@@ -60,12 +60,6 @@
 <p>Augur maintains a public Ethereum node at <a href="http://geth.augur.net">http://geth.augur.net</a>.</p>
 
 <h2 id="getting-started">Getting started</h2>
-
-<p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
-
-<p><code class="prettyprint">$ npm install augur.js</code></p>
-
-<p>To use the Augur API, augur.js needs to connect to an Ethereum node.  By default, augur.js will look for a localhost Ethereum node listening on port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">Augur.connect</code>.</p>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
 <span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
 
@@ -75,6 +69,12 @@
 <span class="c1">// Connect to Augur's public node (geth.augur.net)</span>
 <span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"geth.augur.net"</span><span class="p">);</span>
 </code></pre>
+
+<p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
+
+<p><code class="prettyprint">$ npm install augur.js</code></p>
+
+<p>To use the Augur API, augur.js needs to connect to an Ethereum node.  By default, augur.js will look for a localhost Ethereum node listening on port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">Augur.connect</code>.</p>
 
           <h1 id="accounts">Accounts</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
