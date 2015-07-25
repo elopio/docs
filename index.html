@@ -96,137 +96,192 @@
 
 <p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
-<p><strong>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</strong> Do <strong>not</strong> use the base 2^64 representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <strong>not</strong> send the Loch Ness monster 3.50*2^64 CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</p>
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
 
           <h1 id="callbacks">Callbacks</h1>
 
 <p>All of augur.js&rsquo;s methods that involve an RPC request take an optional callback function as their last parameter.  If a callback is supplied, the RPC request will be asynchronous; otherwise, it will be synchronous.  Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser, as synchronous RPC requests block the main JS thread (which essentially freezes the browser).</p>
 
           <h1 id="api">API</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * All Augur functions have an optional callback (or callbacks) as their
+ * final parameter.
+ */</span>
 
-<p>augur.js is primarily a set of JavaScript bindings for the Augur API.  The augur.js function name, as well as the function&rsquo;s parameters, are generally the same as those of the underlying <a href="https://github.com/AugurProject/augur-core">augur-core</a> functions.</p>
+<span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<p>All Augur functions have an optional callback (or callbacks; see below) as their final parameter.  augur.js currently implements the following Augur API functions:</p>
+<span class="nx">getRepBalance</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">address</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<ul>
-<li><p>getCashBalance(address[, callback])</p></li>
-<li><p>getRepBalance(branch, address[, callback])</p></li>
-<li><p>getBranches([callback])</p></li>
-<li><p>getMarkets(branch[, callback])</p></li>
-<li><p>getMarketInfo(market[, callback])</p></li>
-<li><p>getMarketEvents(market[, callback])</p></li>
-<li><p>getNumEvents(market[, callback])</p></li>
-<li><p>getEventInfo(event[, callback])</p></li>
-<li><p>getBranchID(branch[, callback])</p></li>
-<li><p>getNonce(id[, callback])</p></li>
-<li><p>getCurrentParticipantNumber(market[, callback])</p></li>
-<li><p>getParticipantSharesPurchased(market, participantNumber, outcome[, callback])</p></li>
-<li><p>getSharesPurchased(market, outcome[, callback])</p></li>
-<li><p>getEvents(branchId, votePeriod[, callback])</p></li>
-<li><p>getVotePeriod(branchId[, callback])</p></li>
-<li><p>getPeriodLength(branchId[, callback])</p></li>
-<li><p>getBranch(branchIdNumber[, callback])</p></li>
-<li><p>sendCash(receiver, value[, callback])</p></li>
-<li><p>cashFaucet([callback])</p></li>
-<li><p>reputationFaucet([callback])</p></li>
-<li><p>getDescription(id[, callback])</p></li>
-<li><p>createEvent(eventObject)</p>
+<span class="nx">getBranches</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
 
-<ul>
-<li>eventObject has the following fields:
+<span class="nx">getMarkets</span><span class="p">(</span><span class="nx">branch</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<ul>
-<li>branchId <integer></li>
-<li>description <string></li>
-<li>minValue <integer> (will be floating-point)</li>
-<li>maxValue <integer> (will be floating-point)</li>
-<li>numOutcomes <integer></li>
-<li>expDate <integer> - block number when the event expires</li>
-<li>onSent <function> - callback that fires after the event is broadcast to the network</li>
-<li>onSuccess <function> - optional callback that fires when augur.js is able to see your event on the network (asynchronous check every 12 seconds)</li>
-</ul></li>
-<li>All callbacks should accept a single parameter: an <code class="prettyprint">event</code> object with <code class="prettyprint">id</code> and <code class="prettyprint">txhash</code> fields</li>
-<li>Calling createEvent(branchId, description, expDate, minValue, maxValue, numOutcomes[, onSent, onSuccess]) with positional arguments also works</li>
-</ul></li>
-<li><p>createMarket(marketObject)</p>
+<span class="nx">getMarketInfo</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<ul>
-<li>marketObject has the following fields:
+<span class="nx">getMarketEvents</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<ul>
-<li>branchId <integer></li>
-<li>description <string></li>
-<li>minValue <integer> (will be floating-point)</li>
-<li>maxValue <integer> (will be floating-point)</li>
-<li>numOutcomes <integer></li>
-<li>expDate <integer> - block number when the event expires</li>
-<li>onSent <function> - callback that fires after the event is broadcast to the network</li>
-<li>onSuccess <function> - optional callback that fires when augur.js is able to see your event on the network (asynchronous check every 12 seconds)</li>
-<li>onFailure <function> - optional callback that fires if you market creation errors</li>
-</ul></li>
-<li>All callbacks should accept a single parameter: a <code class="prettyprint">market</code> object with <code class="prettyprint">id</code> and <code class="prettyprint">txhash</code> fields</li>
-<li>Calling createMarket(branchId, description, alpha, liquidity, tradingFee, events[, onSent, onSuccess, onFailed]) with positional arguments also works</li>
-</ul></li>
-<li><p>buyShares(branchId, market, outcome, amount, nonce[, callback])</p></li>
-<li><p>sellShares(branchId, market, outcome, amount, nonce[, callback])</p></li>
-<li><p>sendReputation(branchId, receiver, value[, callback])</p></li>
-<li><p>getSimulatedBuy(market, outcome, amount[, callback])</p></li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+<span class="nx">getNumEvents</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getEventInfo</span><span class="p">(</span><span class="nx">event</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getBranchID</span><span class="p">(</span><span class="nx">branch</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getNonce</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getCurrentParticipantNumber</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getParticipantSharesPurchased</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">participantNumber</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getSharesPurchased</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getEvents</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">votePeriod</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getVotePeriod</span><span class="p">(</span><span class="nx">branchId</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getPeriodLength</span><span class="p">(</span><span class="nx">branchId</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getBranch</span><span class="p">(</span><span class="nx">branchIdNumber</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">cashFaucet</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">reputationFaucet</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getDescription</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">createEvent</span><span class="p">(</span><span class="nx">eventObject</span><span class="p">)</span>
+<span class="cm">/**
+ * - eventObject has the following fields:
+ *   - branchId &lt;integer&gt;
+ *   - description &lt;string&gt;
+ *   - minValue &lt;integer&gt; (will be floating-point)
+ *   - maxValue &lt;integer&gt; (will be floating-point)
+ *   - numOutcomes &lt;integer&gt;
+ *   - expDate &lt;integer&gt; - block number when the event expires
+ *   - onSent &lt;function&gt; - callback that fires after the event is broadcast to
+ *      the network
+ *   - onSuccess &lt;function&gt; - optional callback that fires when augur.js is
+ *      able to see your event on the network
+ *
+ * - Callback functions should accept a single parameter: an event object with
+ *      txHash and callReturn fields
+ *
+ * - Calling createEvent with positional arguments also works:
+ *   - createEvent(branchId, description, expDate, minValue, maxValue, numOutcomes[, onSent, onSuccess])
+ */</span>
+
+<span class="nx">createMarket</span><span class="p">(</span><span class="nx">marketObject</span><span class="p">)</span>
+<span class="cm">/**
+ * - marketObject has the following fields:
+ *   - branchId &lt;integer&gt;
+ *   - description &lt;string&gt;
+ *   - minValue &lt;integer&gt; (will be floating-point)
+ *   - maxValue &lt;integer&gt; (will be floating-point)
+ *   - numOutcomes &lt;integer&gt;
+ *   - expDate &lt;integer&gt; - block number when the event expires
+ *   - onSent &lt;function&gt; - callback that fires after the event is broadcast to
+ *      the network
+ *   - onSuccess &lt;function&gt; - optional callback that fires when augur.js is
+ *      able to see the new market on the network
+ *   - onFailure &lt;function&gt; - optional callback that fires if market creation
+ *      errors
+ *
+ * - Callback functions should accept a single parameter: a market object
+ *      txHash and callReturn fields
+ *   
+ * - Calling createMarket with positional arguments also works:
+ *   - createMarket(branchId, description, alpha, liquidity, tradingFee, events[, onSent, onSuccess, onFailed])
+ */</span>
+
+<span class="nx">buyShares</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">sellShares</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">sendReputation</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
 <span class="p">[</span><span class="s2">"0x0000000000000000000000000000000000000000000000000013b073172aceb2"</span><span class="p">,</span>
  <span class="s2">"0x0000000000000000000000000000000000000000000000008de39f2500000000"</span><span class="p">]</span>
-</code></pre>
 
-<ul>
-<li>getSimulatedSell(market, outcome, amount[, callback])</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getSimulatedSell</span><span class="p">(</span><span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+<span class="nx">getSimulatedSell</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getSimulatedSell</span><span class="p">(</span><span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
 <span class="p">[</span><span class="s2">"0x0000000000000000000000000000000000000000000000000013af84d04feba9"</span><span class="p">,</span>
  <span class="s2">"0x0000000000000000000000000000000000000000000000008dd635b900000000"</span><span class="p">]</span>
-</code></pre>
 
-<ul>
-<li>getCreator(id[, callback])</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">;</span>
+<span class="nx">getCreator</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">;</span>
 <span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getCreator</span><span class="p">(</span><span class="nx">market</span><span class="p">);</span>
 <span class="s2">"0x0000000000000000000000001c11aa45c792e202e9ffdc2f12f99d0d209bef70"</span>
-</code></pre>
 
-<ul>
-<li>getCreationFee(id[, callback])</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getCreationFee</span><span class="p">(</span><span class="nx">market</span><span class="p">)</span>
+<span class="nx">getCreationFee</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getCreationFee</span><span class="p">(</span><span class="nx">market</span><span class="p">)</span>
 <span class="s2">"0x00000000000000000000000000000000000000000000000a0000000000000000"</span>
-</code></pre>
 
-<ul>
-<li>getExpiration(event[, callback]): Event expiration block.</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="s2">"0xb2a6de45f349b5ac384b01a785e640f519f0a8597ab2031c964c7f572d96b13c"</span><span class="p">;</span>
+<span class="nx">getExpiration</span><span class="p">(</span><span class="nx">event</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span><span class="err">:</span> <span class="nx">Event</span> <span class="nx">expiration</span> <span class="nx">block</span><span class="p">.</span>
+
+<span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="s2">"0xb2a6de45f349b5ac384b01a785e640f519f0a8597ab2031c964c7f572d96b13c"</span><span class="p">;</span>
 <span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getExpiration</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span>
 <span class="s2">"0x000000000000000000000000000000000000000000000000000000000003d090"</span>
-</code></pre>
 
-<ul>
-<li>getMarketNumOutcomes(market[, callback]): Number of outcomes in this market as an integer.</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getMarketNumOutcomes</span><span class="p">(</span><span class="nx">market</span><span class="p">)</span>
+<span class="nx">getMarketNumOutcomes</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span><span class="err">:</span> <span class="nb">Number</span> <span class="nx">of</span> <span class="nx">outcomes</span> <span class="k">in</span> <span class="k">this</span> <span class="nx">market</span> <span class="nx">as</span> <span class="nx">an</span> <span class="nx">integer</span><span class="p">.</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getMarketNumOutcomes</span><span class="p">(</span><span class="nx">market</span><span class="p">)</span>
 <span class="mi">2</span>
-</code></pre>
 
-<ul>
-<li>price(market, outcome[, callback]): Get the current (instantaneous) price of an outcome.</li>
-</ul>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">price</span><span class="p">(</span><span class="nx">market_id</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">dividedBy</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">());</span> <span class="p">})</span>
+<span class="nx">price</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span><span class="err">:</span> <span class="nx">Get</span> <span class="nx">the</span> <span class="nx">current</span> <span class="p">(</span><span class="nx">instantaneous</span><span class="p">)</span> <span class="nx">price</span> <span class="nx">of</span> <span class="nx">an</span> <span class="nx">outcome</span><span class="p">.</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">price</span><span class="p">(</span><span class="nx">market_id</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">dividedBy</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">());</span> <span class="p">})</span>
 <span class="mf">0.55415210523642599583</span>
+
+<span class="nx">getWinningOutcomes</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 </code></pre>
 
+<p>The Augur API is a set of JavaScript bindings for the methods encoded in Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  The API method name, as well as its parameters, are generally identical to those of the underlying smart contract method.</p>
+
+<p>In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods.  To do this, first build a transaction object manually, then execute it using <code class="prettyprint">invoke</code>.  The <code class="prettyprint">invoke</code> method executes a method in a contract already on the network.  It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.</p>
+<pre class="highlight javascript"><code>
+<span class="c1">// The method called here, double(22121), simply doubles its input argument.</span>
+<span class="o">&gt;</span> <span class="nx">tx</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="na">to</span><span class="p">:</span> <span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">,</span>
+   <span class="na">method</span><span class="p">:</span> <span class="s2">"double"</span><span class="p">,</span>
+   <span class="na">signature</span><span class="p">:</span> <span class="s2">"i"</span><span class="p">,</span>
+   <span class="na">params</span><span class="p">:</span> <span class="mi">22121</span><span class="p">,</span>
+   <span class="na">send</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+   <span class="na">returns</span><span class="p">:</span> <span class="s2">"int"</span>
+<span class="p">};</span>
+
+<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="nx">tx</span><span class="p">)</span>
+<span class="mi">44242</span>
+</code></pre>
+
+<p>Transaction fields are as follows:</p>
+
+<p>Required:</p>
+
 <ul>
-<li>getWinningOutcomes(market[, callback])</li>
+<li>to: <code class="prettyprint">&lt;contract address&gt; (hexstring)</code></li>
+<li>method: <code class="prettyprint">&lt;function name&gt; (string)</code></li>
+<li>signature: <code class="prettyprint">&lt;function signature, e.g. &quot;iia&quot;&gt; (string)</code></li>
+<li>params: <code class="prettyprint">&lt;parameters passed to the function&gt;</code></li>
 </ul>
 
-<p>If you need more flexibility, please refer to the <code class="prettyprint">invoke</code> function below, which allows you to build a transaction object manually, then broadcast it to the network with <code class="prettyprint">sendTransaction</code> and/or capture its return value with <code class="prettyprint">call</code>.</p>
+<p>Optional:</p>
+
+<ul>
+<li>send: <code class="prettyprint">&lt;true to sendTransaction, false to call (default)&gt;</code></li>
+<li>from: <code class="prettyprint">&lt;sender&#39;s address&gt; (hexstring; defaults to the coinbase account)</code></li>
+<li>returns: <code class="prettyprint">&lt;&quot;array&quot;, &quot;int&quot;, &quot;BigNumber&quot;, or &quot;string&quot; (default)&gt;</code></li>
+</ul>
+
+<p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The <code class="prettyprint">returns</code> field is used only to format the output, and does not affect the actual RPC request.</p>
+
+<aside class="notice"><b><code>invoke</code> currently only works for <a href="https://github.com/ethereum/serpent">Serpent</a> contracts.</b>  The extra datatypes included by <a href="https://github.com/ethereum/wiki/wiki/The-Solidity-Programming-Language">Solidity</a> are not (yet) supported by augur.js&rsquo;s encoder.  In our encoder, all parameters are required to be type <code>string</code>, <code>int256</code>, or <code>int256[]</code>.  If you need a more flexible ABI encoder, check out <a href="https://github.com/etherex/pyepm">pyepm</a> and its <code>api.abi_data</code> method.</aside>
 
           <h1 id="json-rpc">JSON-RPC</h1>
 
@@ -258,39 +313,6 @@
 <pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">)</span>
 <span class="s2">"0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"</span>
 </code></pre>
-
-<h2 id="on-chain-contract-methods">On-chain contract methods</h2>
-
-<p><code class="prettyprint">invoke</code> executes a function in a contract already on the network:</p>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">tx</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="na">to</span><span class="p">:</span> <span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">,</span>
-   <span class="na">method</span><span class="p">:</span> <span class="s2">"double"</span><span class="p">,</span>
-   <span class="na">signature</span><span class="p">:</span> <span class="s2">"i"</span><span class="p">,</span>
-   <span class="na">params</span><span class="p">:</span> <span class="mi">22121</span><span class="p">,</span>
-   <span class="na">send</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-   <span class="na">returns</span><span class="p">:</span> <span class="s2">"int"</span>
-<span class="p">};</span>
-
-<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="nx">tx</span><span class="p">)</span>
-<span class="mi">44242</span>
-</code></pre>
-
-<p>(Both <code class="prettyprint">execute</code> and <code class="prettyprint">run</code> are aliases for <code class="prettyprint">invoke</code>.) The function called here <code class="prettyprint">double(22121)</code> simply doubles its input argument, so the result is as expected.  The transaction fields are as follows:</p>
-
-<p>Required:
-- to: <code class="prettyprint">&lt;contract address&gt; (hexstring)</code>
-- method: <code class="prettyprint">&lt;function name&gt; (string)</code>
-- signature: <code class="prettyprint">&lt;function signature, e.g. &quot;iia&quot;&gt; (string)</code>
-- params: <code class="prettyprint">&lt;parameters passed to the function&gt;</code></p>
-
-<p>Optional:
-- send: <code class="prettyprint">&lt;true to sendTransaction, false to call (default)&gt;</code>
-- from: <code class="prettyprint">&lt;sender&#39;s address&gt; (hexstring; defaults to the coinbase account)</code>
-- returns: <code class="prettyprint">&lt;&quot;array&quot;, &quot;int&quot;, &quot;BigNumber&quot;, or &quot;string&quot; (default)&gt;</code></p>
-
-<p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The <code class="prettyprint">returns</code> field is used only to format the output, and has no effect on the actual RPC command.</p>
-
-<aside class="notice">*`invoke` currently only works for Serpent contracts.*  The extra datatypes that Solidity includes are not (yet) supported by augur.js&rsquo;s encoder.  In our encoder, all parameters are type `string`, `int256`, or `int256[]`.  If you need a more flexible ABI encoder, I recommend [pyepm](https://github.com/etherex/pyepm), specifically the `pyepm.api.abi_data` method.</aside>
 
           <h1 id="batching">Batching</h1>
 
