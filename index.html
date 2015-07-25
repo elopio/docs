@@ -11,6 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
+      <script>
+        $(function() {
+          setupLanguages(["javascript"]);
+        });
+      </script>
   </head>
 
   <body class="index">
@@ -22,6 +27,9 @@
     </a>
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">JavaScript</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -29,10 +37,10 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://www.augur.net'>Augur Project</a></li>
-            <li><a href='https://github.com/AugurProject'>Github</a></li>
-            <li><a href='https://twitter.com/AugurProject'>Twitter</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href="http://www.augur.net">Augur.net</a></li>
+            <li><a href="http://demo.augur.net">Demo</a></li>
+            <li><a href="https://github.com/AugurProject">Github</a></li>
+            <li><a href="https://twitter.com/AugurProject">Twitter</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -42,20 +50,23 @@
 
 <p>The <a href="https://github.com/AugurProject/augur.js">Augur JavaScript API</a> requires an <a href="https://www.ethereum.org/">Ethereum</a> client to communicate with <a href="https://github.com/AugurProject/augur-core">Augur&rsquo;s smart contracts</a>.  Our testing has been primarily carried out with the <a href="https://github.com/ethereum/go-ethereum">Go</a> Ethereum implementation (geth).</p>
 
-<p>Augur&rsquo;s public Ethereum node is located at: <a href="http://poc9.com">http://poc9.com</a></p>
+<p>If you are running a <a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">local Ethereum node</a>, sending RPC requests to your local node is the preferred (and by far the fastest) way to use the Augur API.</p>
 
-<p>If you want to use your local Ethereum node, in order to use &ldquo;send&rdquo; RPC commands &ndash; that is, RPC commands that consume ether! &ndash; you will need to unlock your node.  The easiest way to do this is to start geth with the <code class="prettyprint">--unlock</code> option:</p>
-<pre class="highlight shell"><code>geth --rpc --rpccorsdomain <span class="s2">"http://localhost:8545"</span> --rpcapi <span class="s2">"shh,db,eth,net,web3"</span> --shh --unlock 0
-</code></pre>
+<aside class="notice">To use &ldquo;sendTransaction&rdquo; RPC commands (i.e., anything that requires Ether / is actually sent to the network) you will need to unlock your Ethereum node.  If you are running geth, the easiest way to do this is to start it with the <code>--unlock</code> option:
+
+<code class="block">geth --unlock 0 --rpc --rpccorsdomain "http://localhost:8545" --rpcapi "shh,db,eth,net,web3" --shh</code>
+</aside>
+
+<p>If maintaining a local Ethereum node isn&rsquo;t practical for you, Augur has a public Ethereum node at <a href="http://geth.augur.net">http://geth.augur.net</a>.</p>
 
 <h2 id="installation">Installation</h2>
 
 <p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
-<pre class="highlight shell"><code>npm install augur.js
-</code></pre>
 
-<p>After installing, just require augur.js to use it:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
+<p><code class="prettyprint">npm install augur.js</code></p>
+<pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
+
+<span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
 </code></pre>
 
 <h2 id="getting-started">Getting started</h2>
@@ -279,7 +290,7 @@
 
 <p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The <code class="prettyprint">returns</code> field is used only to format the output, and has no effect on the actual RPC command.</p>
 
-<p><em><code class="prettyprint">invoke</code> currently only works for Serpent contracts.</em>  The extra datatypes that Solidity includes are not (yet) supported by augur.js&rsquo;s encoder.  In our encoder, all parameters are type <code class="prettyprint">string</code>, <code class="prettyprint">int256</code>, or <code class="prettyprint">int256[]</code>.  If you need a more flexible ABI encoder, I recommend <a href="https://github.com/etherex/pyepm">pyepm</a>, specifically the <code class="prettyprint">pyepm.api.abi_data</code> method.</p>
+<aside class="notice">*`invoke` currently only works for Serpent contracts.*  The extra datatypes that Solidity includes are not (yet) supported by augur.js&rsquo;s encoder.  In our encoder, all parameters are type `string`, `int256`, or `int256[]`.  If you need a more flexible ABI encoder, I recommend [pyepm](https://github.com/etherex/pyepm), specifically the `pyepm.api.abi_data` method.</aside>
 
           <h1 id="batching">Batching</h1>
 
@@ -320,7 +331,7 @@
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<h2 id="api-errors">API Errors</h2>
 
 <p>The Augur API uses the following error codes:</p>
 
@@ -331,53 +342,227 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request</td>
+<td>65</td>
+<td>Whisper Post Failed: could not post message to whisper</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized</td>
+<td>98</td>
+<td>Database Write Failed</td>
+</tr>
+<tr>
+<td>99</td>
+<td>Database Read Failed</td>
+</tr>
+<tr>
+<td>120</td>
+<td>Contract Error (details below)</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden</td>
+<td>Bad Credentials: incorrect handle or password</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found</td>
+<td>412</td>
+<td>Transaction Invalid: transaction validation failed</td>
 </tr>
 <tr>
-<td>405</td>
-<td>Method Not Allowed</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests</td>
+<td>422</td>
+<td>Handle Taken: handle already taken</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error</td>
+<td>Transaction Failed</td>
+</tr>
+</tbody></table>
+
+<h2 id="contract-errors">Contract Errors</h2>
+
+<p>In addition to the error codes generated by the API, there is a separate set of error codes used by Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  To avoid confusion, the API error codes are all positive numbers, while the contract error codes are integers less than or equal to zero.</p>
+
+<table><thead>
+<tr>
+<th>Contract Method</th>
+<th>Error</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>buyShares</td>
+<td>-1</td>
+<td>Invalid outcome or trading closed</td>
 </tr>
 <tr>
-<td>503</td>
-<td>Service Unavailable</td>
+<td>buyShares</td>
+<td>-2</td>
+<td>Entered a negative number of shares</td>
+</tr>
+<tr>
+<td>buyShares</td>
+<td>-3</td>
+<td>Not enough money</td>
+</tr>
+<tr>
+<td>buyShares</td>
+<td>-4</td>
+<td>Bad nonce/hash</td>
+</tr>
+<tr>
+<td>cashFaucet</td>
+<td>-1</td>
+<td>Hey, you&rsquo;re not broke!</td>
+</tr>
+<tr>
+<td>checkReportValidity</td>
+<td>-1</td>
+<td>Report isn&rsquo;t long enough</td>
+</tr>
+<tr>
+<td>checkReportValidity</td>
+<td>-2</td>
+<td>Reporter doesn&rsquo;t exist, voting period is over, or voting period hasn&rsquo;t started yet</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-1</td>
+<td>Market has no cash</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-2</td>
+<td>0 outcome</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-3</td>
+<td>Outcome indeterminable</td>
+</tr>
+<tr>
+<td>createEvent</td>
+<td>0</td>
+<td>Not enough money to pay fees or event already exists</td>
+</tr>
+<tr>
+<td>createEvent</td>
+<td>-1</td>
+<td>We&rsquo;re either already past that date, branch doesn&rsquo;t exist, or description is bad</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-1</td>
+<td>Bad input or parent doesn&rsquo;t exist</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-2</td>
+<td>Too many events</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-3</td>
+<td>Too many outcomes</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-4</td>
+<td>Not enough money or market already exists</td>
+</tr>
+<tr>
+<td>getSimulatedBuy</td>
+<td>-2</td>
+<td>Cost updating error (did you enter a valid quantity?)</td>
+</tr>
+<tr>
+<td>getSimulatedSell</td>
+<td>-2</td>
+<td>Cost updating error (did you enter a valid quantity?)</td>
+</tr>
+<tr>
+<td>report</td>
+<td>0</td>
+<td>Could not set reporter ballot</td>
+</tr>
+<tr>
+<td>report</td>
+<td>-1</td>
+<td>Report length does not match the number of expiring events</td>
+</tr>
+<tr>
+<td>report</td>
+<td>-2</td>
+<td>Voting period expired</td>
+</tr>
+<tr>
+<td>report</td>
+<td>-3</td>
+<td>Incorrect hash</td>
+</tr>
+<tr>
+<td>sellShares</td>
+<td>-1</td>
+<td>Invalid outcome or trading closed</td>
+</tr>
+<tr>
+<td>sellShares</td>
+<td>-2</td>
+<td>Entered a negative number of shares</td>
+</tr>
+<tr>
+<td>sellShares</td>
+<td>-3</td>
+<td>Not enough money</td>
+</tr>
+<tr>
+<td>sellShares</td>
+<td>-4</td>
+<td>Bad nonce/hash</td>
+</tr>
+<tr>
+<td>sendReputation</td>
+<td>0</td>
+<td>Not enough Reputation</td>
+</tr>
+<tr>
+<td>sendReputation</td>
+<td>-1</td>
+<td>Your Reputation account was just created! Earn some Reputation before you can send to others.</td>
+</tr>
+<tr>
+<td>sendReputation</td>
+<td>-2</td>
+<td>Receiving address doesn&rsquo;t exist</td>
+</tr>
+<tr>
+<td>slashRep</td>
+<td>0</td>
+<td>Incorrect hash</td>
+</tr>
+<tr>
+<td>slashRep</td>
+<td>-2</td>
+<td>Incorrect reporter ID</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>0</td>
+<td>Could not set report hash</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>-1</td>
+<td>Reporter doesn&rsquo;t exist, voting period is over, or voting period hasn&rsquo;t started yet</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>-2</td>
+<td>Not in hash submitting timeframe</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">JavaScript</a>
+          </div>
       </div>
     </div>
   </body>
