@@ -57,46 +57,79 @@
 <code class="block">geth --unlock 0 --rpc --rpccorsdomain "http://localhost:8545" --rpcapi "shh,db,eth,net,web3" --shh</code>
 </aside>
 
-<p>If maintaining a local Ethereum node isn&rsquo;t practical for you, Augur has a public Ethereum node at <a href="http://geth.augur.net">http://geth.augur.net</a>.</p>
-
-<h2 id="installation">Installation</h2>
-
-<p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
-
-<p><code class="prettyprint">npm install augur.js</code></p>
-<pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
-
-<span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
-</code></pre>
+<p>Augur maintains a public Ethereum node at <a href="http://geth.augur.net">http://geth.augur.net</a>.</p>
 
 <h2 id="getting-started">Getting started</h2>
 
-<p>To use the Augur API, augur.js needs to connect to an Ethereum node:</p>
-<pre class="highlight javascript"><code><span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
+
+<p><code class="prettyprint">$ npm install augur.js</code></p>
+
+<p>To use the Augur API, augur.js needs to connect to an Ethereum node.  By default, augur.js will look for a localhost Ethereum node listening on port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">Augur.connect</code>.</p>
+<pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
+<span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
+
+<span class="c1">// Attempt to connect to a local Ethereum node (on http://localhost:8545)</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+
+<span class="c1">// Connect to Augur's public node (geth.augur.net)</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"geth.augur.net"</span><span class="p">);</span>
 </code></pre>
 
-<p>By default, augur.js will look for a localhost Ethereum node listening on port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">Augur.connect</code>.  For example, to connect to Augur&rsquo;s public node:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">ethereumNode</span> <span class="o">=</span> <span class="s2">"geth.augur.net"</span><span class="p">;</span> <span class="c1">// default: "localhost:8545"</span>
+          <h1 id="accounts">Accounts</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Create an account using the Augur.web.register method.
+ */</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">ethereumNode</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">account</span> <span class="o">=</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
+
+<span class="c1">// output</span>
+<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * The user is automatically logged in after registering.  When logged in,
+ * the user's data is kept in the the Augur.web.account object.  Logging out
+ * unsets the Augur.web.account object.
+ */</span>
+
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+
+<span class="c1">// output</span>
+<span class="nl">Account</span><span class="p">:</span> <span class="p">{}</span>
+
+<span class="cm">/* Logging in both sets and returns the Augur.web.account object: */</span>
+
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s2">"tinybike"</span><span class="p">,</span> <span class="s2">"tinypassword"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+
+<span class="c1">// output</span>
+<span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 </code></pre>
 
-          <h1 id="numbers">Numbers</h1>
+<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.  Accounts are trustless because only the user&rsquo;s encrypted key is stored on our server.  Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
 
-<p>There are four acceptable ways to pass numerical inputs to the Augur API:</p>
+<p>The user specifies a username and password, and a private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key using AES-256.  The username, encrypted private key, and initialization vector are stored as a key-value pair in the Ethereum LevelDB.</p>
 
-<ul>
-<li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
-<li><p>stringified numbers (e.g., <code class="prettyprint">&quot;1010101&quot;</code>)</p></li>
-<li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
-<li><p>BigNumbers (e.g., <code class="prettyprint">new BigNumber(&quot;1010101&quot;)</code>)</p></li>
-</ul>
+<aside class="notice">This will be changed soon, possibly to nedb and/or html5 localstorage.  Manual put/get to the ethereum DB is [deprecated](https://github.com/ethereum/wiki/wiki/JSON-RPC) and slated for removal at some point.</aside>
 
-<p>Note that for primitive JS numbers, you will receive an error from the BigNumber library if your input contains more than 15 significant figures.</p>
+<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">Augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
 
-<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
-
-<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
+<p>The user&rsquo;s private key is encrypted using their password, then indexed by username and stored in our LevelDB.  We do not store the user&rsquo;s password (not even a hash of it) or their public key, and we do not have access to the user&rsquo;s account.  Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</p>
 
           <h1 id="callbacks">Callbacks</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -169,6 +202,23 @@
 <p>Augur API methods that perform RPC requests that do not submit transactions to the network (using the <code class="prettyprint">eth_call</code> RPC) take a single optional callback as their last parameter.  Unlike transaction RPCs, call RPCs can be synchronous.  If a callback is supplied, the RPC request will be asynchronous; otherwise, it will be synchronous.</p>
 
 <aside class="notice">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+
+          <h1 id="numbers">Numbers</h1>
+
+<p>There are four acceptable ways to pass numerical inputs to the Augur API:</p>
+
+<ul>
+<li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
+<li><p>stringified numbers (e.g., <code class="prettyprint">&quot;1010101&quot;</code>)</p></li>
+<li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
+<li><p>BigNumbers (e.g., <code class="prettyprint">new BigNumber(&quot;1010101&quot;)</code>)</p></li>
+</ul>
+
+<p>Note that for primitive JS numbers, you will receive an error from the BigNumber library if your input contains more than 15 significant figures.</p>
+
+<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
+
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
 
           <h1 id="api">API</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -416,7 +466,7 @@
 
 <p>augur.js implements <a href="http://www.jsonrpc.org/specification#batch">batch RPC</a>, which can help reduce overhead if you&rsquo;re making several API calls that can be run in parallel (i.e., do not depend on each other&rsquo;s results).</p>
 
-<p>If you need more control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">Augur.batch</code> method directly.  <code class="prettyprint">Augur.batch</code> accepts manually constructed transaction objects.</p>
+<p>For finer-grained control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">Augur.batch</code> method directly.  <code class="prettyprint">Augur.batch</code> accepts manually constructed transaction objects.</p>
 
           <h1 id="tests">Tests</h1>
 
