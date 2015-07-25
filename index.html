@@ -315,9 +315,12 @@
 </code></pre>
 
           <h1 id="batching">Batching</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Batch RPC request that gets the cash and reputation balances for account
+ * 0x63524e3fe4791aefce1e932bbfb3fdf375bfad89.
+ */</span>
 
-<p>augur.js implements batched RPC, which can help reduce overhead if you&rsquo;re making several API calls that can be run in parallel (i.e., do not depend on each other&rsquo;s results).  For example, here is a batch RPC request that gets both the cash and reputation balance for account <code class="prettyprint">0x63524e3fe4791aefce1e932bbfb3fdf375bfad89</code>:</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">myAccount</span> <span class="o">=</span> <span class="s2">"0x63524e3fe4791aefce1e932bbfb3fdf375bfad89"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">myAccount</span> <span class="o">=</span> <span class="s2">"0x63524e3fe4791aefce1e932bbfb3fdf375bfad89"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">batch</span> <span class="o">=</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">createBatch</span><span class="p">();</span>
 
@@ -325,10 +328,10 @@
 <span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"getRepBalance"</span><span class="p">,</span> <span class="p">[</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span> <span class="nx">myAccount</span><span class="p">],</span> <span class="nx">callback</span><span class="p">);</span>
 
 <span class="nx">batch</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
-</code></pre>
 
-<p>If you need more control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">Augur.batch</code> method directly.  This allows you to manually construct transaction objects.</p>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="kd">var</span> <span class="nx">txlist</span> <span class="o">=</span> <span class="p">[{</span>
+<span class="c1">// Manual batching</span>
+
+<span class="kd">var</span> <span class="nx">txlist</span> <span class="o">=</span> <span class="p">[{</span>
     <span class="na">to</span><span class="p">:</span> <span class="s2">"0x3caf506cf3d5bb16ba2c8f89a6591c5160d69cf3"</span><span class="p">,</span>
     <span class="na">method</span><span class="p">:</span> <span class="s2">"ten"</span>
 <span class="p">},</span> <span class="p">{</span>
@@ -338,24 +341,39 @@
     <span class="na">params</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}];</span>
 
-<span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">batch</span><span class="p">(</span><span class="nx">txlist</span><span class="p">)</span>
-<span class="p">[</span><span class="s1">'10'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">]</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">batch</span><span class="p">(</span><span class="nx">txlist</span><span class="p">);</span>
+
+<span class="c1">// returns: ['10', '6']</span>
 </code></pre>
+
+<p>augur.js implements <a href="http://www.jsonrpc.org/specification#batch">batch RPC</a>, which can help reduce overhead if you&rsquo;re making several API calls that can be run in parallel (i.e., do not depend on each other&rsquo;s results).</p>
+
+<p>If you need more control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">Augur.batch</code> method directly.  <code class="prettyprint">Augur.batch</code> accepts manually constructed transaction objects.</p>
 
           <h1 id="tests">Tests</h1>
 
-<p>Unit tests included with augur.js are in the <code class="prettyprint">test</code> directory:</p>
+<p>augur.js includes a unit test suite.  Tests are be run using <a href="http://mochajs.org/">Mocha</a>.</p>
 
-<p>$ npm install mocha it-each
-    $ scripts/runtests.sh</p>
+<p><code class="block">$ npm install -g mocha</code></p>
+
+<p><code class="block">$ scripts/runtests.sh</code></p>
 
 <p>Note that your local Ethereum node must be running for the tests to run properly.</p>
 
           <h1 id="errors">Errors</h1>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">412</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transaction validation failed"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>In addition to the error codes generated by the Augur API, there is a separate set of error codes used by Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  To avoid confusion, API error codes are positive integers, while contract error codes are integers less than or equal to zero.</p>
+
+<p>API and contract errors are returned as objects that contain an <code class="prettyprint">error</code> field (the integer error code) and a <code class="prettyprint">message</code> field (a description of the error).</p>
+
+<aside class="notice">In addition to the errors tabulated below, contract methods may also return <code>"0x"</code>, accompanied by the message <code>"no response or bad input"</code>.  This error indicates that either the contract was unreachable or the invoked method did not execute successfully.</aside>
 
 <h2 id="api-errors">API Errors</h2>
-
-<p>The Augur API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -376,10 +394,6 @@
 <td>Database Read Failed</td>
 </tr>
 <tr>
-<td>120</td>
-<td>Contract Error (details below)</td>
-</tr>
-<tr>
 <td>403</td>
 <td>Bad Credentials: incorrect handle or password</td>
 </tr>
@@ -398,8 +412,6 @@
 </tbody></table>
 
 <h2 id="contract-errors">Contract Errors</h2>
-
-<p>In addition to the error codes generated by the API, there is a separate set of error codes used by Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  To avoid confusion, the API error codes are all positive numbers, while the contract error codes are integers less than or equal to zero.</p>
 
 <table><thead>
 <tr>
