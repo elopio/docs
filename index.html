@@ -57,7 +57,12 @@
 <code class="block">geth --unlock 0 --rpc --rpccorsdomain "http://localhost:8545" --rpcapi "shh,db,eth,net,web3" --shh</code>
 </aside>
 
-<p>Augur maintains a public Ethereum node at <a href="http://geth.augur.net">http://geth.augur.net</a>.</p>
+<p>Augur maintains two public Ethereum nodes:</p>
+
+<ul>
+<li><a href="http://eth1.augur.net">http://eth1.augur.net</a></li>
+<li><a href="http://eth2.augur.net">http://eth2.augur.net</a></li>
+</ul>
 
 <h2 id="getting-started">Getting started</h2>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
@@ -66,8 +71,8 @@
 <span class="c1">// Attempt to connect to a local Ethereum node (on http://localhost:8545)</span>
 <span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
-<span class="c1">// Connect to Augur's public node (geth.augur.net)</span>
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"geth.augur.net"</span><span class="p">);</span>
+<span class="c1">// Connect to Augur's public node (eth1.augur.net)</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"eth1.augur.net"</span><span class="p">);</span>
 </code></pre>
 
 <p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
