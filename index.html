@@ -72,7 +72,7 @@
 <span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
 <span class="c1">// Connect to Augur's public node (eth1.augur.net)</span>
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"eth1.augur.net"</span><span class="p">);</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"http://eth1.augur.net"</span><span class="p">);</span>
 </code></pre>
 
 <p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
@@ -89,16 +89,17 @@
 <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">account</span> <span class="o">=</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
+<span class="p">});</span>
 
 <span class="c1">// output</span>
-<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
-    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
-<span class="p">}</span>
+<span class="c1">// Account: {</span>
+<span class="c1">//     handle: 'tinybike',</span>
+<span class="c1">//     privateKey: &lt;Buffer 55 ec ac 35 98 76 6f b9 05 de a2 13 8c 6d 48 7f 07 9e b1 36 a8 fb eb 5b 93 e2 59 6f 91 4f 35 81&gt;,</span>
+<span class="c1">//     address: '0x09129dcde8e0f510ffb2a715709b69f5c4a42361',</span>
+<span class="c1">//     nonce: 0</span>
+<span class="c1">// }</span>
 
 <span class="cm">/**
  * The user is automatically logged in after registering.  When logged in,
@@ -114,8 +115,9 @@
 
 <span class="cm">/* Logging in both sets and returns the Augur.web.account object: */</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s2">"tinybike"</span><span class="p">,</span> <span class="s2">"tinypassword"</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="p">});</span>
 
 <span class="c1">// output</span>
 <span class="p">{</span>
@@ -126,15 +128,17 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.  Accounts are trustless because only the user&rsquo;s encrypted key is stored on our server.  Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
+<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
 
-<p>First, the user specifies a username and password, and a private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key using AES-256.  The username, encrypted private key, and initialization vector are stored as a key-value pair in the Ethereum LevelDB.</p>
+<p>The user specifies a username and password, and a private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key using AES-256.  The username, encrypted private key, and initialization vector are stored with <a href="https://www.firebase.com/">Firebase</a>.</p>
 
-<aside class="notice">This will be changed soon, possibly to nedb and/or html5 localstorage.  Manual put/get to the ethereum DB is [deprecated](https://github.com/ethereum/wiki/wiki/JSON-RPC) and slated for removal at some point.</aside>
+<aside class="success">Our account system is <b>trustless</b> because only the user&rsquo;s encrypted key is stored.  The user&rsquo;s randomly-generated private key is encrypted using their password, then indexed by username and stored with Firebase.  The user&rsquo;s password is never stored (not even a hash of it), nor is their public key or their address.  Neither we nor Firebase have any access to the user&rsquo;s account.  We can&rsquo;t see your account balance, your transaction history, or anything else.</aside>
+
+<p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
 
 <p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">Augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
 
-<p>The user&rsquo;s private key is encrypted using their password, then indexed by username and stored in our LevelDB.  We do not store the user&rsquo;s password (not even a hash of it) or their public key, and we do not have access to the user&rsquo;s account.  Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</p>
+<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
 
           <h1 id="callbacks">Callbacks</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -515,6 +519,10 @@
 <tr>
 <td>99</td>
 <td>Database Read Failed</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Not Logged In</td>
 </tr>
 <tr>
 <td>403</td>
