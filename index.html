@@ -94,12 +94,12 @@
 <span class="p">});</span>
 
 <span class="c1">// output</span>
-<span class="c1">// Account: {</span>
-<span class="c1">//     handle: 'tinybike',</span>
-<span class="c1">//     privateKey: &lt;Buffer 55 ec ac 35 98 76 6f b9 05 de a2 13 8c 6d 48 7f 07 9e b1 36 a8 fb eb 5b 93 e2 59 6f 91 4f 35 81&gt;,</span>
-<span class="c1">//     address: '0x09129dcde8e0f510ffb2a715709b69f5c4a42361',</span>
-<span class="c1">//     nonce: 0</span>
-<span class="c1">// }</span>
+<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 
 <span class="cm">/**
  * The user is automatically logged in after registering.  When logged in,
@@ -521,8 +521,16 @@
 <td>Database Read Failed</td>
 </tr>
 <tr>
+<td>400</td>
+<td>Invalid Contract Parameter: cannot sent object parameter to contract</td>
+</tr>
+<tr>
 <td>401</td>
 <td>Not Logged In</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Incorrect number of parameters</td>
 </tr>
 <tr>
 <td>403</td>
