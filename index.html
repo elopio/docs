@@ -57,22 +57,23 @@
 <code class="block">geth --unlock 0 --rpc --rpccorsdomain "http://localhost:8545" --rpcapi "shh,db,eth,net,web3" --shh</code>
 </aside>
 
-<p>Augur maintains two public Ethereum nodes:</p>
+<p>Augur maintains three public Ethereum nodes:</p>
 
 <ul>
 <li><a href="http://eth1.augur.net">http://eth1.augur.net</a></li>
 <li><a href="http://eth2.augur.net">http://eth2.augur.net</a></li>
+<li><a href="http://eth3.augur.net">http://eth3.augur.net</a></li>
 </ul>
 
 <h2 id="getting-started">Getting started</h2>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
-<span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"augur.js"</span><span class="p">);</span>
 
 <span class="c1">// Attempt to connect to a local Ethereum node (on http://localhost:8545)</span>
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
 <span class="c1">// Connect to Augur's public node (eth1.augur.net)</span>
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"http://eth1.augur.net"</span><span class="p">);</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"http://eth1.augur.net"</span><span class="p">);</span>
 </code></pre>
 
 <p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
@@ -83,13 +84,13 @@
 
           <h1 id="accounts">Accounts</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
- * Create an account using the Augur.web.register method.
+ * Create an account using the augur.web.register method.
  */</span>
 
 <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
 <span class="p">});</span>
 
@@ -103,20 +104,20 @@
 
 <span class="cm">/**
  * The user is automatically logged in after registering.  When logged in,
- * the user's data is kept in the the Augur.web.account object.  Logging out
- * unsets the Augur.web.account object.
+ * the user's data is kept in the the augur.web.account object.  Logging out
+ * unsets the augur.web.account object.
  */</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
 
 <span class="c1">// output</span>
 <span class="nl">Account</span><span class="p">:</span> <span class="p">{}</span>
 
-<span class="cm">/* Logging in both sets and returns the Augur.web.account object: */</span>
+<span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// output</span>
@@ -136,7 +137,7 @@
 
 <p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
 
-<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">Augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
+<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
 
 <aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
 
@@ -148,11 +149,11 @@
 <span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">;</span>
 
 <span class="c1">// Synchronous</span>
-<span class="kd">var</span> <span class="nx">showMeTheMoney</span> <span class="o">=</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">showMeTheMoney</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">);</span>
 <span class="c1">// '98855.99999999999999994145'</span>
 
 <span class="c1">// Asynchronous</span>
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// prints 98855.99999999999999994145</span>
@@ -169,7 +170,7 @@
     <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed:"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">amountToSend</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSent</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onFailed</span><span class="p">);</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">amountToSend</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSent</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onFailed</span><span class="p">);</span>
 
 <span class="c1">// Printed almost immediately; the callReturn field is the sendCash method's</span>
 <span class="c1">// return value.  If the transaction was sent successfully, callReturn will</span>
@@ -417,27 +418,27 @@
 <h2 id="basic-rpc">Basic RPC</h2>
 
 <p>The <code class="prettyprint">raw</code> method allows you to send in raw commands (similar to sending in via cURL):</p>
-<pre class="highlight plaintext"><code>&gt; Augur.raw("net_peerCount")
+<pre class="highlight plaintext"><code>&gt; augur.raw("net_peerCount")
 "0x10"
 
-&gt; Augur.eth("gasPrice")
+&gt; augur.eth("gasPrice")
 "0x015f90"
 </code></pre>
 
 <p>Many of the commonly used functions have named wrappers.  For example, <code class="prettyprint">blockNumber</code> fetches the current block number:</p>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">blockNumber</span><span class="p">()</span>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">blockNumber</span><span class="p">()</span>
 <span class="mi">217153</span>
 </code></pre>
 
 <h2 id="contract-upload-and-download">Contract upload and download</h2>
 
 <p><code class="prettyprint">publish</code> broadcasts (uploads) a compiled contract to the network, and returns the contract&rsquo;s address:</p>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"0x603980600b6000396044567c01000000000000000000000000000000000000000000000000000000006000350463643ceff9811415603757600a60405260206040f35b505b6000f3"</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"0x603980600b6000396044567c01000000000000000000000000000000000000000000000000000000006000350463643ceff9811415603757600a60405260206040f35b505b6000f3"</span><span class="p">)</span>
 <span class="s2">"0xf4549459f9ef8c8898c054a7fc37c286831c2ced"</span>
 </code></pre>
 
 <p><code class="prettyprint">read</code> downloads code from a contract already on the Ethereum network:</p>
-<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">)</span>
 <span class="s2">"0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"</span>
 </code></pre>
 
@@ -449,10 +450,10 @@
 
 <span class="kd">var</span> <span class="nx">myAccount</span> <span class="o">=</span> <span class="s2">"0x63524e3fe4791aefce1e932bbfb3fdf375bfad89"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">batch</span> <span class="o">=</span> <span class="nx">Augur</span><span class="p">.</span><span class="nx">createBatch</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">batch</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">createBatch</span><span class="p">();</span>
 
 <span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"getCashBalance"</span><span class="p">,</span> <span class="p">[</span><span class="nx">myAccount</span><span class="p">],</span> <span class="nx">callback</span><span class="p">);</span>
-<span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"getRepBalance"</span><span class="p">,</span> <span class="p">[</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span> <span class="nx">myAccount</span><span class="p">],</span> <span class="nx">callback</span><span class="p">);</span>
+<span class="nx">batch</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"getRepBalance"</span><span class="p">,</span> <span class="p">[</span><span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span> <span class="nx">myAccount</span><span class="p">],</span> <span class="nx">callback</span><span class="p">);</span>
 
 <span class="nx">batch</span><span class="p">.</span><span class="nx">execute</span><span class="p">();</span>
 
@@ -468,24 +469,36 @@
     <span class="na">params</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}];</span>
 
-<span class="nx">Augur</span><span class="p">.</span><span class="nx">batch</span><span class="p">(</span><span class="nx">txlist</span><span class="p">);</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">batch</span><span class="p">(</span><span class="nx">txlist</span><span class="p">);</span>
 
 <span class="c1">// returns: ['10', '6']</span>
 </code></pre>
 
 <p>augur.js implements <a href="http://www.jsonrpc.org/specification#batch">batch RPC</a>, which can help reduce overhead if you&rsquo;re making several API calls that can be run in parallel (i.e., do not depend on each other&rsquo;s results).</p>
 
-<p>For finer-grained control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">Augur.batch</code> method directly.  <code class="prettyprint">Augur.batch</code> accepts manually constructed transaction objects.</p>
+<p>For finer-grained control over the batched commands, you can also use augur.js&rsquo;s lower-level <code class="prettyprint">augur.batch</code> method directly.  <code class="prettyprint">augur.batch</code> accepts manually constructed transaction objects.</p>
 
           <h1 id="tests">Tests</h1>
 
-<p>augur.js includes a unit test suite.  Tests are be run using <a href="http://mochajs.org/">Mocha</a>.</p>
+<p><a href="https://github.com/AugurProject/augur.js">augur.js</a> includes unit tests.  Tests are run using <a href="http://mochajs.org/">Mocha</a>.</p>
 
 <p><code class="block">$ npm install -g mocha</code></p>
 
-<p><code class="block">$ scripts/runtests.sh</code></p>
+<p>There are two test suites &ndash; the first only runs &ldquo;offline&rdquo; (i.e., not connected to Ethereum) tests, and the second runs a full complement of tests which connect to a local Ethereum node.  Since the full tests include transactions that send ether, cash, and reputation, it is recommended to carry these out on a private chain!</p>
 
-<p>Note that your local Ethereum node must be running for the tests to run properly.</p>
+<p>Offline tests:</p>
+
+<p><code class="block">$ npm run offline</code></p>
+
+<p>To set up a private chain to run the full test suite, run the included <a href="https://github.com/AugurProject/augur.js/blob/master/scripts/setup.js">setup.js script</a>.  This script requires a local installation of geth, and creates a fresh blockchain (with network ID 10101) in data directory <code class="prettyprint">~/.augur-test</code>.  It does <em>not</em> create Ethereum accounts for you; you must set these up yourself prior to running setup.js.  The script assumes that your account password is in a file in the new data directory called <code class="prettyprint">.password</code>.</p>
+
+<p>The setup script also will upload the Augur contracts to the new blockchain.  You must have a local clone of the <a href="https://github.com/AugurProject/augur-core">augur-core</a> repository on your machine for this to work.  The setup script can be run with npm:</p>
+
+<p><code class="block">$ npm run setup -- --augur /path/to/augur-core</code></p>
+
+<p>After the setup script finishes, you can run the full test suite using npm:</p>
+
+<p><code class="block">$ npm run tests -- --gospel</code></p>
 
           <h1 id="errors">Errors</h1>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
