@@ -58,13 +58,17 @@
 <code class="block">geth --unlock 0 --rpc --rpccorsdomain "http://localhost:8545" --rpcapi "shh,db,eth,net,web3" --shh</code>
 </aside>
 
-<p>Augur maintains three public Ethereum nodes:</p>
+<p>Augur maintains five public Ethereum nodes:</p>
 
 <ul>
 <li><a href="http://eth1.augur.net">http://eth1.augur.net</a></li>
 <li><a href="http://eth2.augur.net">http://eth2.augur.net</a></li>
 <li><a href="http://eth3.augur.net">http://eth3.augur.net</a></li>
+<li><a href="http://eth4.augur.net">http://eth4.augur.net</a></li>
+<li><a href="http://eth5.augur.net">http://eth5.augur.net</a></li>
 </ul>
+
+<p>These nodes are temporarily on a private chain (networkid 7).  We plan to move to the Frontier testnet once it is set up!</p>
 
 <h2 id="getting-started">Getting started</h2>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
@@ -73,7 +77,7 @@
 <span class="c1">// Attempt to connect to a local Ethereum node (on http://localhost:8545)</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
 
-<span class="c1">// Connect to Augur's public node (eth1.augur.net)</span>
+<span class="c1">// Connect to one of Augur's public nodes (eth1.augur.net)</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"http://eth1.augur.net"</span><span class="p">);</span>
 </code></pre>
 
