@@ -447,6 +447,26 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <span class="s2">"0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"</span>
 </code></pre>
 
+<h2 id="filters">Filters</h2>
+<pre class="highlight javascript"><code><span class="c1">// Create a filter for transactions on any of the augur contract addresses</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">start_contracts_listener</span><span class="p">();</span>
+
+<span class="c1">// "Heartbeat" check for new transactions every 5 seconds</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">heartbeat</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new transaction:"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Stop heartbeat polling</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">stop_heartbeat</span><span class="p">();</span>
+
+<span class="c1">// Clear the contract transactions filter</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">clear_contracts_filter</span><span class="p">();</span>
+</code></pre>
+
+<p>The contracts-listener filter watches for new transactions and calls back with the augur-related transaction(s); for example, shares purchased/sold.</p>
+
+<aside class="warning">Due to a geth bug affecting multi-address filters, all-contract filters <b>will not work</b> until <a href="https://github.com/ethereum/go-ethereum/pull/1751">ethereum/go-ethereum#1751</a> is merged.</aside>
+
           <h1 id="batching">Batching</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
  * Batch RPC request that gets the cash and reputation balances for account
