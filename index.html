@@ -463,9 +463,7 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">clear_contracts_filter</span><span class="p">();</span>
 </code></pre>
 
-<p>The contracts-listener filter watches for new transactions and calls back with the augur-related transaction(s); for example, shares purchased/sold.</p>
-
-<aside class="warning">Due to a geth bug affecting multi-address filters, all-contract filters <b>will not work</b> until <a href="https://github.com/ethereum/go-ethereum/pull/1751">ethereum/go-ethereum#1751</a> is merged.</aside>
+<p>The contracts-listener filter watches for new Augur transactions and calls back with the transaction(s) data; for example, shares purchased/sold.</p>
 
           <h1 id="batching">Batching</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
