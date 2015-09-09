@@ -447,32 +447,90 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <span class="s2">"0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"</span>
 </code></pre>
 
-<h2 id="filters">Filters</h2>
-<pre class="highlight javascript"><code><span class="c1">// Create a filter for transactions on any of the augur contract addresses</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">start_contracts_listener</span><span class="p">();</span>
-
-<span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">contracts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new transaction:"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+          <h1 id="filters">Filters</h1>
+<pre class="highlight javascript"><code><span class="c1">// Start filtering</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">listen</span><span class="p">({</span>
+    <span class="na">block</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">blockHash</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new block:"</span><span class="p">,</span> <span class="nx">blockHash</span><span class="p">);</span>
     <span class="p">},</span>
-    <span class="na">price</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"price update:"</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+    <span class="na">contracts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">augurTx</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"augur transaction:"</span><span class="p">,</span> <span class="nx">augurTx</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">price</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updatedPrice</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"updated price:"</span><span class="p">,</span> <span class="nx">updatedPrice</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">start_heartbeat</span><span class="p">(</span><span class="nx">callbacks</span><span class="p">);</span>
+<span class="p">});</span>
 
-<span class="c1">// Stop heartbeat polling</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">stop_heartbeat</span><span class="p">();</span>
+<span class="c1">// Stop filtering</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">();</span>
 
-<span class="c1">// Clear the contract transactions filter</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">clear_contracts_filter</span><span class="p">();</span>
+<span class="c1">// Stop filtering and uninstall filters</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="cm">/**
+ * Example filter results
+ */</span>
+
+<span class="c1">// block</span>
+<span class="nx">blockHash</span> <span class="o">=</span> <span class="s2">"0x999553c632fa10f3eb2af9a2be9ab612726372721680e3f76441f75f7c879a2f"</span>
+
+<span class="c1">// contracts</span>
+<span class="nx">augurTx</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79"</span><span class="p">,</span>
+    <span class="na">topics</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"0x1a653a04916ffd3d6f74d5966492bda358e560be296ecf5307c2e2c2fdedd35a"</span><span class="p">,</span>
+        <span class="s2">"0x00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
+        <span class="s2">"0x3557ce85d2ac4bcd36be7f3a6e0f63cfa6b18d34908b810ed41e44aafb399b44"</span><span class="p">,</span>
+        <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000001"</span>
+    <span class="p">],</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"0x000000000000000000000000000000000000000000000001000000000000d330"</span><span class="p">,</span>
+        <span class="s2">"0xfffffffffffffffffffffffffffffffffffffffffffffffeffffffffffffffa3"</span>
+    <span class="p">],</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"0x110d"</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+    <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x8481c76a1f88a203191c1cd1942963ff9f1ea31b1db02f752771fef30133798e"</span><span class="p">,</span>
+    <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="c1">// price</span>
+<span class="nx">updatedPrice</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">user</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"-0xcaa8317a2d53b432c94180c591f09c30594e72cb6f747ef12be1bb5504c664bc"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="s2">"1.00000000000000002255"</span><span class="p">,</span>
+    <span class="na">cost</span><span class="p">:</span> <span class="s2">"-1.00000000000000008137"</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"4722"</span>
+<span class="p">}</span>
+
 </code></pre>
 
-<p>&ldquo;Heartbeat&rdquo; checks for new transactions and/or price updates every 5 seconds.  Passing callback functions for <code class="prettyprint">contracts</code> and/or <code class="prettyprint">price</code> to the <code class="prettyprint">augur.filters.start_heartbeat</code> method will start polling the contracts and price filters, respectively.</p>
+<p>augur.js binds the RPC commands associated with Ethereum&rsquo;s blockchain (transaction/block) filters, as well as whisper filters.  Messages &ldquo;caught&rdquo; by filters are retrieved by polling the Ethereum node; the filtering &ldquo;heartbeat&rdquo; checks for new messages every 5 seconds.  The three primary types of blockchain filters augur.js uses are:</p>
 
-<aside class="notice">You can adjust the heartbeat polling interval by changing the value of <code>augur.filters.PULSE</code>.  By default it is set to <code>5000</code> (5 seconds).</aside>
+<table><thead>
+<tr>
+<th>Filter</th>
+<th>Message contents</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>block</td>
+<td>new blockhashes</td>
+</tr>
+<tr>
+<td>contracts</td>
+<td>transactions involving any Augur contract</td>
+</tr>
+<tr>
+<td>price</td>
+<td>market price updates</td>
+</tr>
+</tbody></table>
 
-<p>The contracts-listener filter watches for new Augur transactions and calls back with the transaction(s) data; for example, shares purchased/sold.</p>
+<p>Passing callback functions for <code class="prettyprint">block</code>, <code class="prettyprint">contracts</code> and/or <code class="prettyprint">price</code> to the <code class="prettyprint">augur.filters.listen</code> method will start polling the block, contracts and price filters, respectively.</p>
+
+<aside class="notice">You can adjust the polling interval by changing the value of <code>augur.filters.PULSE</code>.  By default it is set to <code>5000</code> (5 seconds).</aside>
 
           <h1 id="batching">Batching</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
