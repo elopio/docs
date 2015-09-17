@@ -102,9 +102,9 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 
 <span class="c1">// output</span>
 <span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
     <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 
@@ -118,7 +118,7 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
 
 <span class="c1">// output</span>
-<span class="nl">Account</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">{}</span>
 
 <span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
 
@@ -128,16 +128,18 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 
 <span class="c1">// output</span>
 <span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s1">'tinybike'</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="mi">55</span> <span class="nx">ec</span> <span class="nx">ac</span> <span class="mi">35</span> <span class="mi">98</span> <span class="mi">76</span> <span class="mi">6</span><span class="nx">f</span> <span class="nx">b9</span> <span class="mi">05</span> <span class="nx">de</span> <span class="nx">a2</span> <span class="mi">13</span> <span class="mi">8</span><span class="nx">c</span> <span class="mi">6</span><span class="nx">d</span> <span class="mi">48</span> <span class="mi">7</span><span class="nx">f</span> <span class="mi">07</span> <span class="mi">9</span><span class="nx">e</span> <span class="nx">b1</span> <span class="mi">36</span> <span class="nx">a8</span> <span class="nx">fb</span> <span class="nx">eb</span> <span class="mi">5</span><span class="nx">b</span> <span class="mi">93</span> <span class="nx">e2</span> <span class="mi">59</span> <span class="mi">6</span><span class="nx">f</span> <span class="mi">91</span> <span class="mi">4</span><span class="nx">f</span> <span class="mi">35</span> <span class="mi">81</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s1">'0x09129dcde8e0f510ffb2a715709b69f5c4a42361'</span><span class="p">,</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
     <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
 
-<p>The user specifies a username and password, and a private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key using AES-256.  The username, encrypted private key, and initialization vector are stored with <a href="https://www.firebase.com/">Firebase</a>.</p>
+<p>To use the account system, the user specifies a username and password.  Everything else is done automatically for the user.  The only requirement for the password is that it be at least 6 characters long.</p>
+
+<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256).  The username, encrypted private key, and initialization vector are stored with <a href="https://www.firebase.com/">Firebase</a>.</p>
 
 <aside class="success">Our account system is <b>trustless</b> because only the user&rsquo;s encrypted key is stored.  The user&rsquo;s randomly-generated private key is encrypted using their password, then indexed by username and stored with Firebase.  The user&rsquo;s password is never stored (not even a hash of it), nor is their public key or their address.  Neither we nor Firebase have any access to the user&rsquo;s account.  We can&rsquo;t see your account balance, your transaction history, or anything else.</aside>
 
