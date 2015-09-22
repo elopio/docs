@@ -458,6 +458,9 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
     <span class="na">contracts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">augurTx</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"augur transaction:"</span><span class="p">,</span> <span class="nx">augurTx</span><span class="p">);</span>
     <span class="p">},</span>
+    <span class="na">creation</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newMarket</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new market created:"</span><span class="p">,</span> <span class="nx">newMarket</span><span class="p">.</span><span class="nx">marketId</span><span class="p">);</span>
+    <span class="p">},</span>
     <span class="na">price</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updatedPrice</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"updated price:"</span><span class="p">,</span> <span class="nx">updatedPrice</span><span class="p">);</span>
     <span class="p">}</span>
@@ -476,7 +479,7 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <span class="c1">// block</span>
 <span class="nx">blockHash</span> <span class="o">=</span> <span class="s2">"0x999553c632fa10f3eb2af9a2be9ab612726372721680e3f76441f75f7c879a2f"</span>
 
-<span class="c1">// contracts</span>
+<span class="c1">// contracts (topics and data fields vary by contract and method)</span>
 <span class="nx">augurTx</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">address</span><span class="p">:</span> <span class="s2">"0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79"</span><span class="p">,</span>
     <span class="na">topics</span><span class="p">:</span> <span class="p">[</span>
@@ -494,6 +497,12 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
     <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x8481c76a1f88a203191c1cd1942963ff9f1ea31b1db02f752771fef30133798e"</span><span class="p">,</span>
     <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="c1">// creation</span>
+<span class="nx">newMarket</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"-0xcaa8317a2d53b432c94180c591f09c30594e72cb6f747ef12be1bb5504c664bc"</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"4689"</span>
 <span class="p">}</span>
 
 <span class="c1">// price</span>
@@ -525,12 +534,16 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <td>transactions involving any Augur contract</td>
 </tr>
 <tr>
+<td>creation</td>
+<td>new market&rsquo;s ID and creation blocknumber</td>
+</tr>
+<tr>
 <td>price</td>
 <td>market price updates</td>
 </tr>
 </tbody></table>
 
-<p>Passing callback functions for <code class="prettyprint">block</code>, <code class="prettyprint">contracts</code> and/or <code class="prettyprint">price</code> to the <code class="prettyprint">augur.filters.listen</code> method will start polling the block, contracts and price filters, respectively.</p>
+<p>Passing callback functions for <code class="prettyprint">block</code>, <code class="prettyprint">contracts</code>, <code class="prettyprint">creation</code> and/or <code class="prettyprint">price</code> to the <code class="prettyprint">augur.filters.listen</code> method will start polling the block, contracts, creation and price filters, respectively.</p>
 
 <aside class="notice">You can adjust the polling interval by changing the value of <code>augur.filters.PULSE</code>.  By default it is set to <code>5000</code> (5 seconds).</aside>
 
