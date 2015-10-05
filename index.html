@@ -55,8 +55,11 @@
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
 <span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"augur.js"</span><span class="p">);</span>
 
-<span class="c1">// Attempt to connect to a local Ethereum node (on http://localhost:8545)</span>
+<span class="c1">// Attempt to connect to a local Ethereum node</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+
+<span class="c1">// Connect to a local Ethereum node with IPC support</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">"/home/augur/.ethereum/geth.ipc"</span><span class="p">);</span>
 
 <span class="c1">// Connect to one of Augur's public nodes (eth1.augur.net)</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"http://eth1.augur.net"</span><span class="p">);</span>
@@ -66,7 +69,9 @@
 
 <p><code class="prettyprint">$ npm install augur.js</code></p>
 
-<p>To use the Augur API, augur.js needs to connect to an Ethereum node.  By default, augur.js will look for a localhost Ethereum node listening on port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">Augur.connect</code>.</p>
+<p>To use the Augur API, augur.js needs to connect to an Ethereum node.  By default, augur.js will look for a local Ethereum node listening on localhost port 8545.  To change this, just call pass your RPC connection info to <code class="prettyprint">augur.connect</code>.</p>
+
+<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth&rsquo;s IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  It is significantly faster than HTTP RPC, but requires access to the filesystem, so it cannot be used from the browser.</aside>
 
           <h1 id="architecture">Architecture</h1>
 
@@ -84,7 +89,7 @@ where <code>/path/to/genesis_block.json</code> is the genesis block for the (tem
 <h2 id="hosted-node">Hosted node</h2>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'">
-Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains five public Ethereum nodes, which are used automatically by <a href="http://client.augur.net">client.augur.net</a> if an Ethereum node is not detected on localhost:</p>
+Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains five public Ethereum nodes, which are used automatically by <a href="http://client.augur.net">client.augur.net</a> if a local Ethereum node is not detected:</p>
 
 <ul>
 <li><a href="http://eth1.augur.net">http://eth1.augur.net</a></li>
@@ -94,7 +99,7 @@ Understandably, many users will not want to go to the trouble of running a full 
 <li><a href="http://eth5.augur.net">http://eth5.augur.net</a></li>
 </ul>
 
-<p>Nodes <a href="http://eth1.augur.net">eth1</a>, <a href="http://eth3.augur.net">eth3</a>, <a href="http://eth4.augur.net">eth4</a> and <a href="http://eth5.augur.net">eth5</a> are temporarily on a private chain (networkid 7).  <a href="http://eth2.augur.net">eth2.augur.net</a> is temporarily on the Frontier network; it is being used by the <a href="https://sale.augur.net">Augur Reputation sale app</a> until the end of the sale on Oct. 1 at noon EST.</p>
+<p>All five nodes are temporarily on a private chain (networkid 7), rather than the main Frontier network, while Augur is in alpha/beta testing.</p>
 
           <h1 id="accounts">Accounts</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -597,11 +602,11 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <p><code class="block">$ npm install -g mocha</code></p>
 
-<p>There are two test suites &ndash; the first only runs &ldquo;offline&rdquo; (i.e., not connected to Ethereum) tests, and the second runs a full complement of tests which connect to a local Ethereum node.  Since the full tests include transactions that send ether, cash, and reputation, it is recommended to carry these out on a private chain!</p>
+<p>There are two test suites &ndash; the first only runs tests which do not require sending transactions to the Ethereum network, and the second runs a full complement of tests, including tests that create events, markets, buy and sell shares, etc.  Generally, it is recommended to only run the full test suite on a private chain.</p>
 
-<p>Offline tests:</p>
+<p>To run the test suite without transactional tests:</p>
 
-<p><code class="block">$ npm run offline</code></p>
+<p><code class="block">$ npm run testnet</code></p>
 
 <p>To set up a private chain to run the full test suite, run the included <a href="https://github.com/AugurProject/augur.js/blob/master/scripts/setup.js">setup.js script</a>.  This script requires a local installation of geth, and creates a fresh blockchain (with network ID 10101) in data directory <code class="prettyprint">~/.augur-test</code>.  It does <em>not</em> create Ethereum accounts for you; you must set these up yourself prior to running setup.js.  The script assumes that your account password is in a file in the new data directory called <code class="prettyprint">.password</code>.</p>
 
@@ -611,7 +616,7 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <p>After the setup script finishes, you can run the full test suite using npm:</p>
 
-<p><code class="block">$ npm run tests -- --gospel</code></p>
+<p><code class="block">$ npm test -- --gospel</code></p>
 
           <h1 id="errors">Errors</h1>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
