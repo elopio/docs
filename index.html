@@ -97,156 +97,6 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <p>All five nodes are temporarily on a private chain (networkid 7), rather than the main Frontier network, while Augur is in alpha/beta testing.</p>
 
-          <h1 id="accounts">Accounts</h1>
-<pre class="highlight javascript"><code><span class="cm">/**
- * Create an account using the augur.web.register method.
- */</span>
-
-<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
-<span class="p">});</span>
-
-<span class="c1">// output</span>
-<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
-    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
-<span class="p">}</span>
-
-<span class="cm">/**
- * The user is automatically logged in after registering.  When logged in,
- * the user's data is kept in the the augur.web.account object.  Logging out
- * unsets the augur.web.account object.
- */</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
-
-<span class="c1">// output</span>
-<span class="p">{}</span>
-
-<span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// output</span>
-<span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
-    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
-
-<p>To use the account system, the user specifies a username and password.  Everything else is done automatically for the user.  The only requirement for the password is that it be at least 6 characters long.</p>
-
-<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256).  The username, encrypted private key, and initialization vector are stored with <a href="https://www.firebase.com/">Firebase</a>.</p>
-
-<aside class="success">Our account system is <b>trustless</b> because only the user&rsquo;s encrypted key is stored.  The user&rsquo;s randomly-generated private key is encrypted using their password, then indexed by username and stored with Firebase.  The user&rsquo;s password is never stored (not even a hash of it), nor is their public key or their address.  Neither we nor Firebase have any access to the user&rsquo;s account.  We can&rsquo;t see your account balance, your transaction history, or anything else.</aside>
-
-<p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
-
-<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
-
-<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
-
-          <h1 id="callbacks">Callbacks</h1>
-<pre class="highlight javascript"><code><span class="cm">/**
- * Check account 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b's cash balance.
- */</span>
-
-<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">;</span>
-
-<span class="c1">// Synchronous</span>
-<span class="kd">var</span> <span class="nx">showMeTheMoney</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">);</span>
-<span class="c1">// '98855.99999999999999994145'</span>
-
-<span class="c1">// Asynchronous</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// prints 98855.99999999999999994145</span>
-
-<span class="cm">/**
- * Send 50 cash to 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b.  Because this
- * submits a transaction to the network, it can only be done asynchronously.
- */</span>
-
-<span class="kd">var</span> <span class="nx">amountToSend</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Sent:"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">},</span>
-    <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Success!"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">},</span>
-    <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed:"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">amountToSend</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSent</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onFailed</span><span class="p">);</span>
-
-<span class="c1">// Printed almost immediately; the callReturn field is the sendCash method's</span>
-<span class="c1">// return value.  If the transaction was sent successfully, callReturn will</span>
-<span class="c1">// be the amount of cash sent.  txHash (the transaction hash) uniquely</span>
-<span class="c1">// identifies this transaction, and can be used to look it up.</span>
-<span class="nl">Sent</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">txHash</span><span class="p">:</span> <span class="s1">'0xd5743b5b3bfdec989692b69d68fd8c979120e82cd199fdd80cff36dba42befbe'</span><span class="p">,</span>
-    <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'50'</span>
-<span class="p">}</span>
-
-<span class="c1">// Printed after about 12 seconds, when the transaction is detected to have a</span>
-<span class="c1">// non-null blockHash value.</span>
-<span class="nx">Success</span><span class="o">!</span> <span class="p">{</span>
-    <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x6f'</span><span class="p">,</span>
-    <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x2f10d8cdb8b2746a5ed24f4021caffae3f25abca297622984c2baa69db0ac50f'</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x2c58'</span><span class="p">,</span>
-    <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-    <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-    <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
-    <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0x11102181f5e'</span><span class="p">,</span>
-    <span class="na">input</span><span class="p">:</span> <span class="s1">'0x693200ce00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b0000000000000000000000000000000000000000000000320000000000000000'</span><span class="p">,</span>
-    <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'50'</span><span class="p">,</span>
-    <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xd5743b5b3bfdec989692b69d68fd8c979120e82cd199fdd80cff36dba42befbe'</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Augur API methods that submit transactions to the network (using the <code class="prettyprint">eth_sendTransaction</code> RPC) take three callbacks, in the following order:</p>
-
-<ul>
-<li>onSent: fires when the transaction has been broadcast to the network.</li>
-<li>onSuccess: fires when the transaction has been successfully incorporated into a block.</li>
-<li>onFailed: fires if the RPC request returns an error.</li>
-</ul>
-
-<p>The <code class="prettyprint">onSent</code> callback is required; <code class="prettyprint">onSuccess</code> and <code class="prettyprint">onFailed</code> are both optional.  If the <code class="prettyprint">onSuccess</code> callback is supplied, augur.js will poll the network every 12 seconds with <code class="prettyprint">eth_getTransaction</code>, until the transaction record contains a non-null <code class="prettyprint">blockHash</code> value, or a maximum of 12 requests have been made.</p>
-
-<p>Augur API methods that perform RPC requests that do not submit transactions to the network (using the <code class="prettyprint">eth_call</code> RPC) take a single optional callback as their last parameter.  Unlike transaction RPCs, call RPCs can be synchronous.  If a callback is supplied, the RPC request will be asynchronous; otherwise, it will be synchronous.</p>
-
-<aside class="notice">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
-
-          <h1 id="numbers">Numbers</h1>
-
-<p>There are four acceptable ways to pass numerical inputs to the Augur API:</p>
-
-<ul>
-<li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
-<li><p>stringified numbers (e.g., <code class="prettyprint">&quot;1010101&quot;</code>)</p></li>
-<li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
-<li><p>BigNumbers (e.g., <code class="prettyprint">new BigNumber(&quot;1010101&quot;)</code>)</p></li>
-</ul>
-
-<p>Note that for primitive JS numbers, you will receive an error from the BigNumber library if your input contains more than 15 significant figures.</p>
-
-<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
-
-<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
-
           <h1 id="api">API</h1>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
 <span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"augur.js"</span><span class="p">);</span>
@@ -448,6 +298,156 @@ Understandably, many users will not want to go to the trouble of running a full 
 <p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The <code class="prettyprint">returns</code> field is used only to format the output, and does not affect the actual RPC request.</p>
 
 <aside class="notice"><b><code>invoke</code> currently only works for <a href="https://github.com/ethereum/serpent">Serpent</a> contracts.</b>  The extra datatypes included by <a href="https://github.com/ethereum/solidity">Solidity</a> are not (yet) supported by the <a href="https://github.com/AugurProject/augur-abi">augur-abi</a> encoder.  The augur-abi encoder requires all parameters to be type <code>string</code>, <code>int256</code>, or <code>int256[]</code>.</aside>
+
+          <h1 id="accounts">Accounts</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Create an account using the augur.web.register method.
+ */</span>
+
+<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
+<span class="p">});</span>
+
+<span class="c1">// output</span>
+<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * The user is automatically logged in after registering.  When logged in,
+ * the user's data is kept in the the augur.web.account object.  Logging out
+ * unsets the augur.web.account object.
+ */</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+
+<span class="c1">// output</span>
+<span class="p">{}</span>
+
+<span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// output</span>
+<span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
+
+<p>To use the account system, the user specifies a username and password.  Everything else is done automatically for the user.  The only requirement for the password is that it be at least 6 characters long.</p>
+
+<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256).  The username, encrypted private key, and initialization vector are stored with <a href="https://www.firebase.com/">Firebase</a>.</p>
+
+<aside class="success">Our account system is <b>trustless</b> because only the user&rsquo;s encrypted key is stored.  The user&rsquo;s randomly-generated private key is encrypted using their password, then indexed by username and stored with Firebase.  The user&rsquo;s password is never stored (not even a hash of it), nor is their public key or their address.  Neither we nor Firebase have any access to the user&rsquo;s account.  We can&rsquo;t see your account balance, your transaction history, or anything else.</aside>
+
+<p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
+
+<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
+
+<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
+
+          <h1 id="callbacks">Callbacks</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Check account 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b's cash balance.
+ */</span>
+
+<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">;</span>
+
+<span class="c1">// Synchronous</span>
+<span class="kd">var</span> <span class="nx">showMeTheMoney</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">);</span>
+<span class="c1">// '98855.99999999999999994145'</span>
+
+<span class="c1">// Asynchronous</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">showMeTheMoney</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// prints 98855.99999999999999994145</span>
+
+<span class="cm">/**
+ * Send 50 cash to 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b.  Because this
+ * submits a transaction to the network, it can only be done asynchronously.
+ */</span>
+
+<span class="kd">var</span> <span class="nx">amountToSend</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Sent:"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">},</span>
+    <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Success!"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">},</span>
+    <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Failed:"</span><span class="p">,</span> <span class="nx">res</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">amountToSend</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSent</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">cb</span><span class="p">.</span><span class="nx">onFailed</span><span class="p">);</span>
+
+<span class="c1">// Printed almost immediately; the callReturn field is the sendCash method's</span>
+<span class="c1">// return value.  If the transaction was sent successfully, callReturn will</span>
+<span class="c1">// be the amount of cash sent.  txHash (the transaction hash) uniquely</span>
+<span class="c1">// identifies this transaction, and can be used to look it up.</span>
+<span class="nl">Sent</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">txHash</span><span class="p">:</span> <span class="s1">'0xd5743b5b3bfdec989692b69d68fd8c979120e82cd199fdd80cff36dba42befbe'</span><span class="p">,</span>
+    <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'50'</span>
+<span class="p">}</span>
+
+<span class="c1">// Printed after about 12 seconds, when the transaction is detected to have a</span>
+<span class="c1">// non-null blockHash value.</span>
+<span class="nx">Success</span><span class="o">!</span> <span class="p">{</span>
+    <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x6f'</span><span class="p">,</span>
+    <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x2f10d8cdb8b2746a5ed24f4021caffae3f25abca297622984c2baa69db0ac50f'</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x2c58'</span><span class="p">,</span>
+    <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+    <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+    <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+    <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0x11102181f5e'</span><span class="p">,</span>
+    <span class="na">input</span><span class="p">:</span> <span class="s1">'0x693200ce00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b0000000000000000000000000000000000000000000000320000000000000000'</span><span class="p">,</span>
+    <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'50'</span><span class="p">,</span>
+    <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xd5743b5b3bfdec989692b69d68fd8c979120e82cd199fdd80cff36dba42befbe'</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Augur API methods that submit transactions to the network (using the <code class="prettyprint">eth_sendTransaction</code> RPC) take three callbacks, in the following order:</p>
+
+<ul>
+<li>onSent: fires when the transaction has been broadcast to the network.</li>
+<li>onSuccess: fires when the transaction has been successfully incorporated into a block.</li>
+<li>onFailed: fires if the RPC request returns an error.</li>
+</ul>
+
+<p>The <code class="prettyprint">onSent</code> callback is required; <code class="prettyprint">onSuccess</code> and <code class="prettyprint">onFailed</code> are both optional.  If the <code class="prettyprint">onSuccess</code> callback is supplied, augur.js will poll the network every 12 seconds with <code class="prettyprint">eth_getTransaction</code>, until the transaction record contains a non-null <code class="prettyprint">blockHash</code> value, or a maximum of 12 requests have been made.</p>
+
+<p>Augur API methods that perform RPC requests that do not submit transactions to the network (using the <code class="prettyprint">eth_call</code> RPC) take a single optional callback as their last parameter.  Unlike transaction RPCs, call RPCs can be synchronous.  If a callback is supplied, the RPC request will be asynchronous; otherwise, it will be synchronous.</p>
+
+<aside class="notice">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+
+          <h1 id="numbers">Numbers</h1>
+
+<p>There are four acceptable ways to pass numerical inputs to the Augur API:</p>
+
+<ul>
+<li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
+<li><p>stringified numbers (e.g., <code class="prettyprint">&quot;1010101&quot;</code>)</p></li>
+<li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
+<li><p>BigNumbers (e.g., <code class="prettyprint">new BigNumber(&quot;1010101&quot;)</code>)</p></li>
+</ul>
+
+<p>Note that for primitive JS numbers, you will receive an error from the BigNumber library if your input contains more than 15 significant figures.</p>
+
+<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
+
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
 
           <h1 id="json-rpc">JSON-RPC</h1>
 
