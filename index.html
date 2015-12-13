@@ -633,12 +633,10 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <span class="c1">// When you and geth have had enough lively times, geth.stop kills</span>
 <span class="c1">// the geth child process:</span>
-<span class="nx">geth</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// no more lively times :( </span>
-<span class="p">});</span>
+<span class="nx">geth</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="cm">/* no more lively times :( */</span> <span class="p">});</span>
 
-<span class="c1">// `geth.start` accepts an optional second parameter which can specify</span>
-<span class="c1">// the listeners to overwrite.</span>
+<span class="c1">// The `stdout`, `stderr`, and `close` listeners can be initially set</span>
+<span class="c1">// by passing them to `geth.start`.</span>
 <span class="kd">var</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">stdout</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"I got a message!! "</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
@@ -652,9 +650,6 @@ Understandably, many users will not want to go to the trouble of running a full 
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"It's game over, man!  Game over!"</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
-
-<span class="c1">// The `stdout`, `stderr`, and `close` listeners can be initially set</span>
-<span class="c1">// by passing them to `geth.start`.</span>
 <span class="nx">geth</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">listeners</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">proc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* &lt;3 geth */</span> <span class="p">});</span>
 
 <span class="c1">// Swap out or add listeners after the initial startup:</span>
