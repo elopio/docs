@@ -344,9 +344,13 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <h2 id="full-api">Full API</h2>
 <pre class="highlight javascript"><code><span class="cm">/**
- * All Augur functions have an optional callback (or callbacks) as their
+ * All Augur API methods have optional callback(s) as their
  * final parameter.
  */</span>
+
+<span class="nx">depositEther</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+
+<span class="nx">withdrawEther</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
 
 <span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
@@ -382,11 +386,9 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <span class="nx">getBranch</span><span class="p">(</span><span class="nx">branchIdNumber</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
 
-<span class="nx">cashFaucet</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
-
-<span class="nx">reputationFaucet</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
+<span class="nx">reputationFaucet</span><span class="p">([</span><span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
 
 <span class="nx">getDescription</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
@@ -1055,11 +1057,6 @@ Understandably, many users will not want to go to the trouble of running a full 
 <td>buyShares</td>
 <td>-4</td>
 <td>Bad nonce/hash</td>
-</tr>
-<tr>
-<td>cashFaucet</td>
-<td>-1</td>
-<td>Hey, you&rsquo;re not broke!</td>
 </tr>
 <tr>
 <td>checkReportValidity</td>
