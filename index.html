@@ -38,7 +38,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href="http://www.augur.net">Augur.net</a></li>
-            <li><a href="http://client.augur.net">Client</a></li>
+            <li><a href="http://app.augur.net">App (Alpha)</a></li>
             <li><a href="http://augur.link/augur.pdf">Whitepaper</a></li>
             <li><a href="https://github.com/AugurProject">Github</a></li>
             <li><a href="https://twitter.com/AugurProject">Twitter</a></li>
@@ -51,7 +51,7 @@
 
 <p><a href="http://augur.net">Augur</a> is a decentralized prediction market platform that runs on Ethereum.</p>
 
-<p>The stable Augur client (user interface) is built and hosted at <a href="https://client.augur.net">client.augur.net</a>.  If you want to use or help test Augur, you do not need to download or install anything!  Just go to <a href="https://client.augur.net">client.augur.net</a> and start using it.  (If you want to use our cutting-edge development client, this is maintained at <a href="https://augur-dev.firebaseapp.com">augur-dev.firebaseapp.com</a> &ndash; warning, we push changes to augur-dev pretty rapidly, so it can be a bit buggy!)</p>
+<p>The stable Augur application is built and hosted at <a href="https://app.augur.net">app.augur.net</a>.  If you want to use or help test Augur, you do not need to download or install anything!  Just go to <a href="https://app.augur.net">app.augur.net</a> and start using it.  (If you want to use our cutting-edge development client, this is maintained at <a href="https://augur-dev.firebaseapp.com">augur-dev.firebaseapp.com</a> &ndash; warning, we push changes to augur-dev pretty rapidly, so it can be a bit buggy!)</p>
 
 <p>If you want to help develop Augur, you will need to build the client from source.  To do this, first install <a href="https://nodejs.org/">Node.js</a>, then execute the following commands to build the client:</p>
 
@@ -142,6 +142,7 @@ Understandably, many users will not want to go to the trouble of running a full 
   <span class="na">creationFee</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
   <span class="na">author</span><span class="p">:</span> <span class="s2">"0x1f068eba431ece4a3ce0bc9bf542d78641285e56"</span><span class="p">,</span>
   <span class="na">endDate</span><span class="p">:</span> <span class="mi">609491</span><span class="p">,</span>
+  <span class="na">type</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
   <span class="na">participants</span><span class="p">:</span> <span class="p">{</span>
     <span class="mh">0xaff9cb4dcb19d13b84761c040c91d21dc6c991ec</span><span class="p">:</span> <span class="mi">0</span>
   <span class="p">},</span>
@@ -175,12 +176,18 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="p">}</span>
 </code></pre>
 
-<p>Our being-developed-as-we-speak Simplified API is designed for our new, Intrade-style UI.  This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.  All of the methods in the Simplified API are getter methods that use an <code class="prettyprint">eth_call</code> RPC request; for transactional requests (<code class="prettyprint">eth_sendTransaction</code>), see the Full API section below.</p>
+<p>All of the methods in the Simplified API are getter methods that use an <code class="prettyprint">eth_call</code> RPC request; for transactional requests (<code class="prettyprint">eth_sendTransaction</code>), see the Full API section below.  This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.</p>
 
 <h3 id="getmarketinfo-marketid-callback">getMarketInfo(marketId[, callback])</h3>
 
-<p>Reads all information about a market that is stored on-contract.</p>
-<pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<p>Reads all information about a market that is stored on-contract.  It also determines the <code class="prettyprint">type</code> of the market, which can be <code class="prettyprint">binary</code> (two outcomes; i.e., Yes or No), <code class="prettyprint">categorical</code> (more than two outcomes, i.e., Multiple Choice), <code class="prettyprint">scalar</code> (answer can be any of a range of values; i.e., Numerical), or <code class="prettyprint">combinatorial</code> (for combined wagers on multiple events).  If the market is a combinatorial market, <code class="prettyprint">getMarketInfo</code> also makes separate RPC request for the individual event descriptions.</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">branch</span><span class="p">:</span> <span class="mi">1010101</span><span class="p">,</span>     <span class="c1">// branch ID (default: 1010101)</span>
+  <span class="na">offset</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>          <span class="c1">// which markets to start  (default: 0)</span>
+  <span class="na">numMarketsToLoad</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// numMarkets</span>
+  <span class="na">combinatorial</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">marketsInfo</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"-0x5932c04cfb6df8275387fc5d15a9897d61a2ef598c7e60ae45829e9e1e3409e6"</span><span class="p">:</span> <span class="p">{</span>
@@ -197,9 +204,13 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="getmarketsinfo-branchid-callback">getMarketsInfo(branchId[, callback])</h3>
+<h3 id="getmarketsinfo-options-callback">getMarketsInfo(options[, callback])</h3>
 
-<p>Retrieve a <code class="prettyprint">marketInfo</code> object for all markets on the specified branch.  The <code class="prettyprint">marketInfo</code> objects (see above for example) are collected into a single object and indexed by <code class="prettyprint">marketId</code>.</p>
+<p>Retrieve a <code class="prettyprint">marketInfo</code> object for all markets on the specified branch.  The <code class="prettyprint">marketInfo</code> objects (see above for example) are collected into a single object and indexed by <code class="prettyprint">marketId</code>.  The <code class="prettyprint">options</code> parameter is an object which specifies the branch ID (<code class="prettyprint">branch</code>), and whether or not to send separate RPC requests for combinatorial event descriptions (<code class="prettyprint">combinatorial</code>).  There are also two fields (<code class="prettyprint">offset</code> and <code class="prettyprint">numMarketsToLoad</code>) used to split up the <code class="prettyprint">getMarketsInfo</code> query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request.</p>
+
+<aside class="notice">Each branch&rsquo;s market IDs are stored as an &ldquo;array&rdquo; on the <a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/branches.se">branches</a> contract, in the contract&rsquo;s <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+
+For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
 <pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">getMostActive</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">mostActiveMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">mostActiveMarkets</span> <span class="o">=</span> <span class="p">{</span>
