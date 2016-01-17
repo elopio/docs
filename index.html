@@ -353,57 +353,621 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 <p>Gets the closing price (last trade price of the day) as well as the total volume traded over the day, ordered by timestamp (most recent record last).  <code class="prettyprint">callback</code> is required; <code class="prettyprint">getClosingPrices</code> is asynchronous-only.</p>
 
-<h2 id="full-api">Full API</h2>
-<pre class="highlight javascript"><code><span class="cm">/**
- * All Augur API methods have optional callback(s) as their
- * final parameter.
- */</span>
+<h2 id="call-api">Call API</h2>
+<pre class="highlight javascript"><code><span class="c1">// cash contract</span>
+<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x639b41c4d3d399894f2a57894278e1653e7cd24c"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cashBalance</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">cashBalance</span> <span class="o">=</span> <span class="s2">"93016.83621687256922549981"</span>
+</code></pre>
 
-<span class="nx">depositEther</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/cash.se">cash contract</a></h3>
 
-<span class="nx">withdrawEther</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<h4 id="getcashbalance-address-callback">getCashBalance(address[, callback])</h4>
 
-<span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<p>Gets the play money (CASH) balance of the user account <code class="prettyprint">address</code>.</p>
+<pre class="highlight javascript"><code><span class="c1">// info contract</span>
+<span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCreator</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">creator</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">creator</span> <span class="o">=</span> <span class="s2">"0x639b41c4d3d399894f2a57894278e1653e7cd24c"</span>
 
-<span class="nx">getRepBalance</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">address</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCreationFee</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">creationFee</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">creationFee</span> <span class="o">=</span> <span class="s2">"16"</span>
 
-<span class="nx">getBranches</span><span class="p">([</span><span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getDescription</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">description</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">description</span> <span class="o">=</span> <span class="s2">"Will the Sun turn into a red giant and engulf the Earth by the end of 2016?"</span>
+</code></pre>
 
-<span class="nx">getMarkets</span><span class="p">(</span><span class="nx">branch</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-info-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/info.se">info contract</a></h3>
 
-<span class="nx">getMarketInfo</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<h4 id="getcreator-id-callback">getCreator(id[, callback])</h4>
 
-<span class="nx">getMarketEvents</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<p>Gets the address of the account that created <code class="prettyprint">id</code> (a market or event ID).</p>
 
-<span class="nx">getNumEvents</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<h4 id="getcreationfee-id-callback">getCreationFee(id[, callback])</h4>
 
-<span class="nx">getEventInfo</span><span class="p">(</span><span class="nx">event</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<p>Gets the fee paid by the creator of <code class="prettyprint">id</code> (a market or event ID).</p>
 
-<span class="nx">getBranchID</span><span class="p">(</span><span class="nx">branch</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<h4 id="getdescription-item-callback">getDescription(item[, callback])</h4>
 
-<span class="nx">getNonce</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<p>Gets the plaintext (UTF-8) description of <code class="prettyprint">item</code> (a market or event ID).</p>
+<pre class="highlight javascript"><code><span class="c1">// branches contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumBranches</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">numBranches</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
 
-<span class="nx">getCurrentParticipantNumber</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
-<span class="nx">getParticipantSharesPurchased</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">participantNumber</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getBranches</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">branches</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">branches</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0xf69b5"</span><span class="p">]</span>
 
-<span class="nx">getSharesPurchased</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMarkets</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">markets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">markets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"-0x519bcdaa60e7259143402153efb9825fc37a5c3d8eee0445b987453d2a23919c"</span><span class="p">,</span>
+           <span class="s2">"-0xacfe5fbc7654fee0b8873e2db464f5c189a1fa9e6e0ea5f5fa44bf6a08832f7a"</span><span class="p">,</span>
+           <span class="s2">"-0xb73f41b31a160852d059c870d1c4d205da9b72db6c53588d4426ffe261ccc745"</span><span class="p">,</span>
+           <span class="s2">"-0x40189b8366a578e807f1381088de10bb4660505ff37d9cfa4be8d2a4eb39c74a"</span><span class="p">,</span>
+           <span class="s2">"-0x5a2d3e163636f0f35ff25bfe9a87d62185228c970acaae71eb1a469132631406"</span><span class="p">,</span>
+           <span class="s2">"-0xd7850ae02e616824cfaa2dfbe6129303752e31a7fdbd559f6c4466ec1594f7c6"</span><span class="p">,</span>
+           <span class="s2">"-0xb52debd79c5baaeec50ef7fa85e9f7b7fca6ddecba38810b070aa4bb8ef06952"</span><span class="p">,</span>
+           <span class="s2">"-0x5680dadb064bd5942e827dc70b389d2d24a63bd186279c0bea6e2ab46444c4a"</span><span class="p">,</span>
+           <span class="s2">"-0x98e1eb72b4c1a5973ab2a443ad2ca0b7a90107c2dc2594c33daea307ec39aa1c"</span><span class="p">,</span>
+           <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4"</span><span class="p">,</span>
+           <span class="s2">"-0x679b4b3112994a7c034ae7f6fb4b5e7bcb4a6923e969c24696ee823fbe4e5524"</span><span class="p">]</span>
 
-<span class="nx">getEvents</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">votePeriod</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getPeriodLength</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">periodLength</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">periodLength</span> <span class="o">=</span> <span class="s2">"1800"</span>
 
-<span class="nx">getVotePeriod</span><span class="p">(</span><span class="nx">branchId</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getVotePeriod</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportPeriod</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportPeriod</span> <span class="o">=</span> <span class="s2">"397"</span>
 
-<span class="nx">getPeriodLength</span><span class="p">(</span><span class="nx">branchId</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumMarkets</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">numMarkets</span> <span class="o">=</span> <span class="s2">"45"</span>
 
-<span class="nx">getBranch</span><span class="p">(</span><span class="nx">branchIdNumber</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMinTradingFee</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">minTradingFee</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">minTradingFee</span> <span class="o">=</span> <span class="s2">"0.0078125"</span>
 
-<span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getBranch</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">branch</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">branch</span> <span class="o">=</span> <span class="s2">"0xf69b5"</span>
+</code></pre>
 
-<span class="nx">reputationFaucet</span><span class="p">([</span><span class="nx">onSend</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-branches-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/branches.se">branches contract</a></h3>
 
-<span class="nx">getDescription</span><span class="p">(</span><span class="nx">id</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
+<h4 id="augur-getnumbranches-callback">augur.getNumBranches([callback])</h4>
 
-<span class="nx">createEvent</span><span class="p">(</span><span class="nx">eventObject</span><span class="p">)</span>
+<p>Looks up the total number of branches that exist on the current network.</p>
+
+<h4 id="augur-getbranches-callback">augur.getBranches([callback])</h4>
+
+<p>Gets an array of all branch IDs on the current network.</p>
+
+<h4 id="augur-getmarkets-branch-callback">augur.getMarkets(branch[, callback])</h4>
+
+<p>Gets an array of all markets on the specified branch ID <code class="prettyprint">branch</code>.</p>
+
+<h4 id="augur-getperiodlength-branch-callback">augur.getPeriodLength(branch[, callback])</h4>
+
+<p>Gets the period length for the specified branch ID <code class="prettyprint">branch</code>.</p>
+
+<h4 id="augur-getvoteperiod-branch-callback">augur.getVotePeriod(branch[, callback])</h4>
+
+<p>Looks up the number of the current vote period on the specified branch ID <code class="prettyprint">branch</code>.</p>
+
+<h4 id="augur-getnummarkets-branch-callback">augur.getNumMarkets(branch[, callback])</h4>
+
+<p>Gets the number of markets on the specified branch ID <code class="prettyprint">branch</code>.</p>
+
+<h4 id="augur-getmintradingfee-branch-callback">augur.getMinTradingFee(branch[, callback])</h4>
+
+<p>Gets the minimum trading fee allowed on the specified branch ID <code class="prettyprint">branch</code>.</p>
+
+<h4 id="augur-getbranch-branchnumber-callback">augur.getBranch(branchNumber[, callback])</h4>
+
+<p>Gets branch ID for the branch with index <code class="prettyprint">branchNumber</code>.  (Branches are stored as an &ldquo;array&rdquo; on-contract; <code class="prettyprint">branchNumber</code> is the index of the branch within this array.)</p>
+<pre class="highlight javascript"><code><span class="c1">// events contract</span>
+<span class="kd">var</span> <span class="nx">eventId</span> <span class="o">=</span> <span class="s2">"-0x5fa67764c533d97e33ef2cbdc37cd11eb5f187b47c89c88d3d81250ba834cb3"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getEventInfo</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">eventInfo</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0xf69b5"</span><span class="p">,</span> <span class="s2">"13801186"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getEventBranch</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventBranch</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">eventBranch</span> <span class="o">=</span> <span class="s2">"0xf69b5"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getExpiration</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">expiration</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">expiration</span> <span class="o">=</span> <span class="s2">"13801186"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getOutcome</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">outcome</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">outcome</span> <span class="o">=</span> <span class="s2">"0"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMinValue</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">minValue</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">minValue</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMaxValue</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">maxValue</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">maxValue</span> <span class="o">=</span> <span class="s2">"2"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumOutcomes</span><span class="p">(</span><span class="nx">eventId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">numOutcomes</span> <span class="o">=</span> <span class="s2">"2"</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-events-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/events.se">events contract</a></h3>
+
+<h4 id="geteventinfo-eventid-callback">getEventInfo(eventId[, callback])</h4>
+
+<p>Fetches an array of basic information about event <code class="prettyprint">eventId</code>: branch ID, expiration block number, outcome (<code class="prettyprint">&quot;0&quot;</code> if not yet resolved), minimum value, maximum value, and number of outcomes.</p>
+
+<h4 id="geteventbranch-eventid-callback">getEventBranch(eventId[, callback])</h4>
+
+<p>Gets the branch ID of event <code class="prettyprint">eventId</code>.</p>
+
+<h4 id="getexpiration-eventid-callback">getExpiration(eventId[, callback])</h4>
+
+<p>Gets the expiration block number of event <code class="prettyprint">eventId</code>.</p>
+
+<h4 id="getoutcome-eventid-callback">getOutcome(eventId[, callback])</h4>
+
+<p>Gets the outcome (<code class="prettyprint">&quot;0&quot;</code> if the event is not yet resolved) of event <code class="prettyprint">eventId</code>.</p>
+
+<h4 id="getminvalue-eventid-callback">getMinValue(eventId[, callback])</h4>
+
+<p>The minimum possible value for event <code class="prettyprint">eventId</code>.  For binary (yes/no) events, the minimum value is <code class="prettyprint">1</code>.</p>
+
+<h4 id="getmaxvalue-eventid-callback">getMaxValue(eventId[, callback])</h4>
+
+<p>The minimum possible value for event <code class="prettyprint">eventId</code>.  For binary (yes/no) events, the maximum value is <code class="prettyprint">2</code>.</p>
+
+<h4 id="getnumoutcomes-eventid-callback">getNumOutcomes(eventId[, callback])</h4>
+
+<p>The total number of outcomes for this event.  Binary (yes/no) and scalar (numerical) events always have 2 outcomes; categorical events have more than 2 outcomes.</p>
+<pre class="highlight javascript"><code><span class="c1">// expiringEvents contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">reportPeriod</span> <span class="o">=</span> <span class="mi">397</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getEvents</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">events</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">events</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"-0xc6481ca18bec443c7831578e5f2de02594041041e0abbf0e8ecafd70197fd1a5"</span><span class="p">,</span>
+          <span class="s2">"-0xea03728786ca7ddcb91ec3303723ac794b7bcbcb9b3ad48943e797885c6d05ab"</span><span class="p">,</span>
+          <span class="s2">"-0xdb633b6cdbfbd00c85ca1f093764dcb2b2f0b5284c2324baa6008a3d73e0a1c"</span><span class="p">,</span>
+          <span class="s2">"-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683"</span><span class="p">,</span>
+          <span class="s2">"-0x16fe3cb92062b9f43ef9988eb871f346960ff23b5c16222c1ebe5a5e2fc908c6"</span><span class="p">,</span>
+          <span class="s2">"-0x72162079f64916bccf580430cc1788d9b0873fd1e7de633d118c2d1e931eb47b"</span><span class="p">,</span>
+          <span class="s2">"-0x80da06cc9b94b559880aab761a40c88f1cc9c9eae7124301eaa246688ed8eee6"</span><span class="p">,</span>
+          <span class="s2">"-0x8e33043e75d6b8bc9ba5b60edaa159e25f0c84172730026d7c875e35377da13c"</span><span class="p">,</span>
+          <span class="s2">"-0x2e78a12ce25c171d32d649498babc011152b6509d5880568d77009826c6660e3"</span><span class="p">,</span>
+          <span class="s2">"-0xd5cbab9a85c1dd2ae692b87f98faa1e4841933d604d78622bb6dbe03d8acde36"</span><span class="p">,</span>
+          <span class="s2">"-0x7a2c24bec3f16f5edfa06ed6941569f9de70cbe33c768b02617ed89b16be8d8f"</span><span class="p">,</span>
+          <span class="s2">"-0x399c15976085e8dcf8cb57317c1001013ce8ee5472868b1faa8657edcd1336bd"</span> <span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumberEvents</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numberEvents</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">numberEvents</span> <span class="o">=</span> <span class="s2">"12"</span>
+
+<span class="kd">var</span> <span class="nx">eventIndex</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getEvent</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">eventIndex</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">event</span> <span class="o">=</span> <span class="s2">"-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getTotalRepReported</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalRepReported</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalRepReported</span> <span class="o">=</span> <span class="s2">"76"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getReporterBallot</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">reporterID</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reporterBallot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">reporterBallot</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">]</span>
+
+<span class="kd">var</span> <span class="nx">reportNum</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getReport</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">reporter</span><span class="p">,</span> <span class="nx">reportNum</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">report</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">report</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getReportHash</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">reporter</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportHash</span> <span class="o">=</span> <span class="s2">"-0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getTotalReputation</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalReputation</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalReputation</span> <span class="o">=</span> <span class="s2">"282"</span>
+
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-expiringevents-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/expiringEvents.se">expiringEvents contract</a></h3>
+
+<h4 id="getevents-branch-reportperiod-callback">getEvents(branch, reportPeriod[, callback])</h4>
+
+<p>Fetches an array of event IDs that are scheduled to be reported on during <code class="prettyprint">reportPeriod</code>.</p>
+
+<h4 id="getnumberevents-branch-reportperiod-callback">getNumberEvents(branch, reportPeriod[, callback])</h4>
+
+<p>The total number of events scheduled to be reported on during <code class="prettyprint">reportPeriod</code>.</p>
+
+<h4 id="getevent-branch-reportperiod-eventindex-callback">getEvent(branch, reportPeriod, eventIndex[, callback])</h4>
+
+<p>Looks up the event ID that has index <code class="prettyprint">eventIndex</code>.</p>
+
+<h4 id="gettotalrepreported-branch-reportperiod-callback">getTotalRepReported(branch, reportPeriod[, callback])</h4>
+
+<p>Gets the total amount of Reputation reporting during <code class="prettyprint">reportPeriod</code>.</p>
+
+<h4 id="getreporterballot-branch-reportperiod-reporterid-callback">getReporterBallot(branch, reportPeriod, reporterID[, callback])</h4>
+
+<p>Fetches the ballot submitted for <code class="prettyprint">reportPeriod</code> by address <code class="prettyprint">reporterID</code>.</p>
+
+<h4 id="getreport-branch-reportperiod-reporter-reportnum-callback">getReport(branch, reportPeriod, reporter, reportNum[, callback])</h4>
+
+<p>The report for reporting event number <code class="prettyprint">reportNum</code> submitted for <code class="prettyprint">reportPeriod</code> by address <code class="prettyprint">reporter</code>.</p>
+
+<h4 id="getreporthash-branch-reportperiod-reporter-callback">getReportHash(branch, reportPeriod, reporter[, callback])</h4>
+
+<p>The report hash submitted for <code class="prettyprint">reportPeriod</code> by address <code class="prettyprint">reporter</code>.</p>
+
+<h4 id="gettotalreputation-branch-reportperiod-callback">getTotalReputation(branch, reportPeriod[, callback])</h4>
+
+<p>Gets the total amount of Reputation issued on branch <code class="prettyprint">branch</code> by <code class="prettyprint">reportPeriod</code>.  (In the live release Reputation is neither created nor destroyed, so this will be a constant value of <code class="prettyprint">11000000</code>.)</p>
+<pre class="highlight javascript"><code><span class="c1">// markets contract</span>
+<span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"0xacc29bf675e03383eaf9beebcc975cdcbefda75322640d67baf3b04d6af198a"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">outcomeId</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 9-outcome categorical market</span>
+<span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">simulation</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">simulation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1.22497628703421360092"</span><span class="p">,</span> <span class="s2">"0.5119122035959891813"</span><span class="p">]</span> <span class="c1">// [cost, price]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getSimulatedSell</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">simulation</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">simulation</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0.27632515684523433055"</span><span class="p">,</span> <span class="s2">"0.03172161728914410592"</span><span class="p">]</span> <span class="c1">// [cost, price]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">lsLmsr</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cost</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">cost</span> <span class="o">=</span> <span class="s2">"32.66160518907426017564"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketEvents</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketEvents</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">marketEvents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"-0xa65427afe1fc912e973d8dac2a83487aea5f5707a74c3168afb56e5a95b760ea"</span><span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumEvents</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numEvents</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">numEvents</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getBranchID</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">branchID</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">branchID</span> <span class="o">=</span> <span class="s2">"0xf69b5"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCurrentParticipantNumber</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">currentParticipantNumber</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">currentParticipantNumber</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketNumOutcomes</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketNumOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">marketNumOutcomes</span> <span class="o">=</span> <span class="s2">"9"</span>
+
+<span class="kd">var</span> <span class="nx">participantNumber</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getParticipantSharesPurchased</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">participantNumber</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">participantSharesPurchased</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">participantSharesPurchased</span> <span class="o">=</span> <span class="s2">"4"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getSharesPurchased</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sharesPurchased</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">sharesPurchased</span> <span class="o">=</span> <span class="s2">"32.24854252438022522758"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getWinningOutcomes</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">winningOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">winningOutcomes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">price</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">price</span> <span class="o">=</span> <span class="s2">"0.4882160701306164927"</span>
+
+<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getParticipantNumber</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">participantNumber</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">participantNumber</span> <span class="o">=</span> <span class="s2">"0"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getParticipantID</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="nx">participantNumber</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">participantID</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">participantID</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getAlpha</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">alpha</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">alpha</span> <span class="o">=</span> <span class="s2">"0.00790000000000000001"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getCumScale</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cumScale</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">cumScale</span> <span class="o">=</span> <span class="s2">"0.00000000000000000005"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getTradingPeriod</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tradingPeriod</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">tradingPeriod</span> <span class="o">=</span> <span class="s2">"1075"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getTradingFee</span><span class="p">(</span><span class="nx">marketId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tradingFee</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">tradingFee</span> <span class="o">=</span> <span class="s2">"0.00999999999999999999"</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-markets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/markets.se">markets contract</a></h3>
+
+<h4 id="getsimulatedbuy-market-outcome-amount-callback">getSimulatedBuy(market, outcome, amount[, callback])</h4>
+
+<p>Gets &ldquo;simulated&rdquo; results for the proposed buy from the automated market maker, without actually making the trade.  Returns an array with 2 elements: the cost of the trade, and the current LS-LMSR price.</p>
+
+<h4 id="getsimulatedsell-market-outcome-amount-callback">getSimulatedSell(market, outcome, amount[, callback])</h4>
+
+<p>Gets &ldquo;simulated&rdquo; results for the proposed sale from the automated market maker, without actually making the trade.  Returns an array with 2 elements: the cost of the trade, and the current LS-LMSR price.</p>
+
+<h4 id="lslmsr-market-callback">lsLmsr(market[, callback])</h4>
+
+<p>Gets the current value of the LS-LMSR&rsquo;s cost function for <code class="prettyprint">market</code>.</p>
+
+<h4 id="getmarketevents-market-callback">getMarketEvents(market[, callback])</h4>
+
+<p>Gets an array of event IDs included in <code class="prettyprint">market</code>.  (Note: only combinatorial markets have more than one event.)</p>
+
+<h4 id="getnumevents-market-callback">getNumEvents(market[, callback])</h4>
+
+<p>Get the number of events included in <code class="prettyprint">market</code>.  (Note: only combinatorial markets have more than one event.)</p>
+
+<h4 id="getbranchid-market-callback">getBranchID(market[, callback])</h4>
+
+<p>Gets the branch ID of <code class="prettyprint">market</code>.</p>
+
+<h4 id="getcurrentparticipantnumber-market-callback">getCurrentParticipantNumber(market[, callback])</h4>
+
+<p>Gets the current number of participants (traders) in <code class="prettyprint">market</code>, starting from 0.  (i.e., if there is a single trader, then he is assigned participant number 0, and the &ldquo;current participant number&rdquo; is 1.)</p>
+
+<h4 id="getmarketnumoutcomes-market-callback">getMarketNumOutcomes(market[, callback])</h4>
+
+<p>Gets the total number of outcomes for <code class="prettyprint">market</code>.  For binary and scalar markets, this is 2.  For categorical markets, this is equal to the number of categories (choices).  For combinatorial markets, this is the number of possible outcome combinations.</p>
+
+<h4 id="getparticipantsharespurchased-market-participantnumber-outcome-callback">getParticipantSharesPurchased(market, participantNumber, outcome[, callback])</h4>
+
+<p>The number of shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code> purchased by trader number <code class="prettyprint">participantNumber</code>.  (Note: you can look up <code class="prettyprint">participantNumber</code> using <code class="prettyprint">augur.getParticipantNumber</code>.)</p>
+
+<h4 id="getsharespurchased-market-outcome-callback">getSharesPurchased(market, outcome[, callback])</h4>
+
+<p>The total number of shares purchased (by all traders) of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+
+<h4 id="getwinningoutcomes-market-callback">getWinningOutcomes(market[, callback])</h4>
+
+<p>Gets an array of outcomes showing the winning/correct outcome, or an array of all zeros if <code class="prettyprint">market</code> has not yet been resolved.</p>
+
+<h4 id="price-market-outcome-callback">price(market, outcome[, callback])</h4>
+
+<p>The LS-LMSR&rsquo;s current instantaneous price for <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+
+<h4 id="getparticipantnumber-market-address-callback">getParticipantNumber(market, address[, callback])</h4>
+
+<p>Looks up the participant number for account <code class="prettyprint">address</code>.</p>
+
+<h4 id="getparticipantid-market-participantnumber-callback">getParticipantID(market, participantNumber[, callback])</h4>
+
+<p>Looks up the account address for <code class="prettyprint">participantNumber</code>.</p>
+
+<h4 id="getalpha-market-callback">getAlpha(market[, callback])</h4>
+
+<p>Gets the value of the LS-LMSR parameter alpha for <code class="prettyprint">market</code>.</p>
+
+<h4 id="getcumscale-market-callback">getCumScale(market[, callback])</h4>
+
+<p>Gets the cumulative scale for <code class="prettyprint">market</code>.</p>
+
+<h4 id="gettradingperiod-market-callback">getTradingPeriod(market[, callback])</h4>
+
+<p>Gets the trading period for <code class="prettyprint">market</code>.</p>
+
+<h4 id="gettradingfee-market-callback">getTradingFee(market[, callback])</h4>
+
+<p>Gets the trading fee for <code class="prettyprint">market</code>, expressed as a proportion.</p>
+<pre class="highlight javascript"><code><span class="c1">// reporting contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getRepBalance</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">repBalance</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">repBalance</span> <span class="o">=</span> <span class="s2">"47"</span>
+
+<span class="kd">var</span> <span class="nx">repIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getRepByIndex</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">repIndex</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">rep</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">rep</span> <span class="o">=</span> <span class="s2">"47"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getReporterID</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">repIndex</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reporterID</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">reporterID</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNumberReporters</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numberReporters</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">numberReporters</span> <span class="o">=</span> <span class="s2">"38"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">repIDToIndex</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">repIndex</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">repIndex</span> <span class="o">=</span> <span class="s2">"0"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getTotalRep</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalRep</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalRep</span> <span class="o">=</span> <span class="s2">"1796"</span>
+
+<span class="kd">var</span> <span class="nx">ballot</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">salt</span> <span class="o">=</span> <span class="s2">"0xbd352b6e2858ba27d8b7639afd2e34954803338e0e54cae7dcdf93f97f315225"</span><span class="p">;</span>
+<span class="nx">hashReport</span><span class="p">(</span><span class="nx">ballot</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportHash</span> <span class="o">=</span> <span class="s2">"-0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-reporting-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/reporting.se">reporting contract</a></h3>
+
+<h4 id="getrepbalance-branch-address-callback">getRepBalance(branch, address[, callback])</h4>
+
+<p>The Reputation balance on <code class="prettyprint">branch</code> of account <code class="prettyprint">address</code>.</p>
+
+<h4 id="getrepbyindex-branch-repindex-callback">getRepByIndex(branch, repIndex[, callback])</h4>
+
+<p>The Reputation balance on <code class="prettyprint">branch</code> of reporter number <code class="prettyprint">repIndex</code>.</p>
+
+<h4 id="getreporterid-branch-index-callback">getReporterID(branch, index[, callback])</h4>
+
+<p>Looks up a reporter&rsquo;s ID (address) by reporter number <code class="prettyprint">index</code>.</p>
+
+<h4 id="getnumberreporters-branch-callback">getNumberReporters(branch[, callback])</h4>
+
+<p>The total number of reporters on <code class="prettyprint">branch</code>.</p>
+
+<h4 id="repidtoindex-branch-repid-callback">repIDToIndex(branch, repID[, callback])</h4>
+
+<p>Looks up a reporter&rsquo;s number (index) by address <code class="prettyprint">repID</code>.</p>
+
+<h4 id="gettotalrep-branch-callback">getTotalRep(branch[, callback])</h4>
+
+<p>The total amount of Reputation on <code class="prettyprint">branch</code>.</p>
+
+<h4 id="hashreport-ballot-salt-callback">hashReport(ballot, salt[, callback])</h4>
+
+<p>Calculates the SHA256 hash of <code class="prettyprint">ballot</code> using <code class="prettyprint">salt</code>.</p>
+<pre class="highlight javascript"><code><span class="c1">// buy&amp;sellShares contract</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getNonce</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nonce</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0"</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
+
+<h4 id="getnonce-id-callback">getNonce(id[, callback])</h4>
+
+<p>Gets a trading nonce.</p>
+<pre class="highlight javascript"><code><span class="c1">// makeReports contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">report</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">reportPeriod</span> <span class="o">=</span> <span class="mi">397</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">checkReportValidity</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">report</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">isValid</span> <span class="o">=</span> <span class="s2">"1"</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se">makeReports contract</a></h3>
+
+<h4 id="checkreportvalidity-branch-report-reportperiod-callback">checkReportValidity(branch, report, reportPeriod[, callback])</h4>
+
+<p>Checks the validity of <code class="prettyprint">report</code> made on <code class="prettyprint">branch</code> for <code class="prettyprint">reportPeriod</code>.  A valid report is the correct length, is made before 2 reporting periods have elapsed, and is created by a valid reporting address.  Returns 1 if valid, -1 if invalid because the report is the wrong length (i.e., doesn&rsquo;t match the number of events being reported on), or -2 if invalid for another reason.</p>
+
+<h2 id="transaction-api">Transaction API</h2>
+<pre class="highlight javascript"><code><span class="c1">// faucets contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reputationFaucet</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
+<span class="c1">// example outputs:</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-faucets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/faucets.se">faucets contract</a></h3>
+
+<h4 id="reputationfaucet-branch-onsent-onsuccess-onfailed">reputationFaucet(branch[, onSent, onSuccess, onFailed])</h4>
+
+<p>When invoked, grants 47 free Reputation.  (This is only available during testing, of course.)</p>
+<pre class="highlight javascript"><code><span class="c1">// cash contract</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
+<span class="c1">// example output:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCashFrom</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">from</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
+<span class="c1">// example output:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">depositEther</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
+<span class="c1">// example output:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">withdrawEther</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
+<span class="c1">// example output:</span>
+
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/cash.se">cash contract</a></h3>
+
+<h4 id="sendcash-receiver-value-onsent-onsuccess-onfailed">sendCash(receiver, value[, onSent, onSuccess, onFailed])</h4>
+
+<p>.</p>
+
+<h4 id="sendcashfrom-to-value-from-onsent-onsuccess-onfailed">sendCashFrom(to, value, from[, onSent, onSuccess, onFailed])</h4>
+
+<p>.</p>
+
+<h4 id="depositether-value-onsent-onsuccess-onfailed">depositEther(value[, onSent, onSuccess, onFailed])</h4>
+
+<p>.</p>
+
+<h4 id="withdrawether-to-value-onsent-onsuccess-onfailed">withdrawEther(to, value[, onSent, onSuccess, onFailed])</h4>
+
+<p>.</p>
+<pre class="highlight javascript"><code><span class="c1">// checkQuorum contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">checkQuorum</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">)</span>
+<span class="c1">// example output:</span>
+
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-checkquorum-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/checkQuorum.se">checkQuorum contract</a></h3>
+
+<h4 id="checkquorum-branch-onsent-onsuccess-onfailed">checkQuorum(branch[, onSent, onSuccess, onFailed])</h4>
+<pre class="highlight javascript"><code><span class="c1">// buy&amp;sellShares contract</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">buyShares</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span> <span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+<span class="c1">// example outputs:</span>
+<span class="p">{</span> <span class="nl">txHash</span><span class="p">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span><span class="p">,</span>
+  <span class="nx">callReturn</span><span class="err">:</span> <span class="s1">'1.23722604990455573688'</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nl">nonce</span><span class="p">:</span> <span class="s1">'0x4dc'</span><span class="p">,</span>
+  <span class="nx">blockHash</span><span class="err">:</span> <span class="s1">'0xf32b439e5993add2af5133fad6c8b35c6552f16f4279ca7aeb3acc9def7c3c2d'</span><span class="p">,</span>
+  <span class="nx">blockNumber</span><span class="err">:</span> <span class="s1">'0x6a2c'</span><span class="p">,</span>
+  <span class="nx">transactionIndex</span><span class="err">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="nx">from</span><span class="err">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="nx">to</span><span class="err">:</span> <span class="s1">'0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f'</span><span class="p">,</span>
+  <span class="nx">value</span><span class="err">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="nx">gas</span><span class="err">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="nx">gasPrice</span><span class="err">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="nx">input</span><span class="err">:</span> <span class="s1">'0x7d9e764100000000000000000000000000000000000000000000000000000000000f69b50acc29bf675e03383eaf9beebcc975cdcbefda75322640d67baf3b04d6af198a0000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000004333333333333333300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+  <span class="nx">callReturn</span><span class="err">:</span> <span class="s1">'1.23722604990455573688'</span><span class="p">,</span>
+  <span class="nx">txHash</span><span class="err">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span> <span class="p">}</span>
+
+<span class="nx">sellShares</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">[,</span> <span class="nx">nonce</span><span class="p">,</span> <span class="nx">limit</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="buy-amp-sellshares-contract">[buy&amp;sellShares contract]</h3>
+
+<h4 id="buyshares-branch-market-outcome-amount-nonce-limit-onsent-onsuccess-onfailed">buyShares(branch, market, outcome, amount[, nonce, limit, onSent, onSuccess, onFailed])</h4>
+<pre class="highlight javascript"><code><span class="c1">// createBranch contract</span>
+<span class="nx">createSubbranch</span><span class="p">(</span><span class="nx">description</span><span class="p">,</span> <span class="nx">periodLength</span><span class="p">,</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">tradingFee</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createbranch-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createBranch.se">createBranch contract</a></h3>
+<pre class="highlight javascript"><code><span class="c1">// sendReputation contract</span>
+<span class="nx">sendReputation</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-sendreputation-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/sendReputation.se">sendReputation contract</a></h3>
+<pre class="highlight javascript"><code><span class="c1">// makeReports contract</span>
+<span class="nx">report</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">report</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">salt</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="nx">submitReportHash</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">reportHash</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="nx">slashRep</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="nx">report</span><span class="p">,</span> <span class="nx">reporter</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se">makeReports contract</a></h3>
+<pre class="highlight javascript"><code><span class="c1">// createEvent contract</span>
+<span class="nx">createEvent</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">expDate</span><span class="p">,</span> <span class="nx">minValue</span><span class="p">,</span> <span class="nx">maxValue</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createevent-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createEvent.se">createEvent contract</a></h3>
+<pre class="highlight javascript"><code><span class="c1">// createMarket contract</span>
+<span class="nx">createMarket</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">,</span> <span class="nx">liquidity</span><span class="p">,</span> <span class="nx">tradingFee</span><span class="p">,</span> <span class="nx">events</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createmarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createMarket.se">createMarket contract</a></h3>
+<pre class="highlight javascript"><code><span class="c1">// closeMarket contract</span>
+<span class="nx">closeMarket</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">market</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+</code></pre>
+
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-closemarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/closeMarket.se">closeMarket contract</a></h3>
+<pre class="highlight javascript"><code><span class="nx">createEvent</span><span class="p">(</span><span class="nx">eventObject</span><span class="p">)</span>
 <span class="cm">/**
  * - eventObject has the following fields:
  *   - branchId &lt;integer&gt;
@@ -447,12 +1011,6 @@ For example, suppose you were displaying markets on separate pages.  You might w
  *   - createMarket(branchId, description, alpha, liquidity, tradingFee, events[, onSent, onSuccess, onFailed])
  */</span>
 
-<span class="nx">buyShares</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
-
-<span class="nx">sellShares</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
-
-<span class="nx">sendReputation</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
-
 <span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 
 <span class="o">&gt;</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">getSimulatedBuy</span><span class="p">(</span><span class="s2">"0xb13d98f933cbd602a3d9d4626260077678ab210d1e63b3108b231c1758ff9971"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">ONE</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
@@ -495,21 +1053,36 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">getWinningOutcomes</span><span class="p">(</span><span class="nx">market</span><span class="p">[,</span> <span class="nx">callback</span><span class="p">])</span>
 </code></pre>
 
-<p>In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods.  To do this, use <a href="https://github.com/AugurProject/ethrpc">ethrpc</a>&rsquo;s lower-level <code class="prettyprint">invoke</code> method (<code class="prettyprint">augur.rpc.invoke</code>).  First, build a transaction object manually, then execute it using <code class="prettyprint">invoke</code>.  The <code class="prettyprint">invoke</code> method executes a method in a contract already on the network.  It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.</p>
-<pre class="highlight javascript"><code><span class="c1">// The method called here doubles its input argument.</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">invoke</span><span class="p">({</span>
-   <span class="na">to</span><span class="p">:</span> <span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">,</span>
-   <span class="na">method</span><span class="p">:</span> <span class="s2">"double"</span><span class="p">,</span>
-   <span class="na">signature</span><span class="p">:</span> <span class="s2">"i"</span><span class="p">,</span>
-   <span class="na">params</span><span class="p">:</span> <span class="mi">22121</span><span class="p">,</span> <span class="c1">// parameter value(s)</span>
-   <span class="na">send</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-   <span class="na">returns</span><span class="p">:</span> <span class="s2">"number"</span>
-<span class="p">});</span>
-<span class="c1">// this returns:</span>
-<span class="mi">44242</span>
+<h2 id="events-logging-api">Events/logging API</h2>
+<pre class="highlight javascript"><code><span class="c1">// trade events (price history data)</span>
+<span class="nx">getPrices</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="nx">getClosingPrices</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="nx">getPriceHistory</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="nx">getOutcomePriceHistory</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="nx">getMarketPriceHistory</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="c1">// market creation events (block numbers)</span>
+<span class="nx">getCreationBlocks</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
+<span class="nx">getMarketCreationBlock</span><span class="p">(</span><span class="nx">market</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span>
 </code></pre>
 
-<p>Transaction fields are as follows:</p>
+<h2 id="invoke">Invoke</h2>
+
+<p>In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods.  To do this, use <a href="https://github.com/AugurProject/ethrpc">ethrpc</a>&rsquo;s lower-level <code class="prettyprint">invoke</code> method (<code class="prettyprint">augur.rpc.invoke</code>).  First, build a transaction object manually, then execute it using <code class="prettyprint">invoke</code>.  The <code class="prettyprint">invoke</code> method executes a method in a contract already on the network.  It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.
+<code class="prettyprint">javascript
+// The method called here doubles its input argument.
+augur.rpc.invoke({
+   to: &quot;0x5204f18c652d1c31c6a5968cb65e011915285a50&quot;,
+   method: &quot;double&quot;,
+   signature: &quot;i&quot;,
+   params: 22121, // parameter value(s)
+   send: false,
+   returns: &quot;number&quot;
+});
+// this returns:
+44242
+</code>
+Transaction fields are as follows:</p>
 
 <p>Required:</p>
 
