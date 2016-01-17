@@ -354,6 +354,8 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <p>Gets the closing price (last trade price of the day) as well as the total volume traded over the day, ordered by timestamp (most recent record last).  <code class="prettyprint">callback</code> is required; <code class="prettyprint">getClosingPrices</code> is asynchronous-only.</p>
 
 <h2 id="call-api">Call API</h2>
+
+<p>Augur&rsquo;s Call API is made up of &ldquo;getter&rdquo; methods that retrieve information from the blockchain (using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC) but do not write information to the blockchain.</p>
 <pre class="highlight javascript"><code><span class="c1">// cash contract</span>
 <span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="s2">"0x639b41c4d3d399894f2a57894278e1653e7cd24c"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">getCashBalance</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">cashBalance</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
@@ -858,6 +860,8 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <p>Checks the validity of <code class="prettyprint">report</code> made on <code class="prettyprint">branch</code> for <code class="prettyprint">reportPeriod</code>.  A valid report is the correct length, is made before 2 reporting periods have elapsed, and is created by a valid reporting address.  Returns 1 if valid, -1 if invalid because the report is the wrong length (i.e., doesn&rsquo;t match the number of events being reported on), or -2 if invalid for another reason.</p>
 
 <h2 id="transaction-api">Transaction API</h2>
+
+<p>Augur&rsquo;s Transaction API is made up of &ldquo;setter&rdquo; methods that can both read from and write to the blockchain using Ethereum&rsquo;s <code class="prettyprint">eth_sendTransaction</code> RPC.</p>
 <pre class="highlight javascript"><code><span class="c1">// faucets contract</span>
 <span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reputationFaucet</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
