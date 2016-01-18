@@ -38,7 +38,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href="http://www.augur.net">Augur.net</a></li>
-            <li><a href="http://app.augur.net">App (Alpha)</a></li>
+            <li><a href="http://app.augur.net">Alpha App</a></li>
             <li><a href="http://augur.link/augur.pdf">Whitepaper</a></li>
             <li><a href="https://github.com/AugurProject">Github</a></li>
             <li><a href="https://twitter.com/AugurProject">Twitter</a></li>
@@ -857,97 +857,510 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 <h4 id="checkreportvalidity-branch-report-reportperiod-callback">checkReportValidity(branch, report, reportPeriod[, callback])</h4>
 
-<p>Checks the validity of <code class="prettyprint">report</code> made on <code class="prettyprint">branch</code> for <code class="prettyprint">reportPeriod</code>.  A valid report is the correct length, is made before 2 reporting periods have elapsed, and is created by a valid reporting address.  Returns 1 if valid, -1 if invalid because the report is the wrong length (i.e., doesn&rsquo;t match the number of events being reported on), or -2 if invalid for another reason.</p>
+<p>Validates <code class="prettyprint">report</code> made on <code class="prettyprint">branch</code> for <code class="prettyprint">reportPeriod</code>.  A valid report is the correct length, is made before 2 reporting periods have elapsed, and is created by a valid reporting address.  Returns 1 if valid, -1 if invalid because the report is the wrong length (i.e., doesn&rsquo;t match the number of events being reported on), or -2 if invalid for another reason.</p>
 
 <h2 id="transaction-api">Transaction API</h2>
 
-<p>Augur&rsquo;s Transaction API is made up of &ldquo;setter&rdquo; methods that can both read from and write to the blockchain using Ethereum&rsquo;s <code class="prettyprint">eth_sendTransaction</code> RPC.</p>
-<pre class="highlight javascript"><code><span class="c1">// faucets contract</span>
-<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">reputationFaucet</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
+<p>Augur&rsquo;s Transaction API is made up of &ldquo;setter&rdquo; methods that can both read from and write to the blockchain using Ethereum&rsquo;s <code class="prettyprint">eth_sendTransaction</code> RPC.  Under the hood, the API uses augur.js&rsquo;s convenience wrapper for <code class="prettyprint">eth_sendTransaction</code>, <code class="prettyprint">augur.transact</code>.</p>
+
+<h3 id="callbacks">Callbacks</h3>
+
+<p>All Transaction API methods accept three callback functions:</p>
+
+<h4 id="onsent-sentresponse">onSent(sentResponse)</h4>
+
+<p>Fires when the initial <code class="prettyprint">eth_sendTransaction</code> response is received.  If the transaction was broadcast to the network without problems, <code class="prettyprint">sentResponse</code> will have two fields: <code class="prettyprint">txHash</code> (the transaction hash as a hex string) and <code class="prettyprint">callReturn</code> (the value returned by the invoked contract method).  The optional <code class="prettyprint">returns</code> field in the <code class="prettyprint">tx</code> object sent to <code class="prettyprint">augur.transact</code> can be used to specify the format of the <code class="prettyprint">callReturn</code> value.</p>
+
+<h4 id="onsuccess-successresponse">onSuccess(successResponse)</h4>
+
+<p>Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero <code class="prettyprint">blockHash</code> value.  <code class="prettyprint">successResponse</code> is structured the same way as <code class="prettyprint">eth_getTransactionByHash</code> responses (see code example for details), with the addition of a <code class="prettyprint">callReturn</code> field which contains the contract method&rsquo;s return value.</p>
+
+<h4 id="onfailed-failedresponse">onFailed(failedResponse)</h4>
+
+<p>Fires if the transaction is unsuccessful.  <code class="prettyprint">failedResponse</code> has <code class="prettyprint">error</code> (error code) and <code class="prettyprint">message</code> (error description) fields, describing the way in which the transaction failed.</p>
+
+<p>No callbacks are required; if none are supplied, then the transaction hash (or error) will simply be returned.  In this case, the transaction has been broadcast to the Ethereum network, but further confirmation of the transaction and/or lookups of its return value will need to be done manually.  If an <code class="prettyprint">onSent</code> but not an <code class="prettyprint">onSuccess</code> callback is provided, the transaction will be broadcast, and <code class="prettyprint">onSent</code> will be passed an <code class="prettyprint">sentResponse</code> object containing <code class="prettyprint">txHash</code> and <code class="prettyprint">callReturn</code> fields, but <code class="prettyprint">augur.rpc</code> will not poll the network repeatedly to check on the status of the transaction.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<p>All Transaction API methods accept either positional or object arguments.  Examples are shown using object arguments (to make the field names clear).  The arguments are displayed in order from left-to-right (top-to-bottom if multiple lines are needed).  For positional arguments, <code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> should always be the last three arguments, in that order.</p>
+<pre class="highlight javascript"><code><span class="c1">// transaction object (generated by the buyShares method)</span>
+<span class="kd">var</span> <span class="nx">tx</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f"</span><span class="p">,</span>
+  <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"buyShares"</span><span class="p">,</span>
+  <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"iiiiii"</span><span class="p">,</span>
+  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
+  <span class="s2">"params"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0xf69b5"</span><span class="p">,</span>
+    <span class="s2">"-0x130158e01e01cc67d3d8803f88493b8aadc6654be759fbf2d40105506b41daa3"</span><span class="p">,</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"0x199999999999999a"</span><span class="p">,</span>
+    <span class="s2">"0"</span><span class="p">,</span>
+    <span class="mi">0</span>
+  <span class="p">],</span>
+  <span class="s2">"returns"</span><span class="p">:</span> <span class="s2">"unfix"</span><span class="p">,</span>
+  <span class="s2">"send"</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+
+<span class="c1">// onSent callback fires when the initial eth_sendTransaction response</span>
+<span class="c1">// is received</span>
+<span class="kd">var</span> <span class="nx">onSent</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"transaction sent:"</span><span class="p">,</span> <span class="nx">sentResponse</span><span class="p">);</span>  
+<span class="p">};</span>
+
+<span class="c1">// onSuccess callback fires</span>
+<span class="kd">var</span> <span class="nx">onSuccess</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"transaction successful:"</span><span class="p">,</span> <span class="nx">successResponse</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// onFailed callback fires when the transaction is malformed, fails to confirm,</span>
+<span class="c1">// or an object with an error field is received</span>
+<span class="kd">var</span> <span class="nx">onFailed</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"transaction failed:"</span><span class="p">,</span> <span class="nx">failedResponse</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">transact</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
 <span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xdf096e249638df143118f562868e90285579819e59b09f0784b95fa5fd920413'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0.05959702938270431576'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e1'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xb8e4e78c9cf949729bbb7b94e942d8d63e67e9f48b394f3208cf0d2928e44bad'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a5f'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x7d9e764100000000000000000000000000000000000000000000000000000000000f69b5ecfea71fe1fe33982c277fc077b6c47552399ab418a6040d2bfefaaf94be255d0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000199999999999999a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0.05959702938270431576'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xdf096e249638df143118f562868e90285579819e59b09f0784b95fa5fd920413'</span>
+<span class="p">}</span>
+<span class="nx">failedResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">error</span><span class="p">:</span> <span class="mi">501</span><span class="p">,</span>
+  <span class="na">message</span><span class="p">:</span> <span class="s1">'polled network but could not confirm transaction'</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="transact-tx-onsent-onsuccess-onfailed">transact(tx[, onSent, onSuccess, onFailed])</h3>
+
+<aside class="warning">While it is possible to use `augur.transact` directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections.  Readers who want to use the Transaction API and aren&rsquo;t terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
+
+<p><code class="prettyprint">augur.transact</code> carries out the following &ldquo;send-call-confirm&rdquo; sequence:</p>
+
+<ol>
+<li><p><code class="prettyprint">augur.transact</code> sends an <code class="prettyprint">eth_sendTransaction</code> RPC request (or <code class="prettyprint">eth_sendRawTransaction</code> for transactions which are already signed), which broadcasts the transaction to the Ethereum network.  If an error is received, then the error is passed to <code class="prettyprint">onFailed</code> and <code class="prettyprint">augur.transact</code> terminates.  If a transaction hash is received, then this transaction is added to the <code class="prettyprint">augur.rpc.txs</code> object (which is indexed by transaction hash, e.g. <code class="prettyprint">augur.rpc.txs[txHash]</code>) and assigned a <code class="prettyprint">status</code> of <code class="prettyprint">&quot;pending&quot;</code>.</p></li>
+<li><p><code class="prettyprint">augur.rpc.confirmTx</code> uses <code class="prettyprint">eth_getTransactionByHash</code> to look up the transaction&rsquo;s exact ABI-encoded inputs.  It then sends an <code class="prettyprint">eth_call</code> RPC using these inputs to get the invoked method&rsquo;s return value (if any).  If the return value is an error, then the error is passed to <code class="prettyprint">onFailed</code> and <code class="prettyprint">augur.transact</code> terminates.  Otherwise, <code class="prettyprint">augur.rpc.encodeResult</code> encodes the return value (as specified in the <code class="prettyprint">returns</code> field of the <code class="prettyprint">tx</code> input), and an object with <code class="prettyprint">txHash</code> and <code class="prettyprint">callReturn</code> fields is passed to <code class="prettyprint">onSent</code>.</p></li>
+<li><p>Every <code class="prettyprint">augur.rpc.TX_POLL_INTERVAL</code> milliseconds, <code class="prettyprint">augur.rpc.txNotify</code> looks up the transaction using <code class="prettyprint">eth_getTransactionByHash</code>.  If <code class="prettyprint">augur.rpc.txNotify</code> receives a <code class="prettyprint">null</code> response, <code class="prettyprint">augur.rpc.txs[txHash].status</code> is set to <code class="prettyprint">&quot;failed&quot;</code>.  A null response indicates that the transaction has been (silently) removed from geth&rsquo;s transaction pool.  This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction&rsquo;s nonce (but not its other fields) is a duplicate.  In the former case, the duplicate transaction is assumed to be an accidental submission, a <code class="prettyprint">TRANSACTION_NOT_FOUND</code> error is passed to <code class="prettyprint">onFailed</code>, and the <code class="prettyprint">augur.transact</code> sequence terminates.  The latter case arises when the transaction was signed client-side &ndash; and therefore its nonce was also generated client-side &ndash; then submitted using <code class="prettyprint">eth_sendRawTransaction</code> (instead of <code class="prettyprint">eth_sendTransaction</code>).  Network latency, client-side errors, and other factors can result in duplicate raw transaction nonces.  In this case, <code class="prettyprint">augur.rpc.txs[txHash].status</code> is set to <code class="prettyprint">&quot;resubmitted&quot;</code>, the transaction&rsquo;s nonce is incremented, and <code class="prettyprint">augur.transact</code> is executed with the new transaction.</p></li>
+<li><p>If <code class="prettyprint">augur.rpc.txNotify</code> receives a non-null transaction object, then <code class="prettyprint">augur.rpc.checkBlockHash</code> checks to see if the transaction&rsquo;s <code class="prettyprint">blockHash</code> field is a nonzero value, indicating that it has been successfully incorporated into a block and attached to the blockchain.  If <code class="prettyprint">blockHash</code> is zero, then after <code class="prettyprint">augur.rpc.TX_POLL_INTERVAL</code> elapses, <code class="prettyprint">augur.rpc.txNotify</code> again looks up the transaction; this step repeats at most <code class="prettyprint">augur.rpc.TX_POLL_MAX</code> times, after which <code class="prettyprint">augur.rpc.txs[txHash].status</code> is set to <code class="prettyprint">&quot;unconfirmed&quot;</code>, the <code class="prettyprint">TRANSACTION_NOT_CONFIRMED</code> error is passed to <code class="prettyprint">onFailed</code>, and the sequence terminates.  If <code class="prettyprint">blockHash</code> is non-zero, then <code class="prettyprint">augur.rpc.txs[txHash].status</code> is set to <code class="prettyprint">&quot;confirmed&quot;</code>.  A <code class="prettyprint">callReturn</code> field is added to the transaction object, which is then passed to <code class="prettyprint">onSuccess</code>, completing the sequence.</p></li>
+</ol>
+
+<aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
+
+<p>The first argument to <code class="prettyprint">augur.transact</code> is a &ldquo;transaction object&rdquo;.</p>
+<pre class="highlight javascript"><code><span class="c1">// faucets contract</span>
+<span class="kd">var</span> <span class="nx">branch</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reputationFaucet</span><span class="p">({</span>
+  <span class="na">branch</span><span class="p">:</span> <span class="nx">branch</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x7aeeacf586d3afa89dc7ca41a4df52307d1a91c33b8726552d3f84b041b5850e'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e4'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x1fb89b98f59e8a1803556e99c6e2772992ad9bd199e638ccf5e9bff9aa595ffe'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6ab8'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x509592c96eee7e19f6a34772fd8783cb072ca3c6'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x988445fe00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x7aeeacf586d3afa89dc7ca41a4df52307d1a91c33b8726552d3f84b041b5850e'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-faucets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/faucets.se">faucets contract</a></h3>
 
 <h4 id="reputationfaucet-branch-onsent-onsuccess-onfailed">reputationFaucet(branch[, onSent, onSuccess, onFailed])</h4>
 
-<p>When invoked, grants 47 free Reputation.  (This is only available during testing, of course.)</p>
+<p>Sets the Reputation balance of the sending account to 47.  (Only available during testing, of course!)</p>
 <pre class="highlight javascript"><code><span class="c1">// cash contract</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
-<span class="c1">// example output:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCash</span><span class="p">({</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x639b41c4d3d399894f2a57894278e1653e7cd24c"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xff5ad9bdfc9e1ffce3f1014ead5feea6ce4ff15b4a4aaa8734ef4e18338a7bfb'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e6'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xc1fd7a7897560f153cd37053389ac079942661c11f6b9296928481188e4b2b5d'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6ade'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x693200ce000000000000000000000000639b41c4d3d399894f2a57894278e1653e7cd24c0000000000000000000000000000000000000000000000010000000000000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xff5ad9bdfc9e1ffce3f1014ead5feea6ce4ff15b4a4aaa8734ef4e18338a7bfb'</span>
+<span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCashFrom</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">from</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
-<span class="c1">// example output:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendCashFrom</span><span class="p">({</span>
+  <span class="na">to</span><span class="p">:</span> <span class="nx">to</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="nx">from</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xb2dc04cb4b5f3bb4b0a1dec50d539f31cf048918f62da6bfd202a0a546a32b62'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e7'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x220870218f6e62037139c4d86ba21fad96497ec8bcc3735999dc81e0bc099b21'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6ae4'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x80b97fc0000000000000000000000000639b41c4d3d399894f2a57894278e1653e7cd24c000000000000000000000000000000000000000000000001000000000000000000000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xb2dc04cb4b5f3bb4b0a1dec50d539f31cf048918f62da6bfd202a0a546a32b62'</span>
+<span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">depositEther</span><span class="p">(</span><span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
-<span class="c1">// example output:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">depositEther</span><span class="p">({</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x2cb4c0f6796b102fb6b1dead8cb85d91f2af330057eb69a6f6f9814617d04a56'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'2000000000000000000'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e8'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x81cfb01f897dd7df9ca898f4fd232f5c0957f59596a35b1ef552e37516cdfc38'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6af0'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x1bc16d674ec80000'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x98ea5fca'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'2000000000000000000'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x2cb4c0f6796b102fb6b1dead8cb85d91f2af330057eb69a6f6f9814617d04a56'</span>
+<span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">withdrawEther</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">]);</span>
-<span class="c1">// example output:</span>
-
+<span class="nx">augur</span><span class="p">.</span><span class="nx">withdrawEther</span><span class="p">({</span>
+  <span class="na">to</span><span class="p">:</span> <span class="err">"</span><span class="mh">0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x3f44c75513667dee7dcf0a5f08e7be32751fbc2c5c52a8a29018682941ee4895'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e9'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xde4deb916d67631e63e8aed4fefec7839a09be9b3cd8b3914fe48d9751a159a4'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6af3'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0xe4714fcbdcdba49629bc408183ef40d120700b8d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x698f6e9d00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b0000000000000000000000000000000000000000000000001bc16d674ec80000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x3f44c75513667dee7dcf0a5f08e7be32751fbc2c5c52a8a29018682941ee4895'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data-20and-20api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/cash.se">cash contract</a></h3>
 
-<h4 id="sendcash-receiver-value-onsent-onsuccess-onfailed">sendCash(receiver, value[, onSent, onSuccess, onFailed])</h4>
+<h4 id="sendcash-to-value-onsent-onsuccess-onfailed">sendCash(to, value[, onSent, onSuccess, onFailed])</h4>
+
+<p>Sends <code class="prettyprint">value</code> units of CASH to address <code class="prettyprint">to</code>.  Returns the value sent if successful.</p>
 
 <h4 id="sendcashfrom-to-value-from-onsent-onsuccess-onfailed">sendCashFrom(to, value, from[, onSent, onSuccess, onFailed])</h4>
 
+<p>Sends <code class="prettyprint">value</code> units of CASH to address <code class="prettyprint">to</code> from address <code class="prettyprint">from</code>.  Returns the value sent if successful.</p>
+
 <h4 id="depositether-value-onsent-onsuccess-onfailed">depositEther(value[, onSent, onSuccess, onFailed])</h4>
 
+<p>Exchange <code class="prettyprint">value</code> units of Ether for an equivalent number of CASH tokens.  Returns the amount sent (in Wei).</p>
+
 <h4 id="withdrawether-to-value-onsent-onsuccess-onfailed">withdrawEther(to, value[, onSent, onSuccess, onFailed])</h4>
+
+<p>Exchange <code class="prettyprint">value</code> CASH tokens for an equivalent number of Ether tokens.  The withdrawn CASH is sent to address <code class="prettyprint">to</code>.  Returns 1 if successful, 0 otherwise.</p>
 <pre class="highlight javascript"><code><span class="c1">// checkQuorum contract</span>
 <span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">checkQuorum</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">)</span>
-<span class="c1">// example output:</span>
-
+<span class="nx">augur</span><span class="p">.</span><span class="nx">checkQuorum</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x45bc69d4aaf9e9bc8d8524d6b4a33f3289d56d150ab4b58c3e85a480db851f47'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e3'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x0211c8bd326e9e71bfadb19258ea787080626fe9940a4c197dea31edbe93c3c6'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a97'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x27138bfb00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x45bc69d4aaf9e9bc8d8524d6b4a33f3289d56d150ab4b58c3e85a480db851f47'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-checkquorum-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/checkQuorum.se">checkQuorum contract</a></h3>
 
-<h4 id="checkquorum-branch-onsent-onsuccess-onfailed">checkQuorum(branch[, onSent, onSuccess, onFailed])</h4>
-<pre class="highlight javascript"><code><span class="c1">// buy&amp;sellShares contract</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">buyShares</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span> <span class="nx">marketId</span><span class="p">,</span> <span class="nx">outcomeId</span><span class="p">,</span> <span class="nx">amount</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">,</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
-<span class="c1">// example outputs:</span>
-<span class="p">{</span> <span class="nl">txHash</span><span class="p">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span><span class="p">,</span>
-  <span class="nx">callReturn</span><span class="err">:</span> <span class="s1">'1.23722604990455573688'</span> <span class="p">}</span>
-<span class="p">{</span> <span class="nl">nonce</span><span class="p">:</span> <span class="s1">'0x4dc'</span><span class="p">,</span>
-  <span class="nx">blockHash</span><span class="err">:</span> <span class="s1">'0xf32b439e5993add2af5133fad6c8b35c6552f16f4279ca7aeb3acc9def7c3c2d'</span><span class="p">,</span>
-  <span class="nx">blockNumber</span><span class="err">:</span> <span class="s1">'0x6a2c'</span><span class="p">,</span>
-  <span class="nx">transactionIndex</span><span class="err">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="nx">from</span><span class="err">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="nx">to</span><span class="err">:</span> <span class="s1">'0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f'</span><span class="p">,</span>
-  <span class="nx">value</span><span class="err">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="nx">gas</span><span class="err">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
-  <span class="nx">gasPrice</span><span class="err">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
-  <span class="nx">input</span><span class="err">:</span> <span class="s1">'0x7d9e764100000000000000000000000000000000000000000000000000000000000f69b50acc29bf675e03383eaf9beebcc975cdcbefda75322640d67baf3b04d6af198a0000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000004333333333333333300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
-  <span class="nx">callReturn</span><span class="err">:</span> <span class="s1">'1.23722604990455573688'</span><span class="p">,</span>
-  <span class="nx">txHash</span><span class="err">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span> <span class="p">}</span>
+<h4 id="checkquorum-branchid-onsent-onsuccess-onfailed">checkQuorum(branchId[, onSent, onSuccess, onFailed])</h4>
 
-<span class="nx">sellShares</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">market</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">,</span> <span class="nx">amount</span><span class="p">[,</span> <span class="nx">nonce</span><span class="p">,</span> <span class="nx">limit</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<p>Determines whether consensus is ready to run.  If there aren&rsquo;t enough events in a vote period, push the events to the current period and increment the vote period.  Verifies if there are sufficient future events at stake; the minimum threshold is presently set at 200.  If the number of future events is not above this minimum threshold, then the branch stalls.  Returns 1 if ready, 0 otherwise.</p>
+<pre class="highlight javascript"><code><span class="c1">// buy&amp;sellShares contract</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0x130158e01e01cc67d3d8803f88493b8aadc6654be759fbf2d40105506b41daa3"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">outcome</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="s2">"0.1"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">buyShares</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">marketId</span><span class="p">:</span> <span class="nx">marketId</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="nx">outcome</span><span class="p">,</span>
+  <span class="na">amount</span><span class="p">:</span> <span class="nx">amount</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1.23722604990455573688'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4dc'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xf32b439e5993add2af5133fad6c8b35c6552f16f4279ca7aeb3acc9def7c3c2d'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a2c'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x7d9e764100000000000000000000000000000000000000000000000000000000000f69b50acc29bf675e03383eaf9beebcc975cdcbefda75322640d67baf3b04d6af198a0000000000000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000000004333333333333333300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'1.23722604990455573688'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x5b99e6d18716da6be2c9c50795d92c0b716eb0a0012dcf2e73f96b9c0ee1b2b2'</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sellShares</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">marketId</span><span class="p">:</span> <span class="nx">marketId</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="nx">outcome</span><span class="p">,</span>
+  <span class="na">amount</span><span class="p">:</span> <span class="nx">amount</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x0c93b30f4e001b5aaf367470346874e15f4fb14acf024572a3aaac6515ab4adb'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0.07115672415962748134'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e2'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xc9b8506031f455cf9de3145e637b9bae13a79d8ed5c6f4eed257d483b0b6cdbb'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a79'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x314f177c00000000000000000000000000000000000000000000000000000000000f69b5ecfea71fe1fe33982c277fc077b6c47552399ab418a6040d2bfefaaf94be255d0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000199999999999999a00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0.07115672415962748134'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x0c93b30f4e001b5aaf367470346874e15f4fb14acf024572a3aaac6515ab4adb'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
 
-<h4 id="buyshares-branch-market-outcome-amount-nonce-limit-onsent-onsuccess-onfailed">buyShares(branch, market, outcome, amount[, nonce, limit, onSent, onSuccess, onFailed])</h4>
+<h4 id="buyshares-branchid-marketid-outcome-amount-nonce-limit-onsent-onsuccess-onfailed">buyShares(branchId, marketId, outcome, amount[, nonce, limit, onSent, onSuccess, onFailed])</h4>
+
+<p>Buy <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">marketId</code> from the automated market maker.</p>
+
+<h4 id="sellshares-branchid-marketid-outcome-amount-nonce-limit-onsent-onsuccess-onfailed">sellShares(branchId, marketId, outcome, amount[, nonce, limit, onSent, onSuccess, onFailed])</h4>
+
+<p>Sell <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">marketId</code> from the automated market maker.</p>
 <pre class="highlight javascript"><code><span class="c1">// createBranch contract</span>
-<span class="nx">createSubbranch</span><span class="p">(</span><span class="nx">description</span><span class="p">,</span> <span class="nx">periodLength</span><span class="p">,</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">tradingFee</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createSubbranch</span><span class="p">({</span>
+  <span class="na">description</span><span class="p">:</span> <span class="s2">"Ground0:Party at Ground Zero"</span><span class="p">,</span>
+  <span class="na">periodLength</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="na">parent</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span>
+  <span class="na">tradingFee</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x29b169c0bd087aefd2f2dcd7b54c6ac08a3d8d78c6030a18980d059650f39117'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0xab9869bbaf19cc580a5c6d4571cd7eac02e98ed6ef127c69478bfb43762d4d13'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4f0'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0xe521198ffbbd9c53bbe7e773502a08482ebe3cdebbb0053a1bf44487b834d43a'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6b7f'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x5c5c65010000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000001900000000000000000000000000000000000000000000000000000000000f69b5000000000000000000000000000000000000000000000000051eb851eb851eb8000000000000000000000000000000000000000000000000000000000000001c47726f756e64303a50617274792061742047726f756e64205a65726f00000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0xab9869bbaf19cc580a5c6d4571cd7eac02e98ed6ef127c69478bfb43762d4d13'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x29b169c0bd087aefd2f2dcd7b54c6ac08a3d8d78c6030a18980d059650f39117'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createbranch-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createBranch.se">createBranch contract</a></h3>
+
+<h4 id="createsubbranch-description-periodlength-parent-tradingfee-onsent-onsuccess-onfailed">createSubbranch(description, periodLength, parent, tradingFee[, onSent, onSuccess, onFailed])</h4>
+
+<p>Creates a new sub-branch of branch <code class="prettyprint">parent</code>.  The description format is branchName:description.  <code class="prettyprint">periodLength</code> is given in blocks.  Returns the new branch&rsquo;s ID if successful.  Otherwise, returns -1 if there is a bad input or the parent doesn&rsquo;t exist, -2 if there is insufficient funds to create the branch or if the branch already exists.</p>
 <pre class="highlight javascript"><code><span class="c1">// sendReputation contract</span>
-<span class="nx">sendReputation</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">to</span><span class="p">,</span> <span class="nx">value</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">sendReputation</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x0da70d5a92d6cfcd4c12e2a83950676fdf4c95f9"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x1460b261654f24bf0bbb436f1766b68a94f476c57d4998e26da75114f56cc5a8'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'10'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4f1'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x2ad3f1071758d9efcb4d2458236128fdaa76585c3c4d551f50c26d2a50a2e38f'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6b97'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x35152caa07026203a1add680771afb690d872d7d'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0xa677135c00000000000000000000000000000000000000000000000000000000000f69b50000000000000000000000000da70d5a92d6cfcd4c12e2a83950676fdf4c95f900000000000000000000000000000000000000000000000a0000000000000000'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x1460b261654f24bf0bbb436f1766b68a94f476c57d4998e26da75114f56cc5a8'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-sendreputation-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/sendReputation.se">sendReputation contract</a></h3>
+
+<h4 id="sendreputation-branchid-to-value-onsent-onsuccess-onfailed">sendReputation(branchId, to, value[, onSent, onSuccess, onFailed])</h4>
+
+<p>Sends <code class="prettyprint">value</code> Reputation tokens on branch <code class="prettyprint">branchId</code> to address <code class="prettyprint">to</code>.  Returns the value sent if successful.</p>
 <pre class="highlight javascript"><code><span class="c1">// makeReports contract</span>
-<span class="nx">report</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">report</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">salt</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
-<span class="nx">submitReportHash</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">reportHash</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
-<span class="nx">slashRep</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">reportPeriod</span><span class="p">,</span> <span class="nx">salt</span><span class="p">,</span> <span class="nx">report</span><span class="p">,</span> <span class="nx">reporter</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
+<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">report</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">reportPeriod</span> <span class="o">=</span> <span class="mi">397</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">salt</span> <span class="o">=</span> <span class="s2">"0xb3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">report</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">report</span><span class="p">:</span> <span class="nx">report</span><span class="p">,</span>
+  <span class="na">reportPeriod</span><span class="p">:</span> <span class="nx">reportPeriod</span><span class="p">,</span>
+  <span class="na">salt</span><span class="p">:</span> <span class="nx">salt</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> 
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">submitReportHash</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">reportHash</span><span class="p">:</span> <span class="nx">reportHash</span><span class="p">,</span>
+  <span class="na">reportPeriod</span><span class="p">:</span> <span class="nx">reportPeriod</span><span class="p">,</span>
+  <span class="na">salt</span><span class="p">:</span> <span class="nx">salt</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> 
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">slashRep</span><span class="p">({</span>
+  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
+  <span class="na">reportPeriod</span><span class="p">:</span> <span class="nx">reportPeriod</span><span class="p">,</span>
+  <span class="na">salt</span><span class="p">:</span> <span class="nx">salt</span><span class="p">,</span>
+  <span class="na">report</span><span class="p">:</span> <span class="nx">report</span><span class="p">,</span>
+  <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> 
+
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se">makeReports contract</a></h3>
+
+<h4 id="report-branchid-report-reportperiod-salt-onsent-onsuccess-onfailed">report(branchId, report, reportPeriod, salt[, onSent, onSuccess, onFailed])</h4>
+
+<p>Submits an array of reports <code class="prettyprint">report</code> for report period <code class="prettyprint">reportPeriod</code> on branch <code class="prettyprint">branchId</code>.</p>
+
+<h4 id="submitreporthash-branchid-reporthash-reportperiod-onsent-onsuccess-onfailed">submitReportHash(branchId, reportHash, reportPeriod[, onSent, onSuccess, onFailed])</h4>
+
+<p>Submits the SHA256 hash of the reports array <code class="prettyprint">reportHash</code> for report period <code class="prettyprint">reportPeriod</code> on branch <code class="prettyprint">branchId</code>.</p>
+
+<h4 id="slashrep-branchid-reportperiod-salt-report-reporter-onsent-onsuccess-onfailed">slashRep(branchId, reportPeriod, salt, report, reporter[, onSent, onSuccess, onFailed])</h4>
+
+<p>Slashes the Reputation of address <code class="prettyprint">reporter</code> for <code class="prettyprint">report</code> on branch <code class="prettyprint">branchId</code>.</p>
 <pre class="highlight javascript"><code><span class="c1">// createEvent contract</span>
 <span class="nx">createEvent</span><span class="p">(</span><span class="nx">branch</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">expDate</span><span class="p">,</span> <span class="nx">minValue</span><span class="p">,</span> <span class="nx">maxValue</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">[,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">])</span>
 </code></pre>
