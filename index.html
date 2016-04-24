@@ -81,21 +81,12 @@ If you are running a <a href="https://github.com/ethereum/go-ethereum/wiki/Build
 
 <code class="block">geth --unlock 0 --testnet --rpc --rpccorsdomain "http://localhost:8545"</code></aside>
 
-<aside class="notice">Because geth&rsquo;s RPC server uses regular (unencrypted) HTTP, in order for the Augur app to communicate with your local geth node, it must be served over HTTP.  The static file served when you visit <a href="https://augur.net">augur.net</a> is presently hosted on Firebase, which is HTTPS-only, and therefore you can&rsquo;t interact with your local geth node from this URL!  As a short-term workaround (until we get set up on a more flexible CDN), we set up <a href="http://local.augur.net">local.augur.net</a> on one of our Linode servers.  It&rsquo;s configured for both HTTP and HTTPS, so it will work with your local node.</aside>
+<aside class="notice">Because geth&rsquo;s RPC server uses regular (unencrypted) HTTP, in order for the Augur app to communicate with your local geth node, it must be served over HTTP.  The static file served when you visit <a href="https://augur.net">augur.net</a> is presently hosted on Firebase, which is HTTPS-only, and therefore you can&rsquo;t interact with your local geth node from this URL!  As a short-term workaround (until we set up on a more flexible CDN), we set up <a href="http://local.augur.net">local.augur.net</a> on one of our Linode servers.  It&rsquo;s configured for both HTTP and HTTPS, so it will work with your local node.</aside>
 
 <h2 id="hosted-node">Hosted node</h2>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'">
-Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains four public Ethereum nodes, which are used automatically by <a href="https://augur.net">augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected):</p>
-
-<ul>
-<li><a href="https://eth1.augur.net">https://eth1.augur.net</a></li>
-<li><a href="https://eth3.augur.net">https://eth3.augur.net</a></li>
-<li><a href="https://eth4.augur.net">https://eth4.augur.net</a></li>
-<li><a href="https://eth5.augur.net">https://eth5.augur.net</a></li>
-</ul>
-
-<p>All four nodes are temporarily on the Morden testnet, rather than the main Homestead network, while Augur is in beta testing.</p>
+Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains a public Ethereum node at <a href="https://eth3.augur.net">https://eth3.augur.net</a>, which is used automatically by <a href="https://augur.net">augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).  Augur&rsquo;s node is on the Morden testnet.</p>
 
 <aside class="notice">We also maintain a public Ethereum node on the Homestead network at <a href="https://eth2.augur.net">https://eth2.augur.net</a>, which is used for the <a href="https://sale.augur.net">sale site</a>.  However, the Augur contracts are not currently maintained on Homestead.</aside>
 
@@ -109,8 +100,8 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="c1">// Connect to a local Ethereum node with IPC support</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">"/home/augur/.ethereum/geth.ipc"</span><span class="p">);</span>
 
-<span class="c1">// Connect to one of Augur's public nodes (eth1.augur.net)</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"https://eth1.augur.net"</span><span class="p">);</span>
+<span class="c1">// Connect to Augur's public node (eth3.augur.net)</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s2">"https://eth3.augur.net"</span><span class="p">);</span>
 </code></pre>
 
 <p>The Augur API is a set of JavaScript bindings for the methods encoded in Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  The API method name, as well as its parameters, are generally identical to those of the underlying smart contract method.</p>
@@ -214,45 +205,6 @@ Understandably, many users will not want to go to the trouble of running a full 
 <aside class="notice">Each branch&rsquo;s market IDs are stored as an &ldquo;array&rdquo; on the <a href="https://github.com/AugurProject/augur-core/blob/master/src/data%20and%20api/branches.se">branches</a> contract, in the contract&rsquo;s <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
 
 For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
-<pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">getMostActive</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">mostActiveMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">mostActiveMarkets</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">nodeId</span><span class="p">:</span> <span class="s2">"MOST_ACTIVE"</span><span class="p">,</span>
-  <span class="na">nodeType</span><span class="p">:</span> <span class="s2">"MOST_ACTIVE"</span><span class="p">,</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s2">"Most Active"</span><span class="p">,</span>
-  <span class="na">childNodes</span><span class="p">:</span> <span class="p">[{</span>
-    <span class="na">nodeId</span><span class="p">:</span> <span class="s2">"CONTRACT-0xcd220a762601e471f9efae4c911d0e7380927c571743e060843f105a4a1e96bc"</span><span class="p">,</span>
-    <span class="na">nodeType</span><span class="p">:</span> <span class="s2">"CONTRACT"</span><span class="p">,</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s2">"Will it rain in New York City on November 12, 2016?"</span><span class="p">,</span>
-    <span class="na">childNodes</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"-0xcd220a762601e471f9efae4c911d0e7380927c571743e060843f105a4a1e96bc"</span><span class="p">,</span>
-    <span class="na">eventName</span><span class="p">:</span> <span class="s2">"Will it rain in New York City on November 12, 2016?"</span><span class="p">,</span>
-    <span class="na">imagePath</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="na">displayOrder</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="na">tickSize</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="na">tickValue</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="na">lastTradePrice</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.087238</span><span class="nx">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
-    <span class="na">lastTradePriceFormatted</span><span class="p">:</span> <span class="s2">"0.00"</span><span class="p">,</span>
-    <span class="na">lastTradeCostPerShare</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.087238</span><span class="nx">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
-    <span class="na">lastTradeCostPerShareFormatted</span><span class="p">:</span> <span class="s2">"0.00 CASH"</span><span class="p">,</span>
-    <span class="na">sessionChangePrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="na">sessionChangePriceFormatted</span><span class="p">:</span> <span class="s2">"+0.0"</span><span class="p">,</span>
-    <span class="na">sessionChangeCostPerShare</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="na">sessionChangeCostPerShareFormatted</span><span class="p">:</span> <span class="s2">"0.00 CASH"</span><span class="p">,</span>
-    <span class="na">totalVolume</span><span class="p">:</span> <span class="mf">18108.06</span><span class="p">,</span>
-    <span class="na">bestBidPrice</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.087238</span><span class="nx">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
-    <span class="na">bestAskPrice</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.087238</span><span class="nx">e</span><span class="o">-</span><span class="mi">14</span><span class="p">,</span>
-    <span class="na">leaf</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="cm">/* ... */</span>
-  <span class="p">}],</span>
-  <span class="na">leaf</span><span class="p">:</span> <span class="kc">false</span>
-<span class="p">}</span>
-</code></pre>
-
-<h3 id="getmostactive-branchid-callback">getMostActive(branchId, callback)</h3>
-
-<p>Get and sort all markets by volume from the specified branch.  <code class="prettyprint">branchId</code> is an optional parameter; if <code class="prettyprint">branchId</code> is omitted, the default value of <code class="prettyprint">1010101</code> will be used.  The <code class="prettyprint">callback</code> function is required; <code class="prettyprint">getMostActive</code> is asynchronous-only.</p>
 <pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketsSummary</span><span class="p">(</span><span class="nx">branchId</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsSummary</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">marketsSummary</span> <span class="o">=</span> <span class="p">[{</span>
