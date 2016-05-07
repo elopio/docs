@@ -1880,14 +1880,6 @@ Transaction fields are as follows:</p>
 <td>No Market Info: could not retrieve market data</td>
 </tr>
 <tr>
-<td>506</td>
-<td>IPFS Add Failure: files could not be added to IPFS</td>
-</tr>
-<tr>
-<td>507</td>
-<td>IPFS Get Failure: could not retrieve file from IPFS</td>
-</tr>
-<tr>
 <td>599</td>
 <td>RPC Timeout: timed out while waiting for Ethereum network response</td>
 </tr>
@@ -1918,26 +1910,6 @@ Transaction fields are as follows:</p>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>buyShares</td>
-<td>-1</td>
-<td>Invalid outcome or trading closed</td>
-</tr>
-<tr>
-<td>buyShares</td>
-<td>-2</td>
-<td>Entered a negative number of shares</td>
-</tr>
-<tr>
-<td>buyShares</td>
-<td>-3</td>
-<td>Not enough money</td>
-</tr>
-<tr>
-<td>buyShares</td>
-<td>-4</td>
-<td>Bad nonce/hash</td>
-</tr>
 <tr>
 <td>checkReportValidity</td>
 <td>-1</td>
@@ -1992,56 +1964,6 @@ Transaction fields are as follows:</p>
 <td>createMarket</td>
 <td>-4</td>
 <td>Not enough money or market already exists</td>
-</tr>
-<tr>
-<td>getSimulatedBuy</td>
-<td>-2</td>
-<td>Cost updating error (did you enter a valid quantity?)</td>
-</tr>
-<tr>
-<td>getSimulatedSell</td>
-<td>-2</td>
-<td>Cost updating error (did you enter a valid quantity?)</td>
-</tr>
-<tr>
-<td>report</td>
-<td>0</td>
-<td>Could not set reporter ballot</td>
-</tr>
-<tr>
-<td>report</td>
-<td>-1</td>
-<td>Report length does not match the number of expiring events</td>
-</tr>
-<tr>
-<td>report</td>
-<td>-2</td>
-<td>Voting period expired</td>
-</tr>
-<tr>
-<td>report</td>
-<td>-3</td>
-<td>Incorrect hash</td>
-</tr>
-<tr>
-<td>sellShares</td>
-<td>-1</td>
-<td>Invalid outcome or trading closed</td>
-</tr>
-<tr>
-<td>sellShares</td>
-<td>-2</td>
-<td>Entered a negative number of shares</td>
-</tr>
-<tr>
-<td>sellShares</td>
-<td>-3</td>
-<td>Not enough money</td>
-</tr>
-<tr>
-<td>sellShares</td>
-<td>-4</td>
-<td>Bad nonce/hash</td>
 </tr>
 <tr>
 <td>sendReputation</td>
