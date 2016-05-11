@@ -371,7 +371,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 <p>Gets the minimum trading fee allowed on the specified branch ID <code class="prettyprint">branch</code>.</p>
 
-<h4 id="augur-getbranch-branchnumber-callback">augur.getBranch(branchNumber[, callback])</h4>
+<h4 id="augur-getbranchbynum-branchnumber-callback">augur.getBranchByNum(branchNumber[, callback])</h4>
 
 <p>Gets branch ID for the branch with index <code class="prettyprint">branchNumber</code>.  (Branches are stored as an &ldquo;array&rdquo; on-contract; <code class="prettyprint">branchNumber</code> is the index of the branch within this array.)</p>
 <pre class="highlight javascript"><code><span class="c1">// events contract</span>
@@ -550,7 +550,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
   <span class="s1">'-0xec12b8e92e92b83534ba5948c0ea22752f6975e5eef96b46e4f6d558314347a7'</span><span class="p">,</span>
   <span class="s1">'-0xef272ceaabdc90b0c99248caaf34198e2d88d973e30a485118ab30598a95097e'</span><span class="p">,</span>
   <span class="s1">'-0x22daf7fdff22ff716fd8108c011d1c0e69a7ab4a2b087f65dda2fc77ea044ba1'</span>
-  <span class="p">]</span>
+<span class="p">]</span>
 
 <span class="kd">var</span> <span class="nx">outcomeId</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 8-outcome categorical market</span>
 <span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
@@ -1354,9 +1354,10 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">({</span>
   <span class="na">branchId</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span>
   <span class="na">description</span><span class="p">:</span> <span class="nx">description</span><span class="p">,</span>
-  <span class="na">alpha</span><span class="p">:</span> <span class="s2">"0.0079"</span><span class="p">,</span>
-  <span class="na">initialLiquidity</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
   <span class="na">tradingFee</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
+  <span class="na">makerFees</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"example tag"</span><span class="p">,</span> <span class="s2">"other example tag"</span><span class="p">,</span> <span class="s2">"nonsense"</span><span class="p">],</span>
+  <span class="na">extraInfo</span><span class="p">:</span> <span class="s2">"An even longer description / link to more info!"</span><span class="p">,</span>
   <span class="na">events</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-0x90fb310e94df790eaab7266034ae3807b147696bcf57a72f71db338f86718875"</span><span class="p">],</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -1385,9 +1386,9 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-createmarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/createMarket.se">createMarket contract</a></h3>
 
-<h4 id="createmarket-branchid-description-alpha-initialliquidity-tradingfee-events-onsent-onsuccess-onfailed">createMarket(branchId, description, alpha, initialLiquidity, tradingFee, events[, onSent, onSuccess, onFailed])</h4>
+<h4 id="createmarket-branchid-description-tradingfee-events-tags-makerfees-extrainfo-onsent-onsuccess-onfailed">createMarket(branchId, description, tradingFee, events, tags, makerFees, extraInfo, onSent, onSuccess, onFailed)</h4>
 
-<p>Creates a market on branch <code class="prettyprint">branchId</code> with <code class="prettyprint">description</code>, LS-LMSR <code class="prettyprint">alpha</code> value, initial investment of <code class="prettyprint">initialLiquidity</code>, trading fee (as a proportion) of <code class="prettyprint">tradingFee</code>, containing event IDs supplied in an array <code class="prettyprint">events</code>.  Regular (non-combinatorial) markets always have a single event; combinatorial markets allow up to 3 events.</p>
+<p>Creates a market on branch <code class="prettyprint">branchId</code> with <code class="prettyprint">description</code>, trading fee (as a proportion) of <code class="prettyprint">tradingFee</code>, maker fees (proportion of trading fees paid by the order creator, as opposed to the person matching the order) <code class="prettyprint">makerFees</code>, topics/categories <code class="prettyprint">tags</code>, and more detailed description and/or link to more info <code class="prettyprint">extraInfo</code>, and containing event IDs supplied in an array <code class="prettyprint">events</code>.  Regular (non-combinatorial) markets always have a single event; combinatorial markets allow up to 3 events.</p>
 <pre class="highlight javascript"><code><span class="c1">// closeMarket contract</span>
 <span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0x3bb8d91f2481d886fe94acd4d1ffe3339ec60524aeb55ceb5a6c6c8631a796c2"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">closeMarket</span><span class="p">({</span>
