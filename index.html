@@ -1005,40 +1005,6 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <h4 id="withdrawether-to-value-onsent-onsuccess-onfailed">withdrawEther(to, value[, onSent, onSuccess, onFailed])</h4>
 
 <p>Exchange <code class="prettyprint">value</code> CASH tokens for an equivalent number of Ether tokens.  The withdrawn CASH is sent to address <code class="prettyprint">to</code>.  Returns 1 if successful, 0 otherwise.</p>
-<pre class="highlight javascript"><code><span class="c1">// checkQuorum contract</span>
-<span class="kd">var</span> <span class="nx">branchId</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">checkQuorum</span><span class="p">({</span>
-  <span class="na">branchId</span><span class="p">:</span> <span class="nx">branchId</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example outputs:</span>
-<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x45bc69d4aaf9e9bc8d8524d6b4a33f3289d56d150ab4b58c3e85a480db851f47'</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span>
-<span class="p">}</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x4e3'</span><span class="p">,</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x0211c8bd326e9e71bfadb19258ea787080626fe9940a4c197dea31edbe93c3c6'</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a97'</span><span class="p">,</span>
-  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d'</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x27138bfb00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x45bc69d4aaf9e9bc8d8524d6b4a33f3289d56d150ab4b58c3e85a480db851f47'</span>
-<span class="p">}</span>
-</code></pre>
-
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-checkquorum-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/checkQuorum.se">checkQuorum contract</a></h3>
-
-<h4 id="checkquorum-branchid-onsent-onsuccess-onfailed">checkQuorum(branchId[, onSent, onSuccess, onFailed])</h4>
-
-<p>Determines whether consensus is ready to run.  If there aren&rsquo;t enough events in a vote period, push the events to the current period and increment the vote period.  Verifies if there are sufficient future events at stake; the minimum threshold is presently set at 200.  If the number of future events is not above this minimum threshold, then the branch stalls.  Returns 1 if ready, 0 otherwise.</p>
 <pre class="highlight javascript"><code><span class="c1">// buy&amp;sellShares contract</span>
 <span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0xb196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d9"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">outcome</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
