@@ -1102,6 +1102,39 @@ For example, suppose you were displaying markets on separate pages.  You might w
   <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0x5c354ef67fc3306a984bd1e8722fa3342b02fe6ba690b2d7aecc766c927891f'</span><span class="p">,</span>
   <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xbeacc3547fd07d7cd0bde16d404f3554eb4515561fb21bc6a5231459238085c0'</span>
 <span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trade</span><span class="p">({</span>
+  <span class="na">max_value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">max_amount</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">trade_ids</span><span class="p">:</span> <span class="p">[</span><span class="s2">"-0x22daf7fdff22ff716fd8108c011d1c0e69a7ab4a2b087f65dda2fc77ea044ba1"</span><span class="p">],</span>
+  <span class="na">onTradeHash</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tradeHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onCommitSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onCommitSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onCommitFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onNextBlock</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">blockNumber</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onTradeSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onTradeSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onTradeFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example outputs:</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span>
+<span class="p">}</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x3f19ec7209de63043cf5031bb4a38df4bcf6e610f6874dfac87e7ad42e830708'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0xe10e0'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x15f6400a88fb320822b689607d425272bea2175f'</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0x4a817c800'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0xf5c3624f0000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000001c630a59f0e14a6695e8078027b13184f00c79e72e606390eab9bd395bdfa1a83'</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x10074f'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0xb44cd937904ba0e309204ffc1413e094f2a84ee5'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7'</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
@@ -1113,6 +1146,10 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <h4 id="sell-amount-price-market-outcome-onsent-onsuccess-onfailed">sell(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
 
 <p>Sell <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+
+<h4 id="trade-max_value-max_amount-trade_ids-onsent-onsuccess-onfailed">trade(max_value, max_amount, trade_ids[, onSent, onSuccess, onFailed])</h4>
+
+<p>Matches an order or orders (specified using an array parameter <code class="prettyprint">trade_ids</code>) already on the books. <code class="prettyprint">max_value</code> is the maximum amount to spend to buy (including fees).  <code class="prettyprint">max_amount</code> is the maximum number of shares to sell.</p>
 <pre class="highlight javascript"><code><span class="c1">// completeSets contract</span>
 <span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0xb196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d9"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">outcome</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -1877,10 +1914,6 @@ Transaction fields are as follows:</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>65</td>
-<td>Whisper Post Failed: could not post message to whisper</td>
-</tr>
-<tr>
 <td>97</td>
 <td>Database Delete Failed</td>
 </tr>
@@ -1992,10 +2025,6 @@ Transaction fields are as follows:</p>
 <td>700</td>
 <td>Root Not Found: no LS-LMSR objectve function solution found</td>
 </tr>
-<tr>
-<td>710</td>
-<td>Check Order Book Failed: could not check order book using current prices</td>
-</tr>
 </tbody></table>
 
 <h2 id="contract-errors">Contract Errors</h2>
@@ -2101,6 +2130,61 @@ Transaction fields are as follows:</p>
 <td>submitReportHash</td>
 <td>-2</td>
 <td>Not in hash submitting timeframe</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>-1</td>
+<td>Amount/price bad or no market</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>-2</td>
+<td>Oracle-only branch</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>-4</td>
+<td>Not enough money or shares</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-1</td>
+<td>amount/price bad or no market</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-2</td>
+<td>oracle only branch</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-4</td>
+<td>not enough money or shares</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>-1</td>
+<td>oracle only branch</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>-2</td>
+<td>bad trade hash</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>-3</td>
+<td>trader doesn&rsquo;t exist / own shares in this market</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>-4</td>
+<td>must buy at least .00000001 in value</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>10</td>
+<td>insufficient balance</td>
 </tr>
 </tbody></table>
 
