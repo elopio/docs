@@ -1102,7 +1102,18 @@ For example, suppose you were displaying markets on separate pages.  You might w
   <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0x5c354ef67fc3306a984bd1e8722fa3342b02fe6ba690b2d7aecc766c927891f'</span><span class="p">,</span>
   <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xbeacc3547fd07d7cd0bde16d404f3554eb4515561fb21bc6a5231459238085c0'</span>
 <span class="p">}</span>
+</code></pre>
 
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
+
+<h4 id="buy-amount-price-market-outcome-onsent-onsuccess-onfailed">buy(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
+
+<p>Buy <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+
+<h4 id="sell-amount-price-market-outcome-onsent-onsuccess-onfailed">sell(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
+
+<p>Sell <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+<pre class="highlight javascript"><code><span class="c1">// trade contract</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trade</span><span class="p">({</span>
   <span class="na">max_value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="na">max_amount</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1137,15 +1148,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
-
-<h4 id="buy-amount-price-market-outcome-onsent-onsuccess-onfailed">buy(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
-
-<p>Buy <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
-
-<h4 id="sell-amount-price-market-outcome-onsent-onsuccess-onfailed">sell(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
-
-<p>Sell <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-trade-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/trade.se">trade contract</a></h3>
 
 <h4 id="trade-max_value-max_amount-trade_ids-onsent-onsuccess-onfailed">trade(max_value, max_amount, trade_ids[, onSent, onSuccess, onFailed])</h4>
 
