@@ -1318,44 +1318,44 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <p>Slashes the Reputation of address <code class="prettyprint">reporter</code> for <code class="prettyprint">report</code> on branch <code class="prettyprint">branchId</code>.</p>
 <pre class="highlight javascript"><code><span class="c1">// createEvent contract</span>
 <span class="kd">var</span> <span class="nx">description</span> <span class="o">=</span> <span class="s2">"What will the high temperature (in degrees Fahrenheit) be in San Francisco, California, on July 1, 2016?"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">expirationBlock</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">date_to_block</span><span class="p">(</span><span class="nx">augur</span><span class="p">,</span> <span class="s2">"7-2-2016"</span><span class="p">);</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">({</span>
   <span class="na">branchId</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span>
   <span class="na">description</span><span class="p">:</span> <span class="nx">description</span><span class="p">,</span>
-  <span class="na">expirationBlock</span><span class="p">:</span> <span class="nx">expirationBlock</span><span class="p">,</span>
+  <span class="na">expDate</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">"7/2/2016"</span><span class="p">).</span><span class="nx">getTime</span><span class="p">(),</span>
   <span class="na">minValue</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">maxValue</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
   <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">resolution</span><span class="p">:</span> <span class="s2">"www.weather.com"</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="p">});</span>
 <span class="c1">// example outputs:</span>
-<span class="nx">sentResponse</span> <span class="o">=</span>  <span class="p">{</span>
-  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x5ed66d25e36b6b4cb6e15c97d6c85c43060af75cdbfed4d562426d24ed37fb05'</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0x90fb310e94df790eaab7266034ae3807b147696bcf57a72f71db338f86718875'</span>
+<span class="nx">sentResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xc9b92f0224fee5f28c35f49c8b3015e5a09a4876ebb819c1abb5c08ba47c01c6'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0xce75eb6f37b92fa80df3240ea8528f7c4b70c8553a536275e26f36a87f02518'</span>
 <span class="p">}</span>
 <span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x532'</span><span class="p">,</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x44818f0c59f089ffc55c147bd72eab5c755a34288826a40c1a695d711d5ef02c'</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0x72e2'</span><span class="p">,</span>
-  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645'</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s1">'0x30782f7d4dda3be6e9823deb64a926556b9a508bbef76f4d7bb0e69a4940e59f'</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0xe287e'</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s1">'0x15f6400a88fb320822b689607d425272bea2175f'</span><span class="p">,</span>
   <span class="na">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x130dd1b300000000000000000000000000000000000000000000000000000000000f69b500000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000129ad90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000068576861742077696c6c2074686520686967682074656d70657261747572652028696e20646567726565732046616872656e686569742920626520696e2053616e204672616e636973636f2c2043616c69666f726e69612c206f6e204a756c7920312c20323031363f000000000000000000000000000000000000000000000000'</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'-0x90fb310e94df790eaab7266034ae3807b147696bcf57a72f71db338f86718875'</span><span class="p">,</span>
-  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0x5ed66d25e36b6b4cb6e15c97d6c85c43060af75cdbfed4d562426d24ed37fb05'</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s1">'0x4a817c800'</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s1">'0x3c1f6f6300000000000000000000000000000000000000000000000000000000000f69b500000000000000000000000000000000000000000000000000000000000000e000000000000000000000000000000000000000000000000000000155aa68258000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000780000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000068576861742077696c6c2074686520686967682074656d70657261747572652028696e20646567726565732046616872656e686569742920626520696e2053616e204672616e636973636f2c2043616c69666f726e69612c206f6e204a756c7920312c20323031363f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f7777772e776561746865722e636f6d0000000000000000000000000000000000'</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s1">'0x100751'</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s1">'0x24b051c19bd981a59f6c459c128a285bcd8d66bc'</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s1">'0x1'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s1">'0xce75eb6f37b92fa80df3240ea8528f7c4b70c8553a536275e26f36a87f02518'</span><span class="p">,</span>
+  <span class="na">txHash</span><span class="p">:</span> <span class="s1">'0xc9b92f0224fee5f28c35f49c8b3015e5a09a4876ebb819c1abb5c08ba47c01c6'</span>
 <span class="p">}</span>
 </code></pre>
 
 <h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-createevent-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/createEvent.se">createEvent contract</a></h3>
 
-<h4 id="createevent-branchid-description-expirationblock-minvalue-maxvalue-numoutcomes-onsent-onsuccess-onfailed">createEvent(branchId, description, expirationBlock, minValue, maxValue, numOutcomes[, onSent, onSuccess, onFailed])</h4>
+<h4 id="createevent-branchid-description-expdate-minvalue-maxvalue-numoutcomes-resolution-onsent-onsuccess-onfailed">createEvent(branchId, description, expDate, minValue, maxValue, numOutcomes, resolution[, onSent, onSuccess, onFailed])</h4>
 
-<p>Creates an event on branch <code class="prettyprint">branchId</code> with <code class="prettyprint">description</code>, expiration block number of <code class="prettyprint">expirationBlock</code>, minimum value <code class="prettyprint">minValue</code>, maximum value <code class="prettyprint">maxValue</code>, and <code class="prettyprint">numOutcomes</code> possible outcomes.</p>
+<p>Creates an event on branch <code class="prettyprint">branchId</code> with <code class="prettyprint">description</code>, expiration date (in epoch time) of <code class="prettyprint">expDate</code>, minimum value <code class="prettyprint">minValue</code>, maximum value <code class="prettyprint">maxValue</code>, <code class="prettyprint">numOutcomes</code> possible outcomes, and <code class="prettyprint">resolution</code> source for resolution data (e.g., <code class="prettyprint">resolution</code> might be set to <code class="prettyprint">https://www.wunderground.com/history</code> for a weather-related event).</p>
 <pre class="highlight javascript"><code><span class="c1">// createMarket contract</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">({</span>
   <span class="na">branchId</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">branches</span><span class="p">.</span><span class="nx">dev</span><span class="p">,</span>
