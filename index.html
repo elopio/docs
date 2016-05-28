@@ -168,11 +168,11 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="n">compositeMarketsHash</span> <span class="o">=</span> <span class="n">sha3</span><span class="p">(</span><span class="n">compositeMarketsHash</span> <span class="o">+</span> <span class="n">marketID4</span><span class="p">)</span>
 </code></pre>
 
+<p>To load the basic market info for all markets, first call <code class="prettyprint">augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  You will likely need to chunk the results so that the request does not time out.  More detailed market info (including prices) for each market in each chunk (page) is then loaded using <code class="prettyprint">augur.getMarketInfo(marketID)</code>.  <code class="prettyprint">getMarketInfo</code> does not return the full order book; to get the order book for a market, call <code class="prettyprint">augur.getOrderBook(marketID)</code>.</p>
+
 <aside class="notice">Cache nodes regularly call <code>augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  The first time <code>getMarketsInfo</code> is called, all markets should be loaded.  Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.
 
 If data is loaded from a cache node (rather than directly from the Ethereum blockchain), then its integrity should be verified to ensure the cache node has not tampered with the data.  Verification of a cache node&rsquo;s markets data can be done by calling <code>augur.getMarketsHash(branch)</code>, then checking that the `getMarketsHash` return value matches a hash locally calculated from a combined hash of each market&rsquo;s static data (see Serpent code sample).</aside>
-
-<p>To load the basic market info for all markets, first call <code class="prettyprint">augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  You will likely need to chunk the results so that the request does not time out.  More detailed market info (including prices) for each market in each chunk (page) is then loaded using <code class="prettyprint">augur.getMarketInfo(marketID)</code>.  <code class="prettyprint">getMarketInfo</code> does not return the full order book; to get the order book for a market, call <code class="prettyprint">augur.getOrderBook(marketID)</code>.</p>
 
 <h2 id="reporting-outcomes">Reporting outcomes</h2>
 
