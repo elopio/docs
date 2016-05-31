@@ -326,23 +326,30 @@ If data is loaded from a cache node (rather than directly from the Ethereum bloc
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">branch</span><span class="p">:</span> <span class="mi">1010101</span><span class="p">,</span>     <span class="c1">// branch ID (default: 1010101)</span>
   <span class="na">offset</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>          <span class="c1">// which markets to start  (default: 0)</span>
-  <span class="na">numMarketsToLoad</span><span class="p">:</span> <span class="mi">5</span>  <span class="c1">// numMarkets</span>
+  <span class="na">numMarketsToLoad</span><span class="p">:</span> <span class="mi">2</span>  <span class="c1">// numMarkets</span>
 <span class="p">};</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="nx">marketsInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"-0x5932c04cfb6df8275387fc5d15a9897d61a2ef598c7e60ae45829e9e1e3409e6"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
-    <span class="s2">"traderCount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="cm">/* ... */</span>
-  <span class="p">},</span>
-  <span class="s2">"-0x428531d38a8960123e16a2810591c36d523a5269081543f7ac5914408ae63183"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"network"</span><span class="err">:</span> <span class="s2">"2"</span><span class="p">,</span>
-    <span class="s2">"traderCount"</span><span class="err">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="cm">/* ... */</span>
-  <span class="p">},</span>
-  <span class="cm">/* ... */</span>
-<span class="p">}</span>
+<span class="p">{</span> <span class="s1">'0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5'</span><span class="err">:</span> 
+   <span class="p">{</span> <span class="nl">_id</span><span class="p">:</span> <span class="s1">'0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5'</span><span class="p">,</span>
+     <span class="nx">sortOrder</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+     <span class="nx">tradingPeriod</span><span class="err">:</span> <span class="mi">206104</span><span class="p">,</span>
+     <span class="nx">tradingFee</span><span class="err">:</span> <span class="s1">'0.01999999999999999998'</span><span class="p">,</span>
+     <span class="nx">creationTime</span><span class="err">:</span> <span class="mi">1464642365</span><span class="p">,</span>
+     <span class="nx">volume</span><span class="err">:</span> <span class="s1">'0'</span><span class="p">,</span>
+     <span class="nx">tags</span><span class="err">:</span> <span class="p">[</span> <span class="s1">'weather'</span><span class="p">,</span> <span class="s1">'temperature'</span><span class="p">,</span> <span class="s1">'climate change'</span> <span class="p">],</span>
+     <span class="nx">endDate</span><span class="err">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+     <span class="nx">description</span><span class="err">:</span> <span class="s1">'Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged'</span> <span class="p">},</span>
+  <span class="s1">'0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'</span><span class="err">:</span> 
+   <span class="p">{</span> <span class="nl">_id</span><span class="p">:</span> <span class="s1">'0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'</span><span class="p">,</span>
+     <span class="nx">sortOrder</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+     <span class="nx">tradingPeriod</span><span class="err">:</span> <span class="mi">206104</span><span class="p">,</span>
+     <span class="nx">tradingFee</span><span class="err">:</span> <span class="s1">'0.01999999999999999998'</span><span class="p">,</span>
+     <span class="nx">creationTime</span><span class="err">:</span> <span class="mi">1464642450</span><span class="p">,</span>
+     <span class="nx">volume</span><span class="err">:</span> <span class="s1">'0'</span><span class="p">,</span>
+     <span class="nx">tags</span><span class="err">:</span> <span class="p">[</span> <span class="s1">'quotes'</span><span class="p">,</span> <span class="s1">'严肃'</span><span class="p">,</span> <span class="s1">'蝙蝠侠'</span> <span class="p">],</span>
+     <span class="nx">endDate</span><span class="err">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+     <span class="nx">description</span><span class="err">:</span> <span class="s1">'为什么有这么严重吗？'</span> <span class="p">}</span> <span class="p">}</span>
 </code></pre>
 
 <h3 id="getmarketsinfo-options-callback">getMarketsInfo(options[, callback])</h3>
