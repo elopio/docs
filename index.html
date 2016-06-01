@@ -323,7 +323,7 @@ If data is loaded from a cache node (rather than directly from the Ethereum bloc
 <h3 id="getmarketinfo-marketid-callback">getMarketInfo(marketId[, callback])</h3>
 
 <p>Reads all information about a market that is stored on-contract.  It also determines the <code class="prettyprint">type</code> of the market, which can be <code class="prettyprint">binary</code> (two outcomes; i.e., Yes or No), <code class="prettyprint">categorical</code> (more than two outcomes, i.e., Multiple Choice), <code class="prettyprint">scalar</code> (answer can be any of a range of values; i.e., Numerical), or <code class="prettyprint">combinatorial</code> (for combined wagers on multiple events).  If the market is a combinatorial market, <code class="prettyprint">getMarketInfo</code> also makes separate RPC request for the individual event descriptions.</p>
-<pre class="highlight javascript"><code><span class="nx">marketIDs</span> <span class="o">=</span> <span class="p">[</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketIDs</span> <span class="o">=</span> <span class="p">[</span>
   <span class="s1">'0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5'</span><span class="p">,</span>
   <span class="s1">'0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'</span>
 <span class="p">];</span>
