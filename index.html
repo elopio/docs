@@ -323,7 +323,124 @@ If data is loaded from a cache node (rather than directly from the Ethereum bloc
 <h3 id="getmarketinfo-marketid-callback">getMarketInfo(marketId[, callback])</h3>
 
 <p>Reads all information about a market that is stored on-contract.  It also determines the <code class="prettyprint">type</code> of the market, which can be <code class="prettyprint">binary</code> (two outcomes; i.e., Yes or No), <code class="prettyprint">categorical</code> (more than two outcomes, i.e., Multiple Choice), <code class="prettyprint">scalar</code> (answer can be any of a range of values; i.e., Numerical), or <code class="prettyprint">combinatorial</code> (for combined wagers on multiple events).  If the market is a combinatorial market, <code class="prettyprint">getMarketInfo</code> also makes separate RPC request for the individual event descriptions.</p>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+<pre class="highlight javascript"><code><span class="nx">marketIDs</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s1">'0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5'</span><span class="p">,</span>
+  <span class="s1">'0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'</span>
+<span class="p">];</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">batchGetMarketInfo</span><span class="p">(</span><span class="nx">marketIDs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">info</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="s2">"traderCount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"makerFees"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
+    <span class="s2">"traderIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"tradingPeriod"</span><span class="p">:</span> <span class="mi">206104</span><span class="p">,</span>
+    <span class="s2">"tradingFee"</span><span class="p">:</span> <span class="s2">"0.01999999999999999998"</span><span class="p">,</span>
+    <span class="s2">"branchId"</span><span class="p">:</span> <span class="s2">"0xf69b5"</span><span class="p">,</span>
+    <span class="s2">"numEvents"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"cumulativeScale"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"creationTime"</span><span class="p">:</span> <span class="mi">1464642365</span><span class="p">,</span>
+    <span class="s2">"volume"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"creationFee"</span><span class="p">:</span> <span class="s2">"8.99999999999999967469"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="s2">"0x7c0d52faab596c08f484e3478aebc6205f3f5d8c"</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"weather"</span><span class="p">,</span> <span class="s2">"temperature"</span><span class="p">,</span> <span class="s2">"climate change"</span><span class="p">],</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+    <span class="s2">"endDate"</span><span class="p">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+    <span class="s2">"winningOutcomes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">],</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged"</span><span class="p">,</span>
+    <span class="s2">"outcomes"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"events"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"0x808bd49d2a16214bed80a6249302b55a87282a7d6ecc74a0381b7453b1ed9101"</span><span class="p">,</span>
+        <span class="s2">"endDate"</span><span class="p">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+        <span class="s2">"outcome"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"minValue"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"maxValue"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"categorical"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"_id"</span><span class="p">:</span> <span class="s2">"0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5"</span><span class="p">,</span>
+    <span class="s2">"sortOrder"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="s2">"0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"network"</span><span class="err">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="s2">"traderCount"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"makerFees"</span><span class="err">:</span> <span class="s2">"0.39999999999999999998"</span><span class="p">,</span>
+    <span class="s2">"traderIndex"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numOutcomes"</span><span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"tradingPeriod"</span><span class="err">:</span> <span class="mi">206104</span><span class="p">,</span>
+    <span class="s2">"tradingFee"</span><span class="err">:</span> <span class="s2">"0.01999999999999999998"</span><span class="p">,</span>
+    <span class="s2">"branchId"</span><span class="err">:</span> <span class="s2">"0xf69b5"</span><span class="p">,</span>
+    <span class="s2">"numEvents"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"cumulativeScale"</span><span class="err">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"creationTime"</span><span class="err">:</span> <span class="mi">1464642450</span><span class="p">,</span>
+    <span class="s2">"volume"</span><span class="err">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"creationFee"</span><span class="err">:</span> <span class="s2">"8.99999999999999967469"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="err">:</span> <span class="s2">"0x7c0d52faab596c08f484e3478aebc6205f3f5d8c"</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="err">:</span> <span class="p">[</span><span class="s2">"quotes"</span><span class="p">,</span> <span class="s2">"严肃"</span><span class="p">,</span> <span class="s2">"蝙蝠侠"</span><span class="p">],</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+    <span class="s2">"endDate"</span><span class="err">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+    <span class="s2">"winningOutcomes"</span><span class="err">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">],</span>
+    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"为什么有这么严重吗？"</span><span class="p">,</span>
+    <span class="s2">"outcomes"</span><span class="err">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"shares"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"outstandingShares"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"events"</span><span class="err">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"0xe2b0453641b305c4aa96b3bd473d93b0b5062a7c0fc62d6e158c133859fcdcb3"</span><span class="p">,</span>
+        <span class="s2">"endDate"</span><span class="p">:</span> <span class="mi">1483948800</span><span class="p">,</span>
+        <span class="s2">"outcome"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"minValue"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"maxValue"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"categorical"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"_id"</span><span class="err">:</span> <span class="s2">"0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8"</span><span class="p">,</span>
+    <span class="s2">"sortOrder"</span><span class="err">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">branch</span><span class="p">:</span> <span class="mi">1010101</span><span class="p">,</span>     <span class="c1">// branch ID (default: 1010101)</span>
   <span class="na">offset</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>          <span class="c1">// which markets to start  (default: 0)</span>
   <span class="na">numMarketsToLoad</span><span class="p">:</span> <span class="mi">2</span>  <span class="c1">// numMarkets</span>
@@ -352,9 +469,13 @@ If data is loaded from a cache node (rather than directly from the Ethereum bloc
      <span class="nx">description</span><span class="err">:</span> <span class="s1">'为什么有这么严重吗？'</span> <span class="p">}</span> <span class="p">}</span>
 </code></pre>
 
+<h3 id="batchgetmarketinfo-marketids-callback">batchGetMarketInfo(marketIDs[, callback])</h3>
+
+<p>Retrieve a <code class="prettyprint">marketInfo</code> object for the market IDs in array <code class="prettyprint">marketIDs</code>.  The <code class="prettyprint">marketInfo</code> objects (see above for example) are collected into a single object and indexed by market ID.</p>
+
 <h3 id="getmarketsinfo-options-callback">getMarketsInfo(options[, callback])</h3>
 
-<p>Retrieve a <code class="prettyprint">marketInfo</code> object for all markets on the specified branch.  The <code class="prettyprint">marketInfo</code> objects (see above for example) are collected into a single object and indexed by <code class="prettyprint">marketId</code>.  The <code class="prettyprint">options</code> parameter is an object which specifies the branch ID (<code class="prettyprint">branch</code>), and whether or not to send separate RPC requests for combinatorial event descriptions (<code class="prettyprint">combinatorial</code>).  There are also two fields (<code class="prettyprint">offset</code> and <code class="prettyprint">numMarketsToLoad</code>) used to split up the <code class="prettyprint">getMarketsInfo</code> query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request.</p>
+<p>Gets basic info about markets the specified branch, and returns an object with market info indexed by market ID.  The <code class="prettyprint">options</code> parameter is an object which specifies the branch ID (<code class="prettyprint">branch</code>).  There are also two fields (<code class="prettyprint">offset</code> and <code class="prettyprint">numMarketsToLoad</code>) used to split up the <code class="prettyprint">getMarketsInfo</code> query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request (which is typical).</p>
 
 <aside class="notice">Each branch&rsquo;s market IDs are stored as an &ldquo;array&rdquo; on the <a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/branches.se">branches</a> contract, in the contract&rsquo;s <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
 
