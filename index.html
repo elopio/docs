@@ -1622,6 +1622,43 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <h4 id="createmarket-branchid-description-tradingfee-events-tags-makerfees-extrainfo-onsent-onsuccess-onfailed">createMarket(branchId, description, tradingFee, events, tags, makerFees, extraInfo, onSent, onSuccess, onFailed)</h4>
 
 <p>Creates a market on branch <code class="prettyprint">branchId</code> with <code class="prettyprint">description</code>, trading fee (as a proportion) of <code class="prettyprint">tradingFee</code>, maker fees (proportion of trading fees paid by the order creator, as opposed to the person matching the order) <code class="prettyprint">makerFees</code>, topics/categories <code class="prettyprint">tags</code>, and more detailed description and/or link to more info <code class="prettyprint">extraInfo</code>, and containing event IDs supplied in an array <code class="prettyprint">events</code>.  Regular (non-combinatorial) markets always have a single event; combinatorial markets allow up to 3 events.</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketID</span> <span class="o">=</span> <span class="s2">"0xa290cd9d0c81f2af150a36725c986a3387dc6cef178c183e7237eeac4ea81ddc"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">market</span><span class="p">:</span> <span class="nx">marketID</span><span class="p">,</span>
+    <span class="na">liquidity</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">initialFairPrice</span><span class="p">:</span> <span class="s2">"0.4"</span><span class="p">,</span>
+    <span class="na">startingQuantity</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">bestStartingQuantity</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">priceWidth</span><span class="p">:</span> <span class="s2">"0.4"</span><span class="p">,</span>
+    <span class="na">priceDepth</span><span class="p">:</span> <span class="s2">"0.2"</span>
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">generateOrderBook</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">onBuyCompleteSets</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSetupOutcome</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">outcome</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSetupOrder</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">orderBook</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">params</span><span class="p">.</span><span class="nx">isSimulation</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">generateOrderBook</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">onSimulate</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">simulation</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">})</span>
+<span class="c1">// example:</span>
+<span class="nx">simulation</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">sharesOnBook</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
+  <span class="na">sharesToBuy</span><span class="p">:</span> <span class="s1">'85'</span><span class="p">,</span>
+  <span class="na">numBuyOrders</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">numSellOrders</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="na">numTransactions</span><span class="p">:</span> <span class="mi">6</span>
+<span class="p">}</span>
+</code></pre>
+
+<h4 id="generateorderbook-params-callbacks">generateOrderBook(params, callbacks)</h4>
+
+<p>A convenience method for generating an initial order book for a newly created market.  <code class="prettyprint">params</code> is an object containing the input parameters (see example code).  <code class="prettyprint">liquidity</code> is the total amount of liquidity to add to the market.  <code class="prettyprint">initialFairPrice</code> is the center of the bid-ask spread.  <code class="prettyprint">startingQuantity</code> is the number of shares available at each price point.  <code class="prettyprint">bestStartingQuantity</code> can optionally be specified separately, and is the number of shares available at the best price point (those closest to the spread).  <code class="prettyprint">priceWidth</code> is the price difference between the best bid and best ask orders.  <code class="prettyprint">priceDepth</code> is the difference between adjacent orders on the same side of the book.</p>
+
+<p><code class="prettyprint">augur.generateOrderBook</code> also accepts an optional parameter, <code class="prettyprint">isSimulation</code>, which if set to <code class="prettyprint">true</code>, returns information about what the method will do (see code example).  <code class="prettyprint">sharesOnBook</code> is the number of shares that will go on the book (in sell orders), <code class="prettyprint">sharesToBuy</code> is the total number of shares to buy (the initial liquidity minus the cash needed for buy orders), <code class="prettyprint">numBuyOrders</code> is the number of buy orders that will be created, <code class="prettyprint">numSellOrders</code> is the number of sell orders that will be created, and <code class="prettyprint">numTransactions</code> is the total number of Ethereum transactions needed to set up the order book.</p>
 <pre class="highlight javascript"><code><span class="c1">// closeMarket contract</span>
 <span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0x3bb8d91f2481d886fe94acd4d1ffe3339ec60524aeb55ceb5a6c6c8631a796c2"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">closeMarket</span><span class="p">({</span>
