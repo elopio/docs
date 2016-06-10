@@ -478,7 +478,7 @@ If data is loaded from a cache node (rather than directly from the Ethereum bloc
 
 <p>Gets basic info about markets the specified branch, and returns an object with market info indexed by market ID.  The <code class="prettyprint">options</code> parameter is an object which specifies the branch ID (<code class="prettyprint">branch</code>).  There are also two fields (<code class="prettyprint">offset</code> and <code class="prettyprint">numMarketsToLoad</code>) used to split up the <code class="prettyprint">getMarketsInfo</code> query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request (which is typical).</p>
 
-<aside class="notice">Each branch&rsquo;s market IDs are stored as an &ldquo;array&rdquo; on the <a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/branches.se">branches</a> contract, in the contract&rsquo;s <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+<aside class="notice">Each branch&rsquo;s market IDs are stored as an &ldquo;array&rdquo; on the <a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se">branches</a> contract, in the contract&rsquo;s <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
 
 For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
 
@@ -492,7 +492,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">cashBalance</span> <span class="o">=</span> <span class="s2">"93016.83621687256922549981"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/cash.se">cash contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/cash.se">cash contract</a></h3>
 
 <h4 id="getcashbalance-address-callback">getCashBalance(address[, callback])</h4>
 
@@ -512,7 +512,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">description</span> <span class="o">=</span> <span class="s2">"Will the Sun turn into a red giant and engulf the Earth by the end of 2016?"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-info-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/info.se">info contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-info-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/info.se">info contract</a></h3>
 
 <h4 id="getcreator-id-callback">getCreator(id[, callback])</h4>
 
@@ -570,7 +570,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">branch</span> <span class="o">=</span> <span class="s2">"0xf69b5"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-branches-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/branches.se">branches contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-branches-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se">branches contract</a></h3>
 
 <h4 id="augur-getnumbranches-callback">augur.getNumBranches([callback])</h4>
 
@@ -634,7 +634,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">numOutcomes</span> <span class="o">=</span> <span class="s2">"2"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-events-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/events.se">events contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-events-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/events.se">events contract</a></h3>
 
 <h4 id="geteventinfo-eventid-callback">getEventInfo(eventId[, callback])</h4>
 
@@ -713,7 +713,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-expiringevents-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/expiringEvents.se">expiringEvents contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-expiringevents-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/expiringEvents.se">expiringEvents contract</a></h3>
 
 <h4 id="getevents-branch-reportperiod-callback">getEvents(branch, reportPeriod[, callback])</h4>
 
@@ -763,7 +763,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-trades-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/trades.se">trades contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-trades-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/trades.se">trades contract</a></h3>
 
 <h4 id="get_trade-trade_id-callback">get_trade(trade_id[, callback])</h4>
 
@@ -838,7 +838,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">tradingFee</span> <span class="o">=</span> <span class="s2">"0.00999999999999999999"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-markets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/markets.se">markets contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-markets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/markets.se">markets contract</a></h3>
 
 <h4 id="get_trade_ids-market-callback">get_trade_ids(market[, callback])</h4>
 
@@ -930,7 +930,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">reportHash</span> <span class="o">=</span> <span class="s2">"-0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-reporting-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/reporting.se">reporting contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-reporting-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/reporting.se">reporting contract</a></h3>
 
 <h4 id="getrepbalance-branch-address-callback">getRepBalance(branch, address[, callback])</h4>
 
@@ -964,7 +964,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="nx">isValid</span> <span class="o">=</span> <span class="s2">"1"</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/makeReports.se">makeReports contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se">makeReports contract</a></h3>
 
 <h4 id="checkreportvalidity-branch-report-reportperiod-callback">checkReportValidity(branch, report, reportPeriod[, callback])</h4>
 
@@ -1101,7 +1101,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-faucets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/faucets.se">faucets contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-faucets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/faucets.se">faucets contract</a></h3>
 
 <h4 id="reputationfaucet-branch-onsent-onsuccess-onfailed">reputationFaucet(branch[, onSent, onSuccess, onFailed])</h4>
 
@@ -1216,7 +1216,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-data_api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/data_api/cash.se">cash contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-data_api-cash-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/cash.se">cash contract</a></h3>
 
 <h4 id="sendcash-to-value-onsent-onsuccess-onfailed">sendCash(to, value[, onSent, onSuccess, onFailed])</h4>
 
@@ -1298,7 +1298,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-buy-26sellshares-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/buy%26sellShares.se">buy&amp;sellShares contract</a></h3>
 
 <h4 id="buy-amount-price-market-outcome-onsent-onsuccess-onfailed">buy(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
 
@@ -1342,7 +1342,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-trade-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/trade.se">trade contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-trade-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/trade.se">trade contract</a></h3>
 
 <h4 id="trade-max_value-max_amount-trade_ids-onsent-onsuccess-onfailed">trade(max_value, max_amount, trade_ids[, onSent, onSuccess, onFailed])</h4>
 
@@ -1407,7 +1407,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-completesets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/completeSets.se">completeSets contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-completesets-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/completeSets.se">completeSets contract</a></h3>
 
 <h4 id="buycompletesets-marketid-amount-limit-onsent-onsuccess-onfailed">buyCompleteSets(marketId, amount[, limit, onSent, onSuccess, onFailed])</h4>
 
@@ -1447,7 +1447,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-createbranch-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/createBranch.se">createBranch contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createbranch-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createBranch.se">createBranch contract</a></h3>
 
 <h4 id="createsubbranch-description-periodlength-parent-tradingfee-onsent-onsuccess-onfailed">createSubbranch(description, periodLength, parent, tradingFee[, onSent, onSuccess, onFailed])</h4>
 
@@ -1482,7 +1482,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-sendreputation-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/sendReputation.se">sendReputation contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-sendreputation-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/sendReputation.se">sendReputation contract</a></h3>
 
 <h4 id="sendreputation-branchid-to-value-onsent-onsuccess-onfailed">sendReputation(branchId, to, value[, onSent, onSuccess, onFailed])</h4>
 
@@ -1531,7 +1531,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/makeReports.se">makeReports contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-makereports-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se">makeReports contract</a></h3>
 
 <h4 id="report-branchid-report-reportperiod-salt-onsent-onsuccess-onfailed">report(branchId, report, reportPeriod, salt[, onSent, onSuccess, onFailed])</h4>
 
@@ -1579,7 +1579,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-createevent-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/createEvent.se">createEvent contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createevent-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createEvent.se">createEvent contract</a></h3>
 
 <h4 id="createevent-branchid-description-expdate-minvalue-maxvalue-numoutcomes-resolution-onsent-onsuccess-onfailed">createEvent(branchId, description, expDate, minValue, maxValue, numOutcomes, resolution[, onSent, onSuccess, onFailed])</h4>
 
@@ -1618,7 +1618,7 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-createmarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/createMarket.se">createMarket contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-createmarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/createMarket.se">createMarket contract</a></h3>
 
 <h4 id="createmarket-branchid-description-tradingfee-events-tags-makerfees-extrainfo-onsent-onsuccess-onfailed">createMarket(branchId, description, tradingFee, events, tags, makerFees, extraInfo, onSent, onSuccess, onFailed)</h4>
 
@@ -1712,7 +1712,7 @@ $$
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="a-href-https-github-com-augurproject-augur-core-blob-forking-src-functions-closemarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/forking/src/functions/closeMarket.se">closeMarket contract</a></h3>
+<h3 id="a-href-https-github-com-augurproject-augur-core-blob-master-src-functions-closemarket-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/src/functions/closeMarket.se">closeMarket contract</a></h3>
 
 <h4 id="closemarket-branchid-marketid-onsent-onsuccess-onfailed">closeMarket(branchId, marketId[, onSent, onSuccess, onFailed])</h4>
 
