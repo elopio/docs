@@ -2183,6 +2183,14 @@ Transaction fields are as follows:</p>
 </tr>
 </thead><tbody>
 <tr>
+<td>42</td>
+<td>Insufficient Liquidity: insufficient liquidity to generate order book</td>
+</tr>
+<tr>
+<td>43</td>
+<td>Initial Price Out-of-Bounds: one or more initial fair prices are out-of-bounds</td>
+</tr>
+<tr>
 <td>97</td>
 <td>Database Delete Failed</td>
 </tr>
@@ -2291,8 +2299,8 @@ Transaction fields are as follows:</p>
 <td>Ethereum Not Found: no active Ethereum node(s) found</td>
 </tr>
 <tr>
-<td>700</td>
-<td>Root Not Found: no LS-LMSR objectve function solution found</td>
+<td>710</td>
+<td>Check Order Book Failed: could not check order book using current prices</td>
 </tr>
 </tbody></table>
 
@@ -2306,59 +2314,284 @@ Transaction fields are as follows:</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>checkReportValidity</td>
+<td>buy</td>
 <td>-1</td>
-<td>Report isn&rsquo;t long enough</td>
+<td>Amount/price bad or no market</td>
 </tr>
 <tr>
-<td>checkReportValidity</td>
+<td>buy</td>
 <td>-2</td>
-<td>Reporter doesn&rsquo;t exist, voting period is over, or voting period hasn&rsquo;t started yet</td>
+<td>Oracle-only branch</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>-4</td>
+<td>Not enough money or shares</td>
+</tr>
+<tr>
+<td>buyCompleteSets</td>
+<td>0</td>
+<td>market not found</td>
+</tr>
+<tr>
+<td>buyCompleteSets</td>
+<td>-1</td>
+<td>oracle-only branch</td>
+</tr>
+<tr>
+<td>buyCompleteSets</td>
+<td>-3</td>
+<td>not enough cash</td>
+</tr>
+<tr>
+<td>cashFaucet</td>
+<td>-1</td>
+<td>Hey, you&rsquo;re not broke!</td>
+</tr>
+<tr>
+<td>claimProceeds</td>
+<td>0</td>
+<td>reporting not done</td>
+</tr>
+<tr>
+<td>claimProceeds</td>
+<td>-1</td>
+<td>trader doesn&rsquo;t exist</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>0</td>
+<td>fail/trading not over yet/event not expired or closed already</td>
 </tr>
 <tr>
 <td>closeMarket</td>
 <td>-1</td>
-<td>Market has no cash</td>
+<td>Market has no cash anyway / already closed</td>
 </tr>
 <tr>
 <td>closeMarket</td>
 <td>-2</td>
-<td>0 outcome</td>
+<td>0 outcome / not reported on yet</td>
 </tr>
 <tr>
 <td>closeMarket</td>
 <td>-3</td>
-<td>Outcome indeterminable</td>
+<td>not final round 2 event</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-5</td>
+<td>Event forked and not final yet</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-6</td>
+<td>bonded pushed forward market not ready to be resolved</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-7</td>
+<td>event not reportable &gt;.99</td>
+</tr>
+<tr>
+<td>closeMarket</td>
+<td>-8</td>
+<td>market isn&rsquo;t in branch</td>
+</tr>
+<tr>
+<td>collectFees</td>
+<td>-2</td>
+<td>needs to be second half of reporting period to claim rep (1st half is when redistribution is done)</td>
+</tr>
+<tr>
+<td>createEvent</td>
+<td>-1</td>
+<td>we&rsquo;re either already past that date, branch doesn&rsquo;t exist, or description is bad</td>
 </tr>
 <tr>
 <td>createEvent</td>
 <td>0</td>
-<td>Not enough money to pay fees or event already exists</td>
+<td>not enough money to pay fees or event already exists</td>
 </tr>
 <tr>
 <td>createEvent</td>
-<td>-1</td>
-<td>We&rsquo;re either already past that date, branch doesn&rsquo;t exist, or description is bad</td>
+<td>-2</td>
+<td>max value &lt; min value</td>
+</tr>
+<tr>
+<td>createEvent</td>
+<td>-9</td>
+<td>would expire during non-reporting fork period</td>
 </tr>
 <tr>
 <td>createMarket</td>
 <td>-1</td>
-<td>Bad input or parent doesn&rsquo;t exist</td>
+<td>bad input or parent doesn&rsquo;t exist</td>
 </tr>
 <tr>
 <td>createMarket</td>
 <td>-2</td>
-<td>Too many events</td>
+<td>too many events</td>
 </tr>
 <tr>
 <td>createMarket</td>
 <td>-3</td>
-<td>Too many outcomes</td>
+<td>too many outcomes</td>
 </tr>
 <tr>
 <td>createMarket</td>
 <td>-4</td>
-<td>Not enough money or market already exists</td>
+<td>not enough money</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-5</td>
+<td>fee too low</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-6</td>
+<td>duplicate events</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-7</td>
+<td>event already expired</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-8</td>
+<td>market already exists</td>
+</tr>
+<tr>
+<td>createMarket</td>
+<td>-9</td>
+<td>would expire during non-reporting fork period</td>
+</tr>
+<tr>
+<td>penalizationCatchup</td>
+<td>-2</td>
+<td>can only be called during the first half of the reporting period</td>
+</tr>
+<tr>
+<td>penalizeNotEnoughReports</td>
+<td>-1</td>
+<td>already done</td>
+</tr>
+<tr>
+<td>penalizeNotEnoughReports</td>
+<td>-2</td>
+<td>hasn&rsquo;t reported this period</td>
+</tr>
+<tr>
+<td>penalizeOnForkedEvent</td>
+<td>-2</td>
+<td>already past first half of new period and needed to penalize before then</td>
+</tr>
+<tr>
+<td>penalizeOnForkedEvent</td>
+<td>-4</td>
+<td>fork event isn&rsquo;t resolved yet</td>
+</tr>
+<tr>
+<td>penalizeOnForkedEvent</td>
+<td>-5</td>
+<td>already done for all events in this period</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>0</td>
+<td>event is a fork event</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>-1</td>
+<td>need to penalize in round 2 penalize function</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>-2</td>
+<td>already past first half of new period and needed to penalize before then</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>-4</td>
+<td>in fork period only thing that rbcr is done on is the round 2 event in the original branch via round 2 penalize</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>-5</td>
+<td>already done for all events in this period</td>
+</tr>
+<tr>
+<td>penalizeRoundTwoWrong</td>
+<td>-6</td>
+<td>forked events should be penalized using the fork penalization function</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>0</td>
+<td>event is a fork event</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-1</td>
+<td>need to penalize in round 2 penalize function</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-2</td>
+<td>already past first half of new period and needed to penalize before then</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-4</td>
+<td>in fork period only thing that rbcr is done on is the round 2 event in the original branch via round 2 penalize</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-5</td>
+<td>already done for all events in this period</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-6</td>
+<td>forked events should be penalized using the fork penalization function</td>
+</tr>
+<tr>
+<td>penalizeWrong</td>
+<td>-7</td>
+<td>no outcome</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-1</td>
+<td>amount/price bad or no market</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-2</td>
+<td>oracle only branch</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-4</td>
+<td>not enough money or shares</td>
+</tr>
+<tr>
+<td>sellCompleteSets</td>
+<td>-1</td>
+<td>oracle-only branch</td>
+</tr>
+<tr>
+<td>sellCompleteSets</td>
+<td>-2</td>
+<td>not a participant in this market</td>
+</tr>
+<tr>
+<td>sellCompleteSets</td>
+<td>-3</td>
+<td>not enough shares</td>
 </tr>
 <tr>
 <td>sendReputation</td>
@@ -2376,59 +2609,104 @@ Transaction fields are as follows:</p>
 <td>Receiving address doesn&rsquo;t exist</td>
 </tr>
 <tr>
-<td>slashRep</td>
-<td>0</td>
-<td>Incorrect hash</td>
-</tr>
-<tr>
-<td>slashRep</td>
-<td>-2</td>
-<td>Incorrect reporter ID</td>
-</tr>
-<tr>
-<td>submitReportHash</td>
-<td>0</td>
-<td>Could not set report hash</td>
-</tr>
-<tr>
-<td>submitReportHash</td>
+<td>short_sell</td>
 <td>-1</td>
-<td>Reporter doesn&rsquo;t exist, voting period is over, or voting period hasn&rsquo;t started yet</td>
-</tr>
-<tr>
-<td>submitReportHash</td>
-<td>-2</td>
-<td>Not in hash submitting timeframe</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-1</td>
-<td>Amount/price bad or no market</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-2</td>
-<td>Oracle-only branch</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-4</td>
-<td>Not enough money or shares</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-1</td>
-<td>amount/price bad or no market</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-2</td>
 <td>oracle only branch</td>
 </tr>
 <tr>
-<td>sell</td>
+<td>short_sell</td>
+<td>-2</td>
+<td>bad trade hash</td>
+</tr>
+<tr>
+<td>short_sell</td>
+<td>-3</td>
+<td>trader doesn&rsquo;t exist / own shares in this market</td>
+</tr>
+<tr>
+<td>short_sell</td>
 <td>-4</td>
-<td>not enough money or shares</td>
+<td>must buy at least .00000001 in value</td>
+</tr>
+<tr>
+<td>short_sell</td>
+<td>10</td>
+<td>insufficient balance</td>
+</tr>
+<tr>
+<td>slashRep</td>
+<td>0</td>
+<td>Not a valid claim</td>
+</tr>
+<tr>
+<td>slashRep</td>
+<td>-2</td>
+<td>Reporter doesn&rsquo;t exist</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>0</td>
+<td>not caught up on rep redistributions</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>-1</td>
+<td>invalid event</td>
+</tr>
+<tr>
+<td>submitReportHash</td>
+<td>-2</td>
+<td>not in first half of period (commit phase)</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>0</td>
+<td>reporter doesn&rsquo;t exist or has &lt;1 rep</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-1</td>
+<td>has already reported</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-2</td>
+<td>not in second half of period [reveal part]</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-3</td>
+<td>hash doesn&rsquo;t match</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-4</td>
+<td>bad report</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-5</td>
+<td>invalid event</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-6</td>
+<td>already resolved</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-7</td>
+<td>&lt;48 hr left in period, too late to report, able to put up readj. bonds though&quot;,</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-8</td>
+<td>fees couldn&rsquo;t be collected</td>
+</tr>
+<tr>
+<td>submitReport</td>
+<td>-9</td>
+<td>need to pay not reporting bond</td>
 </tr>
 <tr>
 <td>trade</td>
