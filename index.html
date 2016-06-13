@@ -2564,6 +2564,36 @@ Transaction fields are as follows:</p>
 <td>no outcome</td>
 </tr>
 <tr>
+<td>proveReporterDidntReportEnough</td>
+<td>-1</td>
+<td>already done</td>
+</tr>
+<tr>
+<td>proveReporterDidntReportEnough</td>
+<td>-2</td>
+<td>not in right part of period</td>
+</tr>
+<tr>
+<td>pushMarketForward</td>
+<td>-1</td>
+<td>fork period cannot be the current or previous period</td>
+</tr>
+<tr>
+<td>pushMarketForward</td>
+<td>-2</td>
+<td>market is already closed or pushed forward</td>
+</tr>
+<tr>
+<td>pushMarketForward</td>
+<td>-3</td>
+<td>not enough cash to post early resolution bond</td>
+</tr>
+<tr>
+<td>pushMarketForward</td>
+<td>-4</td>
+<td>early resolution already attempted or outcome already exists</td>
+</tr>
+<tr>
 <td>sell</td>
 <td>-1</td>
 <td>amount/price bad or no market</td>
@@ -2732,6 +2762,16 @@ Transaction fields are as follows:</p>
 <td>trade</td>
 <td>10</td>
 <td>insufficient balance</td>
+</tr>
+<tr>
+<td>updateTradingFee</td>
+<td>-1</td>
+<td>invalid trading fee: either fee is below the minimum trading fee or you are trying to raise the trading fee (trading fees can be lowered, but not raised)</td>
+</tr>
+<tr>
+<td>updateTradingFee</td>
+<td>-4</td>
+<td>sender&rsquo;s address does not match the market creator&rsquo;s address</td>
 </tr>
 </tbody></table>
 
