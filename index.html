@@ -1903,16 +1903,13 @@ Transaction fields are as follows:</p>
 
           <h1 id="numbers">Numbers</h1>
 
-<p>There are four acceptable ways to pass numerical inputs to the Augur API:</p>
+<p>There are three acceptable ways to pass numerical inputs to the Augur API:</p>
 
 <ul>
 <li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
 <li><p>stringified numbers (e.g., <code class="prettyprint">&quot;1010101&quot;</code>)</p></li>
 <li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
-<li><p>BigNumbers (e.g., <code class="prettyprint">new BigNumber(&quot;1010101&quot;)</code>)</p></li>
 </ul>
-
-<p>Note that for primitive JS numbers, you will receive an error from the BigNumber library if your input contains more than 15 significant figures.</p>
 
 <p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
