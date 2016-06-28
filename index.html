@@ -2327,6 +2327,11 @@ Transaction fields are as follows:</p>
 </thead><tbody>
 <tr>
 <td>buy</td>
+<td>0</td>
+<td>Couldn&rsquo;t place buy order</td>
+</tr>
+<tr>
+<td>buy</td>
 <td>-1</td>
 <td>Amount/price bad or no market</td>
 </tr>
@@ -2339,6 +2344,11 @@ Transaction fields are as follows:</p>
 <td>buy</td>
 <td>-4</td>
 <td>Not enough money or shares</td>
+</tr>
+<tr>
+<td>buy</td>
+<td>21</td>
+<td>Trade already exists</td>
 </tr>
 <tr>
 <td>buyCompleteSets</td>
@@ -2597,18 +2607,33 @@ Transaction fields are as follows:</p>
 </tr>
 <tr>
 <td>sell</td>
+<td>0</td>
+<td>Couldn&rsquo;t place sell order</td>
+</tr>
+<tr>
+<td>sell</td>
 <td>-1</td>
-<td>amount/price bad or no market</td>
+<td>Amount/price bad or no market</td>
 </tr>
 <tr>
 <td>sell</td>
 <td>-2</td>
-<td>oracle only branch</td>
+<td>Oracle-only branch</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>-3</td>
+<td>Bad outcome to trade</td>
 </tr>
 <tr>
 <td>sell</td>
 <td>-4</td>
-<td>not enough money or shares</td>
+<td>Not enough money or shares</td>
+</tr>
+<tr>
+<td>sell</td>
+<td>21</td>
+<td>Trade already exists</td>
 </tr>
 <tr>
 <td>sellCompleteSets</td>
