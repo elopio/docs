@@ -1920,7 +1920,7 @@ Transaction fields are as follows:</p>
 
 <p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
-<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 2<sup>64</sup> representation that Augur uses internally for fixed-point numbers!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 2<sup>64</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 10<sup>18</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
 
           <h1 id="json-rpc">JSON-RPC</h1>
 
