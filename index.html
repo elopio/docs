@@ -109,7 +109,7 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span>
     <span class="na">http</span><span class="p">:</span> <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span>
     <span class="na">ws</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span>
-    <span class="na">ipc</span><span class="p">:</span> <span class="s2">"/home/augur/.ethereum/geth.ipc"</span>
+    <span class="na">ipc</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">HOME</span> <span class="o">+</span> <span class="s2">"/.ethereum/geth.ipc"</span>
 <span class="p">});</span>
 
 </code></pre>
@@ -127,14 +127,14 @@ Understandably, many users will not want to go to the trouble of running a full 
 <aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth&rsquo;s IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  It is significantly faster than HTTP RPC, but requires access to the filesystem, so it cannot be used from the browser.</aside>
 
 <h2 id="market-making">Market making</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketID</span> <span class="o">=</span> <span class="s2">"0xa290cd9d0c81f2af150a36725c986a3387dc6cef178c183e7237eeac4ea81ddc"</span><span class="p">;</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketID</span> <span class="o">=</span> <span class="s2">"0x34e104a15ab3eb2a0c26f1138c278416424ef7f8425799a76127e9b427fac74d"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">market</span><span class="p">:</span> <span class="nx">marketID</span><span class="p">,</span>
-    <span class="na">liquidity</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="na">initialFairPrices</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0.4"</span><span class="p">,</span> <span class="s2">"0.5"</span><span class="p">],</span>
-    <span class="na">startingQuantity</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="na">bestStartingQuantity</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="na">priceWidth</span><span class="p">:</span> <span class="s2">"0.4"</span>
+  <span class="na">market</span><span class="p">:</span> <span class="nx">marketID</span><span class="p">,</span>
+  <span class="na">liquidity</span><span class="p">:</span> <span class="mi">9012</span><span class="p">,</span>
+  <span class="na">startingQuantity</span><span class="p">:</span> <span class="mi">501</span><span class="p">,</span>
+  <span class="na">bestStartingQuantity</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+  <span class="na">priceWidth</span><span class="p">:</span> <span class="s2">"0.08697536855694898"</span><span class="p">,</span>
+  <span class="na">initialFairPrices</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"0.661837082683109"</span><span class="p">,</span> <span class="s2">"0.5132635487227519"</span> <span class="p">]</span>
 <span class="p">};</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">generateOrderBook</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">onBuyCompleteSets</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
@@ -150,10 +150,41 @@ Understandably, many users will not want to go to the trouble of running a full 
 <span class="p">})</span>
 <span class="c1">// example:</span>
 <span class="nx">simulation</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">shares</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
-  <span class="na">numBuyOrders</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="na">numSellOrders</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="na">numTransactions</span><span class="p">:</span> <span class="mi">6</span>
+  <span class="na">shares</span><span class="p">:</span> <span class="s2">"4007"</span><span class="p">,</span>
+  <span class="na">numBuyOrders</span><span class="p">:</span> <span class="p">[</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span> <span class="p">],</span>
+  <span class="na">numSellOrders</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span> <span class="p">],</span>
+  <span class="na">buyPrices</span><span class="p">:</span> 
+   <span class="p">[</span> <span class="p">[</span> <span class="s2">"0.61834939840463451"</span><span class="p">,</span>
+       <span class="s2">"0.55853753243153362626"</span><span class="p">,</span>
+       <span class="s2">"0.49872566645843274252"</span><span class="p">,</span>
+       <span class="s2">"0.43891380048533185878"</span><span class="p">,</span>
+       <span class="s2">"0.37910193451223097504"</span><span class="p">,</span>
+       <span class="s2">"0.3192900685391300913"</span><span class="p">,</span>
+       <span class="s2">"0.25947820256602920756"</span><span class="p">,</span>
+       <span class="s2">"0.19966633659292832382"</span><span class="p">,</span>
+       <span class="s2">"0.13985447061982744008"</span><span class="p">,</span>
+       <span class="s2">"0.08004260464672655634"</span> <span class="p">],</span>
+     <span class="p">[</span> <span class="s2">"0.46977586444427741"</span><span class="p">,</span>
+       <span class="s2">"0.40996399847117652626"</span><span class="p">,</span>
+       <span class="s2">"0.35015213249807564252"</span><span class="p">,</span>
+       <span class="s2">"0.29034026652497475878"</span><span class="p">,</span>
+       <span class="s2">"0.23052840055187387504"</span><span class="p">,</span>
+       <span class="s2">"0.1707165345787729913"</span><span class="p">,</span>
+       <span class="s2">"0.11090466860567210756"</span> <span class="p">]</span> <span class="p">],</span>
+  <span class="na">sellPrices</span><span class="p">:</span> 
+   <span class="p">[</span> <span class="p">[</span> <span class="s2">"0.70532476696158349"</span><span class="p">,</span>
+       <span class="s2">"0.76513663293468437374"</span><span class="p">,</span>
+       <span class="s2">"0.82494849890778525748"</span><span class="p">,</span>
+       <span class="s2">"0.88476036488088614122"</span> <span class="p">],</span>
+     <span class="p">[</span> <span class="s2">"0.55675123300122639"</span><span class="p">,</span>
+       <span class="s2">"0.61656309897432727374"</span><span class="p">,</span>
+       <span class="s2">"0.67637496494742815748"</span><span class="p">,</span>
+       <span class="s2">"0.73618683092052904122"</span><span class="p">,</span>
+       <span class="s2">"0.79599869689362992496"</span><span class="p">,</span>
+       <span class="s2">"0.8558105628667308087"</span><span class="p">,</span>
+       <span class="s2">"0.91562242883983169244"</span> <span class="p">]</span> <span class="p">],</span>
+  <span class="na">numTransactions</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span>
+  <span class="na">priceDepth</span><span class="p">:</span> <span class="s2">"0.05981186597310088374"</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -1386,7 +1417,16 @@ For example, suppose you were displaying markets on separate pages.  You might w
 <h4 id="sell-amount-price-market-outcome-onsent-onsuccess-onfailed">sell(amount, price, market, outcome[, onSent, onSuccess, onFailed])</h4>
 
 <p>Sell <code class="prettyprint">amount</code> shares of <code class="prettyprint">outcome</code> in <code class="prettyprint">market</code>.</p>
-<pre class="highlight javascript"><code><span class="c1">// trade contract</span>
+<pre class="highlight javascript"><code><span class="c1">// check the maximum number of orders per trade</span>
+<span class="kd">var</span> <span class="nx">blockNumber</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">blockNumber</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">gasLimit</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">getBlock</span><span class="p">(</span><span class="nx">blockNumber</span><span class="p">).</span><span class="nx">gasLimit</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">maxOrdersPerTrade</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">maxOrdersPerTrade</span><span class="p">(</span><span class="s2">"buy"</span><span class="p">,</span> <span class="nx">gasLimit</span><span class="p">);</span>
+
+<span class="c1">// verify that a trade combination does not exceed the gas limit</span>
+<span class="kd">var</span> <span class="nx">proposedTrades</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"buy"</span><span class="p">,</span> <span class="s2">"buy"</span><span class="p">,</span> <span class="s2">"sell"</span><span class="p">,</span> <span class="s2">"buy"</span><span class="p">,</span> <span class="s2">"sell"</span><span class="p">];</span>
+<span class="nx">assert</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">isUnderGasLimit</span><span class="p">(</span><span class="nx">proposedTrades</span><span class="p">,</span> <span class="nx">gasLimit</span><span class="p">));</span>
+
+<span class="c1">// trade contract</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trade</span><span class="p">({</span>
   <span class="na">max_value</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="na">max_amount</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1425,7 +1465,15 @@ For example, suppose you were displaying markets on separate pages.  You might w
 
 <h4 id="trade-max_value-max_amount-trade_ids-onsent-onsuccess-onfailed">trade(max_value, max_amount, trade_ids[, onSent, onSuccess, onFailed])</h4>
 
-<p>Matches an order or orders (specified using an array parameter <code class="prettyprint">trade_ids</code>) already on the books. <code class="prettyprint">max_value</code> is the maximum amount to spend to buy (including fees).  <code class="prettyprint">max_amount</code> is the maximum number of shares to sell.</p>
+<p>Matches orders (specified with the array parameter <code class="prettyprint">trade_ids</code>) already on the books. <code class="prettyprint">max_value</code> is the maximum amount to spend buying shares (including fees).  <code class="prettyprint">max_amount</code> is the maximum number of shares to sell.  The maximum number of trade IDs that can be included in a trade depends on the current gas limit as well as whether the trades are bid or ask orders.</p>
+
+<h4 id="maxorderspertrade-type-gaslimit">maxOrdersPerTrade(type, gasLimit)</h4>
+
+<p>Calculates the maximum number of orders (<code class="prettyprint">trade_ids</code>) of <code class="prettyprint">type</code> (<code class="prettyprint">&quot;buy&quot;</code> or <code class="prettyprint">&quot;sell&quot;</code>) that can be included in a single <code class="prettyprint">augur.trade</code> without exceeding the block <code class="prettyprint">gasLimit</code>: <code class="prettyprint">max_num_tradeids = 1 + (gas_limit - first_tradeid_gas_cost) \ next_tradeid_gas_cost</code>, where <code class="prettyprint">\</code> is integer division.  These costs are determined empirically: for asks, <code class="prettyprint">first_tradeid_gas_cost = 756374</code>, <code class="prettyprint">next_tradeid_gas_cost = 615817</code>, and for bids, <code class="prettyprint">first_tradeid_gas_cost = 787421</code>, <code class="prettyprint">next_tradeid_gas_cost = 661894</code>.</p>
+
+<h4 id="isundergaslimit-proposedtrades-gaslimit-callback">isUnderGasLimit(proposedTrades[, gasLimit, callback])</h4>
+
+<p>Verifies that the sequence of trades in the array <code class="prettyprint">proposedTrades</code> does not exceed the gas limit.  If <code class="prettyprint">gasLimit</code> is not specified, this function will get the gas limit of the most recent block.  (If <code class="prettyprint">gasLimit</code> is not specified, <code class="prettyprint">isUnderGasLimit</code> should be run asynchronously.)  Returns <code class="prettyprint">true</code> if the proposed trades are under the gas limit, <code class="prettyprint">false</code> otherwise.</p>
 <pre class="highlight javascript"><code><span class="c1">// completeSets contract</span>
 <span class="kd">var</span> <span class="nx">marketId</span> <span class="o">=</span> <span class="s2">"-0xb196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d9"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">outcome</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
@@ -2293,6 +2341,10 @@ Transaction fields are as follows:</p>
 <tr>
 <td>504</td>
 <td>RLP Encoding Error (geth error -32603)</td>
+</tr>
+<tr>
+<td>505</td>
+<td>Transaction receipt not found</td>
 </tr>
 <tr>
 <td>599</td>
