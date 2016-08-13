@@ -2370,6 +2370,10 @@ Transaction fields are as follows:</p>
 <td>711</td>
 <td>Trade Failed: instead of success value (1), received [actual value received]</td>
 </tr>
+<tr>
+<td>712</td>
+<td>Trade Not Found</td>
+</tr>
 </tbody></table>
 
 <h2 id="contract-errors">Contract Errors</h2>
@@ -2734,27 +2738,37 @@ Transaction fields are as follows:</p>
 <tr>
 <td>short_sell</td>
 <td>-1</td>
-<td>oracle only branch</td>
+<td>trade doesn&rsquo;t exist</td>
 </tr>
 <tr>
 <td>short_sell</td>
 <td>-2</td>
-<td>bad trade hash</td>
+<td>invalid trade hash/commitment</td>
 </tr>
 <tr>
 <td>short_sell</td>
 <td>-3</td>
-<td>trader doesn&rsquo;t exist / own shares in this market</td>
+<td>must be a bid, not an ask</td>
 </tr>
 <tr>
 <td>short_sell</td>
 <td>-4</td>
-<td>must buy at least .00000001 in value</td>
+<td>market is already resolved</td>
 </tr>
 <tr>
 <td>short_sell</td>
-<td>10</td>
-<td>insufficient balance</td>
+<td>-5</td>
+<td>can&rsquo;t pickup your own trade</td>
+</tr>
+<tr>
+<td>short_sell</td>
+<td>-6</td>
+<td>can&rsquo;t trade on oracle only branch</td>
+</tr>
+<tr>
+<td>short_sell</td>
+<td>-7</td>
+<td>not a large enough trade</td>
 </tr>
 <tr>
 <td>slashRep</td>
@@ -2848,8 +2862,18 @@ Transaction fields are as follows:</p>
 </tr>
 <tr>
 <td>trade</td>
+<td>-5</td>
+<td>can&rsquo;t pick up your own trade</td>
+</tr>
+<tr>
+<td>trade</td>
 <td>10</td>
 <td>insufficient balance</td>
+</tr>
+<tr>
+<td>trade</td>
+<td>22</td>
+<td>trade in same block prohibited</td>
 </tr>
 <tr>
 <td>updateTradingFee</td>
