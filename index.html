@@ -51,7 +51,7 @@
 
 <p><a href="https://augur.net">Augur</a> is a decentralized prediction market platform that runs on Ethereum.</p>
 
-<p>The stable Augur application is built and hosted at <a href="https://augur.net">augur.net</a>.  If you want to use or help test Augur, you do not need to download or install anything!  Just go to <a href="https://app.augur.net">augur.net</a> and start using it.  (If you want to use our cutting-edge development client, this is maintained at <a href="https://augur-dev.firebaseapp.com">augur-dev.firebaseapp.com</a> &ndash; warning, we push changes to augur-dev pretty rapidly, so it can be a bit buggy!)</p>
+<p>The stable Augur application is built and hosted at <a href="https://augur.net">augur.net</a>.  If you want to use or help test Augur, you do not need to download or install anything!  Just go to <a href="http://app.augur.net">augur.net</a> and start using it.  (If you want to use our cutting-edge development client, this is maintained at <a href="http://private.augur.net">private.augur.net</a> &ndash; warning, we push changes to private.augur.net pretty rapidly, so it can be a bit buggy!)</p>
 
 <p>If you want to help develop Augur, you will need to build the client from source.  To do this, first install <a href="https://nodejs.org/">Node.js</a>, then execute the following commands to build the client:</p>
 
@@ -63,7 +63,7 @@
 
 <p><code class="prettyprint">$ npm run build</code></p>
 
-<p>(If you&rsquo;re going to be developing and want the build to update automatically when you make changes, use <code class="prettyprint">npm run watch</code> instead of <code class="prettyprint">npm run build</code>!) Next, start the static web server:</p>
+<p>(If you&rsquo;re going to be developing and want the build to update automatically when you make changes, use <code class="prettyprint">npm run dev</code> instead of <code class="prettyprint">npm run build</code>!) Next, start the web server:</p>
 
 <p><code class="prettyprint">$ npm start</code></p>
 
@@ -76,24 +76,20 @@
 <h2 id="local-node">Local node</h2>
 
 <p><img src="images/architecture_local.svg" onerror="this.src='images/architecture_local.png'">
-If you are running a <a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">local Ethereum node</a>, sending RPC requests to your local node is the best (fastest) way to use Augur.  To do this, you can either download and run the Augur app locally, or simply visit <a href="http://local.augur.net">http://local.augur.net</a>, which is configured to automatically talk to your local node, if present.</p>
+If you are running a <a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">local Ethereum node</a>, sending RPC requests to your local node is the best (fastest) way to use Augur.  To do this, you can either download and run the Augur app locally, or simply visit <a href="http://app.augur.net">http://app.augur.net</a>, which is configured to automatically talk to your local node, if present.</p>
 
-<aside class="notice">To use &ldquo;sendTransaction&rdquo; RPC commands (i.e., anything that requires Ether / is actually sent to the network) you will need to unlock your Ethereum node.  If you are running geth, the easiest way to do this is to start it with the <code>--unlock</code> option:
+<aside class="notice">To use sendTransaction/sendRawTransaction RPC commands (i.e., anything that requires Ether / is actually sent to the network) you will need to unlock your Ethereum node.  If you are running geth, the easiest way to do this is to start it with the <code>--unlock</code> option:
 
 <code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins "http://localhost:8080"</code>
 
-The <code>--ws</code> flag allows websocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your geth node.  Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is <a href="<a href="https://github.com/AugurProject/augur-ui-webserver">&ldquo;>served</a>, if you build Augur locally.  To use your local node with a remote host, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://local.augur.net</code>, then you would use <code>http://local.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
+The <code>--ws</code> flag allows websocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your geth node.  Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is served, if you build Augur locally.  To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
-<p>Because geth&rsquo;s RPC server uses regular (unencrypted) HTTP, in order for the Augur app to communicate with your local geth node, it must be served over HTTP.  The static file served when you visit <a href="https://augur.net">augur.net</a> is presently hosted on Firebase, which is HTTPS-only, and therefore you can&rsquo;t interact with your local geth node from this URL!  As a short-term workaround (until we set up on a more flexible CDN), we set up <a href="http://local.augur.net">local.augur.net</a> on one of our Linode servers.  It&rsquo;s configured for both HTTP and HTTPS, so it will work with your local node.</p>
-
-<aside class="notice">These notes are specifically for <a href="https://github.com/ethereum/go-ethereum">geth</a>, the Go Ethereum implementation, which is the most widely-used implementation.  <a href="https://github.com/ethcore/parity">Parity</a> is another commonly-used implementation, for which we are working on adding official support (and how-to notes)!</aside>
+<p>Note to geth users: because geth&rsquo;s RPC server uses regular (unencrypted) HTTP, in order for the Augur app to communicate with your local geth node, it must be served over HTTP.</p>
 
 <h2 id="hosted-node">Hosted node</h2>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'">
-Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains a public Ethereum node at <a href="https://eth3.augur.net">https://eth3.augur.net</a>, which is used automatically by <a href="https://augur.net">augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).  Augur&rsquo;s node is on the Morden testnet.</p>
-
-<aside class="notice">We also maintain a public Ethereum node on the Homestead network at <a href="https://eth2.augur.net">https://eth2.augur.net</a>, which is used for the <a href="https://sale.augur.net">sale site</a>.  However, the Augur contracts are not currently maintained on Homestead.</aside>
+Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur.  Augur maintains a public (testnet) Ethereum node at <a href="https://eth3.augur.net">https://eth3.augur.net</a>, which is used automatically by <a href="https://augur.net">augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).  Augur&rsquo;s node is on the Morden testnet.</p>
 
           <h1 id="api">API</h1>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
@@ -116,15 +112,15 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <p>The Augur API is a set of JavaScript bindings for the methods encoded in Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  The API method name, as well as its parameters, are generally identical to those of the underlying smart contract method.</p>
 
-<p>Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">core contracts</a> exist on Ethereum&rsquo;s decentralized network.  The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur&rsquo;s sprawling <a href="http://docs.augur.net/#architecture">middleware</a>.</p>
+<p>Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">core contracts</a> exist on Ethereum&rsquo;s decentralized network.  The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur&rsquo;s <a href="http://docs.augur.net/#architecture">middleware</a>.</p>
 
-<p><a href="https://github.com/AugurProject/augur.js">augur.js</a> includes the Augur JavaScript API, and is the user-facing component of the middleware.  If you want to interact with the Augur contracts from a custom application, augur.js is the recommended way to do so.  The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
+<p><a href="https://github.com/AugurProject/augur.js">augur.js</a> is the Augur JavaScript SDK, and is the user-facing component of the middleware.  If you want to interact with the Augur contracts from a custom application, augur.js is the recommended way to do so.  The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
 
 <p><code class="prettyprint">$ npm install augur.js</code></p>
 
-<p>To use the Augur API, augur.js can connect to an Ethereum node, which can be either remote (hosted) or local.  To specify the connection endpoint, pass your RPC/IPC connection info to <code class="prettyprint">augur.connect</code>.</p>
+<p>To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local.  To specify the connection endpoint, pass your RPC connection info to <code class="prettyprint">augur.connect</code>.</p>
 
-<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth&rsquo;s IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  It is significantly faster than HTTP RPC, but requires access to the filesystem, so it cannot be used from the browser.</aside>
+<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth&rsquo;s IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
 
 <h2 id="market-making">Market making</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketID</span> <span class="o">=</span> <span class="s2">"0x34e104a15ab3eb2a0c26f1138c278416424ef7f8425799a76127e9b427fac74d"</span><span class="p">;</span>
@@ -1825,64 +1821,456 @@ Transaction fields are as follows:</p>
 
 <aside class="notice"><b><code>invoke</code> currently only works for <a href="https://github.com/ethereum/serpent">Serpent</a> contracts.</b>  The extra datatypes included by <a href="https://github.com/ethereum/solidity">Solidity</a> are not (yet) supported by the <a href="https://github.com/AugurProject/augur-abi">augur-abi</a> encoder.  The augur-abi encoder requires all parameters to be type <code>string</code>, <code>int256</code>, or <code>int256[]</code>.</aside>
 
-          <h1 id="accounts">Accounts</h1>
+          <h1 id="events-api">Events API</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
- * Create an account using the augur.web.register method.
+ * Listen for events emitted by the augur contracts.
  */</span>
 
-<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
+<span class="c1">// Start listening for events</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">listen</span><span class="p">({</span>
+  <span class="na">block</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">blockHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">collectedFees</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">payout</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">penalizationCaughtUp</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">penalize</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">registration</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">submittedReport</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">submittedReportHash</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">slashedRep</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">log_fill_tx</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">log_short_fill_tx</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">log_add_tx</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">log_cancel</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">marketCreated</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">tradingFeeUpdated</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">deposit</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">withdraw</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">sentCash</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">Transfer</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">Approval</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}),</span>
+  <span class="na">closedMarket</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">listeners</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Listeners ready:"</span><span class="p">,</span> <span class="nx">listeners</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="c1">// output</span>
-<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
-    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
-<span class="p">}</span>
+<span class="c1">// Stop filtering</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">();</span>
 
-<span class="cm">/**
- * The user is automatically logged in after registering.  When logged in,
- * the user's data is kept in the the augur.web.account object.  Logging out
- * unsets the augur.web.account object.
+<span class="c1">// Stop filtering and delete (uninstall) filters</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Search for historical events.
  */</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">myAccountAddress</span> <span class="o">=</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">;</span>
 
-<span class="c1">// output</span>
-<span class="p">{}</span>
+<span class="c1">// Look up all markets created by myAccountAddress</span>
+<span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">sender</span><span class="p">:</span> <span class="nx">myAccountAddress</span><span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 
-<span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="c1">// Look up all markets created by myAccountAddress after block number 123 with the topic "elections"</span>
+<span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">sender</span><span class="p">:</span> <span class="nx">myAccountAddress</span><span class="p">,</span> <span class="na">topic</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">formatTag</span><span class="p">(</span><span class="s2">"elections"</span><span class="p">),</span> <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">123</span><span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// example output:</span>
+  <span class="nx">logs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x4a0395ed58ce5a4e180115703d0c89d39811e7918b3a8b8506f9d6f10bec7c06'</span><span class="p">,</span>
+      <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+      <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+      <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+      <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805273</span><span class="p">,</span>
+      <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">171</span><span class="p">,</span>
+      <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x6d866d30264c3a94af0d653ede512db57a17db6af097b291523863902915fe78'</span><span class="p">,</span>
+      <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xab7b688c7445b25cbe014ad0d33568f3c85bccb738d504ad4d08ef5c362e24e6'</span><span class="p">,</span>
+      <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+      <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+      <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010740526194'</span><span class="p">,</span>
+      <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805289</span><span class="p">,</span>
+      <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
+      <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x9669f32202b1f2d370d2414f63c03c253d93cf177b6c771e2521e35db08f2d69'</span><span class="p">,</span>
+      <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x1313780ce1a5dac675f4b6d3a83d7bfdafe36dd81ec8709e5d6710eb8931b2b9'</span><span class="p">,</span>
+      <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+      <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+      <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.011211935648'</span><span class="p">,</span>
+      <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805339</span><span class="p">,</span>
+      <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">198</span><span class="p">,</span>
+      <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x3601c930e8ef03ddd436c3902dc3d3e771c3093449781ef21cc61ba2c1f7b3be'</span><span class="p">,</span>
+      <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+  <span class="p">];</span>
 <span class="p">});</span>
 
-<span class="c1">// output</span>
-<span class="p">{</span>
-    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
-    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
-    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
-<span class="p">}</span>
+
+<span class="c1">// Look up all markets created between block numbers 123 and 190 with the topic "elections", and</span>
+<span class="c1">// organize them by market creator</span>
+<span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">topic</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">formatTag</span><span class="p">(</span><span class="s2">"elections"</span><span class="p">),</span> <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="na">toBlock</span><span class="p">:</span> <span class="mi">190</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">auxiliaryParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">index</span><span class="p">:</span> <span class="s2">"sender"</span><span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="nx">auxiliaryParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// example output:</span>
+  <span class="nx">logs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x4a0395ed58ce5a4e180115703d0c89d39811e7918b3a8b8506f9d6f10bec7c06'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805273</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">171</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x6d866d30264c3a94af0d653ede512db57a17db6af097b291523863902915fe78'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xab7b688c7445b25cbe014ad0d33568f3c85bccb738d504ad4d08ef5c362e24e6'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010740526194'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805289</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x9669f32202b1f2d370d2414f63c03c253d93cf177b6c771e2521e35db08f2d69'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xd3e5a45914d5ba9018054d579b1b8c5a97456dff60d896938893842bf9675e76'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010818318899'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805416</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">161</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x5a149247a3e382cf9649b9a0fb397c84c764ee9b36ba05a0ce29f2b144c8cab2'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+
+<span class="c1">// Look up all markets created before block number 190 with the topic "elections", organize them</span>
+<span class="c1">// by market creator, and add an extra field {"maxBlockNumber": 190} to each event log</span>
+<span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">topic</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">formatTag</span><span class="p">(</span><span class="s2">"elections"</span><span class="p">),</span> <span class="na">toBlock</span><span class="p">:</span> <span class="mi">190</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">auxiliaryParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">index</span><span class="p">:</span> <span class="s2">"sender"</span><span class="p">,</span> <span class="na">extraField</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"maxBlockNumber"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">190</span><span class="p">}};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="nx">auxiliaryParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// example output:</span>
+  <span class="nx">logs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x4a0395ed58ce5a4e180115703d0c89d39811e7918b3a8b8506f9d6f10bec7c06'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805273</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">171</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x6d866d30264c3a94af0d653ede512db57a17db6af097b291523863902915fe78'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">maxBlockNumber</span><span class="p">:</span> <span class="mi">190</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xab7b688c7445b25cbe014ad0d33568f3c85bccb738d504ad4d08ef5c362e24e6'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010740526194'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805289</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x9669f32202b1f2d370d2414f63c03c253d93cf177b6c771e2521e35db08f2d69'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">maxBlockNumber</span><span class="p">:</span> <span class="mi">190</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">,</span>
+        <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xd3e5a45914d5ba9018054d579b1b8c5a97456dff60d896938893842bf9675e76'</span><span class="p">,</span>
+        <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+        <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+        <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010818318899'</span><span class="p">,</span>
+        <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805416</span><span class="p">,</span>
+        <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">161</span><span class="p">,</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x5a149247a3e382cf9649b9a0fb397c84c764ee9b36ba05a0ce29f2b144c8cab2'</span><span class="p">,</span>
+        <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">maxBlockNumber</span><span class="p">:</span> <span class="mi">190</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+
+<span class="c1">// Look up all markets created before block number 190 with the topic "elections", then look up all</span>
+<span class="c1">// markets created after block number 300, merge the results of these two searches together, organize</span>
+<span class="c1">// them by market creator, and modify the results of the first search by adding an extra field</span>
+<span class="c1">// {"firstSearch": true} to its results.</span>
+<span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">topic</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">formatTag</span><span class="p">(</span><span class="s2">"elections"</span><span class="p">),</span> <span class="na">toBlock</span><span class="p">:</span> <span class="mi">190</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">auxiliaryParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">index</span><span class="p">:</span> <span class="s2">"sender"</span><span class="p">,</span> <span class="na">extraField</span><span class="p">:</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s2">"firstSearch"</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span> <span class="na">mergedLogs</span><span class="p">:</span> <span class="p">{}};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="nx">auxiliaryParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="p">{</span><span class="na">fromBlock</span><span class="p">:</span> <span class="mi">300</span><span class="p">};</span>
+  <span class="nx">auxiliaryParams</span><span class="p">.</span><span class="nx">extraField</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">augur</span><span class="p">.</span><span class="nx">getLogs</span><span class="p">(</span><span class="s2">"marketCreated"</span><span class="p">,</span> <span class="nx">searchParams</span><span class="p">,</span> <span class="nx">auxiliaryParams</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">logs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// example output:</span>
+    <span class="nx">logs</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+          <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x4a0395ed58ce5a4e180115703d0c89d39811e7918b3a8b8506f9d6f10bec7c06'</span><span class="p">,</span>
+          <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+          <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+          <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+          <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805273</span><span class="p">,</span>
+          <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">171</span><span class="p">,</span>
+          <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x6d866d30264c3a94af0d653ede512db57a17db6af097b291523863902915fe78'</span><span class="p">,</span>
+          <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">firstSearch</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+          <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xab7b688c7445b25cbe014ad0d33568f3c85bccb738d504ad4d08ef5c362e24e6'</span><span class="p">,</span>
+          <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+          <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+          <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010740526194'</span><span class="p">,</span>
+          <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805289</span><span class="p">,</span>
+          <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">180</span><span class="p">,</span>
+          <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x9669f32202b1f2d370d2414f63c03c253d93cf177b6c771e2521e35db08f2d69'</span><span class="p">,</span>
+          <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">firstSearch</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+          <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x6367db025f80e201cda0cc643b8152b548e9ef91bc277e90a9a9ffdfeb11c0e5'</span><span class="p">,</span>
+          <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x7265706f7274696e670000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+          <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+          <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+          <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805559</span><span class="p">,</span>
+          <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">302</span><span class="p">,</span>
+          <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0xfc84f7548b4960b91f2721cd8bf77c4e1157f32fd849818f476ae36a3ab227de'</span><span class="p">,</span>
+          <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
+          <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0x72b52b8a174c540d69166e2ac96a12eb1163b0f982ee044cdfcc0f5096b5929b'</span><span class="p">,</span>
+          <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+          <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+          <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
+          <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805595</span><span class="p">,</span>
+          <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">319</span><span class="p">,</span>
+          <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0xd21ff5b3e7fe5e918455b1ae3e1cf6c3d916b4c930d54645a0a425bc8aea52a2'</span><span class="p">,</span>
+          <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">sender</span><span class="p">:</span> <span class="s1">'0x405be667f1a6b2d5149a61057040cade5aada366'</span><span class="p">,</span>
+          <span class="na">marketID</span><span class="p">:</span> <span class="s1">'0xd3e5a45914d5ba9018054d579b1b8c5a97456dff60d896938893842bf9675e76'</span><span class="p">,</span>
+          <span class="na">topic</span><span class="p">:</span> <span class="s1">'0x656c656374696f6e730000000000000000000000000000000000000000000000'</span><span class="p">,</span>
+          <span class="na">branch</span><span class="p">:</span> <span class="s1">'0x00000000000000000000000000000000000000000000000000000000000f69b5'</span><span class="p">,</span>
+          <span class="na">marketCreationFee</span><span class="p">:</span> <span class="s1">'0.010818318899'</span><span class="p">,</span>
+          <span class="na">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
+          <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1486805416</span><span class="p">,</span>
+          <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">161</span><span class="p">,</span>
+          <span class="na">transactionHash</span><span class="p">:</span> <span class="s1">'0x5a149247a3e382cf9649b9a0fb397c84c764ee9b36ba05a0ce29f2b144c8cab2'</span><span class="p">,</span>
+          <span class="na">removed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">firstSearch</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+<span class="c1">// (Note: for efficiency, the mergedLogs field in auxiliaryParams is mutated by getLogs.  If this</span>
+<span class="c1">// bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.</span>
+<span class="c1">// Also, the tears of functional programmers are delicious.)</span>
 </code></pre>
 
-<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
+<p>There are a variety of &ldquo;events&rdquo; emitted by the augur contracts.  Each event is triggered by a user doing something on augur: submitting a report, closing a market, filling an open order, etc.</p>
 
-<p>To use the account system, the user specifies a username and password.  Everything else is done automatically for the user.  The only requirement for the password is that it be at least 6 characters long.</p>
+<aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of &ldquo;events&rdquo; that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of &ldquo;event&rdquo; is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
 
-<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256).  The username, encrypted private key, and initialization vector are stored in the browser&rsquo;s <code class="prettyprint">localStorage</code>.</p>
+<p>The augur.js events API includes event listeners, which notify you of events happening now, and a search function for historical events (&ldquo;logs&rdquo;):</p>
 
-<p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
+<ul>
+<li><em>Event listeners</em> (&ldquo;filters&rdquo;) can be turned on using the <code class="prettyprint">augur.filters.listen</code> function.  <code class="prettyprint">augur.filters.listen</code> accepts two arguments: an object with event labels as keys (see table below) and callbacks for these events as values.  Each callback has a single argument, an object containing the &ldquo;Data&rdquo; fields shown in the table below.</li>
+<li><em>Event search</em> can be accomplished with the <code class="prettyprint">augur.getLogs</code> function.  <code class="prettyprint">augur.getLogs</code> can search for any combination of an event&rsquo;s <em>indexed</em> data fields (enumerated in the table below), and also accepts optional upper- and lower-bound block numbers to further narrow down the search.</li>
+</ul>
 
-<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
+<p>The following table shows the events that can be passed to <code class="prettyprint">augur.filters.listen</code>.  All of these events are optional; if you don&rsquo;t need some of these events for your application, don&rsquo;t include the event in your call to <code class="prettyprint">augur.filters.listen</code>.  In this table, &ldquo;Contract&rdquo; refers to the Ethereum contract on which the event is defined (<a href="https://github.com/AugurProject/augur-core">source code</a> / <a href="https://github.com/AugurProject/augur-contracts">contract addresses</a>), &ldquo;Data (indexed)&rdquo; refers to fields included in the event log that are searchable using the <code class="prettyprint">augur.getLogs</code> function.</p>
 
-<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
+<table><thead>
+<tr>
+<th>Label</th>
+<th>Contract</th>
+<th>Event description</th>
+<th>Data (indexed)</th>
+<th>Data (non-indexed)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>collectedFees</td>
+<td>collectFees</td>
+<td>Reporter has collected their payment for the previous Reporting cycle</td>
+<td>branch, sender</td>
+<td>cashFeesCollected, newCashBalance, repGain, newRepBalance, totalReportingRep, notReportingBond, period, timestamp</td>
+</tr>
+<tr>
+<td>payout</td>
+<td>payout</td>
+<td>Outstanding shares of winning outcomes in a closed market cashed out</td>
+<td>sender, market</td>
+<td>cashPayout, cashBalance, shares, timestamp</td>
+</tr>
+<tr>
+<td>penalizationCaughtUp</td>
+<td>penalizationCatchup</td>
+<td>Penalty paid by Reporter who has missed one or more full Reporting cycles</td>
+<td>branch, sender</td>
+<td>penalizedFrom, penalizedUpTo, repLost, newRepBalance, timestamp</td>
+</tr>
+<tr>
+<td>penalize</td>
+<td>consensus</td>
+<td>Report compared with consensus outcome, and reporter (possibly) penalized</td>
+<td>sender, branch, event</td>
+<td>outcome, oldrep, repchange, p, reportValue, penalizedUpTo, timestamp</td>
+</tr>
+<tr>
+<td>registration</td>
+<td>register</td>
+<td>Timestamp for &ldquo;new&rdquo; account saved</td>
+<td>sender</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>submittedReport</td>
+<td>makeReports</td>
+<td>Reporter has revealed a report</td>
+<td>sender, branch, event</td>
+<td>salt, report, ethics, timestamp</td>
+</tr>
+<tr>
+<td>submittedReportHash</td>
+<td>makeReports</td>
+<td>Reporter has committed to a report</td>
+<td>sender, branch, event</td>
+<td>reportHash, encryptedReport, encryptedSalt, ethics, timestamp</td>
+</tr>
+<tr>
+<td>slashedRep</td>
+<td>slashRep</td>
+<td>Cheating reporter punished via the &ldquo;snitch&rdquo; mechanism</td>
+<td>branch, sender, reporter</td>
+<td>event, repSlashed, slasherBalance, timestamp</td>
+</tr>
+<tr>
+<td>log_fill_tx</td>
+<td>trade</td>
+<td>Trade filled</td>
+<td>market, sender, owner</td>
+<td>type, price, amount, tradeid, outcome, timestamp, takerFee, makerFee, onChainPrice, tradeHash, tradeGroupID</td>
+</tr>
+<tr>
+<td>log_short_fill_tx</td>
+<td>trade</td>
+<td>Short sell filled (deprecated)</td>
+<td>market, sender, owner</td>
+<td>price, amount, tradeid, outcome, timestamp, takerFee, makerFee, numOutcomes, onChainPrice, tradeHash, tradeGroupID</td>
+</tr>
+<tr>
+<td>log_add_tx</td>
+<td>buy&amp;sellShares</td>
+<td>New order added to orderbook</td>
+<td>market, sender</td>
+<td>type, price, amount, outcome, tradeid, isShortAsk, timestamp, tradeGroupID</td>
+</tr>
+<tr>
+<td>log_cancel</td>
+<td>buy&amp;sellShares</td>
+<td>Order removed from orderbook</td>
+<td>market, sender</td>
+<td>price, amount, tradeid, outcome, type, cashRefund, timestamp</td>
+</tr>
+<tr>
+<td>marketCreated</td>
+<td>createMarket</td>
+<td>New market created</td>
+<td>sender, marketID, topic</td>
+<td>branch, marketCreationFee, eventBond, timestamp</td>
+</tr>
+<tr>
+<td>tradingFeeUpdated</td>
+<td>createMarket</td>
+<td>Market trading fee decreased</td>
+<td>sender, branch, marketID</td>
+<td>tradingFee, timestamp</td>
+</tr>
+<tr>
+<td>deposit</td>
+<td>cash</td>
+<td>Convert Ether to Cash at a 1:1 rate</td>
+<td>sender</td>
+<td>value, timestamp</td>
+</tr>
+<tr>
+<td>withdraw</td>
+<td>cash</td>
+<td>Convert Cash to Ether at a 1:1 rate</td>
+<td>sender, to</td>
+<td>value, timestamp</td>
+</tr>
+<tr>
+<td>sentCash</td>
+<td>cash</td>
+<td>Cash transfer</td>
+<td>_from, _to</td>
+<td>_value, timestamp</td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td>sendReputation</td>
+<td>Reputation transfer</td>
+<td>_from, _to</td>
+<td>_value, timestamp</td>
+</tr>
+<tr>
+<td>Approval</td>
+<td>sendReputation</td>
+<td>Approval to spend Reputation from a different account</td>
+<td>_owner, _spender</td>
+<td>value, timestamp</td>
+</tr>
+<tr>
+<td>closedMarket</td>
+<td>closeMarket</td>
+<td>Market closed: consensus is complete and event outcome has been set</td>
+<td>market, branch, sender</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>In addition to these on-contract events, <code class="prettyprint">augur.filters.listen</code> also accepts a callback for the <code class="prettyprint">block</code> listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.</p>
+
+<aside class="success">Events are retrieved either via push notification (if connected via websocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
 
           <h1 id="callbacks">Callbacks</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -1950,11 +2338,11 @@ Transaction fields are as follows:</p>
 <li>onFailed: fires if the RPC request returns an error.</li>
 </ul>
 
-<p>The <code class="prettyprint">onSent</code> callback is required; <code class="prettyprint">onSuccess</code> and <code class="prettyprint">onFailed</code> are both optional.  If the <code class="prettyprint">onSuccess</code> callback is supplied, augur.js will poll the network every 12 seconds with <code class="prettyprint">eth_getTransaction</code>, until the transaction record contains a non-null <code class="prettyprint">blockHash</code> value, or a maximum of 12 requests have been made.</p>
+<p>The <code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> callbacks are optional.  If <code class="prettyprint">onSent</code> is not included, then the transaction will run in synchronous (blocking) mode; if it is included, then the transaction will be run in asynchronous mode.  If the <code class="prettyprint">onSuccess</code> callback is supplied, augur.js will issue an <code class="prettyprint">eth_getTransaction</code> request upon receipt of every new block, until the transaction record contains a non-null <code class="prettyprint">blockHash</code> value, or the transaction record itself returns <code class="prettyprint">null</code> (indicating that the transaction has failed).</p>
 
-<p>Augur API methods that perform RPC requests that do not submit transactions to the network (using the <code class="prettyprint">eth_call</code> RPC) take a single optional callback as their last parameter.  Unlike transaction RPCs, call RPCs can be synchronous.  If a callback is supplied, the RPC request will be asynchronous; otherwise, it will be synchronous.</p>
+<p>Augur API methods that perform read-only RPC requests that do not submit transactions to the network (using the <code class="prettyprint">eth_call</code> RPC) take a single optional callback as their last parameter.  Like <code class="prettyprint">sendTransaction</code> requests, call requests can be synchronous or asynchronous: if a callback is supplied, the request will be made asynchronously.</p>
 
-<aside class="notice">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
           <h1 id="numbers">Numbers</h1>
 
@@ -1969,6 +2357,65 @@ Transaction fields are as follows:</p>
 <p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
 <aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 10<sup>18</sup> CASH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
+
+          <h1 id="accounts">Accounts</h1>
+<pre class="highlight javascript"><code><span class="cm">/**
+ * Create an account using the augur.web.register method.
+ */</span>
+
+<span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">"tinybike"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"tinypassword"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span> 
+<span class="p">});</span>
+
+<span class="c1">// output</span>
+<span class="nl">Account</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * The user is automatically logged in after registering.  When logged in,
+ * the user's data is kept in the the augur.web.account object.  Logging out
+ * unsets the augur.web.account object.
+ */</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+
+<span class="c1">// output</span>
+<span class="p">{}</span>
+
+<span class="cm">/* Logging in both sets and returns the augur.web.account object: */</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">account</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// output</span>
+<span class="p">{</span>
+    <span class="nl">handle</span><span class="p">:</span> <span class="s2">"tinybike"</span><span class="p">,</span>
+    <span class="nx">privateKey</span><span class="err">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">address</span><span class="err">:</span> <span class="s2">"0x09129dcde8e0f510ffb2a715709b69f5c4a42361"</span><span class="p">,</span>
+    <span class="nx">nonce</span><span class="err">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>augur.js includes a trustless account management system.  The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
+
+<p>To use the account system, the user specifies a username and password.  Everything else is done automatically for the user.  The only requirement for the password is that it be at least 6 characters long.</p>
+
+<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256).  The username, encrypted private key, and initialization vector are stored in the browser&rsquo;s <code class="prettyprint">localStorage</code>.</p>
+
+<p>Transaction signing and serialization is entirely carried out in the browser using <a href="https://github.com/ethereum/ethereumjs-tx">ethereumjs-tx</a> and the <code class="prettyprint">eth_sendRawTransaction</code> RPC; the plaintext private key never touches our servers at any time.</p>
+
+<p>Invoking contract methods is unchanged from normal use (from the client&rsquo;s perspective).  The Augur API functions can simply be called in the usual way (e.g., <code class="prettyprint">augur.reputationFaucet</code>), and augur.js will default to client-side transactions if the user is logged in.</p>
+
+<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node.  Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
 
           <h1 id="json-rpc">JSON-RPC</h1>
 
@@ -2000,104 +2447,6 @@ Transaction fields are as follows:</p>
 <pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s2">"0x5204f18c652d1c31c6a5968cb65e011915285a50"</span><span class="p">)</span>
 <span class="s2">"0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"</span>
 </code></pre>
-
-          <h1 id="filters">Filters</h1>
-<pre class="highlight javascript"><code><span class="c1">// Start filtering</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">listen</span><span class="p">({</span>
-    <span class="na">block</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">blockHash</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new block:"</span><span class="p">,</span> <span class="nx">blockHash</span><span class="p">);</span>
-    <span class="p">},</span>
-    <span class="na">contracts</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">augurTx</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"augur transaction:"</span><span class="p">,</span> <span class="nx">augurTx</span><span class="p">);</span>
-    <span class="p">},</span>
-    <span class="na">creation</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newMarket</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"new market created:"</span><span class="p">,</span> <span class="nx">newMarket</span><span class="p">.</span><span class="nx">marketId</span><span class="p">);</span>
-    <span class="p">},</span>
-    <span class="na">price</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">updatedPrice</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"updated price:"</span><span class="p">,</span> <span class="nx">updatedPrice</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="c1">// Stop filtering</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">();</span>
-
-<span class="c1">// Stop filtering and uninstall filters</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">filters</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-
-<span class="cm">/**
- * Example filter results
- */</span>
-
-<span class="c1">// block</span>
-<span class="nx">blockHash</span> <span class="o">=</span> <span class="s2">"0x999553c632fa10f3eb2af9a2be9ab612726372721680e3f76441f75f7c879a2f"</span>
-
-<span class="c1">// contracts (topics and data fields vary by contract and method)</span>
-<span class="nx">augurTx</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79"</span><span class="p">,</span>
-    <span class="na">topics</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">"0x1a653a04916ffd3d6f74d5966492bda358e560be296ecf5307c2e2c2fdedd35a"</span><span class="p">,</span>
-        <span class="s2">"0x00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
-        <span class="s2">"0x3557ce85d2ac4bcd36be7f3a6e0f63cfa6b18d34908b810ed41e44aafb399b44"</span><span class="p">,</span>
-        <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000001"</span>
-    <span class="p">],</span>
-    <span class="na">data</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">"0x000000000000000000000000000000000000000000000001000000000000d330"</span><span class="p">,</span>
-        <span class="s2">"0xfffffffffffffffffffffffffffffffffffffffffffffffeffffffffffffffa3"</span>
-    <span class="p">],</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"0x110d"</span><span class="p">,</span>
-    <span class="na">logIndex</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-    <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x8481c76a1f88a203191c1cd1942963ff9f1ea31b1db02f752771fef30133798e"</span><span class="p">,</span>
-    <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="c1">// creation</span>
-<span class="nx">newMarket</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"-0xcaa8317a2d53b432c94180c591f09c30594e72cb6f747ef12be1bb5504c664bc"</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"4689"</span>
-<span class="p">}</span>
-
-<span class="c1">// price</span>
-<span class="nx">updatedPrice</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">user</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"-0xcaa8317a2d53b432c94180c591f09c30594e72cb6f747ef12be1bb5504c664bc"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="na">price</span><span class="p">:</span> <span class="s2">"1.00000000000000002255"</span><span class="p">,</span>
-    <span class="na">cost</span><span class="p">:</span> <span class="s2">"-1.00000000000000008137"</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="s2">"4722"</span>
-<span class="p">}</span>
-
-</code></pre>
-
-<p>augur.js binds the RPC commands associated with Ethereum&rsquo;s blockchain (transaction/block) filters, as well as whisper filters.  Messages &ldquo;caught&rdquo; by filters are retrieved by polling the Ethereum node; the filtering &ldquo;heartbeat&rdquo; checks for new messages every 5 seconds.  The three primary types of blockchain filters augur.js uses are:</p>
-
-<table><thead>
-<tr>
-<th>Filter</th>
-<th>Message contents</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>block</td>
-<td>new blockhashes</td>
-</tr>
-<tr>
-<td>contracts</td>
-<td>transactions involving any Augur contract</td>
-</tr>
-<tr>
-<td>creation</td>
-<td>new market&rsquo;s ID and creation blocknumber</td>
-</tr>
-<tr>
-<td>price</td>
-<td>market price updates</td>
-</tr>
-</tbody></table>
-
-<p>Passing callback functions for <code class="prettyprint">block</code>, <code class="prettyprint">contracts</code>, <code class="prettyprint">creation</code> and/or <code class="prettyprint">price</code> to the <code class="prettyprint">augur.filters.listen</code> method will start polling the block, contracts, creation and price filters, respectively.</p>
-
-<aside class="notice">You can adjust the polling interval by changing the value of <code>augur.filters.PULSE</code>.  By default it is set to <code>5000</code> (5 seconds).</aside>
 
           <h1 id="batching">Batching</h1>
 <pre class="highlight javascript"><code><span class="cm">/**
@@ -2135,83 +2484,21 @@ Transaction fields are as follows:</p>
 
 <p>For finer-grained control over the batched commands, you can also use <a href="https://github.com/AugurProject/ethrpc">ethrpc</a>&rsquo;s lower-level <code class="prettyprint">batch</code> method directly, which is attached to <code class="prettyprint">augur.rpc</code>.  <code class="prettyprint">augur.rpc.batch</code> accepts a list of manually constructed transaction objects.</p>
 
-          <h1 id="geth">Geth</h1>
-<pre class="highlight javascript"><code><span class="c1">// After installing, require geth.js to use it</span>
-<span class="kd">var</span> <span class="nx">geth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"geth"</span><span class="p">);</span>
-
-<span class="c1">// The same flags as the geth command line client!</span>
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">networkid</span><span class="p">:</span> <span class="s2">"10101"</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">30303</span><span class="p">,</span>
-    <span class="na">rpcport</span><span class="p">:</span> <span class="mi">8545</span><span class="p">,</span>
-    <span class="na">mine</span><span class="p">:</span> <span class="kc">null</span>
-<span class="p">};</span>
-
-<span class="nx">geth</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">proc</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-    <span class="c1">// get your geth on!</span>
-<span class="p">});</span>
-
-<span class="c1">// When you and geth have had enough lively times, geth.stop kills</span>
-<span class="c1">// the geth child process:</span>
-<span class="nx">geth</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="cm">/* no more lively times :( */</span> <span class="p">});</span>
-
-<span class="c1">// The `stdout`, `stderr`, and `close` listeners can be initially set</span>
-<span class="c1">// by passing them to `geth.start`.</span>
-<span class="kd">var</span> <span class="nx">listeners</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">stdout</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"I got a message!! "</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-    <span class="p">},</span>
-    <span class="na">stderr</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"Protocol Versions"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">geth</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">geth</span><span class="p">.</span><span class="nx">proc</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
-    <span class="na">close</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"It's game over, man!  Game over!"</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-<span class="nx">geth</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">listeners</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">proc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* &lt;3 geth */</span> <span class="p">});</span>
-
-<span class="c1">// Swap out or add listeners after the initial startup:</span>
-<span class="nx">geth</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="s2">"stdout"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</code></pre>
-
-<p><a href="https://github.com/ethereumjs/geth.js">geth.js</a> is a Node.js module that allows you to start, stop, and monitor <a href="https://github.com/ethereum/go-ethereum">geth</a> programmatically.  These methods are a bit lower-level than what consumers of Augur&rsquo;s API will require.</p>
-
-<p>geth.js can be installed using npm:</p>
-
-<p><code class="prettyprint">$ npm install geth</code></p>
-
-<p>geth&rsquo;s <code class="prettyprint">start</code> method accepts a configuration object, which uses the same flags as the geth command line client.  Here, the flags are organized into an object.  Flags that are not accompanied by a value on the command line (for example, <code class="prettyprint">--mine</code>) should be passed in as <code class="prettyprint">{ flag: null }</code>.</p>
-
-<aside class="notice"><code>geth.start</code> callback&rsquo;s parameter <code>proc</code> is the geth child process, which is also attached to the <code>geth</code> object (<code>geth.proc</code>) for your convenience.</aside>
-
-<p>The callback for <code class="prettyprint">geth.start</code> fires after geth has successfully started.  Specifically, it looks for <code class="prettyprint">&quot;IPC service started&quot;</code> in geth&rsquo;s <code class="prettyprint">stderr</code> stream.  If you want to change the start callback trigger to something else, this can be done by replacing geth&rsquo;s default listeners.</p>
-
-<p><code class="prettyprint">geth.trigger</code> is the callback passed to <code class="prettyprint">geth.start</code>: its callback is stored so that the startup trigger can be changed if needed.</p>
-
           <h1 id="tests">Tests</h1>
 
 <p><a href="https://github.com/AugurProject/augur.js">augur.js</a> includes unit tests.  Tests are run using <a href="http://mochajs.org/">Mocha</a>.</p>
 
 <p><code class="block">$ npm install -g mocha</code></p>
 
-<p>There are two test suites &ndash; the first only runs tests which do not require sending transactions to the Ethereum network, and the second runs a full complement of tests, including tests that create events, markets, buy and sell shares, etc.  Generally, it is recommended to only run the full test suite on a private chain.</p>
+<p>There are two test suites &ndash; unit tests and integration tests.  Generally, it is recommended to only run the integration tests on a private chain.</p>
 
-<p>To run the test suite without transactional tests:</p>
+<p>To run the unit tests:</p>
 
-<p><code class="block">$ npm run testnet</code></p>
+<p><code class="block">$ npm test</code></p>
 
-<p>To set up a private chain to run the full test suite, run the included <a href="https://github.com/AugurProject/augur.js/blob/master/scripts/setup.js">setup.js script</a>.  This script requires a local installation of geth, and creates a fresh blockchain (with network ID 10101) in data directory <code class="prettyprint">~/.augur-test</code>.  It does <em>not</em> create Ethereum accounts for you; you must set these up yourself prior to running setup.js.  The script assumes that your account password is in a file in the new data directory called <code class="prettyprint">.password</code>.</p>
+<p>To run the integration tests:</p>
 
-<p>The setup script also will upload the Augur contracts to the new blockchain.  You must have a local clone of the <a href="https://github.com/AugurProject/augur-core">augur-core</a> repository on your machine for this to work.  The setup script can be run with npm:</p>
-
-<p><code class="block">$ npm run setup -- --augur /path/to/augur-core</code></p>
-
-<p>After the setup script finishes, you can run the full test suite using npm:</p>
-
-<p><code class="block">$ npm test -- --gospel</code></p>
+<p><code class="block">$ npm run integration-test</code></p>
 
           <h1 id="errors">Errors</h1>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -2906,9 +3193,7 @@ Transaction fields are as follows:</p>
 
 <p>We think Augur and Ethereum are pretty awesome, and believe that they&rsquo;re going to change the world.  We&rsquo;d love it if you want to be a part of this &ndash; as a user, tester, or developer!</p>
 
-<p>We use <a href="https://github.com/AugurProject/augur/issues">Github issues</a> as our bug tracker and to-do list.  If you want to put your shoulder to the wheel, just pick an issue you want to work on, comment on it to let us know you want to tackle it, and we&rsquo;ll help you get it done.</p>
-
-<p>Most of our day-to-day conversation happens in our Slack.  (We also have an IRC gateway in #augur on Freenode that is connected to our Slack chat!)  Our Slack is totally open.  If you&rsquo;d like to join the conversation, just go to <a href="https://www.hamsterpad.com/chat/dyffy">Hamsterpad</a> and sign up.</p>
+<p>Most of our day-to-day conversation happens in our Slack.  (We also have an IRC gateway in #augur on Freenode that is connected to our Slack chat!)  Our Slack is open.  If you&rsquo;d like to join the conversation, just go to <a href="http://slack.augur.net">slack.augur.net</a> and sign up.</p>
 
       </div>
       <div class="dark-box">
