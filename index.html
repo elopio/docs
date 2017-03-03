@@ -122,7 +122,7 @@ Understandably, many users will not want to go to the trouble of running a full 
 
 <aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth&rsquo;s IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
 
-<h2 id="market-making">Market making</h2>
+<h2 id="market-creation">Market creation</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">marketID</span> <span class="o">=</span> <span class="s2">"0x34e104a15ab3eb2a0c26f1138c278416424ef7f8425799a76127e9b427fac74d"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">market</span><span class="p">:</span> <span class="nx">marketID</span><span class="p">,</span>
@@ -140,7 +140,7 @@ Understandably, many users will not want to go to the trouble of running a full 
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">params</span><span class="p">.</span><span class="nx">isSimulation</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="nx">params</span><span class="p">.</span><span class="nx">isSimulationOnly</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">generateOrderBook</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">onSimulate</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">simulation</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="p">})</span>
@@ -218,7 +218,7 @@ $$
 
 <p>The initial order book is now fully specified.</p>
 
-<p><code class="prettyprint">augur.generateOrderBook</code> also accepts an optional parameter, <code class="prettyprint">isSimulation</code>, which if set to <code class="prettyprint">true</code>, returns information about what the method will do (see code example).  <code class="prettyprint">shares</code> is the number of complete sets of shares to purchased, <code class="prettyprint">numBuyOrders</code> is the number of buy orders that will be created, <code class="prettyprint">numSellOrders</code> is the number of sell orders that will be created, and <code class="prettyprint">numTransactions</code> is the total number of Ethereum transactions needed to set up the order book.</p>
+<p><code class="prettyprint">augur.generateOrderBook</code> also accepts an optional parameter, <code class="prettyprint">isSimulationOnly</code>, which if set to <code class="prettyprint">true</code>, returns information about what the method will do (see code example).  <code class="prettyprint">shares</code> is the number of complete sets of shares to purchased, <code class="prettyprint">numBuyOrders</code> is the number of buy orders that will be created, <code class="prettyprint">numSellOrders</code> is the number of sell orders that will be created, and <code class="prettyprint">numTransactions</code> is the total number of Ethereum transactions needed to set up the order book.</p>
 
 <h2 id="trading">Trading</h2>
 
@@ -248,6 +248,14 @@ $$
 
 <p>Pending transactions and what orders have already been picked up in pending broadcasted transactions are shown in the book.  These orders are removed if the other side has already been taken in the transaction pool (those orders get executed first on Ethereum anyway based on time precedence and default gas price).  If not processed / taken up, those orders are placed back on the book.  If two orders at same price are placed on the book, the one placed first is executed first.</p>
 
+<h2 id="reporting">Reporting</h2>
+
+<p><a href="images/reporting_cycle.svg"><img src="images/reporting_cycle.svg" onerror="this.src='images/reporting_cycle.png'"></a></p>
+
+<p>This diagram shows the Reporting cycle for an event (and its associated market) which was created during some previous cycle (off the diagram to the left) and which expires sometime during the cycle marked as &ldquo;Reporting cycle 1&rdquo;.  Each cycle takes 60 days to complete.  Including the steps needed to fully complete all payouts and Reputation redistribution, resolving an event takes three full Reporting cycles.</p>
+
+<aside class="notice">In Augur, the terms &ldquo;Reporting period&rdquo; and &ldquo;Reporting cycle&rdquo; are used interchangeably throughout the codebase.</aside>
+
 <h2 id="initial-market-loading">Initial market loading</h2>
 <pre class="highlight python"><code><span class="c"># Each market's ID is a hash of the following information:</span>
 <span class="n">marketinfo</span> <span class="o">=</span> <span class="n">string</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="mi">32</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">description</span><span class="p">))</span>
@@ -274,9 +282,7 @@ $$
 
 <p>To load the basic market info for all markets, first call <code class="prettyprint">augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  You will likely need to chunk the results so that the request does not time out.  More detailed market info (including prices) for each market in each chunk (page) is then loaded using <code class="prettyprint">augur.getMarketInfo(marketID)</code>.  <code class="prettyprint">getMarketInfo</code> does not return the full order book; to get the order book for a market, call <code class="prettyprint">augur.getOrderBook(marketID)</code>.</p>
 
-<aside class="notice">Cache nodes regularly call <code>augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  The first time <code>getMarketsInfo</code> is called, all markets should be loaded.  Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.
-
-If data is loaded from a cache node (rather than directly from the Ethereum blockchain), then its integrity should be verified to ensure the cache node has not tampered with the data.  Verification of a cache node&rsquo;s markets data can be done by calling <code>augur.getMarketsHash(branch)</code>, then checking that the `getMarketsHash` return value matches a hash locally calculated from a combined hash of each market&rsquo;s static data (see Serpent code sample).</aside>
+<aside class="notice">Cache nodes regularly call <code>augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  The first time <code>getMarketsInfo</code> is called, all markets should be loaded.  Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
 
 <h2 id="reporting-outcomes">Reporting outcomes</h2>
 
