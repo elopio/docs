@@ -2469,7 +2469,7 @@ successResponse = {
 ### [closeMarket contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/closeMarket.se)
 #### closeMarket(marketId, sender[, onSent, onSuccess, onFailed])
 
-Closes market with ID `marketId` and refunds the closing cost to the specified address `sender`.
+Closes market with ID `marketId` and refunds the closing cost to the specified address `sender`. Returns `1` if successful. Will fail if the market hasn't been reported on and resolved or if the market is already closed.
 
 Invoke
 ------
