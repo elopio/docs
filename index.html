@@ -93,7 +93,8 @@ Understandably, many users will not want to go to the trouble of running a full 
 
           <h1 id="api">API</h1>
 <pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
-<span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"augur.js"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"augur.js"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Augur</span><span class="p">();</span>
 
 <span class="c1">// Attempt to connect to a local Ethereum node</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span><span class="na">http</span><span class="p">:</span> <span class="s2">"http://127.0.0.1:8545"</span><span class="p">});</span>
