@@ -2131,7 +2131,7 @@ successResponse = {
 ### [bidAndAsk contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/bidAndAsk.se)
 #### placeOrder(type, fxpAmount, fxpPrice, market, outcome[, onSent, onSuccess, onFailed])
 
-Place a bid or ask order onto the order book. These orders can be filled using the `trade` method described in the next section. `placeOrder` will fail if the market doesn't exist, the `fxpAmount` or `fxpPrice` are invalid values, or if this is an oracle only branch. The minimum order allowed is 0.00000001.
+Place a bid or ask order onto the order book. These orders can be filled using the `trade` method described in the `trade` contract section. `placeOrder` will fail if the market doesn't exist, the `fxpAmount` or `fxpPrice` are invalid values, or if this is an oracle only branch. The minimum order allowed is 0.00000001.
 
 #### cancel(orderID[, onSent, onSuccess, onFailed])
 
@@ -2173,7 +2173,7 @@ successResponse = {
 ### [trade contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/trade.se)
 #### trade(orderID, amountTakerWants[, onSent, onSuccess, onFailed])
 
-Used to fill orders off of the order book. `OrderID` is the order we plan to fill, `amountTakerWants` is how much of the order to fill. This can fail if the `orderID` provided doesn't exist, if the orderhash is bad, the order is attempting to be filled in the same block it was placed on the book, or if you are attempting to fill your own order.
+Used to fill orders off of the order book. `OrderID` is the order we plan to fill, `amountTakerWants` is how much of the order to fill. This can fail if the `orderID` provided doesn't exist, if the order hash is bad, the order is attempting to be filled in the same block it was placed on the book, or if you are attempting to fill your own order.
 
 ```javascript
 // createBranch contract
@@ -2282,20 +2282,6 @@ augur.submitReportHash({
 });
 // example outputs:
 sentResponse =
-
-augur.slashRep({
-  branchId: branchId,
-  reportPeriod: reportPeriod,
-  salt: salt,
-  report: report,
-  reporter: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-  onSent: function (sentResponse) { /* ... */ },
-  onSuccess: function (successResponse) { /* ... */ },
-  onFailed: function (failedResponse) { /* ... */ }
-});
-// example outputs:
-sentResponse =
-
 ```
 ### [makeReports contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se)
 #### report(branchId, report, reportPeriod, salt[, onSent, onSuccess, onFailed])
@@ -2306,7 +2292,49 @@ Submits an array of reports `report` for report period `reportPeriod` on branch 
 
 Submits the SHA256 hash of the reports array `reportHash` for report period `reportPeriod` on branch `branchId`.
 
-#### slashRep(branchId, reportPeriod, salt, report, reporter[, onSent, onSuccess, onFailed])
+```javascript
+// slashRep contract
+var branch = augur.branches.dev;
+var salt = "0xb3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33";
+var report = "1";
+var ethics = "1";
+var reporter = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
+var event = "0x7cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcac";
+
+augur.slashRep({
+  branch: branch,
+  salt: salt,
+  report: report,
+  ethics: ethics,
+  reporter: reporter,
+  event: event,
+  onSent: function (sentResponse) { /* ... */ },
+  onSuccess: function (successResponse) { /* ... */ },
+  onFailed: function (failedResponse) { /* ... */ }
+});
+// example outputs:
+sentResponse = {
+  txHash: "0x8b3c5d4276d370648e55563bcaab3219c8d961abf513ecd835df89ee63e85524",
+  hash: "0x8b3c5d4276d370648e55563bcaab3219c8d961abf513ecd835df89ee63e85524",
+  callReturn: "1"
+}
+successResponse = {
+  nonce: "0x4f1",
+  blockHash: "0x2ad3f1071758d9efcb4d2458236128fdaa76585c3c4d551f50c26d2a50a2e38f",
+  blockNumber: "0x6b97",
+  transactionIndex: "0x0",
+  from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
+  to: "0x35152caa07026203a1add680771afb690d872d7d",
+  value: "0x0",
+  gas: "0x2fd618",
+  gasPrice: "0xba43b7400",
+  input: "0x8a698a9b00000000000000000000000000000000000000000000000000000000000f69b5b3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33f57a578a48826896505e591fb940f52bf627e2159a399a033067d963bc124b0b000000000000000000000000000000000000000000000000000000000000000100000000000000000000000005ae1d0ca6206c6168b42efcd1fbe0ed144e821b7cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcac",
+  callReturn: "1",
+  txHash: "0x8b3c5d4276d370648e55563bcaab3219c8d961abf513ecd835df89ee63e85524"
+}
+```
+### [slashRep contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/slashRep.se)
+#### slashRep(branch, salt, report, ethics, reporter, event[, onSent, onSuccess, onFailed])
 
 Slashes the Reputation of address `reporter` for `report` on branch `branchId`.
 
