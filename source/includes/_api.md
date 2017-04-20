@@ -2061,13 +2061,15 @@ onSuccess = {
 Claims the trading profits after a specified `market` is completed. If the market hasn't been resolved yet, then you will get a call return of `0`.
 
 ```javascript
-// buy&sellShares contract
-var marketId = "-0xb196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d9";
+// bidAndAsk contract
+var marketId = "0xb196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d9";
 var outcome = 1;
-var amount = "0.1";
+var type = 2; // ask, bid is 1
+var amount = "10";
 var price = "0.5";
 
-augur.sell({
+augur.placeOrder({
+  type: type,
   amount: amount,
   price: price,
   market: marketId,
@@ -2078,118 +2080,100 @@ augur.sell({
 });
 // example outputs:
 sentResponse = {
-  txHash: '0x24fa2a803f42253bbaa900af9badd32d75a728299e66ce9a0dce6a2a264307ca',
-  callReturn: '-0xb33524aac9866c6cfb74305e92958b150e0a1c1849dbcf606f18d861c4362467'
+  txHash: "0x24fa2a803f42253bbaa900af9badd32d75a728299e66ce9a0dce6a2a264307ca",
+  hash: "0x24fa2a803f42253bbaa900af9badd32d75a728299e66ce9a0dce6a2a264307ca",
+  callReturn: "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7"
 }
 successResponse = {
-  blockHash: '0x0cde35b78f6102a59c07c0c4279166864e34518fd6672af988cd9224acdfc9c6',
-  blockNumber: '0xe0ddb',
-  from: '0x15f6400a88fb320822b689607d425272bea2175f',
-  gas: '0x2fd618',
-  gasPrice: '0x4a817c800',
-  input: '0x24cd95b300000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000008000000000000000f4e693b31e7dc66d8e1912bcb14c0ddef51a1bd83753f9fb3d34dd9e96b6ae270000000000000000000000000000000000000000000000000000000000000001',
-  nonce: '0x1006ff',
-  to: '0xa16ced61576483990d0d821a5fc344a3429ba755',
-  transactionIndex: '0x0',
-  value: '0x0',
-  callReturn: '-0xb33524aac9866c6cfb74305e92958b150e0a1c1849dbcf606f18d861c4362467',
-  txHash: '0x24fa2a803f42253bbaa900af9badd32d75a728299e66ce9a0dce6a2a264307ca'
+  blockHash: "0x0cde35b78f6102a59c07c0c4279166864e34518fd6672af988cd9224acdfc9c6",
+  blockNumber: "0xe0ddb",
+  from: "0x15f6400a88fb320822b689607d425272bea2175f",
+  gas: "0x2fd618",
+  gasPrice: "0x4a817c800",
+  input: "0x62be772100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000b196c4ce182399271e6ed434eb3f2210ae5e427c8ac0604c2cb2261694951d90000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0x1006ff",
+  to: "0xa16ced61576483990d0d821a5fc344a3429ba755",
+  transactionIndex: "0x0",
+  value: "0x0",
+  callReturn: "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7",
+  txHash: "0x24fa2a803f42253bbaa900af9badd32d75a728299e66ce9a0dce6a2a264307ca"
 }
 
-augur.buy({
-  amount: amount,
-  price: price,
-  market: marketId,
-  outcome: outcome,
+var orderID = "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7";
+
+augur.cancel({
+  orderID: orderID
   onSent: function (sentResponse) { /* ... */ },
   onSuccess: function (successResponse) { /* ... */ },
   onFailed: function (failedResponse) { /* ... */ }
 });
 // example outputs:
 sentResponse = {
-  txHash: '0xbeacc3547fd07d7cd0bde16d404f3554eb4515561fb21bc6a5231459238085c0',
-  callReturn: '-0x5c354ef67fc3306a984bd1e8722fa3342b02fe6ba690b2d7aecc766c927891f'
+  txHash: "0x134f4c425e132f1eed2be6aa21f55b258e22c589d88a93f198e73e9d6d938261",
+  hash: "0x134f4c425e132f1eed2be6aa21f55b258e22c589d88a93f198e73e9d6d938261",
+  callReturn: "1"
 }
 successResponse = {
-  blockHash: '0x7f940ad92362787b0f788c8c092e12791f8c588edc10de43091cf989bf5dd615',
-  blockNumber: '0xe0e4d',
-  from: '0x15f6400a88fb320822b689607d425272bea2175f',
-  gas: '0x2fd618',
-  gasPrice: '0x4a817c800',
-  input: '0x3651cae40000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000851eb851eb851eb8f4e693b31e7dc66d8e1912bcb14c0ddef51a1bd83753f9fb3d34dd9e96b6ae270000000000000000000000000000000000000000000000000000000000000001',
-  nonce: '0x100701',
-  to: '0xa16ced61576483990d0d821a5fc344a3429ba755',
-  transactionIndex: '0x0',
-  value: '0x0',
-  callReturn: '-0x5c354ef67fc3306a984bd1e8722fa3342b02fe6ba690b2d7aecc766c927891f',
-  txHash: '0xbeacc3547fd07d7cd0bde16d404f3554eb4515561fb21bc6a5231459238085c0'
+  blockHash: "0x0cde35b78f6102a59c07c0c4279166864e34518fd6672af988cd9224acdfc9c6",
+  blockNumber: "0xe0ddb",
+  from: "0x15f6400a88fb320822b689607d425272bea2175f",
+  gas: "0x2fd618",
+  gasPrice: "0x4a817c800",
+  input: "0x327a22f15f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7",
+  nonce: "0x1006ff",
+  to: "0xa16ced61576483990d0d821a5fc344a3429ba755",
+  transactionIndex: "0x0",
+  value: "0x0",
+  callReturn: "1",
+  txHash: "0x134f4c425e132f1eed2be6aa21f55b258e22c589d88a93f198e73e9d6d938261"
 }
 ```
-### [buy&sellShares contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/buy%26sellShares.se)
-#### buy(amount, price, market, outcome[, onSent, onSuccess, onFailed])
+### [bidAndAsk contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/bidAndAsk.se)
+#### placeOrder(type, fxpAmount, fxpPrice, market, outcome[, onSent, onSuccess, onFailed])
 
-Buy `amount` shares of `outcome` in `market`.
+Place a bid or ask order onto the order book. These orders can be filled using the `trade` method described in the next section. `placeOrder` will fail if the market doesn't exist, the `fxpAmount` or `fxpPrice` are invalid values, or if this is an oracle only branch. The minimum order allowed is 0.00000001.
 
-#### sell(amount, price, market, outcome[, onSent, onSuccess, onFailed])
+#### cancel(orderID[, onSent, onSuccess, onFailed])
 
-Sell `amount` shares of `outcome` in `market`.
+Cancel an order you have placed on the order book. Returns shares if the order was an `ask`, refunds money if the order was a `bid`. Returns `1` on success, `0` on failure.
 
 ```javascript
-// check the maximum number of orders per trade
-var blockNumber = augur.rpc.blockNumber();
-var gasLimit = parseInt(augur.rpc.getBlock(blockNumber).gasLimit, 16);
-var maxOrdersPerTrade = augur.maxOrdersPerTrade("buy", gasLimit);
-
-// verify that a trade combination does not exceed the gas limit
-var proposedTrades = ["buy", "buy", "sell", "buy", "sell"];
-assert(augur.isUnderGasLimit(proposedTrades, gasLimit));
-
 // trade contract
+var orderID = "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7";
+var amountTakerWants = "10";
+
 augur.trade({
-  max_value: 1,
-  max_amount: 0,
-  trade_ids: ["-0x22daf7fdff22ff716fd8108c011d1c0e69a7ab4a2b087f65dda2fc77ea044ba1"],
-  onTradeHash: function (tradeHash) { /* ... */ },
-  onCommitSent: function (sentResponse) { /* ... */ },
-  onCommitSuccess: function (successResponse) { /* ... */ },
-  onCommitFailed: function (failedResponse) { /* ... */ },
-  onNextBlock: function (blockNumber) { /* ... */ },
-  onTradeSent: function (sentResponse) { /* ... */ },
-  onTradeSuccess: function (successResponse) { /* ... */ },
-  onTradeFailed: function (failedResponse) { /* ... */ }
+  orderID: orderID,
+  amountTakerWants: amountTakerWants,
+  onSent: function (sentResponse) { /* ... */ },
+  onSuccess: function (successResponse) { /* ... */ },
+  onFailed: function (failedResponse) { /* ... */ }
 });
 // example outputs:
 sentResponse = {
-  txHash: '0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7',
-  callReturn: '0'
+  txHash: "0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7",
+  hash: "0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7",
+  callReturn: "0x8ac7230489e80000"
 }
 successResponse = {
-  blockHash: '0x3f19ec7209de63043cf5031bb4a38df4bcf6e610f6874dfac87e7ad42e830708',
-  blockNumber: '0xe10e0',
-  from: '0x15f6400a88fb320822b689607d425272bea2175f',
-  gas: '0x2fd618',
-  gasPrice: '0x4a817c800',
-  input: '0xf5c3624f0000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000001c630a59f0e14a6695e8078027b13184f00c79e72e606390eab9bd395bdfa1a83',
-  nonce: '0x10074f',
-  to: '0xb44cd937904ba0e309204ffc1413e094f2a84ee5',
-  transactionIndex: '0x0',
-  value: '0x0',
-  callReturn: '0',
-  txHash: '0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7'
+  blockHash: "0x3f19ec7209de63043cf5031bb4a38df4bcf6e610f6874dfac87e7ad42e830708",
+  blockNumber: "0xe10e0",
+  from: "0x15f6400a88fb320822b689607d425272bea2175f",
+  gas: "0x2fd618",
+  gasPrice: "0x4a817c800",
+  input: "0x09d600695f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7000000000000000000000000000000000000000000000000000000000000000a",
+  nonce: "0x10074f",
+  to: "0xb44cd937904ba0e309204ffc1413e094f2a84ee5",
+  transactionIndex: "0x0",
+  value: "0x0",
+  callReturn: "0x8ac7230489e80000",
+  txHash: "0x1437c2e44379169076db42d12fb4f0fab1d330f84ab152900a703ee13f814bf7"
 }
 ```
 ### [trade contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/trade.se)
-#### trade(max_value, max_amount, trade_ids[, onSent, onSuccess, onFailed])
+#### trade(orderID, amountTakerWants[, onSent, onSuccess, onFailed])
 
-Matches orders (specified with the array parameter `trade_ids`) already on the books. `max_value` is the maximum amount to spend buying shares (including fees).  `max_amount` is the maximum number of shares to sell.  The maximum number of trade IDs that can be included in a trade depends on the current gas limit as well as whether the trades are bid or ask orders.
-
-#### maxOrdersPerTrade(type, gasLimit)
-
-Calculates the maximum number of orders (`trade_ids`) of `type` (`"buy"` or `"sell"`) that can be included in a single `augur.trade` without exceeding the block `gasLimit`: `max_num_tradeids = 1 + (gas_limit - first_tradeid_gas_cost) \ next_tradeid_gas_cost`, where `\` is integer division.  These costs are determined empirically: for asks, `first_tradeid_gas_cost = 756374`, `next_tradeid_gas_cost = 615817`, and for bids, `first_tradeid_gas_cost = 787421`, `next_tradeid_gas_cost = 661894`.
-
-#### isUnderGasLimit(proposedTrades[, gasLimit, callback])
-
-Verifies that the sequence of trades in the array `proposedTrades` does not exceed the gas limit.  If `gasLimit` is not specified, this function will get the gas limit of the most recent block.  (If `gasLimit` is not specified, `isUnderGasLimit` should be run asynchronously.)  Returns `true` if the proposed trades are under the gas limit, `false` otherwise.
+Used to fill orders off of the order book. `OrderID` is the order we plan to fill, `amountTakerWants` is how much of the order to fill. This can fail if the `orderID` provided doesn't exist, if the orderhash is bad, the order is attempting to be filled in the same block it was placed on the book, or if you are attempting to fill your own order.
 
 ```javascript
 // createBranch contract
