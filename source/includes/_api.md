@@ -2299,7 +2299,7 @@ successResponse = {
   callReturn: "1",
   txHash: "0x81635384e4fd7c0b36ed49901cd2c3f03577a287c030de55bcd6f0ddb739919c"
 }
-var key = "this is a secret"; // generally this would be the logged in accounts privateKey, for this example we are using a string.
+var key = "this is a secret"; // generally this would be the logged in accounts secret key, for this example we are using a string.
 var saltyEncryptedHash = augur.encryptReport(fxpReport, key, salt);
 augur.submitReportHash({
   event: event,
