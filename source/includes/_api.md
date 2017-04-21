@@ -2255,42 +2255,93 @@ Sends `value` Reputation tokens on branch `branchId` to address `to`.  Returns t
 
 ```javascript
 // makeReports contract
-var branchId = augur.branches.dev;
-var report = ["1", "2", "1", "1.5", "1", "1.5", "2", "1", "1", "1.5", "1", "1"];
-var reportPeriod = 397;
+var event = "0x7cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcac";
+var fxpReport = "0x1bc16d674ec80000"; // 2
 var salt = "0xb3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33";
-augur.report({
-  branchId: branchId,
-  report: report,
-  reportPeriod: reportPeriod,
+var sender = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
+var fxpEthics = "0xde0b6b3a7640000"; // 1
+augur.makeHash({
   salt: salt,
-  onSent: function (sentResponse) { /* ... */ },
-  onSuccess: function (successResponse) { /* ... */ },
-  onFailed: function (failedResponse) { /* ... */ }
-});
-// example outputs:
-sentResponse =
+  fxpReport: fxpReport,
+  event: event,
+  sender: sender,
+  ethics: fxpEthics
+})
+// example output:
+reportHash = "0x543ea8a255d3e8e92a08cf7d61acd7d79d71f4256d0be5f2d450a2b3a5442cd0"
 
-augur.submitReportHash({
-  branchId: branchId,
-  reportHash: reportHash,
-  reportPeriod: reportPeriod,
+augur.submitReport({
+  event: event,
   salt: salt,
+  fxpReport: fxpReport,
+  fxpEthics: fxpEthics,
   onSent: function (sentResponse) { /* ... */ },
   onSuccess: function (successResponse) { /* ... */ },
   onFailed: function (failedResponse) { /* ... */ }
 });
 // example outputs:
-sentResponse =
+sentResponse = {
+  txHash: "0x81635384e4fd7c0b36ed49901cd2c3f03577a287c030de55bcd6f0ddb739919c",
+  hash: "0x81635384e4fd7c0b36ed49901cd2c3f03577a287c030de55bcd6f0ddb739919c",
+  callReturn: "1"
+}
+successResponse = {
+  nonce: "0x4f1",
+  blockHash: "0x2ad3f1071758d9efcb4d2458236128fdaa76585c3c4d551f50c26d2a50a2e38f",
+  blockNumber: "0x6b97",
+  transactionIndex: "0x0",
+  from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
+  to: "0x35152caa07026203a1add680771afb690d872d7d",
+  value: "0x0",
+  gas: "0x2fd618",
+  gasPrice: "0xba43b7400",
+  input: "0x5b5156367cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcacb3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c330000000000000000000000000000000000000000000000001bc16d674ec800000000000000000000000000000000000000000000000000000de0b6b3a7640000",
+  callReturn: "1",
+  txHash: "0x81635384e4fd7c0b36ed49901cd2c3f03577a287c030de55bcd6f0ddb739919c"
+}
+var key = "this is a secret"; // generally this would be the logged in accounts privateKey, for this example we are using a string.
+var saltyEncryptedHash = augur.encryptReport(fxpReport, key, salt);
+augur.submitReportHash({
+  event: event,
+  reportHash: reportHash,
+  saltyEncryptedHash: saltyEncryptedHash,
+  onSent: function (sentResponse) { /* ... */ },
+  onSuccess: function (successResponse) { /* ... */ },
+  onFailed: function (failedResponse) { /* ... */ }
+});
+// example outputs:
+sentResponse = {
+  txHash: "0x3625055027664b92890677a3cd109edecc9d80f6451082b94cb641f688baa426",
+  hash: "0x3625055027664b92890677a3cd109edecc9d80f6451082b94cb641f688baa426",
+  callReturn: "1"
+}
+successResponse = {
+  nonce: "0x4f1",
+  blockHash: "0x2ad3f1071758d9efcb4d2458236128fdaa76585c3c4d551f50c26d2a50a2e38f",
+  blockNumber: "0x6b97",
+  transactionIndex: "0x0",
+  from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
+  to: "0x35152caa07026203a1add680771afb690d872d7d",
+  value: "0x0",
+  gas: "0x2fd618",
+  gasPrice: "0xba43b7400",
+  input: "0xd96945b9b3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33543ea8a255d3e8e92a08cf7d61acd7d79d71f4256d0be5f2d450a2b3a5442cd03de5f80e01c94760e70db1d4aa455096a76cfb85f7e9b55584079a76308ee37b",
+  callReturn: "1",
+  txHash: "0x3625055027664b92890677a3cd109edecc9d80f6451082b94cb641f688baa426"
+}
 ```
 ### [makeReports contract](https://github.com/AugurProject/augur-core/blob/master/src/functions/makeReports.se)
-#### report(branchId, report, reportPeriod, salt[, onSent, onSuccess, onFailed])
+#### makeHash(salt, fxpReport, event, sender, ethics)
 
-Submits an array of reports `report` for report period `reportPeriod` on branch `branchId`.
+Creates the `reportHash` which is a sha3 hash of `salt`, `fxpReport`, `event`, `sender`, and `ethics` and returns the `reportHash`.
 
-#### submitReportHash(branchId, reportHash, reportPeriod[, onSent, onSuccess, onFailed])
+#### submitReport(event, salt, fxpReport, fxpEthics[, onSent, onSuccess, onFailed])
 
-Submits the SHA256 hash of the reports array `reportHash` for report period `reportPeriod` on branch `branchId`.
+Used to reveal/submit a report in the second half of the reporting cycle for a specific `event` that you have already committed a `reportHash` for in the first half of a reporting cycle.
+
+#### submitReportHash(event, reportHash, saltyEncryptedHash[, onSent, onSuccess, onFailed])
+
+Used to commit/submit a `reportHash` for an `event` during the first half of the reporting cycle.
 
 ```javascript
 // slashRep contract
