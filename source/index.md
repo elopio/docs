@@ -20,6 +20,7 @@ includes:
   - rpc
   - tests
   - errors
+  - uiConventions
   - contributing
 
 search: true
