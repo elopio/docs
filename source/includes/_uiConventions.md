@@ -163,7 +163,7 @@ Styles
 
   /* Component Style Conventions: */
 
-  .example-component-view {
+  .example-widget-viewer {
     .border(true);
     .font-size-medium();
 
