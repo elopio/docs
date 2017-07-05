@@ -1,11 +1,20 @@
-AugurUI: Conventions
+UI Conventions
 ====================
 
 Modules
 -------
 ```javascript
-  // Module Export Examples:
+  // Modules Conventions
+  // Import Conventions
+  // Order: 3rd party modules > services > components/selectors/reducers/actions
+  // > constants > utils
+  import React, { Component } from 'react';
+  import { augur } from 'services/augurjs';
+  import Input from 'modules/common/components/input';
+  import { BUY, SELL } from 'modules/trade/constants/types';
+  import trimString from 'utils/trim-string';
 
+  // Export conventions
   // single constant export
   export default const BUY = 'buy';
   // or for a single function
@@ -13,8 +22,16 @@ Modules
     // do something...
   };
 ```
-Modules with a single export should have that denoted as `default`
-If the export is a function, it should be anonymous
+Modules import paths for `assets`, `modules`, `utils`, and `services` are aliased, so avoid relative paths. <b>Always</b> traverse from the aliases. Import requirements in the following order:
+
+1. 3rd party modules
+2. services
+3. components/selectors/reducers/actions
+4. constants
+5. utils
+
+Modules with a single export should have that denoted as `default`.
+If the export is a function, it should be anonymous.
 
 Components
 ----------
@@ -35,89 +52,85 @@ Components
 </main>
 ```
 ```javascript
-// Import Conventions
-
-// Import Path Example:
-// Good: Using Aliases to import
-import ValueDenomination from 'modules/common/components/value-denomination';
-import shouldComponentUpdatePure from 'utils/should-component-update-pure';
-import { rpc } from 'services/augurjs';
-
-// Bad: Using relative paths to import
-import ValueDenomination from '../../common/components/value-denomination';
-
-// Imports Order Example:
-// 3rd party modules > services > components/selectors/reducers/actions > constants > utils
-// Good:
-import React, { Component } from 'react';
-import { augur } from 'services/augurjs';
-import Input from 'modules/common/components/input';
-import { BUY, SELL } from 'modules/trade/constants/types';
-import trimString from 'utils/trim-string';
-
-// Bad:
-import Input from 'modules/common/components/input';
-import React, { Component } from 'react';
-import trimString from 'utils/trim-string';
-import { augur } from 'services/augurjs';
-import { BUY, SELL } from 'modules/trade/constants/types';
-
 // React Conventions:
-
-// PropTypes example:
-// Good: Required props come first
+// required propTypes should come first.
 static propTypes = {
-  url: PropTypes.string.isRequired,
-  text: PropTypes.string
-};
+  importantProp: PropTypes.object.isRequired,
+  optionalProp: PropTypes.string,
+}
 
-// Bad: Required props should come first
-static propTypes = {
-  text: PropTypes.string,
-  url: PropTypes.string.isRequired
-};
-
-// Null state example / conditional display:
-const MyMarkets = p => (
-  <article className="my-markets">
-    <div className="view-header">
-      // some more jsx...
-    </div>
-    {p.myMarkets && p.myMarkets.length ?
-      <div>
-        // some more jsx...
-      </div> :
-      <NullStateMessage message="No Markets Created" />
-    }
-  </article>
+// top level component (ie Views) example:
+const marketsView = p => (
+  <section id="markets-view">
+    <MarketsList
+      loginAccount={p.loginAccount}
+      markets={p.markets}
+      pagination={p.pagination}
+      scalarShareDenomination={p.scalarShareDenomination}
+    />
+  </section>
 );
+
+marketsView.propTypes = {
+  loginAccount: PropTypes.object,
+  scalarShareDenomination: PropTypes.object,
+  markets: PropTypes.array,
+  pagination: PropTypes.object,
+};
+
+export default marketsView;
+
+// re-usable component example:
+const MarketsList = (p) => {
+  const nullMessage = 'No Markets Available';
+
+  return (
+    <article className="markets-list">
+      {p.markets.length ? p.markets.map((market) => {
+        const selectedShareDenomination = getValue(p, `scalarShareDenomination.markets.${market.id}`);
+        const shareDenominations = getValue(p, 'scalarShareDenomination.denominations');
+
+        return (
+          <MarketPreview
+            key={market.id}
+            loginAccount={p.loginAccount}
+            {...market}
+            selectedShareDenomination={selectedShareDenomination}
+            shareDenominations={shareDenominations}
+          />
+        );
+      }) : <NullStateMessage message={nullMessage} /> }
+      {!!p.pagination && !!p.pagination.numUnpaginated &&
+        <Paginator {...p.pagination} />
+      }
+    </article>
+  );
+};
+
+MarketsList.propTypes = {
+  loginAccount: PropTypes.object,
+  scalarShareDenomination: PropTypes.object,
+  markets: PropTypes.array,
+  pagination: PropTypes.object
+};
+
+export default MarketsList;
 ```
-All components should be semantically tagged, highly reusable, and DRY.
+All components should be semantically tagged, highly reusable, and DRY. Components should have comments for functionality that may be non-obvious, depend on other methods, requires a complex mutation/filer, etc.
 
 To help ensure this, the following conventions have been employed:
 
-#### General Conventions
-- Do leave comments for functionality that may be non-obvious, dependence on other methods, complex mutations/filters, etc.
-- Font Awesome characters are used directly in the components -- in order to render these inside your text editors/IDEs, reference the [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less) stylesheet.
+#### Layout Conventions:
+There is only one `main` tag, which is currently employed in the [app.jsx](https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx) component, to contain all view content. All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
 
-#### JSX layout conventions:
-- Only one `main` tag which is currently employed in the [app.jsx](https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx) component to contain all view content.
-- All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)).
-- All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate.
-- All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
-
-#### Import Conventions
-- Import paths for `assets`, `modules`, `utils`, and `services` are aliased, so avoid relative paths. <b>Always</b> traverse from the aliases.
-- Import requirements in the following Order: 3rd party modules > services > components/selectors/reducers > constants > utils
 
 #### React Conventions
-- Props that are being passed to a component should be explicit from both ends
-- Prop validations should have required props first, optional props after
-- Null component states (ex: 'no markets', 'no tags', etc.) should always come first in the component.
-- Conditional display should occur as far down the component tree as possible.
+Props that are being passed to a component should be explicit from both ends and Prop validations should have required props first, optional props after.
+
+Null component states (ex: 'no markets', 'no tags', etc.) should always be shown as the `false` value for a conditional display. Conditional display should occur as far down the component tree as possible.
 
 
-#### Other Component Conventions
+#### Detailed Component Conventions
 Not all conventions are detailed above, but rather just the main points.
 For a full review of the breadth of the conventions employed, reference:
 
@@ -127,9 +140,26 @@ For a full review of the breadth of the conventions employed, reference:
 
 Styles
 ------
-```css
-  /* Mixin Component Example (taken from colors.less)*/
+<!-- this seems to work better than just css highlighting. less isn't available. -->
+```scss
+// Less Variable exposed for JS example:
+@animation-speed-very-fast: 200ms;
 
+// For accessibility w/in JS
+body {
+  --animation-speed-very-fast: unit(@animation-speed-very-fast);
+}
+```
+```javascript
+// access less variable using JS
+updateAnimationSpeedValue() {
+    this.setState({
+      animationSpeed: parseInt(window.getComputedStyle(document.body).getPropertyValue('--animation-speed-very-fast'), 10)
+    });
+  }
+```
+```scss
+  /* Mixin Conventions */
   /* constants */
   @color-green: #28e071;
   @color-red: #ff3b34;
@@ -182,20 +212,22 @@ To help ensure this, the following conventions have been employed:
 
 #### General Conventions
 
-- The full breadth of Less's functionality is permissible.
-- All styles should be contextual and housed within their relevant files (1-to-1 component to stylesheet)
-- If you need a less variable to be accessible during runtime, create a rule set for `body` and with identically named custom properties which have their values as the respective less variables.  You can then get these values by calling `getComputedStyle` and `getPropertyValue` on `document.body`.
+The full breadth of Less's functionality is permissible. As mentioned above, all styles should be contextual and housed within their relevant files (1-to-1 component to stylesheet). If you need a Less variable to be accessible during runtime, create a rule set for `body` and with identically named custom properties which have their values as the respective less variables.  You can then get these values by calling `getComputedStyle` and `getPropertyValue` on `document.body`.
 
 #### Mixin Conventions
 
-- Use mixins where provided.
-- If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. This can be seen in the way (not exhaustive) [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less) and [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less) are employed.
- - Some notable mixins include: [animations](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/animations.less), [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less), [colors](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/colors.less), and [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less).
-- Comments should be employed for mixins to help inform the utilization.
+Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less) and [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less) are employed. Some notable mixins include:
+- [animations](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/animations.less),
+- [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less),
+- [colors](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/colors.less), and
+- [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less).
 
 #### Component Style Conventions
 
-- Every component should have the minimum amount of styling required (helps maintain contextualization). This allows for stylesheets of parent components that employ a component to apply any additional 'chrome' required.
+Every component should have the minimum amount of styling required (helps maintain contextualization). This allows for stylesheets of parent components that employ a component to apply any additional 'chrome' required.
+
+Things to remember about Component Less styling include:
+
 - Mixin inclusions should always come first within a declaration block and be alphabetical.
 - Classnames should be contextual, non-generic, and should be discrete words delimited by a `-` (dash).
 - IDs should be discrete words delimited by an `_` (underscore).
@@ -205,7 +237,7 @@ To help ensure this, the following conventions have been employed:
 - When utilizing `CSSTransitionGroup`, styling of this wrapper should be housed within the rendered child's stylesheet
 
 
-#### Other Style Conventions
+#### Detailed Style Conventions
 Above are the main points, but additional structural and styling conventions of the stylesheets themselves are enforced through linting.
 For a full review of all conventions, reference:
 
