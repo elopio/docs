@@ -51,7 +51,7 @@ Components
   </section>
 </main>
 ```
-```javascript
+```jsx
 // React Conventions:
 // required propTypes should come first.
 static propTypes = {
