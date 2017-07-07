@@ -35,6 +35,12 @@ If the export is a function, it should be anonymous.
 
 Components
 ----------
+All components should be semantically tagged, highly reusable, and DRY. Components should have comments for functionality that may be non-obvious, depend on other methods, requires a complex mutation/filer, etc.
+
+To help ensure this, the following conventions have been employed:
+
+#### Layout Conventions:
+
 ```html
 <!-- JSX Layout Conventions -->
 <!-- Example Component tree (after rendering)-->
@@ -51,6 +57,9 @@ Components
   </section>
 </main>
 ```
+
+There is only one `main` tag, which is currently employed in the [app.jsx](https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx) component, to contain all view content. All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
+
 ```jsx
 // React Conventions:
 // required propTypes should come first.
@@ -116,13 +125,6 @@ MarketsList.propTypes = {
 
 export default MarketsList;
 ```
-All components should be semantically tagged, highly reusable, and DRY. Components should have comments for functionality that may be non-obvious, depend on other methods, requires a complex mutation/filer, etc.
-
-To help ensure this, the following conventions have been employed:
-
-#### Layout Conventions:
-There is only one `main` tag, which is currently employed in the [app.jsx](https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx) component, to contain all view content. All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
-
 
 #### React Conventions
 Props that are being passed to a component should be explicit from both ends and Prop validations should have required props first, optional props after.
@@ -158,44 +160,60 @@ updateAnimationSpeedValue() {
     });
   }
 ```
+
+All styles should be contextual such that styling rules are only directly applied to the immediately relevant component(s), with the ultimate goal always being consistency and maintainability. This is seen reflected in the overall structure of the stylesheets -- generally a 1-to-1 between a component and a stylesheet.
+
+The full breadth of Less's functionality is permissible. If you need a Less variable to be accessible during runtime, create a rule set for `body` and with identically named custom properties which have their values as the respective less variables.  You can then get these values by calling `getComputedStyle` and `getPropertyValue` on `document.body`.
+
+Following are some of the conventions that have been employed:
+
+#### Mixin Conventions
+
 ```scss
   /* Mixin Conventions */
-  /* constants */
-  @color-green: #28e071;
-  @color-red: #ff3b34;
-  @color-green-light: lighten(@color-green, @amount-light);
-  @color-red-muted: lighten(@color-red, @amount-muted);
-
-  /* Mixins */
-  .colorize {
-    &.positive,
-    .positive {
-      .value {
-        color: @color-green;
+  // BORDER Constants
+  // Defaults
+  @border-all: 'all sides';
+  @border-default-chroma: @border-normal;
+  @border-default-width: 1px;
+  // Sides
+  @border-top: border-top;
+  @border-right: border-right;
+  @border-bottom: border-bottom;
+  @border-left: border-left;
+  // Chroma
+  @border-normal: @color-border;
+  @border-muted: @color-border-muted;
+  @border-light: @color-border-light;
+  @border-faded: fadeout(@color-border, @amount-extra-light);
+  // Style
+  @border-solid: solid;
+  @border-dotted: dotted;
+  @border-dashed: dashed;
+  @border-double: double;
+  // Width
+  @border-width-2: 2px;
+  @border-width-3: 3px;
+  // define mixin
+  .border(@side: false; @property: @border-all; @chroma: @border-default-chroma; @width: @border-default-width; @style: @border-solid;) {
+    & when (@side) {
+      & when (@property = @border-all) {
+        border: @width @style @chroma;
       }
 
-      .denomination {
-        color: @color-green-light;
-      }
+      @{property}: @width @style @chroma;
     }
 
-    &.negative,
-    .negative {
-      .value {
-        color: @color-red;
-      }
-
-      .denomination {
-        color: @color-red-muted;
-      }
+    & when not (@side) {
+      border: none;
     }
   }
 
   /* Component Style Conventions: */
 
   .example-widget-viewer {
+    // mixins come first and in alphabetical order
     .border(true);
-    .font-size-medium();
 
     align-items: center;
     background-color: @color-white;
@@ -204,17 +222,6 @@ updateAnimationSpeedValue() {
     min-width: 22em;
   }
 ```
-All styles should be contextual such that styling rules are only directly applied to the immediately relevant component(s), with the ultimate goal always being consistency and maintainability.
-
-This is seen reflected in the overall structure of the stylesheets -- generally a 1-to-1 between a component and a stylesheet.
-
-To help ensure this, the following conventions have been employed:
-
-#### General Conventions
-
-The full breadth of Less's functionality is permissible. As mentioned above, all styles should be contextual and housed within their relevant files (1-to-1 component to stylesheet). If you need a Less variable to be accessible during runtime, create a rule set for `body` and with identically named custom properties which have their values as the respective less variables.  You can then get these values by calling `getComputedStyle` and `getPropertyValue` on `document.body`.
-
-#### Mixin Conventions
 
 Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less) and [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less) are employed. Some notable mixins include:
 - [animations](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/animations.less),
