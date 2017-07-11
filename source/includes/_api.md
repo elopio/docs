@@ -506,38 +506,38 @@ Augur's Call API is made up of "getter" methods that retrieve information from t
 ```javascript
 // info contract
 var marketId = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4";
-augur.api().Info.getCreator(marketId, function (creator) { /* ... */ });
+augur.api().Info.getCreator({ ID: marketId }, function (creator) { /* ... */ });
 // example output:
 creator = "0x639b41c4d3d399894f2a57894278e1653e7cd24c"
 
-augur.api().Info.getCreationFee(marketId, function (creationFee) { /* ... */ });
+augur.api().Info.getCreationFee({ ID: marketId }, function (creationFee) { /* ... */ });
 // example output:
 creationFee = "16"
 
-augur.api().Info.getDescription(marketId, function (description) { /* ... */ });
+augur.api().Info.getDescription({ ID: marketId }, function (description) { /* ... */ });
 // example output:
 description = "Will the Sun turn into a red giant and engulf the Earth by the end of 2016?"
 
-augur.api().Info.getDescriptionLength(marketId, function (descriptionLength) { /* ... */ });
+augur.api().Info.getDescriptionLength({ ID: marketId }, function (descriptionLength) { /* ... */ });
 // example output:
 descriptionLength = "75"
 ```
 ### [info contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/info.se)
-#### augur.api().Info.getCreator(id[, callback])
+#### augur.api().Info.getCreator({ ID }[, callback])
 
-Gets the address of the account that created `id` (a market or event ID).
+Gets the address of the account that created `ID` (a market or event ID).
 
-#### augur.api().Info.getCreationFee(id[, callback])
+#### augur.api().Info.getCreationFee({ ID }[, callback])
 
-Gets the fee paid by the creator of `id` (a market or event ID).
+Gets the fee paid by the creator of `ID` (a market or event ID).
 
-#### augur.api().Info.getDescription(item[, callback])
+#### augur.api().Info.getDescription({ ID }[, callback])
 
-Gets the plaintext (UTF-8) description of `item` (a market or event ID).
+Gets the plaintext (UTF-8) description of `ID` (a market or event ID).
 
-#### augur.api().Info.getDescriptionLength(item[, callback])
+#### augur.api().Info.getDescriptionLength({ ID }[, callback])
 
-Gets the length of description of the specified `item` (item is a market ID or event ID).
+Gets the length of description of the specified `ID` (item is a market ID or event ID).
 
 ```javascript
 // branches contract
@@ -689,75 +689,55 @@ Looks up the number of the current vote period on the specified branch ID `branc
 ```javascript
 // events contract
 var eventId = "-0x5fa67764c533d97e33ef2cbdc37cd11eb5f187b47c89c88d3d81250ba834cb3";
-augur.api().Events.getBond(eventId, function (bond) { /* ... */ })
+augur.api().Events.getBond({ event: eventId }, function (bond) { /* ... */ })
 // example output:
 bond = "0x0000000000000000000000000000000000000000000000001f399b1438a10000"
 
-augur.api().Events.getChallenged(eventId, function (challenged) { /* ... */ })
+augur.api().Events.getBranch({ event: eventId }, function (branch) { /* ... */ })
 // example output:
-challenged = "0x0000000000000000000000000000000000000000000000000000000000000001"
+branch = "0xf69b4"
 
-augur.api().Events.getCreationTime(eventId, function (eventCreationTime) { /* ... */ })
-// example output:
-eventCreationTime = "13701020"
-
-augur.api().Events.getEarlyResolutionBond(eventId, function(resolutionBond) { /* ... */ })
-// example output:
-resolutionBond = "0x00000000000000000000000000000000000000000000000021282a48ffb20000"
-
-augur.api().Events.getEthics(eventId, function (ethical) { /* ... */ })
+augur.api().Events.getEthics({ event: eventId }, function (ethical) { /* ... */ })
 // example output:
 ethical = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getEventBranch(eventId, function (branch) { /* ... */ })
+augur.api().Events.getEventBranch({ event: eventId }, function (branch) { /* ... */ })
 // example output:
 branch = "0xf69b5"
 
-augur.api().Events.getEventInfo(eventId, function (eventInfo) { /* ... */ })
+augur.api().Events.getEventInfo({ event: eventId }, function (eventInfo) { /* ... */ })
 // example output:
 eventInfo = ["0xf69b5", "13801186", "0", "1", "2", "2"]
 
-augur.api().Events.getEventPushedUp(eventId, function (eventPushed) { /* ... */ })
+augur.api().Events.getEventPushedUp({ event: eventId }, function (eventPushed) { /* ... */ })
 // example output:
 eventPushed = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getEventResolution(eventId, function (resolution) { /* ... */ })
-// example output:
-resolution = "https://www.google.com"
-
-augur.api().Events.getExpiration(eventId, function (expiration) { /* ... */ })
+augur.api().Events.getExpiration({ event: eventId }, function (expiration) { /* ... */ })
 // example output:
 expiration = "13801186"
 
-augur.api().Events.getExtraBond(eventId, function (extraBond) { /* ... */ })
-// example output:
-extraBond = "0x0000000000000000000000000000000000000000000000003f11bac901df2000"
-
-augur.api().Events.getFirstPreliminaryOutcome(eventId, function (preliminaryOutcome) { /* ... */ })
-// example output:
-preliminaryOutcome = "0x0000000000000000000000000000000000000000000000000000000000000002"
-
-augur.api().Events.getForkEthicality(eventId, function (forkEthicality) { /* ... */ })
+augur.api().Events.getForkEthicality({ event: eventId }, function (forkEthicality) { /* ... */ })
 // example output:
 forkEthicality = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getForkOutcome(eventId, function (forkOutcome) { /* ... */ })
+augur.api().Events.getForkOutcome({ event: eventId }, function (forkOutcome) { /* ... */ })
 // example output:
 forkOutcome = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getForked(eventId, function (forked) { /* ... */ })
+augur.api().Events.getForked({ event: eventId }, function (forked) { /* ... */ })
 // example output:
 forked = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getForkDone(eventId, function (forkDone) { /* ... */ })
+augur.api().Events.getForkDone({ event: eventId }, function (forkDone) { /* ... */ })
 // example output:
 forkDone = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.api().Events.getMarket(eventId, 0, function (markets) { /* ... */ })
+augur.api().Events.getMarket({ event: eventId, marketIndex: 0 }, function (markets) { /* ... */ })
 // example output:
 market = "0x519bcdaa60e7259143402153efb9825fc37a5c3d8eee0445b987453d2a23919c"
 
-augur.api().Events.getMarkets(eventId, function (markets) { /* ... */ })
+augur.api().Events.getMarkets({ event: eventId }, function (markets) { /* ... */ })
 // example output:
 markets = ["0x519bcdaa60e7259143402153efb9825fc37a5c3d8eee0445b987453d2a23919c",
            "0xacfe5fbc7654fee0b8873e2db464f5c189a1fa9e6e0ea5f5fa44bf6a08832f7a",
@@ -771,186 +751,155 @@ markets = ["0x519bcdaa60e7259143402153efb9825fc37a5c3d8eee0445b987453d2a23919c",
            "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4",
            "0x679b4b3112994a7c034ae7f6fb4b5e7bcb4a6923e969c24696ee823fbe4e5524"]
 
-augur.api().Events.getMaxValue(eventId, function (maxValue) { /* ... */ })
+augur.api().Events.getMaxValue({ event: eventId }, function (maxValue) { /* ... */ })
 // example output:
 maxValue = "2"
 
-augur.api().Events.getMinValue(eventId, function (minValue) { /* ... */ })
+augur.api().Events.getMinValue({ event: eventId }, function (minValue) { /* ... */ })
 // example output:
 minValue = "1"
 
-augur.api().Events.getNumMarkets(eventId, function (numMarkets) { /* ... */ })
+augur.api().Events.getNumMarkets({ event: eventId }, function (numMarkets) { /* ... */ })
 // example output:
 numMarkets = "45"
 
-augur.api().Events.getNumOutcomes(eventId, function (numOutcomes) { /* ... */ })
+augur.api().Events.getNumOutcomes({ event: eventId }, function (numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "2"
 
-augur.api().Events.getOriginalExpiration(eventId, function(orgExpiration) { /* ... */ })
+augur.api().Events.getOriginalExpiration({ event: eventId }, function(orgExpiration) { /* ... */ })
 // example output:
 orgExpiration = "0x000000000000000000000000000000000000000000000000000000005a47fe50"
 
-augur.api().Events.getOutcome(eventId, function (outcome) { /* ... */ })
+augur.api().Events.getOutcome({ event: eventId }, function (outcome) { /* ... */ })
 // example output:
 outcome = "0"
 
-augur.api().Events.getPast24(8615, function (eventsCreated) { /* ... */ })
+augur.api().Events.getPast24({ period: 8615 }, function (eventsCreated) { /* ... */ })
 // example output:
 eventsCreated = "10"
 
-augur.api().Events.getRejected(eventId, function (rejected) { /* ... */ })
+augur.api().Events.getRejected({ event: eventId }, function (rejected) { /* ... */ })
 // example output:
 rejected = "1"
 
-augur.api().Events.getRejectedPeriod(eventId, function (rejected) { /* ... */ })
+augur.api().Events.getRejectedPeriod({ event: eventId }, function (rejected) { /* ... */ })
 // example output:
 rejectedPeriod = "8612"
 
-augur.api().Events.getReportersPaidSoFar(eventId, function (reportersPaid) { /* ... */ })
-// example output:
-reportersPaid = "6"
-
-augur.api().Events.getReportingThreshold(eventId, function (reporterThreshold) { /* ... */ })
+augur.api().Events.getReportingThreshold({ event: eventId }, function (reporterThreshold) { /* ... */ })
 // example output:
 reporterThreshold = "0x6277101735386680763835789423207666416102355444464034512896000000"
 
-augur.api().Events.getResolutionAddress(eventId, function(resolutionAddress) { /* ... */ })
+augur.api().Events.getResolution({ event: eventId }, function(resolutionAddress) { /* ... */ })
 // example output:
 resolutionAddress = "0x15e140e00231a1de6f8b902f5ff91dd1a5931679"
 
-augur.api().Events.getResolutionLength(eventId, function(resolutionLength) { /* ... */ })
+augur.api().Events.getResolutionLength({ event: eventId }, function(resolutionLength) { /* ... */ })
 // example output:
 resolutionLength = "22"
 
-augur.api().Events.getResolveBondPoster(eventId, function(bondPoster) { /* ... */ })
-// example output:
-bondPoster = "0x27a231cdd19292de6f8b902f5ff91dd1a5931fad"
 ```
 ### [events contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/events.se)
-#### augur.api().Events.getBond(eventId[, callback])
+#### augur.api().Events.getBond({ event }[, callback])
 
-Returns the bond amount for the event ID `eventId` specified.
+Returns the bond amount for the event ID `event` specified.
 
-#### augur.api().Events.getChallenged(eventId[, callback])
+#### augur.api().Events.getBranch({ event }[, callback])
 
-Returns wether the specified event ID `eventId` has been challenged already.
+Returns the branch ID of the specified event ID `event`;
 
-#### augur.api().Events.getCreationTime(eventId[, callback])
+#### augur.api().Events.getEthics({ event }[, callback])
 
-Returns the time of creation of the specified event ID `eventId`.
+Gets the value of ethical for the event ID `event` specified.
 
-#### augur.api().Events.getEarlyResolutionBond(eventId[, callback])
+#### augur.api().Events.getEventBranch({ event }[, callback])
 
-Gets the bond amount paid for early resolution for the specified event ID `eventId`.
+Gets the branch ID of event `event`.
 
-#### augur.api().Events.getEthics(eventId[, callback])
+#### augur.api().Events.getEventInfo({ event }[, callback])
 
-Gets the value of ethical for the event ID `eventId` specified.
+Fetches an array of basic information about event `event`: branch ID, expiration block number, outcome (`"0"` if not yet resolved), minimum value, maximum value, and number of outcomes.
 
-#### augur.api().Events.getEventBranch(eventId[, callback])
+#### augur.api().Events.getEventPushedUp({ event }[, callback])
 
-Gets the branch ID of event `eventId`.
+Returns whether an specified event ID `event` has been pushed up.
 
-#### augur.api().Events.getEventInfo(eventId[, callback])
+#### augur.api().Events.getExpiration({ event }[, callback])
 
-Fetches an array of basic information about event `eventId`: branch ID, expiration block number, outcome (`"0"` if not yet resolved), minimum value, maximum value, and number of outcomes.
+Gets the expiration block number of event `event`.
 
-#### augur.api().Events.getEventPushedUp(eventId[, callback])
+#### augur.api().Events.getForkEthicality({ event }[, callback])
 
-Returns whether an specified event ID `eventId` has been pushed up.
+Gets the ethicality of the event ID `event` that caused a fork.
 
-#### augur.api().Events.getEventResolution(eventId[, callback])
+#### augur.api().Events.getForkOutcome({ event }[, callback])
 
-Gets a resolution string which represents the recommended source to resolve a specified event `eventId`.
+Gets the outcome of the event `event` that caused a fork.
 
-#### augur.api().Events.getExpiration(eventId[, callback])
+#### augur.api().Events.getForked({ event }[, callback])
 
-Gets the expiration block number of event `eventId`.
+Returns wether the specified event ID `event` caused a fork or not.
 
-#### augur.api().Events.getFirstPreliminaryOutcome(eventId[, callback])
+#### augur.api().Events.getForkDone({ event }[, callback])
 
-Returns the outcome submitted by the Resolution Address given a specified event ID `eventId`.
+Returns wether the specified event ID `event` that caused a fork has been resolved or not.
 
-#### augur.api().Events.getForkEthicality(eventId[, callback])
+#### augur.api().Events.getMarket({ event, marketIndex }[, callback])
 
-Gets the ethicality of the event ID `eventId` that caused a fork.
+Gets a specific markets info given a specified event ID `event` and the index of the market `marketIndex` associated with the specified event.
 
-#### augur.api().Events.getForkOutcome(eventId[, callback])
+#### augur.api().Events.getMarkets({ event }[, callback])
 
-Gets the outcome of the event `eventId` that caused a fork.
+Gets an array of all markets on the specified event ID `event`.
 
-#### augur.api().Events.getForked(eventId[, callback])
+#### augur.api().Events.getMaxValue({ event }[, callback])
 
-Returns wether the specified event ID `eventId` caused a fork or not.
+The minimum possible value for event `event`. For binary (yes/no) events, the maximum value is `2`.
 
-#### augur.api().Events.getForkDone(eventId[, callback])
+#### augur.api().Events.getMinValue({ event }[, callback])
 
-Returns wether the specified event ID `eventId` that caused a fork has been resolved or not.
+The minimum possible value for event `event`. For binary (yes/no) events, the minimum value is `1`.
 
-#### augur.api().Events.getMarket(eventId, marketIndex[, callback])
+#### augur.api().Events.getNumMarkets({ event }[, callback])
 
-Gets a specific markets info given a specified event ID `eventId` and the index of the market `marketIndex` associated with the specified event.
+Gets the number of markets associated with the specified event ID `event`.
 
-#### augur.api().Events.getMarkets(eventId[, callback])
-
-Gets an array of all markets on the specified event ID `eventId`.
-
-#### augur.api().Events.getMaxValue(eventId[, callback])
-
-The minimum possible value for event `eventId`.  For binary (yes/no) events, the maximum value is `2`.
-
-#### augur.api().Events.getMinValue(eventId[, callback])
-
-The minimum possible value for event `eventId`.  For binary (yes/no) events, the minimum value is `1`.
-
-#### augur.api().Events.getNumMarkets(eventId[, callback])
-
-Gets the number of markets associated with the specified event ID `eventId`.
-
-#### augur.api().Events.getNumOutcomes(eventId[, callback])
+#### augur.api().Events.getNumOutcomes({ event }[, callback])
 
 The total number of outcomes for this event.  Binary (yes/no) and scalar (numerical) events always have 2 outcomes; categorical events have more than 2 outcomes.
 
-#### augur.api().Events.getOriginalExpiration(eventId[, callback])
+#### augur.api().Events.getOriginalExpiration({ event }[, callback])
 
-Gets the original expiration date set for the specified event ID `eventId`.
+Gets the original expiration date set for the specified event ID `event`.
 
-#### augur.api().Events.getOutcome(eventId[, callback])
+#### augur.api().Events.getOutcome({ event }[, callback])
 
-Gets the outcome (`"0"` if the event is not yet resolved) of event `eventId`.
+Gets the outcome (`"0"` if the event is not yet resolved) of event `event`.
 
-#### augur.api().Events.getPast24(period[, callback])
+#### augur.api().Events.getPast24({ period }[, callback])
 
 Gets the number of events created in the past 24 hours given the specified period `period`.
 
-#### augur.api().Events.getRejected(eventId[, callback])
+#### augur.api().Events.getRejected({ event }[, callback])
 
-Gets the rejection status of the specified event ID `eventId`.
+Gets the rejection status of the specified event ID `event`.
 
-#### augur.api().Events.getRejectedPeriod(eventId[, callback])
+#### augur.api().Events.getRejectedPeriod({ event }[, callback])
 
-Gets the period during which the specified event ID `eventId` was rejected.
+Gets the period during which the specified event ID `event` was rejected.
 
-#### augur.api().Events.getReportersPaidSoFar(eventId[, callback])
+#### augur.api().Events.getReportingThreshold({ event }[, callback])
 
-Gets the number of reporters who have been paid so far given a specified event ID `eventId`.
+Gets the reporting threshold for a specified event ID `event`.
 
-#### augur.api().Events.getReportingThreshold(eventId[, callback])
+#### augur.api().Events.getResolution({ event }[, callback])
 
-Gets the reporting threshold for a specified event ID `eventId`.
+Gets the address of the first person who reports on a specified event `event`.
 
-#### augur.api().Events.getResolutionAddress(eventId[, callback])
+#### augur.api().Events.getResolutionLength({ event }[, callback])
 
-Gets the address of the first person who reports on a specified event `eventId`.
-
-#### augur.api().Events.getResolutionLength(eventId[, callback])
-
-Returns the length of the resolution string for the specified event ID `eventId`.
-
-#### augur.api().Events.getResolveBondPoster(eventId[, callback])
-
-Returns the address of the person who posted the bond for the first resolution period of the specified event ID `eventId`.
+Returns the length of the resolution string for the specified event ID `event`.
 
 ```javascript
 // expiringEvents contract
