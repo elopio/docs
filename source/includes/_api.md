@@ -522,7 +522,7 @@ augur.api().Info.getDescriptionLength({ ID: marketId }, function (descriptionLen
 // example output:
 descriptionLength = "75"
 ```
-### [info contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/info.se)
+### [Info contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/info.se)
 #### augur.api().Info.getCreator({ ID }[, callback])
 
 Gets the address of the account that created `ID` (a market or event ID).
@@ -570,7 +570,7 @@ augur.api().Branches.getInitialBalance({ branch: branchId, period: 8615 }, funct
 // example output:
 balance = "0x0000000000000000000000000000000000000000000000380ac240b094e18ce5"
 
-augur.api().Branches.getMarketsBranch({ branch: branchId }, function(markets) { /* ... */ })
+augur.api().Branches.getMarketsInBranch({ branch: branchId }, function(markets) { /* ... */ })
 // example output:
 markets = ["0x519bcdaa60e7259143402153efb9825fc37a5c3d8eee0445b987453d2a23919c",
            "0xacfe5fbc7654fee0b8873e2db464f5c189a1fa9e6e0ea5f5fa44bf6a08832f7a",
@@ -617,7 +617,7 @@ augur.api().Branches.getVotePeriod({ branch: branchId }, function (reportPeriod)
 reportPeriod = "397"
 
 ```
-### [branches contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se)
+### [Branches contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se)
 #### augur.api().Branches.getBaseReporters({ branch }[, callback])
 
 Gets the base number of reporters for the specified branch ID `branch`.
@@ -646,7 +646,7 @@ Gets the most recent period in which the specified branch ID `branch` was forked
 
 Gets the initial balance of a branch given a specified branch ID `branch`, a specified period `period`.
 
-#### augur.api().Branches.getMarketInBranch({ branch }[, callback])
+#### augur.api().Branches.getMarketsInBranch({ branch }[, callback])
 
 Gets an array of all market IDs for the specified branch ID `branch`.
 
@@ -687,7 +687,7 @@ Gets the period length for the specified branch ID `branch`.
 Looks up the number of the current vote period on the specified branch ID `branch`.
 
 ```javascript
-// events contract
+// Events contract
 var eventId = "-0x5fa67764c533d97e33ef2cbdc37cd11eb5f187b47c89c88d3d81250ba834cb3";
 augur.api().Events.getBond({ event: eventId }, function (bond) { /* ... */ })
 // example output:
@@ -696,6 +696,12 @@ bond = "0x0000000000000000000000000000000000000000000000001f399b1438a10000"
 augur.api().Events.getBranch({ event: eventId }, function (branch) { /* ... */ })
 // example output:
 branch = "0xf69b4"
+
+augur.api().Events.getEthical({ event: eventId }, function (ethical) {
+/* ... */
+});
+// example output:
+ethical = "0x0000000000000000000000000000000000000000000000000000000000000001";
 
 augur.api().Events.getEthics({ event: eventId }, function (ethical) { /* ... */ })
 // example output:
@@ -791,23 +797,34 @@ augur.api().Events.getReportingThreshold({ event: eventId }, function (reporterT
 // example output:
 reporterThreshold = "0x6277101735386680763835789423207666416102355444464034512896000000"
 
-augur.api().Events.getResolution({ event: eventId }, function(resolutionAddress) { /* ... */ })
+augur.api().Events.getResolution({ event: eventId }, function (resolutionAddress) { /* ... */ })
 // example output:
 resolutionAddress = "0x15e140e00231a1de6f8b902f5ff91dd1a5931679"
 
-augur.api().Events.getResolutionLength({ event: eventId }, function(resolutionLength) { /* ... */ })
+augur.api().Events.getResolutionLength({ event: eventId }, function (resolutionLength) { /* ... */ })
 // example output:
 resolutionLength = "22"
 
+augur.api().Events.getUncaughtOutcome({ event: eventId }, function (uncaughtOutcome) { /* ... */ })
+// example output:
+uncaughtOutcome = "1"
+
+augur.api().Events.getMode({ event: eventId }, function (mode) { /* ... */ })
+// example output:
+mode = "0x0000000000000000000000000000000000000000000000000000000000000002"
 ```
-### [events contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/events.se)
+### [Events contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/events.se)
 #### augur.api().Events.getBond({ event }[, callback])
 
 Returns the bond amount for the event ID `event` specified.
 
 #### augur.api().Events.getBranch({ event }[, callback])
 
-Returns the branch ID of the specified event ID `event`;
+Returns the branch ID of the specified event ID `event`.
+
+#### augur.api().Events.getEthical({ event }[, callback])
+
+Gets the value of ethical for the event ID `event` specified.
 
 #### augur.api().Events.getEthics({ event }[, callback])
 
@@ -901,28 +918,59 @@ Gets the address of the first person who reports on a specified event `event`.
 
 Returns the length of the resolution string for the specified event ID `event`.
 
+#### augur.api().Events.getUncaughtOutcome({ event }[, callback])
+
+Returns the uncaughtOutcome value of the specified event ID `event`.
+
+#### augur.api().Events.getMode({ event }[, callback])
+
+Returns the mode value of the specified event ID `event`.
+
 ```javascript
-// expiringEvents contract
+// ExpiringEvents contract
 var branchId = augur.branches.dev;
 var reportPeriod = 397;
-augur.getActiveReporters(branchId, reportPeriod, 0, 5, function(activeReporters) { /* ... */ })
-// example output:
-activeReporters = [ "0x61badf138090eb57cac69a595374090ef7b76f86",
-                    "0x6964753be3e3f94b276d2fcb77186ab1422f5a31",
-                    "0x15e140e00231a1de6f8b902f5ff91dd1a5931679",
-                    "0x5d8591daaac13717e12c25fead00406c0f594394",
-                    "0x591c4545f370f48d56df8721321e499f980c6e4d" ]
-
 var eventId = "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683";
-augur.getCurrentMode(reportPeriod, eventId, function (mode) { /* ... */ })
+var reporter = "0x639b41c4d3d399894f2a57894278e1653e7cd24c";
+
+augur.api().ExpiringEvents.getAfterRep({ branch: branchId, period: reportPeriod, sender: reporter}, function (afterRep) { /* ... */ })
+// example output:
+afterRep = "0x2b5e3af16b1880000"
+
+augur.api().ExpiringEvents.getBeforeRep({ branch: branchId, period: reportPeriod, sender: reporter}, function (beforeRep) { /* ... */ })
+// example output:
+beforeRep = "0x2c3c465ca58ec0000"
+
+augur.api().ExpiringEvents.getCurrentMode({ period: reportPeriod, event: eventId }, function (mode) { /* ... */ })
 // example output:
 mode = "3"
 
-augur.getCurrentModeItems(reportPeriod, eventId, function (modeItems) { /* ... */ }))
+augur.api().ExpiringEvents.getCurrentModeItems({ period: reportPeriod, event: eventId }, function (modeItems) { /* ... */ })
 // example output:
 modeItems = "8"
 
-augur.getEvents(branchId, reportPeriod, function (events) { /* ... */ });
+augur.api().ExpiringEvents.getEncryptedReport({ branch: branchId, expDateIndex: reportPeriod, reporter, event: eventId }, function (encryptedReport) { /* ... */ })
+// example output:
+encryptedReport = [
+  "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a",
+  "0xb3017088d3de23f9611dbf5d23773b5ad38621bab84aa79a0621c8800aeb4c33",
+  "0x0000000000000000000000000000000000000000000000000000000000000001"
+  ]
+
+augur.api().ExpiringEvents.getEthicReport({ branch: branchId, period: reportPeriod, event: eventId, sender: reporter }, function (ethicReport) { /* ... */ })
+// example output:
+ethicReport = "0x0000000000000000000000000000000000000000000000000000000000000001"
+
+var eventIndex = 3;
+augur.api().ExpiringEvents.getEvent({ branch: branchId, expDateIndex: reportPeriod, eventIndex }, function (event) { /* ... */ });
+// example output:
+event = "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683"
+
+augur.api().ExpiringEvents.getEventIndex({ period: reportPeriod, eventID: eventId }, function (eventIndex) { /* ... */ })
+// example output:
+eventIndex = '3'
+
+augur.api().ExpiringEvents.getEvents({ branch: branchId, expDateIndex: reportPeriod }, function (events) { /* ... */ });
 // example output:
 events = ["-0xc6481ca18bec443c7831578e5f2de02594041041e0abbf0e8ecafd70197fd1a5",
           "-0xea03728786ca7ddcb91ec3303723ac794b7bcbcb9b3ad48943e797885c6d05ab",
@@ -937,213 +985,169 @@ events = ["-0xc6481ca18bec443c7831578e5f2de02594041041e0abbf0e8ecafd70197fd1a5",
           "-0x7a2c24bec3f16f5edfa06ed6941569f9de70cbe33c768b02617ed89b16be8d8f",
           "-0x399c15976085e8dcf8cb57317c1001013ce8ee5472868b1faa8657edcd1336bd" ]
 
-augur.getEventsRange(branchId, reportPeriod, 1, 4, function (eventsRange) { /* ... */ });
+augur.api().ExpiringEvents.getEventsRange({ branch: branchId, expDateIndex: reportPeriod, start: 1, end: 4 }, function (eventsRange) { /* ... */ });
 // example output:
-eventsRange = [ "-0xea03728786ca7ddcb91ec3303723ac794b7bcbcb9b3ad48943e797885c6d05ab",
-           "-0xdb633b6cdbfbd00c85ca1f093764dcb2b2f0b5284c2324baa6008a3d73e0a1c",
-           "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683",
-           "-0x16fe3cb92062b9f43ef9988eb871f346960ff23b5c16222c1ebe5a5e2fc908c6" ]
+eventsRange = [      
+              "-0xea03728786ca7ddcb91ec3303723ac794b7bcbcb9b3ad48943e797885c6d05ab",
+              "-0xdb633b6cdbfbd00c85ca1f093764dcb2b2f0b5284c2324baa6008a3d73e0a1c",
+              "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683",
+              "-0x16fe3cb92062b9f43ef9988eb871f346960ff23b5c16222c1ebe5a5e2fc908c6"
+              ]
 
-augur.getNumberEvents(branchId, reportPeriod, function (numberEvents) { /* ... */ });
-// example output:
-numberEvents = "12"
-
-var eventIndex = 3;
-augur.getEvent(branchId, reportPeriod, eventIndex, function (event) { /* ... */ });
-// example output:
-event = "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683"
-
-var reporter = "0x639b41c4d3d399894f2a57894278e1653e7cd24c";
-augur.getAfterRep(branchId, reportPeriod, reporter, function (afterRep) { /* ... */ })
-// example output:
-afterRep = "0x2b5e3af16b1880000"
-
-augur.getBeforeRep(branchId, reportPeriod, reporter, function (beforeRep) { /* ... */ })
-// example output:
-beforeRep = "0x2c3c465ca58ec0000"
-
-augur.getEventWeight(branchId, reportPeriod, eventId, function (eventWeight) { /* ... */ })
-// example output:
-eventWeight = "0x29a2241af62c0000"
-
-augur.getReport(branchId, reportPeriod, eventId, reporter, function (report) { /* ... */ });
-// example output:
-report = "1"
-
-augur.getReportHash(branchId, reportPeriod, reporter, eventId, function (reportHash) { /* ... */ });
-// example output:
-reportHash = "-0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
-
-augur.getReportsCommitted(branchId, reportPeriod, eventId, function (numReportsCommitted) { /* ... */ })
-// example output:
-numReportsCommitted = "10"
-
-augur.getRequired(eventId, reportPeriod, branch, function (required) { /* ... */ })
-// example output:
-required = "0x0000000000000000000000000000000000000000000000000000000000000001"
-
-augur.getEventIndex(branch, reportPeriod, eventId, function (eventIndex) { /* ... */ })
-// example output:
-eventIndex = '3'
-
-augur.getEthicReport(branch, reportPeriod, eventId, reporter, function (reportEthicality) { /* ... */ })
-// example output:
-reportEthicality = '0x0000000000000000000000000000000000000000000000000000000000000001'
-
-augur.getFeeValue(branch, reportPeriod, function (feeValue) { /* ... */ })
-// example output:
-feeValue = "0xb3cdb9c590ad9d4263997ff000000000"
-
-augur.getNumActiveReporters(branch, reportPeriod, function (numReporters) { /* ... */ })
-// example output:
-numReporters = "6"
-
-augur.getNumEventsToReportOn(branch, reportPeriod, function (numEvents) { /* ... */ })
-// example output:
-numEvents = "54"
-
-augur.getNumReportsSubmitted(branch, reporterPeriod, reporter, function (numReports) { /* ... */ })
-// example output:
-numReports = "5"
-
-augur.getNumRemoved(branch, reportPeriod, function (numRemoved) { /* ... */ })
-// example output:
-numRemoved = "3"
-
-augur.getNumRequired(branch, reportPeriod, function (numRequired) { /* ... */ })
-// example output:
-numRequired = "2"
-
-augur.getNumRoundTwo(branch, reportPeriod, function (numRoundTwo) { /* ... */ })
-// example output:
-numRoundTwo = "1"
-
-augur.getLesserReportNum(branch, reportPeriod, eventId, function (reportNum) { /* ... */ })
+augur.api().ExpiringEvents.getLesserReportNum({ branch: branchId, period: reportPeriod, event: eventId }, function (reportNum) { /* ... */ })
 // example output:
 reportNum = "0xb469471f80140000"
 
-augur.getPeriodDormantRep(branch, reportPeriod, reporter, function(dormantRep) { /* ... */ })
+augur.api().ExpiringEvents.getNumEventsToReportOn({ branch: branchId, expDateIndex: reportPeriod }, function (numEvents) { /* ... */ })
+// example output:
+numEvents = "54"
+
+augur.api().ExpiringEvents.getNumRemoved({ branch: branchId, period: reportPeriod }, function (numRemoved) { /* ... */ })
+// example output:
+numRemoved = "3"
+
+augur.api().ExpiringEvents.getNumReportsActual({ branch: branchId, votePeriod: reportPeriod, sender: reporter }, function (numReportsActual) { /* ... */ })
+// example output:
+numReportsActual = "5"
+
+augur.api().ExpiringEvents.getNumReportsEvent({ branch: branchId, votePeriod: reportPeriod, event: eventId }, function (numReportsEvent) { /* ... */ })
+// example output:
+numReportsEvent = "6"
+
+augur.api().ExpiringEvents.getNumRequired({ branch: branchId, period: reportPeriod }, function (numRequired) { /* ... */ })
+// example output:
+numRequired = "2"
+
+augur.api().ExpiringEvents.getNumRoundTwo({ branch: branchId, period: reportPeriod }, function (numRoundTwo) { /* ... */ })
+// example output:
+numRoundTwo = "1"
+
+augur.api().ExpiringEvents.getNumberEvents({ branch: branchId, expDateIndex: reportPeriod }, function (numberEvents) { /* ... */ });
+// example output:
+numberEvents = "12"
+
+augur.api().ExpiringEvents.getPeriodDormantRep({ branch: branchId, period: reportPeriod, sender: reporter }, function(dormantRep) { /* ... */ })
 // example output:
 dormantRep = "0x8ac7230489e80000"
 
-augur.getPeriodRepWeight(branch, reportPeriod, reporter, function (repWeight) { /* ... */ })
+augur.api().ExpiringEvents.getPeriodRepConstant({ branch: branchId, votePeriod: reportPeriod, sender: reporter }, function(repConstant) { /* ... */ })
 // example output:
-repWeight = "0x291e8f2fb9cfc00"
+repConstant = "0x8ac7230489e80000"
+
+augur.api().ExpiringEvents.getReport({ branch: branchId, period: reportPeriod, event: eventId, sender: reporter }, function (report) { /* ... */ });
+// example output:
+report = "1"
+
+augur.api().ExpiringEvents.getReportHash({ branch: branchId, expDateIndex: reportPeriod, reporter, event: eventId }, function (reportHash) { /* ... */ });
+// example output:
+reportHash = "-0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api().ExpiringEvents.getRequired({ event: eventId }, function (required) { /* ... */ })
+// example output:
+required = "0x0000000000000000000000000000000000000000000000000000000000000001"
+
+augur.api().ExpiringEvents.getEthicReport({ branch: branchId, period: reportPeriod, event: eventId, sender: reporter }, function (reportEthicality) { /* ... */ })
+// example output:
+reportEthicality = '0x0000000000000000000000000000000000000000000000000000000000000001'
 
 var report = '.74';
-augur.getWeightOfReport(reportPeriod, eventId, report, function (reportWeight) { /* ... */ })
+augur.api().ExpiringEvents.getWeightOfReport({ period: reportPeriod, event: eventId, report }, function (reportWeight) { /* ... */ })
 // example output:
 reportWeight = "0x29a2241af62c0000"
 
 ```
-### [expiringEvents contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/expiringEvents.se)
-#### getActiveReporters(branch, reportPeriod, from, to[, callback])
+### [ExpiringEvents contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/expiringEvents.se)
+#### augur.api().ExpiringEvents.getAfterRep({ branch, period, sender }[, callback])
 
-Fetches an array of reporter addresses from the reporters pool given a start `from` and end `to` point and a specified `reportPeriod`.
+Gets the amount of active REP for a specified reporter `sender` after all modifications to REP for the reporting cycle are complete. Initially this is equal to the `beforeRep` value.
 
-#### getCurrentMode(reportPeriod, eventId[, callback])
+#### augur.api().ExpiringEvents.getBeforeRep({ branch, period, sender }[, callback])
 
-Returns the current mode report or report key with the most value for a specified Event ID `eventId` and period `reportPeriod`.
+Gets the amount of active REP for a specified reporter `sender` before any penalization for incorrectly reporting.
 
-#### getCurrentModeItems(reportPeriod, eventId[, callback])
+#### augur.api().ExpiringEvents.getCurrentMode({ period, event }[, callback])
 
-Returns the current mode report value for a specified Event ID `eventId` and period `reportPeriod`.
+Returns the current mode report or report key with the most value for a specified Event ID `event` and `period`.
 
-#### getEvents(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getCurrentModeItems({ period, event }[, callback])
 
-Fetches an array of event IDs that are scheduled to be reported on during `reportPeriod`.
+Returns the current mode report value for a specified Event ID `event` and `period`.
 
-#### getEventsRange(branch, reportPeriod, start, end[, callback])
+#### augur.api().ExpiringEvents.getEncryptedReport({ branch, expDateIndex, reporter, event }[, callback])
 
-Fetches an array of event IDs that are scheduled to be reported on during `reportPeriod` with a range specified by the `start` and `end` values.
+Returns an array with the encrypted report, encrypted salt, and ethicality of the `event` specified given the `branch`, period `expDateIndex`, and `reporter` who submit the report.
 
-#### getNumberEvents(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getEthicReport({ branch, period, event, sender }[, callback])
 
-The total number of events scheduled to be reported on during `reportPeriod`.
+Returns the ethicality of the report given the specified event ID `event` and specified reporter `sender`.
 
-#### getEvent(branch, reportPeriod, eventIndex[, callback])
+#### augur.api().ExpiringEvents.getEvent({ branch, expDateIndex, eventIndex}[, callback])
 
-Looks up the event ID that has index `eventIndex`.
+Looks up the event ID that has index `eventIndex` given a specific `branch` and period `expDateIndex`.
 
-#### getAfterRep(branch, reportPeriod, reporter[, callback])
+#### augur.api().ExpiringEvents.getEventIndex({ period, eventID }[, callback])
 
-Gets the amount of active REP for a specified reporter `reporter` after all modifications to REP for the reporting cycle are complete. Initially this is equal to the `beforeRep` value.
+Gets the index of the specified event `eventID` in a `period`.
 
-#### getBeforeRep(branch, reportPeriod, reporter[, callback])
+#### augur.api().ExpiringEvents.getEvents({ branch, expDateIndex }[, callback])
 
-Gets the amount of active REP for a specified reporter `reporter` before any penalization for incorrectly reporting.
+Fetches an array of event IDs that are scheduled to be reported on during the report period `expDateIndex`.
 
-#### getEventWeight(branch, reportPeriod, eventId[, callback])
+#### augur.api().ExpiringEvents.getEventsRange({ branch, expDateIndex, start, end }[, callback])
 
-Returns the weight of the specified event `eventId` for the specified reporting period `reportPeriod`.
+Fetches an array of event IDs that are scheduled to be reported on during the report period `expDateIndex` with a range specified by the `start` and `end` values.
 
-#### getReport(branch, reportPeriod, eventId, reporter[, callback])
+#### augur.api().ExpiringEvents.getLesserReportNum({ branch, period, event }[, callback])
 
-The report for reporting event ID `eventId` submitted for `reportPeriod` by address `reporter`.
+Returns the number of reports an specified event `event` should have.
 
-#### getReportHash(branch, reportPeriod, reporter, eventId[, callback])
+#### augur.api().ExpiringEvents.getNumEventsToReportOn({ branch, expDateIndex }[, callback])
 
-The report hash submitted for `reportPeriod` by address `reporter` for specified event ID `eventId`.
+The total number of events scheduled to be reported on during the report period `expDateIndex`.
 
-#### getReportsCommitted(branch, reportPeriod, eventId[, callback])
+#### augur.api().ExpiringEvents.getNumRemoved({ branch, period }[, callback])
 
-Gets the number of reports committed for the specified event ID `eventId`.
+Returns the number of events that no longer need to be reported on from the specified reporting period `period`. This can be caused by an event being resolved early successfully as an example.
 
-#### getRequired(eventId, reportPeriod, branch[, callback])
+#### augur.api().ExpiringEvents.getNumReportsActual({ branch, votePeriod, sender }[, callback])
 
-Returns if the specified event ID `eventId` is required to be reported on or not.
+Returns the actual number of reports a reporter `sender` has reported on a given `branch` for a specified `votePeriod`.
 
-#### getEventIndex(branch, reportPeriod, eventId[, callback])
+#### augur.api().ExpiringEvents.getNumReportsEvent({ branch, votePeriod, eventID }[, callback])
 
-Gets the index of the specified event `eventId`.
+Returns the number of reports for a specific event `eventID` on a `branch` during a specific `votePeriod`.
 
-#### getEthicReport(branch, reportPeriod, eventId, reporter[, callback])
+#### augur.api().ExpiringEvents.getNumRequired({ branch, period }[, callback])
 
-Returns the ethicality of the report given the specified event ID `eventId` and specified reporter `reporter`.
+Returns the number of events that will be required to be reported on given a specified `period`.
 
-#### getFeeValue(branch, period[, callback])
+#### augur.api().ExpiringEvents.getNumRoundTwo({ branch, period }[, callback])
 
-Gets all the fees for all markets in Wei for the specified `period`.
+Returns the number of round 2 events in the specified reporting `period`.
 
-#### getNumActiveReporters(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getNumberEvents({ branch, expDateIndex }[, callback])
 
-Returns the number of active reporters available to report for a specified `reportPeriod`.
+Returns the number of events expiring on a `branch` during a specific period `expDateIndex`.
 
-#### getNumEventsToReportOn(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getPeriodDormantRep({ branch, period, sender }[, callback])
 
-Returns the number of available events to report on, not counting required events for a specified `reportPeriod`.
+Returns the amount of dormant REP for a specified reporter `sender` and report `period`.
 
-#### getNumReportsSubmitted(branch, reportPeriod, reporter[, callback])
+#### augur.api().ExpiringEvents.getReport({ branch, period, event, sender }[, callback])
 
-Returns the number of reports submitted by the specified reporter `reporter`.
+The report for reporting event ID `event` submitted for a `period` by address `sender`.
 
-#### getNumRemoved(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getReportHash({ branch, expDateIndex, reporter, event }[, callback])
 
-Returns the number of events that no longer need to be reported on from the specified reporting period `reportPeriod`. This can be caused by an event being resolved early successfully as an example.
+The report hash submitted for period `expDateIndex` by address `reporter` for specified event ID `event`.
 
-#### getNumRequired(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getRequired({ event }[, callback])
 
-Returns the number of events that will be required to be reported on given a specified `reportPeriod`.
+Returns if the specified event ID `event` is required to be reported on or not.
 
-#### getNumRoundTwo(branch, reportPeriod[, callback])
+#### augur.api().ExpiringEvents.getWeightOfReport({ period, event, report }[, callback])
 
-Returns the number of round 2 events in the specified reporting period `reportPeriod`.
-
-#### getLesserReportNum(branch, reportPeriod, eventId[, callback])
-
-Returns the number of reports an specified event `eventId` should have.
-
-#### getPeriodDormantRep(branch, reportPeriod, reporter[, callback])
-
-Returns the amount of dormant REP for a specified reporter `reporter` and report period `reportPeriod`.
-
-#### getPeriodRepWeight(branch, reportPeriod, reporter[, callback])
-
-Returns the rep weight value for the specified reporter `reporter` in a specified report period `reportPeriod`.
-
-#### getWeightOfReport(reportPeriod, eventId, report[, callback])
-
-Returns the amount of reports an event `eventId` has for a specified report value `report`. In the case of a backstop then this will return the amount of REP that has reported on the report value `report`.
+Returns the amount of reports an event `event` has for a specified report value `report`. In the case of a backstop then this will return the amount of REP that has reported on the report value `report`.
 
 ```javascript
 // trades contract
