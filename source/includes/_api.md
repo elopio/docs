@@ -1150,89 +1150,58 @@ Returns if the specified event ID `event` is required to be reported on or not.
 Returns the amount of reports an event `event` has for a specified report value `report`. In the case of a backstop then this will return the amount of REP that has reported on the report value `report`.
 
 ```javascript
-// trades contract
-var trade_id = "-0x22daf7fdff22ff716fd8108c011d1c0e69a7ab4a2b087f65dda2fc77ea044ba1";
-
-augur.get_trade(trade_id, function (trade) { /* ... */ });
-// example output:
-trade = {
-  id: '-0x22daf7fdff22ff716fd8108c011d1c0e69a7ab4a2b087f65dda2fc77ea044ba1',
-  type: 'sell',
-  market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-  amount: '1',
-  price: '0.5',
-  owner: '0x15f6400a88fb320822b689607d425272bea2175f',
-  block: 920945,
-  outcome: '1'
-}
-```
-
-### [trades contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/trades.se)
-#### get_trade(trade_id[, callback])
-
-Gets the details of trade `trade_id`.  (To get the `trade_id`s for a given market, call `augur.get_trade_ids(market)`.)
-
-```javascript
 // markets contract
 var marketId = "0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519";
 var outcomeId = 5; // 8-outcome categorical market
 var amount = 4;
 var branchId = augur.branches.dev;
 
-augur.getBondsMan(marketId, function (bondsMan) { /* ... */ })
+augur.api().Markets.getBondsMan({ market: marketId }, function (bondsMan) { /* ... */ })
 // example output: (this market hasn't been moved, no bondsMan set.)
 bondsMan = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
-augur.getBranch(marketId, function (branch) { /* ... */ })
+augur.api().Markets.getBranch({ market: marketId }, function (branch) { /* ... */ })
 // example output:
 branch = "0xf69b5"
 
-augur.getCumulativeScale(marketId, function (cumulativeScale) { /* ... */ })
+augur.api().Markets.getCumulativeScale({ market: marketId }, function (cumulativeScale) { /* ... */ })
 // example output:
 cumulativeScale = "1"
 
-augur.getExtraInfo(marketId, function (extraInfo) { /* ... */ })
+augur.api().Markets.getExtraInfo({ market: marketId }, function (extraInfo) { /* ... */ })
 // example output:
 extraInfo = "https://www.google.com/"
 
-augur.getExtraInfoLength(marketId, function (extraInfoLength) { /* ... */ })
+augur.api().Markets.getExtraInfoLength({ market: marketId }, function (extraInfoLength) { /* ... */ })
 // example output:
 extraInfoLength = "23"
 
-augur.getFees(marketId, function (fees) { /* ... */ })
+augur.api().Markets.getFees({ market: marketId }, function (fees) { /* ... */ })
 // example output:
 fees = "0xf4dba088b49b05fd4380c9c00000000"
 
-augur.getGasSubsidy(marketId, function (gasSubsidy) { /* ... */ })
+augur.api().Markets.getGasSubsidy({ market: marketId }, function (gasSubsidy) { /* ... */ })
 // example output:
 gasSubsidy = "0x22b1c8c1227a0000"
 
-augur.getLastExpDate(marketId, function (lastExpiration) { /* ... */ })
+augur.api().Markets.getLastExpDate({ market: marketId }, function (lastExpiration) { /* ... */ })
 // example output:
 lastExpiration = "1608876000000"
 
-augur.getLastOrder(marketId, function (lastOrder) { /* ... */ })
-// example output:
-lastOrder = "0x9344a62a43eba907fffeaf54e944070f11d65af62d188cb561823ad540c10314"
-
-augur.getLastOutcomePrice(marketId, outcomeId, function (lastPrice) { /* ... */ })
-// example output:
-lastPrice = "0x4c9afac0f828000"
-
 var eventIndex = 0;
-augur.getMarketEvent(marketId, eventIndex, function (eventId) { /* ... */ })
+augur.api().Markets.getMarketEvent({ market: marketId }, function (eventId) { /* ... */ })
 // example output:
 eventId = "-0xa65427afe1fc912e973d8dac2a83487aea5f5707a74c3168afb56e5a95b760ea"
 
-augur.getMarketEvents(marketId, function (marketEvents) { /* ... */ });
-// example output:
-marketEvents = ["-0xa65427afe1fc912e973d8dac2a83487aea5f5707a74c3168afb56e5a95b760ea"]
-
-augur.getMarketNumOutcomes(marketId, function (marketNumOutcomes) { /* ... */ });
+augur.api().Markets.getMarketNumOutcomes({ market: marketId }, function (marketNumOutcomes) { /* ... */ });
 // example output:
 marketNumOutcomes = "9"
 
-augur.getMarketShareContracts(marketId, function (marketShareContracts) { /* ... */ })
+augur.api().Markets.getMarketResolved({ market: marketId }, function (marketResolved) { /* ... */ })
+// example output:
+marketResolved = "0"
+
+augur.api().Markets.getMarketShareContracts({ market: marketId }, function (marketShareContracts) { /* ... */ })
 // example output:
 marketShareContracts = ["0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
                         "0x2df941084bacae336391f5e9a078b19113ae642b",
@@ -1243,194 +1212,164 @@ marketShareContracts = ["0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
                         "0xee0b0b53a7794f329e81423e92dd00a5512cfad7",
                         "0xb0368caf8e89da60d9c9a23592d3508f562a88ab"]
 
-augur.getMarketsHash(branchId, function (marketsHash) { /* ... */ })
+augur.api().Markets.getMarketsHash({ branch: branchId }, function (marketsHash) { /* ... */ })
 // example output:
 marketsHash = "178816a401f9441f1b375285a405d2d29902bad1da499dc154f6dfc946f08ce5"
 
-augur.getNumEvents(marketId, function (numEvents) { /* ... */ })
-// example output:
-numEvents = "1"
-
-augur.getOneWinningOutcome(marketId, outcomeId, function (outcome) { /* ... */ })
-// example output:
-outcome = "0x0000000000000000000000000000000000000000000000000000000000000000"
-
-augur.getOrderIDs(marketId, function (orderIds) { /* ... */ })
-// example output:
-orderIds = ["69dded28702e791fad4f5614a182e7e432e61f3709eb52162792651703607dc9"]
-
-augur.getOriginalTradingPeriod(marketId, function(originalPeriod) { /* ... */ })
+augur.api().Markets.getOriginalTradingPeriod({ market: marketId }, function (originalPeriod) { /* ... */ })
 // example output:
 originalPeriod = "8766"
 
+augur.api().Markets.getOutcomeShareContract({ market: marketId, outcome: outcomeId }, function (outcomeShareContract) { /* ... */ })
+// example output:
+outcomeShareContract = "0xeadd2e20f4dba389439ed49a6fe22a967c4182c8"
+
+augur.api().Markets.getOutcomeShareWallet({ market: marketId, outcome: outcomeId }, function (outcomeShareWallet) { /* ... */ })
+// example output:
+outcomeShareWallet = "0xc4e58666325a2d00367de25c85fc178fb4b111cb"
+
 var trader = "0x61badf138090eb57cac69a595374090ef7b76f86";
-augur.getParticipantSharesPurchased(marketId, trader, outcomeId, function (participantSharesPurchased) { /* ... */ });
+augur.getParticipantSharesPurchased({ market: marketId, trader, outcome: outcomeId }, function (participantSharesPurchased) { /* ... */ });
 // example output:
 participantSharesPurchased = "4"
 
-var order = "0x9344a62a43eba907fffeaf54e944070f11d65af62d188cb561823ad540c10314"
-augur.getPrevID(marketId, order, function (previousID) { /* ... */ })
-// example output:
-previousID = "0x23acb23dddeba907fffeaf54e932800a11d73af62d188cb561823ad540c10442"
-
-augur.getPushedForward(marketId, function (isPushedForward) { /* ... */ })
+augur.api().Markets.getPushedForward({ market: marketId }, function (isPushedForward) { /* ... */ })
 // example output:
 isPushedForward = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
-augur.getSharesPurchased(marketId, outcomeId, function (sharesPurchased) { /* ... */ });
+augur.api().Markets.getSharesPurchased({ market: marketId, outcome: outcomeId }, function (sharesPurchased) { /* ... */ });
 // example output:
 sharesPurchased = "32.24854252438022522758"
 
-augur.getSharesValue(marketId, function (sharesValues) { /* ... */ })
+augur.api().Markets.getSharesValue({ market: marketId }, function (sharesValues) { /* ... */ })
 // example output:
 sharesValues = "0x24dce54d34a1a00000"
 
-augur.getTotalOrders(marketId, function (totalOrders) { /* ... */ })
+augur.api().Markets.getTags({ market: marketId }, function (tags) { /* ... */ })
 // example output:
-totalOrders = "42"
+tags = [
+        "0x73706f7274730000",
+        "0x4261736562616c6c"
+        ]
 
-augur.getTotalSharesPurchased(marketId, function (totalSharesPurchased) { /* ... */ })
+augur.api().Markets.getTopic({ market: marketId }, function (topic) { /* ... */ })
+// example output:
+topic = "0x416d65726963616e2053706f727473"
+
+augur.api().Markets.getTotalSharesPurchased({ market: marketId }, function (totalSharesPurchased) { /* ... */ })
 // example output:
 totalSharesPurchased = "2720"
 
-augur.getTradingFee(marketId, function (tradingFee) { /* ... */ });
+augur.api().Markets.getTradingFee({ market: marketId }, function (tradingFee) { /* ... */ });
 // example output:
 tradingFee = "0.00999999999999999999"
 
-augur.getTradingPeriod(marketId, function (tradingPeriod) { /* ... */ });
+augur.api().Markets.getTradingPeriod({ markets: marketId }, function (tradingPeriod) { /* ... */ });
 // example output:
 tradingPeriod = "1075"
-
-augur.getVolume(marketId, function (marketVolume) { /* ... */ })
-// example output:
-marketVolume = "5315"
-
-augur.getWinningOutcomes(marketId, function (winningOutcomes) { /* ... */ });
-// example output:
-winningOutcomes = ["0", "0", "0", "0", "0", "0", "0", "0", "0"]
 
 ```
 ### [markets contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/markets.se)
 
-#### getBondsMan(market[, callback])
+#### augur.api().Markets.getBondsMan({ market }[, callback])
 
 Gets the address of the person who posted the bond to push the specified market ID `market` up. If no bond has been posted then this returns false.
 
-#### getBranch(market[, callback])
+#### augur.api().Markets.getBranch({ market }[, callback])
 
 Gets the branch of the specified market ID `market`.
 
-#### getCumulativeScale(market[, callback])
+#### augur.api().Markets.getCumulativeScale({ market }[, callback])
 
 Gets the cumulative scale of the specified market ID `market`.
 
-#### getExtraInfo(market[, callback])
+#### augur.api().Markets.getExtraInfo({ market }[, callback])
 
 Gets the Extra Info string for the specified market ID `market`.
 
-#### getExtraInfoLength(market[, callback])
+#### augur.api().Markets.getExtraInfoLength({ market }[, callback])
 
 Gets the Extra Info string length for the specified market ID `market`.
 
-#### getFees(market[, callback])
+#### augur.api().Markets.getFees({ market }[, callback])
 
 Gets the total fees paid in Wei to the branch by a specified market ID `market`.
 
-#### getGasSubsidy(market[, callback])
+#### augur.api().Markets.getGasSubsidy({ market }[, callback])
 
 Gets the gas subsidy of the specified market ID `market`.
 
-#### getLastExpDate(market[, callback])
+#### augur.api().Markets.getLastExpDate({ market }[, callback])
 
 Gets the date of expiration of the specified `market`'s last event.
 
-#### getLastOrder(market[, callback])
+#### augur.api().Markets.getMarketEvent({ market }[, callback])
 
-Returns the last order placed on the specified market ID `market`.
+Returns the event ID for a specified market ID `market`.
 
-#### getLastOutcomePrice(market, outcome[, callback])
-
-Returns the last traded price of a specified `outcome` in a `market`.
-
-#### getMarketEvent(market, eventIndex[, callback])
-
-Returns the event ID for a specified market ID `market` and the index `eventIndex` of the events array for the specified market.
-
-#### getMarketEvents(market[, callback])
-
-Gets an array of event IDs included in `market`.  (Note: only combinatorial markets have more than one event.)
-
-#### getMarketNumOutcomes(market[, callback])
+#### augur.api().Markets.getMarketNumOutcomes({ market }[, callback])
 
 Gets the total number of outcomes for `market`.  For binary and scalar markets, this is 2.  For categorical markets, this is equal to the number of categories (choices).  For combinatorial markets, this is the number of possible outcome combinations.
 
-#### getMarketShareContracts(market[, callback])
+#### augur.api().Markets.getMarketResolved({ market }[, callback])
+
+Returns wether the specified `market` is resolved or not.
+
+#### augur.api().Markets.getMarketShareContracts({ market }[, callback])
 
 Returns an array of share contract address for each outcome in the specified `market`.
 
-#### getMarketsHash(branch[, callback])
+#### augur.api().Markets.getMarketsHash({ branch }[, callback])
 
 Returns the marketsHash of the specified branch ID `branch`. marketsHash is a composite hash of all markets.
 
-#### getNumEvents(market[, callback])
-
-Get the number of events included in `market`.  (Note: only combinatorial markets have more than one event.)
-
-#### getOneWinningOutcome(market, outcome[, callback])
-
-Get the winning outcome value for a specified market ID `market` and a specific outcome `outcome`.
-
-#### getOrderIDs(market[, callback])
-
-Gets an array of Order IDs for a specified market ID `market`.
-
-#### getOriginalTradingPeriod(market[, callback])
+#### augur.api().Markets.getOriginalTradingPeriod({ market }[, callback])
 
 Gets the original trading period of the specified market ID `market`.
 
-#### getParticipantSharesPurchased(market, trader, outcome[, callback])
+#### augur.api().Markets.getOutcomeShareContract({ market, outcome }[, callback])
+
+Returns the Share Token Contract address for a specified `market` and `outcome`.
+
+#### augur.api().Markets.getOutcomeShareWallet({ market, outcome }[, callback])
+
+Returns the Outcome Share Wallet Contract address for a specified `market` and `outcome`.
+
+#### augur.api().Markets.getParticipantSharesPurchased({ market, trader, outcome }[, callback])
 
 The number of shares of `outcome` in `market` purchased by the address of the specified `trader`.
 
-#### getPrevID(market, order[, callback])
-
-Gets the order placed before the specified `order` in the selected market ID `market`.
-
-#### getPushedForward(market[, callback])
+#### augur.api().Markets.getPushedForward({ market }[, callback])
 
 Returns wether the specified market `market` is pushed forward or not.
 
-#### getSharesPurchased(market, outcome[, callback])
+#### augur.api().Markets.getSharesPurchased({ market, outcome }[, callback])
 
 The total number of shares purchased (by all traders) of `outcome` in `market`.
 
-#### getSharesValue(market[, callback])
+#### augur.api().Markets.getSharesValue({ market }[, callback])
 
 Gets the value of all shares traded on the specified `market`.
 
-#### getTotalOrders(market[, callback])
+#### augur.api().Markets.getTags({ market }[, callback])
 
-Gets a count of the total amount of orders placed on a specified market ID `market`.
+Returns an array of the tags associated with the specified `market`.
 
-#### getTotalSharesPurchased(market[, callback])
+#### augur.api().Markets.getTopic({ market }[, callback])
+
+Returns the topic of the specified `market`.
+
+#### augur.api().Markets.getTotalSharesPurchased({ market }[, callback])
 
 Gets the total amount of shares purchased across all outcomes in a specified `market`.
 
-#### getTradingFee(market[, callback])
+#### augur.api().Markets.getTradingFee({ market }[, callback])
 
 Gets the trading fee for `market`, expressed as a proportion.
 
-#### getTradingPeriod(market[, callback])
+#### augur.api().Markets.getTradingPeriod({ market }[, callback])
 
 Gets the trading period for `market`.
-
-#### getVolume(market[, callback])
-
-Gets the volume of the specified market id `market`.
-
-#### getWinningOutcomes(market[, callback])
-
-Gets an array of outcomes showing the winning/correct outcome, or an array of all zeros if `market` has not yet been resolved.
 
 ```javascript
 // reporting contract
