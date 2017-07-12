@@ -1373,104 +1373,104 @@ Gets the trading period for `market`.
 
 ```javascript
 // reporting contract
-var branchId = augur.branches.dev;
+var branch = augur.branches.dev;
 var address = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"
-augur.balanceOf(branchId, address, function (repBalance) { /* ... */ })
+augur.api().Reporting.balanceOfReporter({ branch, address}, function (repBalance) { /* ... */ })
 // example output:
 repBalance = "47"
 
-augur.getActiveRep(branchId, function (activeRep) { /* ... */ })
+augur.api().Reporting.getActiveRep({ branch }, function (activeRep) { /* ... */ })
 // example output:
 activeRep = "5820"
 
 var repIndex = 39;
-augur.getDormantRepByIndex(branchId, repIndex, function (dormantRep) { /* ... */ })
+augur.api().Reporting.getDormantRepByIndex({ branch, repIndex }, function (dormantRep) { /* ... */ })
 // example output:
 dormantRep = "0"
 
-augur.getFork(branchId, function (fork) { /* ... */ })
-// example output:
-fork = "0xe58a0"
-
-augur.getRepBalance(branchId, address, function (repBalance) { /* ... */ });
-// example output:
-repBalance = "47"
-
-augur.getRepByIndex(branchId, repIndex, function (rep) { /* ... */ });
-// example output:
-rep = "47"
-
-augur.getReporterID(branchId, repIndex, function (reporterID) { /* ... */ });
-// example output:
-reporterID = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"
-
-augur.getReputation(address, function (reputation) { /* ... */ })
-// example output:
-reputation = [ "0xf69b5", "0x28c418afbbb5c0000" ]
-
-augur.getNumberReporters(branchId, function (numberReporters) { /* ... */ });
+augur.api().Reporting.getNumberReporters({ branch }, function (numberReporters) { /* ... */ });
 // example output:
 numberReporters = "38"
 
-augur.repIDToIndex(branchId, address, function (repIndex) { /* ... */ });
+augur.api().Reporting.getRepBalance({ branch, address }, function (repBalance) { /* ... */ });
 // example output:
-repIndex = "0"
+repBalance = "47"
 
-augur.getTotalRep(branchId, function (totalRep) { /* ... */ });
+augur.api().Reporting.getRepByIndex({ branch, repIndex }, function (rep) { /* ... */ });
+// example output:
+rep = "47"
+
+augur.api().Reporting.getReportedOnNonFinalRoundTwoEvent({ branch, reporter: address }, function (reportedRoundTwo) { /* ... */ })
+// example output:
+reportedRoundTwo = "0"
+
+augur.api().Reporting.getReporterID({ branch, index: repIndex }, function (reporterID) { /* ... */ });
+// example output:
+reporterID = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"
+
+augur.api().Reporting.getReputation({ address }, function (reputation) { /* ... */ })
+// example output:
+reputation = [ "0xf69b5", "0x28c418afbbb5c0000" ]
+
+augur.api().Reporting.getTotalRep({ branch }, function (totalRep) { /* ... */ });
 // example output:
 totalRep = "6000"
 
-augur.totalSupply(branchId, function (totalSupply) { /* ... */ })
+augur.api().Reporting.repIDToIndex({ branch, repID: address }, function (repIndex) { /* ... */ });
+// example output:
+repIndex = "0"
+
+augur.api().Reporting.totalSupply({ branch }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "180"
 
 ```
 ### [reporting contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/reporting.se)
-#### balanceOf(branch, address[, callback])
+#### augur.api().Reporting.balanceOfReporter({ branch, address }[, callback])
 
 Gets the active rep balance of the specified `address`.
 
-#### getActiveRep(branch[, callback])
+#### augur.api().Reporting.getActiveRep({ branch }[, callback])
 
-Gets all the active rep for a specified branch ID `branch`.
+Gets all the active rep for a specified `branch`.
 
-#### getDormantRepByIndex(branch, repIndex[, callback])
+#### augur.api().Reporting.getDormantRepByIndex({ branch, repIndex }[, callback])
 
 Gets the amount of dormant rep for a specified rep index `repIndex` in a specific `branch`.
 
-#### getFork(branch[, callback])
-
-Gets the branch ID of the specified branch ID `branch` if it was forked. If not it will return 0.
-
-#### getRepBalance(branch, address[, callback])
-
-The Reputation balance on `branch` of account `address`.
-
-#### getRepByIndex(branch, repIndex[, callback])
-
-The Reputation balance on `branch` of reporter number `repIndex`.
-
-#### getReporterID(branch, index[, callback])
-
-Looks up a reporter's ID (address) by reporter number `index`.
-
-#### getReputation(address[, callback])
-
-Returns an array containing branch and amount of active rep for the specified `address`.
-
-#### getNumberReporters(branch[, callback])
+#### augur.api().Reporting.getNumberReporters({ branch }[, callback])
 
 The total number of reporters on `branch`.
 
-#### repIDToIndex(branch, repID[, callback])
+#### augur.api().Reporting.getRepBalance({ branch, address }[, callback])
 
-Looks up a reporter's number (index) by address `repID`.
+The Reputation balance on `branch` of account `address`.
 
-#### getTotalRep(branch[, callback])
+#### augur.api().Reporting.getRepByIndex({ branch, repIndex }[, callback])
+
+The Reputation balance on `branch` of reporter number `repIndex`.
+
+#### augur.api().Reporting.getReportedOnNonFinalRoundTwoEvent({ branch, reporter }[, callback])
+
+Returns wether the specified `reporter` has reported on a non Final Round Two Event or not.
+
+#### augur.api().Reporting.getReporterID({ branch, index }[, callback])
+
+Looks up a reporter's ID (address) by reporter number `index`.
+
+#### augur.api().Reporting.getReputation({ address }[, callback])
+
+Returns an array containing branch and amount of active rep for the specified `address`.
+
+#### augur.api().Reporting.getTotalRep({ branch }[, callback])
 
 The total amount of Reputation on `branch`.
 
-#### totalSupply(branch[, callback])
+#### augur.api().Reporting.repIDToIndex({ branch, repID }[, callback])
+
+Looks up a reporter's number (index) by address `repID`.
+
+#### augur.api().Reporting.totalSupply({ branch }[, callback])
 
 Returns the amount of dormant rep on a specified `branch`.
 
