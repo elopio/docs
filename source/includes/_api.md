@@ -537,7 +537,7 @@ Gets the plaintext (UTF-8) description of `ID` (a market or event ID).
 
 #### augur.api().Info.getDescriptionLength({ ID }[, callback])
 
-Gets the length of description of the specified `ID` (item is a market ID or event ID).
+Gets the length of description of the specified `ID` (a market ID or event ID).
 
 ```javascript
 // branches contract
@@ -629,6 +629,10 @@ Gets branch ID for the branch with index `branchNumber`.  (Branches are stored a
 #### augur.api().Branches.getBranches([callback])
 
 Gets an array of all branch IDs on the current network.
+
+#### augur.api().Branches.getBranches({ index }[, callback])
+
+Returns an array of all branch IDs on the current network starting from the specified `index`.
 
 #### augur.api().Branches.getCreationDate({ ID }[, callback])
 
@@ -1030,10 +1034,6 @@ augur.api().ExpiringEvents.getPeriodDormantRep({ branch: branchId, period: repor
 // example output:
 dormantRep = "0x8ac7230489e80000"
 
-augur.api().ExpiringEvents.getPeriodRepConstant({ branch: branchId, votePeriod: reportPeriod, sender: reporter }, function(repConstant) { /* ... */ })
-// example output:
-repConstant = "0x8ac7230489e80000"
-
 augur.api().ExpiringEvents.getReport({ branch: branchId, period: reportPeriod, event: eventId, sender: reporter }, function (report) { /* ... */ });
 // example output:
 report = "1"
@@ -1150,7 +1150,7 @@ Returns if the specified event ID `event` is required to be reported on or not.
 Returns the amount of reports an event `event` has for a specified report value `report`. In the case of a backstop then this will return the amount of REP that has reported on the report value `report`.
 
 ```javascript
-// markets contract
+// Markets contract
 var marketId = "0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519";
 var outcomeId = 5; // 8-outcome categorical market
 var amount = 4;
@@ -1269,7 +1269,7 @@ augur.api().Markets.getTradingPeriod({ markets: marketId }, function (tradingPer
 tradingPeriod = "1075"
 
 ```
-### [markets contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/markets.se)
+### [Markets contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/markets.se)
 
 #### augur.api().Markets.getBondsMan({ market }[, callback])
 
@@ -1372,7 +1372,7 @@ Gets the trading fee for `market`, expressed as a proportion.
 Gets the trading period for `market`.
 
 ```javascript
-// reporting contract
+// Reporting contract
 var branch = augur.branches.dev;
 var address = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"
 augur.api().Reporting.balanceOfReporter({ branch, address}, function (repBalance) { /* ... */ })
@@ -1425,7 +1425,7 @@ augur.api().Reporting.totalSupply({ branch }, function (totalSupply) { /* ... */
 totalSupply = "180"
 
 ```
-### [reporting contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/reporting.se)
+### [Reporting contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/reporting.se)
 #### augur.api().Reporting.balanceOfReporter({ branch, address }[, callback])
 
 Gets the active rep balance of the specified `address`.
@@ -1475,242 +1475,244 @@ Looks up a reporter's number (index) by address `repID`.
 Returns the amount of dormant rep on a specified `branch`.
 
 ```javascript
-// backstops contract
-var branchId = augur.branches.dev;
-var eventId = "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683";
-augur.getBondAmount(eventId, function (bondAmount) { /* ... */ })
+// Backstops contract
+var branch = augur.branches.dev;
+var event = "-0xd0dbd235c8de8cccd7d8ef96b460c7dc2d19539fb45778f7897c412d4c0a3683";
+augur.api().Backstops.getBondAmount({ event }, function (bondAmount) { /* ... */ })
 // example output:
 bondAmount = "0x214e8348c4f00000"
 
-augur.getBondPaid(eventId, function (bondPaid) { /* ... */ })
+augur.api().Backstops.getBondPaid({ event }, function (bondPaid) { /* ... */ })
 // example output:
 bondPaid = "0x214e8348c4f00000"
 
-augur.getBondPoster(eventId, function (bondPoster) { /* ... */ })
+augur.api().Backstops.getBondPoster({ event }, function (bondPoster) { /* ... */ })
 // example output:
 bondPoster = "0x72ba02adc3c8c4aa67cd92fecf77a2cdf79eb34d"
 
-augur.getBondReturned(eventId, function (bondReturned) { /* ... */ })
+augur.api().Backstops.getBondReturned({ event }, function (bondReturned) { /* ... */ })
 // example output:
 bondReturned = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getDisputedOverEthics(eventId, function (disputedOverEthics) { /* ... */ })
+augur.api().Backstops.getDisputedOverEthics({ event }, function (disputedOverEthics) { /* ... */ })
 // example output:
 disputedOverEthics = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getFinal(eventId, function (isFinal) { /* ... */ })
+augur.api().Backstops.getFinal({ event }, function (isFinal) { /* ... */ })
 // example output:
 isFinal = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getForkBondPaid(eventId, function (forkBondPaid) { /* ... */ })
+augur.api().Backstops.getForkBondPaid({ event }, function (forkBondPaid) { /* ... */ })
 // example output:
 forkBondPaid = "0x24150e3980040000"
 
-augur.getForkBondPoster(eventId, function (forkBondPoster) { /* ... */ })
+augur.api().Backstops.getForkBondPoster({ event }, function (forkBondPoster) { /* ... */ })
 // example output:
 forkBondPoster = "0xb0368caf8e89da60d9c9a23592d3508f562a88ab"
 
-augur.getForkedOverEthicality(eventId, function (forkedOverEthics) { /* ... */ })
+augur.api().Backstops.getForkedOverEthicality({ event }, function (forkedOverEthics) { /* ... */ })
 // example output:
 forkedOverEthics = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getMoved(eventId, function (moved) { /* ... */ })
+augur.api().Backstops.getMoved({ event }, function (moved) { /* ... */ })
 // example output:
 moved = "0x0000000000000000000000000000000000000000000000000000000000000000"
 
-augur.getOriginalBranch(eventId, function (originalBranch) { /* ... */ })
+augur.api().Backstops.getOriginalBranch({ event }, function (originalBranch) { /* ... */ })
 // example output:
 originalBranch = "0xf59b5"
 
-augur.getOriginalEthicality(eventId, function (originalEthicality) { /* ... */ })
+augur.api().Backstops.getOriginalEthicality({ event }, function (originalEthicality) { /* ... */ })
 // example output:
 originalEthicality = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getOriginalOutcome(eventId, function (originalOutcome) { /* ... */ })
+augur.api().Backstops.getOriginalOutcome({ event }, function (originalOutcome) { /* ... */ })
 // example output:
 originalOutcome = "1"
 
-augur.getOriginalVotePeriod(eventId, function (originalVotePeriod) { /* ... */ })
+augur.api().Backstops.getOriginalVotePeriod({ event }, function (originalVotePeriod) { /* ... */ })
 // example output:
 originalVotePeriod = "8766"
 
 var forkPeriod = 8766;
-augur.getResolved(branchId, forkPeriod, function (resolved) { /* ... */ })
+augur.api().Backstops.getResolved({ branch, forkPeriod }, function (resolved) { /* ... */ })
 // example output:
 resolved = "0xf59b5"
 
-augur.getRoundTwo(eventId, function (roundTwo) { /* ... */ })
+augur.api().Backstops.getRoundTwo({ event }, function (roundTwo) { /* ... */ })
 // example output:
 roundTwo = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
 ```
-### [backstops contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/backstops.se)
-#### getBondAmount(event[, callback])
+### [Backstops contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/backstops.se)
+#### augur.api().Backstops.getBondAmount({ event }[, callback])
 
 Returns the amount of the bond for a specified event ID `event`.
 
-#### getBondPaid(event[, callback])
+#### augur.api().Backstops.getBondPaid({ event }[, callback])
 
 Gets the amount of the bond that has been paid back for a specified event ID `event`.
 
-#### getBondPoster(event[, callback])
+#### augur.api().Backstops.getBondPoster({ event }[, callback])
 
 Gets the address of the poster of the bond for a specified event ID `event`.
 
-#### getBondReturned(event[, callback])
+#### augur.api().Backstops.getBondReturned({ event }[, callback])
 
 Gets wether a round 2 bond has been returned or not given a specified event ID `event`.
 
-#### getDisputedOverEthics(event[, callback])
+#### augur.api().Backstops.getDisputedOverEthics({ event }[, callback])
 
 Gets wether a specified event ID `event` was disputed over ethicality.
 
-#### getFinal(event[, callback])
+#### augur.api().Backstops.getFinal({ event }[, callback])
 
 Gets wether the specified event ID `event` is final.
 
-#### getForkBondPaid(eventId[, callback])
+#### augur.api().Backstops.getForkBondPaid({ event }[, callback])
 
 Gets the amount of the bond paid to fork on the specified event ID `event`.
 
-#### getForkBondPoster(eventId[, callback])
+#### augur.api().Backstops.getForkBondPoster({ event }[, callback])
 
 Gets the address of the poster of the fork bond given a specified event ID `event`.
 
-#### getForkedOverEthicality(eventId[, callback])
+#### augur.api().Backstops.getForkedOverEthicality({ event }[, callback])
 
 Gets wether a specified event ID `event` was forked over ethicality.
 
-#### getMoved(eventId[, callback])
+#### augur.api().Backstops.getMoved({ event }[, callback])
 
 Returns wether the event ID `event` has been moved or not.
 
-#### getOriginalBranch(eventId[, callback])
+#### augur.api().Backstops.getOriginalBranch({ event }[, callback])
 
 Returns the original branch of the specified event ID `event`.
 
-#### getOriginalEthicality(eventId[, callback])
+#### augur.api().Backstops.getOriginalEthicality({ event }[, callback])
 
 Gets the original ethicality of the specified event ID `event`.
 
-#### getOriginalOutcome(eventId[, callback])
+#### augur.api().Backstops.getOriginalOutcome({ event }[, callback])
 
 Gets the original outcome of the specified event ID `event`.
 
-#### getOriginalVotePeriod(eventId[, callback])
+#### augur.api().Backstops.getOriginalVotePeriod({ event }[, callback])
 
 Gets the original vote period of the specified event ID `event`.
 
-#### getResolved(branchId, forkPeriod[, callback])
+#### augur.api().Backstops.getResolved({ branch, forkPeriod }[, callback])
 
 Gets the resolved branch given a specified `branchId` and `forkPeriod`.
 
-#### getRoundTwo(eventId[, callback])
+#### augur.api().Backstops.getRoundTwo({ event }[, callback])
 
 Gets wether the event ID `event` is a round two event or not.
 
 ```javascript
-// consensusData contract
-var branchId = augur.branches.dev;
+// ConsensusData contract
+var branch = augur.branches.dev;
 var period = 397;
 var reporter = "0x72ba02adc3c8c4aa67cd92fecf77a2cdf79eb34d";
-augur.getBaseReportersLastPeriod(branchId, function (baseReporters) { /* ... */ })
+var address = "0xee0b0b53a7794f329e81423e92dd00a5512cfad7";
+var event = "0x7cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcac";
+var currency = "0x02d3a9bc6cf0e18a7b54e944b89fd81d101af59f";
+
+augur.api().ConsensusData.getBaseReportersLastPeriod({ branch }, function (baseReporters) { /* ... */ })
 // example output:
 baseReporters = "120"
 
-augur.getDenominator(branch, period, function (denominator) { /* ... */ })
+augur.api().ConsensusData.getDenominator({ branch, period }, function (denominator) { /* ... */ })
 // example output:
 denominator = "0x1b1ae4d6e2ef500000"
 
-var address = "0xee0b0b53a7794f329e81423e92dd00a5512cfad7";
-augur.getFeesCollected(branch, address, period, currency, function (feesCollected) { /* ... */ })
-// example output:
-feesCollected = "0x0000000000000000000000000000000000000000000000000000000000000001"
-
-augur.getFeeFirst(branch, period, function (firstFeeClaimed) { /* ... */ })
+augur.api().ConsensusData.getFeeFirst({ branch, period }, function (firstFeeClaimed) { /* ... */ })
 // example output:
 firstFeeClaimed = "1"
 
-augur.getNotEnoughPenalized(branch, address, period, function (notEnough) { /* ... */ })
+augur.api().ConsensusData.getFeesCollected({ branch, address, period, currency }, function (feesCollected) { /* ... */ })
+// example output:
+feesCollected = "0x0000000000000000000000000000000000000000000000000000000000000001"
+
+augur.api().ConsensusData.getNotEnoughPenalized({ branch, address, period }, function (notEnough) { /* ... */ })
 // example output:
 notEnough = "1"
 
-var eventId = "0x7cbcc157062d19bf53daac10c98516c587925f0b4848240f690cc4e43ef5dcac";
-augur.getPenalized(branch, period, address, eventId, function (penalized) { /* ... */ })
+augur.api().ConsensusData.getPenalized({ branch, period, sender: address, event }, function (penalized) { /* ... */ })
 // example output:
 penalized = "1"
 
-augur.getPenalizedNum(branch, period, address, function (penalizedNum) { /* ... */ })
+augur.api().ConsensusData.getPenalizedNum({ branch, period, sender: address }, function (penalizedNum) { /* ... */ })
 // example output:
 penalizedNum = "6"
 
-augur.getPenalizedUpTo(branch, address, function (lastPenalizedPeriod) { /* ... */ })
+augur.api().ConsensusData.getPenalizedUpTo({ branch, sender: address }, function (lastPenalizedPeriod) { /* ... */ })
 // example output:
 lastPenalizedPeriod = "390"
 
-augur.getPeriodBalance(branch, period, function (periodBalance) { /* ... */ })
+augur.api().ConsensusData.getPeriodBalance({ branch, period }, function (periodBalance) { /* ... */ })
 // example output:
 periodBalance = "7240"
 
-augur.getRepCollected(branch, address, period, function (repCollected) { /* ... */ })
+augur.api().ConsensusData.getRepCollected({ branch, address, period }, function (repCollected) { /* ... */ })
 // example output:
 repCollected = "0x0000000000000000000000000000000000000000000000000000000000000001"
 
-augur.getRepRedistributionDone(branch, reporter, function (repRedistributionDone) { /* ... */ })
+augur.api().ConsensusData.getRepRedistributionDone({ branch, reporter }, function (repRedistributionDone) { /* ... */ })
 // example output:
 repRedistributionDone = "1"
 
-augur.getSlashed(branchId, period, reporter, function (isSlashed) { /* ... */ });
+augur.api().ConsensusData.getSlashed({ branchId, votePeriod: period, reporter }, function (isSlashed) { /* ... */ });
 // example output:
 isSlashed = "1"
 
 ```
-### [consensusData contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/consensusData.se)
-#### getBaseReportersLastPeriod(branch[, callback])
+### [ConsensusData contract](https://github.com/AugurProject/augur-core/blob/master/src/data_api/consensusData.se)
+#### augur.api().ConsensusData.getBaseReportersLastPeriod({ branch }[, callback])
 
 Gets the amount of base reporters for the previous period on the specified `branch`.
 
-#### getDenominator(branch, period[, callback])
+#### augur.api().ConsensusData.getDenominator({ branch, period }[, callback])
 
 Returns the value of the denominator used to calculate fees to pay out reporters for reporting given a specified `branch` and `period`.
 
-#### getFeesCollected(branch, address, period, currency[, callback])
-
-Returns wether the specified `address` has collected fees or not for the specified `currency`.
-
-#### getFeeFirst(branch, period[, callback])
+#### augur.api().ConsensusData.getFeeFirst({ branch, period }[, callback])
 
 Returns wether the first fee has been claimed by a reporter yet for the specified `branch` and `period`.
 
-#### getNotEnoughPenalized(branch, address, period[, callback])
+#### augur.api().ConsensusData.getFeesCollected({ branch, address, period, currency }, currency[, callback])
+
+Returns wether the specified `address` has collected fees or not for the specified `currency`.
+
+#### augur.api().ConsensusData.getNotEnoughPenalized({ branch, address, period }[, callback])
 
 Returns wether the specified `address` has been penalized for not reporting on enough reports in the specified `period`.
 
-#### getPenalized(branch, period, address, eventId[, callback])
+#### augur.api().ConsensusData.getPenalized({ branch, period, sender, event }[, callback])
 
-Returns wether the specified `address` was penalized for a specified event ID `eventId`.
+Returns wether the specified `sender` address was penalized for a specified event ID `event`.
 
-#### getPenalizedNum(branch, period, address[, callback])
+#### augur.api().ConsensusData.getPenalizedNum({ branch, period, sender }[, callback])
 
-Returns the number of times a specified `address` has been penalized.
+Returns the number of times a specified `sender` address has been penalized in a specified `branch` and `period`.
 
-#### getPenalizedUpTo(branch, address[, callback])
+#### augur.api().ConsensusData.getPenalizedUpTo({ branch, sender }[, callback])
 
-Gets the period that the specified `address` has been penalized up to so far.
+Gets the period that the specified `sender` address has been penalized up to so far.
 
-#### getPeriodBalance(branch, period[, callback])
+#### augur.api().ConsensusData.getPeriodBalance({ branch, period }[, callback])
 
 Returns the total balance of the specified `period`.
 
-#### getRepCollected(branch, address, period[, callback])
+#### augur.api().ConsensusData.getRepCollected({ branch, address, period }[, callback])
 
 Returns wether the specified `address` has collected Rep in the specified `period`.
 
-#### getRepRedistributionDone(branch, reporter[, callback])
+#### augur.api().ConsensusData.getRepRedistributionDone({ branch, reporter }[, callback])
 
 Returns wether the Rep redistribution is complete for the specified `reporter`.
 
-#### getSlashed(branch, period, reporter[, callback])
+#### augur.api().ConsensusData.getSlashed({ branch, votePeriod, reporter }[, callback])
 
 Returns wether the specified reporter `reporter` has been penalized for collusion while reporting.
 
