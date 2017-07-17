@@ -498,6 +498,58 @@ Gets basic info about markets the specified branch, and returns an object with m
 
 For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
 
+Call API 2.0
+------------
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain.
+
+```javascript
+// Branch contract
+const branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
+const parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+
+augur.api().Branch.getChildBranch({ branch, parentPayoutDistributionHash }, function (childBranch) { /* ... */ })
+// example output:
+childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
+
+augur.api().Branch.getCurrentReportingWindow({ branch }, function (currReportingWindow) { /* ... */ })
+// example output:
+currReportingWindow = "8612"
+
+augur.api().Branch.getForkEndTime({ branch }, function (forkEndTime) { /* ... */ })
+// example output:
+forkEndTime = 1489855429;
+
+augur.api().Branch.getForkingMarket({ branch }, function (forkingMarket) { /* ... */ })
+// example output:
+forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8ae31123ec97e90c28101fc55";
+
+augur.api().Branch.getNextReportingWindow({ branch }, function (nextReportingWindow) { /* ... */ })
+// example output:
+nextReportingWindow = "8613"
+
+```
+### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
+
+#### augur.api().Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
+
+Returns the child branch address of the specified `branch` address related to the `parentPayoutDistributionHash` provided.
+
+#### augur.api().Branch.getCurrentReportingWindow({ branch }[, callback])
+
+Returns the current reporting window ID for the specified `branch`.
+
+#### augur.api().Branch.getForkEndTime({ branch }[, callback])
+
+Returns the timestamp for when the fork ends given a specified `branch`.
+
+#### augur.api().Branch.getForkingMarket({ branch }[, callback])
+
+Returns the address of the market that the specified `branch` is forking over.
+
+#### augur.api().Branch.getNextReportingWindow({ branch }[, callback])
+
+Returns the next reporting window ID for a specific `branch`.
+
 Call API
 --------
 
