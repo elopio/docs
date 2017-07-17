@@ -513,11 +513,11 @@ childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 
 augur.api().Branch.getCurrentReportingWindow({ branch }, function (currReportingWindow) { /* ... */ })
 // example output:
-currReportingWindow = "8612"
+currReportingWindow = "578"
 
 augur.api().Branch.getForkEndTime({ branch }, function (forkEndTime) { /* ... */ })
 // example output:
-forkEndTime = 1489855429;
+forkEndTime = "1489855429";
 
 augur.api().Branch.getForkingMarket({ branch }, function (forkingMarket) { /* ... */ })
 // example output:
@@ -525,7 +525,69 @@ forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8ae31123ec97e90c28101f
 
 augur.api().Branch.getNextReportingWindow({ branch }, function (nextReportingWindow) { /* ... */ })
 // example output:
-nextReportingWindow = "8613"
+nextReportingWindow = "579"
+
+augur.api().Branch.getParentBranch({ branch }, function (parentBranch) { /* ... */ })
+// example output:
+parentBranch = "0x63c59544b89cce1dd53b1b566862189b25adec41"
+
+augur.api().Branch.getParentPayoutDistributionHash({ branch }, function (branchParentPayoutDistributionHash) { /* ... */ })
+// example output:
+branchParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
+
+augur.api().Branch.getPreviousReportingWindow({ branch }, function (previousReportingWindow) { /* ... */ })
+// example output:
+previousReportingWindow = "577"
+
+augur.api().Branch.getReportingPeriodDurationInSeconds({ branch }, function (reportingPeriodDuration) { /* ... */ })
+// example output:
+reportingPeriodDuration = "2592000";
+
+const endTime = 2524608000;
+augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
+// example output:
+reportingWindowByEndTime = "974";
+
+augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
+// example output:
+reportingWindowByTimestamp = "974";
+
+augur.api().Branch.getReportingWindowId({ branch, timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
+// example output:
+reportingWindowId = "578";
+
+augur.api().Branch.getReputationToken({ branch }, function (reputationTokenAddress) { /* ... */ })
+// example output:
+reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
+
+augur.api().Branch.getTopics({ branch }, function (topicsAddress) { /* ... */ })
+// example output:
+topicsAddress = "0x14f094c79a676c681e7cc490e775f73072e535ae";
+
+const market = "0x02a29bac5fd27c441358e725781c16ac585f52a8ae31123ec97e90caa9023a0f";
+augur.api().Branch.isContainerForMarket({ branch, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+// example output:
+isContainerForMarket = "1";
+
+const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+augur.api().Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+// example output:
+isContainerForRegistrationToken = "1";
+
+const reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+augur.api().Branch.isContainerForReportingToken({ branch, shadyReportingToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+// example output:
+isContainerForReportingToken = "1";
+
+const reportingWindow = "578";
+augur.api().Branch.isContainerForReportingWindow({ branch, shadyReportingWindow: reportingWindow }, function (isContainerForReportingWindow) { /* ... */ })
+// example output:
+isContainerForReportingWindow = "1";
+
+const childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
+augur.api().Branch.isParentOf({ branch, shadyChild: childBranch }, function (isParentOf) { /* ... */ })
+// example output:
+isParentOf = "1";
 
 ```
 ### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
@@ -549,6 +611,63 @@ Returns the address of the market that the specified `branch` is forking over.
 #### augur.api().Branch.getNextReportingWindow({ branch }[, callback])
 
 Returns the next reporting window ID for a specific `branch`.
+
+#### augur.api().Branch.getParentBranch({ branch }[, callback])
+
+Returns the parent branch address of the specified `branch`.
+
+#### augur.api().Branch.getParentPayoutDistributionHash({ branch }[, callback])
+
+Returns the parent branch's payout distribution hash given a `branch` address.
+
+#### augur.api().Branch.getPreviousReportingWindow({ branch }[, callback])
+
+Returns the previous reporting window ID for the specified `branch`.
+
+#### augur.api().Branch.getReportingPeriodDurationInSeconds({ branch }[, callback])
+
+Returns the specified `branch`'s reporting period duration in seconds.
+
+#### augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter }[, callback])
+
+Returns the reporting window ID on the specific `branch` given an `endTime` and if the market we are checking for has an automated reporter or not (`hasAutomatedReporter`). `hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
+
+#### augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp }[, callback])
+
+Returns the reporting window ID for a specific `branch` and provided `timestamp`.
+
+#### augur.api().Branch.getReportingWindowId({ branch, timestamp }[, callback])
+
+Returns the reporting window ID for a specific branch and provided timestamp. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
+
+#### augur.api().Branch.getReputationToken({ branch }[, callback])
+
+Returns the reputation token address for a specific `branch`.
+
+#### augur.api().Branch.getTopics({ branch }[, callback])
+
+Returns the topics address for the specific `branch`.
+
+#### augur.api().Branch.isContainerForMarket({ branch, shadyMarket }[, callback])
+
+Returns wether the specific `branch` is a container for the `shadyMarket` address provided. Returns `1` if true, `0` if false.
+
+#### augur.api().Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken }[, callback])
+
+Returns wether the specific `branch` is a container for the `shadyRegistrationToken` address provided. Returns `1` if true, `0` if false.
+
+#### augur.api().Branch.isContainerForReportingToken({ branch, shadyReportingToken }[, callback])
+
+Returns wether the specific `branch` is a container for the `shadyReportingToken` address provided. Returns `1` if true, `0` if false.
+
+#### augur.api().Branch.isContainerForReportingWindow({ branch, shadyReportingWindow }[, callback])
+
+Returns wether the specific `branch` is a container for the `shadyReportingWindow` provided. Returns `1` if true, `0` if false.
+
+#### augur.api().Branch.isParentOf({ branch, shadyChild }[, callback])
+
+Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
+
 
 Call API
 --------
