@@ -758,8 +758,65 @@ tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300
 
 augur.api().Market.getTopic({ market }, function (topic) { /* ... */ })
 // example output:
-topic = "Augur";
+topic = "Augur"
 
+const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+augur.api().Market.isContainerForReportingToken({ market, shadyToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+// example output:
+isContainerForReportingToken = "1"
+
+const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
+augur.api().Market.isContainerForShareToken({ market, shadyShareToken: shareToken }, function (isContainerForShareToken) { /* ... */ })
+// example output:
+isContainerForShareToken = "1"
+
+augur.api().Market.isDoneWithAllReporters({ market }, function (isDoneWithAllReporters) { /* ... */ })
+// example output:
+isDoneWithAllReporters = "1"
+
+augur.api().Market.isDoneWithAutomatedReporters({ market }, function (isDoneWithAutomatedReporters) { /* ... */ })
+// example output:
+isDoneWithAutomatedReporters = "1"
+
+augur.api().Market.isDoneWithLimitedReporters({ market }, function (isDoneWithLimitedReporters) { /* ... */ })
+// example output:
+isDoneWithLimitedReporters = "1"
+
+augur.api().Market.isFinalized({ market }, function (isFinalized) { /* ... */ })
+// example output:
+isFinalized = "1"
+
+augur.api().Market.isInAllDisputePhase({ market }, function (isInAllDisputePhase) { /* ... */ })
+// example output:
+isInAllDisputePhase = "1";
+
+augur.api().Market.isInAllReportingPhase({ market }, function (isInAllReportingPhase) { /* ... */ })
+// example output:
+isInAllReportingPhase = "1";
+
+augur.api().Market.isInAutomatedDisputePhase({ market }, function (isInAutomatedDisputePhase) { /* ... */ })
+// example output:
+isInAutomatedDisputePhase = "1";
+
+augur.api().Market.isInAutomatedReportingPhase({ market }, function (isInAutomatedReportingPhase) { /* ... */ })
+// example output:
+isInAutomatedReportingPhase = "1";
+
+augur.api().Market.isInLimitedDisutePhase({ market }, function (isInLimitedDisutePhase) { /* ... */ })
+// example output:
+isInLimitedDisutePhase = "1";
+
+augur.api().Market.isInLimitedReportingPhase({ market }, function (isInLimitedReportingPhase) { /* ... */ })
+// example output:
+isInLimitedReportingPhase = "1";
+
+augur.api().Market.needsMigration({ market }, function (needsMigration) { /* ... */ })
+// example output:
+needsMigration = "1";
+
+augur.api().Market.shouldCollectReportingFees({ market }, function (shouldCollectReportingFees) { /* ... */ })
+// example output:
+shouldCollectReportingFees = "1";
 ```
 ### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
 
@@ -851,6 +908,61 @@ Returns the tentatively winning Payout Distribution Hash given a specified `mark
 
 Returns the topic of the specified `market`.
 
+#### augur.api().Market.isContainerForReportingToken({ market, shadyToken }[, callback])
+
+Returns wether the specific `market` is a container for the `shadyToken` address provided, which is the reporting token address we intend to check. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isContainerForShareToken({ market, shadyShareToken }[, callback])
+
+Returns wether the specific `market` is a container for the `shadyShareToken` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isDoneWithAllReporters({ market }[, callback])
+
+Returns wether the specific `market` is done with the all reporting phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isDoneWithAutomatedReporters({ market }[, callback])
+
+Returns wether the specific `market` is done with the automated reporting phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isDoneWithLimitedReporters({ market }[, callback])
+
+Returns wether the specific `market` is done with the limited reporting phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isFinalized({ market }[, callback])
+
+Returns wether the specific `market` has been finalized or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInAllDisputePhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the All Dispute Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInAllReportingPhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the All Reporting Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInAutomatedDisputePhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the Automated Dispute Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInAutomatedReportingPhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the Automated Reporting Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInLimitedDisutePhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the Limited Dispute Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isInLimitedReportingPhase({ market }[, callback])
+
+Returns wether the specific `market` is current in the the Limited Reporting Phase or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.needsMigration({ market }[, callback])
+
+Returns wether the specific `market` needs to be migrated to a new branch or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.shouldCollectReportingFees({ market }[, callback])
+
+Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
 
 Call API
