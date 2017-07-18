@@ -715,6 +715,51 @@ finalPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb
 augur.api().Market.getFinalWinningReportingToken({ market }, function (winningReportingToken) { /* ... */ })
 // example output:
 winningReportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api().Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }, function (marketCreatorSettlementFee) { /* ... */ })
+// example output:
+marketCreatorSettlementFee = "20000000000000000"
+
+augur.api().Market.getMaxDisplayPrice({ market }, function (maxDisplayPrice) { /* ... */ })
+// example output:
+maxDisplayPrice = "1"
+
+augur.api().Market.getMinDisplayPrice({ market }, function (minDisplayPrice) { /* ... */ })
+// example output:
+minDisplayPrice = "0"
+
+augur.api().Market.getNumberOfOutcomes({ market }, function (numOutcomes) { /* ... */ })
+// example output:
+numOutcomes = "2"
+
+augur.api().Market.getPayoutDenominator({ market }, function (payoutDenominator) { /* ... */ })
+// example output:
+payoutDenominator = "1"
+
+augur.api().Market.getRegistrationToken({ market }, function (registrationToken) { /* ... */ })
+// example output:
+registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
+
+augur.api().Market.getReportingWindow({ market }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "578"
+
+augur.api().Market.getReputationToken({ market }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api().Market.getShareToken({ market, outcome: 1 }, function (shareToken) { /* ... */ })
+// example output:
+shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
+
+augur.api().Market.getTentativeWinningPayoutDistributionHash({ market }, function (tentativeWinningPayoutDistributionHash) { /* ... */ })
+// example output:
+tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api().Market.getTopic({ market }, function (topic) { /* ... */ })
+// example output:
+topic = "Augur";
+
 ```
 ### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
 
@@ -761,6 +806,52 @@ Returns the final payout distribution hash for a specified `market`.
 #### augur.api().Market.getFinalWinningReportingToken({ market }[, callback])
 
 Returns the winning reporting token address for a specified `market`.
+
+#### augur.api().Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
+
+Returns the fee paid to the `market` creator denominated in Attotokens for 1 token settled on the market.
+
+#### augur.api().Market.getMaxDisplayPrice({ market }[, callback])
+
+Returns the maximum displayed price for the specified `market`.
+
+#### augur.api().Market.getMinDisplayPrice({ market }[, callback])
+
+Returns the minimum displayed price for the specified `market`.
+
+#### augur.api().Market.getNumberOfOutcomes({ market }[, callback])
+
+Returns the number of outcomes for a specified `market`.
+
+#### augur.api().Market.getPayoutDenominator({ market }[, callback])
+
+Returns the payout denominator for a specified `market`.
+
+#### augur.api().Market.getRegistrationToken({ market }[, callback])
+
+Returns the registration token's address for the specified `market`.
+
+#### augur.api().Market.getReportingWindow({ market }[, callback])
+
+Returns the reporting window ID for the specified `market`.
+
+#### augur.api().Market.getReputationToken({ market }[, callback])
+
+Returns the reputation token's address for the specified `market`.
+
+#### augur.api().Market.getShareToken({ market, outcome }[, callback])
+
+Returns the share token's address for the specified `market` and `outcome`.
+
+#### augur.api().Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
+
+Returns the tentatively winning Payout Distribution Hash given a specified `market`.
+
+#### augur.api().Market.getTopic({ market }[, callback])
+
+Returns the topic of the specified `market`.
+
+
 
 Call API
 --------
