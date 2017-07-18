@@ -588,7 +588,6 @@ const childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
 augur.api().Branch.isParentOf({ branch, shadyChild: childBranch }, function (isParentOf) { /* ... */ })
 // example output:
 isParentOf = "1";
-
 ```
 ### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
 
@@ -668,6 +667,100 @@ Returns wether the specific `branch` is a container for the `shadyReportingWindo
 
 Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
+
+```javascript
+// Market Contract
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4";
+
+augur.api().Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
+// example output:
+canBeReportedOn = "1"
+
+augur.api().Market.getAutomatedReportDisputeDueTimestamp({ market }, function (automatedReporterDisputeDueTimestamp) { /* ... */ })
+// example output:
+automatedReporterDisputeDueTimestamp = "1500907130"
+
+augur.api().Market.getAutomatedReportDueTimestamp({ market }, function (automatedReporterDueTimestamp) { /* ... */ })
+// example output:
+automatedReporterDueTimestamp = "1500647930"
+
+augur.api().Market.getBranch({ market }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().Market.getCompleteSetCostInAttotokens({ market }, function (completeSetCostInAttotokens) { /* ... */ })
+// example output:
+completeSetCostInAttotokens = "1000000000000000000"
+
+augur.api().Market.getCreator({ market }, function (marketCreator) { /* ... */ })
+// example output:
+marketCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa"
+
+augur.api().Market.getDenominationToken({ market }, function (denominationToken) { /* ... */ })
+// example output:
+denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
+
+augur.api().Market.getEndTime({ market }, function (endTime) { /* ... */ })
+// example output:
+endTime = "1500388730";
+
+augur.api().Market.getFinalizationTime({ market }, function (finalizationTime) { /* ... */ })
+// example output:
+finalizationTime = "1500647930";
+
+augur.api().Market.getFinalPayoutDistributionHash({ market }, function (finalPayoutDistributionHash) { /* ... */ })
+// example output:
+finalPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
+
+augur.api().Market.getFinalWinningReportingToken({ market }, function (winningReportingToken) { /* ... */ })
+// example output:
+winningReportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+```
+### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+
+#### augur.api().Market.canBeReportedOn({ market }[, callback])
+
+Returns wether the specific `market` can be reported on. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.getAutomatedReportDisputeDueTimestamp({ market }[, callback])
+
+Returns the timestamp for when a specific `market`'s  automated report process and dispute period should be completed.
+
+#### augur.api().Market.getAutomatedReportDueTimestamp({ market }[, callback])
+
+Returns the timestamp for when a specific `market`'s  automated report process should be completed but doesn't count the dispute period.
+
+#### augur.api().Market.getBranch({ market }[, callback])
+
+Returns the branch ID of the branch that the specified `market` is contained within.
+
+#### augur.api().Market.getCompleteSetCostInAttotokens({ market }[, callback])
+
+Returns the cost of a complete set for a specific `market` denominated in Attotokens.
+
+#### augur.api().Market.getCreator({ market }[, callback])
+
+Returns the address of the creator of the specified `market`.
+
+#### augur.api().Market.getDenominationToken({ market }[, callback])
+
+Returns the address of the token used to denominate the specified `market`.
+
+#### augur.api().Market.getEndTime({ market }[, callback])
+
+Returns the timestamp for when the specified `market`'s event has come to pass and the market is ready to be reported on.
+
+#### augur.api().Market.getFinalizationTime({ market }[, callback])
+
+Returns the timestamp for when the specified `market` was finalized.
+
+#### augur.api().Market.getFinalPayoutDistributionHash({ market }[, callback])
+
+Returns the final payout distribution hash for a specified `market`.
+
+#### augur.api().Market.getFinalWinningReportingToken({ market }[, callback])
+
+Returns the winning reporting token address for a specified `market`.
 
 Call API
 --------
