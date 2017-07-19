@@ -546,11 +546,11 @@ reportingPeriodDuration = "2592000";
 const endTime = 2524608000;
 augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
 // example output:
-reportingWindowByEndTime = "974";
+reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
 // example output:
-reportingWindowByTimestamp = "974";
+reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api().Branch.getReportingWindowId({ branch, timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
 // example output:
@@ -629,15 +629,15 @@ Returns the specified `branch`'s reporting period duration in seconds.
 
 #### augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter }[, callback])
 
-Returns the reporting window ID on the specific `branch` given an `endTime` and if the market we are checking for has an automated reporter or not (`hasAutomatedReporter`). `hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
+Returns the reporting window address on the specific `branch` given an `endTime` and if the market we are checking for has an automated reporter or not (`hasAutomatedReporter`). `hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
 
 #### augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp }[, callback])
 
-Returns the reporting window ID for a specific `branch` and provided `timestamp`.
+Returns the reporting window address for a specific `branch` and provided `timestamp`.
 
 #### augur.api().Branch.getReportingWindowId({ branch, timestamp }[, callback])
 
-Returns the reporting window ID for a specific branch and provided timestamp. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
+Returns the reporting window ID for a specific `branch` and provided `timestamp`. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
 
 #### augur.api().Branch.getReputationToken({ branch }[, callback])
 
@@ -742,7 +742,7 @@ registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
 augur.api().Market.getReportingWindow({ market }, function (reportingWindow) { /* ... */ })
 // example output:
-reportingWindow = "578"
+reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
 augur.api().Market.getReputationToken({ market }, function (reputationToken) { /* ... */ })
 // example output:
@@ -890,7 +890,7 @@ Returns the registration token's address for the specified `market`.
 
 #### augur.api().Market.getReportingWindow({ market }[, callback])
 
-Returns the reporting window ID for the specified `market`.
+Returns the reporting window address for the specified `market`.
 
 #### augur.api().Market.getReputationToken({ market }[, callback])
 
@@ -988,7 +988,7 @@ peakSuppy = "234"
 
 augur.api().RegistrationToken.getReportingWindow({ registrationToken }, function (reportingWindow) { /* ... */ })
 // example output:
-reportingWindow = "578"
+reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
 augur.api().RegistrationToken.getReputationToken({ registrationToken }, function (reputationToken) { /* ... */ })
 // example output:
@@ -1019,7 +1019,7 @@ Returns the peak supply of tokens for the specified `registrationToken`.
 
 #### augur.api().RegistrationToken.getReportingWindow({ registrationToken }[, callback])
 
-Returns the Reporting Window ID for the specified `registrationToken`.
+Returns the Reporting Window address for the specified `registrationToken`.
 
 #### augur.api().RegistrationToken.getReputationToken({ registrationToken }[, callback])
 
@@ -1065,7 +1065,7 @@ registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
 augur.api().ReportingToken.getReportingWindow({ reportingToken }, function (reportingWindow) { /* ... */ })
 // example output:
-reportingWindow = "578"
+reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
 augur.api().ReportingToken.getReputationToken({ reportingToken }, function (reputationToken) { /* ... */ })
 // example output:
@@ -1108,7 +1108,7 @@ Returns the Registration Token address for this specific `reportingToken`.
 
 #### augur.api().ReportingToken.getReportingWindow({ reportingToken }[, callback])
 
-Returns the Reporting Window ID for the specified `reportingToken`.
+Returns the Reporting Window address for the specified `reportingToken`.
 
 #### augur.api().ReportingToken.getReputationToken({ reportingToken }[, callback])
 
@@ -1117,6 +1117,61 @@ Returns the Reputation Tokens address for the specific `reportingToken`'s Report
 #### augur.api().ReportingToken.totalSupply({ reportingToken }[, callback])
 
 Returns the current total supply of the specified `reportingToken`.
+
+```javascript
+// Reporting Window Contract
+const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+
+augur.api().ReportingWindow.getBranch({ reportingWindow }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }, function (disputeEndTime) { /* ... */ })
+// example output:
+disputeEndTime = "1500907130"
+
+augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }, function (disputeStartTime) { /* ... */ })
+// example output:
+disputeStartTime = "1500647930"
+
+augur.api().ReportingWindow.getEndTime({ reportingWindow }, function (endTime) { /* ... */ })
+// example output:
+endTime = "1500388730"
+
+augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }, function (maxReportsPerLimitedReporterMarket) { /* ... */ })
+// example output:
+maxReportsPerLimitedReporterMarket = "9"
+
+augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }, function (registrationToken) { /* ... */ })
+// example output:
+registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
+
+```
+### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+
+#### augur.api().ReportingWindow.getBranch({ reportingWindow }[, calllback])
+
+Returns the branch address that contains the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }[, calllback])
+
+Returns the Dispute End Time for a specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }[, calllback])
+
+Returns the Dispute Start Time for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getEndTime({ reportingWindow }[, calllback])
+
+Returns the End Time for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, calllback])
+
+Returns the maximum number of reports a limited reporter market can have in the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }[, calllback])
+
+Returns the Registration Token address for the specified `reportingWindow`.
 
 ```javascript
 // Reputation Token Contract
