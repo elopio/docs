@@ -964,6 +964,45 @@ Returns wether the specific `market` needs to be migrated to a new branch or not
 
 Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
+```javascript
+// Registration Token Contract
+const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+
+augur.api().RegistrationToken.getBranch({ registrationToken }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().RegistrationToken.getPeakSupply({ registrationToken }, function (peakSuppy) { /* ... */ })
+// example output:
+peakSuppy = "234"
+
+augur.api().RegistrationToken.getReportingWindow({ registrationToken }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "578"
+
+augur.api().RegistrationToken.getReputationToken({ registrationToken }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+```
+### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+
+#### augur.api().RegistrationToken.getBranch({ registrationToken }[, callback])
+
+Returns the Branch address for the specified `registrationToken`'s Reporting Window.
+
+#### augur.api().RegistrationToken.getPeakSupply({ registrationToken }[, callback])
+
+Returns the peak supply of tokens for the specified `registrationToken`.
+
+#### augur.api().RegistrationToken.getReportingWindow({ registrationToken }[, callback])
+
+Returns the Reporting Window ID for the specified `registrationToken`.
+
+#### augur.api().RegistrationToken.getReputationToken({ registrationToken }[, callback])
+
+Returns the Reputation Tokens address for the specific `registrationToken`'s Reporting Window.
+
 
 Call API
 --------
