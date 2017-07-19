@@ -1118,6 +1118,54 @@ Returns the Reputation Tokens address for the specific `reportingToken`'s Report
 
 Returns the current total supply of the specified `reportingToken`.
 
+```javascript
+// Reputation Token Contract
+const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api().ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+// example output:
+allowance = "200"
+
+augur.api().ReputationToken.balanceOf({ reputationToken, address: ownerAddress }, function (balance) { /* ... */ })
+// example output:
+balance = "1000"
+
+augur.api().ReputationToken.getBranch({ reputationToken }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().ReputationToken.getTopMigrationDestination({ reputationToken }, function (topMigrationDestination) { /* ... */ })
+// example output:
+topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
+
+augur.api().ReputationToken.totalSupply({ reputationToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "11000000"
+```
+### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.se)
+
+#### augur.api().ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
+
+Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reputationToken`s.
+
+#### augur.api().ReputationToken.balanceOf({ reputationToken, address }[, callback])
+
+Returns the balance for the specified `reputationToken` and the `address` of the owner of those tokens.
+
+#### augur.api().ReputationToken.getBranch({ reputationToken }[, callback])
+
+Returns the Branch address for the specified `reputationToken`.
+
+#### augur.api().ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
+
+Returns the top migration destination address for the specified `reputationToken`.
+
+#### augur.api().ReputationToken.totalSupply({ reputationToken }[, callback])
+
+Returns the current total supply of the specified `reputationToken`.
+
 Call API
 --------
 
