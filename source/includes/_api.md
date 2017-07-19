@@ -521,7 +521,7 @@ forkEndTime = "1489855429";
 
 augur.api().Branch.getForkingMarket({ branch }, function (forkingMarket) { /* ... */ })
 // example output:
-forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8ae31123ec97e90c28101fc55";
+forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 
 augur.api().Branch.getNextReportingWindow({ branch }, function (nextReportingWindow) { /* ... */ })
 // example output:
@@ -564,7 +564,7 @@ augur.api().Branch.getTopics({ branch }, function (topicsAddress) { /* ... */ })
 // example output:
 topicsAddress = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 
-const market = "0x02a29bac5fd27c441358e725781c16ac585f52a8ae31123ec97e90caa9023a0f";
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api().Branch.isContainerForMarket({ branch, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1";
@@ -670,7 +670,7 @@ Returns wether the specific `branch` is a container for the `shadyChild` branch 
 
 ```javascript
 // Market Contract
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42d736197278acab402980fd4";
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api().Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
 // example output:
@@ -967,6 +967,16 @@ Returns wether the specific `market` should collect reporting fees or not. Retur
 ```javascript
 // Registration Token Contract
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api().RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+// example output:
+allowance = "1";
+
+augur.api().RegistrationToken.balanceOf({ registrationToken, address: ownerAddress }, function (balance) { /* ... */ })
+// example output:
+balance = "1";
 
 augur.api().RegistrationToken.getBranch({ registrationToken }, function (branch) { /* ... */ })
 // example output:
@@ -984,8 +994,20 @@ augur.api().RegistrationToken.getReputationToken({ registrationToken }, function
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
+augur.api().RegistrationToken.totalSupply({ registrationToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "215";
+
 ```
 ### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+
+#### augur.api().RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
+
+Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `registrationToken`s.
+
+#### augur.api().RegistrationToken.balanceOf({ registrationToken, address }[, callback])
+
+Returns the balance for the specified `registrationToken` and the `address` of the owner of those tokens.
 
 #### augur.api().RegistrationToken.getBranch({ registrationToken }[, callback])
 
@@ -1003,6 +1025,98 @@ Returns the Reporting Window ID for the specified `registrationToken`.
 
 Returns the Reputation Tokens address for the specific `registrationToken`'s Reporting Window.
 
+#### augur.api().RegistrationToken.totalSupply({ registrationToken }[, callback])
+
+Returns the current total supply of the specified `registrationToken`.
+
+```javascript
+// Reporting Token Contract
+const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api().ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+// example output:
+allowance = "1"
+
+augur.api().ReportingToken.balanceOf({ reportingToken, address: ownerAddress }, function (balance) { /* ... */ })
+// example output:
+balance = "1"
+
+augur.api().ReportingToken.getBranch({ reportingToken }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().ReportingToken.getMarket({ reportingToken }, function (market) { /* ... */ })
+// example output:
+market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+
+augur.api().ReportingToken.getPayoutDistributionHash({ reportingToken }, function (payoutDistributionHash) { /* ... */ })
+// example output:
+payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api().ReportingToken.getPayoutNumerator({ reportingToken, index: 0 }, function (payoutNumerator) { /* ... */ })
+// example output:
+payoutNumerator = "1"
+
+augur.api().ReportingToken.getRegistrationToken({ reportingToken }, function (registrationToken) { /* ... */ })
+// example output:
+registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
+
+augur.api().ReportingToken.getReportingWindow({ reportingToken }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "578"
+
+augur.api().ReportingToken.getReputationToken({ reportingToken }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api().ReportingToken.totalSupply({ reportingToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "210"
+
+```
+### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+
+#### augur.api().ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
+
+Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reportingToken`s.
+
+#### augur.api().ReportingToken.balanceOf({ reportingToken, address }[, callback])
+
+Returns the balance for the specified `reportingToken` and the `address` of the owner of those tokens.
+
+#### augur.api().ReportingToken.getBranch({ reportingToken }[, callback])
+
+Returns the Branch address for the specified `reportingToken`'s Reporting Window.
+
+#### augur.api().ReportingToken.getMarket({ reportingToken }[, callback])
+
+Returns the market address for the specified `reportingToken`.
+
+#### augur.api().ReportingToken.getPayoutDistributionHash({ reportingToken }[, callback])
+
+Returns the payoutDistributionHash for a specific `reportingToken`.
+
+#### augur.api().ReportingToken.getPayoutNumerator({ reportingToken, index }[, callback])
+
+Returns the payout Numerator for a specific `reportingToken` given an outcome `index`.
+
+#### augur.api().ReportingToken.getRegistrationToken({ reportingToken }[, callback])
+
+Returns the Registration Token address for this specific `reportingToken`.
+
+#### augur.api().ReportingToken.getReportingWindow({ reportingToken }[, callback])
+
+Returns the Reporting Window ID for the specified `reportingToken`.
+
+#### augur.api().ReportingToken.getReputationToken({ reportingToken }[, callback])
+
+Returns the Reputation Tokens address for the specific `reportingToken`'s Reporting Window.
+
+#### augur.api().ReportingToken.totalSupply({ reportingToken }[, callback])
+
+Returns the current total supply of the specified `reportingToken`.
 
 Call API
 --------
