@@ -1399,6 +1399,66 @@ Returns the symbol string for Cash: `CASH`.
 Returns the current total supply of Cash.
 
 ```javascript
+// Orders Contract
+const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+const type = "1";
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const outcome = "1";
+const fxpPrice = "450000000000000000"; // 0.45
+
+augur.api().Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice,
+betterOrderID: orderID }, function (isNotBetterPrice) { /* ... */ })
+// example output:
+isNotBetterPrice = "1"
+
+augur.api().Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID: orderID }, function (isNotWorstPrice) { /* ... */ })
+// example output:
+isNotWorstPrice = "0"
+
+augur.api().Orders.getAmount({ orderID, type, market, outcome }, function (amount) { /* ... */ })
+// example output:
+amount = "15"
+
+augur.api().Orders.getBestOrderID({ type, market, outcome }, function (bestOrderID) { /* ... */ })
+// example output:
+bestOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
+
+const secondBestOrderID = "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5";
+augur.api().Orders.getBetterOrderID({ orderID: secondBestOrderID, type, market, outcome }, function (betterOrderID) { /* ... */ })
+// example output:
+betterOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
+
+augur.api().Orders.getGasPrice({ orderID, type, market, outcome }, function (gasPrice) { /* ... */ })
+// example output:
+gasPrice = "42000000000000"
+```
+### [Orders Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
+
+#### augur.api().Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice, betterOrderID }[, callback])
+
+Returns wether the specified `fxpPrice` is not a better price than the `betterOrderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
+
+#### augur.api().Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID }[, callback])
+
+Returns wether the specified `fxpPrice` is not a worst price than the `worstOrderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
+
+#### augur.api().Orders.getAmount({ orderID, type, market, outcome }[, callback])
+
+Returns the amount of shares requested on a specified `orderID` of `type` trading on the `outcome` in the provided `market`.
+
+#### augur.api().Orders.getBestOrderID({ type, market, outcome }[, callback])
+
+Returns the order ID of the best order on the `market` of `type` trading on the provided `outcome`.
+
+#### augur.api().Orders.getBetterOrderID({ orderID, type, market, outcome }[, callback])
+
+Returns a better order ID than the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
+
+#### augur.api().Orders.getGasPrice({ orderID, type, market, outcome }[, callback])
+
+Returns the gas price for the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
+
+```javascript
 // Share Token Contract
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
