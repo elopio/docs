@@ -1146,6 +1146,64 @@ augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }, function (
 // example output:
 registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
+augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }, function (reportingEndTime) { /* ... */ })
+// example output:
+reportingEndTime = "1500647900"
+
+augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }, function (reportingStartTime) { /* ... */ })
+// example output:
+reportingStartTime = "14998315100"
+
+const reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
+augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }, function (reportsByReporter) { /* ... */ })
+// example output:
+reportsByReporter = "0x03198001d1c223b2fdb1866703a7c2e4d5313f80"
+
+augur.api().ReportingWindow.getReputationToken({ reportingWindow }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api().ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }, function (requiredReportsPerReporterForLimitedReporterMarkets) { /* ... */ })
+// example output:
+requiredReportsPerReporterForLimitedReporterMarkets = "2"
+
+augur.api().ReportingWindow.getStartTime({ reportingWindow }, function (startTime) { /* ... */ })
+// example output:
+startTime = "14995895900"
+
+augur.api().ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }, function (targetReportsPerLimitedReporterMarket) { /* ... */ })
+// example output:
+targetReportsPerLimitedReporterMarket = "3"
+
+augur.api().ReportingWindow.getTargetReportsPerReporter({ reportingWindow }, function (targetReportsPerReporter) { /* ... */ })
+// example output:
+targetReportsPerReporter = "5"
+
+augur.api().ReportingWindow.isActive({ reportingWindow }, function (isActive) { /* ... */ })
+// example output:
+isActive = "1"
+
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api().ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+// example output:
+isContainerForMarket = "1"
+
+const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+augur.api().ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+// example output:
+isContainerForRegistrationToken = "1"
+
+augur.api().ReportingWindow.isDisputeActive({ reportingWindow }, function (isDisputeActive) { /* ... */ })
+// example output:
+isDisputeActive = "1"
+
+augur.api().ReportingWindow.isDoneReporting({ reportingWindow, reporter }, function (isDoneReporting) { /* ... */ })
+// example output:
+isDoneReporting = "1"
+
+augur.api().ReportingWindow.isReportingActive({ reportingWindow }, function (isReportingActive) { /* ... */ })
+// example output:
+isReportingActive = "1"
 ```
 ### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
 
@@ -1172,6 +1230,62 @@ Returns the maximum number of reports a limited reporter market can have in the 
 #### augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }[, calllback])
 
 Returns the Registration Token address for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }[, calllback])
+
+Returns the reporting phase end time for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }[, calllback])
+
+Returns the reporting phase start time for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }[, calllback])
+
+Returns the reports set address for the specified `reportingWindow` and `reporter`.
+
+#### augur.api().ReportingWindow.getReputationToken({ reportingWindow }[, calllback])
+
+Returns the Reputation Token address for the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }[, callback])
+
+Returns the required number of reports per reporter for the limited reporter markets contained within the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getStartTime({ reportingWindow }[, calllback])
+
+Returns the specified `reportingWindow`'s start time.
+
+#### augur.api().ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
+
+Returns the target number of reports per reporter for the limited reporter markets contained within the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.getTargetReportsPerReporter({ reportingWindow }[, callback])
+
+Returns the target number of reports per reporter for all markets contained within the specified `reportingWindow`.
+
+#### augur.api().ReportingWindow.isActive({ reportingWindow }[, callback])
+
+Returns wether the specified `reportingWindow` is currently active or not. Returns `1` if true, `0` if false.
+
+#### augur.api().ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket }[, callback])
+
+Returns wether the specified `reportingWindow` contains the `shadyMarket` or not. Returns `1` if true, `0` if false.
+
+#### augur.api().ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken }[, callback])
+
+Returns wether the specified `reportingWindow` contains the `shadyRegistrationToken` or not. Returns `1` if true, `0` if false.
+
+#### augur.api().ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
+
+Returns wether the specified `reportingWindow`'s dispute phase is active or not. Returns `1` if true, `0` if false.
+
+#### augur.api().ReportingWindow.isDoneReporting({ reportingWindow, reporter }[, callback])
+
+Returns wether the specified `reporter` is finished reporting for the `reportingWindow` or not. Returns `1` if true, `0` if false.
+
+#### augur.api().ReportingWindow.isReportingActive({ reportingWindow }[, callback])
+
+Returns wether the specified `reportingWindow`'s reporting phase is active or not. Returns `1` if true, `0` if false.
 
 ```javascript
 // Reputation Token Contract
