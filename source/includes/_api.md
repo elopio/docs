@@ -1478,6 +1478,45 @@ Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0
 
 Returns the total supply of `shareToken`s specified.
 
+```javascript
+// Topics Contract
+const topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
+const topic = "Augur";
+
+augur.api().Topics.count({ topics }, function (count) { /* ... */ })
+// example output:
+count = "152"
+
+augur.api().Topics.getPopularity({ topics, topic }, function (popularity) { /* ... */ })
+// example output:
+popularity = "1000"
+
+augur.api().Topics.getPopularityByOffset({ topics, offset: 0 }, function () { /* ... */ })
+// example output:
+popularity = "1000"
+
+augur.api().Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */ })
+// example output:
+topic = "Augur"
+```
+### [Topics Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
+
+#### augur.api().Topics.count({ topics }[, callback])
+
+Returns a count of all the Topics at the specified `topics` address.
+
+#### augur.api().Topics.getPopularity({ topics, topic }[, callback])
+
+Returns the popularity value of a specified `topic` at the `topics` address provided.
+
+#### augur.api().Topics.getPopularityByOffset({ topics, offset }[, callback])
+
+Returns the popularity of the Topic at the index `offset` at the `topics` address provided.
+
+#### augur.api().Topics.getTopicByOffset({ topics, offset }[, callback])
+
+Returns the Topic at the index `offset` at the `topics` address provided.
+
 
 Call API
 --------
