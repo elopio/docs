@@ -1007,7 +1007,7 @@ Returns the allowance that a specified `spenderAddress` can spend of the `ownerA
 
 #### augur.api().RegistrationToken.balanceOf({ registrationToken, address }[, callback])
 
-Returns the balance for the specified `registrationToken` and the `address` of the owner of those tokens.
+Returns the token balance for the specified `registrationToken` owned by the `address` provided.
 
 #### augur.api().RegistrationToken.getBranch({ registrationToken }[, callback])
 
@@ -1084,7 +1084,7 @@ Returns the allowance that a specified `spenderAddress` can spend of the `ownerA
 
 #### augur.api().ReportingToken.balanceOf({ reportingToken, address }[, callback])
 
-Returns the balance for the specified `reportingToken` and the `address` of the owner of those tokens.
+Returns the token balance for the specified `reportingToken` owned by the provided `address`.
 
 #### augur.api().ReportingToken.getBranch({ reportingToken }[, callback])
 
@@ -1321,7 +1321,7 @@ Returns the allowance that a specified `spenderAddress` can spend of the `ownerA
 
 #### augur.api().ReputationToken.balanceOf({ reputationToken, address }[, callback])
 
-Returns the balance for the specified `reputationToken` and the `address` of the owner of those tokens.
+Returns the token balance of the specified `reputationToken` owned by the `address` provided.
 
 #### augur.api().ReputationToken.getBranch({ reputationToken }[, callback])
 
@@ -1334,6 +1334,69 @@ Returns the top migration destination address for the specified `reputationToken
 #### augur.api().ReputationToken.totalSupply({ reputationToken }[, callback])
 
 Returns the current total supply of the specified `reputationToken`.
+
+```javascript
+// Cash Contract
+const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api().Cash.allowance({ owner, spender }, function (allowance) { /* ... */ })
+// example output:
+allowance = "100"
+
+augur.api().Cash.balanceOf({ address: owner }, function (balance) { /* ... */ })
+// example output:
+balance = "10000"
+
+augur.api().Cash.getDecimals({}, function (decimals) { /* ... */ })
+// example output:
+decimals = "18"
+
+augur.api().Cash.getInitiated({}, function (initiated) { /* ... */ })
+// example output:
+initiated = "1"
+
+augur.api().Cash.getName({}, function (name) { /* ... */ })
+// example output:
+name = "Cash"
+
+augur.api().Cash.getSymbol({}, function (symbol) { /* ... */ })
+// example output:
+symbol = "CASH"
+
+augur.api().Cash.totalSupply({}, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "11000000"
+```
+### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.se)
+
+#### augur.api().Cash.allowance({ owner, spender }[, callback])
+
+Returns the allowance that a specified `spender` address can spend of the `owner` address' Cash tokens.
+
+#### augur.api().Cash.balanceOf({ address }[, callback])
+
+Returns the balance of Cash tokens owned by the specified `address`.
+
+#### augur.api().Cash.getDecimals({}[, callback])
+
+Returns the amount of decimal places that the Cash contract is accurate to: `18`, like Ether.
+
+#### augur.api().Cash.getInitiated({}[, callback])
+
+Returns wether the sender of this call has initiated a withdraw of Ether from the Cash contract or not. Returns `1` if true, `0` if false.
+
+#### augur.api().Cash.getName({}[, callback])
+
+Returns the name string for Cash: `Cash`.
+
+#### augur.api().Cash.getSymbol({}[, callback])
+
+Returns the symbol string for Cash: `CASH`.
+
+#### augur.api().Cash.totalSupply({}[, callback])
+
+Returns the current total supply of Cash.
 
 Call API
 --------
