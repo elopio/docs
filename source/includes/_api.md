@@ -1398,6 +1398,87 @@ Returns the symbol string for Cash: `CASH`.
 
 Returns the current total supply of Cash.
 
+```javascript
+// Share Token Contract
+const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
+const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api().ShareToken.allowance({ shareToken, owner, spender }, function (allowance) { /* ... */ })
+// example output:
+allowance = "100"
+
+augur.api().ShareToken.balanceOf({ shareToken, address: owner }, function (balance) { /* ... */ })
+// example output:
+balance = "1000"
+
+augur.api().ShareToken.getDecimals({ shareToken }, function (decimals) { /* ... */ })
+// example output:
+decimals = "18"
+
+augur.api().ShareToken.getMarket({ shareToken }, function (market) { /* ... */ })
+// example output:
+market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+
+augur.api().ShareToken.getName({ shareToken }, function (name) { /* ... */ })
+// example output:
+name = "Shares"
+
+augur.api().ShareToken.getOutcome({ shareToken }, function (outcome) { /* ... */ })
+// example output:
+outcome = "1"
+
+augur.api().ShareToken.getSymbol({ shareToken }, function (symbol) { /* ... */ })
+// example output:
+symbol = "SHARES"
+
+augur.api().ShareToken.isShareToken({ shareToken }, function (isShareToken) { /* ... */ })
+// example output:
+isShareToken = "1"
+
+augur.api().ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "50000"
+```
+### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+
+#### augur.api().ShareToken.allowance({ shareToken, owner, spender }[, callback])
+
+Returns the token allowance a `spender` can use of an `owner`'s specified `shareToken`s.
+
+#### augur.api().ShareToken.balanceOf({ shareToken, address }[, callback])
+
+Returns the token balance of a specified `shareToken` owned by the `address`.
+
+#### augur.api().ShareToken.getDecimals({ shareToken }[, callback])
+
+Returns the amount of decimal places the `shareToken` is accurate to: `18`.
+
+#### augur.api().ShareToken.getMarket({ shareToken }[, callback])
+
+Returns the market address for the specified `shareToken`.
+
+#### augur.api().ShareToken.getName({ shareToken }[, callback])
+
+Returns the name string of the `shareToken`: `Shares`.
+
+#### augur.api().ShareToken.getOutcome({ shareToken }[, callback])
+
+Returns the Outcome of the market that the specified `shareToken` is for.
+
+#### augur.api().ShareToken.getSymbol({ shareToken }[, callback])
+
+Returns the symbol string of the `shareToken`: `SHARES`.
+
+#### augur.api().ShareToken.isShareToken({ shareToken }[, callback])
+
+Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0` if false. (should always be true.)
+
+#### augur.api().ShareToken.totalSupply({ shareToken }[, callback])
+
+Returns the total supply of `shareToken`s specified.
+
+
 Call API
 --------
 
