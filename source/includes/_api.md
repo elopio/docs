@@ -1431,6 +1431,47 @@ betterOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f
 augur.api().Orders.getGasPrice({ orderID, type, market, outcome }, function (gasPrice) { /* ... */ })
 // example output:
 gasPrice = "42000000000000"
+
+augur.api().Orders.getLastOutcomePrice({ market, outcome }, function (lastOutcomePrice) { /* ... */ })
+// example output:
+lastOutcomePrice = "490000000000000000"
+
+augur.api().Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }, function (orderMoneyEscrowed) { /* ... */ })
+// example output:
+orderMoneyEscrowed = "5000000000000000000"
+
+augur.api().Orders.getOrderOwner({ orderId, type, market, outcome }, function (owner) { /* ... */ })
+// example output:
+owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+
+augur.api().Orders.getOrderSharesEscrowed({ orderId, type, market, outcome }, function (orderSharesEscrowed) { /* ... */ })
+// example output:
+orderSharesEscrowed = "0";
+
+augur.api().Orders.getPrice({ orderId, type, market, outcome }, function (price) { /* ... */ })
+// example output:
+price = "500000000000000000";
+
+augur.api().Orders.getVolume({ market }, function (volume) { /* ... */ })
+// example output:
+volume = "100000000000000000000000";
+
+const secondWorstOrderID = "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1";
+augur.api().Orders.getWorseOrderID({ orderID: secondWorstOrderID, type, market, outcome }, function (worseOrderID) { /* ... */ })
+// example output:
+worseOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
+
+augur.api().Orders.getWorstOrderID({ type, market, outcome }, function (worstOrderID) { /* ... */ })
+// example output:
+worstOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
+
+augur.api().Orders.isBetterPrice({ type, market, outcome, fxpPrice, orderID }, function (isBetterPrice) { /* ... */ })
+// example output:
+isBetterPrice = "0"
+
+augur.api().Orders.isWorsePrice({ type, market, outcome, fxpPrice, orderID }, function (isWorsePrice) { /* ... */ })
+// example output:
+isWorsePrice = "1"
 ```
 ### [Orders Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
 
@@ -1457,6 +1498,46 @@ Returns a better order ID than the `orderID` specified on the `market` of `type`
 #### augur.api().Orders.getGasPrice({ orderID, type, market, outcome }[, callback])
 
 Returns the gas price for the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
+
+#### augur.api().Orders.getLastOutcomePrice({ market, outcome }[, callback])
+
+Returns the fixed point value of the last price traded for a specified `market` and `outcome`.
+
+#### augur.api().Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }[, callback])
+
+Returns the fixed point value of the amount of money escrowed by a specified `orderID` of `type` trading on the `market` and `outcome`.
+
+#### augur.api().Orders.getOrderOwner({ orderID, type, market, outcome }[, callback])
+
+Returns the owner address of the specified `orderID` of `type` trading on `market` and `outcome`.
+
+#### augur.api().Orders.getOrderSharesEscrowed({ orderID, type, market, outcome }[, callback])
+
+Returns the fixed point value of the amount of shares escrowed by a specified `orderID` of `type` trading on the `market` and `outcome`.
+
+#### augur.api().Orders.getPrice({ orderID, type, market, outcome }[, callback])
+
+Returns the fixed point value of the price of a specified `orderID` of `type` trading on the `market` and `outcome`.
+
+#### augur.api().Orders.getVolume({ market }[, callback])
+
+Returns the fixed point value of the volume of a specified `market`.
+
+#### augur.api().Orders.getWorseOrderID({ orderID, type, market, outcome }[, callback])
+
+Returns a worse order ID than the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
+
+#### augur.api().Orders.getWorstOrderID({ type, market, outcome }[, callback])
+
+Returns the order ID of the worst order on the `market` of `type` trading on the provided `outcome`.
+
+#### augur.api().Orders.isBetterPrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
+
+Returns wether the specified `fxpPrice` is a better price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
+
+#### augur.api().Orders.isWorsePrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
+
+Returns wether the specified `fxpPrice` is a worst price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
 ```javascript
 // Share Token Contract
