@@ -1540,6 +1540,73 @@ Returns wether the specified `fxpPrice` is a better price than the `orderID` for
 Returns wether the specified `fxpPrice` is a worst price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
 ```javascript
+// Orders Fetcher Contract
+const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+const type = "1";
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const outcome = "1";
+const fxpPrice = "450000000000000000"; // 0.45
+
+augur.api().OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID: orderID }, function (ascendingOrderList) { /* ... */ })
+// example output:
+ascendingOrderList = [
+  "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
+  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
+
+augur.api().OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID: orderID }, function (decendingOrderList) { /* ... */ })
+// example output:
+decendingOrderList = [
+  "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
+  "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"]
+
+augur.api().OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID: orderID, worstOrderID: 0, betterOrderID: 0, worseOrderID: 0 }, function (boundingOrders) { /* ... */ })
+// example output:
+boundingOrders = [
+  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
+  "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
+
+augur.api().OrdersFetcher.getOrder({ orderID, type, market, outcome }, function (order) { /* ... */ })
+// example output:
+order = [ "10000000000000000000",
+          "500000000000000000",
+          "0x438f2aeb8a16745b1cd711e168581ebce744ffaa",
+          "5000000000000000000",
+          "0",
+          "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
+          "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
+          "42000000000000"  ]
+
+augur.api().OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID: orderID, numOrdersToLoad: 2 }, function (orderIDs) { /* ... */ })
+// example output:
+orderIDs = [
+  "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
+  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
+```
+### [Orders Fetcher Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
+
+#### augur.api().OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
+
+Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `lowestOrderID` is an order ID expected to be a worse price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
+
+#### augur.api().OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID }[, callback])
+
+Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `highestOrderID` is an order ID expected to be a better price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
+
+#### augur.api().OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID, worstOrderID, betterOrderID, worseOrderID }[, callback])
+
+Returns an array containing the order IDs that should be set to `betterOrderID` and `worseORderID` respectively for an order inserted at `fxpPrice`. `betterOrderID` and `worseOrderID` should be orders that are better or worse than the `fxpPrice` for an order of `type` trading on `market` around `outcome`. `bestOrderID` and `worstOrderID` should be the best and worst order IDs on the order book for the specified `market`.
+
+the proper place to insert the fxpPrice order, IE returns a fxpPrice's better/worse order ids for insertion into the order book.
+
+#### augur.api().OrdersFetcher.getOrder({ orderID, type, market, outcome }[, callback])
+
+Returns a length 8 array containing information about a specified `orderID` of `type` trading on `market` around `outcome`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
+
+#### augur.api().OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID, numOrdersToLoad }[, callback])
+
+Returns an array of order IDs of `type` trading on `market` around `outcome` starting from the `startingOrderID` order ID specified. The array will be of length `numOrdersToLoad`.
+
+```javascript
 // Share Token Contract
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
