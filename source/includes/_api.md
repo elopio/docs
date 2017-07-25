@@ -1983,8 +1983,104 @@ If the `msg.sender` of the `transfer` transaction has enough of `registrationTok
 
 #### augur.api().RegistrationToken.transferFrom({ registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destiniationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
 
+```javascript
+// Reporting Token Contract
+const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const attotokens = "100000000000000000000";
+
+augur.api().ReportingToken.approve({
+  reportingToken,
+  spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320499,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xb3f94e1ad1890d0a14b21e3fd46530eb8c18887edc810e01fc789ccbfb39f067",
+  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xc",
+  timestamp: 1501003143,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.transfer({
+  reportingToken,
+  destinationAddress: spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320500,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
+  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xd",
+  timestamp: 1501003144,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+const sourceAddress = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
+augur.api().ReportingToken.transferFrom({
+  reportingToken,
+  sourceAddress,
+  destinationAddress: spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320501,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
+  input: "0xc19cca5200000000000000000000000034c85afe56c392e240c64dc09d2a7962afe2920a000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xe",
+  timestamp: 1501003145,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+```
+### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+
+#### augur.api().ReportingToken.approve({ reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
+
+#### augur.api().ReportingToken.transfer({ reportingToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destiniationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+
+#### augur.api().ReportingToken.transferFrom({ reportingToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
 
 Legacy Transaction API
 ----------------------
