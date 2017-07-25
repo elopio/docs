@@ -1832,6 +1832,162 @@ failedResponse = {
 
 The first argument to `augur.transact` is a "transaction object".
 
+
+```javascript
+// Registration Token Contract
+const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const attotokens = "100000000000000000000";
+
+augur.api().RegistrationToken.approve({
+  registrationToken,
+  spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320494,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2b51b527645d4844b5f604c39c7b5bca1e7de02b028f9e70d3b2c0aaf4471163",
+  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0x7",
+  timestamp: 1501003138,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().RegistrationToken.redeem({
+  registrationToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320495,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x35fceac9ab27d1e6922d10c90db97cb863876dbfb74503ef93e5df5161e04fe2",
+  input: "0xbe040fb0",
+  nonce: "0x8",
+  timestamp: 1501003139,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().RegistrationToken.register({
+  registrationToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320496,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2324f99375a30a212d9b47c2478516a79c98804379599fcf9030ddbd46fd87e4",
+  input: "0x1aa3a008",
+  nonce: "0x9",
+  timestamp: 1501003140,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().RegistrationToken.transfer({
+  registrationToken,
+  destinationAddress: spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320497,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6d3e368b97bb342b2f901efb94a5b306a33f9d623ababd1a258ab3c287762682",
+  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xa",
+  timestamp: 1501003141,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+const sourceAddress = "0x39D3b15006e580077a2E8B51B93BE90cCF1EC0e0";
+augur.api().RegistrationToken.transferFrom({
+  registrationToken,
+  sourceAddress,
+  destinationAddress: spenderAddress,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320498,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xd9417b50a49b50a50e133173dc3fb994477af9e30cecd2c3c845f7bc79ce8f78",
+  input: "0x27f08b0000000000000000000000000039d3b15006e580077a2e8b51b93be90ccf1ec0e0000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xb",
+  timestamp: 1501003142,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+```
+### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+
+#### augur.api().RegistrationToken.approve({ registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
+
+#### augur.api().RegistrationToken.redeem({ registrationToken[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of this transaction has a `registrationToken`, has completed reporting, and the reporting window for the specified `registrationToken` has completed then transfer the bond amount of reputation tokens to the `msg.sender`. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
+
+#### augur.api().RegistrationToken.register({ registrationToken[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of this transaction has the bond amount of `REP`, the reporting window for this `registrationToken` hasn't started yet, and the `msg.sender` doesn't already have a `registrationToken` then this transaction will transfer the bond amount of `reputationTokens` out of the `msg.sender`'s wallet and transfer 1 `registrationToken` to `msg.sender` in return. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
+
+#### augur.api().RegistrationToken.transfer({ registrationToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destiniationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+
+#### augur.api().RegistrationToken.transferFrom({ registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destiniationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+
+
+Legacy Transaction API
+----------------------
 ```javascript
 // faucets contract
 var branch = augur.branches.dev;
