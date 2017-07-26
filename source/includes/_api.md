@@ -2016,6 +2016,148 @@ successResponse = {
   value: "0x0"
 }
 
+augur.api().ReportingToken.buy({
+  reportingToken,
+  attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320500,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x99620dd1428671eb095de26ad02137916237844456e243cdaa9d9821affa5120",
+  input: "0xe94030130000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xd",
+  timestamp: 1501003143,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.extractBondHolderPayments({
+  reportingToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320501,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x1a2c55d91a8343b32ba3713d4ef1fa766cd4643ac2c5353fa2634248e3d15eec",
+  input: "0xe9aa05a1",
+  nonce: "0xd1",
+  timestamp: 1501003145,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.migrateLosingTokens({
+  reportingToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x75cb653f1ab81c95d0aad86c03e092a3fa9de7252603edfabee534b8e5183141",
+  input: "0xe9aa05a1",
+  nonce: "0xd2",
+  timestamp: 1501003151,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.redeemDisavowedTokens({
+  reportingToken,
+  reporter: spenderAddress,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320503,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x3c7827f3cc51e4062c73bf9fdbd6ad51edec7d31842900cd88811e67d83eb514",
+  input: "0x60b54d2e000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd3",
+  timestamp: 1501003152,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.redeemForkedTokens({
+  reportingToken,
+  reporter: spenderAddress,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320504,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8cfc973a802f44e5c0a93a8a0d294e680fe4735ca4f49310038908d73bb4536c",
+  input: "0x00633a30000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd4",
+  timestamp: 1501003153,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api().ReportingToken.redeemWinningTokens({
+  reportingToken,
+  reporter: spenderAddress,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320505,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa94d27cf876602ff5cbbce344e5d03ff30c60d61c2e2adf4bf9c54c303d51b81",
+  input: "0xc165c7cc000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd5",
+  timestamp: 1501003155,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
 augur.api().ReportingToken.transfer({
   reportingToken,
   destinationAddress: spenderAddress,
@@ -2035,7 +2177,7 @@ successResponse = {
   gasPrice: "0x430e23400",
   hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
   input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xd",
+  nonce: "0xe",
   timestamp: 1501003144,
   to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
   value: "0x0"
@@ -2062,7 +2204,7 @@ successResponse = {
   gasPrice: "0x430e23400",
   hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
   input: "0xc19cca5200000000000000000000000034c85afe56c392e240c64dc09d2a7962afe2920a000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xe",
+  nonce: "0xf",
   timestamp: 1501003145,
   to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
   value: "0x0"
@@ -2074,13 +2216,38 @@ successResponse = {
 
 Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
 
+#### augur.api().ReportingToken.buy({ reportingToken, attotokens[, onSent, onSuccess, onFailed ]})
+
+Purchases `attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `attotokens` worth of `reputationToken`, if `attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` purchased.
+
+#### augur.api().ReportingToken.extractBondHolderPayments({ reportingToken[, onSent, onSuccess, onFailed ]})
+
+Extracts reputation from the `reportingToken` and transfers it to the `market` for this `reportingToken`. Does nothing if the `market` already has the desired amount of `REP` to reward a successful dispute. Returns 1 if reputation was moved from `reportingToken` to the market, returns 0 if the market already has enough `REP` to reward a successful dispute.
+
+#### augur.api().ReportingToken.migrateLosingTokens({ reportingToken[, onSent, onSuccess, onFailed ]})
+
+Sets the supply of this `reportingToken` to 0 and transfers all `REP` on this `reportingToken` to this `reportingToken`'s `market`'s winning reporting token contract. This will fail if the `market` isn't finalized, the `market` isn't a container for this `reportingToken`, the `market` for this `reportingToken` is the cause of a fork, and the `market`'s winning reporting token isn't this `reportingToken`.
+
+#### augur.api().ReportingToken.redeemDisavowedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+
+Transfers `REP` to the `reporter` from the `reportingToken` for the value of `reportingToken` owned by `reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
+
+#### augur.api().ReportingToken.redeemForkedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+
+Transfers `REP` to the `reporter` on the new `branch` for the amount of `reportingToken`s owned by `reporter`. This transaction will fail if the `msg.sender` isn't the `reporter` address, if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter` on the new branch.
+
+#### augur.api().ReportingToken.redeemWinningTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+
+Transfers `REP` to the `reporter` based on how many `reportingToken`s the `reporter` owned. This transaction will fail if the `msg.sender` isn't the `reporter`, if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
+This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
+
 #### augur.api().ReportingToken.transfer({ reportingToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destiniationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
 #### augur.api().ReportingToken.transferFrom({ reportingToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
 Legacy Transaction API
 ----------------------
