@@ -1834,6 +1834,179 @@ The first argument to `augur.transact` is a "transaction object".
 
 
 ```javascript
+// Market Contract
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const payoutNumerators = [ 0, 2 ];
+
+augur.api().Market.approveSpenders({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320485,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xe0dd7114a82fda1daba5adee379eb2fc4fce72e2b2d0005833ffd5ee1f54064c",
+  input: "0x8d7e8a57",
+  nonce: "0x1",
+  timestamp: 1501003130,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.automatedReport({
+	market,
+  payoutNumerators,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320486,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x4c291db662925c48ed38d3c33e3f7e6599f956f3254d4a8464b71bdadb758316",
+  input: "0x17c18af20000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002",
+  nonce: "0x2",
+  timestamp: 1501003132,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+const newCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+augur.api().Market.changeCreator({
+	market,
+  newCreator,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320487,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x1053711293fe30fd7bfe3e0f138ef4f38357553ffa4c33a1a4b8233dc250b531",
+  input: "0xc78c9a9e000000000000000000000000438f2aeb8a16745b1cd711e168581ebce744ffaa",
+  nonce: "0x3",
+  timestamp: 1501003133,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
+	market,
+  newFeePerEthInWei: '1000000000',
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320488,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
+  input: "0x4c92c4b3000000000000000000000000000000000000000000000000000000003b9aca00",
+  nonce: "0x4",
+  timestamp: 1501003134,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.disputeAllReporters({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320489,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
+  input: "0x99ea0fd5",
+  nonce: "0x5",
+  timestamp: 1501003135,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.disputeAutomatedReport({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320490,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xd0d81785960bb128c35748e018ad52e599a80921c39ac02adabdaeb4a23d926c",
+  input: "0x7a13d14c",
+  nonce: "0x6",
+  timestamp: 1501003136,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+```
+### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+
+#### augur.api().Market.approveSpenders({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function.
+
+#### augur.api().Market.automatedReport({ market, payoutNumerators[, onSent, onSuccess, onFailed ]})
+
+This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
+
+#### augur.api().Market.changeCreator({ market, newCreator[, onSent, onSuccess, onFailed ]})
+
+Changes the `market` creator address to the `newCreator` address submitted. This transaction will fail if the `msg.sender` isn't set as the creator of the `market`.
+
+#### augur.api().Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ market, newFeePerEthInWei[, onSent, onSuccess, onFailed ]})
+
+Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `newFeePerEthInWei` is 0 or less, or if `newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
+
+#### augur.api().Market.disputeAllReporters({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will trigger a dispute of the all reporters phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the upcoming reporting window. This transaction will fail if the `market` isn't in the all reporters dispute phase of reporting.
+
+#### augur.api().Market.disputeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized..
+
+```javascript
 // Registration Token Contract
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
