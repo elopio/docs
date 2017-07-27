@@ -1979,6 +1979,215 @@ successResponse = {
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
+
+augur.api().Market.disputeLimitedReporters({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320491,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xd3f644e8904966909a9d974c7ed63ae8ddbb0f23d824f576764afddd7023ef88",
+  input: "0x3f4628c1",
+  nonce: "0x7",
+  timestamp: 1501003137,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.migrateThroughAllForks({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320492,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x32bf0849d589b6dd639791c7ea49579ea654a648c41b3a614878d77608ef1b07",
+  input: "0x00987265",
+  nonce: "0x8",
+  timestamp: 1501003138,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.migrateThroughOneFork({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320493,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x32bf0849d589b6dd639791c7ea49579ea654a648c41b3a614878d77608ef1b07",
+  input: "0x069b559c",
+  nonce: "0x9",
+  timestamp: 1501003139,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.tryFinalize({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320494,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6b506f0f96381638635948aa0969f4fbb0e918b7a752643cbe7619f0c1f9fc67",
+  input: "0x338e579e",
+  nonce: "0xa",
+  timestamp: 1501003140,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.tryFinalizeAllReporting({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320495,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa1ffc62d3b695a834d17aae5be1dbe4ba23ffe9d8dd43935e6c9651445c80f68",
+  input: "0xef202e5f",
+  nonce: "0xb",
+  timestamp: 1501003141,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.tryFinalizeAutomatedReport({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320496,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x515c59f42ef87795e97665c249447164248163aea50ef027d1b3cdda3cd851c2",
+  input: "0x806ec359",
+  nonce: "0xc",
+  timestamp: 1501003142,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.tryFinalizeFork({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320497,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6309a70af5a70eb6b4c2f23255334a19633f3d1d1c57fa79bb5c4ba1288421a5",
+  input: "0x685186c2",
+  nonce: "0xd",
+  timestamp: 1501003143,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api().Market.tryFinalizeLimitedReporting({
+	market,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320498,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x46d6ffc1189a8cd5dbdba9a253294c6fed16f7d654dc80af359f3dc65fc51032",
+  input: "0x3afa4270",
+  nonce: "0xe",
+  timestamp: 1501003144,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+const payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+augur.api().Market.updateTentativeWinningPayoutDistributionHash({
+	market,
+  payoutDistributionHash,
+	onSent: (result) => console.log(result),
+	onSuccess: (result) => console.log(result),
+	onFailed: (result) => console.log(result)
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320499,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7c5aff31c3c88edfb03d10ced2c561a7464326a6941db1eee868c0a46e7fc77d",
+  input: "0xe36cd6e04480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a",
+  nonce: "0xf",
+  timestamp: 1501003145,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
 ```
 ### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
 
@@ -2004,7 +2213,43 @@ This transaction will trigger a dispute of the all reporters phase of reporting 
 
 #### augur.api().Market.disputeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
 
-This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized..
+This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized.
+
+#### augur.api().Market.disputeLimitedReporters({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will trigger a dispute of the limited report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the next reporting window for all reporting. This transaction will fail if the `market` isn't in the limited dispute phase of reporting.
+
+#### augur.api().Market.migrateThroughAllForks({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will call `migrateThroughOneFork` repeatedly until the `market` has moved through all forks or has reached an active fork which will throw.
+
+#### augur.api().Market.migrateThroughOneForks({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will move the `market` onto the active branch following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
+
+#### augur.api().Market.tryFinalize({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`.
+
+#### augur.api().Market.tryFinalizeAllReporting({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to finalize the `market`'s all reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a limited reporters phase, this `market` doesn't have a limited reporters dispute bond holder, this `market` does have an all reporters dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
+
+#### augur.api().Market.tryFinalizeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to finalize the `market`'s Automated reporting phase by changing the `market` to a finalized state, and pays reward to automated report bond holders. This transaction will fail if this `market` doesn't have a reported winning outcome, if this `market` doesn't have a Automated Reporter Dispute Bond Holder, or if this `market`'s automated report dispute period hasn't ended. Returns `1` if successful, `0` if the `market` can't be finalized.
+
+#### augur.api().Market.tryFinalizeFork({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to finalize `market` after it caused a fork and pays out rewards to the bond holders. This transaction will fail if the market hasn't gone through the limited reporters phase, if the market doesn't have a limited reporter dispute bond holder, if the market hasn't gone through the all reporters phase, if the market doesn't have a all reporter dispute bond holder, if this market isn't the market that caused a fork, if this market doesn't have a winning branch, if the winning branch doesn't have at least half the total supply of REP (5.5 million), or if it's before the fork end time. Returns `1` if successful, `0` if the `market` can't be finalized.
+
+#### augur.api().Market.tryFinalizeLimitedReporting({ market[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to finalize the `market`'s limited reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a automated report phase, this `market` doesn't have a automated report dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
+
+#### augur.api().Market.updateTentativeWinningPayoutDistributionHash({ market, payoutDistributionHash[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
 
 ```javascript
 // Registration Token Contract
