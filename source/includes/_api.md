@@ -2667,6 +2667,60 @@ If the `msg.sender` of the `transfer` transaction has enough of `reportingToken`
 
 If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
+```javascript
+// Reporting Window Contract
+const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+const endTime = 1501015000;
+const numOutcomes = '2';
+const payoutDenominator = '2';
+const feePerEthInWei = '10000000000000000';
+const cashContract = "0xb85a75a008e15d134c8ba01679ce2ab82dd7f777";
+const creator = "0xab11204cfeaccffa63c2d23aef2ea9accdb0a0d5";
+const minDisplayPrice = "0";
+const maxDisplayPrice = "1";
+const automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
+const topic = "examples";
+
+augur.api().ReportingWindow.createNewMarket({
+  reportingWindow,
+  endTime,
+  numOutcomes,
+  payoutDenominator,
+  feePerEthInWei,
+  denominationToken: cashContract,
+  creator,
+  minDisplayPrice,
+  maxDisplayPrice,
+  automatedReporterAddress,
+  topic,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "0x5e3b08cd8a3b909e4396eda0818d5b1e4f43d4da",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8de51be2ae9140e6db01a97b8578419e8deb542c7de2a615ced10f282bce3cc8",
+  input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
+  nonce: "0xf1",
+  timestamp: 1501003145,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+```
+### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+
+#### augur.api().ReportingWindow.createNewMarket({ reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
+
+This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+
+
 Legacy Transaction API
 ----------------------
 ```javascript
