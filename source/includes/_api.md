@@ -2710,7 +2710,7 @@ successResponse = {
   input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
   nonce: "0xf1",
   timestamp: 1501003145,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  to: "0x06cbcd92af2571f1419b622a794d65db524f682a",
   value: "0x0"
 }
 ```
@@ -2720,6 +2720,129 @@ successResponse = {
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
+```javascript
+// Reputation Token Contract
+const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
+const attotokens = "100000000000000000000";
+
+augur.api().ReputationToken.approve({
+  reputationToken,
+  spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320512,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6",
+  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf2",
+  timestamp: 1501003152,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+
+augur.api().ReputationToken.migrateFromLegacyRepContract({
+  reputationToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320513,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf1eb499764e9422d51a37b3567bb2513c022d63524518d520a9d4eabad0f0238",
+  input: "0x3a15e7ca",
+  nonce: "0xf3",
+  timestamp: 1501003153,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+
+augur.api().ReputationToken.transfer({
+  reputationToken,
+  to: spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320514,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
+  input: "0x86744558000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf4",
+  timestamp: 1501003154,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+
+const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
+augur.api().ReputationToken.transferFrom({
+  reputationToken,
+  from: source,
+  to: spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320515,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
+  input: "0x27f08b000000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab3000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf5",
+  timestamp: 1501003155,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+```
+### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
+
+#### augur.api().ReputationToken.approve({ reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
+
+Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
+
+#### augur.api().ReputationToken.migrateFromLegacyRepContract({ reputationToken[, onSent, onSuccess, onFailed ]})
+
+This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
+
+#### augur.api().ReputationToken.transfer({ reputationToken, to, value[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of `reputationToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
+
+#### augur.api().ReputationToken.transferFrom({ reputationToken, from, to, value[, onSent, onSuccess, onFailed ]})
+
+If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
 Legacy Transaction API
 ----------------------
