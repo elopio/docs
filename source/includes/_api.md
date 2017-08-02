@@ -2875,6 +2875,155 @@ If the `msg.sender` of the `transfer` transaction has enough of `reputationToken
 
 If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
+```javascript
+// Cash Token Contract
+const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const attotokens = "100000000000000000000";
+
+augur.api().Cash.approve({
+  spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320517,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x13c698a48dcee8a3680e8ff1b767cf3327b2dec516355de7112b23a1031dcd70",
+  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf7",
+  timestamp: 1501003157,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+
+augur.api().Cash.publicDepositEther({
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320518,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xe5e6737ec3fd36c7147cc9af910d96a6e41977e1c2a491205b7a006dbf33c4ff",
+  input: "0xf81de66a",
+  nonce: "0xf8",
+  timestamp: 1501003158,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+
+augur.api().Cash.publicWithdrawEther({
+  to: owner,
+  amount: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320519,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xe340a2b59c774d3e297e4728be09d96e1cd5579551cdde6966c0bd23ce764fb2",
+  input: "0x25d48493000000000000000000000000438f2aeb8a16745b1cd711e168581ebce744ffaa0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf9",
+  timestamp: 1501003159,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+
+augur.api().Cash.transfer({
+  to: spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320520,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa29b95168d8ee80bc940fdd9ddc68b9c3f2f94cb688d613719da58819c65673a",
+  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xfa",
+  timestamp: 1501003120,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+
+augur.api().Cash.transferFrom({
+  from: owner,
+  to: spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320521,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xb6973356d29c63f559093ec2d732a70fbfe4085736d04c0496e2b1abd45f53d5",
+  input: "0x27f08b00000000000000000000000000438f2aeb8a16745b1cd711e168581ebce744ffaa000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xfb",
+  timestamp: 1501003121,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+```
+### [Cash Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
+
+#### augur.api().Cash.approve({ spender, value[, onSent, onSuccess, onFailed ]})
+
+Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
+
+#### augur.api().Cash.publicDepositEther({ value[, onSent, onSuccess, onFailed ]})
+
+This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `value` deposited, and the total balance for this `msg.sender`.
+
+#### augur.api().Cash.publicWithdrawEther({ to, amount[, onSent, onSuccess, onFailed ]})
+
+This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `amount` of `msg.sender`'s CASH Tokens `to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `publicWithdrawEther` again will withdraw the `amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `amount` of Cash Tokens denoted in attotokens, or if the `amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `publicWithdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed.
+
+#### augur.api().Cash.transfer({ to, value[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of Cash Tokens to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
+
+#### augur.api().Cash.transferFrom({ from, to, value[, onSent, onSuccess, onFailed ]})
+
+If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
+
+
 Legacy Transaction API
 ----------------------
 ```javascript
