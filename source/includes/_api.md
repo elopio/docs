@@ -2724,6 +2724,7 @@ This function will create a new market for the given `reportingWindow` that will
 // Reputation Token Contract
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
+const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 const attotokens = "100000000000000000000";
 
 augur.api().ReputationToken.approve({
@@ -2774,10 +2775,12 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReputationToken.transfer({
+const targetReputationToken = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
+augur.api().ReputationToken.migrateOut({
   reputationToken,
-  to: spender,
-  value: attotokens,
+  destination: targetReputationToken,
+  reporter: source,
+  attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -2791,18 +2794,16 @@ successResponse = {
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
-  input: "0x86744558000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  hash: "0xeddcfa199671312d7dd90eba2895da3104801ab05220758c62bbc6ef059f6057",
+  input: "0x5ca7a72700000000000000000000000073295d3c0ca46113ca226222c81c79adabf9f3910000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab30000000000000000000000000000000000000000000000056bc75e2d63100000",
   nonce: "0xf4",
   timestamp: 1501003154,
   to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
   value: "0x0"
 }
 
-const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
-augur.api().ReputationToken.transferFrom({
+augur.api().ReputationToken.transfer({
   reputationToken,
-  from: source,
   to: spender,
   value: attotokens,
   onSent: (result) => console.log(result),
@@ -2818,10 +2819,36 @@ successResponse = {
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
-  input: "0x27f08b000000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab3000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
+  input: "0x86744558000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
   nonce: "0xf5",
   timestamp: 1501003155,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+
+augur.api().ReputationToken.transferFrom({
+  reputationToken,
+  from: source,
+  to: spender,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320516,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
+  input: "0x27f08b000000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab3000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf6",
+  timestamp: 1501003156,
   to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
   value: "0x0"
 }
@@ -2835,6 +2862,10 @@ Allows the `spender` the ability to spend up to `value` (denoted in attotokens) 
 #### augur.api().ReputationToken.migrateFromLegacyRepContract({ reputationToken[, onSent, onSuccess, onFailed ]})
 
 This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
+
+#### augur.api().ReputationToken.migrateOut({ reputationToken, destination, reporter, attotokens[, onSent, onSuccess, onFailed ]})
+
+This function migrates a `reporter`'s REP (amount of REP denoted in `attotokens`) from one `reputationToken` address to another (`destination`). The `msg.sender` of this transaction must be the `reporter` provided or the `msg.sender` must be approved to spend `attotokens` amount of REP for the `reporter` provided.
 
 #### augur.api().ReputationToken.transfer({ reputationToken, to, value[, onSent, onSuccess, onFailed ]})
 
