@@ -1913,15 +1913,107 @@ The first argument to `augur.transact` is a "transaction object".
 
 
 ```javascript
+// Dispute Bond Token Contract
+const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+const destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
+
+augur.api().DisputeBondToken.transfer({
+  disputeBondToken,
+  destiniationAddress,
+  attotokens: 1,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320480,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6b0f32ca16855ab6a680ebff87f63837c78e1fcdd94f909cac9acf7768e73384",
+  input: "0x86744558000000000000000000000000aa895acf2091752393384b902f813da761ca421f0000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0x1",
+  timestamp: 1501003125,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
+
+augur.api().DisputeBondToken.withdraw({
+  disputeBondToken,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320481,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x3ccfd60b",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
+
+const shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
+augur.api().DisputeBondToken.withdrawToBranch({
+  disputeBondToken,
+  shadyBranch,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320483,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xd3a9a88dd49f9eb485498190013fe8004df40a2549e5c2f3aafb452aab0a7a98",
+  input: "0x8ac17bbb000000000000000000000000580f633f475614636ee132a0a355dcdc826d16c8",
+  nonce: "0x4",
+  timestamp: 1501003128,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
+```
+### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+
+#### augur.api().DisputeBondToken.transfer({ disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+
+The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destiniationAddress`), and `attotokens` amount transfered (`1`).
+
+#### augur.api().DisputeBondToken.withdraw({ disputeBondToken[, onSent, onSuccess, onFailed ]})
+
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork.
+
+#### augur.api().DisputeBondToken.withdrawToBranch({ disputeBondToken, shadyBranch[, onSent, onSuccess, onFailed ]})
+
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
+
+```javascript
 // Market Contract
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const payoutNumerators = [ 0, 2 ];
 
 augur.api().Market.approveSpenders({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -1941,11 +2033,11 @@ successResponse = {
 }
 
 augur.api().Market.automatedReport({
-	market,
+  market,
   payoutNumerators,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -1966,11 +2058,11 @@ successResponse = {
 
 const newCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 augur.api().Market.changeCreator({
-	market,
+  market,
   newCreator,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -1990,11 +2082,11 @@ successResponse = {
 }
 
 augur.api().Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
-	market,
+  market,
   newFeePerEthInWei: '1000000000',
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2014,10 +2106,10 @@ successResponse = {
 }
 
 augur.api().Market.disputeAllReporters({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2037,10 +2129,10 @@ successResponse = {
 }
 
 augur.api().Market.disputeAutomatedReport({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2060,10 +2152,10 @@ successResponse = {
 }
 
 augur.api().Market.disputeLimitedReporters({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2083,10 +2175,10 @@ successResponse = {
 }
 
 augur.api().Market.migrateThroughAllForks({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2106,10 +2198,10 @@ successResponse = {
 }
 
 augur.api().Market.migrateThroughOneFork({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2129,10 +2221,10 @@ successResponse = {
 }
 
 augur.api().Market.tryFinalize({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2152,10 +2244,10 @@ successResponse = {
 }
 
 augur.api().Market.tryFinalizeAllReporting({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2175,10 +2267,10 @@ successResponse = {
 }
 
 augur.api().Market.tryFinalizeAutomatedReport({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2198,10 +2290,10 @@ successResponse = {
 }
 
 augur.api().Market.tryFinalizeFork({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2221,10 +2313,10 @@ successResponse = {
 }
 
 augur.api().Market.tryFinalizeLimitedReporting({
-	market,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
@@ -2245,11 +2337,11 @@ successResponse = {
 
 const payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api().Market.updateTentativeWinningPayoutDistributionHash({
-	market,
+  market,
   payoutDistributionHash,
-	onSent: (result) => console.log(result),
-	onSuccess: (result) => console.log(result),
-	onFailed: (result) => console.log(result)
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
 })
 // example output:
 successResponse = {
