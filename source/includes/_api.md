@@ -3047,6 +3047,45 @@ If the `msg.sender` of the `transfer` transaction has enough of `reputationToken
 If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
 ```javascript
+// Cancel Order Contract
+const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+const type = "1";
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const outcome = "1";
+
+augur.api().CancelOrder.publicCancelOrder({
+  orderID,
+  type,
+  market,
+  outcome,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320516,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa031604c8ef75ab5b1d07f7358d594e1cb57c927a86be92459d78ae3415bb3b0",
+  input: "0x309d23e17ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f87000000000000000000000000000000000000000000000000000000000000000010000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a420000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xf61",
+  timestamp: 1501003156,
+  to: "0xb2930b35844a230f00e51431acae96fe543a0347",
+  value: "0x0"
+}
+```
+### [Cancel Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
+
+#### augur.api().CancelOrder.publicCancelOrder({ orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
+
+The `publicCancelOrder` transaction is used to cancel and refund an existing order on the specified `market` of `type` for the `outcome` given it's `orderID`. This will fail if `msg.sender` isn't the owner of the order, if the `market` or `orderID` is not defined, or if `type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
+
+```javascript
 // Cash Token Contract
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
