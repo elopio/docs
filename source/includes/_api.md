@@ -667,6 +667,76 @@ Returns wether the specific `branch` is a container for the `shadyReportingWindo
 
 Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
+```javascript
+// Dispute Bond Token Contract
+const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+const address = "0x3d62bafc1791752393384b902f813da861ddedd9";
+
+augur.api().DisputeBondToken.balanceOf({ disputeBondToken, address }, function (balance) { /* ... */ })
+// example output:
+balance = "1"
+
+augur.api().DisputeBondToken.getBondHolder({ disputeBondToken }, function (bondHolder) { /* ... */ })
+// example output:
+bondHolder = "0x3d62bafc1791752393384b902f813da861ddedd9"
+
+augur.api().DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }, function (bondRemainingToBePaidOut) { /* ... */ })
+// example output:
+bondRemainingToBePaidOut = "1100000000000000000000"
+
+augur.api().DisputeBondToken.getBranch({ disputeBondToken }, function (branch) { /* ... */ })
+// example output:
+branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api().DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }, function (disputedPayoutDistributionHash) { /* ... */ })
+// example output:
+disputedPayoutDistributionHash = "0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"
+
+augur.api().DisputeBondToken.getMarket({ disputeBondToken }, function (market) { /* ... */ })
+// example output:
+market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+
+augur.api().DisputeBondToken.getReputationToken({ disputeBondToken }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api().DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "1"
+```
+### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+
+#### augur.api().DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
+
+This transaction will return the balance for a specified `disputeBondToken` owned by the provided `address`. Will always result in `1` or `0`.
+
+#### augur.api().DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
+
+This transaction will return the address of the bond holder for a specified `disputeBondToken`.
+
+#### augur.api().DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
+
+This transaction will return the amount, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`.
+
+#### augur.api().DisputeBondToken.getBranch({ disputeBondToken }[, callback])
+
+This transaction will return the branch that a specified `disputeBondToken`'s market lives on.
+
+#### augur.api().DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }[, callback])
+
+This transaction will return the distribution hash for the dispute payout given a specified `disputeBondToken`.
+
+#### augur.api().DisputeBondToken.getMarket({ disputeBondToken }[, callback])
+
+This transaction will return the market that a specified `disputeBondToken` is disputing the results of.
+
+#### augur.api().DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
+
+This transaction will return the reputation token address that a specified `disputeBondToken`'s market uses.
+
+#### augur.api().DisputeBondToken.totalSupply({ disputeBondToken }[, callback])
+
+This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
 
 ```javascript
 // Market Contract
@@ -769,6 +839,11 @@ const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 augur.api().Market.isContainerForShareToken({ market, shadyShareToken: shareToken }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
+
+const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+augur.api().Market.isContainerForDisputeBondToken({ market, shadyBondToken: disputeBondToken }, function (isContainerForShareToken) { /* ... */ })
+// example output:
+isContainerForDisputeBondToken = "1"
 
 augur.api().Market.isDoneWithAllReporters({ market }, function (isDoneWithAllReporters) { /* ... */ })
 // example output:
@@ -915,6 +990,10 @@ Returns wether the specific `market` is a container for the `shadyToken` address
 #### augur.api().Market.isContainerForShareToken({ market, shadyShareToken }[, callback])
 
 Returns wether the specific `market` is a container for the `shadyShareToken` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
+
+#### augur.api().Market.isContainerForDisputeBondToken({ market, shadyBondToken }[, callback])
+
+Returns wether the specific `market` is a container for the `shadyBondToken` address provided. A `shadyBondToken` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
 
 #### augur.api().Market.isDoneWithAllReporters({ market }[, callback])
 
