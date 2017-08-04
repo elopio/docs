@@ -3256,16 +3256,78 @@ successResponse = {
   input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   nonce: "0xfc",
   timestamp: 1501003122,
-  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  to: "0x96c7ed5f9465a8661df4df3bbbf16cc13ad7e115",
   value: "0x0"
 }
 ```
 ### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.se)
 
-#### augur.api().ClaimProceeds.publicClaimProceeds({ market[, onSent, onSucces, onFailed ]})
+#### augur.api().ClaimProceeds.publicClaimProceeds({ market[, onSent, onSuccess, onFailed ]})
 
 The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized.
 
+```javascript
+// Complete Sets Contract
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const fxpAmount = "50000000000000000000" // 50.0
+
+augur.api().CompleteSets.publicBuyCompleteSets({
+  market,
+  fxpAmount,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320523,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xc77149d6a3fef8755a20aa2100fc79c02ca7dd198d6f3c65aabe638883d8d017",
+  input: "0xfadc758a0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
+  nonce: "0xfd",
+  timestamp: 1501003123,
+  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
+  value: "0x0"
+}
+
+augur.api().CompleteSets.publicSellCompleteSets({
+  market,
+  fxpAmount,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320524,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x21121bf9a8d32969b5ce4d53b6021ad6b7b5e7c658e9d98d582c720c8abce220",
+  input: "0x04b586670000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
+  nonce: "0xfe",
+  timestamp: 1501003124,
+  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
+  value: "0x0"
+}
+```
+### [Complete Sets Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/completeSets.se)
+
+#### augur.api().CompleteSets.publicBuyCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to purchase `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't have enough of the `market`'s denomination token to be able to afford `fxpAmount` shares in all outcomes, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (buy), `fxpAmount` purchased, number of outcomes in the `market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
+
+#### augur.api().CompleteSets.publicSellCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
+
+This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
 
 Legacy Transaction API
 ----------------------
