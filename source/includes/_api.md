@@ -3233,6 +3233,39 @@ If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to b
 
 If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
+```javascript
+// Claim Proceeds Contract
+const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+
+augur.api().ClaimProceeds.publicClaimProceeds({
+  market,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320522,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x0f6152b9a39055b34bc092d9e96e852e3137e3d42f4e78b1dc5848f8b2abf12f",
+  input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  nonce: "0xfc",
+  timestamp: 1501003122,
+  to: "0xa8f769b88d6d74fb2bd3912f6793f75625228baf",
+  value: "0x0"
+}
+```
+### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.se)
+
+#### augur.api().ClaimProceeds.publicClaimProceeds({ market[, onSent, onSucces, onFailed ]})
+
+The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized.
+
 
 Legacy Transaction API
 ----------------------
