@@ -3376,7 +3376,104 @@ successResponse = {
 
 This transaction will create a new order on the order book for the specified `market` trading on the `outcome` provided. The required fields besides market and outcome are the `type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `attoshares`, and the `displayPrice` for the order. Optional params include `betterOrderID`, `worseOrderID`, `tradeGroupID`, and the callbacks. The `betterOrderID` and `worseOrderID` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `tradeGroupID` is a field used by the Augur UI to group transactions and can be left blank.
 
-This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`. 
+This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`.
+
+```javascript
+// Share Token Contract
+const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
+const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
+const attotokens = "100000000000000000000";
+
+augur.api().ShareToken.approve({
+  shareToken,
+  spender: spenderAddress,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320526,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x02730239e82d37ec032ecde79f27ae75d7cc59c277ab44c6eb5b67520ee487e9",
+  input: "0x83b5863800000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xff1",
+  timestamp: 1501003126,
+  to: "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5",
+  value: "0x0"
+}
+augur.api().ShareToken.transfer({
+  shareToken,
+  to: spenderAddress,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320527,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7dfbd9d87964814e0da2d874d8d7c2d886df6b852a46d69562018620d62fd773",
+  input: "0x8674455800000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xff2",
+  timestamp: 1501003127,
+  to: "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5",
+  value: "0x0"
+}
+
+const sourceAddress = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
+augur.api().ShareToken.transferFrom({
+  shareToken,
+  from: sourceAddress,
+  to: spenderAddress,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320528,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x619a9d4a75f43cf5d5b8e81365f9859e60aa96554915e912cdf7ffd96f0d4d96",
+  input: "0x27f08b000000000000000000000000004b01721f0244e7c5b5f63c20942850e447f5a5ee00000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xff3",
+  timestamp: 1501003128,
+  to: "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5",
+  value: "0x0"
+}
+```
+### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+
+#### augur.api().ShareToken.approve({ shareToken, spender, value[, onSent, onSuccess, onFailed ]})
+
+Allows the `spender` the ability to spend up to `value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` denoted in attotokens approved.
+
+#### augur.api().ShareToken.transfer({ shareToken, to, value[, onSent, onSuccess, onFailed ]})
+
+If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `value` worth to the `to` address and `value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred denoted in attotokens.
+
+#### augur.api().ShareToken.transferFrom({ shareToken, from, to, value[, onSent, onSuccess, onFailed ]})
+
+If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens.
+
 
 Legacy Transaction API
 ----------------------
