@@ -3474,6 +3474,48 @@ If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to
 
 If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens.
 
+```javascript
+// Take Order Contract
+const orderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+const type = "1";
+const market = "0x71a4e3899629f6023cde649a40982eda46ef2777";
+const outcome = "1";
+const fxpAmountTakerWants = "10000000000000000000"; // 10.0
+const tradeGroupID = "1";
+
+augur.api().TakeOrder.publicTakeOrder({
+  orderID,
+  type,
+  market,
+  outcome,
+  fxpAmountTakerWants,
+  tradeGroupID,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320529,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x3efb4102dc3b9e1bb145ca21310233646a4eba24894b04f12ee4d390281301ac",
+  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091000000000000000000000000000000000000000000000000000000000000000100000000000000000000000071a4e3899629f6023cde649a40982eda46ef277700000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff4",
+  timestamp: 1501003129,
+  to: "0x077f28f038dd94ed9c444b806137302b1c4cbd5a",
+  value: "0x0"
+}
+```
+### [Take Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
+
+#### augur.api().TakeOrder.publicTakeOrder({ orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
+
+Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`.
 
 Legacy Transaction API
 ----------------------
