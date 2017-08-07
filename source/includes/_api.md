@@ -3517,6 +3517,143 @@ successResponse = {
 
 Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`.
 
+```javascript
+// Trade Contract
+const market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
+const outcome = "1";
+const fxpAmount = "10000000000000000000"; // 10.0
+const fxpPrice = "500000000000000000"; // 0.5
+const tradeGroupID = "1";
+
+augur.api().Trade.publicBuy({
+  market,
+  outcome,
+  fxpAmount,
+  fxpPrice,
+  tradeGroupID,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320530,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x027e3b312f5949388830a0f5c945cbfcbf4ec06edc3b342ef8d6e85f631a50c3",
+  input: "0x888b82010000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff5",
+  timestamp: 1501003130,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api().Trade.publicSell({
+  market,
+  outcome,
+  fxpAmount,
+  fxpPrice,
+  tradeGroupID,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320531,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x1072dd3501dd0796f3b986bb45704798d198265ca5b75303488a8eb69c76bae5",
+  input: "0xf049066b0000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff6",
+  timestamp: 1501003131,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api().Trade.publicTrade({
+  direction: '1',
+  market,
+  outcome,
+  fxpAmount,
+  fxpPrice,
+  tradeGroupID,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320532,
+  callReturn: "0xa754c0437ff499df19d163199dcb43a539cbd0a9670b976f0ac66f33a88b3ac6",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2dc8b6f31e83e0e558863528130af2c66309f582ed02d96c7d7cfbe6a2c7179f",
+  input: "0x1ee6ba1000000000000000000000000000000000000000000000000000000000000000010000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff7",
+  timestamp: 1501003132,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api().Trade.publicTakeBestOrder({
+  direction: '2',
+  market,
+  outcome,
+  fxpAmount,
+  fxpPrice,
+  tradeGroupID,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result),
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320533,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x048db15000000000000000000000000000000000000000000000000000000000000000020000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+```
+### [Trade Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
+
+#### augur.api().Trade.publicBuy({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+
+The `publicBuy` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to buy at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+
+#### augur.api().Trade.publicSell({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+
+The `publicSell` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to sell at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+
+#### augur.api().Trade.publicTrade({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+
+The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+
+#### augur.api().Trade.publicTakeBestOrder({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+
+The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
+
+
 Invoke
 ------
 
