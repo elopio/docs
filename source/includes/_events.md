@@ -51,17 +51,17 @@ The following table shows the events that can be passed to `augur.filters.listen
 
 Label                | Contract            | Event description                                                         | Data (indexed)           | Data (non-indexed)
 -------------------- | ------------------- | ------------------------------------------------------------------------- | ------------------------ | ------------------
-Approval             | ERC20               | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
-Burn                 | VariableSupplyToken | Burned the target's tokens to completely destroy them                     | target                   | value
-CancelOrder          | Orders              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
-CompleteSets         | Orders              | Bought/Sold a complete set of shares for a market                         | sender, market, type     | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
-depositEther         | Cash                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
-InitiateWithdrawEther| Cash                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
-MakeOrder            | Orders              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
-Mint                 | VariableSupplyToken | Created brand new tokens for target                                       | target                   | value
-TakeOrder            | Orders              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
-Transfer             | ERC20Basic          | Transferred tokens from one owner to another                              | from, to                 | value
-WithdrawEther        | Cash                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
+Approval             | [ERC20](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/ERC20.sol)              | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
+Burn                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/VariableSupplyToken.sol) | Burned the target's tokens to completely destroy them                     | target                   | value
+CancelOrder          | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
+CompleteSets         | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)              | Bought/Sold a complete set of shares for a market                         | sender, market, type     | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
+DepositEther         | [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
+InitiateWithdrawEther| [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
+MakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
+Mint                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/VariableSupplyToken.sol) | Created brand new tokens for target                                       | target                   | value
+TakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
+Transfer             | [ERC20Basic](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/ERC20.sol)          | Transferred tokens from one owner to another                              | from, to                 | value
+WithdrawEther        | [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
 
 In addition to these on-contract events, `augur.filters.listen` also accepts a callback for the `block` listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.
 
