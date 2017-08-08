@@ -1,4 +1,73 @@
-Events API
+Events API 2.0
+==============
+```javascript
+// Listen for Events emitted by the augur contracts
+// contractAddresses is a JSON object containing the name and address of the augur contracts.
+const contractAddresses = {
+  Cash: "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
+ /* ... */
+};
+// Events API is a JSON object containing the event labels, and information about each event
+const eventsAPI = {
+  Approval: {
+    address: "0x9308cf21b5a11f182f9707ca284bbb71bb84f893",
+    /* ... */
+  },
+  /* ... */
+}
+// Both contractAddress and eventsAPI can be found in successful connection object received from calling the augur.connect() function. The contractAddresses can be found in connectionObject.contracts and the events API can be found at connectionObject.api.events.
+
+// Start listening for Events
+augur.filters.listen(contractAddresses, eventsAPI, {
+    approval: (event) => { /* ... */ },
+    block: (blockhash) => { /* ... */ },
+    burn: (event) => { /* ... */ },
+    cancelOrder: (event) => { /* ... */ },
+    completeSets: (event) => { /* ... */ },
+    depositEther: (event) => { /* ... */ },
+    initiateWithdrawEther: (event) => { /* ... */ },
+    makeOrder: (event) => { /* ... */ },
+    mint: (event) => { /* ... */ },
+    takeOrder: (event) => { /* ... */ },
+    transfer: (event) => { /* ... */ },
+    withdrawEther: (event) => { /* ... */ },
+  },
+  filters => console.log('Listening to filters:', filters)
+);
+
+// Stop listening for events and delete (uninstall) filters
+augur.filters.ignore();
+```
+There are a variety of "events" emitted by the augur contracts.  Each event is triggered by a user doing something on augur: submitting a report, closing a market, filling an open order, etc.
+
+<aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of "events" that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of "event" is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
+
+The augur.js events API includes event listeners, which notify you of events happening now, and a search function for historical events ("logs"):
+
+- *Event listeners* ("filters") can be turned on using the `augur.filters.listen` function.  `augur.filters.listen` accepts four arguments: a JSON object containing the contracts and their addresses, a JSON object containing information about each event, an object with event labels as keys (see table below), and callbacks for these events as values.  Each callback has a single argument, an object containing the "Data" fields shown in the table below.
+- *Event search* can be accomplished with the `augur.logs.getLogs` function.  `augur.logs.getLogs` can search for any combination of an event's *indexed* data fields (enumerated in the table below), and also accepts optional upper- and lower-bound block numbers to further narrow down the search.
+
+The following table shows the events that can be passed to `augur.filters.listen`.  All of these events are optional; if you don't need some of these events for your application, don't include the event in your call to `augur.filters.listen`.  In this table, "Contract" refers to the Ethereum contract on which the event is defined ([source code](https://github.com/AugurProject/augur-core) / [contract addresses](https://github.com/AugurProject/augur-contracts)), "Data (indexed)" refers to fields included in the event log that are searchable using the `augur.logs.getLogs` function.
+
+Label                | Contract            | Event description                                                         | Data (indexed)           | Data (non-indexed)
+-------------------- | ------------------- | ------------------------------------------------------------------------- | ------------------------ | ------------------
+Approval             | ERC20               | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
+Burn                 | VariableSupplyToken | Burned the target's tokens to completely destroy them                     | target                   | value
+CancelOrder          | Orders              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
+CompleteSets         | Orders              | Bought/Sold a complete set of shares for a market                         | sender, market, type     | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
+depositEther         | Cash                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
+InitiateWithdrawEther| Cash                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
+MakeOrder            | Orders              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
+Mint                 | VariableSupplyToken | Created brand new tokens for target                                       | target                   | value
+TakeOrder            | Orders              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
+Transfer             | ERC20Basic          | Transferred tokens from one owner to another                              | from, to                 | value
+WithdrawEther        | Cash                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
+
+In addition to these on-contract events, `augur.filters.listen` also accepts a callback for the `block` listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.
+
+<aside class="success">Events are retrieved either via push notification (if connected via websocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
+
+Legacy Events API
 ==========
 ```javascript
 /**
