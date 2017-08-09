@@ -37,6 +37,43 @@ augur.filters.listen(contractAddresses, eventsAPI, {
 
 // Stop listening for events and delete (uninstall) filters
 augur.filters.ignore();
+
+/**
+ * Search for historical events.
+ */
+
+const myAccountAddress = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
+const myFriendsAddress = "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1";
+
+// Look up Transfers from my account to my friends account.
+let params = {
+  label: "Transfer",
+  filter: { from: myAccountAddress, to: myFriendsAddress }
+};
+
+augur.logs.getLogs(params, function (err, logs) { /* ... */ });
+
+// Logs will look something like this:
+successfulLogsResponse = [{
+  blockNumber: 6200,
+  removed: false,
+  from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
+  to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
+  value: "1000000000000",
+  timestamp: 1502305142,  
+  transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028"
+}]
+
+// now only look for Transfers between block 2000 and 6000.
+params = {
+  label: "Transfer",
+  filter: { from: myAccountAddress, to: myFriendsAddress, toBlock: 6000, fromBlock: 2000 }
+};
+
+augur.logs.getLogs(params, function (err, logs) { /* ... */ });
+
+// in this case we have no logs in those blocks, so an empty array is returned.
+successfulLogsResponse = [];
 ```
 There are a variety of "events" emitted by the augur contracts.  Each event is triggered by a user doing something on augur: submitting a report, closing a market, filling an open order, etc.
 
