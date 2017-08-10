@@ -27,6 +27,7 @@ search: true
 ---
 Overview
 ========
+<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur Team plans to have these docs fully updated prior to launching Augur. Please bare with us as we update this document and be advised that some of this information is out of date or may be changed prior to launch. Thank you for your patience.</aside>
 
 [Augur](https://augur.net) is a decentralized prediction market platform that runs on Ethereum.
 
