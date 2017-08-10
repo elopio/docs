@@ -877,9 +877,9 @@ augur.api().Market.isInAutomatedReportingPhase({ market }, function (isInAutomat
 // example output:
 isInAutomatedReportingPhase = "1";
 
-augur.api().Market.isInLimitedDisutePhase({ market }, function (isInLimitedDisutePhase) { /* ... */ })
+augur.api().Market.isInLimitedDisputePhase({ market }, function (isInLimitedDisputePhase) { /* ... */ })
 // example output:
-isInLimitedDisutePhase = "1";
+isInLimitedDisputePhase = "1";
 
 augur.api().Market.isInLimitedReportingPhase({ market }, function (isInLimitedReportingPhase) { /* ... */ })
 // example output:
@@ -913,7 +913,7 @@ Returns the branch ID of the branch that the specified `market` is contained wit
 
 #### augur.api().Market.getCompleteSetCostInAttotokens({ market }[, callback])
 
-Returns the cost of a complete set for a specific `market` denominated in Attotokens.
+Returns the cost of a complete set for a specific `market` denominated in attotokens.
 
 #### augur.api().Market.getCreator({ market }[, callback])
 
@@ -925,7 +925,7 @@ Returns the address of the token used to denominate the specified `market`.
 
 #### augur.api().Market.getEndTime({ market }[, callback])
 
-Returns the timestamp for when the specified `market`'s event has come to pass and the market is ready to be reported on.
+Returns the timestamp for when the specified `market`'s event has come to pass and the `market` is ready to be reported on.
 
 #### augur.api().Market.getFinalizationTime({ market }[, callback])
 
@@ -941,7 +941,7 @@ Returns the winning reporting token address for a specified `market`.
 
 #### augur.api().Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
-Returns the fee paid to the `market` creator denominated in Attotokens for 1 token settled on the market.
+Returns the fee paid to the `market` creator denominated in attotokens for 1 token settled on the market.
 
 #### augur.api().Market.getMaxDisplayPrice({ market }[, callback])
 
@@ -1027,7 +1027,7 @@ Returns wether the specific `market` is current in the Automated Dispute Phase o
 
 Returns wether the specific `market` is current in the Automated Reporting Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInLimitedDisutePhase({ market }[, callback])
+#### augur.api().Market.isInLimitedDisputePhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the Limited Dispute Phase or not. Returns `1` if true, `0` if false.
 
@@ -1286,43 +1286,43 @@ isReportingActive = "1"
 ```
 ### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
 
-#### augur.api().ReportingWindow.getBranch({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getBranch({ reportingWindow }[, callback])
 
 Returns the branch address that contains the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
 
 Returns the Dispute End Time for a specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }[, callback])
 
 Returns the Dispute Start Time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getEndTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getEndTime({ reportingWindow }[, callback])
 
 Returns the End Time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
 Returns the maximum number of reports a limited reporter market can have in the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }[, callback])
 
 Returns the Registration Token address for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
 
 Returns the reporting phase end time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }[, callback])
 
 Returns the reporting phase start time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }[, calllback])
+#### augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }[, callback])
 
 Returns the reports set address for the specified `reportingWindow` and `reporter`.
 
-#### augur.api().ReportingWindow.getReputationToken({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getReputationToken({ reportingWindow }[, callback])
 
 Returns the Reputation Token address for the specified `reportingWindow`.
 
@@ -1330,7 +1330,7 @@ Returns the Reputation Token address for the specified `reportingWindow`.
 
 Returns the required number of reports per reporter for the limited reporter markets contained within the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getStartTime({ reportingWindow }[, calllback])
+#### augur.api().ReportingWindow.getStartTime({ reportingWindow }[, callback])
 
 Returns the specified `reportingWindow`'s start time.
 
@@ -1673,9 +1673,7 @@ Returns an array containing the order IDs that should be set to `betterOrderID` 
 
 #### augur.api().OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID, worstOrderID, betterOrderID, worseOrderID }[, callback])
 
-Returns an array containing the order IDs that should be set to `betterOrderID` and `worseORderID` respectively for an order inserted at `fxpPrice`. `betterOrderID` and `worseOrderID` should be orders that are better or worse than the `fxpPrice` for an order of `type` trading on `market` around `outcome`. `bestOrderID` and `worstOrderID` should be the best and worst order IDs on the order book for the specified `market`.
-
-the proper place to insert the fxpPrice order, IE returns a fxpPrice's better/worse order ids for insertion into the order book.
+Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `betterOrderID` and `worseOrderID` should be orders that are better or worse than the `fxpPrice` for an order of `type` trading on `market` around `outcome`. `bestOrderID` and `worstOrderID` should be the best and worst order IDs on the order book for the specified `market`, `type`, and `outcome`.
 
 #### augur.api().OrdersFetcher.getOrder({ orderID, type, market, outcome }[, callback])
 
@@ -1994,7 +1992,7 @@ successResponse = {
 
 #### augur.api().DisputeBondToken.transfer({ disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destiniationAddress`), and `attotokens` amount transfered (`1`).
+The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destinationAddress`), and `attotokens` amount transferred (`1`).
 
 #### augur.api().DisputeBondToken.withdraw({ disputeBondToken[, onSent, onSuccess, onFailed ]})
 
@@ -2525,7 +2523,7 @@ successResponse = {
   value: "0x0"
 }
 
-const sourceAddress = "0x39D3b15006e580077a2E8B51B93BE90cCF1EC0e0";
+const sourceAddress = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
 augur.api().RegistrationToken.transferFrom({
   registrationToken,
   sourceAddress,
@@ -2568,11 +2566,11 @@ If the `msg.sender` of this transaction has the bond amount of `REP`, the report
 
 #### augur.api().RegistrationToken.transfer({ registrationToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destiniationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
 
 #### augur.api().RegistrationToken.transferFrom({ registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
+If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
 ```javascript
 // Reporting Token Contract
