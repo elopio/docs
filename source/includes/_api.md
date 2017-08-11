@@ -507,163 +507,163 @@ Augur's Call API is made up of "getter" methods that retrieve information from t
 const branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 const parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 
-augur.api().Branch.getChildBranch({ branch, parentPayoutDistributionHash }, function (childBranch) { /* ... */ })
+augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }, function (childBranch) { /* ... */ })
 // example output:
 childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 
-augur.api().Branch.getCurrentReportingWindow({ branch }, function (currReportingWindow) { /* ... */ })
+augur.api.Branch.getCurrentReportingWindow({ branch }, function (currReportingWindow) { /* ... */ })
 // example output:
 currReportingWindow = "578"
 
-augur.api().Branch.getForkEndTime({ branch }, function (forkEndTime) { /* ... */ })
+augur.api.Branch.getForkEndTime({ branch }, function (forkEndTime) { /* ... */ })
 // example output:
 forkEndTime = "1489855429";
 
-augur.api().Branch.getForkingMarket({ branch }, function (forkingMarket) { /* ... */ })
+augur.api.Branch.getForkingMarket({ branch }, function (forkingMarket) { /* ... */ })
 // example output:
 forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 
-augur.api().Branch.getNextReportingWindow({ branch }, function (nextReportingWindow) { /* ... */ })
+augur.api.Branch.getNextReportingWindow({ branch }, function (nextReportingWindow) { /* ... */ })
 // example output:
 nextReportingWindow = "579"
 
-augur.api().Branch.getParentBranch({ branch }, function (parentBranch) { /* ... */ })
+augur.api.Branch.getParentBranch({ branch }, function (parentBranch) { /* ... */ })
 // example output:
 parentBranch = "0x63c59544b89cce1dd53b1b566862189b25adec41"
 
-augur.api().Branch.getParentPayoutDistributionHash({ branch }, function (branchParentPayoutDistributionHash) { /* ... */ })
+augur.api.Branch.getParentPayoutDistributionHash({ branch }, function (branchParentPayoutDistributionHash) { /* ... */ })
 // example output:
 branchParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api().Branch.getPreviousReportingWindow({ branch }, function (previousReportingWindow) { /* ... */ })
+augur.api.Branch.getPreviousReportingWindow({ branch }, function (previousReportingWindow) { /* ... */ })
 // example output:
 previousReportingWindow = "577"
 
-augur.api().Branch.getReportingPeriodDurationInSeconds({ branch }, function (reportingPeriodDuration) { /* ... */ })
+augur.api.Branch.getReportingPeriodDurationInSeconds({ branch }, function (reportingPeriodDuration) { /* ... */ })
 // example output:
 reportingPeriodDuration = "2592000";
 
 const endTime = 2524608000;
-augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
+augur.api.Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
 // example output:
 reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
+augur.api.Branch.getReportingWindowByTimestamp({ branch, timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
 // example output:
 reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api().Branch.getReportingWindowId({ branch, timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
+augur.api.Branch.getReportingWindowId({ branch, timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
 // example output:
 reportingWindowId = "578";
 
-augur.api().Branch.getReputationToken({ branch }, function (reputationTokenAddress) { /* ... */ })
+augur.api.Branch.getReputationToken({ branch }, function (reputationTokenAddress) { /* ... */ })
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 
-augur.api().Branch.getTopics({ branch }, function (topicsAddress) { /* ... */ })
+augur.api.Branch.getTopics({ branch }, function (topicsAddress) { /* ... */ })
 // example output:
 topicsAddress = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api().Branch.isContainerForMarket({ branch, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+augur.api.Branch.isContainerForMarket({ branch, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1";
 
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api().Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+augur.api.Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
 // example output:
 isContainerForRegistrationToken = "1";
 
 const reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-augur.api().Branch.isContainerForReportingToken({ branch, shadyReportingToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+augur.api.Branch.isContainerForReportingToken({ branch, shadyReportingToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
 // example output:
 isContainerForReportingToken = "1";
 
 const reportingWindow = "578";
-augur.api().Branch.isContainerForReportingWindow({ branch, shadyReportingWindow: reportingWindow }, function (isContainerForReportingWindow) { /* ... */ })
+augur.api.Branch.isContainerForReportingWindow({ branch, shadyReportingWindow: reportingWindow }, function (isContainerForReportingWindow) { /* ... */ })
 // example output:
 isContainerForReportingWindow = "1";
 
 const childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
-augur.api().Branch.isParentOf({ branch, shadyChild: childBranch }, function (isParentOf) { /* ... */ })
+augur.api.Branch.isParentOf({ branch, shadyChild: childBranch }, function (isParentOf) { /* ... */ })
 // example output:
 isParentOf = "1";
 ```
 ### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
 
-#### augur.api().Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
+#### augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
 
 Returns the child branch address of the specified `branch` address related to the `parentPayoutDistributionHash` provided.
 
-#### augur.api().Branch.getCurrentReportingWindow({ branch }[, callback])
+#### augur.api.Branch.getCurrentReportingWindow({ branch }[, callback])
 
 Returns the current reporting window ID for the specified `branch`.
 
-#### augur.api().Branch.getForkEndTime({ branch }[, callback])
+#### augur.api.Branch.getForkEndTime({ branch }[, callback])
 
 Returns the timestamp for when the fork ends given a specified `branch`.
 
-#### augur.api().Branch.getForkingMarket({ branch }[, callback])
+#### augur.api.Branch.getForkingMarket({ branch }[, callback])
 
 Returns the address of the market that the specified `branch` is forking over.
 
-#### augur.api().Branch.getNextReportingWindow({ branch }[, callback])
+#### augur.api.Branch.getNextReportingWindow({ branch }[, callback])
 
 Returns the next reporting window ID for a specific `branch`.
 
-#### augur.api().Branch.getParentBranch({ branch }[, callback])
+#### augur.api.Branch.getParentBranch({ branch }[, callback])
 
 Returns the parent branch address of the specified `branch`.
 
-#### augur.api().Branch.getParentPayoutDistributionHash({ branch }[, callback])
+#### augur.api.Branch.getParentPayoutDistributionHash({ branch }[, callback])
 
 Returns the parent branch's payout distribution hash given a `branch` address.
 
-#### augur.api().Branch.getPreviousReportingWindow({ branch }[, callback])
+#### augur.api.Branch.getPreviousReportingWindow({ branch }[, callback])
 
 Returns the previous reporting window ID for the specified `branch`.
 
-#### augur.api().Branch.getReportingPeriodDurationInSeconds({ branch }[, callback])
+#### augur.api.Branch.getReportingPeriodDurationInSeconds({ branch }[, callback])
 
 Returns the specified `branch`'s reporting period duration in seconds.
 
-#### augur.api().Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter }[, callback])
+#### augur.api.Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter }[, callback])
 
 Returns the reporting window address on the specific `branch` given an `endTime` and if the market we are checking for has an automated reporter or not (`hasAutomatedReporter`). `hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
 
-#### augur.api().Branch.getReportingWindowByTimestamp({ branch, timestamp }[, callback])
+#### augur.api.Branch.getReportingWindowByTimestamp({ branch, timestamp }[, callback])
 
 Returns the reporting window address for a specific `branch` and provided `timestamp`.
 
-#### augur.api().Branch.getReportingWindowId({ branch, timestamp }[, callback])
+#### augur.api.Branch.getReportingWindowId({ branch, timestamp }[, callback])
 
 Returns the reporting window ID for a specific `branch` and provided `timestamp`. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
 
-#### augur.api().Branch.getReputationToken({ branch }[, callback])
+#### augur.api.Branch.getReputationToken({ branch }[, callback])
 
 Returns the reputation token address for a specific `branch`.
 
-#### augur.api().Branch.getTopics({ branch }[, callback])
+#### augur.api.Branch.getTopics({ branch }[, callback])
 
 Returns the topics address for the specific `branch`.
 
-#### augur.api().Branch.isContainerForMarket({ branch, shadyMarket }[, callback])
+#### augur.api.Branch.isContainerForMarket({ branch, shadyMarket }[, callback])
 
 Returns wether the specific `branch` is a container for the `shadyMarket` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api().Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken }[, callback])
+#### augur.api.Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken }[, callback])
 
 Returns wether the specific `branch` is a container for the `shadyRegistrationToken` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api().Branch.isContainerForReportingToken({ branch, shadyReportingToken }[, callback])
+#### augur.api.Branch.isContainerForReportingToken({ branch, shadyReportingToken }[, callback])
 
 Returns wether the specific `branch` is a container for the `shadyReportingToken` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api().Branch.isContainerForReportingWindow({ branch, shadyReportingWindow }[, callback])
+#### augur.api.Branch.isContainerForReportingWindow({ branch, shadyReportingWindow }[, callback])
 
 Returns wether the specific `branch` is a container for the `shadyReportingWindow` provided. Returns `1` if true, `0` if false.
 
-#### augur.api().Branch.isParentOf({ branch, shadyChild }[, callback])
+#### augur.api.Branch.isParentOf({ branch, shadyChild }[, callback])
 
 Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
@@ -672,69 +672,69 @@ Returns wether the specific `branch` is a container for the `shadyChild` branch 
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 const address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 
-augur.api().DisputeBondToken.balanceOf({ disputeBondToken, address }, function (balance) { /* ... */ })
+augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }, function (balance) { /* ... */ })
 // example output:
 balance = "1"
 
-augur.api().DisputeBondToken.getBondHolder({ disputeBondToken }, function (bondHolder) { /* ... */ })
+augur.api.DisputeBondToken.getBondHolder({ disputeBondToken }, function (bondHolder) { /* ... */ })
 // example output:
 bondHolder = "0x3d62bafc1791752393384b902f813da861ddedd9"
 
-augur.api().DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }, function (bondRemainingToBePaidOut) { /* ... */ })
+augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }, function (bondRemainingToBePaidOut) { /* ... */ })
 // example output:
 bondRemainingToBePaidOut = "1100000000000000000000"
 
-augur.api().DisputeBondToken.getBranch({ disputeBondToken }, function (branch) { /* ... */ })
+augur.api.DisputeBondToken.getBranch({ disputeBondToken }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }, function (disputedPayoutDistributionHash) { /* ... */ })
+augur.api.DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }, function (disputedPayoutDistributionHash) { /* ... */ })
 // example output:
 disputedPayoutDistributionHash = "0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"
 
-augur.api().DisputeBondToken.getMarket({ disputeBondToken }, function (market) { /* ... */ })
+augur.api.DisputeBondToken.getMarket({ disputeBondToken }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api().DisputeBondToken.getReputationToken({ disputeBondToken }, function (reputationToken) { /* ... */ })
+augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupply) { /* ... */ })
+augur.api.DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "1"
 ```
 ### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
 
-#### augur.api().DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
+#### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
 
 This transaction will return the balance for a specified `disputeBondToken` owned by the provided `address`. Will always result in `1` or `0`.
 
-#### augur.api().DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
 
 This transaction will return the address of the bond holder for a specified `disputeBondToken`.
 
-#### augur.api().DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
 
 This transaction will return the amount, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`.
 
-#### augur.api().DisputeBondToken.getBranch({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getBranch({ disputeBondToken }[, callback])
 
 This transaction will return the branch that a specified `disputeBondToken`'s market lives on.
 
-#### augur.api().DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }[, callback])
 
 This transaction will return the distribution hash for the dispute payout given a specified `disputeBondToken`.
 
-#### augur.api().DisputeBondToken.getMarket({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getMarket({ disputeBondToken }[, callback])
 
 This transaction will return the market that a specified `disputeBondToken` is disputing the results of.
 
-#### augur.api().DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
 
 This transaction will return the reputation token address that a specified `disputeBondToken`'s market uses.
 
-#### augur.api().DisputeBondToken.totalSupply({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.totalSupply({ disputeBondToken }[, callback])
 
 This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
 
@@ -742,304 +742,304 @@ This transaction will return the total supply of a specified `disputeBondToken`,
 // Market Contract
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api().Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
+augur.api.Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
 // example output:
 canBeReportedOn = "1"
 
-augur.api().Market.getAutomatedReportDisputeDueTimestamp({ market }, function (automatedReporterDisputeDueTimestamp) { /* ... */ })
+augur.api.Market.getAutomatedReportDisputeDueTimestamp({ market }, function (automatedReporterDisputeDueTimestamp) { /* ... */ })
 // example output:
 automatedReporterDisputeDueTimestamp = "1500907130"
 
-augur.api().Market.getAutomatedReportDueTimestamp({ market }, function (automatedReporterDueTimestamp) { /* ... */ })
+augur.api.Market.getAutomatedReportDueTimestamp({ market }, function (automatedReporterDueTimestamp) { /* ... */ })
 // example output:
 automatedReporterDueTimestamp = "1500647930"
 
-augur.api().Market.getBranch({ market }, function (branch) { /* ... */ })
+augur.api.Market.getBranch({ market }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().Market.getCompleteSetCostInAttotokens({ market }, function (completeSetCostInAttotokens) { /* ... */ })
+augur.api.Market.getCompleteSetCostInAttotokens({ market }, function (completeSetCostInAttotokens) { /* ... */ })
 // example output:
 completeSetCostInAttotokens = "1000000000000000000"
 
-augur.api().Market.getCreator({ market }, function (marketCreator) { /* ... */ })
+augur.api.Market.getCreator({ market }, function (marketCreator) { /* ... */ })
 // example output:
 marketCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa"
 
-augur.api().Market.getDenominationToken({ market }, function (denominationToken) { /* ... */ })
+augur.api.Market.getDenominationToken({ market }, function (denominationToken) { /* ... */ })
 // example output:
 denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
 
-augur.api().Market.getEndTime({ market }, function (endTime) { /* ... */ })
+augur.api.Market.getEndTime({ market }, function (endTime) { /* ... */ })
 // example output:
 endTime = "1500388730";
 
-augur.api().Market.getFinalizationTime({ market }, function (finalizationTime) { /* ... */ })
+augur.api.Market.getFinalizationTime({ market }, function (finalizationTime) { /* ... */ })
 // example output:
 finalizationTime = "1500647930";
 
-augur.api().Market.getFinalPayoutDistributionHash({ market }, function (finalPayoutDistributionHash) { /* ... */ })
+augur.api.Market.getFinalPayoutDistributionHash({ market }, function (finalPayoutDistributionHash) { /* ... */ })
 // example output:
 finalPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api().Market.getFinalWinningReportingToken({ market }, function (winningReportingToken) { /* ... */ })
+augur.api.Market.getFinalWinningReportingToken({ market }, function (winningReportingToken) { /* ... */ })
 // example output:
 winningReportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }, function (marketCreatorSettlementFee) { /* ... */ })
+augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
 
-augur.api().Market.getMaxDisplayPrice({ market }, function (maxDisplayPrice) { /* ... */ })
+augur.api.Market.getMaxDisplayPrice({ market }, function (maxDisplayPrice) { /* ... */ })
 // example output:
 maxDisplayPrice = "1"
 
-augur.api().Market.getMinDisplayPrice({ market }, function (minDisplayPrice) { /* ... */ })
+augur.api.Market.getMinDisplayPrice({ market }, function (minDisplayPrice) { /* ... */ })
 // example output:
 minDisplayPrice = "0"
 
-augur.api().Market.getNumberOfOutcomes({ market }, function (numOutcomes) { /* ... */ })
+augur.api.Market.getNumberOfOutcomes({ market }, function (numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "2"
 
-augur.api().Market.getPayoutDenominator({ market }, function (payoutDenominator) { /* ... */ })
+augur.api.Market.getPayoutDenominator({ market }, function (payoutDenominator) { /* ... */ })
 // example output:
 payoutDenominator = "1"
 
-augur.api().Market.getRegistrationToken({ market }, function (registrationToken) { /* ... */ })
+augur.api.Market.getRegistrationToken({ market }, function (registrationToken) { /* ... */ })
 // example output:
 registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
-augur.api().Market.getReportingWindow({ market }, function (reportingWindow) { /* ... */ })
+augur.api.Market.getReportingWindow({ market }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
-augur.api().Market.getReputationToken({ market }, function (reputationToken) { /* ... */ })
+augur.api.Market.getReputationToken({ market }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().Market.getShareToken({ market, outcome: 1 }, function (shareToken) { /* ... */ })
+augur.api.Market.getShareToken({ market, outcome: 1 }, function (shareToken) { /* ... */ })
 // example output:
 shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
-augur.api().Market.getTentativeWinningPayoutDistributionHash({ market }, function (tentativeWinningPayoutDistributionHash) { /* ... */ })
+augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }, function (tentativeWinningPayoutDistributionHash) { /* ... */ })
 // example output:
 tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api().Market.getTopic({ market }, function (topic) { /* ... */ })
+augur.api.Market.getTopic({ market }, function (topic) { /* ... */ })
 // example output:
 topic = "Augur"
 
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-augur.api().Market.isContainerForReportingToken({ market, shadyToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+augur.api.Market.isContainerForReportingToken({ market, shadyToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
 // example output:
 isContainerForReportingToken = "1"
 
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
-augur.api().Market.isContainerForShareToken({ market, shadyShareToken: shareToken }, function (isContainerForShareToken) { /* ... */ })
+augur.api.Market.isContainerForShareToken({ market, shadyShareToken: shareToken }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
 
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-augur.api().Market.isContainerForDisputeBondToken({ market, shadyBondToken: disputeBondToken }, function (isContainerForShareToken) { /* ... */ })
+augur.api.Market.isContainerForDisputeBondToken({ market, shadyBondToken: disputeBondToken }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForDisputeBondToken = "1"
 
-augur.api().Market.isDoneWithAllReporters({ market }, function (isDoneWithAllReporters) { /* ... */ })
+augur.api.Market.isDoneWithAllReporters({ market }, function (isDoneWithAllReporters) { /* ... */ })
 // example output:
 isDoneWithAllReporters = "1"
 
-augur.api().Market.isDoneWithAutomatedReporters({ market }, function (isDoneWithAutomatedReporters) { /* ... */ })
+augur.api.Market.isDoneWithAutomatedReporters({ market }, function (isDoneWithAutomatedReporters) { /* ... */ })
 // example output:
 isDoneWithAutomatedReporters = "1"
 
-augur.api().Market.isDoneWithLimitedReporters({ market }, function (isDoneWithLimitedReporters) { /* ... */ })
+augur.api.Market.isDoneWithLimitedReporters({ market }, function (isDoneWithLimitedReporters) { /* ... */ })
 // example output:
 isDoneWithLimitedReporters = "1"
 
-augur.api().Market.isFinalized({ market }, function (isFinalized) { /* ... */ })
+augur.api.Market.isFinalized({ market }, function (isFinalized) { /* ... */ })
 // example output:
 isFinalized = "1"
 
-augur.api().Market.isInAllDisputePhase({ market }, function (isInAllDisputePhase) { /* ... */ })
+augur.api.Market.isInAllDisputePhase({ market }, function (isInAllDisputePhase) { /* ... */ })
 // example output:
 isInAllDisputePhase = "1";
 
-augur.api().Market.isInAllReportingPhase({ market }, function (isInAllReportingPhase) { /* ... */ })
+augur.api.Market.isInAllReportingPhase({ market }, function (isInAllReportingPhase) { /* ... */ })
 // example output:
 isInAllReportingPhase = "1";
 
-augur.api().Market.isInAutomatedDisputePhase({ market }, function (isInAutomatedDisputePhase) { /* ... */ })
+augur.api.Market.isInAutomatedDisputePhase({ market }, function (isInAutomatedDisputePhase) { /* ... */ })
 // example output:
 isInAutomatedDisputePhase = "1";
 
-augur.api().Market.isInAutomatedReportingPhase({ market }, function (isInAutomatedReportingPhase) { /* ... */ })
+augur.api.Market.isInAutomatedReportingPhase({ market }, function (isInAutomatedReportingPhase) { /* ... */ })
 // example output:
 isInAutomatedReportingPhase = "1";
 
-augur.api().Market.isInLimitedDisputePhase({ market }, function (isInLimitedDisputePhase) { /* ... */ })
+augur.api.Market.isInLimitedDisputePhase({ market }, function (isInLimitedDisputePhase) { /* ... */ })
 // example output:
 isInLimitedDisputePhase = "1";
 
-augur.api().Market.isInLimitedReportingPhase({ market }, function (isInLimitedReportingPhase) { /* ... */ })
+augur.api.Market.isInLimitedReportingPhase({ market }, function (isInLimitedReportingPhase) { /* ... */ })
 // example output:
 isInLimitedReportingPhase = "1";
 
-augur.api().Market.needsMigration({ market }, function (needsMigration) { /* ... */ })
+augur.api.Market.needsMigration({ market }, function (needsMigration) { /* ... */ })
 // example output:
 needsMigration = "1";
 
-augur.api().Market.shouldCollectReportingFees({ market }, function (shouldCollectReportingFees) { /* ... */ })
+augur.api.Market.shouldCollectReportingFees({ market }, function (shouldCollectReportingFees) { /* ... */ })
 // example output:
 shouldCollectReportingFees = "1";
 ```
 ### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
 
-#### augur.api().Market.canBeReportedOn({ market }[, callback])
+#### augur.api.Market.canBeReportedOn({ market }[, callback])
 
 Returns wether the specific `market` can be reported on. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.getAutomatedReportDisputeDueTimestamp({ market }[, callback])
+#### augur.api.Market.getAutomatedReportDisputeDueTimestamp({ market }[, callback])
 
 Returns the timestamp for when a specific `market`'s  automated report process and dispute period should be completed.
 
-#### augur.api().Market.getAutomatedReportDueTimestamp({ market }[, callback])
+#### augur.api.Market.getAutomatedReportDueTimestamp({ market }[, callback])
 
 Returns the timestamp for when a specific `market`'s  automated report process should be completed but doesn't count the dispute period.
 
-#### augur.api().Market.getBranch({ market }[, callback])
+#### augur.api.Market.getBranch({ market }[, callback])
 
 Returns the branch ID of the branch that the specified `market` is contained within.
 
-#### augur.api().Market.getCompleteSetCostInAttotokens({ market }[, callback])
+#### augur.api.Market.getCompleteSetCostInAttotokens({ market }[, callback])
 
 Returns the cost of a complete set for a specific `market` denominated in attotokens.
 
-#### augur.api().Market.getCreator({ market }[, callback])
+#### augur.api.Market.getCreator({ market }[, callback])
 
 Returns the address of the creator of the specified `market`.
 
-#### augur.api().Market.getDenominationToken({ market }[, callback])
+#### augur.api.Market.getDenominationToken({ market }[, callback])
 
 Returns the address of the token used to denominate the specified `market`.
 
-#### augur.api().Market.getEndTime({ market }[, callback])
+#### augur.api.Market.getEndTime({ market }[, callback])
 
 Returns the timestamp for when the specified `market`'s event has come to pass and the `market` is ready to be reported on.
 
-#### augur.api().Market.getFinalizationTime({ market }[, callback])
+#### augur.api.Market.getFinalizationTime({ market }[, callback])
 
 Returns the timestamp for when the specified `market` was finalized.
 
-#### augur.api().Market.getFinalPayoutDistributionHash({ market }[, callback])
+#### augur.api.Market.getFinalPayoutDistributionHash({ market }[, callback])
 
 Returns the final payout distribution hash for a specified `market`.
 
-#### augur.api().Market.getFinalWinningReportingToken({ market }[, callback])
+#### augur.api.Market.getFinalWinningReportingToken({ market }[, callback])
 
 Returns the winning reporting token address for a specified `market`.
 
-#### augur.api().Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
+#### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
 Returns the fee paid to the `market` creator denominated in attotokens for 1 token settled on the market.
 
-#### augur.api().Market.getMaxDisplayPrice({ market }[, callback])
+#### augur.api.Market.getMaxDisplayPrice({ market }[, callback])
 
 Returns the maximum displayed price for the specified `market`.
 
-#### augur.api().Market.getMinDisplayPrice({ market }[, callback])
+#### augur.api.Market.getMinDisplayPrice({ market }[, callback])
 
 Returns the minimum displayed price for the specified `market`.
 
-#### augur.api().Market.getNumberOfOutcomes({ market }[, callback])
+#### augur.api.Market.getNumberOfOutcomes({ market }[, callback])
 
 Returns the number of outcomes for a specified `market`.
 
-#### augur.api().Market.getPayoutDenominator({ market }[, callback])
+#### augur.api.Market.getPayoutDenominator({ market }[, callback])
 
 Returns the payout denominator for a specified `market`.
 
-#### augur.api().Market.getRegistrationToken({ market }[, callback])
+#### augur.api.Market.getRegistrationToken({ market }[, callback])
 
 Returns the registration token's address for the specified `market`.
 
-#### augur.api().Market.getReportingWindow({ market }[, callback])
+#### augur.api.Market.getReportingWindow({ market }[, callback])
 
 Returns the reporting window address for the specified `market`.
 
-#### augur.api().Market.getReputationToken({ market }[, callback])
+#### augur.api.Market.getReputationToken({ market }[, callback])
 
 Returns the reputation token's address for the specified `market`.
 
-#### augur.api().Market.getShareToken({ market, outcome }[, callback])
+#### augur.api.Market.getShareToken({ market, outcome }[, callback])
 
 Returns the share token's address for the specified `market` and `outcome`.
 
-#### augur.api().Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
+#### augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
 
 Returns the tentatively winning Payout Distribution Hash given a specified `market`.
 
-#### augur.api().Market.getTopic({ market }[, callback])
+#### augur.api.Market.getTopic({ market }[, callback])
 
 Returns the topic of the specified `market`.
 
-#### augur.api().Market.isContainerForReportingToken({ market, shadyToken }[, callback])
+#### augur.api.Market.isContainerForReportingToken({ market, shadyToken }[, callback])
 
 Returns wether the specific `market` is a container for the `shadyToken` address provided, which is the reporting token address we intend to check. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isContainerForShareToken({ market, shadyShareToken }[, callback])
+#### augur.api.Market.isContainerForShareToken({ market, shadyShareToken }[, callback])
 
 Returns wether the specific `market` is a container for the `shadyShareToken` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isContainerForDisputeBondToken({ market, shadyBondToken }[, callback])
+#### augur.api.Market.isContainerForDisputeBondToken({ market, shadyBondToken }[, callback])
 
 Returns wether the specific `market` is a container for the `shadyBondToken` address provided. A `shadyBondToken` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isDoneWithAllReporters({ market }[, callback])
+#### augur.api.Market.isDoneWithAllReporters({ market }[, callback])
 
 Returns wether the specific `market` is done with the all reporting phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isDoneWithAutomatedReporters({ market }[, callback])
+#### augur.api.Market.isDoneWithAutomatedReporters({ market }[, callback])
 
 Returns wether the specific `market` is done with the automated reporting phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isDoneWithLimitedReporters({ market }[, callback])
+#### augur.api.Market.isDoneWithLimitedReporters({ market }[, callback])
 
 Returns wether the specific `market` is done with the limited reporting phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isFinalized({ market }[, callback])
+#### augur.api.Market.isFinalized({ market }[, callback])
 
 Returns wether the specific `market` has been finalized or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInAllDisputePhase({ market }[, callback])
+#### augur.api.Market.isInAllDisputePhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the All Dispute Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInAllReportingPhase({ market }[, callback])
+#### augur.api.Market.isInAllReportingPhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the All Reporting Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInAutomatedDisputePhase({ market }[, callback])
+#### augur.api.Market.isInAutomatedDisputePhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the Automated Dispute Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInAutomatedReportingPhase({ market }[, callback])
+#### augur.api.Market.isInAutomatedReportingPhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the Automated Reporting Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInLimitedDisputePhase({ market }[, callback])
+#### augur.api.Market.isInLimitedDisputePhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the Limited Dispute Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.isInLimitedReportingPhase({ market }[, callback])
+#### augur.api.Market.isInLimitedReportingPhase({ market }[, callback])
 
 Returns wether the specific `market` is current in the the Limited Reporting Phase or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.needsMigration({ market }[, callback])
+#### augur.api.Market.needsMigration({ market }[, callback])
 
 Returns wether the specific `market` needs to be migrated to a new branch or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Market.shouldCollectReportingFees({ market }[, callback])
+#### augur.api.Market.shouldCollectReportingFees({ market }[, callback])
 
 Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
@@ -1049,62 +1049,62 @@ const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api().RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
 // example output:
 allowance = "1";
 
-augur.api().RegistrationToken.balanceOf({ registrationToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.RegistrationToken.balanceOf({ registrationToken, address: ownerAddress }, function (balance) { /* ... */ })
 // example output:
 balance = "1";
 
-augur.api().RegistrationToken.getBranch({ registrationToken }, function (branch) { /* ... */ })
+augur.api.RegistrationToken.getBranch({ registrationToken }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().RegistrationToken.getPeakSupply({ registrationToken }, function (peakSuppy) { /* ... */ })
+augur.api.RegistrationToken.getPeakSupply({ registrationToken }, function (peakSuppy) { /* ... */ })
 // example output:
 peakSuppy = "234"
 
-augur.api().RegistrationToken.getReportingWindow({ registrationToken }, function (reportingWindow) { /* ... */ })
+augur.api.RegistrationToken.getReportingWindow({ registrationToken }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
-augur.api().RegistrationToken.getReputationToken({ registrationToken }, function (reputationToken) { /* ... */ })
+augur.api.RegistrationToken.getReputationToken({ registrationToken }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().RegistrationToken.totalSupply({ registrationToken }, function (totalSupply) { /* ... */ })
+augur.api.RegistrationToken.totalSupply({ registrationToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "215";
 
 ```
 ### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
 
-#### augur.api().RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
 
 Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `registrationToken`s.
 
-#### augur.api().RegistrationToken.balanceOf({ registrationToken, address }[, callback])
+#### augur.api.RegistrationToken.balanceOf({ registrationToken, address }[, callback])
 
 Returns the token balance for the specified `registrationToken` owned by the `address` provided.
 
-#### augur.api().RegistrationToken.getBranch({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.getBranch({ registrationToken }[, callback])
 
 Returns the Branch address for the specified `registrationToken`'s Reporting Window.
 
-#### augur.api().RegistrationToken.getPeakSupply({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.getPeakSupply({ registrationToken }[, callback])
 
 Returns the peak supply of tokens for the specified `registrationToken`.
 
-#### augur.api().RegistrationToken.getReportingWindow({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.getReportingWindow({ registrationToken }[, callback])
 
 Returns the Reporting Window address for the specified `registrationToken`.
 
-#### augur.api().RegistrationToken.getReputationToken({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.getReputationToken({ registrationToken }[, callback])
 
 Returns the Reputation Tokens address for the specific `registrationToken`'s Reporting Window.
 
-#### augur.api().RegistrationToken.totalSupply({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.totalSupply({ registrationToken }[, callback])
 
 Returns the current total supply of the specified `registrationToken`.
 
@@ -1114,86 +1114,86 @@ const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api().ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
 // example output:
 allowance = "1"
 
-augur.api().ReportingToken.balanceOf({ reportingToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.ReportingToken.balanceOf({ reportingToken, address: ownerAddress }, function (balance) { /* ... */ })
 // example output:
 balance = "1"
 
-augur.api().ReportingToken.getBranch({ reportingToken }, function (branch) { /* ... */ })
+augur.api.ReportingToken.getBranch({ reportingToken }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().ReportingToken.getMarket({ reportingToken }, function (market) { /* ... */ })
+augur.api.ReportingToken.getMarket({ reportingToken }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api().ReportingToken.getPayoutDistributionHash({ reportingToken }, function (payoutDistributionHash) { /* ... */ })
+augur.api.ReportingToken.getPayoutDistributionHash({ reportingToken }, function (payoutDistributionHash) { /* ... */ })
 // example output:
 payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api().ReportingToken.getPayoutNumerator({ reportingToken, index: 0 }, function (payoutNumerator) { /* ... */ })
+augur.api.ReportingToken.getPayoutNumerator({ reportingToken, index: 0 }, function (payoutNumerator) { /* ... */ })
 // example output:
 payoutNumerator = "1"
 
-augur.api().ReportingToken.getRegistrationToken({ reportingToken }, function (registrationToken) { /* ... */ })
+augur.api.ReportingToken.getRegistrationToken({ reportingToken }, function (registrationToken) { /* ... */ })
 // example output:
 registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
-augur.api().ReportingToken.getReportingWindow({ reportingToken }, function (reportingWindow) { /* ... */ })
+augur.api.ReportingToken.getReportingWindow({ reportingToken }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
-augur.api().ReportingToken.getReputationToken({ reportingToken }, function (reputationToken) { /* ... */ })
+augur.api.ReportingToken.getReputationToken({ reportingToken }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().ReportingToken.totalSupply({ reportingToken }, function (totalSupply) { /* ... */ })
+augur.api.ReportingToken.totalSupply({ reportingToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "210"
 
 ```
 ### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
 
-#### augur.api().ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
 
 Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reportingToken`s.
 
-#### augur.api().ReportingToken.balanceOf({ reportingToken, address }[, callback])
+#### augur.api.ReportingToken.balanceOf({ reportingToken, address }[, callback])
 
 Returns the token balance for the specified `reportingToken` owned by the provided `address`.
 
-#### augur.api().ReportingToken.getBranch({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getBranch({ reportingToken }[, callback])
 
 Returns the Branch address for the specified `reportingToken`'s Reporting Window.
 
-#### augur.api().ReportingToken.getMarket({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getMarket({ reportingToken }[, callback])
 
 Returns the market address for the specified `reportingToken`.
 
-#### augur.api().ReportingToken.getPayoutDistributionHash({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getPayoutDistributionHash({ reportingToken }[, callback])
 
 Returns the payoutDistributionHash for a specific `reportingToken`.
 
-#### augur.api().ReportingToken.getPayoutNumerator({ reportingToken, index }[, callback])
+#### augur.api.ReportingToken.getPayoutNumerator({ reportingToken, index }[, callback])
 
 Returns the payout Numerator for a specific `reportingToken` given an outcome `index`.
 
-#### augur.api().ReportingToken.getRegistrationToken({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getRegistrationToken({ reportingToken }[, callback])
 
 Returns the Registration Token address for this specific `reportingToken`.
 
-#### augur.api().ReportingToken.getReportingWindow({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getReportingWindow({ reportingToken }[, callback])
 
 Returns the Reporting Window address for the specified `reportingToken`.
 
-#### augur.api().ReportingToken.getReputationToken({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getReputationToken({ reportingToken }[, callback])
 
 Returns the Reputation Tokens address for the specific `reportingToken`'s Reporting Window.
 
-#### augur.api().ReportingToken.totalSupply({ reportingToken }[, callback])
+#### augur.api.ReportingToken.totalSupply({ reportingToken }[, callback])
 
 Returns the current total supply of the specified `reportingToken`.
 
@@ -1201,168 +1201,168 @@ Returns the current total supply of the specified `reportingToken`.
 // Reporting Window Contract
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api().ReportingWindow.getBranch({ reportingWindow }, function (branch) { /* ... */ })
+augur.api.ReportingWindow.getBranch({ reportingWindow }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }, function (disputeEndTime) { /* ... */ })
+augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow }, function (disputeEndTime) { /* ... */ })
 // example output:
 disputeEndTime = "1500907130"
 
-augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }, function (disputeStartTime) { /* ... */ })
+augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow }, function (disputeStartTime) { /* ... */ })
 // example output:
 disputeStartTime = "1500647930"
 
-augur.api().ReportingWindow.getEndTime({ reportingWindow }, function (endTime) { /* ... */ })
+augur.api.ReportingWindow.getEndTime({ reportingWindow }, function (endTime) { /* ... */ })
 // example output:
 endTime = "1500388730"
 
-augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }, function (maxReportsPerLimitedReporterMarket) { /* ... */ })
+augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }, function (maxReportsPerLimitedReporterMarket) { /* ... */ })
 // example output:
 maxReportsPerLimitedReporterMarket = "9"
 
-augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }, function (registrationToken) { /* ... */ })
+augur.api.ReportingWindow.getRegistrationToken({ reportingWindow }, function (registrationToken) { /* ... */ })
 // example output:
 registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
 
-augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }, function (reportingEndTime) { /* ... */ })
+augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }, function (reportingEndTime) { /* ... */ })
 // example output:
 reportingEndTime = "1500647900"
 
-augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }, function (reportingStartTime) { /* ... */ })
+augur.api.ReportingWindow.getReportingStartTime({ reportingWindow }, function (reportingStartTime) { /* ... */ })
 // example output:
 reportingStartTime = "14998315100"
 
 const reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
-augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }, function (reportsByReporter) { /* ... */ })
+augur.api.ReportingWindow.getReportsByReporter({ reportingWindow, reporter }, function (reportsByReporter) { /* ... */ })
 // example output:
 reportsByReporter = "0x03198001d1c223b2fdb1866703a7c2e4d5313f80"
 
-augur.api().ReportingWindow.getReputationToken({ reportingWindow }, function (reputationToken) { /* ... */ })
+augur.api.ReportingWindow.getReputationToken({ reportingWindow }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api().ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }, function (requiredReportsPerReporterForLimitedReporterMarkets) { /* ... */ })
+augur.api.ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }, function (requiredReportsPerReporterForLimitedReporterMarkets) { /* ... */ })
 // example output:
 requiredReportsPerReporterForLimitedReporterMarkets = "2"
 
-augur.api().ReportingWindow.getStartTime({ reportingWindow }, function (startTime) { /* ... */ })
+augur.api.ReportingWindow.getStartTime({ reportingWindow }, function (startTime) { /* ... */ })
 // example output:
 startTime = "14995895900"
 
-augur.api().ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }, function (targetReportsPerLimitedReporterMarket) { /* ... */ })
+augur.api.ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }, function (targetReportsPerLimitedReporterMarket) { /* ... */ })
 // example output:
 targetReportsPerLimitedReporterMarket = "3"
 
-augur.api().ReportingWindow.getTargetReportsPerReporter({ reportingWindow }, function (targetReportsPerReporter) { /* ... */ })
+augur.api.ReportingWindow.getTargetReportsPerReporter({ reportingWindow }, function (targetReportsPerReporter) { /* ... */ })
 // example output:
 targetReportsPerReporter = "5"
 
-augur.api().ReportingWindow.isActive({ reportingWindow }, function (isActive) { /* ... */ })
+augur.api.ReportingWindow.isActive({ reportingWindow }, function (isActive) { /* ... */ })
 // example output:
 isActive = "1"
 
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api().ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1"
 
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api().ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+augur.api.ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
 // example output:
 isContainerForRegistrationToken = "1"
 
-augur.api().ReportingWindow.isDisputeActive({ reportingWindow }, function (isDisputeActive) { /* ... */ })
+augur.api.ReportingWindow.isDisputeActive({ reportingWindow }, function (isDisputeActive) { /* ... */ })
 // example output:
 isDisputeActive = "1"
 
-augur.api().ReportingWindow.isDoneReporting({ reportingWindow, reporter }, function (isDoneReporting) { /* ... */ })
+augur.api.ReportingWindow.isDoneReporting({ reportingWindow, reporter }, function (isDoneReporting) { /* ... */ })
 // example output:
 isDoneReporting = "1"
 
-augur.api().ReportingWindow.isReportingActive({ reportingWindow }, function (isReportingActive) { /* ... */ })
+augur.api.ReportingWindow.isReportingActive({ reportingWindow }, function (isReportingActive) { /* ... */ })
 // example output:
 isReportingActive = "1"
 ```
 ### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
 
-#### augur.api().ReportingWindow.getBranch({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getBranch({ reportingWindow }[, callback])
 
 Returns the branch address that contains the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
 
 Returns the Dispute End Time for a specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getDisputeStartTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow }[, callback])
 
 Returns the Dispute Start Time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getEndTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getEndTime({ reportingWindow }[, callback])
 
 Returns the End Time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
 Returns the maximum number of reports a limited reporter market can have in the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getRegistrationToken({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getRegistrationToken({ reportingWindow }[, callback])
 
 Returns the Registration Token address for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
 
 Returns the reporting phase end time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportingStartTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getReportingStartTime({ reportingWindow }[, callback])
 
 Returns the reporting phase start time for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getReportsByReporter({ reportingWindow, reporter }[, callback])
+#### augur.api.ReportingWindow.getReportsByReporter({ reportingWindow, reporter }[, callback])
 
 Returns the reports set address for the specified `reportingWindow` and `reporter`.
 
-#### augur.api().ReportingWindow.getReputationToken({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getReputationToken({ reportingWindow }[, callback])
 
 Returns the Reputation Token address for the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }[, callback])
 
 Returns the required number of reports per reporter for the limited reporter markets contained within the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getStartTime({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getStartTime({ reportingWindow }[, callback])
 
 Returns the specified `reportingWindow`'s start time.
 
-#### augur.api().ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
 Returns the target number of reports per reporter for the limited reporter markets contained within the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.getTargetReportsPerReporter({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.getTargetReportsPerReporter({ reportingWindow }[, callback])
 
 Returns the target number of reports per reporter for all markets contained within the specified `reportingWindow`.
 
-#### augur.api().ReportingWindow.isActive({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.isActive({ reportingWindow }[, callback])
 
 Returns wether the specified `reportingWindow` is currently active or not. Returns `1` if true, `0` if false.
 
-#### augur.api().ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket }[, callback])
+#### augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket }[, callback])
 
 Returns wether the specified `reportingWindow` contains the `shadyMarket` or not. Returns `1` if true, `0` if false.
 
-#### augur.api().ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken }[, callback])
+#### augur.api.ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken }[, callback])
 
 Returns wether the specified `reportingWindow` contains the `shadyRegistrationToken` or not. Returns `1` if true, `0` if false.
 
-#### augur.api().ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
 
 Returns wether the specified `reportingWindow`'s dispute phase is active or not. Returns `1` if true, `0` if false.
 
-#### augur.api().ReportingWindow.isDoneReporting({ reportingWindow, reporter }[, callback])
+#### augur.api.ReportingWindow.isDoneReporting({ reportingWindow, reporter }[, callback])
 
 Returns wether the specified `reporter` is finished reporting for the `reportingWindow` or not. Returns `1` if true, `0` if false.
 
-#### augur.api().ReportingWindow.isReportingActive({ reportingWindow }[, callback])
+#### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
 
 Returns wether the specified `reportingWindow`'s reporting phase is active or not. Returns `1` if true, `0` if false.
 
@@ -1372,45 +1372,45 @@ const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api().ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
 // example output:
 allowance = "200"
 
-augur.api().ReputationToken.balanceOf({ reputationToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.ReputationToken.balanceOf({ reputationToken, address: ownerAddress }, function (balance) { /* ... */ })
 // example output:
 balance = "1000"
 
-augur.api().ReputationToken.getBranch({ reputationToken }, function (branch) { /* ... */ })
+augur.api.ReputationToken.getBranch({ reputationToken }, function (branch) { /* ... */ })
 // example output:
 branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api().ReputationToken.getTopMigrationDestination({ reputationToken }, function (topMigrationDestination) { /* ... */ })
+augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }, function (topMigrationDestination) { /* ... */ })
 // example output:
 topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 
-augur.api().ReputationToken.totalSupply({ reputationToken }, function (totalSupply) { /* ... */ })
+augur.api.ReputationToken.totalSupply({ reputationToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
 ### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.se)
 
-#### augur.api().ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
 
 Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reputationToken`s.
 
-#### augur.api().ReputationToken.balanceOf({ reputationToken, address }[, callback])
+#### augur.api.ReputationToken.balanceOf({ reputationToken, address }[, callback])
 
 Returns the token balance of the specified `reputationToken` owned by the `address` provided.
 
-#### augur.api().ReputationToken.getBranch({ reputationToken }[, callback])
+#### augur.api.ReputationToken.getBranch({ reputationToken }[, callback])
 
 Returns the Branch address for the specified `reputationToken`.
 
-#### augur.api().ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
+#### augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
 
 Returns the top migration destination address for the specified `reputationToken`.
 
-#### augur.api().ReputationToken.totalSupply({ reputationToken }[, callback])
+#### augur.api.ReputationToken.totalSupply({ reputationToken }[, callback])
 
 Returns the current total supply of the specified `reputationToken`.
 
@@ -1419,61 +1419,61 @@ Returns the current total supply of the specified `reputationToken`.
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api().Cash.allowance({ owner, spender }, function (allowance) { /* ... */ })
+augur.api.Cash.allowance({ owner, spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "100"
 
-augur.api().Cash.balanceOf({ address: owner }, function (balance) { /* ... */ })
+augur.api.Cash.balanceOf({ address: owner }, function (balance) { /* ... */ })
 // example output:
 balance = "10000"
 
-augur.api().Cash.getDecimals({}, function (decimals) { /* ... */ })
+augur.api.Cash.getDecimals({}, function (decimals) { /* ... */ })
 // example output:
 decimals = "18"
 
-augur.api().Cash.getInitiated({}, function (initiated) { /* ... */ })
+augur.api.Cash.getInitiated({}, function (initiated) { /* ... */ })
 // example output:
 initiated = "1"
 
-augur.api().Cash.getName({}, function (name) { /* ... */ })
+augur.api.Cash.getName({}, function (name) { /* ... */ })
 // example output:
 name = "Cash"
 
-augur.api().Cash.getSymbol({}, function (symbol) { /* ... */ })
+augur.api.Cash.getSymbol({}, function (symbol) { /* ... */ })
 // example output:
 symbol = "CASH"
 
-augur.api().Cash.totalSupply({}, function (totalSupply) { /* ... */ })
+augur.api.Cash.totalSupply({}, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
 ### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.se)
 
-#### augur.api().Cash.allowance({ owner, spender }[, callback])
+#### augur.api.Cash.allowance({ owner, spender }[, callback])
 
 Returns the allowance that a specified `spender` address can spend of the `owner` address' Cash tokens.
 
-#### augur.api().Cash.balanceOf({ address }[, callback])
+#### augur.api.Cash.balanceOf({ address }[, callback])
 
 Returns the balance of Cash tokens owned by the specified `address`.
 
-#### augur.api().Cash.getDecimals({}[, callback])
+#### augur.api.Cash.getDecimals({}[, callback])
 
 Returns the amount of decimal places that the Cash contract is accurate to: `18`, like Ether.
 
-#### augur.api().Cash.getInitiated({}[, callback])
+#### augur.api.Cash.getInitiated({}[, callback])
 
 Returns wether the sender of this call has initiated a withdraw of Ether from the Cash contract or not. Returns `1` if true, `0` if false.
 
-#### augur.api().Cash.getName({}[, callback])
+#### augur.api.Cash.getName({}[, callback])
 
 Returns the name string for Cash: `Cash`.
 
-#### augur.api().Cash.getSymbol({}[, callback])
+#### augur.api.Cash.getSymbol({}[, callback])
 
 Returns the symbol string for Cash: `CASH`.
 
-#### augur.api().Cash.totalSupply({}[, callback])
+#### augur.api.Cash.totalSupply({}[, callback])
 
 Returns the current total supply of Cash.
 
@@ -1485,136 +1485,136 @@ const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const outcome = "1";
 const fxpPrice = "450000000000000000"; // 0.45
 
-augur.api().Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice,
+augur.api.Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice,
 betterOrderID: orderID }, function (isNotBetterPrice) { /* ... */ })
 // example output:
 isNotBetterPrice = "1"
 
-augur.api().Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID: orderID }, function (isNotWorstPrice) { /* ... */ })
+augur.api.Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID: orderID }, function (isNotWorstPrice) { /* ... */ })
 // example output:
 isNotWorstPrice = "0"
 
-augur.api().Orders.getAmount({ orderID, type, market, outcome }, function (amount) { /* ... */ })
+augur.api.Orders.getAmount({ orderID, type, market, outcome }, function (amount) { /* ... */ })
 // example output:
 amount = "15"
 
-augur.api().Orders.getBestOrderID({ type, market, outcome }, function (bestOrderID) { /* ... */ })
+augur.api.Orders.getBestOrderID({ type, market, outcome }, function (bestOrderID) { /* ... */ })
 // example output:
 bestOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 const secondBestOrderID = "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5";
-augur.api().Orders.getBetterOrderID({ orderID: secondBestOrderID, type, market, outcome }, function (betterOrderID) { /* ... */ })
+augur.api.Orders.getBetterOrderID({ orderID: secondBestOrderID, type, market, outcome }, function (betterOrderID) { /* ... */ })
 // example output:
 betterOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
-augur.api().Orders.getGasPrice({ orderID, type, market, outcome }, function (gasPrice) { /* ... */ })
+augur.api.Orders.getGasPrice({ orderID, type, market, outcome }, function (gasPrice) { /* ... */ })
 // example output:
 gasPrice = "42000000000000"
 
-augur.api().Orders.getLastOutcomePrice({ market, outcome }, function (lastOutcomePrice) { /* ... */ })
+augur.api.Orders.getLastOutcomePrice({ market, outcome }, function (lastOutcomePrice) { /* ... */ })
 // example output:
 lastOutcomePrice = "490000000000000000"
 
-augur.api().Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }, function (orderMoneyEscrowed) { /* ... */ })
+augur.api.Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }, function (orderMoneyEscrowed) { /* ... */ })
 // example output:
 orderMoneyEscrowed = "5000000000000000000"
 
-augur.api().Orders.getOrderOwner({ orderId, type, market, outcome }, function (owner) { /* ... */ })
+augur.api.Orders.getOrderOwner({ orderId, type, market, outcome }, function (owner) { /* ... */ })
 // example output:
 owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 
-augur.api().Orders.getOrderSharesEscrowed({ orderId, type, market, outcome }, function (orderSharesEscrowed) { /* ... */ })
+augur.api.Orders.getOrderSharesEscrowed({ orderId, type, market, outcome }, function (orderSharesEscrowed) { /* ... */ })
 // example output:
 orderSharesEscrowed = "0";
 
-augur.api().Orders.getPrice({ orderId, type, market, outcome }, function (price) { /* ... */ })
+augur.api.Orders.getPrice({ orderId, type, market, outcome }, function (price) { /* ... */ })
 // example output:
 price = "500000000000000000";
 
-augur.api().Orders.getVolume({ market }, function (volume) { /* ... */ })
+augur.api.Orders.getVolume({ market }, function (volume) { /* ... */ })
 // example output:
 volume = "100000000000000000000000";
 
 const secondWorstOrderID = "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1";
-augur.api().Orders.getWorseOrderID({ orderID: secondWorstOrderID, type, market, outcome }, function (worseOrderID) { /* ... */ })
+augur.api.Orders.getWorseOrderID({ orderID: secondWorstOrderID, type, market, outcome }, function (worseOrderID) { /* ... */ })
 // example output:
 worseOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
-augur.api().Orders.getWorstOrderID({ type, market, outcome }, function (worstOrderID) { /* ... */ })
+augur.api.Orders.getWorstOrderID({ type, market, outcome }, function (worstOrderID) { /* ... */ })
 // example output:
 worstOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
-augur.api().Orders.isBetterPrice({ type, market, outcome, fxpPrice, orderID }, function (isBetterPrice) { /* ... */ })
+augur.api.Orders.isBetterPrice({ type, market, outcome, fxpPrice, orderID }, function (isBetterPrice) { /* ... */ })
 // example output:
 isBetterPrice = "0"
 
-augur.api().Orders.isWorsePrice({ type, market, outcome, fxpPrice, orderID }, function (isWorsePrice) { /* ... */ })
+augur.api.Orders.isWorsePrice({ type, market, outcome, fxpPrice, orderID }, function (isWorsePrice) { /* ... */ })
 // example output:
 isWorsePrice = "1"
 ```
 ### [Orders Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
 
-#### augur.api().Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice, betterOrderID }[, callback])
+#### augur.api.Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice, betterOrderID }[, callback])
 
 Returns wether the specified `fxpPrice` is not a better price than the `betterOrderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
-#### augur.api().Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID }[, callback])
+#### augur.api.Orders.assertIsNotWorsePrice({ type, market, outcome, fxpPrice, worstOrderID }[, callback])
 
 Returns wether the specified `fxpPrice` is not a worst price than the `worstOrderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
-#### augur.api().Orders.getAmount({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getAmount({ orderID, type, market, outcome }[, callback])
 
 Returns the amount of shares requested on a specified `orderID` of `type` trading on the `outcome` in the provided `market`.
 
-#### augur.api().Orders.getBestOrderID({ type, market, outcome }[, callback])
+#### augur.api.Orders.getBestOrderID({ type, market, outcome }[, callback])
 
 Returns the order ID of the best order on the `market` of `type` trading on the provided `outcome`.
 
-#### augur.api().Orders.getBetterOrderID({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getBetterOrderID({ orderID, type, market, outcome }[, callback])
 
 Returns a better order ID than the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
 
-#### augur.api().Orders.getGasPrice({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getGasPrice({ orderID, type, market, outcome }[, callback])
 
 Returns the gas price for the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
 
-#### augur.api().Orders.getLastOutcomePrice({ market, outcome }[, callback])
+#### augur.api.Orders.getLastOutcomePrice({ market, outcome }[, callback])
 
 Returns the fixed point value of the last price traded for a specified `market` and `outcome`.
 
-#### augur.api().Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getOrderMoneyEscrowed({ orderID, type, market, outcome }[, callback])
 
 Returns the fixed point value of the amount of money escrowed by a specified `orderID` of `type` trading on the `market` and `outcome`.
 
-#### augur.api().Orders.getOrderOwner({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getOrderOwner({ orderID, type, market, outcome }[, callback])
 
 Returns the owner address of the specified `orderID` of `type` trading on `market` and `outcome`.
 
-#### augur.api().Orders.getOrderSharesEscrowed({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getOrderSharesEscrowed({ orderID, type, market, outcome }[, callback])
 
 Returns the fixed point value of the amount of shares escrowed by a specified `orderID` of `type` trading on the `market` and `outcome`.
 
-#### augur.api().Orders.getPrice({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getPrice({ orderID, type, market, outcome }[, callback])
 
 Returns the fixed point value of the price of a specified `orderID` of `type` trading on the `market` and `outcome`.
 
-#### augur.api().Orders.getVolume({ market }[, callback])
+#### augur.api.Orders.getVolume({ market }[, callback])
 
 Returns the fixed point value of the volume of a specified `market`.
 
-#### augur.api().Orders.getWorseOrderID({ orderID, type, market, outcome }[, callback])
+#### augur.api.Orders.getWorseOrderID({ orderID, type, market, outcome }[, callback])
 
 Returns a worse order ID than the `orderID` specified on the `market` of `type` trading on the provided `outcome`.
 
-#### augur.api().Orders.getWorstOrderID({ type, market, outcome }[, callback])
+#### augur.api.Orders.getWorstOrderID({ type, market, outcome }[, callback])
 
 Returns the order ID of the worst order on the `market` of `type` trading on the provided `outcome`.
 
-#### augur.api().Orders.isBetterPrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
+#### augur.api.Orders.isBetterPrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
 
 Returns wether the specified `fxpPrice` is a better price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
-#### augur.api().Orders.isWorsePrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
+#### augur.api.Orders.isWorsePrice({ type, market, outcome, fxpPrice, OrderID }[, callback])
 
 Returns wether the specified `fxpPrice` is a worst price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
@@ -1626,25 +1626,25 @@ const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const outcome = "1";
 const fxpPrice = "450000000000000000"; // 0.45
 
-augur.api().OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID: orderID }, function (ascendingOrderList) { /* ... */ })
+augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID: orderID }, function (ascendingOrderList) { /* ... */ })
 // example output:
 ascendingOrderList = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 
-augur.api().OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID: orderID }, function (decendingOrderList) { /* ... */ })
+augur.api.OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID: orderID }, function (decendingOrderList) { /* ... */ })
 // example output:
 decendingOrderList = [
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"]
 
-augur.api().OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID: orderID, worstOrderID: 0, betterOrderID: 0, worseOrderID: 0 }, function (boundingOrders) { /* ... */ })
+augur.api.OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID: orderID, worstOrderID: 0, betterOrderID: 0, worseOrderID: 0 }, function (boundingOrders) { /* ... */ })
 // example output:
 boundingOrders = [
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
 
-augur.api().OrdersFetcher.getOrder({ orderID, type, market, outcome }, function (order) { /* ... */ })
+augur.api.OrdersFetcher.getOrder({ orderID, type, market, outcome }, function (order) { /* ... */ })
 // example output:
 order = [ "10000000000000000000",
           "500000000000000000",
@@ -1655,7 +1655,7 @@ order = [ "10000000000000000000",
           "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
           "42000000000000"  ]
 
-augur.api().OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID: orderID, numOrdersToLoad: 2 }, function (orderIDs) { /* ... */ })
+augur.api.OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID: orderID, numOrdersToLoad: 2 }, function (orderIDs) { /* ... */ })
 // example output:
 orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
@@ -1663,23 +1663,23 @@ orderIDs = [
 ```
 ### [Orders Fetcher Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
 
-#### augur.api().OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
+#### augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
 
 Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `lowestOrderID` is an order ID expected to be a worse price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
 
-#### augur.api().OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID }[, callback])
+#### augur.api.OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID }[, callback])
 
 Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `highestOrderID` is an order ID expected to be a better price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
 
-#### augur.api().OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID, worstOrderID, betterOrderID, worseOrderID }[, callback])
+#### augur.api.OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID, worstOrderID, betterOrderID, worseOrderID }[, callback])
 
 Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `betterOrderID` and `worseOrderID` should be orders that are better or worse than the `fxpPrice` for an order of `type` trading on `market` around `outcome`. `bestOrderID` and `worstOrderID` should be the best and worst order IDs on the order book for the specified `market`, `type`, and `outcome`.
 
-#### augur.api().OrdersFetcher.getOrder({ orderID, type, market, outcome }[, callback])
+#### augur.api.OrdersFetcher.getOrder({ orderID, type, market, outcome }[, callback])
 
 Returns a length 8 array containing information about a specified `orderID` of `type` trading on `market` around `outcome`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
 
-#### augur.api().OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID, numOrdersToLoad }[, callback])
+#### augur.api.OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID, numOrdersToLoad }[, callback])
 
 Returns an array of order IDs of `type` trading on `market` around `outcome` starting from the `startingOrderID` order ID specified. The array will be of length `numOrdersToLoad`.
 
@@ -1689,77 +1689,77 @@ const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api().ShareToken.allowance({ shareToken, owner, spender }, function (allowance) { /* ... */ })
+augur.api.ShareToken.allowance({ shareToken, owner, spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "100"
 
-augur.api().ShareToken.balanceOf({ shareToken, address: owner }, function (balance) { /* ... */ })
+augur.api.ShareToken.balanceOf({ shareToken, address: owner }, function (balance) { /* ... */ })
 // example output:
 balance = "1000"
 
-augur.api().ShareToken.getDecimals({ shareToken }, function (decimals) { /* ... */ })
+augur.api.ShareToken.getDecimals({ shareToken }, function (decimals) { /* ... */ })
 // example output:
 decimals = "18"
 
-augur.api().ShareToken.getMarket({ shareToken }, function (market) { /* ... */ })
+augur.api.ShareToken.getMarket({ shareToken }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api().ShareToken.getName({ shareToken }, function (name) { /* ... */ })
+augur.api.ShareToken.getName({ shareToken }, function (name) { /* ... */ })
 // example output:
 name = "Shares"
 
-augur.api().ShareToken.getOutcome({ shareToken }, function (outcome) { /* ... */ })
+augur.api.ShareToken.getOutcome({ shareToken }, function (outcome) { /* ... */ })
 // example output:
 outcome = "1"
 
-augur.api().ShareToken.getSymbol({ shareToken }, function (symbol) { /* ... */ })
+augur.api.ShareToken.getSymbol({ shareToken }, function (symbol) { /* ... */ })
 // example output:
 symbol = "SHARES"
 
-augur.api().ShareToken.isShareToken({ shareToken }, function (isShareToken) { /* ... */ })
+augur.api.ShareToken.isShareToken({ shareToken }, function (isShareToken) { /* ... */ })
 // example output:
 isShareToken = "1"
 
-augur.api().ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ... */ })
+augur.api.ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "50000"
 ```
 ### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
-#### augur.api().ShareToken.allowance({ shareToken, owner, spender }[, callback])
+#### augur.api.ShareToken.allowance({ shareToken, owner, spender }[, callback])
 
 Returns the token allowance a `spender` can use of an `owner`'s specified `shareToken`s.
 
-#### augur.api().ShareToken.balanceOf({ shareToken, address }[, callback])
+#### augur.api.ShareToken.balanceOf({ shareToken, address }[, callback])
 
 Returns the token balance of a specified `shareToken` owned by the `address`.
 
-#### augur.api().ShareToken.getDecimals({ shareToken }[, callback])
+#### augur.api.ShareToken.getDecimals({ shareToken }[, callback])
 
 Returns the amount of decimal places the `shareToken` is accurate to: `18`.
 
-#### augur.api().ShareToken.getMarket({ shareToken }[, callback])
+#### augur.api.ShareToken.getMarket({ shareToken }[, callback])
 
 Returns the market address for the specified `shareToken`.
 
-#### augur.api().ShareToken.getName({ shareToken }[, callback])
+#### augur.api.ShareToken.getName({ shareToken }[, callback])
 
 Returns the name string of the `shareToken`: `Shares`.
 
-#### augur.api().ShareToken.getOutcome({ shareToken }[, callback])
+#### augur.api.ShareToken.getOutcome({ shareToken }[, callback])
 
 Returns the Outcome of the market that the specified `shareToken` is for.
 
-#### augur.api().ShareToken.getSymbol({ shareToken }[, callback])
+#### augur.api.ShareToken.getSymbol({ shareToken }[, callback])
 
 Returns the symbol string of the `shareToken`: `SHARES`.
 
-#### augur.api().ShareToken.isShareToken({ shareToken }[, callback])
+#### augur.api.ShareToken.isShareToken({ shareToken }[, callback])
 
 Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0` if false. (should always be true.)
 
-#### augur.api().ShareToken.totalSupply({ shareToken }[, callback])
+#### augur.api.ShareToken.totalSupply({ shareToken }[, callback])
 
 Returns the total supply of `shareToken`s specified.
 
@@ -1768,37 +1768,37 @@ Returns the total supply of `shareToken`s specified.
 const topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 const topic = "Augur";
 
-augur.api().Topics.count({ topics }, function (count) { /* ... */ })
+augur.api.Topics.count({ topics }, function (count) { /* ... */ })
 // example output:
 count = "152"
 
-augur.api().Topics.getPopularity({ topics, topic }, function (popularity) { /* ... */ })
+augur.api.Topics.getPopularity({ topics, topic }, function (popularity) { /* ... */ })
 // example output:
 popularity = "1000"
 
-augur.api().Topics.getPopularityByOffset({ topics, offset: 0 }, function () { /* ... */ })
+augur.api.Topics.getPopularityByOffset({ topics, offset: 0 }, function () { /* ... */ })
 // example output:
 popularity = "1000"
 
-augur.api().Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */ })
+augur.api.Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */ })
 // example output:
 topic = "Augur"
 ```
 ### [Topics Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
 
-#### augur.api().Topics.count({ topics }[, callback])
+#### augur.api.Topics.count({ topics }[, callback])
 
 Returns a count of all the Topics at the specified `topics` address.
 
-#### augur.api().Topics.getPopularity({ topics, topic }[, callback])
+#### augur.api.Topics.getPopularity({ topics, topic }[, callback])
 
 Returns the popularity value of a specified `topic` at the `topics` address provided.
 
-#### augur.api().Topics.getPopularityByOffset({ topics, offset }[, callback])
+#### augur.api.Topics.getPopularityByOffset({ topics, offset }[, callback])
 
 Returns the popularity of the Topic at the index `offset` at the `topics` address provided.
 
-#### augur.api().Topics.getTopicByOffset({ topics, offset }[, callback])
+#### augur.api.Topics.getTopicByOffset({ topics, offset }[, callback])
 
 Returns the Topic at the index `offset` at the `topics` address provided.
 
@@ -1915,7 +1915,7 @@ The first argument to `augur.transact` is a "transaction object".
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 const destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
 
-augur.api().DisputeBondToken.transfer({
+augur.api.DisputeBondToken.transfer({
   disputeBondToken,
   destiniationAddress,
   attotokens: 1,
@@ -1940,7 +1940,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().DisputeBondToken.withdraw({
+augur.api.DisputeBondToken.withdraw({
   disputeBondToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -1964,7 +1964,7 @@ successResponse = {
 }
 
 const shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
-augur.api().DisputeBondToken.withdrawToBranch({
+augur.api.DisputeBondToken.withdrawToBranch({
   disputeBondToken,
   shadyBranch,
   onSent: (result) => console.log(result),
@@ -1990,15 +1990,15 @@ successResponse = {
 ```
 ### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
 
-#### augur.api().DisputeBondToken.transfer({ disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.transfer({ disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destinationAddress`), and `attotokens` amount transferred (`1`).
 
-#### augur.api().DisputeBondToken.withdraw({ disputeBondToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.withdraw({ disputeBondToken[, onSent, onSuccess, onFailed ]})
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork.
 
-#### augur.api().DisputeBondToken.withdrawToBranch({ disputeBondToken, shadyBranch[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.withdrawToBranch({ disputeBondToken, shadyBranch[, onSent, onSuccess, onFailed ]})
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
 
@@ -2007,7 +2007,7 @@ This transaction is used by the bond holder of the specified `disputeBondToken` 
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const payoutNumerators = [ 0, 2 ];
 
-augur.api().Market.approveSpenders({
+augur.api.Market.approveSpenders({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2030,7 +2030,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.automatedReport({
+augur.api.Market.automatedReport({
   market,
   payoutNumerators,
   onSent: (result) => console.log(result),
@@ -2055,7 +2055,7 @@ successResponse = {
 }
 
 const newCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-augur.api().Market.changeCreator({
+augur.api.Market.changeCreator({
   market,
   newCreator,
   onSent: (result) => console.log(result),
@@ -2079,7 +2079,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
+augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
   market,
   newFeePerEthInWei: '1000000000',
   onSent: (result) => console.log(result),
@@ -2103,7 +2103,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.disputeAllReporters({
+augur.api.Market.disputeAllReporters({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2126,7 +2126,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.disputeAutomatedReport({
+augur.api.Market.disputeAutomatedReport({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2149,7 +2149,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.disputeLimitedReporters({
+augur.api.Market.disputeLimitedReporters({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2172,7 +2172,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.migrateThroughAllForks({
+augur.api.Market.migrateThroughAllForks({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2195,7 +2195,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.migrateThroughOneFork({
+augur.api.Market.migrateThroughOneFork({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2218,7 +2218,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.tryFinalize({
+augur.api.Market.tryFinalize({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2241,7 +2241,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.tryFinalizeAllReporting({
+augur.api.Market.tryFinalizeAllReporting({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2264,7 +2264,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.tryFinalizeAutomatedReport({
+augur.api.Market.tryFinalizeAutomatedReport({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2287,7 +2287,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.tryFinalizeFork({
+augur.api.Market.tryFinalizeFork({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2310,7 +2310,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Market.tryFinalizeLimitedReporting({
+augur.api.Market.tryFinalizeLimitedReporting({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2334,7 +2334,7 @@ successResponse = {
 }
 
 const payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-augur.api().Market.updateTentativeWinningPayoutDistributionHash({
+augur.api.Market.updateTentativeWinningPayoutDistributionHash({
   market,
   payoutDistributionHash,
   onSent: (result) => console.log(result),
@@ -2360,63 +2360,63 @@ successResponse = {
 ```
 ### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
 
-#### augur.api().Market.approveSpenders({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.approveSpenders({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function.
 
-#### augur.api().Market.automatedReport({ market, payoutNumerators[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.automatedReport({ market, payoutNumerators[, onSent, onSuccess, onFailed ]})
 
 This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
 
-#### augur.api().Market.changeCreator({ market, newCreator[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.changeCreator({ market, newCreator[, onSent, onSuccess, onFailed ]})
 
 Changes the `market` creator address to the `newCreator` address submitted. This transaction will fail if the `msg.sender` isn't set as the creator of the `market`.
 
-#### augur.api().Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ market, newFeePerEthInWei[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ market, newFeePerEthInWei[, onSent, onSuccess, onFailed ]})
 
 Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `newFeePerEthInWei` is 0 or less, or if `newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
-#### augur.api().Market.disputeAllReporters({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeAllReporters({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will trigger a dispute of the all reporters phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the upcoming reporting window. This transaction will fail if the `market` isn't in the all reporters dispute phase of reporting.
 
-#### augur.api().Market.disputeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized.
 
-#### augur.api().Market.disputeLimitedReporters({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeLimitedReporters({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will trigger a dispute of the limited report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the next reporting window for all reporting. This transaction will fail if the `market` isn't in the limited dispute phase of reporting.
 
-#### augur.api().Market.migrateThroughAllForks({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.migrateThroughAllForks({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will call `migrateThroughOneFork` repeatedly until the `market` has moved through all forks or has reached an active fork which will throw.
 
-#### augur.api().Market.migrateThroughOneForks({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.migrateThroughOneForks({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will move the `market` onto the active branch following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
 
-#### augur.api().Market.tryFinalize({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalize({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`.
 
-#### augur.api().Market.tryFinalizeAllReporting({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeAllReporting({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to finalize the `market`'s all reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a limited reporters phase, this `market` doesn't have a limited reporters dispute bond holder, this `market` does have an all reporters dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api().Market.tryFinalizeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeAutomatedReport({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to finalize the `market`'s Automated reporting phase by changing the `market` to a finalized state, and pays reward to automated report bond holders. This transaction will fail if this `market` doesn't have a reported winning outcome, if this `market` doesn't have a Automated Reporter Dispute Bond Holder, or if this `market`'s automated report dispute period hasn't ended. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api().Market.tryFinalizeFork({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeFork({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to finalize `market` after it caused a fork and pays out rewards to the bond holders. This transaction will fail if the market hasn't gone through the limited reporters phase, if the market doesn't have a limited reporter dispute bond holder, if the market hasn't gone through the all reporters phase, if the market doesn't have a all reporter dispute bond holder, if this market isn't the market that caused a fork, if this market doesn't have a winning branch, if the winning branch doesn't have at least half the total supply of REP (5.5 million), or if it's before the fork end time. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api().Market.tryFinalizeLimitedReporting({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeLimitedReporting({ market[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to finalize the `market`'s limited reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a automated report phase, this `market` doesn't have a automated report dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api().Market.updateTentativeWinningPayoutDistributionHash({ market, payoutDistributionHash[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ market, payoutDistributionHash[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
 
@@ -2426,7 +2426,7 @@ const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
-augur.api().RegistrationToken.approve({
+augur.api.RegistrationToken.approve({
   registrationToken,
   spenderAddress,
   attotokens,
@@ -2451,7 +2451,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().RegistrationToken.redeem({
+augur.api.RegistrationToken.redeem({
   registrationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2474,7 +2474,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().RegistrationToken.register({
+augur.api.RegistrationToken.register({
   registrationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2497,7 +2497,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().RegistrationToken.transfer({
+augur.api.RegistrationToken.transfer({
   registrationToken,
   destinationAddress: spenderAddress,
   attotokens,
@@ -2524,7 +2524,7 @@ successResponse = {
 }
 
 const sourceAddress = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
-augur.api().RegistrationToken.transferFrom({
+augur.api.RegistrationToken.transferFrom({
   registrationToken,
   sourceAddress,
   destinationAddress: spenderAddress,
@@ -2552,23 +2552,23 @@ successResponse = {
 ```
 ### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
 
-#### augur.api().RegistrationToken.approve({ registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.approve({ registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
 
-#### augur.api().RegistrationToken.redeem({ registrationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.redeem({ registrationToken[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of this transaction has a `registrationToken`, has completed reporting, and the reporting window for the specified `registrationToken` has completed then transfer the bond amount of reputation tokens to the `msg.sender`. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
 
-#### augur.api().RegistrationToken.register({ registrationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.register({ registrationToken[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of this transaction has the bond amount of `REP`, the reporting window for this `registrationToken` hasn't started yet, and the `msg.sender` doesn't already have a `registrationToken` then this transaction will transfer the bond amount of `reputationTokens` out of the `msg.sender`'s wallet and transfer 1 `registrationToken` to `msg.sender` in return. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
 
-#### augur.api().RegistrationToken.transfer({ registrationToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.transfer({ registrationToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transfered.
 
-#### augur.api().RegistrationToken.transferFrom({ registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.transferFrom({ registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
@@ -2578,7 +2578,7 @@ const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
-augur.api().ReportingToken.approve({
+augur.api.ReportingToken.approve({
   reportingToken,
   spenderAddress,
   attotokens,
@@ -2603,7 +2603,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.buy({
+augur.api.ReportingToken.buy({
   reportingToken,
   attotokens,
   onSent: (result) => console.log(result),
@@ -2627,7 +2627,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.extractBondHolderPayments({
+augur.api.ReportingToken.extractBondHolderPayments({
   reportingToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2650,7 +2650,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.migrateLosingTokens({
+augur.api.ReportingToken.migrateLosingTokens({
   reportingToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2673,7 +2673,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.redeemDisavowedTokens({
+augur.api.ReportingToken.redeemDisavowedTokens({
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2697,7 +2697,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.redeemForkedTokens({
+augur.api.ReportingToken.redeemForkedTokens({
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2721,7 +2721,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.redeemWinningTokens({
+augur.api.ReportingToken.redeemWinningTokens({
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2745,7 +2745,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReportingToken.transfer({
+augur.api.ReportingToken.transfer({
   reportingToken,
   destinationAddress: spenderAddress,
   attotokens,
@@ -2771,7 +2771,7 @@ successResponse = {
 }
 
 const sourceAddress = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
-augur.api().ReportingToken.transferFrom({
+augur.api.ReportingToken.transferFrom({
   reportingToken,
   sourceAddress,
   destinationAddress: spenderAddress,
@@ -2799,40 +2799,40 @@ successResponse = {
 ```
 ### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
 
-#### augur.api().ReportingToken.approve({ reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.approve({ reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
 
-#### augur.api().ReportingToken.buy({ reportingToken, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.buy({ reportingToken, attotokens[, onSent, onSuccess, onFailed ]})
 
 Purchases `attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `attotokens` worth of `reputationToken`, if `attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` purchased.
 
-#### augur.api().ReportingToken.extractBondHolderPayments({ reportingToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.extractBondHolderPayments({ reportingToken[, onSent, onSuccess, onFailed ]})
 
 Extracts reputation from the `reportingToken` and transfers it to the `market` for this `reportingToken`. Does nothing if the `market` already has the desired amount of `REP` to reward a successful dispute. Returns 1 if reputation was moved from `reportingToken` to the market, returns 0 if the market already has enough `REP` to reward a successful dispute.
 
-#### augur.api().ReportingToken.migrateLosingTokens({ reportingToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.migrateLosingTokens({ reportingToken[, onSent, onSuccess, onFailed ]})
 
 Sets the supply of this `reportingToken` to 0 and transfers all `REP` on this `reportingToken` to this `reportingToken`'s `market`'s winning reporting token contract. This will fail if the `market` isn't finalized, the `market` isn't a container for this `reportingToken`, the `market` for this `reportingToken` is the cause of a fork, and the `market`'s winning reporting token isn't this `reportingToken`.
 
-#### augur.api().ReportingToken.redeemDisavowedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemDisavowedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
 
 Transfers `REP` to the `reporter` from the `reportingToken` for the value of `reportingToken` owned by `reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
 
-#### augur.api().ReportingToken.redeemForkedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemForkedTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
 
 Transfers `REP` to the `reporter` on the new `branch` for the amount of `reportingToken`s owned by `reporter`. This transaction will fail if the `msg.sender` isn't the `reporter` address, if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter` on the new branch.
 
-#### augur.api().ReportingToken.redeemWinningTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemWinningTokens({ reportingToken, reporter[, onSent, onSuccess, onFailed ]})
 
 Transfers `REP` to the `reporter` based on how many `reportingToken`s the `reporter` owned. This transaction will fail if the `msg.sender` isn't the `reporter`, if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
 This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
 
-#### augur.api().ReportingToken.transfer({ reportingToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.transfer({ reportingToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
-#### augur.api().ReportingToken.transferFrom({ reportingToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.transferFrom({ reportingToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
 If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
@@ -2850,7 +2850,7 @@ const maxDisplayPrice = "1";
 const automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
 const topic = "examples";
 
-augur.api().ReportingWindow.createNewMarket({
+augur.api.ReportingWindow.createNewMarket({
   reportingWindow,
   endTime,
   numOutcomes,
@@ -2885,7 +2885,7 @@ successResponse = {
 ```
 ### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
 
-#### augur.api().ReportingWindow.createNewMarket({ reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingWindow.createNewMarket({ reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
@@ -2896,7 +2896,7 @@ const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
 const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 const attotokens = "100000000000000000000";
 
-augur.api().ReputationToken.approve({
+augur.api.ReputationToken.approve({
   reputationToken,
   spender,
   value: attotokens,
@@ -2921,7 +2921,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReputationToken.migrateFromLegacyRepContract({
+augur.api.ReputationToken.migrateFromLegacyRepContract({
   reputationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2945,7 +2945,7 @@ successResponse = {
 }
 
 const targetReputationToken = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
-augur.api().ReputationToken.migrateOut({
+augur.api.ReputationToken.migrateOut({
   reputationToken,
   destination: targetReputationToken,
   reporter: source,
@@ -2971,7 +2971,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReputationToken.transfer({
+augur.api.ReputationToken.transfer({
   reputationToken,
   to: spender,
   value: attotokens,
@@ -2996,7 +2996,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().ReputationToken.transferFrom({
+augur.api.ReputationToken.transferFrom({
   reputationToken,
   from: source,
   to: spender,
@@ -3024,23 +3024,23 @@ successResponse = {
 ```
 ### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
-#### augur.api().ReputationToken.approve({ reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.approve({ reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
 
 Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
 
-#### augur.api().ReputationToken.migrateFromLegacyRepContract({ reputationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.migrateFromLegacyRepContract({ reputationToken[, onSent, onSuccess, onFailed ]})
 
 This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
-#### augur.api().ReputationToken.migrateOut({ reputationToken, destination, reporter, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.migrateOut({ reputationToken, destination, reporter, attotokens[, onSent, onSuccess, onFailed ]})
 
 This function migrates a `reporter`'s REP (amount of REP denoted in `attotokens`) from one `reputationToken` address to another (`destination`). The `msg.sender` of this transaction must be the `reporter` provided or the `msg.sender` must be approved to spend `attotokens` amount of REP for the `reporter` provided.
 
-#### augur.api().ReputationToken.transfer({ reputationToken, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.transfer({ reputationToken, to, value[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of `reputationToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
 
-#### augur.api().ReputationToken.transferFrom({ reputationToken, from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.transferFrom({ reputationToken, from, to, value[, onSent, onSuccess, onFailed ]})
 
 If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
@@ -3051,7 +3051,7 @@ const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const outcome = "1";
 
-augur.api().CancelOrder.publicCancelOrder({
+augur.api.CancelOrder.publicCancelOrder({
   orderID,
   type,
   market,
@@ -3079,7 +3079,7 @@ successResponse = {
 ```
 ### [Cancel Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
 
-#### augur.api().CancelOrder.publicCancelOrder({ orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
+#### augur.api.CancelOrder.publicCancelOrder({ orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
 
 The `publicCancelOrder` transaction is used to cancel and refund an existing order on the specified `market` of `type` for the `outcome` given it's `orderID`. This will fail if `msg.sender` isn't the owner of the order, if the `market` or `orderID` is not defined, or if `type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
 
@@ -3089,7 +3089,7 @@ const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
-augur.api().Cash.approve({
+augur.api.Cash.approve({
   spender,
   value: attotokens,
   onSent: (result) => console.log(result),
@@ -3113,7 +3113,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Cash.publicDepositEther({
+augur.api.Cash.publicDepositEther({
   value: attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -3136,7 +3136,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Cash.publicWithdrawEther({
+augur.api.Cash.publicWithdrawEther({
   to: owner,
   amount: attotokens,
   onSent: (result) => console.log(result),
@@ -3160,7 +3160,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Cash.transfer({
+augur.api.Cash.transfer({
   to: spender,
   value: attotokens,
   onSent: (result) => console.log(result),
@@ -3184,7 +3184,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Cash.transferFrom({
+augur.api.Cash.transferFrom({
   from: owner,
   to: spender,
   value: attotokens,
@@ -3211,23 +3211,23 @@ successResponse = {
 ```
 ### [Cash Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
 
-#### augur.api().Cash.approve({ spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.approve({ spender, value[, onSent, onSuccess, onFailed ]})
 
 Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
 
-#### augur.api().Cash.publicDepositEther({ value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.publicDepositEther({ value[, onSent, onSuccess, onFailed ]})
 
 This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `value` deposited, and the total balance for this `msg.sender`.
 
-#### augur.api().Cash.publicWithdrawEther({ to, amount[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.publicWithdrawEther({ to, amount[, onSent, onSuccess, onFailed ]})
 
 This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `amount` of `msg.sender`'s CASH Tokens `to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `publicWithdrawEther` again will withdraw the `amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `amount` of Cash Tokens denoted in attotokens, or if the `amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `publicWithdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed.
 
-#### augur.api().Cash.transfer({ to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.transfer({ to, value[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of Cash Tokens to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
 
-#### augur.api().Cash.transferFrom({ from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.transferFrom({ from, to, value[, onSent, onSuccess, onFailed ]})
 
 If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
@@ -3235,7 +3235,7 @@ If the `from` address of the `transferFrom` transaction has enough Cash Tokens t
 // Claim Proceeds Contract
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api().ClaimProceeds.publicClaimProceeds({
+augur.api.ClaimProceeds.publicClaimProceeds({
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -3260,7 +3260,7 @@ successResponse = {
 ```
 ### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.se)
 
-#### augur.api().ClaimProceeds.publicClaimProceeds({ market[, onSent, onSuccess, onFailed ]})
+#### augur.api.ClaimProceeds.publicClaimProceeds({ market[, onSent, onSuccess, onFailed ]})
 
 The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized.
 
@@ -3269,7 +3269,7 @@ The `publicClaimProceeds` transaction attempts to collect trading profits from o
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const fxpAmount = "50000000000000000000" // 50.0
 
-augur.api().CompleteSets.publicBuyCompleteSets({
+augur.api.CompleteSets.publicBuyCompleteSets({
   market,
   fxpAmount,
   onSent: (result) => console.log(result),
@@ -3293,7 +3293,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().CompleteSets.publicSellCompleteSets({
+augur.api.CompleteSets.publicSellCompleteSets({
   market,
   fxpAmount,
   onSent: (result) => console.log(result),
@@ -3319,11 +3319,11 @@ successResponse = {
 ```
 ### [Complete Sets Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/completeSets.se)
 
-#### augur.api().CompleteSets.publicBuyCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
+#### augur.api.CompleteSets.publicBuyCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to purchase `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't have enough of the `market`'s denomination token to be able to afford `fxpAmount` shares in all outcomes, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (buy), `fxpAmount` purchased, number of outcomes in the `market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
 
-#### augur.api().CompleteSets.publicSellCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
+#### augur.api.CompleteSets.publicSellCompleteSets({ market, fxpAmount[, onSent, onSuccess, onFailed ]})
 
 This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
 
@@ -3338,7 +3338,7 @@ const betterOrderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a2
 const worseOrderID = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
 const tradeGroupID = "1";
 
-augur.api().MakeOrder.publicMakeOrder({
+augur.api.MakeOrder.publicMakeOrder({
   type,
   attoshares,
   displayPrice,
@@ -3370,7 +3370,7 @@ successResponse = {
 ```
 ### [Make Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
 
-#### augur.api().MakeOrder.publicMakeOrder({ type, attoshares, displayPrice, market, outcome[, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.MakeOrder.publicMakeOrder({ type, attoshares, displayPrice, market, outcome[, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 This transaction will create a new order on the order book for the specified `market` trading on the `outcome` provided. The required fields besides market and outcome are the `type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `attoshares`, and the `displayPrice` for the order. Optional params include `betterOrderID`, `worseOrderID`, `tradeGroupID`, and the callbacks. The `betterOrderID` and `worseOrderID` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `tradeGroupID` is a field used by the Augur UI to group transactions and can be left blank.
 
@@ -3382,7 +3382,7 @@ const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
 const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
 const attotokens = "100000000000000000000";
 
-augur.api().ShareToken.approve({
+augur.api.ShareToken.approve({
   shareToken,
   spender: spenderAddress,
   value: attotokens,
@@ -3406,7 +3406,7 @@ successResponse = {
   to: "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5",
   value: "0x0"
 }
-augur.api().ShareToken.transfer({
+augur.api.ShareToken.transfer({
   shareToken,
   to: spenderAddress,
   value: attotokens,
@@ -3432,7 +3432,7 @@ successResponse = {
 }
 
 const sourceAddress = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
-augur.api().ShareToken.transferFrom({
+augur.api.ShareToken.transferFrom({
   shareToken,
   from: sourceAddress,
   to: spenderAddress,
@@ -3460,15 +3460,15 @@ successResponse = {
 ```
 ### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
-#### augur.api().ShareToken.approve({ shareToken, spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.approve({ shareToken, spender, value[, onSent, onSuccess, onFailed ]})
 
 Allows the `spender` the ability to spend up to `value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` denoted in attotokens approved.
 
-#### augur.api().ShareToken.transfer({ shareToken, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.transfer({ shareToken, to, value[, onSent, onSuccess, onFailed ]})
 
 If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `value` worth to the `to` address and `value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred denoted in attotokens.
 
-#### augur.api().ShareToken.transferFrom({ shareToken, from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.transferFrom({ shareToken, from, to, value[, onSent, onSuccess, onFailed ]})
 
 If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens.
 
@@ -3481,7 +3481,7 @@ const outcome = "1";
 const fxpAmountTakerWants = "10000000000000000000"; // 10.0
 const tradeGroupID = "1";
 
-augur.api().TakeOrder.publicTakeOrder({
+augur.api.TakeOrder.publicTakeOrder({
   orderID,
   type,
   market,
@@ -3511,7 +3511,7 @@ successResponse = {
 ```
 ### [Take Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
 
-#### augur.api().TakeOrder.publicTakeOrder({ orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.TakeOrder.publicTakeOrder({ orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`.
 
@@ -3523,7 +3523,7 @@ const fxpAmount = "10000000000000000000"; // 10.0
 const fxpPrice = "500000000000000000"; // 0.5
 const tradeGroupID = "1";
 
-augur.api().Trade.publicBuy({
+augur.api.Trade.publicBuy({
   market,
   outcome,
   fxpAmount,
@@ -3550,7 +3550,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Trade.publicSell({
+augur.api.Trade.publicSell({
   market,
   outcome,
   fxpAmount,
@@ -3577,7 +3577,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Trade.publicTrade({
+augur.api.Trade.publicTrade({
   direction: '1',
   market,
   outcome,
@@ -3605,7 +3605,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api().Trade.publicTakeBestOrder({
+augur.api.Trade.publicTakeBestOrder({
   direction: '2',
   market,
   outcome,
@@ -3635,19 +3635,19 @@ successResponse = {
 ```
 ### [Trade Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
 
-#### augur.api().Trade.publicBuy({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicBuy({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 The `publicBuy` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to buy at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api().Trade.publicSell({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicSell({ market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 The `publicSell` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to sell at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api().Trade.publicTrade({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicTrade({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api().Trade.publicTakeBestOrder({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicTakeBestOrder({ direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
 
