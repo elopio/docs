@@ -1911,10 +1911,13 @@ The first argument to `augur.rpc.transact` is a "transaction object".
 
 ```javascript
 // Dispute Bond Token Contract
+// privateKey for the msg.sender of these transactions
+const privateKey = <Buffer ...>;
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 const destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
 
 augur.api.DisputeBondToken.transfer({
+  _signer: privateKey,
   disputeBondToken,
   destinationAddress,
   attotokens: 1,
@@ -1940,6 +1943,7 @@ successResponse = {
 }
 
 augur.api.DisputeBondToken.withdraw({
+  _signer: privateKey,
   disputeBondToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -1964,6 +1968,7 @@ successResponse = {
 
 const shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
 augur.api.DisputeBondToken.withdrawToBranch({
+  _signer: privateKey,
   disputeBondToken,
   shadyBranch,
   onSent: (result) => console.log(result),
@@ -2003,10 +2008,12 @@ This transaction is used by the bond holder of the specified `disputeBondToken` 
 
 ```javascript
 // Market Contract
+const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const payoutNumerators = [ 0, 2 ];
 
 augur.api.Market.approveSpenders({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2030,6 +2037,7 @@ successResponse = {
 }
 
 augur.api.Market.automatedReport({
+  _signer: privateKey,
   market,
   payoutNumerators,
   onSent: (result) => console.log(result),
@@ -2055,6 +2063,7 @@ successResponse = {
 
 const newCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 augur.api.Market.changeCreator({
+  _signer: privateKey,
   market,
   newCreator,
   onSent: (result) => console.log(result),
@@ -2079,6 +2088,7 @@ successResponse = {
 }
 
 augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
+  _signer: privateKey,
   market,
   newFeePerEthInWei: '1000000000',
   onSent: (result) => console.log(result),
@@ -2103,6 +2113,7 @@ successResponse = {
 }
 
 augur.api.Market.disputeAllReporters({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2126,6 +2137,7 @@ successResponse = {
 }
 
 augur.api.Market.disputeAutomatedReport({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2149,6 +2161,7 @@ successResponse = {
 }
 
 augur.api.Market.disputeLimitedReporters({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2172,6 +2185,7 @@ successResponse = {
 }
 
 augur.api.Market.migrateThroughAllForks({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2195,6 +2209,7 @@ successResponse = {
 }
 
 augur.api.Market.migrateThroughOneFork({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2218,6 +2233,7 @@ successResponse = {
 }
 
 augur.api.Market.tryFinalize({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2241,6 +2257,7 @@ successResponse = {
 }
 
 augur.api.Market.tryFinalizeAllReporting({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2264,6 +2281,7 @@ successResponse = {
 }
 
 augur.api.Market.tryFinalizeAutomatedReport({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2287,6 +2305,7 @@ successResponse = {
 }
 
 augur.api.Market.tryFinalizeFork({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2310,6 +2329,7 @@ successResponse = {
 }
 
 augur.api.Market.tryFinalizeLimitedReporting({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2334,6 +2354,7 @@ successResponse = {
 
 const payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api.Market.updateTentativeWinningPayoutDistributionHash({
+  _signer: privateKey,
   market,
   payoutDistributionHash,
   onSent: (result) => console.log(result),
@@ -2421,11 +2442,13 @@ This transaction will attempt to update the `tentativeWinningPayoutDistributionH
 
 ```javascript
 // Registration Token Contract
+const privateKey = <Buffer ...>;
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
 augur.api.RegistrationToken.approve({
+  _signer: privateKey,
   registrationToken,
   spenderAddress,
   attotokens,
@@ -2451,6 +2474,7 @@ successResponse = {
 }
 
 augur.api.RegistrationToken.redeem({
+  _signer: privateKey,
   registrationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2474,6 +2498,7 @@ successResponse = {
 }
 
 augur.api.RegistrationToken.register({
+  _signer: privateKey,
   registrationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2497,6 +2522,7 @@ successResponse = {
 }
 
 augur.api.RegistrationToken.transfer({
+  _signer: privateKey,
   registrationToken,
   destinationAddress: spenderAddress,
   attotokens,
@@ -2524,6 +2550,7 @@ successResponse = {
 
 const sourceAddress = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
 augur.api.RegistrationToken.transferFrom({
+  _signer: privateKey,
   registrationToken,
   sourceAddress,
   destinationAddress: spenderAddress,
@@ -2573,11 +2600,13 @@ If the `sourceAddress` of the `transferFrom` transaction has enough of `registra
 
 ```javascript
 // Reporting Token Contract
+const privateKey = <Buffer ...>;
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
 augur.api.ReportingToken.approve({
+  _signer: privateKey,
   reportingToken,
   spenderAddress,
   attotokens,
@@ -2603,6 +2632,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.buy({
+  _signer: privateKey,
   reportingToken,
   attotokens,
   onSent: (result) => console.log(result),
@@ -2627,6 +2657,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.extractBondHolderPayments({
+  _signer: privateKey,
   reportingToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2650,6 +2681,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.migrateLosingTokens({
+  _signer: privateKey,
   reportingToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2673,6 +2705,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.redeemDisavowedTokens({
+  _signer: privateKey,
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2697,6 +2730,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.redeemForkedTokens({
+  _signer: privateKey,
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2721,6 +2755,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.redeemWinningTokens({
+  _signer: privateKey,
   reportingToken,
   reporter: spenderAddress,
   onSent: (result) => console.log(result),
@@ -2745,6 +2780,7 @@ successResponse = {
 }
 
 augur.api.ReportingToken.transfer({
+  _signer: privateKey,
   reportingToken,
   destinationAddress: spenderAddress,
   attotokens,
@@ -2771,6 +2807,7 @@ successResponse = {
 
 const sourceAddress = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
 augur.api.ReportingToken.transferFrom({
+  _signer: privateKey,
   reportingToken,
   sourceAddress,
   destinationAddress: spenderAddress,
@@ -2837,6 +2874,7 @@ If the `sourceAddress` of the `transferFrom` transaction has enough of `reportin
 
 ```javascript
 // Reporting Window Contract
+const privateKey = <Buffer ...>;
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 const endTime = 1501015000;
 const numOutcomes = '2';
@@ -2850,6 +2888,7 @@ const automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
 const topic = "examples";
 
 augur.api.ReportingWindow.createNewMarket({
+  _signer: privateKey,
   reportingWindow,
   endTime,
   numOutcomes,
@@ -2890,12 +2929,14 @@ This function will create a new market for the given `reportingWindow` that will
 
 ```javascript
 // Reputation Token Contract
+const privateKey = <Buffer ...>;
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
 const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 const attotokens = "100000000000000000000";
 
 augur.api.ReputationToken.approve({
+  _signer: privateKey,
   reputationToken,
   spender,
   value: attotokens,
@@ -2921,6 +2962,7 @@ successResponse = {
 }
 
 augur.api.ReputationToken.migrateFromLegacyRepContract({
+  _signer: privateKey,
   reputationToken,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -2945,6 +2987,7 @@ successResponse = {
 
 const targetReputationToken = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
+  _signer: privateKey,
   reputationToken,
   destination: targetReputationToken,
   reporter: source,
@@ -2971,6 +3014,7 @@ successResponse = {
 }
 
 augur.api.ReputationToken.transfer({
+  _signer: privateKey,
   reputationToken,
   to: spender,
   value: attotokens,
@@ -2996,6 +3040,7 @@ successResponse = {
 }
 
 augur.api.ReputationToken.transferFrom({
+  _signer: privateKey,
   reputationToken,
   from: source,
   to: spender,
@@ -3045,12 +3090,14 @@ If the `from` address of the `transferFrom` transaction has enough of `reputatio
 
 ```javascript
 // Cancel Order Contract
+const privateKey = <Buffer ...>;
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const outcome = "1";
 
 augur.api.CancelOrder.publicCancelOrder({
+  _signer: privateKey,
   orderID,
   type,
   market,
@@ -3084,11 +3131,13 @@ The `publicCancelOrder` transaction is used to cancel and refund an existing ord
 
 ```javascript
 // Cash Token Contract
+const privateKey = <Buffer ...>;
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 const attotokens = "100000000000000000000";
 
 augur.api.Cash.approve({
+  _signer: privateKey,
   spender,
   value: attotokens,
   onSent: (result) => console.log(result),
@@ -3113,6 +3162,7 @@ successResponse = {
 }
 
 augur.api.Cash.publicDepositEther({
+  _signer: privateKey,
   value: attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -3136,6 +3186,7 @@ successResponse = {
 }
 
 augur.api.Cash.publicWithdrawEther({
+  _signer: privateKey,
   to: owner,
   amount: attotokens,
   onSent: (result) => console.log(result),
@@ -3160,6 +3211,7 @@ successResponse = {
 }
 
 augur.api.Cash.transfer({
+  _signer: privateKey,
   to: spender,
   value: attotokens,
   onSent: (result) => console.log(result),
@@ -3184,6 +3236,7 @@ successResponse = {
 }
 
 augur.api.Cash.transferFrom({
+  _signer: privateKey,
   from: owner,
   to: spender,
   value: attotokens,
@@ -3232,9 +3285,11 @@ If the `from` address of the `transferFrom` transaction has enough Cash Tokens t
 
 ```javascript
 // Claim Proceeds Contract
+const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.ClaimProceeds.publicClaimProceeds({
+  _signer: privateKey,
   market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
@@ -3265,10 +3320,12 @@ The `publicClaimProceeds` transaction attempts to collect trading profits from o
 
 ```javascript
 // Complete Sets Contract
+const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const fxpAmount = "50000000000000000000" // 50.0
 
 augur.api.CompleteSets.publicBuyCompleteSets({
+  _signer: privateKey,
   market,
   fxpAmount,
   onSent: (result) => console.log(result),
@@ -3293,6 +3350,7 @@ successResponse = {
 }
 
 augur.api.CompleteSets.publicSellCompleteSets({
+  _signer: privateKey,
   market,
   fxpAmount,
   onSent: (result) => console.log(result),
@@ -3328,6 +3386,7 @@ This transaction will attempt to sell `fxpAmount` worth of shares in all outcome
 
 ```javascript
 // Make Order Contract
+const privateKey = <Buffer ...>;
 const type = "1";
 const attoshares = "10000000000000000000"; // 10 shares
 const displayPrice = "0.5";
@@ -3338,6 +3397,7 @@ const worseOrderID = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7
 const tradeGroupID = "1";
 
 augur.api.MakeOrder.publicMakeOrder({
+  _signer: privateKey,
   type,
   attoshares,
   displayPrice,
@@ -3377,11 +3437,13 @@ This transaction will fail if `type` is not a valid value of 1 or 2, If the `att
 
 ```javascript
 // Share Token Contract
+const privateKey = <Buffer ...>;
 const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
 const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
 const attotokens = "100000000000000000000";
 
 augur.api.ShareToken.approve({
+  _signer: privateKey,
   shareToken,
   spender: spenderAddress,
   value: attotokens,
@@ -3406,6 +3468,7 @@ successResponse = {
   value: "0x0"
 }
 augur.api.ShareToken.transfer({
+  _signer: privateKey,
   shareToken,
   to: spenderAddress,
   value: attotokens,
@@ -3432,6 +3495,7 @@ successResponse = {
 
 const sourceAddress = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
+  _signer: privateKey,
   shareToken,
   from: sourceAddress,
   to: spenderAddress,
@@ -3473,6 +3537,7 @@ If the `from` address of the `transferFrom` transaction has enough of `shareToke
 
 ```javascript
 // Take Order Contract
+const privateKey = <Buffer ...>;
 const orderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 const type = "1";
 const market = "0x71a4e3899629f6023cde649a40982eda46ef2777";
@@ -3481,6 +3546,7 @@ const fxpAmountTakerWants = "10000000000000000000"; // 10.0
 const tradeGroupID = "1";
 
 augur.api.TakeOrder.publicTakeOrder({
+  _signer: privateKey,
   orderID,
   type,
   market,
@@ -3516,6 +3582,7 @@ Given an `orderID`, the `type` of order, the `market` containing this order, the
 
 ```javascript
 // Trade Contract
+const privateKey = <Buffer ...>;
 const market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 const outcome = "1";
 const fxpAmount = "10000000000000000000"; // 10.0
@@ -3523,6 +3590,7 @@ const fxpPrice = "500000000000000000"; // 0.5
 const tradeGroupID = "1";
 
 augur.api.Trade.publicBuy({
+  _signer: privateKey,
   market,
   outcome,
   fxpAmount,
@@ -3550,6 +3618,7 @@ successResponse = {
 }
 
 augur.api.Trade.publicSell({
+  _signer: privateKey,
   market,
   outcome,
   fxpAmount,
@@ -3577,6 +3646,7 @@ successResponse = {
 }
 
 augur.api.Trade.publicTrade({
+  _signer: privateKey,
   direction: '1',
   market,
   outcome,
@@ -3605,6 +3675,7 @@ successResponse = {
 }
 
 augur.api.Trade.publicTakeBestOrder({
+  _signer: privateKey,
   direction: '2',
   market,
   outcome,
