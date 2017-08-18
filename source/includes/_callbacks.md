@@ -15,20 +15,23 @@ augur.api.Cash.balanceOf({ address }, balance => console.log(balance));
 // prints 9999.495000000000000001
 
 /**
-* Send 50 cash to 0xdb719489b265c4221cfd78852a616a9bbf9168fa.  Because this
-* submits a transaction to the network, it can only be done asynchronously.
+* Send 50 cash to 0xdb719489b265c4221cfd78852a616a9bbf9168fa. Because this
+* submits a transaction to the network, it can only be done asynchronously. It also needs to be signed.
 */
+// the privateKey buffer of the sending account
+const privateKey = <Buffer ...>;
 
 augur.api.Cash.transfer({
+  _signer: privateKey,
   to: "0xdb719489b265c4221cfd78852a616a9bbf9168fa",
   value: 50,
   onSent: sent => console.log(sent),
   onSuccess: success => console.log(success),
   onFailed: failed => console.log(failed)
 });
-// Printed almost immediately; the callReturn field is the sendCash method's
-// return value.  If the transaction was sent successfully, callReturn will
-// be the amount of cash sent.  txHash (the transaction hash) uniquely
+// Printed almost immediately; the callReturn field is the transfer method's
+// return value. If the transaction was sent successfully, callReturn will
+// be the amount of cash sent. txHash (the transaction hash) uniquely
 // identifies this transaction, and can be used to look it up.
 Sent: {
   txHash: '0xd5743b5b3bfdec989692b69d68fd8c979120e82cd199fdd80cff36dba42befbe',
@@ -60,6 +63,6 @@ Augur API methods that submit transactions to the network (using the `eth_sendTr
 
 The `onSent`, `onSuccess`, and `onFailed` callbacks are optional.  If `onSent` is not included, then the transaction will run in synchronous (blocking) mode; if it is included, then the transaction will be run in asynchronous mode.  If the `onSuccess` callback is supplied, augur.js will issue an `eth_getTransaction` request upon receipt of every new block, until the transaction record contains a non-null `blockHash` value, or the transaction record itself returns `null` (indicating that the transaction has failed).
 
-Augur API methods that perform read-only RPC requests that do not submit transactions to the network (using the `eth_call` RPC) take a single optional callback as their last parameter.  Like `sendTransaction` requests, call requests can be synchronous or asynchronous: if a callback is supplied, the request will be made asynchronously.
+Augur API methods that perform read-only RPC requests that do not submit transactions to the network (using the `eth_call` RPC) take a single optional callback as their last parameter. Like `sendTransaction` requests, call requests can be synchronous or asynchronous: if a callback is supplied, the request will be made asynchronously.
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser.  Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
