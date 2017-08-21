@@ -218,129 +218,148 @@ Reporting outcomes
 Simplified API
 --------------
 ```javascript
-var branchId = 1010101;
-var marketId = "0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519";
+const market = '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da';
 
-augur.trading.orderBook.getOrderBook(marketId, function (orderBook) { /* ... */ });
+augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ });
 // example output:
-{ sell:
-   [ { id: '-0xc764b37f2eebb389040025b33668470bf017ce00e3d7c3725d2c33da04cc0bc5',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8457,
-       outcome: '1' },
-     { id: '-0x66f53e64d4547120bd1962168f4acedc58d93efb63e62ad675ef55d19743e66c',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8452,
-       outcome: '1' },
-     { id: '-0x6d354a545d040ee85ef3b59f96cf20227f7f9385c510c87a5b43970043e36ed5',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8379,
-       outcome: '1' },
-     { id: '-0x7f79fc1e36e703f9a0f7b8776d9a1899d6e9ce121f68b3bce7161b9f394b942e',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8375,
-       outcome: '1' } ],
-  buy:
-   [ { id: '-0x753a368b0cd164302041448c61c57a868dccf8fceb538fb2e0a60356f793d720',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8448,
-       outcome: '1' },
-     { id: '-0x9bae4959ded1d5426da64870b39a1465a39491d47e5071c6e4889d739c994c0d',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8446,
-       outcome: '1' },
-     { id: '-0xadd0854ba0ebba7ac915929988cb01e7b2ca8b6cca9cf9f88b235d654ce6666c',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8391,
-       outcome: '1' },
-     { id: '-0x1116dd2bd3aa1db9d14591c42f8eaac9a6a57ea2aad5654c5ada3245f7a52a7b',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8389,
-       outcome: '1' } ] }
+{
+  author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+  branchID: '0xf69b5',
+  consensus: null,
+  creationBlock: 213,
+  creationFee: '9',
+  creationTime: 1502248462,
+  cumulativeScale: '1',
+  description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
+  endDate: 1577952000,
+  eventBond: '4.5',
+  eventID: "0xaa58ddedf98691e35fd6a65ba29fa0b48bcce45b48a8a7c6585c4c650c596895",
+  extraInfo: 'http://www.nationalpopularvote.com',
+  id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+  makerFee: '0.01',
+  maxValue: '3',
+  minValue: '1',
+  network: '9000',
+  numOutcomes: 3,
+  outcomes: [{
+    id: 1,
+    outstandingShares: '310',
+    price: '0.6020833333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 2,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 3,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }],
+  tags: ['politics', 'elections', 'US politics'],
+  takerFee: '0.02',
+  topic: 'politics',
+  tradingFee: '0.02',
+  tradingPeriod: 9131,
+  type: 'categorical',
+  volume: '1710.399999999999999985'
+}
 
-augur.markets.getMarketInfo(marketId, function (marketInfo) { /* ... */ })
+augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... */ })
 // example output:
-{ network: '2',
-  traderCount: 2,
-  traderIndex: 5e-20,
-  numOutcomes: 2,
-  tradingPeriod: 107304960000,
-  makerFee: '0.01246155619866478799995356402249700352',
-  takerFee: '0.07910419330000878000004643597750299648',
-  tradingFee: '0.061043832999115712',
-  branchId: '0xf69b5',
-  numEvents: 1,
-  cumulativeScale: '14999',
-  creationTime: 1463784466,
-  volume: '1.25',
-  creationFee: '5.14285714285714266327',
-  author: '0x7c0d52faab596c08f484e3478aebc6205f3f5d8c',
-  tags: [ 'spaceflight', 'LEO', 'economics' ],
-  type: 'scalar',
-  endDate: 1609574400000,
-  winningOutcomes: [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-  description: 'How much will it cost (in USD) to move a pound of inert cargo from Earth\'s surface to Low Earth Orbit by January 1, 2021?',
-  outcomes:
-   [ { shares: {},
-       id: 1,
-       outstandingShares: '0.5',
-       price: '0.51999999999999999998' },
-     { shares: {}, id: 2, outstandingShares: '0.5', price: '0' } ],
-  events:
-   [ { id: '-0x9d869b3088e7c963e21d295bec13b57342aa70510252fa97388ded77df03d483',
-       endDate: 1609574400000,
-       outcome: '0',
-       minValue: '1',
-       maxValue: '15000',
-       numOutcomes: 2,
-       type: 'scalar' } ],
-  _id: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519' }
+{
+  buy: {
+    '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
+      amount: '10',
+      block: 217,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.1208333333333333',
+      id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '2',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.1208',
+      type: 'buy',
+    },
+    '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b': {
+      amount: '10',
+      block: 219,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.0083333333333333',
+      id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '2',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.0083',
+      type: 'buy',
+    },
+    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
+      amount: '10',
+      block: 220,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.1770833333333333',
+      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '3',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.177',
+      type: 'buy',
+    }
+  },
+  sell: {
+    '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15': {
+      amount: '10',
+      block: 224,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.9958333333333333',
+      id: '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.9959',
+      type: 'sell',
+    },
+    '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e': {
+      amount: '10',
+      block: 220,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.6583333333333333',
+      id: '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '3',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.6584',
+      type: 'sell',
+    },
+    '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269': {
+      amount: '10',
+      block: 222,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.7145833333333333',
+      id: '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269',
+      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.7146',
+      type: 'sell',
+    }
+  }
+}
 ```
-All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the Full API section below.  This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
+All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the Transaction API section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
-### augur.trading.orderBook.getOrderBook(marketId[, callback])
+### augur.markets.getMarketInfo({ marketID[, account] }[, callback])
 
-Retrieves the full order book for `marketId`.  The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders.  The structure of the orders is shown in the example code.
+Reads all information about a market (`marketID`) that is stored on-contract. It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), or `scalar` (answer can be any of a range of values; i.e., Numerical). You can optionally pass an `account` address to show the amount of shares purchased by that `account` for each outcome.
 
-### augur.markets.getMarketInfo(marketId[, callback])
+### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
 
-Reads all information about a market that is stored on-contract.  It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), `scalar` (answer can be any of a range of values; i.e., Numerical), or `combinatorial` (for combined wagers on multiple events).  If the market is a combinatorial market, `getMarketInfo` also makes separate RPC request for the individual event descriptions.
+Retrieves the full order book for `market`. The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders. If your `market` is a scalar `market` then you would want to include the optional object `scalarMinMax`. `scalarMinMax` should have a `minValue` and `maxValue` for the `market` you are querying. There are two optional fields, `offset` and `numTradesToLoad`, which can be used to split up the query into multiple chunks, which can be helpful for larger order books.
 
 ```javascript
 var marketIDs = [
-  '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
+  '0xf41me2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
   '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'
 ];
 augur.markets.batchGetMarketInfo(marketIDs, function (info) { /* ... */ });
