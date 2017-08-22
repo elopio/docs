@@ -19,7 +19,7 @@ augur.connect({
 });
 
 ```
-The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters, are generally identical to those of the underlying smart contract method.
+The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters as keys in the `params` object, are generally identical to those of the underlying smart contract method.
 
 Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Ethereum's decentralized network. The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur's [middleware](http://docs.augur.net/#architecture).
 
@@ -27,9 +27,9 @@ Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Et
 
 `$ npm install augur.js`
 
-To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local.  To specify the connection endpoint, pass your RPC connection info to `augur.connect`.
+To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`.
 
-<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth's IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
+<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth's IPC (inter-process communication) file. IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
 
 Market creation
 ---------------
@@ -189,9 +189,9 @@ compositeMarketsHash = sha3(compositeMarketsHash + marketID3)
 compositeMarketsHash = sha3(compositeMarketsHash + marketID4)
 ```
 
-To load the basic market info for all markets, first call `augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})`.  You will likely need to chunk the results so that the request does not time out.  More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.getMarketInfo(marketID)`.  `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.getOrderBook(marketID)`.
+To load the basic market info for all markets, first call `augur.market.getMarketsInfo({ branch, offset, numMarketsToLoad }, callback)`.  You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.market.getMarketInfo({ marketID }, callback)`. `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ market })`.
 
-<aside class="notice">Cache nodes regularly call <code>augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  The first time <code>getMarketsInfo</code> is called, all markets should be loaded.  Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
+<aside class="notice">Cache nodes regularly call <code>augur.market.getMarketsInfo({branch, offset, numMarketsToLoad} callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
 
 Reporting outcomes
 ------------------
@@ -219,52 +219,6 @@ Simplified API
 --------------
 ```javascript
 const market = '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da';
-
-augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ });
-// example output:
-{
-  author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-  branchID: '0xf69b5',
-  consensus: null,
-  creationBlock: 213,
-  creationFee: '9',
-  creationTime: 1502248462,
-  cumulativeScale: '1',
-  description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
-  endDate: 1577952000,
-  eventBond: '4.5',
-  eventID: "0xaa58ddedf98691e35fd6a65ba29fa0b48bcce45b48a8a7c6585c4c650c596895",
-  extraInfo: 'http://www.nationalpopularvote.com',
-  id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
-  makerFee: '0.01',
-  maxValue: '3',
-  minValue: '1',
-  network: '9000',
-  numOutcomes: 3,
-  outcomes: [{
-    id: 1,
-    outstandingShares: '310',
-    price: '0.6020833333333333',
-    sharesPurchased: '0',
-  }, {
-    id: 2,
-    outstandingShares: '310',
-    price: '0.4333333333333333',
-    sharesPurchased: '0',
-  }, {
-    id: 3,
-    outstandingShares: '310',
-    price: '0.4333333333333333',
-    sharesPurchased: '0',
-  }],
-  tags: ['politics', 'elections', 'US politics'],
-  takerFee: '0.02',
-  topic: 'politics',
-  tradingFee: '0.02',
-  tradingPeriod: 9131,
-  type: 'categorical',
-  volume: '1710.399999999999999985'
-}
 
 augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... */ })
 // example output:
@@ -346,176 +300,215 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
     }
   }
 }
+
+augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ });
+// example output:
+{
+  author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+  branchID: '0xf69b5',
+  consensus: null,
+  creationBlock: 213,
+  creationFee: '9',
+  creationTime: 1502248462,
+  cumulativeScale: '1',
+  description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
+  endDate: 1577952000,
+  eventBond: '4.5',
+  extraInfo: 'http://www.nationalpopularvote.com',
+  id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+  makerFee: '0.01',
+  maxValue: '3',
+  minValue: '1',
+  network: '9000',
+  numOutcomes: 3,
+  outcomes: [{
+    id: 1,
+    outstandingShares: '310',
+    price: '0.6020833333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 2,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 3,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }],
+  tags: ['politics', 'elections', 'US politics'],
+  takerFee: '0.02',
+  topic: 'politics',
+  tradingFee: '0.02',
+  tradingPeriod: 9131,
+  type: 'categorical',
+  volume: '1710.399999999999999985'
+}
+
+const marketIDs = [ market, '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178'];
+const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
+
+augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) { /* ... */ })
+// example output:
+{
+  '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da': {
+    author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationBlock: 213,
+    creationFee: '9',
+    creationTime: 1502248462,
+    cumulativeScale: '1',
+    description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
+    endDate: 1577952000,
+    eventBond: '4.5',
+    extraInfo: 'http://www.nationalpopularvote.com',
+    id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+    makerFee: '0.01',
+    maxValue: '3',
+    minValue: '1',
+    network: '9000',
+    numOutcomes: 3,
+    outcomes: [{
+      id: 1,
+      outstandingShares: '310',
+      price: '0.6020833333333333',
+      sharesPurchased: '0',
+    }, {
+      id: 2,
+      outstandingShares: '310',
+      price: '0.4333333333333333',
+      sharesPurchased: '0',
+    }, {
+      id: 3,
+      outstandingShares: '310',
+      price: '0.4333333333333333',
+      sharesPurchased: '0',
+    }],
+    tags: ['politics', 'elections', 'US politics'],
+    takerFee: '0.02',
+    topic: 'politics',
+    tradingFee: '0.02',
+    tradingPeriod: 9131,
+    type: 'categorical',
+    volume: '1710.399999999999999985'
+  },
+  '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationBlock: 5156,
+    creationFee: '9',
+    creationTime: 1502291695,
+    cumulativeScale: '1',
+    description: 'Will the Bitcoin (BTC) price be equal to or higher than USD 3,400 on 31 August 2017 as shown on www.coinmarketcap.com?',
+    endDate: 1504130400,
+    eventBond: '4.5',
+    extraInfo: 'http://www.nationalpopularvote.com',
+    id: '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178',
+    makerFee: '0.01',
+    maxValue: '2',
+    minValue: '1',
+    network: '9000',
+    numOutcomes: 2,
+    outcomes: [{
+      id: 1,
+      outstandingShares: '2101.2',
+      price: '0',
+      sharesPurchased: '0',
+    }, {
+      id: 2,
+      outstandingShares: '2101.2',
+      price: '0.99',
+      sharesPurchased: '5',
+    }],
+    resolutionSource: 'www.coinmarketcap.com',
+    tags: ['Bitcoin', 'Cryptocurrency', null],
+    takerFee: '0.02',
+    topic: 'Bitcoin',
+    tradingFee: '0.02',
+    tradingPeriod: 8704,
+    type: 'binary',
+    volume: '8346'
+  }
+}
+// all keys in the options object are optional, if branch is not provided then
+// the default of augur.constants.DEFAULT_BRANCH_ID will be used.
+const options = {
+  branch: '0xf69b5',
+  offset: '3',
+  numMarketsToLoad: '2',
+  volumeMin: '1000',
+  volumeMax: '3000'
+}
+
+augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
+// example output:
+{
+  '0x66a1351f6623f3ce2d0a19b45c6997648b51f1311dfa366687f093bdeec00340': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationTime: 1502248542,
+    description: 'Who will win the University of Georgia vs. University of Florida football game in 2017?~|>Georgia|Florida|Vanderbilt',
+    endDate: 1509346800,
+    id: '0x66a1351f6623f3ce2d0a19b45c6997648b51f1311dfa366687f093bdeec00340',
+    makerFee: '0.01',
+    maxValue: '3',
+    minValue: '1',
+    numOutcomes: 3,
+    tags: ['sports', 'college football', 'football'],
+    takerFee: '0.02',
+    topic: 'sports',
+    tradingFee: '0.02',
+    tradingPeriod: 8734,
+    type: 'categorical',
+    volume: '1195.999999999999999997'
+  },
+  '0x6820175a673a59e07905c27a18939d4e1599bc8e5f1ada397a6ee16d20d79739': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationTime: 1502248522,
+    description: "Will Augur's live release happen by the end of August, 2017?",
+    endDate: 1504249200,
+    id: '0x6820175a673a59e07905c27a18939d4e1599bc8e5f1ada397a6ee16d20d79739',
+    makerFee: '0.010000000000000000125',
+    maxValue: '2',
+    minValue: '1',
+    numOutcomes: 2,
+    tags: ['Augur', 'release date', 'Ethereum'],
+    takerFee: '0.030000000000000000375',
+    topic: 'Augur',
+    tradingFee: '0.026666666666666667',
+    tradingPeriod: 8705,
+    type: 'binary',
+    volume: '29623.019599999999999969'
+  }
+}
 ```
 All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the Transaction API section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
-
-### augur.markets.getMarketInfo({ marketID[, account] }[, callback])
-
-Reads all information about a market (`marketID`) that is stored on-contract. It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), or `scalar` (answer can be any of a range of values; i.e., Numerical). You can optionally pass an `account` address to show the amount of shares purchased by that `account` for each outcome.
 
 ### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
 
 Retrieves the full order book for `market`. The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders. If your `market` is a scalar `market` then you would want to include the optional object `scalarMinMax`. `scalarMinMax` should have a `minValue` and `maxValue` for the `market` you are querying. There are two optional fields, `offset` and `numTradesToLoad`, which can be used to split up the query into multiple chunks, which can be helpful for larger order books.
 
-```javascript
-var marketIDs = [
-  '0xf41me2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
-  '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'
-];
-augur.markets.batchGetMarketInfo(marketIDs, function (info) { /* ... */ });
-// example output:
-info = {
-  "0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5": {
-    "network": "2",
-    "traderCount": 0,
-    "makerFee": "0.01246155619866478799995356402249700352",
-    "takerFee": "0.07910419330000878000004643597750299648",
-    "tradingFee": "0.061043832999115712",
-    "traderIndex": 0,
-    "numOutcomes": 3,
-    "tradingPeriod": 206104,
-    "branchId": "0xf69b5",
-    "numEvents": 1,
-    "cumulativeScale": "1",
-    "creationTime": 1464642365,
-    "volume": "0",
-    "creationFee": "8.99999999999999967469",
-    "author": "0x7c0d52faab596c08f484e3478aebc6205f3f5d8c",
-    "tags": ["weather", "temperature", "climate change"],
-    "type": "categorical",
-    "endDate": 1483948800,
-    "winningOutcomes": ["0", "0", "0", "0", "0", "0", "0", "0"],
-    "description": "Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged",
-    "outcomes": [
-      {
-        "shares": {},
-        "id": 1,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 2,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 3,
-        "outstandingShares": "0",
-        "price": "0"
-      }
-    ],
-    "events": [
-      {
-        "id": "0x808bd49d2a16214bed80a6249302b55a87282a7d6ecc74a0381b7453b1ed9101",
-        "endDate": 1483948800,
-        "outcome": "0",
-        "minValue": "1",
-        "maxValue": "2",
-        "numOutcomes": 3,
-        "type": "categorical"
-      }
-    ],
-    "_id": "0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5",
-    "sortOrder": 0
-  },
-  "0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8": {
-    "network": "2",
-    "traderCount": 0,
-    "makerFee": "0.01246155619866478799995356402249700352",
-    "takerFee": "0.07910419330000878000004643597750299648",
-    "tradingFee": "0.061043832999115712",
-    "traderIndex": 0,
-    "numOutcomes": 3,
-    "tradingPeriod": 206104,
-    "branchId": "0xf69b5",
-    "numEvents": 1,
-    "cumulativeScale": "1",
-    "creationTime": 1464642450,
-    "volume": "0",
-    "creationFee": "8.99999999999999967469",
-    "author": "0x7c0d52faab596c08f484e3478aebc6205f3f5d8c",
-    "tags": ["quotes", "严肃", "蝙蝠侠"],
-    "type": "categorical",
-    "endDate": 1483948800,
-    "winningOutcomes": ["0", "0", "0", "0", "0", "0", "0", "0"],
-    "description": "为什么有这么严重吗？",
-    "outcomes": [
-      {
-        "shares": {},
-        "id": 1,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 2,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 3,
-        "outstandingShares": "0",
-        "price": "0"
-      }
-    ],
-    "events": [
-      {
-        "id": "0xe2b0453641b305c4aa96b3bd473d93b0b5062a7c0fc62d6e158c133859fcdcb3",
-        "endDate": 1483948800,
-        "outcome": "0",
-        "minValue": "1",
-        "maxValue": "2",
-        "numOutcomes": 3,
-        "type": "categorical"
-      }
-    ],
-    "_id": "0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8",
-    "sortOrder": 1
-  }
-}
+### augur.markets.getMarketInfo({ marketID[, account] }[, callback])
 
-var options = {
-  branch: 1010101,     // branch ID (default: 1010101)
-  offset: 10,          // which markets to start  (default: 0)
-  numMarketsToLoad: 2  // numMarkets
-};
-augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
-// example output:
-{ '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5':
-   { _id: '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
-     sortOrder: 0,
-     tradingPeriod: 206104,
-     tradingFee: '0.01999999999999999998',
-     creationTime: 1464642365,
-     volume: '0',
-     tags: [ 'weather', 'temperature', 'climate change' ],
-     endDate: 1483948800,
-     description: 'Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged' },
-  '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8':
-   { _id: '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8',
-     sortOrder: 1,
-     tradingPeriod: 206104,
-     tradingFee: '0.01999999999999999998',
-     creationTime: 1464642450,
-     volume: '0',
-     tags: [ 'quotes', '严肃', '蝙蝠侠' ],
-     endDate: 1483948800,
-     description: '为什么有这么严重吗？' } }
-```
-### augur.markets.batchGetMarketInfo(marketIDs[, callback])
+Reads all information about a market (`marketID`) that is stored on-contract. It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), or `scalar` (answer can be any of a range of values; i.e., Numerical). You can optionally pass an `account` address to show the amount of shares purchased by that `account` for each outcome.
 
-Retrieve a `marketInfo` object for the market IDs in array `marketIDs`.  The `marketInfo` objects (see above for example) are collected into a single object and indexed by market ID.
+### augur.markets.batchGetMarketInfo({ marketIDs[, account] }[, callback])
 
-### augur.markets.getMarketsInfo(options[, callback])
+Retrieve a `marketsInfo` object for the market IDs in array `marketIDs`. The `marketsInfo` object will contain `marketInfo` objects (see above for example) which are indexed by their respective market IDs. `account` is an optional parameter used to determine shares purchased by that `account` address for each outcome in the markets returned in the `marketsInfo` object.
 
-Gets basic info about markets the specified branch, and returns an object with market info indexed by market ID.  The `options` parameter is an object which specifies the branch ID (`branch`).  There are also two fields (`offset` and `numMarketsToLoad`) used to split up the `getMarketsInfo` query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request (which is typical).
+### augur.markets.getMarketsInfo({ [branch, offset, numMarketsToLoad, volumeMin, volumeMax] }[, callback])
 
-<aside class="notice">Each branch's market IDs are stored as an "array" on the <a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se">branches</a> contract, in the contract's <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+Returns basic information about markets on a specific `branch` or the `augur.constants.DEFAULT_BRANCH_ID` if no `branch` is provided. This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. The `offset` and `numMarketsToLoad` optional params are also available to this function to break up the market information as the number of markets on a single branch is typically too large for a single RPC request. The final two optional parameters are `volumeMin` and `volumeMax` which are used to filter markets by a minimum and/or maximum trade volume.
 
-For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
+<aside class="notice">Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc. This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+
+For example, suppose you were displaying markets on separate pages. You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request. To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
 
 Call API
 --------
