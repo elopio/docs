@@ -35,7 +35,7 @@ The stable Augur application is built and hosted at [https://app.augur.net](http
 
 If you want to help develop Augur, you will need to build the client from source. To do this, first install [Node.js](https://nodejs.org/), and [git](https://git-scm.com/downloads).
 
-First we need to clone the Augur repository from [Github](https://www.github.com/AugurProject/augur.git), open up your terminal and enter the following commands:
+First we need to clone the Augur repository from [Github](https://www.github.com/AugurProject/augur), open up your terminal and enter the following commands:
 
 `$ git clone https://www.github.com/AugurProject/augur.git`
 
