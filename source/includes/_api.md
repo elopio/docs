@@ -163,36 +163,6 @@ This diagram shows the Reporting cycle for an event (and its associated market) 
 
 <aside class="notice">In Augur, the terms "Reporting period" and "Reporting cycle" are used interchangeably throughout the codebase.</aside>
 
-Initial market loading
-----------------------
-```python
-# Each market's ID is a hash of the following information:
-marketinfo = string(8*32 + len(description))
-marketinfo[0] = tradingPeriod
-marketinfo[1] = tradingFee
-marketinfo[2] = block.timestamp # market creation timestamp
-marketinfo[3] = tag1
-marketinfo[4] = tag2
-marketinfo[5] = tag3
-marketinfo[6] = expirationDate
-marketinfo[7] = len(description)
-mcopy(marketinfo + 8*32, description, chars=len(description))
-marketID = sha3(marketinfo, chars=len(marketinfo))
-
-# Then for the next market, do sha3 of its marketID plus the previous:
-# (marketID2 is the same calculation as above, for the second market)
-compositeMarketsHash = sha3(marketID + marketID2)
-
-# Then continue this process until you've included all markets in the
-# composite hash; for example, if there were 4 total markets:
-compositeMarketsHash = sha3(compositeMarketsHash + marketID3)
-compositeMarketsHash = sha3(compositeMarketsHash + marketID4)
-```
-
-To load the basic market info for all markets, first call `augur.market.getMarketsInfo({ branch, offset, numMarketsToLoad }, callback)`.  You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.market.getMarketInfo({ marketID }, callback)`. `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ market })`.
-
-<aside class="notice">Cache nodes regularly call <code>augur.market.getMarketsInfo({branch, offset, numMarketsToLoad} callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
-
 Reporting outcomes
 ------------------
 
@@ -215,10 +185,16 @@ Reporting outcomes
 - indeterminate: `2**63`
 - exactly in the middle but not indeterminate: `2**63 + 1`
 
+Initial market loading
+----------------------
+To load the basic market info for all markets, first call `augur.markets.getMarketsInfo({ [ branch, offset, numMarketsToLoad, volumeMin, volumeMax] }, callback)`. You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.markets.getMarketInfo({ marketID[, account ] }, callback)`. `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }, callback)`.
+
+<aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ branch, offset, numMarketsToLoad } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
+
 Simplified API
 --------------
 ```javascript
-const market = '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da';
+const market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
 
 augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... */ })
 // example output:
@@ -230,7 +206,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.1208333333333333',
       id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '2',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.1208',
@@ -242,7 +218,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.0083333333333333',
       id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '2',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.0083',
@@ -254,7 +230,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.1770833333333333',
       id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '3',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.177',
@@ -268,7 +244,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.9958333333333333',
       id: '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '1',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.9959',
@@ -280,7 +256,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.6583333333333333',
       id: '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '3',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.6584',
@@ -292,7 +268,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPrecisionAmount: '10',
       fullPercisionPrice: '0.7145833333333333',
       id: '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269',
-      market: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
       outcome: '1',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.7146',
@@ -315,7 +291,7 @@ augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ 
   endDate: 1577952000,
   eventBond: '4.5',
   extraInfo: 'http://www.nationalpopularvote.com',
-  id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+  id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
   makerFee: '0.01',
   maxValue: '3',
   minValue: '1',
@@ -346,13 +322,13 @@ augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ 
   volume: '1710.399999999999999985'
 }
 
-const marketIDs = [ market, '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178'];
+const marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
 const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
 
 augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) { /* ... */ })
 // example output:
 {
-  '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da': {
+  '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42': {
     author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
     branchID: '0xf69b5',
     consensus: null,
@@ -364,7 +340,7 @@ augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) 
     endDate: 1577952000,
     eventBond: '4.5',
     extraInfo: 'http://www.nationalpopularvote.com',
-    id: '0x452efe15c0c481d2a4c1e345dd017e81c3cc24d9ca5e38a8002ad9a64cd996da',
+    id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
     makerFee: '0.01',
     maxValue: '3',
     minValue: '1',
@@ -394,7 +370,7 @@ augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) 
     type: 'categorical',
     volume: '1710.399999999999999985'
   },
-  '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178': {
+  '0xe095e00863aecd814003a739da97b54c2b6737bd': {
     author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
     branchID: '0xf69b5',
     consensus: null,
@@ -406,7 +382,7 @@ augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) 
     endDate: 1504130400,
     eventBond: '4.5',
     extraInfo: 'http://www.nationalpopularvote.com',
-    id: '0x97c8978d29217a1a3c6cad3c53b947ee97de91164dd021fa5c8c8935d5e93178',
+    id: '0xe095e00863aecd814003a739da97b54c2b6737bd',
     makerFee: '0.01',
     maxValue: '2',
     minValue: '1',
@@ -446,14 +422,14 @@ const options = {
 augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
 // example output:
 {
-  '0x66a1351f6623f3ce2d0a19b45c6997648b51f1311dfa366687f093bdeec00340': {
+  '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e': {
     author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
     branchID: '0xf69b5',
     consensus: null,
     creationTime: 1502248542,
     description: 'Who will win the University of Georgia vs. University of Florida football game in 2017?~|>Georgia|Florida|Vanderbilt',
     endDate: 1509346800,
-    id: '0x66a1351f6623f3ce2d0a19b45c6997648b51f1311dfa366687f093bdeec00340',
+    id: '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e',
     makerFee: '0.01',
     maxValue: '3',
     minValue: '1',
@@ -466,14 +442,14 @@ augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
     type: 'categorical',
     volume: '1195.999999999999999997'
   },
-  '0x6820175a673a59e07905c27a18939d4e1599bc8e5f1ada397a6ee16d20d79739': {
+  '0x563b377a956c80d77a7c613a9343699ad6123911': {
     author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
     branchID: '0xf69b5',
     consensus: null,
     creationTime: 1502248522,
     description: "Will Augur's live release happen by the end of August, 2017?",
     endDate: 1504249200,
-    id: '0x6820175a673a59e07905c27a18939d4e1599bc8e5f1ada397a6ee16d20d79739',
+    id: '0x563b377a956c80d77a7c613a9343699ad6123911',
     makerFee: '0.010000000000000000125',
     maxValue: '2',
     minValue: '1',
@@ -1907,15 +1883,15 @@ failedResponse = {
 
 `augur.rpc.transact` carries out the following sequence:
 
-1. `augur.rpc.transact` will first attempt to use `eth.call` on the transaction submitted in order to determine if there is enough GAS to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough GAS, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
+1. `augur.rpc.transact` will first attempt to use `eth_call` on the transaction submitted in order to determine if there is enough GAS to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough GAS, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
 
-2. After confirming that the Transaction is valid, `augur.rpc.transact` will send a `eth.sendTransaction` RPC request (or `eth.sendRawTransaction` for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate. Otherwise, the `onSent` handler will be called and return an object containing the `txHash` and `callReturn`.
+2. After confirming that the Transaction is valid, `augur.rpc.transact` will send a `eth_sendTransaction` RPC request (or `eth_sendRawTransaction` for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate. Otherwise, the `onSent` handler will be called and return an object containing the `txHash` and `callReturn`.
 
 3. After calling the `onSent` handler, Augur will add the transaction to the `transactions` object (which is indexed by transaction hash, e.g. `transactions[txHash]`) and assign the transaction a `status` of `"pending"`. Use `augur.rpc.getTransactions()` to access the `transactions` object.
 
-4. Augur then uses `eth.getTransactionByHash` to determine if the transaction has been mined or not, indicated by a `null` response. A `null` response indicates that the transaction has been (silently) removed from geth's transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction's nonce (but not its other fields) is a duplicate. If a `null` response is received from `eth.getTransactionByHash` then Augur will attempt to re-submit the transaction to `augur.rpc.transact` as long the amount of attempts hasn't exceeded `augur.constants.TX_RETRY_MAX`. If the attempts to submit the transaction exceed `augur.constants.TX_RETRY_MAX` then a `TRANSACTION_RETRY_MAX_EXCEEDED` error will be sent to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate.
+4. Augur then uses `eth_getTransactionByHash` to determine if the transaction has been mined or not, indicated by a `null` response. A `null` response indicates that the transaction has been (silently) removed from geth's transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction's nonce (but not its other fields) is a duplicate. If a `null` response is received from `eth_getTransactionByHash` then Augur will attempt to re-submit the transaction to `augur.rpc.transact` as long the amount of attempts hasn't exceeded `augur.constants.TX_RETRY_MAX`. If the attempts to submit the transaction exceed `augur.constants.TX_RETRY_MAX` then a `TRANSACTION_RETRY_MAX_EXCEEDED` error will be sent to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate.
 
-5. Once the transaction has been successfully mined (`eth.getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and it's `status` is changed to `"sealed"`.
+5. Once the transaction has been successfully mined (`eth_getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and it's `status` is changed to `"sealed"`.
 
 6. When the amount of confirmations of our transaction exceeds `augur.constants.REQUIRED_CONFIRMATIONS` then the transaction is updated to a status of `"confirmed"`. A `callReturn` field is added to the transaction object, which is then passed to the `onSuccess` handler, completing the sequence.
 
