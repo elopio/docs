@@ -3712,20 +3712,19 @@ The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` 
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
-
-Invoke
+callOrSendTransaction
 ------
 
-In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods.  To do this, use [ethrpc](https://github.com/AugurProject/ethrpc)'s lower-level `invoke` method (`augur.rpc.invoke`). First, build a transaction object manually, then execute it using `invoke`. The `invoke` method executes a method in a contract already on the network. It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.
+In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods. To do this, use [ethrpc](https://github.com/AugurProject/ethrpc)'s lower-level `callOrSendTransaction` method which is accessed by calling `callOrSendTransaction`. (`augur.rpc.callOrSendTransaction`). First, build a transaction object manually, then execute it using `callOrSendTransaction`. The `callOrSendTransaction` method executes a method in a contract already on the network. It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.
 
 ```javascript
-// Invoke:
+// callOrSendTransaction:
 // The method called here doubles its input argument.
-augur.rpc.invoke({
+augur.rpc.callOrSendTransaction({
    to: "0x5204f18c652d1c31c6a5968cb65e011915285a50",
    method: "double",
-   signature: "i",
-   params: 22121, // parameter value(s)
+   signature: ["int256"],
+   params: [22121], // parameter value(s)
    send: false,
    returns: "number"
 });
@@ -3738,15 +3737,13 @@ Required:
 
 - to: `<contract address> (hexstring)`
 - method: `<function name> (string)`
-- signature: `<function signature, e.g. "iia"> (string)`
+- signature: `<function signature, e.g. ["int256", "bytes", "int256[]"]> (array)`
 - params: `<parameters passed to the function>`
 
 Optional:
 
 - send: `<true to sendTransaction, false to call (default)>`
 - from: `<sender's address> (hexstring; defaults to the coinbase account)`
-- returns: `<"array", "int", "BigNumber", or "string" (default)>`
+- returns: `<"int256" (default), "int", "number", "int256[]", "number[]", or "string">`
 
 The `params` and `signature` fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The `returns` field is used only to format the output, and does not affect the actual RPC request.
-
-<aside class="notice"><b><code>invoke</code> currently only works for <a href="https://github.com/ethereum/serpent">Serpent</a> contracts.</b>  The extra datatypes included by <a href="https://github.com/ethereum/solidity">Solidity</a> are not (yet) supported by the <a href="https://github.com/AugurProject/augur-abi">augur-abi</a> encoder.  The augur-abi encoder requires all parameters to be type <code>string</code>, <code>int256</code>, or <code>int256[]</code>.</aside>
