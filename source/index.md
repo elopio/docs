@@ -35,6 +35,9 @@ The stable Augur application is built and hosted at [https://app.augur.net](http
 
 Augur has it's own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [slack.augur.net](http://slack.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
 
+Getting Started
+---------------
+
 If you want to help develop Augur, you will need to build the client from source. To do this, first install [Node.js](https://nodejs.org/), and [git](https://git-scm.com/downloads).
 
 First we need to clone the Augur repository from [Github](https://www.github.com/AugurProject/augur), open up your terminal and enter the following command to clone the repository:
