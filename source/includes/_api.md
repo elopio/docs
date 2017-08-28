@@ -2,22 +2,36 @@ API
 ===
 ```javascript
 // After installing, just require augur.js to use it.
-var Augur = require("augur.js");
-var augur = new Augur();
+import Augur from 'augur.js';
+const augur = new Augur();
+
+const options = {
+  httpAddresss: [
+    'http://127.0.0.1:8545', // local http address for Geth Node
+    'https://eth9000.augur.net' // hosted http address for Augur Node
+  ],
+  wsAddresses: [
+    'ws://127.0.0.1:8545', // local websocket address for Geth Node
+    'wss://ws9000.augur.net', // hosted websocket address for Augur Node
+  ],
+};
 
 // Attempt to connect to a local Ethereum node
-augur.connect({http: "http://127.0.0.1:8545"});
-
-// Connect to Augur's public node with websocket support
-augur.connect({http: "https://eth3.augur.net", ws: "wss://ws.augur.net"});
-
-// Connect to a local Ethereum node with websocket and IPC support
-augur.connect({
-    http: "http://127.0.0.1:8545",
-    ws: "ws://127.0.0.1:8546",
-    ipc: process.env.HOME + "/.ethereum/geth.ipc"
-});
-
+// if that fails, fall back to our hosted node
+augur.connect(options, function (vitals) { /* ... */ });
+// example vitals object:
+vitals = {
+  networkID: '9000',
+  blockNumber: '0xf69b5',
+  coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+  gasPrice: 18000000000,
+  api: {
+    events: { /*...*/},
+    functions: { /* ... */ },
+  },
+  contracts: { /* ... */ },
+  rpc: { /* ... */ },
+};
 ```
 The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters as keys in the `params` object, are generally identical to those of the underlying smart contract method.
 
@@ -27,9 +41,13 @@ Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Et
 
 `$ npm install augur.js`
 
-To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`.
+or if you prefer [yarn](https://yarnpkg.com/en/):
 
-<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth's IPC (inter-process communication) file. IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
+`$ yarn add augur.js`
+
+To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail.
+
+In the example we have set our first connection to test as `http://127.0.0.1:8545` which is our local geth node. If Augur is unable to connect to the local geth node, then Augur will go to the next provided address. In this case we have provided a single hosted node (`https://eth9000.augur.net`) as the only other attempt to make outside of the local geth node. If a connection is successfully established then a `vitals` object will be returned, otherwise an error message will be returned.
 
 Market creation
 ---------------
