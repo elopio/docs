@@ -12,7 +12,11 @@ toc_footers:
 
 includes:
   - architecture
-  - api
+  - trading
+  - reporting
+  - generalAPI
+  - callAPI
+  - transactionAPI
   - events
   - callbacks
   - numbers
