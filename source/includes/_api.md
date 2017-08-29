@@ -595,7 +595,7 @@ augur.api.Branch.isParentOf({ branch, shadyChild: childBranch }, function (isPar
 // example output:
 isParentOf = "1";
 ```
-### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
+### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
 
 #### augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
 
@@ -710,7 +710,7 @@ augur.api.DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupp
 // example output:
 totalSupply = "1"
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
 
@@ -899,7 +899,7 @@ augur.api.Market.shouldCollectReportingFees({ market }, function (shouldCollectR
 // example output:
 shouldCollectReportingFees = "1";
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.canBeReportedOn({ market }[, callback])
 
@@ -1084,7 +1084,7 @@ augur.api.RegistrationToken.totalSupply({ registrationToken }, function (totalSu
 totalSupply = "215";
 
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1161,7 +1161,7 @@ augur.api.ReportingToken.totalSupply({ reportingToken }, function (totalSupply) 
 totalSupply = "210"
 
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1290,7 +1290,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow }, function (isRep
 // example output:
 isReportingActive = "1"
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.getBranch({ reportingWindow }[, callback])
 
@@ -1398,7 +1398,7 @@ augur.api.ReputationToken.totalSupply({ reputationToken }, function (totalSupply
 // example output:
 totalSupply = "11000000"
 ```
-### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.se)
+### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1453,7 +1453,7 @@ augur.api.Cash.totalSupply({}, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
-### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.se)
+### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
 
 #### augur.api.Cash.allowance({ owner, spender }[, callback])
 
@@ -2066,7 +2066,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2452,7 +2452,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.approveSpenders({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
@@ -2650,7 +2650,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2907,7 +2907,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2995,7 +2995,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
 
@@ -3386,7 +3386,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.se)
+### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
 
 #### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
