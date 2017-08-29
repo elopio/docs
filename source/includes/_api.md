@@ -482,7 +482,7 @@ augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
   }
 }
 ```
-All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the Transaction API section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
+All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](http://docs.augur.net/#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
 ### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
 
@@ -506,10 +506,20 @@ For example, suppose you were displaying markets on separate pages. You might wa
 
 Call API
 --------
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain.
+```javascript
+// Call API Example
+const market = '0x37bc721758f3e574d2c18e98a02b3495ab175e0a';
+const params = { market };
+
+// Augur.api.<Contract>.<Method>(<params>, <callback>);
+augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) { /* ... */ })
+// example output:
+numOutcomes = "5"
+```
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the simplified API allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`.
 
 ```javascript
-// Branch contract
+// Branch Contract Call API Examples:
 const branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 const parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 
@@ -595,7 +605,7 @@ augur.api.Branch.isParentOf({ branch, shadyChild: childBranch }, function (isPar
 // example output:
 isParentOf = "1";
 ```
-### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
+### [Branch Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
 
 #### augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
 
@@ -674,7 +684,7 @@ Returns wether the specific `branch` is a container for the `shadyReportingWindo
 Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
 ```javascript
-// Dispute Bond Token Contract
+// Dispute Bond Token Contract Call API Examples:
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 const address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 
@@ -710,7 +720,7 @@ augur.api.DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupp
 // example output:
 totalSupply = "1"
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
+### [Dispute Bond Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
 
@@ -745,7 +755,7 @@ This transaction will return the reputation token address that a specified `disp
 This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
 
 ```javascript
-// Market Contract
+// Market Contract Call API Examples:
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
@@ -899,7 +909,7 @@ augur.api.Market.shouldCollectReportingFees({ market }, function (shouldCollectR
 // example output:
 shouldCollectReportingFees = "1";
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
+### [Market Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.canBeReportedOn({ market }[, callback])
 
@@ -1050,7 +1060,7 @@ Returns wether the specific `market` needs to be migrated to a new branch or not
 Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
 ```javascript
-// Registration Token Contract
+// Registration Token Contract Call API Examples:
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1084,7 +1094,7 @@ augur.api.RegistrationToken.totalSupply({ registrationToken }, function (totalSu
 totalSupply = "215";
 
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
+### [Registration Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1115,7 +1125,7 @@ Returns the Reputation Tokens address for the specific `registrationToken`'s Rep
 Returns the current total supply of the specified `registrationToken`.
 
 ```javascript
-// Reporting Token Contract
+// Reporting Token Contract Call API Examples:
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1161,7 +1171,7 @@ augur.api.ReportingToken.totalSupply({ reportingToken }, function (totalSupply) 
 totalSupply = "210"
 
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
+### [Reporting Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1204,7 +1214,7 @@ Returns the Reputation Tokens address for the specific `reportingToken`'s Report
 Returns the current total supply of the specified `reportingToken`.
 
 ```javascript
-// Reporting Window Contract
+// Reporting Window Contract Call API Examples:
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api.ReportingWindow.getBranch({ reportingWindow }, function (branch) { /* ... */ })
@@ -1290,7 +1300,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow }, function (isRep
 // example output:
 isReportingActive = "1"
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
+### [Reporting Window Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.getBranch({ reportingWindow }[, callback])
 
@@ -1373,7 +1383,7 @@ Returns wether the specified `reporter` is finished reporting for the `reporting
 Returns wether the specified `reportingWindow`'s reporting phase is active or not. Returns `1` if true, `0` if false.
 
 ```javascript
-// Reputation Token Contract
+// Reputation Token Contract Call API Examples:
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1398,7 +1408,7 @@ augur.api.ReputationToken.totalSupply({ reputationToken }, function (totalSupply
 // example output:
 totalSupply = "11000000"
 ```
-### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
+### [Reputation Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1421,7 +1431,7 @@ Returns the top migration destination address for the specified `reputationToken
 Returns the current total supply of the specified `reputationToken`.
 
 ```javascript
-// Cash Contract
+// Cash Contract Call API Examples:
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
@@ -1453,7 +1463,7 @@ augur.api.Cash.totalSupply({}, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
-### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
+### [Cash Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
 
 #### augur.api.Cash.allowance({ owner, spender }[, callback])
 
@@ -1484,7 +1494,7 @@ Returns the symbol string for Cash: `CASH`.
 Returns the current total supply of Cash.
 
 ```javascript
-// Orders Contract
+// Orders Contract Call API Examples:
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
@@ -1558,7 +1568,7 @@ augur.api.Orders.isWorsePrice({ type, market, outcome, fxpPrice, orderID }, func
 // example output:
 isWorsePrice = "1"
 ```
-### [Orders Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
+### [Orders Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
 
 #### augur.api.Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice, betterOrderID }[, callback])
 
@@ -1625,7 +1635,7 @@ Returns wether the specified `fxpPrice` is a better price than the `orderID` for
 Returns wether the specified `fxpPrice` is a worst price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
 ```javascript
-// Orders Fetcher Contract
+// Orders Fetcher Contract Call API Examples:
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
@@ -1667,7 +1677,7 @@ orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 ```
-### [Orders Fetcher Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
+### [Orders Fetcher Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
 
@@ -1690,7 +1700,7 @@ Returns a length 8 array containing information about a specified `orderID` of `
 Returns an array of order IDs of `type` trading on `market` around `outcome` starting from the `startingOrderID` order ID specified. The array will be of length `numOrdersToLoad`.
 
 ```javascript
-// Share Token Contract
+// Share Token Contract Call API Examples:
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1731,7 +1741,7 @@ augur.api.ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ...
 // example output:
 totalSupply = "50000"
 ```
-### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+### [Share Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
 #### augur.api.ShareToken.allowance({ shareToken, owner, spender }[, callback])
 
@@ -1770,7 +1780,7 @@ Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0
 Returns the total supply of `shareToken`s specified.
 
 ```javascript
-// Topics Contract
+// Topics Contract Call API Examples:
 const topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 const topic = "Augur";
 
@@ -1790,7 +1800,7 @@ augur.api.Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */
 // example output:
 topic = "Augur"
 ```
-### [Topics Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
+### [Topics Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
 
 #### augur.api.Topics.count({ topics }[, callback])
 
@@ -1984,7 +1994,7 @@ The `privateKeyOrSigner` is required if we are attempting to execute a transacti
 
 
 ```javascript
-// Dispute Bond Token Contract
+// Dispute Bond Token Contract Transaction API Examples:
 // privateKey for the msg.sender of these transactions
 const privateKey = <Buffer ...>;
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
@@ -2066,7 +2076,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
+### [Dispute Bond Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2081,7 +2091,7 @@ This transaction is used by the bond holder of the specified `disputeBondToken` 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Market Contract
+// Market Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const payoutNumerators = [ 0, 2 ];
@@ -2452,7 +2462,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
+### [Market Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.approveSpenders({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
@@ -2515,7 +2525,7 @@ This transaction will attempt to finalize the `market`'s limited reporting phase
 This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Registration Token Contract
+// Registration Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -2650,7 +2660,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
+### [Registration Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2673,7 +2683,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `registrationTok
 If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reporting Token Contract
+// Reporting Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -2907,7 +2917,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
+### [Reporting Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2947,7 +2957,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `reportingToken`
 If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reporting Window Contract
+// Reporting Window Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 const endTime = 1501015000;
@@ -2995,14 +3005,14 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
+### [Reporting Window Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reputation Token Contract
+// Reputation Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
@@ -3140,7 +3150,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
+### [Reputation Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.approve({ \_signer, reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3163,7 +3173,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `reputationToken
 If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Cancel Order Contract
+// Cancel Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
@@ -3197,7 +3207,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Cancel Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
+### [Cancel Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
 
 #### augur.api.CancelOrder.publicCancelOrder({ \_signer, orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
 
@@ -3335,7 +3345,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Cash Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
+### [Cash Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
 
 #### augur.api.Cash.approve({ \_signer, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3358,7 +3368,7 @@ If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to b
 If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Claim Proceeds Contract
+// Claim Proceeds Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
@@ -3386,7 +3396,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
+### [Claim Proceeds Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
 
 #### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
@@ -3459,7 +3469,7 @@ This transaction will attempt to purchase `fxpAmount` worth of shares in all out
 This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Make Order Contract
+// Make Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const type = "1";
 const attoshares = "10000000000000000000"; // 10 shares
@@ -3501,7 +3511,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Make Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
+### [Make Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
 
 #### augur.api.MakeOrder.publicMakeOrder({ \_signer, type, attoshares, displayPrice, market, outcome[, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed ]})
 
@@ -3510,7 +3520,7 @@ This transaction will create a new order on the order book for the specified `ma
 This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Share Token Contract
+// Share Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
 const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
@@ -3595,7 +3605,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+### [Share Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
 #### augur.api.ShareToken.approve({ \_signer, shareToken, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3610,7 +3620,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to
 If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Take Order Contract
+// Take Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const orderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 const type = "1";
@@ -3648,14 +3658,14 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Take Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
+### [Take Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
 
 #### augur.api.TakeOrder.publicTakeOrder({ \_signer, orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Trade Contract
+// Trade Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 const outcome = "1";
@@ -3777,7 +3787,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Trade Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
+### [Trade Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
 
 #### augur.api.Trade.publicBuy({ \_signer, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
