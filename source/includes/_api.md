@@ -2,24 +2,38 @@ API
 ===
 ```javascript
 // After installing, just require augur.js to use it.
-var Augur = require("augur.js");
-var augur = new Augur();
+import Augur from 'augur.js';
+const augur = new Augur();
+
+const options = {
+  httpAddresss: [
+    'http://127.0.0.1:8545', // local http address for Geth Node
+    'https://eth9000.augur.net' // hosted http address for Augur Node
+  ],
+  wsAddresses: [
+    'ws://127.0.0.1:8545', // local websocket address for Geth Node
+    'wss://ws9000.augur.net', // hosted websocket address for Augur Node
+  ],
+};
 
 // Attempt to connect to a local Ethereum node
-augur.connect({http: "http://127.0.0.1:8545"});
-
-// Connect to Augur's public node with websocket support
-augur.connect({http: "https://eth3.augur.net", ws: "wss://ws.augur.net"});
-
-// Connect to a local Ethereum node with websocket and IPC support
-augur.connect({
-    http: "http://127.0.0.1:8545",
-    ws: "ws://127.0.0.1:8546",
-    ipc: process.env.HOME + "/.ethereum/geth.ipc"
-});
-
+// if that fails, fall back to our hosted node
+augur.connect(options, function (vitals) { /* ... */ });
+// example vitals object:
+vitals = {
+  networkID: '9000',
+  blockNumber: '0xf69b5',
+  coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+  gasPrice: 18000000000,
+  api: {
+    events: { /*...*/},
+    functions: { /* ... */ },
+  },
+  contracts: { /* ... */ },
+  rpc: { /* ... */ },
+};
 ```
-The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters, are generally identical to those of the underlying smart contract method.
+The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters as keys in the `params` object, are generally identical to those of the underlying smart contract method.
 
 Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Ethereum's decentralized network. The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur's [middleware](http://docs.augur.net/#architecture).
 
@@ -27,9 +41,13 @@ Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Et
 
 `$ npm install augur.js`
 
-To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local.  To specify the connection endpoint, pass your RPC connection info to `augur.connect`.
+or if you prefer [yarn](https://yarnpkg.com/en/):
 
-<aside class="notice"><code>augur.connect</code> also accepts a second argument specifying the path to geth's IPC (inter-process communication) file.  IPC creates a persistent connection using a Unix domain socket (or a named pipe on Windows).  While it is significantly faster than HTTP RPC, it cannot be used from the browser.</aside>
+`$ yarn add augur.js`
+
+To use the Augur API, augur.js must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail.
+
+In the example we have set our first connection to try as `http://127.0.0.1:8545` which is our local geth node. If Augur is unable to connect to the local geth node, then Augur will go to the next provided address. In this case we have provided a single hosted node (`https://eth9000.augur.net`) as the only other attempt to make outside of the local geth node. If a connection is successfully established then a `vitals` object will be returned, otherwise an error message will be returned.
 
 Market creation
 ---------------
@@ -163,36 +181,6 @@ This diagram shows the Reporting cycle for an event (and its associated market) 
 
 <aside class="notice">In Augur, the terms "Reporting period" and "Reporting cycle" are used interchangeably throughout the codebase.</aside>
 
-Initial market loading
-----------------------
-```python
-# Each market's ID is a hash of the following information:
-marketinfo = string(8*32 + len(description))
-marketinfo[0] = tradingPeriod
-marketinfo[1] = tradingFee
-marketinfo[2] = block.timestamp # market creation timestamp
-marketinfo[3] = tag1
-marketinfo[4] = tag2
-marketinfo[5] = tag3
-marketinfo[6] = expirationDate
-marketinfo[7] = len(description)
-mcopy(marketinfo + 8*32, description, chars=len(description))
-marketID = sha3(marketinfo, chars=len(marketinfo))
-
-# Then for the next market, do sha3 of its marketID plus the previous:
-# (marketID2 is the same calculation as above, for the second market)
-compositeMarketsHash = sha3(marketID + marketID2)
-
-# Then continue this process until you've included all markets in the
-# composite hash; for example, if there were 4 total markets:
-compositeMarketsHash = sha3(compositeMarketsHash + marketID3)
-compositeMarketsHash = sha3(compositeMarketsHash + marketID4)
-```
-
-To load the basic market info for all markets, first call `augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})`.  You will likely need to chunk the results so that the request does not time out.  More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.getMarketInfo(marketID)`.  `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.getOrderBook(marketID)`.
-
-<aside class="notice">Cache nodes regularly call <code>augur.getMarketsInfo({branch, offset, numMarketsToLoad, callback})</code>.  The first time <code>getMarketsInfo</code> is called, all markets should be loaded.  Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
-
 Reporting outcomes
 ------------------
 
@@ -215,295 +203,323 @@ Reporting outcomes
 - indeterminate: `2**63`
 - exactly in the middle but not indeterminate: `2**63 + 1`
 
+Initial market loading
+----------------------
+To load the basic market info for all markets, first call `augur.markets.getMarketsInfo({ [ branch, offset, numMarketsToLoad, volumeMin, volumeMax] }, callback)`. You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.markets.getMarketInfo({ marketID[, account ] }, callback)`. `getMarketInfo` does not return the full order book; to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }, callback)`.
+
+<aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ branch, offset, numMarketsToLoad } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
+
 Simplified API
 --------------
 ```javascript
-var branchId = 1010101;
-var marketId = "0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519";
+const market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
 
-augur.trading.orderBook.getOrderBook(marketId, function (orderBook) { /* ... */ });
+augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... */ })
 // example output:
-{ sell:
-   [ { id: '-0xc764b37f2eebb389040025b33668470bf017ce00e3d7c3725d2c33da04cc0bc5',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8457,
-       outcome: '1' },
-     { id: '-0x66f53e64d4547120bd1962168f4acedc58d93efb63e62ad675ef55d19743e66c',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8452,
-       outcome: '1' },
-     { id: '-0x6d354a545d040ee85ef3b59f96cf20227f7f9385c510c87a5b43970043e36ed5',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8379,
-       outcome: '1' },
-     { id: '-0x7f79fc1e36e703f9a0f7b8776d9a1899d6e9ce121f68b3bce7161b9f394b942e',
-       type: 'sell',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8375,
-       outcome: '1' } ],
-  buy:
-   [ { id: '-0x753a368b0cd164302041448c61c57a868dccf8fceb538fb2e0a60356f793d720',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8448,
-       outcome: '1' },
-     { id: '-0x9bae4959ded1d5426da64870b39a1465a39491d47e5071c6e4889d739c994c0d',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8446,
-       outcome: '1' },
-     { id: '-0xadd0854ba0ebba7ac915929988cb01e7b2ca8b6cca9cf9f88b235d654ce6666c',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '0.25',
-       price: '0.51999999999999999998',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8391,
-       outcome: '1' },
-     { id: '-0x1116dd2bd3aa1db9d14591c42f8eaac9a6a57ea2aad5654c5ada3245f7a52a7b',
-       type: 'buy',
-       market: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519',
-       amount: '1',
-       price: '0.5',
-       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-       block: 8389,
-       outcome: '1' } ] }
-
-augur.markets.getMarketInfo(marketId, function (marketInfo) { /* ... */ })
-// example output:
-{ network: '2',
-  traderCount: 2,
-  traderIndex: 5e-20,
-  numOutcomes: 2,
-  tradingPeriod: 107304960000,
-  makerFee: '0.01246155619866478799995356402249700352',
-  takerFee: '0.07910419330000878000004643597750299648',
-  tradingFee: '0.061043832999115712',
-  branchId: '0xf69b5',
-  numEvents: 1,
-  cumulativeScale: '14999',
-  creationTime: 1463784466,
-  volume: '1.25',
-  creationFee: '5.14285714285714266327',
-  author: '0x7c0d52faab596c08f484e3478aebc6205f3f5d8c',
-  tags: [ 'spaceflight', 'LEO', 'economics' ],
-  type: 'scalar',
-  endDate: 1609574400000,
-  winningOutcomes: [ '0', '0', '0', '0', '0', '0', '0', '0' ],
-  description: 'How much will it cost (in USD) to move a pound of inert cargo from Earth\'s surface to Low Earth Orbit by January 1, 2021?',
-  outcomes:
-   [ { shares: {},
-       id: 1,
-       outstandingShares: '0.5',
-       price: '0.51999999999999999998' },
-     { shares: {}, id: 2, outstandingShares: '0.5', price: '0' } ],
-  events:
-   [ { id: '-0x9d869b3088e7c963e21d295bec13b57342aa70510252fa97388ded77df03d483',
-       endDate: 1609574400000,
-       outcome: '0',
-       minValue: '1',
-       maxValue: '15000',
-       numOutcomes: 2,
-       type: 'scalar' } ],
-  _id: '0x45c545745a80121b14c879bf9542dd838559f7acc90f1e1774f4268c332a519' }
-```
-All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the Full API section below.  This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
-
-### augur.trading.orderBook.getOrderBook(marketId[, callback])
-
-Retrieves the full order book for `marketId`.  The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders.  The structure of the orders is shown in the example code.
-
-### augur.markets.getMarketInfo(marketId[, callback])
-
-Reads all information about a market that is stored on-contract.  It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), `scalar` (answer can be any of a range of values; i.e., Numerical), or `combinatorial` (for combined wagers on multiple events).  If the market is a combinatorial market, `getMarketInfo` also makes separate RPC request for the individual event descriptions.
-
-```javascript
-var marketIDs = [
-  '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
-  '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8'
-];
-augur.markets.batchGetMarketInfo(marketIDs, function (info) { /* ... */ });
-// example output:
-info = {
-  "0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5": {
-    "network": "2",
-    "traderCount": 0,
-    "makerFee": "0.01246155619866478799995356402249700352",
-    "takerFee": "0.07910419330000878000004643597750299648",
-    "tradingFee": "0.061043832999115712",
-    "traderIndex": 0,
-    "numOutcomes": 3,
-    "tradingPeriod": 206104,
-    "branchId": "0xf69b5",
-    "numEvents": 1,
-    "cumulativeScale": "1",
-    "creationTime": 1464642365,
-    "volume": "0",
-    "creationFee": "8.99999999999999967469",
-    "author": "0x7c0d52faab596c08f484e3478aebc6205f3f5d8c",
-    "tags": ["weather", "temperature", "climate change"],
-    "type": "categorical",
-    "endDate": 1483948800,
-    "winningOutcomes": ["0", "0", "0", "0", "0", "0", "0", "0"],
-    "description": "Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged",
-    "outcomes": [
-      {
-        "shares": {},
-        "id": 1,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 2,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 3,
-        "outstandingShares": "0",
-        "price": "0"
-      }
-    ],
-    "events": [
-      {
-        "id": "0x808bd49d2a16214bed80a6249302b55a87282a7d6ecc74a0381b7453b1ed9101",
-        "endDate": 1483948800,
-        "outcome": "0",
-        "minValue": "1",
-        "maxValue": "2",
-        "numOutcomes": 3,
-        "type": "categorical"
-      }
-    ],
-    "_id": "0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5",
-    "sortOrder": 0
+{
+  buy: {
+    '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
+      amount: '10',
+      block: 217,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.1208333333333333',
+      id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '2',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.1208',
+      type: 'buy',
+    },
+    '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b': {
+      amount: '10',
+      block: 219,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.0083333333333333',
+      id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '2',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.0083',
+      type: 'buy',
+    },
+    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
+      amount: '10',
+      block: 220,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.1770833333333333',
+      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '3',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.177',
+      type: 'buy',
+    }
   },
-  "0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8": {
-    "network": "2",
-    "traderCount": 0,
-    "makerFee": "0.01246155619866478799995356402249700352",
-    "takerFee": "0.07910419330000878000004643597750299648",
-    "tradingFee": "0.061043832999115712",
-    "traderIndex": 0,
-    "numOutcomes": 3,
-    "tradingPeriod": 206104,
-    "branchId": "0xf69b5",
-    "numEvents": 1,
-    "cumulativeScale": "1",
-    "creationTime": 1464642450,
-    "volume": "0",
-    "creationFee": "8.99999999999999967469",
-    "author": "0x7c0d52faab596c08f484e3478aebc6205f3f5d8c",
-    "tags": ["quotes", "严肃", "蝙蝠侠"],
-    "type": "categorical",
-    "endDate": 1483948800,
-    "winningOutcomes": ["0", "0", "0", "0", "0", "0", "0", "0"],
-    "description": "为什么有这么严重吗？",
-    "outcomes": [
-      {
-        "shares": {},
-        "id": 1,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 2,
-        "outstandingShares": "0",
-        "price": "0"
-      },
-      {
-        "shares": {},
-        "id": 3,
-        "outstandingShares": "0",
-        "price": "0"
-      }
-    ],
-    "events": [
-      {
-        "id": "0xe2b0453641b305c4aa96b3bd473d93b0b5062a7c0fc62d6e158c133859fcdcb3",
-        "endDate": 1483948800,
-        "outcome": "0",
-        "minValue": "1",
-        "maxValue": "2",
-        "numOutcomes": 3,
-        "type": "categorical"
-      }
-    ],
-    "_id": "0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8",
-    "sortOrder": 1
+  sell: {
+    '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15': {
+      amount: '10',
+      block: 224,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.9958333333333333',
+      id: '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.9959',
+      type: 'sell',
+    },
+    '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e': {
+      amount: '10',
+      block: 220,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.6583333333333333',
+      id: '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '3',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.6584',
+      type: 'sell',
+    },
+    '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269': {
+      amount: '10',
+      block: 222,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.7145833333333333',
+      id: '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.7146',
+      type: 'sell',
+    }
   }
 }
 
-var options = {
-  branch: 1010101,     // branch ID (default: 1010101)
-  offset: 10,          // which markets to start  (default: 0)
-  numMarketsToLoad: 2  // numMarkets
-};
+augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ });
+// example output:
+{
+  author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+  branchID: '0xf69b5',
+  consensus: null,
+  creationBlock: 213,
+  creationFee: '9',
+  creationTime: 1502248462,
+  cumulativeScale: '1',
+  description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
+  endDate: 1577952000,
+  eventBond: '4.5',
+  extraInfo: 'http://www.nationalpopularvote.com',
+  id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+  makerFee: '0.01',
+  maxValue: '3',
+  minValue: '1',
+  network: '9000',
+  numOutcomes: 3,
+  outcomes: [{
+    id: 1,
+    outstandingShares: '310',
+    price: '0.6020833333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 2,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }, {
+    id: 3,
+    outstandingShares: '310',
+    price: '0.4333333333333333',
+    sharesPurchased: '0',
+  }],
+  tags: ['politics', 'elections', 'US politics'],
+  takerFee: '0.02',
+  topic: 'politics',
+  tradingFee: '0.02',
+  tradingPeriod: 9131,
+  type: 'categorical',
+  volume: '1710.399999999999999985'
+}
+
+const marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
+const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
+
+augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) { /* ... */ })
+// example output:
+{
+  '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42': {
+    author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationBlock: 213,
+    creationFee: '9',
+    creationTime: 1502248462,
+    cumulativeScale: '1',
+    description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
+    endDate: 1577952000,
+    eventBond: '4.5',
+    extraInfo: 'http://www.nationalpopularvote.com',
+    id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+    makerFee: '0.01',
+    maxValue: '3',
+    minValue: '1',
+    network: '9000',
+    numOutcomes: 3,
+    outcomes: [{
+      id: 1,
+      outstandingShares: '310',
+      price: '0.6020833333333333',
+      sharesPurchased: '0',
+    }, {
+      id: 2,
+      outstandingShares: '310',
+      price: '0.4333333333333333',
+      sharesPurchased: '0',
+    }, {
+      id: 3,
+      outstandingShares: '310',
+      price: '0.4333333333333333',
+      sharesPurchased: '0',
+    }],
+    tags: ['politics', 'elections', 'US politics'],
+    takerFee: '0.02',
+    topic: 'politics',
+    tradingFee: '0.02',
+    tradingPeriod: 9131,
+    type: 'categorical',
+    volume: '1710.399999999999999985'
+  },
+  '0xe095e00863aecd814003a739da97b54c2b6737bd': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationBlock: 5156,
+    creationFee: '9',
+    creationTime: 1502291695,
+    cumulativeScale: '1',
+    description: 'Will the Bitcoin (BTC) price be equal to or higher than USD 3,400 on 31 August 2017 as shown on www.coinmarketcap.com?',
+    endDate: 1504130400,
+    eventBond: '4.5',
+    extraInfo: 'http://www.nationalpopularvote.com',
+    id: '0xe095e00863aecd814003a739da97b54c2b6737bd',
+    makerFee: '0.01',
+    maxValue: '2',
+    minValue: '1',
+    network: '9000',
+    numOutcomes: 2,
+    outcomes: [{
+      id: 1,
+      outstandingShares: '2101.2',
+      price: '0',
+      sharesPurchased: '0',
+    }, {
+      id: 2,
+      outstandingShares: '2101.2',
+      price: '0.99',
+      sharesPurchased: '5',
+    }],
+    resolutionSource: 'www.coinmarketcap.com',
+    tags: ['Bitcoin', 'Cryptocurrency', null],
+    takerFee: '0.02',
+    topic: 'Bitcoin',
+    tradingFee: '0.02',
+    tradingPeriod: 8704,
+    type: 'binary',
+    volume: '8346'
+  }
+}
+// all keys in the options object are optional, if branch is not provided then
+// the default of augur.constants.DEFAULT_BRANCH_ID will be used.
+const options = {
+  branch: '0xf69b5',
+  offset: '3',
+  numMarketsToLoad: '2',
+  volumeMin: '1000',
+  volumeMax: '3000'
+}
+
 augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
 // example output:
-{ '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5':
-   { _id: '0xf41e2f1827142a95cc14b5333f3d3493588342ef8bc9214e96e0c894dff27fc5',
-     sortOrder: 0,
-     tradingPeriod: 206104,
-     tradingFee: '0.01999999999999999998',
-     creationTime: 1464642365,
-     volume: '0',
-     tags: [ 'weather', 'temperature', 'climate change' ],
-     endDate: 1483948800,
-     description: 'Will the average temperature on Earth in 2016 be Higher, Lower, or Unchanged from the average temperature on Earth in 2015? Choices: Higher, Lower, Unchanged' },
-  '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8':
-   { _id: '0x9b8e45cdf9d35ab66b939d5eb5b48bf10de3c39b7f6fa2d38fe518a869502e8',
-     sortOrder: 1,
-     tradingPeriod: 206104,
-     tradingFee: '0.01999999999999999998',
-     creationTime: 1464642450,
-     volume: '0',
-     tags: [ 'quotes', '严肃', '蝙蝠侠' ],
-     endDate: 1483948800,
-     description: '为什么有这么严重吗？' } }
+{
+  '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationTime: 1502248542,
+    description: 'Who will win the University of Georgia vs. University of Florida football game in 2017?~|>Georgia|Florida|Vanderbilt',
+    endDate: 1509346800,
+    id: '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e',
+    makerFee: '0.01',
+    maxValue: '3',
+    minValue: '1',
+    numOutcomes: 3,
+    tags: ['sports', 'college football', 'football'],
+    takerFee: '0.02',
+    topic: 'sports',
+    tradingFee: '0.02',
+    tradingPeriod: 8734,
+    type: 'categorical',
+    volume: '1195.999999999999999997'
+  },
+  '0x563b377a956c80d77a7c613a9343699ad6123911': {
+    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
+    branchID: '0xf69b5',
+    consensus: null,
+    creationTime: 1502248522,
+    description: "Will Augur's live release happen by the end of August, 2017?",
+    endDate: 1504249200,
+    id: '0x563b377a956c80d77a7c613a9343699ad6123911',
+    makerFee: '0.010000000000000000125',
+    maxValue: '2',
+    minValue: '1',
+    numOutcomes: 2,
+    tags: ['Augur', 'release date', 'Ethereum'],
+    takerFee: '0.030000000000000000375',
+    topic: 'Augur',
+    tradingFee: '0.026666666666666667',
+    tradingPeriod: 8705,
+    type: 'binary',
+    volume: '29623.019599999999999969'
+  }
+}
 ```
-### augur.markets.batchGetMarketInfo(marketIDs[, callback])
+All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](http://docs.augur.net/#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
-Retrieve a `marketInfo` object for the market IDs in array `marketIDs`.  The `marketInfo` objects (see above for example) are collected into a single object and indexed by market ID.
+### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
 
-### augur.markets.getMarketsInfo(options[, callback])
+Retrieves the full order book for `market`. The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders. If your `market` is a scalar `market` then you would want to include the optional object `scalarMinMax`. `scalarMinMax` should have a `minValue` and `maxValue` for the `market` you are querying. There are two optional fields, `offset` and `numTradesToLoad`, which can be used to split up the query into multiple chunks, which can be helpful for larger order books.
 
-Gets basic info about markets the specified branch, and returns an object with market info indexed by market ID.  The `options` parameter is an object which specifies the branch ID (`branch`).  There are also two fields (`offset` and `numMarketsToLoad`) used to split up the `getMarketsInfo` query into multiple requests.  This is useful if the number of markets on the branch is too large for a single RPC request (which is typical).
+### augur.markets.getMarketInfo({ marketID[, account] }[, callback])
 
-<aside class="notice">Each branch's market IDs are stored as an "array" on the <a href="https://github.com/AugurProject/augur-core/blob/master/src/data_api/branches.se">branches</a> contract, in the contract's <code>Branches[](markets[], numMarkets, ...)</code> data.  Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc.  This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+Reads all information about a market (`marketID`) that is stored on-contract. It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), or `scalar` (answer can be any of a range of values; i.e., Numerical). You can optionally pass an `account` address to show the amount of shares purchased by that `account` for each outcome.
 
-For example, suppose you were displaying markets on separate pages.  You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request.  To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
+### augur.markets.batchGetMarketInfo({ marketIDs[, account] }[, callback])
+
+Retrieve a `marketsInfo` object for the market IDs in array `marketIDs`. The `marketsInfo` object will contain `marketInfo` objects (see above for example) which are indexed by their respective market IDs. `account` is an optional parameter used to determine shares purchased by that `account` address for each outcome in the markets returned in the `marketsInfo` object.
+
+### augur.markets.getMarketsInfo({ [branch, offset, numMarketsToLoad, volumeMin, volumeMax] }[, callback])
+
+Returns basic information about markets on a specific `branch` or the `augur.constants.DEFAULT_BRANCH_ID` if no `branch` is provided. This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. The `offset` and `numMarketsToLoad` optional params are also available to this function to break up the market information as the number of markets on a single branch is typically too large for a single RPC request. The final two optional parameters are `volumeMin` and `volumeMax` which are used to filter markets by a minimum and/or maximum trade volume.
+
+<aside class="notice">Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc. This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
+
+For example, suppose you were displaying markets on separate pages. You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request. To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
 
 Call API
 --------
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain.
+```javascript
+// Call API Example
+const market = '0x37bc721758f3e574d2c18e98a02b3495ab175e0a';
+const params = { market };
+
+// Augur.api.<Contract>.<Method>(<params>, <callback>);
+augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) { /* ... */ })
+// example output:
+numOutcomes = "5"
+```
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the simplified API allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`.
 
 ```javascript
-// Branch contract
+// Branch Contract Call API Examples:
 const branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 const parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 
@@ -589,7 +605,7 @@ augur.api.Branch.isParentOf({ branch, shadyChild: childBranch }, function (isPar
 // example output:
 isParentOf = "1";
 ```
-### [Branch Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.se)
+### [Branch Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
 
 #### augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
 
@@ -668,7 +684,7 @@ Returns wether the specific `branch` is a container for the `shadyReportingWindo
 Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
 ```javascript
-// Dispute Bond Token Contract
+// Dispute Bond Token Contract Call API Examples:
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 const address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 
@@ -704,7 +720,7 @@ augur.api.DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupp
 // example output:
 totalSupply = "1"
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+### [Dispute Bond Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
 
@@ -739,7 +755,7 @@ This transaction will return the reputation token address that a specified `disp
 This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
 
 ```javascript
-// Market Contract
+// Market Contract Call API Examples:
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Market.canBeReportedOn({ market }, function (canBeReportedOn) { /* ... */ })
@@ -893,7 +909,7 @@ augur.api.Market.shouldCollectReportingFees({ market }, function (shouldCollectR
 // example output:
 shouldCollectReportingFees = "1";
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+### [Market Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.canBeReportedOn({ market }[, callback])
 
@@ -1044,7 +1060,7 @@ Returns wether the specific `market` needs to be migrated to a new branch or not
 Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
 ```javascript
-// Registration Token Contract
+// Registration Token Contract Call API Examples:
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1078,7 +1094,7 @@ augur.api.RegistrationToken.totalSupply({ registrationToken }, function (totalSu
 totalSupply = "215";
 
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+### [Registration Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1109,7 +1125,7 @@ Returns the Reputation Tokens address for the specific `registrationToken`'s Rep
 Returns the current total supply of the specified `registrationToken`.
 
 ```javascript
-// Reporting Token Contract
+// Reporting Token Contract Call API Examples:
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1155,7 +1171,7 @@ augur.api.ReportingToken.totalSupply({ reportingToken }, function (totalSupply) 
 totalSupply = "210"
 
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+### [Reporting Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1198,7 +1214,7 @@ Returns the Reputation Tokens address for the specific `reportingToken`'s Report
 Returns the current total supply of the specified `reportingToken`.
 
 ```javascript
-// Reporting Window Contract
+// Reporting Window Contract Call API Examples:
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api.ReportingWindow.getBranch({ reportingWindow }, function (branch) { /* ... */ })
@@ -1284,7 +1300,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow }, function (isRep
 // example output:
 isReportingActive = "1"
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+### [Reporting Window Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.getBranch({ reportingWindow }[, callback])
 
@@ -1367,7 +1383,7 @@ Returns wether the specified `reporter` is finished reporting for the `reporting
 Returns wether the specified `reportingWindow`'s reporting phase is active or not. Returns `1` if true, `0` if false.
 
 ```javascript
-// Reputation Token Contract
+// Reputation Token Contract Call API Examples:
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1392,7 +1408,7 @@ augur.api.ReputationToken.totalSupply({ reputationToken }, function (totalSupply
 // example output:
 totalSupply = "11000000"
 ```
-### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.se)
+### [Reputation Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
 
@@ -1415,7 +1431,7 @@ Returns the top migration destination address for the specified `reputationToken
 Returns the current total supply of the specified `reputationToken`.
 
 ```javascript
-// Cash Contract
+// Cash Contract Call API Examples:
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
@@ -1447,7 +1463,7 @@ augur.api.Cash.totalSupply({}, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
-### [Cash Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.se)
+### [Cash Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
 
 #### augur.api.Cash.allowance({ owner, spender }[, callback])
 
@@ -1478,7 +1494,7 @@ Returns the symbol string for Cash: `CASH`.
 Returns the current total supply of Cash.
 
 ```javascript
-// Orders Contract
+// Orders Contract Call API Examples:
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
@@ -1552,7 +1568,7 @@ augur.api.Orders.isWorsePrice({ type, market, outcome, fxpPrice, orderID }, func
 // example output:
 isWorsePrice = "1"
 ```
-### [Orders Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
+### [Orders Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
 
 #### augur.api.Orders.assertIsNotBetterPrice({ type, market, outcome, fxpPrice, betterOrderID }[, callback])
 
@@ -1619,7 +1635,7 @@ Returns wether the specified `fxpPrice` is a better price than the `orderID` for
 Returns wether the specified `fxpPrice` is a worst price than the `orderID` for a given order `type` trading on the `outcome` of the provided `market`. Returns `1` if true, `0` if false.
 
 ```javascript
-// Orders Fetcher Contract
+// Orders Fetcher Contract Call API Examples:
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
@@ -1661,7 +1677,7 @@ orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 ```
-### [Orders Fetcher Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
+### [Orders Fetcher Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
 
@@ -1684,7 +1700,7 @@ Returns a length 8 array containing information about a specified `orderID` of `
 Returns an array of order IDs of `type` trading on `market` around `outcome` starting from the `startingOrderID` order ID specified. The array will be of length `numOrdersToLoad`.
 
 ```javascript
-// Share Token Contract
+// Share Token Contract Call API Examples:
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -1725,7 +1741,7 @@ augur.api.ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ...
 // example output:
 totalSupply = "50000"
 ```
-### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+### [Share Token Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
 #### augur.api.ShareToken.allowance({ shareToken, owner, spender }[, callback])
 
@@ -1764,7 +1780,7 @@ Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0
 Returns the total supply of `shareToken`s specified.
 
 ```javascript
-// Topics Contract
+// Topics Contract Call API Examples:
 const topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 const topic = "Augur";
 
@@ -1784,7 +1800,7 @@ augur.api.Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */
 // example output:
 topic = "Augur"
 ```
-### [Topics Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
+### [Topics Contract Call API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
 
 #### augur.api.Topics.count({ topics }[, callback])
 
@@ -1806,11 +1822,60 @@ Returns the Topic at the index `offset` at the `topics` address provided.
 Transaction API
 ---------------
 
-Augur's Transaction API is made up of "setter" methods that can both read from and write to the blockchain using Ethereum's `eth_sendTransaction` RPC.  Under the hood, the API uses augur.js's convenience wrapper for `eth_sendTransaction`, `augur.rpc.transact`.
+```javascript
+// Transaction API example:
+const privateKey = <Buffer ...>;
+const reputationTokenAddress = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+const transferTarget = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
+const attotokens = "100000000000000000000"; // 1000.00 REP
+
+// the Augur API is organized by Contract and then Method like so:
+// augur.api.<Contract>.<Method>(<argument object>);
+augur.api.ReputationToken.transfer({
+  _signer: privateKey,
+  reputationToken: reputationTokenAddress,
+  to: transferTarget,
+  value: attotokens,
+  onSent: (result) => console.log(result),
+  onSuccess: (result) => console.log(result),
+  onFailed: (result) => console.log(result)
+});
+// example sent output:
+sentResponse = {
+  txHash: '0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6',
+  callReturn: '1'
+}
+// example successful output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320512,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6",
+  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf2",
+  timestamp: 1501003152,
+  to: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
+  value: "0x0"
+}
+// example failed output:
+failedResponse = {
+  error: '0x',
+  message: 'no response or bad input'
+}
+```
+Augur's Transaction API is made up of "setter" methods that can both read from and write to the blockchain using Ethereum's `eth_sendTransaction` RPC. Under the hood, the API uses augur.js's convenience wrapper for `eth_sendTransaction` which can be accessed using `augur.rpc.transact`. Although it is possible to call `augur.rpc.transact` directly, which is discussed in greater detail below, it is generally better and easier to use the built in API functions. The API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`.
+
+### Arguments
+
+All Transaction API methods accept a single object argument. This single object optionally contains the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the Call API methods which accept a params object and a second optional argument for the callback.
 
 ### Callbacks
 
-All Transaction API methods accept three callback functions:
+All Transaction API methods accept three callback functions within the argument object. The following keys are used for each callback:
 
 #### onSent(sentResponse)
 
@@ -1826,13 +1891,8 @@ Fires if the transaction is unsuccessful. `failedResponse` has `error` (error co
 
 No callbacks are required; if none are supplied, then the transaction hash (or error) will simply be returned. In this case, the transaction has been broadcast to the Ethereum network, but further confirmation of the transaction and/or lookups of its return value will need to be done manually. If an `onSent` but not an `onSuccess` callback is provided, the transaction will be broadcast, and `onSent` will be passed an `sentResponse` object containing `txHash` and `callReturn` fields, but `augur.rpc` will not poll the network repeatedly to check on the status of the transaction.
 
-### Arguments
-
-All Transaction API methods accept a single object argument. This single object optionally contains the `onSent`, `onSuccess`, and `onFailed` fields with callbacks attached. This single object should contain all required params for the transactions as key/value pairs.
-
 ```javascript
 // using augur.rpc.transact() directly example:
-
 // payload object (generated by transfer method of the Cash Contract)
 const payload = {
   to: "0x039546e174d6a2f4c9239e08094b114fa82efc23",
@@ -1889,31 +1949,52 @@ failedResponse = {
   message: 'polled network but could not confirm transaction'
 }
 ```
-### augur.rpc.transact(payload, privateKeyOrSigner[, onSent, onSuccess, onFailed])
+### Using transact directly:
 
 <aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren't terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
 
-`augur.rpc.transact` carries out the following sequence:
+#### augur.rpc.transact(payload, privateKeyOrSigner[, onSent, onSuccess, onFailed])
 
-1. `augur.rpc.transact` will first attempt to use `eth.call` on the transaction submitted in order to determine if there is enough GAS to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough GAS, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
+You can broadcast transactions to the Ethereum Network by calling `augur.rpc.transact` directly. If called directly, the `payload` object needs to be constructed by hand and must be structured correctly.
 
-2. After confirming that the Transaction is valid, `augur.rpc.transact` will send a `eth.sendTransaction` RPC request (or `eth.sendRawTransaction` for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate. Otherwise, the `onSent` handler will be called and return an object containing the `txHash` and `callReturn`.
+The `payload` object, also known as the "transaction object", is structured as follows:
+
+**Required:**
+
+- to: `<contract address> (hexstring)`
+- name: `<function name> (string)`
+- signature: `<function signature, e.g. ["int256", "bytes", "int256[]"]> (array)`
+- params: `<parameters passed to the function>`
+
+**Optional:**
+
+- send: `<true to sendTransaction, false to call (default)>`
+- from: `<sender's address> (hexstring; defaults to the coinbase account)`
+- returns: `<"int256" (default), "int", "number", "int256[]", "number[]", or "string">`
+
+The `params` and `signature` fields are required if your function accepts parameters; otherwise, these fields can be excluded. The `returns` field is used only to format the output, and does not affect the actual RPC request.
+
+The `privateKeyOrSigner` is required if we are attempting to execute a transaction that will modify the blockchain (`eth_sendTransaction`). If we are simply getting information (`eth_call`) we don't need to pass anything for `privateKeyOrSigner`. `privateKeyOrSigner` should be the Private Key Buffer for the logged in account or a function to sign transactions provided by a hardware wallet.
+
+**Under the hood `augur.rpc.transact` carries out the following sequence:**
+
+1. `augur.rpc.transact` will first attempt to use `eth_call` on the transaction submitted in order to determine if there is enough GAS to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough GAS, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
+
+2. After confirming that the Transaction is valid, `augur.rpc.transact` will send a `eth_sendTransaction` RPC request (or `eth_sendRawTransaction` for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate. Otherwise, the `onSent` handler will be called and return an object containing the `txHash` and `callReturn`.
 
 3. After calling the `onSent` handler, Augur will add the transaction to the `transactions` object (which is indexed by transaction hash, e.g. `transactions[txHash]`) and assign the transaction a `status` of `"pending"`. Use `augur.rpc.getTransactions()` to access the `transactions` object.
 
-4. Augur then uses `eth.getTransactionByHash` to determine if the transaction has been mined or not, indicated by a `null` response. A `null` response indicates that the transaction has been (silently) removed from geth's transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction's nonce (but not its other fields) is a duplicate. If a `null` response is received from `eth.getTransactionByHash` then Augur will attempt to re-submit the transaction to `augur.rpc.transact` as long the amount of attempts hasn't exceeded `augur.constants.TX_RETRY_MAX`. If the attempts to submit the transaction exceed `augur.constants.TX_RETRY_MAX` then a `TRANSACTION_RETRY_MAX_EXCEEDED` error will be sent to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate.
+4. Augur then uses `eth_getTransactionByHash` to determine if the transaction has been mined or not, indicated by a `null` response. A `null` response indicates that the transaction has been (silently) removed from geth's transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction's nonce (but not its other fields) is a duplicate. If a `null` response is received from `eth_getTransactionByHash` then Augur will attempt to re-submit the transaction to `augur.rpc.transact` as long the amount of attempts hasn't exceeded `augur.constants.TX_RETRY_MAX`. If the attempts to submit the transaction exceed `augur.constants.TX_RETRY_MAX` then a `TRANSACTION_RETRY_MAX_EXCEEDED` error will be sent to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate.
 
-5. Once the transaction has been successfully mined (`eth.getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and it's `status` is changed to `"sealed"`.
+5. Once the transaction has been successfully mined (`eth_getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and it's `status` is changed to `"sealed"`.
 
 6. When the amount of confirmations of our transaction exceeds `augur.constants.REQUIRED_CONFIRMATIONS` then the transaction is updated to a status of `"confirmed"`. A `callReturn` field is added to the transaction object, which is then passed to the `onSuccess` handler, completing the sequence.
 
 <aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
 
-The first argument to `augur.rpc.transact` is a "transaction object".
-
 
 ```javascript
-// Dispute Bond Token Contract
+// Dispute Bond Token Contract Transaction API Examples:
 // privateKey for the msg.sender of these transactions
 const privateKey = <Buffer ...>;
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
@@ -1995,7 +2076,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Dispute Bond Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.se)
+### [Dispute Bond Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2010,7 +2091,7 @@ This transaction is used by the bond holder of the specified `disputeBondToken` 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Market Contract
+// Market Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 const payoutNumerators = [ 0, 2 ];
@@ -2381,7 +2462,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Market Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.se)
+### [Market Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
 #### augur.api.Market.approveSpenders({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
@@ -2444,7 +2525,7 @@ This transaction will attempt to finalize the `market`'s limited reporting phase
 This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Registration Token Contract
+// Registration Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -2579,7 +2660,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Registration Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.se)
+### [Registration Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2602,7 +2683,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `registrationTok
 If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reporting Token Contract
+// Reporting Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
@@ -2836,7 +2917,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.se)
+### [Reporting Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
 
@@ -2876,7 +2957,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `reportingToken`
 If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reporting Window Contract
+// Reporting Window Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 const endTime = 1501015000;
@@ -2924,14 +3005,14 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reporting Window Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.se)
+### [Reporting Window Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Reputation Token Contract
+// Reputation Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
@@ -3069,7 +3150,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Reputation Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
+### [Reputation Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.approve({ \_signer, reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3092,7 +3173,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `reputationToken
 If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Cancel Order Contract
+// Cancel Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 const type = "1";
@@ -3126,7 +3207,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Cancel Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
+### [Cancel Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
 
 #### augur.api.CancelOrder.publicCancelOrder({ \_signer, orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
 
@@ -3264,7 +3345,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Cash Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
+### [Cash Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
 
 #### augur.api.Cash.approve({ \_signer, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3287,7 +3368,7 @@ If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to b
 If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Claim Proceeds Contract
+// Claim Proceeds Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
@@ -3315,7 +3396,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Claim Proceeds Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.se)
+### [Claim Proceeds Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
 
 #### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market[, onSent, onSuccess, onFailed ]})
 
@@ -3388,7 +3469,7 @@ This transaction will attempt to purchase `fxpAmount` worth of shares in all out
 This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Make Order Contract
+// Make Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const type = "1";
 const attoshares = "10000000000000000000"; // 10 shares
@@ -3430,7 +3511,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Make Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
+### [Make Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
 
 #### augur.api.MakeOrder.publicMakeOrder({ \_signer, type, attoshares, displayPrice, market, outcome[, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed ]})
 
@@ -3439,7 +3520,7 @@ This transaction will create a new order on the order book for the specified `ma
 This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Share Token Contract
+// Share Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
 const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
@@ -3524,7 +3605,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Share Token Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+### [Share Token Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
 #### augur.api.ShareToken.approve({ \_signer, shareToken, spender, value[, onSent, onSuccess, onFailed ]})
 
@@ -3539,7 +3620,7 @@ If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to
 If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Take Order Contract
+// Take Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const orderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 const type = "1";
@@ -3577,14 +3658,14 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Take Order Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
+### [Take Order Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
 
 #### augur.api.TakeOrder.publicTakeOrder({ \_signer, orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
 
 ```javascript
-// Trade Contract
+// Trade Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 const outcome = "1";
@@ -3706,7 +3787,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-### [Trade Contract](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
+### [Trade Contract Transaction API Methods](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
 
 #### augur.api.Trade.publicBuy({ \_signer, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
@@ -3723,42 +3804,3 @@ The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` 
 #### augur.api.Trade.publicTakeBestOrder({ \_signer, direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
-
-
-Invoke
-------
-
-In some cases, you may need more flexibility beyond simply mix-and-matching the Augur API methods.  To do this, use [ethrpc](https://github.com/AugurProject/ethrpc)'s lower-level `invoke` method (`augur.rpc.invoke`). First, build a transaction object manually, then execute it using `invoke`. The `invoke` method executes a method in a contract already on the network. It can broadcast transactions to the network and/or capture return values by calling the contract method(s) locally.
-
-```javascript
-// Invoke:
-// The method called here doubles its input argument.
-augur.rpc.invoke({
-   to: "0x5204f18c652d1c31c6a5968cb65e011915285a50",
-   method: "double",
-   signature: "i",
-   params: 22121, // parameter value(s)
-   send: false,
-   returns: "number"
-});
-// this returns:
-44242
-```
-Transaction fields are as follows:
-
-Required:
-
-- to: `<contract address> (hexstring)`
-- method: `<function name> (string)`
-- signature: `<function signature, e.g. "iia"> (string)`
-- params: `<parameters passed to the function>`
-
-Optional:
-
-- send: `<true to sendTransaction, false to call (default)>`
-- from: `<sender's address> (hexstring; defaults to the coinbase account)`
-- returns: `<"array", "int", "BigNumber", or "string" (default)>`
-
-The `params` and `signature` fields are required if your function accepts parameters; otherwise, these fields can be excluded.  The `returns` field is used only to format the output, and does not affect the actual RPC request.
-
-<aside class="notice"><b><code>invoke</code> currently only works for <a href="https://github.com/ethereum/serpent">Serpent</a> contracts.</b>  The extra datatypes included by <a href="https://github.com/ethereum/solidity">Solidity</a> are not (yet) supported by the <a href="https://github.com/AugurProject/augur-abi">augur-abi</a> encoder.  The augur-abi encoder requires all parameters to be type <code>string</code>, <code>int256</code>, or <code>int256[]</code>.</aside>
