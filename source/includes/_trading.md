@@ -49,15 +49,27 @@ For simplicity, going forward Trading Fees will refer to both the Trading Fee an
 - Selling a Complete Set
 - Redeeming winning shares in a finalized market
 
-Selling a Complete Set can be thought of as exiting your market positions. Complete Sets are simply a set of shares for each outcome. If you own a set of shares in each outcome, you can settle those shares and receive `ETH` back for their value minus Trading Fees.
+Selling a Complete Set can be thought of as exiting your market position. Complete Sets are simply a set of shares for each outcome. If you own a set of shares in each outcome, you can settle those shares and receive `ETH` back for their value minus Trading Fees.
 
-
-Worst Case Loss
----------------
+Calculating Trades
+------------------
 <!--
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
+
+Below is a table of all trade situations and the results of those trades:
+
+Maker Order Type | Maker of Order Escrowed | Taker of Order Sends | Maker Value Changes | Taker Value Changes
+----------|------------------------|----------------------|---------------------|---------
+Bid | Maker escrows `N` shares of all outcomes except `Outcome A` into a `bid` order (buying) at `X` price. Maker is intending to close a short position for `Outcome A`. | Taker has no shares, only ETH. Taker would like to short `Outcome A`. | Gains: `(marketMaxPrice - X) * N ETH`. Loses: `N` shares in all outcomes except `Outcome A`. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`.
+Bid | Maker escrows `(X - marketMinPrice) * N ETH` into a `bid` order (buying) for `N` shares of `Outcome A` at `X` Price. Maker is intending to open a long position for `Outcome A`. | Taker has no shares in `Outcome A`. Taker is intending to open a short position for `Outcome A`. | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH` | Gains: `N` shares of all outcomes except for `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`.
+Bid | Maker escrows `N` shares of all outcomes except `Outcome A` into a bid order (buying) for `Outcome A` at `X` price. Maker intends to close a short position for `Outcome A`. | Taker has `N` shares out `Outcome A`. Taker intends to close a long position for `Outcome A`. | Gains: `((marketMaxPrice - X) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in all outcomes except `Outcome A`. | Gains: `((X - marketMinPrice) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in `Outcome A`.
+Bid | Maker escrows `(X - marketMinPrice) * N ETH` into a `bid` order (buying) for `N` shares of `Outcome A` at `X` Price. Maker is intending to open a long position for `Outcome A`. | Taker has `N` shares out `Outcome A`. Taker intends to close a long position for `Outcome A`. | Gains: `N` shares in `Outcome A`. Loses: `(X - marketMinPrice) * N ETH` | Gains: `(X - marketMinPrice) * N ETH`. Loses: `N` shares of `Outcome A`.
+Ask | Maker escrows `N` shares of `Outcome A` into a `ask` order (selling) at `X` price. Maker is intending to close a long position for `Outcome A`. | Taker has no shares. Taker would like to purchase `N` shares of `Outcome A` for `ETH`. Taker is intending to open a long position. | Gains: `(X - marketMinPrice) * N ETH`. Loses: `N` shares in `Outcome A` | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH`
+Ask | Maker escrows `(marketMaxPrice - X) * N ETH` into an `ask` order (selling) for `N` shares of `Outcome A` at `X` price. Maker intends to short `Outcome A` but doesn't own any shares. | Taker has no shares. Taker would like to purchase `N` shares of `Outcome A` at `X` price. Taker would like open a long position. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH` | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH`.
+Ask | Maker escrows `N` shares of `Outcome A` into an `ask` order (selling) at `X` price. Maker is intending to close a long position for `Outcome A`. | Taker has shares in all outcomes except `Outcome A`. The Taker is intending to close a short position for `Outcome A`. | Gains: `((X - marketMinPrice) * N) - (tradingFees / 2) ETH`. Loses: `N` shares of `Outcome A` | Gains: `((marketMaxPrice - X) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in all outcomes except `Outcome A`.
+Ask | Maker escrows `(marketMaxPrice - X) * N ETH` into an `ask` order (selling) for `N` shares of `Outcome A` at `X` price. Maker intends to short `Outcome A` but doesn't own any shares. | Taker has shares in all outcomes except `Outcome A`. The Taker is intending to close a short position for `Outcome A`. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`. | Gains: `(marketMaxPrice - X) * N ETH`. Loses: `N` shares in all outcomes except `Outcome A`.
 
 <!-- scrap text
 -----------
