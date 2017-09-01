@@ -14,6 +14,13 @@ If no order is available on the order book that would partially or completely fi
 
 For more information on how to trade using the Augur API, check the [trade](http://docs.augur.net/#trade-tx-api) section of the [Transaction API](http://docs.augur.net/#transaction-api).
 
+<!--
+- Trading Fees
+- Reporting Fees and how they work
+- Complete Sets
+- Worst Case Loss outline and examples
+
+  -->
 Trading Fees
 ------------
 <!--
@@ -25,11 +32,19 @@ Outline of this section:
 
 -->
 
-Augur extracts Trading Fees in order to be able to reward users who create markets and report on the outcome of those markets. Creating a market costs a small amount of `ETH`. Without some incentive people won't create markets as they get nothing in return for the `ETH` they spent to create it. Augur solves this problem by allowing market creators to set a Trading Fee for their market. The Trading Fee must be between `0` and `50` percent. Once a market is created the Trading Fee cannot be raised, only lowered.
+Creating a market costs a small amount of `ETH`. Without some incentive people won't create markets as they get nothing in return for the `ETH` they spent to create it. Augur solves this problem by allowing market creators to set a Trading Fee for their market. The Trading Fee must be between `0` and `50` percent. Once a market is created the Trading Fee cannot be raised, only lowered.
 
-There is also a reporter fee that isn't set by the market creator. The reporter fee is calculated by a recurring market on Augur and is generally targeted to drive REP value up to five times the total open interest in Augur markets. For simplicity, when Trading Fees is mentioned below, we are talking about the combined fees of the Trading Fee set by the market creator and the reporter fee.
+Augur extracts Trading Fees in order to be able to reward users who create markets, but it also extracts Fees to help support the reporting system. The Reporter Fee isn't set by the market creator like the Trading Fee but is instead set by Augur.
 
-Trading Fees are extracted anytime settlement occurs and shares are destroyed. This can happen for two reasons:
+Augur will automatically create a market once a month to use as a data feed for the REP price. This market will be a normal market and it will go through the normal resolution process. Once the REP price is known, Augur can calculate the REP market cap by multiply by the total supply of REP.
+
+The contracts will track the open interest of all markets passively as people interact with Augur, which allows Augur to always have access to the open interest numbers. Once the open interest and REP market caps are known Augur can then wether the REP market cap is too high or too low. Augur then calculates the new Reporter Fee using the following formula:
+
+`current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)`
+
+The current plan is to update this value once a month. If updates where to occur too frequently, the market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn't yet account for by the fee system.
+
+For simplicity, going forward Trading Fees will refer to both the Trading Fee and the Reporting Fee combined. Trading Fees are extracted anytime settlement occurs and shares are destroyed. This can happen for two reasons:
 
 - Selling a Complete Set
 - Redeeming winning shares in a finalized market
