@@ -1,5 +1,6 @@
 Callbacks
 =========
+<aside class="warning">The Callback section is depricated. This section will most likely be removed as it's redundant with planned changes to the [Call API](https://docs.augur.net/#call-api) and [Transaction API](https://docs.augur.net/#transaction-api) sections.</aside>
 
 ```javascript
 // eth_sendTransaction examples

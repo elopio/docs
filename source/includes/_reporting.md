@@ -1,6 +1,7 @@
 
 Reporting
 =========
+<aside class="warning">The Reporting section is deprecated. This information is no longer accurate as the reporting system has undergone some changes. This document will be updated prior to release of Augur.</aside>
 
 <a href="images/reporting_cycle.svg"><img src="images/reporting_cycle.svg" onerror="this.src='images/reporting_cycle.png'"></a>
 

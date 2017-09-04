@@ -1,5 +1,7 @@
 Trading
 ========
+<aside class="notice">The Trading section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
+
 Augur allows anyone to create an openly tradable market about any upcoming event. Augur will maintain an order book for each of the markets created. Any trader can place or take an order on the market's order book. When placing an order, if there is an order on the book that will fulfill your order then it will be filled immediately. If there is no matching order, or your order was only partially filled, on the book then your order, or the remainder of what wasn't filled of your order, will be placed on the book until another trader tries to fill the order or we cancel the order and remove it from the book. Orders are executed on a "first come, first served" basis.
 
 The Augur UI will offer users the best prices first when displaying the order book on each market page. Orders are never executed at a worse prices than the limit price set by the user, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback orders to attempt to fill our order in the event that the best order was filled before we sent the transaction. These backup/fallback orders will always fit within the limit price set by the trader.
@@ -57,34 +59,62 @@ Calculating Trades
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
+In this section we breakdown all potential trade situations and their expected outcome. There are two types of orders, bid orders (requesting to buy) and ask orders (requesting to sell). In our examples below we will first go over all the potential trade possibilities around Bid Orders and then we will do the same for Ask Orders. The calculations below use `N` as the number of shares the order is requesting, `X` as the price per share for the order, and `Outcome` for the outcome our order is concerning.
 
-Below is a table of all trade situations and the results of those trades:
+### Bid Order Trading
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`N` shares of all outcomes except `Outcome` into a **Bid** order at `X` price.<br/> Maker is intending to close a short position for `Outcome`. | No shares, only ETH.<br/> Taker is intending to open a short position for `Outcome`. |
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`. | **Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(marketMaxPrice - X) * N`</span> ETH.
 
-Maker Order Type | Maker of Order Escrowed | Taker of Order Sends | Maker Value Changes | Taker Value Changes
-----------|------------------------|----------------------|---------------------|---------
-Bid | Maker escrows `N` shares of all outcomes except `Outcome A` into a `bid` order (buying) at `X` price. Maker is intending to close a short position for `Outcome A`. | Taker has no shares, only ETH. Taker would like to short `Outcome A`. | Gains: `(marketMaxPrice - X) * N ETH`. Loses: `N` shares in all outcomes except `Outcome A`. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`.
-Bid | Maker escrows `(X - marketMinPrice) * N ETH` into a `bid` order (buying) for `N` shares of `Outcome A` at `X` Price. Maker is intending to open a long position for `Outcome A`. | Taker has no shares in `Outcome A`. Taker is intending to open a short position for `Outcome A`. | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH` | Gains: `N` shares of all outcomes except for `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`.
-Bid | Maker escrows `N` shares of all outcomes except `Outcome A` into a bid order (buying) for `Outcome A` at `X` price. Maker intends to close a short position for `Outcome A`. | Taker has `N` shares out `Outcome A`. Taker intends to close a long position for `Outcome A`. | Gains: `((marketMaxPrice - X) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in all outcomes except `Outcome A`. | Gains: `((X - marketMinPrice) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in `Outcome A`.
-Bid | Maker escrows `(X - marketMinPrice) * N ETH` into a `bid` order (buying) for `N` shares of `Outcome A` at `X` Price. Maker is intending to open a long position for `Outcome A`. | Taker has `N` shares out `Outcome A`. Taker intends to close a long position for `Outcome A`. | Gains: `N` shares in `Outcome A`. Loses: `(X - marketMinPrice) * N ETH` | Gains: `(X - marketMinPrice) * N ETH`. Loses: `N` shares of `Outcome A`.
-Ask | Maker escrows `N` shares of `Outcome A` into a `ask` order (selling) at `X` price. Maker is intending to close a long position for `Outcome A`. | Taker has no shares. Taker would like to purchase `N` shares of `Outcome A` for `ETH`. Taker is intending to open a long position. | Gains: `(X - marketMinPrice) * N ETH`. Loses: `N` shares in `Outcome A` | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH`
-Ask | Maker escrows `(marketMaxPrice - X) * N ETH` into an `ask` order (selling) for `N` shares of `Outcome A` at `X` price. Maker intends to short `Outcome A` but doesn't own any shares. | Taker has no shares. Taker would like to purchase `N` shares of `Outcome A` at `X` price. Taker would like open a long position. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH` | Gains: `N` shares of `Outcome A`. Loses: `(X - marketMinPrice) * N ETH`.
-Ask | Maker escrows `N` shares of `Outcome A` into an `ask` order (selling) at `X` price. Maker is intending to close a long position for `Outcome A`. | Taker has shares in all outcomes except `Outcome A`. The Taker is intending to close a short position for `Outcome A`. | Gains: `((X - marketMinPrice) * N) - (tradingFees / 2) ETH`. Loses: `N` shares of `Outcome A` | Gains: `((marketMaxPrice - X) * N) - (tradingFees / 2) ETH`. Loses: `N` shares in all outcomes except `Outcome A`.
-Ask | Maker escrows `(marketMaxPrice - X) * N ETH` into an `ask` order (selling) for `N` shares of `Outcome A` at `X` price. Maker intends to short `Outcome A` but doesn't own any shares. | Taker has shares in all outcomes except `Outcome A`. The Taker is intending to close a short position for `Outcome A`. | Gains: `N` shares in all outcomes except `Outcome A`. Loses: `(marketMaxPrice - X) * N ETH`. | Gains: `(marketMaxPrice - X) * N ETH`. Loses: `N` shares in all outcomes except `Outcome A`.
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`(X - marketMinPrice) * N` ETH into a **Bid** order for `N` shares<br/> of `Outcome` at `X` Price.<br/> Maker is intending to open a long position for `Outcome`. | No shares, only ETH.<br/> Taker is intending to open a short position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `N` shares of all outcomes except for `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH.
 
-<!-- scrap text
------------
-Ideally some time passes and now `Outcome A` is trading at `0.65 ETH` a share. If we sell our `100` shares of `Outcome A` at a limit of `0.65 ETH` a share we will get `65.0 ETH` minus the fees for the market back. If our market has a `1%` trading fee we would get back `64.35 ETH`, and the `0.65 ETH` will be kept by the market to be able to pay out the market creator and reporters.
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`N` shares of all outcomes except `Outcome` into a **Bid** order for `Outcome` at `X` price.<br/> Maker intends to close a short position for `Outcome`. | `N` shares of `Outcome`, no ETH.<br/> Taker intends to close a long position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in `Outcome`.
 
-If there was no orders on the order book in the above example that fit our order then our bid order to buy `100` shares of `A` at `0.5 ETH` will be created and placed on the order book. Our `50.0 ETH` will be held by the market until someone comes along to take our order off the book. A Trader can take the order off the book by providing the `50.0 ETH` required to create new Complete Sets of shares or if they have `100` shares of `Outcome A` they can simply provide that. If someone takes our order by providing the shares we want then they get our `50.0 ETH` back from the market and we would receive our `100` shares of `Outcome A`. If the trader taking our order doesn't have any shares of `Outcome A` but does have `50.0 ETH` they can provide that instead and the market will create new Complete Sets of shares.
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`(X - marketMinPrice) * N` ETH into a **Bid** order for `N` shares<br/> of `Outcome` at `X` Price.<br/> Maker is intending to open a long position for `Outcome`. |  `N` shares of `Outcome`, no ETH.<br/> Taker intends to close a long position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `N` shares in `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` shares of `Outcome`.
 
-Complete Sets are simply a set of shares for each outcome, so a Complete Set would be any amount of shares in every outcome of our market as long as each share is worth that amount. In other words, `1.0` share of every outcome is a complete set, but so is `0.25` shares of each outcome, or `500.0` shares of each outcome. In our above example, the maker of the original bid order for `100` Shares of `Outcome A` will get their `100` shares of `Outcome A` from the complete sets created. Our trader who is taking the order and provided the rest of the `ETH` to create the Complete Sets will receive `100` shares in `Outcome B`.
+### Ask Order Trading
 
-When one person has a Complete Set they can sell the Complete Set of shares back to the market and the market will return ETH equal to the cost of a Complete Set. Complete Set costs are calculated by the maximum display price for the market minus the minimum display price. So if the max is `1 ETH` and the min is `0 ETH` then a Complete Set costs `1 ETH` (1 - 0 = 1). For Binary and Categorical Market types, the Complete Set Cost should always be `1 ETH`. A Scalar Market could be setup to have a maximum value of `100,000` and a minimum value of `4,500`. In this case, in order to purchase `1` complete set it would cost `95,500.00 ETH` (100,000 - 4,500 = 95,500). For a market with that large of a spread, it might make sense to only purchase thousandths or millionths of a share instead so the prices are a bit more reasonable.
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`N` shares of `Outcome` into a **Ask** order at `X` price.<br/> Maker is intending to close a long position for `Outcome`. | No shares, only ETH.<br/>  Taker is intending to open a long position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` shares in `Outcome` | **Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH
 
- -->
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`(marketMaxPrice - X) * N` ETH into an **Ask** order for `N` shares<br/> of `Outcome` at `X` price.<br/> Maker intends to open a short position for `Outcome`. | No shares, only ETH.<br/> Taker would like open a long position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH | **Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH.
 
-Legacy Trading Section (to be removed)
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`N` shares of `Outcome` into an **Ask** order at `X` price.<br/> Maker is intending to close a long position for `Outcome`. | Shares in all outcomes except `Outcome`, no ETH.<br/> Taker is intending to close a short position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares of `Outcome` | **Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`.
+
+**Maker of Order Escrowed:** | **Taker of Order Sends:**
+---|---
+`(marketMaxPrice - X) * N` ETH into an **Ask** order for `N` shares<br/> of `Outcome` at `X` price.<br/> Maker intends to open a short position for `Outcome`. | Shares in all outcomes except `Outcome`, no ETH.<br/> Taker is intending to close a short position for `Outcome`.
+**Maker Value Changes:** | **Taker Value Changes:**
+**Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH. | **Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`.
+
+<!-- Legacy Trading Section (to be removed)
 --------------------------------------
+
 Traders submit bids and asks. Orders are executed if another trader will match/offer better terms. Orders executed first come first served.  UI offers users the best prices first, in case another trader has already picked up those orders by broadcasting their transaction first (UI can also check this in the transaction pool). The UI includes multiple backup/fallback orders in their transactions that the user would still be willing to trade (provided they're within her limit parameters). Orders are never executed at worse prices than their limit prices (but can be better). Orders can be partially filled.
 
 ### How to trade
@@ -105,4 +135,4 @@ When someone enters an order in the UI the following happens:
 - Then to populate the order books for each outcome in the UI: `get_trade(id)`
 - If `> max` or `< min` don't show order
 
-Pending transactions and what orders have already been picked up in pending broadcasted transactions are shown in the book.  These orders are removed if the other side has already been taken in the transaction pool (those orders get executed first on Ethereum anyway based on time precedence and default gas price).  If not processed / taken up, those orders are placed back on the book.  If two orders at same price are placed on the book, the one placed first is executed first.
+Pending transactions and what orders have already been picked up in pending broadcasted transactions are shown in the book.  These orders are removed if the other side has already been taken in the transaction pool (those orders get executed first on Ethereum anyway based on time precedence and default gas price).  If not processed / taken up, those orders are placed back on the book.  If two orders at same price are placed on the book, the one placed first is executed first. -->

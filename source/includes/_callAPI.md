@@ -1,16 +1,18 @@
 Call API
 ========
+<aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
+
 ```javascript
 // Call API Example
 const market = '0x37bc721758f3e574d2c18e98a02b3495ab175e0a';
 const params = { market };
 
-// Augur.api.<Contract>.<Method>(<params>, <callback>);
+// Augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "5"
 ```
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the [Simplified API](http://docs.augur.net/#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`.
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the [Simplified API](http://docs.augur.net/#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`.
 
 Branch Call API
 ---------------
