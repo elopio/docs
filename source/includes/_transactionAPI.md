@@ -50,7 +50,7 @@ Augur's Transaction API ("Tx API" for short) is made up of "setter" methods that
 
 ### Arguments
 
-All Transaction API methods accept a single object argument. This single object optionally contains the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the [Call API](http://docs.augur.net/#call-api) methods which accept a params object and a second optional argument for the callback.
+All Transaction API methods accept a single object argument. This single object must contain the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the [Call API](http://docs.augur.net/#call-api) methods which accept a params object and a second optional argument for the callback.
 
 ### Callbacks
 
@@ -68,7 +68,9 @@ Fires when the transaction is successfully incorporated into a block and added t
 
 Fires if the transaction is unsuccessful. `failedResponse` has `error` (error code) and `message` (error description) fields, describing the way in which the transaction failed.
 
-No callbacks are required; if none are supplied, then the transaction hash (or error) will simply be returned. In this case, the transaction has been broadcast to the Ethereum network, but further confirmation of the transaction and/or lookups of its return value will need to be done manually. If an `onSent` but not an `onSuccess` callback is provided, the transaction will be broadcast, and `onSent` will be passed an `sentResponse` object containing `txHash` and `callReturn` fields, but `augur.rpc` will not poll the network repeatedly to check on the status of the transaction.
+### Signer
+
+In addition to the arguments and callbacks, all Transaction API functions require a `_signer` param. The `_signer` param should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account who wishes to initiate the transaction. The Transaction API functions all attempt to modify information on the blockchain which requires a signed transaction. Anytime you plan to modify or "set" information on the blockchain you will need to include a `_signer` param. This concept is discussed in a bit more detail in the next section.
 
 Using Transact Directly
 -----------------------
@@ -133,7 +135,7 @@ failedResponse = {
 
 <aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren't terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
 
-#### augur.rpc.transact(payload, privateKeyOrSigner[, onSent, onSuccess, onFailed])
+#### augur.rpc.transact(payload, privateKeyOrSigner, onSent, onSuccess, onFailed)
 
 You can broadcast transactions to the Ethereum Network by calling `augur.rpc.transact` directly. If called directly, the `payload` object needs to be constructed by hand and must be structured correctly.
 
@@ -259,17 +261,17 @@ successResponse = {
 ```
 #### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
-#### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
 
-The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destinationAddress`), and `attotokens` amount transferred (`1`). As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destinationAddress`), and `attotokens` amount transferred (`1`).
 
-#### augur.api.DisputeBondToken.withdraw({ \_signer, disputeBondToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.withdraw({ \_signer, disputeBondToken, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork.
 
-#### augur.api.DisputeBondToken.withdrawToBranch({ \_signer, disputeBondToken, shadyBranch[, onSent, onSuccess, onFailed ]})
+#### augur.api.DisputeBondToken.withdrawToBranch({ \_signer, disputeBondToken, shadyBranch, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
 
 Market Tx API
 ----------------------
@@ -647,65 +649,65 @@ successResponse = {
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
 
-#### augur.api.Market.approveSpenders({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.approveSpenders({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function.
 
-#### augur.api.Market.automatedReport({ \_signer, market, payoutNumerators[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.automatedReport({ \_signer, market, payoutNumerators, onSent, onSuccess, onFailed })
 
-This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
 
-#### augur.api.Market.changeCreator({ \_signer, market, newCreator[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.changeCreator({ \_signer, market, newCreator, onSent, onSuccess, onFailed })
 
-Changes the `market` creator address to the `newCreator` address submitted. This transaction will fail if the `msg.sender` isn't set as the creator of the `market`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Changes the `market` creator address to the `newCreator` address submitted. This transaction will fail if the `msg.sender` isn't set as the creator of the `market`.
 
-#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, newFeePerEthInWei[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, newFeePerEthInWei, onSent, onSuccess, onFailed })
 
-Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `newFeePerEthInWei` is 0 or less, or if `newFeePerEthInWei` isn't a lower number than the current fee per `Eth`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `newFeePerEthInWei` is 0 or less, or if `newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
-#### augur.api.Market.disputeAllReporters({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeAllReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the all reporters phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the upcoming reporting window. This transaction will fail if the `market` isn't in the all reporters dispute phase of reporting. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will trigger a dispute of the all reporters phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the upcoming reporting window. This transaction will fail if the `market` isn't in the all reporters dispute phase of reporting.
 
-#### augur.api.Market.disputeAutomatedReport({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeAutomatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized.
 
-#### augur.api.Market.disputeLimitedReporters({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.disputeLimitedReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the limited report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the next reporting window for all reporting. This transaction will fail if the `market` isn't in the limited dispute phase of reporting. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will trigger a dispute of the limited report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the next reporting window for all reporting. This transaction will fail if the `market` isn't in the limited dispute phase of reporting.
 
-#### augur.api.Market.migrateThroughAllForks({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.migrateThroughAllForks({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will call `migrateThroughOneFork` repeatedly until the `market` has moved through all forks or has reached an active fork which will throw. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will call `migrateThroughOneFork` repeatedly until the `market` has moved through all forks or has reached an active fork which will throw.
 
-#### augur.api.Market.migrateThroughOneForks({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.migrateThroughOneForks({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will move the `market` onto the active branch following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will move the `market` onto the active branch following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
 
-#### augur.api.Market.tryFinalize({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`.
 
-#### augur.api.Market.tryFinalizeAllReporting({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeAllReporting({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market`'s all reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a limited reporters phase, this `market` doesn't have a limited reporters dispute bond holder, this `market` does have an all reporters dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to finalize the `market`'s all reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a limited reporters phase, this `market` doesn't have a limited reporters dispute bond holder, this `market` does have an all reporters dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api.Market.tryFinalizeAutomatedReport({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeAutomatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market`'s Automated reporting phase by changing the `market` to a finalized state, and pays reward to automated report bond holders. This transaction will fail if this `market` doesn't have a reported winning outcome, if this `market` doesn't have a Automated Reporter Dispute Bond Holder, or if this `market`'s automated report dispute period hasn't ended. Returns `1` if successful, `0` if the `market` can't be finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to finalize the `market`'s Automated reporting phase by changing the `market` to a finalized state, and pays reward to automated report bond holders. This transaction will fail if this `market` doesn't have a reported winning outcome, if this `market` doesn't have a Automated Reporter Dispute Bond Holder, or if this `market`'s automated report dispute period hasn't ended. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api.Market.tryFinalizeFork({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeFork({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize `market` after it caused a fork and pays out rewards to the bond holders. This transaction will fail if the market hasn't gone through the limited reporters phase, if the market doesn't have a limited reporter dispute bond holder, if the market hasn't gone through the all reporters phase, if the market doesn't have a all reporter dispute bond holder, if this market isn't the market that caused a fork, if this market doesn't have a winning branch, if the winning branch doesn't have at least half the total supply of REP (5.5 million), or if it's before the fork end time. Returns `1` if successful, `0` if the `market` can't be finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to finalize `market` after it caused a fork and pays out rewards to the bond holders. This transaction will fail if the market hasn't gone through the limited reporters phase, if the market doesn't have a limited reporter dispute bond holder, if the market hasn't gone through the all reporters phase, if the market doesn't have a all reporter dispute bond holder, if this market isn't the market that caused a fork, if this market doesn't have a winning branch, if the winning branch doesn't have at least half the total supply of REP (5.5 million), or if it's before the fork end time. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api.Market.tryFinalizeLimitedReporting({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.tryFinalizeLimitedReporting({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market`'s limited reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a automated report phase, this `market` doesn't have a automated report dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to finalize the `market`'s limited reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a automated report phase, this `market` doesn't have a automated report dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
 
-#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, payoutDistributionHash[, onSent, onSuccess, onFailed ]})
+#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, payoutDistributionHash, onSent, onSuccess, onFailed })
 
-This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
 
 Registration Token Tx API
 ----------------------------------
@@ -847,25 +849,25 @@ successResponse = {
 ```
 #### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
-#### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens, onSent, onSuccess, onFailed })
 
-Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
 
-#### augur.api.RegistrationToken.redeem({ \_signer, registrationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.redeem({ \_signer, registrationToken, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of this transaction has a `registrationToken`, has completed reporting, and the reporting window for the specified `registrationToken` has completed then transfer the bond amount of reputation tokens to the `msg.sender`. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of this transaction has a `registrationToken`, has completed reporting, and the reporting window for the specified `registrationToken` has completed then transfer the bond amount of reputation tokens to the `msg.sender`. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
 
-#### augur.api.RegistrationToken.register({ \_signer, registrationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.register({ \_signer, registrationToken, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of this transaction has the bond amount of `REP`, the reporting window for this `registrationToken` hasn't started yet, and the `msg.sender` doesn't already have a `registrationToken` then this transaction will transfer the bond amount of `reputationTokens` out of the `msg.sender`'s wallet and transfer 1 `registrationToken` to `msg.sender` in return. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of this transaction has the bond amount of `REP`, the reporting window for this `registrationToken` hasn't started yet, and the `msg.sender` doesn't already have a `registrationToken` then this transaction will transfer the bond amount of `reputationTokens` out of the `msg.sender`'s wallet and transfer 1 `registrationToken` to `msg.sender` in return. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
 
-#### augur.api.RegistrationToken.transfer({ \_signer, registrationToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.transfer({ \_signer, registrationToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
-#### augur.api.RegistrationToken.transferFrom({ \_signer, registrationToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.RegistrationToken.transferFrom({ \_signer, registrationToken, sourceAddress, destinationAddress, attotokens, onSent, onSuccess, onFailed })
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
 Reporting Token Tx API
 -------------------------------
@@ -1106,42 +1108,42 @@ successResponse = {
 ```
 #### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
-#### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens, onSent, onSuccess, onFailed })
 
-Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
 
-#### augur.api.ReportingToken.buy({ \_signer, reportingToken, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.buy({ \_signer, reportingToken, attotokens, onSent, onSuccess, onFailed })
 
-Purchases `attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `attotokens` worth of `reputationToken`, if `attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` purchased. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Purchases `attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `attotokens` worth of `reputationToken`, if `attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` purchased.
 
-#### augur.api.ReportingToken.extractBondHolderPayments({ \_signer, reportingToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.extractBondHolderPayments({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Extracts reputation from the `reportingToken` and transfers it to the `market` for this `reportingToken`. Does nothing if the `market` already has the desired amount of `REP` to reward a successful dispute. Returns 1 if reputation was moved from `reportingToken` to the market, returns 0 if the market already has enough `REP` to reward a successful dispute. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Extracts reputation from the `reportingToken` and transfers it to the `market` for this `reportingToken`. Does nothing if the `market` already has the desired amount of `REP` to reward a successful dispute. Returns 1 if reputation was moved from `reportingToken` to the market, returns 0 if the market already has enough `REP` to reward a successful dispute.
 
-#### augur.api.ReportingToken.migrateLosingTokens({ \_signer, reportingToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.migrateLosingTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Sets the supply of this `reportingToken` to 0 and transfers all `REP` on this `reportingToken` to this `reportingToken`'s `market`'s winning reporting token contract. This will fail if the `market` isn't finalized, the `market` isn't a container for this `reportingToken`, the `market` for this `reportingToken` is the cause of a fork, and the `market`'s winning reporting token isn't this `reportingToken`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Sets the supply of this `reportingToken` to 0 and transfers all `REP` on this `reportingToken` to this `reportingToken`'s `market`'s winning reporting token contract. This will fail if the `market` isn't finalized, the `market` isn't a container for this `reportingToken`, the `market` for this `reportingToken` is the cause of a fork, and the `market`'s winning reporting token isn't this `reportingToken`.
 
-#### augur.api.ReportingToken.redeemDisavowedTokens({ \_signer, reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemDisavowedTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `reporter` from the `reportingToken` for the value of `reportingToken` owned by `reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Transfers `REP` to the `reporter` from the `reportingToken` for the value of `reportingToken` owned by `reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
 
-#### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `reporter` on the new `branch` for the amount of `reportingToken`s owned by `reporter`. This transaction will fail if the `msg.sender` isn't the `reporter` address, if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter` on the new branch. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Transfers `REP` to the `reporter` on the new `branch` for the amount of `reportingToken`s owned by `reporter`. This transaction will fail if the `msg.sender` isn't the `reporter` address, if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter` on the new branch.
 
-#### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, reporter[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
 
 Transfers `REP` to the `reporter` based on how many `reportingToken`s the `reporter` owned. This transaction will fail if the `msg.sender` isn't the `reporter`, if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
-This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
 
-#### augur.api.ReportingToken.transfer({ \_signer, reportingToken, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.transfer({ \_signer, reportingToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
-#### augur.api.ReportingToken.transferFrom({ \_signer, reportingToken, sourceAddress, destinationAddress, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingToken.transferFrom({ \_signer, reportingToken, sourceAddress, destinationAddress, attotokens, onSent, onSuccess, onFailed })
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
 
 Reporting Window Tx API
 --------------------------------
@@ -1196,9 +1198,9 @@ successResponse = {
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
-#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic, onSent, onSuccess, onFailed })
 
-This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
 Reputation Token Tx API
 --------------------------------
@@ -1343,25 +1345,25 @@ successResponse = {
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
-#### augur.api.ReputationToken.approve({ \_signer, reputationToken, spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.approve({ \_signer, reputationToken, spender, value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
 
-#### augur.api.ReputationToken.migrateFromLegacyRepContract({ \_signer, reputationToken[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.migrateFromLegacyRepContract({ \_signer, reputationToken, onSent, onSuccess, onFailed })
 
-This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
-#### augur.api.ReputationToken.migrateOut({ \_signer, reputationToken, destination, reporter, attotokens[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.migrateOut({ \_signer, reputationToken, destination, reporter, attotokens, onSent, onSuccess, onFailed })
 
-This function migrates a `reporter`'s REP (amount of REP denoted in `attotokens`) from one `reputationToken` address to another (`destination`). The `msg.sender` of this transaction must be the `reporter` provided or the `msg.sender` must be approved to spend `attotokens` amount of REP for the `reporter` provided. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This function migrates a `reporter`'s REP (amount of REP denoted in `attotokens`) from one `reputationToken` address to another (`destination`). The `msg.sender` of this transaction must be the `reporter` provided or the `msg.sender` must be approved to spend `attotokens` amount of REP for the `reporter` provided.
 
-#### augur.api.ReputationToken.transfer({ \_signer, reputationToken, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.transfer({ \_signer, reputationToken, to, value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of `reputationToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of `reputationToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
 
-#### augur.api.ReputationToken.transferFrom({ \_signer, reputationToken, from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ReputationToken.transferFrom({ \_signer, reputationToken, from, to, value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
 Cancel Order Tx API
 ----------------------------
@@ -1402,9 +1404,9 @@ successResponse = {
 ```
 #### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
 
-#### augur.api.CancelOrder.publicCancelOrder({ \_signer, orderID, type, market, outcome[, onSent, onSuccess, onFailed ]})
+#### augur.api.CancelOrder.publicCancelOrder({ \_signer, orderID, type, market, outcome, onSent, onSuccess, onFailed })
 
-The `publicCancelOrder` transaction is used to cancel and refund an existing order on the specified `market` of `type` for the `outcome` given it's `orderID`. This will fail if `msg.sender` isn't the owner of the order, if the `market` or `orderID` is not defined, or if `type` is not an expected value (`1` for a `BID`, `2` for an `ASK`). As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicCancelOrder` transaction is used to cancel and refund an existing order on the specified `market` of `type` for the `outcome` given it's `orderID`. This will fail if `msg.sender` isn't the owner of the order, if the `market` or `orderID` is not defined, or if `type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
 
 Cash Tx API
 --------------------
@@ -1542,25 +1544,25 @@ successResponse = {
 ```
 #### [Cash Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
 
-#### augur.api.Cash.approve({ \_signer, spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.approve({ \_signer, spender, value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
 
-#### augur.api.Cash.publicDepositEther({ \_signer, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.publicDepositEther({ \_signer, value, onSent, onSuccess, onFailed })
 
-This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `value` deposited, and the total balance for this `msg.sender`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `value` deposited, and the total balance for this `msg.sender`.
 
-#### augur.api.Cash.publicWithdrawEther({ \_signer, to, amount[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.publicWithdrawEther({ \_signer, to, amount, onSent, onSuccess, onFailed })
 
-This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `amount` of `msg.sender`'s CASH Tokens `to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `publicWithdrawEther` again will withdraw the `amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `amount` of Cash Tokens denoted in attotokens, or if the `amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `publicWithdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `amount` of `msg.sender`'s CASH Tokens `to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `publicWithdrawEther` again will withdraw the `amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `amount` of Cash Tokens denoted in attotokens, or if the `amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `publicWithdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed.
 
-#### augur.api.Cash.transfer({ \_signer, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.transfer({ \_signer, to, value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of Cash Tokens to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of Cash Tokens to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
 
-#### augur.api.Cash.transferFrom({ \_signer, from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.Cash.transferFrom({ \_signer, from, to, value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
 
 Claim Proceeds Tx API
 ------------------------------
@@ -1595,9 +1597,9 @@ successResponse = {
 ```
 #### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
 
-#### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market[, onSent, onSuccess, onFailed ]})
+#### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market, onSent, onSuccess, onFailed })
 
-The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized.
 
 Complete Sets Tx API
 -----------------------------
@@ -1659,13 +1661,13 @@ successResponse = {
 ```
 #### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/completeSets.se)
 
-#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, market, fxpAmount[, onSent, onSuccess, onFailed ]})
+#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, market, fxpAmount, onSent, onSuccess, onFailed })
 
-This transaction will attempt to purchase `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't have enough of the `market`'s denomination token to be able to afford `fxpAmount` shares in all outcomes, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (buy), `fxpAmount` purchased, number of outcomes in the `market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to purchase `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't have enough of the `market`'s denomination token to be able to afford `fxpAmount` shares in all outcomes, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (buy), `fxpAmount` purchased, number of outcomes in the `market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
 
-#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, market, fxpAmount[, onSent, onSuccess, onFailed ]})
+#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, market, fxpAmount, onSent, onSuccess, onFailed })
 
-This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
 
 Make Order Tx API
 --------------------------
@@ -1714,11 +1716,11 @@ successResponse = {
 ```
 #### [Make Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
 
-#### augur.api.MakeOrder.publicMakeOrder({ \_signer, type, attoshares, displayPrice, market, outcome[, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.MakeOrder.publicMakeOrder({ \_signer, type, attoshares, displayPrice, market, outcome, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed })
 
 This transaction will create a new order on the order book for the specified `market` trading on the `outcome` provided. The required fields besides market and outcome are the `type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `attoshares`, and the `displayPrice` for the order. Optional params include `betterOrderID`, `worseOrderID`, `tradeGroupID`, and the callbacks. The `betterOrderID` and `worseOrderID` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `tradeGroupID` is a field used by the Augur UI to group transactions and can be left blank.
 
-This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`.
 
 Share Token Tx API
 ---------------------------
@@ -1810,17 +1812,17 @@ successResponse = {
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
-#### augur.api.ShareToken.approve({ \_signer, shareToken, spender, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.approve({ \_signer, shareToken, spender, value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` denoted in attotokens approved. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Allows the `spender` the ability to spend up to `value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` denoted in attotokens approved.
 
-#### augur.api.ShareToken.transfer({ \_signer, shareToken, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.transfer({ \_signer, shareToken, to, value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `value` worth to the `to` address and `value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred denoted in attotokens. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `value` worth to the `to` address and `value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred denoted in attotokens.
 
-#### augur.api.ShareToken.transferFrom({ \_signer, shareToken, from, to, value[, onSent, onSuccess, onFailed ]})
+#### augur.api.ShareToken.transferFrom({ \_signer, shareToken, from, to, value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens.
 
 Take Order Tx API
 --------------------------
@@ -1865,9 +1867,9 @@ successResponse = {
 ```
 #### [Take Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
 
-#### augur.api.TakeOrder.publicTakeOrder({ \_signer, orderID, type, market, outcome, fxpAmountTakerWants[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.TakeOrder.publicTakeOrder({ \_signer, orderID, type, market, outcome, fxpAmountTakerWants, tradeGroupID, onSent, onSuccess, onFailed })
 
-Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`.
 
 Trade Tx API
 ---------------------
@@ -1996,18 +1998,18 @@ successResponse = {
 ```
 #### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
 
-#### augur.api.Trade.publicBuy({ \_signer, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicBuy({ \_signer, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
 
-The `publicBuy` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to buy at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicBuy` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to buy at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api.Trade.publicSell({ \_signer, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicSell({ \_signer, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
 
-The `publicSell` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to sell at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicSell` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to sell at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api.Trade.publicTrade({ \_signer, direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicTrade({ \_signer, direction, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
 
-The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
 
-#### augur.api.Trade.publicTakeBestOrder({ \_signer, direction, market, outcome, fxpAmount, fxpPrice[, tradeGroupID, onSent, onSuccess, onFailed ]})
+#### augur.api.Trade.publicTakeBestOrder({ \_signer, direction, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
 
-The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled. As with all transactions that will modify the blockchain, a `_signer` is required and should be the `privateKey` Buffer for the account sending the transaction or a signing function (hardware wallets).
+The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
