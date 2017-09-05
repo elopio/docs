@@ -18,7 +18,6 @@ includes:
   - callAPI
   - transactionAPI
   - events
-  - callbacks
   - numbers
   - accounts
   - rpc

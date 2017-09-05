@@ -1,18 +1,28 @@
 Call API
 ========
-<aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 ```javascript
 // Call API Example
-const market = '0x37bc721758f3e574d2c18e98a02b3495ab175e0a';
-const params = { market };
+/**
+* Check account 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b's Cash balance.
+*/
+const address = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
+const params = { address };
 
-// Augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
-augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) { /* ... */ })
-// example output:
-numOutcomes = "5"
+// augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
+
+// asynchronously -- STRONGLY RECOMMENDED --
+augur.api.Cash.balanceOf(params, balance => console.log(balance));
+// console prints 9999.495000000000000001
+
+// synchronous -- possible but not recommended.
+const money = augur.api.Cash.balanceOf(params);
+// money = 9999.495000000000000001
 ```
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the [Simplified API](http://docs.augur.net/#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`.
+<aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
+
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the [Simplified API](http://docs.augur.net/#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`. Although technically optional, the Augur Team **strongly recommends** using a callback. Without the callback the calls will be synchronous which can lock up your browser until they complete.
+
+<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 Branch Call API
 ---------------
