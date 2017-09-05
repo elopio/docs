@@ -24,8 +24,8 @@ includes:
   - tests
   - errors
   - uiConventions
-  - contributing
   - glossary
+  - contributing
 
 search: true
 ---
