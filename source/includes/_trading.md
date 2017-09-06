@@ -8,13 +8,13 @@ The Augur UI will offer users the best prices first when displaying the order bo
 
 Trading Example
 ---------------
-Let's use an example binary market trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a bid order to buy `100` shares of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus trading fees and gas used to place the bid order. [Fees](http://docs.augur.net/#trading-fees) will be discussed in more details in the next section.
+Let's use an example binary market trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a bid order to buy `100` shares of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus trading fees and gas used to place the bid order. [Fees](#trading-fees) will be discussed in more details in the next section.
 
 If there are orders on the order book that match our request for `100` shares of `Outcome A` at a price of `0.5 ETH` or cheaper then Augur will fill those orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus trading fees and gas cost.
 
 If no order is available on the order book that would partially or completely fill our order request then a bid order would be created and placed on the order book. Whenever an order is placed on the order book something of value is escrowed by the market. In our example, the value we are giving to the market to place our bid would be our `50.0 ETH` plus fees. If we were attempting to sell shares that we currently owned then we would escrow the shares instead of `ETH`. If we cancel our order we can get our `50.0 ETH` back, but we do lose our fees and gas costs. When someone decides to take our order off the order book, we will get our `100` shares of `Outcome A` transferred to us.
 
-For more information on how to trade using the Augur API, check the [trade](http://docs.augur.net/#trade-tx-api) section of the [Transaction API](http://docs.augur.net/#transaction-api).
+For more information on how to trade using the Augur API, check the [trade](#trade-tx-api) section of the [Transaction API](#transaction-api).
 
 <!--
 - Trading Fees
@@ -59,58 +59,53 @@ Calculating Trades
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
-In this section we breakdown all potential trade situations and their expected outcome. There are two types of orders, bid orders (requesting to buy) and ask orders (requesting to sell). In our examples below we will first go over all the potential trade possibilities around Bid Orders and then we will do the same for Ask Orders. The calculations below use `N` as the number of shares the order is requesting, `X` as the price per share for the order, and `Outcome` for the outcome our order is concerning.
+In this section we breakdown all potential trade situations and their expected outcome. There are two types of orders, bid orders (requesting to buy) and ask orders (requesting to sell). In our examples below we will first go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of Shares the order is requesting, `X` as the price per Share for the order, and `Outcome` for the outcome our order is concerning.
 
 ### Bid Order Trading
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`N` shares of all outcomes except `Outcome` into a **Bid** order at `X` price.<br/> Maker is intending to close a short position for `Outcome`. | No shares, only ETH.<br/> Taker is intending to open a short position for `Outcome`. |
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`. | **Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(marketMaxPrice - X) * N`</span> ETH.
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`(X - marketMinPrice) * N` ETH into a **Bid** order for `N` shares<br/> of `Outcome` at `X` Price.<br/> Maker is intending to open a long position for `Outcome`. | No shares, only ETH.<br/> Taker is intending to open a short position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `N` shares of all outcomes except for `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH.
+Maker of Bid Order | Taker of Bid Order
+--- | ---
+**Escrows:** `N` Shares of all outcomes except `Outcome` at `X` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a short position for `Outcome`.
+**Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(marketMaxPrice - X) * N`</span> ETH.
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`N` shares of all outcomes except `Outcome` into a **Bid** order for `Outcome` at `X` price.<br/> Maker intends to close a short position for `Outcome`. | `N` shares of `Outcome`, no ETH.<br/> Taker intends to close a long position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in `Outcome`.
+Maker of Bid Order | Taker of Bid Order
+--- | ---
+**Escrows:** `(X - marketMinPrice) * N` ETH for `N` Shares of <br/>`Outcome` at `X` Price.<br/> **Intent:** open a long position for `Outcome`. | **Sends:**: ETH.<br/> **Intent:** open a short position for `Outcome`.
+**Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `N` Shares of all outcomes except for `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH.
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`(X - marketMinPrice) * N` ETH into a **Bid** order for `N` shares<br/> of `Outcome` at `X` Price.<br/> Maker is intending to open a long position for `Outcome`. |  `N` shares of `Outcome`, no ETH.<br/> Taker intends to close a long position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `N` shares in `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` shares of `Outcome`.
+Maker of Bid Order | Taker of Bid Order
+--- | ---
+**Escrows:** `N` Shares of all outcomes except `Outcome` at `X` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/>**Intent:** close a long position for `Outcome`.
+**Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in `Outcome`.
+
+Maker of Bid Order | Taker of Bid Order
+--- | ---
+**Escrows:** `(X - marketMinPrice) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/>**Intent:** open a long position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/> **Intent:** close a long position for `Outcome`.
+**Gains:** `N` Shares in `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` Shares of `Outcome`.
+
 
 ### Ask Order Trading
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`N` shares of `Outcome` into a **Ask** order at `X` price.<br/> Maker is intending to close a long position for `Outcome`. | No shares, only ETH.<br/>  Taker is intending to open a long position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` shares in `Outcome` | **Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH
+Maker of Ask Order | Taker of Ask Order
+--- | ---
+**Escrows:** `N` Shares of `Outcome` at `X` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** ETH.<br/>**Intent:** open a long position for `Outcome`.
+**Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` Shares in `Outcome` | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`(marketMaxPrice - X) * N` ETH into an **Ask** order for `N` shares<br/> of `Outcome` at `X` price.<br/> Maker intends to open a short position for `Outcome`. | No shares, only ETH.<br/> Taker would like open a long position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH | **Gains:** `N` shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH.
+Maker of Ask Order | Taker of Ask Order
+--- | ---
+**Escrows:** `(marketMaxPrice - X) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a long position for `Outcome`.
+**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH.
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`N` shares of `Outcome` into an **Ask** order at `X` price.<br/> Maker is intending to close a long position for `Outcome`. | Shares in all outcomes except `Outcome`, no ETH.<br/> Taker is intending to close a short position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares of `Outcome` | **Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`.
+Maker of Ask Order | Taker of Ask Order
+--- | ---
+**Escrows:** `N` Shares of `Outcome` at `X` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`. <br/> **Intent:** close a short position for `Outcome`.
+**Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares of `Outcome` | **Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
 
-**Maker of Order Escrowed:** | **Taker of Order Sends:**
----|---
-`(marketMaxPrice - X) * N` ETH into an **Ask** order for `N` shares<br/> of `Outcome` at `X` price.<br/> Maker intends to open a short position for `Outcome`. | Shares in all outcomes except `Outcome`, no ETH.<br/> Taker is intending to close a short position for `Outcome`.
-**Maker Value Changes:** | **Taker Value Changes:**
-**Gains:** `N` shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH. | **Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` shares in all outcomes except `Outcome`.
+Maker of Ask Order | Taker of Ask Order
+--- | ---
+**Escrows:** `(marketMaxPrice - X) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`.<br/> **Intent:** close a short position for `Outcome`.
+**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH. | **Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
+
 
 <!-- Legacy Trading Section (to be removed)
 --------------------------------------

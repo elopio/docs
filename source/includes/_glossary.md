@@ -22,7 +22,7 @@ A Categorical Market is a [market](#market) with more than 2 potential [outcomes
 
 ## Complete Sets
 
-A Complete Set is a complete collection of whole shares in every outcome owned by one address. When a user amasses a complete set, the shares are destroyed and the range of the [market](#market) ([maxDisplayPrice](#maximum-display-price) - [minDisplayPrice](#minimum-display-price)) - [Trading Fees](#trading-fees) ETH will be paid out to the owner of the complete set.
+A Complete Set is a complete collection of whole shares in every outcome owned by one address. When a user amasses a complete set, the shares are destroyed and the range of the [market](#market), ([maxDisplayPrice](#maximum-display-price) - [minDisplayPrice](#minimum-display-price)) - [Trading Fees](#trading-fees) ETH, will be paid out to the owner of the complete set.
 
 ## End Time
 
