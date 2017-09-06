@@ -51,7 +51,7 @@ Augur's Transaction API ("Tx API" for short) is made up of "setter" methods that
 
 ### Arguments
 
-All Transaction API methods accept a single object argument. This single object must contain the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the [Call API](http://docs.augur.net/#call-api) methods which accept a params object and a second optional argument for the callback.
+All Transaction API methods accept a single object argument. This single object must contain the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the [Call API](#call-api) methods which accept a params object and a second optional argument for the callback.
 
 ### Callbacks
 

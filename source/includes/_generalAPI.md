@@ -2,7 +2,7 @@ General API
 ===========
 <aside class="notice">The General API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-The Augur API is split up into three sections, the [Simplified API](http://docs.augur.net/#simplified-api), the [Call API](http://docs.augur.net/#call-api), and the [Transaction API](http://docs.augur.net/#transaction-api). The [Simplified API](http://docs.augur.net/#simplified-api) is provided to get information about markets on the Augur network. The [Call](http://docs.augur.net/#call-api) and [Transaction](http://docs.augur.net/#transaction-api) API's are direct contract and method mapping to the `augur.api` object. The [Call API](http://docs.augur.net/#call-api) uses `eth_call` to make "get" requests for information stored on the blockchain. The [Transaction API](http://docs.augur.net/#transaction-api) uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new order on the order book. The [Call](http://docs.augur.net/#call-api) and [Transaction](http://docs.augur.net/#transaction-api) APIs will be covered in greater detail in their respective sections of these docs.
+The Augur API is split up into three sections, the [Simplified API](#simplified-api), the [Call API](#call-api), and the [Transaction API](#transaction-api). The [Simplified API](#simplified-api) is provided to get information about markets on the Augur network. The [Call](#call-api) and [Transaction](#transaction-api) API's are direct contract and method mapping to the `augur.api` object. The [Call API](#call-api) uses `eth_call` to make "get" requests for information stored on the blockchain. The [Transaction API](#transaction-api) uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new order on the order book. The [Call](#call-api) and [Transaction](#transaction-api) APIs will be covered in greater detail in their respective sections of these docs.
 
 In this section we will go over how to import `augur.js` into your project and connect it to an Ethereum Node. This section will also cover market creation, initial market loading, and review the Simplified API methods.
 
@@ -43,7 +43,7 @@ vitals = {
 ```
 The Augur API is a set of JavaScript bindings for the methods encoded in Augur's [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters as keys in the `params` object, are generally identical to those of the underlying smart contract method.
 
-Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Ethereum's decentralized network. The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur's [middleware](http://docs.augur.net/#architecture).
+Augur's [core contracts](https://github.com/AugurProject/augur-core) exist on Ethereum's decentralized network. The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur's [middleware](#architecture).
 
 [augur.js](https://github.com/AugurProject/augur.js) is the Augur JavaScript SDK, and is the user-facing component of the middleware. If you want to interact with the Augur contracts from a custom application, augur.js is the recommended way to do so. The easiest way to install augur.js is using [npm](https://www.npmjs.com/package/augur.js):
 
@@ -494,7 +494,7 @@ augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
   }
 }
 ```
-All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](http://docs.augur.net/#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
+All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
 ### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
 
