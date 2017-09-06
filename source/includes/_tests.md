@@ -1,10 +1,12 @@
 Tests
 =====
-The [Augur](https://github.com/AugurProject/augur) repository, and the middleware [augur.js](https://github.com/AugurProject/augur.js) repository both contain tests. Tests are run using [Mocha](http://mochajs.org/). Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha. To globally install Mocha using `npm` you would run the following command:
+The [Augur](https://github.com/AugurProject/augur) repository, and the middleware [augur.js](https://github.com/AugurProject/augur.js) repository both contain tests. Tests are run using [Mocha](http://mochajs.org/). Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.
+
+To globally install Mocha using `npm` you would run the following command:
 
 `$ npm install -g mocha`
 
-To install Mocha globally with `yarn`, you would run the following command:
+To globally install Mocha using `yarn`, you would run the following command:
 
 `$ yarn global add mocha`
 
@@ -12,8 +14,10 @@ Once you have Mocha installed, you can run a specific test case like so:
 
 `$ mocha ./test/unit/core/cash.js`
 
-Augur
-------
+Augur and Augur.js both contain their own sets of unit tests and Augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.
+
+Running Tests In Augur
+----------------------
 [Augur](https://github.com/AugurProject/augur) has a suite of unit tests that can be run using `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for Augur first by using the following command:
 
 `$ npm install`
@@ -40,8 +44,8 @@ and to issue the same command with `yarn`, you would enter this:
 
 <aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur Team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
 
-Augur.js
---------
+Running Tests In Augur.js
+-------------------------
 [augur.js](https://github.com/AugurProject/augur.js) includes both Unit tests and integration tests that can be run with `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for Augur.js first by using the following command:
 
 `$ npm install`

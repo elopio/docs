@@ -1,3 +1,6 @@
+<!--
+May remove this section entirely. hidden for now.
+
 JSON-RPC
 ========
 
@@ -45,4 +48,4 @@ var address = augur.rpc.getTransactionReceipt(txHash).contractAddress;
 ```javascript
 augur.rpc.getCode("0x86fb6d1f1bd78cc13c6354b6436b6ea0c144de2e");
 "0x7c010000000000000000000000000000000000000000000000000000000060003504636ffa1caa81141560415760043560405260026040510260605260206060f35b50"
-```
+``` -->

@@ -12,15 +12,16 @@ toc_footers:
 
 includes:
   - architecture
-  - api
+  - trading
+  - reporting
+  - generalAPI
+  - callAPI
+  - transactionAPI
   - events
-  - callbacks
-  - numbers
-  - accounts
-  - rpc
   - tests
   - errors
   - uiConventions
+  - glossary
   - contributing
 
 search: true
@@ -47,6 +48,8 @@ First we need to clone the Augur repository from [Github](https://www.github.com
 Now navigate into the newly created `augur` folder by running the following command:
 
 `$ cd augur`
+
+Now we need to install Augur's dependencies. This can be done with `npm` or `yarn`. Both methods are detailed in the next sections.
 
 Using NPM
 ---------

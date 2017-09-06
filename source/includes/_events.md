@@ -1,5 +1,7 @@
 Events API
 ===========
+<aside class="notice">The Events section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
+
 ```javascript
 // Listen for Events emitted by the augur contracts
 // contractAddresses is a JSON object containing the name and address of the augur contracts.
