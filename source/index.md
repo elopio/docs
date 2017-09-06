@@ -18,9 +18,6 @@ includes:
   - callAPI
   - transactionAPI
   - events
-  - numbers
-  - accounts
-  - rpc
   - tests
   - errors
   - uiConventions

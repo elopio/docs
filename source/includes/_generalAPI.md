@@ -1,5 +1,7 @@
 General API
 ===========
+<aside class="notice">The General API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
+
 The Augur API is split up into three sections, the [Simplified API](http://docs.augur.net/#simplified-api), the [Call API](http://docs.augur.net/#call-api), and the [Transaction API](http://docs.augur.net/#transaction-api). The [Simplified API](http://docs.augur.net/#simplified-api) is provided to get information about markets on the Augur network. The [Call](http://docs.augur.net/#call-api) and [Transaction](http://docs.augur.net/#transaction-api) API's are direct contract and method mapping to the `augur.api` object. The [Call API](http://docs.augur.net/#call-api) uses `eth_call` to make "get" requests for information stored on the blockchain. The [Transaction API](http://docs.augur.net/#transaction-api) uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new order on the order book. The [Call](http://docs.augur.net/#call-api) and [Transaction](http://docs.augur.net/#transaction-api) APIs will be covered in greater detail in their respective sections of these docs.
 
 In this section we will go over how to import `augur.js` into your project and connect it to an Ethereum Node. This section will also cover market creation, initial market loading, and review the Simplified API methods.
@@ -54,6 +56,66 @@ or if you prefer [yarn](https://yarnpkg.com/en/):
 To use the Augur API, `augur.js` must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail.
 
 In the example we have set our first connection to try as `http://127.0.0.1:8545` which is our local geth node. If Augur is unable to connect to the local geth node, then Augur will go to the next provided address. In this case we have provided a single hosted node (`https://eth9000.augur.net`) as the only other attempt to make outside of the local geth node. If a connection is successfully established then a `vitals` object will be returned, otherwise an error message will be returned.
+
+Accounts
+--------
+```javascript
+/**
+ * Create an account using the augur.accounts.register method.
+ */
+ const password = "thisismysupersecurepassword";
+
+ augur.accounts.register(password, account => console.log("Account:", account));
+
+// output
+account = {
+  address: "0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf",
+  derivedKey: <Buffer ...>,
+  keystore: { /* ... */ },
+  privateKey: <Buffer ...>
+};
+
+const keystore = account.keystore;
+
+augur.accounts.login(keystore, password, account => console.log("Account:", account));
+
+// output
+account = {
+  address: "0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf",
+  derivedKey: <Buffer ...>,
+  keystore: { /* ... */ },
+  privateKey: <Buffer ...>
+};
+
+// Augur.js does not store any account data. Augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.
+```
+Augur.js includes a trustless account management system. The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.
+
+To use the account system, the user specifies a password. Everything else is done automatically for the user. The only requirement for the password is that it be at least 6 characters long.
+
+A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by Augur.js, the account object will be returned to the callback provided or simply returned if no callback is provided.
+
+The Augur UI will handle your account information for you, but if you are using Augur.js on it's own you will need to manage the account yourself. Augur.js doesn't sign any transactions for you if you aren't using the Augur UI.
+
+If you want to use the Augur.js API directly, you will need to sign any transaction that will modify information on the blockchain (non-call transactions). All transactions take a `_signer` parameter which should be set to the sending account's `privateKey` Buffer or a function that will sign a transaction (hardware wallet).
+
+<aside class="notice">Since the user's account key is an ordinary Ethereum private key, the user's key (and therefore their funds and Reputation) can be used with any Ethereum node. Therefore, although the accounts system is managed using an ordinary web server, since the user's funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
+
+Numbers
+-------
+
+Before we move on, lets quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:
+
+- primitive JS numbers (e.g., `1010101`): ok for integers, but use strings for floating point numbers (see below)
+
+- stringified numbers (e.g., `"1010101"`)
+
+- hexadecimal strings (e.g., `"0xf69b5"`)
+
+Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of `0.07`, use `"0.07"`), for reasons described in [enormous detail](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) elsewhere.
+
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 10<sup>18</sup> CASH.  (Probably don't even give him 3.50, but that's a debate for another time.)</aside>
+
 
 Market creation
 ---------------
