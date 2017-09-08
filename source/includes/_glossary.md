@@ -32,9 +32,25 @@ A Categorical Market is a [market](#market) with more than 2 potential [outcomes
 
 A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete the trade then a Complete Set will be formed and settled (destroyed). The range of the [market](#market), ([maxDisplayPrice](#maximum-display-price) - [minDisplayPrice](#minimum-display-price)) - [Trading Fees](#trading-fees) ETH will then be paid out proportionally to both the Maker and Taker based on their respective Shares value at the time of settlement. The Trading Fees extracted will go toward paying for the reporting system and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from share settlement.
 
+## Dispute Bond
+
+A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Outcome](#outcome) of a [Market](#market) isn't accurate. If the market's outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false outcome of the market. More information about reporting can be found in the
+
+## Dispute Period
+
+A Dispute Period is a 3 day window after a [Market](#market) has been resolved ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
+
 ## End Time
 
 End Time is the date and time that a [market](#market)'s event will have come to pass and should be known. After this date and time has passed the market will get reported on and finalized.
+
+## Fill Order
+
+Filling an [Order](#order) is when a [Taker](#taker) provides what the [Maker](#maker) of the order is seeking in their order. If a taker only provides some of what the Maker wants then it's known as a partial fill. If the Taker provides exactly what the Maker requests then it's known as completely filling the order.
+
+## Finalized Market
+
+A Finalized Market is a [Market](#market) that has been [Resolved](#market-resolution) and has not been disputed, the [Winning Outcome](#winning-outcome) is now final. This market is officially closed and [Share](#shares) holders can [settle](#settlement) their shares with the market.
 
 ## Maker
 
@@ -48,6 +64,10 @@ A market is created by users of Augur for a small fee. They are used to describe
 
 A Market Creator is simply a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for settlement of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
+## Market Resolution
+
+Market Resolution occurs when a [Market](#market) has been [Reported](#report) on and has a [Winning Outcome](#winning-outcome). Market's are resolved for a period of 3 days, in which [Reporters](#reporters) are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market in question. If a market's resolution is not challenged for 3 days it becomes a [Finalized Market](#finalized-market).
+
 ## Maximum Display Price
 
 The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price allowed for a share on a [market](#market). For [Binary](#binary-market) or [Categorical](#categorical-market) Markets this value is always 1, as in 1 ETH. [Scalar](#scalar-market) markets' Maximum Display Price would be the top end of the range set by the [Market Creator](#market-creator).
@@ -58,7 +78,7 @@ The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price
 
 ## Open Order
 
-An Open Order is an [Order](#order) that is currently on the [Order Book](#order-book) and has not been completely filled.
+An Open Order is an [Order](#order) that is currently on the [Order Book](#order-book) and has not been completely [Filled](#fill-order).
 
 ## Order
 
@@ -66,8 +86,7 @@ An Order can be thought of as the recorded interest of a user to execute a trade
 
 ## Order Book
 
-The Order Book is the collection of all [Open Orders](#open-order) currently available for a [Market](#market). [Orders](#order) are placed on the order book by [Makers](#maker) and are filled by [Takers](#taker).
-
+The Order Book is the collection of all [Open Orders](#open-order) currently available for a [Market](#market). [Orders](#order) are placed on the order book by [Makers](#maker) and are [Filled](#fill-order) by [Takers](#taker). Orders are divided up by which type, or side, of order they are [Bid](#bid-order) or [Ask](#ask-order). Orders are further divided up by [Outcome](#outcome).
 
 ## Outcome
 
@@ -79,15 +98,35 @@ A Position is the amount of [Shares](#share) that is owned (a long position) or 
 
 ## Registration Token
 
-A Registration Token is purchasable by [REP](#REP) holders for REP and is used as a sort of ticket to participate in the Reporting Cycle the Registration Token belongs to. Once the Reporting Cycle has started, it will cost the Registration Token to be able to report. When the Registration Token is spent the REP used to pay for it is refunded. The Registration Token cannot be spent once the reporting cycle it belongs to has passed, and the deposited REP is not refunded. The Registration Token is designed as a sort of deposit to ensure that Reporters who sign up to report in the coming Reporting Cycle actually show up and participate in the reporting process, or lose their deposit.
+A Registration Token is purchasable by [REP](#REP) holders for REP and is used as a sort of ticket to participate in the [Reporting Cycle](#reporting-cycle) the Registration Token belongs to. Once the Reporting Cycle has started, it will cost the Registration Token to be able to report. When the Registration Token is spent the REP used to pay for it is refunded. The Registration Token cannot be spent once the reporting cycle it belongs to has passed, and the deposited REP is not refunded. The Registration Token is designed as a sort of deposit to ensure that [Reporters](#reporters) who sign up to [Report](#report) in the coming Reporting Cycle actually show up and participate in the reporting process, or lose their deposit.
 
 ## REP
 
-REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur Decentralized Oracle System. REP is used to purchase a [Registration Token](#registration-token) for an upcoming Reporting Window and to report on the [outcome](#outcome) of [Markets](#market). Once you have registered for a Reporting Window, when the time comes to report you will be shown markets that need to be finalized. You will be asked to wager REP on an outcome based on how confident you are in that outcome being the result of the question asked in the market. The markets you will see for reporting are all past their [End Time](#end-time) and the outcome should be determinable. If the outcome is not determinable you can wager your rep into the Indeterminate outcome. The more REP you wager, the larger the share of the [Reporting Fees](#reporting-fee) you will receive if you report with the consensus.
+REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur Decentralized Oracle System. REP is used to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) and to [Report](#report) on the [outcome](#outcome) of [Markets](#market). Once you have registered for a Reporting Window, when the time comes to report you will be shown markets that need to be finalized. You will be asked to wager REP on an outcome based on how confident you are in that outcome being the result of the question asked in the market. The markets you will see for reporting are all past their [End Time](#end-time) and the outcome should be determinable. If the outcome is not determinable you can wager your rep into the Indeterminate outcome. The more REP you wager, the larger the share of the [Reporting Fees](#reporting-fee) you will receive if you report with the consensus.
+
+## Report
+
+A Report, or Reporting, is the submission of [REP](#REP) wagered on the [Outcome](#outcome) of a [Closed Market](#closed-market) by a [Reporter](#reporter) in which the reporter has selected the accurate outcome of the [Market](#market). The wagering and submitting of the wager is the act of Reporting. Reporting as a term can be used to describe the act of submitting a report for a single market or a number of markets. Reporting takes place during a [Reporting Window](#reporting-window), sometimes called a [Reporting Cycle](#reporting-cycle) or [Reporting Period](#reporting-period). For a detailed breakdown of the Reporting System in Augur, check out the [Reporting Section](#reporting).
+
+## Reporter
+
+A Reporter is a [REP](#REP) holder who has registered for the current Reporting Cycle by purchasing a [Registration Token](#registration-token). The Reporter is expected to [Report](#report) on at least a minimum number of [Markets](#markets) and ideally should be [Reporting](#report) accurately as these market's descriptions should have a known outcome at this point in time.
+
+## Reporting Cycle
+
+The Reporting Cycle is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Period](#reporting-period) and [Reporting Window](#reporting-window).
 
 ## Reporting Fee
 
 The Reporting Fee is used to help pay for the decentralized oracle system. When shares are settled (aka destroyed), before paying out to the share holders Augur will extract the [Trading Fees](#trading-fees), which includes the [Trading Fee](#trading-fee) and The Reporting Fee. The Reporting Fees are sent to the Reporting Window that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for reporting on the outcome of markets.
+
+## Reporting Period
+
+The Reporting Period is 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Cycle](#reporting-cycle) and [Reporting Window](#reporting-window).
+
+## Reporting Window
+
+The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Period](#reporting-period) and [Reporting Cycle](#reporting-cycle).
 
 ## Scalar Market
 
@@ -103,7 +142,7 @@ A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outc
 
 ## Taker
 
-A Taker is someone who partially or fully fills an [Open Order](#open-order) on the [Order Book](#order-book). Takers send currency or [Shares](#shares) to fill the Open Order and complete their half of the trade described in the [Order](#order).
+A Taker is someone who partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Takers send currency or [Shares](#shares) to fill the Open Order and complete their half of the trade described in the [Order](#order).
 
 ## Topic
 
@@ -112,3 +151,7 @@ A Topic is a keyword used to categorize [markets](#market). All markets must hav
 ## Trading Fee
 
 A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever shares are settled on a market. Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been finalized and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Trading Fees](#trading-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
+
+## Winning Outcome
+
+The Winning Outcome is the currently [Resolved](#market-resolution) [Outcome](#outcome) for a [Market](#market). In other words, it's the outcome who [Reporters](#reporters) wagered was the correct outcome of the market.
