@@ -217,19 +217,45 @@ The initial order book is now fully specified.
 
 Initial market loading
 ----------------------
-To load the basic [Market](#market) info for all markets, first call `augur.markets.getMarketsInfo({ [ branch, offset, numMarketsToLoad, volumeMin, volumeMax] }, callback)`. You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.markets.getMarketInfo({ marketID[, account ] }, callback)`. `getMarketInfo` does not return the full [Order Book](#order-book); to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }, callback)`.
+To load the basic [Market](#market) info for all markets, first call `augur.markets.getMarketsInfo({ marketIDs }, callback)`. You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.markets.getMarketInfo({ _market }, callback)`. `getMarketInfo` does not return the full [Order Book](#order-book); to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ _type, _market, _outcome, minPrice, maxPrice[, _startingOrderId, _numOrdersToLoad ]}, callback)`.
 
-<aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ branch, offset, numMarketsToLoad } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
+<aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ marketIDs } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
 
 Simplified API
 --------------
 ```javascript
-const market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
+const _type = 1; // 1 is "buy", 2 is "sell"
+const _market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
+const _outcome = 1;
+const minPrice = "0.0";
+const maxPrice = "1.0";
+const _startingOrderId = "0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc";
+const _numOrdersToLoad = 3;
 
-augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... */ })
+augur.trading.orderBook.getOrderBook({
+  _type,
+  _market,
+  _outcome,
+  minPrice,
+  maxPrice,
+  _startingOrderId,
+  _numOrdersToLoad
+}, function (orderBook) { /* ... */ })
 // example output:
 {
   buy: {
+    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
+      amount: '15',
+      block: 220,
+      fullPrecisionAmount: '15',
+      fullPercisionPrice: '0.1770833333333333',
+      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.177',
+      type: 'buy',
+    },
     '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
       amount: '10',
       block: 217,
@@ -237,7 +263,7 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPercisionPrice: '0.1208333333333333',
       id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
       market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '2',
+      outcome: '1',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.1208',
       type: 'buy',
@@ -249,65 +275,66 @@ augur.trading.orderBook.getOrderBook({ market }, function (orderBook) { /* ... *
       fullPercisionPrice: '0.0083333333333333',
       id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
       market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '2',
+      outcome: '1',
       owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
       price: '0.0083',
       type: 'buy',
-    },
-    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
-      amount: '10',
-      block: 220,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.1770833333333333',
-      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '3',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.177',
-      type: 'buy',
-    }
-  },
-  sell: {
-    '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15': {
-      amount: '10',
-      block: 224,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.9958333333333333',
-      id: '0x0a056c290d73ca11b22531ef0c4ea970bdc3e7ccd64a60f8127fedaabd231f15',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.9959',
-      type: 'sell',
-    },
-    '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e': {
-      amount: '10',
-      block: 220,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.6583333333333333',
-      id: '0x0bd9bf9c18ea08f98c70312ccc8deac7b58d88d3c5f2d0cc9a5bed201a90191e',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '3',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.6584',
-      type: 'sell',
-    },
-    '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269': {
-      amount: '10',
-      block: 222,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.7145833333333333',
-      id: '0x1afbdc152df5d674a26459b0267a22cb13a3903f7922affcf526485662293269',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.7146',
-      type: 'sell',
     }
   }
 }
 
-augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ });
+augur.trading.orderBook.getOrderBook({
+  _type,
+  _market,
+  _outcome,
+  minPrice,
+  maxPrice,
+  _startingOrderId,
+  _numOrdersToLoad
+}, function (orderBookChunk) { /* ... */ }, function (completeSingleOutcomeOrderBookSide) { /* ... */ });
+// example chunk output:
+{
+  buy: {
+    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
+      amount: '15',
+      block: 220,
+      fullPrecisionAmount: '15',
+      fullPercisionPrice: '0.1770833333333333',
+      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.177',
+      type: 'buy',
+    },
+    '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
+      amount: '10',
+      block: 217,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.1208333333333333',
+      id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.1208',
+      type: 'buy',
+    },
+    '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b': {
+      amount: '10',
+      block: 219,
+      fullPrecisionAmount: '10',
+      fullPercisionPrice: '0.0083333333333333',
+      id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
+      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
+      outcome: '1',
+      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
+      price: '0.0083',
+      type: 'buy',
+    }
+  }
+}
+
+augur.markets.getMarketInfo({ _market }, function (market) { /* ... */ });
 // example output:
 {
   author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
@@ -353,9 +380,9 @@ augur.markets.getMarketInfo({ marketID: market }, function (market) { /* ... */ 
 }
 
 const marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
-const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
+// const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
 
-augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) { /* ... */ })
+augur.markets.batchGetMarketInfo({ marketIDs }, function (marketsInfo) { /* ... */ })
 // example output:
 {
   '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42': {
@@ -427,7 +454,7 @@ augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) 
       id: 2,
       outstandingShares: '2101.2',
       price: '0.99',
-      sharesPurchased: '5',
+      sharesPurchased: '0',
     }],
     resolutionSource: 'www.coinmarketcap.com',
     tags: ['Bitcoin', 'Cryptocurrency', null],
@@ -439,17 +466,12 @@ augur.markets.batchGetMarketInfo({ marketIDs, account }, function (marketsInfo) 
     volume: '8346'
   }
 }
-// all keys in the options object are optional, if branch is not provided then
-// the default of augur.constants.DEFAULT_BRANCH_ID will be used.
-const options = {
-  branch: '0xf69b5',
-  offset: '3',
-  numMarketsToLoad: '2',
-  volumeMin: '1000',
-  volumeMax: '3000'
-}
 
-augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
+augur.markets.getMarketsInfo({
+  marketIDs: [
+    '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e', '0x563b377a956c80d77a7c613a9343699ad6123911'
+  ]
+}, function (marketsInfo) { /* ... */ })
 // example output:
 {
   '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e': {
@@ -496,22 +518,30 @@ augur.markets.getMarketsInfo(options, function (marketsInfo) { /* ... */ })
 ```
 All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
-### augur.trading.orderBook.getOrderBook({ market[, offset, numTradesToLoad, scalarMinMax: { minValue, maxValue } ] }[, callback])
+### augur.trading.orderBook.getOrderBook({ \_type, \_market, \_outcome, minPrice, maxPrice[, \_startingOrderId, \_numOrdersToLoad ]}[, callback])
 
-Retrieves the full order book for `market`. The order book's format is an object with fields `buy` and `sell` containing arrays of buy and sell orders. If your `market` is a scalar `market` then you would want to include the optional object `scalarMinMax`. `scalarMinMax` should have a `minValue` and `maxValue` for the `market` you are querying. There are two optional fields, `offset` and `numTradesToLoad`, which can be used to split up the query into multiple chunks, which can be helpful for larger order books.
+Retrieves a section of the [Order Book](#order-book) for a specified [Market](#market). The required params are `_market` which is the address of the Market we intend to get the order book for. The `_type` which is either set to `1` for getting the Buy side of the order book and `2` for the sell side. The `_outcome` which is an integer value between 1 and 8 for the [Outcome](#outcome) we want to get [Orders](#order) for. The `minPrice` and `maxPrice` are also required and should be set to the minimum and maximum possible prices for a [Share](#shares). The two optional parameters are `_startingOrderId` which defaults to `0x0`, which indicates "start from the best order", and `_numOrdersToLoad` which defaults to 0, or "load all orders". The `_startingOrderId` field should be the order ID from which to start walking towards the order book's tail, as a hexadecimal string. The `_numOrdersToLoad` is expected to be a whole number. The `getOrderBook` function generally should be used only to fetch a small chunk of orders. To fetch entire order book, typically `getOrderBookChunked` should be used instead.
 
-### augur.markets.getMarketInfo({ marketID[, account] }[, callback])
+### augur.trading.orderBook.getOrderBookChunked({ \_type, \_market, \_outcome, minPrice, maxPrice[, \_startingOrderId, \_numOrdersToLoad ]}[, onChunkCallback, onCompleteCallback ])
 
-Reads all information about a market (`marketID`) that is stored on-contract. It also determines the `type` of the market, which can be `binary` (two outcomes; i.e., Yes or No), `categorical` (more than two outcomes, i.e., Multiple Choice), or `scalar` (answer can be any of a range of values; i.e., Numerical). You can optionally pass an `account` address to show the amount of shares purchased by that `account` for each outcome.
+Very similar to the above `getOrderBook` function, however this function is designed for getting the entire side of an [Outcome's](#outcome) [Order Book](#order-book) for a specific [Market](#market) in chunks. The `getOrderBookChunked` function has a params object with the same keys as `getOrderBook` but they work slightly differently. The `_numOrdersToLoad` key is now the chunk size, which instead of defaulting to 0 or "load all orders", it defaults to the default chunk size: 100. The chunk size is simply the number of orders each request will attempt to bring back at a time. This function also has two callbacks, the `onChunkCallback` and the `onCompleteCallback`. The `onChunkCallback` will be triggered for each chunk of orders received where as the `onCompleteCallback` will only be called when the entire order book's single outcome side has been returned. In our example, we are looking to find all the buy orders for outcome 1 in our market, starting from the order ID `0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc` in chunks of three orders per return to `onChunkCallback`.
 
-### augur.markets.batchGetMarketInfo({ marketIDs[, account] }[, callback])
+### augur.markets.getMarketInfo({ \_market }[, callback])
 
-Retrieve a `marketsInfo` object for the market IDs in array `marketIDs`. The `marketsInfo` object will contain `marketInfo` objects (see above for example) which are indexed by their respective market IDs. `account` is an optional parameter used to determine shares purchased by that `account` address for each outcome in the markets returned in the `marketsInfo` object.
+Returns information about a [Market](#market) (`_market`) that is stored on-contract. Information returned will include all kinds of basic information about the market as well as information about each market [Outcome](#outcome). This information doesn't include the [Order Book](#order-book) however and you should use `getOrderBook` or `getOrderBookChunked` to get information about [Open Orders](#open-orders) for the specified Market.
 
-### augur.markets.getMarketsInfo({ [branch, offset, numMarketsToLoad, volumeMin, volumeMax] }[, callback])
+### augur.markets.batchGetMarketInfo({ marketIDs }[, callback])
 
-Returns basic information about markets on a specific `branch` or the `augur.constants.DEFAULT_BRANCH_ID` if no `branch` is provided. This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. The `offset` and `numMarketsToLoad` optional params are also available to this function to break up the market information as the number of markets on a single branch is typically too large for a single RPC request. The final two optional parameters are `volumeMin` and `volumeMax` which are used to filter markets by a minimum and/or maximum trade volume.
+Retrieve a `marketsInfo` object for the [Market](#market) IDs in the array `marketIDs`. The `marketsInfo` object will contain `marketInfo` objects (see above for example) which are indexed by their respective market IDs. Much like the above `getMarketsInfo` the [Order Book](#order-book) will not be included in the market information returned and needs to be retrieved separately.
+
+### augur.markets.getMarketsInfo({ marketIDs }[, callback])
+
+This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. This function does not return as much information about the markets as `batchGetMarketInfo`,
+
+<!--
 
 <aside class="notice">Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc. This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
 
 For example, suppose you were displaying markets on separate pages. You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request. To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
+
+-->
