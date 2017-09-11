@@ -6,7 +6,7 @@ Call API
 * Check account 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b's Cash balance.
 */
 const address = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
-const params = { address };
+const params = { _owner: address };
 
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
@@ -576,14 +576,14 @@ Registration Token Call API
 ```javascript
 // Registration Token Contract Call API Examples:
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.RegistrationToken.allowance({ registrationToken, _owner, _spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "1";
 
-augur.api.RegistrationToken.balanceOf({ registrationToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.RegistrationToken.balanceOf({ registrationToken, _owner }, function (balance) { /* ... */ })
 // example output:
 balance = "1";
 
@@ -603,19 +603,23 @@ augur.api.RegistrationToken.getReputationToken({ registrationToken }, function (
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.RegistrationToken.totalSupply({ registrationToken }, function (totalSupply) { /* ... */ })
+augur.api.RegistrationToken.getTotalSupply({ registrationToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "215";
+
+augur.api.RegistrationToken.getTypeName({ registrationToken }, function (typeName) { /* ... */ })
+// example output:
+typeName = "RegistrationToken";
 ```
 #### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
-#### augur.api.RegistrationToken.allowance({ registrationToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.RegistrationToken.allowance({ registrationToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `registrationToken`s.
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `registrationToken`s.
 
-#### augur.api.RegistrationToken.balanceOf({ registrationToken, address }[, callback])
+#### augur.api.RegistrationToken.balanceOf({ registrationToken, \_owner }[, callback])
 
-Returns the token balance for the specified `registrationToken` owned by the `address` provided.
+Returns the token balance for the specified `registrationToken` owned by the `_owner` provided.
 
 #### augur.api.RegistrationToken.getBranch({ registrationToken }[, callback])
 
@@ -633,23 +637,27 @@ Returns the Reporting Window address for the specified `registrationToken`.
 
 Returns the Reputation Tokens address for the specific `registrationToken`'s Reporting Window.
 
-#### augur.api.RegistrationToken.totalSupply({ registrationToken }[, callback])
+#### augur.api.RegistrationToken.getTotalSupply({ registrationToken }[, callback])
 
 Returns the current total supply of the specified `registrationToken`.
+
+#### augur.api.RegistrationToken.getTypeName({ registrationToken }[, callback])
+
+Returns the type name for the specified `registrationToken`, should always return "RegistrationToken".
 
 Reporting Token Call API
 ------------------------
 ```javascript
 // Reporting Token Contract Call API Examples:
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.ReportingToken.allowance({ reportingToken, _owner, _spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "1"
 
-augur.api.ReportingToken.balanceOf({ reportingToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.ReportingToken.balanceOf({ reportingToken, _owner }, function (balance) { /* ... */ })
 // example output:
 balance = "1"
 
@@ -681,19 +689,23 @@ augur.api.ReportingToken.getReputationToken({ reportingToken }, function (reputa
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.ReportingToken.totalSupply({ reportingToken }, function (totalSupply) { /* ... */ })
+augur.api.ReportingToken.getTotalSupply({ reportingToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "210"
+
+augur.api.ReportingToken.getTypeName({ reportingToken }, function (typeName) { /* ... */ })
+// example output:
+typeName = "ReportingToken";
 ```
 #### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
-#### augur.api.ReportingToken.allowance({ reportingToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.ReportingToken.allowance({ reportingToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reportingToken`s.
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `reportingToken`s.
 
-#### augur.api.ReportingToken.balanceOf({ reportingToken, address }[, callback])
+#### augur.api.ReportingToken.balanceOf({ reportingToken, \_owner }[, callback])
 
-Returns the token balance for the specified `reportingToken` owned by the provided `address`.
+Returns the token balance for the specified `reportingToken` owned by the provided `_owner`.
 
 #### augur.api.ReportingToken.getBranch({ reportingToken }[, callback])
 
@@ -723,9 +735,13 @@ Returns the Reporting Window address for the specified `reportingToken`.
 
 Returns the Reputation Tokens address for the specific `reportingToken`'s Reporting Window.
 
-#### augur.api.ReportingToken.totalSupply({ reportingToken }[, callback])
+#### augur.api.ReportingToken.getTotalSupply({ reportingToken }[, callback])
 
 Returns the current total supply of the specified `reportingToken`.
+
+#### augur.api.ReportingToken.getTypeName({ reportingToken }[, callback])
+
+Returns the type name for the specified `reportingToken`, should always return "ReportingToken".
 
 Reporting Window Call API
 -------------------------
@@ -903,14 +919,18 @@ Reputation Token Call API
 ```javascript
 // Reputation Token Contract Call API Examples:
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-const ownerAddress = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }, function (allowance) { /* ... */ })
+augur.api.ReputationToken.allowance({ reputationToken, _owner, _spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "200"
 
-augur.api.ReputationToken.balanceOf({ reputationToken, address: ownerAddress }, function (balance) { /* ... */ })
+augur.api.ReputationToken.assertReputationTokenIsLegit({ _shadyReputationToken: reputationToken }, function (isLegitREPToken) { /* ... */ })
+// example output:
+isLegitREPToken = true;
+
+augur.api.ReputationToken.balanceOf({ reputationToken, _owner }, function (balance) { /* ... */ })
 // example output:
 balance = "1000"
 
@@ -922,19 +942,27 @@ augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }, functi
 // example output:
 topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 
-augur.api.ReputationToken.totalSupply({ reputationToken }, function (totalSupply) { /* ... */ })
+augur.api.ReputationToken.getTotalSupply({ reputationToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
+
+augur.api.ReputationToken.getTypeName({ reputationToken }, function (typeName) { /* ... */ })
+// example output:
+reputationToken = "ReputationToken";
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
-#### augur.api.ReputationToken.allowance({ reputationToken, ownerAddress, spenderAddress }[, callback])
+#### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `spenderAddress` can spend of the `ownerAddress`'s `reputationToken`s.
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `reputationToken`s.
 
-#### augur.api.ReputationToken.balanceOf({ reputationToken, address }[, callback])
+#### augur.api.ReputationToken.assertReputationTokenIsLegit({ reputationToken, \_shadyReputationToken }[, callback])
 
-Returns the token balance of the specified `reputationToken` owned by the `address` provided.
+Returns true or false depending on if the `_shadyReputationToken` provided is actually a legitimate token belonging to the correct branch for a specified `reputationToken`.
+
+#### augur.api.ReputationToken.balanceOf({ reputationToken, \_owner }[, callback])
+
+Returns the token balance of the specified `reputationToken` owned by the `_owner` provided.
 
 #### augur.api.ReputationToken.getBranch({ reputationToken }[, callback])
 
@@ -944,22 +972,26 @@ Returns the Branch address for the specified `reputationToken`.
 
 Returns the top migration destination address for the specified `reputationToken`.
 
-#### augur.api.ReputationToken.totalSupply({ reputationToken }[, callback])
+#### augur.api.ReputationToken.getTotalSupply({ reputationToken }[, callback])
 
 Returns the current total supply of the specified `reputationToken`.
+
+#### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
+
+Returns the type name for a specified `reputationToken`, this should always return "ReputationToken".
 
 Cash Call API
 -------------
 ```javascript
 // Cash Contract Call API Examples:
-const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.Cash.allowance({ owner, spender }, function (allowance) { /* ... */ })
+augur.api.Cash.allowance({ _owner, _spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "100"
 
-augur.api.Cash.balanceOf({ address: owner }, function (balance) { /* ... */ })
+augur.api.Cash.balanceOf({ _owner }, function (balance) { /* ... */ })
 // example output:
 balance = "10000"
 
@@ -979,19 +1011,19 @@ augur.api.Cash.getSymbol({}, function (symbol) { /* ... */ })
 // example output:
 symbol = "CASH"
 
-augur.api.Cash.totalSupply({}, function (totalSupply) { /* ... */ })
+augur.api.Cash.getTotalSupply({}, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "11000000"
 ```
 #### [Cash Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
 
-#### augur.api.Cash.allowance({ owner, spender }[, callback])
+#### augur.api.Cash.allowance({ \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `spender` address can spend of the `owner` address' Cash tokens.
+Returns the allowance that a specified `_spender` address can spend of the `_owner` address' Cash tokens.
 
-#### augur.api.Cash.balanceOf({ address }[, callback])
+#### augur.api.Cash.balanceOf({ \_owner }[, callback])
 
-Returns the balance of Cash tokens owned by the specified `address`.
+Returns the balance of Cash tokens owned by the specified `_owner`.
 
 #### augur.api.Cash.getDecimals({}[, callback])
 
@@ -1009,7 +1041,7 @@ Returns the name string for Cash: `Cash`.
 
 Returns the symbol string for Cash: `CASH`.
 
-#### augur.api.Cash.totalSupply({}[, callback])
+#### augur.api.Cash.getTotalSupply({}[, callback])
 
 Returns the current total supply of Cash.
 
@@ -1228,14 +1260,14 @@ Share Token Call API
 ```javascript
 // Share Token Contract Call API Examples:
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
-const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.ShareToken.allowance({ shareToken, owner, spender }, function (allowance) { /* ... */ })
+augur.api.ShareToken.allowance({ shareToken, _owner, _spender }, function (allowance) { /* ... */ })
 // example output:
 allowance = "100"
 
-augur.api.ShareToken.balanceOf({ shareToken, address: owner }, function (balance) { /* ... */ })
+augur.api.ShareToken.balanceOf({ shareToken, _owner }, function (balance) { /* ... */ })
 // example output:
 balance = "1000"
 
@@ -1263,19 +1295,23 @@ augur.api.ShareToken.isShareToken({ shareToken }, function (isShareToken) { /* .
 // example output:
 isShareToken = "1"
 
-augur.api.ShareToken.totalSupply({ shareToken }, function (totalSupply) { /* ... */ })
+augur.api.ShareToken.getTotalSupply({ shareToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "50000"
+
+augur.api.ShareToken.getTypeName({ shareToken }, function (typeName) { /* ... */ })
+// example output:
+typeName = "ShareToken";
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
-#### augur.api.ShareToken.allowance({ shareToken, owner, spender }[, callback])
+#### augur.api.ShareToken.allowance({ shareToken, \_owner, \_spender }[, callback])
 
-Returns the token allowance a `spender` can use of an `owner`'s specified `shareToken`s.
+Returns the token allowance a `_spender` can use of an `_owner`'s specified `shareToken`s.
 
-#### augur.api.ShareToken.balanceOf({ shareToken, address }[, callback])
+#### augur.api.ShareToken.balanceOf({ shareToken, \_owner }[, callback])
 
-Returns the token balance of a specified `shareToken` owned by the `address`.
+Returns the token balance of a specified `shareToken` owned by the `_owner`.
 
 #### augur.api.ShareToken.getDecimals({ shareToken }[, callback])
 
@@ -1301,9 +1337,13 @@ Returns the symbol string of the `shareToken`: `SHARES`.
 
 Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0` if false. (should always be true.)
 
-#### augur.api.ShareToken.totalSupply({ shareToken }[, callback])
+#### augur.api.ShareToken.getTotalSupply({ shareToken }[, callback])
 
 Returns the total supply of `shareToken`s specified.
+
+#### augur.api.ShareToken.getTypeName({ shareToken }[, callback])
+
+Returns the type name for a specific `shareToken`, which should always return "ShareToken".
 
 Topics Call API
 ---------------
