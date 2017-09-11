@@ -1247,31 +1247,31 @@ Orders Fetcher Call API
 -----------------------
 ```javascript
 // Orders Fetcher Contract Call API Examples:
-const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
-const type = "1";
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-const outcome = "1";
-const fxpPrice = "450000000000000000"; // 0.45
+const _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+const _type = "1";
+const _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const _outcome = "1";
+const _fxpPrice = "450000000000000000"; // 0.45
 
-augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID: orderID }, function (ascendingOrderList) { /* ... */ })
+augur.api.OrdersFetcher.ascendOrderList({ _type, _fxpPrice, _lowestOrderId: _orderId }, function (ascendingOrderList) { /* ... */ })
 // example output:
 ascendingOrderList = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 
-augur.api.OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID: orderID }, function (decendingOrderList) { /* ... */ })
+augur.api.OrdersFetcher.descendOrderList({ _type, _fxpPrice, _highestOrderId: _orderId }, function (decendingOrderList) { /* ... */ })
 // example output:
 decendingOrderList = [
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"]
 
-augur.api.OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID: orderID, worstOrderID: 0, betterOrderID: 0, worseOrderID: 0 }, function (boundingOrders) { /* ... */ })
+augur.api.OrdersFetcher.findBoundingOrders({ _type, _fxpPrice, _bestOrderId: _orderId, _worstOrderId: 0, _betterOrderId: 0, _worseOrderId: 0 }, function (boundingOrders) { /* ... */ })
 // example output:
 boundingOrders = [
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
 
-augur.api.OrdersFetcher.getOrder({ orderID, type, market, outcome }, function (order) { /* ... */ })
+augur.api.OrdersFetcher.getOrder({ _orderId }, function (order) { /* ... */ })
 // example output:
 order = [ "10000000000000000000",
           "500000000000000000",
@@ -1282,7 +1282,7 @@ order = [ "10000000000000000000",
           "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
           "42000000000000"  ]
 
-augur.api.OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID: orderID, numOrdersToLoad: 2 }, function (orderIDs) { /* ... */ })
+augur.api.OrdersFetcher.getOrderIds({ _type, _market, _outcome, _startingOrderId: _orderId, _numOrdersToLoad: 2 }, function (orderIDs) { /* ... */ })
 // example output:
 orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
@@ -1290,25 +1290,25 @@ orderIDs = [
 ```
 #### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
 
-#### augur.api.OrdersFetcher.ascendOrderList({ type, market, outcome, fxpPrice, lowestOrderID }[, callback])
+#### augur.api.OrdersFetcher.ascendOrderList({ \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
-Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `lowestOrderID` is an order ID expected to be a worse price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
+Returns an array containing the order IDs that should be the better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_lowestOrderId` is an order ID expected to be a worse price than the `_fxpPrice` specified for an order of `_type`.
 
-#### augur.api.OrdersFetcher.descendOrderList({ type, market, outcome, fxpPrice, highestOrderID }[, callback])
+#### augur.api.OrdersFetcher.descendOrderList({ \_type, \_fxpPrice, \_highestOrderId }[, callback])
 
-Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `highestOrderID` is an order ID expected to be a better price than the `fxpPrice` specified for an order of `type` trading on `market` around `outcome`.
+Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_highestOrderId` is an order ID expected to be a better price than the `_fxpPrice` specified for an order of `_type`.
 
-#### augur.api.OrdersFetcher.findBoundingOrders({ type, market, outcome, fxpPrice, bestOrderID, worstOrderID, betterOrderID, worseOrderID }[, callback])
+#### augur.api.OrdersFetcher.findBoundingOrders({ \_type, \_fxpPrice, \_bestOrderId, \_worstOrderId, \_betterOrderId, \_worseOrderId }[, callback])
 
-Returns an array containing the order IDs that should be set to `betterOrderID` and `worseOrderID` respectively for an order inserted at `fxpPrice`. `betterOrderID` and `worseOrderID` should be orders that are better or worse than the `fxpPrice` for an order of `type` trading on `market` around `outcome`. `bestOrderID` and `worstOrderID` should be the best and worst order IDs on the order book for the specified `market`, `type`, and `outcome`.
+Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_betterOrderId` and `_worseOrderId` should be orders that are better or worse than the `_fxpPrice` for an order of `_type`. `_bestOrderId` and `_worstOrderId` should be the best and worst order IDs on the order book for the specified `_type`.
 
-#### augur.api.OrdersFetcher.getOrder({ orderID, type, market, outcome }[, callback])
+#### augur.api.OrdersFetcher.getOrder({ \_orderId }[, callback])
 
-Returns a length 8 array containing information about a specified `orderID` of `type` trading on `market` around `outcome`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
+Returns a length 8 array containing information about a specified `_orderId`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
 
-#### augur.api.OrdersFetcher.getOrderIDs({ type, market, outcome, startingOrderID, numOrdersToLoad }[, callback])
+#### augur.api.OrdersFetcher.getOrderIDs({ \_type, \_startingOrderId, \_numOrdersToLoad }[, callback])
 
-Returns an array of order IDs of `type` trading on `market` around `outcome` starting from the `startingOrderID` order ID specified. The array will be of length `numOrdersToLoad`.
+Returns an array of order IDs of `_type` starting from the `_startingOrderId` order ID specified. The array will be of length `_numOrdersToLoad`.
 
 Share Token Call API
 --------------------
@@ -1405,21 +1405,21 @@ Topics Call API
 ```javascript
 // Topics Contract Call API Examples:
 const topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
-const topic = "Augur";
+const _topic = "Augur";
 
 augur.api.Topics.count({ topics }, function (count) { /* ... */ })
 // example output:
 count = "152"
 
-augur.api.Topics.getPopularity({ topics, topic }, function (popularity) { /* ... */ })
+augur.api.Topics.getPopularity({ topics, _topic }, function (popularity) { /* ... */ })
 // example output:
 popularity = "1000"
 
-augur.api.Topics.getPopularityByOffset({ topics, offset: 0 }, function () { /* ... */ })
+augur.api.Topics.getPopularityByOffset({ topics, _offset: 0 }, function () { /* ... */ })
 // example output:
 popularity = "1000"
 
-augur.api.Topics.getTopicByOffset({ topics, offset: 0 }, function () { /* ... */ })
+augur.api.Topics.getTopicByOffset({ topics, _offset: 0 }, function () { /* ... */ })
 // example output:
 topic = "Augur"
 ```
@@ -1429,14 +1429,14 @@ topic = "Augur"
 
 Returns a count of all the Topics at the specified `topics` address.
 
-#### augur.api.Topics.getPopularity({ topics, topic }[, callback])
+#### augur.api.Topics.getPopularity({ topics, \_topic }[, callback])
 
-Returns the popularity value of a specified `topic` at the `topics` address provided.
+Returns the popularity value of a specified `_topic` at the `topics` address provided.
 
-#### augur.api.Topics.getPopularityByOffset({ topics, offset }[, callback])
+#### augur.api.Topics.getPopularityByOffset({ topics, \_offset }[, callback])
 
-Returns the popularity of the Topic at the index `offset` at the `topics` address provided.
+Returns the popularity of the Topic at the index `_offset` at the `topics` address provided.
 
-#### augur.api.Topics.getTopicByOffset({ topics, offset }[, callback])
+#### augur.api.Topics.getTopicByOffset({ topics, \_offset }[, callback])
 
-Returns the Topic at the index `offset` at the `topics` address provided.
+Returns the Topic at the index `_offset` at the `topics` address provided.
