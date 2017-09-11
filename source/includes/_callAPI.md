@@ -29,9 +29,9 @@ Branch Call API
 ```javascript
 // Branch Contract Call API Examples:
 const branch = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
-const parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+const _parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 
-augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }, function (childBranch) { /* ... */ })
+augur.api.Branch.getChildBranch({ branch, _parentPayoutDistributionHash }, function (childBranch) { /* ... */ })
 // example output:
 childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 
@@ -67,16 +67,16 @@ augur.api.Branch.getReportingPeriodDurationInSeconds({ branch }, function (repor
 // example output:
 reportingPeriodDuration = "2592000";
 
-const endTime = 2524608000;
-augur.api.Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
+const _endTime = 2524608000;
+augur.api.Branch.getReportingWindowByMarketEndTime({ branch, _endTime, _hasAutomatedReporter: 0 }, function (reportingWindowByEndTime) { /* ... */ })
 // example output:
 reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api.Branch.getReportingWindowByTimestamp({ branch, timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
+augur.api.Branch.getReportingWindowByTimestamp({ branch, _timestamp: endTime }, function (reportingWindowByTimestamp) { /* ... */ })
 // example output:
 reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api.Branch.getReportingWindowId({ branch, timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
+augur.api.Branch.getReportingWindowId({ branch, _timestamp: new Date().getTime() }, function (reportingWindowId) { /* ... */ })
 // example output:
 reportingWindowId = "578";
 
@@ -88,36 +88,40 @@ augur.api.Branch.getTopics({ branch }, function (topicsAddress) { /* ... */ })
 // example output:
 topicsAddress = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 
+augur.api.Branch.getTypeName({ branch }, function (typeName) { /* ... */ })
+// example output:
+typeName = "Branch";
+
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api.Branch.isContainerForMarket({ branch, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+augur.api.Branch.isContainerForMarket({ branch, _shadyTarget: market }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1";
 
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api.Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+augur.api.Branch.isContainerForRegistrationToken({ branch, _shadyTarget: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
 // example output:
 isContainerForRegistrationToken = "1";
 
 const reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-augur.api.Branch.isContainerForReportingToken({ branch, shadyReportingToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+augur.api.Branch.isContainerForReportingToken({ branch, _shadyTarget: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
 // example output:
 isContainerForReportingToken = "1";
 
 const reportingWindow = "578";
-augur.api.Branch.isContainerForReportingWindow({ branch, shadyReportingWindow: reportingWindow }, function (isContainerForReportingWindow) { /* ... */ })
+augur.api.Branch.isContainerForReportingWindow({ branch, _shadyTarget: reportingWindow }, function (isContainerForReportingWindow) { /* ... */ })
 // example output:
 isContainerForReportingWindow = "1";
 
 const childBranch = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
-augur.api.Branch.isParentOf({ branch, shadyChild: childBranch }, function (isParentOf) { /* ... */ })
+augur.api.Branch.isParentOf({ branch, _shadyChild: childBranch }, function (isParentOf) { /* ... */ })
 // example output:
 isParentOf = "1";
 ```
 #### [Branch Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
 
-#### augur.api.Branch.getChildBranch({ branch, parentPayoutDistributionHash }[, callback])
+#### augur.api.Branch.getChildBranch({ branch, \_parentPayoutDistributionHash }[, callback])
 
-Returns the child branch address of the specified `branch` address related to the `parentPayoutDistributionHash` provided.
+Returns the child branch address of the specified `branch` address related to the `_parentPayoutDistributionHash` provided.
 
 #### augur.api.Branch.getCurrentReportingWindow({ branch }[, callback])
 
@@ -151,17 +155,17 @@ Returns the previous reporting window ID for the specified `branch`.
 
 Returns the specified `branch`'s reporting period duration in seconds.
 
-#### augur.api.Branch.getReportingWindowByMarketEndTime({ branch, endTime, hasAutomatedReporter }[, callback])
+#### augur.api.Branch.getReportingWindowByMarketEndTime({ branch, \_endTime, \_hasAutomatedReporter }[, callback])
 
-Returns the reporting window address on the specific `branch` given an `endTime` and if the market we are checking for has an automated reporter or not (`hasAutomatedReporter`). `hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
+Returns the reporting window address on the specific `branch` given an `_endTime` and if the market we are checking for has an automated reporter or not (`_hasAutomatedReporter`). `_hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
 
-#### augur.api.Branch.getReportingWindowByTimestamp({ branch, timestamp }[, callback])
+#### augur.api.Branch.getReportingWindowByTimestamp({ branch, \_timestamp }[, callback])
 
-Returns the reporting window address for a specific `branch` and provided `timestamp`.
+Returns the reporting window address for a specific `branch` and provided `_timestamp`.
 
-#### augur.api.Branch.getReportingWindowId({ branch, timestamp }[, callback])
+#### augur.api.Branch.getReportingWindowId({ branch, \_timestamp }[, callback])
 
-Returns the reporting window ID for a specific `branch` and provided `timestamp`. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
+Returns the reporting window ID for a specific `branch` and provided `_timestamp`. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
 
 #### augur.api.Branch.getReputationToken({ branch }[, callback])
 
@@ -171,34 +175,38 @@ Returns the reputation token address for a specific `branch`.
 
 Returns the topics address for the specific `branch`.
 
-#### augur.api.Branch.isContainerForMarket({ branch, shadyMarket }[, callback])
+#### augur.api.Branch.getTypeName({ branch }[, callback])
 
-Returns wether the specific `branch` is a container for the `shadyMarket` address provided. Returns `1` if true, `0` if false.
+Returns the specified `branch`'s type name, which should always return "Branch".
 
-#### augur.api.Branch.isContainerForRegistrationToken({ branch, shadyRegistrationToken }[, callback])
+#### augur.api.Branch.isContainerForMarket({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `shadyRegistrationToken` address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api.Branch.isContainerForReportingToken({ branch, shadyReportingToken }[, callback])
+#### augur.api.Branch.isContainerForRegistrationToken({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `shadyReportingToken` address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api.Branch.isContainerForReportingWindow({ branch, shadyReportingWindow }[, callback])
+#### augur.api.Branch.isContainerForReportingToken({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `shadyReportingWindow` provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
-#### augur.api.Branch.isParentOf({ branch, shadyChild }[, callback])
+#### augur.api.Branch.isContainerForReportingWindow({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `shadyChild` branch address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the `_shadyTarget` provided. Returns `1` if true, `0` if false.
+
+#### augur.api.Branch.isParentOf({ branch, \_shadyChild }[, callback])
+
+Returns wether the specific `branch` is a container for the `_shadyChild` branch address provided. Returns `1` if true, `0` if false.
 
 Dispute Bond Token Call API
 ---------------------------
 ```javascript
 // Dispute Bond Token Contract Call API Examples:
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-const address = "0x3d62bafc1791752393384b902f813da861ddedd9";
+const _address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 
-augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }, function (balance) { /* ... */ })
+augur.api.DisputeBondToken.balanceOf({ disputeBondToken, _address }, function (balance) { /* ... */ })
 // example output:
 balance = "1"
 
@@ -226,15 +234,19 @@ augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }, function (re
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.DisputeBondToken.totalSupply({ disputeBondToken }, function (totalSupply) { /* ... */ })
+augur.api.DisputeBondToken.getTotalSupply({ disputeBondToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "1"
+
+augur.api.DisputeBondToken.getTypeName({ disputeBondToken }, function (typeName) { /* ... */ })
+// example output:
+typeName = "DisputeBondToken";
 ```
 #### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
-#### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, address }[, callback])
+#### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, \_address }[, callback])
 
-This transaction will return the balance for a specified `disputeBondToken` owned by the provided `address`. Will always result in `1` or `0`.
+This transaction will return the balance for a specified `disputeBondToken` owned by the provided `_address`. Will always result in `1` or `0`.
 
 #### augur.api.DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
 
@@ -260,9 +272,13 @@ This transaction will return the market that a specified `disputeBondToken` is d
 
 This transaction will return the reputation token address that a specified `disputeBondToken`'s market uses.
 
-#### augur.api.DisputeBondToken.totalSupply({ disputeBondToken }[, callback])
+#### augur.api.DisputeBondToken.getTotalSupply({ disputeBondToken }[, callback])
 
 This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
+
+#### augur.api.DisputeBondToken.getTypeName({ disputeBondToken }[, callback])
+
+Returns the type name of the specified `disputeBondToken`, this should always return "DisputeBondToken".
 
 Market Call API
 ----------------
@@ -346,7 +362,7 @@ augur.api.Market.getReputationToken({ market }, function (reputationToken) { /* 
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.Market.getShareToken({ market, outcome: 1 }, function (shareToken) { /* ... */ })
+augur.api.Market.getShareToken({ market, _outcome: 1 }, function (shareToken) { /* ... */ })
 // example output:
 shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
@@ -358,18 +374,22 @@ augur.api.Market.getTopic({ market }, function (topic) { /* ... */ })
 // example output:
 topic = "Augur"
 
+augur.api.Market.getTypeName({ market }, function (typeName) { /* ... */ })
+// example output:
+typeName = "Market";
+
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-augur.api.Market.isContainerForReportingToken({ market, shadyToken: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
+augur.api.Market.isContainerForReportingToken({ market, _shadyTarget: reportingToken }, function (isContainerForReportingToken) { /* ... */ })
 // example output:
 isContainerForReportingToken = "1"
 
 const shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
-augur.api.Market.isContainerForShareToken({ market, shadyShareToken: shareToken }, function (isContainerForShareToken) { /* ... */ })
+augur.api.Market.isContainerForShareToken({ market, _shadyTarget: shareToken }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
 
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-augur.api.Market.isContainerForDisputeBondToken({ market, shadyBondToken: disputeBondToken }, function (isContainerForShareToken) { /* ... */ })
+augur.api.Market.isContainerForDisputeBondToken({ market, _shadyTarget: disputeBondToken }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForDisputeBondToken = "1"
 
@@ -499,9 +519,9 @@ Returns the reporting window address for the specified `market`.
 
 Returns the reputation token's address for the specified `market`.
 
-#### augur.api.Market.getShareToken({ market, outcome }[, callback])
+#### augur.api.Market.getShareToken({ market, \_outcome }[, callback])
 
-Returns the share token's address for the specified `market` and `outcome`.
+Returns the share token's address for the specified `market` and `_outcome`.
 
 #### augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
 
@@ -511,17 +531,21 @@ Returns the tentatively winning Payout Distribution Hash given a specified `mark
 
 Returns the topic of the specified `market`.
 
-#### augur.api.Market.isContainerForReportingToken({ market, shadyToken }[, callback])
+#### augur.api.Market.getTypeName({ market }[, callback])
 
-Returns wether the specific `market` is a container for the `shadyToken` address provided, which is the reporting token address we intend to check. Returns `1` if true, `0` if false.
+Returns the type name for the specified `market`, should always return "Market".
 
-#### augur.api.Market.isContainerForShareToken({ market, shadyShareToken }[, callback])
+#### augur.api.Market.isContainerForReportingToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `shadyShareToken` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided, which is the reporting token address we intend to check. Returns `1` if true, `0` if false.
 
-#### augur.api.Market.isContainerForDisputeBondToken({ market, shadyBondToken }[, callback])
+#### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `shadyBondToken` address provided. A `shadyBondToken` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
+
+#### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
+
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isDoneWithAllReporters({ market }[, callback])
 
@@ -769,6 +793,11 @@ augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindo
 // example output:
 maxReportsPerLimitedReporterMarket = "9"
 
+const _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api.ReportingWindow.getNumberOfReportsByMarket({ reportingWindow, _market }, function (numOfReportsByMarket) { /* ... */ })
+// example output:
+numOfReportsByMarket = "10";
+
 augur.api.ReportingWindow.getRegistrationToken({ reportingWindow }, function (registrationToken) { /* ... */ })
 // example output:
 registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
@@ -781,8 +810,8 @@ augur.api.ReportingWindow.getReportingStartTime({ reportingWindow }, function (r
 // example output:
 reportingStartTime = "14998315100"
 
-const reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
-augur.api.ReportingWindow.getReportsByReporter({ reportingWindow, reporter }, function (reportsByReporter) { /* ... */ })
+const _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
+augur.api.ReportingWindow.getReportsByReporter({ reportingWindow, _reporter }, function (reportsByReporter) { /* ... */ })
 // example output:
 reportsByReporter = "0x03198001d1c223b2fdb1866703a7c2e4d5313f80"
 
@@ -810,13 +839,12 @@ augur.api.ReportingWindow.isActive({ reportingWindow }, function (isActive) { /*
 // example output:
 isActive = "1"
 
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, shadyMarket: market }, function (isContainerForMarket) { /* ... */ })
+augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, _shadyMarket: _market }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1"
 
-const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api.ReportingWindow.isContainerForRegistrationToken({ reportingWindow, shadyRegistrationToken: registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
+const _registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+augur.api.ReportingWindow.isContainerForRegistrationToken({ reportingWindow, _shadyRegistrationToken: _registrationToken }, function (isContainerForRegistrationToken) { /* ... */ })
 // example output:
 isContainerForRegistrationToken = "1"
 
@@ -824,7 +852,7 @@ augur.api.ReportingWindow.isDisputeActive({ reportingWindow }, function (isDispu
 // example output:
 isDisputeActive = "1"
 
-augur.api.ReportingWindow.isDoneReporting({ reportingWindow, reporter }, function (isDoneReporting) { /* ... */ })
+augur.api.ReportingWindow.isDoneReporting({ reportingWindow, _reporter }, function (isDoneReporting) { /* ... */ })
 // example output:
 isDoneReporting = "1"
 
@@ -853,6 +881,10 @@ Returns the End Time for the specified `reportingWindow`.
 #### augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
 Returns the maximum number of reports a limited reporter market can have in the specified `reportingWindow`.
+
+#### augur.api.ReportingWindow.getNumberOfReportsByMarket({ reportingWindow, \_market }[, callback])
+
+Returns the number of reports submitted so far to a specified `_market` in a given `reportingWindow`.
 
 #### augur.api.ReportingWindow.getRegistrationToken({ reportingWindow }[, callback])
 
