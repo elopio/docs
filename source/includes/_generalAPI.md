@@ -536,12 +536,4 @@ Retrieve a `marketsInfo` object for the [Market](#market) IDs in the array `mark
 
 ### augur.markets.getMarketsInfo({ marketIDs }[, callback])
 
-This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. This function does not return as much information about the markets as `batchGetMarketInfo`,
-
-<!--
-
-<aside class="notice">Markets are indexed in the order created; i.e., the first market created has index 0, the second 1, etc. This ordering allows us to break up a large aggregate request like <code>getMarketsInfo</code> into manageable chunks.
-
-For example, suppose you were displaying markets on separate pages. You might want to retrieve information about all markets, but, to keep your loading time reasonable, only get 5 markets per request. To get the first 5 markets, you would set <code>offset</code> to 0 and <code>numMarketsToLoad</code> to 5: <code>augur.markets.getMarketsInfo({offset: 0, numMarketsToLoad: 5}, cb)</code>.  To get the second 5, <code>offset</code> would be 5: <code>augur.markets.getMarketsInfo({offset: 5, numMarketsToLoad: 5}, cb)</code>.  The third 5, <code>offset</code> would be 10: <code>augur.markets.getMarketsInfo({offset: 10, numMarketsToLoad: 5}, cb)</code>, and so on.</aside>
-
--->
+This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. This function does not return as much information about the markets as `batchGetMarketInfo`.
