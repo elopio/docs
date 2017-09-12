@@ -14,8 +14,8 @@ const attotokens = "100000000000000000000"; // 1000.00 REP
 augur.api.ReputationToken.transfer({
   _signer: privateKey,
   reputationToken: reputationTokenAddress,
-  to: transferTarget,
-  value: attotokens,
+  _to: transferTarget,
+  _value: attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -182,13 +182,13 @@ Dispute Bond Token Tx API
 // privateKey for the msg.sender of these transactions
 const privateKey = <Buffer ...>;
 const disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-const destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
+const _destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
 
 augur.api.DisputeBondToken.transfer({
   _signer: privateKey,
   disputeBondToken,
-  destinationAddress,
-  attotokens: 1,
+  _destinationAddress,
+  _attotokens: 1,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -234,11 +234,11 @@ successResponse = {
   value: "0x0"
 }
 
-const shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
+const _shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
 augur.api.DisputeBondToken.withdrawToBranch({
   _signer: privateKey,
   disputeBondToken,
-  shadyBranch,
+  _shadyBranch,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -262,17 +262,17 @@ successResponse = {
 ```
 #### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
 
-#### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, \_destinationAddress, \_attotokens, onSent, onSuccess, onFailed })
 
-The `transfer` transaction will change the current bond holder to the specified `destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`destinationAddress`), and `attotokens` amount transferred (`1`).
+The `transfer` transaction will change the current bond holder to the specified `_destinationAddress`. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `_attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), to address (`_destinationAddress`), and `_attotokens` amount transferred (`1`).
 
 #### augur.api.DisputeBondToken.withdraw({ \_signer, disputeBondToken, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork.
 
-#### augur.api.DisputeBondToken.withdrawToBranch({ \_signer, disputeBondToken, shadyBranch, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBondToken.withdrawToBranch({ \_signer, disputeBondToken, \_shadyBranch, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `_shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
 
 Market Tx API
 ----------------------
@@ -280,7 +280,7 @@ Market Tx API
 // Market Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-const payoutNumerators = [ 0, 2 ];
+const _payoutNumerators = [ 0, 2 ];
 
 augur.api.Market.approveSpenders({
   _signer: privateKey,
@@ -309,7 +309,7 @@ successResponse = {
 augur.api.Market.automatedReport({
   _signer: privateKey,
   market,
-  payoutNumerators,
+  _payoutNumerators,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -331,36 +331,10 @@ successResponse = {
   value: "0x0"
 }
 
-const newCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-augur.api.Market.changeCreator({
-  _signer: privateKey,
-  market,
-  newCreator,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320487,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x1053711293fe30fd7bfe3e0f138ef4f38357553ffa4c33a1a4b8233dc250b531",
-  input: "0xc78c9a9e000000000000000000000000438f2aeb8a16745b1cd711e168581ebce744ffaa",
-  nonce: "0x3",
-  timestamp: 1501003133,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
 augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
   _signer: privateKey,
   market,
-  newFeePerEthInWei: '1000000000',
+  _newFeePerEthInWei: '1000000000',
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -526,107 +500,11 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Market.tryFinalizeAllReporting({
-  _signer: privateKey,
-  market,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320495,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xa1ffc62d3b695a834d17aae5be1dbe4ba23ffe9d8dd43935e6c9651445c80f68",
-  input: "0xef202e5f",
-  nonce: "0xb",
-  timestamp: 1501003141,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-augur.api.Market.tryFinalizeAutomatedReport({
-  _signer: privateKey,
-  market,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320496,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x515c59f42ef87795e97665c249447164248163aea50ef027d1b3cdda3cd851c2",
-  input: "0x806ec359",
-  nonce: "0xc",
-  timestamp: 1501003142,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-augur.api.Market.tryFinalizeFork({
-  _signer: privateKey,
-  market,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320497,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6309a70af5a70eb6b4c2f23255334a19633f3d1d1c57fa79bb5c4ba1288421a5",
-  input: "0x685186c2",
-  nonce: "0xd",
-  timestamp: 1501003143,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-augur.api.Market.tryFinalizeLimitedReporting({
-  _signer: privateKey,
-  market,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320498,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x46d6ffc1189a8cd5dbdba9a253294c6fed16f7d654dc80af359f3dc65fc51032",
-  input: "0x3afa4270",
-  nonce: "0xe",
-  timestamp: 1501003144,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-const payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+const _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api.Market.updateTentativeWinningPayoutDistributionHash({
   _signer: privateKey,
   market,
-  payoutDistributionHash,
+  _payoutDistributionHash,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -654,17 +532,13 @@ successResponse = {
 
 This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function.
 
-#### augur.api.Market.automatedReport({ \_signer, market, payoutNumerators, onSent, onSuccess, onFailed })
+#### augur.api.Market.automatedReport({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
 
-This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
+This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `_payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
 
-#### augur.api.Market.changeCreator({ \_signer, market, newCreator, onSent, onSuccess, onFailed })
+#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, \_newFeePerEthInWei, onSent, onSuccess, onFailed })
 
-Changes the `market` creator address to the `newCreator` address submitted. This transaction will fail if the `msg.sender` isn't set as the creator of the `market`.
-
-#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, newFeePerEthInWei, onSent, onSuccess, onFailed })
-
-Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `newFeePerEthInWei` is 0 or less, or if `newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
+Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `_newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `_newFeePerEthInWei` is 0 or less, or if `_newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
 #### augur.api.Market.disputeAllReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -690,25 +564,9 @@ This transaction will move the `market` onto the active branch following a fork 
 
 This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`.
 
-#### augur.api.Market.tryFinalizeAllReporting({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market`'s all reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a limited reporters phase, this `market` doesn't have a limited reporters dispute bond holder, this `market` does have an all reporters dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
-
-#### augur.api.Market.tryFinalizeAutomatedReport({ \_signer, market, onSent, onSuccess, onFailed })
-
-This transaction will attempt to finalize the `market`'s Automated reporting phase by changing the `market` to a finalized state, and pays reward to automated report bond holders. This transaction will fail if this `market` doesn't have a reported winning outcome, if this `market` doesn't have a Automated Reporter Dispute Bond Holder, or if this `market`'s automated report dispute period hasn't ended. Returns `1` if successful, `0` if the `market` can't be finalized.
-
-#### augur.api.Market.tryFinalizeFork({ \_signer, market, onSent, onSuccess, onFailed })
-
-This transaction will attempt to finalize `market` after it caused a fork and pays out rewards to the bond holders. This transaction will fail if the market hasn't gone through the limited reporters phase, if the market doesn't have a limited reporter dispute bond holder, if the market hasn't gone through the all reporters phase, if the market doesn't have a all reporter dispute bond holder, if this market isn't the market that caused a fork, if this market doesn't have a winning branch, if the winning branch doesn't have at least half the total supply of REP (5.5 million), or if it's before the fork end time. Returns `1` if successful, `0` if the `market` can't be finalized.
-
-#### augur.api.Market.tryFinalizeLimitedReporting({ \_signer, market, onSent, onSuccess, onFailed })
-
-This transaction will attempt to finalize the `market`'s limited reporting phase by first moving the `market` through all forks, changing the `market` to a finalized state, and pays reward to bond holders. This transaction will fail if this `market` hasn't gone through a automated report phase, this `market` doesn't have a automated report dispute bond holder, or if this `market`'s reporting window isn't complete. Returns `1` if successful, `0` if the `market` can't be finalized.
-
-#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, payoutDistributionHash, onSent, onSuccess, onFailed })
-
-This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
+This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `_payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `_payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `_payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
 
 Registration Token Tx API
 ----------------------------------
@@ -716,14 +574,14 @@ Registration Token Tx API
 // Registration Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-const attotokens = "100000000000000000000";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _value = "100000000000000000000";
 
 augur.api.RegistrationToken.approve({
   _signer: privateKey,
   registrationToken,
-  spenderAddress,
-  attotokens,
+  _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -796,8 +654,8 @@ successResponse = {
 augur.api.RegistrationToken.transfer({
   _signer: privateKey,
   registrationToken,
-  destinationAddress: spenderAddress,
-  attotokens,
+  _to: _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -820,13 +678,13 @@ successResponse = {
   value: "0x0"
 }
 
-const sourceAddress = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
+const _from = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
 augur.api.RegistrationToken.transferFrom({
   _signer: privateKey,
   registrationToken,
-  sourceAddress,
-  destinationAddress: spenderAddress,
-  attotokens,
+  _from,
+  _to: _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -850,9 +708,9 @@ successResponse = {
 ```
 #### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
 
-#### augur.api.RegistrationToken.approve({ \_signer, registrationToken, spenderAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.RegistrationToken.approve({ \_signer, registrationToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
+Allows the `_spender` the ability to spend up to `_value` worth of the specified `registrationToken` for the sender of this `approve` transaction (`msg.sender`). This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` approved.
 
 #### augur.api.RegistrationToken.redeem({ \_signer, registrationToken, onSent, onSuccess, onFailed })
 
@@ -862,13 +720,13 @@ If the `msg.sender` of this transaction has a `registrationToken`, has completed
 
 If the `msg.sender` of this transaction has the bond amount of `REP`, the reporting window for this `registrationToken` hasn't started yet, and the `msg.sender` doesn't already have a `registrationToken` then this transaction will transfer the bond amount of `reputationTokens` out of the `msg.sender`'s wallet and transfer 1 `registrationToken` to `msg.sender` in return. Currently the bond amount is set to 10<sup>18</sup> attotokens, or 1 `REP`.
 
-#### augur.api.RegistrationToken.transfer({ \_signer, registrationToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.RegistrationToken.transfer({ \_signer, registrationToken, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
+If the `msg.sender` of the `transfer` transaction has enough of `registrationToken` to be able to transfer `_value` worth to the `_to` and `_value` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `_value` worth of `registrationToken` to the specified `_to` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `_value` amount transferred.
 
-#### augur.api.RegistrationToken.transferFrom({ \_signer, registrationToken, sourceAddress, destinationAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.RegistrationToken.transferFrom({ \_signer, registrationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `registrationToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
+If the `_from` of the `transferFrom` transaction has enough of `registrationToken` to be able to transfer `_value` worth to the `_to`, `_value` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `registrationToken` for `_from` then this transaction will send `_value` worth of `registrationToken` to the specified `_to` from the `_from`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `_value` amount transferred.
 
 Reporting Token Tx API
 -------------------------------
@@ -876,14 +734,14 @@ Reporting Token Tx API
 // Reporting Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-const spenderAddress = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-const attotokens = "100000000000000000000";
+const _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _attotokens = "100000000000000000000";
 
 augur.api.ReportingToken.approve({
   _signer: privateKey,
   reportingToken,
-  spenderAddress,
-  attotokens,
+  _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -908,7 +766,7 @@ successResponse = {
 augur.api.ReportingToken.buy({
   _signer: privateKey,
   reportingToken,
-  attotokens,
+  _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -926,30 +784,6 @@ successResponse = {
   input: "0xe94030130000000000000000000000000000000000000000000000056bc75e2d63100000",
   nonce: "0xd",
   timestamp: 1501003143,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.ReportingToken.extractBondHolderPayments({
-  _signer: privateKey,
-  reportingToken,
-  onSent: (result) => console.log(result),
-  onSuccess: (result) => console.log(result),
-  onFailed: (result) => console.log(result)
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320501,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x1a2c55d91a8343b32ba3713d4ef1fa766cd4643ac2c5353fa2634248e3d15eec",
-  input: "0xe9aa05a1",
-  nonce: "0xd1",
-  timestamp: 1501003145,
   to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
   value: "0x0"
 }
@@ -981,7 +815,7 @@ successResponse = {
 augur.api.ReportingToken.redeemDisavowedTokens({
   _signer: privateKey,
   reportingToken,
-  reporter: spenderAddress,
+  _reporter: _spender,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1006,7 +840,6 @@ successResponse = {
 augur.api.ReportingToken.redeemForkedTokens({
   _signer: privateKey,
   reportingToken,
-  reporter: spenderAddress,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1031,7 +864,6 @@ successResponse = {
 augur.api.ReportingToken.redeemWinningTokens({
   _signer: privateKey,
   reportingToken,
-  reporter: spenderAddress,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1056,8 +888,8 @@ successResponse = {
 augur.api.ReportingToken.transfer({
   _signer: privateKey,
   reportingToken,
-  destinationAddress: spenderAddress,
-  attotokens,
+  _to: _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1079,13 +911,13 @@ successResponse = {
   value: "0x0"
 }
 
-const sourceAddress = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
+const _from = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
 augur.api.ReportingToken.transferFrom({
   _signer: privateKey,
   reportingToken,
-  sourceAddress,
-  destinationAddress: spenderAddress,
-  attotokens,
+  _from,
+  _to: _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1109,42 +941,38 @@ successResponse = {
 ```
 #### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
 
-#### augur.api.ReportingToken.approve({ \_signer, reportingToken, spenderAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.approve({ \_signer, reportingToken, \_spender, \_attotokens, onSent, onSuccess, onFailed })
 
-Allows the `spenderAddress` the ability to spend up to `attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spenderAddress`, and `attotokens` value approved.
+Allows the `_spender` the ability to spend up to `_attotokens` worth of the specified `reportingToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_attotokens` value approved.
 
-#### augur.api.ReportingToken.buy({ \_signer, reportingToken, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.buy({ \_signer, reportingToken, \_attotokens, onSent, onSuccess, onFailed })
 
-Purchases `attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `attotokens` worth of `reputationToken`, if `attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` purchased.
-
-#### augur.api.ReportingToken.extractBondHolderPayments({ \_signer, reportingToken, onSent, onSuccess, onFailed })
-
-Extracts reputation from the `reportingToken` and transfers it to the `market` for this `reportingToken`. Does nothing if the `market` already has the desired amount of `REP` to reward a successful dispute. Returns 1 if reputation was moved from `reportingToken` to the market, returns 0 if the market already has enough `REP` to reward a successful dispute.
+Purchases `_attotokens` worth of `reportingToken` for `msg.sender` using the `msg.sender`'s `reputationToken`s. If the `msg.sender` doesn't have `_attotokens` worth of `reputationToken`, if `_attotokens` value isn't between 1 and 2<sup>254</sup>, the `market` for this `reportingToken` can't be reported on, or the `msg.sender` doesn't have a `registrationToken` for the `reportingWindow` containing the `reportingToken`'s `market` then this transaction will fail. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `_attotokens` purchased.
 
 #### augur.api.ReportingToken.migrateLosingTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
 Sets the supply of this `reportingToken` to 0 and transfers all `REP` on this `reportingToken` to this `reportingToken`'s `market`'s winning reporting token contract. This will fail if the `market` isn't finalized, the `market` isn't a container for this `reportingToken`, the `market` for this `reportingToken` is the cause of a fork, and the `market`'s winning reporting token isn't this `reportingToken`.
 
-#### augur.api.ReportingToken.redeemDisavowedTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.redeemDisavowedTokens({ \_signer, reportingToken, \_reporter, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `reporter` from the `reportingToken` for the value of `reportingToken` owned by `reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
+Transfers `REP` to the `_reporter` from the `reportingToken` for the value of `reportingToken` owned by `_reporter`. This transaction will fail if the `reportingToken` is still contained within the `reportingToken`'s `market`. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `_reporter`.
 
-#### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `reporter` on the new `branch` for the amount of `reportingToken`s owned by `reporter`. This transaction will fail if the `msg.sender` isn't the `reporter` address, if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter` on the new branch.
+Transfers `REP` to the `msg.sender` on the new `branch` for the amount of `reportingToken`s owned by `msg.sender` from the old branch. This transaction will fail if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new branch.
 
-#### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, reporter, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `reporter` based on how many `reportingToken`s the `reporter` owned. This transaction will fail if the `msg.sender` isn't the `reporter`, if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
-This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `reporter`.
+Transfers `REP` to the `msg.sender` based on how many `reportingToken`s the `msg.sender` owned on the old branch. This transaction will fail if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
+This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new branch.
 
-#### augur.api.ReportingToken.transfer({ \_signer, reportingToken, destinationAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.transfer({ \_signer, reportingToken, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress` and `attotokens` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `attotokens` worth of `reportingToken` to the specified `destinationAddress` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
+If the `msg.sender` of the `transfer` transaction has enough of `reportingToken` to be able to transfer `_value` worth to the `_to` and `_value` is a valid value between 1 and 2<sup>254</sup> then this transaction will send `_value` worth of `reportingToken` to the specified `_to` from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `_value` amount transferred.
 
-#### augur.api.ReportingToken.transferFrom({ \_signer, reportingToken, sourceAddress, destinationAddress, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReportingToken.transferFrom({ \_signer, reportingToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `attotokens` worth to the `destinationAddress`, `attotokens` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `attotokens` worth of `reportingToken` for `sourceAddress` then this transaction will send `attotokens` worth of `registrationToken` to the specified `destinationAddress` from the `sourceAddress`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `attotokens` amount transferred.
+If the `sourceAddress` of the `transferFrom` transaction has enough of `reportingToken` to be able to transfer `_value` worth to the `_to`, `_value` is a valid value between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `reportingToken` for `_from` then this transaction will send `_value` worth of `registrationToken` to the specified `_to` from the `_from`. This transaction will spawn a `Transfer` event which will record the from address, to address, and `_value` amount transferred.
 
 Reporting Window Tx API
 --------------------------------
@@ -1209,15 +1037,15 @@ Reputation Token Tx API
 // Reputation Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-const spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
-const source = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
-const attotokens = "100000000000000000000";
+const _spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
+const _from = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
+const _value = "100000000000000000000";
 
 augur.api.ReputationToken.approve({
   _signer: privateKey,
   reputationToken,
-  spender,
-  value: attotokens,
+  _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1263,13 +1091,13 @@ successResponse = {
   value: "0x0"
 }
 
-const targetReputationToken = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
+const _destination = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
   _signer: privateKey,
   reputationToken,
-  destination: targetReputationToken,
-  reporter: source,
-  attotokens,
+  _destination,
+  _reporter: _source,
+  _attotokens: _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1294,8 +1122,8 @@ successResponse = {
 augur.api.ReputationToken.transfer({
   _signer: privateKey,
   reputationToken,
-  to: spender,
-  value: attotokens,
+  _to: _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1320,9 +1148,9 @@ successResponse = {
 augur.api.ReputationToken.transferFrom({
   _signer: privateKey,
   reputationToken,
-  from: source,
-  to: spender,
-  value: attotokens,
+  _from,
+  _to: _spender,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1346,25 +1174,25 @@ successResponse = {
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
 
-#### augur.api.ReputationToken.approve({ \_signer, reputationToken, spender, value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.approve({ \_signer, reputationToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
+Allows the `_spender` the ability to spend up to `_value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` in attotokens approved.
 
 #### augur.api.ReputationToken.migrateFromLegacyRepContract({ \_signer, reputationToken, onSent, onSuccess, onFailed })
 
 This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
-#### augur.api.ReputationToken.migrateOut({ \_signer, reputationToken, destination, reporter, attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.migrateOut({ \_signer, reputationToken, \_destination, \_reporter, \_attotokens, onSent, onSuccess, onFailed })
 
-This function migrates a `reporter`'s REP (amount of REP denoted in `attotokens`) from one `reputationToken` address to another (`destination`). The `msg.sender` of this transaction must be the `reporter` provided or the `msg.sender` must be approved to spend `attotokens` amount of REP for the `reporter` provided.
+This function migrates a `_reporter`'s REP (amount of REP denoted in `_attotokens`) from one `reputationToken` address to another (`_destination`). The `msg.sender` of this transaction must be the `_reporter` provided or the `msg.sender` must be approved to spend `_attotokens` amount of REP for the `_reporter` provided.
 
-#### augur.api.ReputationToken.transfer({ \_signer, reputationToken, to, value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.transfer({ \_signer, reputationToken, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of `reputationToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
+If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address and `_value` is a number between 1 and 2<sup>254</sup> then this transaction will send `_value` (in attotokens) worth of `reputationToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
-#### augur.api.ReputationToken.transferFrom({ \_signer, reputationToken, from, to, value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.transferFrom({ \_signer, reputationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `reputationTokens` for the `from` address then this transaction will send `value` worth of `reputationToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
+If the `_from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address, `_value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `reputationTokens` for the `_from` address then this transaction will send `_value` worth of `reputationToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` (in attotokens) amount transferred.
 
 Cancel Order Tx API
 ----------------------------
