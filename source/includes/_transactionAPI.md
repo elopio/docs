@@ -1242,14 +1242,14 @@ Cash Tx API
 ```javascript
 // Cash Token Contract
 const privateKey = <Buffer ...>;
-const owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-const spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-const attotokens = "100000000000000000000";
+const _from = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+const _to = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+const _value = "100000000000000000000";
 
 augur.api.Cash.approve({
   _signer: privateKey,
-  spender,
-  value: attotokens,
+  _spender: _to,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1271,9 +1271,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Cash.publicDepositEther({
+augur.api.Cash.depositEther({
   _signer: privateKey,
-  value: attotokens,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1295,10 +1295,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Cash.publicWithdrawEther({
+augur.api.Cash.withdrawEther({
   _signer: privateKey,
-  to: owner,
-  amount: attotokens,
+  _amount: _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1322,8 +1321,8 @@ successResponse = {
 
 augur.api.Cash.transfer({
   _signer: privateKey,
-  to: spender,
-  value: attotokens,
+  _to,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1347,9 +1346,9 @@ successResponse = {
 
 augur.api.Cash.transferFrom({
   _signer: privateKey,
-  from: owner,
-  to: spender,
-  value: attotokens,
+  _from,
+  _to,
+  _value,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1373,36 +1372,36 @@ successResponse = {
 ```
 #### [Cash Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)
 
-#### augur.api.Cash.approve({ \_signer, spender, value, onSent, onSuccess, onFailed })
+#### augur.api.Cash.approve({ \_signer, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` in attotokens approved.
+Allows the `_spender` the ability to spend up to `_value` (denoted in attotokens) worth of Cash Tokens for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` in attotokens approved.
 
-#### augur.api.Cash.publicDepositEther({ \_signer, value, onSent, onSuccess, onFailed })
+#### augur.api.Cash.depositEther({ \_signer, \_value, onSent, onSuccess, onFailed })
 
-This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `value` deposited, and the total balance for this `msg.sender`.
+This transaction is used to convert Ether (ETH) into a Cash token that is used on the augur markets. `_value` is the amount of Ether (ETH) denoted in attotokens to deposit into the Cash Token Contract for the `msg.sender`. This will spawn a `DepositEther` event which will record the owner address (`msg.sender`), `_value` deposited, and the total balance for this `msg.sender`.
 
-#### augur.api.Cash.publicWithdrawEther({ \_signer, to, amount, onSent, onSuccess, onFailed })
+#### augur.api.Cash.withdrawEther({ \_signer, \_to, \_amount, onSent, onSuccess, onFailed })
 
-This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `amount` of `msg.sender`'s CASH Tokens `to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `publicWithdrawEther` again will withdraw the `amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `amount` of Cash Tokens denoted in attotokens, or if the `amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `publicWithdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed.
+This transaction is used to convert Cash Tokens back into Ether (ETH) by sending the `_amount` of `msg.sender`'s CASH Tokens `_to` the address specified denoted in attotokens. This transaction requires a 3-day wait period from the initial call to withdraw. Once three days have passed, calling `withdrawEther` again will withdraw the `_amount` specified. This transaction will fail if we have initiated a withdraw but it hasn't been 3 days since the initiated withdraw, if the `msg.sender` doesn't have at least `_amount` of Cash Tokens denoted in attotokens, or if the `_amount` specified is less than 1. This transaction can spawn two different events depending on when it was called. If a withdraw hasn't been initiated then calling `withdrawEther` will spawn a `InitiateWithdrawEther` event which records the `msg.sender`, the `_amount` specified for withdraw, and the current balance of Cash Tokens for the `msg.sender`. If it has been at least 3 days since we have initiated a withdraw then when the withdraw takes place, this transaction will spawn a `WithdrawEther` event. The `WithdrawEther` event records `msg.sender`, the `_amount` withdrawn, and the balance of Cash Tokens after withdrawal has been completed.
 
-#### augur.api.Cash.transfer({ \_signer, to, value, onSent, onSuccess, onFailed })
+#### augur.api.Cash.transfer({ \_signer, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address and `value` is a number between 1 and 2<sup>254</sup> then this transaction will send `value` (in attotokens) worth of Cash Tokens to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred.
+If the `msg.sender` of the `transfer` transaction has enough of Cash Tokens to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address and `_value` is a number between 1 and 2<sup>254</sup> then this transaction will send `_value` (in attotokens) worth of Cash Tokens to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
-#### augur.api.Cash.transferFrom({ \_signer, from, to, value, onSent, onSuccess, onFailed })
+#### augur.api.Cash.transferFrom({ \_signer, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `value` (denoted in attotokens) worth to the `to` address, `value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of Cash Tokens for the `from` address then this transaction will send `value` worth of Cash Tokens to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` (in attotokens) amount transferred.
+If the `_from` address of the `transferFrom` transaction has enough Cash Tokens to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address, `_value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of Cash Tokens for the `_from` address then this transaction will send `_value` worth of Cash Tokens to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` (in attotokens) amount transferred.
 
 Claim Proceeds Tx API
 ------------------------------
 ```javascript
 // Claim Proceeds Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.ClaimProceeds.publicClaimProceeds({
+augur.api.ClaimProceeds.claimProceeds({
   _signer: privateKey,
-  market,
+  _market,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1426,22 +1425,22 @@ successResponse = {
 ```
 #### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
 
-#### augur.api.ClaimProceeds.publicClaimProceeds({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.ClaimProceeds.claimProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
 
-The `publicClaimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `market` owned by the `msg.sender`. This transaction will fail if the `market` specified is not finalized or if it hasn't been at least 3 days since the `market` was finalized.
+The `claimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
 
 Complete Sets Tx API
 -----------------------------
 ```javascript
 // Complete Sets Contract
 const privateKey = <Buffer ...>;
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-const fxpAmount = "50000000000000000000" // 50.0
+const _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const _amount = "50000000000000000000" // 50.0
 
 augur.api.CompleteSets.publicBuyCompleteSets({
   _signer: privateKey,
-  market,
-  fxpAmount,
+  _market,
+  _amount,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1465,8 +1464,8 @@ successResponse = {
 
 augur.api.CompleteSets.publicSellCompleteSets({
   _signer: privateKey,
-  market,
-  fxpAmount,
+  _market,
+  _amount,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1490,13 +1489,13 @@ successResponse = {
 ```
 #### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/completeSets.se)
 
-#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, market, fxpAmount, onSent, onSuccess, onFailed })
+#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
 
-This transaction will attempt to purchase `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't have enough of the `market`'s denomination token to be able to afford `fxpAmount` shares in all outcomes, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (buy), `fxpAmount` purchased, number of outcomes in the `market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
+This transaction will attempt to purchase `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` shares in all outcomes, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
 
-#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, market, fxpAmount, onSent, onSuccess, onFailed })
+#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
 
-This transaction will attempt to sell `fxpAmount` worth of shares in all outcomes for a specified `market`. This transaction will fail if the `msg.sender` doesn't own `fxpAmount` of shares in all outcomes for the `market`, or if the `fxpAmount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `market`, type (sell), `fxpAmount` sold, number of outcomes in the `market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
+This transaction will attempt to sell `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't own `_amount` of shares in all outcomes for the `_market`, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (sell), `_amount` sold, number of outcomes in the `_market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
 
 Make Order Tx API
 --------------------------
