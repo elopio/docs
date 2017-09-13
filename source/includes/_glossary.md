@@ -12,9 +12,21 @@ Goals:
  -->
 This section of the documentation is dedicated to terms found and used throughout the rest of documentation. Below you will find sections about terms used in Augur. The goal is to explain everything that might be confusing in an easy to understand way.
 
+## All Reporting
+
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). All Reporting lasts for 27 days and is followed by a 3 day [Dispute Period](#dispute-period) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a Fork. 
+
 ## Ask Order
 
 An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
+
+## Automated Reporter
+
+An Automated Reporter is a single address designated to [Resolve](#market-resolution) a [Market](#market) during [Automated Reporting](#automated-reporting). The Automated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Automated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be resolved, instead of Automated Reporting.
+
+## Automated Reporting
+
+Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on and [Resolved](#market-resolution). One address will be responsible for resolving the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Period](#dispute-period) begins where in anyone can post a bond to dispute the resolved [Outcome](#outcome) of the market. If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Cycle](#reporting-cycle) and will be subject to [Limited Reporting](#limited-reporting).
 
 ## Bid Order
 
@@ -34,11 +46,11 @@ A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome)
 
 ## Dispute Bond
 
-A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Outcome](#outcome) of a [Market](#market) isn't accurate. If the market's outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false outcome of the market. More information about reporting can be found in the
+A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Outcome](#outcome) of a [Market](#market) hasn't been [Resolved](#market-resolution) accurately. If the market's outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false outcome of the market.
 
 ## Dispute Period
 
-A Dispute Period is a 3 day window after a [Market](#market) has been resolved ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
+A Dispute Period is a 3 day window after a [Market](#market) has been [Resolved](#market-resolution) ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
 
 ## End Time
 
@@ -51,6 +63,10 @@ Filling an [Order](#order) is when a [Taker](#taker) provides what the [Maker](#
 ## Finalized Market
 
 A Finalized Market is a [Market](#market) that has been [Resolved](#market-resolution) and has not been disputed, the [Winning Outcome](#winning-outcome) is now final. This market is officially closed and [Share](#shares) holders can [settle](#settlement) their shares with the market.
+
+## Limited Reporting
+
+Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Resolution](#market-resolution) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) before the market is resolved. Limited Reporting lasts for 27 days and has a 3 day Dispute Period following market resolution before the market is finalized.
 
 ## Maker
 
