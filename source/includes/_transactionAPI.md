@@ -980,30 +980,30 @@ Reporting Window Tx API
 // Reporting Window Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-const endTime = 1501015000;
-const numOutcomes = '2';
-const payoutDenominator = '2';
-const feePerEthInWei = '10000000000000000';
+const _endTime = 1501015000;
+const _numOutcomes = '2';
+const _payoutDenominator = '2';
+const _feePerEthInWei = '10000000000000000';
 const cashContract = "0xb85a75a008e15d134c8ba01679ce2ab82dd7f777";
-const creator = "0xab11204cfeaccffa63c2d23aef2ea9accdb0a0d5";
-const minDisplayPrice = "0";
-const maxDisplayPrice = "1";
-const automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
-const topic = "examples";
+const _creator = "0xab11204cfeaccffa63c2d23aef2ea9accdb0a0d5";
+const _minDisplayPrice = "0";
+const _maxDisplayPrice = "1";
+const _automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
+const _topic = "examples";
 
 augur.api.ReportingWindow.createNewMarket({
   _signer: privateKey,
   reportingWindow,
-  endTime,
-  numOutcomes,
-  payoutDenominator,
-  feePerEthInWei,
-  denominationToken: cashContract,
-  creator,
-  minDisplayPrice,
-  maxDisplayPrice,
-  automatedReporterAddress,
-  topic,
+  _endTime,
+  _numOutcomes,
+  _payoutDenominator,
+  _feePerEthInWei,
+  _denominationToken: cashContract,
+  _creator,
+  _minDisplayPrice,
+  _maxDisplayPrice,
+  _automatedReporterAddress,
+  _topic,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1027,9 +1027,9 @@ successResponse = {
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
 
-#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, endTime, numOutcomes, payoutDenominator, feePerEthInWei, denominationToken, creator, minDisplayPrice, maxDisplayPrice, automatedReporterAddress, topic, onSent, onSuccess, onFailed })
+#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_automatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
 
-This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `numOutcomes` value isn't within the range of 2 and 8, if the `payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `reportingWindow`, if the `payoutDenominator` isn't a multiple of `numOutcomes`, if `feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `maxDisplayPrice` and `minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `maxDisplayPrice` - `minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `_numOutcomes` value isn't within the range of 2 and 8, if the `_payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `_reportingWindow`, if the `_payoutDenominator` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_maxDisplayPrice` and `_minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `_maxDisplayPrice` - `_minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
 Reputation Token Tx API
 --------------------------------
@@ -1199,17 +1199,17 @@ Cancel Order Tx API
 ```javascript
 // Cancel Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
-const orderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
-const type = "1";
-const market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-const outcome = "1";
+const _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+const _type = "1";
+const _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+const _outcome = "1";
 
-augur.api.CancelOrder.publicCancelOrder({
+augur.api.CancelOrder.cancelOrder({
   _signer: privateKey,
-  orderID,
-  type,
-  market,
-  outcome,
+  _orderId,
+  _type,
+  _market,
+  _outcome,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1233,9 +1233,9 @@ successResponse = {
 ```
 #### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cancelOrder.se)
 
-#### augur.api.CancelOrder.publicCancelOrder({ \_signer, orderID, type, market, outcome, onSent, onSuccess, onFailed })
+#### augur.api.CancelOrder.cancelOrder({ \_signer, \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
 
-The `publicCancelOrder` transaction is used to cancel and refund an existing order on the specified `market` of `type` for the `outcome` given it's `orderID`. This will fail if `msg.sender` isn't the owner of the order, if the `market` or `orderID` is not defined, or if `type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
+The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given it's `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
 
 Cash Tx API
 --------------------
@@ -1502,25 +1502,25 @@ Make Order Tx API
 ```javascript
 // Make Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
-const type = "1";
-const attoshares = "10000000000000000000"; // 10 shares
-const displayPrice = "0.5";
-const market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
-const outcome = "1";
-const betterOrderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-const worseOrderID = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
-const tradeGroupID = "1";
+const _type = "1";
+const _attoshares = "10000000000000000000"; // 10 shares
+const _displayPrice = "0.5";
+const _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
+const _outcome = "1";
+const _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+const _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
+const _tradeGroupId = "1";
 
 augur.api.MakeOrder.publicMakeOrder({
   _signer: privateKey,
-  type,
-  attoshares,
-  displayPrice,
-  market,
-  outcome,
-  betterOrderID,
-  worseOrderID,
-  tradeGroupID,
+  _type,
+  _attoshares,
+  _displayPrice,
+  _market,
+  _outcome,
+  _betterOrderId,
+  _worseOrderId,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1544,11 +1544,11 @@ successResponse = {
 ```
 #### [Make Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/makeOrder.se)
 
-#### augur.api.MakeOrder.publicMakeOrder({ \_signer, type, attoshares, displayPrice, market, outcome, betterOrderID, worseOrderID, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.MakeOrder.publicMakeOrder({ \_signer, \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-This transaction will create a new order on the order book for the specified `market` trading on the `outcome` provided. The required fields besides market and outcome are the `type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `attoshares`, and the `displayPrice` for the order. Optional params include `betterOrderID`, `worseOrderID`, `tradeGroupID`, and the callbacks. The `betterOrderID` and `worseOrderID` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `tradeGroupID` is a field used by the Augur UI to group transactions and can be left blank.
+This transaction will create a new order on the order book for the specified `_market` trading on the `_outcome` provided. The required fields besides market and outcome are the `_type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `_attoshares`, and the `_displayPrice` for the order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
 
-This transaction will fail if `type` is not a valid value of 1 or 2, If the `attoshares` value is less than 0, if the `market` isn't defined, if the `outcome` is less than 0 or greater than the total number of outcomes for the `market`, or if the `displayPrice` is below the `market`'s minimum `displayPrice` or if the `displayPrice` is above the market's maximum `displayPrice`.
+This transaction will fail if `_type` is not a valid value of 1 or 2, If the `_attoshares` value is less than 0, if the `_market` isn't defined, if the `_outcome` is less than 0 or greater than the total number of outcomes for the `_market`, or if the `_displayPrice` is below the `_market`'s minimum `_displayPrice` or if the `_displayPrice` is above the market's maximum `_displayPrice`.
 
 Share Token Tx API
 ---------------------------
@@ -1556,14 +1556,14 @@ Share Token Tx API
 // Share Token Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
 const shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
-const spenderAddress = "0x01f50356c280cd886dd058210937160c73700a4b";
-const attotokens = "100000000000000000000";
+const _spender = "0x01f50356c280cd886dd058210937160c73700a4b";
+const _attotokens = "100000000000000000000";
 
 augur.api.ShareToken.approve({
   _signer: privateKey,
   shareToken,
-  spender: spenderAddress,
-  value: attotokens,
+  _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1587,8 +1587,8 @@ successResponse = {
 augur.api.ShareToken.transfer({
   _signer: privateKey,
   shareToken,
-  to: spenderAddress,
-  value: attotokens,
+  _to: _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1610,13 +1610,13 @@ successResponse = {
   value: "0x0"
 }
 
-const sourceAddress = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
+const _from = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
   _signer: privateKey,
   shareToken,
-  from: sourceAddress,
-  to: spenderAddress,
-  value: attotokens,
+  _from,
+  _to: _spender,
+  _value: _attotokens,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result)
@@ -1640,38 +1640,32 @@ successResponse = {
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
 
-#### augur.api.ShareToken.approve({ \_signer, shareToken, spender, value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.approve({ \_signer, shareToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Allows the `spender` the ability to spend up to `value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `spender`, and `value` denoted in attotokens approved.
+Allows the `_spender` the ability to spend up to `_value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` denoted in attotokens approved.
 
-#### augur.api.ShareToken.transfer({ \_signer, shareToken, to, value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.transfer({ \_signer, shareToken, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `value` worth to the `to` address and `value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `to` address, and `value` amount transferred denoted in attotokens.
+If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `_value` worth to the `_to` address and `_value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred denoted in attotokens.
 
-#### augur.api.ShareToken.transferFrom({ \_signer, shareToken, from, to, value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.transferFrom({ \_signer, shareToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `value` worth to the `to` address, `value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `value` worth of `shareToken` for `from` address then this transaction will send `value` worth of `shareToken` to the specified `to` address from the `from` address. This transaction will spawn a `Transfer` event which will record the `from` address, `to` address, and `value` amount transferred denoted in attotokens.
+If the `_from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `_value` worth to the `_to` address, `_value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `shareToken` for `_from` address then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` amount transferred denoted in attotokens.
 
 Take Order Tx API
 --------------------------
 ```javascript
 // Take Order Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
-const orderID = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-const type = "1";
-const market = "0x71a4e3899629f6023cde649a40982eda46ef2777";
-const outcome = "1";
-const fxpAmountTakerWants = "10000000000000000000"; // 10.0
-const tradeGroupID = "1";
+const _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+const _amountTakerWants = "10000000000000000000"; // 10.0
+const _tradeGroupId = "1";
 
 augur.api.TakeOrder.publicTakeOrder({
   _signer: privateKey,
-  orderID,
-  type,
-  market,
-  outcome,
-  fxpAmountTakerWants,
-  tradeGroupID,
+  _orderId,
+  _amountTakerWants,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1686,7 +1680,7 @@ successResponse = {
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
   hash: "0x3efb4102dc3b9e1bb145ca21310233646a4eba24894b04f12ee4d390281301ac",
-  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091000000000000000000000000000000000000000000000000000000000000000100000000000000000000000071a4e3899629f6023cde649a40982eda46ef277700000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
+  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e60910000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
   nonce: "0xff4",
   timestamp: 1501003129,
   to: "0x077f28f038dd94ed9c444b806137302b1c4cbd5a",
@@ -1695,28 +1689,28 @@ successResponse = {
 ```
 #### [Take Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/takeOrder.se)
 
-#### augur.api.TakeOrder.publicTakeOrder({ \_signer, orderID, type, market, outcome, fxpAmountTakerWants, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.TakeOrder.publicTakeOrder({ \_signer, \_orderID, \_amountTakerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
 
-Given an `orderID`, the `type` of order, the `market` containing this order, the `outcome` this order trades on, and the amount a taker wants as `fxpAmountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `fxpAmountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `fxpAmountTakerWants` value that the taker requests. This transaction requires `orderID`, `type`, `market`, `outcome`, and `fxpAmountTakerWants` are defined. The maker of the order specified by `orderID` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `orderID` after being filled, if it's completely filled this will return `0`. The `tradeGroupID` is an optional value that is used by the Augur UI and can be left `undefined`.
+Given an `_orderId` and the amount a taker wants as `_amountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `_amountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `_amountTakerWants` value that the taker requests. This transaction requires `_orderId` and `_amountTakerWants` are defined. The maker of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
 
 Trade Tx API
 ---------------------
 ```javascript
 // Trade Contract Transaction API Examples:
 const privateKey = <Buffer ...>;
-const market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
-const outcome = "1";
-const fxpAmount = "10000000000000000000"; // 10.0
-const fxpPrice = "500000000000000000"; // 0.5
-const tradeGroupID = "1";
+const _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
+const _outcome = "1";
+const _fxpAmount = "10000000000000000000"; // 10.0
+const _fxpPrice = "500000000000000000"; // 0.5
+const _tradeGroupId = "1";
 
 augur.api.Trade.publicBuy({
   _signer: privateKey,
-  market,
-  outcome,
-  fxpAmount,
-  fxpPrice,
-  tradeGroupID,
+  _market,
+  _outcome,
+  _fxpAmount,
+  _fxpPrice,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1740,11 +1734,11 @@ successResponse = {
 
 augur.api.Trade.publicSell({
   _signer: privateKey,
-  market,
-  outcome,
-  fxpAmount,
-  fxpPrice,
-  tradeGroupID,
+  _market,
+  _outcome,
+  _fxpAmount,
+  _fxpPrice,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1768,12 +1762,12 @@ successResponse = {
 
 augur.api.Trade.publicTrade({
   _signer: privateKey,
-  direction: '1',
-  market,
-  outcome,
-  fxpAmount,
-  fxpPrice,
-  tradeGroupID,
+  _direction: '1',
+  _market,
+  _outcome,
+  _fxpAmount,
+  _fxpPrice,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1797,12 +1791,12 @@ successResponse = {
 
 augur.api.Trade.publicTakeBestOrder({
   _signer: privateKey,
-  direction: '2',
-  market,
-  outcome,
-  fxpAmount,
-  fxpPrice,
-  tradeGroupID,
+  _direction: '2',
+  _market,
+  _outcome,
+  _fxpAmount,
+  _fxpPrice,
+  _tradeGroupId,
   onSent: (result) => console.log(result),
   onSuccess: (result) => console.log(result),
   onFailed: (result) => console.log(result),
@@ -1826,18 +1820,18 @@ successResponse = {
 ```
 #### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/trade.se)
 
-#### augur.api.Trade.publicBuy({ \_signer, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicBuy({ \_signer, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicBuy` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to buy at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+The `publicBuy` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to buy at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicSell({ \_signer, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicSell({ \_signer, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicSell` transaction is used to purchase shares for a specified `market` and `outcome`. The amount of shares you wish to purchase is `fxpAmount` denoted in attoshares and the price point you would like to sell at is `fxpPrice` denoted in attotokens of the `market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `fxpAmount` of shares at `fxpPrice`. The `tradeGroupID` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+The `publicSell` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to sell at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicTrade({ \_signer, direction, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTrade({ \_signer, \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `orderID` of that new order will be returned.
+The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicTakeBestOrder({ \_signer, direction, market, outcome, fxpAmount, fxpPrice, tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTakeBestOrder({ \_signer, \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
+The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
