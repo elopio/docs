@@ -14,7 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). All Reporting lasts for 27 days and is followed by a 3 day [Dispute Period](#dispute-period) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a Fork. 
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). Every Reporter is expected to report on All Reporting Markets during a [Reporting Window](#reporting-window) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Period](#dispute-period) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork).
 
 ## Ask Order
 
@@ -35,6 +35,10 @@ A Bid Order is an [Order](#order) indicating the desire of the [Maker](#maker) t
 ## Binary Market
 
 A Binary Market is a [market](#market) with only two [outcomes](#outcome), as well as Indeterminate which is always a possible outcome. Binary markets are for yes or no questions, if you need more than a yes or no then a [Categorical](#categorical-market) or [Scalar](#scalar-market) market might fit your needs better.
+
+## Branch
+
+A Branch can be thought of as a separate universe of Augur where the [Winning Outcome](#winning-outcome) [Resolved](#market-resolution) for a [All Reporting](#all-reporting) [Market](#market) is [Disputed](#dispute-bond) and multiple versions of Augur are needed to resolve the dispute. Each version of Augur is a different Branch, where each version will feature a copy of Augur's state with the one difference being the Outcome of the Market that caused the [Fork](#fork).
 
 ## Categorical Market
 
@@ -63,6 +67,10 @@ Filling an [Order](#order) is when a [Taker](#taker) provides what the [Maker](#
 ## Finalized Market
 
 A Finalized Market is a [Market](#market) that has been [Resolved](#market-resolution) and has not been disputed, the [Winning Outcome](#winning-outcome) is now final. This market is officially closed and [Share](#shares) holders can [settle](#settlement) their shares with the market.
+
+## Fork
+
+A Fork occurs if a [All Reporting](#all-reporting) [Market Resolution](#market-resolution) is disputed. A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the finalized [outcome](#outcome) of the [Market](#market) that caused the Fork to happen by being disputed after All Reporting. There will be a branch created for each possible outcome of the market, including invalid. The idea here is that people will want to trade in the branch of Augur that actually reflects reality (the correct outcome of the market). The branch that people have accepted as reality will have more trading volume on it and will be considered the main branch.
 
 ## Limited Reporting
 
