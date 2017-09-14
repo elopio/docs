@@ -14,7 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). Every Reporter is expected to report on All Reporting Markets during a [Reporting Window](#reporting-window) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Period](#dispute-period) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork).
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). Every Reporter is expected to report on All Reporting Markets during a [Reporting Window](#reporting-window) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork).
 
 ## Ask Order
 
@@ -26,7 +26,7 @@ An Automated Reporter is a single address designated to [Resolve](#market-resolu
 
 ## Automated Reporting
 
-Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on and [Resolved](#market-resolution). One address will be responsible for resolving the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Period](#dispute-period) begins where in anyone can post a bond to dispute the resolved [Outcome](#outcome) of the market. If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Cycle](#reporting-cycle) and will be subject to [Limited Reporting](#limited-reporting).
+Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on and [Resolved](#market-resolution). One address will be responsible for resolving the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in anyone can post a bond to dispute the resolved [Outcome](#outcome) of the market. If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Cycle](#reporting-cycle) and will be subject to [Limited Reporting](#limited-reporting).
 
 ## Bid Order
 
@@ -52,9 +52,9 @@ A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome)
 
 A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Outcome](#outcome) of a [Market](#market) hasn't been [Resolved](#market-resolution) accurately. If the market's outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false outcome of the market.
 
-## Dispute Period
+## Dispute Phase
 
-A Dispute Period is a 3 day window after a [Market](#market) has been [Resolved](#market-resolution) ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
+A Dispute Phase is a three (3) day window after a [Market](#market) has been [Resolved](#market-resolution) ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
 
 ## End Time
 
@@ -74,7 +74,7 @@ A Fork occurs if a [All Reporting](#all-reporting) [Market Resolution](#market-r
 
 ## Limited Reporting
 
-Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Resolution](#market-resolution) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) before the market is resolved. Limited Reporting lasts for 27 days and has a 3 day Dispute Period following market resolution before the market is finalized.
+Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Resolution](#market-resolution) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) before the market is resolved. [Limited Reporting](#limited-reporting) lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following market resolution before the market is finalized.
 
 ## Maker
 
@@ -147,6 +147,10 @@ The Reporting Fee is used to help pay for the decentralized oracle system. When 
 ## Reporting Period
 
 The Reporting Period is 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Cycle](#reporting-cycle) and [Reporting Window](#reporting-window).
+
+## Reporting Phase
+
+The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter).
 
 ## Reporting Window
 

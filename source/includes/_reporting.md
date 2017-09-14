@@ -5,7 +5,7 @@ Reporting
 
 <a href="images/Reporting Diagram.png"><img src="images/Reporting Diagram.png"></a>
 
-The Reporting Diagram above is a high level overview of [Reporting](#report) implemented by Augur. There are four ways for a [Market](#market) to be [Resolved](#market-resolution): [Automated Reporting](#automated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and rarely a [Fork](#fork). Markets in Augur have 10 potential states after [Market Creation](#market-creation). The potential states of a Market are as follows:
+The Reporting Diagram above is a high level overview of [Reporting](#report) implemented by Augur. There are four ways for a [Market](#market) to be [Resolved](#market-resolution): [Automated Reporting](#automated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and rarely a [Fork](#fork). Markets in Augur have 10 potential states after Market Creation. The potential states of a Market are as follows:
 
 1. Pre-Reporting
 2. Automated Reporting
@@ -30,6 +30,11 @@ Once 27 days have passed the Reporting Window enters the Dispute Phase and all M
 
 If a Market in the Limited Dispute (6) state is challenged then it will be moved into the All Reporting (7) state at the start of the next Reporting Window, which should be a maximum of three days away from the posting of the dispute bond. If a Market in the All Dispute (8) state is challenged then that market will cause a [Fork](#fork) and be moved into the Fork (9) state.
 
+The Fork (9) state is a special and rarely entered state. A fork lasts sixty (60) days, and creates multiple [Branches](#branch) of Augur. A Branch can be thought of as a different universe of Augur where everything is the same as all the other Branches, when they are first created anyway, except for the Winning Outcome of the Market that has entered the Fork state. As the sixty days go by, people will be allowed to trade on whatever branch they choose to trade on. Which ever of these branches has the most activity after 60 days will have the Market enter the Finalized (10) state with the Winning Outcome set to whatever the outcome was for that Branch.
+
+A Market can move into the Finalized (10) state anytime it is resolved and moves through a dispute state without being challenged. Forks cannot be challenged, therefore after 60 days the market is always moved to a finalized state. Once a market is finalized, traders can [Settle](#settlement) their [positions](#position) on the market.
+
+The majority of Markets will most likely use Automated Reporting and be settled without the need to wait for a Reporting Window to start. This is anticipated as [Market Creators](#market-creator) will want to create reputable markets that have accurate automated reporting in order to drive more trading on their markets so they can collect more fees and earn more. 
 
 
 Legacy Reporting
