@@ -32,39 +32,13 @@ If a Market in the Limited Dispute (6) state is challenged then it will be moved
 
 The Fork (9) state is a special and rarely entered state. A fork lasts sixty (60) days, and creates multiple [Branches](#branch) of Augur. A Branch can be thought of as a different universe of Augur where everything is the same as all the other Branches, when they are first created anyway, except for the Winning Outcome of the Market that has entered the Fork state. As the sixty days go by, people will be allowed to trade on whatever branch they choose to trade on. Which ever of these branches has the most activity after 60 days will have the Market enter the Finalized (10) state with the Winning Outcome set to whatever the outcome was for that Branch.
 
-A Market can move into the Finalized (10) state anytime it is resolved and moves through a dispute state without being challenged. Forks cannot be challenged, therefore after 60 days the market is always moved to a finalized state. Once a market is finalized, traders can [Settle](#settlement) their [positions](#position) on the market.
+A Market can move into the Finalized (10) state anytime it is resolved and moves through a dispute state without being challenged. Forks cannot be challenged, therefore after 60 days the market is always moved to a finalized state. Once a market is finalized, traders can [Settle](#settlement) their [positions](#position) with the market.
 
-The majority of Markets will most likely use Automated Reporting and be settled without the need to wait for a Reporting Window to start. This is anticipated as [Market Creators](#market-creator) will want to create reputable markets that have accurate automated reporting in order to drive more trading on their markets so they can collect more fees and earn more. 
+The majority of Markets will most likely use Automated Reporting and be settled without the need to wait for a Reporting Window to start. This is anticipated as [Market Creators](#market-creator) will want to create reputable markets that have accurate automated reporting in order to drive more trading on their markets so they can earn more fees.
 
+Reporting Windows and Registration
+----------------------------------
 
-Legacy Reporting
-----------
-<aside class="warning">The Legacy Reporting section is deprecated. This information is no longer accurate as the reporting system has undergone some changes. This document will be updated prior to release of Augur.</aside>
+Reporting Windows continually occur and last for thirty days. Reporting Windows have two phases, the Reporting Phase and the Dispute Phase. The Reporting Phase lasts for twenty seven (27) days in which Reporters will be Reporting on Markets in the Limited Reporting and All Reporting states. The Dispute Phase lasts three (3) days immediately following the Reporting Phase. During a Dispute Phase any REP holder is able to post a Dispute Bond to challenge the resolved Winning Outcome of a Market. You do not need to have registered for the Reporting Window to post a Dispute Bond. In order to earn Reporting Fees as a REP holder you need to Report on Markets during the Reporting Phase.
 
-<a href="images/reporting_cycle.svg"><img src="images/reporting_cycle.svg" onerror="this.src='images/reporting_cycle.png'"></a>
-
-This diagram shows the Reporting cycle for an event (and its associated market) which was created during some previous cycle (off the diagram to the left) and which expires sometime during the cycle marked as "Reporting cycle 1".  Each cycle takes 60 days to complete.  Including the steps needed to fully complete all payouts and Reputation redistribution, resolving an event takes three full Reporting cycles.
-
-<aside class="notice">In Augur, the terms "Reporting period" and "Reporting cycle" are used interchangeably throughout the codebase.</aside>
-
-Legacy Reporting outcomes
-------------------
-
-### Yes or no (binary)
-- no: `2**64`
-- yes: `2*2**64`
-- indeterminate: `3*2**63`
-- exactly in the middle but not indeterminate: `2**63 + 1`
-
-### Multiple choice (categorical)
-
-- min: `1`
-- max: `2**64`
-- indeterminate: `2**63`
-- exactly in the middle but not indeterminate: `2**63 + 1`
-
-### Numerical (scalar)
-- min: `1`
-- max: `2**64`
-- indeterminate: `2**63`
-- exactly in the middle but not indeterminate: `2**63 + 1`
+REP holders who intend to Report on the outcome of markets in a Limited Reporting or All Reporting state will need to register to report prior to the Reporting Window's start time. To do this, REP holders will purchase a Registration Token, which are tied to a specific upcoming Reporting Window. The purpose of a Registration Token is to allow the system to get an approximation as to how many Reporters will be participating in the Reporting Window. This is used to calculate how many Markets each Reporter needs to Report on in order for the system to get its target number of Reports per Market. Registration Tokens can be purchased as far in advanced as you would like for any future Reporting Window, but cannot be purchased for a Reporting Window in progress.
