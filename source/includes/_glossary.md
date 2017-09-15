@@ -44,6 +44,10 @@ A Branch can be thought of as a separate universe of Augur where the [Winning Ou
 
 A Categorical Market is a [market](#market) with more than 2 potential [outcomes](#outcome), but no more than 8. As with all markets, Indeterminate is also an outcome not included in the 8 outcome maximum. Categorical Markets are best for multiple choice type questions, which team wins a tournament or what color tie the President of the United States wears at his next press conference. If you just need a yes or no question, you will probably want to make a [Binary Market](#binary-market). If you wanted to guess the temperature in degrees on a certain day, you would probably want to use a [Scalar Market](#scalar-market) for that, as it would be very difficult to pin down 8 possibilities and it's not a yes or no question.
 
+## Challenge
+
+Challenge is used to describe the act of a [REP](#rep) holder posting a [Dispute Bond](#dispute-bond) to dispute or "challenge" the [Resolved](#market-resolution) [Winning Outcome](#winning-outcome) of a [Market](#market) before it is [Finalized](#finalized-market).
+
 ## Complete Set
 
 A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete the trade then a Complete Set will be formed and settled (destroyed). The range of the [market](#market), ([maxDisplayPrice](#maximum-display-price) - [minDisplayPrice](#minimum-display-price)) - [Trading Fees](#trading-fees) ETH will then be paid out proportionally to both the Maker and Taker based on their respective Shares value at the time of settlement. The Trading Fees extracted will go toward paying for the reporting system and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from share settlement.
@@ -134,7 +138,7 @@ A Report, or Reporting, is the submission of [REP](#REP) wagered on the [Outcome
 
 ## Reporter
 
-A Reporter is a [REP](#REP) holder who has registered for the current Reporting Cycle by purchasing a [Registration Token](#registration-token). The Reporter is expected to [Report](#report) on at least a minimum number of [Markets](#markets) and ideally should be [Reporting](#report) accurately as these market's descriptions should have a known outcome at this point in time.
+A Reporter, or Registered Reporter, is a [REP](#REP) holder who has registered for the current Reporting Cycle by purchasing a [Registration Token](#registration-token). The Reporter is expected to [Report](#report) on at least a minimum number of [Markets](#markets) and ideally should be [Reporting](#report) accurately as these market's descriptions should have a known outcome at this point in time.
 
 ## Reporting Cycle
 
