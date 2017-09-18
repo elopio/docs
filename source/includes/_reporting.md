@@ -1,7 +1,7 @@
 
 Reporting
 =========
-<aside class="notice">The Reporting section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates. **The Legacy Reporting and Legacy Reporting Outcomes sections below are deprecated and can be ignored.** </aside>
+<aside class="notice">The Reporting section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 <a href="images/Reporting Diagram.png"><img src="images/Reporting Diagram.png"></a>
 
@@ -18,11 +18,11 @@ The Reporting Diagram above is a high level overview of [Reporting](#report) imp
 9. Forking
 10. Finalized
 
-The Pre-Reporting (1) state is the time period where the market's [End Time](#end-time) has not come to pass and there is open trading on the various outcomes for the Market. Once the End Time has come to pass, a Market with an [Automated Reporter](#automated-reporter) set will immediately enter it's Automated Reporting state.
+The Pre-Reporting (1) state is the time period where the market's [End Time](#end-time) has not come to pass, generally this is the most active trading period. Once the End Time has come to pass, a Market with an [Automated Reporter](#automated-reporter) set will immediately enter it's Automated Reporting state.
 
 The [Automated Reporting](#automated-reporting) (2) state is up to three days long. During this state, the market is expected to be resolved by the Automated Reporter at some point during this three day period. As soon as the Automated Reporter submits his Report the Market will be moved into the Automated Dispute (3) state. The Automated Dispute state lasts for three days, during which any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to challenge the [Winning Outcome](#winning-outcome) resolved by the Automated Reporter. If a Dispute Bond is posted during the Automated Dispute state, or if the Automated Reporter fails to report during the Automated Reporting state then the market will be moved into the Awaiting Migration (4) state.
 
-The Awaiting Migration (4) state can last up to 30 days and theoretically could be as short as a second long. During this time the Market is essentially waiting for the next [Reporting Window](#reporting-window) to begin so that the Market can be moved into the Limited Reporting (5) state. Reporting Windows last a total of 30 days, the first 27 days are for the [Reporting Phase](#reporting-phase), the following 3 days are for the [Dispute Phase](#dispute-phase). When a Reporting Window ends another Reporting Window immediately starts.
+The Awaiting Migration (4) state can last up to 30 days and theoretically could be as short as a second long. During this time the Market is waiting for the next [Reporting Window](#reporting-window) to begin so that the Market can be moved into the Limited Reporting (5) state. Reporting Windows last a total of 30 days, the first 27 days are for the [Reporting Phase](#reporting-phase), the following 3 days are for the [Dispute Phase](#dispute-phase). When a Reporting Window ends another Reporting Window immediately starts.
 
 Once a new Reporting Window has begun, any markets in the Awaiting Migration (4) state will be moved into the Limited Reporting (5) state, and the Reporting Phase will begin. During the Reporting Phase markets in both a Limited Reporting (5) and All Reporting (7) state will be reported on by [Registered Reporters](#reporter).
 

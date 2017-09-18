@@ -562,7 +562,7 @@ This transaction will move the `market` onto the active branch following a fork 
 
 #### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market` by calling 'tryFinalizeAutomatedReport', 'tryFinalizeLimitedReporting', 'tryFinalizeAllReporting', and 'tryFinalizeFork' in that order. If the `market` becomes finalized after any of those calls, this transaction will return `1`. If none of those calls finalized the market then this transaction returns `0`.
+This transaction will attempt to finalize the `market`. If the `market` becomes finalized, this transaction will return `1`. If the market could not be finalized then `0` is returned instead.
 
 #### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
