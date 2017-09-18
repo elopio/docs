@@ -143,7 +143,7 @@ A Report, or Reporting, is the staking of [REP](#REP) on the [Outcome](#outcome)
 ## Reporter
 
 A Reporter, or Registered Reporter, is a [REP](#REP) holder who
-Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is not [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Automated Reporting](#automated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
+Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Automated Reporting](#automated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
 
 ## Reporting Fee
 
@@ -151,7 +151,7 @@ The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. W
 
 ## Reporting Phase
 
-The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter).
+The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should have a set [Proposed Outcome](#proposed-outcome) and be moved into a [Dispute Phase](#dispute-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
 
 ## Reporting Window
 
