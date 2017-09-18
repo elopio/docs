@@ -14,7 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and the [Market Resolution](#market-resolution) has been challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Cycle](#reporting-cycle). Every Reporter is expected to report on All Reporting Markets during a [Reporting Window](#reporting-window) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork).
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Window](#reporting-window). Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork). All Reporting takes place within a Reporting Window.
 
 ## Ask Order
 
@@ -22,11 +22,11 @@ An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) 
 
 ## Automated Reporter
 
-An Automated Reporter is a single address designated to [Resolve](#market-resolution) a [Market](#market) during [Automated Reporting](#automated-reporting). The Automated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Automated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be resolved, instead of Automated Reporting.
+An Automated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Automated Reporting](#automated-reporting). The Automated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Automated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be [Finalized](#finalized), instead of Automated Reporting.
 
 ## Automated Reporting
 
-Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on and [Resolved](#market-resolution). One address will be responsible for resolving the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in anyone can post a bond to dispute the resolved [Outcome](#outcome) of the market. If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Cycle](#reporting-cycle) and will be subject to [Limited Reporting](#limited-reporting).
+Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in anyone can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Automated Reporting is independent of Reporting Windows.
 
 ## Bid Order
 
@@ -38,7 +38,7 @@ A Binary Market is a [market](#market) with only two [outcomes](#outcome), as we
 
 ## Branch
 
-A Branch can be thought of as a separate universe of Augur where the [Winning Outcome](#winning-outcome) [Resolved](#market-resolution) for a [All Reporting](#all-reporting) [Market](#market) is [Disputed](#dispute-bond) and multiple versions of Augur are needed to resolve the dispute. Each version of Augur is a different Branch, where each version will feature a copy of Augur's state with the one difference being the Outcome of the Market that caused the [Fork](#fork).
+A Branch can be thought of as a separate universe of Augur where the [Proposed Outcome](#proposed-outcome) submitted for a [All Reporting](#all-reporting) [Market](#market) is [Disputed](#dispute-bond) and multiple versions of Augur are needed to resolve the dispute. Each version of Augur is a different Branch, where each version will feature a copy of Augur's state with the one difference being the Proposed Outcome of the Market that caused the [Fork](#fork). Once the Fork occurs, [REP](#REP) holders will have to choose which branch to migrate their REP to. Migration is a one way action and is final. The Market that caused the Fork will be considered [Finalized](#finalized-market) in all branches, however only the branch that has the most REP migrated to it after 60 days will allow traders to [Settle](#settlement) [Shares](#shares) and payout [Reporters](#reporters) their [Reporting Fees](#reporting-fee).
 
 ## Categorical Market
 
@@ -46,7 +46,7 @@ A Categorical Market is a [market](#market) with more than 2 potential [outcomes
 
 ## Challenge
 
-Challenge is used to describe the act of a [REP](#rep) holder posting a [Dispute Bond](#dispute-bond) to dispute or "challenge" the [Resolved](#market-resolution) [Winning Outcome](#winning-outcome) of a [Market](#market) before it is [Finalized](#finalized-market).
+Challenge is used to describe the act of a [REP](#rep) holder posting a [Dispute Bond](#dispute-bond) to dispute or "challenge" the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization) before it is [Finalized](#finalized-market).
 
 ## Complete Set
 
@@ -54,15 +54,15 @@ A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome)
 
 ## Dispute Bond
 
-A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Outcome](#outcome) of a [Market](#market) hasn't been [Resolved](#market-resolution) accurately. If the market's outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false outcome of the market.
+A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization) isn't accurate. If the [Market's](#market) Proposed Outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false [Outcome](#outcome) of the Market.
 
 ## Dispute Phase
 
-A Dispute Phase is a three (3) day window after a [Market](#market) has been [Resolved](#market-resolution) ([Reported](#report) on) before which the [Outcome](#outcome) of the market resolution is finalized. During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window).
+A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) of the market [Finalized](#finalized-market). During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window). Markets in the Dispute Phase are sometimes referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
 
 ## End Time
 
-End Time is the date and time that a [market](#market)'s event will have come to pass and should be known. After this date and time has passed the market will get reported on and finalized.
+End Time is the date and time that a [Market](#market)'s event will have come to pass and should be known. After this date and time has passed the Market will get [Reported](#report) on and [Finalized](#finalized-market).
 
 ## Fill Order
 
@@ -70,15 +70,19 @@ Filling an [Order](#order) is when a [Taker](#taker) provides what the [Maker](#
 
 ## Finalized Market
 
-A Finalized Market is a [Market](#market) that has been [Resolved](#market-resolution) and has not been disputed, the [Winning Outcome](#winning-outcome) is now final. This market is officially closed and [Share](#shares) holders can [settle](#settlement) their shares with the market.
+A Finalized Market is a [Market](#market) that has [Awaited Finalization](#market-awaiting-finalization) and has not been disputed, the [Proposed Outcome](#proposed-outcome) is now considered final. This market will now allow [Share](#shares) holders to [settle](#settlement) their shares with the market.
 
 ## Fork
 
-A Fork occurs if a [All Reporting](#all-reporting) [Market Resolution](#market-resolution) is disputed. A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the finalized [outcome](#outcome) of the [Market](#market) that caused the Fork to happen by being disputed after All Reporting. There will be a branch created for each possible outcome of the market, including invalid. The idea here is that people will want to trade in the branch of Augur that actually reflects reality (the correct outcome of the market). The branch that people have accepted as reality will have more trading volume on it and will be considered the main branch.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) round of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Finalized](#finalized-market) [outcome](#outcome) of the [Market](#market) that caused the Fork to occur. There will be a branch created for each possible outcome of the market, including invalid. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to settle shares for that market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
+
+## Fork Period
+
+The Fork Period is a sixty (60) day window of time after a [Fork](#fork) has occurred.
 
 ## Limited Reporting
 
-Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Resolution](#market-resolution) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) before the market is resolved. [Limited Reporting](#limited-reporting) lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following market resolution before the market is finalized.
+Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Finalization](#finalized-market) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) who will stake their REP on the [Proposed Outcome](#proposed-outcome) of their choosing. Limited Reporting has a [Reporting Phase](#reporting-phase) that lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following it. If a Limited Report's Proposed Outcome is [challenged](#challenge) the Market is moved into the [All Reporting](#all-reporting) state and attached to the next [Reporting Window](#reporting-window). Limited Reporting takes place within a Reporting Window.
 
 ## Maker
 
@@ -86,15 +90,15 @@ A Maker is the creator of an [Order](#order) that is placed on the [Order Book](
 
 ## Market
 
-A market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [outcome](#outcome) of the event, the more specific the better. Each market created on the Augur network will have an automatically managed order book, which will allow users to buy and sell shares of different outcomes of the market. The [Market Creator](#market-creator) can set the [Trading Fee](#trading-fee) for the market, which once set cannot be lowered, which will determine their cut of all shares settled on their market. There are three different market types supported by Augur, they are: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
+A market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [outcome](#outcome) of the event, the more specific the better. Each market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different outcomes of the market. The [Market Creator](#market-creator) can set the [Trading Fee](#trading-fee) for the market, which once set cannot be raised, which will determine their cut of all shares [Settled](#settlement) on the Market. There are three different Market types supported by Augur, they are: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
 ## Market Creator
 
-A Market Creator is simply a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for settlement of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
+A Market Creator is a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for [Settlement](#settlement) of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of Settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
-## Market Resolution
+## Market Awaiting Finalization
 
-Market Resolution occurs when a [Market](#market) has been [Reported](#report) on and has a [Winning Outcome](#winning-outcome). Market's are resolved for a period of 3 days, in which [Reporters](#reporters) are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market in question. If a market's resolution is not challenged for 3 days it becomes a [Finalized Market](#finalized-market).
+Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Proposed Outcome](#proposed-outcome). Market's await finalization for a period of 3 days, which is the length of the [Dispute Phase](#dispute-phase), in which [REP](#rep) Holders are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market Awaiting Finalization. If a Market's Proposed Outcome is not [Challenged](#challenge) for 3 days it becomes a [Finalized Market](#finalized-market).
 
 ## Maximum Display Price
 
@@ -118,15 +122,15 @@ The Order Book is the collection of all [Open Orders](#open-order) currently ava
 
 ## Outcome
 
-An outcome is a potential result of a [Market](#market)'s future event. For example, a market with a question of "Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?" would have three potential outcomes: Yes, No, and Indeterminate. Indeterminate would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the market. More realistically this can happen for markets that have too vague of a question. A good example of a vague market that would most likely be voted indeterminate would be "Does God exist?" as no one has a definitive answer.
+An outcome is a potential result of a [Market](#market)'s future event. For example, a market with a question of "Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?" would have three potential [Outcomes](#outcome): Yes, No, and Invalid. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market's Outcome. More realistically this can happen for markets that have too vague of a question. A good example of a vague market that would most likely be voted invalid would be "Does God exist?" as no one has a definitive answer.
 
 ## Position
 
-A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the outcome you are short on, where as closing a long position means selling the Shares you own.
+A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the [Outcome](#outcome) you are short on, where as closing a long position means selling the Shares you own.
 
 ## Registration Token
 
-A Registration Token is purchasable by [REP](#REP) holders for REP and is used as a sort of ticket to participate in the [Reporting Cycle](#reporting-cycle) the Registration Token belongs to. Once the Reporting Cycle has started, it will cost the Registration Token to be able to report. When the Registration Token is spent the REP used to pay for it is refunded. The Registration Token cannot be spent once the reporting cycle it belongs to has passed, and the deposited REP is not refunded. The Registration Token is designed as a sort of deposit to ensure that [Reporters](#reporters) who sign up to [Report](#report) in the coming Reporting Cycle actually show up and participate in the reporting process, or lose their deposit.
+A Registration Token is purchasable by [REP](#REP) holders for REP and is used as a sort of ticket to participate in the upcoming [Reporting Window](#reporting-window) that the Registration Token belongs to. Once the Reporting Window has started, you will need the Registration Token to be able to report. When the [Reporter](#reporter) finishes [Reporting](#report) they are able to redeem their Registration Token for the REP spent to purchase it. The Registration Token cannot be redeemed once the reporting window it belongs to has passed if the Reporter did not Report and the deposit is lost. The Registration Token is designed as a sort of deposit to ensure that Reporters who sign up to Report in the upcoming Reporting Window actually show up and participate in the reporting process, or lose their deposit.
 
 ## REP
 
@@ -134,23 +138,16 @@ REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency
 
 ## Report
 
-A Report, or Reporting, is the submission of [REP](#REP) wagered on the [Outcome](#outcome) of a [Closed Market](#closed-market) by a [Reporter](#reporter) in which the reporter has selected the accurate outcome of the [Market](#market). The wagering and submitting of the wager is the act of Reporting. Reporting as a term can be used to describe the act of submitting a report for a single market or a number of markets. Reporting takes place during a [Reporting Window](#reporting-window), sometimes called a [Reporting Cycle](#reporting-cycle) or [Reporting Period](#reporting-period). For a detailed breakdown of the Reporting System in Augur, check out the [Reporting Section](#reporting).
+A Report, or Reporting, is the staking of [REP](#REP) on the [Outcome](#outcome) of a [Market](#market) that's passed it's [End Time](#end-time) by a [Reporter](#reporter). The staking of REP is the act of Reporting. Reporting as a term can be used to describe the act of submitting a report for a single market or a number of markets. Reporting takes place during a [Reporting Window](#reporting-window). For a detailed breakdown of the Reporting System in Augur, see the [Reporting Section](#reporting).
 
 ## Reporter
 
-A Reporter, or Registered Reporter, is a [REP](#REP) holder who has registered for the current Reporting Cycle by purchasing a [Registration Token](#registration-token). The Reporter is expected to [Report](#report) on at least a minimum number of [Markets](#markets) and ideally should be [Reporting](#report) accurately as these market's descriptions should have a known outcome at this point in time.
-
-## Reporting Cycle
-
-The Reporting Cycle is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Period](#reporting-period) and [Reporting Window](#reporting-window).
+A Reporter, or Registered Reporter, is a [REP](#REP) holder who
+Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is not [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Automated Reporting](#automated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
 
 ## Reporting Fee
 
-The Reporting Fee is used to help pay for the decentralized oracle system. When shares are settled (aka destroyed), before paying out to the share holders Augur will extract the [Trading Fees](#trading-fees), which includes the [Trading Fee](#trading-fee) and The Reporting Fee. The Reporting Fees are sent to the Reporting Window that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for reporting on the outcome of markets.
-
-## Reporting Period
-
-The Reporting Period is 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Cycle](#reporting-cycle) and [Reporting Window](#reporting-window).
+The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Trading Fees](#trading-fees), which includes the [Trading Fee](#trading-fee) and the Reporting Fee. The Reporting Fees are sent to the [Reporting Window](#reporting-window) that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the Outcome of Markets.
 
 ## Reporting Phase
 
@@ -158,19 +155,19 @@ The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting W
 
 ## Reporting Window
 
-The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). This term is interchangeable with [Reporting Period](#reporting-period) and [Reporting Cycle](#reporting-cycle).
+The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). Reporting Windows last for thirty (30) days and consist of two (2) phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts twenty seven (27) days in which [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets are Reported on. The Dispute Phase lasts three (3) days and during this time any [REP](#REP) holder is allowed to post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of the [Market Awaiting Finalization](#market-awaiting-finalization). Reporting Windows are occasionally referred to as "Reporting Cycles" or "Reporting Periods" as those were legacy terms for a Reporting Window during development of Augur.
 
 ## Scalar Market
 
-A Scalar Market is a [Market](#market) with a range for potential [outcomes](#outcome). A scalar market example might be "According to www.weather.com, what will the temperature in Fahrenheit be at SFO on January 3rd, 2062 at 1:00pm?". In this example market, we might set the [minDisplayPrice](#minimum-display-price) of the market to -50 and the [maxDisplayPrice](#maximum-display-price) to 150. This would allow for the market to settle on any number between the two. Sometimes you don't need a range of potential outcomes, only a simple yes/no or a small number of choices, in these cases you would want to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market respectively.
+A Scalar Market is a [Market](#market) with a range for potential [outcomes](#outcome). A scalar market example might be "According to www.weather.com, what will the temperature in Fahrenheit be at SFO on January 3rd, 2062 at 1:00pm?". In this example market, we might set the [minDisplayPrice](#minimum-display-price) of the market to -50 and the [maxDisplayPrice](#maximum-display-price) to 150. This would allow for the market to [Settle](#settlement) on any number between the two. Sometimes you don't need a range of potential outcomes, only a simple yes/no or a small number of choices, in these cases you would want to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market respectively.
 
 ## Settlement
 
-Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on an expired and finalized [Market](#market). The other is the collection of a [Complete Set](#complete-set) which can happen before a market expires. The [Trading Fees](#trading-fees), which includes both the [Trading Fee](#trading-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
+Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Trading Fees](#trading-fees), which includes both the [Trading Fee](#trading-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
 
 ## Shares
 
-A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Maker](#maker) and [Taker](#taker) of an [Order](#order) send value to the market. Shares are settled (destroyed) when a Complete Set is sold back to the market.
+A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Maker](#maker) and [Taker](#taker) of an [Order](#order) send currency to the market to complete an [Order](#order). Shares are settled (destroyed) when a Complete Set is sold back to the market.
 
 ## Taker
 
@@ -178,12 +175,12 @@ A Taker is someone who partially or fully [Fills](#fill-order) an [Open Order](#
 
 ## Topic
 
-A Topic is a keyword used to categorize [markets](#market). All markets must have a topic, and are optionally allowed up to two sub-topics to further categorize the market. An example market for "Will the New York Giants win Super Bowl 100?" might have a Topic of "Sports" and sub-topics of "American Football" and "NFL". The Topics are set by the [Market Creator](#market-creator) when a new market is made and cannot be changed.
+A Topic is a keyword used to categorize [markets](#market). All markets must have a topic, and are optionally allowed up to two sub-topics to further categorize the Market. An example Market for "Will the New York Giants win Super Bowl 100?" might have a Topic of "Sports" and sub-topics of "American Football" and "NFL". The Topics are set by the [Market Creator](#market-creator) when a new market is made and cannot be changed.
 
 ## Trading Fee
 
-A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever shares are settled on a market. Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been finalized and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Trading Fees](#trading-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
+A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased, only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Trading Fees](#trading-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
 
-## Winning Outcome
+## Proposed Outcome
 
-The Winning Outcome is the currently [Resolved](#market-resolution) [Outcome](#outcome) for a [Market](#market). In other words, it's the outcome who [Reporters](#reporters) wagered was the correct outcome of the market.
+The Proposed Outcome is the currently proposed [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct outcome of the Market. If a market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will be final.

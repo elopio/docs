@@ -38,7 +38,7 @@ Creating a market costs a small amount of `ETH`. Without some incentive people w
 
 Augur extracts Trading Fees in order to be able to reward users who create markets, but it also extracts Fees to help support the reporting system. The Reporter Fee isn't set by the market creator like the Trading Fee but is instead set by Augur.
 
-Augur will automatically create a market once a month to use as a data feed for the REP price. This market will be a normal market and it will go through the normal resolution process. Once the REP price is known, Augur can calculate the REP market cap by multiply by the total supply of REP.
+Augur will automatically create a market once a month to use as a data feed for the REP price. This market will be a normal market and it will go through the normal reporting process. Once the REP price is known, Augur can calculate the REP market cap by multiply by the total supply of REP.
 
 The contracts will track the open interest of all markets passively as people interact with Augur, which allows Augur to always have access to the open interest numbers. Once the open interest and REP market caps are known Augur can then wether the REP market cap is too high or too low. Augur then calculates the new Reporter Fee using the following formula:
 
