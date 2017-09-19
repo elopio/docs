@@ -32,9 +32,9 @@ Overview
 
 [Augur](https://app.augur.net) is a decentralized prediction market platform that runs on Ethereum.
 
-The stable Augur application is built and hosted at [https://app.augur.net](https://app.augur.net). If you want to use or help test Augur, you do not need to download or install anything! Just go to [https://app.augur.net](https://app.augur.net) and start using it. (If you want to use our cutting-edge development client, this is maintained at [https://augur-dev.firebaseapp.com](https://augur-dev.firebaseapp.com) -- warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using [https://app.augur.net](https://app.augur.net) for a more stable experience.)
+The stable Augur application is built and hosted at [https://app.augur.net](https://app.augur.net). If you want to use or help test Augur, you do not need to download or install anything! Just go to [https://app.augur.net](https://app.augur.net) and start using it. (If you want to use our cutting-edge development client, this is maintained at [https://dev.augur.net](https://dev.augur.net) -- warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using [https://app.augur.net](https://app.augur.net) for a more stable experience.)
 
-Augur has it's own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [slack.augur.net](http://slack.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
+Augur has it's own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
 
 Getting Started
 ---------------
@@ -53,7 +53,7 @@ Now we need to install Augur's dependencies. This can be done with `npm` or `yar
 
 Using NPM
 ---------
-[Node.js](https://nodejs.org/) comes with a built in package manager called `npm`. `npm` is used to install dependencies for Augur, build the Augur project from source code, run [tests](http://docs.augur.net/#tests), and start a web server to host Augur among other things. To install Augur's dependencies using `npm` we will run the following command:
+[Node.js](https://nodejs.org/) comes with a built in package manager called `npm`. `npm` is used to install dependencies for Augur, build the Augur project from source code, run [tests](#tests), and start a web server to host Augur among other things. To install Augur's dependencies using `npm` we will run the following command:
 
 `$ npm install`
 
@@ -93,6 +93,6 @@ If you would like hot-reloading for development purposes then, instead of `yarn 
 
 Finally, go to [http://localhost:8080](http://localhost:8080) in your web browser. You should be greeted by Augur's most popular topics page. Congratulations, you're ready to start hacking!
 
-If you plan to submit a Pull Request to the Augur Project, make sure to read through the [contributing](http://docs.augur.net/#contributing) section of these documents before you submit the request.
+If you plan to submit a Pull Request to the Augur Project, make sure to read through the [contributing](#contributing) section of these documents before you submit the request.
 
-<aside class="notice"><b>If you are using or helping develop the Augur client (i.e., the front-end/user interface), it is usually not necessary for you to run a local Ethereum node on your computer.</b> We're already running several <a href="http://docs.augur.net/#hosted-node">hosted nodes</a> that you can simply plug into! If you are running an Ethereum node, the client will automatically detect it and begin talking to it; if you are not, the client will default to using the hosted nodes.</aside>
+<aside class="notice"><b>If you are using or helping develop the Augur client (i.e., the front-end/user interface), it is usually not necessary for you to run a local Ethereum node on your computer.</b> We're already running several <a href="#hosted-node">hosted nodes</a> that you can simply plug into! If you are running an Ethereum node, the client will automatically detect it and begin talking to it; if you are not, the client will default to using the hosted nodes.</aside>
