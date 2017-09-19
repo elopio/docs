@@ -14,7 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is challenged then the Market will be moved into the upcoming All Reporting level of the next [Reporting Window](#reporting-window). Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are Reporting. All Reporting lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted to force the final reporting system level, a [Fork](#fork). All Reporting takes place within a Reporting Window.
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is [Challenged](#challenge) then the Market will be moved into the upcoming [Reporting Window](#reporting-window) and have it's state changed to All Reporting. Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are [Registered](#registration-token) to Report. The Reporting Phase lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted by any [REP](#rep) Holder to force the last reporting system state, a [Fork](#fork). All Reporting takes place within a Reporting Window.
 
 ## Ask Order
 
@@ -26,7 +26,7 @@ An Automated Reporter is a single address designated to submit the [Proposed Out
 
 ## Automated Reporting
 
-Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Automated Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in anyone can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Automated Reporting is independent of Reporting Windows.
+Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Automated Reporting is independent of Reporting Windows.
 
 ## Bid Order
 
@@ -58,7 +58,7 @@ A Dispute Bond is a bond posted to force another round of [Reporting](#report) i
 
 ## Dispute Phase
 
-A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) of the market [Finalized](#finalized-market). During this 3 day period, a [Reporter](#reporter) can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window). Markets in the Dispute Phase are sometimes referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
+A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) of the market [Finalized](#finalized-market). During this 3 day period, a [REP](#rep) Holder can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window). Markets in the Dispute Phase are referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
 
 ## End Time
 
@@ -68,13 +68,17 @@ End Time is the date and time that a [Market](#market)'s event will have come to
 
 Filling an [Order](#order) is when a [Taker](#taker) provides what the [Maker](#maker) of the order is seeking in their order. If a taker only provides some of what the Maker wants then it's known as a partial fill. If the Taker provides exactly what the Maker requests then it's known as completely filling the order.
 
+## Final Outcome
+
+A Final Outcome is a [Proposed Outcome](#proposed-outcome) that is not [Challenged](#challenge) through a [Dispute Phase](#dispute-phase) and the [Market](#market) becomes [Finalized](#finalized-market). A Market's Final Outcome cannot be challenged or changed.
+
 ## Finalized Market
 
 A Finalized Market is a [Market](#market) that has [Awaited Finalization](#market-awaiting-finalization) and has not been disputed, the [Proposed Outcome](#proposed-outcome) is now considered final. This market will now allow [Share](#shares) holders to [settle](#settlement) their shares with the market.
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) round of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Finalized](#finalized-market) [outcome](#outcome) of the [Market](#market) that caused the Fork to occur. There will be a branch created for each possible outcome of the market, including invalid. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to settle shares for that market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Final Outcome](#final-outcome) of the [Market](#market) that caused the Fork to occur. There will be a branch created for each possible [Outcome](#outcome) of the Market, including invalid, and the markets will be [Finalized](#finalized-market) on each Branch. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for that Market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
 
 ## Fork Period
 
@@ -98,7 +102,7 @@ A Market Creator is a user who created a [market](#market). They are charged a s
 
 ## Market Awaiting Finalization
 
-Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Proposed Outcome](#proposed-outcome). Market's await finalization for a period of 3 days, which is the length of the [Dispute Phase](#dispute-phase), in which [REP](#rep) Holders are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market Awaiting Finalization. If a Market's Proposed Outcome is not [Challenged](#challenge) for 3 days it becomes a [Finalized Market](#finalized-market).
+Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Proposed Outcome](#proposed-outcome). Market's await finalization for a period of 3 days, which is the length of the [Dispute Phase](#dispute-phase), in which [REP](#rep) Holders are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market Awaiting Finalization. If a Market's Proposed Outcome is not [Challenged](#challenge) for 3 days it becomes a [Finalized Market](#finalized-market) and can no longer be Challenged.
 
 ## Maximum Display Price
 
@@ -127,6 +131,10 @@ An outcome is a potential result of a [Market](#market)'s future event. For exam
 ## Position
 
 A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the [Outcome](#outcome) you are short on, where as closing a long position means selling the Shares you own.
+
+## Proposed Outcome
+
+The Proposed Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct Outcome of the Market. If a Market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will become a [Final Outcome](#final-outcome).
 
 ## Registration Token
 
@@ -180,7 +188,3 @@ A Topic is a keyword used to categorize [markets](#market). All markets must hav
 ## Trading Fee
 
 A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased, only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Trading Fees](#trading-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
-
-## Proposed Outcome
-
-The Proposed Outcome is the currently proposed [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct outcome of the Market. If a market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will be final.
