@@ -5,12 +5,12 @@ Events API
 ```javascript
 // Listen for Events emitted by the augur contracts
 // contractAddresses is a JSON object containing the name and address of the augur contracts.
-const contractAddresses = {
+var contractAddresses = {
   Cash: "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
  /* ... */
 };
 // Events API is a JSON object containing the event labels, and information about each event
-const eventsAPI = {
+var eventsAPI = {
   Approval: {
     address: "0x9308cf21b5a11f182f9707ca284bbb71bb84f893",
     /* ... */
@@ -21,20 +21,20 @@ const eventsAPI = {
 
 // Start listening for Events
 augur.filters.listen(contractAddresses, eventsAPI, {
-    approval: (event) => { /* ... */ },
-    block: (blockhash) => { /* ... */ },
-    burn: (event) => { /* ... */ },
-    cancelOrder: (event) => { /* ... */ },
-    completeSets: (event) => { /* ... */ },
-    depositEther: (event) => { /* ... */ },
-    initiateWithdrawEther: (event) => { /* ... */ },
-    makeOrder: (event) => { /* ... */ },
-    mint: (event) => { /* ... */ },
-    takeOrder: (event) => { /* ... */ },
-    transfer: (event) => { /* ... */ },
-    withdrawEther: (event) => { /* ... */ },
+    approval: function (event) { /* ... */ },
+    block: function (blockhash) { /* ... */ },
+    burn: function (event) { /* ... */ },
+    cancelOrder: function (event) { /* ... */ },
+    completeSets: function (event) { /* ... */ },
+    depositEther: function (event) { /* ... */ },
+    initiateWithdrawEther: function (event) { /* ... */ },
+    makeOrder: function (event) { /* ... */ },
+    mint: function (event) { /* ... */ },
+    takeOrder: function (event) { /* ... */ },
+    transfer: function (event) { /* ... */ },
+    withdrawEther: function (event) { /* ... */ },
   },
-  filters => console.log('Listening to filters:', filters)
+  function (filters) { console.log('Listening to filters:', filters); }
 );
 
 // Stop listening for events and delete (uninstall) filters
@@ -43,11 +43,11 @@ augur.filters.ignore();
 /**
  * Search for historical events.
  */
-const myAccountAddress = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
-const myFriendsAddress = "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1";
+var myAccountAddress = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
+var myFriendsAddress = "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1";
 
 // Look up Transfers from my account to my friends account.
-let params = {
+var params = {
   label: "Transfer",
   filter: { from: myAccountAddress, to: myFriendsAddress }
 };
@@ -68,7 +68,12 @@ logs = [{
 // now only look for Transfers between block 2000 and 6000.
 params = {
   label: "Transfer",
-  filter: { from: myAccountAddress, to: myFriendsAddress, toBlock: 6000, fromBlock: 2000 }
+  filter: {
+    from: myAccountAddress,
+    to: myFriendsAddress,
+    toBlock: 6000,
+    fromBlock: 2000
+  }
 };
 
 augur.logs.getLogs(params, function (err, logs) { /* ... */ });
@@ -85,8 +90,16 @@ logs = [];
 // it's value should always be "testing"
 params = {
   label: "Transfer",
-  filter: { from: myAccountAddress, to: myFriendsAddress, toBlock: "latest", fromBlock: 2000 },
-  aux: { index: "from", extraField: { name: "anotherField", value: "testing" } }
+  filter: {
+    from: myAccountAddress,
+    to: myFriendsAddress,
+    toBlock: "latest",
+    fromBlock: 2000
+  },
+  aux: {
+    index: "from",
+    extraField: { name: "anotherField", value: "testing" }
+  }
 };
 
 augur.logs.getLogs(params, function (err, logs) { /* ... */ });
@@ -118,8 +131,17 @@ logs = {
 // finally, we can merge more than one search by adding the mergedLogs object to the aux object.
 params = {
   label: "Transfer",
-  filter: { from: myAccountAddress, to: myFriendsAddress, toBlock: 6300, fromBlock: 5000 },
-  aux: { index: "from", extraField: { name: "firstSearch", value: true }, mergedLogs: {} }
+  filter: {
+    from: myAccountAddress,
+    to: myFriendsAddress,
+    toBlock: 6300,
+    fromBlock: 5000
+  },
+  aux: {
+    index: "from",
+    extraField: { name: "firstSearch", value: true },
+    mergedLogs: {}
+  }
 };
 
 augur.logs.getLogs(params, function (err, logs) {

@@ -10,10 +10,10 @@ Connect to an Ethereum Node
 ---------------------------
 ```javascript
 // After installing, just require augur.js to use it.
-import Augur from 'augur.js';
-const augur = new Augur();
+var Augur = require('augur.js');
+var augur = new Augur();
 
-const options = {
+var options = {
   httpAddresss: [
     'http://127.0.0.1:8545', // local http address for Geth Node
     'https://eth9000.augur.net' // hosted http address for Augur Node
@@ -63,9 +63,11 @@ Accounts
 /**
  * Create an account using the augur.accounts.register method.
  */
- const password = "thisismysupersecurepassword";
+var password = "thisismysupersecurepassword";
 
- augur.accounts.register(password, account => console.log("Account:", account));
+augur.accounts.register(password, function (account) {
+  console.log("Account:", account);
+});
 
 // output
 account = {
@@ -75,9 +77,11 @@ account = {
   privateKey: <Buffer ...>
 };
 
-const keystore = account.keystore;
+var keystore = account.keystore;
 
-augur.accounts.login(keystore, password, account => console.log("Account:", account));
+augur.accounts.login(keystore, password, function (account) {
+  console.log("Account:", account);
+});
 
 // output
 account = {
@@ -125,22 +129,22 @@ To load the basic [Market](#market) info for all markets, first call `augur.mark
 Simplified API
 --------------
 ```javascript
-const _type = 1; // 1 is "buy", 2 is "sell"
-const _market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
-const _outcome = 1;
-const minPrice = "0.0";
-const maxPrice = "1.0";
-const _startingOrderId = "0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc";
-const _numOrdersToLoad = 3;
+var _type = 1; // 1 is "buy", 2 is "sell"
+var _market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
+var _outcome = 1;
+var minPrice = "0.0";
+var maxPrice = "1.0";
+var _startingOrderId = "0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc";
+var _numOrdersToLoad = 3;
 
 augur.trading.orderBook.getOrderBook({
-  _type,
-  _market,
-  _outcome,
-  minPrice,
-  maxPrice,
-  _startingOrderId,
-  _numOrdersToLoad
+  _type: _type,
+  _market: _market,
+  _outcome: _outcome,
+  minPrice: minPrice,
+  maxPrice: maxPrice,
+  _startingOrderId: _startingOrderId,
+  _numOrdersToLoad: _numOrdersToLoad
 }, function (orderBook) { /* ... */ })
 // example output:
 {
@@ -185,13 +189,13 @@ augur.trading.orderBook.getOrderBook({
 }
 
 augur.trading.orderBook.getOrderBook({
-  _type,
-  _market,
-  _outcome,
-  minPrice,
-  maxPrice,
-  _startingOrderId,
-  _numOrdersToLoad
+  _type: _type,
+  _market: _market,
+  _outcome: _outcome,
+  minPrice: minPrice,
+  maxPrice: maxPrice,
+  _startingOrderId: _startingOrderId,
+  _numOrdersToLoad: _numOrdersToLoad
 }, function (orderBookChunk) { /* ... */ }, function (completeSingleOutcomeOrderBookSide) { /* ... */ });
 // example chunk output:
 {
@@ -235,7 +239,7 @@ augur.trading.orderBook.getOrderBook({
   }
 }
 
-augur.markets.getMarketInfo({ _market }, function (market) { /* ... */ });
+augur.markets.getMarketInfo({ _market: _market }, function (market) { /* ... */ });
 // example output:
 {
   author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
@@ -280,10 +284,10 @@ augur.markets.getMarketInfo({ _market }, function (market) { /* ... */ });
   volume: '1710.399999999999999985'
 }
 
-const marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
+var marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
 // const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
 
-augur.markets.batchGetMarketInfo({ marketIDs }, function (marketsInfo) { /* ... */ })
+augur.markets.batchGetMarketInfo({ marketIDs: marketIDs }, function (marketsInfo) { /* ... */ })
 // example output:
 {
   '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42': {
