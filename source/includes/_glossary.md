@@ -20,6 +20,14 @@ All Reporting is the third level of the [Reporting](#report) system, second if t
 
 An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
 
+## Automated Dispute Phase
+
+The Automated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Automated Reporter](#automated-reporter) during the [Automated Report Phase](#automated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Automated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Automated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Automated Dispute Phase is not part of a Reporting Window.
+
+## Automated Report Phase
+
+The Automated Report Phase is up to three (3) days in length and begins immediately following the [End Time](#end-time) of a [Market](#market) with an [Automated Reporter](#automated-reporter). During this time the Automated Reporter is expected to [Report](#report) a [Proposed Outcome](#proposed-outcome) for the Market. When the Automated Reporter submits his/her/it's response the Market will immediately enter an [Automated Dispute Phase](#automated-dispute-phsae). If the Automated Reporter fails to Report on the Market within the Automated Report Phase then the [Automated Reporter Bond](#automated-reporter-bond) is lost and the Market is moved into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). The Automated Report Phase only occurs for [Automated Reporting](#automated-reporting) Markets and should not be confused with a Reporting Window's [Reporting Phase](#reporting-phase) which is longer and only concerned Limited and [All Reporting](#all-reporting).
+
 ## Automated Reporter
 
 An Automated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Automated Reporting](#automated-reporting). The Automated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Automated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be [Finalized](#finalized), instead of Automated Reporting.
@@ -62,7 +70,7 @@ A Dispute Bond is a bond posted to force another round of [Reporting](#report) i
 
 ## Dispute Phase
 
-A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) of the market [Finalized](#finalized-market). During this 3 day period, a [REP](#rep) Holder can post a [Dispute Bond](#dispute-bond) for a particular market if they would like to force another round of reporting on that market. The market will be moved into the next coming [Reporting Window](#reporting-window). Markets in the Dispute Phase are referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
+A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) becomes the [Final Outcome](#final-outcome). During this 3 day period, a [REP](#rep) Holder can post a [Dispute Bond](#dispute-bond) if they would like to force another round of Reporting for the Market. The Market will be moved into the next [Reporting Window](#reporting-window). Markets in the Dispute Phase are referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
 
 ## End Time
 
@@ -82,11 +90,15 @@ A Finalized Market is a [Market](#market) that has [Awaited Finalization](#marke
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Final Outcome](#final-outcome) of the [Market](#market) that caused the Fork to occur. There will be a branch created for each possible [Outcome](#outcome) of the Market, including invalid, and the markets will be [Finalized](#finalized-market) on each Branch. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for that Market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Final Outcome](#final-outcome) of the [Forked Market](#forked-market). There will be a branch created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Branch. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for that Market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
 
 ## Fork Period
 
 The Fork Period is a sixty (60) day window of time after a [Fork](#fork) has occurred.
+
+## Forked Market
+
+A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcome) after an [All Reporting](#all-reporting) state is [Disputed](#dispute-bond) and causes a [Fork](#fork) to occur. A fork will cause multiple [Branches](#branch) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Branch.
 
 ## Limited Reporting
 
@@ -100,13 +112,17 @@ A Maker is the creator of an [Order](#order) that is placed on the [Order Book](
 
 A market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [outcome](#outcome) of the event, the more specific the better. Each market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different outcomes of the market. The [Market Creator](#market-creator) can set the [Trading Fee](#trading-fee) for the market, which once set cannot be raised, which will determine their cut of all shares [Settled](#settlement) on the Market. There are three different Market types supported by Augur, they are: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
+## Market Awaiting Finalization
+
+Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Proposed Outcome](#proposed-outcome). Market's await finalization for a period of 3 days, which is the length of the [Dispute Phase](#dispute-phase), in which [REP](#rep) Holders are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market Awaiting Finalization. If a Market's Proposed Outcome is not [Challenged](#challenge) for 3 days it becomes a [Finalized Market](#finalized-market) and can no longer be Challenged.
+
 ## Market Creator
 
 A Market Creator is a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for [Settlement](#settlement) of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of Settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
-## Market Awaiting Finalization
+## Market Resolution
 
-Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Proposed Outcome](#proposed-outcome). Market's await finalization for a period of 3 days, which is the length of the [Dispute Phase](#dispute-phase), in which [REP](#rep) Holders are allowed to post a [Dispute Bond](#dispute-bond) to force another round of reporting for the Market Awaiting Finalization. If a Market's Proposed Outcome is not [Challenged](#challenge) for 3 days it becomes a [Finalized Market](#finalized-market) and can no longer be Challenged.
+Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Automated Reporting](#automated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and [Forks](#fork) are all examples of attempts to get Market Resolution.
 
 ## Maximum Display Price
 
