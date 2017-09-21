@@ -65,12 +65,17 @@ Limited and All Reporting Details
 
 Discussed in greater detail in the [previous section](#reporting-windows-and-registration), Reporting Windows last for a total of 30 days, are split into two phases (the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase)), and occur infinitely, one starting immediately after the previous window ends. During a Reporting Window's Reporting Phase only [Registered Reporters](#reporters) can submit [Reports](#report) for Limited and All Reporting Markets.
 
-Each Reporting Window calculates the minimum amount of reports each Registered Reporter will be required to make on Limited Reporting Markets within the Window. Reporters do not need to report on every limited reporting market in the window, but must report at least the minimum amount. Reporters must stake at least 1 attorep on their reported outcome for the report to count toward the minimum. Reporters can stake as much REP as they would like on an outcome and can report on as many markets as they would like.
+Each Reporting Window calculates the minimum amount of reports each Registered Reporter will be required to make on Limited Reporting Markets within the Window. Reporters need to Report on at least the minimum amount of Limited Reporting Markets but can choose to report on all of them if they wish. Reporters must stake at least 1 attorep on a Outcome for the Report to count toward the minimum however there is no maximum limit for the stake assuming the Reporter has the REP to pay for it.
 
-On top of the minimum amount of limited reporting markets, reporters are required to report on every All Reporting Market available in the Window. Once a Reporter has reported on at least the minimum amount of limited reporting markets and also every All Reporting market in the window, then the Reporter can redeem their Registration Token for their deposited REP.
+If a Limited Reporting Market has at least 1 attorep staked on an Outcome it will move into the Dispute Phase and [Await Finalization](#market-awaiting-finalization). If a Limited Reporting Market does not get any REP staked on it during a Reporting Phase it is moved to the next Reporting Window and does not appear in the Dispute Phase for the current Window.
 
+Unlike Limited Reporting Markets, All Reporting Markets are **required** to be Reported on by every Registered Reporter within the Reporting Phase. This ensures that All Reporting Markets get more attention than a Limited Reporting Market may get, as Reporters a required to stake at least 1 attorep on an Outcome. Reporters that fulfill the minimum requirements of a Reporting Phase will be able to redeem their Registration Token for their deposit used to purchase the Registration Token.
+
+Lets use a quick example:
+
+You, a REP holder, purchase a Registration Token for an upcoming Reporting Window and wait until the Window Starts. Once it has started, you enter the Report Phase and find that there are 10 Limited Reporting Markets and 2 All Reporting Markets available to Report on. The Reporting Window has calculated that you need to Report on at least four (4) of the Limited Reporting Markets. You stake 1 REP on the Outcome you know is correct for four of the Limited Reporting Markets. This does not meet the minimum requirement yet however, as you also are **required** to report on both of the All Reporting Markets. You stake 1 REP into the Outcome you expect for each All Reporting Market. You have now met the minimum requirements to successfully redeem your Registration Token at this point, however you are also free to continue Reporting on the 6 remaining Limited Reporting Markets if you wish to do so. When you redeem your Registration Token you will receive back the value you used to purchase the token originally.
 
 Forking Details
 ---------------
 
-Coming soon to documentation near you!
+coming soon!
