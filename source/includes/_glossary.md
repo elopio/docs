@@ -14,31 +14,31 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Automated Reporter](#automated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is [Challenged](#challenge) then the Market will be moved into the upcoming [Reporting Window](#reporting-window) and have it's state changed to All Reporting. Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are [Registered](#registration-token) to Report. The Reporting Phase lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted by any [REP](#rep) Holder to force the last reporting system state, a [Fork](#fork). All Reporting takes place within a Reporting Window.
+All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Designated Reporter](#designated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is [Challenged](#challenge) then the Market will be moved into the upcoming [Reporting Window](#reporting-window) and have it's state changed to All Reporting. Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are [Registered](#registration-token) to Report. The Reporting Phase lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted by any [REP](#rep) Holder to force the last reporting system state, a [Fork](#fork). All Reporting takes place within a Reporting Window.
 
 ## Ask Order
 
 An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
 
-## Automated Dispute Phase
+## Designated Dispute Phase
 
-The Automated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Automated Reporter](#automated-reporter) during the [Automated Report Phase](#automated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Automated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Automated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Automated Dispute Phase is not part of a Reporting Window.
+The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
 
-## Automated Report Phase
+## Designated Report Phase
 
-The Automated Report Phase is up to three (3) days in length and begins immediately following the [End Time](#end-time) of a [Market](#market) with an [Automated Reporter](#automated-reporter). During this time the Automated Reporter is expected to [Report](#report) a [Proposed Outcome](#proposed-outcome) for the Market. When the Automated Reporter submits his/her/it's response the Market will immediately enter an [Automated Dispute Phase](#automated-dispute-phsae). If the Automated Reporter fails to Report on the Market within the Automated Report Phase then the [Automated Reporter Bond](#automated-reporter-bond) is lost and the Market is moved into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). The Automated Report Phase only occurs for [Automated Reporting](#automated-reporting) Markets and should not be confused with a Reporting Window's [Reporting Phase](#reporting-phase) which is longer and only concerned Limited and [All Reporting](#all-reporting).
+The Designated Report Phase is up to three (3) days in length and begins immediately following the [End Time](#end-time) of a [Market](#market) with an [Designated Reporter](#designated-reporter). During this time the Designated Reporter is expected to [Report](#report) a [Proposed Outcome](#proposed-outcome) for the Market. When the Designated Reporter submits his/her/it's response the Market will immediately enter an [Designated Dispute Phase](#designated-dispute-phsae). If the Designated Reporter fails to Report on the Market within the Designated Report Phase then the [Designated Reporter Bond](#designated-reporter-bond) is lost and the Market is moved into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). The Designated Report Phase only occurs for [Designated Reporting](#designated-reporting) Markets and should not be confused with a Reporting Window's [Reporting Phase](#reporting-phase) which is longer and only concerned Limited and [All Reporting](#all-reporting).
 
-## Automated Reporter
+## Designated Reporter
 
-An Automated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Automated Reporting](#automated-reporting). The Automated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Automated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be [Finalized](#finalized), instead of Automated Reporting.
+An Designated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Designated Reporting](#designated-reporting). The Designated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Designated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as it's first attempt to be [Finalized](#finalized), instead of Designated Reporting.
 
-## Automated Reporter Bond
+## Designated Reporter Bond
 
-The Automated Reported Bond is paid by the [Market Creator](#market-creator) during Market Creation. It's only required if the Market Creator intends to assign an [Automated Reporter](#automated-reporter) for their [Market](#market). This is refunded to the Market Creator if the Automated Reporter's [Proposed Outcome](#proposed-outcome) matches the [Final Outcome](#final-outcome) for the Market.
+The Designated Reported Bond is paid by the [Market Creator](#market-creator) during Market Creation. It's only required if the Market Creator intends to assign an [Designated Reporter](#designated-reporter) for their [Market](#market). This is refunded to the Market Creator if the Designated Reporter's [Proposed Outcome](#proposed-outcome) matches the [Final Outcome](#final-outcome) for the Market.
 
-## Automated Reporting
+## Designated Reporting
 
-Automated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the automated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Automated Reporting is independent of Reporting Windows.
+Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the Designated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Designated Reporting is independent of Reporting Windows.
 
 ## Bid Order
 
@@ -102,7 +102,7 @@ A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcom
 
 ## Limited Reporting
 
-Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Finalization](#finalized-market) if an [Automated Reporter](#automated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) who will stake their REP on the [Proposed Outcome](#proposed-outcome) of their choosing. Limited Reporting has a [Reporting Phase](#reporting-phase) that lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following it. If a Limited Report's Proposed Outcome is [challenged](#challenge) the Market is moved into the [All Reporting](#all-reporting) state and attached to the next [Reporting Window](#reporting-window). Limited Reporting takes place within a Reporting Window.
+Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Finalization](#finalized-market) if an [Designated Reporter](#designated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) who will stake their REP on the [Proposed Outcome](#proposed-outcome) of their choosing. Limited Reporting has a [Reporting Phase](#reporting-phase) that lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following it. If a Limited Report's Proposed Outcome is [challenged](#challenge) the Market is moved into the [All Reporting](#all-reporting) state and attached to the next [Reporting Window](#reporting-window). Limited Reporting takes place within a Reporting Window.
 
 ## Maker
 
@@ -122,7 +122,7 @@ A Market Creator is a user who created a [market](#market). They are charged a s
 
 ## Market Resolution
 
-Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Automated Reporting](#automated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and [Forks](#fork) are all examples of attempts to get Market Resolution.
+Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Designated Reporting](#designated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and [Forks](#fork) are all examples of attempts to get Market Resolution.
 
 ## Maximum Display Price
 
@@ -171,7 +171,7 @@ A Report, or Reporting, is the staking of [REP](#REP) on the [Outcome](#outcome)
 ## Reporter
 
 A Reporter, or Registered Reporter, is a [REP](#REP) holder who
-Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Automated Reporting](#automated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
+Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
 
 ## Reporting Fee
 
