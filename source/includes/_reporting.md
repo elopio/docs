@@ -30,9 +30,7 @@ Once 27 days have passed the Reporting Window's Reporting Phase ends and the Dis
 
 If a Market in the Limited Dispute (6) state is challenged then it will be moved into the All Reporting (7) state at the start of the next Reporting Window, which should be a maximum of three days away from the posting of the dispute bond. If a Market in the All Dispute (8) state is challenged then that market will cause a [Fork](#fork) and be moved into the Fork (9) state.
 
-The Fork (9) state is a special and rarely entered state. A fork lasts sixty (60) days, and creates multiple [Branches](#branch) of Augur. A Branch can be thought of as a different universe of Augur where everything is the same as all the other Branches, when they are first created anyway, except for the Finalized Outcome of the Market that has entered the Fork state.
-
-Users can migrate their REP from the original branch or universe into one of the new branches (whichever they choose). Migration is one-way and final. The universe with the most REP migrated to it by the end of the Fork period (60 days) will be chosen as the winning branch. Forked markets are considered Finalized (10) in each universe but only the winning universe will be able to [Settle](#settlement) shares and reward reporters for their work.
+The Fork (9) state is a special and rarely entered state. A Fork lasts sixty (60) days, known as the [Fork Period](#fork-period), and creates multiple [Universes](#branch) of Augur. Users can migrate their REP from the original  Universe into one of the new Universes (whichever they choose). Migration is one-way and final. The Universe with the most REP migrated to it by the end of the Fork Period will be chosen as the Winning Universe. Forked markets are considered Finalized (10) in each universe but only the Winning Universe will be able to [Settle](#settlement) shares and reward Reporters. Forking is discussed in greater detail in the below section: [Forking Details](#forking-details).
 
 A Market can move into the Finalized (10) state anytime they have a Reported Proposed Outcome and move through a Dispute Phase without being challenged. Forks cannot be challenged and their markets are always considered Finalized. Once a market is finalized, traders can [Settle](#settlement) their [positions](#position) with the market.
 
@@ -78,4 +76,10 @@ You, a REP holder, purchase a Registration Token for an upcoming Reporting Windo
 Forking Details
 ---------------
 
-coming soon!
+As discussed above, if an [All Reporting](#all-reporting) [Market](#market)'s [Proposed Outcome](#proposed-outcome) is [Challenged](#challenged) during the [Dispute Phase](#dispute-phase) then the Market causes a [Fork](#fork). Forks cause the creation of [Universes](#branch) equal to the number of [Outcomes](#outcome) for the [Forked Market](#forked-market). A [Binary Market](#binary-market) that causes a Fork would create three Universes, one where the [Final Outcome](#final-outcome) is "Yes", one where the Final Outcome is "No", and one where the Final Outcome is "Invalid".
+
+All Markets created in Augur belong to a Universe. The Original Universe that contained the Market that caused the Fork to occur will become locked once the Fork happens. Markets are always tradable, no matter what state they are in or what Universe. While trading can still take place in the Original Universe, new Markets cannot be created on a Locked Universe.
+
+Forking causes the [REP](#rep) remaining in the Locked Universe to no longer have the ability to earn fees from Reporting as there will never be new Markets to Report on. REP holders are given the option to Migrate their REP to one of the new Universes created by the Fork. Migration should be considered very carefully as it only happens in one direction and is irreversible, however if you ever want to use your REP to earn Reporting Fees again you will need to choose a Universe to Migrate too. There is no time limit on when a REP holder is allowed to migrate, they can choose to do it immediately after a fork or wait for fork to resolve and choose the winning universe or wait however long they want with no penalty.
+
+After a Fork occurs, a [Fork Period](#fork-period) begins and lasts for sixty (60) days. 

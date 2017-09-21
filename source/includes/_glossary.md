@@ -90,11 +90,11 @@ A Finalized Market is a [Market](#market) that has [Awaited Finalization](#marke
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Branches](#branch) of itself, where each branch is a copy of the current state of Augur with the only difference being the [Final Outcome](#final-outcome) of the [Forked Market](#forked-market). There will be a branch created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Branch. [REP](#REP) holders will need to choose which branch they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the branch with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for that Market and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that branch.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#branch) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Universe. [REP](#REP) holders will need to choose which universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe.
 
 ## Fork Period
 
-The Fork Period is a sixty (60) day window of time after a [Fork](#fork) has occurred.
+The Fork Period is a sixty (60) day period of time after a [Fork](#fork) has occurred.
 
 ## Forked Market
 
