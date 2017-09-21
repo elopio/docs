@@ -6,7 +6,7 @@ Events API
 // Listen for Events emitted by the augur contracts
 // contractAddresses is a JSON object containing the name and address of the augur contracts.
 var contractAddresses = {
-  Cash: "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55",
+  ReputationToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
  /* ... */
 };
 // Events API is a JSON object containing the event labels, and information about each event

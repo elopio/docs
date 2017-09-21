@@ -12,7 +12,7 @@ To globally install Mocha using `yarn`, you would run the following command:
 
 Once you have Mocha installed, you can run a specific test case like so:
 
-`$ mocha ./test/unit/core/cash.js`
+`$ mocha ./test/unit/filters/add-filter.js`
 
 Augur and Augur.js both contain their own sets of unit tests and Augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.
 

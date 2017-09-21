@@ -3,22 +3,24 @@ Call API
 ```javascript
 // Call API Example
 /**
-* Check account 0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b's Cash balance.
+* Get the Number of Outcomes for the Market:
+* 0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42
 */
-var address = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
-var params = { _owner: address };
+
+var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var params = { market: market };
 
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
 // asynchronously -- STRONGLY RECOMMENDED --
-augur.api.Cash.balanceOf(params, function (balance) {
-  console.log(balance);
+augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) {
+  console.log(numOutcomes);
 });
-// console prints 9999.495000000000000001
+// console prints 2
 
 // synchronous -- possible but not recommended.
-var money = augur.api.Cash.balanceOf(params);
-// money = 9999.495000000000000001
+var outcomes = augur.api.Market.getNumberOfOutcomes(params);
+// outcomes = 2
 ```
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
@@ -339,10 +341,6 @@ augur.api.Market.getCompleteSetCostInAttotokens({ market: market }, function (co
 // example output:
 completeSetCostInAttotokens = "1000000000000000000"
 
-augur.api.Market.getCreator({ market: market }, function (marketCreator) { /* ... */ })
-// example output:
-marketCreator = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa"
-
 augur.api.Market.getDenominationToken({ market: market }, function (denominationToken) { /* ... */ })
 // example output:
 denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
@@ -507,10 +505,6 @@ Returns the branch ID of the branch that the specified `market` is contained wit
 #### augur.api.Market.getCompleteSetCostInAttotokens({ market }[, callback])
 
 Returns the cost of a complete set for a specific `market` denominated in attotokens.
-
-#### augur.api.Market.getCreator({ market }[, callback])
-
-Returns the address of the creator of the specified `market`.
 
 #### augur.api.Market.getDenominationToken({ market }[, callback])
 
@@ -1095,74 +1089,6 @@ Returns the current total supply of the specified `reputationToken`.
 #### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
 
 Returns the type name for a specified `reputationToken`, this should always return "ReputationToken".
-
-Cash Call API
--------------
-```javascript
-// Cash Contract Call API Examples:
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.Cash.allowance({
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "100"
-
-augur.api.Cash.balanceOf({ _owner: _owner }, function (balance) { /* ... */ })
-// example output:
-balance = "10000"
-
-augur.api.Cash.getDecimals({}, function (decimals) { /* ... */ })
-// example output:
-decimals = "18"
-
-augur.api.Cash.getInitiated({}, function (initiated) { /* ... */ })
-// example output:
-initiated = "1"
-
-augur.api.Cash.getName({}, function (name) { /* ... */ })
-// example output:
-name = "Cash"
-
-augur.api.Cash.getSymbol({}, function (symbol) { /* ... */ })
-// example output:
-symbol = "CASH"
-
-augur.api.Cash.getTotalSupply({}, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "11000000"
-```
-#### [Cash Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/cash.sol)
-
-#### augur.api.Cash.allowance({ \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` address can spend of the `_owner` address' Cash tokens.
-
-#### augur.api.Cash.balanceOf({ \_owner }[, callback])
-
-Returns the balance of Cash tokens owned by the specified `_owner`.
-
-#### augur.api.Cash.getDecimals({}[, callback])
-
-Returns the amount of decimal places that the Cash contract is accurate to: `18`, like Ether.
-
-#### augur.api.Cash.getInitiated({}[, callback])
-
-Returns wether the sender of this call has initiated a withdraw of Ether from the Cash contract or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Cash.getName({}[, callback])
-
-Returns the name string for Cash: `Cash`.
-
-#### augur.api.Cash.getSymbol({}[, callback])
-
-Returns the symbol string for Cash: `CASH`.
-
-#### augur.api.Cash.getTotalSupply({}[, callback])
-
-Returns the current total supply of Cash.
 
 Orders Call API
 ---------------
