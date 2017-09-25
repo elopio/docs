@@ -59,49 +59,49 @@ Calculating Trades
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
-In this section we breakdown all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of [Shares](#shares) the Order is requesting, `X` as the price per Share for the Order, and `Outcome` for the Outcome our Order is trading on.
+In this section we breakdown all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of [Shares](#shares) the Order is requesting, `P` as the price per Share for the Order, and `Outcome` for the Outcome our Order is trading on. The [Market Price Range](#market-price-range), or `range` below, is the [Market](#market)'s [Maximum Display Price](#maximum-display-price) subtracted by it's [Minimum Display Price](#minimum-display-price): `(maxPrice - minPrice) = range`. Finally, `fees` below refers to the [Fees](#trading-fees) extracted during the [Settlement](#settlement) of Shares.
 
 ### Bid Order Trading
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
-**Escrows:** `N` Shares of all outcomes except `Outcome` at `X` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a short position for `Outcome`.
-**Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(marketMaxPrice - X) * N`</span> ETH.
+**Escrows:** `N` Shares of all outcomes except `Outcome` at `P` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a short position for `Outcome`.
+**Gains:** `(maxPrice - P) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(maxPrice - P) * N`</span> ETH.
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
-**Escrows:** `(X - marketMinPrice) * N` ETH for `N` Shares of <br/>`Outcome` at `X` Price.<br/> **Intent:** open a long position for `Outcome`. | **Sends:**: ETH.<br/> **Intent:** open a short position for `Outcome`.
-**Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `N` Shares of all outcomes except for `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH.
+**Escrows:** `(P - minPrice) * N` ETH for `N` Shares of <br/>`Outcome` at `P` Price.<br/> **Intent:** open a long position for `Outcome`. | **Sends:**: ETH.<br/> **Intent:** open a short position for `Outcome`.
+**Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(P - minPrice) * N` ETH | **Gains:** `N` Shares of all outcomes except for `Outcome`. <br/>**Loses:** `(maxPrice - P) * N` ETH.
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
-**Escrows:** `N` Shares of all outcomes except `Outcome` at `X` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/>**Intent:** close a long position for `Outcome`.
-**Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in `Outcome`.
+**Escrows:** `N` Shares of all outcomes except `Outcome` at `P` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/>**Intent:** close a long position for `Outcome`.
+**Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (maxPrice - P) * N`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (P - minPrice) * N`</span> ETH. <br/>**Loses:** `N` Shares in `Outcome`.
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
-**Escrows:** `(X - marketMinPrice) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/>**Intent:** open a long position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/> **Intent:** close a long position for `Outcome`.
-**Gains:** `N` Shares in `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH | **Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` Shares of `Outcome`.
+**Escrows:** `(P - minPrice) * N` ETH for `N` Shares<br/> of `Outcome` at `P` Price.<br/>**Intent:** open a long position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/> **Intent:** close a long position for `Outcome`.
+**Gains:** `N` Shares in `Outcome`. <br/>**Loses:** `(P - minPrice) * N` ETH | **Gains:** `(P - minPrice) * N` ETH. <br/>**Loses:** `N` Shares of `Outcome`.
 
 
 ### Ask Order Trading
 
 Maker of Ask Order | Taker of Ask Order
 --- | ---
-**Escrows:** `N` Shares of `Outcome` at `X` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** ETH.<br/>**Intent:** open a long position for `Outcome`.
-**Gains:** `(X - marketMinPrice) * N` ETH. <br/>**Loses:** `N` Shares in `Outcome` | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH
+**Escrows:** `N` Shares of `Outcome` at `P` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** ETH.<br/>**Intent:** open a long position for `Outcome`.
+**Gains:** `(P - minPrice) * N` ETH. <br/>**Loses:** `N` Shares in `Outcome` | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(P - minPrice) * N` ETH
 
 Maker of Ask Order | Taker of Ask Order
 --- | ---
-**Escrows:** `(marketMaxPrice - X) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a long position for `Outcome`.
-**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(X - marketMinPrice) * N` ETH.
+**Escrows:** `(maxPrice - P) * N` ETH for `N` Shares<br/> of `Outcome` at `P` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a long position for `Outcome`.
+**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(maxPrice - P) * N` ETH | **Gains:** `N` Shares of `Outcome`. <br/>**Loses:** `(P - minPrice) * N` ETH.
 
 Maker of Ask Order | Taker of Ask Order
 --- | ---
-**Escrows:** `N` Shares of `Outcome` at `X` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`. <br/> **Intent:** close a short position for `Outcome`.
-**Gains:** <br/><span style="white-space: nowrap;">`((X - marketMinPrice) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares of `Outcome` | **Gains:** <br/><span style="white-space: nowrap;">`((marketMaxPrice - X) * N) - (tradingFees / 2)`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
+**Escrows:** `N` Shares of `Outcome` at `P` Price.<br/> **Intent:** close a long position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`. <br/> **Intent:** close a short position for `Outcome`.
+**Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (P - minPrice) * N`</span> ETH. <br/>**Loses:** `N` Shares of `Outcome` | **Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (maxPrice - P) * N`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
 
 Maker of Ask Order | Taker of Ask Order
 --- | ---
-**Escrows:** `(marketMaxPrice - X) * N` ETH for `N` Shares<br/> of `Outcome` at `X` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`.<br/> **Intent:** close a short position for `Outcome`.
-**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(marketMaxPrice - X) * N` ETH. | **Gains:** `(marketMaxPrice - X) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
+**Escrows:** `(maxPrice - P) * N` ETH for `N` Shares<br/> of `Outcome` at `P` Price.<br/> **Intent:** open a short position for `Outcome`. | **Sends:** Shares in all outcomes except `Outcome`.<br/> **Intent:** close a short position for `Outcome`.
+**Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** `(maxPrice - P) * N` ETH. | **Gains:** `(maxPrice - P) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`.
