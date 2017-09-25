@@ -120,9 +120,9 @@ Market Awaiting Finalization occurs when a [Market](#market) has been [Reported]
 
 A Market Creator is a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for [Settlement](#settlement) of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of Settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
-## Market Price Range
+## Market Denominator
 
-The Market Price Range is the [Market](#market)'s [Maximum Display Price](#maximum-display-price) minus the Market's [Minimum Display Price](#minimum-display-price). The Market's Price Range is the cost of a [Complete Set](#complete-set) of [Shares](#shares) for that Market. For example, a [Binary Market](#binary-market) has a Maximum Display Price of 1, and a Minimum Display Price of 0, which makes the Market Price Range, 1 - 0 = 1 ETH, which is the cost of a Complete Set for a Binary Market.
+The Market Denominator is the amount of attoeth required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a [Market](#market).
 
 ## Market Resolution
 

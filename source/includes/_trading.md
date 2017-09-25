@@ -59,7 +59,25 @@ Calculating Trades
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
-In this section we breakdown all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of [Shares](#shares) the Order is requesting, `P` as the price per Share for the Order, and `Outcome` for the Outcome our Order is trading on. The [Market Price Range](#market-price-range), or `range` below, is the [Market](#market)'s [Maximum Display Price](#maximum-display-price) subtracted by it's [Minimum Display Price](#minimum-display-price): `(maxPrice - minPrice) = range`. Finally, `fees` below refers to the [Fees](#trading-fees) extracted during the [Settlement](#settlement) of Shares.
+In this section we breakdown all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of [Shares](#shares) the Order is requesting, `P` as the price per Share for the Order, `Outcome` for the Outcome our Order is trading on, `marketDenominator` as the [Market Denominator](#market-denominator), and `feeRate` as the [Trading Fees](#trading-fees) extracted during the [Settlement](#settlement) of Shares. The formulas for determining the payout and the fees required to be paid by each side of an Order are as follows:
+
+**Total payout for closing a Long Position**(`totalPayoutClosingLong`):
+
+`N * P / marketDenominator`
+
+**Total payout for closing a Short Position**(`totalPayoutClosingShort`):
+
+`N * (marketDenominator - P) / marketDenominator`
+
+**Fees paid for closing a Long Position:**
+
+`totalPayoutClosingLong - totalPayoutClosingLong * feeRate`
+
+**Fees paid for closing a Short Position:**
+
+`totalPayoutClosingShort - totalPayoutClosingShort * feeRate`
+
+Below are some more examples of specific order situations and their results:
 
 ### Bid Order Trading
 
