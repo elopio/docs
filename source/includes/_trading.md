@@ -51,7 +51,7 @@ For simplicity, going forward Trading Fees will refer to both the Trading Fee an
 - Selling a [Complete Set](#complete-set)
 - Redeeming shares for the finalized outcome in a [Finalized Market](#finalized-market)
 
-Selling a Complete Set can be thought of as exiting your market [Position](#position). Complete Sets are a set of Shares for each [Outcome](#outcome). If you own a set of Shares in each Outcome, you can Settle those Shares and receive `ETH` back for their value minus Trading Fees.
+Selling a Complete Set can be thought of as exiting your market [Position](#position). Complete Sets are a set of Shares for each [Outcome](#outcome). Complete Sets are priced differently for each market, and are determined by the [Market Denominator](#market-denominator), which represents the amount of attoeth it costs to purchase a Complete Set for the Market. If you own a set of Shares in each Outcome, you can Settle those Shares and receive `ETH` back for their value minus Trading Fees.
 
 Calculating Trades
 ------------------
@@ -59,23 +59,25 @@ Calculating Trades
 - Overview of calculations
 - Complete Sets - under the hood section?
 - all potential outcomes - in a table? -->
-In this section we breakdown all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. The calculations below use `N` as the number of [Shares](#shares) the Order is requesting, `P` as the price per Share for the Order, `Outcome` for the Outcome our Order is trading on, `marketDenominator` as the [Market Denominator](#market-denominator), and `feeRate` as the [Trading Fees](#trading-fees) extracted during the [Settlement](#settlement) of Shares. The formulas for determining the payout and the fees required to be paid by each side of an Order are as follows:
+In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Makers](#maker) and contain four important details: The Maker of the Order, the Price of the Order, The amount of [Shares](#shares) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The Price can be any value between 0 and the [Market Denominator](#market-denominator). The calculations below use `Num_Shares` as the number of Shares the Order is requesting, `Price` as the price per Share for the Order, `Outcome` for the Outcome our Order is trading on, `marketDenominator` as the Market Denominator, and `feeRate` as the [Trading Fees](#trading-fees) extracted during the [Settlement](#settlement) of Shares.
+
+The formulas for determining the payout and the fees required to be paid by each side of an Order are as follows:
 
 **Total payout for closing a Long Position**(`totalPayoutClosingLong`):
 
-`N * P / marketDenominator`
+`Num_Shares * Price / marketDenominator`
 
 **Total payout for closing a Short Position**(`totalPayoutClosingShort`):
 
-`N * (marketDenominator - P) / marketDenominator`
+`Num_Shares * (marketDenominator - Price) / marketDenominator`
 
-**Fees paid for closing a Long Position:**
+**Fees paid for closing a Long Position**(`longPositionFeesPaid`):
 
-`totalPayoutClosingLong - totalPayoutClosingLong * feeRate`
+`totalPayoutClosingLong * (1 - feeRate)`
 
-**Fees paid for closing a Short Position:**
+**Fees paid for closing a Short Position**(`shortPositionFeesPaid`):
 
-`totalPayoutClosingShort - totalPayoutClosingShort * feeRate`
+`totalPayoutClosingShort * (1 - fee_rate)`
 
 Below are some more examples of specific order situations and their results:
 
@@ -83,8 +85,8 @@ Below are some more examples of specific order situations and their results:
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
-**Escrows:** `N` Shares of all outcomes except `Outcome` at `P` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a short position for `Outcome`.
-**Gains:** `(maxPrice - P) * N` ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** `N` Shares in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`(maxPrice - P) * N`</span> ETH.
+**Escrows:** `Num_Shares` of all outcomes except `Outcome`<br/> **Order Details:** `Price`,`Maker`,`Outcome`<br/> **Intent:** close a short position for `Outcome`. | **Sends:** ETH.<br/> **Intent:** open a short position for `Outcome`.
+**Gains:** `totalPayoutClosingShort` ETH. <br/>**Loses:** `Num_Shares` in all outcomes except `Outcome`. | **Gains:** `Num_Shares` in all outcomes except `Outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`totalPayoutClosingShort`</span> ETH.
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
@@ -94,7 +96,7 @@ Maker of Bid Order | Taker of Bid Order
 Maker of Bid Order | Taker of Bid Order
 --- | ---
 **Escrows:** `N` Shares of all outcomes except `Outcome` at `P` Price.<br/> **Intent:** close a short position for `Outcome`. | **Sends:** `N` Shares of `Outcome`.<br/>**Intent:** close a long position for `Outcome`.
-**Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (maxPrice - P) * N`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (P - minPrice) * N`</span> ETH. <br/>**Loses:** `N` Shares in `Outcome`.
+**Gains:** <br/><span style="white-space: nowrap;">`totalPayoutClosingShort - shortPositionFeesPaid`</span> ETH. <br/>**Loses:** `N` Shares in all outcomes except `Outcome`. | **Gains:** <br/><span style="white-space: nowrap;">`(range - fees) * (P - minPrice) * N`</span> ETH. <br/>**Loses:** `N` Shares in `Outcome`.
 
 Maker of Bid Order | Taker of Bid Order
 --- | ---
