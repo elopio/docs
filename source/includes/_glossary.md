@@ -58,7 +58,7 @@ Challenge is used to describe the act of a [REP](#rep) holder posting a [Dispute
 
 ## Complete Set
 
-A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the value of the [Market Denominator](#market-denominator) for that Market. When Complete Sets are settled, [Trading Fees](#trading-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from settlement you will also pay the lions share of the fees. The Trading Fees extracted will go toward paying for the reporting system and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from share settlement.
+A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are settled, [Trading Fees](#trading-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from settlement you will also pay the lions share of the fees. The Trading Fees extracted will go toward paying for the reporting system and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from share settlement.
 
 ## Dispute Bond
 
@@ -120,10 +120,6 @@ Market Awaiting Finalization occurs when a [Market](#market) has been [Reported]
 
 A Market Creator is a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for [Settlement](#settlement) of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of Settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
-## Market Denominator
-
-The Market Denominator is the amount of attoeth required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a [Market](#market). When Shares are [Settled](#settlement) then each Complete Set will yield [Market Denominator](#market-denominator) attoeth. The yield from the Complete Sets Settlement is what [Trading Fees](#trading-fees) are extracted from prior to paying out traders for their closed positions. Trading Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees.
-
 ## Market Resolution
 
 Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Designated Reporting](#designated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and [Forks](#fork) are all examples of attempts to get Market Resolution.
@@ -135,6 +131,10 @@ The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price
 ## Minimum Display Price
 
 The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price allowed for a share on a [market](#market). For [Binary](#binary-market) or [Categorical](#categorical-market) Markets this value is always 0, as in 0 ETH. [Scalar](#scalar-market) markets' Minimum Display Price would be the bottom end of the range set by the [Market Creator](#market-creator).
+
+## Number of Ticks
+
+The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of attoeth required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a Market. When Shares are [Settled](#settlement) then each Complete Set will yield Number of Ticks attoeth. The yield from the Complete Sets Settlement is what [Trading Fees](#trading-fees) are extracted from prior to paying out traders for their closed positions. Trading Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an order can be set to anywhere between 0 and the Number of Ticks set for the Market.
 
 ## Open Order
 
@@ -158,7 +158,7 @@ A Position is the amount of [Shares](#share) that is owned (a long position) or 
 
 ## Tick
 
-A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the number of ticks for the Market. This number becomes the [Market Denominator](#market-denominator) and represents how much attoeth a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a [Minimum Price](#minimum-display-price) of -10 and a [Maximum Price](#maximum-display-price) of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 attoeth. The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Trading Fees](#trading-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
+A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market) between it's [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much attoeth a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 attoeth. The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Trading Fees](#trading-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
 
 ## Proposed Outcome
 
