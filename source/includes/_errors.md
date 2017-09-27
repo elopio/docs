@@ -162,5 +162,5 @@ trade | -4 | must trade at least 0.00000001 in value
 trade | -5 | can't pick up your own trade
 trade | 10 | insufficient balance
 trade | 22 | trade in same block prohibited
-updateTradingFee | -1 | invalid trading fee: either fee is below the minimum trading fee or you are trying to raise the trading fee (trading fees can be lowered, but not raised)
+updateTradingFee | -1 | invalid trading fee: either fee is below the minimum trading fee or you are trying to raise the trading fee (trading fee can be lowered, but not raised)
 updateTradingFee | -4 | sender's address does not match the market creator's address

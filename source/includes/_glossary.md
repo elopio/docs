@@ -58,7 +58,7 @@ Challenge is used to describe the act of a [REP](#rep) holder posting a [Dispute
 
 ## Complete Set
 
-A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are settled, [Trading Fees](#trading-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from settlement you will also pay the lions share of the fees. The Trading Fees extracted will go toward paying for the reporting system and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from share settlement.
+A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are [Settled](#settlement), [Settlement Fees](#settlement-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from Settlement you will also pay the lions share of the fees. The Settlement Fees extracted will go toward paying for the reporting system, in the form of a [Reporting fee](#reporting-fee), and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from Share Settlement.
 
 ## Dispute Bond
 
@@ -134,7 +134,7 @@ The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price
 
 ## Number of Ticks
 
-The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of attoeth required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a Market. When Shares are [Settled](#settlement) then each Complete Set will yield Number of Ticks attoeth. The yield from the Complete Sets Settlement is what [Trading Fees](#trading-fees) are extracted from prior to paying out traders for their closed positions. Trading Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an order can be set to anywhere between 0 and the Number of Ticks set for the Market.
+The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of attoeth required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a Market. When Shares are [Settled](#settlement) then each Complete Set will yield Number of Ticks attoeth. The yield from the Complete Sets Settlement is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the [Number of Ticks](#number-of-ticks) set for the Market.
 
 ## Open Order
 
@@ -158,7 +158,7 @@ A Position is the amount of [Shares](#share) that is owned (a long position) or 
 
 ## Tick
 
-A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market) between it's [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much attoeth a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 attoeth. The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Trading Fees](#trading-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
+A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market) between it's [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much attoeth a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 attoeth. The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Settlement Fees](#settlement-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
 
 ## Proposed Outcome
 
@@ -183,7 +183,7 @@ Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#e
 
 ## Reporting Fee
 
-The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Trading Fees](#trading-fees), which includes the [Trading Fee](#trading-fee) and the Reporting Fee. The Reporting Fees are sent to the [Reporting Window](#reporting-window) that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the Outcome of Markets.
+The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Settlement Fees](#settlement-fees), which includes the [Trading Fee](#trading-fee) and the Reporting Fee. The Reporting Fees are sent to the [Reporting Window](#reporting-window) that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the [Outcome](#outcome) of Markets.
 
 ## Reporting Phase
 
@@ -199,7 +199,11 @@ A Scalar Market is a [Market](#market) with a range for potential [outcomes](#ou
 
 ## Settlement
 
-Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Trading Fees](#trading-fees), which includes both the [Trading Fee](#trading-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
+Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Trading Fee](#trading-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
+
+## Settlement Fees
+
+Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Trading Fee](#trading-fee) and The [Reporting Fee](#reporting-fee).
 
 ## Shares
 
@@ -215,7 +219,7 @@ A Topic is a keyword used to categorize [markets](#market). All markets must hav
 
 ## Trading Fee
 
-A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased, only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Trading Fees](#trading-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
+A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased, only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
 
 ## Universe
 
