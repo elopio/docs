@@ -149,7 +149,7 @@ augur.api.Branch.isParentOf({
 // example output:
 isParentOf = "1";
 ```
-#### [Branch Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/branch.sol)
+#### [Branch Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/branch.sol)
 
 #### augur.api.Branch.getChildBranch({ branch, \_parentPayoutDistributionHash }[, callback])
 
@@ -277,7 +277,7 @@ augur.api.DisputeBondToken.getTypeName({ disputeBondToken: disputeBondToken }, f
 // example output:
 typeName = "DisputeBondToken";
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/disputeBondToken.sol)
+#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/disputeBondToken.sol)
 
 #### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, \_address }[, callback])
 
@@ -484,7 +484,7 @@ augur.api.Market.shouldCollectReportingFees({ market: market }, function (should
 // example output:
 shouldCollectReportingFees = "1";
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/market.sol)
+#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/market.sol)
 
 #### augur.api.Market.canBeReportedOn({ market }[, callback])
 
@@ -681,7 +681,7 @@ augur.api.RegistrationToken.getTypeName({ registrationToken: registrationToken }
 // example output:
 typeName = "RegistrationToken";
 ```
-#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/registrationToken.sol)
+#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/registrationToken.sol)
 
 #### augur.api.RegistrationToken.allowance({ registrationToken, \_owner, \_spender }[, callback])
 
@@ -777,7 +777,7 @@ augur.api.ReportingToken.getTypeName({ reportingToken: reportingToken }, functio
 // example output:
 typeName = "ReportingToken";
 ```
-#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingToken.sol)
+#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingToken.sol)
 
 #### augur.api.ReportingToken.allowance({ reportingToken, \_owner, \_spender }[, callback])
 
@@ -931,7 +931,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }
 // example output:
 isReportingActive = "1"
 ```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reportingWindow.sol)
+#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingWindow.sol)
 
 #### augur.api.ReportingWindow.getBranch({ reportingWindow }[, callback])
 
@@ -1060,7 +1060,7 @@ augur.api.ReputationToken.getTypeName({ reputationToken: reputationToken }, func
 // example output:
 reputationToken = "ReputationToken";
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/reporting/reputationToken.sol)
+#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reputationToken.sol)
 
 #### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
 
@@ -1209,7 +1209,7 @@ augur.api.Orders.isWorsePrice({
 // example output:
 isWorsePrice = "1"
 ```
-#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.se)
+#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/orders.sol)
 
 #### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
@@ -1353,7 +1353,7 @@ orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 ```
-#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ordersFetcher.se)
+#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/ordersFetcher.sol)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
@@ -1430,7 +1430,7 @@ augur.api.ShareToken.getTypeName({ shareToken: shareToken }, function (typeName)
 // example output:
 typeName = "ShareToken";
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/shareToken.se)
+#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/shareToken.sol)
 
 #### augur.api.ShareToken.allowance({ shareToken, \_owner, \_spender }[, callback])
 
@@ -1471,53 +1471,3 @@ Returns the total supply of `shareToken`s specified.
 #### augur.api.ShareToken.getTypeName({ shareToken }[, callback])
 
 Returns the type name for a specific `shareToken`, which should always return "ShareToken".
-
-Topics Call API
----------------
-```javascript
-// Topics Contract Call API Examples:
-var topics = "0x14f094c79a676c681e7cc490e775f73072e535ae";
-var _topic = "Augur";
-
-augur.api.Topics.count({ topics: topics }, function (count) { /* ... */ })
-// example output:
-count = "152"
-
-augur.api.Topics.getPopularity({
-  topics: topics,
-  _topic: _topic
-}, function (popularity) { /* ... */ })
-// example output:
-popularity = "1000"
-
-augur.api.Topics.getPopularityByOffset({
-  topics: topics,
-  _offset: 0
-}, function () { /* ... */ })
-// example output:
-popularity = "1000"
-
-augur.api.Topics.getTopicByOffset({
-  topics: topics,
-  _offset: 0
-}, function () { /* ... */ })
-// example output:
-topic = "Augur"
-```
-#### [Topics Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/topics.se)
-
-#### augur.api.Topics.count({ topics }[, callback])
-
-Returns a count of all the Topics at the specified `topics` address.
-
-#### augur.api.Topics.getPopularity({ topics, \_topic }[, callback])
-
-Returns the popularity value of a specified `_topic` at the `topics` address provided.
-
-#### augur.api.Topics.getPopularityByOffset({ topics, \_offset }[, callback])
-
-Returns the popularity of the Topic at the index `_offset` at the `topics` address provided.
-
-#### augur.api.Topics.getTopicByOffset({ topics, \_offset }[, callback])
-
-Returns the Topic at the index `_offset` at the `topics` address provided.
