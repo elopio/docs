@@ -74,6 +74,10 @@ augur.api.Branch.getReportingPeriodDurationInSeconds({ branch: branch }, functio
 // example output:
 reportingPeriodDuration = "2592000";
 
+augur.api.Branch.getReportingWindow({ branch: branch, _reportingWindowId: 579 }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
+
 var _endTime = 2524608000;
 augur.api.Branch.getReportingWindowByMarketEndTime({
   branch: branch,
@@ -100,10 +104,6 @@ reportingWindowId = "578";
 augur.api.Branch.getReputationToken({ branch: branch }, function (reputationTokenAddress) { /* ... */ })
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
-
-augur.api.Branch.getTopics({ branch: branch }, function (topicsAddress) { /* ... */ })
-// example output:
-topicsAddress = "0x14f094c79a676c681e7cc490e775f73072e535ae";
 
 augur.api.Branch.getTypeName({ branch: branch }, function (typeName) { /* ... */ })
 // example output:
@@ -151,61 +151,63 @@ isParentOf = "1";
 ```
 #### [Branch Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/branch.sol)
 
+The Branch Contract is the contract incharge of defining an Augur [Universe](#universe). All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that original contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
+
 #### augur.api.Branch.getChildBranch({ branch, \_parentPayoutDistributionHash }[, callback])
 
-Returns the child branch address of the specified `branch` address related to the `_parentPayoutDistributionHash` provided.
+Returns the Child [Universe](#universe) address of the specified `branch` address related to the `_parentPayoutDistributionHash` provided.
 
 #### augur.api.Branch.getCurrentReportingWindow({ branch }[, callback])
 
-Returns the current reporting window ID for the specified `branch`.
+Returns the current running [Reporting Window](#reporting-window)'s Id belonging to the `branch` specified. Every [Branch](#universe) has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.
 
 #### augur.api.Branch.getForkEndTime({ branch }[, callback])
 
-Returns the timestamp for when the fork ends given a specified `branch`.
+Returns the timestamp for when the [Fork Period](#fork-period) ends that was started on `branch` specified.
 
 #### augur.api.Branch.getForkingMarket({ branch }[, callback])
 
-Returns the address of the market that the specified `branch` is forking over.
+Returns the contract address of the [Market](#market) that the specified `branch` is [Forking](#fork) over.
 
 #### augur.api.Branch.getNextReportingWindow({ branch }[, callback])
 
-Returns the next reporting window ID for a specific `branch`.
+Returns the next [Reporting Window](#reporting-window) Id coming up in a specific `branch`.
 
 #### augur.api.Branch.getParentBranch({ branch }[, callback])
 
-Returns the parent branch address of the specified `branch`.
+Returns the [Parent Branch](#parent-universe) address of the specified `branch`. When a [Fork](#fork) occurs, [Child Universes](#child-universe) are created and the original [Universe](#universe) that contained the [Forking Market](#forked-market) would become a Parent Universe to the newly created Universes.
 
 #### augur.api.Branch.getParentPayoutDistributionHash({ branch }[, callback])
 
-Returns the parent branch's payout distribution hash given a `branch` address.
+Returns the [Parent Universes](#parent-universe)'s payout distribution hash given a `branch` address.
 
 #### augur.api.Branch.getPreviousReportingWindow({ branch }[, callback])
 
-Returns the previous reporting window ID for the specified `branch`.
+Returns the previous [Reporting Window](#reporting-window) Id for the specified `branch`.
 
 #### augur.api.Branch.getReportingPeriodDurationInSeconds({ branch }[, callback])
 
-Returns the specified `branch`'s reporting period duration in seconds.
+Returns the specified `branch`'s [Reporting Window](#reporting-window) duration in seconds.
+
+#### augur.api.Branch.getReportingWindow({ branch, \_reportingWindowId }[, callback])
+
+Returns the [Reporting Window](#reporting-window) Contract Address belonging to this `branch` that matches the `_reportingWindowId` passed to the function.
 
 #### augur.api.Branch.getReportingWindowByMarketEndTime({ branch, \_endTime, \_hasAutomatedReporter }[, callback])
 
-Returns the reporting window address on the specific `branch` given an `_endTime` and if the market we are checking for has an automated reporter or not (`_hasAutomatedReporter`). `_hasAutomatedReporter` should be `0` for markets without an automated reporter, `1` for markets with an automated reporter.
+Returns the [Reporting Window](#reporting-window) address on the specific `branch` given an `_endTime` and if the [Market](#market) we are checking for has an [Designated Reporter](#designated-reporter) or not (`_hasAutomatedReporter`). `_hasAutomatedReporter` should be `0` for Markets without an Designated Reporter, `1` for Markets with an Designated Reporter.
 
 #### augur.api.Branch.getReportingWindowByTimestamp({ branch, \_timestamp }[, callback])
 
-Returns the reporting window address for a specific `branch` and provided `_timestamp`.
+Returns the [Reporting Window](#reporting-window) Contract Address for a specific `branch` and provided `_timestamp`.
 
 #### augur.api.Branch.getReportingWindowId({ branch, \_timestamp }[, callback])
 
-Returns the reporting window ID for a specific `branch` and provided `_timestamp`. This is calculated by dividing the timestamp by the branch's reporting period duration in seconds.
+Returns the [Reporting Window](#reporting-window) Id for a specific `branch` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universes'](#universe) Reporting Window duration in seconds.
 
 #### augur.api.Branch.getReputationToken({ branch }[, callback])
 
-Returns the reputation token address for a specific `branch`.
-
-#### augur.api.Branch.getTopics({ branch }[, callback])
-
-Returns the topics address for the specific `branch`.
+Returns the [Reputation Token](#rep) Address for a specific `branch`.
 
 #### augur.api.Branch.getTypeName({ branch }[, callback])
 
@@ -213,23 +215,23 @@ Returns the specified `branch`'s type name, which should always return "Branch".
 
 #### augur.api.Branch.isContainerForMarket({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
 #### augur.api.Branch.isContainerForRegistrationToken({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the [Registration Token](#registration-token) `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
 #### augur.api.Branch.isContainerForReportingToken({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `_shadyTarget` address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false.
 
 #### augur.api.Branch.isContainerForReportingWindow({ branch, \_shadyTarget }[, callback])
 
-Returns wether the specific `branch` is a container for the `_shadyTarget` provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false.
 
 #### augur.api.Branch.isParentOf({ branch, \_shadyChild }[, callback])
 
-Returns wether the specific `branch` is a container for the `_shadyChild` branch address provided. Returns `1` if true, `0` if false.
+Returns wether the specific `branch` is a container for the `_shadyChild` [Child Universe](#child-universe) Address provided. Returns `1` if true, `0` if false.
 
 Dispute Bond Token Call API
 ---------------------------
