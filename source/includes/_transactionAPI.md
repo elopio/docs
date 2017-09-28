@@ -234,11 +234,11 @@ successResponse = {
   value: "0x0"
 }
 
-var _shadyBranch = "0x580f633f475614636ee132a0a355dcdc826d16c8";
-augur.api.DisputeBondToken.withdrawToBranch({
+var _shadyUniverse = "0x580f633f475614636ee132a0a355dcdc826d16c8";
+augur.api.DisputeBondToken.withdrawToUniverse({
   _signer: privateKey,
   disputeBondToken: disputeBondToken,
-  _shadyBranch: _shadyBranch,
+  _shadyUniverse: _shadyUniverse,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -270,9 +270,9 @@ The `transfer` transaction will change the current bond holder to the specified 
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that hasn't caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the market for the `disputeBondToken` isn't finalized, if the market is finalized but the final payout distribution hash is the same distribution hash challenged by the `disputeBondToken`, or if this `disputeBondToken`'s market has caused a fork.
 
-#### augur.api.DisputeBondToken.withdrawToBranch({ \_signer, disputeBondToken, \_shadyBranch, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBondToken.withdrawToUniverse({ \_signer, disputeBondToken, \_shadyUniverse, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `_shadyBranch` isn't the child branch of the branch containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent branch of `shadyBranch` is the same distribution hash challenged by the `disputeBondToken`.
+This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw reputation tokens earned by correctly disputing the outcome of the `disputeBondToken`'s market that has caused a fork. This transaction will fail to pay out reputation tokens if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `_shadyUniverse` isn't the child universe of the universe containing this `disputeBondToken`, if this `disputeBondToken`'s market has not caused a fork, if the payout distribution hash for the parent universe of `shadyUniverse` is the same distribution hash challenged by the `disputeBondToken`.
 
 Market Tx API
 ----------------------
@@ -558,7 +558,7 @@ This transaction will call `migrateThroughOneFork` repeatedly until the `market`
 
 #### augur.api.Market.migrateThroughOneForks({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will move the `market` onto the active branch following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
+This transaction will move the `market` onto the active universe following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
 
 #### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -959,12 +959,12 @@ Transfers `REP` to the `_reporter` from the `reportingToken` for the value of `r
 
 #### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `msg.sender` on the new `branch` for the amount of `reportingToken`s owned by `msg.sender` from the old branch. This transaction will fail if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new branch.
+Transfers `REP` to the `msg.sender` on the new `universe` for the amount of `reportingToken`s owned by `msg.sender` from the old universe. This transaction will fail if the `market` isn't a container for the `reportingToken`, or if the `market` isn't the cause of a fork. This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new universe.
 
 #### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
 
-Transfers `REP` to the `msg.sender` based on how many `reportingToken`s the `msg.sender` owned on the old branch. This transaction will fail if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
-This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new branch.
+Transfers `REP` to the `msg.sender` based on how many `reportingToken`s the `msg.sender` owned on the old universe. This transaction will fail if the `market` isn't finalized, if the `market` isn't a container for `reportingToken`, if the `market` is the cause of a fork, or if the `reportingToken` isn't the winning `reportingToken`.
+This transaction will spawn a `Transfer` event which will record the from address, to address, and the amount of `attotokens` of `REP` transferred to the `msg.sender` on the new universe.
 
 #### augur.api.ReportingToken.transfer({ \_signer, reportingToken, \_to, \_value, onSent, onSuccess, onFailed })
 
