@@ -28,210 +28,6 @@ Augur's Call API is made up of "getter" methods that retrieve information from t
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
-Universe Call API
----------------
-```javascript
-// Universe Contract Call API Examples:
-var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
-var _parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-
-augur.api.Universe.getChildUniverse({
-  universe: universe,
-  _parentPayoutDistributionHash: _parentPayoutDistributionHash
-}, function (childUniverse) { /* ... */ })
-// example output:
-childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
-
-augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (currReportingWindow) { /* ... */ })
-// example output:
-currReportingWindow = "578"
-
-augur.api.Universe.getForkEndTime({ universe: universe }, function (forkEndTime) { /* ... */ })
-// example output:
-forkEndTime = "1489855429";
-
-augur.api.Universe.getForkingMarket({ universe: universe }, function (forkingMarket) { /* ... */ })
-// example output:
-forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
-
-augur.api.Universe.getNextReportingWindow({ universe: universe }, function (nextReportingWindow) { /* ... */ })
-// example output:
-nextReportingWindow = "579"
-
-augur.api.Universe.getParentUniverse({ universe: universe }, function (parentUniverse) { /* ... */ })
-// example output:
-parentUniverse = "0x63c59544b89cce1dd53b1b566862189b25adec41"
-
-augur.api.Universe.getParentPayoutDistributionHash({ universe: universe }, function (universeParentPayoutDistributionHash) { /* ... */ })
-// example output:
-universeParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
-
-augur.api.Universe.getPreviousReportingWindow({ universe: universe }, function (previousReportingWindow) { /* ... */ })
-// example output:
-previousReportingWindow = "577"
-
-augur.api.Universe.getReportingPeriodDurationInSeconds({ universe: universe }, function (reportingPeriodDuration) { /* ... */ })
-// example output:
-reportingPeriodDuration = "2592000";
-
-augur.api.Universe.getReportingWindow({ universe: universe, _reportingWindowId: 579 }, function (reportingWindow) { /* ... */ })
-// example output:
-reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
-
-var _endTime = 2524608000;
-augur.api.Universe.getReportingWindowByMarketEndTime({
-  universe: universe,
-  _endTime: _endTime,
-  _hasAutomatedReporter: 0
-}, function (reportingWindowByEndTime) { /* ... */ })
-// example output:
-reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-
-augur.api.Universe.getReportingWindowByTimestamp({
-  universe: universe,
-  _timestamp: _endTime
-}, function (reportingWindowByTimestamp) { /* ... */ })
-// example output:
-reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-
-augur.api.Universe.getReportingWindowId({
-  universe: universe,
-  _timestamp: new Date().getTime()
-}, function (reportingWindowId) { /* ... */ })
-// example output:
-reportingWindowId = "578";
-
-augur.api.Universe.getReputationToken({ universe: universe }, function (reputationTokenAddress) { /* ... */ })
-// example output:
-reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
-
-augur.api.Universe.getTypeName({ universe: universe }, function (typeName) { /* ... */ })
-// example output:
-typeName = "Universe";
-
-var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api.Universe.isContainerForMarket({
-  universe: universe,
-  _shadyTarget: market
-}, function (isContainerForMarket) { /* ... */ })
-// example output:
-isContainerForMarket = "1";
-
-var registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api.Universe.isContainerForRegistrationToken({
-  universe: universe,
-  _shadyTarget: registrationToken
-}, function (isContainerForRegistrationToken) { /* ... */ })
-// example output:
-isContainerForRegistrationToken = "1";
-
-var reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-augur.api.Universe.isContainerForReportingToken({
-  universe: universe,
-  _shadyTarget: reportingToken
-}, function (isContainerForReportingToken) { /* ... */ })
-// example output:
-isContainerForReportingToken = "1";
-
-var reportingWindow = "578";
-augur.api.Universe.isContainerForReportingWindow({
-  universe: universe,
-  _shadyTarget: reportingWindow
-}, function (isContainerForReportingWindow) { /* ... */ })
-// example output:
-isContainerForReportingWindow = "1";
-
-var childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
-augur.api.Universe.isParentOf({
-  universe: universe,
-  _shadyChild: childUniverse
-}, function (isParentOf) { /* ... */ })
-// example output:
-isParentOf = "1";
-```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/universe.sol)
-
-The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that original contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
-
-#### augur.api.Universe.getChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
-
-Returns the Child [Universe](#universe) address of the specified `universe` address related to the `_parentPayoutDistributionHash` provided.
-
-#### augur.api.Universe.getCurrentReportingWindow({ universe }[, callback])
-
-Returns the current running [Reporting Window](#reporting-window)'s Id belonging to the `universe` specified. Every [Universe](#universe) has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.
-
-#### augur.api.Universe.getForkEndTime({ universe }[, callback])
-
-Returns the timestamp for when the [Fork Period](#fork-period) ends that was started on `universe` specified.
-
-#### augur.api.Universe.getForkingMarket({ universe }[, callback])
-
-Returns the contract address of the [Market](#market) that the specified `universe` is [Forking](#fork) over.
-
-#### augur.api.Universe.getNextReportingWindow({ universe }[, callback])
-
-Returns the next [Reporting Window](#reporting-window) Id coming up in a specific `universe`.
-
-#### augur.api.Universe.getParentUniverse({ universe }[, callback])
-
-Returns the [Parent Universe](#parent-universe) address of the specified `universe`. When a [Fork](#fork) occurs, [Child Universes](#child-universe) are created and the original [Universe](#universe) that contained the [Forking Market](#forked-market) would become a Parent Universe to the newly created Universes.
-
-#### augur.api.Universe.getParentPayoutDistributionHash({ universe }[, callback])
-
-Returns the [Parent Universes](#parent-universe)'s payout distribution hash given a `universe` address.
-
-#### augur.api.Universe.getPreviousReportingWindow({ universe }[, callback])
-
-Returns the previous [Reporting Window](#reporting-window) Id for the specified `universe`.
-
-#### augur.api.Universe.getReportingPeriodDurationInSeconds({ universe }[, callback])
-
-Returns the specified `universe`'s [Reporting Window](#reporting-window) duration in seconds.
-
-#### augur.api.Universe.getReportingWindow({ universe, \_reportingWindowId }[, callback])
-
-Returns the [Reporting Window](#reporting-window) Contract Address belonging to this `universe` that matches the `_reportingWindowId` passed to the function.
-
-#### augur.api.Universe.getReportingWindowByMarketEndTime({ universe, \_endTime, \_hasAutomatedReporter }[, callback])
-
-Returns the [Reporting Window](#reporting-window) address on the specific `universe` given an `_endTime` and if the [Market](#market) we are checking for has an [Designated Reporter](#designated-reporter) or not (`_hasAutomatedReporter`). `_hasAutomatedReporter` should be `0` for Markets without an Designated Reporter, `1` for Markets with an Designated Reporter.
-
-#### augur.api.Universe.getReportingWindowByTimestamp({ universe, \_timestamp }[, callback])
-
-Returns the [Reporting Window](#reporting-window) Contract Address for a specific `universe` and provided `_timestamp`.
-
-#### augur.api.Universe.getReportingWindowId({ universe, \_timestamp }[, callback])
-
-Returns the [Reporting Window](#reporting-window) Id for a specific `universe` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universes'](#universe) Reporting Window duration in seconds.
-
-#### augur.api.Universe.getReputationToken({ universe }[, callback])
-
-Returns the [Reputation Token](#rep) Address for a specific `universe`.
-
-#### augur.api.Universe.getTypeName({ universe }[, callback])
-
-Returns the specified `universe`'s type name, which should always return "Universe".
-
-#### augur.api.Universe.isContainerForMarket({ universe, \_shadyTarget }[, callback])
-
-Returns wether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false.
-
-#### augur.api.Universe.isContainerForRegistrationToken({ universe, \_shadyTarget }[, callback])
-
-Returns wether the specific `universe` is a container for the [Registration Token](#registration-token) `_shadyTarget` address provided. Returns `1` if true, `0` if false.
-
-#### augur.api.Universe.isContainerForReportingToken({ universe, \_shadyTarget }[, callback])
-
-Returns wether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false.
-
-#### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
-
-Returns wether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false.
-
-#### augur.api.Universe.isParentOf({ universe, \_shadyChild }[, callback])
-
-Returns wether the specific `universe` is a container for the `_shadyChild` [Child Universe](#child-universe) Address provided. Returns `1` if true, `0` if false.
 
 Dispute Bond Token Call API
 ---------------------------
@@ -1473,3 +1269,208 @@ Returns the total supply of `shareToken`s specified.
 #### augur.api.ShareToken.getTypeName({ shareToken }[, callback])
 
 Returns the type name for a specific `shareToken`, which should always return "ShareToken".
+
+Universe Call API
+---------------
+```javascript
+// Universe Contract Call API Examples:
+var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
+var _parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+
+augur.api.Universe.getChildUniverse({
+  universe: universe,
+  _parentPayoutDistributionHash: _parentPayoutDistributionHash
+}, function (childUniverse) { /* ... */ })
+// example output:
+childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
+
+augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (currReportingWindow) { /* ... */ })
+// example output:
+currReportingWindow = "578"
+
+augur.api.Universe.getForkEndTime({ universe: universe }, function (forkEndTime) { /* ... */ })
+// example output:
+forkEndTime = "1489855429";
+
+augur.api.Universe.getForkingMarket({ universe: universe }, function (forkingMarket) { /* ... */ })
+// example output:
+forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
+
+augur.api.Universe.getNextReportingWindow({ universe: universe }, function (nextReportingWindow) { /* ... */ })
+// example output:
+nextReportingWindow = "579"
+
+augur.api.Universe.getParentUniverse({ universe: universe }, function (parentUniverse) { /* ... */ })
+// example output:
+parentUniverse = "0x63c59544b89cce1dd53b1b566862189b25adec41"
+
+augur.api.Universe.getParentPayoutDistributionHash({ universe: universe }, function (universeParentPayoutDistributionHash) { /* ... */ })
+// example output:
+universeParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
+
+augur.api.Universe.getPreviousReportingWindow({ universe: universe }, function (previousReportingWindow) { /* ... */ })
+// example output:
+previousReportingWindow = "577"
+
+augur.api.Universe.getReportingPeriodDurationInSeconds({ universe: universe }, function (reportingPeriodDuration) { /* ... */ })
+// example output:
+reportingPeriodDuration = "2592000";
+
+augur.api.Universe.getReportingWindow({ universe: universe, _reportingWindowId: 579 }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
+
+var _endTime = 2524608000;
+augur.api.Universe.getReportingWindowByMarketEndTime({
+  universe: universe,
+  _endTime: _endTime,
+  _hasDesignatedReporter: 0
+}, function (reportingWindowByEndTime) { /* ... */ })
+// example output:
+reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+
+augur.api.Universe.getReportingWindowByTimestamp({
+  universe: universe,
+  _timestamp: _endTime
+}, function (reportingWindowByTimestamp) { /* ... */ })
+// example output:
+reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+
+augur.api.Universe.getReportingWindowId({
+  universe: universe,
+  _timestamp: new Date().getTime()
+}, function (reportingWindowId) { /* ... */ })
+// example output:
+reportingWindowId = "578";
+
+augur.api.Universe.getReputationToken({ universe: universe }, function (reputationTokenAddress) { /* ... */ })
+// example output:
+reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
+
+augur.api.Universe.getTypeName({ universe: universe }, function (typeName) { /* ... */ })
+// example output:
+typeName = "Universe";
+
+var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api.Universe.isContainerForMarket({
+  universe: universe,
+  _shadyTarget: market
+}, function (isContainerForMarket) { /* ... */ })
+// example output:
+isContainerForMarket = "1";
+
+var registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
+augur.api.Universe.isContainerForRegistrationToken({
+  universe: universe,
+  _shadyTarget: registrationToken
+}, function (isContainerForRegistrationToken) { /* ... */ })
+// example output:
+isContainerForRegistrationToken = "1";
+
+var reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+augur.api.Universe.isContainerForReportingToken({
+  universe: universe,
+  _shadyTarget: reportingToken
+}, function (isContainerForReportingToken) { /* ... */ })
+// example output:
+isContainerForReportingToken = "1";
+
+var reportingWindow = "578";
+augur.api.Universe.isContainerForReportingWindow({
+  universe: universe,
+  _shadyTarget: reportingWindow
+}, function (isContainerForReportingWindow) { /* ... */ })
+// example output:
+isContainerForReportingWindow = "1";
+
+var childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
+augur.api.Universe.isParentOf({
+  universe: universe,
+  _shadyChild: childUniverse
+}, function (isParentOf) { /* ... */ })
+// example output:
+isParentOf = "1";
+```
+#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/universe.sol)
+
+The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that original contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
+
+#### augur.api.Universe.getChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
+
+Returns the Child [Universe](#universe) address for this `universe` address who's [Forked Market](#forked-market)'s [Final Outcome](#final-outcome) is the `_parentPayoutDistributionHash` [Payout Distribution Hash](#payout-distribution-hash) provided.
+
+#### augur.api.Universe.getCurrentReportingWindow({ universe }[, callback])
+
+Returns the current running [Reporting Window](#reporting-window)'s Id belonging to the `universe` specified. Every [Universe](#universe) has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.
+
+#### augur.api.Universe.getForkEndTime({ universe }[, callback])
+
+Returns the timestamp for when the [Fork Period](#fork-period) ends that was started on the `universe` specified.
+
+#### augur.api.Universe.getForkingMarket({ universe }[, callback])
+
+Returns the contract address of the [Market](#market) that the specified `universe` is [Forking](#fork) over. This returns 0 if the Universe has never forked and there is no [Forked Market](#forked-market).
+
+#### augur.api.Universe.getNextReportingWindow({ universe }[, callback])
+
+Returns the next [Reporting Window](#reporting-window) Id coming up after the current Reporting Window ends in a specific `universe`.
+
+#### augur.api.Universe.getParentUniverse({ universe }[, callback])
+
+Returns the [Parent Universe](#parent-universe) address of the specified `universe`. When a [Fork](#fork) occurs, [Child Universes](#child-universe) are created and the original [Universe](#universe) that contained the [Forking Market](#forked-market) would become a Parent Universe to the newly created Universes. If this is called on the very first Augur Universe then it will return 0, as the first Universe had no Parent Universe.
+
+#### augur.api.Universe.getParentPayoutDistributionHash({ universe }[, callback])
+
+Returns the [Parent Universes](#parent-universe)'s [Payout Distribution Hash](#payout-distribution-hash) given the `universe` address of a [Child Universe](#child-universe). The Payout Distrubution Hash is a hash of the [Disputed](#dispute-bond) [Outcome](#outcome) of the [Forked Market](#forked-market).
+
+#### augur.api.Universe.getPreviousReportingWindow({ universe }[, callback])
+
+Returns the previous [Reporting Window](#reporting-window) Id to the current Reporting Window for the specified `universe`.
+
+#### augur.api.Universe.getReportingPeriodDurationInSeconds({ universe }[, callback])
+
+Returns the specified `universe`'s [Reporting Window](#reporting-window) full duration in seconds, also known as the [Reporting Period](#reporting-period). This includes both the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) of the Reporting Window. The Reporting Phase should last 27 days followed by a 3 day Dispute Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.
+
+#### augur.api.Universe.getReportingWindow({ universe, \_reportingWindowId }[, callback])
+
+Returns the [Reporting Window](#reporting-window) Contract Address belonging to this `universe` that matches the `_reportingWindowId` passed to the function.
+
+#### augur.api.Universe.getReportingWindowByMarketEndTime({ universe, \_endTime, \_hasDesignatedReporter }[, callback])
+
+Returns the [Reporting Window](#reporting-window) address on the specific `universe` given an `_endTime` and if the [Market](#market) we are checking for has an [Designated Reporter](#designated-reporter) or not (`_hasDesignatedReporter`). `_hasDesignatedReporter` should be `0` for Markets without an Designated Reporter, `1` for Markets with an Designated Reporter.
+
+#### augur.api.Universe.getReportingWindowByTimestamp({ universe, \_timestamp }[, callback])
+
+Returns the [Reporting Window](#reporting-window) Contract Address for a specific `universe` and provided `_timestamp`.
+
+#### augur.api.Universe.getReportingWindowId({ universe, \_timestamp }[, callback])
+
+Returns the [Reporting Window](#reporting-window) Id for a specific `universe` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universes'](#universe) Reporting Window duration in seconds.
+
+#### augur.api.Universe.getReputationToken({ universe }[, callback])
+
+Returns the [Reputation Token](#rep) Address for a specific `universe`. This is the REP usable within this Universe.
+
+#### augur.api.Universe.getTypeName({ universe }[, callback])
+
+Returns the specified `universe`'s type name, which should always return "Universe".
+
+#### augur.api.Universe.isContainerForMarket({ universe, \_shadyTarget }[, callback])
+
+Returns wether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
+
+#### augur.api.Universe.isContainerForRegistrationToken({ universe, \_shadyTarget }[, callback])
+
+Returns wether the specific `universe` is a container for the [Registration Token](#registration-token) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All [Reporting Windows](#reporting-window) are attached to a Universe, and all Registration Tokens belong to a specific Reporting Window. This method is used to confirm that the Registration Token belongs to a Reporting Window belonging to this Universe.
+
+#### augur.api.Universe.isContainerForReportingToken({ universe, \_shadyTarget }[, callback])
+
+Returns wether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Reporting Tokens](#reporting-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine wether the Universe contains the Reporting Token specified.
+
+#### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
+
+Returns wether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. All Reporting Windows belong to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
+
+#### augur.api.Universe.isParentOf({ universe, \_shadyChild }[, callback])
+
+Returns wether the specific `universe` is a container for the `_shadyChild` [Child Universe](#child-universe) Address provided. Returns `1` if true, `0` if false. If you want to see if a specific [Universe](#universe) is the [Parent Universe](#parent-universe) to a Child Universe you would use this function to determine that.

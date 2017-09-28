@@ -160,6 +160,14 @@ An outcome is a potential result of a [Market](#market)'s future event. For exam
 
 A Parent Universe is a [Universe](#universe) that has spawned [Child Universes](#child-universe) because a [Fork](#fork) had occurred on the Parent Universe and caused it to make new Universes. In other words, [Locked Universes](#locked-universe) are Parent Universes to the Universes created due to the Fork.
 
+## Payout Distribution Hash
+
+The Payout Distribution Hash is a sha3 hash of the [Payout Numerator](#payout-numerator). When a [Market](#market) is [Awaiting Finalization](#market-awaiting-finalization) it is said to have a tentative Winning Payout Distribution Hash. Once the Market is Finalized then the tentative hash becomes the Winning Payout Distribution Hash. Payout Distribution Hash's of [Forked Markets](#forked-markets) are used as identifiers for [Child Universes](#child-universe) and [Parent Universes](#parent-universe).
+
+## Payout Numerator
+
+A Payout Numerator is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the Array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Numerator array should be equaled to the Number of Ticks for the Market. A quick example, on a [Binary Market](#binary-market) with 1000 [Ticks](#tick), if we wanted to submit a [Report](#report) that stakes [REP](#rep) on Outcome `0`, we would submit a Payout Numerator that looks like this `[1000, 0]`. Payout Numerators are a breakdown of how Markets should payout, or the Payout Distribution, when [Finalized](#finalized-market), so in the above example, only shares of Outcome `0` will payout on the Finalized Market. Valid Payout Numerators are hashed using sha3, and becomes a [Payout Distribution Hash](#payout-distribution-hash).
+
 ## Position
 
 A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the [Outcome](#outcome) you are short on, where as closing a long position means selling the Shares you own.
@@ -189,13 +197,21 @@ Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#e
 
 The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Settlement Fees](#settlement-fees), which includes the [Trading Fee](#trading-fee) and the Reporting Fee. The Reporting Fees are sent to the [Reporting Window](#reporting-window) that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the [Outcome](#outcome) of Markets.
 
+## Reporting Period
+
+The Reporting Period is combined time of the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) of a [Reporting Window](#reporting-window). In other words, it's a term used to describe the total duration of a Reporting Window.
+
 ## Reporting Phase
 
 The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should have a set [Proposed Outcome](#proposed-outcome) and be moved into a [Dispute Phase](#dispute-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
 
+## Reporting Token
+
+A Reporting Token is used to represent the amount of Staked [REP](#rep) a [Reporter](#reporter) has on an [Outcome](#outcome) for their [Report](#report). Reporting Tokens have a 1:1 cost ratio to REP, so 100 attoREP would buy you 100 attoReportingTokens. You must have a [Registration Token](#registration-token) purchased for the [Reporting Window](#reporting-window) you are attempting to purchase Reporting Tokens in.
+
 ## Reporting Window
 
-The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). Reporting Windows last for thirty (30) days and consist of two (2) phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts twenty seven (27) days in which [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets are Reported on. The Dispute Phase lasts three (3) days and during this time any [REP](#REP) holder is allowed to post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of the [Market Awaiting Finalization](#market-awaiting-finalization). Reporting Windows are occasionally referred to as "Reporting Cycles" or "Reporting Periods" as those were legacy terms for a Reporting Window during development of Augur.
+The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). Reporting Windows last for thirty (30) days and consist of two (2) phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). The combined duration of the Reporting Phase and the Dispute Phase is known as the [Reporting Period](#reporting-period). The Reporting Phase lasts twenty seven (27) days in which [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets are Reported on. The Dispute Phase lasts three (3) days and during this time any [REP](#REP) holder is allowed to post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of the [Market Awaiting Finalization](#market-awaiting-finalization). Reporting Windows are occasionally referred to as "Reporting Cycles" or "Reporting Periods" as those were legacy terms for a Reporting Window during development of Augur.
 
 ## Scalar Market
 
