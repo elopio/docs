@@ -77,41 +77,43 @@ typeName = "DisputeBondToken";
 ```
 #### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/disputeBondToken.sol)
 
+The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
+
 #### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, \_address }[, callback])
 
-This transaction will return the balance for a specified `disputeBondToken` owned by the provided `_address`. Will always result in `1` or `0`.
+This method will returns the balance for a specified `disputeBondToken` owned by the provided `_address`. Returns `1` or `0` as you cannot own more than `1` [Dispute Bond](#dispute-bond) Token, and only one is required for a [Market](#market)'s [Proposed Outcome](#proposed-outcome) to be considered [Challenged](#challenged).
 
 #### augur.api.DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
 
-This transaction will return the address of the bond holder for a specified `disputeBondToken`.
+This transaction will return the account address of the bond holder for a specified `disputeBondToken`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
 
 #### augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
 
-This transaction will return the amount, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`.
+This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporters) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
 
 #### augur.api.DisputeBondToken.getUniverse({ disputeBondToken }[, callback])
 
-This transaction will return the universe that a specified `disputeBondToken`'s market lives on.
+This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBondToken` belongs to.
 
 #### augur.api.DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }[, callback])
 
-This transaction will return the distribution hash for the dispute payout given a specified `disputeBondToken`.
+This transaction will return the [Payout Distribution Hash](#payout-distribution-hash) for the dispute payout given a specified `disputeBondToken`. The Payout Distribution Hash in this case refers the Hash that was the [Proposed Outcome](#proposed-outcome) but was [Challenged](#challenged) by the [Dispute Bond](#dispute-bond).
 
 #### augur.api.DisputeBondToken.getMarket({ disputeBondToken }[, callback])
 
-This transaction will return the market that a specified `disputeBondToken` is disputing the results of.
+This transaction will return the [Market](#market) that a specified `disputeBondToken` belongs to. All Dispute Bond Tokens belong to a Market, and there can only be one Dispute Bond Token per [Dispute Phase](#dispute-phase) for that Market.
 
 #### augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
 
-This transaction will return the reputation token address that a specified `disputeBondToken`'s market uses.
+This transaction will return the [Reputation Token](#rep) address used by the [Universe](#universe) that contains [Market](#market) of the specified `disputeBondToken`.
 
 #### augur.api.DisputeBondToken.getTotalSupply({ disputeBondToken }[, callback])
 
-This transaction will return the total supply of a specified `disputeBondToken`, which will always return `1`.
+This transaction will return the total supply of a specified `disputeBondToken`. This should always return `1` as only 1 Dispute Bond Token can be purchased per [Dispute Phase](#dispute-phase) and therefore every Dispute Bond Token is unique.
 
 #### augur.api.DisputeBondToken.getTypeName({ disputeBondToken }[, callback])
 
-Returns the type name of the specified `disputeBondToken`, this should always return "DisputeBondToken".
+Returns the type name of the specified `disputeBondToken`, this will always return "DisputeBondToken".
 
 Market Call API
 ----------------

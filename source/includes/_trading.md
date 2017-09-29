@@ -65,11 +65,11 @@ The formulas for determining the payout and the fees required to be paid by each
 
 **Fees paid for closing a Long Position**(`long_position_fees`):
 
-`total_payout_closing_long * (1 - fee_rate)`
+`total_payout_closing_long * fee_rate`
 
 **Fees paid for closing a Short Position**(`short_position_fees`):
 
-`total_payout_closing_short * (1 - fee_rate)`
+`total_payout_closing_short * fee_rate`
 
 Below are some more examples of specific order situations and their results:
 
