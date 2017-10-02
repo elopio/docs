@@ -24,7 +24,7 @@ var outcomes = augur.api.Market.getNumberOfOutcomes(params);
 ```
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" then the [Simplified API](#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`. Although technically optional, the Augur Team **strongly recommends** using a callback. Without the callback the calls will be synchronous which can lock up your browser until they complete.
+Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" than the [Simplified API](#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`. Although technically optional, the Augur Team **strongly recommends** using a callback. Without the callback the calls will be synchronous which can lock up your browser until they complete.
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
@@ -75,7 +75,7 @@ augur.api.DisputeBondToken.getTypeName({ disputeBondToken: disputeBondToken }, f
 // example output:
 typeName = "DisputeBondToken";
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/disputeBondToken.sol)
+#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/DisputeBondToken.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
@@ -241,7 +241,7 @@ augur.api.Market.isContainerForShareToken({
 // example output:
 isContainerForShareToken = "1"
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/market.sol)
+#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
 #### augur.api.Market.getAllReportersDisputeBondToken({ market }[, callback])
 
@@ -394,7 +394,7 @@ augur.api.RegistrationToken.getTypeName({ registrationToken: registrationToken }
 // example output:
 typeName = "RegistrationToken";
 ```
-#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/registrationToken.sol)
+#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/RegistrationToken.sol)
 
 #### augur.api.RegistrationToken.allowance({ registrationToken, \_owner, \_spender }[, callback])
 
@@ -490,7 +490,7 @@ augur.api.ReportingToken.getTypeName({ reportingToken: reportingToken }, functio
 // example output:
 typeName = "ReportingToken";
 ```
-#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingToken.sol)
+#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingToken.sol)
 
 #### augur.api.ReportingToken.allowance({ reportingToken, \_owner, \_spender }[, callback])
 
@@ -644,7 +644,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }
 // example output:
 isReportingActive = "1"
 ```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingWindow.sol)
+#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
 
 #### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
 
@@ -773,7 +773,7 @@ augur.api.ReputationToken.getTypeName({ reputationToken: reputationToken }, func
 // example output:
 reputationToken = "ReputationToken";
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reputationToken.sol)
+#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
 
 #### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
 
@@ -922,7 +922,7 @@ augur.api.Orders.isWorsePrice({
 // example output:
 isWorsePrice = "1"
 ```
-#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/orders.sol)
+#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)
 
 #### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
@@ -1066,7 +1066,7 @@ orderIDs = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 ```
-#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/ordersFetcher.sol)
+#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/OrdersFetcher.sol)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
@@ -1143,7 +1143,7 @@ augur.api.ShareToken.getTypeName({ shareToken: shareToken }, function (typeName)
 // example output:
 typeName = "ShareToken";
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/shareToken.sol)
+#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/ShareToken.sol)
 
 #### augur.api.ShareToken.allowance({ shareToken, \_owner, \_spender }[, callback])
 
@@ -1306,9 +1306,9 @@ augur.api.Universe.isParentOf({
 // example output:
 isParentOf = "1";
 ```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/universe.sol)
+#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Universe.sol)
 
-The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that original contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
+The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), whereas the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
 
 #### augur.api.Universe.getChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
 
