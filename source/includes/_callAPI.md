@@ -243,17 +243,21 @@ isContainerForShareToken = "1"
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/market.sol)
 
+#### augur.api.Market.getAllReportersDisputeBondToken({ market }[, callback])
+
+Returns the [All Reporting](#all-reporting) phase's [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through an All Reporting phase or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) after All Reporting then this will return an empty address `0x0`.
+
 #### augur.api.Market.getDenominationToken({ market }[, callback])
 
-Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used to trade on the [Market](#market).
+Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used as the currency to trade on the [Outcome](#outcome) of a [Market](#market).
 
 #### augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market }[, callback])
 
-Returns the timestamp for when a specific `market`'s  designated report process and dispute period should be completed.
+Returns the timestamp for when a specific `market`'s [Designated Report Phase](#designated-report-phase) and [Designated Dispute Phase](#designated-dispute-phase) should end. Can be up to 6 days after the [Market](#market)'s [End Time](#end-time), or as little as 3 days after the End Time, depends on how quickly the [Designated Reporter](#designated-reporter) [Reports](#report).
 
 #### augur.api.Market.getDesignatedReportDueTimestamp({ market }[, callback])
 
-Returns the timestamp for when a specific `market`'s  designated report process should be completed but doesn't count the dispute period.
+Returns the timestamp for when a specific `market`'s  [Designated Report Phase](#designated-report-phase) should be completed but doesn't count the [Designated Dispute Phase](#designated-dispute-phase). If the [Designated Reporter](#designated-reporter) has already submit their [Report](#report) for the Designated Report Phase, then this will return the timestamp for when that Report was submit to the [Market](#market).
 
 #### augur.api.Market.getDesignatedReporterDisputeBondToken({ market }[, callback])
 
@@ -261,19 +265,19 @@ Returns the [Dispute Bond](#dispute-bond) Token address for the [Designated Repo
 
 #### augur.api.Market.getEndTime({ market }[, callback])
 
-Returns the timestamp for when the specified `market`'s event has come to pass and the `market` is ready to be reported on.
+Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Report Phase](#designated-report-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin a round of [Limited Reporting](#limited-reporting).
 
 #### augur.api.Market.getFinalizationTime({ market }[, callback])
 
-Returns the timestamp for when the specified `market` was finalized.
+Returns the timestamp for when the specified `market` was [Finalized](#finalized-market). A Finalized Market has a [Final Outcome](#final-outcome) set from successful [Market Resolution](#market-resolution) which cannot be [Challenged](#challenge) and the Market is considered [Settled](#settlement).
 
 #### augur.api.Market.getFinalPayoutDistributionHash({ market }[, callback])
 
-Returns the final payout distribution hash for a specified `market`.
+Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a specified `market`. The Final Payout Distribution Hash determines how a [Finalized Market](#finalized-market) payouts out for a specific [Share](#shares) of an [Outcome](#outcome).
 
 #### augur.api.Market.getFinalWinningReportingToken({ market }[, callback])
 
-Returns the winning reporting token address for a specified `market`.
+Returns the Reporting Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
 
 #### augur.api.Market.getLimitedReportersDisputeBondToken({ market }[, callback])
 
@@ -281,27 +285,27 @@ Returns the [Dispute Bond](#dispute-bond) Token address for the [Limited Reporti
 
 #### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
-Returns the fee paid to the `market` creator denominated in attotokens for 1 token settled on the market.
+Returns the [Trading Fee](#trading-fee) set by the [Market Creator](#market-creator), denominated in attotokens per [settlement](#settlement) of a [Complete Set](#complete-set), for the `market`.
 
 #### augur.api.Market.getNumberOfOutcomes({ market }[, callback])
 
-Returns the number of outcomes for a specified `market`.
+Returns the number of [Outcomes](#outcome) for a specified `market`. The number of outcomes is the number of potential results of the [Market](#market).
 
 #### augur.api.Market.getNumTicks({ market }[, callback])
 
-Returns the [Number of Ticks](#number-of-ticks) the specified `market` has.
+Returns the [Number of Ticks](#number-of-ticks) set for a specific `market`. The Number of Ticks represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
 
 #### augur.api.Market.getPayoutDistributionHashStake({ market, \_payoutDistributionHash }[, callback])
 
-Returns the Stake Amount for a specified `_payoutDistributionHash` for a [Market](#market).
+Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDistributionHash` of a `market`. [Reporters](#reporter) who stake REP on the same [Outcome](#outcome) during the [Reporting Phase](#reporting-phase) will have identical [Payout Distribution Hashs](#payout-distribution-hash). This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on [it is considered the Proposed Outcome](#proposed-outcome) while the [Market](#market) is [Awaiting Finalization](#awaiting-finalization). If the [Dispute Phase](#dispute-phase) passes without a [Challenge](#challenge) to the Proposed Outcome then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome).
 
 #### augur.api.Market.getReportingState({ market }[, callback])
 
-Returns the current Reporting State that the `market` is in.
+Returns the current [Reporting](#report) State that the `market` is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the [Reporting Section](#reporting) of the documentation.
 
 #### augur.api.Market.getReportingToken({ market, \_payoutNumerators }[, callback])
 
-Returns the Reporting Token address for `_payoutNumerators` on the `market` specified.
+Returns the Reporting Token address for `_payoutNumerators` on the `market` specified. 
 
 #### augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
 
