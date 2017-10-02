@@ -96,7 +96,7 @@ var payload = {
 
 // onSent callback fires when the initial eth_sendTransaction response
 // is received
-var onSent = function (sentResponse) { console.log("transaction sent:", sentResponse); };  
+var onSent = function (sentResponse) { console.log("transaction sent:", sentResponse); };
 
 // onSuccess callback fires
 var onSuccess = function (successResponse) { console.log("transaction successful:", successResponse); };
