@@ -105,7 +105,7 @@ Maker of Ask Order | Taker of Ask Order
 
 Maker of Ask Order | Taker of Ask Order
 --- | ---
-**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** 'open_long_position_cost' ETH.<br/> **Intent:** open a long position for `outcome`.
+**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/> **Intent:** open a long position for `outcome`.
 **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** `open_short_position_cost` ETH | **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH.
 
 Maker of Ask Order | Taker of Ask Order
