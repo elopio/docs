@@ -10,7 +10,7 @@ If you are running a [local Ethereum node](https://github.com/ethereum/go-ethere
 
 <img src="images/architecture_local.svg" onerror="this.src='images/architecture_local.png'">
 
-<aside class="notice">To use sendTransaction/sendRawTransaction RPC commands (i.e., anything that requires Ether / is actually sent to the network) you will need to unlock your Ethereum node. If you are running geth, the easiest way to do this is to start it with the <code>--unlock</code> option:
+<aside class="notice">To use sendTransaction RPC commands (or any other command that requires Ether / is actually sent to the network) you will need to unlock your Ethereum node. If you are running geth, the easiest way to do this is to start it with the <code>--unlock</code> option:
 
 <code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins "http://localhost:8080"</code>
 
