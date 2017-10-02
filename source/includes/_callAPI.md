@@ -285,7 +285,7 @@ Returns the [Dispute Bond](#dispute-bond) Token address for the [Limited Reporti
 
 #### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
-Returns the [Trading Fee](#trading-fee) set by the [Market Creator](#market-creator), denominated in attotokens per [settlement](#settlement) of a [Complete Set](#complete-set), for the `market`.
+Returns the [Creator Fee](#creator-fee) set by the [Market Creator](#market-creator), denominated in attotokens per [settlement](#settlement) of a [Complete Set](#complete-set), for the `market`.
 
 #### augur.api.Market.getNumberOfOutcomes({ market }[, callback])
 
@@ -305,7 +305,7 @@ Returns the current [Reporting](#report) State that the `market` is in. This met
 
 #### augur.api.Market.getReportingToken({ market, \_payoutNumerators }[, callback])
 
-Returns the Reporting Token address for `_payoutNumerators` on the `market` specified. 
+Returns the Reporting Token address for `_payoutNumerators` on the `market` specified.
 
 #### augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
 
