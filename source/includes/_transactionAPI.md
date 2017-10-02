@@ -169,7 +169,7 @@ The `privateKeyOrSigner` is required if we are attempting to execute a transacti
 
 4. Augur then uses `eth_getTransactionByHash` to determine if the transaction has been mined or not, indicated by a `null` response. A `null` response indicates that the transaction has been (silently) removed from geth's transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction's nonce (but not its other fields) is a duplicate. If a `null` response is received from `eth_getTransactionByHash` then Augur will attempt to re-submit the transaction to `augur.rpc.transact` as long the amount of attempts hasn't exceeded `augur.constants.TX_RETRY_MAX`. If the attempts to submit the transaction exceed `augur.constants.TX_RETRY_MAX` then a `TRANSACTION_RETRY_MAX_EXCEEDED` error will be sent to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate.
 
-5. Once the transaction has been successfully mined (`eth_getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and it's `status` is changed to `"sealed"`.
+5. Once the transaction has been successfully mined (`eth_getTransactionByHash` successfully returns the transaction object) the transaction is updated to include the `blockNumber` and `blockHash` and its `status` is changed to `"sealed"`.
 
 6. When the amount of confirmations of our transaction exceeds `augur.constants.REQUIRED_CONFIRMATIONS` then the transaction is updated to a status of `"confirmed"`. A `callReturn` field is added to the transaction object, which is then passed to the `onSuccess` handler, completing the sequence.
 
@@ -568,7 +568,7 @@ This transaction will attempt to finalize the `market`. If the `market` becomes 
 
 #### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
-This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `_payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and it's supply of reporting tokens is higher than the `_payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `_payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
+This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `_payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and its supply of reporting tokens is higher than the `_payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `_payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
 
 Registration Token Tx API
 ----------------------------------
@@ -1237,7 +1237,7 @@ successResponse = {
 
 #### augur.api.CancelOrder.cancelOrder({ \_signer, \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
 
-The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given it's `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
+The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
 
 Claim Proceeds Tx API
 ------------------------------
