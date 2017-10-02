@@ -121,29 +121,25 @@ Market Call API
 // Market Contract Call API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.Market.canBeReportedOn({ market: market }, function (canBeReportedOn) { /* ... */ })
+augur.api.Market.getAllReportersDisputeBondToken({ market: market }, function (allReportersDisputeBondToken) { /* ... */ })
 // example output:
-canBeReportedOn = "1"
-
-augur.api.Market.getAutomatedReportDisputeDueTimestamp({ market: market }, function (automatedReporterDisputeDueTimestamp) { /* ... */ })
-// example output:
-automatedReporterDisputeDueTimestamp = "1500907130"
-
-augur.api.Market.getAutomatedReportDueTimestamp({ market: market }, function (automatedReporterDueTimestamp) { /* ... */ })
-// example output:
-automatedReporterDueTimestamp = "1500647930"
-
-augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
-augur.api.Market.getCompleteSetCostInAttotokens({ market: market }, function (completeSetCostInAttotokens) { /* ... */ })
-// example output:
-completeSetCostInAttotokens = "1000000000000000000"
+allReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.Market.getDenominationToken({ market: market }, function (denominationToken) { /* ... */ })
 // example output:
 denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
+
+augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market: market }, function (designatedReporterDisputeDueTimestamp) { /* ... */ })
+// example output:
+designatedReporterDisputeDueTimestamp = "1500907130"
+
+augur.api.Market.getDesignatedReportDueTimestamp({ market: market }, function (designatedReporterDueTimestamp) { /* ... */ })
+// example output:
+designatedReporterDueTimestamp = "1500647930"
+
+augur.api.Market.getDesignatedReporterDisputeBondToken({ market: market }, function (designatedReporterDisputeBondToken) { /* ... */ })
+// example output:
+designatedReporterDisputeBondToken = "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
 
 augur.api.Market.getEndTime({ market: market }, function (endTime) { /* ... */ })
 // example output:
@@ -161,37 +157,42 @@ augur.api.Market.getFinalWinningReportingToken({ market: market }, function (win
 // example output:
 winningReportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
+augur.api.Market.getLimitedReportersDisputeBondToken({ market: market }, function (limitedReportersDisputeBondToken) { /* ... */ })
+// example output:
+limitedReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
+
 augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
-
-augur.api.Market.getMaxDisplayPrice({ market: market }, function (maxDisplayPrice) { /* ... */ })
-// example output:
-maxDisplayPrice = "1"
-
-augur.api.Market.getMinDisplayPrice({ market: market }, function (minDisplayPrice) { /* ... */ })
-// example output:
-minDisplayPrice = "0"
 
 augur.api.Market.getNumberOfOutcomes({ market: market }, function (numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "2"
 
-augur.api.Market.getPayoutDenominator({ market: market }, function (payoutDenominator) { /* ... */ })
+augur.api.Market.getNumTicks({ market: market }, function (numTicks) { /* ... */ })
 // example output:
-payoutDenominator = "1"
+numTicks = "1000"
 
-augur.api.Market.getRegistrationToken({ market: market }, function (registrationToken) { /* ... */ })
+var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+augur.api.Market.getPayoutDistributionHashStake({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (payoutDenominator) { /* ... */ })
 // example output:
-registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
+payoutDenominator = "1100000000000000000"
+
+augur.api.Market.getReportingState({ market: market }, function (reportingState) { /* ... */ })
+// example output:
+reportingState = "0";
+
+augur.api.Market.getReportingToken({ market: market }, function (reportingToken) { /* ... */ })
+// example output:
+reportingToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
+
+augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (reportingTokenOrZero) { /* ... */ })
+// example output:
+reportingTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
 augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
-
-augur.api.Market.getReputationToken({ market: market }, function (reputationToken) { /* ... */ })
-// example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
 augur.api.Market.getShareToken({
   market: market,
@@ -204,13 +205,25 @@ augur.api.Market.getTentativeWinningPayoutDistributionHash({ market: market }, f
 // example output:
 tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.Market.getTopic({ market: market }, function (topic) { /* ... */ })
-// example output:
-topic = "Augur"
-
 augur.api.Market.getTypeName({ market: market }, function (typeName) { /* ... */ })
 // example output:
 typeName = "Market";
+
+augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.Market.getWinningPayoutDistributionHashFromFork({ market: market }, function (winningPayoutDistributionHashFromFork) { /* ... */ })
+// example output:
+winningPayoutDistributionHashFromFork = "0xab912273ffce2cb2ca24ce2162df2d342322904a96039eb53cba0e34b8b9fc12"
+
+var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+augur.api.Market.isContainerForDisputeBondToken({
+  market: market,
+  _shadyTarget: disputeBondToken
+}, function (isContainerForShareToken) { /* ... */ })
+// example output:
+isContainerForDisputeBondToken = "1"
 
 var reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 augur.api.Market.isContainerForReportingToken({
@@ -227,88 +240,24 @@ augur.api.Market.isContainerForShareToken({
 }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
-
-var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-augur.api.Market.isContainerForDisputeBondToken({
-  market: market,
-  _shadyTarget: disputeBondToken
-}, function (isContainerForShareToken) { /* ... */ })
-// example output:
-isContainerForDisputeBondToken = "1"
-
-augur.api.Market.isDoneWithAllReporters({ market: market }, function (isDoneWithAllReporters) { /* ... */ })
-// example output:
-isDoneWithAllReporters = "1"
-
-augur.api.Market.isDoneWithAutomatedReporters({ market: market }, function (isDoneWithAutomatedReporters) { /* ... */ })
-// example output:
-isDoneWithAutomatedReporters = "1"
-
-augur.api.Market.isDoneWithLimitedReporters({ market: market }, function (isDoneWithLimitedReporters) { /* ... */ })
-// example output:
-isDoneWithLimitedReporters = "1"
-
-augur.api.Market.isFinalized({ market: market }, function (isFinalized) { /* ... */ })
-// example output:
-isFinalized = "1"
-
-augur.api.Market.isInAllDisputePhase({ market: market }, function (isInAllDisputePhase) { /* ... */ })
-// example output:
-isInAllDisputePhase = "1";
-
-augur.api.Market.isInAllReportingPhase({ market: market }, function (isInAllReportingPhase) { /* ... */ })
-// example output:
-isInAllReportingPhase = "1";
-
-augur.api.Market.isInAutomatedDisputePhase({ market: market }, function (isInAutomatedDisputePhase) { /* ... */ })
-// example output:
-isInAutomatedDisputePhase = "1";
-
-augur.api.Market.isInAutomatedReportingPhase({ market: market }, function (isInAutomatedReportingPhase) { /* ... */ })
-// example output:
-isInAutomatedReportingPhase = "1";
-
-augur.api.Market.isInLimitedDisputePhase({ market: market }, function (isInLimitedDisputePhase) { /* ... */ })
-// example output:
-isInLimitedDisputePhase = "1";
-
-augur.api.Market.isInLimitedReportingPhase({ market: market }, function (isInLimitedReportingPhase) { /* ... */ })
-// example output:
-isInLimitedReportingPhase = "1";
-
-augur.api.Market.needsMigration({ market: market }, function (needsMigration) { /* ... */ })
-// example output:
-needsMigration = "1";
-
-augur.api.Market.shouldCollectReportingFees({ market: market }, function (shouldCollectReportingFees) { /* ... */ })
-// example output:
-shouldCollectReportingFees = "1";
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/market.sol)
 
-#### augur.api.Market.canBeReportedOn({ market }[, callback])
-
-Returns wether the specific `market` can be reported on. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.getAutomatedReportDisputeDueTimestamp({ market }[, callback])
-
-Returns the timestamp for when a specific `market`'s  automated report process and dispute period should be completed.
-
-#### augur.api.Market.getAutomatedReportDueTimestamp({ market }[, callback])
-
-Returns the timestamp for when a specific `market`'s  automated report process should be completed but doesn't count the dispute period.
-
-#### augur.api.Market.getUniverse({ market }[, callback])
-
-Returns the universe ID of the universe that the specified `market` is contained within.
-
-#### augur.api.Market.getCompleteSetCostInAttotokens({ market }[, callback])
-
-Returns the cost of a complete set for a specific `market` denominated in attotokens.
-
 #### augur.api.Market.getDenominationToken({ market }[, callback])
 
-Returns the address of the token used to denominate the specified `market`.
+Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used to trade on the [Market](#market).
+
+#### augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market }[, callback])
+
+Returns the timestamp for when a specific `market`'s  designated report process and dispute period should be completed.
+
+#### augur.api.Market.getDesignatedReportDueTimestamp({ market }[, callback])
+
+Returns the timestamp for when a specific `market`'s  designated report process should be completed but doesn't count the dispute period.
+
+#### augur.api.Market.getDesignatedReporterDisputeBondToken({ market }[, callback])
+
+Returns the [Dispute Bond](#dispute-bond) Token address for the [Designated Reporting](#designated-reporting) round for a specified `market`. When a Designated [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a Designated Report or if the Designated Report hasn't been Challenged.
 
 #### augur.api.Market.getEndTime({ market }[, callback])
 
@@ -326,37 +275,41 @@ Returns the final payout distribution hash for a specified `market`.
 
 Returns the winning reporting token address for a specified `market`.
 
+#### augur.api.Market.getLimitedReportersDisputeBondToken({ market }[, callback])
+
+Returns the [Dispute Bond](#dispute-bond) Token address for the [Limited Reporting](#limited-reporting) round for a specified `market`. When a Limited [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a Limited Report or if the Limited Report hasn't been Challenged.
+
 #### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
 Returns the fee paid to the `market` creator denominated in attotokens for 1 token settled on the market.
-
-#### augur.api.Market.getMaxDisplayPrice({ market }[, callback])
-
-Returns the maximum displayed price for the specified `market`.
-
-#### augur.api.Market.getMinDisplayPrice({ market }[, callback])
-
-Returns the minimum displayed price for the specified `market`.
 
 #### augur.api.Market.getNumberOfOutcomes({ market }[, callback])
 
 Returns the number of outcomes for a specified `market`.
 
-#### augur.api.Market.getPayoutDenominator({ market }[, callback])
+#### augur.api.Market.getNumTicks({ market }[, callback])
 
-Returns the payout denominator for a specified `market`.
+Returns the [Number of Ticks](#number-of-ticks) the specified `market` has.
 
-#### augur.api.Market.getRegistrationToken({ market }[, callback])
+#### augur.api.Market.getPayoutDistributionHashStake({ market, \_payoutDistributionHash }[, callback])
 
-Returns the registration token's address for the specified `market`.
+Returns the Stake Amount for a specified `_payoutDistributionHash` for a [Market](#market).
+
+#### augur.api.Market.getReportingState({ market }[, callback])
+
+Returns the current Reporting State that the `market` is in.
+
+#### augur.api.Market.getReportingToken({ market, \_payoutNumerators }[, callback])
+
+Returns the Reporting Token address for `_payoutNumerators` on the `market` specified.
+
+#### augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
+
+Returns a Reporting Token address, or 0 if there is no reporting token for that [Payout Distribution Hash](#payout-distribution-hash), for a specific `_payoutDistributionHash` for a `market`.
 
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
 Returns the reporting window address for the specified `market`.
-
-#### augur.api.Market.getReputationToken({ market }[, callback])
-
-Returns the reputation token's address for the specified `market`.
 
 #### augur.api.Market.getShareToken({ market, \_outcome }[, callback])
 
@@ -366,13 +319,21 @@ Returns the share token's address for the specified `market` and `_outcome`.
 
 Returns the tentatively winning Payout Distribution Hash given a specified `market`.
 
-#### augur.api.Market.getTopic({ market }[, callback])
-
-Returns the topic of the specified `market`.
-
 #### augur.api.Market.getTypeName({ market }[, callback])
 
 Returns the type name for the specified `market`, should always return "Market".
+
+#### augur.api.Market.getUniverse({ market }[, callback])
+
+Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within.
+
+#### augur.api.Market.getWinningPayoutDistributionHashFromFork({ market }[, callback])
+
+Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which is used to identify the Winning [Universe](#universe), after a [Fork](#fork) for a given `market`.
+
+#### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
+
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForReportingToken({ market, \_shadyTarget }[, callback])
 
@@ -381,58 +342,6 @@ Returns wether the specific `market` is a container for the `_shadyTarget` addre
 #### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
 
 Returns wether the specific `market` is a container for the `_shadyTarget` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
-
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isDoneWithAllReporters({ market }[, callback])
-
-Returns wether the specific `market` is done with the all reporting phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isDoneWithAutomatedReporters({ market }[, callback])
-
-Returns wether the specific `market` is done with the automated reporting phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isDoneWithLimitedReporters({ market }[, callback])
-
-Returns wether the specific `market` is done with the limited reporting phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isFinalized({ market }[, callback])
-
-Returns wether the specific `market` has been finalized or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInAllDisputePhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the All Dispute Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInAllReportingPhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the All Reporting Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInAutomatedDisputePhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the Automated Dispute Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInAutomatedReportingPhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the Automated Reporting Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInLimitedDisputePhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the Limited Dispute Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isInLimitedReportingPhase({ market }[, callback])
-
-Returns wether the specific `market` is current in the the Limited Reporting Phase or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.needsMigration({ market }[, callback])
-
-Returns wether the specific `market` needs to be migrated to a new universe or not. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.shouldCollectReportingFees({ market }[, callback])
-
-Returns wether the specific `market` should collect reporting fees or not. Returns `1` if true, `0` if false.
 
 Registration Token Call API
 ---------------------------
