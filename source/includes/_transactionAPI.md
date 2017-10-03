@@ -260,7 +260,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/disputeBondToken.sol)
+#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/DisputeBondToken.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
@@ -528,7 +528,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/market.sol)
+#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
 #### augur.api.Market.approveSpenders({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -708,7 +708,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/registrationToken.sol)
+#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/RegistrationToken.sol)
 
 #### augur.api.RegistrationToken.approve({ \_signer, registrationToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
@@ -941,7 +941,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingToken.sol)
+#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingToken.sol)
 
 #### augur.api.ReportingToken.approve({ \_signer, reportingToken, \_spender, \_attotokens, onSent, onSuccess, onFailed })
 
@@ -1027,7 +1027,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reportingWindow.sol)
+#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
 
 #### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_automatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
 
@@ -1174,7 +1174,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/reputationToken.sol)
+#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
 
 #### augur.api.ReputationToken.approve({ \_signer, reputationToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
@@ -1270,7 +1270,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/claimProceeds.sol)
+#### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ClaimProceeds.sol)
 
 #### augur.api.ClaimProceeds.claimProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
 
@@ -1334,7 +1334,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/completeSets.sol)
+#### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/CompleteSets.sol)
 
 #### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
 
@@ -1389,7 +1389,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Make Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/makeOrder.sol)
+#### [Make Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/MakeOrder.sol)
 
 #### augur.api.MakeOrder.publicMakeOrder({ \_signer, \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
@@ -1485,7 +1485,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/shareToken.sol)
+#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/ShareToken.sol)
 
 #### augur.api.ShareToken.approve({ \_signer, shareToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
@@ -1534,7 +1534,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Take Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/takeOrder.sol)
+#### [Take Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/TakeOrder.sol)
 
 #### augur.api.TakeOrder.publicTakeOrder({ \_signer, \_orderID, \_amountTakerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
 
@@ -1665,7 +1665,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/trade.sol)
+#### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Trade.sol)
 
 #### augur.api.Trade.publicBuy({ \_signer, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 

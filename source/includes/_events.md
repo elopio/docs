@@ -61,7 +61,7 @@ logs = [{
   from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
   to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
   value: "1000000000000",
-  timestamp: 1502305142,  
+  timestamp: 1502305142,
   transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028"
 }];
 
@@ -87,7 +87,7 @@ logs = [];
 // to myFriendsAddress, starting from block 2000 all the way to the latest block.
 // We would also like to have the logs object organized by from field, in this case just myAccountAddress as we specified that as the only from address to look for.
 // We also would like to add an extra field to each log called "anotherField"
-// it's value should always be "testing"
+// its value should always be "testing"
 params = {
   label: "Transfer",
   filter: {
@@ -112,7 +112,7 @@ logs = {
     from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
     to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
     value: "1000000000000",
-    timestamp: 1502305142,  
+    timestamp: 1502305142,
     transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028",
     anotherField: "testing"
   },
@@ -122,7 +122,7 @@ logs = {
     from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
     to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
     value: "100000000000000",
-    timestamp: 1502306213,  
+    timestamp: 1502306213,
     transactionHash: "0x13c40b9ed0fd124e9bfcae2bd41e6dc8163d4ac0012c69c0efe57f502ecf81ea",
     anotherField: "testing"
   }]
@@ -160,7 +160,7 @@ augur.logs.getLogs(params, function (err, logs) {
         from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
         to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
         value: "1000000000000",
-        timestamp: 1502305142,  
+        timestamp: 1502305142,
         transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028",
         firstSearch: true
       },
@@ -170,7 +170,7 @@ augur.logs.getLogs(params, function (err, logs) {
         from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
         to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
         value: "100000000000000",
-        timestamp: 1502306213,  
+        timestamp: 1502306213,
         transactionHash: "0x13c40b9ed0fd124e9bfcae2bd41e6dc8163d4ac0012c69c0efe57f502ecf81ea",
       }]
     };
@@ -193,19 +193,19 @@ The following table shows the events that can be passed to `augur.filters.listen
 
 Label                | Contract            | Event description                                                         | Data (indexed)           | Data (non-indexed)
 -------------------- | ------------------- | ------------------------------------------------------------------------- | ------------------------ | ------------------
-Approval             | [ERC20](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/ERC20.sol)              | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
-Burn                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/VariableSupplyToken.sol) | Burned the target's tokens to completely destroy them                     | target                   | value
-CancelOrder          | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.sol)              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
-BuyCompleteSets         | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.sol)              | Bought a Complete Set of shares for a market                         | sender, market     | fxpAmount, numOutcomes
-DepositEther         | [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
-InitiateWithdrawEther| [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
-MakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.sol)              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
-Mint                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/VariableSupplyToken.sol) | Created brand new tokens for target                                       | target                   | value
-Registration         | [Register](https://github.com/AugurProject/augur-core/blob/develop/src/extensions/register.sol) | Records the registration of new accounts     | sender      | timestamp
-SellCompleteSets     | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.sol)   | Sold a Complete Set of shares for a market  | sender, market         | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
-TakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/src/trading/orders.sol)              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
-Transfer             | [ERC20Basic](https://github.com/AugurProject/augur-core/blob/develop/src/libraries/token/ERC20.sol)          | Transferred tokens from one owner to another                              | from, to                 | value
-WithdrawEther        | [Cash](https://github.com/AugurProject/augur-core/blob/develop/src/trading/Cash.sol)                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
+Approval             | [ERC20](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol)              | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
+Burn                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Burned the target's tokens to completely destroy them                     | target                   | value
+CancelOrder          | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
+BuyCompleteSets         | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Bought a Complete Set of shares for a market                         | sender, market     | fxpAmount, numOutcomes
+DepositEther         | [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
+InitiateWithdrawEther| [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
+MakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
+Mint                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Created brand new tokens for target                                       | target                   | value
+Registration         | [Register](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/extensions/Register.sol) | Records the registration of new accounts     | sender      | timestamp
+SellCompleteSets     | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)   | Sold a Complete Set of shares for a market  | sender, market         | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
+TakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
+Transfer             | [ERC20Basic](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol)          | Transferred tokens from one owner to another                              | from, to                 | value
+WithdrawEther        | [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
 
 In addition to these on-contract events, `augur.filters.listen` also accepts a callback for the `block` listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.
 

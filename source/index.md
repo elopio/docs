@@ -34,16 +34,16 @@ Overview
 
 The stable Augur application is built and hosted at [https://app.augur.net](https://app.augur.net). If you want to use or help test Augur, you do not need to download or install anything! Just go to [https://app.augur.net](https://app.augur.net) and start using it. (If you want to use our cutting-edge development client, this is maintained at [https://dev.augur.net](https://dev.augur.net) -- warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using [https://app.augur.net](https://app.augur.net) for a more stable experience.)
 
-Augur has it's own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
+Augur has its own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
 
 Getting Started
 ---------------
 
 If you want to help develop Augur, you will need to build the client from source. To do this, first install [Node.js](https://nodejs.org/), and [git](https://git-scm.com/downloads).
 
-First we need to clone the Augur repository from [Github](https://www.github.com/AugurProject/augur), open up your terminal and enter the following command to clone the repository:
+First we need to clone the Augur repository from [Github](https://github.com/AugurProject/augur), open up your terminal and enter the following command to clone the repository:
 
-`$ git clone https://www.github.com/AugurProject/augur.git`
+`$ git clone https://github.com/AugurProject/augur.git`
 
 Now navigate into the newly created `augur` folder by running the following command:
 
