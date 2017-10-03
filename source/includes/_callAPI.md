@@ -240,6 +240,12 @@ augur.api.Market.isContainerForShareToken({
 }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
+
+augur.api.Market.isIndeterminate({
+  market: market
+}, function (isIndeterminate) { /* ... */ })
+// example output:
+isIndeterminate = "0"
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
@@ -346,6 +352,10 @@ Returns wether the specific `market` is a container for the `_shadyTarget` addre
 #### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
 
 Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
+
+#### augur.api.Market.isIndeterminate({ market }[, callback])
+
+Returns True or False depending on if the [Market](#market) passed as `market` has been [Finalized](#finalized-market) as Indeterminate, or Invalid. This means the Market is unable to be finalized to a single [Final Outcome](#final-outcome) due to an unclear Market or an indeterminate [Outcome](#outcome). Returns `1` if True, `0` if False.
 
 Registration Token Call API
 ---------------------------
