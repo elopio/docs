@@ -293,7 +293,7 @@ Returns the number of [Outcomes](#outcome) for a specified `market`. The number 
 
 #### augur.api.Market.getNumTicks({ market }[, callback])
 
-Returns the [Number of Ticks](#number-of-ticks) set for a specific `market`. The Number of Ticks represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
+Returns the [Number of Ticks](#number-of-ticks) set for a specific `market`. The Number of [Ticks](#ticks) represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
 
 #### augur.api.Market.getPayoutDistributionHashStake({ market, \_payoutDistributionHash }[, callback])
 
@@ -305,47 +305,47 @@ Returns the current [Reporting](#report) State that the `market` is in. This met
 
 #### augur.api.Market.getReportingToken({ market, \_payoutNumerators }[, callback])
 
-Returns the Reporting Token address for `_payoutNumerators` on the `market` specified.
+Returns the Reporting Token address for `_payoutNumerators` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Numerator](#payout-numerator) array indicating how the [Market](#market) should payout. Each Payout Numerator has a Reporting Token associated with it, so if two different Reporters submit the same Payout Numerator as their Report then they will receive the same Reporting Token currency. This method will return the reporting token associated with a specific Payout Numerator.
 
 #### augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
 
-Returns a Reporting Token address, or 0 if there is no reporting token for that [Payout Distribution Hash](#payout-distribution-hash), for a specific `_payoutDistributionHash` for a `market`.
+Returns a Reporting Token address, or 0 if there is no reporting token for a specific `_payoutDistributionHash` for a `market`. [Payout Numerators](#payout-numerator) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Reporting Token given a Payout Distribution Hash, much like `getReportingToken` returns the Reporting Token given a Payout Numerator.
 
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
-Returns the reporting window address for the specified `market`.
+Returns the [Reporting Window](#reporting-window) address for the specified `market`. This returns the Reporting Window when this [Market](#market) is scheduled to be [Reported](#report) on for [Limited Reporting](#limited-reporting) if a [Designated Reporter](#designated-reporter) is not set, or fails to Report.
 
 #### augur.api.Market.getShareToken({ market, \_outcome }[, callback])
 
-Returns the share token's address for the specified `market` and `_outcome`.
+Returns the [Share](#shares) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
 
 #### augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
 
-Returns the tentatively winning Payout Distribution Hash given a specified `market`.
+Returns the tentatively winning [Payout Distribution Hash](#payout-distribution-hash) given a specified `market`. The tentatively winning Payout Distribution Hash is the hash with the most [REP](#rep) staked on it prior to [Market Finalization](#finalized-market). Once the [Market](#market) Finalized the tentatively winning Payout Distribution Hash becomes the Winning Payout Distribution Hash.
 
 #### augur.api.Market.getTypeName({ market }[, callback])
 
-Returns the type name for the specified `market`, should always return "Market".
+Returns the type name for the specified `market` contract address, will always return "Market" if the `market` is a [Market](#market) contract. This is helpful if you need to verify that a contract address is a Market.
 
 #### augur.api.Market.getUniverse({ market }[, callback])
 
-Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within.
+Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within. All [Markets](#market) are created on a specific Universe and new Universes can be created in the event of a [Fork](#fork).
 
 #### augur.api.Market.getWinningPayoutDistributionHashFromFork({ market }[, callback])
 
-Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which is used to identify the Winning [Universe](#universe), after a [Fork](#fork) for a given `market`.
+Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which is used to identify the Winning [Universe](#universe), after a [Fork](#fork) for a given `market`. The Winning Payout Distribution Hash is also used to determine how the [Finalized Market](#finalized-market) should payout for a specific [Outcome](#outcome) when [Shares](#shares) are [Settled](#settlement) for that Outcome.
 
 #### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` will return true if it is a automated report dispute bond token, a limited reporter dispute bond token, or an all reporters dispute bond token for this `market`. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, a [Limited Reporting](#limted-reporting) Dispute Bond token, or an [All Reporting](#all-reporting) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForReportingToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided, which is the reporting token address we intend to check. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if the address is a Reporting Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided, which is the share token address we intend to check. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
 
 Registration Token Call API
 ---------------------------
