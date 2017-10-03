@@ -282,11 +282,12 @@ Market Tx API
 // Market Contract Transaction API Examples:
 var privateKey = <Buffer ...>;
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _payoutNumerators = [ 0, 2 ];
+var _payoutNumerators = [ 0, 1000 ];
 
-augur.api.Market.approveSpenders({
+augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
   _signer: privateKey,
   market: market,
+  _newFeePerEthInWei: '1000000000',
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -294,21 +295,47 @@ augur.api.Market.approveSpenders({
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320485,
+  blockNumber: 320488,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0xe0dd7114a82fda1daba5adee379eb2fc4fce72e2b2d0005833ffd5ee1f54064c",
-  input: "0x8d7e8a57",
-  nonce: "0x1",
-  timestamp: 1501003130,
+  hash: "0xd513068544920197371d325b08e23ed19c68f326b47eb3a2c7e14aa915417da7",
+  input: "0x4c92c4b3000000000000000000000000000000000000000000000000000000003b9aca00",
+  nonce: "0x4",
+  timestamp: 1501003134,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
 
-augur.api.Market.automatedReport({
+augur.api.Market.derivePayoutDistributionHash({
+  _signer: privateKey,
+  market: market,
+  _payoutNumerators: _payoutNumerators,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320488,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
+  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
+  nonce: "0x4",
+  timestamp: 1501003134,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+
+augur.api.Market.designatedReport({
   _signer: privateKey,
   market: market,
   _payoutNumerators: _payoutNumerators,
@@ -329,31 +356,6 @@ successResponse = {
   input: "0x17c18af20000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002",
   nonce: "0x2",
   timestamp: 1501003132,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
-  _signer: privateKey,
-  market: market,
-  _newFeePerEthInWei: '1000000000',
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b3000000000000000000000000000000000000000000000000000000003b9aca00",
-  nonce: "0x4",
-  timestamp: 1501003134,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
@@ -382,7 +384,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Market.disputeAutomatedReport({
+augur.api.Market.disputeDesignatedReport({
   _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
@@ -424,6 +426,30 @@ successResponse = {
   gasPrice: "0x430e23400",
   hash: "0xd3f644e8904966909a9d974c7ed63ae8ddbb0f23d824f576764afddd7023ef88",
   input: "0x3f4628c1",
+  nonce: "0x7",
+  timestamp: 1501003137,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api.Market.migrateDueToNoReports({
+  _signer: privateKey,
+  market: market,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320491,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x76acc0f6322ec26e9623158f0b377777b8c7c3e4b4e700de08b39cf8accc39e5",
+  input: "0x2c10270f",
   nonce: "0x7",
   timestamp: 1501003137,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
@@ -530,45 +556,49 @@ successResponse = {
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
-#### augur.api.Market.approveSpenders({ \_signer, market, onSent, onSuccess, onFailed })
-
-This transaction calls a number of `approve` transactions for the `market`'s `denominationToken` and `shareTokens` to allow other contracts the ability to transfer around the `market`'s tokens so the `market` can function.
-
-#### augur.api.Market.automatedReport({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
-
-This transaction is used by the `automatedReporter` for a specified `market` to report the winning outcome, by submitting `_payoutNumerators`, of the `market`. This transaction will fail if the `msg.sender` isn't the `automatedReporterAddress` set for this `market`, or if this `market` isn't in the Automated Reporting Phase.
-
 #### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, \_newFeePerEthInWei, onSent, onSuccess, onFailed })
 
 Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `_newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `_newFeePerEthInWei` is 0 or less, or if `_newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
+#### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` passed in. If the [Payout Numerators](#payout-numerator) is valid, then a Payout Distribution Hash is created by hashing the Payout Numerators using sha3.
+
+#### augur.api.Market.designatedReport({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
+
+This transaction is used by the [Designated Reporter](#designated-reporter) for a specified `market` to [Report](#report), by submitting `_payoutNumerators` that indicate how the [Market](#market) should Payout. This transaction will fail if the `msg.sender` isn't the Designated Reporter Address set for this Market, or if this Market isn't in the [Designated Report Phase](#designated-report-phase).
+
 #### augur.api.Market.disputeAllReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the all reporters phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the upcoming reporting window. This transaction will fail if the `market` isn't in the all reporters dispute phase of reporting.
+`disputeAllReporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through a round of [All Reporting](#all-reporting) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the All Reporting Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
 
-#### augur.api.Market.disputeAutomatedReport({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeDesignatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the automated report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then update the `market` reporting phase to limited reporting. This transaction will fail if the `market` isn't in the automated dispute phase of reporting or if the `market` has been finalized.
+This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) as a [Limited Reporting](#limited-reporting) Market.
 
 #### augur.api.Market.disputeLimitedReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will trigger a dispute of the limited report phase of reporting for the specified `market`. This transaction will take the bond amount from the `msg.sender` and then move the `market` into the next reporting window for all reporting. This transaction will fail if the `market` isn't in the limited dispute phase of reporting.
+This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Limited Reporting](#limited-reporting) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for a round of [All Reporting](#all-reporting).
+
+#### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
+
+This function is called to move a [Market](#market) to the next [Reporting Window](#reporting-window) if no [Reports](#report) were submitted for the Market during a [Reporting Phase](#reporting-phase). If a Market is in [Limited Reporting](#limited-reporting) and doesn't receive any Reports, it's moved to the next coming Reporting Window to be Reported on again, however it remains in Limited Reporting.
 
 #### augur.api.Market.migrateThroughAllForks({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will call `migrateThroughOneFork` repeatedly until the `market` has moved through all forks or has reached an active fork which will throw.
+This transaction will call `migrateThroughOneFork` repeatedly until the [Market](#market) has migrated through all of the [Forks](#fork) or has reached an active Fork which will throw. See the `migrateThroughOneFork` function for a better explanation of what is going on here (the next method).
 
-#### augur.api.Market.migrateThroughOneForks({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.migrateThroughOneFork({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will move the `market` onto the active universe following a fork and refund bond holders for limited or all reporting disputes. This transaction will fail if no move is required or if the forked market isn't finalized. Returns `1` if a move occurred, `0` if no move occurred, and throws if the forking market isn't finalized.
+This transaction attempts to migrate the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a 60 day long [Fork Period](#fork-period) that occurs where in [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling `migrateThroughOneFork` attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This method will throw if the Fork Period isn't over, so there is no Winning Universe to migrate to yet. This will return `1` if the `market` was successfully migrated and return `0` if no migration was required.
 
 #### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will attempt to finalize the `market`. If the `market` becomes finalized, this transaction will return `1`. If the market could not be finalized then `0` is returned instead.
+This transaction will attempt to finalize a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). If the Market isn't Awaiting Finalization then this will fail and return `0`. If the Market is Awaiting Finalization and can be finalized then this function will return 1 to indicate that the Market is now finalized and the [Proposed Outcome](#proposed-outcome) is now the [Final Outcome](#final-outcome). Further the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash) will become the Winning Payout Distribution Hash.
 
 #### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
-This transaction will attempt to update the `tentativeWinningPayoutDistributionHash` for this `market` to the `_payoutDistributionHash` provided. This transaction will not update the `tentativeWinningPayoutDistributionHash` if it already has a value and its supply of reporting tokens is higher than the `_payoutDistributionHash`'s supply of reporting tokens. This transaction will fail if the `_payoutDistributionHash` provided isn't a hash contained within this `market`'s reporting tokens. Returns `1`.
+This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#shares) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
 
 Registration Token Tx API
 ----------------------------------
@@ -990,7 +1020,7 @@ var currencyContract = "0xb85a75a008e15d134c8ba01679ce2ab82dd7f777";
 var _creator = "0xab11204cfeaccffa63c2d23aef2ea9accdb0a0d5";
 var _minDisplayPrice = "0";
 var _maxDisplayPrice = "1";
-var _automatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
+var _designatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
 var _topic = "examples";
 
 augur.api.ReportingWindow.createNewMarket({
@@ -1004,7 +1034,7 @@ augur.api.ReportingWindow.createNewMarket({
   _creator: _creator,
   _minDisplayPrice: _minDisplayPrice,
   _maxDisplayPrice: _maxDisplayPrice,
-  _automatedReporterAddress: _automatedReporterAddress,
+  _designatedReporterAddress: _designatedReporterAddress,
   _topic: _topic,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1029,7 +1059,7 @@ successResponse = {
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
 
-#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_automatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
+#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_designatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `_numOutcomes` value isn't within the range of 2 and 8, if the `_payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `_reportingWindow`, if the `_payoutDenominator` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_maxDisplayPrice` and `_minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `_maxDisplayPrice` - `_minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 

@@ -20,26 +20,6 @@ All Reporting is the third level of the [Reporting](#report) system, second if t
 
 An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
 
-## Designated Dispute Phase
-
-The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
-
-## Designated Report Phase
-
-The Designated Report Phase is up to three (3) days in length and begins immediately following the [End Time](#end-time) of a [Market](#market) with an [Designated Reporter](#designated-reporter). During this time the Designated Reporter is expected to [Report](#report) a [Proposed Outcome](#proposed-outcome) for the Market. When the Designated Reporter submits his/her/its response the Market will immediately enter an [Designated Dispute Phase](#designated-dispute-phsae). If the Designated Reporter fails to Report on the Market within the Designated Report Phase then the [Designated Reporter Bond](#designated-reporter-bond) is lost and the Market is moved into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). The Designated Report Phase only occurs for [Designated Reporting](#designated-reporting) Markets and should not be confused with a Reporting Window's [Reporting Phase](#reporting-phase) which is longer and only concerned Limited and [All Reporting](#all-reporting).
-
-## Designated Reporter
-
-An Designated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Designated Reporting](#designated-reporting). The Designated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Designated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as its first attempt to be [Finalized](#finalized), instead of Designated Reporting.
-
-## Designated Reporter Bond
-
-The Designated Reported Bond is paid by the [Market Creator](#market-creator) during Market Creation. It's only required if the Market Creator intends to assign an [Designated Reporter](#designated-reporter) for their [Market](#market). This is refunded to the Market Creator if the Designated Reporter's [Proposed Outcome](#proposed-outcome) matches the [Final Outcome](#final-outcome) for the Market.
-
-## Designated Reporting
-
-Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the Designated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Designated Reporting is independent of Reporting Windows.
-
 ## Bid Order
 
 A Bid Order is an [Order](#order) indicating the desire of the [Maker](#maker) to buy [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of an [Ask Order](#ask-order).
@@ -62,7 +42,31 @@ A Child Universe is a [Universe](#universe) created after a [Fork](#fork). Child
 
 ## Complete Set
 
-A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are [Settled](#settlement), [Settlement Fees](#settlement-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from Settlement you will also pay the lions share of the fees. The Settlement Fees extracted will go toward paying for the reporting system, in the form of a [Reporting fee](#reporting-fee), and paying the [Market Creator](#market-creator) their set [Trading Fee](#trading-fee) from Share Settlement.
+A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Maker](#maker) and [Taker](#taker) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in attoeth of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are [Settled](#settlement), [Settlement Fees](#settlement-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from Settlement you will also pay the lions share of the fees. The Settlement Fees extracted will go toward paying for the reporting system, in the form of a [Reporting fee](#reporting-fee), and paying the [Market Creator](#market-creator) their set [Creator Fee](#trading-fee) from Share Settlement.
+
+## Creator Fee
+
+A Creator Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the Creator Fee is set, it can never be increased, only decreased. The Creator Fee must be between 0% and 50%. The Creator Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be Settled when a user amasses a [Complete Set](#complete-set) or when the Market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting Markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
+
+## Designated Dispute Phase
+
+The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
+
+## Designated Report Phase
+
+The Designated Report Phase is up to three (3) days in length and begins immediately following the [End Time](#end-time) of a [Market](#market) with an [Designated Reporter](#designated-reporter). During this time the Designated Reporter is expected to [Report](#report) a [Proposed Outcome](#proposed-outcome) for the Market. When the Designated Reporter submits his/her/its response the Market will immediately enter an [Designated Dispute Phase](#designated-dispute-phsae). If the Designated Reporter fails to Report on the Market within the Designated Report Phase then the [Designated Reporter Bond](#designated-reporter-bond) is lost and the Market is moved into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). The Designated Report Phase only occurs for [Designated Reporting](#designated-reporting) Markets and should not be confused with a Reporting Window's [Reporting Phase](#reporting-phase) which is longer and only concerned Limited and [All Reporting](#all-reporting).
+
+## Designated Reporter
+
+An Designated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Designated Reporting](#designated-reporting). The Designated Reporter is set by the [Market Creator](#market-creator) during Market Creation. If no Designated Reporter is set then the market will use [Limited Reporting](#limited-reporting) as its first attempt to be [Finalized](#finalized), instead of Designated Reporting.
+
+## Designated Reporter Bond
+
+The Designated Reported Bond is paid by the [Market Creator](#market-creator) during Market Creation. It's only required if the Market Creator intends to assign an [Designated Reporter](#designated-reporter) for their [Market](#market). This is refunded to the Market Creator if the Designated Reporter's [Proposed Outcome](#proposed-outcome) matches the [Final Outcome](#final-outcome) for the Market.
+
+## Designated Reporting
+
+Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the Designated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Designated Reporting is independent of Reporting Windows.
 
 ## Dispute Bond
 
@@ -90,7 +94,7 @@ A Finalized Market is a [Market](#market) that has [Awaited Finalization](#marke
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#universe) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#universe) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe. The original universe that contained the Forked Market will be known as the [Parent Universe](#parent-universe) and will be considered Locked. All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
 
 ## Fork Period
 
@@ -114,7 +118,7 @@ A Maker is the creator of an [Order](#order) that is placed on the [Order Book](
 
 ## Market
 
-A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different outcomes of the Market. The [Market Creator](#market-creator) can set the [Trading Fee](#trading-fee) for the Market, which once set cannot be raised, which will determine their cut of all shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#tick) for the Market. There are three different Market types supported by Augur, they are: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
+A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which once set cannot be raised, which will determine their cut of all shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#tick) for the Market. There are three different Market types supported by Augur, they are: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
 ## Market Awaiting Finalization
 
@@ -122,7 +126,7 @@ Market Awaiting Finalization occurs when a [Market](#market) has been [Reported]
 
 ## Market Creator
 
-A Market Creator is a user who created a [market](#market). They are charged a small fee to make a new market but can determine the [Trading Fee](#trading-fee) for [Settlement](#settlement) of [Shares](#shares) on that market. Market Creators are incentivized to create popular markets so as to generate the most amount of Settlement fees for themselves. Other information a market requires is the actual question being purposed, the type of market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
+A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can determine the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#shares) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being purposed, the type of Market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
 ## Market Resolution
 
@@ -174,11 +178,11 @@ A Position is the amount of [Shares](#share) that is owned (a long position) or 
 
 ## Proposed Outcome
 
-The Proposed Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporter) have staked their [REP](#rep) on to indicate that it is the correct Outcome of the Market. If a Market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will become a [Final Outcome](#final-outcome).
+The Proposed Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct Outcome of the Market. If a Market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will become a [Final Outcome](#final-outcome).
 
 ## Registration Token
 
-A Registration Token is purchasable by [REP](#rep) holders for REP and is used as a sort of ticket to participate in the upcoming [Reporting Window](#reporting-window) that the Registration Token belongs to. Once the Reporting Window has started, you will need the Registration Token to be able to report. When the [Reporter](#reporter) finishes [Reporting](#report) they are able to redeem their Registration Token for the REP spent to purchase it. The Registration Token cannot be redeemed once the reporting window it belongs to has passed if the Reporter did not Report and the deposit is lost. The Registration Token is designed as a sort of deposit to ensure that Reporters who sign up to Report in the upcoming Reporting Window actually show up and participate in the reporting process, or lose their deposit.
+A Registration Token is purchasable by [REP](#rep) holders for REP and is used as a sort of ticket to participate in the upcoming [Reporting Window](#reporting-window) that the Registration Token belongs to. Once the Reporting Window has started, you will need the Registration Token to be able to report. When the [Reporter](#reporter) finishes [Reporting](#report) they are able to redeem their Registration Token for the REP spent to purchase it. The Registration Token cannot be redeemed once the reporting window it belongs to has passed if the Reporter did not Report and the deposit is lost. The Registration Token is designed as a sort of deposit to ensure that Reporters who sign up to Report in the upcoming Reporting Window actually show up and participate in the reporting process, or lose their deposit. The Registration Token follows the [ERC20 Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md).
 
 ## REP
 
@@ -195,7 +199,7 @@ Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#e
 
 ## Reporting Fee
 
-The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Settlement Fees](#settlement-fees), which includes the [Trading Fee](#trading-fee) and the Reporting Fee. The Reporting Fees are sent to the [Reporting Window](#reporting-window) that contains the [market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the [Outcome](#outcome) of Markets.
+The Reporting Fee is used to help pay for Augur's Decentralized Oracle System. When [Shares](#shares) are [Settled](#settlement) (aka destroyed), before paying out to the share holders Augur will extract the [Settlement Fees](#settlement-fees), which includes the [Creator Fee](#creator-fee) and the Reporting Fee. The Reporting Fee is sent to the [Reporting Window](#reporting-window) that contains the [Market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the [Outcome](#outcome) of Markets.
 
 ## Reporting Period
 
@@ -219,11 +223,11 @@ A Scalar Market is a [Market](#market) with a range for potential [outcomes](#ou
 
 ## Settlement
 
-Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Trading Fee](#trading-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
+Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
 
 ## Settlement Fees
 
-Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Trading Fee](#trading-fee) and The [Reporting Fee](#reporting-fee).
+Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Creator Fee](#creator-fee) and The [Reporting Fee](#reporting-fee).
 
 ## Shares
 
@@ -240,10 +244,6 @@ A Tick is the smallest recognized amount by which a price of a security or futur
 ## Topic
 
 A Topic is a keyword used to categorize [markets](#market). All markets must have a topic, and are optionally allowed up to two sub-topics to further categorize the Market. An example Market for "Will the New York Giants win Super Bowl 100?" might have a Topic of "Sports" and sub-topics of "American Football" and "NFL". The Topics are set by the [Market Creator](#market-creator) when a new market is made and cannot be changed.
-
-## Trading Fee
-
-A Trading Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the trading fee is set, it can never be increased, only decreased. The Trading Fee must be between 0% and 50%. The Trading Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be settled when a user amasses a [Complete Set](#complete-set) or when the market has been [Finalized](#finalized-market) and you want to close your open [Position](#position). The Trading Fee is designed to incentivize users to make popular markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
 
 ## Universe
 

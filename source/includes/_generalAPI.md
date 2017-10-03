@@ -14,7 +14,7 @@ var Augur = require('augur.js');
 var augur = new Augur();
 
 var options = {
-  httpAddresss: [
+  httpAddresses: [
     'http://127.0.0.1:8545', // local http address for Geth Node
     'https://eth9000.augur.net' // hosted http address for Augur Node
   ],
