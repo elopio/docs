@@ -380,10 +380,6 @@ augur.api.RegistrationToken.balanceOf({
 // example output:
 balance = "1";
 
-augur.api.RegistrationToken.getUniverse({ registrationToken: registrationToken }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
 augur.api.RegistrationToken.getPeakSupply({ registrationToken: registrationToken }, function (peakSuppy) { /* ... */ })
 // example output:
 peakSuppy = "234"
@@ -396,47 +392,45 @@ augur.api.RegistrationToken.getReputationToken({ registrationToken: registration
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.RegistrationToken.getTotalSupply({ registrationToken: registrationToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "215";
-
 augur.api.RegistrationToken.getTypeName({ registrationToken: registrationToken }, function (typeName) { /* ... */ })
 // example output:
 typeName = "RegistrationToken";
+
+augur.api.RegistrationToken.getUniverse({ registrationToken: registrationToken }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 ```
 #### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/RegistrationToken.sol)
 
+[Registration Tokens](#registration-token) are purchasable with [REP](#rep) and allows the owner of the Registration Token the ability to [Report](#report) on [Markets](#market) during a [Reporting Window](#reporting-window). Being a Registered [Reporter](#reporter) means you can stake REP on the [Outcome](#outcome) of [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets during the Reporting Window's [Reporting Phase](#reporting-phase). If the Reporter Reports on at least the minimum number of Reports for the Reporting Phase they are able to redeem their Registration Token for the REP used to purchase it. If you purchase a Registration Token but fail to Report during it's Reporting Window then you will lose the REP you used to Purchase the Registration Token and it will be redistributed to the Reporters who did show up to Report during that Window. Registration Tokens can only be used during the Reporting Windows they belong to and are not reusable.  
+
 #### augur.api.RegistrationToken.allowance({ registrationToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `registrationToken`s.
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `registrationToken`s. [Registration Tokens](#registration-token) are based off of the [ERC20 Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md), which allows a token owner to designate an spender address to be able to spend the Registration Token for the owner. This method returns the amount of Registration Tokens the spender is allowed to spend for the owner.
 
 #### augur.api.RegistrationToken.balanceOf({ registrationToken, \_owner }[, callback])
 
-Returns the token balance for the specified `registrationToken` owned by the `_owner` provided.
-
-#### augur.api.RegistrationToken.getUniverse({ registrationToken }[, callback])
-
-Returns the Universe address for the specified `registrationToken`'s Reporting Window.
+Returns the amount of [Registration Tokens](#registration-token) owned for the specified `registrationToken` address and `_owner` address provided. You can only purchase a maximum of 1 Registration Token per [Reporting Window](#reporting-window), so this should always return `1` if the owner owns a Registration Token at the address provided, otherwise it will return `0`.
 
 #### augur.api.RegistrationToken.getPeakSupply({ registrationToken }[, callback])
 
-Returns the peak supply of tokens for the specified `registrationToken`.
+Returns the peak supply of [Registration Tokens](#registration-token) purchased for the `registrationToken` Address provided. All Registration Tokens belong to a specific [Reporting Window](#reporting-window) and this function is used to keep track of how many potential Registered [Reporters](#reporter) may be participating in the Reporting Window's [Reporting Phase](#reporing-phase).
 
 #### augur.api.RegistrationToken.getReportingWindow({ registrationToken }[, callback])
 
-Returns the Reporting Window address for the specified `registrationToken`.
+Returns the [Reporting Window](#reporting-window) address for the specified `registrationToken`. All [Registration Tokens](#registration-token) belong to a specific Reporting Window and this method will allow you to easily find out which Reporting Window this Registration Token belongs to.
 
 #### augur.api.RegistrationToken.getReputationToken({ registrationToken }[, callback])
 
-Returns the Reputation Tokens address for the specific `registrationToken`'s Reporting Window.
-
-#### augur.api.RegistrationToken.getTotalSupply({ registrationToken }[, callback])
-
-Returns the current total supply of the specified `registrationToken`.
+Returns the [Reputation Tokens](#rep) address for the specific `registrationToken`'s [Reporting Window](#reporting-window). Each Reporting Window has a Reputation Token set that is valid to use for that Reporting Window. All Reporting Windows will use the same Reputation Token until their is a [Fork](#fork) and multiple REP token contracts are created for each [Child Universe](#child-universe) created. Once a Fork occurs, each Child Universe will end up with their own version of REP and this method will allow you to get the contract address used by the Reporting Window that the Registration Token belongs to.
 
 #### augur.api.RegistrationToken.getTypeName({ registrationToken }[, callback])
 
-Returns the type name for the specified `registrationToken`, should always return "RegistrationToken".
+Returns the type name for the specified `registrationToken`, should always return "RegistrationToken". This is a method that is used to make sure the address provided as `registrationToken` is really a [Registration Token](#registration-token) contract.
+
+#### augur.api.RegistrationToken.getUniverse({ registrationToken }[, callback])
+
+Returns the [Universe](#universe) address that the specified `registrationToken`'s [Reporting Window](#reporting-window) belongs in. Everything in Augur belongs to a specific Universe of Augur. New Universes are created when an [All Reporting](#all-reporting) [Market](#market)'s [Proposed Outcome](#proposed-outcome) is [Challenged](#challenged) and a [Fork](#fork) occurs. This method is used to figure out what Universe the [Registration Token](#registration-token) belongs to.
 
 Reporting Token Call API
 ------------------------
