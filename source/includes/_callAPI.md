@@ -89,7 +89,7 @@ This transaction will return the account address of the bond holder for a specif
 
 #### augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
 
-This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporters) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
+This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporter) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
 
 #### augur.api.DisputeBondToken.getUniverse({ disputeBondToken }[, callback])
 
