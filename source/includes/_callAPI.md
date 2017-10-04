@@ -486,7 +486,7 @@ augur.api.ReportingToken.getReputationToken({ reportingToken: reportingToken }, 
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.ReportingToken.getTotalSupply({ reportingToken: reportingToken }, function (totalSupply) { /* ... */ })
+augur.api.ReportingToken.totalSupply({ reportingToken: reportingToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "210"
 
@@ -495,6 +495,8 @@ augur.api.ReportingToken.getTypeName({ reportingToken: reportingToken }, functio
 typeName = "ReportingToken";
 ```
 #### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingToken.sol)
+
+The Reporting Token is used to represent Staked REP by a Reporter for a specific Report and Market. When a Reporter submits a Report on a Limited or All Reporting Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Reporting Tokens. A new type of Reporting Token is created for each Payout Set submitted by Reporters. Reporting Tokens are then redeemed after Finalizing the Market. If your Reporting Tokens are the tokens that represent the Winning Payout Set then your Reporting Tokens can be redeemed for the amount of REP that was staked as well as a portion of Reporting Fees and REP staked on any other Outcome but the Final Outcome.
 
 #### augur.api.ReportingToken.allowance({ reportingToken, \_owner, \_spender }[, callback])
 
@@ -532,7 +534,7 @@ Returns the Reporting Window address for the specified `reportingToken`.
 
 Returns the Reputation Tokens address for the specific `reportingToken`'s Reporting Window.
 
-#### augur.api.ReportingToken.getTotalSupply({ reportingToken }[, callback])
+#### augur.api.ReportingToken.totalSupply({ reportingToken }[, callback])
 
 Returns the current total supply of the specified `reportingToken`.
 

@@ -562,11 +562,11 @@ Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the
 
 #### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` passed in. If the [Payout Numerators](#payout-numerator) is valid, then a Payout Distribution Hash is created by hashing the Payout Numerators using sha3.
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets using sha3.
 
 #### augur.api.Market.designatedReport({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
 
-This transaction is used by the [Designated Reporter](#designated-reporter) for a specified `market` to [Report](#report), by submitting `_payoutNumerators` that indicate how the [Market](#market) should Payout. This transaction will fail if the `msg.sender` isn't the Designated Reporter Address set for this Market, or if this Market isn't in the [Designated Report Phase](#designated-report-phase).
+This transaction is used by the [Designated Reporter](#designated-reporter) for a specified `market` to [Report](#report), by submitting `_payoutNumerators` ([Payout Sets](#payout-set)) that indicate how the [Market](#market) should Payout. This transaction will fail if the `msg.sender` isn't the Designated Reporter Address set for this Market, or if this Market isn't in the [Designated Report Phase](#designated-report-phase).
 
 #### augur.api.Market.disputeAllReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
