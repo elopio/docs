@@ -828,10 +828,6 @@ augur.api.ReputationToken.allowance({
 // example output:
 allowance = "200"
 
-augur.api.ReputationToken.assertReputationTokenIsLegit({ _shadyReputationToken: reputationToken }, function (isLegitREPToken) { /* ... */ })
-// example output:
-isLegitREPToken = true;
-
 augur.api.ReputationToken.balanceOf({
   reputationToken: reputationToken,
   _owner: _owner
@@ -857,33 +853,33 @@ reputationToken = "ReputationToken";
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
 
+The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
+
+REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a REP bond to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creators Designated Reporter Bond will go to the first Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator and the Designated Reporter Bond is added to whatever the reporter staked, there by improving her stake and potential rewards if correctly staked.
+
 #### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `reputationToken`s.
-
-#### augur.api.ReputationToken.assertReputationTokenIsLegit({ reputationToken, \_shadyReputationToken }[, callback])
-
-Returns true or false depending on if the `_shadyReputationToken` provided is actually a legitimate token belonging to the correct universe for a specified `reputationToken`.
+Returns the allowance that a specified `_spender` can spend of the `_owner`’s [REP](#rep). REP holders can designate a spender address to be able to take actions with REP on behalf of the owner. This method returns the amount of REP the spender is allowed to use. In order to designate a spender address and the amount of REP they are allowed to act with, see the `approve` method in the [REP Transaction API section](#reputation-token-tx-api).
 
 #### augur.api.ReputationToken.balanceOf({ reputationToken, \_owner }[, callback])
 
-Returns the token balance of the specified `reputationToken` owned by the `_owner` provided.
+Returns the [REP](#rep) balance of the specified `reputationToken` address owned by the `_owner` address provided. This is the method to use to check how much REP a particular address controls.
 
 #### augur.api.ReputationToken.getUniverse({ reputationToken }[, callback])
 
-Returns the Universe address for the specified `reputationToken`.
+Returns the [Universe](#universe) address for the [REP](#rep) address provided. All of Augur's information belongs to a Universe and each Universe has it's own REP contract. New Universes are created in the event of a [Fork](#fork).
 
 #### augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
 
-Returns the top migration destination address for the specified `reputationToken`.
+As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the 60 day [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
 
 #### augur.api.ReputationToken.getTotalSupply({ reputationToken }[, callback])
 
-Returns the current total supply of the specified `reputationToken`.
+Returns the total supply of [REP](#rep) for a particular REP contract address. This number is going to return 11 million on the original Augur [Universe](#universe). If a [Fork](#fork) ever occurs, each [Child Universe](#child-universe) could potentially have some portion of REP migrated to it. This method is how to find the total amount of REP contained within a specific Universe, given that Universe's REP address.
 
 #### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
 
-Returns the type name for a specified `reputationToken`, this should always return "ReputationToken".
+Returns the type name for a specified `reputationToken`. If the `reputationToken` address provided is actually a legitimate [REP](#rep) contract, this will return "ReputationToken". This is used to confirm that the address is a Reputation Token Contract.
 
 Orders Call API
 ---------------
