@@ -574,7 +574,7 @@ This transaction is used by the [Designated Reporter](#designated-reporter) for 
 
 #### augur.api.Market.disputeDesignatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) as a [Limited Reporting](#limited-reporting) Market.
+This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round).
 
 #### augur.api.Market.disputeLimitedReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -582,7 +582,7 @@ This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-o
 
 #### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
 
-This function is called to move a [Market](#market) to the next [Reporting Window](#reporting-window) if no [Reports](#report) were submitted for the Market during a [Reporting Phase](#reporting-phase). If a Market is in [Limited Reporting](#limited-reporting) and doesn't receive any Reports, it's moved to the next coming Reporting Window to be Reported on again, however it remains in Limited Reporting.
+This function is called to move a [Market](#market) to the next [Reporting Window](#reporting-window) if no [Reports](#report) were submitted for the Market during a [Reporting Phase](#reporting-phase). If a Market is in the [First Report Round](#first-report-round) and doesn't receive any Reports, it's moved to the next coming Reporting Window to be Reported on again, however it remains in the First Report Round, however this will be rare as the [First Report](#first-report) is incentivized.
 
 #### augur.api.Market.migrateThroughAllForks({ \_signer, market, onSent, onSuccess, onFailed })
 

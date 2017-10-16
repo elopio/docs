@@ -14,9 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
-All Reporting is deprecated and is to be removed shortly please ignore this glossary term and know this will soon be corrected to reflect the updated reporting flow.
-
-All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Designated Reporter](#designated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is [Challenged](#challenge) then the Market will be moved into the upcoming [Reporting Window](#reporting-window) and have its state changed to All Reporting. Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are [Registered](#registration-token) to Report. The Reporting Phase lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted by any [REP](#rep) Holder to force the last reporting system state, a [Fork](#fork). All Reporting takes place within a Reporting Window.
+All Reporting no longer exists, links to this glossary are being removed/updated.
 
 ## Ask Order
 
@@ -52,7 +50,7 @@ A Creator Fee is set by the [Market Creator](#market-creator) when he or she cre
 
 ## Designated Dispute Phase
 
-The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a round of [Limited Reporting](#limited-reporting). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
+The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a [Reporting Round](#reporting-round), specifically the [First Report Round](#first-report-round). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
 
 ## Designated Report Phase
 
@@ -64,7 +62,7 @@ An Designated Reporter is a single address designated to submit the [Proposed Ou
 
 ## Designated Reporting
 
-Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time). After the Report has been submitted by the Designated [Reporter](#reporter) then a 3 day [Dispute Phase](#dispute-phase) begins where in any [REP](#rep) Holder can post a bond to dispute the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Limited Reporting](#limited-reporting). Designated Reporting is independent of Reporting Windows.
+Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time), known as the [Designated Report Phase](#designated-report-phase). After the Report has been submit by the Designated [Reporter](#reporter) then a 3 day [Designated Dispute Phase](#designated-dispute-phase) begins where in any [REP](#rep) Holder can [Challenge](#challenge) the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the Market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Reporting Rounds](#reporting-round). Designated Reporting is independent of Reporting Windows.
 
 ## Dispute Bond
 
@@ -116,7 +114,7 @@ The First Reporter is the person who submits the [First Report](#first-report) o
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [All Reporting](#all-reporting) state of [Reporting](#report) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#universe) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe. The original universe that contained the Forked Market will be known as the [Parent Universe](#parent-universe) and will be considered Locked. All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
+A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [Last Report Round](#last-report-round) of [Reporting Rounds](#reporting-round) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#universe) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the Markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
 
 ## Fork Period
 
@@ -124,7 +122,7 @@ The Fork Period is a sixty (60) day period of time after a [Fork](#fork) has occ
 
 ## Forked Market
 
-A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcome) after an [All Reporting](#all-reporting) state is [Disputed](#dispute-bond) and causes a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
+A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcome) after a [Last Report Round](#last-report-round) is [Disputed](#dispute-bond) and causes a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
 
 ## Last Report Round
 
@@ -132,9 +130,7 @@ The Last Report Round is the final [Reporting Round](#reporting-round) in which 
 
 ## Limited Reporting
 
-Limited Reporting is deprecated and is to be removed shortly please ignore this glossary term and know this will soon be corrected to reflect the updated reporting flow.
-
-Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Finalization](#finalized-market) if an [Designated Reporter](#designated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) who will stake their REP on the [Proposed Outcome](#proposed-outcome) of their choosing. Limited Reporting has a [Reporting Phase](#reporting-phase) that lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following it. If a Limited Report's Proposed Outcome is [challenged](#challenge) the Market is moved into the [All Reporting](#all-reporting) state and attached to the next [Reporting Window](#reporting-window). Limited Reporting takes place within a Reporting Window.
+Limited Reporting no longer exists, links to this glossary are being removed/updated.
 
 ## Locked Universe
 
@@ -158,7 +154,7 @@ A Market Creator is a user who created a [Market](#market). They are charged a s
 
 ## Market Resolution
 
-Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Designated Reporting](#designated-reporting), [Limited Reporting](#limited-reporting), [All Reporting](#all-reporting), and [Forks](#fork) are all examples of attempts to get Market Resolution.
+Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Designated Reporting](#designated-reporting), [Reporting Rounds](#reporting-round) and [Forks](#fork) are all examples of attempts at Market Resolution.
 
 ## Maximum Display Price
 
@@ -235,7 +231,7 @@ The Reporting Period is combined time of the [Reporting Phase](#reporting-phase)
 
 ## Reporting Phase
 
-The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should have a set [Proposed Outcome](#proposed-outcome) and be moved into a [Dispute Phase](#dispute-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
+The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Markets](#market) in [Reporting Rounds](#reporting-round) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should receive a Report to set a [Proposed Outcome](#proposed-outcome) and be moved into a [Dispute Phase](#dispute-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
 
 ## Reporting Round
 

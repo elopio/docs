@@ -625,7 +625,7 @@ Returns the amount of [Limited Reporting](#limited-reporting) [Markets](#market)
 
 #### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
 
-Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes both [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets.
+Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
 
 #### augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
@@ -643,7 +643,7 @@ Returns the number of [Markets](#market) that were [Reported](#report) to be Inv
 
 #### augur.api.ReportingWindow.getNumMarkets({ reportingWindow }[, callback])
 
-Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes both [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets.
+Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
 
 #### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
 
