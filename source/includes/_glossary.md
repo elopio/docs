@@ -14,6 +14,8 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## All Reporting
 
+All Reporting is deprecated and is to be removed shortly please ignore this glossary term and know this will soon be corrected to reflect the updated reporting flow.
+
 All Reporting is the third level of the [Reporting](#report) system, second if the [Market](#market) never had a set [Designated Reporter](#designated-reporter). If a Market has gone through [Limited Reporting](#limited-reporting) and while [Awaiting Finalization](#market-awaiting-finalization) is [Challenged](#challenge) then the Market will be moved into the upcoming [Reporting Window](#reporting-window) and have its state changed to All Reporting. Every Reporter is expected to report on All Reporting Markets during a Reporting Window's [Reporting Phase](#reporting-phase) in which they are [Registered](#registration-token) to Report. The Reporting Phase lasts for 27 days and is followed by a 3 day [Dispute Phase](#dispute-phase) where a [Dispute Bond](#dispute-bond) can be posted by any [REP](#rep) Holder to force the last reporting system state, a [Fork](#fork). All Reporting takes place within a Reporting Window.
 
 ## Ask Order
@@ -110,6 +112,8 @@ A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcom
 
 ## Limited Reporting
 
+Limited Reporting is deprecated and is to be removed shortly please ignore this glossary term and know this will soon be corrected to reflect the updated reporting flow.
+
 Limited Reporting is the second level of [Reporting](#report) and is the first attempt at [Market Finalization](#finalized-market) if an [Designated Reporter](#designated-reporter) hasn't been set by the [Market Creator](#market-creator). Limited Reporting means the [Market](#market) needs to be reported on by a certain amount of [Reporters](#reporter) who will stake their REP on the [Proposed Outcome](#proposed-outcome) of their choosing. Limited Reporting has a [Reporting Phase](#reporting-phase) that lasts for twenty seven (27) days and has a three (3) day [Dispute Phase](#dispute-phase) following it. If a Limited Report's Proposed Outcome is [challenged](#challenge) the Market is moved into the [All Reporting](#all-reporting) state and attached to the next [Reporting Window](#reporting-window). Limited Reporting takes place within a Reporting Window.
 
 ## Locked Universe
@@ -198,8 +202,8 @@ A Report, or Reporting, is the staking of [REP](#rep) on the [Outcome](#outcome)
 
 ## Reporter
 
-A Reporter, or Registered Reporter, is a [REP](#rep) holder who
-Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is [Awaiting Finalization](#market-awaiting-finalization). A Reporter can be assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting), otherwise REP holders will need to purchase a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of Markets. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known.
+A Reporter is a [REP](#rep) holder who
+Stakes REP on the [Outcome](#outcome) of a [Market](#market) who's [End Time](#end-time) has come to pass and is [Awaiting Finalization](#market-awaiting-finalization). A [Designated Reporter](#designated-reporter) is assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting). REP holders will need to wait for a Market to enter a [Reporting Round](#reporting-round) of a [Reporting Window](#reporting-window) in order to [Report](#report) on the Outcome of the Market. Reporters are expected to Report accurately as the Market's event should have come to pass and the result should be known. To incentivize this, reporters who stake on the non [Final Outcome](#final-outcome) will lose their stake to the Reporters who did correctly Stake their REP on the Final Outcome.
 
 ## Reporting Fee
 
@@ -212,10 +216,6 @@ The Reporting Period is combined time of the [Reporting Phase](#reporting-phase)
 ## Reporting Phase
 
 The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) [Markets](#market) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should have a set [Proposed Outcome](#proposed-outcome) and be moved into a [Dispute Phase](#dispute-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
-
-## Reporting Token
-
-A Reporting Token is used to represent the amount of Staked [REP](#rep) a [Reporter](#reporter) has on an [Outcome](#outcome) for their [Report](#report). Reporting Tokens have a 1:1 cost ratio to REP, so 100 attoREP would buy you 100 attoReportingTokens. You must have a [Registration Token](#registration-token) purchased for the [Reporting Window](#reporting-window) you are attempting to purchase Reporting Tokens in.
 
 ## Reporting Window
 
@@ -236,6 +236,10 @@ Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Sett
 ## Shares
 
 A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Maker](#maker) and [Taker](#taker) of an [Order](#order) send currency to the market to complete an [Order](#order). Shares are settled (destroyed) when a Complete Set is sold back to the market.
+
+## Stake Token
+
+A Stake Token is used to represent the amount of Staked [REP](#rep) a [Reporter](#reporter) has on an [Outcome](#outcome) for their [Report](#report). Stake Tokens have a 1:1 cost ratio to REP, so 100 attoREP would buy you 100 attoStakeTokens.
 
 ## Taker
 

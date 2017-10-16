@@ -600,178 +600,18 @@ This transaction will attempt to finalize a [Market](#market) that is [Awaiting 
 
 This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#shares) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
 
-Registration Token Tx API
-----------------------------------
-```javascript
-// Registration Token Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
-var registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-var _value = "100000000000000000000";
-
-augur.api.RegistrationToken.approve({
-  _signer: privateKey,
-  registrationToken: registrationToken,
-  _spender: _spender,
-  _value: _value,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320494,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x2b51b527645d4844b5f604c39c7b5bca1e7de02b028f9e70d3b2c0aaf4471163",
-  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0x7",
-  timestamp: 1501003138,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.RegistrationToken.redeem({
-  _signer: privateKey,
-  registrationToken: registrationToken,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320495,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x35fceac9ab27d1e6922d10c90db97cb863876dbfb74503ef93e5df5161e04fe2",
-  input: "0xbe040fb0",
-  nonce: "0x8",
-  timestamp: 1501003139,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.RegistrationToken.register({
-  _signer: privateKey,
-  registrationToken: registrationToken,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320496,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x2324f99375a30a212d9b47c2478516a79c98804379599fcf9030ddbd46fd87e4",
-  input: "0x1aa3a008",
-  nonce: "0x9",
-  timestamp: 1501003140,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.RegistrationToken.transfer({
-  _signer: privateKey,
-  registrationToken: registrationToken,
-  _to: _spender,
-  _value: _value,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320497,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6d3e368b97bb342b2f901efb94a5b306a33f9d623ababd1a258ab3c287762682",
-  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xa",
-  timestamp: 1501003141,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-var _from = "0x39d3b15006e580077a2e8b51b93be90ccf1ec0e0";
-augur.api.RegistrationToken.transferFrom({
-  _signer: privateKey,
-  registrationToken: registrationToken,
-  _from: _from,
-  _to: _spender,
-  _value: _value,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320498,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xd9417b50a49b50a50e133173dc3fb994477af9e30cecd2c3c845f7bc79ce8f78",
-  input: "0x27f08b0000000000000000000000000039d3b15006e580077a2e8b51b93be90ccf1ec0e0000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xb",
-  timestamp: 1501003142,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-```
-#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/RegistrationToken.sol)
-
-#### augur.api.RegistrationToken.approve({ \_signer, registrationToken, \_spender, \_value, onSent, onSuccess, onFailed })
-
-The approve transaction follows the [ERC20 Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) and is used to allow another person, `_spender`, the ability to spend up to `_value` attotokens worth of the `msg.sender`'s [Registration Token](#registration-token). This is useful if you would like to designate someone else to use your Registration Token for you. This transaction will spawn an `Approval` event which will record a log of the owner address (`msg.sender`), `_spender`, and `_value` approved.
-
-#### augur.api.RegistrationToken.redeem({ \_signer, registrationToken, onSent, onSuccess, onFailed })
-
-The redeem transaction is used to recover the [REP](#rep) bond paid to purchase the [Registration Token](#registration-token). This transaction only works if the `msg.sender` owns a Registration Token, if the [Reporting Window](#reporting-window) that the Registration Token belongs to is completed, and the `msg.sender` did successfully complete the minimum number of [Reports](#report) during the Reporting Window. If the previous conditions are not met, this will fail and no REP will be transferred back to the `msg.sender`.
-
-#### augur.api.RegistrationToken.register({ \_signer, registrationToken, onSent, onSuccess, onFailed })
-
-The register transaction is what you would call as a [REP](#rep) holder interested in purchasing a [Registration Token](#registration-token) for an upcoming [Reporting Window](#reporting-window). This will fail if the Reporting Token that this Registration Token belongs to has already started or has completed, or if the REP holder who sends the transaction doesn't have enough REP to pay the Registration Token bond.
-
-#### augur.api.RegistrationToken.transfer({ \_signer, registrationToken, \_to, \_value, onSent, onSuccess, onFailed })
-
-The transfer transaction is used to transfer a [Registration Token](#registration-token)'s ownership from the `msg.sender` to the `_to` address provided. The `_value` in this case should always be passed as `1` since you can only own a maximum of `1` Registration Token. This transaction will fail if the `msg.sender` doesn't own a Registration Token at the `registrationToken` address provided, or if the `_value` provided is greater than the number of Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
-
-#### augur.api.RegistrationToken.transferFrom({ \_signer, registrationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
-
-Unlike transfer, in transferFrom you specify a `_from` value as the owner of the [Registration Token](#registration-token) who will be giving up their ownership to the `_to` parameter provided. The `_value` should be set to `1` as you can only own a single Registration Token. This is a useful function as a `msg.sender` who has approval to spend the Registration Token of the `_from` address provided will be able to use this to transfer ownership of the Registration Token. This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own a Registration Token, or if the `_value` provided is more than the Registration Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
-
-Reporting Token Tx API
+Stake Token Tx API
 -------------------------------
 ```javascript
-// Reporting Token Contract Transaction API Examples:
+// Stake Token Contract Transaction API Examples:
 var privateKey = <Buffer ...>;
-var reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 var _attotokens = "100000000000000000000";
 
-augur.api.ReportingToken.approve({
+augur.api.StakeToken.approve({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   _spender: _spender,
   _value: _attotokens,
   onSent: function (result) { console.log(result) },
@@ -795,9 +635,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.buy({
+augur.api.StakeToken.buy({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   _attotokens: _attotokens,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -820,9 +660,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.migrateLosingTokens({
+augur.api.StakeToken.migrateLosingTokens({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -844,9 +684,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.redeemDisavowedTokens({
+augur.api.StakeToken.redeemDisavowedTokens({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   _reporter: _spender,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -869,9 +709,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.redeemForkedTokens({
+augur.api.StakeToken.redeemForkedTokens({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -893,9 +733,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.redeemWinningTokens({
+augur.api.StakeToken.redeemWinningTokens({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -917,9 +757,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReportingToken.transfer({
+augur.api.StakeToken.transfer({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   _to: _spender,
   _value: _attotokens,
   onSent: function (result) { console.log(result) },
@@ -944,9 +784,9 @@ successResponse = {
 }
 
 var _from = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
-augur.api.ReportingToken.transferFrom({
+augur.api.StakeToken.transferFrom({
   _signer: privateKey,
-  reportingToken: reportingToken,
+  stakeToken: stakeToken,
   _from: _from,
   _to: _spender,
   _value: _attotokens,
@@ -971,39 +811,39 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingToken.sol)
+#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
 
-#### augur.api.ReportingToken.approve({ \_signer, reportingToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.approve({ \_signer, stakeToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Allows the `_spender` the ability to spend up to `_value` worth of the specified `reportingToken` for the `msg.sender`. This transaction is used to allow another person to perform actions with your Reporting Tokens on your behalf. This transaction will spawn an `Approval` event which will record a log of the owner's address (`msg.sender`), `_spender` address, and `_value` amount approved.
+Allows the `_spender` the ability to spend up to `_value` worth of the specified `stakeToken` for the `msg.sender`. This transaction is used to allow another person to perform actions with your Stake Tokens on your behalf. This transaction will spawn an `Approval` event which will record a log of the owner's address (`msg.sender`), `_spender` address, and `_value` amount approved.
 
-#### augur.api.ReportingToken.buy({ \_signer, reportingToken, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.buy({ \_signer, stakeToken, \_attotokens, onSent, onSuccess, onFailed })
 
-This transaction is used to purchase Reporting Tokens using [REP](#rep). The `msg.sender` must control a [Registration Token](#registration-token) belonging to the [Reporting Window](#reporting-window) that contains the `reportingToken`. The Reporting Token's [Market](#market) must be in an [Limited](#limited-reporting) or [All Reporting](#all-reporting) state and Reporting Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of the Reporting Window. Reporting Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoReportingTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`reportingToken`), and the amount of `_attotokens` purchased.
+This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in an [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
 
-#### augur.api.ReportingToken.migrateLosingTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.migrateLosingTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
 
-This transaction should be called, though it's not required, once on each Reporting Token that isn't the Winning Reporting Token once a [Market](#market) has [Finalized](#finalized-market). This method will migrate the [REP](#rep) used to purchase the non-winning Reporting Token to the Winning Reporting Token so the REP can be redistributed to the Reporters who correctly staked REP on the Winning [Payout Set](#payout-set). If this isn't called, then whatever REP is staked into this Reporting Token will remain staked into the Reporting Token indefinitely. This function will fail to migrate REP to the winning Reporting Token if the Market isn't finalized, the Market caused a Fork, or if This Reporting Token represents the Winning Payout Set and is therefor not a losing token.
+This transaction should be called, though it's not required, once on each Stake Token that isn't the Winning Stake Token once a [Market](#market) has [Finalized](#finalized-market). This method will migrate the [REP](#rep) used to purchase the non-winning Stake Token to the Winning Stake Token so the REP can be redistributed to the Reporters who correctly staked REP on the Winning [Payout Set](#payout-set). If this isn't called, then whatever REP is staked into this Stake Token will remain staked into the Stake Token indefinitely. This function will fail to migrate REP to the winning Stake Token if the Market isn't finalized, the Market caused a Fork, or if This Stake Token represents the Winning Payout Set and is therefor not a losing token.
 
-#### augur.api.ReportingToken.redeemDisavowedTokens({ \_signer, reportingToken, \_reporter, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemDisavowedTokens({ \_signer, stakeToken, \_reporter, onSent, onSuccess, onFailed })
 
-In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked Market](#forked-market), that haven't been [Finalized](#finalized-market) are placed into a pending state until the [Fork Period](#fork-period) concludes and the Fork is Resolved. During this time, any Reporting Tokens purchased for these pending Markets are considered to be "Disavowed" and are able to be refunded for [REP](#rep) back into the [Parent Universe](#parent-universe) using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a [Child Universe](#child-universe) and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets act as though they just had their [End Time](#end-time) pass as the Fork Period Ended and are immediately start [Designated Reporting](#designated-reporting) if they have a [Designated Reporter](#designated-reporter), or move into the first [Reporting Window](#reporting-window) available for Limited Reporting. This will fail if the Reporting Token hasn't been Disavowed, or if this is used on a Reporting Token belonging to the Forked Market. This transaction will spawn a `Transfer` event which will record the from address (`reportingToken`), to address (`_reporter`), and the amount of REP transferred.
+In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked Market](#forked-market), that haven't been [Finalized](#finalized-market) are placed into a pending state until the [Fork Period](#fork-period) concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be "Disavowed" and are able to be refunded for [REP](#rep) back into the [Parent Universe](#parent-universe) using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a [Child Universe](#child-universe) and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start [Designated Dispute Phase](#designated-dispute-phase). This will fail if the Stake Token hasn't been Disavowed, or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a `Transfer` event which will record the from address (`stakeToken`), to address (`_reporter`), and the amount of REP transferred.
 
-#### augur.api.ReportingToken.redeemForkedTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemForkedTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
 
-This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Reporting Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
+This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Stake Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
 
-#### augur.api.ReportingToken.redeemWinningTokens({ \_signer, reportingToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
 
-This transaction is used to redeem [REP](#rep) from a winning Reporting Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Reporting Token by the `msg.sender` as well as a portion of the REP redistributed from losing Reporting Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Reporting Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `reportingToken` is the winning Reporting Token, and this isn't a [Forked Market](#forked-market). This transaction will spawn a `Transfer` event which will record a log of the from address (`reportingToken`), to address (`msg.sender`), and the amount of `REP` transferred.
+This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
 
-#### augur.api.ReportingToken.transfer({ \_signer, reportingToken, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
 
-The transfer transaction is used to transfer a Reporting Token's ownership from the `msg.sender` to the `_to` address provided. This transaction will fail if the `msg.sender` doesn't own any Reporting Tokens at the `reportingToken` address provided, or if the `_value` provided is greater than the number of Reporting Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
+The transfer transaction is used to transfer a Stake Token's ownership from the `msg.sender` to the `_to` address provided. This transaction will fail if the `msg.sender` doesn't own any Stake Tokens at the `stakeToken` address provided, or if the `_value` provided is greater than the number of Stake Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
 
-#### augur.api.ReportingToken.transferFrom({ \_signer, reportingToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.transferFrom({ \_signer, stakeToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-Unlike transfer, in transferFrom you specify a `_from` value as the owner of the Reporting Token who will be giving up their ownership to the `_to` address provided. This allows Reporting Tokens to be completely transferrable and therefor the Staked [REP](#rep) contained is also still transferable even while staked on a [Report](#report). This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own any Reporting Tokens, or if the `_value` provided is more than the Reporting Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
+Unlike transfer, in transferFrom you specify a `_from` value as the owner of the Stake Token who will be giving up their ownership to the `_to` address provided. This allows Stake Tokens to be completely transferrable and therefor the Staked [REP](#rep) contained is also still transferable even while staked on a [Report](#report). This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own any Stake Tokens, or if the `_value` provided is more than the Stake Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
 
 Reporting Window Tx API
 --------------------------------

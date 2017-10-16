@@ -153,9 +153,9 @@ augur.api.Market.getFinalPayoutDistributionHash({ market: market }, function (fi
 // example output:
 finalPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Market.getFinalWinningReportingToken({ market: market }, function (winningReportingToken) { /* ... */ })
+augur.api.Market.getFinalWinningStakeToken({ market: market }, function (winningStakeToken) { /* ... */ })
 // example output:
-winningReportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+winningStakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
 augur.api.Market.getLimitedReportersDisputeBondToken({ market: market }, function (limitedReportersDisputeBondToken) { /* ... */ })
 // example output:
@@ -182,13 +182,13 @@ augur.api.Market.getReportingState({ market: market }, function (reportingState)
 // example output:
 reportingState = "0";
 
-augur.api.Market.getReportingToken({ market: market }, function (reportingToken) { /* ... */ })
+augur.api.Market.getStakeToken({ market: market }, function (stakeToken) { /* ... */ })
 // example output:
-reportingToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
+stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
-augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (reportingTokenOrZero) { /* ... */ })
+augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (stakeTokenOrZero) { /* ... */ })
 // example output:
-reportingTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
+stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
 augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
 // example output:
@@ -225,13 +225,13 @@ augur.api.Market.isContainerForDisputeBondToken({
 // example output:
 isContainerForDisputeBondToken = "1"
 
-var reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-augur.api.Market.isContainerForReportingToken({
+var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+augur.api.Market.isContainerForStakeToken({
   market: market,
-  _shadyTarget: reportingToken
-}, function (isContainerForReportingToken) { /* ... */ })
+  _shadyTarget: stakeToken
+}, function (isContainerForStakeToken) { /* ... */ })
 // example output:
-isContainerForReportingToken = "1"
+isContainerForStakeToken = "1"
 
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 augur.api.Market.isContainerForShareToken({
@@ -281,9 +281,9 @@ Returns the timestamp for when the specified `market` was [Finalized](#finalized
 
 Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a specified `market`. The Final Payout Distribution Hash determines how a [Finalized Market](#finalized-market) payouts out for a specific [Share](#shares) of an [Outcome](#outcome).
 
-#### augur.api.Market.getFinalWinningReportingToken({ market }[, callback])
+#### augur.api.Market.getFinalWinningStakeToken({ market }[, callback])
 
-Returns the Reporting Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
+Returns the Stake Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
 
 #### augur.api.Market.getLimitedReportersDisputeBondToken({ market }[, callback])
 
@@ -309,13 +309,13 @@ Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDi
 
 Returns the current [Reporting](#report) State that the `market` is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the [Reporting Section](#reporting) of the documentation.
 
-#### augur.api.Market.getReportingToken({ market, \_payoutNumerators }[, callback])
+#### augur.api.Market.getStakeToken({ market, \_payoutNumerators }[, callback])
 
-Returns the Reporting Token address for `_payoutNumerators` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Reporting Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Reporting Token currency. This method will return the reporting token associated with a specific Payout Set.
+Returns the Stake Token address for `_payoutNumerators` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
 
-#### augur.api.Market.getReportingTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
+#### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
 
-Returns a Reporting Token address, or 0 if there is no reporting token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Reporting Token given a Payout Distribution Hash, much like `getReportingToken` returns the Reporting Token given a Payout Set.
+Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Stake Token given a Payout Distribution Hash, much like `getStakeToken` returns the Stake Token given a Payout Set.
 
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
@@ -345,9 +345,9 @@ Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which
 
 Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, a [Limited Reporting](#limted-reporting) Dispute Bond token, or an [All Reporting](#all-reporting) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
 
-#### augur.api.Market.isContainerForReportingToken({ market, \_shadyTarget }[, callback])
+#### augur.api.Market.isContainerForStakeToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if the address is a Reporting Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if the address is a Stake Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
 
@@ -357,198 +357,115 @@ Returns wether the specific `market` is a container for the `_shadyTarget` addre
 
 Returns True or False depending on if the [Market](#market) passed as `market` has been [Finalized](#finalized-market) as Indeterminate, or Invalid. This means the Market is unable to be finalized to a single [Final Outcome](#final-outcome) due to an unclear Market or an indeterminate [Outcome](#outcome). Returns `1` if True, `0` if False.
 
-Registration Token Call API
----------------------------
-```javascript
-// Registration Token Contract Call API Examples:
-var registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.RegistrationToken.allowance({
-  registrationToken: registrationToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "1";
-
-augur.api.RegistrationToken.balanceOf({
-  registrationToken: registrationToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "1";
-
-augur.api.RegistrationToken.getPeakSupply({ registrationToken: registrationToken }, function (peakSuppy) { /* ... */ })
-// example output:
-peakSuppy = "234"
-
-augur.api.RegistrationToken.getReportingWindow({ registrationToken: registrationToken }, function (reportingWindow) { /* ... */ })
-// example output:
-reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
-
-augur.api.RegistrationToken.getReputationToken({ registrationToken: registrationToken }, function (reputationToken) { /* ... */ })
-// example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-
-augur.api.RegistrationToken.getTypeName({ registrationToken: registrationToken }, function (typeName) { /* ... */ })
-// example output:
-typeName = "RegistrationToken";
-
-augur.api.RegistrationToken.getUniverse({ registrationToken: registrationToken }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-```
-#### [Registration Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/RegistrationToken.sol)
-
-[Registration Tokens](#registration-token) are purchasable with [REP](#rep) and allows the owner of the Registration Token the ability to [Report](#report) on [Markets](#market) during a [Reporting Window](#reporting-window). Being a Registered [Reporter](#reporter) means you can stake REP on the [Outcome](#outcome) of [Limited Reporting](#limited-reporting) and [All Reporting](#all-reporting) Markets during the Reporting Window's [Reporting Phase](#reporting-phase). If the Reporter Reports on at least the minimum number of Reports for the Reporting Phase they are able to redeem their Registration Token for the REP used to purchase it. If you purchase a Registration Token but fail to Report during it's Reporting Window then you will lose the REP you used to Purchase the Registration Token and it will be redistributed to the Reporters who did show up to Report during that Window. Registration Tokens can only be used during the Reporting Windows they belong to and are not reusable.  
-
-#### augur.api.RegistrationToken.allowance({ registrationToken, \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `registrationToken`s. [Registration Tokens](#registration-token) allow a token owner to designate an spender address to be able to spend the Registration Token for the owner. This method returns the amount of Registration Tokens the spender is allowed to spend for the owner.
-
-#### augur.api.RegistrationToken.balanceOf({ registrationToken, \_owner }[, callback])
-
-Returns the amount of [Registration Tokens](#registration-token) owned for the specified `registrationToken` address and `_owner` address provided. You can only purchase a maximum of 1 Registration Token per [Reporting Window](#reporting-window), so this should always return `1` if the owner owns a Registration Token at the address provided, otherwise it will return `0`.
-
-#### augur.api.RegistrationToken.getPeakSupply({ registrationToken }[, callback])
-
-Returns the peak supply of [Registration Tokens](#registration-token) purchased for the `registrationToken` Address provided. All Registration Tokens belong to a specific [Reporting Window](#reporting-window) and this function is used to keep track of how many potential Registered [Reporters](#reporter) may be participating in the Reporting Window's [Reporting Phase](#reporing-phase).
-
-#### augur.api.RegistrationToken.getReportingWindow({ registrationToken }[, callback])
-
-Returns the [Reporting Window](#reporting-window) address for the specified `registrationToken`. All [Registration Tokens](#registration-token) belong to a specific Reporting Window and this method will allow you to easily find out which Reporting Window this Registration Token belongs to.
-
-#### augur.api.RegistrationToken.getReputationToken({ registrationToken }[, callback])
-
-Returns the [Reputation Tokens](#rep) address for the specific `registrationToken`'s [Reporting Window](#reporting-window). Each Reporting Window has a Reputation Token set that is valid to use for that Reporting Window. All Reporting Windows will use the same Reputation Token until their is a [Fork](#fork) and multiple REP token contracts are created for each [Child Universe](#child-universe) created. Once a Fork occurs, each Child Universe will end up with their own version of REP and this method will allow you to get the contract address used by the Reporting Window that the Registration Token belongs to.
-
-#### augur.api.RegistrationToken.getTypeName({ registrationToken }[, callback])
-
-Returns the type name for the specified `registrationToken`, should always return "RegistrationToken". This is a method that is used to make sure the address provided as `registrationToken` is really a [Registration Token](#registration-token) contract.
-
-#### augur.api.RegistrationToken.getUniverse({ registrationToken }[, callback])
-
-Returns the [Universe](#universe) address that the specified `registrationToken`'s [Reporting Window](#reporting-window) belongs in. Everything in Augur belongs to a specific Universe of Augur. New Universes are created when an [All Reporting](#all-reporting) [Market](#market)'s [Proposed Outcome](#proposed-outcome) is [Challenged](#challenged) and a [Fork](#fork) occurs. This method is used to figure out what Universe the [Registration Token](#registration-token) belongs to.
-
-Reporting Token Call API
+Stake Token Call API
 ------------------------
 ```javascript
-// Reporting Token Contract Call API Examples:
-var reportingToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+// Stake Token Contract Call API Examples:
+var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 
-augur.api.ReportingToken.allowance({
-  reportingToken: reportingToken,
+augur.api.StakeToken.allowance({
+  stakeToken: stakeToken,
   _owner: _owner,
   _spender: _spender
 }, function (allowance) { /* ... */ })
 // example output:
 allowance = "1"
 
-augur.api.ReportingToken.balanceOf({
-  reportingToken: reportingToken,
+augur.api.StakeToken.balanceOf({
+  stakeToken: stakeToken,
   _owner: _owner
 }, function (balance) { /* ... */ })
 // example output:
 balance = "200000"
 
-augur.api.ReportingToken.getMarket({ reportingToken: reportingToken }, function (market) { /* ... */ })
+augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.ReportingToken.getPayoutDistributionHash({ reportingToken: reportingToken }, function (payoutDistributionHash) { /* ... */ })
+augur.api.StakeToken.getPayoutDistributionHash({ stakeToken: stakeToken }, function (payoutDistributionHash) { /* ... */ })
 // example output:
 payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.ReportingToken.getPayoutNumerator({
-  reportingToken: reportingToken,
+augur.api.StakeToken.getPayoutNumerator({
+  stakeToken: stakeToken,
   index: 0
 }, function (payoutSetValue) { /* ... */ })
 // example output:
 payoutSetValue = "1000"
 
-augur.api.ReportingToken.getRegistrationToken({ reportingToken: reportingToken }, function (registrationToken) { /* ... */ })
-// example output:
-registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
-
-augur.api.ReportingToken.getReportingWindow({ reportingToken: reportingToken }, function (reportingWindow) { /* ... */ })
+augur.api.StakeToken.getStakeWindow({ stakeToken: stakeToken }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
-augur.api.ReportingToken.getReputationToken({ reportingToken: reportingToken }, function (reputationToken) { /* ... */ })
+augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.ReportingToken.getTypeName({ reportingToken: reportingToken }, function (typeName) { /* ... */ })
+augur.api.StakeToken.getTypeName({ stakeToken: stakeToken }, function (typeName) { /* ... */ })
 // example output:
-typeName = "ReportingToken";
+typeName = "StakeToken";
 
-augur.api.ReportingToken.getUniverse({ reportingToken: reportingToken }, function (universe) { /* ... */ })
+augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.ReportingToken.isValid({ reportingToken: reportingToken }, function (isValid) { /* ... */ })
+augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (isValid) { /* ... */ })
 // example output:
 isValid = "1"
 
-augur.api.ReportingToken.totalSupply({ reportingToken: reportingToken }, function (totalSupply) { /* ... */ })
+augur.api.StakeToken.totalSupply({ stakeToken: stakeToken }, function (totalSupply) { /* ... */ })
 // example output:
 totalSupply = "210000000000000"
 ```
-#### [Reporting Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingToken.sol)
+#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
 
-The Reporting Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report on a [Limited](#limited-reporting) or [All Reporting](#all-reporting) Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Reporting Tokens. A new type of Reporting Token is created for each [Payout Set](#payout-set) submitted by Reporters. Reporting Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Reporting Tokens are the tokens that represent the Winning Payout Set then your Reporting Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome).
+The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report on a [Limited](#limited-reporting) or [All Reporting](#all-reporting) Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submitted by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome).
 
-#### augur.api.ReportingToken.allowance({ reportingToken, \_owner, \_spender }[, callback])
+#### augur.api.StakeToken.allowance({ stakeToken, \_owner, \_spender }[, callback])
 
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `reportingToken`s. Reporting Tokens allow a token owner to designate an spender address to be able to spend the Reporting Tokens for the owner. This method returns the amount of Reporting Tokens the spender is allowed to spend for the owner.
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `stakeToken`s. Stake Tokens allow a token owner to designate an spender address to be able to spend the Stake Tokens for the owner. This method returns the amount of Stake Tokens the spender is allowed to spend for the owner.
 
-#### augur.api.ReportingToken.balanceOf({ reportingToken, \_owner }[, callback])
+#### augur.api.StakeToken.balanceOf({ stakeToken, \_owner }[, callback])
 
-Returns the amount of Reporting Tokens owned for the specified `reportingToken` address and `_owner` address provided. This is useful in finding out how much [REP](#rep) was Staked for a particular [Report](#report) by a specific [Reporter](#reporter).
+Returns the amount of Stake Tokens owned for the specified `stakeToken` address and `_owner` address provided. This is useful in finding out how much [REP](#rep) was Staked for a particular [Report](#report) by a specific [Reporter](#reporter).
 
-#### augur.api.ReportingToken.getMarket({ reportingToken }[, callback])
+#### augur.api.StakeToken.getMarket({ stakeToken }[, callback])
 
-This method will return the [Market](#market) address that the Reporting Token belongs too. Every Reporting Token belongs to a specific Market in which the Token acts as a 1 to 1 representation of Staked [REP](#rep) for a particular [Payout Set](#payout-set) representing a [Report](#report) for the Market.
+This method will return the [Market](#market) address that the Stake Token belongs too. Every Stake Token belongs to a specific Market in which the Token acts as a 1 to 1 representation of Staked [REP](#rep) for a particular [Payout Set](#payout-set) representing a [Report](#report) for the Market.
 
-#### augur.api.ReportingToken.getPayoutDistributionHash({ reportingToken }[, callback])
+#### augur.api.StakeToken.getPayoutDistributionHash({ stakeToken }[, callback])
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for a specific `reportingToken`. A Payout Distribution Hash is a sha3 hash of the [Payout Set](#payout-set) the Reporting Token represents. The Payout Distribution Hash is used in other contract methods to identify a particular Payout Set.
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for a specific `stakeToken`. A Payout Distribution Hash is a sha3 hash of the [Payout Set](#payout-set) the Stake Token represents. The Payout Distribution Hash is used in other contract methods to identify a particular Payout Set.
 
-#### augur.api.ReportingToken.getPayoutNumerator({ reportingToken, index }[, callback])
+#### augur.api.StakeToken.getPayoutNumerator({ stakeToken, index }[, callback])
 
-Returns the value at the `index` of the [Payout Set](#payout-set) represented by this `reportingToken`. The `index` is a value between `0` and number of [Outcomes](#outcome) for the [Market](#market) and corresponds to a particular Outcome of the Market. In a [Binary Market](#binary-market) for example, there are only two Outcomes, so the allowable `index` values are 0 and 1.
+Returns the value at the `index` of the [Payout Set](#payout-set) represented by this `stakeToken`. The `index` is a value between `0` and number of [Outcomes](#outcome) for the [Market](#market) and corresponds to a particular Outcome of the Market. In a [Binary Market](#binary-market) for example, there are only two Outcomes, so the allowable `index` values are 0 and 1.
 
-#### augur.api.ReportingToken.getRegistrationToken({ reportingToken }[, callback])
+#### augur.api.StakeToken.getReportingWindow({ stakeToken }[, callback])
 
-Returns the [Registration Token](#registration-token) address for this specific `reportingToken`. In order to purchase Reporting Tokens with [REP](#rep) you would need to be a Registered [Reporter](#reporter) for a [Reporting Window](#reporting-window). In order to register to [Report](#report) you need a Registration Token. All Reporting Tokens have a record of which Registration Token was required to be able to successfully purchase the Reporting Tokens and this method will return the contract address of the Registration Token that is required.
+Returns the [Reporting Window](#reporting-window) address for the specified `stakeToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Stake Tokens were purchased for.
 
-#### augur.api.ReportingToken.getReportingWindow({ reportingToken }[, callback])
+#### augur.api.StakeToken.getReputationToken({ stakeToken }[, callback])
 
-Returns the [Reporting Window](#reporting-window) address for the specified `reportingToken`. All Reporting Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Reporting Tokens were purchased for.
+As mentioned above, a Stake Token belongs to a [Market](#market) which in turn belongs to a [Reporting Window](#reporting-window). Reporting Windows only interact with a single [REP](#rep) contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Stake Tokens. Stake Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.
 
-#### augur.api.ReportingToken.getReputationToken({ reportingToken }[, callback])
+#### augur.api.StakeToken.getTypeName({ stakeToken }[, callback])
 
-As mentioned above, a Reporting Token belongs to a [Market](#market) which in turn belongs to a [Reporting Window](#reporting-window). Reporting Windows only interact with a single [REP](#rep) contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Reporting Tokens. Reporting Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.
+Returns the type name for the specified `stakeToken`, should will return "StakeToken" if the `stakeToken` address provided belongs to a Stake Token contract.
 
-#### augur.api.ReportingToken.getTypeName({ reportingToken }[, callback])
+#### augur.api.StakeToken.getUniverse({ stakeToken }[, callback])
 
-Returns the type name for the specified `reportingToken`, should will return "ReportingToken" if the `reportingToken` address provided belongs to a Reporting Token contract.
+Returns the [Universe](#universe) address for the specified `stakeToken`'s [Reporting Window](#reporting-window). Everything in Augur belongs to a Universe, and Stake Tokens are no different. New Universes are created in the event of a [Fork](#fork), so this method provides an API user the ability to find out which Universe the Stake Token is currently in.
 
-#### augur.api.ReportingToken.getUniverse({ reportingToken }[, callback])
+#### augur.api.StakeToken.isValid({ stakeToken }[, callback])
 
-Returns the [Universe](#universe) address for the specified `reportingToken`'s [Reporting Window](#reporting-window). Everything in Augur belongs to a Universe, and Reporting Tokens are no different. New Universes are created in the event of a [Fork](#fork), so this method provides an API user the ability to find out which Universe the Reporting Token is currently in.
+This method is used as a way to check if the `stakeToken` represents a [Payout Set](#payout-set) that indicates the [Market](#market) is Invalid. This isn't to say that the Stake Token, the [Report](#report), or the Payout Set is invalid, but rather the [Outcome](#outcome) of the Market is unclear based on how the Market is worded or the result of Market doesn't correspond to any of the Outcomes set for the Market.
 
-#### augur.api.ReportingToken.isValid({ reportingToken }[, callback])
+#### augur.api.StakeToken.totalSupply({ stakeToken }[, callback])
 
-This method is used as a way to check if the `reportingToken` represents a [Payout Set](#payout-set) that indicates the [Market](#market) is Invalid. This isn't to say that the Reporting Token, the [Report](#report), or the Payout Set is invalid, but rather the [Outcome](#outcome) of the Market is unclear based on how the Market is worded or the result of Market doesn't correspond to any of the Outcomes set for the Market.
-
-#### augur.api.ReportingToken.totalSupply({ reportingToken }[, callback])
-
-Returns the current total supply of the specified `reportingToken`. This is used to see how many Reporting Tokens have been purchased for a specific [Payout Set](#payout-set). This is used to see how much [REP](#rep) is staked on a particular Payout Set since Reporting Tokens are a 1:1 ratio to REP staked.
+Returns the current total supply of the specified `stakeToken`. This is used to see how many Stake Tokens have been purchased for a specific [Payout Set](#payout-set). This is used to see how much [REP](#rep) is staked on a particular Payout Set since Stake Tokens are a 1:1 ratio to REP staked.
 
 Reporting Window Call API
 -------------------------
@@ -610,10 +527,6 @@ augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportin
 // example output:
 = "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
 
-augur.api.ReportingWindow.getRegistrationToken({ reportingWindow: reportingWindow }, function (registrationToken) { /* ... */ })
-// example output:
-registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352"
-
 augur.api.ReportingWindow.getReportingEndTime({ reportingWindow: reportingWindow }, function (reportingEndTime) { /* ... */ })
 // example output:
 reportingEndTime = "1500647900"
@@ -660,14 +573,6 @@ augur.api.ReportingWindow.isContainerForMarket({
 }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1"
-
-var _registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api.ReportingWindow.isContainerForRegistrationToken({
-  reportingWindow: reportingWindow,
-  _shadyRegistrationToken: _registrationToken
-}, function (isContainerForRegistrationToken) { /* ... */ })
-// example output:
-isContainerForRegistrationToken = "1"
 
 augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, function (isDisputeActive) { /* ... */ })
 // example output:
@@ -716,7 +621,7 @@ Returns a timestamp for when this [Reporting Window](#reporting-window) will end
 
 #### augur.api.ReportingWindow.getLimitedReporterMarketsCount({ reportingWindow }[, callback])
 
-Returns the amount of [Limited Reporting](#limited-reporting) [Markets](#market) set to be [Reported](#report) on during this [Reporting Window](#reporting-window). Limited Reporting Markets are Reported on during the [Reporting Phase](#reporting-phase) of the Reporting Window. [Reporters](#reporter) aren't required to Report on any particular Limited Reporting Market but are required to report on a minimum number of Limited Reporting Markets to fulfill their Reporting requirements and allow a Reporter to redeem their [Registration Token](#registraiton-token).
+Returns the amount of [Limited Reporting](#limited-reporting) [Markets](#market) set to be [Reported](#report) on during this [Reporting Window](#reporting-window). Limited Reporting Markets are Reported on during the [Reporting Phase](#reporting-phase) of the Reporting Window. [Reporters](#reporter) aren't required to Report on any particular Limited Reporting Market but are required to report on a minimum number of Limited Reporting Markets to fulfill their Reporting requirements and allow a Reporter to redeem their [Registration Token](#registration-token).
 
 #### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
 
@@ -724,7 +629,7 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 
 #### augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
 
-This method returns the maximum number of [Reports](#report) a [Limited Reporting](#limited-reporting) [Market](#market) can receive in this [Reporting Window](#reporting-window) and still give credit to the [Reporter](#reporter) for Reporting on it. Reporters only need to Report on a minimum amount of Limited Reporting, as well as every [All Reporting](#all-reporting), Markets during a [Reporting Phase](#reporting-phase) to get credit for Reporting. Limited Reporting Markets that have received the maximum number of Reports will no longer give the Reporter credit toward completion of Reporting. Reporters who do successfully get credit for Reporting on at least the minimum number of Markets are able to redeem their [Registration Tokens](#registraiton-token) at the end of the Reporting Window.
+This method returns the maximum number of [Reports](#report) a [Limited Reporting](#limited-reporting) [Market](#market) can receive in this [Reporting Window](#reporting-window) and still give credit to the [Reporter](#reporter) for Reporting on it. Reporters only need to Report on a minimum amount of Limited Reporting, as well as every [All Reporting](#all-reporting), Markets during a [Reporting Phase](#reporting-phase) to get credit for Reporting. Limited Reporting Markets that have received the maximum number of Reports will no longer give the Reporter credit toward completion of Reporting. Reporters who do successfully get credit for Reporting on at least the minimum number of Markets are able to redeem their [Registration Tokens](#registration-token) at the end of the Reporting Window.
 
 
 #### augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow }[, callback])
@@ -743,10 +648,6 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 #### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
 
 Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and all Reporting Windows belong to a Universe.
-
-#### augur.api.ReportingWindow.getRegistrationToken({ reportingWindow }[, callback])
-
-Returns the [Registration Token](#registration-token) address for a specific [Reporting Window](#reporting-window). [REP](#rep) holders need to purchase a Registration Token to participate in the [Reporting Phase](#reporting-phase) of a Reporting Window, and each Registration Token only works for one specific Reporting Window. Once a [Reporter](#reporter) has gotten credit for completing the minimum number of [Reports](#report) for a Reporting Window they will be able to redeem their Registration Token for the REP purchased as well as their [Reporting Fee](#reporting-fee) cut they may earn or REP redistribution from incorrect Reports.
 
 #### augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
 
@@ -791,10 +692,6 @@ This method returns wether the [Reporting Window](#reporting-window) is currentl
 #### augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, \_shadyMarket }[, callback])
 
 Returns wether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
-
-#### augur.api.ReportingWindow.isContainerForRegistrationToken({ reportingWindow, \_shadyRegistrationToken }[, callback])
-
-Returns wether the `_shadyRegistrationToken` address provided is the [Registration Token](#registration-token) belonging to the [Reporting Window](#reporting-window). Reporting Windows have unique Registration Tokens and each Token belongs to a specific Window. Returns `1` if the Registration Token is for this Reporting Window, `0` if not.
 
 #### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
 
@@ -1352,21 +1249,13 @@ augur.api.Universe.isContainerForMarket({
 // example output:
 isContainerForMarket = "1";
 
-var registrationToken = "0x8385755a52e85df2f571ce5e1550e5472c639352";
-augur.api.Universe.isContainerForRegistrationToken({
+var stakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+augur.api.Universe.isContainerForStakeToken({
   universe: universe,
-  _shadyTarget: registrationToken
-}, function (isContainerForRegistrationToken) { /* ... */ })
+  _shadyTarget: stakeToken
+}, function (isContainerForStakeToken) { /* ... */ })
 // example output:
-isContainerForRegistrationToken = "1";
-
-var reportingToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-augur.api.Universe.isContainerForReportingToken({
-  universe: universe,
-  _shadyTarget: reportingToken
-}, function (isContainerForReportingToken) { /* ... */ })
-// example output:
-isContainerForReportingToken = "1";
+isContainerForStakeToken = "1";
 
 var reportingWindow = "578";
 augur.api.Universe.isContainerForReportingWindow({
@@ -1452,13 +1341,9 @@ Returns the specified `universe`'s type name, which should always return "Univer
 
 Returns wether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
 
-#### augur.api.Universe.isContainerForRegistrationToken({ universe, \_shadyTarget }[, callback])
+#### augur.api.Universe.isContainerForStakeToken({ universe, \_shadyTarget }[, callback])
 
-Returns wether the specific `universe` is a container for the [Registration Token](#registration-token) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All [Reporting Windows](#reporting-window) are attached to a Universe, and all Registration Tokens belong to a specific Reporting Window. This method is used to confirm that the Registration Token belongs to a Reporting Window belonging to this Universe.
-
-#### augur.api.Universe.isContainerForReportingToken({ universe, \_shadyTarget }[, callback])
-
-Returns wether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Reporting Tokens](#reporting-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine wether the Universe contains the Reporting Token specified.
+Returns wether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Stake Tokens](#stake-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine wether the Universe contains the Stake Token specified.
 
 #### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
 
