@@ -12,10 +12,6 @@ Goals:
  -->
 This section of the documentation is dedicated to terms found and used throughout the rest of documentation. Below you will find sections about terms used in Augur. The goal is to explain everything that might be confusing in an easy to understand way.
 
-## All Reporting
-
-All Reporting no longer exists, links to this glossary are being removed/updated.
-
 ## Ask Order
 
 An Ask Order is an [Order](#order) indicating the desire of the [Maker](#maker) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
@@ -128,10 +124,6 @@ A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcom
 
 The Last Report Round is the final [Reporting Round](#reporting-round) in which a [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) during the [Dispute Phase](#dispute-phase) will result in a [Fork](#fork) instead of another Reporting Round. Unlike previous Reporting Rounds, when a [Market](#market) in the Last Report Round enters the Dispute Phase and it's Proposed Outcome is Challenged then the Market becomes a [Forked Market](#forked-market) and the [Universe](#universe) becomes a [Locked Universe](#locked-universe).
 
-## Limited Reporting
-
-Limited Reporting no longer exists, links to this glossary are being removed/updated.
-
 ## Locked Universe
 
 A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur within it and no longer allows the creation of new [Markets](#markets). All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after [Finalizing](#finalized-market). [REP](#rep) holders within a Locked Universe are given a one time and final option to migrate their REP to one of the new universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.
@@ -204,10 +196,6 @@ A Position is the amount of [Shares](#share) that is owned (a long position) or 
 
 The Proposed Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct Outcome of the Market. If a Market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will become a [Final Outcome](#final-outcome).
 
-## Registration Token
-
-A Registration Token no longer exists. This is a deprecated term and will be removed. Leaving this here to explain any broken links as we work to remove all references to the Registration Token. Reporting has gone through a slight adjustment that makes the system simpler but will require a bit of tweaking to the docs to explain the change. As always, we thank you for your patience and understanding and appreciate your interest and enthusiasm for the Augur Project.
-
 ## REP
 
 REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur Decentralized Oracle System. REP is used to stake on a [Report](#report) on the [Outcome](#outcome) of a [Market](#market), Pay the [First Report REP Bond](#first-report-rep-bond) in order to create a Market, and to purchase a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization). During the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window) is where most REP holders will be using their REP to Report. You will be asked to stake REP on an Outcome based on how confident you are in that Outcome being the result of the Market. The Markets you will see during a Reporting Window are all past their [End Time](#end-time) and the Outcome should be determinable. If the outcome is not determinable you can Report it as Invalid. The more REP you stake, the larger the share of the [Reporting Fees](#reporting-fee) you will receive if you Report with the consensus. The two bonds purchased by REP, Dispute Bonds and the First Report REP Bond, are both fully refunded to the bond placer if things go smoothly. So the [Market Creator](#market-creator) immediately gets their REP bond back if the [Designated Reporter](#designated-reporter) does Report during the [Designated Report Phase](#designated-report-phase). Dispute Bonds are refunded to the Dispute Bond Owner if the Market's Proposed Outcome is changed from the one Challenged.
@@ -251,7 +239,7 @@ Settlement is something that happens one of two ways. The first is when a trader
 
 ## Settlement Fees
 
-Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Creator Fee](#creator-fee) and The [Reporting Fee](#reporting-fee).
+Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee).
 
 ## Shares
 

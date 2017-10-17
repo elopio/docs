@@ -21,7 +21,7 @@ Settlement Fees Explained
 
 Creating a Market costs a small amount of `ETH`. Without some incentive people won't create Markets as they get nothing in return for the `ETH` they spent to create it. Augur solves this problem by allowing [Market Creators](#market-creator) to set a [Creator Fee](#creator-fee) for their Market. The Creator Fee must be between `0` and `50` percent. Once a Market is created the Creator Fee cannot be raised, only lowered.
 
-Augur also extracts Fees to help support the [Reporting System](#reporting) known as the Reporting Fee. [Settlement Fees](#settlement-fees) refer to both the Creator Fee and the Reporting Fee combined. The Reporting Fee isn't set by the Market Creator, like the Creator Fee, but is instead set by an automated Augur Market.
+Augur also extracts Fees to help support the [Reporting System](#reporting) known as the [Reporting Fee](#reporting-fee). [Settlement Fees](#settlement-fees) refer to both the Creator Fee and the Reporting Fee combined. The Reporting Fee isn't set by the Market Creator, like the Creator Fee, but is instead set by an automated Augur Market.
 
 Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the [REP](#rep) price. This Market will act just like a regular Market and it will go through [Reporting Rounds](#reporting-round) process in order to be [Resolved](#market-resolution). Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.
 
