@@ -299,7 +299,7 @@ Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s 
 
 #### augur.api.Market.getEndTime({ market }[, callback])
 
-Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Report Phase](#designated-report-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin a round of [Limited Reporting](#limited-reporting).
+Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Report Phase](#designated-report-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin [Reporting Rounds](#reporting-round).
 
 #### augur.api.Market.getFinalizationTime({ market }[, callback])
 
@@ -347,7 +347,7 @@ Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_
 
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
-Returns the [Reporting Window](#reporting-window) address for the specified `market`. This returns the Reporting Window when this [Market](#market) is scheduled to be [Reported](#report) on for [Limited Reporting](#limited-reporting) if a [Designated Reporter](#designated-reporter) is not set, or fails to Report.
+Returns the [Reporting Window](#reporting-window) address for the specified `market`. This returns the Reporting Window when this [Market](#market) is scheduled to be [Reported](#report) on for [Reporting Rounds](#reporting-round) if a [Designated Reporter](#designated-reporter) fails to Report or their Report is [Challenged](#challenge).
 
 #### augur.api.Market.getRound1ReportersDisputeBondToken({ market }[, callback])
 
@@ -379,7 +379,7 @@ Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which
 
 #### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, a [Limited Reporting](#limted-reporting) Dispute Bond token, or an [All Reporting](#all-reporting) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
+Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, or a [Reporting Round](#reporting-round) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForStakeToken({ market, \_shadyTarget }[, callback])
 
@@ -457,7 +457,7 @@ totalSupply = "210000000000000"
 ```
 #### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
 
-The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report on a [Limited](#limited-reporting) or [All Reporting](#all-reporting) Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submitted by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome).
+The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report during a [Reporting Round](#reporting-round) for this Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submit by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome). If your tokens are Staked on any other Outcome they are worthless and the Staked REP is redistributed to people with winning Stake Tokens.
 
 #### augur.api.StakeToken.allowance({ stakeToken, \_owner, \_spender }[, callback])
 
@@ -626,7 +626,7 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 
 #### augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow }[, callback])
 
-Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and all Reporting Windows belong to a Universe.
+Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
 
 #### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
 
@@ -646,7 +646,7 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 
 #### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
 
-Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and all Reporting Windows belong to a Universe.
+Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
 
 #### augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
 
@@ -670,7 +670,7 @@ Returns the type name for the `reportingWindow` address provided. If the address
 
 #### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
 
-Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. All Reporting Windows belong to a specific Universe in which they were created and operate within.
+Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
 
 #### augur.api.ReportingWindow.isActive({ reportingWindow }[, callback])
 
@@ -686,7 +686,7 @@ Returns wether the [Reporting Window](#reporting-window) is currently in it's [D
 
 #### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
 
-Returns wether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. All Reporting Windows belong to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
+Returns wether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
 
 #### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
 
@@ -1258,7 +1258,7 @@ isParentOf = "1";
 ```
 #### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Universe.sol)
 
-The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [All Reporting](#all-reporting) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), whereas the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
+The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [Last Report Round](#last-report-round) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
 
 #### augur.api.Universe.getChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
 
@@ -1330,7 +1330,7 @@ Returns wether the specific `universe` is a container for the [Reporting](#repor
 
 #### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
 
-Returns wether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. All Reporting Windows belong to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
+Returns wether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
 
 #### augur.api.Universe.isParentOf({ universe, \_shadyChild }[, callback])
 

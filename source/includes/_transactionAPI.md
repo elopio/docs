@@ -334,7 +334,6 @@ successResponse = {
   value: "0x0"
 }
 
-
 augur.api.Market.designatedReport({
   _signer: privateKey,
   market: market,
@@ -360,7 +359,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Market.disputeAllReporters({
+augur.api.Market.disavowTokens({
   _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
@@ -370,14 +369,14 @@ augur.api.Market.disputeAllReporters({
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320489,
+  blockNumber: 320490,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
-  input: "0x99ea0fd5",
+  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
+  input: "0xf12afe02",
   nonce: "0x5",
   timestamp: 1501003135,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
@@ -408,7 +407,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Market.disputeLimitedReporters({
+augur.api.Market.disputeRound1Reporters({
   _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
@@ -428,6 +427,30 @@ successResponse = {
   input: "0x3f4628c1",
   nonce: "0x7",
   timestamp: 1501003137,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api.Market.disputeRound2Reporters({
+  _signer: privateKey,
+  market: market,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320489,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
+  input: "0x99ea0fd5",
+  nonce: "0x5",
+  timestamp: 1501003135,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
@@ -568,17 +591,21 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payo
 
 This transaction is used by the [Designated Reporter](#designated-reporter) for a specified `market` to [Report](#report), by submitting `_payoutNumerators` ([Payout Sets](#payout-set)) that indicate how the [Market](#market) should Payout. This transaction will fail if the `msg.sender` isn't the Designated Reporter Address set for this Market, or if this Market isn't in the [Designated Report Phase](#designated-report-phase).
 
-#### augur.api.Market.disputeAllReporters({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disavowTokens({ \_signer, market, onSent, onSuccess, onFailed })
 
-`disputeAllReporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through a round of [All Reporting](#all-reporting) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the All Reporting Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
+This transaction is used to disavow Stake Tokens for this [Market](#market). When a Stake Token is disavowed it is able to be redeemed from the Market for the full [REP](#rep) price of purchase. This is used in the event of a [Fork](#fork), which causes all Markets that aren't [Finalized](#finalized-market) to enter an Awaiting Fork Migration state for the duration of the [Fork Period](#fork-period). During this time, the Market is unable to proceed through the [Market Resolution](#market-resolution) process until the Fork Period is completed and a winning [Child Universe](#child-universe) is known. To withdraw REP from the Staked Tokens on Markets Awaiting Fork Migration the Stake Tokens must be disavowed by calling `disavowTokens` on the Market. The Stake Tokens are then disavowed for the entire Market and can be sold back to the Market for full REP price. This then allows the REP holder to migrate their REP to their chosen Child Universe.
 
 #### augur.api.Market.disputeDesignatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
 This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round).
 
-#### augur.api.Market.disputeLimitedReporters({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeRound1Reporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Limited Reporting](#limited-reporting) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for a round of [All Reporting](#all-reporting).
+This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [First Report Round](#first-report-round) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for the next [Reporting Round](#reporting-round).
+
+#### augur.api.Market.disputeRound2Reporters({ \_signer, market, onSent, onSuccess, onFailed })
+
+`disputeRound2Reporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
 
 #### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
 
