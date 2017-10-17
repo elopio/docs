@@ -121,9 +121,9 @@ Market Call API
 // Market Contract Call API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.Market.getAllReportersDisputeBondToken({ market: market }, function (allReportersDisputeBondToken) { /* ... */ })
+augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ market: market }, function (secondPlaceTentativeWinningPayoutDistributionHash) { /* ... */ })
 // example output:
-allReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+secondPlaceTentativeWinningPayoutDistributionHash = "0x20acbb1199c43cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
 augur.api.Market.getDenominationToken({ market: market }, function (denominationToken) { /* ... */ })
 // example output:
@@ -137,9 +137,21 @@ augur.api.Market.getDesignatedReportDueTimestamp({ market: market }, function (d
 // example output:
 designatedReporterDueTimestamp = "1500647930"
 
+augur.api.Market.getDesignatedReporter({ market: market }, function (designatedReporter) { /* ... */ })
+// example output:
+designatedReporter = "0xca3edca4ed326bbcb77e914b379913b12d49654d"
+
 augur.api.Market.getDesignatedReporterDisputeBondToken({ market: market }, function (designatedReporterDisputeBondToken) { /* ... */ })
 // example output:
 designatedReporterDisputeBondToken = "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
+
+augur.api.Market.getDesignatedReportPayoutHash({ market: market }, function (designatedReportPayoutHash) { /* ... */ })
+// example output:
+designatedReportPayoutHash = "0x58aff2018af3cb2ca3a3a1862df2d350300904a96039eb50cb0fd1ac3710aad"
+
+augur.api.Market.getDesignatedReportReceivedTime({ market: market }, function (designatedReportReceivedTime) { /* ... */ })
+// example output:
+designatedReportReceivedTime = "1500388800";
 
 augur.api.Market.getEndTime({ market: market }, function (endTime) { /* ... */ })
 // example output:
@@ -157,9 +169,9 @@ augur.api.Market.getFinalWinningStakeToken({ market: market }, function (winning
 // example output:
 winningStakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.Market.getLimitedReportersDisputeBondToken({ market: market }, function (limitedReportersDisputeBondToken) { /* ... */ })
+augur.api.Market.getForkingMarket({ market: market }, function (forkedMarket) { /* ... */ })
 // example output:
-limitedReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
+forkedMarket = "0x0"
 
 augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
@@ -173,11 +185,6 @@ augur.api.Market.getNumTicks({ market: market }, function (numTicks) { /* ... */
 // example output:
 numTicks = "1000"
 
-var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-augur.api.Market.getPayoutDistributionHashStake({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (payoutDenominator) { /* ... */ })
-// example output:
-payoutDenominator = "1100000000000000000"
-
 augur.api.Market.getReportingState({ market: market }, function (reportingState) { /* ... */ })
 // example output:
 reportingState = "0";
@@ -186,6 +193,7 @@ augur.api.Market.getStakeToken({ market: market }, function (stakeToken) { /* ..
 // example output:
 stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
+var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (stakeTokenOrZero) { /* ... */ })
 // example output:
 stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
@@ -193,6 +201,14 @@ stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
+
+augur.api.Market.getRound1ReportersDisputeBondToken({ market: market }, function (round1ReportersDisputeBondToken) { /* ... */ })
+// example output:
+round1ReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
+
+augur.api.Market.getRound2ReportersDisputeBondToken({ market: market }, function (round2ReportersDisputeBondToken) { /* ... */ })
+// example output:
+round2ReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.Market.getShareToken({
   market: market,
@@ -241,17 +257,17 @@ augur.api.Market.isContainerForShareToken({
 // example output:
 isContainerForShareToken = "1"
 
-augur.api.Market.isIndeterminate({
+augur.api.Market.isValid({
   market: market
-}, function (isIndeterminate) { /* ... */ })
+}, function (isValid) { /* ... */ })
 // example output:
-isIndeterminate = "0"
+isValid = "1"
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
-#### augur.api.Market.getAllReportersDisputeBondToken({ market }[, callback])
+#### augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ market }[, callback])
 
-Returns the [All Reporting](#all-reporting) phase's [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through an All Reporting phase or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) after All Reporting then this will return an empty address `0x0`.
+Returns the second best, or second place, tentatively winning [Payout Distribution Hash](#payout-distribution-hash). The [Payout Set](#payout-set) [Reported](#report) by a [REP](#rep) holder is converted into a sha3 hash known as the Payout Distribution Hash. This method returns the Payout Set Hash with the 2nd most REP staked on it while the [Market](#market) is still [Awaiting Finalization](#market-awaiting-finalization).
 
 #### augur.api.Market.getDenominationToken({ market }[, callback])
 
@@ -265,9 +281,21 @@ Returns the timestamp for when a specific `market`'s [Designated Report Phase](#
 
 Returns the timestamp for when a specific `market`'s  [Designated Report Phase](#designated-report-phase) should be completed but doesn't count the [Designated Dispute Phase](#designated-dispute-phase). If the [Designated Reporter](#designated-reporter) has already submit their [Report](#report) for the Designated Report Phase, then this will return the timestamp for when that Report was submit to the [Market](#market).
 
+#### augur.api.Market.getDesignatedReporter({ market }[, callback])
+
+Returns the address for the [Designated Reporter](#designated-reporter) set for the specified `market`. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market Creation.
+
 #### augur.api.Market.getDesignatedReporterDisputeBondToken({ market }[, callback])
 
 Returns the [Dispute Bond](#dispute-bond) Token address for the [Designated Reporting](#designated-reporting) round for a specified `market`. When a Designated [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a Designated Report or if the Designated Report hasn't been Challenged.
+
+#### augur.api.Market.getDesignatedReportPayoutHash({ market }[, callback])
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) of the [Payout Set](#payout-set) submit by the [Designated Reporter](#designated-reporter) for their [Report](#report). The Payout Set is used to determine how the [Market](#market) should [Settle](#settlement) for particular [Shares](#shares) after being [Finalized](#finalized-market).
+
+#### augur.api.Market.getDesignatedReportReceivedTime({ market }[, callback])
+
+Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s [Report](#report) was submit for the specified `market`. Each [Market](#market) is required to have a Designated Reporter who is expected to Report during the [Designated Report Phase](#designated-report-phase). This timestamp is used to determine if they actually submit their Report on time, which would be anytime within 3 days of the Market's [End Time](#end-time).
 
 #### augur.api.Market.getEndTime({ market }[, callback])
 
@@ -285,9 +313,9 @@ Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a sp
 
 Returns the Stake Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
 
-#### augur.api.Market.getLimitedReportersDisputeBondToken({ market }[, callback])
+#### augur.api.Market.getForkingMarket({ market }[, callback])
 
-Returns the [Dispute Bond](#dispute-bond) Token address for the [Limited Reporting](#limited-reporting) round for a specified `market`. When a Limited [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a Limited Report or if the Limited Report hasn't been Challenged.
+Returns the [Market](#market) address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified `market` address. If the `market` address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
 
 #### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
 
@@ -321,6 +349,14 @@ Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_
 
 Returns the [Reporting Window](#reporting-window) address for the specified `market`. This returns the Reporting Window when this [Market](#market) is scheduled to be [Reported](#report) on for [Limited Reporting](#limited-reporting) if a [Designated Reporter](#designated-reporter) is not set, or fails to Report.
 
+#### augur.api.Market.getRound1ReportersDisputeBondToken({ market }[, callback])
+
+Returns the [Dispute Bond](#dispute-bond) Token address for the [First Report Round](#first-report-round) for a specified `market`. When a First Report Round [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a First Round Report or if the First Round Report hasn't been Challenged.
+
+#### augur.api.Market.getRound2ReportersDisputeBondToken({ market }[, callback])
+
+Returns the [Last Report Round](#last-report-round)'s [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
+
 #### augur.api.Market.getShareToken({ market, \_outcome }[, callback])
 
 Returns the [Share](#shares) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
@@ -353,9 +389,9 @@ Returns wether the specific `market` is a container for the `_shadyTarget` addre
 
 Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
 
-#### augur.api.Market.isIndeterminate({ market }[, callback])
+#### augur.api.Market.isValid({ market }[, callback])
 
-Returns True or False depending on if the [Market](#market) passed as `market` has been [Finalized](#finalized-market) as Indeterminate, or Invalid. This means the Market is unable to be finalized to a single [Final Outcome](#final-outcome) due to an unclear Market or an indeterminate [Outcome](#outcome). Returns `1` if True, `0` if False.
+Returns True or False depending on if the [Market](#market) passed as `market` has been [Finalized](#finalized-market) as Invalid. This means the Market is unable to be finalized to a single [Final Outcome](#final-outcome) due to an unclear Market or an indeterminate [Outcome](#outcome). Returns `1` for True in the event that the Market is valid, `0` is False, the Market is invalid.
 
 Stake Token Call API
 ------------------------
