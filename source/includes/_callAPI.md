@@ -475,17 +475,9 @@ var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
 
-augur.api.ReportingWindow.getAllReporterMarketsCount({ reportingWindow: reportingWindow }, function (allReportingMarketsCount) { /* ... */ })
+augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (avgReportingGasPrice) { /* ... */ })
 // example output:
-allReportingMarketsCount = "15"
-
-augur.api.ReportingWindow.getAvgReportingGasCost({ reportingWindow: reportingWindow }, function (avgReportingGasCost) { /* ... */ })
-// example output:
-avgReportingGasCost = "340000"
-
-augur.api.ReportingWindow.getAvgReportsPerMarket({ reportingWindow: reportingWindow }, function (avgReportsPerMarket) { /* ... */ })
-// example output:
-avgReportsPerMarket = "5"
+avgReportingGasPrice = "340000"
 
 augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow: reportingWindow }, function (disputeEndTime) { /* ... */ })
 // example output:
@@ -499,21 +491,21 @@ augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, funct
 // example output:
 endTime = "1500388730"
 
-augur.api.ReportingWindow.getLimitedReporterMarketsCount({ reportingWindow: reportingWindow }, function (limitedReportingMarketsCount) { /* ... */ })
-// example output:
-limitedReportingMarketsCount = "50"
-
 augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (marketsCount) { /* ... */ })
 // example output:
 marketsCount = "65"
 
-augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow: reportingWindow }, function (maxReportsPerLimitedReporterMarket) { /* ... */ })
-// example output:
-maxReportsPerLimitedReporterMarket = "9"
-
 augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow: reportingWindow }, function (nextReportingWindow) { /* ... */ })
 // example output:
 nextReportingWindow = "0x0d6b5a54f940bf3d52e438cab785981aaefdf40c"
+
+augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow: reportingWindow }, function (numDesignatedReportNoShows) { /* ... */ })
+// example output:
+numDesignatedReportNoShows = "2"
+
+augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow: reportingWindow }, function (numIncorrectDesignatedReportMarkets) { /* ... */ })
+// example output:
+numIncorrectDesignatedReportMarkets = "1"
 
 augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow: reportingWindow }, function (numInvalidMarkets) { /* ... */ })
 // example output:
@@ -539,21 +531,9 @@ augur.api.ReportingWindow.getReputationToken({ reportingWindow: reportingWindow 
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow: reportingWindow }, function (requiredReportsPerReporterForLimitedReporterMarkets) { /* ... */ })
-// example output:
-requiredReportsPerReporterForLimitedReporterMarkets = "2"
-
 augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (startTime) { /* ... */ })
 // example output:
 startTime = "14995895900"
-
-augur.api.ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow: reportingWindow }, function (targetReportsPerLimitedReporterMarket) { /* ... */ })
-// example output:
-targetReportsPerLimitedReporterMarket = "3"
-
-augur.api.ReportingWindow.getTargetReportsPerReporter({ reportingWindow: reportingWindow }, function (targetReportsPerReporter) { /* ... */ })
-// example output:
-targetReportsPerReporter = "5"
 
 augur.api.ReportingWindow.getTypeName({ reportingWindow: reportingWindow }, function (typeName) { /* ... */ })
 // example output:
@@ -578,13 +558,6 @@ augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, 
 // example output:
 isDisputeActive = "1"
 
-augur.api.ReportingWindow.isDoneReporting({
-  reportingWindow: reportingWindow,
-  _reporter: _reporter
-}, function (isDoneReporting) { /* ... */ })
-// example output:
-isDoneReporting = "1"
-
 augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingWindow }, function (isForkingMarketFinalized) { /* ... */ })
 // example output:
 isForkingMarketFinalized = "0";
@@ -595,17 +568,9 @@ isReportingActive = "1"
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
 
-#### augur.api.ReportingWindow.getAllReporterMarketsCount({ reportingWindow }[, callback])
-
-Returns the amount of [All Reporting](#all-reporting) [Markets](#market) that are set to be [Reported](#report) on during this [Reporting Window](#reporting-window). All Reporting Markets are required to be Reported on by each [Reporter](#reporter) during the [Reporting Phase](#reporting-phase).
-
-#### augur.api.ReportingWindow.getAvgReportingGasCost({ reportingWindow }[, callback ])
+#### augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])
 
 Returns the average amount of Gas spent per [Report](#report) submit during the [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getAvgReportsPerMarket({ reportingWindow }[, callback ])
-
-Returns the average amount of [Reports](#report) submit across all [Markets](#market) in the [Reporting Window](#reporting-window). This number includes the Reports on [All Reporting](#all-reporting) Markets, which every [Reporter](#reporter) is required to Report on, and [Limited Reporting](#limited-reporting) Markets.
 
 #### augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
 
@@ -619,23 +584,21 @@ As stated above, [Reporting Windows](#reporting-window) have two phases, the [Re
 
 Returns a timestamp for when this [Reporting Window](#reporting-window) will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
 
-#### augur.api.ReportingWindow.getLimitedReporterMarketsCount({ reportingWindow }[, callback])
-
-Returns the amount of [Limited Reporting](#limited-reporting) [Markets](#market) set to be [Reported](#report) on during this [Reporting Window](#reporting-window). Limited Reporting Markets are Reported on during the [Reporting Phase](#reporting-phase) of the Reporting Window. [Reporters](#reporter) aren't required to Report on any particular Limited Reporting Market but are required to report on a minimum number of Limited Reporting Markets to fulfill their Reporting requirements and allow a Reporter to redeem their [Registration Token](#registration-token).
-
 #### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
 
 Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
-
-#### augur.api.ReportingWindow.getMaxReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
-
-This method returns the maximum number of [Reports](#report) a [Limited Reporting](#limited-reporting) [Market](#market) can receive in this [Reporting Window](#reporting-window) and still give credit to the [Reporter](#reporter) for Reporting on it. Reporters only need to Report on a minimum amount of Limited Reporting, as well as every [All Reporting](#all-reporting), Markets during a [Reporting Phase](#reporting-phase) to get credit for Reporting. Limited Reporting Markets that have received the maximum number of Reports will no longer give the Reporter credit toward completion of Reporting. Reporters who do successfully get credit for Reporting on at least the minimum number of Markets are able to redeem their [Registration Tokens](#registration-token) at the end of the Reporting Window.
-
 
 #### augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow }[, callback])
 
 Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and all Reporting Windows belong to a Universe.
 
+#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
+
+#### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have [First Report Bonds](#first-report-bonds) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
 
 #### augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow }[, callback])
 
@@ -661,21 +624,9 @@ Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specifi
 
 Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting Window](#reporting-window). Every Reporting Window has a [Reporting Phase](#reporting-phase) where [Reporters](#reporter) submit [Reports](#report) on the [Outcomes](#outcome) of [Markets](#market). In order to Report, Reporters need to stake REP. A Reporting Window only accepts one REP contract as the source of staked REP and this method returns that contract's address.
 
-#### augur.api.ReportingWindow.getRequiredReportsPerReporterForlimitedReporterMarkets({ reportingWindow }[, callback])
-
-Returns the number of required [Reports](#report) a [Reporter](#reporter) needs to get credit for submitting on [Limited Reporting](#limited-reporting) [Markets](#market) to complete Reporting. If a Reporter doesn't get credit for Reporting on a minimum number of Limited Reporting Markets they will be unable to redeem their [Registration Token](#registration-token).
-
 #### augur.api.ReportingWindow.getStartTime({ reportingWindow }[, callback])
 
 Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
-
-#### augur.api.ReportingWindow.getTargetReportsPerLimitedReporterMarket({ reportingWindow }[, callback])
-
-This method returns the target number of [Reports](#report) a [Limited Reporting](#limited-reporting) [Market](#market) should receive in this [Reporting Window](#reporting-window). [Reporters](#reporters) only need to Report on a minimum amount of Limited Reporting, as well as every [All Reporting](#all-reporting), Markets during a [Reporting Phase](#reporting-phase) to get credit for Reporting. This method is used to help get an idea of how many Reports to expect and to be able to set a maximum number of Reports accepted before the Limited Reporting Market stops giving credit to Reporters.
-
-#### augur.api.ReportingWindow.getTargetReportsPerReporter({ reportingWindow }[, callback])
-
-This method returns the target number of [Reports](#report) a [Reporter](#reporter) will need to have credit for in order to complete Reporting. This number is calculated by taking the result of `getRequiredReportsPerReporterForlimitedReporterMarkets` and adding it to the number of [All Reporting](#all-reporting) [Markets](#markets) in this [Reporting Window](#reporting-window). This gives the target number of Reports a Reporter should submit and get credit for in order to redeem their [Registration Token](#registration-token).
 
 #### augur.api.ReportingWindow.getTypeName({ reportingWindow }[, callback])
 
@@ -696,10 +647,6 @@ Returns wether the `_shadyMarket` address provided is a [Market](#market) that i
 #### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
 
 Returns wether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
-
-#### augur.api.ReportingWindow.isDoneReporting({ reportingWindow, \_reporter }[, callback])
-
-Returns wether the `_reporter` address provided has gotten credit for [Reporting](#report) on the minimum number of [Limited Reporting](#limited-reporting) [Markets](#market) and every [All Reporting](#all-reporting) Market in the [Reporting Window](#reporting-window)'s [Reporting Phase](#reporting-phase). Returns `1` if the Reporter has completed the minimum number of Reports, `0` if not.
 
 #### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
 
