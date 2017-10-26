@@ -63,7 +63,7 @@ Fires when the initial `eth_sendTransaction` response is received.  If the trans
 
 #### onSuccess(successResponse)
 
-Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero `blockHash` value.  `successResponse` is structured the same way as `eth_getTransactionByHash` responses (see code example for details), with the addition of a `callReturn` field which contains the contract method's return value.
+Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero `blockHash` value. `successResponse` is structured the same way as `eth_getTransactionByHash` responses (see code example for details), with the addition of a `callReturn` field which contains the contract method's return value.
 
 #### onFailed(failedResponse)
 
@@ -175,6 +175,208 @@ The `privateKeyOrSigner` is required if we are attempting to execute a transacti
 
 <aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
 
+Cancel Order Tx API
+----------------------------
+```javascript
+// Cancel Order Contract Transaction API Examples:
+var privateKey = <Buffer ...>;
+var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
+var _type = "1";
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _outcome = "1";
+
+augur.api.CancelOrder.cancelOrder({
+  _signer: privateKey,
+  _orderId: _orderId,
+  _type: _type,
+  _market: _market,
+  _outcome: _outcome,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320516,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa031604c8ef75ab5b1d07f7358d594e1cb57c927a86be92459d78ae3415bb3b0",
+  input: "0x309d23e17ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f87000000000000000000000000000000000000000000000000000000000000000010000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a420000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xf61",
+  timestamp: 1501003156,
+  to: "0xb2930b35844a230f00e51431acae96fe543a0347",
+  value: "0x0"
+}
+```
+#### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/cancelOrder.se)
+
+#### augur.api.CancelOrder.cancelOrder({ \_signer, \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
+
+The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`). It returns true if the order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+Claim Proceeds Tx API
+------------------------------
+```javascript
+// Claim Proceeds Contract Transaction API Examples:
+var privateKey = <Buffer ...>;
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+
+augur.api.ClaimProceeds.claimProceeds({
+  _signer: privateKey,
+  _market: _market,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320522,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x0f6152b9a39055b34bc092d9e96e852e3137e3d42f4e78b1dc5848f8b2abf12f",
+  input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  nonce: "0xfc",
+  timestamp: 1501003122,
+  to: "0x96c7ed5f9465a8661df4df3bbbf16cc13ad7e115",
+  value: "0x0"
+}
+```
+
+#### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ClaimProceeds.sol)
+
+#### augur.api.ClaimProceeds.claimProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
+
+The `claimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
+
+Complete Sets Tx API
+-----------------------------
+```javascript
+// Complete Sets Contract
+var privateKey = <Buffer ...>;
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _amount = "50000000000000000000" // 50.0
+
+augur.api.CompleteSets.publicBuyCompleteSets({
+  _signer: privateKey,
+  _market: _market,
+  _amount: _amount,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320523,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xc77149d6a3fef8755a20aa2100fc79c02ca7dd198d6f3c65aabe638883d8d017",
+  input: "0xfadc758a0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
+  nonce: "0xfd",
+  timestamp: 1501003123,
+  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
+  value: "0x0"
+}
+
+augur.api.CompleteSets.publicSellCompleteSets({
+  _signer: privateKey,
+  _market: _market,
+  _amount: _amount,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320524,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x21121bf9a8d32969b5ce4d53b6021ad6b7b5e7c658e9d98d582c720c8abce220",
+  input: "0x04b586670000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
+  nonce: "0xfe",
+  timestamp: 1501003124,
+  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
+  value: "0x0"
+}
+```
+#### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/CompleteSets.sol)
+
+#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
+
+This transaction will attempt to purchase `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` shares in all outcomes, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
+
+#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
+
+This transaction will attempt to sell `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't own `_amount` of shares in all outcomes for the `_market`, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (sell), `_amount` sold, number of outcomes in the `_market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
+
+Create Order Tx API
+--------------------------
+```javascript
+// Make Order Contract Transaction API Examples:
+var privateKey = <Buffer ...>;
+var _type = "1";
+var _attoshares = "10000000000000000000"; // 10 shares
+var _displayPrice = "0.5";
+var _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
+var _outcome = "1";
+var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
+var _tradeGroupId = "1";
+
+augur.api.CreateOrder.publicCreateOrder({
+  _signer: privateKey,
+  _type: _type,
+  _attoshares: _attoshares,
+  _displayPrice: _displayPrice,
+  _market: _market,
+  _outcome: _outcome,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupId,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320525,
+  callReturn: "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xcf6729b0e27fffc81c4f5c824992a780daf1f41bf590c7f62f16777edbc2c08e",
+  input: "0x138dcef200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000000000000fffffff1000000000000000000000000d3273eba07248020bf98a8b560ec1576a612102f0000000000000000000000000000000000000000000000000000000000000001ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091ed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd5614260000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff",
+  timestamp: 1501003125,
+  to: "0x82378b6ee7b6e8c69874b491e4488c72a390c367",
+  value: "0x0"
+}
+```
+#### [Create Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/CreateOrder.sol)
+
+#### augur.api.CreateOrder.publicCreateOrder({ \_signer, \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+
+This transaction will create a new order on the order book for the specified `_market` trading on the `_outcome` provided. The required fields besides market and outcome are the `_type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `_attoshares`, and the `_displayPrice` for the order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
+
+This transaction will fail if `_type` is not a valid value of 1 or 2, If the `_attoshares` value is less than 0, if the `_market` isn't defined, if the `_outcome` is less than 0 or greater than the total number of outcomes for the `_market`, or if the `_displayPrice` is below the `_market`'s minimum `_displayPrice` or if the `_displayPrice` is above the market's maximum `_displayPrice`.
+
 Dispute Bond Token Tx API
 ----------------------------------
 ```javascript
@@ -234,6 +436,30 @@ successResponse = {
   value: "0x0"
 }
 
+augur.api.DisputeBondToken.withdrawInEmergency {
+  _signer: privateKey,
+  disputeBondToken: disputeBondToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+}
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320482,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x00000001",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
+
 var _shadyUniverse = "0x580f633f475614636ee132a0a355dcdc826d16c8";
 augur.api.DisputeBondToken.withdrawToUniverse({
   _signer: privateKey,
@@ -272,9 +498,60 @@ The `transfer` transaction will change the current bond holder to the specified 
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBondToken`'s [Market](#market). This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the Market for the `disputeBondToken` isn't [Finalized](#finalized-market), if the Market is Finalized but the final [Payout Distribution Hash](#payout-distribution-hash) is the same Distribution Hash Challenged by the `disputeBondToken`, or if the `disputeBondToken`'s Market isn't Finalized.
 
+#### augur.api.DisputeBondToken.withdrawInEmergency({ \_signer, disputeBondToken, onSent, onSuccess, onFailed })
+
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond Token and convert it into a Reputation Token.
+
+This transaction will fail if:
+
+- Augur is not currently in a haulted state.
+
+Returns: true if the Dispute Bond Token was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
 #### augur.api.DisputeBondToken.withdrawToUniverse({ \_signer, disputeBondToken, \_shadyUniverse, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBondToken`'s [Market](#market). This transaction will fail to payout if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `_shadyUniverse` isn't the [Child Universe](#child-universe) of the [Universe](#universe) containing this `disputeBondToken`, if the [Payout Distribution Hash](#payout-distribution-hash) for the [Parent Universe](#parent-universe) of `shadyUniverse` is the same Distribution Hash Challenged by the `disputeBondToken`.
+
+Fill Order Tx API
+--------------------------
+```javascript
+// Fill Order Contract Transaction API Examples:
+var privateKey = <Buffer ...>;
+var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+var _amountFillerWants = "10000000000000000000"; // 10.0
+var _tradeGroupId = "1";
+
+augur.api.FillOrder.publicFillOrder({
+  _signer: privateKey,
+  _orderId: _orderId,
+  _amountFillerWants: _amountFillerWants,
+  _tradeGroupId: _tradeGroupId,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320529,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x3efb4102dc3b9e1bb145ca21310233646a4eba24894b04f12ee4d390281301ac",
+  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e60910000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
+  nonce: "0xff4",
+  timestamp: 1501003129,
+  to: "0x077f28f038dd94ed9c444b806137302b1c4cbd5a",
+  value: "0x0"
+}
+```
+#### [Fill Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/TakeOrder.sol)
+
+#### augur.api.FillOrder.publicFillOrder({ \_signer, \_orderID, \_amountFillerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
+
+Given an `_orderId` and the amount a filler wants as `_amountFillerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `_amountFillerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `_amountFillerWants` value that the filler requests. This transaction requires `_orderId` and `_amountFillerWants` are defined. The maker of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
 
 Market Tx API
 ----------------------
@@ -576,6 +853,30 @@ successResponse = {
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
+
+augur.api.Market.withdrawInEmergency {
+  _signer: privateKey,
+  market: market,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+}
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320500,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x00000001",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
 
@@ -627,44 +928,27 @@ This transaction will attempt to finalize a [Market](#market) that is [Awaiting 
 
 This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#shares) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
 
-Stake Token Tx API
--------------------------------
+#### augur.api.Market.withdrawInEmergency({ \_signer, market, onSent, onSuccess, onFailed })
+
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
+
+This transaction will fail if:
+
+- Augur is not currently in a haulted state.
+
+Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+Participation Token Tx API
+--------------------------------
 ```javascript
-// Stake Token Contract Transaction API Examples:
+// Participation Token Transaction API Examples:
 var privateKey = <Buffer ...>;
-var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-var _attotokens = "100000000000000000000";
+var participationToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+var _attotokens = 100;
 
-augur.api.StakeToken.approve({
+augur.api.ParticipationToken.buy({
   _signer: privateKey,
-  stakeToken: stakeToken,
-  _spender: _spender,
-  _value: _attotokens,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320499,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xb3f94e1ad1890d0a14b21e3fd46530eb8c18887edc810e01fc789ccbfb39f067",
-  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xc",
-  timestamp: 1501003143,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.StakeToken.buy({
-  _signer: privateKey,
-  stakeToken: stakeToken,
+  participationToken: participationToken,
   _attotokens: _attotokens,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -673,204 +957,103 @@ augur.api.StakeToken.buy({
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320500,
+  blockNumber: 320486,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x99620dd1428671eb095de26ad02137916237844456e243cdaa9d9821affa5120",
-  input: "0xe94030130000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xd",
-  timestamp: 1501003143,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x0000000000000000000000000000000000000000000000000000000000000100",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
   value: "0x0"
 }
 
-augur.api.StakeToken.migrateLosingTokens({
+var _forgoFees = true;
+augur.api.ParticipationToken.redeem {
   _signer: privateKey,
-  stakeToken: stakeToken,
+  participationToken: participationToken,
+  _forgoFees: _forgoFees,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
-});
+}
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320502,
+  blockNumber: 320487,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x75cb653f1ab81c95d0aad86c03e092a3fa9de7252603edfabee534b8e5183141",
-  input: "0xe9aa05a1",
-  nonce: "0xd2",
-  timestamp: 1501003151,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x00000001",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
   value: "0x0"
 }
 
-augur.api.StakeToken.redeemDisavowedTokens({
+augur.api.ParticipationToken.withdrawInEmergency {
   _signer: privateKey,
-  stakeToken: stakeToken,
-  _reporter: _spender,
+  participationToken: participationToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320503,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x3c7827f3cc51e4062c73bf9fdbd6ad51edec7d31842900cd88811e67d83eb514",
-  input: "0x60b54d2e000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
-  nonce: "0xd3",
-  timestamp: 1501003152,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
 }
-
-augur.api.StakeToken.redeemForkedTokens({
-  _signer: privateKey,
-  stakeToken: stakeToken,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320504,
+  blockNumber: 320488,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x8cfc973a802f44e5c0a93a8a0d294e680fe4735ca4f49310038908d73bb4536c",
-  input: "0x00633a30000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
-  nonce: "0xd4",
-  timestamp: 1501003153,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.StakeToken.redeemWinningTokens({
-  _signer: privateKey,
-  stakeToken: stakeToken,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320505,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xa94d27cf876602ff5cbbce344e5d03ff30c60d61c2e2adf4bf9c54c303d51b81",
-  input: "0xc165c7cc000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
-  nonce: "0xd5",
-  timestamp: 1501003155,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-augur.api.StakeToken.transfer({
-  _signer: privateKey,
-  stakeToken: stakeToken,
-  _to: _spender,
-  _value: _attotokens,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320500,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
-  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xe",
-  timestamp: 1501003144,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
-  value: "0x0"
-}
-
-var _from = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
-augur.api.StakeToken.transferFrom({
-  _signer: privateKey,
-  stakeToken: stakeToken,
-  _from: _from,
-  _to: _spender,
-  _value: _attotokens,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320501,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
-  input: "0xc19cca5200000000000000000000000034c85afe56c392e240c64dc09d2a7962afe2920a000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xf",
-  timestamp: 1501003145,
-  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x00000001",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
   value: "0x0"
 }
 ```
-#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
+#### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ParticipationToken.sol)
 
-#### augur.api.StakeToken.approve({ \_signer, stakeToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ParticipationToken.buy({ \_signer, participationToken, \_attotokens, onSent, onSuccess, onFailed })
 
-Allows the `_spender` the ability to spend up to `_value` worth of the specified `stakeToken` for the `msg.sender`. This transaction is used to allow another person to perform actions with your Stake Tokens on your behalf. This transaction will spawn an `Approval` event which will record a log of the owner's address (`msg.sender`), `_spender` address, and `_value` amount approved.
+Purchases the number of participation tokens specified by `_attotokens`. 
 
-#### augur.api.StakeToken.buy({ \_signer, stakeToken, \_attotokens, onSent, onSuccess, onFailed })
+This transaction will fail if:
 
-This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in an [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
+- `_attotokens` is <= 0.
+- reporting is not currently active in the reporting window.
+- all markets have not been finalized in the reporting window.
 
-#### augur.api.StakeToken.migrateLosingTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+Returns: true if the Participation Tokens were successfully purchased. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-This transaction should be called, though it's not required, once on each Stake Token that isn't the Winning Stake Token once a [Market](#market) has [Finalized](#finalized-market). This method will migrate the [REP](#rep) used to purchase the non-winning Stake Token to the Winning Stake Token so the REP can be redistributed to the Reporters who correctly staked REP on the Winning [Payout Set](#payout-set). If this isn't called, then whatever REP is staked into this Stake Token will remain staked into the Stake Token indefinitely. This function will fail to migrate REP to the winning Stake Token if the Market isn't finalized, the Market caused a Fork, or if This Stake Token represents the Winning Payout Set and is therefor not a losing token.
+#### augur.api.ParticipationToken.redeem({ \_signer, participationToken, \_forgoFees, onSent, onSuccess, onFailed })
 
-#### augur.api.StakeToken.redeemDisavowedTokens({ \_signer, stakeToken, \_reporter, onSent, onSuccess, onFailed })
+Converts the user's Participation Tokens to Reputation Tokens. Due to the fact that the fees can sometimes take months to claim, the parameter `forgoFees` can be set to true if the user would like to redeem his or her Participation Tokens without having to wait.
 
-In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked Market](#forked-market), that haven't been [Finalized](#finalized-market) are placed into a pending state until the [Fork Period](#fork-period) concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be "Disavowed" and are able to be refunded for [REP](#rep) back into the [Parent Universe](#parent-universe) using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a [Child Universe](#child-universe) and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start [Designated Dispute Phase](#designated-dispute-phase). This will fail if the Stake Token hasn't been Disavowed, or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a `Transfer` event which will record the from address (`stakeToken`), to address (`_reporter`), and the amount of REP transferred.
+This transaction will fail if:
 
-#### augur.api.StakeToken.redeemForkedTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+- `msg.sender` does not have any Participation Tokens.
 
-This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Stake Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
+Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+#### augur.api.ParticipationToken.withdrawInEmergency({ \_signer, participationToken, onSent, onSuccess, onFailed })
 
-This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
-#### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
+This transaction will fail if:
 
-The transfer transaction is used to transfer a Stake Token's ownership from the `msg.sender` to the `_to` address provided. This transaction will fail if the `msg.sender` doesn't own any Stake Tokens at the `stakeToken` address provided, or if the `_value` provided is greater than the number of Stake Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
+- Augur is not currently in a haulted state.
 
-#### augur.api.StakeToken.transferFrom({ \_signer, stakeToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
-
-Unlike transfer, in transferFrom you specify a `_from` value as the owner of the Stake Token who will be giving up their ownership to the `_to` address provided. This allows Stake Tokens to be completely transferrable and therefor the Staked [REP](#rep) contained is also still transferable even while staked on a [Report](#report). This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own any Stake Tokens, or if the `_value` provided is more than the Stake Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
+Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Reporting Window Tx API
 --------------------------------
@@ -1092,207 +1275,6 @@ If the `msg.sender` of the `transfer` transaction has enough of `reputationToken
 
 If the `_from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address, `_value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `reputationTokens` for the `_from` address then this transaction will send `_value` worth of `reputationToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` (in attotokens) amount transferred.
 
-Cancel Order Tx API
-----------------------------
-```javascript
-// Cancel Order Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
-var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
-var _type = "1";
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _outcome = "1";
-
-augur.api.CancelOrder.cancelOrder({
-  _signer: privateKey,
-  _orderId: _orderId,
-  _type: _type,
-  _market: _market,
-  _outcome: _outcome,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320516,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xa031604c8ef75ab5b1d07f7358d594e1cb57c927a86be92459d78ae3415bb3b0",
-  input: "0x309d23e17ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f87000000000000000000000000000000000000000000000000000000000000000010000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a420000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xf61",
-  timestamp: 1501003156,
-  to: "0xb2930b35844a230f00e51431acae96fe543a0347",
-  value: "0x0"
-}
-```
-#### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/cancelOrder.se)
-
-#### augur.api.CancelOrder.cancelOrder({ \_signer, \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
-
-The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`).
-
-Claim Proceeds Tx API
-------------------------------
-```javascript
-// Claim Proceeds Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-
-augur.api.ClaimProceeds.claimProceeds({
-  _signer: privateKey,
-  _market: _market,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320522,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0f6152b9a39055b34bc092d9e96e852e3137e3d42f4e78b1dc5848f8b2abf12f",
-  input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  nonce: "0xfc",
-  timestamp: 1501003122,
-  to: "0x96c7ed5f9465a8661df4df3bbbf16cc13ad7e115",
-  value: "0x0"
-}
-```
-#### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/develop/src/trading/ClaimProceeds.sol)
-
-#### augur.api.ClaimProceeds.claimProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
-
-The `claimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
-
-Complete Sets Tx API
------------------------------
-```javascript
-// Complete Sets Contract
-var privateKey = <Buffer ...>;
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _amount = "50000000000000000000" // 50.0
-
-augur.api.CompleteSets.publicBuyCompleteSets({
-  _signer: privateKey,
-  _market: _market,
-  _amount: _amount,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320523,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xc77149d6a3fef8755a20aa2100fc79c02ca7dd198d6f3c65aabe638883d8d017",
-  input: "0xfadc758a0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
-  nonce: "0xfd",
-  timestamp: 1501003123,
-  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
-  value: "0x0"
-}
-
-augur.api.CompleteSets.publicSellCompleteSets({
-  _signer: privateKey,
-  _market: _market,
-  _amount: _amount,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320524,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x21121bf9a8d32969b5ce4d53b6021ad6b7b5e7c658e9d98d582c720c8abce220",
-  input: "0x04b586670000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
-  nonce: "0xfe",
-  timestamp: 1501003124,
-  to: "0xfbb1b73c4f0bda4f67dca266ce6ef42f520fbb98",
-  value: "0x0"
-}
-```
-#### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/CompleteSets.sol)
-
-#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
-
-This transaction will attempt to purchase `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` shares in all outcomes, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
-
-#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
-
-This transaction will attempt to sell `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't own `_amount` of shares in all outcomes for the `_market`, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (sell), `_amount` sold, number of outcomes in the `_market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
-
-Make Order Tx API
---------------------------
-```javascript
-// Make Order Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
-var _type = "1";
-var _attoshares = "10000000000000000000"; // 10 shares
-var _displayPrice = "0.5";
-var _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
-var _outcome = "1";
-var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
-var _tradeGroupId = "1";
-
-augur.api.MakeOrder.publicMakeOrder({
-  _signer: privateKey,
-  _type: _type,
-  _attoshares: _attoshares,
-  _displayPrice: _displayPrice,
-  _market: _market,
-  _outcome: _outcome,
-  _betterOrderId: _betterOrderId,
-  _worseOrderId: _worseOrderId,
-  _tradeGroupId: _tradeGroupId,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320525,
-  callReturn: "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xcf6729b0e27fffc81c4f5c824992a780daf1f41bf590c7f62f16777edbc2c08e",
-  input: "0x138dcef200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000000000000fffffff1000000000000000000000000d3273eba07248020bf98a8b560ec1576a612102f0000000000000000000000000000000000000000000000000000000000000001ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091ed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd5614260000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff",
-  timestamp: 1501003125,
-  to: "0x82378b6ee7b6e8c69874b491e4488c72a390c367",
-  value: "0x0"
-}
-```
-#### [Make Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/MakeOrder.sol)
-
-#### augur.api.MakeOrder.publicMakeOrder({ \_signer, \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
-
-This transaction will create a new order on the order book for the specified `_market` trading on the `_outcome` provided. The required fields besides market and outcome are the `_type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `_attoshares`, and the `_displayPrice` for the order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
-
-This transaction will fail if `_type` is not a valid value of 1 or 2, If the `_attoshares` value is less than 0, if the `_market` isn't defined, if the `_outcome` is less than 0 or greater than the total number of outcomes for the `_market`, or if the `_displayPrice` is below the `_market`'s minimum `_displayPrice` or if the `_displayPrice` is above the market's maximum `_displayPrice`.
-
 Share Token Tx API
 ---------------------------
 ```javascript
@@ -1395,20 +1377,20 @@ If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to
 
 If the `_from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `_value` worth to the `_to` address, `_value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `shareToken` for `_from` address then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` amount transferred denoted in attotokens.
 
-Take Order Tx API
---------------------------
+Stake Token Tx API
+-------------------------------
 ```javascript
-// Take Order Contract Transaction API Examples:
+// Stake Token Contract Transaction API Examples:
 var privateKey = <Buffer ...>;
-var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-var _amountTakerWants = "10000000000000000000"; // 10.0
-var _tradeGroupId = "1";
+var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+var _attotokens = "100000000000000000000";
 
-augur.api.TakeOrder.publicTakeOrder({
+augur.api.StakeToken.approve({
   _signer: privateKey,
-  _orderId: _orderId,
-  _amountTakerWants: _amountTakerWants,
-  _tradeGroupId: _tradeGroupId,
+  stakeToken: stakeToken,
+  _spender: _spender,
+  _value: _attotokens,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -1416,25 +1398,263 @@ augur.api.TakeOrder.publicTakeOrder({
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320529,
-  callReturn: "0",
+  blockNumber: 320499,
+  callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
-  hash: "0x3efb4102dc3b9e1bb145ca21310233646a4eba24894b04f12ee4d390281301ac",
-  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e60910000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff4",
-  timestamp: 1501003129,
-  to: "0x077f28f038dd94ed9c444b806137302b1c4cbd5a",
+  hash: "0xb3f94e1ad1890d0a14b21e3fd46530eb8c18887edc810e01fc789ccbfb39f067",
+  input: "0x83b58638000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xc",
+  timestamp: 1501003143,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.buy({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  _attotokens: _attotokens,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320500,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x99620dd1428671eb095de26ad02137916237844456e243cdaa9d9821affa5120",
+  input: "0xe94030130000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xd",
+  timestamp: 1501003143,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.migrateLosingTokens({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x75cb653f1ab81c95d0aad86c03e092a3fa9de7252603edfabee534b8e5183141",
+  input: "0xe9aa05a1",
+  nonce: "0xd2",
+  timestamp: 1501003151,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.redeemDisavowedTokens({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  _reporter: _spender,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320503,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x3c7827f3cc51e4062c73bf9fdbd6ad51edec7d31842900cd88811e67d83eb514",
+  input: "0x60b54d2e000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd3",
+  timestamp: 1501003152,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.redeemForkedTokens({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320504,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8cfc973a802f44e5c0a93a8a0d294e680fe4735ca4f49310038908d73bb4536c",
+  input: "0x00633a30000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd4",
+  timestamp: 1501003153,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.redeemWinningTokens({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320505,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xa94d27cf876602ff5cbbce344e5d03ff30c60d61c2e2adf4bf9c54c303d51b81",
+  input: "0xc165c7cc000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e",
+  nonce: "0xd5",
+  timestamp: 1501003155,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.transfer({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  _to: _spender,
+  _value: _attotokens,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320500,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
+  input: "0x86744558000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xe",
+  timestamp: 1501003144,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+var _from = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
+augur.api.StakeToken.transferFrom({
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  _from: _from,
+  _to: _spender,
+  _value: _attotokens,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320501,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
+  input: "0xc19cca5200000000000000000000000034c85afe56c392e240c64dc09d2a7962afe2920a000000000000000000000000fe9d0408be14d1d1ec28671b03bda1b80748977e0000000000000000000000000000000000000000000000056bc75e2d63100000",
+  nonce: "0xf",
+  timestamp: 1501003145,
+  to: "0x8385755a52e85df2f571ce5e1550e5472c639352",
+  value: "0x0"
+}
+
+augur.api.StakeToken.withdrawInEmergency {
+  _signer: privateKey,
+  stakeToken: stakeToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+}
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x00000001",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
   value: "0x0"
 }
 ```
-#### [Take Order Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/TakeOrder.sol)
+#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
 
-#### augur.api.TakeOrder.publicTakeOrder({ \_signer, \_orderID, \_amountTakerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.approve({ \_signer, stakeToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
-Given an `_orderId` and the amount a taker wants as `_amountTakerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `_amountTakerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `_amountTakerWants` value that the taker requests. This transaction requires `_orderId` and `_amountTakerWants` are defined. The maker of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
+Allows the `_spender` the ability to spend up to `_value` worth of the specified `stakeToken` for the `msg.sender`. This transaction is used to allow another person to perform actions with your Stake Tokens on your behalf. This transaction will spawn an `Approval` event which will record a log of the owner's address (`msg.sender`), `_spender` address, and `_value` amount approved.
+
+#### augur.api.StakeToken.buy({ \_signer, stakeToken, \_attotokens, onSent, onSuccess, onFailed })
+
+This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in an [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
+
+#### augur.api.StakeToken.migrateLosingTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+
+This transaction should be called, though it's not required, once on each Stake Token that isn't the Winning Stake Token once a [Market](#market) has [Finalized](#finalized-market). This method will migrate the [REP](#rep) used to purchase the non-winning Stake Token to the Winning Stake Token so the REP can be redistributed to the Reporters who correctly staked REP on the Winning [Payout Set](#payout-set). If this isn't called, then whatever REP is staked into this Stake Token will remain staked into the Stake Token indefinitely. This function will fail to migrate REP to the winning Stake Token if the Market isn't finalized, the Market caused a Fork, or if This Stake Token represents the Winning Payout Set and is therefor not a losing token.
+
+#### augur.api.StakeToken.redeemDisavowedTokens({ \_signer, stakeToken, \_reporter, onSent, onSuccess, onFailed })
+
+In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked Market](#forked-market), that haven't been [Finalized](#finalized-market) are placed into a pending state until the [Fork Period](#fork-period) concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be "Disavowed" and are able to be refunded for [REP](#rep) back into the [Parent Universe](#parent-universe) using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a [Child Universe](#child-universe) and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start [Designated Dispute Phase](#designated-dispute-phase). This will fail if the Stake Token hasn't been Disavowed, or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a `Transfer` event which will record the from address (`stakeToken`), to address (`_reporter`), and the amount of REP transferred.
+
+#### augur.api.StakeToken.redeemForkedTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+
+This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Stake Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
+
+#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+
+This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
+
+#### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
+
+The transfer transaction is used to transfer a Stake Token's ownership from the `msg.sender` to the `_to` address provided. This transaction will fail if the `msg.sender` doesn't own any Stake Tokens at the `stakeToken` address provided, or if the `_value` provided is greater than the number of Stake Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
+
+#### augur.api.StakeToken.transferFrom({ \_signer, stakeToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+
+Unlike transfer, in transferFrom you specify a `_from` value as the owner of the Stake Token who will be giving up their ownership to the `_to` address provided. This allows Stake Tokens to be completely transferrable and therefor the Staked [REP](#rep) contained is also still transferable even while staked on a [Report](#report). This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own any Stake Tokens, or if the `_value` provided is more than the Stake Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
+
+#### augur.api.StakeToken.withdrawInEmergency({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Stake Tokens and convert them into Reputation Tokens.
+
+This transaction will fail if:
+
+- Augur is not currently in a haulted state.
+
+Returns: true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Trade Tx API
 ---------------------

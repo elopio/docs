@@ -393,374 +393,6 @@ Returns wether the specific `market` is a container for the `_shadyTarget` addre
 
 Returns True or False depending on if the [Market](#market) passed as `market` has been [Finalized](#finalized-market) as Invalid. This means the Market is unable to be finalized to a single [Final Outcome](#final-outcome) due to an unclear Market or an indeterminate [Outcome](#outcome). Returns `1` for True in the event that the Market is valid, `0` is False, the Market is invalid.
 
-Stake Token Call API
-------------------------
-```javascript
-// Stake Token Contract Call API Examples:
-var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.StakeToken.allowance({
-  stakeToken: stakeToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "1"
-
-augur.api.StakeToken.balanceOf({
-  stakeToken: stakeToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "200000"
-
-augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (market) { /* ... */ })
-// example output:
-market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
-
-augur.api.StakeToken.getPayoutDistributionHash({ stakeToken: stakeToken }, function (payoutDistributionHash) { /* ... */ })
-// example output:
-payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
-
-augur.api.StakeToken.getPayoutNumerator({
-  stakeToken: stakeToken,
-  index: 0
-}, function (payoutSetValue) { /* ... */ })
-// example output:
-payoutSetValue = "1000"
-
-augur.api.StakeToken.getStakeWindow({ stakeToken: stakeToken }, function (reportingWindow) { /* ... */ })
-// example output:
-reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
-
-augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (reputationToken) { /* ... */ })
-// example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-
-augur.api.StakeToken.getTypeName({ stakeToken: stakeToken }, function (typeName) { /* ... */ })
-// example output:
-typeName = "StakeToken";
-
-augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
-augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (isValid) { /* ... */ })
-// example output:
-isValid = "1"
-
-augur.api.StakeToken.totalSupply({ stakeToken: stakeToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "210000000000000"
-```
-#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
-
-The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report during a [Reporting Round](#reporting-round) for this Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submit by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome). If your tokens are Staked on any other Outcome they are worthless and the Staked REP is redistributed to people with winning Stake Tokens.
-
-#### augur.api.StakeToken.allowance({ stakeToken, \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `stakeToken`s. Stake Tokens allow a token owner to designate an spender address to be able to spend the Stake Tokens for the owner. This method returns the amount of Stake Tokens the spender is allowed to spend for the owner.
-
-#### augur.api.StakeToken.balanceOf({ stakeToken, \_owner }[, callback])
-
-Returns the amount of Stake Tokens owned for the specified `stakeToken` address and `_owner` address provided. This is useful in finding out how much [REP](#rep) was Staked for a particular [Report](#report) by a specific [Reporter](#reporter).
-
-#### augur.api.StakeToken.getMarket({ stakeToken }[, callback])
-
-This method will return the [Market](#market) address that the Stake Token belongs too. Every Stake Token belongs to a specific Market in which the Token acts as a 1 to 1 representation of Staked [REP](#rep) for a particular [Payout Set](#payout-set) representing a [Report](#report) for the Market.
-
-#### augur.api.StakeToken.getPayoutDistributionHash({ stakeToken }[, callback])
-
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for a specific `stakeToken`. A Payout Distribution Hash is a sha3 hash of the [Payout Set](#payout-set) the Stake Token represents. The Payout Distribution Hash is used in other contract methods to identify a particular Payout Set.
-
-#### augur.api.StakeToken.getPayoutNumerator({ stakeToken, index }[, callback])
-
-Returns the value at the `index` of the [Payout Set](#payout-set) represented by this `stakeToken`. The `index` is a value between `0` and number of [Outcomes](#outcome) for the [Market](#market) and corresponds to a particular Outcome of the Market. In a [Binary Market](#binary-market) for example, there are only two Outcomes, so the allowable `index` values are 0 and 1.
-
-#### augur.api.StakeToken.getReportingWindow({ stakeToken }[, callback])
-
-Returns the [Reporting Window](#reporting-window) address for the specified `stakeToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Stake Tokens were purchased for.
-
-#### augur.api.StakeToken.getReputationToken({ stakeToken }[, callback])
-
-As mentioned above, a Stake Token belongs to a [Market](#market) which in turn belongs to a [Reporting Window](#reporting-window). Reporting Windows only interact with a single [REP](#rep) contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Stake Tokens. Stake Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.
-
-#### augur.api.StakeToken.getTypeName({ stakeToken }[, callback])
-
-Returns the type name for the specified `stakeToken`, should will return "StakeToken" if the `stakeToken` address provided belongs to a Stake Token contract.
-
-#### augur.api.StakeToken.getUniverse({ stakeToken }[, callback])
-
-Returns the [Universe](#universe) address for the specified `stakeToken`'s [Reporting Window](#reporting-window). Everything in Augur belongs to a Universe, and Stake Tokens are no different. New Universes are created in the event of a [Fork](#fork), so this method provides an API user the ability to find out which Universe the Stake Token is currently in.
-
-#### augur.api.StakeToken.isValid({ stakeToken }[, callback])
-
-This method is used as a way to check if the `stakeToken` represents a [Payout Set](#payout-set) that indicates the [Market](#market) is Invalid. This isn't to say that the Stake Token, the [Report](#report), or the Payout Set is invalid, but rather the [Outcome](#outcome) of the Market is unclear based on how the Market is worded or the result of Market doesn't correspond to any of the Outcomes set for the Market.
-
-#### augur.api.StakeToken.totalSupply({ stakeToken }[, callback])
-
-Returns the current total supply of the specified `stakeToken`. This is used to see how many Stake Tokens have been purchased for a specific [Payout Set](#payout-set). This is used to see how much [REP](#rep) is staked on a particular Payout Set since Stake Tokens are a 1:1 ratio to REP staked.
-
-Reporting Window Call API
--------------------------
-```javascript
-// Reporting Window Contract Call API Examples:
-var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
-
-augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (avgReportingGasPrice) { /* ... */ })
-// example output:
-avgReportingGasPrice = "340000"
-
-augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow: reportingWindow }, function (disputeEndTime) { /* ... */ })
-// example output:
-disputeEndTime = "1500907130"
-
-augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow: reportingWindow }, function (disputeStartTime) { /* ... */ })
-// example output:
-disputeStartTime = "1500647930"
-
-augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, function (endTime) { /* ... */ })
-// example output:
-endTime = "1500388730"
-
-augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (marketsCount) { /* ... */ })
-// example output:
-marketsCount = "65"
-
-augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow: reportingWindow }, function (nextReportingWindow) { /* ... */ })
-// example output:
-nextReportingWindow = "0x0d6b5a54f940bf3d52e438cab785981aaefdf40c"
-
-augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow: reportingWindow }, function (numDesignatedReportNoShows) { /* ... */ })
-// example output:
-numDesignatedReportNoShows = "2"
-
-augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow: reportingWindow }, function (numIncorrectDesignatedReportMarkets) { /* ... */ })
-// example output:
-numIncorrectDesignatedReportMarkets = "1"
-
-augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow: reportingWindow }, function (numInvalidMarkets) { /* ... */ })
-// example output:
-numInvalidMarkets = "3"
-
-augur.api.ReportingWindow.getNumMarkets({ reportingWindow: reportingWindow }, function (numMarkets) { /* ... */ })
-// example output:
-numMarkets = "65"
-
-augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportingWindow }, function () { /* ... */ })
-// example output:
-= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
-
-augur.api.ReportingWindow.getReportingEndTime({ reportingWindow: reportingWindow }, function (reportingEndTime) { /* ... */ })
-// example output:
-reportingEndTime = "1500647900"
-
-augur.api.ReportingWindow.getReportingStartTime({ reportingWindow: reportingWindow }, function (reportingStartTime) { /* ... */ })
-// example output:
-reportingStartTime = "14998315100"
-
-augur.api.ReportingWindow.getReputationToken({ reportingWindow: reportingWindow }, function (reputationToken) { /* ... */ })
-// example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-
-augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (startTime) { /* ... */ })
-// example output:
-startTime = "14995895900"
-
-augur.api.ReportingWindow.getTypeName({ reportingWindow: reportingWindow }, function (typeName) { /* ... */ })
-// example output:
-typeName = "ReportingWindow"
-
-augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
-augur.api.ReportingWindow.isActive({ reportingWindow: reportingWindow }, function (isActive) { /* ... */ })
-// example output:
-isActive = "1"
-
-augur.api.ReportingWindow.isContainerForMarket({
-  reportingWindow: reportingWindow,
-  _shadyMarket: _market
-}, function (isContainerForMarket) { /* ... */ })
-// example output:
-isContainerForMarket = "1"
-
-augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, function (isDisputeActive) { /* ... */ })
-// example output:
-isDisputeActive = "1"
-
-augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingWindow }, function (isForkingMarketFinalized) { /* ... */ })
-// example output:
-isForkingMarketFinalized = "0";
-
-augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }, function (isReportingActive) { /* ... */ })
-// example output:
-isReportingActive = "1"
-```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
-
-#### augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])
-
-Returns the average amount of Gas spent per [Report](#report) submit during the [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
-
-Every [Reporting Window](#reporting-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). This method is used to return the timestamp for the end of the Reporting Window's Dispute Phase.
-
-#### augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow }[, callback])
-
-As stated above, [Reporting Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) and this method returns the timestamp of the start of the Dispute Phase.
-
-#### augur.api.ReportingWindow.getEndTime({ reportingWindow }[, callback])
-
-Returns a timestamp for when this [Reporting Window](#reporting-window) will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
-
-#### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
-
-Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
-
-#### augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow }[, callback])
-
-Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
-
-#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
-
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
-
-#### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow }[, callback])
-
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have [First Report Bonds](#first-report-bonds) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
-
-#### augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow }[, callback])
-
-Returns the number of [Markets](#market) that were [Reported](#report) to be Invalid during a [Reporting Window](#reporting-window). Invalid Markets are Markets that aren't clearly defined or doesn't fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
-
-#### augur.api.ReportingWindow.getNumMarkets({ reportingWindow }[, callback])
-
-Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
-
-#### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
-
-Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
-
-#### augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
-
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
-
-#### augur.api.ReportingWindow.getReportingStartTime({ reportingWindow }[, callback])
-
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
-
-#### augur.api.ReportingWindow.getReputationToken({ reportingWindow }[, callback])
-
-Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting Window](#reporting-window). Every Reporting Window has a [Reporting Phase](#reporting-phase) where [Reporters](#reporter) submit [Reports](#report) on the [Outcomes](#outcome) of [Markets](#market). In order to Report, Reporters need to stake REP. A Reporting Window only accepts one REP contract as the source of staked REP and this method returns that contract's address.
-
-#### augur.api.ReportingWindow.getStartTime({ reportingWindow }[, callback])
-
-Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
-
-#### augur.api.ReportingWindow.getTypeName({ reportingWindow }[, callback])
-
-Returns the type name for the `reportingWindow` address provided. If the address is a [Reporting Window](#reporting-window) contract, this will return "ReportingWindow".
-
-#### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
-
-Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
-
-#### augur.api.ReportingWindow.isActive({ reportingWindow }[, callback])
-
-This method returns wether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
-
-#### augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, \_shadyMarket }[, callback])
-
-Returns wether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
-
-#### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
-
-Returns wether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
-
-#### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
-
-Returns wether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
-
-#### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
-
-Returns wether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Phase](#dispute-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
-
-Reputation Token Call API
--------------------------
-```javascript
-// Reputation Token Contract Call API Examples:
-var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.ReputationToken.allowance({
-  reputationToken: reputationToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "200"
-
-augur.api.ReputationToken.balanceOf({
-  reputationToken: reputationToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "1000"
-
-augur.api.ReputationToken.getUniverse({ reputationToken: reputationToken }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
-augur.api.ReputationToken.getTopMigrationDestination({ reputationToken: reputationToken }, function (topMigrationDestination) { /* ... */ })
-// example output:
-topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
-
-augur.api.ReputationToken.getTotalSupply({ reputationToken: reputationToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "11000000"
-
-augur.api.ReputationToken.getTypeName({ reputationToken: reputationToken }, function (typeName) { /* ... */ })
-// example output:
-reputationToken = "ReputationToken";
-```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
-
-The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
-
-REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [First Report REP Bond](#first-report-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creators First Report REP Bond will go to the First Reporter to Report on the Market. Their GAS cost for the Report transaction will be covered by the Market Creator's [First Report GAS Bond](#first-report-gas-bond) and the First Report REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
-
-#### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` can spend of the `_owner`’s [REP](#rep). REP holders can designate a spender address to be able to take actions with REP on behalf of the owner. This method returns the amount of REP the spender is allowed to use. In order to designate a spender address and the amount of REP they are allowed to act with, see the `approve` method in the [REP Transaction API section](#reputation-token-tx-api).
-
-#### augur.api.ReputationToken.balanceOf({ reputationToken, \_owner }[, callback])
-
-Returns the [REP](#rep) balance of the specified `reputationToken` address owned by the `_owner` address provided. This is the method to use to check how much REP a particular address controls.
-
-#### augur.api.ReputationToken.getUniverse({ reputationToken }[, callback])
-
-Returns the [Universe](#universe) address for the [REP](#rep) address provided. All of Augur's information belongs to a Universe and each Universe has it's own REP contract. New Universes are created in the event of a [Fork](#fork).
-
-#### augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
-
-As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the 60 day [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
-
-#### augur.api.ReputationToken.getTotalSupply({ reputationToken }[, callback])
-
-Returns the total supply of [REP](#rep) for a particular REP contract address. This number is going to return 11 million on the original Augur [Universe](#universe). If a [Fork](#fork) ever occurs, each [Child Universe](#child-universe) could potentially have some portion of REP migrated to it. This method is how to find the total amount of REP contained within a specific Universe, given that Universe's REP address.
-
-#### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
-
-Returns the type name for a specified `reputationToken`. If the `reputationToken` address provided is actually a legitimate [REP](#rep) contract, this will return "ReputationToken". This is used to confirm that the address is a Reputation Token Contract.
-
 Orders Call API
 ---------------
 ```javascript
@@ -1046,6 +678,264 @@ Returns a length 8 array containing information about a specified `_orderId`. In
 
 Returns an array of order IDs of `_type` starting from the `_startingOrderId` order ID specified. The array will be of length `_numOrdersToLoad`.
 
+Reporting Window Call API
+-------------------------
+```javascript
+// Reporting Window Contract Call API Examples:
+var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
+
+augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (avgReportingGasPrice) { /* ... */ })
+// example output:
+avgReportingGasPrice = "340000"
+
+augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow: reportingWindow }, function (disputeEndTime) { /* ... */ })
+// example output:
+disputeEndTime = "1500907130"
+
+augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow: reportingWindow }, function (disputeStartTime) { /* ... */ })
+// example output:
+disputeStartTime = "1500647930"
+
+augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, function (endTime) { /* ... */ })
+// example output:
+endTime = "1500388730"
+
+augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (marketsCount) { /* ... */ })
+// example output:
+marketsCount = "65"
+
+augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow: reportingWindow }, function (nextReportingWindow) { /* ... */ })
+// example output:
+nextReportingWindow = "0x0d6b5a54f940bf3d52e438cab785981aaefdf40c"
+
+augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow: reportingWindow }, function (numDesignatedReportNoShows) { /* ... */ })
+// example output:
+numDesignatedReportNoShows = "2"
+
+augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow: reportingWindow }, function (numIncorrectDesignatedReportMarkets) { /* ... */ })
+// example output:
+numIncorrectDesignatedReportMarkets = "1"
+
+augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow: reportingWindow }, function (numInvalidMarkets) { /* ... */ })
+// example output:
+numInvalidMarkets = "3"
+
+augur.api.ReportingWindow.getNumMarkets({ reportingWindow: reportingWindow }, function (numMarkets) { /* ... */ })
+// example output:
+numMarkets = "65"
+
+augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportingWindow }, function () { /* ... */ })
+// example output:
+= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
+
+augur.api.ReportingWindow.getReportingEndTime({ reportingWindow: reportingWindow }, function (reportingEndTime) { /* ... */ })
+// example output:
+reportingEndTime = "1500647900"
+
+augur.api.ReportingWindow.getReportingStartTime({ reportingWindow: reportingWindow }, function (reportingStartTime) { /* ... */ })
+// example output:
+reportingStartTime = "14998315100"
+
+augur.api.ReportingWindow.getReputationToken({ reportingWindow: reportingWindow }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (startTime) { /* ... */ })
+// example output:
+startTime = "14995895900"
+
+augur.api.ReportingWindow.getTypeName({ reportingWindow: reportingWindow }, function (typeName) { /* ... */ })
+// example output:
+typeName = "ReportingWindow"
+
+augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.ReportingWindow.isActive({ reportingWindow: reportingWindow }, function (isActive) { /* ... */ })
+// example output:
+isActive = "1"
+
+augur.api.ReportingWindow.isContainerForMarket({
+  reportingWindow: reportingWindow,
+  _shadyMarket: _market
+}, function (isContainerForMarket) { /* ... */ })
+// example output:
+isContainerForMarket = "1"
+
+augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, function (isDisputeActive) { /* ... */ })
+// example output:
+isDisputeActive = "1"
+
+augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingWindow }, function (isForkingMarketFinalized) { /* ... */ })
+// example output:
+isForkingMarketFinalized = "0";
+
+augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }, function (isReportingActive) { /* ... */ })
+// example output:
+isReportingActive = "1"
+```
+#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
+
+#### augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])
+
+Returns the average amount of Gas spent per [Report](#report) submit during the [Reporting Window](#reporting-window).
+
+#### augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow }[, callback])
+
+Every [Reporting Window](#reporting-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). This method is used to return the timestamp for the end of the Reporting Window's Dispute Phase.
+
+#### augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow }[, callback])
+
+As stated above, [Reporting Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) and this method returns the timestamp of the start of the Dispute Phase.
+
+#### augur.api.ReportingWindow.getEndTime({ reportingWindow }[, callback])
+
+Returns a timestamp for when this [Reporting Window](#reporting-window) will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
+
+#### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
+
+Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
+
+#### augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow }[, callback])
+
+Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
+
+#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
+
+#### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have [First Report Bonds](#first-report-bonds) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
+
+#### augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) that were [Reported](#report) to be Invalid during a [Reporting Window](#reporting-window). Invalid Markets are Markets that aren't clearly defined or doesn't fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
+
+#### augur.api.ReportingWindow.getNumMarkets({ reportingWindow }[, callback])
+
+Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
+
+#### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
+
+Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
+
+#### augur.api.ReportingWindow.getReportingEndTime({ reportingWindow }[, callback])
+
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
+
+#### augur.api.ReportingWindow.getReportingStartTime({ reportingWindow }[, callback])
+
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
+
+#### augur.api.ReportingWindow.getReputationToken({ reportingWindow }[, callback])
+
+Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting Window](#reporting-window). Every Reporting Window has a [Reporting Phase](#reporting-phase) where [Reporters](#reporter) submit [Reports](#report) on the [Outcomes](#outcome) of [Markets](#market). In order to Report, Reporters need to stake REP. A Reporting Window only accepts one REP contract as the source of staked REP and this method returns that contract's address.
+
+#### augur.api.ReportingWindow.getStartTime({ reportingWindow }[, callback])
+
+Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
+
+#### augur.api.ReportingWindow.getTypeName({ reportingWindow }[, callback])
+
+Returns the type name for the `reportingWindow` address provided. If the address is a [Reporting Window](#reporting-window) contract, this will return "ReportingWindow".
+
+#### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
+
+Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
+
+#### augur.api.ReportingWindow.isActive({ reportingWindow }[, callback])
+
+This method returns wether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
+
+#### augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, \_shadyMarket }[, callback])
+
+Returns wether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
+
+#### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
+
+Returns wether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
+
+#### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
+
+Returns wether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
+
+#### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
+
+Returns wether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Phase](#dispute-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
+
+Reputation Token Call API
+-------------------------
+```javascript
+// Reputation Token Contract Call API Examples:
+var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api.ReputationToken.allowance({
+  reputationToken: reputationToken,
+  _owner: _owner,
+  _spender: _spender
+}, function (allowance) { /* ... */ })
+// example output:
+allowance = "200"
+
+augur.api.ReputationToken.balanceOf({
+  reputationToken: reputationToken,
+  _owner: _owner
+}, function (balance) { /* ... */ })
+// example output:
+balance = "1000"
+
+augur.api.ReputationToken.getUniverse({ reputationToken: reputationToken }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.ReputationToken.getTopMigrationDestination({ reputationToken: reputationToken }, function (topMigrationDestination) { /* ... */ })
+// example output:
+topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
+
+augur.api.ReputationToken.getTotalSupply({ reputationToken: reputationToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "11000000"
+
+augur.api.ReputationToken.getTypeName({ reputationToken: reputationToken }, function (typeName) { /* ... */ })
+// example output:
+reputationToken = "ReputationToken";
+```
+#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
+
+The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
+
+REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [First Report REP Bond](#first-report-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creators First Report REP Bond will go to the First Reporter to Report on the Market. Their GAS cost for the Report transaction will be covered by the Market Creator's [First Report GAS Bond](#first-report-gas-bond) and the First Report REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
+
+#### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
+
+Returns the allowance that a specified `_spender` can spend of the `_owner`’s [REP](#rep). REP holders can designate a spender address to be able to take actions with REP on behalf of the owner. This method returns the amount of REP the spender is allowed to use. In order to designate a spender address and the amount of REP they are allowed to act with, see the `approve` method in the [REP Transaction API section](#reputation-token-tx-api).
+
+#### augur.api.ReputationToken.balanceOf({ reputationToken, \_owner }[, callback])
+
+Returns the [REP](#rep) balance of the specified `reputationToken` address owned by the `_owner` address provided. This is the method to use to check how much REP a particular address controls.
+
+#### augur.api.ReputationToken.getUniverse({ reputationToken }[, callback])
+
+Returns the [Universe](#universe) address for the [REP](#rep) address provided. All of Augur's information belongs to a Universe and each Universe has it's own REP contract. New Universes are created in the event of a [Fork](#fork).
+
+#### augur.api.ReputationToken.getTopMigrationDestination({ reputationToken }[, callback])
+
+As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the 60 day [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
+
+#### augur.api.ReputationToken.getTotalSupply({ reputationToken }[, callback])
+
+Returns the total supply of [REP](#rep) for a particular REP contract address. This number is going to return 11 million on the original Augur [Universe](#universe). If a [Fork](#fork) ever occurs, each [Child Universe](#child-universe) could potentially have some portion of REP migrated to it. This method is how to find the total amount of REP contained within a specific Universe, given that Universe's REP address.
+
+#### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
+
+Returns the type name for a specified `reputationToken`. If the `reputationToken` address provided is actually a legitimate [REP](#rep) contract, this will return "ReputationToken". This is used to confirm that the address is a Reputation Token Contract.
+
 Share Token Call API
 --------------------
 ```javascript
@@ -1142,6 +1032,117 @@ Returns the total supply of `shareToken`s specified.
 #### augur.api.ShareToken.getTypeName({ shareToken }[, callback])
 
 Returns the type name for a specific `shareToken`, which should always return "ShareToken".
+
+Stake Token Call API
+------------------------
+```javascript
+// Stake Token Contract Call API Examples:
+var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
+var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
+
+augur.api.StakeToken.allowance({
+  stakeToken: stakeToken,
+  _owner: _owner,
+  _spender: _spender
+}, function (allowance) { /* ... */ })
+// example output:
+allowance = "1"
+
+augur.api.StakeToken.balanceOf({
+  stakeToken: stakeToken,
+  _owner: _owner
+}, function (balance) { /* ... */ })
+// example output:
+balance = "200000"
+
+augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (market) { /* ... */ })
+// example output:
+market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+
+augur.api.StakeToken.getPayoutDistributionHash({ stakeToken: stakeToken }, function (payoutDistributionHash) { /* ... */ })
+// example output:
+payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api.StakeToken.getPayoutNumerator({
+  stakeToken: stakeToken,
+  index: 0
+}, function (payoutSetValue) { /* ... */ })
+// example output:
+payoutSetValue = "1000"
+
+augur.api.StakeToken.getStakeWindow({ stakeToken: stakeToken }, function (reportingWindow) { /* ... */ })
+// example output:
+reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
+
+augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api.StakeToken.getTypeName({ stakeToken: stakeToken }, function (typeName) { /* ... */ })
+// example output:
+typeName = "StakeToken";
+
+augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (isValid) { /* ... */ })
+// example output:
+isValid = "1"
+
+augur.api.StakeToken.totalSupply({ stakeToken: stakeToken }, function (totalSupply) { /* ... */ })
+// example output:
+totalSupply = "210000000000000"
+```
+
+#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
+
+The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report during a [Reporting Round](#reporting-round) for this Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submit by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome). If your tokens are Staked on any other Outcome they are worthless and the Staked REP is redistributed to people with winning Stake Tokens.
+
+#### augur.api.StakeToken.allowance({ stakeToken, \_owner, \_spender }[, callback])
+
+Returns the allowance that a specified `_spender` can spend of the `_owner`'s `stakeToken`s. Stake Tokens allow a token owner to designate an spender address to be able to spend the Stake Tokens for the owner. This method returns the amount of Stake Tokens the spender is allowed to spend for the owner.
+
+#### augur.api.StakeToken.balanceOf({ stakeToken, \_owner }[, callback])
+
+Returns the amount of Stake Tokens owned for the specified `stakeToken` address and `_owner` address provided. This is useful in finding out how much [REP](#rep) was Staked for a particular [Report](#report) by a specific [Reporter](#reporter).
+
+#### augur.api.StakeToken.getMarket({ stakeToken }[, callback])
+
+This method will return the [Market](#market) address that the Stake Token belongs too. Every Stake Token belongs to a specific Market in which the Token acts as a 1 to 1 representation of Staked [REP](#rep) for a particular [Payout Set](#payout-set) representing a [Report](#report) for the Market.
+
+#### augur.api.StakeToken.getPayoutDistributionHash({ stakeToken }[, callback])
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for a specific `stakeToken`. A Payout Distribution Hash is a sha3 hash of the [Payout Set](#payout-set) the Stake Token represents. The Payout Distribution Hash is used in other contract methods to identify a particular Payout Set.
+
+#### augur.api.StakeToken.getPayoutNumerator({ stakeToken, index }[, callback])
+
+Returns the value at the `index` of the [Payout Set](#payout-set) represented by this `stakeToken`. The `index` is a value between `0` and number of [Outcomes](#outcome) for the [Market](#market) and corresponds to a particular Outcome of the Market. In a [Binary Market](#binary-market) for example, there are only two Outcomes, so the allowable `index` values are 0 and 1.
+
+#### augur.api.StakeToken.getReportingWindow({ stakeToken }[, callback])
+
+Returns the [Reporting Window](#reporting-window) address for the specified `stakeToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Stake Tokens were purchased for.
+
+#### augur.api.StakeToken.getReputationToken({ stakeToken }[, callback])
+
+As mentioned above, a Stake Token belongs to a [Market](#market) which in turn belongs to a [Reporting Window](#reporting-window). Reporting Windows only interact with a single [REP](#rep) contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Stake Tokens. Stake Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.
+
+#### augur.api.StakeToken.getTypeName({ stakeToken }[, callback])
+
+Returns the type name for the specified `stakeToken`, should will return "StakeToken" if the `stakeToken` address provided belongs to a Stake Token contract.
+
+#### augur.api.StakeToken.getUniverse({ stakeToken }[, callback])
+
+Returns the [Universe](#universe) address for the specified `stakeToken`'s [Reporting Window](#reporting-window). Everything in Augur belongs to a Universe, and Stake Tokens are no different. New Universes are created in the event of a [Fork](#fork), so this method provides an API user the ability to find out which Universe the Stake Token is currently in.
+
+#### augur.api.StakeToken.isValid({ stakeToken }[, callback])
+
+This method is used as a way to check if the `stakeToken` represents a [Payout Set](#payout-set) that indicates the [Market](#market) is Invalid. This isn't to say that the Stake Token, the [Report](#report), or the Payout Set is invalid, but rather the [Outcome](#outcome) of the Market is unclear based on how the Market is worded or the result of Market doesn't correspond to any of the Outcomes set for the Market.
+
+#### augur.api.StakeToken.totalSupply({ stakeToken }[, callback])
+
+Returns the current total supply of the specified `stakeToken`. This is used to see how many Stake Tokens have been purchased for a specific [Payout Set](#payout-set). This is used to see how much [REP](#rep) is staked on a particular Payout Set since Stake Tokens are a 1:1 ratio to REP staked.
 
 Universe Call API
 ---------------
