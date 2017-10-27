@@ -684,9 +684,15 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.Market.disputeRound1Reporters({
+var _payoutNumerators = [5,10,25,60];
+var _attotokens = 100;
+var _invalid = false;
+augur.api.Market.disputeFirstReporters({
   _signer: privateKey,
   market: market,
+  _payoutNumerators: _payoutNumerators,
+  _attotokens: _attotokens,
+  _invalid: _invalid,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -701,14 +707,14 @@ successResponse = {
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
   hash: "0xd3f644e8904966909a9d974c7ed63ae8ddbb0f23d824f576764afddd7023ef88",
-  input: "0x3f4628c1",
+  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
   nonce: "0x7",
   timestamp: 1501003137,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
 
-augur.api.Market.disputeRound2Reporters({
+augur.api.Market.disputeLastReporters({
   _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
@@ -900,13 +906,13 @@ This transaction is used to disavow Stake Tokens for this [Market](#market). Whe
 
 This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round).
 
-#### augur.api.Market.disputeRound1Reporters({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeFirstReporters({ \_signer, market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })
 
-This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [First Report Round](#first-report-round) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for the next [Reporting Round](#reporting-round).
+This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [First Report Round](#first-report-round) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for the next [Reporting Round](#reporting-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [First Reporters](#first-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
 
-#### augur.api.Market.disputeRound2Reporters({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeLastReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
-`disputeRound2Reporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
+`disputeLastReporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
 
 #### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -1148,7 +1154,7 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ReputationToken.migrateFromLegacyRepContract({
+augur.api.ReputationToken.migrateFromLegacyReputationToken({
   _signer: privateKey,
   reputationToken: reputationToken,
   onSent: function (result) { console.log(result) },
@@ -1259,7 +1265,7 @@ successResponse = {
 
 Allows the `_spender` the ability to spend up to `_value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` in attotokens approved.
 
-#### augur.api.ReputationToken.migrateFromLegacyRepContract({ \_signer, reputationToken, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.migrateFromLegacyReputationToken({ \_signer, reputationToken, onSent, onSuccess, onFailed })
 
 This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
