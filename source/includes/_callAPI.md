@@ -66,16 +66,8 @@ market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 augur.api.DisputeBondToken.getReputationToken({ disputeBondToken: disputeBondToken }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-
-augur.api.DisputeBondToken.getTotalSupply({ disputeBondToken: disputeBondToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "1"
-
-augur.api.DisputeBondToken.getTypeName({ disputeBondToken: disputeBondToken }, function (typeName) { /* ... */ })
-// example output:
-typeName = "DisputeBondToken";
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/DisputeBondToken.sol)
+#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBondToken.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
@@ -106,14 +98,6 @@ This transaction will return the [Market](#market) that a specified `disputeBond
 #### augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
 
 This transaction will return the [Reputation Token](#rep) address used by the [Universe](#universe) that contains [Market](#market) of the specified `disputeBondToken`.
-
-#### augur.api.DisputeBondToken.getTotalSupply({ disputeBondToken }[, callback])
-
-This transaction will return the total supply of a specified `disputeBondToken`. This should always return `1` as only 1 Dispute Bond Token can be purchased per [Dispute Phase](#dispute-phase) and therefore every Dispute Bond Token is unique.
-
-#### augur.api.DisputeBondToken.getTypeName({ disputeBondToken }[, callback])
-
-Returns the type name of the specified `disputeBondToken`, this will always return "DisputeBondToken".
 
 Market Call API
 ----------------
@@ -221,10 +205,6 @@ augur.api.Market.getTentativeWinningPayoutDistributionHash({ market: market }, f
 // example output:
 tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.Market.getTypeName({ market: market }, function (typeName) { /* ... */ })
-// example output:
-typeName = "Market";
-
 augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
@@ -263,7 +243,7 @@ augur.api.Market.isValid({
 // example output:
 isValid = "1"
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Market.sol)
+#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
 
 #### augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ market }[, callback])
 
@@ -364,10 +344,6 @@ Returns the [Share](#shares) Token's address for the specified `market` and `_ou
 #### augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
 
 Returns the tentatively winning [Payout Distribution Hash](#payout-distribution-hash) given a specified `market`. The tentatively winning Payout Distribution Hash is the hash with the most [REP](#rep) staked on it prior to [Market Finalization](#finalized-market). Once the [Market](#market) Finalized the tentatively winning Payout Distribution Hash becomes the Winning Payout Distribution Hash.
-
-#### augur.api.Market.getTypeName({ market }[, callback])
-
-Returns the type name for the specified `market` contract address, will always return "Market" if the `market` is a [Market](#market) contract. This is helpful if you need to verify that a contract address is a Market.
 
 #### augur.api.Market.getUniverse({ market }[, callback])
 
@@ -512,7 +488,7 @@ augur.api.Orders.isWorsePrice({
 // example output:
 isWorsePrice = "1"
 ```
-#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)
+#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol)
 
 #### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
@@ -643,20 +619,8 @@ order = [ "10000000000000000000",
           "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
           "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
           "42000000000000"  ]
-
-augur.api.OrdersFetcher.getOrderIds({
-  _type: _type,
-  _market: _market,
-  _outcome: _outcome,
-  _startingOrderId: _orderId,
-  _numOrdersToLoad: 2
-}, function (orderIDs) { /* ... */ })
-// example output:
-orderIDs = [
-  "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
-  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 ```
-#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/OrdersFetcher.sol)
+#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
@@ -674,9 +638,32 @@ Returns an array containing the order IDs that should be set to better Order ID 
 
 Returns a length 8 array containing information about a specified `_orderId`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
 
-#### augur.api.OrdersFetcher.getOrderIDs({ \_type, \_startingOrderId, \_numOrdersToLoad }[, callback])
+Participation Token Call API
+--------------------
+```javascript
+// Participation Token Contract Call API Examples:
+var participationToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-Returns an array of order IDs of `_type` starting from the `_startingOrderId` order ID specified. The array will be of length `_numOrdersToLoad`.
+augur.api.ParticipationToken.getMarket({ participationToken: participationToken }, function (market) { /* ... */ })
+// example output:
+market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+
+augur.api.ParticipationToken.getOutcome({ participationToken: participationToken }, function (outcome) { /* ... */ })
+// example output:
+outcome = "1"
+
+```
+#### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
+
+The Participation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
+
+#### augur.api.ParticipationToken.getMarket({ participationToken }[, callback])
+
+Returns the market address for the specified `participationToken`.
+
+#### augur.api.ShareToken.getOutcome({ participationToken }[, callback])
+
+Returns the Outcome of the market that the specified `participationToken` is for.
 
 Reporting Window Call API
 -------------------------
@@ -746,10 +733,6 @@ augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, fun
 // example output:
 startTime = "14995895900"
 
-augur.api.ReportingWindow.getTypeName({ reportingWindow: reportingWindow }, function (typeName) { /* ... */ })
-// example output:
-typeName = "ReportingWindow"
-
 augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
@@ -777,7 +760,7 @@ augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }
 // example output:
 isReportingActive = "1"
 ```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReportingWindow.sol)
+#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
 
 #### augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])
 
@@ -839,10 +822,6 @@ Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting 
 
 Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
 
-#### augur.api.ReportingWindow.getTypeName({ reportingWindow }[, callback])
-
-Returns the type name for the `reportingWindow` address provided. If the address is a [Reporting Window](#reporting-window) contract, this will return "ReportingWindow".
-
 #### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
 
 Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
@@ -872,23 +851,6 @@ Reputation Token Call API
 ```javascript
 // Reputation Token Contract Call API Examples:
 var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.ReputationToken.allowance({
-  reputationToken: reputationToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "200"
-
-augur.api.ReputationToken.balanceOf({
-  reputationToken: reputationToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "1000"
 
 augur.api.ReputationToken.getUniverse({ reputationToken: reputationToken }, function (universe) { /* ... */ })
 // example output:
@@ -897,28 +859,14 @@ universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 augur.api.ReputationToken.getTopMigrationDestination({ reputationToken: reputationToken }, function (topMigrationDestination) { /* ... */ })
 // example output:
 topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
-
-augur.api.ReputationToken.getTotalSupply({ reputationToken: reputationToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "11000000"
-
-augur.api.ReputationToken.getTypeName({ reputationToken: reputationToken }, function (typeName) { /* ... */ })
-// example output:
-reputationToken = "ReputationToken";
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/ReputationToken.sol)
+#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
 
 The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
 
 REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [First Report REP Bond](#first-report-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creators First Report REP Bond will go to the First Reporter to Report on the Market. Their GAS cost for the Report transaction will be covered by the Market Creator's [First Report GAS Bond](#first-report-gas-bond) and the First Report REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
 
-#### augur.api.ReputationToken.allowance({ reputationToken, \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` can spend of the `_owner`’s [REP](#rep). REP holders can designate a spender address to be able to take actions with REP on behalf of the owner. This method returns the amount of REP the spender is allowed to use. In order to designate a spender address and the amount of REP they are allowed to act with, see the `approve` method in the [REP Transaction API section](#reputation-token-tx-api).
-
-#### augur.api.ReputationToken.balanceOf({ reputationToken, \_owner }[, callback])
-
-Returns the [REP](#rep) balance of the specified `reputationToken` address owned by the `_owner` address provided. This is the method to use to check how much REP a particular address controls.
+The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
 #### augur.api.ReputationToken.getUniverse({ reputationToken }[, callback])
 
@@ -928,133 +876,38 @@ Returns the [Universe](#universe) address for the [REP](#rep) address provided. 
 
 As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the 60 day [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
 
-#### augur.api.ReputationToken.getTotalSupply({ reputationToken }[, callback])
-
-Returns the total supply of [REP](#rep) for a particular REP contract address. This number is going to return 11 million on the original Augur [Universe](#universe). If a [Fork](#fork) ever occurs, each [Child Universe](#child-universe) could potentially have some portion of REP migrated to it. This method is how to find the total amount of REP contained within a specific Universe, given that Universe's REP address.
-
-#### augur.api.ReputationToken.getTypeName({ reputationToken }[, callback])
-
-Returns the type name for a specified `reputationToken`. If the `reputationToken` address provided is actually a legitimate [REP](#rep) contract, this will return "ReputationToken". This is used to confirm that the address is a Reputation Token Contract.
-
 Share Token Call API
 --------------------
 ```javascript
 // Share Token Contract Call API Examples:
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.ShareToken.allowance({
-  shareToken: shareToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "100"
-
-augur.api.ShareToken.balanceOf({
-  shareToken: shareToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "1000"
-
-augur.api.ShareToken.getDecimals({ shareToken: shareToken }, function (decimals) { /* ... */ })
-// example output:
-decimals = "18"
 
 augur.api.ShareToken.getMarket({ shareToken: shareToken }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.ShareToken.getName({ shareToken: shareToken }, function (name) { /* ... */ })
-// example output:
-name = "Shares"
-
 augur.api.ShareToken.getOutcome({ shareToken: shareToken }, function (outcome) { /* ... */ })
 // example output:
 outcome = "1"
 
-augur.api.ShareToken.getSymbol({ shareToken: shareToken }, function (symbol) { /* ... */ })
-// example output:
-symbol = "SHARES"
-
-augur.api.ShareToken.isShareToken({ shareToken: shareToken }, function (isShareToken) { /* ... */ })
-// example output:
-isShareToken = "1"
-
-augur.api.ShareToken.getTotalSupply({ shareToken: shareToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "50000"
-
-augur.api.ShareToken.getTypeName({ shareToken: shareToken }, function (typeName) { /* ... */ })
-// example output:
-typeName = "ShareToken";
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/ShareToken.sol)
+#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
 
-#### augur.api.ShareToken.allowance({ shareToken, \_owner, \_spender }[, callback])
-
-Returns the token allowance a `_spender` can use of an `_owner`'s specified `shareToken`s.
-
-#### augur.api.ShareToken.balanceOf({ shareToken, \_owner }[, callback])
-
-Returns the token balance of a specified `shareToken` owned by the `_owner`.
-
-#### augur.api.ShareToken.getDecimals({ shareToken }[, callback])
-
-Returns the amount of decimal places the `shareToken` is accurate to: `18`.
+The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
 #### augur.api.ShareToken.getMarket({ shareToken }[, callback])
 
 Returns the market address for the specified `shareToken`.
 
-#### augur.api.ShareToken.getName({ shareToken }[, callback])
-
-Returns the name string of the `shareToken`: `Shares`.
-
 #### augur.api.ShareToken.getOutcome({ shareToken }[, callback])
 
 Returns the Outcome of the market that the specified `shareToken` is for.
-
-#### augur.api.ShareToken.getSymbol({ shareToken }[, callback])
-
-Returns the symbol string of the `shareToken`: `SHARES`.
-
-#### augur.api.ShareToken.isShareToken({ shareToken }[, callback])
-
-Returns wether the `shareToken` is a share token or not. Returns `1` if true, `0` if false. (should always be true.)
-
-#### augur.api.ShareToken.getTotalSupply({ shareToken }[, callback])
-
-Returns the total supply of `shareToken`s specified.
-
-#### augur.api.ShareToken.getTypeName({ shareToken }[, callback])
-
-Returns the type name for a specific `shareToken`, which should always return "ShareToken".
 
 Stake Token Call API
 ------------------------
 ```javascript
 // Stake Token Contract Call API Examples:
 var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-var _owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
-
-augur.api.StakeToken.allowance({
-  stakeToken: stakeToken,
-  _owner: _owner,
-  _spender: _spender
-}, function (allowance) { /* ... */ })
-// example output:
-allowance = "1"
-
-augur.api.StakeToken.balanceOf({
-  stakeToken: stakeToken,
-  _owner: _owner
-}, function (balance) { /* ... */ })
-// example output:
-balance = "200000"
 
 augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (market) { /* ... */ })
 // example output:
@@ -1079,10 +932,6 @@ augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (re
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.StakeToken.getTypeName({ stakeToken: stakeToken }, function (typeName) { /* ... */ })
-// example output:
-typeName = "StakeToken";
-
 augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
@@ -1090,23 +939,13 @@ universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (isValid) { /* ... */ })
 // example output:
 isValid = "1"
-
-augur.api.StakeToken.totalSupply({ stakeToken: stakeToken }, function (totalSupply) { /* ... */ })
-// example output:
-totalSupply = "210000000000000"
 ```
 
-#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/StakeToken.sol)
+#### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/StakeToken.sol)
 
 The Stake Token is used to represent Staked [REP](#rep) by a [Reporter](#reporter) for a specific [Report](#report) and [Market](#market). When a Reporter submits a Report during a [Reporting Round](#reporting-round) for this Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each [Payout Set](#payout-set) submit by Reporters. Stake Tokens are then redeemed after [Finalizing the Market](#finalized-market). If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of [Reporting Fee](#reporting-fee) and REP staked on any other [Outcome](#outcome) but the [Final Outcome](#final-outcome). If your tokens are Staked on any other Outcome they are worthless and the Staked REP is redistributed to people with winning Stake Tokens.
 
-#### augur.api.StakeToken.allowance({ stakeToken, \_owner, \_spender }[, callback])
-
-Returns the allowance that a specified `_spender` can spend of the `_owner`'s `stakeToken`s. Stake Tokens allow a token owner to designate an spender address to be able to spend the Stake Tokens for the owner. This method returns the amount of Stake Tokens the spender is allowed to spend for the owner.
-
-#### augur.api.StakeToken.balanceOf({ stakeToken, \_owner }[, callback])
-
-Returns the amount of Stake Tokens owned for the specified `stakeToken` address and `_owner` address provided. This is useful in finding out how much [REP](#rep) was Staked for a particular [Report](#report) by a specific [Reporter](#reporter).
+The Stake Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
 #### augur.api.StakeToken.getMarket({ stakeToken }[, callback])
 
@@ -1128,10 +967,6 @@ Returns the [Reporting Window](#reporting-window) address for the specified `sta
 
 As mentioned above, a Stake Token belongs to a [Market](#market) which in turn belongs to a [Reporting Window](#reporting-window). Reporting Windows only interact with a single [REP](#rep) contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Stake Tokens. Stake Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.
 
-#### augur.api.StakeToken.getTypeName({ stakeToken }[, callback])
-
-Returns the type name for the specified `stakeToken`, should will return "StakeToken" if the `stakeToken` address provided belongs to a Stake Token contract.
-
 #### augur.api.StakeToken.getUniverse({ stakeToken }[, callback])
 
 Returns the [Universe](#universe) address for the specified `stakeToken`'s [Reporting Window](#reporting-window). Everything in Augur belongs to a Universe, and Stake Tokens are no different. New Universes are created in the event of a [Fork](#fork), so this method provides an API user the ability to find out which Universe the Stake Token is currently in.
@@ -1139,10 +974,6 @@ Returns the [Universe](#universe) address for the specified `stakeToken`'s [Repo
 #### augur.api.StakeToken.isValid({ stakeToken }[, callback])
 
 This method is used as a way to check if the `stakeToken` represents a [Payout Set](#payout-set) that indicates the [Market](#market) is Invalid. This isn't to say that the Stake Token, the [Report](#report), or the Payout Set is invalid, but rather the [Outcome](#outcome) of the Market is unclear based on how the Market is worded or the result of Market doesn't correspond to any of the Outcomes set for the Market.
-
-#### augur.api.StakeToken.totalSupply({ stakeToken }[, callback])
-
-Returns the current total supply of the specified `stakeToken`. This is used to see how many Stake Tokens have been purchased for a specific [Payout Set](#payout-set). This is used to see how much [REP](#rep) is staked on a particular Payout Set since Stake Tokens are a 1:1 ratio to REP staked.
 
 Universe Call API
 ---------------
@@ -1221,10 +1052,6 @@ augur.api.Universe.getReputationToken({ universe: universe }, function (reputati
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 
-augur.api.Universe.getTypeName({ universe: universe }, function (typeName) { /* ... */ })
-// example output:
-typeName = "Universe";
-
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
   universe: universe,
@@ -1257,7 +1084,7 @@ augur.api.Universe.isParentOf({
 // example output:
 isParentOf = "1";
 ```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/reporting/Universe.sol)
+#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
 
 The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [Last Report Round](#last-report-round) Market's [Proposed Outcome](#proposed-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
 
@@ -1316,10 +1143,6 @@ Returns the [Reporting Window](#reporting-window) Id for a specific `universe` a
 #### augur.api.Universe.getReputationToken({ universe }[, callback])
 
 Returns the [Reputation Token](#rep) Address for a specific `universe`. This is the REP usable within this Universe.
-
-#### augur.api.Universe.getTypeName({ universe }[, callback])
-
-Returns the specified `universe`'s type name, which should always return "Universe".
 
 #### augur.api.Universe.isContainerForMarket({ universe, \_shadyTarget }[, callback])
 

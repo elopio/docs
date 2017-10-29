@@ -26,7 +26,7 @@ A Bid Order is an [Order](#order) indicating the desire of the [Maker](#maker) t
 
 ## Binary Market
 
-A Binary Market is a [market](#market) with only two [outcomes](#outcome), as well as Indeterminate which is always a possible outcome. Binary markets are for yes or no questions, if you need more than a yes or no then a [Categorical](#categorical-market) or [Scalar](#scalar-market) market might fit your needs better.
+A Binary Market is a [market](#market) with only two [outcomes](#outcome), as well as Indeterminate which is always a possible outcome. Binary markets are for yes or no questions, if you need more than a yes or no then a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market might fit your needs better.
 
 ## Categorical Market
 
