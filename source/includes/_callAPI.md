@@ -153,11 +153,19 @@ augur.api.Market.getFinalWinningStakeToken({ market: market }, function (winning
 // example output:
 winningStakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
+augur.api.Market.getFirstReportersDisputeBondToken({ market: market }, function (round1ReportersDisputeBondToken) { /* ... */ })
+// example output:
+round1ReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
+
 augur.api.Market.getForkingMarket({ market: market }, function (forkedMarket) { /* ... */ })
 // example output:
 forkedMarket = "0x0"
 
-augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
+augur.api.Market.getLastReportersDisputeBondToken({ market: market }, function (round2ReportersDisputeBondToken) { /* ... */ })
+// example output:
+round2ReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+
+augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
 
@@ -173,7 +181,7 @@ augur.api.Market.getReportingState({ market: market }, function (reportingState)
 // example output:
 reportingState = "0";
 
-augur.api.Market.getStakeToken({ market: market }, function (stakeToken) { /* ... */ })
+augur.api.Market.getStakeToken({ market: market, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (stakeToken) { /* ... */ })
 // example output:
 stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
@@ -185,14 +193,6 @@ stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
-
-augur.api.Market.getRound1ReportersDisputeBondToken({ market: market }, function (round1ReportersDisputeBondToken) { /* ... */ })
-// example output:
-round1ReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
-
-augur.api.Market.getRound2ReportersDisputeBondToken({ market: market }, function (round2ReportersDisputeBondToken) { /* ... */ })
-// example output:
-round2ReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.Market.getShareToken({
   market: market,
@@ -209,22 +209,18 @@ augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.Market.getWinningPayoutDistributionHashFromFork({ market: market }, function (winningPayoutDistributionHashFromFork) { /* ... */ })
-// example output:
-winningPayoutDistributionHashFromFork = "0xab912273ffce2cb2ca24ce2162df2d342322904a96039eb53cba0e34b8b9fc12"
-
 var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-augur.api.Market.isContainerForDisputeBondToken({
+augur.api.Market.isContainerForDisputeBond({
   market: market,
   _shadyTarget: disputeBondToken
 }, function (isContainerForShareToken) { /* ... */ })
 // example output:
-isContainerForDisputeBondToken = "1"
+isContainerForDisputeBond = "1"
 
 var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 augur.api.Market.isContainerForStakeToken({
   market: market,
-  _shadyTarget: stakeToken
+  _shadyStakeToken: stakeToken
 }, function (isContainerForStakeToken) { /* ... */ })
 // example output:
 isContainerForStakeToken = "1"
@@ -232,7 +228,7 @@ isContainerForStakeToken = "1"
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 augur.api.Market.isContainerForShareToken({
   market: market,
-  _shadyTarget: shareToken
+  _shadyShareToken: shareToken
 }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
@@ -293,11 +289,19 @@ Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a sp
 
 Returns the Stake Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
 
+#### augur.api.Market.getFirstReportersDisputeBondToken({ market }[, callback])
+
+Returns the [Dispute Bond](#dispute-bond) Token address for the [First Report Round](#first-report-round) for a specified `market`. When a First Report Round [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a First Round Report or if the First Round Report hasn't been Challenged.
+
 #### augur.api.Market.getForkingMarket({ market }[, callback])
 
 Returns the [Market](#market) address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified `market` address. If the `market` address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
 
-#### augur.api.Market.getMarketCreatorSettlementFeeInAttoethPerEth({ market }[, callback])
+#### augur.api.Market.getLastReportersDisputeBondToken({ market }[, callback])
+
+Returns the [Last Report Round](#last-report-round)'s [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
+
+#### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market }[, callback])
 
 Returns the [Creator Fee](#creator-fee) set by the [Market Creator](#market-creator), denominated in attotokens per [settlement](#settlement) of a [Complete Set](#complete-set), for the `market`.
 
@@ -317,9 +321,9 @@ Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDi
 
 Returns the current [Reporting](#report) State that the `market` is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the [Reporting Section](#reporting) of the documentation.
 
-#### augur.api.Market.getStakeToken({ market, \_payoutNumerators }[, callback])
+#### augur.api.Market.getStakeToken({ market, \_payoutNumerators, \_invalid }[, callback])
 
-Returns the Stake Token address for `_payoutNumerators` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
+Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
 
 #### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
 
@@ -328,14 +332,6 @@ Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
 Returns the [Reporting Window](#reporting-window) address for the specified `market`. This returns the Reporting Window when this [Market](#market) is scheduled to be [Reported](#report) on for [Reporting Rounds](#reporting-round) if a [Designated Reporter](#designated-reporter) fails to Report or their Report is [Challenged](#challenge).
-
-#### augur.api.Market.getRound1ReportersDisputeBondToken({ market }[, callback])
-
-Returns the [Dispute Bond](#dispute-bond) Token address for the [First Report Round](#first-report-round) for a specified `market`. When a First Report Round [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a First Round Report or if the First Round Report hasn't been Challenged.
-
-#### augur.api.Market.getRound2ReportersDisputeBondToken({ market }[, callback])
-
-Returns the [Last Report Round](#last-report-round)'s [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
 
 #### augur.api.Market.getShareToken({ market, \_outcome }[, callback])
 
@@ -349,21 +345,17 @@ Returns the tentatively winning [Payout Distribution Hash](#payout-distribution-
 
 Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within. All [Markets](#market) are created on a specific Universe and new Universes can be created in the event of a [Fork](#fork).
 
-#### augur.api.Market.getWinningPayoutDistributionHashFromFork({ market }[, callback])
+#### augur.api.Market.isContainerForDisputeBond({ market, \_shadyTarget }[, callback])
 
-Returns the winning [Payout Distribution Hash](#payout-distribution-hash), which is used to identify the Winning [Universe](#universe), after a [Fork](#fork) for a given `market`. The Winning Payout Distribution Hash is also used to determine how the [Finalized Market](#finalized-market) should payout for a specific [Outcome](#outcome) when [Shares](#shares) are [Settled](#settlement) for that Outcome.
+Returns whether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, or a [Reporting Round](#reporting-round) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
 
-#### augur.api.Market.isContainerForDisputeBondToken({ market, \_shadyTarget }[, callback])
+#### augur.api.Market.isContainerForStakeToken({ market, \_shadyStakeToken }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, or a [Reporting Round](#reporting-round) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyStakeToken` address provided. The `_shadyStakeToken` address will return true if the address is a Stake Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
 
-#### augur.api.Market.isContainerForStakeToken({ market, \_shadyTarget }[, callback])
+#### augur.api.Market.isContainerForShareToken({ market, \_shadyShareToken }[, callback])
 
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if the address is a Stake Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
-
-#### augur.api.Market.isContainerForShareToken({ market, \_shadyTarget }[, callback])
-
-Returns wether the specific `market` is a container for the `_shadyTarget` address provided. The `_shadyTarget` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyShareToken` address provided. The `_shadyShareToken` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isValid({ market }[, callback])
 
@@ -407,14 +399,6 @@ augur.api.Orders.getBestOrderId({
 // example output:
 bestOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
-augur.api.Orders.getBestOrderWorstOrderHash({
-  _market: _market,
-  _outcome: _outcome,
-  _type: _type
-}, function (bestOrderWorstOrderHash) { /* ... */ })
-// example output:
-bestOrderWorstOrderHash = "0x502caca9a38d2456d8ac2d743b49982a857222b53039f7eee8de94e5d91aec99"
-
 var secondBestOrderID = "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5";
 augur.api.Orders.getBetterOrderId({ _orderId: secondBestOrderID }, function (betterOrderID) { /* ... */ })
 // example output:
@@ -431,17 +415,21 @@ augur.api.Orders.getMarket({ _orderId: _orderId }, function (orderMarket) { /* .
 // example output:
 orderMarket = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
+augur.api.Orders.getOrderCreator({ _orderId: _orderId }, function (owner) { /* ... */ })
+// example output:
+owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
+
 augur.api.Orders.getOrderMoneyEscrowed({ _orderId: _orderId }, function (orderMoneyEscrowed) { /* ... */ })
 // example output:
 orderMoneyEscrowed = "5000000000000000000"
 
-augur.api.Orders.getOrderMaker({ _orderId: _orderId }, function (owner) { /* ... */ })
-// example output:
-owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
-
 augur.api.Orders.getOrderSharesEscrowed({ _orderId: _orderId }, function (orderSharesEscrowed) { /* ... */ })
 // example output:
 orderSharesEscrowed = "0";
+
+augur.api.Orders.getOrderType({ _orderId: _orderId }, function (type) { /* ... */ })
+// example output:
+type = "1";
 
 augur.api.Orders.getOutcome({ _orderId: _orderId }, function (orderOutcome) { /* ... */ })
 // example output:
@@ -450,10 +438,6 @@ orderOutcome = "1";
 augur.api.Orders.getPrice({ _orderId: _orderId }, function (price) { /* ... */ })
 // example output:
 price = "500000000000000000";
-
-augur.api.Orders.getTradeType({ _orderId: _orderId }, function (type) { /* ... */ })
-// example output:
-type = "1";
 
 augur.api.Orders.getVolume({ _market: _market }, function (volume) { /* ... */ })
 // example output:
@@ -492,11 +476,11 @@ isWorsePrice = "1"
 
 #### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
-Returns wether the specified `_fxpPrice` is not a better price than the `_betterOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
+Returns whether the specified `_fxpPrice` is not a better price than the `_betterOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
 #### augur.api.Orders.assertIsNotWorsePrice({ \_type, \_fxpPrice, \_worstOrderId }[, callback])
 
-Returns wether the specified `_fxpPrice` is not a worst price than the `_worstOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
+Returns whether the specified `_fxpPrice` is not a worst price than the `_worstOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
 #### augur.api.Orders.getAmount({ \_orderId }[, callback])
 
@@ -522,17 +506,21 @@ Returns the fixed point value of the last price traded for a specified `_market`
 
 Returns the [Market](#market) address for the specified `_orderId`.
 
+#### augur.api.Orders.getOrderCreator({ \_orderId }[, callback])
+
+Returns the [Maker](#maker) address of the specified `_orderId`.
+
 #### augur.api.Orders.getOrderMoneyEscrowed({ \_orderId }[, callback])
 
 Returns the fixed point value of the amount of money escrowed by the [Maker](#maker) for a specified `_orderId`.
 
-#### augur.api.Orders.getOrderMaker({ \_orderId }[, callback])
-
-Returns the [Maker](#maker) address of the specified `_orderId`.
-
 #### augur.api.Orders.getOrderSharesEscrowed({ \_orderId }[, callback])
 
 Returns the fixed point value of the amount of shares escrowed by the [Maker](#maker) for a specified `_orderId`.
+
+#### augur.api.Orders.getOrderType({ \_orderId }[, callback])
+
+Returns the trade type, `1` for bid and `2` for ask, for a specified `_orderId`.
 
 #### augur.api.Orders.getOutcome({ \_orderId }[, callback])
 
@@ -541,10 +529,6 @@ Returns the [Outcome](#outcome) being traded on for the specified `_orderId`.
 #### augur.api.Orders.getPrice({ \_orderId }[, callback])
 
 Returns the fixed point value of the price of a specified `_orderId`.
-
-#### augur.api.Orders.getTradeType({ \_orderId }[, callback])
-
-Returns the trade type, `1` for buy and `2` for sell, for a specified `_orderId`.
 
 #### augur.api.Orders.getVolume({ \_market }[, callback])
 
@@ -560,11 +544,11 @@ Returns the order ID of the worst order on the `_market` of `_type` trading on t
 
 #### augur.api.Orders.isBetterPrice({ \_type, \_fxpPrice, \_orderId }[, callback])
 
-Returns wether the specified `_fxpPrice` is a better price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
+Returns whether the specified `_fxpPrice` is a better price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
 #### augur.api.Orders.isWorsePrice({ \_type, \_fxpPrice, \_orderId }[, callback])
 
-Returns wether the specified `_fxpPrice` is a worst price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
+Returns whether the specified `_fxpPrice` is a worst price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
 Orders Fetcher Call API
 -----------------------
@@ -608,17 +592,6 @@ augur.api.OrdersFetcher.findBoundingOrders({
 boundingOrders = [
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
-
-augur.api.OrdersFetcher.getOrder({ _orderId: _orderId }, function (order) { /* ... */ })
-// example output:
-order = [ "10000000000000000000",
-          "500000000000000000",
-          "0x438f2aeb8a16745b1cd711e168581ebce744ffaa",
-          "5000000000000000000",
-          "0",
-          "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
-          "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
-          "42000000000000"  ]
 ```
 #### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol)
 
@@ -633,10 +606,6 @@ Returns an array containing the order IDs that should be set to better Order ID 
 #### augur.api.OrdersFetcher.findBoundingOrders({ \_type, \_fxpPrice, \_bestOrderId, \_worstOrderId, \_betterOrderId, \_worseOrderId }[, callback])
 
 Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_betterOrderId` and `_worseOrderId` should be orders that are better or worse than the `_fxpPrice` for an order of `_type`. `_bestOrderId` and `_worstOrderId` should be the best and worst order IDs on the order book for the specified `_type`.
-
-#### augur.api.OrdersFetcher.getOrder({ \_orderId }[, callback])
-
-Returns a length 8 array containing information about a specified `_orderId`. Information returned includes: amount of attoshares, fixed point display price, owner address, tokens escrowed, shares escrowed, better order id, worse order id, and gas price.
 
 Participation Token Call API
 --------------------
@@ -828,23 +797,23 @@ Returns the [Universe](#universe) address that the [Reporting Window](#reporting
 
 #### augur.api.ReportingWindow.isActive({ reportingWindow }[, callback])
 
-This method returns wether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
+This method returns whether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
 
 #### augur.api.ReportingWindow.isContainerForMarket({ reportingWindow, \_shadyMarket }[, callback])
 
-Returns wether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
+Returns whether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
 
 #### augur.api.ReportingWindow.isDisputeActive({ reportingWindow }[, callback])
 
-Returns wether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
+Returns whether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
 
 #### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
 
-Returns wether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
+Returns whether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
 
 #### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
 
-Returns wether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Phase](#dispute-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
+Returns whether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Phase](#dispute-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
 
 Reputation Token Call API
 -------------------------
@@ -1063,7 +1032,7 @@ isContainerForMarket = "1";
 var stakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 augur.api.Universe.isContainerForStakeToken({
   universe: universe,
-  _shadyTarget: stakeToken
+  _shadyStakeToken: stakeToken
 }, function (isContainerForStakeToken) { /* ... */ })
 // example output:
 isContainerForStakeToken = "1";
@@ -1146,16 +1115,16 @@ Returns the [Reputation Token](#rep) Address for a specific `universe`. This is 
 
 #### augur.api.Universe.isContainerForMarket({ universe, \_shadyTarget }[, callback])
 
-Returns wether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
+Returns whether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
 
 #### augur.api.Universe.isContainerForStakeToken({ universe, \_shadyTarget }[, callback])
 
-Returns wether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Stake Tokens](#stake-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine wether the Universe contains the Stake Token specified.
+Returns whether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Stake Tokens](#stake-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine whether the Universe contains the Stake Token specified.
 
 #### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
 
-Returns wether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
+Returns whether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
 
 #### augur.api.Universe.isParentOf({ universe, \_shadyChild }[, callback])
 
-Returns wether the specific `universe` is a container for the `_shadyChild` [Child Universe](#child-universe) Address provided. Returns `1` if true, `0` if false. If you want to see if a specific [Universe](#universe) is the [Parent Universe](#parent-universe) to a Child Universe you would use this function to determine that.
+Returns whether the specific `universe` is a container for the `_shadyChild` [Child Universe](#child-universe) Address provided. Returns `1` if true, `0` if false. If you want to see if a specific [Universe](#universe) is the [Parent Universe](#parent-universe) to a Child Universe you would use this function to determine that.

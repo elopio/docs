@@ -218,14 +218,14 @@ successResponse = {
 
 The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`). It returns true if the order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-Claim Proceeds Tx API
+Claim Trading Proceeds Tx API
 ------------------------------
 ```javascript
-// Claim Proceeds Contract Transaction API Examples:
+// Claim Trading Proceeds Contract Transaction API Examples:
 var privateKey = <Buffer ...>;
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.ClaimProceeds.claimProceeds({
+augur.api.ClaimTradingProceeds.claimTradingProceeds({
   _signer: privateKey,
   _market: _market,
   onSent: function (result) { console.log(result) },
@@ -250,11 +250,11 @@ successResponse = {
 }
 ```
 
-#### [Claim Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/master/src/trading/ClaimProceeds.sol)
+#### [Claim Trading Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/master/src/trading/ClaimProceeds.sol)
 
-#### augur.api.ClaimProceeds.claimProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
+#### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
 
-The `claimProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
+The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
 
 Complete Sets Tx API
 -----------------------------
@@ -586,10 +586,12 @@ successResponse = {
   value: "0x0"
 }
 
+var _invalid = false;
 augur.api.Market.derivePayoutDistributionHash({
   _signer: privateKey,
   market: market,
   _payoutNumerators: _payoutNumerators,
+  _invalid: _invalid,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -607,31 +609,6 @@ successResponse = {
   input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
   nonce: "0x4",
   timestamp: 1501003134,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
-augur.api.Market.designatedReport({
-  _signer: privateKey,
-  market: market,
-  _payoutNumerators: _payoutNumerators,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320486,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x4c291db662925c48ed38d3c33e3f7e6599f956f3254d4a8464b71bdadb758316",
-  input: "0x17c18af20000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002",
-  nonce: "0x2",
-  timestamp: 1501003132,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
@@ -660,9 +637,15 @@ successResponse = {
   value: "0x0"
 }
 
+var _payoutNumerators = [5,10,25,60];
+var _attotokens = 100;
+var _invalid = false;
 augur.api.Market.disputeDesignatedReport({
   _signer: privateKey,
   market: market,
+  _payoutNumerators: _payoutNumerators, 
+  _attotokens: _attotokens,
+  _invalid: _invalid
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -677,16 +660,13 @@ successResponse = {
   gasFees: "0.005827878",
   gasPrice: "0x430e23400",
   hash: "0xd0d81785960bb128c35748e018ad52e599a80921c39ac02adabdaeb4a23d926c",
-  input: "0x7a13d14c",
+  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
   nonce: "0x6",
   timestamp: 1501003136,
   to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   value: "0x0"
 }
 
-var _payoutNumerators = [5,10,25,60];
-var _attotokens = 100;
-var _invalid = false;
 augur.api.Market.disputeFirstReporters({
   _signer: privateKey,
   market: market,
@@ -890,13 +870,9 @@ successResponse = {
 
 Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `_newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `_newFeePerEthInWei` is 0 or less, or if `_newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
-#### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
+#### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets using sha3.
-
-#### augur.api.Market.designatedReport({ \_signer, market, \_payoutNumerators, onSent, onSuccess, onFailed })
-
-This transaction is used by the [Designated Reporter](#designated-reporter) for a specified `market` to [Report](#report), by submitting `_payoutNumerators` ([Payout Sets](#payout-set)) that indicate how the [Market](#market) should Payout. This transaction will fail if the `msg.sender` isn't the Designated Reporter Address set for this Market, or if this Market isn't in the [Designated Report Phase](#designated-report-phase).
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and `_invalid` using keccak256.
 
 #### augur.api.Market.disavowTokens({ \_signer, market, onSent, onSuccess, onFailed })
 
@@ -904,7 +880,7 @@ This transaction is used to disavow Stake Tokens for this [Market](#market). Whe
 
 #### augur.api.Market.disputeDesignatedReport({ \_signer, market, onSent, onSuccess, onFailed })
 
-This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round).
+This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [Designated Reporter](#designated-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
 
 #### augur.api.Market.disputeFirstReporters({ \_signer, market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })
 
