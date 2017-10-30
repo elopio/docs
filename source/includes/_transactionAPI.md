@@ -377,18 +377,18 @@ This transaction will create a new order on the order book for the specified `_m
 
 This transaction will fail if `_type` is not a valid value of 1 or 2, If the `_attoshares` value is less than 0, if the `_market` isn't defined, if the `_outcome` is less than 0 or greater than the total number of outcomes for the `_market`, or if the `_displayPrice` is below the `_market`'s minimum `_displayPrice` or if the `_displayPrice` is above the market's maximum `_displayPrice`.
 
-Dispute Bond Token Tx API
+Dispute Bond Tx API
 ----------------------------------
 ```javascript
-// Dispute Bond Token Contract Transaction API Examples:
+// Dispute Bond Contract Transaction API Examples:
 // privateKey for the msg.sender of these transactions
 var privateKey = <Buffer ...>;
-var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 var _destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
 
-augur.api.DisputeBondToken.transfer({
+augur.api.DisputeBond.transfer({
   _signer: privateKey,
-  disputeBondToken: disputeBondToken,
+  disputeBond: disputeBond,
   _destinationAddress: _destinationAddress,
   _attotokens: 1,
   onSent: function (result) { console.log(result) },
@@ -412,9 +412,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.DisputeBondToken.withdraw({
+augur.api.DisputeBond.withdraw({
   _signer: privateKey,
-  disputeBondToken: disputeBondToken,
+  disputeBond: disputeBond,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -436,9 +436,9 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.DisputeBondToken.withdrawInEmergency {
+augur.api.DisputeBond.withdrawInEmergency {
   _signer: privateKey,
-  disputeBondToken: disputeBondToken,
+  disputeBond: disputeBond,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -461,9 +461,9 @@ successResponse = {
 }
 
 var _shadyUniverse = "0x580f633f475614636ee132a0a355dcdc826d16c8";
-augur.api.DisputeBondToken.withdrawToUniverse({
+augur.api.DisputeBond.withdrawToUniverse({
   _signer: privateKey,
-  disputeBondToken: disputeBondToken,
+  disputeBond: disputeBond,
   _shadyUniverse: _shadyUniverse,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -486,31 +486,31 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBondToken.sol)
+#### [Dispute Bond Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
-#### augur.api.DisputeBondToken.transfer({ \_signer, disputeBondToken, \_destinationAddress, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.transfer({ \_signer, disputeBond, \_destinationAddress, \_attotokens, onSent, onSuccess, onFailed })
 
-The `transfer` transaction will change the current bond holder to the specified `_destinationAddress`. This is used to transfer ownership of a Dispute Bond Token from one address to another. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBondToken` or if the value of `_attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), the to address (`_destinationAddress`), and the `_attotokens` amount transferred (`1`).
+The `transfer` transaction will change the current bond holder to the specified `_destinationAddress`. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBond` or if the value of `_attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), the to address (`_destinationAddress`), and the `_attotokens` amount transferred (`1`).
 
-#### augur.api.DisputeBondToken.withdraw({ \_signer, disputeBondToken, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdraw({ \_signer, disputeBond, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBondToken`'s [Market](#market). This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the Market for the `disputeBondToken` isn't [Finalized](#finalized-market), if the Market is Finalized but the final [Payout Distribution Hash](#payout-distribution-hash) is the same Distribution Hash Challenged by the `disputeBondToken`, or if the `disputeBondToken`'s Market isn't Finalized.
+This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBond`'s [Market](#market). This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBond`, if the Market for the `disputeBond` isn't [Finalized](#finalized-market), if the Market is Finalized but the final [Payout Distribution Hash](#payout-distribution-hash) is the same Distribution Hash Challenged by the `disputeBond`, or if the `disputeBond`'s Market isn't Finalized.
 
-#### augur.api.DisputeBondToken.withdrawInEmergency({ \_signer, disputeBondToken, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdrawInEmergency({ \_signer, disputeBond, onSent, onSuccess, onFailed })
 
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond Token and convert it into a Reputation Token.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond and convert it into a Reputation Token.
 
 This transaction will fail if:
 
 - Augur is not currently in a haulted state.
 
-Returns: true if the Dispute Bond Token was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
+Returns: true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.DisputeBondToken.withdrawToUniverse({ \_signer, disputeBondToken, \_shadyUniverse, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdrawToUniverse({ \_signer, disputeBond, \_shadyUniverse, onSent, onSuccess, onFailed })
 
-This transaction is used by the bond holder of the specified `disputeBondToken` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBondToken`'s [Market](#market). This transaction will fail to payout if the `msg.sender` isn't the bond holder for the specified `disputeBondToken`, if the `_shadyUniverse` isn't the [Child Universe](#child-universe) of the [Universe](#universe) containing this `disputeBondToken`, if the [Payout Distribution Hash](#payout-distribution-hash) for the [Parent Universe](#parent-universe) of `shadyUniverse` is the same Distribution Hash Challenged by the `disputeBondToken`.
+This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBond`'s [Market](#market). This transaction will fail to payout if the `msg.sender` isn't the bond holder for the specified `disputeBond`, if the `_shadyUniverse` isn't the [Child Universe](#child-universe) of the [Universe](#universe) containing this `disputeBond`, if the [Payout Distribution Hash](#payout-distribution-hash) for the [Parent Universe](#parent-universe) of `shadyUniverse` is the same Distribution Hash Challenged by the `disputeBond`.
 
 Fill Order Tx API
 --------------------------

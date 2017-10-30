@@ -29,75 +29,75 @@ Augur's Call API is made up of "getter" methods that retrieve information from t
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 
-Dispute Bond Token Call API
+Dispute Bond Call API
 ---------------------------
 ```javascript
-// Dispute Bond Token Contract Call API Examples:
-var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+// Dispute Bond Contract Call API Examples:
+var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 var _address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 
-augur.api.DisputeBondToken.balanceOf({
-  disputeBondToken: disputeBondToken,
+augur.api.DisputeBond.balanceOf({
+  disputeBond: disputeBond,
   _address: _address
 }, function (balance) { /* ... */ })
 // example output:
 balance = "1"
 
-augur.api.DisputeBondToken.getBondHolder({ disputeBondToken: disputeBondToken }, function (bondHolder) { /* ... */ })
+augur.api.DisputeBond.getBondHolder({ disputeBond: disputeBond }, function (bondHolder) { /* ... */ })
 // example output:
 bondHolder = "0x3d62bafc1791752393384b902f813da861ddedd9"
 
-augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken: disputeBondToken }, function (bondRemainingToBePaidOut) { /* ... */ })
+augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond: disputeBond }, function (bondRemainingToBePaidOut) { /* ... */ })
 // example output:
 bondRemainingToBePaidOut = "1100000000000000000000"
 
-augur.api.DisputeBondToken.getUniverse({ disputeBondToken: disputeBondToken }, function (universe) { /* ... */ })
+augur.api.DisputeBond.getUniverse({ disputeBond: disputeBond }, function (universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken: disputeBondToken }, function (disputedPayoutDistributionHash) { /* ... */ })
+augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond: disputeBond }, function (disputedPayoutDistributionHash) { /* ... */ })
 // example output:
 disputedPayoutDistributionHash = "0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"
 
-augur.api.DisputeBondToken.getMarket({ disputeBondToken: disputeBondToken }, function (market) { /* ... */ })
+augur.api.DisputeBond.getMarket({ disputeBond: disputeBond }, function (market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.DisputeBondToken.getReputationToken({ disputeBondToken: disputeBondToken }, function (reputationToken) { /* ... */ })
+augur.api.DisputeBond.getReputationToken({ disputeBond: disputeBond }, function (reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 ```
-#### [Dispute Bond Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBondToken.sol)
+#### [Dispute Bond Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
-#### augur.api.DisputeBondToken.balanceOf({ disputeBondToken, \_address }[, callback])
+#### augur.api.DisputeBond.balanceOf({ disputeBond, \_address }[, callback])
 
-This method will returns the balance for a specified `disputeBondToken` owned by the provided `_address`. Returns `1` or `0` as you cannot own more than `1` [Dispute Bond](#dispute-bond) Token, and only one is required for a [Market](#market)'s [Proposed Outcome](#proposed-outcome) to be considered [Challenged](#challenged).
+This method will returns the balance for a specified `disputeBond` owned by the provided `_address`. Returns `1` or `0` as you cannot own more than `1` [Dispute Bond](#dispute-bond) Token, and only one is required for a [Market](#market)'s [Proposed Outcome](#proposed-outcome) to be considered [Challenged](#challenged).
 
-#### augur.api.DisputeBondToken.getBondHolder({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getBondHolder({ disputeBond }[, callback])
 
-This transaction will return the account address of the bond holder for a specified `disputeBondToken`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
+This transaction will return the account address of the bond holder for a specified `disputeBond`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
 
-#### augur.api.DisputeBondToken.getBondRemainingToBePaidOut({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond }[, callback])
 
-This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBondToken`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporter) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
+This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBond`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporter) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
 
-#### augur.api.DisputeBondToken.getUniverse({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getUniverse({ disputeBond }[, callback])
 
-This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBondToken` belongs to.
+This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBond` belongs to.
 
-#### augur.api.DisputeBondToken.getDisputedPayoutDistributionHash({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond }[, callback])
 
-This transaction will return the [Payout Distribution Hash](#payout-distribution-hash) for the dispute payout given a specified `disputeBondToken`. The Payout Distribution Hash in this case refers the Hash that was the [Proposed Outcome](#proposed-outcome) but was [Challenged](#challenged) by the [Dispute Bond](#dispute-bond).
+This transaction will return the [Payout Distribution Hash](#payout-distribution-hash) for the dispute payout given a specified `disputeBond`. The Payout Distribution Hash in this case refers the Hash that was the [Proposed Outcome](#proposed-outcome) but was [Challenged](#challenged) by the [Dispute Bond](#dispute-bond).
 
-#### augur.api.DisputeBondToken.getMarket({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getMarket({ disputeBond }[, callback])
 
-This transaction will return the [Market](#market) that a specified `disputeBondToken` belongs to. All Dispute Bond Tokens belong to a Market, and there can only be one Dispute Bond Token per [Dispute Phase](#dispute-phase) for that Market.
+This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Phase](#dispute-phase) for that Market.
 
-#### augur.api.DisputeBondToken.getReputationToken({ disputeBondToken }[, callback])
+#### augur.api.DisputeBond.getReputationToken({ disputeBond }[, callback])
 
-This transaction will return the [Reputation Token](#rep) address used by the [Universe](#universe) that contains [Market](#market) of the specified `disputeBondToken`.
+This transaction will return the [Reputation Token](#rep) address used by the [Universe](#universe) that contains [Market](#market) of the specified `disputeBond`.
 
 Market Call API
 ----------------
@@ -125,9 +125,9 @@ augur.api.Market.getDesignatedReporter({ market: market }, function (designatedR
 // example output:
 designatedReporter = "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
-augur.api.Market.getDesignatedReporterDisputeBondToken({ market: market }, function (designatedReporterDisputeBondToken) { /* ... */ })
+augur.api.Market.getDesignatedReporterDisputeBond({ market: market }, function (designatedReporterDisputeBond) { /* ... */ })
 // example output:
-designatedReporterDisputeBondToken = "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
+designatedReporterDisputeBond = "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
 
 augur.api.Market.getDesignatedReportPayoutHash({ market: market }, function (designatedReportPayoutHash) { /* ... */ })
 // example output:
@@ -153,17 +153,17 @@ augur.api.Market.getFinalWinningStakeToken({ market: market }, function (winning
 // example output:
 winningStakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.Market.getFirstReportersDisputeBondToken({ market: market }, function (round1ReportersDisputeBondToken) { /* ... */ })
+augur.api.Market.getFirstReportersDisputeBond({ market: market }, function (round1ReportersDisputeBond) { /* ... */ })
 // example output:
-round1ReportersDisputeBondToken = "0x0151f9153f236359ea3605cef0fffff90aba0327";
+round1ReportersDisputeBond = "0x0151f9153f236359ea3605cef0fffff90aba0327";
 
 augur.api.Market.getForkingMarket({ market: market }, function (forkedMarket) { /* ... */ })
 // example output:
 forkedMarket = "0x0"
 
-augur.api.Market.getLastReportersDisputeBondToken({ market: market }, function (round2ReportersDisputeBondToken) { /* ... */ })
+augur.api.Market.getLastReportersDisputeBond({ market: market }, function (round2ReportersDisputeBond) { /* ... */ })
 // example output:
-round2ReportersDisputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+round2ReportersDisputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
@@ -209,10 +209,10 @@ augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-var disputeBondToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 augur.api.Market.isContainerForDisputeBond({
   market: market,
-  _shadyTarget: disputeBondToken
+  _shadyDisputeBond: disputeBond
 }, function (isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForDisputeBond = "1"
@@ -261,7 +261,7 @@ Returns the timestamp for when a specific `market`'s  [Designated Report Phase](
 
 Returns the address for the [Designated Reporter](#designated-reporter) set for the specified `market`. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market Creation.
 
-#### augur.api.Market.getDesignatedReporterDisputeBondToken({ market }[, callback])
+#### augur.api.Market.getDesignatedReporterDisputeBond({ market }[, callback])
 
 Returns the [Dispute Bond](#dispute-bond) Token address for the [Designated Reporting](#designated-reporting) round for a specified `market`. When a Designated [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a Designated Report or if the Designated Report hasn't been Challenged.
 
@@ -289,7 +289,7 @@ Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a sp
 
 Returns the Stake Token address for the [Final Outcome](#final-outcome) of a specific `market`. If the [Market](#market) isn't [Settled](#market-settlement) then this will return a null address, `0x0`.
 
-#### augur.api.Market.getFirstReportersDisputeBondToken({ market }[, callback])
+#### augur.api.Market.getFirstReportersDisputeBond({ market }[, callback])
 
 Returns the [Dispute Bond](#dispute-bond) Token address for the [First Report Round](#first-report-round) for a specified `market`. When a First Report Round [Report](#report) is [Challenged](#challenge) a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the [Market](#market) doesn't have a First Round Report or if the First Round Report hasn't been Challenged.
 
@@ -297,9 +297,9 @@ Returns the [Dispute Bond](#dispute-bond) Token address for the [First Report Ro
 
 Returns the [Market](#market) address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified `market` address. If the `market` address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
 
-#### augur.api.Market.getLastReportersDisputeBondToken({ market }[, callback])
+#### augur.api.Market.getLastReportersDisputeBond({ market }[, callback])
 
-Returns the [Last Report Round](#last-report-round)'s [Dispute Bond Token](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
+Returns the [Last Report Round](#last-report-round)'s [Dispute Bond](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
 
 #### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market }[, callback])
 
@@ -345,9 +345,9 @@ Returns the tentatively winning [Payout Distribution Hash](#payout-distribution-
 
 Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within. All [Markets](#market) are created on a specific Universe and new Universes can be created in the event of a [Fork](#fork).
 
-#### augur.api.Market.isContainerForDisputeBond({ market, \_shadyTarget }[, callback])
+#### augur.api.Market.isContainerForDisputeBond({ market, \_shadyDisputeBond }[, callback])
 
-Returns whether the specific `market` is a container for the `_shadyTarget` address provided. A `_shadyTarget` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, or a [Reporting Round](#reporting-round) Dispute Bond token for this [Market](#market). Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyDisputeBond` address provided. A `_shadyDisputeBond` address will return true if it is a [Designated Report](#designated-reporter) [Dispute Bond](#dispute-bond) token, or a [Reporting Round](#reporting-round) Dispute Bond for this [Market](#market). Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isContainerForStakeToken({ market, \_shadyStakeToken }[, callback])
 
