@@ -923,17 +923,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">balance</span> <span class="o">=</span> <span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getBondHolder</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">bondHolder</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">bondHolder</span> <span class="o">=</span> <span class="s2">"0x3d62bafc1791752393384b902f813da861ddedd9"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getBondRemainingToBePaidOut</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">bondRemainingToBePaidOut</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">bondRemainingToBePaidOut</span> <span class="o">=</span> <span class="s2">"1100000000000000000000"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getDisputedPayoutDistributionHash</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">disputedPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -943,29 +935,21 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getOwner</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">owner</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+<span class="nx">owner</span> <span class="o">=</span> <span class="s2">"0x3d62bafc1791752393384b902f813da861ddedd9"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputebond-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol">Dispute Bond Contract Code</a></h4>
 
 <p>The <a href="#dispute-bond">Dispute Bond</a> Token is used by <a href="#rep">REP</a> holders to <a href="#challenge">Challenge</a> the <a href="#outcome">Outcome</a> of <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>. The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of <a href="#reporting">Reporting</a> in order for the Market to move to the next state of <a href="#report">Reporting</a> in the next upcoming <a href="#reporting-window">Reporting Window</a>. If a Challenge is successful, which means the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is something other than the <a href="#proposed-outcome">Proposed Outcome</a> that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.</p>
 
-<h4 id="augur-api-disputebond-balanceof-disputebond-_address-callback">augur.api.DisputeBond.balanceOf({ disputeBond, _address }[, callback])</h4>
-
-<p>This method will returns the balance for a specified <code class="prettyprint">disputeBond</code> owned by the provided <code class="prettyprint">_address</code>. Returns <code class="prettyprint">1</code> or <code class="prettyprint">0</code> as you cannot own more than <code class="prettyprint">1</code> <a href="#dispute-bond">Dispute Bond</a> Token, and only one is required for a <a href="#market">Market</a>&rsquo;s <a href="#proposed-outcome">Proposed Outcome</a> to be considered <a href="#challenged">Challenged</a>.</p>
-
-<h4 id="augur-api-disputebond-getbondholder-disputebond-callback">augur.api.DisputeBond.getBondHolder({ disputeBond }[, callback])</h4>
-
-<p>This transaction will return the account address of the bond holder for a specified <code class="prettyprint">disputeBond</code>. This is the person who owns/purchased the bond and would be the person to refund if they correctly <a href="#challenge">Challenged</a> the <a href="#proposed-outcome">Proposed Outcome</a> of a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>.</p>
-
 <h4 id="augur-api-disputebond-getbondremainingtobepaidout-disputebond-callback">augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond }[, callback])</h4>
 
 <p>This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified <code class="prettyprint">disputeBond</code>. Bonds are paid back to the Bond Holder if they correctly <a href="#challenge">Challenged</a> a <a href="#proposed-outcome">Proposed Outcome</a> and the <a href="#final-outcome">Final Outcome</a> for the <a href="#market">Market</a> is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to <a href="#reporter">Reporters</a> who confirmed the Proposed Outcome to be the Final Outcome of the Market.</p>
-
-<h4 id="augur-api-disputebond-getuniverse-disputebond-callback">augur.api.DisputeBond.getUniverse({ disputeBond }[, callback])</h4>
-
-<p>This transaction will return the <a href="#universe">Universe</a> that contained the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to.</p>
 
 <h4 id="augur-api-disputebond-getdisputedpayoutdistributionhash-disputebond-callback">augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond }[, callback])</h4>
 
@@ -975,9 +959,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction will return the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per <a href="#dispute-phase">Dispute Phase</a> for that Market.</p>
 
-<h4 id="augur-api-disputebond-getreputationtoken-disputebond-callback">augur.api.DisputeBond.getReputationToken({ disputeBond }[, callback])</h4>
+<h4 id="augur-api-disputebond-getowner-disputebond-callback">augur.api.DisputeBond.getOwner({ disputeBond }[, callback])</h4>
 
-<p>This transaction will return the <a href="#rep">Reputation Token</a> address used by the <a href="#universe">Universe</a> that contains <a href="#market">Market</a> of the specified <code class="prettyprint">disputeBond</code>.</p>
+<p>This transaction will return the account address of the bond holder for a specified <code class="prettyprint">disputeBond</code>. This is the person who owns/purchased the bond and would be the person to refund if they correctly <a href="#challenge">Challenged</a> the <a href="#proposed-outcome">Proposed Outcome</a> of a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>.</p>
+
+<h4 id="augur-api-disputebond-getuniverse-disputebond-callback">augur.api.DisputeBond.getUniverse({ disputeBond }[, callback])</h4>
+
+<p>This transaction will return the <a href="#universe">Universe</a> that contained the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to.</p>
 
 <h2 id="market-call-api">Market Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Call API Examples:</span>
@@ -1019,6 +1007,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span><span class="p">;</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getExtraDisputeBondRemainingToBePaidOut</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">extraDisputeBondRemainingToBePaidOut</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">extraDisputeBondRemainingToBePaidOut</span> <span class="o">=</span> <span class="s2">"1000"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalizationTime</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">finalizationTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">finalizationTime</span> <span class="o">=</span> <span class="s2">"1500647930"</span><span class="p">;</span>
@@ -1047,6 +1039,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">marketCreatorSettlementFee</span> <span class="o">=</span> <span class="s2">"20000000000000000"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getOwner</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">owner</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">owner</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682b"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">numOutcomes</span> <span class="o">=</span> <span class="s2">"2"</span>
@@ -1059,15 +1055,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">reportingState</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeToken</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span> <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span> <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
-
-<span class="kd">var</span> <span class="nx">_payoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeTokenOrZeroByPayoutDistributionHash</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span> <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="nx">_payoutDistributionHash</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stakeTokenOrZero</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">stakeTokenOrZero</span> <span class="o">=</span> <span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span>
@@ -1079,9 +1066,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeToken</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span> <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span> <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
+
+<span class="kd">var</span> <span class="nx">_payoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeTokenOrZeroByPayoutDistributionHash</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span> <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="nx">_payoutDistributionHash</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">stakeTokenOrZero</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">stakeTokenOrZero</span> <span class="o">=</span> <span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTentativeWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">tentativeWinningPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">tentativeWinningPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalWinningDisputeBondStake</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">_totalDisputeBondStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">_totalDisputeBondStake</span> <span class="o">=</span> <span class="s2">"1000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">market</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -1125,7 +1129,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getdenominationtoken-market-callback">augur.api.Market.getDenominationToken({ market }[, callback])</h4>
 
-<p>Returns the address of the token used to denominate the specified <code class="prettyprint">market</code>. A Denomination Token is the ERC20 Token used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
+<p>Returns the address of the token used to denominate the specified <code class="prettyprint">market</code>. A Denomination Token is the ERC20 Token used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this will always return &ldquo;Cash&rdquo;; however, Augur will eventually support other types of Denomination Tokens.</p>
 
 <h4 id="augur-api-market-getdesignatedreportdisputeduetimestamp-market-callback">augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market }[, callback])</h4>
 
@@ -1154,6 +1158,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-market-getendtime-market-callback">augur.api.Market.getEndTime({ market }[, callback])</h4>
 
 <p>Returns the timestamp for when the specified <code class="prettyprint">market</code>&rsquo;s event has come to pass. When the <a href="#market">Market</a>&rsquo;s <a href="#end-time">End Time</a> passes the Market either enters the <a href="#designated-report-phase">Designated Report Phase</a> if a <a href="#designated-reporter">Designated Reporter</a> is assigned or the Market will await the next <a href="#reporting-window">Reporting Window</a> to begin <a href="#reporting-round">Reporting Rounds</a>.</p>
+
+<h4 id="augur-api-market-getextradisputebondremainingtobepaidout-market-callback">augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ market }[, callback])</h4>
+
+<p>Returns the amount of <a href="#rep">REP</a> that is available in a <a href="#market">Market</a> to be migrated to other <a href="#universe">Universes</a> to reward <a href="#dispute-bond">Dispute Bond</a> holders.</p>
 
 <h4 id="augur-api-market-getfinalizationtime-market-callback">augur.api.Market.getFinalizationTime({ market }[, callback])</h4>
 
@@ -1191,6 +1199,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#number-of-ticks">Number of Ticks</a> set for a specific <code class="prettyprint">market</code>. The Number of <a href="#ticks">Ticks</a> represents the number of valid price points between the <a href="#market">Market</a>&rsquo;s <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>.</p>
 
+<h4 id="augur-api-market-getowner-market-callback">augur.api.Market.getOwner({ market }[, callback])</h4>
+
+<p>Returns the address of the specified <a href="#market">Market&rsquo;s</a> owner.</p>
+
 <h4 id="augur-api-market-getpayoutdistributionhashstake-market-_payoutdistributionhash-callback">augur.api.Market.getPayoutDistributionHashStake({ market, _payoutDistributionHash }[, callback])</h4>
 
 <p>Returns the staked amount of <a href="#rep">REP</a>, in attorep, for a specified <code class="prettyprint">_payoutDistributionHash</code> of a <code class="prettyprint">market</code>. <a href="#reporter">Reporters</a> who stake REP on the same <a href="#outcome">Outcome</a> during the <a href="#reporting-phase">Reporting Phase</a> will have identical <a href="#payout-distribution-hash">Payout Distribution Hashs</a>. This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on <a href="#proposed-outcome">it is considered the Proposed Outcome</a> while the <a href="#market">Market</a> is <a href="#awaiting-finalization">Awaiting Finalization</a>. If the <a href="#dispute-phase">Dispute Phase</a> passes without a <a href="#challenge">Challenge</a> to the Proposed Outcome then the Market is <a href="#finalized-market">Finalized</a> and the Proposed Outcome becomes the <a href="#final-outcome">Final Outcome</a>.</p>
@@ -1198,14 +1210,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-market-getreportingstate-market-callback">augur.api.Market.getReportingState({ market }[, callback])</h4>
 
 <p>Returns the current <a href="#report">Reporting</a> State that the <code class="prettyprint">market</code> is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the <a href="#reporting">Reporting Section</a> of the documentation.</p>
-
-<h4 id="augur-api-market-getstaketoken-market-_payoutnumerators-_invalid-callback">augur.api.Market.getStakeToken({ market, _payoutNumerators, _invalid }[, callback])</h4>
-
-<p>Returns the Stake Token address for <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> on the <code class="prettyprint">market</code> specified. When a <a href="#reporter">Reporter</a> submits a <a href="#report">Report</a>, they submit a <a href="#payout-set">Payout Set</a> (<code class="prettyprint">_payoutNumerators</code>) array indicating how the <a href="#market">Market</a> should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.</p>
-
-<h4 id="augur-api-market-getstaketokenorzerobypayoutdistributionhash-market-_payoutdistributionhash-callback">augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, _payoutDistributionHash }[, callback])</h4>
-
-<p>Returns a Stake Token address, or 0 if there is no Stake Token for a specific <code class="prettyprint">_payoutDistributionHash</code> for a <code class="prettyprint">market</code>. <a href="#payout-set">Payout Sets</a> that are valid, that is that they sum of the values in the array equal the <a href="#number-of-ticks">Number of Ticks</a> for the <a href="#market">Market</a> and no individual value in the array is greater than the Number of <a href="#ticks">Ticks</a>, become <a href="#payout-distribution-hash">Payout Distribution Hashes</a>. This method returns the Stake Token given a Payout Distribution Hash, much like <code class="prettyprint">getStakeToken</code> returns the Stake Token given a Payout Set.</p>
 
 <h4 id="augur-api-market-getreportingwindow-market-callback">augur.api.Market.getReportingWindow({ market }[, callback])</h4>
 
@@ -1215,9 +1219,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#shares">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
 
+<h4 id="augur-api-market-getstaketoken-market-_payoutnumerators-_invalid-callback">augur.api.Market.getStakeToken({ market, _payoutNumerators, _invalid }[, callback])</h4>
+
+<p>Returns the Stake Token address for <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> on the <code class="prettyprint">market</code> specified. When a <a href="#reporter">Reporter</a> submits a <a href="#report">Report</a>, they submit a <a href="#payout-set">Payout Set</a> (<code class="prettyprint">_payoutNumerators</code>) array indicating how the <a href="#market">Market</a> should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.</p>
+
+<h4 id="augur-api-market-getstaketokenorzerobypayoutdistributionhash-market-_payoutdistributionhash-callback">augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, _payoutDistributionHash }[, callback])</h4>
+
+<p>Returns a Stake Token address, or 0 if there is no Stake Token for a specific <code class="prettyprint">_payoutDistributionHash</code> for a <code class="prettyprint">market</code>. <a href="#payout-set">Payout Sets</a> that are valid, that is that they sum of the values in the array equal the <a href="#number-of-ticks">Number of Ticks</a> for the <a href="#market">Market</a> and no individual value in the array is greater than the Number of <a href="#ticks">Ticks</a>, become <a href="#payout-distribution-hash">Payout Distribution Hashes</a>. This method returns the Stake Token given a Payout Distribution Hash, much like <code class="prettyprint">getStakeToken</code> returns the Stake Token given a Payout Set.</p>
+
 <h4 id="augur-api-market-gettentativewinningpayoutdistributionhash-market-callback">augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])</h4>
 
 <p>Returns the tentatively winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> given a specified <code class="prettyprint">market</code>. The tentatively winning Payout Distribution Hash is the hash with the most <a href="#rep">REP</a> staked on it prior to <a href="#finalized-market">Market Finalization</a>. Once the <a href="#market">Market</a> Finalized the tentatively winning Payout Distribution Hash becomes the Winning Payout Distribution Hash.</p>
+
+<h4 id="augur-api-market-gettotalstake-market-callback">augur.api.Market.getTotalStake({ market }[, callback])</h4>
+
+<p>Returns the total amount staked on the specified <a href="#market">Market</a>.</p>
+
+<h4 id="augur-api-market-gettotalwinningdisputebondstake-market-callback">augur.api.Market.getTotalWinningDisputeBondStake({ market }[, callback])</h4>
+
+<p>Returns the sum of all <a href="#dispute-bond">Dispute Bonds</a> staked on challenging a <a href="#payout-distribution-hash">Payout Distribution Hash</a> other than the final Payout Distribution Hash for the specfied <a href="#market">Market</a>.</p>
 
 <h4 id="augur-api-market-getuniverse-market-callback">augur.api.Market.getUniverse({ market }[, callback])</h4>
 
@@ -1489,10 +1509,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getOutcome</span><span class="p">({</span> <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">outcome</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="nx">outcome</span> <span class="o">=</span> <span class="s2">"1"</span>
-
+<span class="nx">reportingWindow</span> <span class="o">=</span>  <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-participationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol">Participation Token Contract Code</a></h4>
 
@@ -1502,9 +1521,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the market address for the specified <code class="prettyprint">participationToken</code>.</p>
 
-<h4 id="augur-api-sharetoken-getoutcome-participationtoken-callback">augur.api.ShareToken.getOutcome({ participationToken }[, callback])</h4>
+<h4 id="augur-api-participationtoken-getreportingwindow-participationtoken-callback">augur.api.ParticipationToken.getReportingWindow({ participationToken }[, callback])</h4>
 
-<p>Returns the Outcome of the market that the specified <code class="prettyprint">participationToken</code> is for.</p>
+<p>Returns the <a href="#reporting-window">Reporting Window</a> address for the specified <code class="prettyprint">participationToken</code>. All Stake Tokens belong to a specific <a href="#market">Market</a> and all Market&rsquo;s belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Participation Tokens were purchased for.</p>
 
 <h2 id="reporting-window-call-api">Reporting Window Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reporting Window Contract Call API Examples:</span>
@@ -2361,13 +2380,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// privateKey for the msg.sender of these transactions</span>
 <span class="kd">var</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">disputeBond</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_destinationAddress</span> <span class="o">=</span> <span class="s2">"0xaa895acf2091752393384b902f813da761ca421f"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_newOwner</span> <span class="o">=</span> <span class="s2">"0xaa895acf2091752393384b902f813da761ca421f"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">transferOwnership</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span><span class="p">,</span>
-  <span class="na">_destinationAddress</span><span class="p">:</span> <span class="nx">_destinationAddress</span><span class="p">,</span>
-  <span class="na">_attotokens</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">_newOwner</span><span class="p">:</span> <span class="nx">_newOwner</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
@@ -2413,6 +2431,30 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">withdrawDisavowedTokens</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320482</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x3ccfd60b"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x3"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003126</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">withdrawInEmergency</span> <span class="p">{</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">disputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span><span class="p">,</span>
@@ -2423,7 +2465,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320482</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320483</span><span class="p">,</span>
   <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
   <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
@@ -2449,7 +2491,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320483</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320484</span><span class="p">,</span>
   <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
   <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
@@ -2467,25 +2509,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <a href="#dispute-bond">Dispute Bond</a> Token is used by <a href="#rep">REP</a> holders to <a href="#challenge">Challenge</a> the <a href="#outcome">Outcome</a> of <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>. The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of <a href="#reporting">Reporting</a> in order for the Market to move to the next state of <a href="#report">Reporting</a> in the next upcoming <a href="#reporting-window">Reporting Window</a>. If a Challenge is successful, which means the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is something other than the <a href="#proposed-outcome">Proposed Outcome</a> that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.</p>
 
-<h4 id="augur-api-disputebond-transfer-_signer-disputebond-_destinationaddress-_attotokens-onsent-onsuccess-onfailed">augur.api.DisputeBond.transfer({ _signer, disputeBond, _destinationAddress, _attotokens, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-disputebond-transferownership-_signer-disputebond-_newowner-onsent-onsuccess-onfailed">augur.api.DisputeBond.transferOwnership({ _signer, disputeBond, _newOwner, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">transfer</code> transaction will change the current bond holder to the specified <code class="prettyprint">_destinationAddress</code>. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the bond holder of the specified <code class="prettyprint">disputeBond</code> or if the value of <code class="prettyprint">_attotokens</code> isn&rsquo;t equal to <code class="prettyprint">1</code>. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the from address (<code class="prettyprint">msg.sender</code>), the to address (<code class="prettyprint">_destinationAddress</code>), and the <code class="prettyprint">_attotokens</code> amount transferred (<code class="prettyprint">1</code>).</p>
+<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current bond holder to the specified <code class="prettyprint">_newOwner</code>. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the bond holder of the specified <code class="prettyprint">disputeBond</code>. </p>
 
 <h4 id="augur-api-disputebond-withdraw-_signer-disputebond-onsent-onsuccess-onfailed">augur.api.DisputeBond.withdraw({ _signer, disputeBond, onSent, onSuccess, onFailed })</h4>
 
 <p>This transaction is used by the bond holder of the specified <code class="prettyprint">disputeBond</code> to withdraw <a href="#rep">Reputation Tokens</a> earned by correctly <a href="#challenge">Challenging</a> the <a href="#proposed-outcome">Proposed Outcome</a> of the <code class="prettyprint">disputeBond</code>&rsquo;s <a href="#market">Market</a>. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the bond holder for the specified <code class="prettyprint">disputeBond</code>, if the Market for the <code class="prettyprint">disputeBond</code> isn&rsquo;t <a href="#finalized-market">Finalized</a>, if the Market is Finalized but the final <a href="#payout-distribution-hash">Payout Distribution Hash</a> is the same Distribution Hash Challenged by the <code class="prettyprint">disputeBond</code>, or if the <code class="prettyprint">disputeBond</code>&rsquo;s Market isn&rsquo;t Finalized.</p>
 
+<h4 id="augur-api-disputebond-withdrawdisavowedtokens-_signer-disputebond-onsent-onsuccess-onfailed">augur.api.DisputeBond.withdrawDisavowedTokens({ _signer, disputeBond, onSent, onSuccess, onFailed })</h4>
+
+<p>This transaction is used by the bond holder of the specified <code class="prettyprint">disputeBond</code> to withdraw <a href="#rep">Reputation Tokens</a> in the event that another <a href="#market">Market</a> forks. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the bond holder for the specified <code class="prettyprint">disputeBond</code> or if the Market for the <code class="prettyprint">disputeBond</code> is the <a href="#forked-market">Forked Market</a>.</p>
+
 <h4 id="augur-api-disputebond-withdrawinemergency-_signer-disputebond-onsent-onsuccess-onfailed">augur.api.DisputeBond.withdrawInEmergency({ _signer, disputeBond, onSent, onSuccess, onFailed })</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Dispute Bond and convert it into a Reputation Token.</p>
 
-<p>This transaction will fail if:</p>
+<p>This transaction will fail if Augur is not currently in a haulted state.</p>
 
-<ul>
-<li>Augur is not currently in a haulted state.</li>
-</ul>
-
-<p>Returns: true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>It returns true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h4 id="augur-api-disputebond-withdrawtouniverse-_signer-disputebond-_shadyuniverse-onsent-onsuccess-onfailed">augur.api.DisputeBond.withdrawToUniverse({ _signer, disputeBond, _shadyUniverse, onSent, onSuccess, onFailed })</h4>
 
@@ -2877,6 +2919,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction attempts to migrate the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a 60 day long <a href="#fork-period">Fork Period</a> that occurs where in <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling <code class="prettyprint">migrateThroughOneFork</code> attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This method will throw if the Fork Period isn&rsquo;t over, so there is no Winning Universe to migrate to yet. This will return <code class="prettyprint">1</code> if the <code class="prettyprint">market</code> was successfully migrated and return <code class="prettyprint">0</code> if no migration was required.</p>
 
+<h4 id="augur-api-market-transferownership-_signer-market-_newowner-onsent-onsuccess-onfailed">augur.api.Market.transferOwnership({ _signer, market, _newOwner, onSent, onSuccess, onFailed })</h4>
+
+<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market">Market</a> owner to the specified <code class="prettyprint">_newOwner</code>. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the Market owner of the specified <code class="prettyprint">disputeBond</code>. </p>
+
 <h4 id="augur-api-market-tryfinalize-_signer-market-onsent-onsuccess-onfailed">augur.api.Market.tryFinalize({ _signer, market, onSent, onSuccess, onFailed })</h4>
 
 <p>This transaction will attempt to finalize a <a href="#market">Market</a> that is <a href="#market-awaiting-finalization">Awaiting Finalization</a>. If the Market isn&rsquo;t Awaiting Finalization then this will fail and return <code class="prettyprint">0</code>. If the Market is Awaiting Finalization and can be finalized then this function will return 1 to indicate that the Market is now finalized and the <a href="#proposed-outcome">Proposed Outcome</a> is now the <a href="#final-outcome">Final Outcome</a>. Further the Tentatively Winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> will become the Winning Payout Distribution Hash.</p>
@@ -2889,13 +2935,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Reputation Tokens from a particular Market.</p>
 
-<p>This transaction will fail if:</p>
+<p>This transaction will fail if Augur is not currently in a haulted state.</p>
 
-<ul>
-<li>Augur is not currently in a haulted state.</li>
-</ul>
-
-<p>Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>It returns true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h2 id="participation-token-tx-api">Participation Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Participation Token Transaction API Examples:</span>
@@ -3010,13 +3052,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Participation Tokens and convert them into Reputation Tokens.</p>
 
-<p>This transaction will fail if:</p>
+<p>This transaction will fail if Augur is not currently in a haulted state.</p>
 
-<ul>
-<li>Augur is not currently in a haulted state.</li>
-</ul>
-
-<p>Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h2 id="reporting-window-tx-api">Reporting Window Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reporting Window Contract Transaction API Examples:</span>
@@ -3605,13 +3643,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Stake Tokens and convert them into Reputation Tokens.</p>
 
-<p>This transaction will fail if:</p>
+<p>This transaction will fail if Augur is not currently in a haulted state.</p>
 
-<ul>
-<li>Augur is not currently in a haulted state.</li>
-</ul>
-
-<p>Returns: true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>It returns true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h2 id="trade-tx-api">Trade Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trade Contract Transaction API Examples:</span>
