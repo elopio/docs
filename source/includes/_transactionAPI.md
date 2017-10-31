@@ -384,13 +384,12 @@ Dispute Bond Tx API
 // privateKey for the msg.sender of these transactions
 var privateKey = <Buffer ...>;
 var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-var _destinationAddress = "0xaa895acf2091752393384b902f813da761ca421f";
+var _newOwner = "0xaa895acf2091752393384b902f813da761ca421f";
 
-augur.api.DisputeBond.transfer({
+augur.api.DisputeBond.transferOwnership({
   _signer: privateKey,
   disputeBond: disputeBond,
-  _destinationAddress: _destinationAddress,
-  _attotokens: 1,
+  _newOwner: _newOwner,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -436,6 +435,30 @@ successResponse = {
   value: "0x0"
 }
 
+augur.api.DisputeBond.withdrawDisavowedTokens({
+  _signer: privateKey,
+  disputeBond: disputeBond,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320482,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
+  input: "0x3ccfd60b",
+  nonce: "0x3",
+  timestamp: 1501003126,
+  to: "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4",
+  value: "0x0"
+}
+
 augur.api.DisputeBond.withdrawInEmergency {
   _signer: privateKey,
   disputeBond: disputeBond,
@@ -446,7 +469,7 @@ augur.api.DisputeBond.withdrawInEmergency {
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320482,
+  blockNumber: 320483,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
@@ -472,7 +495,7 @@ augur.api.DisputeBond.withdrawToUniverse({
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320483,
+  blockNumber: 320484,
   callReturn: "1",
   from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
   gas: "0xb10d2",
@@ -490,23 +513,25 @@ successResponse = {
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
-#### augur.api.DisputeBond.transfer({ \_signer, disputeBond, \_destinationAddress, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.transferOwnership({ \_signer, disputeBond, \_newOwner, onSent, onSuccess, onFailed })
 
-The `transfer` transaction will change the current bond holder to the specified `_destinationAddress`. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBond` or if the value of `_attotokens` isn't equal to `1`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), the to address (`_destinationAddress`), and the `_attotokens` amount transferred (`1`).
+The `transferOwnership` transaction will change the current bond holder to the specified `_newOwner`. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBond`. 
 
 #### augur.api.DisputeBond.withdraw({ \_signer, disputeBond, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBond`'s [Market](#market). This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBond`, if the Market for the `disputeBond` isn't [Finalized](#finalized-market), if the Market is Finalized but the final [Payout Distribution Hash](#payout-distribution-hash) is the same Distribution Hash Challenged by the `disputeBond`, or if the `disputeBond`'s Market isn't Finalized.
 
+#### augur.api.DisputeBond.withdrawDisavowedTokens({ \_signer, disputeBond, onSent, onSuccess, onFailed })
+
+This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) in the event that another [Market](#market) forks. This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBond` or if the Market for the `disputeBond` is the [Forked Market](#forked-market).
+
 #### augur.api.DisputeBond.withdrawInEmergency({ \_signer, disputeBond, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond and convert it into a Reputation Token.
 
-This transaction will fail if:
+This transaction will fail if Augur is not currently in a haulted state.
 
-- Augur is not currently in a haulted state.
-
-Returns: true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
+It returns true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 #### augur.api.DisputeBond.withdrawToUniverse({ \_signer, disputeBond, \_shadyUniverse, onSent, onSuccess, onFailed })
 
@@ -902,6 +927,10 @@ This transaction will call `migrateThroughOneFork` repeatedly until the [Market]
 
 This transaction attempts to migrate the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a 60 day long [Fork Period](#fork-period) that occurs where in [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling `migrateThroughOneFork` attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This method will throw if the Fork Period isn't over, so there is no Winning Universe to migrate to yet. This will return `1` if the `market` was successfully migrated and return `0` if no migration was required.
 
+#### augur.api.Market.transferOwnership({ \_signer, market, \_newOwner, onSent, onSuccess, onFailed })
+
+The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the `msg.sender` isn't the Market owner of the specified `disputeBond`. 
+
 #### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 
 This transaction will attempt to finalize a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). If the Market isn't Awaiting Finalization then this will fail and return `0`. If the Market is Awaiting Finalization and can be finalized then this function will return 1 to indicate that the Market is now finalized and the [Proposed Outcome](#proposed-outcome) is now the [Final Outcome](#final-outcome). Further the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash) will become the Winning Payout Distribution Hash.
@@ -914,11 +943,9 @@ This method is used to potentially update the Tentatively Winning [Payout Distri
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
 
-This transaction will fail if:
+This transaction will fail if Augur is not currently in a haulted state.
 
-- Augur is not currently in a haulted state.
-
-Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
+It returns true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Participation Token Tx API
 --------------------------------
@@ -1031,11 +1058,9 @@ Returns: true if the Participation Tokens were successfully withdrawn and conver
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
-This transaction will fail if:
+This transaction will fail if Augur is not currently in a haulted state.
 
-- Augur is not currently in a haulted state.
-
-Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
+It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Reporting Window Tx API
 --------------------------------
@@ -1632,11 +1657,9 @@ Unlike transfer, in transferFrom you specify a `_from` value as the owner of the
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Stake Tokens and convert them into Reputation Tokens.
 
-This transaction will fail if:
+This transaction will fail if Augur is not currently in a haulted state.
 
-- Augur is not currently in a haulted state.
-
-Returns: true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
+It returns true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Trade Tx API
 ---------------------

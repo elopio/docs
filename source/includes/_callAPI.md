@@ -43,17 +43,9 @@ augur.api.DisputeBond.balanceOf({
 // example output:
 balance = "1"
 
-augur.api.DisputeBond.getBondHolder({ disputeBond: disputeBond }, function (bondHolder) { /* ... */ })
-// example output:
-bondHolder = "0x3d62bafc1791752393384b902f813da861ddedd9"
-
 augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond: disputeBond }, function (bondRemainingToBePaidOut) { /* ... */ })
 // example output:
 bondRemainingToBePaidOut = "1100000000000000000000"
-
-augur.api.DisputeBond.getUniverse({ disputeBond: disputeBond }, function (universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
 augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond: disputeBond }, function (disputedPayoutDistributionHash) { /* ... */ })
 // example output:
@@ -63,29 +55,21 @@ augur.api.DisputeBond.getMarket({ disputeBond: disputeBond }, function (market) 
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.DisputeBond.getReputationToken({ disputeBond: disputeBond }, function (reputationToken) { /* ... */ })
+augur.api.DisputeBond.getOwner({ disputeBond: disputeBond }, function (owner) { /* ... */ })
 // example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+owner = "0x3d62bafc1791752393384b902f813da861ddedd9"
+
+augur.api.DisputeBond.getUniverse({ disputeBond: disputeBond }, function (universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 ```
 #### [Dispute Bond Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol)
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
-#### augur.api.DisputeBond.balanceOf({ disputeBond, \_address }[, callback])
-
-This method will returns the balance for a specified `disputeBond` owned by the provided `_address`. Returns `1` or `0` as you cannot own more than `1` [Dispute Bond](#dispute-bond) Token, and only one is required for a [Market](#market)'s [Proposed Outcome](#proposed-outcome) to be considered [Challenged](#challenged).
-
-#### augur.api.DisputeBond.getBondHolder({ disputeBond }[, callback])
-
-This transaction will return the account address of the bond holder for a specified `disputeBond`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
-
 #### augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond }[, callback])
 
 This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBond`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Proposed Outcome](#proposed-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Proposed Outcome. Otherwise, the Bond is paid out to [Reporters](#reporter) who confirmed the Proposed Outcome to be the Final Outcome of the Market.
-
-#### augur.api.DisputeBond.getUniverse({ disputeBond }[, callback])
-
-This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBond` belongs to.
 
 #### augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond }[, callback])
 
@@ -95,9 +79,13 @@ This transaction will return the [Payout Distribution Hash](#payout-distribution
 
 This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Phase](#dispute-phase) for that Market.
 
-#### augur.api.DisputeBond.getReputationToken({ disputeBond }[, callback])
+#### augur.api.DisputeBond.getOwner({ disputeBond }[, callback])
 
-This transaction will return the [Reputation Token](#rep) address used by the [Universe](#universe) that contains [Market](#market) of the specified `disputeBond`.
+This transaction will return the account address of the bond holder for a specified `disputeBond`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
+
+#### augur.api.DisputeBond.getUniverse({ disputeBond }[, callback])
+
+This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBond` belongs to.
 
 Market Call API
 ----------------
@@ -141,6 +129,10 @@ augur.api.Market.getEndTime({ market: market }, function (endTime) { /* ... */ }
 // example output:
 endTime = "1500388730";
 
+augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ market: market }, function (extraDisputeBondRemainingToBePaidOut) { /* ... */ })
+// example output:
+extraDisputeBondRemainingToBePaidOut = "1000";
+
 augur.api.Market.getFinalizationTime({ market: market }, function (finalizationTime) { /* ... */ })
 // example output:
 finalizationTime = "1500647930";
@@ -169,6 +161,10 @@ augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, functi
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
 
+augur.api.Market.getOwner({ market: market }, function (owner) { /* ... */ })
+// example output:
+owner = "0x06cbcd92af2571f1419b622a794d65db524f682b"
+
 augur.api.Market.getNumberOfOutcomes({ market: market }, function (numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "2"
@@ -181,15 +177,6 @@ augur.api.Market.getReportingState({ market: market }, function (reportingState)
 // example output:
 reportingState = "0";
 
-augur.api.Market.getStakeToken({ market: market, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (stakeToken) { /* ... */ })
-// example output:
-stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
-
-var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (stakeTokenOrZero) { /* ... */ })
-// example output:
-stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
-
 augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
@@ -201,9 +188,26 @@ augur.api.Market.getShareToken({
 // example output:
 shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
+augur.api.Market.getStakeToken({ market: market, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (stakeToken) { /* ... */ })
+// example output:
+stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
+
+var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
+augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (stakeTokenOrZero) { /* ... */ })
+// example output:
+stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
+
 augur.api.Market.getTentativeWinningPayoutDistributionHash({ market: market }, function (tentativeWinningPayoutDistributionHash) { /* ... */ })
 // example output:
 tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api.Market.getTotalStake({ market: market }, function (totalStake) { /* ... */ })
+// example output:
+totalStake = "1000"
+
+augur.api.Market.getTotalWinningDisputeBondStake({ market: market }, function (_totalDisputeBondStake) { /* ... */ })
+// example output:
+_totalDisputeBondStake = "1000"
 
 augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */ })
 // example output:
@@ -247,7 +251,7 @@ Returns the second best, or second place, tentatively winning [Payout Distributi
 
 #### augur.api.Market.getDenominationToken({ market }[, callback])
 
-Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used as the currency to trade on the [Outcome](#outcome) of a [Market](#market).
+Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this will always return "Cash"; however, Augur will eventually support other types of Denomination Tokens.
 
 #### augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market }[, callback])
 
@@ -276,6 +280,10 @@ Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s 
 #### augur.api.Market.getEndTime({ market }[, callback])
 
 Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Report Phase](#designated-report-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin [Reporting Rounds](#reporting-round).
+
+#### augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ market }[, callback])
+
+Returns the amount of [REP](#rep) that is available in a [Market](#market) to be migrated to other [Universes](#universe) to reward [Dispute Bond](#dispute-bond) holders.
 
 #### augur.api.Market.getFinalizationTime({ market }[, callback])
 
@@ -313,6 +321,10 @@ Returns the number of [Outcomes](#outcome) for a specified `market`. The number 
 
 Returns the [Number of Ticks](#number-of-ticks) set for a specific `market`. The Number of [Ticks](#ticks) represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
 
+#### augur.api.Market.getOwner({ market }[, callback])
+
+Returns the address of the specified [Market's](#market) owner.
+
 #### augur.api.Market.getPayoutDistributionHashStake({ market, \_payoutDistributionHash }[, callback])
 
 Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDistributionHash` of a `market`. [Reporters](#reporter) who stake REP on the same [Outcome](#outcome) during the [Reporting Phase](#reporting-phase) will have identical [Payout Distribution Hashs](#payout-distribution-hash). This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on [it is considered the Proposed Outcome](#proposed-outcome) while the [Market](#market) is [Awaiting Finalization](#awaiting-finalization). If the [Dispute Phase](#dispute-phase) passes without a [Challenge](#challenge) to the Proposed Outcome then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome).
@@ -320,14 +332,6 @@ Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDi
 #### augur.api.Market.getReportingState({ market }[, callback])
 
 Returns the current [Reporting](#report) State that the `market` is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the [Reporting Section](#reporting) of the documentation.
-
-#### augur.api.Market.getStakeToken({ market, \_payoutNumerators, \_invalid }[, callback])
-
-Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
-
-#### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
-
-Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Stake Token given a Payout Distribution Hash, much like `getStakeToken` returns the Stake Token given a Payout Set.
 
 #### augur.api.Market.getReportingWindow({ market }[, callback])
 
@@ -337,9 +341,25 @@ Returns the [Reporting Window](#reporting-window) address for the specified `mar
 
 Returns the [Share](#shares) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
 
+#### augur.api.Market.getStakeToken({ market, \_payoutNumerators, \_invalid }[, callback])
+
+Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
+
+#### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market, \_payoutDistributionHash }[, callback])
+
+Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Stake Token given a Payout Distribution Hash, much like `getStakeToken` returns the Stake Token given a Payout Set.
+
 #### augur.api.Market.getTentativeWinningPayoutDistributionHash({ market }[, callback])
 
 Returns the tentatively winning [Payout Distribution Hash](#payout-distribution-hash) given a specified `market`. The tentatively winning Payout Distribution Hash is the hash with the most [REP](#rep) staked on it prior to [Market Finalization](#finalized-market). Once the [Market](#market) Finalized the tentatively winning Payout Distribution Hash becomes the Winning Payout Distribution Hash.
+
+#### augur.api.Market.getTotalStake({ market }[, callback])
+
+Returns the total amount staked on the specified [Market](#market).
+
+#### augur.api.Market.getTotalWinningDisputeBondStake({ market }[, callback])
+
+Returns the sum of all [Dispute Bonds](#dispute-bond) staked on challenging a [Payout Distribution Hash](#payout-distribution-hash) other than the final Payout Distribution Hash for the specfied [Market](#market).
 
 #### augur.api.Market.getUniverse({ market }[, callback])
 
@@ -617,10 +637,9 @@ augur.api.ParticipationToken.getMarket({ participationToken: participationToken 
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.ParticipationToken.getOutcome({ participationToken: participationToken }, function (outcome) { /* ... */ })
+augur.api.ParticipationToken.getReportingWindow({ participationToken: participationToken }, function (reportingWindow) { /* ... */ })
 // example output:
-outcome = "1"
-
+reportingWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 ```
 #### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
 
@@ -630,9 +649,9 @@ The Participation Token is an ERC-20 token that implements all of the required f
 
 Returns the market address for the specified `participationToken`.
 
-#### augur.api.ShareToken.getOutcome({ participationToken }[, callback])
+#### augur.api.ParticipationToken.getReportingWindow({ participationToken }[, callback])
 
-Returns the Outcome of the market that the specified `participationToken` is for.
+Returns the [Reporting Window](#reporting-window) address for the specified `participationToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Participation Tokens were purchased for.
 
 Reporting Window Call API
 -------------------------
