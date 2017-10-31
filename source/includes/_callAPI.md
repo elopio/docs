@@ -633,10 +633,6 @@ Participation Token Call API
 // Participation Token Contract Call API Examples:
 var participationToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-augur.api.ParticipationToken.getMarket({ participationToken: participationToken }, function (market) { /* ... */ })
-// example output:
-market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
-
 augur.api.ParticipationToken.getReportingWindow({ participationToken: participationToken }, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
@@ -644,10 +640,6 @@ reportingWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 #### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
 
 The Participation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
-
-#### augur.api.ParticipationToken.getMarket({ participationToken }[, callback])
-
-Returns the market address for the specified `participationToken`.
 
 #### augur.api.ParticipationToken.getReportingWindow({ participationToken }[, callback])
 
@@ -660,6 +652,10 @@ Reporting Window Call API
 var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
+
+augur.api.ReportingWindow.allMarketsFinalized({ reportingWindow: reportingWindow }, function (allMarketsFinalized) { /* ... */ })
+// example output:
+allMarketsFinalized = "1"
 
 augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (avgReportingGasPrice) { /* ... */ })
 // example output:
@@ -676,6 +672,14 @@ disputeStartTime = "1500647930"
 augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, function (endTime) { /* ... */ })
 // example output:
 endTime = "1500388730"
+
+augur.api.ReportingWindow.getFirstReporterMarketsCount({ reportingWindow: reportingWindow }, function (firstReporterMarketsCount) { /* ... */ })
+// example output:
+firstReporterMarketsCount = "54321"
+
+augur.api.ReportingWindow.getLastReporterMarketsCount({ reportingWindow: reportingWindow }, function (lastReporterMarketsCount) { /* ... */ })
+// example output:
+lastReporterMarketsCount = "12345"
 
 augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (marketsCount) { /* ... */ })
 // example output:
@@ -701,6 +705,10 @@ augur.api.ReportingWindow.getNumMarkets({ reportingWindow: reportingWindow }, fu
 // example output:
 numMarkets = "65"
 
+augur.api.ReportingWindow.getParticipationToken({ reportingWindow: reportingWindow }, function () { /* ... */ })
+// example output:
+= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
+
 augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportingWindow }, function () { /* ... */ })
 // example output:
 = "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
@@ -720,6 +728,14 @@ reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (startTime) { /* ... */ })
 // example output:
 startTime = "14995895900"
+
+augur.api.ReportingWindow.getTotalStake({ reportingWindow: reportingWindow }, function (totalStake) { /* ... */ })
+// example output:
+totalStake = "18900512367"
+
+augur.api.ReportingWindow.getTotalWinningStake({ reportingWindow: reportingWindow }, function (totalStake) { /* ... */ })
+// example output:
+totalStake = "29105"
 
 augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (universe) { /* ... */ })
 // example output:
@@ -744,11 +760,19 @@ augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingW
 // example output:
 isForkingMarketFinalized = "0";
 
+augur.api.ReportingWindow.isOver({ reportingWindow: reportingWindow }, function (isOver) { /* ... */ })
+// example output:
+isOver = "0";
+
 augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }, function (isReportingActive) { /* ... */ })
 // example output:
 isReportingActive = "1"
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
+
+#### augur.api.ReportingWindow.allMarketsFinalized({ reportingWindow }[, callback])
+
+Returns true if all [Markets](#market) in the specified [Reporting Window](#reporting-window) are [Finalized Markets](#finalized-market). Otherwise, returns false.
 
 #### augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])
 
@@ -766,6 +790,14 @@ As stated above, [Reporting Windows](#reporting-window) have two phases, the [Re
 
 Returns a timestamp for when this [Reporting Window](#reporting-window) will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
 
+#### augur.api.ReportingWindow.getFirstReporterMarketsCount({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) in the specified [Reporting Window](#reporting-window) that are in the [First Report Round](#first-report-round). NOTE: If the Reporting Window has not begun yet, this number will include Markets that may end up being [Finalized](#finalized-market) in the [Designated Report Round](#designated-report-phase). Since it is unknown whether [Designated Reporters](#designated-reporter) ultimately will submit a report, Augur assumes by default that all new Markets will go to the First Report Round. Once the Reporting Window has begun, this function will return the number of Markets that are actually in the First Report Round.
+
+#### augur.api.ReportingWindow.getLastReporterMarketsCount({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) in the specified [Reporting Window](#reporting-window) that are in the [Last Report Round](#last-report-round).
+
 #### augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])
 
 Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
@@ -774,13 +806,13 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 
 Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
 
-#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
-
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
-
 #### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow }[, callback])
 
 Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have [First Report Bonds](#first-report-bonds) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
+
+#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
 
 #### augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow }[, callback])
 
@@ -789,6 +821,10 @@ Returns the number of [Markets](#market) that were [Reported](#report) to be Inv
 #### augur.api.ReportingWindow.getNumMarkets({ reportingWindow }[, callback])
 
 Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
+
+#### augur.api.ReportingWindow.getParticipationToken({ reportingWindow }[, callback])
+
+Returns the Contract Address of the [Participation Token](#participation-token) associated with the specified [Reporting Window](#reporting-window).
 
 #### augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])
 
@@ -810,6 +846,14 @@ Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting 
 
 Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
 
+#### augur.api.ReportingWindow.getTotalStake({ reportingWindow }[, callback])
+
+Returns the total amount staked across all [Markets](#market) in the specified [Reporting Window](#reporting-window).
+
+#### augur.api.ReportingWindow.getTotalWinningStake({ reportingWindow }[, callback])
+
+Returns the total amount [Participation Tokens](#participation-token) purchased in the specified [Reporting Window](#reporting-window). NOTE: Participation Tokens are only purchasable in the event that no [Market](#market) in a Reporting Window can be reported on.
+
 #### augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])
 
 Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
@@ -829,6 +873,10 @@ Returns whether the [Reporting Window](#reporting-window) is currently in it's [
 #### augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])
 
 Returns whether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
+
+#### augur.api.ReportingWindow.isOver({ reportingwindow }[, callback])
+
+Returns whether the 30-day reporting period for the specified [Reporting Window](#reporting-window) has ended.
 
 #### augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])
 
@@ -1016,8 +1064,7 @@ reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 var _endTime = 2524608000;
 augur.api.Universe.getReportingWindowByMarketEndTime({
   universe: universe,
-  _endTime: _endTime,
-  _hasDesignatedReporter: 0
+  _endTime: _endTime
 }, function (reportingWindowByEndTime) { /* ... */ })
 // example output:
 reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
@@ -1043,7 +1090,7 @@ reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
   universe: universe,
-  _shadyTarget: market
+  _shadyMarket: market
 }, function (isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1";
@@ -1059,7 +1106,7 @@ isContainerForStakeToken = "1";
 var reportingWindow = "578";
 augur.api.Universe.isContainerForReportingWindow({
   universe: universe,
-  _shadyTarget: reportingWindow
+  _shadyReportingWindow: reportingWindow
 }, function (isContainerForReportingWindow) { /* ... */ })
 // example output:
 isContainerForReportingWindow = "1";
@@ -1116,9 +1163,9 @@ Returns the specified `universe`'s [Reporting Window](#reporting-window) full du
 
 Returns the [Reporting Window](#reporting-window) Contract Address belonging to this `universe` that matches the `_reportingWindowId` passed to the function.
 
-#### augur.api.Universe.getReportingWindowByMarketEndTime({ universe, \_endTime, \_hasDesignatedReporter }[, callback])
+#### augur.api.Universe.getReportingWindowByMarketEndTime({ universe, \_endTime }[, callback])
 
-Returns the [Reporting Window](#reporting-window) address on the specific `universe` given an `_endTime` and if the [Market](#market) we are checking for has an [Designated Reporter](#designated-reporter) or not (`_hasDesignatedReporter`). `_hasDesignatedReporter` should be `0` for Markets without an Designated Reporter, `1` for Markets with an Designated Reporter.
+Returns the [Reporting Window](#reporting-window) address on the specific `universe` given an `_endTime`.
 
 #### augur.api.Universe.getReportingWindowByTimestamp({ universe, \_timestamp }[, callback])
 
@@ -1132,17 +1179,17 @@ Returns the [Reporting Window](#reporting-window) Id for a specific `universe` a
 
 Returns the [Reputation Token](#rep) Address for a specific `universe`. This is the REP usable within this Universe.
 
-#### augur.api.Universe.isContainerForMarket({ universe, \_shadyTarget }[, callback])
+#### augur.api.Universe.isContainerForMarket({ universe, \_shadyMarket }[, callback])
 
-Returns whether the specific `universe` is a container for the [Market](#market) `_shadyTarget` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
+Returns whether the specific `universe` is a container for the [Market](#market) `_shadyMarket` address provided. Returns `1` if true, `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market is actually attached to the Universe in question.
 
-#### augur.api.Universe.isContainerForStakeToken({ universe, \_shadyTarget }[, callback])
+#### augur.api.Universe.isContainerForStakeToken({ universe, \_shadyStakeToken }[, callback])
 
-Returns whether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyTarget` address provided. Returns `1` if true, `0` if false. [Stake Tokens](#stake-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine whether the Universe contains the Stake Token specified.
+Returns whether the specific `universe` is a container for the [Reporting](#reporting) Token `_shadyStakeToken` address provided. Returns `1` if true, `0` if false. [Stake Tokens](#stake-tokens) are 1:1 exchangeable for [REP](#rep) by [Reporters](#reporter) to represent their staked REP for a [Report](#report). This method is designed determine whether the Universe contains the Stake Token specified.
 
-#### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyTarget }[, callback])
+#### augur.api.Universe.isContainerForReportingWindow({ universe, \_shadyReportingWindow }[, callback])
 
-Returns whether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyTarget` Contract Address provided. Returns `1` if true, `0` if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
+Returns whether the specific `universe` is a container for the [Reporting Window](#reporting-window) `_shadyReportingWindow` Contract Address provided. Returns `1` if true, `0` if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.
 
 #### augur.api.Universe.isParentOf({ universe, \_shadyChild }[, callback])
 

@@ -1048,11 +1048,9 @@ Returns: true if the Participation Tokens were successfully purchased. (NOTE: Th
 
 Converts the user's Participation Tokens to Reputation Tokens. Due to the fact that the fees can sometimes take months to claim, the parameter `forgoFees` can be set to true if the user would like to redeem his or her Participation Tokens without having to wait.
 
-This transaction will fail if:
+This transaction will fail if `msg.sender` does not have any Participation Tokens.
 
-- `msg.sender` does not have any Participation Tokens.
-
-Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
+It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 #### augur.api.ParticipationToken.withdrawInEmergency({ \_signer, participationToken, onSent, onSuccess, onFailed })
 
@@ -1079,7 +1077,7 @@ var _maxDisplayPrice = "1";
 var _designatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
 var _topic = "examples";
 
-augur.api.ReportingWindow.createNewMarket({
+augur.api.ReportingWindow.createMarket({
   _signer: privateKey,
   reportingWindow: reportingWindow,
   _endTime: _endTime,
@@ -1115,7 +1113,7 @@ successResponse = {
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
 
-#### augur.api.ReportingWindow.createNewMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_designatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
+#### augur.api.ReportingWindow.createMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_payoutDenominator, \_feePerEthInWei, \_denominationToken, \_creator, \_minDisplayPrice, \_maxDisplayPrice, \_designatedReporterAddress, \_topic, onSent, onSuccess, onFailed })
 
 This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `_numOutcomes` value isn't within the range of 2 and 8, if the `_payoutDenominator` isn't between 2 and 2<sup>254</sup>, if the current time is not before the start time of the `_reportingWindow`, if the `_payoutDenominator` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_maxDisplayPrice` and `_minDisplayPrice` isn't between -2<sup>254</sup> to 2<sup>254</sup>, if  `_maxDisplayPrice` - `_minDisplayPrice` must be between 1 and 2<sup>254</sup>, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
@@ -1517,9 +1515,11 @@ successResponse = {
   value: "0x0"
 }
 
+var _forgoFees = true;
 augur.api.StakeToken.redeemWinningTokens({
   _signer: privateKey,
   stakeToken: stakeToken,
+  _forgoFees: _forgoFees,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -1641,9 +1641,9 @@ In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked 
 
 This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Stake Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
 
-#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, _forgoFees, onSent, onSuccess, onFailed })
 
-This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
+This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). Due to the fact that the fees can sometimes take months to claim, the parameter `forgoFees` can be set to true if the user would like to redeem his or her Stake Tokens without having to wait. This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
 
 #### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
 
