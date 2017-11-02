@@ -1046,7 +1046,7 @@ Returns: true if the Participation Tokens were successfully purchased. (NOTE: Th
 
 #### augur.api.ParticipationToken.redeem({ \_signer, participationToken, \_forgoFees, onSent, onSuccess, onFailed })
 
-Converts the user's Participation Tokens to Reputation Tokens. Due to the fact that the fees can sometimes take months to claim, the parameter `forgoFees` can be set to true if the user would like to redeem his or her Participation Tokens without having to wait.
+Converts the user's Participation Tokens to Reputation Tokens. Due to the fact that Markets can sometimes take months to Finalize (and, therefore, fees can take months to claim), the parameter `forgoFees` can be set to true if the user would like to redeem his or her Participation Tokens immediately without having to wait.
 
 This transaction will fail if `msg.sender` does not have any Participation Tokens.
 
@@ -1643,7 +1643,7 @@ This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#fo
 
 #### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, _forgoFees, onSent, onSuccess, onFailed })
 
-This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). Due to the fact that the fees can sometimes take months to claim, the parameter `forgoFees` can be set to true if the user would like to redeem his or her Stake Tokens without having to wait. This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
+This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). Due to the fact that Markets can sometimes take months to Finalize (and, therefore, the fees can take months to claim), the parameter `forgoFees` can be set to true if the user would like to redeem his or her Stake Tokens immediately without having to wait. This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
 
 #### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
 
@@ -1803,3 +1803,210 @@ The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` 
 #### augur.api.Trade.publicTakeBestOrder({ \_signer, \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
+
+Universe Tx API
+---------------------
+```javascript
+// Universe Contract Transaction API Examples:
+var privateKey = <Buffer ...>;
+var universe = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
+
+augur.api.Universe.getDesignatedReportNoShowBond({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320551,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getDesignatedReportStake({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320551,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getMarketCreationCost({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320552,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+var _parentPayoutDistributionHash = <Parent Payout Distribution Hash as 32 bytes...>
+augur.api.Universe.getOrCreateChildUniverse({
+  _signer: privateKey,
+  universe: universe,
+  _parentPayoutDistributionHash: _parentPayoutDistributionHash,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320554,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getReportingFeeDivisor({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320554,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getReportingWindowForForkEndTime({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320555,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getTargetReporterGasCosts({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320556,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+```
+#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
+
+#### augur.api.Universe.getDesignatedReportNoShowBond({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the current [Designated Report No-Show Bond](#designated-report-no-show-bond) for [Markets](#market) in the specified [Universe](#universe), priced in [AttoREP](#atto-prefix).
+
+#### augur.api.Universe.getDesignatedReportStake({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report). 
+
+#### augur.api.Universe.getMarketCreationCost({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the specified [Universe](#universe). The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
+
+#### augur.api.Universe.getOrCreateChildUniverse({ \_signer, universe, \_parentPayoutDistributionHash, onSent, onSuccess, onFailed })
+
+Returns a [Child Universe](#child-universe) corresponding to the specified `_parentPayoutDistributionHash`. If the Child Universe does not already exist, it will be created. This transaction will fail if the Universe does not have a [Forked Market](#forked-market).
+
+#### augur.api.Universe.getReportingFeeDivisor({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
+
+#### augur.api.Universe.getReportingWindowForForkEndTime({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends.
+
+#### augur.api.Universe.getTargetReporterGasCosts({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the fee in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a designated no show, or refunded to the [Market Creator](#market-creator) if the [Designated Reporter](#designated-reporter) does show up.

@@ -1037,9 +1037,17 @@ augur.api.Universe.getForkingMarket({ universe: universe }, function (forkingMar
 // example output:
 forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 
+augur.api.Universe.getForkReputationGoal({ universe }, function (forkReputationGoal) { /* ... */ })
+// example output:
+forkReputationGoal = "150657";
+
 augur.api.Universe.getNextReportingWindow({ universe: universe }, function (nextReportingWindow) { /* ... */ })
 // example output:
 nextReportingWindow = "579"
+
+augur.api.Universe.getOpenInterestInAttoEth({ universe: universe }, function (openInterestInAttoEth) { /* ... */ })
+// example output:
+openInterestInAttoEth = "7123876876123"
 
 augur.api.Universe.getParentUniverse({ universe: universe }, function (parentUniverse) { /* ... */ })
 // example output:
@@ -1139,9 +1147,17 @@ Returns the timestamp for when the [Fork Period](#fork-period) ends that was sta
 
 Returns the contract address of the [Market](#market) that the specified `universe` is [Forking](#fork) over. This returns 0 if the Universe has never forked and there is no [Forked Market](#forked-market).
 
+#### augur.api.Universe.getForkReputationGoal({ universe }[, callback])
+
+Returns the estimated amount of [REP](#rep) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) to be finalized before the end of the [Fork Period](#fork-period).
+
 #### augur.api.Universe.getNextReportingWindow({ universe }[, callback])
 
 Returns the next [Reporting Window](#reporting-window) Id coming up after the current Reporting Window ends in a specific `universe`.
+
+#### augur.api.Universe.getOpenInterestInAttoEth({ universe }[, callback])
+
+Returns the total value of all [Complete Sets](#complete-sets) that exist across all [Markets](#market) in a specific `universe`, priced in attoETH.
 
 #### augur.api.Universe.getParentUniverse({ universe }[, callback])
 
