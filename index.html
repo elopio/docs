@@ -569,319 +569,568 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ marketIDs } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
 
 <h2 id="simplified-api">Simplified API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 1 is "buy", 2 is "sell"</span>
-<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">minPrice</span> <span class="o">=</span> <span class="s2">"0.0"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">maxPrice</span> <span class="o">=</span> <span class="s2">"1.0"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_startingOrderId</span> <span class="o">=</span> <span class="s2">"0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_numOrdersToLoad</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">getAccountTransferHistory</span><span class="p">({</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s2">"0x7a305d9b681fb164dc5ad628b5992177dc66aec8"</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accountTransferHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000deadb33f"</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">sender</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">recipient</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+    <span class="na">token</span><span class="p">:</span> <span class="s2">"0x7a305d9b681fb164dc5ad628b5992177dc66aec8"</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">47</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">orderBook</span><span class="p">.</span><span class="nx">getOrderBook</span><span class="p">({</span>
-  <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">minPrice</span><span class="p">:</span> <span class="nx">minPrice</span><span class="p">,</span>
-  <span class="na">maxPrice</span><span class="p">:</span> <span class="nx">maxPrice</span><span class="p">,</span>
-  <span class="na">_startingOrderId</span><span class="p">:</span> <span class="nx">_startingOrderId</span><span class="p">,</span>
-  <span class="na">_numOrdersToLoad</span><span class="p">:</span> <span class="nx">_numOrdersToLoad</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">orderBook</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">categoriesInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"finance"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">12345</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"politics"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">5000</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"ethereum"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">1000</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">500</span> <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketInfo</span><span class="p">({</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">buy</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">220</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.1770833333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.177'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="s1">'0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">217</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.1208333333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.1208'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="s1">'0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">219</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.0083333333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.0083'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">orderBook</span><span class="p">.</span><span class="nx">getOrderBook</span><span class="p">({</span>
-  <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">minPrice</span><span class="p">:</span> <span class="nx">minPrice</span><span class="p">,</span>
-  <span class="na">maxPrice</span><span class="p">:</span> <span class="nx">maxPrice</span><span class="p">,</span>
-  <span class="na">_startingOrderId</span><span class="p">:</span> <span class="nx">_startingOrderId</span><span class="p">,</span>
-  <span class="na">_numOrdersToLoad</span><span class="p">:</span> <span class="nx">_numOrdersToLoad</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">orderBookChunk</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">completeSingleOutcomeOrderBookSide</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="c1">// example chunk output:</span>
-<span class="p">{</span>
-  <span class="nl">buy</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">220</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'15'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.1770833333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.177'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="s1">'0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">217</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.1208333333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.1208'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="s1">'0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b'</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">amount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">block</span><span class="p">:</span> <span class="mi">219</span><span class="p">,</span>
-      <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
-      <span class="nx">fullPercisionPrice</span><span class="p">:</span> <span class="s1">'0.0083333333333333'</span><span class="p">,</span>
-      <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b'</span><span class="p">,</span>
-      <span class="nx">market</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-      <span class="nx">outcome</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-      <span class="nx">owner</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-      <span class="nx">price</span><span class="p">:</span> <span class="s1">'0.0083'</span><span class="p">,</span>
-      <span class="nx">type</span><span class="p">:</span> <span class="s1">'buy'</span><span class="p">,</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketInfo</span><span class="p">({</span> <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">{</span>
-  <span class="nl">author</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="nx">branchID</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
+  <span class="nl">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="nx">type</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+  <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="nx">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="nx">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+  <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
+  <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
+  <span class="nx">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="nx">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+  <span class="nx">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+  <span class="nx">marketCreatorFeesCollected</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">category</span><span class="p">:</span> <span class="s2">"test category"</span><span class="p">,</span>
+  <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
+  <span class="nx">volume</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">reportingState</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+  <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
+  <span class="nx">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+  <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
+  <span class="nx">numTicks</span><span class="p">:</span> <span class="mi">10752</span><span class="p">,</span>
   <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
-  <span class="nx">creationFee</span><span class="p">:</span> <span class="s1">'9'</span><span class="p">,</span>
-  <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1502248462</span><span class="p">,</span>
-  <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-  <span class="nx">description</span><span class="p">:</span> <span class="s1">'What will be the status of the U.S. electoral college on January 1, 2020?~|&gt;Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished'</span><span class="p">,</span>
-  <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1577952000</span><span class="p">,</span>
-  <span class="nx">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
-  <span class="nx">extraInfo</span><span class="p">:</span> <span class="s1">'http://www.nationalpopularvote.com'</span><span class="p">,</span>
-  <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-  <span class="nx">makerFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
-  <span class="nx">maxValue</span><span class="p">:</span> <span class="s1">'3'</span><span class="p">,</span>
-  <span class="nx">minValue</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-  <span class="nx">network</span><span class="p">:</span> <span class="s1">'9000'</span><span class="p">,</span>
-  <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
   <span class="nx">outcomes</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-    <span class="na">price</span><span class="p">:</span> <span class="s1">'0.6020833333333333'</span><span class="p">,</span>
-    <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-    <span class="na">price</span><span class="p">:</span> <span class="s1">'0.4333333333333333'</span><span class="p">,</span>
-    <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-    <span class="na">price</span><span class="p">:</span> <span class="s1">'0.4333333333333333'</span><span class="p">,</span>
-    <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
   <span class="p">}],</span>
-  <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s1">'politics'</span><span class="p">,</span> <span class="s1">'elections'</span><span class="p">,</span> <span class="s1">'US politics'</span><span class="p">],</span>
-  <span class="nx">takerFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-  <span class="nx">topic</span><span class="p">:</span> <span class="s1">'politics'</span><span class="p">,</span>
-  <span class="nx">tradingFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-  <span class="nx">tradingPeriod</span><span class="p">:</span> <span class="mi">9131</span><span class="p">,</span>
-  <span class="nx">type</span><span class="p">:</span> <span class="s1">'categorical'</span><span class="p">,</span>
-  <span class="nx">volume</span><span class="p">:</span> <span class="s1">'1710.399999999999999985'</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">marketIDs</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">market</span><span class="p">,</span> <span class="s1">'0xe095e00863aecd814003a739da97b54c2b6737bd'</span><span class="p">];</span>
-<span class="c1">// const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">batchGetMarketInfo</span><span class="p">({</span> <span class="na">marketIDs</span><span class="p">:</span> <span class="nx">marketIDs</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> 
+  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> 
+  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketPriceHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">author</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-    <span class="nx">branchID</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
-    <span class="nx">creationFee</span><span class="p">:</span> <span class="s1">'9'</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1502248462</span><span class="p">,</span>
-    <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'What will be the status of the U.S. electoral college on January 1, 2020?~|&gt;Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished'</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1577952000</span><span class="p">,</span>
-    <span class="nx">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
-    <span class="nx">extraInfo</span><span class="p">:</span> <span class="s1">'http://www.nationalpopularvote.com'</span><span class="p">,</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42'</span><span class="p">,</span>
-    <span class="nx">makerFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
-    <span class="nx">maxValue</span><span class="p">:</span> <span class="s1">'3'</span><span class="p">,</span>
-    <span class="nx">minValue</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">network</span><span class="p">:</span> <span class="s1">'9000'</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="nx">outcomes</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="s1">'0.6020833333333333'</span><span class="p">,</span>
-      <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="s1">'0.4333333333333333'</span><span class="p">,</span>
-      <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'310'</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="s1">'0.4333333333333333'</span><span class="p">,</span>
-      <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-    <span class="p">}],</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s1">'politics'</span><span class="p">,</span> <span class="s1">'elections'</span><span class="p">,</span> <span class="s1">'US politics'</span><span class="p">],</span>
-    <span class="nx">takerFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">topic</span><span class="p">:</span> <span class="s1">'politics'</span><span class="p">,</span>
-    <span class="nx">tradingFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">tradingPeriod</span><span class="p">:</span> <span class="mi">9131</span><span class="p">,</span>
-    <span class="nx">type</span><span class="p">:</span> <span class="s1">'categorical'</span><span class="p">,</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s1">'1710.399999999999999985'</span>
-  <span class="p">},</span>
-  <span class="s1">'0xe095e00863aecd814003a739da97b54c2b6737bd'</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">author</span><span class="p">:</span> <span class="s1">'0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f'</span><span class="p">,</span>
-    <span class="nx">branchID</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">5156</span><span class="p">,</span>
-    <span class="nx">creationFee</span><span class="p">:</span> <span class="s1">'9'</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1502291695</span><span class="p">,</span>
-    <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'Will the Bitcoin (BTC) price be equal to or higher than USD 3,400 on 31 August 2017 as shown on www.coinmarketcap.com?'</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1504130400</span><span class="p">,</span>
-    <span class="nx">eventBond</span><span class="p">:</span> <span class="s1">'4.5'</span><span class="p">,</span>
-    <span class="nx">extraInfo</span><span class="p">:</span> <span class="s1">'http://www.nationalpopularvote.com'</span><span class="p">,</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s1">'0xe095e00863aecd814003a739da97b54c2b6737bd'</span><span class="p">,</span>
-    <span class="nx">makerFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
-    <span class="nx">maxValue</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">,</span>
-    <span class="nx">minValue</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">network</span><span class="p">:</span> <span class="s1">'9000'</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nx">outcomes</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'2101.2'</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-      <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="na">outstandingShares</span><span class="p">:</span> <span class="s1">'2101.2'</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="s1">'0.99'</span><span class="p">,</span>
-      <span class="na">sharesPurchased</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
-    <span class="p">}],</span>
-    <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s1">'www.coinmarketcap.com'</span><span class="p">,</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Bitcoin'</span><span class="p">,</span> <span class="s1">'Cryptocurrency'</span><span class="p">,</span> <span class="kc">null</span><span class="p">],</span>
-    <span class="nx">takerFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">topic</span><span class="p">:</span> <span class="s1">'Bitcoin'</span><span class="p">,</span>
-    <span class="nx">tradingFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">tradingPeriod</span><span class="p">:</span> <span class="mi">8704</span><span class="p">,</span>
-    <span class="nx">type</span><span class="p">:</span> <span class="s1">'binary'</span><span class="p">,</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s1">'8346'</span>
-  <span class="p">}</span>
+  <span class="mi">0</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">price</span><span class="p">:</span> <span class="mf">5.5</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
+  <span class="p">}],</span>
 <span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">({</span>
-  <span class="na">marketIDs</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s1">'0xfb9165a0f492a910082c02bc174d3b3b7f7f979e'</span><span class="p">,</span> <span class="s1">'0x563b377a956c80d77a7c613a9343699ad6123911'</span>
-  <span class="p">]</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarkets</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsMatched</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingDesignatedReporting</span><span class="p">({</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"volume"</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="p">{</span>
-  <span class="s1">'0xfb9165a0f492a910082c02bc174d3b3b7f7f979e'</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">author</span><span class="p">:</span> <span class="s1">'0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f'</span><span class="p">,</span>
-    <span class="nx">branchID</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1502248542</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s1">'Who will win the University of Georgia vs. University of Florida football game in 2017?~|&gt;Georgia|Florida|Vanderbilt'</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1509346800</span><span class="p">,</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s1">'0xfb9165a0f492a910082c02bc174d3b3b7f7f979e'</span><span class="p">,</span>
-    <span class="nx">makerFee</span><span class="p">:</span> <span class="s1">'0.01'</span><span class="p">,</span>
-    <span class="nx">maxValue</span><span class="p">:</span> <span class="s1">'3'</span><span class="p">,</span>
-    <span class="nx">minValue</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s1">'sports'</span><span class="p">,</span> <span class="s1">'college football'</span><span class="p">,</span> <span class="s1">'football'</span><span class="p">],</span>
-    <span class="nx">takerFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">topic</span><span class="p">:</span> <span class="s1">'sports'</span><span class="p">,</span>
-    <span class="nx">tradingFee</span><span class="p">:</span> <span class="s1">'0.02'</span><span class="p">,</span>
-    <span class="nx">tradingPeriod</span><span class="p">:</span> <span class="mi">8734</span><span class="p">,</span>
-    <span class="nx">type</span><span class="p">:</span> <span class="s1">'categorical'</span><span class="p">,</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s1">'1195.999999999999999997'</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsClosingInDateRange</span><span class="p">({</span>
+  <span class="na">earliestClosingTime</span><span class="p">:</span> <span class="mi">1506573450</span><span class="p">,</span>
+  <span class="na">latestClosingTime</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsClosingInDateRange</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsCreatedByUser</span><span class="p">({</span>
+  <span class="na">creator</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsCreatedByUser</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInCategory</span><span class="p">({</span>
+  <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInCategory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">marketIDs</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="p">],</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
+    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
+    <span class="na">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+    <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="na">marketCreatorFeesCollected</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"test category"</span><span class="p">,</span>
+    <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
+    <span class="na">volume</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">reportingState</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">endDate</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+    <span class="na">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
+    <span class="na">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
+    <span class="na">numTicks</span><span class="p">:</span> <span class="mi">10752</span><span class="p">,</span>
+    <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+    <span class="p">}],</span>
   <span class="p">},</span>
-  <span class="s1">'0x563b377a956c80d77a7c613a9343699ad6123911'</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">author</span><span class="p">:</span> <span class="s1">'0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f'</span><span class="p">,</span>
-    <span class="nx">branchID</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1502248522</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s2">"Will Augur's live release happen by the end of August, 2017?"</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1504249200</span><span class="p">,</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s1">'0x563b377a956c80d77a7c613a9343699ad6123911'</span><span class="p">,</span>
-    <span class="nx">makerFee</span><span class="p">:</span> <span class="s1">'0.010000000000000000125'</span><span class="p">,</span>
-    <span class="nx">maxValue</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">,</span>
-    <span class="nx">minValue</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Augur'</span><span class="p">,</span> <span class="s1">'release date'</span><span class="p">,</span> <span class="s1">'Ethereum'</span><span class="p">],</span>
-    <span class="nx">takerFee</span><span class="p">:</span> <span class="s1">'0.030000000000000000375'</span><span class="p">,</span>
-    <span class="nx">topic</span><span class="p">:</span> <span class="s1">'Augur'</span><span class="p">,</span>
-    <span class="nx">tradingFee</span><span class="p">:</span> <span class="s1">'0.026666666666666667'</span><span class="p">,</span>
-    <span class="nx">tradingPeriod</span><span class="p">:</span> <span class="mi">8705</span><span class="p">,</span>
-    <span class="nx">type</span><span class="p">:</span> <span class="s1">'binary'</span><span class="p">,</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s1">'29623.019599999999999969'</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
+    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
+    <span class="na">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+    <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="na">marketCreatorFeesCollected</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"test category"</span><span class="p">,</span>
+    <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
+    <span class="na">volume</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">reportingState</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">endDate</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
+    <span class="na">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a binary test market created by b0b."</span><span class="p">,</span>
+    <span class="na">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
+    <span class="na">numTicks</span><span class="p">:</span> <span class="mi">10752</span><span class="p">,</span>
+    <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">},</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">}],</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
+  <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+      <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+      <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+      <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+      <span class="na">reportingToken</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
+      <span class="na">isCategorical</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">isScalar</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">isIndeterminate</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="na">isSubmitted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">}],</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getOpenOrders</span><span class="p">({</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+  <span class="na">creator</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">openOrders</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">buy</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"0x1000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nl">shareToken</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+          <span class="nx">owner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+          <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506473500</span><span class="p">,</span>
+          <span class="nx">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
+          <span class="nx">price</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+          <span class="nx">amount</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nx">fullPrecisionPrice</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+          <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nx">tokensEscrowed</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+          <span class="nx">sharesEscrowed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nx">betterOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nx">worseOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"0x2000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nl">shareToken</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+          <span class="nx">owner</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+          <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506473515</span><span class="p">,</span>
+          <span class="nx">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400002</span><span class="p">,</span>
+          <span class="nx">price</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+          <span class="nx">amount</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nx">fullPrecisionPrice</span><span class="p">:</span> <span class="mf">0.600001</span><span class="p">,</span>
+          <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nx">tokensEscrowed</span><span class="p">:</span> <span class="mf">1.200002</span><span class="p">,</span>
+          <span class="nx">sharesEscrowed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nx">betterOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nx">worseOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">buy</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"0x3000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nl">shareToken</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
+          <span class="nx">owner</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+          <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506473515</span><span class="p">,</span>
+          <span class="nx">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400002</span><span class="p">,</span>
+          <span class="nx">price</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+          <span class="nx">amount</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="nx">fullPrecisionPrice</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+          <span class="nx">fullPrecisionAmount</span><span class="p">:</span> <span class="mf">2.0000001</span><span class="p">,</span>
+          <span class="nx">tokensEscrowed</span><span class="p">:</span> <span class="mf">1.20000006</span><span class="p">,</span>
+          <span class="nx">sharesEscrowed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="nx">betterOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="nx">worseOrderID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">userTradingHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[{</span>
+  <span class="na">type</span><span class="p">:</span> <span class="s2">"sell"</span><span class="p">,</span>
+  <span class="na">price</span><span class="p">:</span> <span class="mf">5.5</span><span class="p">,</span>
+  <span class="na">amount</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+  <span class="na">maker</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">settlementFees</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">shareToken</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
+  <span class="na">tradeGroupID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">}]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingPositions</span><span class="p">({</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">userTradingPositions</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
 <p>All of the methods in the Simplified API are getter methods that use an <code class="prettyprint">eth_call</code> RPC request; for transactional requests (<code class="prettyprint">eth_sendTransaction</code>), see the <a href="#transaction-api">Transaction API</a> section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.</p>
 
-<h3 id="augur-trading-orderbook-getorderbook-_type-_market-_outcome-minprice-maxprice-_startingorderid-_numorderstoload-callback">augur.trading.orderBook.getOrderBook({ _type, _market, _outcome, minPrice, maxPrice[, _startingOrderId, _numOrdersToLoad ]}[, callback])</h3>
+<p>Optional parameters are listed in brackets. Most of the Simplified API functions contain optional parameters for specifying which results to return and how to sort them.  For example, <code class="prettyprint">sortBy</code> should be a string corresponding to the name of a particular field to sort by, and <code class="prettyprint">isSortDescending</code> should be a boolean value for whether to sort the results in descending order. <code class="prettyprint">limit</code> should be an integer greater than 0 that represents the maximum number of results to return. <code class="prettyprint">offset</code> should be an integer greater than 0. It is used when only a portion of the total query results is desired, and it represents the record number at which to start returning results.</p>
 
-<p>Retrieves a section of the <a href="#order-book">Order Book</a> for a specified <a href="#market">Market</a>. The required params are <code class="prettyprint">_market</code> which is the address of the Market we intend to get the order book for. The <code class="prettyprint">_type</code> which is either set to <code class="prettyprint">1</code> for getting the Buy side of the order book and <code class="prettyprint">2</code> for the sell side. The <code class="prettyprint">_outcome</code> which is an integer value between 1 and 8 for the <a href="#outcome">Outcome</a> we want to get <a href="#order">Orders</a> for. The <code class="prettyprint">minPrice</code> and <code class="prettyprint">maxPrice</code> are also required and should be set to the minimum and maximum possible prices for a <a href="#shares">Share</a>. The two optional parameters are <code class="prettyprint">_startingOrderId</code> which defaults to <code class="prettyprint">0x0</code>, which indicates &ldquo;start from the best order&rdquo;, and <code class="prettyprint">_numOrdersToLoad</code> which defaults to 0, or &ldquo;load all orders&rdquo;. The <code class="prettyprint">_startingOrderId</code> field should be the order ID from which to start walking towards the order book&rsquo;s tail, as a hexadecimal string. The <code class="prettyprint">_numOrdersToLoad</code> is expected to be a whole number. The <code class="prettyprint">getOrderBook</code> function generally should be used only to fetch a small chunk of orders. To fetch entire order book, typically <code class="prettyprint">getOrderBookChunked</code> should be used instead.</p>
+<h3 id="augur-accounts-getaccounttransferhistory-account-token-sortby-issortdescending-limit-offset-callback">augur.accounts.getAccountTransferHistory({ account[, token, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<h3 id="augur-trading-orderbook-getorderbookchunked-_type-_market-_outcome-minprice-maxprice-_startingorderid-_numorderstoload-onchunkcallback-oncompletecallback">augur.trading.orderBook.getOrderBookChunked({ _type, _market, _outcome, minPrice, maxPrice[, _startingOrderId, _numOrdersToLoad ]}[, onChunkCallback, onCompleteCallback ])</h3>
+<p>Returns the token transfers made to or from the required <code class="prettyprint">account</code> parameter, which is a string containing the account address. The optional string parameter <code class="prettyprint">token</code> can be used to restrict the results to a particular token name.</p>
 
-<p>Very similar to the above <code class="prettyprint">getOrderBook</code> function, however this function is designed for getting the entire side of an <a href="#outcome">Outcome&rsquo;s</a> <a href="#order-book">Order Book</a> for a specific <a href="#market">Market</a> in chunks. The <code class="prettyprint">getOrderBookChunked</code> function has a params object with the same keys as <code class="prettyprint">getOrderBook</code> but they work slightly differently. The <code class="prettyprint">_numOrdersToLoad</code> key is now the chunk size, which instead of defaulting to 0 or &ldquo;load all orders&rdquo;, it defaults to the default chunk size: 100. The chunk size is simply the number of orders each request will attempt to bring back at a time. This function also has two callbacks, the <code class="prettyprint">onChunkCallback</code> and the <code class="prettyprint">onCompleteCallback</code>. The <code class="prettyprint">onChunkCallback</code> will be triggered for each chunk of orders received where as the <code class="prettyprint">onCompleteCallback</code> will only be called when the entire order book&rsquo;s single outcome side has been returned. In our example, we are looking to find all the buy orders for outcome 1 in our market, starting from the order ID <code class="prettyprint">0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc</code> in chunks of three orders per return to <code class="prettyprint">onChunkCallback</code>.</p>
+<h3 id="augur-markets-getcategories-universe-sortby-issortdescending-limit-offset-callback">augur.markets.getCategories({ universe[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<h3 id="augur-markets-getmarketinfo-_market-callback">augur.markets.getMarketInfo({ _market }[, callback])</h3>
+<p>Returns a list of all <a href="#market">Market</a> categories in the required parameter <code class="prettyprint">universe</code>, which is a string containing the address of a given <a href="#universe">Universe</a>.</p>
 
-<p>Returns information about a <a href="#market">Market</a> (<code class="prettyprint">_market</code>) that is stored on-contract. Information returned will include all kinds of basic information about the market as well as information about each market <a href="#outcome">Outcome</a>. This information doesn&rsquo;t include the <a href="#order-book">Order Book</a> however and you should use <code class="prettyprint">getOrderBook</code> or <code class="prettyprint">getOrderBookChunked</code> to get information about <a href="#open-orders">Open Orders</a> for the specified Market.</p>
+<!-- Query TBD
+augur.markets.getDisputableMarkets({
+  reportingWindow: "0xacac65a0f492a910082c02bc174d3b3b7f7f1234",
+  sortBy: "",
+  isSortDescending: false, 
+  limit: 2, 
+  offset: 0
+}, function (disputableMarkets) { /* ... */ })
+// example output:
 
-<h3 id="augur-markets-batchgetmarketinfo-marketids-callback">augur.markets.batchGetMarketInfo({ marketIDs }[, callback])</h3>
+### augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
 
-<p>Retrieve a <code class="prettyprint">marketsInfo</code> object for the <a href="#market">Market</a> IDs in the array <code class="prettyprint">marketIDs</code>. The <code class="prettyprint">marketsInfo</code> object will contain <code class="prettyprint">marketInfo</code> objects (see above for example) which are indexed by their respective market IDs. Much like the above <code class="prettyprint">getMarketsInfo</code> the <a href="#order-book">Order Book</a> will not be included in the market information returned and needs to be retrieved separately.</p>
+Returns the [Markets](#market) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market's result. The required `reportingWindow` parameter is a string containing the address of a Reporting Window.
+-->
 
-<h3 id="augur-markets-getmarketsinfo-marketids-callback">augur.markets.getMarketsInfo({ marketIDs }[, callback])</h3>
+<h3 id="augur-markets-getmarketinfo-marketid-callback">augur.markets.getMarketInfo({ marketID }[, callback])</h3>
 
-<p>This function returns a <code class="prettyprint">marketsInfo</code> object containing <code class="prettyprint">marketInfo</code> objects indexed by their respective market IDs similar to <code class="prettyprint">batchGetMarketInfo</code>. This function does not return as much information about the markets as <code class="prettyprint">batchGetMarketInfo</code>.</p>
+<p>Returns information about a <a href="#market">Market</a> (<code class="prettyprint">marketID</code>) that is stored on-contract. The returned result includes basic information about the market as well as information about each market <a href="#outcome">Outcome</a>. It does not include <a href="#order-book">Order Book</a> information; however the function <code class="prettyprint">augur.trading.getOpenOrders</code> can be used to get information about <a href="#open-orders">Open Orders</a> for the specified Market.</p>
+
+<h3 id="augur-markets-getmarketpricehistory-marketid-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketPriceHistory({ [marketID, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the prices and timestamps of <a href="#market">Market</a> <a href="#outcome">Outcomes</a> over time. The <code class="prettyprint">marketID</code> parameter can be specified as a string containing a specific Market&rsquo;s address in order to restrict the results to a particular Market.</p>
+
+<h3 id="augur-markets-getmarkets-universe-sortby-issortdescending-limit-offset-callback">augur.markets.getMarkets({ [universe, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns an array of all <a href="#markets">Markets</a>. If <code class="prettyprint">universe</code> is specified, this will restrict the results to only Markets within that Universe[#universe].</p>
+
+<h3 id="augur-markets-getmarketsawaitingdesignatedreporting-designatedreporter-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsAwaitingDesignatedReporting({ [designatedReporter, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the <a href="#market">Markets</a> in the current <a href="#reporting-window">Reporting Window</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted. <code class="prettyprint">designatedReporter</code> is an optional string parameter that can be used to restrict the results to <a href="#market">Markets</a> having a specific <a href="#designated-reporter">Designated Reporter</a> address.</p>
+
+<h3 id="augur-markets-getmarketsclosingindaterange-earliestclosingtime-latestclosingtime-universe-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsClosingInDateRange({ earliestClosingTime, latestClosingTime, universe[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the <a href="#market">Markets</a> closing between <code class="prettyprint">earliestClosingTime</code> and <code class="prettyprint">latestClosingTime</code> in the specified <code class="prettyprint">universe</code>. <code class="prettyprint">earliestClosingTime</code> and <code class="prettyprint">latestClosingTime</code> are integers representing timestamps, and <code class="prettyprint">universe</code> is a string containing the address of a given <a href="#universe">Universe</a>.</p>
+
+<h3 id="augur-markets-getmarketscreatedbyuser-creator-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsCreatedByUser({ creator[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the <a href="#market">Markets</a> created by a specific user, as well as the total amount of fees earned so far by that user. <code class="prettyprint">creator</code> is a string representing the address of the <a href="#market-creator">Market Creator</a>.</p>
+
+<h3 id="augur-markets-getmarketsincategory-category-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsInCategory({ category[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the addresses of the <a href="#market">Markets</a> in a specific category. <code class="prettyprint">category</code> is a string representing the category name.</p>
+
+<h3 id="augur-markets-getmarketsinfo-marketids-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsInfo({ [marketIDs, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns information about <a href="#market">Markets</a> (<code class="prettyprint">marketIDs</code>) that are stored on-contract. The returned result includes basic information about the markets as well as information about each market <a href="#outcome">Outcome</a>. It does not include <a href="#order-book">Order Book</a> information; however the function <code class="prettyprint">augur.trading.getOpenOrders</code> can be used to get information about <a href="#open-orders">Open Orders</a> for the specified Market.</p>
+
+<h3 id="augur-reporting-getreportinghistory-reporter-marketid-universe-reportingwindow-sortby-issortdescending-limit-offset-callback">augur.reporting.getReportingHistory({ reporter[, marketID, universe, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns information about a user&rsquo;s reporting history. For <a href="#reporting-window">Reporting Windows</a> that have ended, this includes the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a>, whether the user&rsquo;s <a href="#report">Report</a> matched that Final Outcome, how much <a href="#rep">REP</a> the user gained or lost from redistribution, and how much the user earned in <a href="#reporting-fee">Reporting Fees</a>.</p>
+
+<!-- Query TBD
+
+augur.reporting.getReportingSummary({
+ reportingWindow: "0x235665a0f492a910082c02bc174d3b3b7f7f8992", 
+ sortBy: "",
+ isSortDescending: false, 
+ limit: 2, 
+ offset: 0
+}, function (reportingSummary) { /* ... */ })
+// example output:
+
+### augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns various information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
+-->
+
+<!-- Query TBD
+
+augur.reporting.getReportingWindowsWithUnclaimedFees({
+  account: "0xfafa65a0f492a910082c02bc174d3b3b7f7ffafa"
+}, function (reportingWindowsWithUnclaimedFees) { /* ... */ })
+// example output:
+
+### augur.reporting.getReportingWindowsWithUnclaimedFees({ account }[, callback])
+
+Returns the [Reporting Windows](#reporting-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee). `account` is a string containing a user's address.
+-->
+
+<h3 id="augur-trading-getopenorders-marketid-outcome-ordertype-creator-sortby-issortdescending-limit-offset-callback">augur.trading.getOpenOrders({ [marketID, outcome, orderType, creator, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns a list of <a href="#open-orders">Open Orders</a> (i.e., <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> that have not been <a href="#fill-order">Filled</a>). The results returned can be restricted by specifying <code class="prettyprint">marketID</code> as a string containing a Market address, <code class="prettyprint">outcome</code> as an integer, <code class="prettyprint">orderType</code> as a string (i.e., &ldquo;buy&rdquo; or &ldquo;sell&rdquo;), and <code class="prettyprint">creator</code> as a string containing a user address.</p>
+
+<h3 id="augur-trading-getusertradinghistory-account-marketid-outcome-ordertype-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingHistory({ account[, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns information about the trades a particular user has made. <code class="prettyprint">account</code> is a string parameter containing the address of a user. The results returned can be restricted by specifying <code class="prettyprint">marketID</code> as a string containing a Market address, <code class="prettyprint">outcome</code> as an integer, <code class="prettyprint">orderType</code> as a string (i.e., &ldquo;buy&rdquo; or &ldquo;sell&rdquo;)</p>
+
+<h3 id="augur-trading-getusertradingpositions-account-marketid-outcome-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingPositions({ account[, marketID, outcome, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the trading positions held by a particular user. <code class="prettyprint">account</code> is a string parameter containing the address of a user. The results returned can be restricted by specifying <code class="prettyprint">marketID</code> as a string containing a Market address.</p>
 
           <h1 id="call-api">Call API</h1>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Call API Example</span>
@@ -1505,10 +1754,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Participation Token Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">participationToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingWindow</span> <span class="o">=</span>  <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
@@ -1516,10 +1761,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-participationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol">Participation Token Contract Code</a></h4>
 
 <p>The Participation Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
-
-<h4 id="augur-api-participationtoken-getmarket-participationtoken-callback">augur.api.ParticipationToken.getMarket({ participationToken }[, callback])</h4>
-
-<p>Returns the market address for the specified <code class="prettyprint">participationToken</code>.</p>
 
 <h4 id="augur-api-participationtoken-getreportingwindow-participationtoken-callback">augur.api.ParticipationToken.getReportingWindow({ participationToken }[, callback])</h4>
 
@@ -1530,6 +1771,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_reporter</span> <span class="o">=</span> <span class="s2">"0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">allMarketsFinalized</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">allMarketsFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">allMarketsFinalized</span> <span class="o">=</span> <span class="s2">"1"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -1546,6 +1791,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getFirstReporterMarketsCount</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">firstReporterMarketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">firstReporterMarketsCount</span> <span class="o">=</span> <span class="s2">"54321"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getLastReporterMarketsCount</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">lastReporterMarketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">lastReporterMarketsCount</span> <span class="o">=</span> <span class="s2">"12345"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getMarketsCount</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -1571,6 +1824,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">numMarkets</span> <span class="o">=</span> <span class="s2">"65"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getParticipationToken</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="o">=</span> <span class="s2">"0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getPreviousReportingWindow</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="o">=</span> <span class="s2">"0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"</span>
@@ -1590,6 +1847,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getStartTime</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">startTime</span> <span class="o">=</span> <span class="s2">"14995895900"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"18900512367"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getTotalWinningStake</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"29105"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -1614,11 +1879,19 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">isForkingMarketFinalized</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isOver</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isOver</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isOver</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isReportingActive</span><span class="p">({</span> <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isReportingActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">isReportingActive</span> <span class="o">=</span> <span class="s2">"1"</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reportingwindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol">Reporting Window Contract Code</a></h4>
+
+<h4 id="augur-api-reportingwindow-allmarketsfinalized-reportingwindow-callback">augur.api.ReportingWindow.allMarketsFinalized({ reportingWindow }[, callback])</h4>
+
+<p>Returns true if all <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> are <a href="#finalized-market">Finalized Markets</a>. Otherwise, returns false.</p>
 
 <h4 id="augur-api-reportingwindow-getavgreportinggasprice-reportingwindow-callback">augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow }[, callback ])</h4>
 
@@ -1636,6 +1909,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns a timestamp for when this <a href="#reporting-window">Reporting Window</a> will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.</p>
 
+<h4 id="augur-api-reportingwindow-getfirstreportermarketscount-reportingwindow-callback">augur.api.ReportingWindow.getFirstReporterMarketsCount({ reportingWindow }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> that are in the <a href="#first-report-round">First Report Round</a>. NOTE: If the Reporting Window has not begun yet, this number will include Markets that may end up being <a href="#finalized-market">Finalized</a> in the <a href="#designated-report-phase">Designated Report Round</a>. Since it is unknown whether <a href="#designated-reporter">Designated Reporters</a> ultimately will submit a report, Augur assumes by default that all new Markets will go to the First Report Round. Once the Reporting Window has begun, this function will return the number of Markets that are actually in the First Report Round.</p>
+
+<h4 id="augur-api-reportingwindow-getlastreportermarketscount-reportingwindow-callback">augur.api.ReportingWindow.getLastReporterMarketsCount({ reportingWindow }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> that are in the <a href="#last-report-round">Last Report Round</a>.</p>
+
 <h4 id="augur-api-reportingwindow-getmarketscount-reportingwindow-callback">augur.api.ReportingWindow.getMarketsCount({ reportingWindow }[, callback])</h4>
 
 <p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#reporting-window">Reporting Window</a>. This includes <a href="#reporting-round">Reporting Round</a> Markets.</p>
@@ -1644,13 +1925,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the next <a href="#reporting-window">Reporting Window</a>&rsquo;s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a <a href="#universe">Universe</a>, and every Reporting Window belongs to a Universe.</p>
 
-<h4 id="augur-api-reportingwindow-getnumincorrectdesignatedreportmarkets-reportingwindow-callback">augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])</h4>
-
-<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#proposed-outcome">Proposed Outcome</a> was <a href="#challenge">Challenged</a> during the <a href="#designated-dispute-phase">Designated Dispute Phase</a>. This is only the count of Markets where Designated Reporters did <a href="#report">Report</a> during the <a href="#designated-report-phase">Designated Report Phase</a> but the Market didn&rsquo;t get <a href="#finalized-market">Finalized</a>. This doesn&rsquo;t include Markets where the Designated Reporter failed to submit a Report.</p>
-
 <h4 id="augur-api-reportingwindow-getnumdesignatedreportnoshows-reportingwindow-callback">augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow }[, callback])</h4>
 
 <p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-report-phase">Designated Report Phase</a>. These Markets will have <a href="#first-report-bonds">First Report Bonds</a> up for grabs for the <a href="#first-reporter">First Reporter</a> because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#proposed-outcome">Proposed Outcome</a> was <a href="#challenge">Challenged</a>.</p>
+
+<h4 id="augur-api-reportingwindow-getnumincorrectdesignatedreportmarkets-reportingwindow-callback">augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#proposed-outcome">Proposed Outcome</a> was <a href="#challenge">Challenged</a> during the <a href="#designated-dispute-phase">Designated Dispute Phase</a>. This is only the count of Markets where Designated Reporters did <a href="#report">Report</a> during the <a href="#designated-report-phase">Designated Report Phase</a> but the Market didn&rsquo;t get <a href="#finalized-market">Finalized</a>. This doesn&rsquo;t include Markets where the Designated Reporter failed to submit a Report.</p>
 
 <h4 id="augur-api-reportingwindow-getnuminvalidmarkets-reportingwindow-callback">augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow }[, callback])</h4>
 
@@ -1659,6 +1940,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-reportingwindow-getnummarkets-reportingwindow-callback">augur.api.ReportingWindow.getNumMarkets({ reportingWindow }[, callback])</h4>
 
 <p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#reporting-window">Reporting Window</a>. This includes <a href="#reporting-round">Reporting Round</a> Markets.</p>
+
+<h4 id="augur-api-reportingwindow-getparticipationtoken-reportingwindow-callback">augur.api.ReportingWindow.getParticipationToken({ reportingWindow }[, callback])</h4>
+
+<p>Returns the Contract Address of the <a href="#participation-token">Participation Token</a> associated with the specified <a href="#reporting-window">Reporting Window</a>.</p>
 
 <h4 id="augur-api-reportingwindow-getpreviousreportingwindow-reportingwindow-callback">augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow }[, callback])</h4>
 
@@ -1680,6 +1965,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns a timestamp of when a <a href="#reporting-window">Reporting Window</a> becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow <a href="#reporter">Reporters</a> to <a href="#report">Report</a> on the <a href="#outcome">Outcomes</a> of the <a href="#market">Markets</a> contained in the Reporting Window.</p>
 
+<h4 id="augur-api-reportingwindow-gettotalstake-reportingwindow-callback">augur.api.ReportingWindow.getTotalStake({ reportingWindow }[, callback])</h4>
+
+<p>Returns the total amount staked across all <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a>.</p>
+
+<h4 id="augur-api-reportingwindow-gettotalwinningstake-reportingwindow-callback">augur.api.ReportingWindow.getTotalWinningStake({ reportingWindow }[, callback])</h4>
+
+<p>Returns the total amount <a href="#participation-token">Participation Tokens</a> purchased in the specified <a href="#reporting-window">Reporting Window</a>. NOTE: Participation Tokens are only purchasable in the event that no <a href="#market">Market</a> in a Reporting Window can be reported on.</p>
+
 <h4 id="augur-api-reportingwindow-getuniverse-reportingwindow-callback">augur.api.ReportingWindow.getUniverse({ reportingWindow }[, callback])</h4>
 
 <p>Returns the <a href="#universe">Universe</a> address that the <a href="#reporting-window">Reporting Window</a> belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.</p>
@@ -1699,6 +1992,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-reportingwindow-isforkingmarketfinalized-reportingwindow-callback">augur.api.ReportingWindow.isForkingMarketFinalized({ reportingwindow }[, callback])</h4>
 
 <p>Returns whether the <a href="#forked-market">Forked Market</a> that caused this <a href="#reporting-window">Reporting Window</a>&rsquo;s <a href="#universe">Universe</a> to be created has been <a href="#finalized-market">Finalized</a> or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a <a href="#fork">Fork</a>. Returns <code class="prettyprint">1</code> if the Forked Market is Finalized, <code class="prettyprint">0</code> it not.</p>
+
+<h4 id="augur-api-reportingwindow-isover-reportingwindow-callback">augur.api.ReportingWindow.isOver({ reportingwindow }[, callback])</h4>
+
+<p>Returns whether the 30-day reporting period for the specified <a href="#reporting-window">Reporting Window</a> has ended.</p>
 
 <h4 id="augur-api-reportingwindow-isreportingactive-reportingwindow-callback">augur.api.ReportingWindow.isReportingActive({ reportingWindow }[, callback])</h4>
 
@@ -1850,9 +2147,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">forkingMarket</span> <span class="o">=</span> <span class="s2">"0x78f7b43150d27c464359e735781c16ac585f52a8"</span><span class="p">;</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkReputationGoal</span><span class="p">({</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">forkReputationGoal</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">forkReputationGoal</span> <span class="o">=</span> <span class="s2">"150657"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getNextReportingWindow</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nextReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">nextReportingWindow</span> <span class="o">=</span> <span class="s2">"579"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOpenInterestInAttoEth</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">openInterestInAttoEth</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">openInterestInAttoEth</span> <span class="o">=</span> <span class="s2">"7123876876123"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getParentUniverse</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">parentUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -1877,8 +2182,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">_endTime</span> <span class="o">=</span> <span class="mi">2524608000</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowByMarketEndTime</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="nx">_endTime</span><span class="p">,</span>
-  <span class="na">_hasDesignatedReporter</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="nx">_endTime</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindowByEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingWindowByEndTime</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
@@ -1904,7 +2208,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">_shadyTarget</span><span class="p">:</span> <span class="nx">market</span>
+  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="nx">market</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">isContainerForMarket</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
@@ -1920,7 +2224,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"578"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForReportingWindow</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">_shadyTarget</span><span class="p">:</span> <span class="nx">reportingWindow</span>
+  <span class="na">_shadyReportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">isContainerForReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">isContainerForReportingWindow</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
@@ -1953,9 +2257,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the contract address of the <a href="#market">Market</a> that the specified <code class="prettyprint">universe</code> is <a href="#fork">Forking</a> over. This returns 0 if the Universe has never forked and there is no <a href="#forked-market">Forked Market</a>.</p>
 
+<h4 id="augur-api-universe-getforkreputationgoal-universe-callback">augur.api.Universe.getForkReputationGoal({ universe }[, callback])</h4>
+
+<p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> to be finalized before the end of the <a href="#fork-period">Fork Period</a>.</p>
+
 <h4 id="augur-api-universe-getnextreportingwindow-universe-callback">augur.api.Universe.getNextReportingWindow({ universe }[, callback])</h4>
 
 <p>Returns the next <a href="#reporting-window">Reporting Window</a> Id coming up after the current Reporting Window ends in a specific <code class="prettyprint">universe</code>.</p>
+
+<h4 id="augur-api-universe-getopeninterestinattoeth-universe-callback">augur.api.Universe.getOpenInterestInAttoEth({ universe }[, callback])</h4>
+
+<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> in a specific <code class="prettyprint">universe</code>, priced in attoETH.</p>
 
 <h4 id="augur-api-universe-getparentuniverse-universe-callback">augur.api.Universe.getParentUniverse({ universe }[, callback])</h4>
 
@@ -1977,9 +2289,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#reporting-window">Reporting Window</a> Contract Address belonging to this <code class="prettyprint">universe</code> that matches the <code class="prettyprint">_reportingWindowId</code> passed to the function.</p>
 
-<h4 id="augur-api-universe-getreportingwindowbymarketendtime-universe-_endtime-_hasdesignatedreporter-callback">augur.api.Universe.getReportingWindowByMarketEndTime({ universe, _endTime, _hasDesignatedReporter }[, callback])</h4>
+<h4 id="augur-api-universe-getreportingwindowbymarketendtime-universe-_endtime-callback">augur.api.Universe.getReportingWindowByMarketEndTime({ universe, _endTime }[, callback])</h4>
 
-<p>Returns the <a href="#reporting-window">Reporting Window</a> address on the specific <code class="prettyprint">universe</code> given an <code class="prettyprint">_endTime</code> and if the <a href="#market">Market</a> we are checking for has an <a href="#designated-reporter">Designated Reporter</a> or not (<code class="prettyprint">_hasDesignatedReporter</code>). <code class="prettyprint">_hasDesignatedReporter</code> should be <code class="prettyprint">0</code> for Markets without an Designated Reporter, <code class="prettyprint">1</code> for Markets with an Designated Reporter.</p>
+<p>Returns the <a href="#reporting-window">Reporting Window</a> address on the specific <code class="prettyprint">universe</code> given an <code class="prettyprint">_endTime</code>.</p>
 
 <h4 id="augur-api-universe-getreportingwindowbytimestamp-universe-_timestamp-callback">augur.api.Universe.getReportingWindowByTimestamp({ universe, _timestamp }[, callback])</h4>
 
@@ -1993,17 +2305,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#rep">Reputation Token</a> Address for a specific <code class="prettyprint">universe</code>. This is the REP usable within this Universe.</p>
 
-<h4 id="augur-api-universe-iscontainerformarket-universe-_shadytarget-callback">augur.api.Universe.isContainerForMarket({ universe, _shadyTarget }[, callback])</h4>
+<h4 id="augur-api-universe-iscontainerformarket-universe-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ universe, _shadyMarket }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyTarget</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market is actually attached to the Universe in question.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market is actually attached to the Universe in question.</p>
 
-<h4 id="augur-api-universe-iscontainerforstaketoken-universe-_shadytarget-callback">augur.api.Universe.isContainerForStakeToken({ universe, _shadyTarget }[, callback])</h4>
+<h4 id="augur-api-universe-iscontainerforstaketoken-universe-_shadystaketoken-callback">augur.api.Universe.isContainerForStakeToken({ universe, _shadyStakeToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting">Reporting</a> Token <code class="prettyprint">_shadyTarget</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. <a href="#stake-tokens">Stake Tokens</a> are 1:1 exchangeable for <a href="#rep">REP</a> by <a href="#reporter">Reporters</a> to represent their staked REP for a <a href="#report">Report</a>. This method is designed determine whether the Universe contains the Stake Token specified.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting">Reporting</a> Token <code class="prettyprint">_shadyStakeToken</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. <a href="#stake-tokens">Stake Tokens</a> are 1:1 exchangeable for <a href="#rep">REP</a> by <a href="#reporter">Reporters</a> to represent their staked REP for a <a href="#report">Report</a>. This method is designed determine whether the Universe contains the Stake Token specified.</p>
 
-<h4 id="augur-api-universe-iscontainerforreportingwindow-universe-_shadytarget-callback">augur.api.Universe.isContainerForReportingWindow({ universe, _shadyTarget }[, callback])</h4>
+<h4 id="augur-api-universe-iscontainerforreportingwindow-universe-_shadyreportingwindow-callback">augur.api.Universe.isContainerForReportingWindow({ universe, _shadyReportingWindow }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting-window">Reporting Window</a> <code class="prettyprint">_shadyTarget</code> Contract Address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting-window">Reporting Window</a> <code class="prettyprint">_shadyReportingWindow</code> Contract Address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.</p>
 
 <h4 id="augur-api-universe-isparentof-universe-_shadychild-callback">augur.api.Universe.isParentOf({ universe, _shadyChild }[, callback])</h4>
 
@@ -3038,15 +3350,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-participationtoken-redeem-_signer-participationtoken-_forgofees-onsent-onsuccess-onfailed">augur.api.ParticipationToken.redeem({ _signer, participationToken, _forgoFees, onSent, onSuccess, onFailed })</h4>
 
-<p>Converts the user&rsquo;s Participation Tokens to Reputation Tokens. Due to the fact that the fees can sometimes take months to claim, the parameter <code class="prettyprint">forgoFees</code> can be set to true if the user would like to redeem his or her Participation Tokens without having to wait.</p>
+<p>Converts the user&rsquo;s Participation Tokens to Reputation Tokens. Due to the fact that Markets can sometimes take months to Finalize (and, therefore, fees can take months to claim), the parameter <code class="prettyprint">forgoFees</code> can be set to true if the user would like to redeem his or her Participation Tokens immediately without having to wait.</p>
 
-<p>This transaction will fail if:</p>
+<p>This transaction will fail if <code class="prettyprint">msg.sender</code> does not have any Participation Tokens.</p>
 
-<ul>
-<li><code class="prettyprint">msg.sender</code> does not have any Participation Tokens.</li>
-</ul>
-
-<p>Returns: true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h4 id="augur-api-participationtoken-withdrawinemergency-_signer-participationtoken-onsent-onsuccess-onfailed">augur.api.ParticipationToken.withdrawInEmergency({ _signer, participationToken, onSent, onSuccess, onFailed })</h4>
 
@@ -3071,7 +3379,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">_designatedReporterAddress</span> <span class="o">=</span> <span class="s2">"0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_topic</span> <span class="o">=</span> <span class="s2">"examples"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">createNewMarket</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">reportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span><span class="p">,</span>
   <span class="na">_endTime</span><span class="p">:</span> <span class="nx">_endTime</span><span class="p">,</span>
@@ -3107,7 +3415,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reportingwindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol">Reporting Window Contract Code</a></h4>
 
-<h4 id="augur-api-reportingwindow-createnewmarket-_signer-reportingwindow-_endtime-_numoutcomes-_payoutdenominator-_feeperethinwei-_denominationtoken-_creator-_mindisplayprice-_maxdisplayprice-_designatedreporteraddress-_topic-onsent-onsuccess-onfailed">augur.api.ReportingWindow.createNewMarket({ _signer, reportingWindow, _endTime, _numOutcomes, _payoutDenominator, _feePerEthInWei, _denominationToken, _creator, _minDisplayPrice, _maxDisplayPrice, _designatedReporterAddress, _topic, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-reportingwindow-createmarket-_signer-reportingwindow-_endtime-_numoutcomes-_payoutdenominator-_feeperethinwei-_denominationtoken-_creator-_mindisplayprice-_maxdisplayprice-_designatedreporteraddress-_topic-onsent-onsuccess-onfailed">augur.api.ReportingWindow.createMarket({ _signer, reportingWindow, _endTime, _numOutcomes, _payoutDenominator, _feePerEthInWei, _denominationToken, _creator, _minDisplayPrice, _maxDisplayPrice, _designatedReporterAddress, _topic, onSent, onSuccess, onFailed })</h4>
 
 <p>This function will create a new market for the given <code class="prettyprint">reportingWindow</code> that will be constructed using the arguments passed and return the new market&rsquo;s address if successful. This transaction will fail if the <code class="prettyprint">_numOutcomes</code> value isn&rsquo;t within the range of 2 and 8, if the <code class="prettyprint">_payoutDenominator</code> isn&rsquo;t between 2 and 2<sup>254</sup>, if the current time is not before the start time of the <code class="prettyprint">_reportingWindow</code>, if the <code class="prettyprint">_payoutDenominator</code> isn&rsquo;t a multiple of <code class="prettyprint">_numOutcomes</code>, if <code class="prettyprint">_feesPerEthInWei</code> is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the <code class="prettyprint">_maxDisplayPrice</code> and <code class="prettyprint">_minDisplayPrice</code> isn&rsquo;t between -2<sup>254</sup> to 2<sup>254</sup>, if  <code class="prettyprint">_maxDisplayPrice</code> - <code class="prettyprint">_minDisplayPrice</code> must be between 1 and 2<sup>254</sup>, or if the <code class="prettyprint">msg.value</code> amount sent isn&rsquo;t enough to cover the market&rsquo;s validity bond and the estimated gas cost for the target amount of reporters to report.</p>
 
@@ -3503,9 +3811,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
+<span class="kd">var</span> <span class="nx">_forgoFees</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">redeemWinningTokens</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">stakeToken</span><span class="p">:</span> <span class="nx">stakeToken</span><span class="p">,</span>
+  <span class="na">_forgoFees</span><span class="p">:</span> <span class="nx">_forgoFees</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
@@ -3627,9 +3937,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction is used to migrate <a href="#rep">REP</a> that is in a <a href="#forked-market">Forked Market</a>. Unlike <code class="prettyprint">redeemDisavowedTokens</code>, which only works on Disavowed <a href="#markets">Markets</a> and withdraws the REP to the <a href="#parent-universe">Parent Universe</a>, this transaction only works on the Forked Market and the REP is withdrawn to the <a href="#child-universe">Child Universe</a> corresponding to the Stake Token&rsquo;s <a href="#payout-set">Payout Set</a>. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (the Child Universe&rsquo;s REP contract), to address (<code class="prettyprint">msg.sender</code>), and the amount of REP transferred.</p>
 
-<h4 id="augur-api-staketoken-redeemwinningtokens-_signer-staketoken-onsent-onsuccess-onfailed">augur.api.StakeToken.redeemWinningTokens({ _signer, stakeToken, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-staketoken-redeemwinningtokens-_signer-staketoken-_forgofees-onsent-onsuccess-onfailed">augur.api.StakeToken.redeemWinningTokens({ _signer, stakeToken, _forgoFees, onSent, onSuccess, onFailed })</h4>
 
-<p>This transaction is used to redeem <a href="#rep">REP</a> from a winning Stake Token on a <a href="#finalized-market">Finalized Market</a>. Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the <code class="prettyprint">msg.sender</code> as well as a portion of the REP redistributed from losing Stake Tokens. It&rsquo;s recommended that <a href="#reporters">Reporters</a> make sure <code class="prettyprint">migrateLosingTokens</code> was called one time on each of the losing Stake Tokens for this <a href="#market">Market</a> if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the <code class="prettyprint">stakeToken</code> is the winning Stake Token, and this isn&rsquo;t a <a href="#forked-market">Forked Market</a>. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">stakeToken</code>), to address (<code class="prettyprint">msg.sender</code>), and the amount of <code class="prettyprint">REP</code> transferred.</p>
+<p>This transaction is used to redeem <a href="#rep">REP</a> from a winning Stake Token on a <a href="#finalized-market">Finalized Market</a>. Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the <code class="prettyprint">msg.sender</code> as well as a portion of the REP redistributed from losing Stake Tokens. It&rsquo;s recommended that <a href="#reporters">Reporters</a> make sure <code class="prettyprint">migrateLosingTokens</code> was called one time on each of the losing Stake Tokens for this <a href="#market">Market</a> if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the <code class="prettyprint">stakeToken</code> is the winning Stake Token, and this isn&rsquo;t a <a href="#forked-market">Forked Market</a>. Due to the fact that Markets can sometimes take months to Finalize (and, therefore, the fees can take months to claim), the parameter <code class="prettyprint">forgoFees</code> can be set to true if the user would like to redeem his or her Stake Tokens immediately without having to wait. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">stakeToken</code>), to address (<code class="prettyprint">msg.sender</code>), and the amount of <code class="prettyprint">REP</code> transferred.</p>
 
 <h4 id="augur-api-staketoken-transfer-_signer-staketoken-_to-_value-onsent-onsuccess-onfailed">augur.api.StakeToken.transfer({ _signer, stakeToken, _to, _value, onSent, onSuccess, onFailed })</h4>
 
@@ -3787,6 +4097,211 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-trade-publictakebestorder-_signer-_direction-_market-_outcome-_fxpamount-_fxpprice-_tradegroupid-onsent-onsuccess-onfailed">augur.api.Trade.publicTakeBestOrder({ _signer, _direction, _market, _outcome, _fxpAmount, _fxpPrice, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
 
 <p>The <code class="prettyprint">publicTakeBestOrder</code> transaction will work very similarly to <code class="prettyprint">publicTrade</code> except it will not create an order if the request can&rsquo;t be filled. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. This transaction returns the fixed point amount not filled by the order, so <code class="prettyprint">0</code> for a completely filled order, some other number if this request could only be partially filled.</p>
+
+<h2 id="universe-tx-api">Universe Tx API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Transaction API Examples:</span>
+<span class="kd">var</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportNoShowBond</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320551</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportStake</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320551</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getMarketCreationCost</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320552</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">_parentPayoutDistributionHash</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Parent</span> <span class="nx">Payout</span> <span class="nx">Distribution</span> <span class="nx">Hash</span> <span class="k">as</span> <span class="mi">32</span> <span class="nx">bytes</span><span class="p">...</span><span class="o">&gt;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCreateChildUniverse</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="nx">_parentPayoutDistributionHash</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320554</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingFeeDivisor</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320554</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowForForkEndTime</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320555</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getTargetReporterGasCosts</span><span class="p">({</span>
+  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320556</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
+
+<h4 id="augur-api-universe-getdesignatedreportnoshowbond-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getDesignatedReportNoShowBond({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the current <a href="#designated-report-no-show-bond">Designated Report No-Show Bond</a> for <a href="#market">Markets</a> in the specified <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">AttoREP</a>.</p>
+
+<h4 id="augur-api-universe-getdesignatedreportstake-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getDesignatedReportStake({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the amount of stake in <a href="#atto-prefix">AttoREP</a> that the <a href="#designated-reporter">Designated Reporter</a> must put up when submitting a <a href="#designated-report">Designated Report</a>. </p>
+
+<h4 id="augur-api-universe-getmarketcreationcost-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getMarketCreationCost({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the estimated amount of <a href="#atto-prefix">AttoETH</a> required to create a <a href="#market">Market</a> in the specified <a href="#universe">Universe</a>. The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.</p>
+
+<h4 id="augur-api-universe-getorcreatechilduniverse-_signer-universe-_parentpayoutdistributionhash-onsent-onsuccess-onfailed">augur.api.Universe.getOrCreateChildUniverse({ _signer, universe, _parentPayoutDistributionHash, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns a <a href="#child-universe">Child Universe</a> corresponding to the specified <code class="prettyprint">_parentPayoutDistributionHash</code>. If the Child Universe does not already exist, it will be created. This transaction will fail if the Universe does not have a <a href="#forked-market">Forked Market</a>.</p>
+
+<h4 id="augur-api-universe-getreportingfeedivisor-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getReportingFeeDivisor({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the number by which the total payout amount for a <a href="#market">Market</a> is divided in order to calculate the <a href="#reporting-fee">Reporting Fee</a>.</p>
+
+<h4 id="augur-api-universe-getreportingwindowforforkendtime-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getReportingWindowForForkEndTime({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the <a href="#reporting-window">Reporting Window</a> that the current <a href="#fork-period">Fork Period</a> ends.</p>
+
+<h4 id="augur-api-universe-gettargetreportergascosts-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getTargetReporterGasCosts({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the fee in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#first-reporter">First Reporter</a> in the event of a designated no show, or refunded to the <a href="#market-creator">Market Creator</a> if the <a href="#designated-reporter">Designated Reporter</a> does show up.</p>
 
           <h1 id="events-api">Events API</h1>
 
