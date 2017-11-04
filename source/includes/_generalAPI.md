@@ -129,316 +129,565 @@ To load the basic [Market](#market) info for all markets, first call `augur.mark
 Simplified API
 --------------
 ```javascript
-var _type = 1; // 1 is "buy", 2 is "sell"
-var _market = '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42';
-var _outcome = 1;
-var minPrice = "0.0";
-var maxPrice = "1.0";
-var _startingOrderId = "0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc";
-var _numOrdersToLoad = 3;
+augur.accounts.getAccountTransferHistory({
+  account: "0x0000000000000000000000000000000000000b0b",
+  token: "0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
+  isSortDescending: false
+}, function (accountTransferHistory) { /* ... */ })
+// example output:
+[
+  {
+    transactionHash: "0x00000000000000000000000000000000000000000000000000000000deadb33f",
+    logIndex: 1,
+    sender: "0x0000000000000000000000000000000000000b0b",
+    recipient: "0x000000000000000000000000000000000000d00d",
+    token: "0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
+    value: 47,
+    blockNumber: 1400001,
+  }
+]
 
-augur.trading.orderBook.getOrderBook({
-  _type: _type,
-  _market: _market,
-  _outcome: _outcome,
-  minPrice: minPrice,
-  maxPrice: maxPrice,
-  _startingOrderId: _startingOrderId,
-  _numOrdersToLoad: _numOrdersToLoad
-}, function (orderBook) { /* ... */ })
+augur.markets.getCategories({
+  universe: "0x000000000000000000000000000000000000000b",
+  sortBy: "popularity",
+  isSortDescending: true
+}, function (categoriesInfo) { /* ... */ })
+// example output:
+[
+  { category: "finance", popularity: 12345 },
+  { category: "politics", popularity: 5000 },
+  { category: "ethereum", popularity: 1000 },
+  { category: "augur", popularity: 500 },
+]
+
+augur.markets.getMarketInfo({
+  marketID: "0x0000000000000000000000000000000000000001"
+}, function (marketInfo) { /* ... */ })
 // example output:
 {
-  buy: {
-    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
-      amount: '15',
-      block: 220,
-      fullPrecisionAmount: '15',
-      fullPercisionPrice: '0.1770833333333333',
-      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.177',
-      type: 'buy',
-    },
-    '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
-      amount: '10',
-      block: 217,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.1208333333333333',
-      id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.1208',
-      type: 'buy',
-    },
-    '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b': {
-      amount: '10',
-      block: 219,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.0083333333333333',
-      id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.0083',
-      type: 'buy',
-    }
-  }
-}
-
-augur.trading.orderBook.getOrderBook({
-  _type: _type,
-  _market: _market,
-  _outcome: _outcome,
-  minPrice: minPrice,
-  maxPrice: maxPrice,
-  _startingOrderId: _startingOrderId,
-  _numOrdersToLoad: _numOrdersToLoad
-}, function (orderBookChunk) { /* ... */ }, function (completeSingleOutcomeOrderBookSide) { /* ... */ });
-// example chunk output:
-{
-  buy: {
-    '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc': {
-      amount: '15',
-      block: 220,
-      fullPrecisionAmount: '15',
-      fullPercisionPrice: '0.1770833333333333',
-      id: '0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.177',
-      type: 'buy',
-    },
-    '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a': {
-      amount: '10',
-      block: 217,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.1208333333333333',
-      id: '0x1f4f112a9aa99282e306cb58abc95b5b46199f802bd36d68f1619ba98866963a',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.1208',
-      type: 'buy',
-    },
-    '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b': {
-      amount: '10',
-      block: 219,
-      fullPrecisionAmount: '10',
-      fullPercisionPrice: '0.0083333333333333',
-      id: '0x2b054b0c9ca2fcf22ee73ba14ae41da70c7039c1a5b8125a40b9f2b68a20080b',
-      market: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-      outcome: '1',
-      owner: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-      price: '0.0083',
-      type: 'buy',
-    }
-  }
-}
-
-augur.markets.getMarketInfo({ _market: _market }, function (market) { /* ... */ });
-// example output:
-{
-  author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-  branchID: '0xf69b5',
+  id: "0x0000000000000000000000000000000000000001",
+  universe: "0x000000000000000000000000000000000000000b",
+  type: "categorical",
+  numOutcomes: 8,
+  minPrice: 0,
+  maxPrice: 1,
+  cumulativeScale: "1",
+  author: "0x0000000000000000000000000000000000000b0b",
+  creationTime: 1506473474,
+  creationBlock: 1400000,
+  creationFee: 10,
+  reportingFeeRate: 0.02,
+  marketCreatorFeeRate: 0.01,
+  marketCreatorFeesCollected: 0,
+  category: "test category",
+  tags: ["test tag 1", "test tag 2"],
+  volume: 0,
+  outstandingShares: 0,
+  reportingState: null,
+  reportingWindow: "0x1000000000000000000000000000000000000000",
+  endDate: 1506573470,
+  finalizationTime: null,
+  description: "This is a categorical test market created by b0b.",
+  extraInfo: null,
+  designatedReporter: "0x0000000000000000000000000000000000000b0b",
+  designatedReportStake: 10,
+  resolutionSource: "http://www.trusted-third-party.com",
+  numTicks: 10752,
   consensus: null,
-  creationBlock: 213,
-  creationFee: '9',
-  creationTime: 1502248462,
-  cumulativeScale: '1',
-  description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
-  endDate: 1577952000,
-  eventBond: '4.5',
-  extraInfo: 'http://www.nationalpopularvote.com',
-  id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-  makerFee: '0.01',
-  maxValue: '3',
-  minValue: '1',
-  network: '9000',
-  numOutcomes: 3,
   outcomes: [{
+    id: 0,
+    outstandingShares: 100,
+    price: 0.125,
+  }, {
     id: 1,
-    outstandingShares: '310',
-    price: '0.6020833333333333',
-    sharesPurchased: '0',
+    outstandingShares: 100,
+    price: 0.125,
   }, {
     id: 2,
-    outstandingShares: '310',
-    price: '0.4333333333333333',
-    sharesPurchased: '0',
+    outstandingShares: 100,
+    price: 0.125,
   }, {
     id: 3,
-    outstandingShares: '310',
-    price: '0.4333333333333333',
-    sharesPurchased: '0',
+    outstandingShares: 100,
+    price: 0.125,
+  }, {
+    id: 4,
+    outstandingShares: 100,
+    price: 0.125,
+  }, {
+    id: 5,
+    outstandingShares: 100,
+    price: 0.125,
+  }, {
+    id: 6,
+    outstandingShares: 100,
+    price: 0.125,
+  }, {
+    id: 7,
+    outstandingShares: 100,
+    price: 0.125,
   }],
-  tags: ['politics', 'elections', 'US politics'],
-  takerFee: '0.02',
-  topic: 'politics',
-  tradingFee: '0.02',
-  tradingPeriod: 9131,
-  type: 'categorical',
-  volume: '1710.399999999999999985'
 }
 
-var marketIDs = [ market, '0xe095e00863aecd814003a739da97b54c2b6737bd'];
-// const account = '0xb3f636cae9e8ad9795d14d3bdda3e382dba47c73';
-
-augur.markets.batchGetMarketInfo({ marketIDs: marketIDs }, function (marketsInfo) { /* ... */ })
+augur.markets.getMarketPriceHistory({
+  marketID: "0x0000000000000000000000000000000000000001",
+  sortBy: null,
+  isSortDescending: null, 
+  limit: null, 
+  offset: null
+}, function (marketPriceHistory) { /* ... */ })
 // example output:
 {
-  '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42': {
-    author: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-    branchID: '0xf69b5',
-    consensus: null,
-    creationBlock: 213,
-    creationFee: '9',
-    creationTime: 1502248462,
-    cumulativeScale: '1',
-    description: 'What will be the status of the U.S. electoral college on January 1, 2020?~|>Unchanged from 2016|Undermined but still in existence (e.g., National Popular Vote bill)|Formally abolished',
-    endDate: 1577952000,
-    eventBond: '4.5',
-    extraInfo: 'http://www.nationalpopularvote.com',
-    id: '0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42',
-    makerFee: '0.01',
-    maxValue: '3',
-    minValue: '1',
-    network: '9000',
-    numOutcomes: 3,
-    outcomes: [{
-      id: 1,
-      outstandingShares: '310',
-      price: '0.6020833333333333',
-      sharesPurchased: '0',
-    }, {
-      id: 2,
-      outstandingShares: '310',
-      price: '0.4333333333333333',
-      sharesPurchased: '0',
-    }, {
-      id: 3,
-      outstandingShares: '310',
-      price: '0.4333333333333333',
-      sharesPurchased: '0',
-    }],
-    tags: ['politics', 'elections', 'US politics'],
-    takerFee: '0.02',
-    topic: 'politics',
-    tradingFee: '0.02',
-    tradingPeriod: 9131,
-    type: 'categorical',
-    volume: '1710.399999999999999985'
-  },
-  '0xe095e00863aecd814003a739da97b54c2b6737bd': {
-    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
-    branchID: '0xf69b5',
-    consensus: null,
-    creationBlock: 5156,
-    creationFee: '9',
-    creationTime: 1502291695,
-    cumulativeScale: '1',
-    description: 'Will the Bitcoin (BTC) price be equal to or higher than USD 3,400 on 31 August 2017 as shown on www.coinmarketcap.com?',
-    endDate: 1504130400,
-    eventBond: '4.5',
-    extraInfo: 'http://www.nationalpopularvote.com',
-    id: '0xe095e00863aecd814003a739da97b54c2b6737bd',
-    makerFee: '0.01',
-    maxValue: '2',
-    minValue: '1',
-    network: '9000',
-    numOutcomes: 2,
-    outcomes: [{
-      id: 1,
-      outstandingShares: '2101.2',
-      price: '0',
-      sharesPurchased: '0',
-    }, {
-      id: 2,
-      outstandingShares: '2101.2',
-      price: '0.99',
-      sharesPurchased: '0',
-    }],
-    resolutionSource: 'www.coinmarketcap.com',
-    tags: ['Bitcoin', 'Cryptocurrency', null],
-    takerFee: '0.02',
-    topic: 'Bitcoin',
-    tradingFee: '0.02',
-    tradingPeriod: 8704,
-    type: 'binary',
-    volume: '8346'
-  }
+  0: [{
+    price: 5.5,
+    timestamp: 1506474500,
+  }],
 }
 
-augur.markets.getMarketsInfo({
-  marketIDs: [
-    '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e', '0x563b377a956c80d77a7c613a9343699ad6123911'
-  ]
+augur.markets.getMarkets({
+  universe: "0x000000000000000000000000000000000000000b"
+}, function (marketsMatched) { /* ... */ })
+// example output:
+[
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000003",
+  "0x0000000000000000000000000000000000000011",
+]
+
+augur.markets.getMarketsAwaitingDesignatedReporting({
+  sortBy: "volume",
+  isSortDescending: false,
 }, function (marketsInfo) { /* ... */ })
 // example output:
-{
-  '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e': {
-    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
-    branchID: '0xf69b5',
+[
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000003",
+]
+
+augur.markets.getMarketsClosingInDateRange({
+  earliestClosingTime: 1506573450,
+  latestClosingTime: 1506573470,
+  universe: "0x000000000000000000000000000000000000000b",
+  limit: 10,
+}, function (marketsClosingInDateRange) { /* ... */ })
+// example output:
+[
+  "0x0000000000000000000000000000000000000001",
+]
+
+augur.markets.getMarketsCreatedByUser({
+  creator: "0x0000000000000000000000000000000000000b0b",
+}, function (marketsCreatedByUser) { /* ... */ })
+// example output:
+[
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000011",
+]
+
+augur.markets.getMarketsInCategory({
+  category: "augur",
+}, function (marketsInCategory) { /* ... */ })
+// example output:
+[
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000003",
+  "0x0000000000000000000000000000000000000011",
+]
+
+augur.markets.getMarketsInfo({
+  universe: null,
+  marketIDs: [
+    "0x0000000000000000000000000000000000000001",
+    "0x0000000000000000000000000000000000000002",
+  ],
+}, function (marketsInfo) { /* ... */ })
+// example output:
+[
+  {
+    id: "0x0000000000000000000000000000000000000001",
+    universe: "0x000000000000000000000000000000000000000b",
+    type: "categorical",
+    numOutcomes: 8,
+    minPrice: 0,
+    maxPrice: 1,
+    cumulativeScale: "1",
+    author: "0x0000000000000000000000000000000000000b0b",
+    creationTime: 1506473474,
+    creationBlock: 1400000,
+    creationFee: 10,
+    reportingFeeRate: 0.02,
+    marketCreatorFeeRate: 0.01,
+    marketCreatorFeesCollected: 0,
+    category: "test category",
+    tags: ["test tag 1", "test tag 2"],
+    volume: 0,
+    outstandingShares: 0,
+    reportingState: null,
+    reportingWindow: "0x1000000000000000000000000000000000000000",
+    endDate: 1506573470,
+    finalizationTime: null,
+    description: "This is a categorical test market created by b0b.",
+    extraInfo: null,
+    designatedReporter: "0x0000000000000000000000000000000000000b0b",
+    designatedReportStake: 10,
+    resolutionSource: "http://www.trusted-third-party.com",
+    numTicks: 10752,
     consensus: null,
-    creationTime: 1502248542,
-    description: 'Who will win the University of Georgia vs. University of Florida football game in 2017?~|>Georgia|Florida|Vanderbilt',
-    endDate: 1509346800,
-    id: '0xfb9165a0f492a910082c02bc174d3b3b7f7f979e',
-    makerFee: '0.01',
-    maxValue: '3',
-    minValue: '1',
-    numOutcomes: 3,
-    tags: ['sports', 'college football', 'football'],
-    takerFee: '0.02',
-    topic: 'sports',
-    tradingFee: '0.02',
-    tradingPeriod: 8734,
-    type: 'categorical',
-    volume: '1195.999999999999999997'
+    outcomes: [{
+      id: 0,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 1,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 2,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 3,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 4,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 5,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 6,
+      outstandingShares: 100,
+      price: 0.125,
+    }, {
+      id: 7,
+      outstandingShares: 100,
+      price: 0.125,
+    }],
   },
-  '0x563b377a956c80d77a7c613a9343699ad6123911': {
-    author: '0x9e12c5b6067c61c811add8fb55f5d6fcb88a9e5f',
-    branchID: '0xf69b5',
-    consensus: null,
-    creationTime: 1502248522,
-    description: "Will Augur's live release happen by the end of August, 2017?",
-    endDate: 1504249200,
-    id: '0x563b377a956c80d77a7c613a9343699ad6123911',
-    makerFee: '0.010000000000000000125',
-    maxValue: '2',
-    minValue: '1',
+  {
+    id: "0x0000000000000000000000000000000000000002",
+    universe: "0x000000000000000000000000000000000000000b",
+    type: "binary",
     numOutcomes: 2,
-    tags: ['Augur', 'release date', 'Ethereum'],
-    takerFee: '0.030000000000000000375',
-    topic: 'Augur',
-    tradingFee: '0.026666666666666667',
-    tradingPeriod: 8705,
-    type: 'binary',
-    volume: '29623.019599999999999969'
+    minPrice: 0,
+    maxPrice: 1,
+    cumulativeScale: "1",
+    author: "0x0000000000000000000000000000000000000b0b",
+    creationTime: 1506480000,
+    creationBlock: 1400100,
+    creationFee: 10,
+    reportingFeeRate: 0.02,
+    marketCreatorFeeRate: 0.01,
+    marketCreatorFeesCollected: 0,
+    category: "test category",
+    tags: ["test tag 1", "test tag 2"],
+    volume: 0,
+    outstandingShares: 0,
+    reportingState: null,
+    reportingWindow: "0x1000000000000000000000000000000000000000",
+    endDate: 1506573480,
+    finalizationTime: null,
+    description: "This is a binary test market created by b0b.",
+    extraInfo: null,
+    designatedReporter: "0x0000000000000000000000000000000000000b0b",
+    designatedReportStake: 10,
+    resolutionSource: "http://www.trusted-third-party.com",
+    numTicks: 10752,
+    consensus: null,
+    outcomes: [{
+      id: 0,
+      outstandingShares: 1000,
+      price: 0.5,
+    }, {
+      id: 1,
+      outstandingShares: 1000,
+      price: 0.5,
+    }],
+  }
+]
+
+augur.reporting.getReportingHistory({
+  reporter: "0x0000000000000000000000000000000000000021",
+}, function (reportingHistory) { /* ... */ })
+// example output:
+{
+  "0x000000000000000000000000000000000000000b": {
+    "0x0000000000000000000000000000000000000002": [{
+      marketID: "0x0000000000000000000000000000000000000002",
+      reportingWindow: "0x1000000000000000000000000000000000000000",
+      payoutNumerators: [0, 2],
+      amountStaked: 17,
+      reportingToken: "0x0000000000000000001000000000000000000001",
+      isCategorical: false,
+      isScalar: false,
+      isIndeterminate: false,
+      isSubmitted: true,
+    }],
   }
 }
+
+augur.trading.getOpenOrders({
+  marketID: "0x0000000000000000000000000000000000000001",
+  outcome: null,
+  orderType: "buy",
+  creator: null,
+}, function (openOrders) { /* ... */ })
+// example output:
+{
+  "0x0000000000000000000000000000000000000001": {
+    0: {
+      buy: {
+        "0x1000000000000000000000000000000000000000000000000000000000000000": {
+          shareToken: "0x1000000000000000000000000000000000000000",
+          owner: "0x0000000000000000000000000000000000000b0b",
+          creationTime: 1506473500,
+          creationBlockNumber: 1400001,
+          price: 0.7,
+          amount: 1,
+          fullPrecisionPrice: 0.7,
+          fullPrecisionAmount: 1,
+          tokensEscrowed: 0.7,
+          sharesEscrowed: 0,
+          betterOrderID: null,
+          worseOrderID: null,
+        },
+        "0x2000000000000000000000000000000000000000000000000000000000000000": {
+          shareToken: "0x1000000000000000000000000000000000000000",
+          owner: "0x000000000000000000000000000000000000d00d",
+          creationTime: 1506473515,
+          creationBlockNumber: 1400002,
+          price: 0.6,
+          amount: 2,
+          fullPrecisionPrice: 0.600001,
+          fullPrecisionAmount: 2,
+          tokensEscrowed: 1.200002,
+          sharesEscrowed: 0,
+          betterOrderID: null,
+          worseOrderID: null,
+        },
+      },
+    },
+    1: {
+      buy: {
+        "0x3000000000000000000000000000000000000000000000000000000000000000": {
+          shareToken: "0x2000000000000000000000000000000000000000",
+          owner: "0x000000000000000000000000000000000000d00d",
+          creationTime: 1506473515,
+          creationBlockNumber: 1400002,
+          price: 0.6,
+          amount: 2,
+          fullPrecisionPrice: 0.6,
+          fullPrecisionAmount: 2.0000001,
+          tokensEscrowed: 1.20000006,
+          sharesEscrowed: 0,
+          betterOrderID: null,
+          worseOrderID: null,
+        },
+      },
+    },
+  },
+}
+
+augur.trading.getUserTradingHistory({
+  account: "0x000000000000000000000000000000000000d00d",
+  marketID: "0x0000000000000000000000000000000000000001",
+  outcome: 0,
+  orderType: null,
+  sortBy: null,
+  isSortDescending: null,
+  limit: null,
+  offset: null,
+}, function (userTradingHistory) { /* ... */ })
+// example output:
+[{
+  type: "sell",
+  price: 5.5,
+  amount: 0.2,
+  maker: false,
+  settlementFees: 0,
+  marketID: "0x0000000000000000000000000000000000000001",
+  outcome: 0,
+  shareToken: "0x1000000000000000000000000000000000000000",
+  timestamp: 1506474500,
+  tradeGroupID: null,
+}]
+
+augur.trading.getUserTradingPositions({
+  account: "0x000000000000000000000000000000000000d00d",
+  marketID: null,
+  outcome: null,
+  sortBy: null,
+  isSortDescending: null,
+  limit: null,
+  offset: null,
+}, function (userTradingPositions) { /* ... */ })
+// example output:
+[
+  {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 0,
+    "numShares": 0.2,
+    "numSharesAdjustedForUserIntention": 0.2,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 11,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 1,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 2,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 3,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 4,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 5,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 6,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }, {
+    "marketID": "0x0000000000000000000000000000000000000001",
+    "outcome": 7,
+    "numShares": 0,
+    "numSharesAdjustedForUserIntention": 0,
+    "realizedProfitLoss": 0,
+    "unrealizedProfitLoss": 0,
+  }
+]
 ```
 All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
 
-### augur.trading.orderBook.getOrderBook({ \_type, \_market, \_outcome, minPrice, maxPrice[, \_startingOrderId, \_numOrdersToLoad ]}[, callback])
+Optional parameters are listed in brackets. Most of the Simplified API functions contain optional parameters for specifying which results to return and how to sort them.  For example, `sortBy` should be a string corresponding to the name of a particular field to sort by, and `isSortDescending` should be a boolean value for whether to sort the results in descending order. `limit` should be an integer greater than 0 that represents the maximum number of results to return. `offset` should be an integer greater than 0. It is used when only a portion of the total query results is desired, and it represents the record number at which to start returning results.
 
-Retrieves a section of the [Order Book](#order-book) for a specified [Market](#market). The required params are `_market` which is the address of the Market we intend to get the order book for. The `_type` which is either set to `1` for getting the Buy side of the order book and `2` for the sell side. The `_outcome` which is an integer value between 1 and 8 for the [Outcome](#outcome) we want to get [Orders](#order) for. The `minPrice` and `maxPrice` are also required and should be set to the minimum and maximum possible prices for a [Share](#shares). The two optional parameters are `_startingOrderId` which defaults to `0x0`, which indicates "start from the best order", and `_numOrdersToLoad` which defaults to 0, or "load all orders". The `_startingOrderId` field should be the order ID from which to start walking towards the order book's tail, as a hexadecimal string. The `_numOrdersToLoad` is expected to be a whole number. The `getOrderBook` function generally should be used only to fetch a small chunk of orders. To fetch entire order book, typically `getOrderBookChunked` should be used instead.
+### augur.accounts.getAccountTransferHistory({ account[, token, sortBy, isSortDescending, limit, offset] }[, callback])
 
-### augur.trading.orderBook.getOrderBookChunked({ \_type, \_market, \_outcome, minPrice, maxPrice[, \_startingOrderId, \_numOrdersToLoad ]}[, onChunkCallback, onCompleteCallback ])
+Returns the token transfers made to or from the required `account` parameter, which is a string containing the account address. The optional string parameter `token` can be used to restrict the results to a particular token name.
 
-Very similar to the above `getOrderBook` function, however this function is designed for getting the entire side of an [Outcome's](#outcome) [Order Book](#order-book) for a specific [Market](#market) in chunks. The `getOrderBookChunked` function has a params object with the same keys as `getOrderBook` but they work slightly differently. The `_numOrdersToLoad` key is now the chunk size, which instead of defaulting to 0 or "load all orders", it defaults to the default chunk size: 100. The chunk size is simply the number of orders each request will attempt to bring back at a time. This function also has two callbacks, the `onChunkCallback` and the `onCompleteCallback`. The `onChunkCallback` will be triggered for each chunk of orders received where as the `onCompleteCallback` will only be called when the entire order book's single outcome side has been returned. In our example, we are looking to find all the buy orders for outcome 1 in our market, starting from the order ID `0x3c3958b3cad3fb693a6fdd013a615485ef42d824aaa3bd57734f5ec21567ebdc` in chunks of three orders per return to `onChunkCallback`.
+### augur.markets.getCategories({ universe[, sortBy, isSortDescending, limit, offset] }[, callback]) 
 
-### augur.markets.getMarketInfo({ \_market }[, callback])
+Returns a list of all [Market](#market) categories in the required parameter `universe`, which is a string containing the address of a given [Universe](#universe).
 
-Returns information about a [Market](#market) (`_market`) that is stored on-contract. Information returned will include all kinds of basic information about the market as well as information about each market [Outcome](#outcome). This information doesn't include the [Order Book](#order-book) however and you should use `getOrderBook` or `getOrderBookChunked` to get information about [Open Orders](#open-orders) for the specified Market.
+<!-- Query TBD
+augur.markets.getDisputableMarkets({
+  reportingWindow: "0xacac65a0f492a910082c02bc174d3b3b7f7f1234",
+  sortBy: "",
+  isSortDescending: false, 
+  limit: 2, 
+  offset: 0
+}, function (disputableMarkets) { /* ... */ })
+// example output:
 
-### augur.markets.batchGetMarketInfo({ marketIDs }[, callback])
+### augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Retrieve a `marketsInfo` object for the [Market](#market) IDs in the array `marketIDs`. The `marketsInfo` object will contain `marketInfo` objects (see above for example) which are indexed by their respective market IDs. Much like the above `getMarketsInfo` the [Order Book](#order-book) will not be included in the market information returned and needs to be retrieved separately.
+Returns the [Markets](#market) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market's result. The required `reportingWindow` parameter is a string containing the address of a Reporting Window.
+-->
 
-### augur.markets.getMarketsInfo({ marketIDs }[, callback])
+### augur.markets.getMarketInfo({ marketID }[, callback])
 
-This function returns a `marketsInfo` object containing `marketInfo` objects indexed by their respective market IDs similar to `batchGetMarketInfo`. This function does not return as much information about the markets as `batchGetMarketInfo`.
+Returns information about a [Market](#market) (`marketID`) that is stored on-contract. The returned result includes basic information about the market as well as information about each market [Outcome](#outcome). It does not include [Order Book](#order-book) information; however the function `augur.trading.getOpenOrders` can be used to get information about [Open Orders](#open-orders) for the specified Market.
+
+### augur.markets.getMarketPriceHistory({ [marketID, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the prices and timestamps of [Market](#market) [Outcomes](#outcome) over time. The `marketID` parameter can be specified as a string containing a specific Market's address in order to restrict the results to a particular Market.
+
+### augur.markets.getMarkets({ [universe, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns an array of all [Markets](#markets). If `universe` is specified, this will restrict the results to only Markets within that Universe[#universe].
+
+### augur.markets.getMarketsAwaitingDesignatedReporting({ [designatedReporter, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the [Markets](#market) in the current [Reporting Window](#reporting-window) that are waiting for a [Designated Report](#designated-report) to be submitted. `designatedReporter` is an optional string parameter that can be used to restrict the results to [Markets](#market) having a specific [Designated Reporter](#designated-reporter) address.
+
+### augur.markets.getMarketsClosingInDateRange({ earliestClosingTime, latestClosingTime, universe[, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the [Markets](#market) closing between `earliestClosingTime` and `latestClosingTime` in the specified `universe`. `earliestClosingTime` and `latestClosingTime` are integers representing timestamps, and `universe` is a string containing the address of a given [Universe](#universe).
+
+### augur.markets.getMarketsCreatedByUser({ creator[, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user. `creator` is a string representing the address of the [Market Creator](#market-creator).
+
+### augur.markets.getMarketsInCategory({ category[, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the addresses of the [Markets](#market) in a specific category. `category` is a string representing the category name.
+
+### augur.markets.getMarketsInfo({ [marketIDs, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns information about [Markets](#market) (`marketIDs`) that are stored on-contract. The returned result includes basic information about the markets as well as information about each market [Outcome](#outcome). It does not include [Order Book](#order-book) information; however the function `augur.trading.getOpenOrders` can be used to get information about [Open Orders](#open-orders) for the specified Market.
+
+### augur.reporting.getReportingHistory({ reporter[, marketID, universe, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns information about a user's reporting history. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee).
+
+<!-- Query TBD
+
+augur.reporting.getReportingSummary({
+ reportingWindow: "0x235665a0f492a910082c02bc174d3b3b7f7f8992", 
+ sortBy: "",
+ isSortDescending: false, 
+ limit: 2, 
+ offset: 0
+}, function (reportingSummary) { /* ... */ })
+// example output:
+
+### augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns various information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
+-->
+
+<!-- Query TBD
+
+augur.reporting.getReportingWindowsWithUnclaimedFees({
+  account: "0xfafa65a0f492a910082c02bc174d3b3b7f7ffafa"
+}, function (reportingWindowsWithUnclaimedFees) { /* ... */ })
+// example output:
+
+### augur.reporting.getReportingWindowsWithUnclaimedFees({ account }[, callback])
+
+Returns the [Reporting Windows](#reporting-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee). `account` is a string containing a user's address.
+-->
+
+### augur.trading.getOpenOrders({ [marketID, outcome, orderType, creator, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns a list of [Open Orders](#open-orders) (i.e., [Orders](#order) on the [Order Book](#order-book) that have not been [Filled](#fill-order)). The results returned can be restricted by specifying `marketID` as a string containing a Market address, `outcome` as an integer, `orderType` as a string (i.e., "buy" or "sell"), and `creator` as a string containing a user address.
+
+### augur.trading.getUserTradingHistory({ account[, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. The results returned can be restricted by specifying `marketID` as a string containing a Market address, `outcome` as an integer, `orderType` as a string (i.e., "buy" or "sell")
+
+### augur.trading.getUserTradingPositions({ account[, marketID, outcome, sortBy, isSortDescending, limit, offset] }[, callback])
+
+Returns the trading positions held by a particular user. `account` is a string parameter containing the address of a user. The results returned can be restricted by specifying `marketID` as a string containing a Market address.
