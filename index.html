@@ -4306,8 +4306,8 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
           <h1 id="events-api">Events API</h1>
 
 <aside class="notice">The Events section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Listen for Events emitted by the augur contracts</span>
-<span class="c1">// contractAddresses is a JSON object containing the name and address of the augur contracts.</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Listen for Events emitted by the Augur contracts</span>
+<span class="c1">// contractAddresses is a JSON object containing the name and address of the Augur contracts.</span>
 <span class="kd">var</span> <span class="nx">contractAddresses</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">ReputationToken</span><span class="p">:</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">,</span>
  <span class="cm">/* ... */</span>
@@ -4483,7 +4483,7 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <span class="c1">// bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.</span>
 <span class="c1">// Also, the tears of functional programmers are delicious. ;)</span>
 </code></pre></div>
-<p>There are a variety of &ldquo;events&rdquo; emitted by the augur contracts.  Each event is triggered by a user doing something on augur: submitting a report, closing a <a href="#market">Market</a>, filling an <a href="#open-order">Open Order</a>, etc.</p>
+<p>There are a variety of &ldquo;events&rdquo; emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur: submitting a report, closing a <a href="#market">Market</a>, filling an <a href="#open-order">Open Order</a>, etc.</p>
 
 <aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of &ldquo;events&rdquo; that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of &ldquo;event&rdquo; is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
 
@@ -4520,39 +4520,25 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <td>value</td>
 </tr>
 <tr>
-<td>CancelOrder</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol">Orders</a></td>
-<td>Canceled an order and removed the order from the order book</td>
-<td>market, sender</td>
-<td>fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund</td>
+<td>DesignatedReportSubmitted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A Designated Reporter for a Market has submitted a Report</td>
+<td>universe, reporter, market</td>
+<td>stakeToken, amountStaked, payoutNumerators</td>
 </tr>
 <tr>
-<td>BuyCompleteSets</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol">Orders</a></td>
-<td>Bought a Complete Set of shares for a market</td>
-<td>sender, market</td>
-<td>fxpAmount, numOutcomes</td>
+<td>MarketCreated</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Someone created a new Market</td>
+<td>universe, market, marketCreator</td>
+<td>marketCreationFee, extraInfo</td>
 </tr>
 <tr>
-<td>DepositEther</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol">Cash</a></td>
-<td>Deposited Ether into cash tokens which are a 1:1 conversion to ETH</td>
-<td>sender</td>
-<td>value, balance</td>
-</tr>
-<tr>
-<td>InitiateWithdrawEther</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol">Cash</a></td>
-<td>Started the withdraw process to convert cash tokens into ETH, 3 day wait</td>
-<td>sender</td>
-<td>value, balance</td>
-</tr>
-<tr>
-<td>MakeOrder</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol">Orders</a></td>
-<td>Placed an order onto the order book</td>
-<td>market, sender</td>
-<td>type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID</td>
+<td>MarketFinalized</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A Market with a Proposed Outcome is now considered final</td>
+<td>universe, market</td>
+<td></td>
 </tr>
 <tr>
 <td>Mint</td>
@@ -4562,25 +4548,67 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <td>value</td>
 </tr>
 <tr>
-<td>Registration</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/extensions/Register.sol">Register</a></td>
-<td>Records the registration of new accounts</td>
-<td>sender</td>
-<td>timestamp</td>
+<td>OrderCanceled</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>An Order for some Shares has been canceled</td>
+<td>universe, shareToken, sender</td>
+<td>orderId, orderType, tokenRefund, sharesRefund</td>
 </tr>
 <tr>
-<td>SellCompleteSets</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol">Orders</a></td>
-<td>Sold a Complete Set of shares for a market</td>
-<td>sender, market</td>
-<td>fxpAmount, numOutcomes, marketCreatorFee, reportingFee</td>
+<td>OrderCreated</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>An Order for a type of Share has been created</td>
+<td>universe, shareToken, creator</td>
+<td>orderId, tradeGroupId</td>
 </tr>
 <tr>
-<td>TakeOrder</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol">Orders</a></td>
-<td>Took an order off the order book and filled it</td>
-<td>market, outcome, type</td>
-<td>orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID</td>
+<td>OrderFilled</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>An Order for some Shares has been filled</td>
+<td>universe, shareToken</td>
+<td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, settlementFees, tradeGroupId</td>
+</tr>
+<tr>
+<td>ReportsDisputed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Someone has put up a Dispute Bond for a Market&rsquo;s Report</td>
+<td>universe, disputer, market</td>
+<td>reportingPhase, disputeBondAmount</td>
+</tr>
+<tr>
+<td>ReportSubmitted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A Report has submitted a Report on a particular Outcome of a Market (either in the First Report Round or the Last Report Round)</td>
+<td>universe, reporter, market</td>
+<td>stakeToken, amountStaked, payoutNumerators</td>
+</tr>
+<tr>
+<td>TokensBurned</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Burned the target&rsquo;s tokens to completely destroy them</td>
+<td>universe, token, target</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>TokensMinted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Created brand new tokens for target</td>
+<td>universe, token, target</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>TokensTransferred</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Transferred tokens from one owner to another</td>
+<td>universe, token, from</td>
+<td>to, value</td>
+</tr>
+<tr>
+<td>TradingProceedsClaimed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A user has collected trading profits from outstanding Shares in a Finalized Market</td>
+<td>universe, shareToken, sender</td>
+<td>market, numShares, numPayoutTokens, finalTokenBalance</td>
 </tr>
 <tr>
 <td>Transfer</td>
@@ -4590,11 +4618,25 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <td>value</td>
 </tr>
 <tr>
-<td>WithdrawEther</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol">Cash</a></td>
-<td>Withdrew Ether from the cash token contract after waiting 3 days</td>
-<td>sender</td>
-<td>value, balance</td>
+<td>UniverseCreated</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A Child Universe has been created from a Parent Universe</td>
+<td>parentUniverse, childUniverse</td>
+<td></td>
+</tr>
+<tr>
+<td>UniverseForked</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A Market in the specified Universe has caused that Universe to Fork because its Proposed Outcome has been Disputed after a Last Report Round</td>
+<td>universe</td>
+<td></td>
+</tr>
+<tr>
+<td>WinningTokensRedeemed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A user has converted their winning Stake Tokens to REP</td>
+<td>universe, reporter, market</td>
+<td>stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
 </tr>
 </tbody></table>
 
