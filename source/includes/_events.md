@@ -3,8 +3,8 @@ Events API
 <aside class="notice">The Events section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 ```javascript
-// Listen for Events emitted by the augur contracts
-// contractAddresses is a JSON object containing the name and address of the augur contracts.
+// Listen for Events emitted by the Augur contracts
+// contractAddresses is a JSON object containing the name and address of the Augur contracts.
 var contractAddresses = {
   ReputationToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
  /* ... */
@@ -180,7 +180,7 @@ augur.logs.getLogs(params, function (err, logs) {
 // bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.
 // Also, the tears of functional programmers are delicious. ;)
 ```
-There are a variety of "events" emitted by the augur contracts.  Each event is triggered by a user doing something on augur: submitting a report, closing a [Market](#market), filling an [Open Order](#open-order), etc.
+There are a variety of "events" emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur: submitting a report, closing a [Market](#market), filling an [Open Order](#open-order), etc.
 
 <aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of "events" that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of "event" is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
 
@@ -191,21 +191,27 @@ The augur.js events API includes event listeners, which notify you of events hap
 
 The following table shows the events that can be passed to `augur.filters.listen`.  All of these events are optional; if you don't need some of these events for your application, don't include the event in your call to `augur.filters.listen`.  In this table, "Contract" refers to the Ethereum contract on which the event is defined ([source code](https://github.com/AugurProject/augur-core) / [contract addresses](https://github.com/AugurProject/augur-contracts)), "Data (indexed)" refers to fields included in the event log that are searchable using the `augur.logs.getLogs` function.
 
-Label                | Contract            | Event description                                                         | Data (indexed)           | Data (non-indexed)
--------------------- | ------------------- | ------------------------------------------------------------------------- | ------------------------ | ------------------
-Approval             | [ERC20](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol)              | Approved for the spender to spend a ERC20 token for an owner account      | owner, spender           | value
-Burn                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Burned the target's tokens to completely destroy them                     | target                   | value
-CancelOrder          | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Canceled an order and removed the order from the order book               | market, sender           | fxpPrice, fxpAmount, orderID, outcome, type, cashRefund, sharesRefund
-BuyCompleteSets         | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Bought a Complete Set of shares for a market                         | sender, market     | fxpAmount, numOutcomes
-DepositEther         | [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Deposited Ether into cash tokens which are a 1:1 conversion to ETH        | sender                   | value, balance
-InitiateWithdrawEther| [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Started the withdraw process to convert cash tokens into ETH, 3 day wait  | sender                   | value, balance
-MakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Placed an order onto the order book                                       | market, sender           | type, fxpPrice, fxpAmount, outcome, orderID, fxpMoneyEscrowed, fxpSharesEscrowed, tradeGroupID
-Mint                 | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Created brand new tokens for target                                       | target                   | value
-Registration         | [Register](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/extensions/Register.sol) | Records the registration of new accounts     | sender      | timestamp
-SellCompleteSets     | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)   | Sold a Complete Set of shares for a market  | sender, market         | fxpAmount, numOutcomes, marketCreatorFee, reportingFee
-TakeOrder            | [Orders](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Orders.sol)              | Took an order off the order book and filled it                            | market, outcome, type    | orderID, price, maker, taker, makerShares, makerTokens, takerShares, takerTokens, tradeGroupID
-Transfer             | [ERC20Basic](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol)          | Transferred tokens from one owner to another                              | from, to                 | value
-WithdrawEther        | [Cash](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/trading/Cash.sol)                | Withdrew Ether from the cash token contract after waiting 3 days          | sender                   | value, balance
+Label                     | Contract                                                                                   | Event description | Data (indexed) | Data (non-indexed)
+------------------------- | ------------------------------------------------------------------------------------------ | ----------------- | -------------- | ------------------
+Approval                  | [ERC20](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol) | Approved for the spender to spend a ERC20 token for an owner account | owner, spender | value
+Burn                      | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Burned the target's tokens to completely destroy them | target | value
+DesignatedReportSubmitted | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A Designated Reporter for a Market has submitted a Report | universe, reporter, market | stakeToken, amountStaked, payoutNumerators
+MarketCreated             | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Someone created a new Market | universe, market, marketCreator | marketCreationFee, extraInfo
+MarketFinalized           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A Market with a Proposed Outcome is now considered final | universe, market |  | 
+Mint                      | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol) | Created brand new tokens for target | target | value
+OrderCanceled             | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | An Order for some Shares has been canceled | universe, shareToken, sender | orderId, orderType, tokenRefund, sharesRefund
+OrderCreated              | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | An Order for a type of Share has been created | universe, shareToken, creator | orderId, tradeGroupId
+OrderFilled               | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | An Order for some Shares has been filled | universe, shareToken | filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, settlementFees, tradeGroupId
+ReportsDisputed           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Someone has put up a Dispute Bond for a Market's Report | universe, disputer, market | reportingPhase, disputeBondAmount
+ReportSubmitted           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A Report has submitted a Report on a particular Outcome of a Market (either in the First Report Round or the Last Report Round) | universe, reporter, market, stakeToken, amountStaked, payoutNumerators
+TokensBurned              | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Burned the target's tokens to completely destroy them | universe, token, target | amount
+TokensMinted              | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Created brand new tokens for target | universe, token, target | amount
+TokensTransferred         | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Transferred tokens from one owner to another | universe, token, from | to, value
+TradingProceedsClaimed    | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A user has collected trading profits from outstanding Shares in a Finalized Market | universe, shareToken, sender | market, numShares, numPayoutTokens, finalTokenBalance
+Transfer | [ERC20Basic](https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol) | Transferred tokens from one owner to another | from, to | value
+UniverseCreated           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A Child Universe has been created from a Parent Universe | parentUniverse, childUniverse | 
+UniverseForked            | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A Market in the specified Universe has caused that Universe to Fork because its Proposed Outcome has been Disputed after a Last Report Round | universe |
+WinningTokensRedeemed     | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A user has converted their winning Stake Tokens to REP | universe, reporter, market | stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators
 
 In addition to these on-contract events, `augur.filters.listen` also accepts a callback for the `block` listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.
 
