@@ -4,7 +4,7 @@ Architecture
 
 Augur is designed to work with a locally running Ethereum Node. If a local Ethereum Node isn't available then Augur will default to using one of the hosted Augur Nodes. A hosted Augur Node is simply an Ethereum Node being run by the Augur Team and hosted on a public server. The sections below explain a bit about each setup (local or hosted) and provide a diagram of what is going on under the hood.
 
-Local node
+Local Node
 ----------
 If you are running a [local Ethereum node](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum), sending RPC requests to your local node is the best (fastest) way to use Augur. To do this, you can either download and run the Augur app locally, or simply visit [https://app.augur.net](https://app.augur.net), which is configured to automatically talk to your local node, if present.
 
@@ -18,7 +18,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 **Note to geth users:** Geth's RPC server uses regular (unencrypted) HTTP and because of this, in order for the Augur app to communicate with your local geth node, it must be served over HTTP.
 
-Hosted node
+Hosted Node
 -----------
 Understandably, many users will not want to go to the trouble of running a full Ethereum node solely for the purpose of using Augur. Augur maintains a public (testnet during the beta) Ethereum node at [https://eth9000.augur.net](https://eth9000.augur.net), which is used automatically by [https://app.augur.net](https://app.augur.net) (and by [local.augur.net](http://local.augur.net) if a local Ethereum node is not detected).
 

@@ -14,7 +14,8 @@ includes:
   - architecture
   - trading
   - reporting
-  - generalAPI
+  - apiOverview
+  - simplifiedAPI
   - callAPI
   - transactionAPI
   - events
