@@ -147,7 +147,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Trading section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur will maintain an <a href="#order-book">Order Book</a> for each of the markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be <a href="#fill-order">Filled</a> immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of your trade will be placed on the Order Book as an Order. If you are the <a href="#maker">Maker</a> of the Order you can cancel it to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
+<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur will maintain an <a href="#order-book">Order Book</a> for each of the markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be <a href="#fill-order">Filled</a> immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of your trade will be placed on the Order Book as an Order. If you are the <a href="#order-creator">Creator</a> of the Order you can cancel it to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
 
 <p>The Augur UI will offer users the best prices first when displaying the Order Book on each Market page. Orders are never executed at a worse price than the limit price set by the trader, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback Orders to attempt to fill our Order in the event that the best Order was filled before we sent the transaction. These backup/fallback Orders will always fit within the limit price set by the trader.</p>
 
@@ -157,7 +157,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If there are Orders on the Order Book that match our request for <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> at a price of <code class="prettyprint">0.5 ETH</code>, or cheaper, then Augur will fill those Orders. We will now own <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> and we will have lost <code class="prettyprint">50.0 ETH</code> plus GAS cost.</p>
 
-<p>If no Order is available on the Order Book that would partially or completely fill our trade request then a <a href="#bid-order">Bid Order</a> would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our <code class="prettyprint">50.0 ETH</code>. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of <code class="prettyprint">ETH</code>. If we cancel our Order we can get our <code class="prettyprint">50.0 ETH</code> back, the only currency lost would be the GAS used to pay to place the trade and cancel the trade. When a <a href="#taker">Taker</a> decides to fill our Order on the Order Book, we will get our <code class="prettyprint">100</code> shares of <code class="prettyprint">Outcome A</code> transferred to us.</p>
+<p>If no Order is available on the Order Book that would partially or completely fill our trade request then a <a href="#bid-order">Bid Order</a> would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our <code class="prettyprint">50.0 ETH</code>. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of <code class="prettyprint">ETH</code>. If we cancel our Order we can get our <code class="prettyprint">50.0 ETH</code> back, the only currency lost would be the GAS used to pay to place the trade and cancel the trade. When a <a href="#order-filler">Filler</a> decides to fill our Order on the Order Book, we will get our <code class="prettyprint">100</code> shares of <code class="prettyprint">Outcome A</code> transferred to us.</p>
 
 <p>For more information on how to trade using the Augur API, check the <a href="#trade-tx-api">trade</a> section of the <a href="#transaction-api">Transaction API</a>.</p>
 
@@ -186,7 +186,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="calculating-trades">Calculating Trades</h2>
 
-<p>In this section we break down all potential trade situations and their expected result. There are two types of <a href="#order">Orders</a>, <a href="#bid-order">Bid Orders</a> (requesting to buy) and <a href="#ask-order">Ask Orders</a> (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the <a href="#order-book">Order Book</a> by <a href="#maker">Makers</a> and contain four important details: The Maker of the Order, the price of the Order, The amount of <a href="#shares">Shares</a> or ETH escrowed, and the <a href="#outcome">Outcome</a> we plan to trade on. The price can be any value between 0 and the <a href="#number-of-ticks">Number of Ticks</a>. The calculations below use <code class="prettyprint">num_shares</code> as the number of Shares the Order is requesting, <code class="prettyprint">price</code> as the price per Share for the Order, <code class="prettyprint">outcome</code> for the Outcome our Order is trading on, <code class="prettyprint">num_ticks</code> as the Number of Ticks, and <code class="prettyprint">fee_rate</code> as the <a href="#settlement-fees">Settlement Fees</a> extracted during the <a href="#settlement">Settlement</a> of Shares.</p>
+<p>In this section we break down all potential trade situations and their expected result. There are two types of <a href="#order">Orders</a>, <a href="#bid-order">Bid Orders</a> (requesting to buy) and <a href="#ask-order">Ask Orders</a> (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the <a href="#order-book">Order Book</a> by <a href="#order-creator">Order Creators</a> and contain four important details: The Creator of the Order, the price of the Order, The amount of <a href="#shares">Shares</a> or ETH escrowed, and the <a href="#outcome">Outcome</a> we plan to trade on. The price can be any value between 0 and the <a href="#number-of-ticks">Number of Ticks</a>. The calculations below use <code class="prettyprint">num_shares</code> as the number of Shares the Order is requesting, <code class="prettyprint">price</code> as the price per Share for the Order, <code class="prettyprint">outcome</code> for the Outcome our Order is trading on, <code class="prettyprint">num_ticks</code> as the Number of Ticks, and <code class="prettyprint">fee_rate</code> as the <a href="#settlement-fees">Settlement Fees</a> extracted during the <a href="#settlement">Settlement</a> of Shares.</p>
 
 <p>The Formulas for determining how much opening a Long or Short position costs are as follows:</p>
 
@@ -222,12 +222,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Bid Order</th>
-<th>Taker of Bid Order</th>
+<th>Creator of Bid Order</th>
+<th>Filler of Bid Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code><br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code><br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -238,12 +238,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Bid Order</th>
-<th>Taker of Bid Order</th>
+<th>Creator of Bid Order</th>
+<th>Filler of Bid Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong>: <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -254,12 +254,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Bid Order</th>
-<th>Taker of Bid Order</th>
+<th>Creator of Bid Order</th>
+<th>Filler of Bid Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/><strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -270,12 +270,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Bid Order</th>
-<th>Taker of Bid Order</th>
+<th>Creator of Bid Order</th>
+<th>Filler of Bid Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/><strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/><strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -288,12 +288,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Ask Order</th>
-<th>Taker of Ask Order</th>
+<th>Creator of Ask Order</th>
+<th>Filler of Ask Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/><strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -304,12 +304,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Ask Order</th>
-<th>Taker of Ask Order</th>
+<th>Creator of Ask Order</th>
+<th>Filler of Ask Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -320,12 +320,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Ask Order</th>
-<th>Taker of Ask Order</th>
+<th>Creator of Ask Order</th>
+<th>Filler of Ask Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>. <br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -336,12 +336,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <table><thead>
 <tr>
-<th>Maker of Ask Order</th>
-<th>Taker of Ask Order</th>
+<th>Creator of Ask Order</th>
+<th>Filler of Ask Order</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">maker</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
 <td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
@@ -458,20 +458,23 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">Augur</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'augur.js'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Augur</span><span class="p">();</span>
 
-<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">ethereumNode</span> <span class="o">=</span> <span class="p">{</span> 
   <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s1">'http://127.0.0.1:8545'</span><span class="p">,</span> <span class="c1">// local http address for Geth Node</span>
-    <span class="s1">'https://eth9000.augur.net'</span> <span class="c1">// hosted http address for Augur Node</span>
+    <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local http address for Geth node</span>
+    <span class="s2">"https://eth9000.augur.net"</span> <span class="c1">// hosted http address for Geth node</span>
   <span class="p">],</span>
   <span class="na">wsAddresses</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s1">'ws://127.0.0.1:8545'</span><span class="p">,</span> <span class="c1">// local websocket address for Geth Node</span>
-    <span class="s1">'wss://ws9000.augur.net'</span><span class="p">,</span> <span class="c1">// hosted websocket address for Augur Node</span>
-  <span class="p">],</span>
+    <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span> <span class="c1">// local websocket address for Geth node</span>
+    <span class="s2">"wss://ws9000.augur.net"</span> <span class="c1">// hosted websocket address for Geth node</span>
+  <span class="p">]</span>
+  <span class="c1">// ipc addresses can also be specified as:</span>
+  <span class="c1">// ipcAddresses: [ ... ]</span>
 <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">augurNode</span> <span class="o">=</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">;</span> <span class="c1">// local websocket address for Augur Node</span>
 
 <span class="c1">// Attempt to connect to a local Ethereum node</span>
 <span class="c1">// if that fails, fall back to our hosted node</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">vitals</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span> <span class="nx">ethereumNode</span><span class="p">,</span> <span class="nx">augurNode</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">vitals</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="c1">// example vitals object:</span>
 <span class="nx">vitals</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">networkID</span><span class="p">:</span> <span class="s1">'9000'</span><span class="p">,</span>
@@ -498,9 +501,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p><code class="prettyprint">$ yarn add augur.js</code></p>
 
-<p>To use the Augur API, <code class="prettyprint">augur.js</code> must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to <code class="prettyprint">augur.connect</code>. Augur will go through the list of potential connections provided by the <code class="prettyprint">options</code> argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail.</p>
+<p>To use the Augur API, <code class="prettyprint">augur.js</code> must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to <code class="prettyprint">augur.connect</code>. Augur will go through the list of potential connections provided by the <code class="prettyprint">options</code> argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail. The Ethereum node may have multiple http, websocket, or ipc addresses specified as arrays. The Augur Node, however, can only have one websocket address specified.</p>
 
-<p>In the example we have set our first connection to try as <code class="prettyprint">http://127.0.0.1:8545</code> which is our local geth node. If Augur is unable to connect to the local geth node, then Augur will go to the next provided address. In this case we have provided a single hosted node (<code class="prettyprint">https://eth9000.augur.net</code>) as the only other attempt to make outside of the local geth node. If a connection is successfully established then a <code class="prettyprint">vitals</code> object will be returned, otherwise an error message will be returned.</p>
+<p>In the example, we have set our first connection to try as <code class="prettyprint">http://127.0.0.1:8545</code> which is our local Geth node. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (<code class="prettyprint">https://eth9000.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then a <code class="prettyprint">vitals</code> object will be returned, otherwise an error message will be returned.</p>
 
 <h2 id="accounts">Accounts</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/**
@@ -583,9 +586,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The Simplified API runs queries against an Augur Node database rather than directly looking up information on the Ethereum blockchain because retrieving information from the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all <a href="#markets">Markets</a> created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.</p>
 
-<p>To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node, which runs the request against its database, and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.</p>
+<p>To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.</p>
 
-<p>To set up an Augur Node, follow the instructions described in the <a href="https://github.com/AugurProject/augur-node#augur-node">Augur Node GitHub repository</a>. Once the Augur Node is running, a connection to the Augur Node can be established as shown by the JavaScript sample code on the right.</p>
+<p>To set up an Augur Node, follow the instructions described in the <a href="https://github.com/AugurProject/augur-node#augur-node">Augur Node GitHub repository</a>. (Alternatively, if the websocket address of a hosted Augur Node are already known, this address can be specified in the JS code without the need to set up an Augur Node.) Once the desired Augur Node is running, a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code on the right.</p>
 
           <h1 id="simplified-api">Simplified API</h1>
 
@@ -634,6 +637,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">500</span> <span class="p">},</span>
 <span class="p">]</span>
 
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getDisputableMarkets</span><span class="p">({</span> 
+  <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">disputableMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
   <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketPriceHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
@@ -668,6 +677,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
 <span class="p">]</span>
 
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingReporting</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsAwaitingReporting</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsClosingInDateRange</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">earliestClosingTime</span><span class="p">:</span> <span class="mi">1506573450</span><span class="p">,</span>
@@ -680,6 +695,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsCreatedByUser</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">creator</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketsCreatedByUser</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -820,12 +836,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns a list of all <a href="#market">Market</a> categories in the required parameter <code class="prettyprint">universe</code>, which is a string containing the address of a given <a href="#universe">Universe</a>.</p>
 
-<!-- TODO: Add example JS code (query pending).
+<h3 id="augur-markets-getdisputablemarkets-reportingwindow-sortby-issortdescending-limit-offset-callback">augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-### augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
-
-Returns the [Markets](#market) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market's result. The required `reportingWindow` parameter is a string containing the address of a Reporting Window.
--->
+<p>Returns the <a href="#market">Markets</a> in a specific <a href="#reporting-window">Reporting Window</a> that are able to be disputed, along with the value of the <a href="#dispute-bond">Dispute Bond</a> needed to dispute each Market&rsquo;s result. The required <code class="prettyprint">reportingWindow</code> parameter is a string containing the address of a Reporting Window.</p>
 
 <h3 id="augur-markets-getmarketpricehistory-marketid-callback">augur.markets.getMarketPriceHistory({ marketID }[, callback])</h3>
 
@@ -839,17 +852,15 @@ Returns the [Markets](#market) in a specific [Reporting Window](#reporting-windo
 
 <p>Returns the <a href="#market">Markets</a> in a <a href="#universe">Universe</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted. <code class="prettyprint">universe</code> is a string containing the address of a given Universe. <code class="prettyprint">designatedReporter</code> is an optional string parameter that can be used to restrict the results to <a href="#market">Markets</a> having a specific <a href="#designated-reporter">Designated Reporter</a> address.</p>
 
-<!-- TODO: Determine possible values for reportingState. Confirm if this returns Markets awaiting Designated Report & update description accordingly. Add example JS code -- not sure what returned data looks like.
-### augur.markets.getMarketsAwaitingReporting({ [universe, reportingWindow, reportingState, sortBy, isSortDescending, limit, offset] }[, callback])
+<!-- TODO: Confirm if this returns Markets awaiting Designated Report & update description accordingly. -->
 
-Returns the [Markets](#market) in a [Universe](#universe) or [Reporting Window](#reporting-window) that are either waiting for a [Designated Report](#designated-report) to be submitted or waiting for the current [Reporting Phase](#reporting-phase) to end. Either `universe` or `reportingWindow` must be specified as an address. `reportingState` is a string that can be _____, _____, or, ____.
--->
+<h3 id="augur-markets-getmarketsawaitingreporting-universe-reportingwindow-reportingstate-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsAwaitingReporting({ [universe, reportingWindow, reportingState, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+
+<p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#reporting-window">Reporting Window</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted or waiting for the <a href="#reporting-phase">Reporting Phase</a> to end. Either <code class="prettyprint">universe</code> or <code class="prettyprint">reportingWindow</code> must be specified as a string containing an address. <code class="prettyprint">reportingState</code> is a string where valid values are &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, or &ldquo;LAST_REPORTING&rdquo;.</p>
 
 <h3 id="augur-markets-getmarketsclosingindaterange-universe-earliestclosingtime-latestclosingtime-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsClosingInDateRange({ universe, earliestClosingTime, latestClosingTime[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
 <p>Returns the <a href="#market">Markets</a> closing between <code class="prettyprint">earliestClosingTime</code> and <code class="prettyprint">latestClosingTime</code> in the specified <code class="prettyprint">universe</code>. <code class="prettyprint">earliestClosingTime</code> and <code class="prettyprint">latestClosingTime</code> are integers representing Unix timestamps, and <code class="prettyprint">universe</code> is a string containing the address of a given <a href="#universe">Universe</a>.</p>
-
-<!-- TODO: Add universe to example JS code -->
 
 <h3 id="augur-markets-getmarketscreatedbyuser-universe-creator-sortby-issortdescending-limit-offset-callback">augur.markets.getMarketsCreatedByUser({ universe, creator[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
@@ -864,7 +875,15 @@ Returns the [Markets](#market) in a [Universe](#universe) or [Reporting Window](
 <p>Returns information about <a href="#market">Markets</a> (<code class="prettyprint">marketIDs</code>) that are stored on-contract. The returned result includes basic information about the markets as well as information about each market <a href="#outcome">Outcome</a>. It does not include <a href="#order-book">Order Book</a> information; however the function <code class="prettyprint">augur.trading.getOpenOrders</code> can be used to get information about <a href="#open-orders">Open Orders</a> for the specified Market.</p>
 
 <h2 id="reporting-api">Reporting API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getAllStakeTokens</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
+  <span class="na">dateRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">1506473500</span><span class="p">,</span> <span class="mi">1507593600</span><span class="p">]</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">allStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
   <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
@@ -884,37 +903,79 @@ Returns the [Markets](#market) in a [Universe](#universe) or [Reporting Window](
     <span class="p">}],</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingSummary</span><span class="p">({</span> 
+  <span class="nx">reportingWindow</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">allStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingWindowsWithUnclaimedFees</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindowsWithUnclaimedFees</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getUnclaimedStakeTokens</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">unclaimedStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getUnfinalizedStakeTokens</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">unfinalizedStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
 </code></pre></div>
-<!-- TODO: Add description. Add JS example (query pending). 
-### augur.reporting.getAllStakeTokens({ universe, account[, dateRange] }[, callback]) 
--->
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+
+<h3 id="augur-reporting-getallstaketokens-universe-account-daterange-callback">augur.reporting.getAllStakeTokens({ universe, account[, dateRange] }[, callback])</h3>
+
+<p>Returns the Stake Tokens owned by a a user that are either unclaimed or are in <a href="#market">Markets</a> that have not been <a href="#finalized-market">Finalized</a>. <code class="prettyprint">universe</code> and <code class="prettyprint">account</code> are strings containing the address of a <a href="#universe">Universe</a> and the address of a user. <code class="prettyprint">dateRange</code> is an array with 2 Unix timestamps for the start time and end time to filter by.</p>
 
 <h3 id="augur-reporting-getreportinghistory-reporter-universe-marketid-reportingwindow-sortby-issortdescending-limit-offset-callback">augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<p>Returns information about a user&rsquo;s reporting history. For <a href="#reporting-window">Reporting Windows</a> that have ended, this includes the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a>, whether the user&rsquo;s <a href="#report">Report</a> matched that Final Outcome, how much <a href="#rep">REP</a> the user gained or lost from redistribution, and how much the user earned in <a href="#reporting-fee">Reporting Fees</a>. <code class="prettyprint">reporter</code> is a string containing the address of a given <a href="#reporter">Reporter</a>. Either <code class="prettyprint">universe</code>, <code class="prettyprint">marketID</code>, or <code class="prettyprint">reportingWindow</code> must be specified as a string paramter containing the address of a <a href="#universe">Universe</a>, Market, or Reporting Window.</p>
+<p>Returns information about the <a href="#report">Reports</a> submitted by a particular user. For <a href="#reporting-window">Reporting Windows</a> that have ended, this includes the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a>, whether the user&rsquo;s <a href="#report">Report</a> matched that Final Outcome, how much <a href="#rep">REP</a> the user gained or lost from redistribution, and how much the user earned in <a href="#reporting-fee">Reporting Fees</a>. <code class="prettyprint">reporter</code> is a string containing the address of a given <a href="#reporter">Reporter</a>. Either <code class="prettyprint">universe</code>, <code class="prettyprint">marketID</code>, or <code class="prettyprint">reportingWindow</code> must be specified as a string paramter containing the address of a <a href="#universe">Universe</a>, Market, or Reporting Window.</p>
 
-<!-- TODO: Add example JS code (query pending).
-### augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 
-Returns various information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
--->
+<h3 id="augur-reporting-getreportingsummary-reportingwindow-sortby-issortdescending-limit-offset-callback">augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<!-- TODO: Add example JS code (query pending).
-### augur.reporting.getReportingWindowsWithUnclaimedFees({ universe, account }[, callback])
+<p>Returns information about a given <a href="#reporting-window">Reporting Window</a>, including total number of <a href="#market">Markets</a> up for reporting, total number of Markets up for <a href="#dispute">Dispute</a>, total number of Markets undergoing and/or resolved via each <a href="#reporting-round">Reporting Round</a>. <code class="prettyprint">reportingWindow</code> is a string containing the address of a specific Reporting Window.</p>
 
-Returns the [Reporting Windows](#reporting-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee). `universe is a string containing a [Universe](#universe)'s address. `account` is a string containing a user's address.
--->
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 
-<!-- TODO: Add description. Add example JS code (query pending).
-### augur.reporting.getUnclaimedStakeTokens({ account }[, callback])
--->
+<h3 id="augur-reporting-getreportingwindowswithunclaimedfees-universe-account-callback">augur.reporting.getReportingWindowsWithUnclaimedFees({ universe, account }[, callback])</h3>
 
-<!-- TODO: Add description. Add example JS code (query pending).
-### augur.reporting.getUnfinalizedStakeTokens({ account }[, callback])
--->
+<p>Returns the <a href="#reporting-window">Reporting Windows</a> where a user has not claimed his or her <a href="#reporting-fee">Reporting Fees</a>. <code class="prettyprint">universe</code> and <code class="prettyprint">account</code> are strings containing the address of a <a href="#universe">Universe</a> and the address of a user.</p>
+
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+
+<h3 id="augur-reporting-getunclaimedstaketokens-universe-account-callback">augur.reporting.getUnclaimedStakeTokens({ universe, account }[, callback])</h3>
+
+<p>Returns the Stake Tokens that a user owns but has not redeemed in <a href="#market">Markets</a> that are <a href="#finalized-market">Finalized</a>. <code class="prettyprint">universe</code> and <code class="prettyprint">account</code> are strings containing the address of a <a href="#universe">Universe</a> and the address of a user.</p>
+
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+
+<h3 id="augur-reporting-getunfinalizedstaketokens-universe-account-callback">augur.reporting.getUnfinalizedStakeTokens({ universe, account }[, callback])</h3>
+
+<p>Returns the Stake Tokens owned by a particular user in <a href="#market">Markets</a> that have not been <a href="#finalized-market">Finalized</a>. <code class="prettyprint">universe</code> and <code class="prettyprint">account</code> are strings containing the address of a <a href="#universe">Universe</a> and the address of a user.</p>
 
 <h2 id="trading-api">Trading API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getOpenOrders</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code>
+<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getClosedOrders</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
+  <span class="na">dateRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">1506473500</span><span class="p">,</span> <span class="mi">1507593600</span><span class="p">]</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">closedOrders</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output: coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getOpenOrders</span><span class="p">({</span>
   <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1071,15 +1132,17 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<!-- TODO: Finish description. Add example JS code (query pending). Determine date range's type (Unix timestamp?).
-### augur.trading.getClosedOrders({ universe, account [, dateRange] }[, callback])
+<!-- TODO: Verify description once function is completed. -->
 
-`universe is a string containing a [Universe](#universe)'s address. `account` is a string containing a user's address.
--->
+<h3 id="augur-trading-getclosedorders-universe-account-daterange-callback">augur.trading.getClosedOrders({ universe, account [, dateRange] }[, callback])</h3>
+
+<p>Description pending.</p>
 
 <h3 id="augur-trading-getopenorders-universe-marketid-outcome-ordertype-creator-sortby-issortdescending-limit-offset-callback">augur.trading.getOpenOrders({ [universe, marketID, outcome, orderType, creator, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
 <p>Returns a list of <a href="#open-orders">Open Orders</a> (i.e., <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> that have not been <a href="#fill-order">Filled</a>). Either <code class="prettyprint">universe</code> or <code class="prettyprint">marketID</code> is required as a string parameter containing the address of a <a href="#universe">Universe</a> or <a href="#market">Market</a>. <code class="prettyprint">outcome</code> is an integer denoting a specific Outcome in the Market, <code class="prettyprint">orderType</code> is a string (i.e., &ldquo;buy&rdquo; or &ldquo;sell&rdquo;), and <code class="prettyprint">creator</code> is a string containing a user account address.</p>
+
+<!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 
 <h3 id="augur-trading-getusertradinghistory-account-universe-marketid-outcome-ordertype-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
@@ -1610,15 +1673,15 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 
 <h4 id="augur-api-orders-getordercreator-_orderid-callback">augur.api.Orders.getOrderCreator({ _orderId }[, callback])</h4>
 
-<p>Returns the <a href="#maker">Maker</a> address of the specified <code class="prettyprint">_orderId</code>.</p>
+<p>Returns the <a href="#order-creator">Creator</a> address of the specified <code class="prettyprint">_orderId</code>.</p>
 
 <h4 id="augur-api-orders-getordermoneyescrowed-_orderid-callback">augur.api.Orders.getOrderMoneyEscrowed({ _orderId }[, callback])</h4>
 
-<p>Returns the fixed point value of the amount of money escrowed by the <a href="#maker">Maker</a> for a specified <code class="prettyprint">_orderId</code>.</p>
+<p>Returns the fixed point value of the amount of money escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
 
 <h4 id="augur-api-orders-getordersharesescrowed-_orderid-callback">augur.api.Orders.getOrderSharesEscrowed({ _orderId }[, callback])</h4>
 
-<p>Returns the fixed point value of the amount of shares escrowed by the <a href="#maker">Maker</a> for a specified <code class="prettyprint">_orderId</code>.</p>
+<p>Returns the fixed point value of the amount of shares escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
 
 <h4 id="augur-api-orders-getordertype-_orderid-callback">augur.api.Orders.getOrderType({ _orderId }[, callback])</h4>
 
@@ -2839,7 +2902,7 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 
 <h4 id="augur-api-fillorder-publicfillorder-_signer-_orderid-_amountfillerwants-_tradegroupid-onsent-onsuccess-onfailed">augur.api.FillOrder.publicFillOrder({ _signer, _orderID, _amountFillerWants, _tradeGroupID, onSent, onSuccess, onFailed })</h4>
 
-<p>Given an <code class="prettyprint">_orderId</code> and the amount a filler wants as <code class="prettyprint">_amountFillerWants</code> denoted in attoshares this transaction will attempt to fill the order specified. If the <code class="prettyprint">_amountFillerWants</code> is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the <code class="prettyprint">_amountFillerWants</code> value that the filler requests. This transaction requires <code class="prettyprint">_orderId</code> and <code class="prettyprint">_amountFillerWants</code> are defined. The maker of the order specified by <code class="prettyprint">_orderId</code> cannot be the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will return the fixed point amount remaining of the order specified by <code class="prettyprint">_orderId</code> after being filled, if it&rsquo;s completely filled this will return <code class="prettyprint">0</code>. The <code class="prettyprint">_tradeGroupId</code> is an optional value that is used by the Augur UI and can be left <code class="prettyprint">undefined</code>.</p>
+<p>Given an <code class="prettyprint">_orderId</code> and the amount a <a href="#order-filler">Filler</a> wants as <code class="prettyprint">_amountFillerWants</code> denoted in attoshares this transaction will attempt to fill the order specified. If the <code class="prettyprint">_amountFillerWants</code> is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the <code class="prettyprint">_amountFillerWants</code> value that the filler requests. This transaction requires <code class="prettyprint">_orderId</code> and <code class="prettyprint">_amountFillerWants</code> are defined. The <a href="#order-creator">Creator</a> of the order specified by <code class="prettyprint">_orderId</code> cannot be the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will return the fixed point amount remaining of the order specified by <code class="prettyprint">_orderId</code> after being filled, if it&rsquo;s completely filled this will return <code class="prettyprint">0</code>. The <code class="prettyprint">_tradeGroupId</code> is an optional value that is used by the Augur UI and can be left <code class="prettyprint">undefined</code>.</p>
 
 <h2 id="market-tx-api">Market Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Transaction API Examples:</span>
@@ -4465,133 +4528,133 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <tr>
 <td>Approval</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20</a></td>
-<td>Approved for the spender to spend a ERC20 token for an owner account</td>
+<td><code class="prettyprint">spender</code> has been approved to spend <code class="prettyprint">value</code> amount of ERC20 tokens on behalf of <code class="prettyprint">owner</code>.</td>
 <td>owner, spender</td>
 <td>value</td>
 </tr>
 <tr>
 <td>Burn</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol">VariableSupplyToken</a></td>
-<td>Burned the target&rsquo;s tokens to completely destroy them</td>
+<td>Burned (i.e., completely destroyed) <code class="prettyprint">value</code> amount of <code class="prettyprint">target</code>&rsquo;s tokens.</td>
 <td>target</td>
 <td>value</td>
 </tr>
 <tr>
 <td>DesignatedReportSubmitted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Designated Reporter for a Market has submitted a Report</td>
+<td><code class="prettyprint">reporter</code> has submitted a Designated Report for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> Stake Tokens (at the address <code class="prettyprint">stakeToken</code>) staked on the Outcome <code class="prettyprint">payoutNumerators</code>.</td>
 <td>universe, reporter, market</td>
 <td>stakeToken, amountStaked, payoutNumerators</td>
 </tr>
 <tr>
 <td>MarketCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Someone created a new Market</td>
+<td><code class="prettyprint">marketCreator</code> has created <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> for a price of <code class="prettyprint">marketCreationFee</code>.</td>
 <td>universe, market, marketCreator</td>
 <td>marketCreationFee, extraInfo</td>
 </tr>
 <tr>
 <td>MarketFinalized</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Market with a Proposed Outcome is now considered final</td>
+<td>The Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> is now considered final.</td>
 <td>universe, market</td>
 <td></td>
 </tr>
 <tr>
 <td>Mint</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol">VariableSupplyToken</a></td>
-<td>Created brand new tokens for target</td>
+<td><code class="prettyprint">value</code> amount of brand new tokens were created for <code class="prettyprint">target</code>.</td>
 <td>target</td>
 <td>value</td>
 </tr>
 <tr>
 <td>OrderCanceled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>An Order for some Shares has been canceled</td>
+<td><code class="prettyprint">sender</code>&rsquo;s Order (with ID <code class="prettyprint">orderId</code> and type <code class="prettyprint">orderType</code>) for the Share Token at address <code class="prettyprint">shareToken</code> was canceled in <code class="prettyprint">universe</code>, and <code class="prettyprint">sender</code> was refunded either <code class="prettyprint">tokenRefund</code> in ETH or <code class="prettyprint">sharesRefund</code> Share Tokens.</td>
 <td>universe, shareToken, sender</td>
 <td>orderId, orderType, tokenRefund, sharesRefund</td>
 </tr>
 <tr>
 <td>OrderCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>An Order for a type of Share has been created</td>
+<td><code class="prettyprint">creator</code> placed an Order (with ID <code class="prettyprint">orderId</code>) in <code class="prettyprint">universe</code> for the Share Token at address <code class="prettyprint">shareToken</code> in the Trade Group <code class="prettyprint">tradeGroupId</code>.</td>
 <td>universe, shareToken, creator</td>
 <td>orderId, tradeGroupId</td>
 </tr>
 <tr>
 <td>OrderFilled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>An Order for some Shares has been filled</td>
+<td>Order <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The Order Creator escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in ETH, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in ETH, and <code class="prettyprint">settlementFees</code> in ETH were spent.</td>
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, settlementFees, tradeGroupId</td>
 </tr>
 <tr>
 <td>ReportsDisputed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Someone has put up a Dispute Bond for a Market&rsquo;s Report</td>
+<td><code class="prettyprint">disputer</code> disputed the Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> for the amount of <code class="prettyprint">disputeBondAmount</code> during <code class="prettyprint">reportingPhase</code>.</td>
 <td>universe, disputer, market</td>
 <td>reportingPhase, disputeBondAmount</td>
 </tr>
 <tr>
 <td>ReportSubmitted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Report has submitted a Report on a particular Outcome of a Market (either in the First Report Round or the Last Report Round)</td>
+<td><code class="prettyprint">reporter</code> submitted a Report for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> (either in the First Report Round or the Last Report Round). <code class="prettyprint">reporter</code> staked <code class="prettyprint">amountStaked</code> ETH on Outcome <code class="prettyprint">payoutNumerators</code> using the Stake Token at address <code class="prettyprint">stakeToken</code>.</td>
 <td>universe, reporter, market</td>
 <td>stakeToken, amountStaked, payoutNumerators</td>
 </tr>
 <tr>
 <td>TokensBurned</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Burned the target&rsquo;s tokens to completely destroy them</td>
+<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
 <td>universe, token, target</td>
 <td>amount</td>
 </tr>
 <tr>
 <td>TokensMinted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Created brand new tokens for target</td>
+<td>Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
 <td>universe, token, target</td>
 <td>amount</td>
 </tr>
 <tr>
 <td>TokensTransferred</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Transferred tokens from one owner to another</td>
+<td><code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
 <td>universe, token, from</td>
 <td>to, value</td>
 </tr>
 <tr>
 <td>TradingProceedsClaimed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A user has collected trading profits from outstanding Shares in a Finalized Market</td>
+<td><code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code></td>
 <td>universe, shareToken, sender</td>
 <td>market, numShares, numPayoutTokens, finalTokenBalance</td>
 </tr>
 <tr>
 <td>Transfer</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a></td>
-<td>Transferred tokens from one owner to another</td>
+<td>Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
 <td>from, to</td>
 <td>value</td>
 </tr>
 <tr>
 <td>UniverseCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Child Universe has been created from a Parent Universe</td>
+<td><code class="prettyprint">childUniverse</code> has been created from <code class="prettyprint">parentUniverse</code>.</td>
 <td>parentUniverse, childUniverse</td>
 <td></td>
 </tr>
 <tr>
 <td>UniverseForked</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Market in the specified Universe has caused that Universe to Fork because its Proposed Outcome has been Disputed after a Last Report Round</td>
+<td>A Market in <code class="prettyprint">universe</code> has had its Proposed Outcome disputed during the Last Report Round, which has caused <code class="prettyprint">universe</code> to Fork.</td>
 <td>universe</td>
 <td></td>
 </tr>
 <tr>
 <td>WinningTokensRedeemed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A user has converted their winning Stake Tokens to REP</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> has converted <code class="prettyprint">amountRedeemed</code> <code class="prettyprint">stakeToken</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> to REP for the Outcome <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also got <code class="prettyprint">reportingFeesReceived</code>.</td>
 <td>universe, reporter, market</td>
 <td>stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
 </tr>
@@ -4682,696 +4745,6 @@ Returns the [Reporting Windows](#reporting-window) where a specific user has unc
 <p><code class="prettyprint">$ yarn lint</code></p>
 
 <aside class="notice">All pull requests made to the Augur.js project must be properly linted first and any new functionality added must include tests or updated tests. The Augur Team will not accept a pull request that doesn&rsquo;t include updated tests or breaks the linting standards we have for the Augur.js codebase.</aside>
-
-          <h1 id="errors">Errors</h1>
-
-<aside class="notice">The Error section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-<div class="highlight"><pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">412</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transaction validation failed"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>In addition to the error codes generated by the Augur API, there is a separate set of error codes used by Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>.  To avoid confusion, API error codes are positive integers, while contract error codes are integers less than or equal to zero.</p>
-
-<p>API and contract errors are returned as objects that contain an <code class="prettyprint">error</code> field (the integer error code) and a <code class="prettyprint">message</code> field (a description of the error).</p>
-
-<aside class="notice">In addition to the errors tabulated below, contract methods may also return <code>"0x"</code>, accompanied by the message <code>"no response or bad input"</code>.  This error indicates that either the contract was unreachable or the invoked method did not execute successfully.</aside>
-
-<h2 id="api-errors">API Errors</h2>
-
-<table><thead>
-<tr>
-<th>Error Code</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>40</td>
-<td>Gas Limit Exceeded: trade exceeds the current block gas limit</td>
-</tr>
-<tr>
-<td>41</td>
-<td>Wrong Number of Outcomes: the number of initial fair prices does not match this market&rsquo;s number of outcomes</td>
-</tr>
-<tr>
-<td>42</td>
-<td>Insufficient Liquidity: insufficient liquidity to generate order book</td>
-</tr>
-<tr>
-<td>43</td>
-<td>Initial Price Out-of-Bounds: one or more initial fair prices are out-of-bounds</td>
-</tr>
-<tr>
-<td>44</td>
-<td>Price Width Out-of-Bounds: price width is too large for one or more initial fair prices</td>
-</tr>
-<tr>
-<td>97</td>
-<td>Database Delete Failed</td>
-</tr>
-<tr>
-<td>98</td>
-<td>Database Write Failed</td>
-</tr>
-<tr>
-<td>99</td>
-<td>Database Read Failed</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Invalid Contract Parameter: cannot send parameter to contract</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Not Logged In</td>
-</tr>
-<tr>
-<td>402</td>
-<td>Incorrect number of parameters</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Bad Credentials: incorrect handle or password</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Transaction Not Found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Password Too Short: password must be at least 6 characters long</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Null Call Return: expected contract call to return value, received null</td>
-</tr>
-<tr>
-<td>407</td>
-<td>Null Response: expected transaction hash from Ethereum node, received null</td>
-</tr>
-<tr>
-<td>408</td>
-<td>No Response</td>
-</tr>
-<tr>
-<td>409</td>
-<td>Invalid Response: could not parse response from Ethereum node</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Local Node Failure: RPC request to local Ethereum node failed</td>
-</tr>
-<tr>
-<td>411</td>
-<td>Hosted Node Failure: RPC request to hosted nodes failed</td>
-</tr>
-<tr>
-<td>412</td>
-<td>Transaction Invalid: transaction validation failed</td>
-</tr>
-<tr>
-<td>422</td>
-<td>Handle Taken: handle already taken</td>
-</tr>
-<tr>
-<td>450</td>
-<td>Filter could not be created</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Transaction Failed</td>
-</tr>
-<tr>
-<td>501</td>
-<td>Transaction Not Confirmed: polled network but could not confirm transaction</td>
-</tr>
-<tr>
-<td>502</td>
-<td>Duplicate Transaction</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Raw Transaction Error: error sending client-side transaction</td>
-</tr>
-<tr>
-<td>504</td>
-<td>RLP Encoding Error (geth error -32603)</td>
-</tr>
-<tr>
-<td>505</td>
-<td>Transaction receipt not found</td>
-</tr>
-<tr>
-<td>599</td>
-<td>RPC Timeout: timed out while waiting for Ethereum network response</td>
-</tr>
-<tr>
-<td>650</td>
-<td>Loopback Not Found: loopback interface required for synchronous local commands</td>
-</tr>
-<tr>
-<td>651</td>
-<td>Ethereum Not Found: no active Ethereum node(s) found</td>
-</tr>
-<tr>
-<td>710</td>
-<td>Check Order Book Failed: could not check order book using current prices</td>
-</tr>
-<tr>
-<td>711</td>
-<td>Trade Failed: instead of success value (1), received [actual value received]</td>
-</tr>
-<tr>
-<td>712</td>
-<td>Trade Not Found</td>
-</tr>
-</tbody></table>
-
-<h2 id="contract-errors">Contract Errors</h2>
-
-<table><thead>
-<tr>
-<th>Contract Method</th>
-<th>Error</th>
-<th>Meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>buy</td>
-<td>0</td>
-<td>Market doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-1</td>
-<td>Amount/price bad</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-2</td>
-<td>Oracle-only branch</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>-4</td>
-<td>Not enough money or shares</td>
-</tr>
-<tr>
-<td>buy</td>
-<td>21</td>
-<td>Trade already exists</td>
-</tr>
-<tr>
-<td>buyCompleteSets</td>
-<td>0</td>
-<td>market not found</td>
-</tr>
-<tr>
-<td>buyCompleteSets</td>
-<td>-1</td>
-<td>oracle-only branch</td>
-</tr>
-<tr>
-<td>buyCompleteSets</td>
-<td>-3</td>
-<td>not enough cash</td>
-</tr>
-<tr>
-<td>cashFaucet</td>
-<td>-1</td>
-<td>Hey, you&rsquo;re not broke!</td>
-</tr>
-<tr>
-<td>claimProceeds</td>
-<td>0</td>
-<td>reporting not done</td>
-</tr>
-<tr>
-<td>claimProceeds</td>
-<td>-1</td>
-<td>trader doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>claimProceeds</td>
-<td>-8</td>
-<td>invalid branch</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>0</td>
-<td>fail/trading not over yet/event not expired or closed already</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-1</td>
-<td>Market has no cash anyway / already closed</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-2</td>
-<td>0 outcome / not reported on yet</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-3</td>
-<td>not final round 2 event</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-5</td>
-<td>Event forked and not final yet</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-6</td>
-<td>bonded pushed forward market not ready to be resolved</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-7</td>
-<td>event not reportable &gt;.99</td>
-</tr>
-<tr>
-<td>closeMarket</td>
-<td>-8</td>
-<td>market isn&rsquo;t in branch</td>
-</tr>
-<tr>
-<td>collectFees</td>
-<td>-2</td>
-<td>needs to be second half of reporting period to claim rep (1st half is when redistribution is done)</td>
-</tr>
-<tr>
-<td>createEvent</td>
-<td>-1</td>
-<td>we&rsquo;re either already past that date, branch doesn&rsquo;t exist, or description is bad</td>
-</tr>
-<tr>
-<td>createEvent</td>
-<td>0</td>
-<td>not enough money to pay fees or event already exists</td>
-</tr>
-<tr>
-<td>createEvent</td>
-<td>-2</td>
-<td>max value &lt; min value</td>
-</tr>
-<tr>
-<td>createEvent</td>
-<td>-9</td>
-<td>would expire during non-reporting fork period</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-1</td>
-<td>bad input or parent doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-2</td>
-<td>too many events</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-3</td>
-<td>too many outcomes</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-4</td>
-<td>not enough money</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-5</td>
-<td>fee too low</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-6</td>
-<td>duplicate events</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-7</td>
-<td>event already expired</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-8</td>
-<td>market already exists</td>
-</tr>
-<tr>
-<td>createMarket</td>
-<td>-9</td>
-<td>would expire during non-reporting fork period</td>
-</tr>
-<tr>
-<td>penalizationCatchup</td>
-<td>-1</td>
-<td>not in first half of reporting period</td>
-</tr>
-<tr>
-<td>penalizationCatchup</td>
-<td>-2</td>
-<td>doesn&rsquo;t need to be penalized/caught up</td>
-</tr>
-<tr>
-<td>penalizationCatchup</td>
-<td>-3</td>
-<td>user isn&rsquo;t behind or reported in the last period (and should thus use the penalization functions in consensus.se)</td>
-</tr>
-<tr>
-<td>penalizeOnForkedEvent</td>
-<td>-2</td>
-<td>already past first half of new period and needed to penalize before then</td>
-</tr>
-<tr>
-<td>penalizeOnForkedEvent</td>
-<td>-4</td>
-<td>fork event isn&rsquo;t resolved yet</td>
-</tr>
-<tr>
-<td>penalizeOnForkedEvent</td>
-<td>-5</td>
-<td>already done for all events in this period</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>0</td>
-<td>event is a fork event</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>-1</td>
-<td>need to penalize in round 2 penalize function</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>-2</td>
-<td>already past first half of new period and needed to penalize before then</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>-4</td>
-<td>in fork period only thing that rbcr is done on is the round 2 event in the original branch via round 2 penalize</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>-5</td>
-<td>already done for all events in this period</td>
-</tr>
-<tr>
-<td>penalizeRoundTwoWrong</td>
-<td>-6</td>
-<td>forked events should be penalized using the fork penalization function</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>0</td>
-<td>event is a fork event</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-1</td>
-<td>need to penalize in round 2 penalize function</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-2</td>
-<td>already past first half of new period and needed to penalize before then</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-4</td>
-<td>in fork period only thing that rbcr is done on is the round 2 event in the original branch via round 2 penalize</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-5</td>
-<td>already done for all events in this period</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-6</td>
-<td>forked events should be penalized using the fork penalization function</td>
-</tr>
-<tr>
-<td>penalizeWrong</td>
-<td>-7</td>
-<td>no outcome</td>
-</tr>
-<tr>
-<td>proveReporterDidntReportEnough</td>
-<td>-1</td>
-<td>already done</td>
-</tr>
-<tr>
-<td>proveReporterDidntReportEnough</td>
-<td>-2</td>
-<td>not in right part of period</td>
-</tr>
-<tr>
-<td>pushMarketForward</td>
-<td>-1</td>
-<td>fork period cannot be the current or previous period</td>
-</tr>
-<tr>
-<td>pushMarketForward</td>
-<td>-2</td>
-<td>market is already closed or pushed forward</td>
-</tr>
-<tr>
-<td>pushMarketForward</td>
-<td>-3</td>
-<td>not enough cash to post early resolution bond</td>
-</tr>
-<tr>
-<td>pushMarketForward</td>
-<td>-4</td>
-<td>early resolution already attempted or outcome already exists</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>0</td>
-<td>Market doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-1</td>
-<td>Amount/price bad</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-2</td>
-<td>Oracle-only branch</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-3</td>
-<td>Bad outcome to trade</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>-4</td>
-<td>Not enough money or shares</td>
-</tr>
-<tr>
-<td>sell</td>
-<td>21</td>
-<td>Trade already exists</td>
-</tr>
-<tr>
-<td>sellCompleteSets</td>
-<td>-1</td>
-<td>oracle-only branch</td>
-</tr>
-<tr>
-<td>sellCompleteSets</td>
-<td>-2</td>
-<td>not a participant in this market</td>
-</tr>
-<tr>
-<td>sellCompleteSets</td>
-<td>-3</td>
-<td>not enough shares</td>
-</tr>
-<tr>
-<td>sendReputation</td>
-<td>0</td>
-<td>Not enough Reputation</td>
-</tr>
-<tr>
-<td>sendReputation</td>
-<td>-1</td>
-<td>Your Reputation account was just created! Earn some Reputation before you can send to others.</td>
-</tr>
-<tr>
-<td>sendReputation</td>
-<td>-2</td>
-<td>Receiving address doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-1</td>
-<td>trade doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-2</td>
-<td>invalid trade hash/commitment</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-3</td>
-<td>must be a bid, not an ask</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-4</td>
-<td>market is already resolved</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-5</td>
-<td>can&rsquo;t pickup your own trade</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-6</td>
-<td>can&rsquo;t trade on oracle only branch</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>-7</td>
-<td>not a large enough trade</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>10</td>
-<td>insufficient balance</td>
-</tr>
-<tr>
-<td>short_sell</td>
-<td>22</td>
-<td>trade in same block prohibited</td>
-</tr>
-<tr>
-<td>slashRep</td>
-<td>0</td>
-<td>Not a valid claim</td>
-</tr>
-<tr>
-<td>slashRep</td>
-<td>-2</td>
-<td>Reporter doesn&rsquo;t exist</td>
-</tr>
-<tr>
-<td>submitReportHash</td>
-<td>-1</td>
-<td>invalid event</td>
-</tr>
-<tr>
-<td>submitReportHash</td>
-<td>-2</td>
-<td>not in first half of period (commit phase)</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>0</td>
-<td>reporter doesn&rsquo;t exist or has &lt;1 rep</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-1</td>
-<td>has already reported</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-2</td>
-<td>not in second half of period [reveal part]</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-3</td>
-<td>hash doesn&rsquo;t match</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-4</td>
-<td>bad report</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-5</td>
-<td>invalid event</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-6</td>
-<td>already resolved</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-7</td>
-<td>&lt;48 hr left in period, too late to report, able to put up readj. bonds though&quot;,</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-8</td>
-<td>fees couldn&rsquo;t be collected</td>
-</tr>
-<tr>
-<td>submitReport</td>
-<td>-9</td>
-<td>need to pay not reporting bond</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>-1</td>
-<td>oracle only branch</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>-2</td>
-<td>bad trade hash</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>-3</td>
-<td>trader doesn&rsquo;t exist / own shares in this market</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>-4</td>
-<td>must trade at least 0.00000001 in value</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>-5</td>
-<td>can&rsquo;t pick up your own trade</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>10</td>
-<td>insufficient balance</td>
-</tr>
-<tr>
-<td>trade</td>
-<td>22</td>
-<td>trade in same block prohibited</td>
-</tr>
-<tr>
-<td>updateTradingFee</td>
-<td>-1</td>
-<td>invalid trading fee: either fee is below the minimum trading fee or you are trying to raise the trading fee (trading fee can be lowered, but not raised)</td>
-</tr>
-<tr>
-<td>updateTradingFee</td>
-<td>-4</td>
-<td>sender&rsquo;s address does not match the market creator&rsquo;s address</td>
-</tr>
-</tbody></table>
 
           <h1 id="ui-conventions">UI Conventions</h1>
 
@@ -5636,7 +5009,7 @@ Goals:
 
 <h2 id="ask-order">Ask Order</h2>
 
-<p>An Ask Order is an <a href="#order">Order</a> indicating the desire of the <a href="#maker">Maker</a> to sell <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of a <a href="#bid-order">Bid Order</a>.</p>
+<p>An Ask Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to sell <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of a <a href="#bid-order">Bid Order</a>.</p>
 
 <h2 id="atto-prefix">Atto- (Prefix)</h2>
 
@@ -5644,7 +5017,7 @@ Goals:
 
 <h2 id="bid-order">Bid Order</h2>
 
-<p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#maker">Maker</a> to buy <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
+<p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to buy <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
 
 <h2 id="binary-market">Binary Market</h2>
 
@@ -5664,7 +5037,7 @@ Goals:
 
 <h2 id="complete-set">Complete Set</h2>
 
-<p>A Complete Set is a collection of <a href="#shares">Shares</a> in every <a href="#outcome">Outcome</a>. Complete Sets are created when the <a href="#maker">Maker</a> and <a href="#taker">Taker</a> of an <a href="#order">Order</a> both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in <a href="#atto-prefix">attoETH</a> of a Complete Set for a particular <a href="#market">Market</a> is determined by the <a href="#number-of-ticks">Number of Ticks</a> for that Market. When Complete Sets are <a href="#settlement">Settled</a>, <a href="#settlement-fees">Settlement Fees</a> are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from Settlement you will also pay the lions share of the fees. The Settlement Fees extracted will go toward paying for the reporting system, in the form of a <a href="#reporting-fee">Reporting fee</a>, and paying the <a href="#market-creator">Market Creator</a> their set <a href="#trading-fee">Creator Fee</a> from Share Settlement.</p>
+<p>A Complete Set is a collection of <a href="#shares">Shares</a> in every <a href="#outcome">Outcome</a>. Complete Sets are created when the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the trade. When both parties use shares to complete a trade then a Complete Set will be formed and settled (destroyed). The cost in <a href="#atto-prefix">attoETH</a> of a Complete Set for a particular <a href="#market">Market</a> is determined by the <a href="#number-of-ticks">Number of Ticks</a> for that Market. When Complete Sets are <a href="#settlement">Settled</a>, <a href="#settlement-fees">Settlement Fees</a> are extracted from the value of the Complete Set and are paid proportionally by both parties, so if you are going to get a larger payout from Settlement you will also pay the lions share of the fees. The Settlement Fees extracted will go toward paying for the reporting system, in the form of a <a href="#reporting-fee">Reporting fee</a>, and paying the <a href="#market-creator">Market Creator</a> their set <a href="#trading-fee">Creator Fee</a> from Share Settlement.</p>
 
 <h2 id="creator-fee">Creator Fee</h2>
 
@@ -5700,7 +5073,7 @@ Goals:
 
 <h2 id="fill-order">Fill Order</h2>
 
-<p>Filling an <a href="#order">Order</a> is when a <a href="#taker">Taker</a> provides what the <a href="#maker">Maker</a> of the order is seeking in their order. If a taker only provides some of what the Maker wants then it&rsquo;s known as a partial fill. If the Taker provides exactly what the Maker requests then it&rsquo;s known as completely filling the order.</p>
+<p>Filling an <a href="#order">Order</a> is when a <a href="#order-filler">Filler</a> provides what the <a href="#order-creator">Creator</a> of the order is seeking in their order. If a Filler only provides some of what the Creator wants then it&rsquo;s known as a partial fill. If the Filler provides exactly what the Creator requests then it&rsquo;s known as completely filling the order.</p>
 
 <h2 id="final-outcome">Final Outcome</h2>
 
@@ -5754,10 +5127,6 @@ Goals:
 
 <p>A Locked Universe is a <a href="#universe">Universe</a> that had a <a href="#fork">Fork</a> occur within it and no longer allows the creation of new <a href="#markets">Markets</a>. All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after <a href="#finalized-market">Finalizing</a>. <a href="#rep">REP</a> holders within a Locked Universe are given a one time and final option to migrate their REP to one of the new universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.</p>
 
-<h2 id="maker">Maker</h2>
-
-<p>A Maker is the creator of an <a href="#order">Order</a> that is placed on the <a href="#order-book">Order Book</a>. They escrow currency or <a href="#shares">Shares</a> into their Order in order to buy or sell Shares of an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
-
 <h2 id="market">Market</h2>
 
 <p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#shares">Shares</a> of different outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which once set cannot be raised, which will determine their cut of all shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#tick">Number of Ticks</a> for the Market. There are three different Market types supported by Augur, they are: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
@@ -5792,11 +5161,19 @@ Goals:
 
 <h2 id="order">Order</h2>
 
-<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#shares">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#maker">Maker</a> of the order will also need to escrow currency or shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of order, the <a href="#market">Market</a> the order is trading on, the <a href="#outcome">Outcome</a> the order is concerned with buying or selling, the Maker&rsquo;s address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Maker for their half of the trade.</p>
+<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#shares">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#order-creator">Creator</a> of the order will also need to escrow currency or shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of order, the <a href="#market">Market</a> the order is trading on, the <a href="#outcome">Outcome</a> the order is concerned with buying or selling, the Order Creator&rsquo;s address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.</p>
 
 <h2 id="order-book">Order Book</h2>
 
-<p>The Order Book is the collection of all <a href="#open-order">Open Orders</a> currently available for a <a href="#market">Market</a>. <a href="#order">Orders</a> are placed on the order book by <a href="#maker">Makers</a> and are <a href="#fill-order">Filled</a> by <a href="#taker">Takers</a>. Orders are divided up by which type, or side, of order they are <a href="#bid-order">Bid</a> or <a href="#ask-order">Ask</a>. Orders are further divided up by <a href="#outcome">Outcome</a>.</p>
+<p>The Order Book is the collection of all <a href="#open-order">Open Orders</a> currently available for a <a href="#market">Market</a>. <a href="#order">Orders</a> are placed on the order book by <a href="#order-creator">Order Creators</a> and are <a href="#fill-order">Filled</a> by <a href="#order-filler">Order Fillers</a>. Orders are divided up by which type, or side, of order they are <a href="#bid-order">Bid</a> or <a href="#ask-order">Ask</a>. Orders are further divided up by <a href="#outcome">Outcome</a>.</p>
+
+<h2 id="order-creator">Order Creator</h2>
+
+<p>An Order Creator is the person who places an <a href="#order">Order</a> on the <a href="#order-book">Order Book</a>. They escrow currency or <a href="#shares">Shares</a> into their Order to buy or sell Shares of an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
+
+<h2 id="order-filler">Order Filler</h2>
+
+<p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#shares">Shares</a> to fill the Open Order and complete their half of the trade described in the <a href="#order">Order</a>.</p>
 
 <h2 id="outcome">Outcome</h2>
 
@@ -5873,15 +5250,11 @@ Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</
 
 <h2 id="shares">Shares</h2>
 
-<p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#maker">Maker</a> and <a href="#taker">Taker</a> of an <a href="#order">Order</a> send currency to the market to complete an <a href="#order">Order</a>. Shares are settled (destroyed) when a Complete Set is sold back to the market.</p>
+<p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> send currency to the market to complete an <a href="#order">Order</a>. Shares are settled (destroyed) when a Complete Set is sold back to the market.</p>
 
 <h2 id="stake-token">Stake Token</h2>
 
 <p>A Stake Token is used to represent the amount of Staked <a href="#rep">REP</a> a <a href="#reporter">Reporter</a> has on an <a href="#outcome">Outcome</a> for their <a href="#report">Report</a>. Stake Tokens have a 1:1 cost ratio to REP, so 100 <a href="#atto-prefix">attoREP</a> would buy you 100 <a href="#atto-prefix">attoStakeTokens</a>.</p>
-
-<h2 id="taker">Taker</h2>
-
-<p>A Taker is someone who partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Takers send currency or <a href="#shares">Shares</a> to fill the Open Order and complete their half of the trade described in the <a href="#order">Order</a>.</p>
 
 <h2 id="tick">Tick</h2>
 
