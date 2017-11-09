@@ -10,6 +10,7 @@ toc_footers:
   - <a href="https://github.com/AugurProject">Github</a>
   - <a href="https://twitter.com/AugurProject">Twitter</a>
 
+[//]: # The Errors section (listed after the Tests section) has temporarily been removed from the sidebar menu. Once the errors have been better organized, and the _errors.md page has been updated, it should be reinstated to the menu.
 includes:
   - architecture
   - trading
@@ -20,7 +21,6 @@ includes:
   - transactionAPI
   - events
   - tests
-  - errors
   - uiConventions
   - glossary
   - contributing

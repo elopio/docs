@@ -2,7 +2,7 @@ Trading
 ========
 <aside class="notice">The Trading section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-Augur allows anyone to create an openly tradable [Market](#market) about any upcoming event. Augur will maintain an [Order Book](#order-book) for each of the markets created. Any trader can place or take an [Order](#order) on the Market's Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be [Filled](#fill-order) immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn't filled of your trade will be placed on the Order Book as an Order. If you are the [Maker](#maker) of the Order you can cancel it to remove it from the Order Book. Orders are executed on a "first come, first served" basis.
+Augur allows anyone to create an openly tradable [Market](#market) about any upcoming event. Augur will maintain an [Order Book](#order-book) for each of the markets created. Any trader can place or take an [Order](#order) on the Market's Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be [Filled](#fill-order) immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn't filled of your trade will be placed on the Order Book as an Order. If you are the [Creator](#order-creator) of the Order you can cancel it to remove it from the Order Book. Orders are executed on a "first come, first served" basis.
 
 The Augur UI will offer users the best prices first when displaying the Order Book on each Market page. Orders are never executed at a worse price than the limit price set by the trader, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback Orders to attempt to fill our Order in the event that the best Order was filled before we sent the transaction. These backup/fallback Orders will always fit within the limit price set by the trader.
 
@@ -12,7 +12,7 @@ Let's use an example [Binary Market](#binary-market) trading on the "super big e
 
 If there are Orders on the Order Book that match our request for `100` Shares of `Outcome A` at a price of `0.5 ETH`, or cheaper, then Augur will fill those Orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus GAS cost.
 
-If no Order is available on the Order Book that would partially or completely fill our trade request then a [Bid Order](#bid-order) would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our `50.0 ETH`. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of `ETH`. If we cancel our Order we can get our `50.0 ETH` back, the only currency lost would be the GAS used to pay to place the trade and cancel the trade. When a [Taker](#taker) decides to fill our Order on the Order Book, we will get our `100` shares of `Outcome A` transferred to us.
+If no Order is available on the Order Book that would partially or completely fill our trade request then a [Bid Order](#bid-order) would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our `50.0 ETH`. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of `ETH`. If we cancel our Order we can get our `50.0 ETH` back, the only currency lost would be the GAS used to pay to place the trade and cancel the trade. When a [Filler](#order-filler) decides to fill our Order on the Order Book, we will get our `100` shares of `Outcome A` transferred to us.
 
 For more information on how to trade using the Augur API, check the [trade](#trade-tx-api) section of the [Transaction API](#transaction-api).
 
@@ -41,7 +41,7 @@ Selling a Complete Set can be thought of as exiting your market [Position](#posi
 Calculating Trades
 ------------------
 
-In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Makers](#maker) and contain four important details: The Maker of the Order, the price of the Order, The amount of [Shares](#shares) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The price can be any value between 0 and the [Number of Ticks](#number-of-ticks). The calculations below use `num_shares` as the number of Shares the Order is requesting, `price` as the price per Share for the Order, `outcome` for the Outcome our Order is trading on, `num_ticks` as the Number of Ticks, and `fee_rate` as the [Settlement Fees](#settlement-fees) extracted during the [Settlement](#settlement) of Shares.
+In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Order Creators](#order-creator) and contain four important details: The Creator of the Order, the price of the Order, The amount of [Shares](#shares) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The price can be any value between 0 and the [Number of Ticks](#number-of-ticks). The calculations below use `num_shares` as the number of Shares the Order is requesting, `price` as the price per Share for the Order, `outcome` for the Outcome our Order is trading on, `num_ticks` as the Number of Ticks, and `fee_rate` as the [Settlement Fees](#settlement-fees) extracted during the [Settlement](#settlement) of Shares.
 
 The Formulas for determining how much opening a Long or Short position costs are as follows:
 
@@ -75,45 +75,45 @@ Below are some more examples of specific order situations and their results:
 
 ### Bid Order Trading
 
-Maker of Bid Order | Taker of Bid Order
+Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow`<br/> **Intent:** close a short position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
+**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow`<br/> **Intent:** close a short position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
 **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`. | **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`total_payout_closing_short`</span> ETH.
 
-Maker of Bid Order | Taker of Bid Order
+Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** open a long position for `outcome`. | **Sends:**: `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
+**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a long position for `outcome`. | **Sends:**: `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
 **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH | **Gains:** `num_shares` of all outcomes except for `outcome`. <br/>**Loses:** `open_short_position_cost` ETH.
 
-Maker of Bid Order | Taker of Bid Order
+Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** close a short position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/>**Intent:** close a long position for `outcome`.
+**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a short position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/>**Intent:** close a long position for `outcome`.
 **Gains:** <span style="white-space: nowrap;">`total_payout_closing_short - short_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`. | **Gains:** <span style="white-space: nowrap;">`total_payout_closing_long - long_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in `outcome`.
 
-Maker of Bid Order | Taker of Bid Order
+Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/>**Intent:** open a long position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/> **Intent:** close a long position for `outcome`.
+**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/>**Intent:** open a long position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/> **Intent:** close a long position for `outcome`.
 **Gains:** `num_shares` in `outcome`. <br/>**Loses:** `open_long_position_cost` ETH | **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` of `outcome`.
 
 
 ### Ask Order Trading
 
-Maker of Ask Order | Taker of Ask Order
+Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/>**Intent:** open a long position for `outcome`.
+**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/>**Intent:** open a long position for `outcome`.
 **Gains:** `total_payout_closing_long` ETH. <br/>**Loses:** `num_shares` in `outcome` | **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH
 
-Maker of Ask Order | Taker of Ask Order
+Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/> **Intent:** open a long position for `outcome`.
+**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/> **Intent:** open a long position for `outcome`.
 **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** `open_short_position_cost` ETH | **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH.
 
-Maker of Ask Order | Taker of Ask Order
+Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`. <br/> **Intent:** close a short position for `outcome`.
+**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`. <br/> **Intent:** close a short position for `outcome`.
 **Gains:** <span style="white-space: nowrap;">`total_payout_closing_long - long_position_fees`</span> ETH. <br/>**Loses:** `num_shares` of `outcome` | **Gains:** <span style="white-space: nowrap;">`total_payout_closing_short - short_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`.
 
-Maker of Ask Order | Taker of Ask Order
+Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `maker`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`.<br/> **Intent:** close a short position for `outcome`.
+**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`.<br/> **Intent:** close a short position for `outcome`.
 **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** `open_short_position_cost` ETH. | **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`.

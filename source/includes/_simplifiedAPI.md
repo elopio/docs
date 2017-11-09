@@ -49,6 +49,12 @@ augur.markets.getCategories({
   { category: "augur", popularity: 500 },
 ]
 
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.markets.getDisputableMarkets({ 
+  reportingWindow: "0x1000000000000000000000000000000000000000"
+}, function (disputableMarkets) { /* ... */ })
+// example output: coming soon
+
 augur.markets.getMarketPriceHistory({
   marketID: "0x0000000000000000000000000000000000000001"
 }, function (marketPriceHistory) { /* ... */ })
@@ -83,6 +89,12 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   "0x0000000000000000000000000000000000000003",
 ]
 
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.markets.getMarketsAwaitingReporting({
+  universe: "0x000000000000000000000000000000000000000b"
+}, function (marketsAwaitingReporting) { /* ... */ })
+// example output: coming soon
+
 augur.markets.getMarketsClosingInDateRange({
   universe: "0x000000000000000000000000000000000000000b",
   earliestClosingTime: 1506573450,
@@ -95,6 +107,7 @@ augur.markets.getMarketsClosingInDateRange({
 ]
 
 augur.markets.getMarketsCreatedByUser({
+  universe: "0x000000000000000000000000000000000000000b",
   creator: "0x0000000000000000000000000000000000000b0b",
 }, function (marketsCreatedByUser) { /* ... */ })
 // example output:
@@ -235,12 +248,9 @@ augur.markets.getMarketsInfo({
 
 Returns a list of all [Market](#market) categories in the required parameter `universe`, which is a string containing the address of a given [Universe](#universe).
 
-<!-- TODO: Add example JS code (query pending).
-
 ### augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns the [Markets](#market) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market's result. The required `reportingWindow` parameter is a string containing the address of a Reporting Window.
--->
 
 ### augur.markets.getMarketPriceHistory({ marketID }[, callback])
 
@@ -254,17 +264,15 @@ Returns an array of all [Markets](#markets) in a given [Universe](#universe). `u
 
 Returns the [Markets](#market) in a [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted. `universe` is a string containing the address of a given Universe. `designatedReporter` is an optional string parameter that can be used to restrict the results to [Markets](#market) having a specific [Designated Reporter](#designated-reporter) address.
 
-<!-- TODO: Determine possible values for reportingState. Confirm if this returns Markets awaiting Designated Report & update description accordingly. Add example JS code -- not sure what returned data looks like.
+<!-- TODO: Confirm if this returns Markets awaiting Designated Report & update description accordingly. -->
 ### augur.markets.getMarketsAwaitingReporting({ [universe, reportingWindow, reportingState, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns the [Markets](#market) in a [Universe](#universe) or [Reporting Window](#reporting-window) that are either waiting for a [Designated Report](#designated-report) to be submitted or waiting for the current [Reporting Phase](#reporting-phase) to end. Either `universe` or `reportingWindow` must be specified as an address. `reportingState` is a string that can be _____, _____, or, ____.
--->
+Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](#designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either `universe` or `reportingWindow` must be specified as a string containing an address. `reportingState` is a string where valid values are "DESIGNATED\_REPORTING", "FIRST\_REPORTING", or "LAST\_REPORTING".
 
 ### augur.markets.getMarketsClosingInDateRange({ universe, earliestClosingTime, latestClosingTime[, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns the [Markets](#market) closing between `earliestClosingTime` and `latestClosingTime` in the specified `universe`. `earliestClosingTime` and `latestClosingTime` are integers representing Unix timestamps, and `universe` is a string containing the address of a given [Universe](#universe).
 
-<!-- TODO: Add universe to example JS code -->
 ### augur.markets.getMarketsCreatedByUser({ universe, creator[, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user. `universe` and `creator` are strings representing the addresses of the [Universe](#universe) and [Market Creator](#market-creator).
@@ -280,6 +288,14 @@ Returns information about [Markets](#market) (`marketIDs`) that are stored on-co
 Reporting API
 -------------
 ```javascript
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getAllStakeTokens({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021",
+  dateRange: [1506473500, 1507593600]
+}, function (allStakeTokens) { /* ... */ })
+// example output: coming soon
+
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
@@ -300,38 +316,75 @@ augur.reporting.getReportingHistory({
     }],
   }
 }
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getReportingSummary({ 
+  reportingWindow
+}, function (allStakeTokens) { /* ... */ })
+// example output: coming soon
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getReportingWindowsWithUnclaimedFees({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021"
+}, function (reportingWindowsWithUnclaimedFees) { /* ... */ })
+// example output: coming soon
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getUnclaimedStakeTokens({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021"
+}, function (unclaimedStakeTokens) { /* ... */ })
+// example output: coming soon
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getUnfinalizedStakeTokens({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021"
+}, function (unfinalizedStakeTokens) { /* ... */ })
+// example output: coming soon
 ```
-<!-- TODO: Add description. Add JS example (query pending). 
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getAllStakeTokens({ universe, account[, dateRange] }[, callback]) 
--->
+
+Returns the Stake Tokens owned by a a user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user. `dateRange` is an array with 2 Unix timestamps for the start time and end time to filter by.
 
 ### augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns information about a user's reporting history. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window.
+Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window.
 
-<!-- TODO: Add example JS code (query pending).
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns various information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
--->
+Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
 
-<!-- TODO: Add example JS code (query pending).
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getReportingWindowsWithUnclaimedFees({ universe, account }[, callback])
 
-Returns the [Reporting Windows](#reporting-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee). `universe is a string containing a [Universe](#universe)'s address. `account` is a string containing a user's address.
--->
+Returns the [Reporting Windows](#reporting-window) where a user has not claimed his or her [Reporting Fees](#reporting-fee). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
 
-<!-- TODO: Add description. Add example JS code (query pending).
-### augur.reporting.getUnclaimedStakeTokens({ account }[, callback])
--->
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+### augur.reporting.getUnclaimedStakeTokens({ universe, account }[, callback])
 
-<!-- TODO: Add description. Add example JS code (query pending).
-### augur.reporting.getUnfinalizedStakeTokens({ account }[, callback])
--->
+Returns the Stake Tokens that a user owns but has not redeemed in [Markets](#market) that are [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
+
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+### augur.reporting.getUnfinalizedStakeTokens({ universe, account }[, callback])
+
+Returns the Stake Tokens owned by a particular user in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
 
 Trading API
 -----------
 ```javascript
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.trading.getClosedOrders({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021",
+  dateRange: [1506473500, 1507593600]
+}, function (closedOrders) { /* ... */ })
+// example output: coming soon
+
 augur.trading.getOpenOrders({
   marketID: "0x0000000000000000000000000000000000000001",
   universe: "0x000000000000000000000000000000000000000b",
@@ -489,16 +542,16 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
-<!-- TODO: Finish description. Add example JS code (query pending). Determine date range's type (Unix timestamp?).
+<!-- TODO: Verify description once function is completed. -->
 ### augur.trading.getClosedOrders({ universe, account [, dateRange] }[, callback])
 
-`universe is a string containing a [Universe](#universe)'s address. `account` is a string containing a user's address.
--->
+Description pending.
 
 ### augur.trading.getOpenOrders({ [universe, marketID, outcome, orderType, creator, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns a list of [Open Orders](#open-orders) (i.e., [Orders](#order) on the [Order Book](#order-book) that have not been [Filled](#fill-order)). Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), and `creator` is a string containing a user account address.
 
+<!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, and `orderType` is a string (i.e., "buy" or "sell").

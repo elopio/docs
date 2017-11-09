@@ -528,15 +528,15 @@ Returns the [Market](#market) address for the specified `_orderId`.
 
 #### augur.api.Orders.getOrderCreator({ \_orderId }[, callback])
 
-Returns the [Maker](#maker) address of the specified `_orderId`.
+Returns the [Creator](#order-creator) address of the specified `_orderId`.
 
 #### augur.api.Orders.getOrderMoneyEscrowed({ \_orderId }[, callback])
 
-Returns the fixed point value of the amount of money escrowed by the [Maker](#maker) for a specified `_orderId`.
+Returns the fixed point value of the amount of money escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
 #### augur.api.Orders.getOrderSharesEscrowed({ \_orderId }[, callback])
 
-Returns the fixed point value of the amount of shares escrowed by the [Maker](#maker) for a specified `_orderId`.
+Returns the fixed point value of the amount of shares escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
 #### augur.api.Orders.getOrderType({ \_orderId }[, callback])
 

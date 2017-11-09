@@ -13,20 +13,23 @@ Connect to an Ethereum Node
 var Augur = require('augur.js');
 var augur = new Augur();
 
-var options = {
+var ethereumNode = { 
   httpAddresses: [
-    'http://127.0.0.1:8545', // local http address for Geth Node
-    'https://eth9000.augur.net' // hosted http address for Augur Node
+    "http://127.0.0.1:8545", // local http address for Geth node
+    "https://eth9000.augur.net" // hosted http address for Geth node
   ],
   wsAddresses: [
-    'ws://127.0.0.1:8545', // local websocket address for Geth Node
-    'wss://ws9000.augur.net', // hosted websocket address for Augur Node
-  ],
+    "ws://127.0.0.1:8546", // local websocket address for Geth node
+    "wss://ws9000.augur.net" // hosted websocket address for Geth node
+  ]
+  // ipc addresses can also be specified as:
+  // ipcAddresses: [ ... ]
 };
+var augurNode = "ws://127.0.0.1:9001"; // local websocket address for Augur Node
 
 // Attempt to connect to a local Ethereum node
 // if that fails, fall back to our hosted node
-augur.connect(options, function (vitals) { /* ... */ });
+augur.connect({ ethereumNode, augurNode }, function (vitals) { /* ... */ });
 // example vitals object:
 vitals = {
   networkID: '9000',
@@ -53,9 +56,9 @@ or if you prefer [yarn](https://yarnpkg.com/en/):
 
 `$ yarn add augur.js`
 
-To use the Augur API, `augur.js` must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail.
+To use the Augur API, `augur.js` must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail. The Ethereum node may have multiple http, websocket, or ipc addresses specified as arrays. The Augur Node, however, can only have one websocket address specified.
 
-In the example we have set our first connection to try as `http://127.0.0.1:8545` which is our local geth node. If Augur is unable to connect to the local geth node, then Augur will go to the next provided address. In this case we have provided a single hosted node (`https://eth9000.augur.net`) as the only other attempt to make outside of the local geth node. If a connection is successfully established then a `vitals` object will be returned, otherwise an error message will be returned.
+In the example, we have set our first connection to try as `http://127.0.0.1:8545` which is our local Geth node. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then a `vitals` object will be returned, otherwise an error message will be returned.
 
 Accounts
 --------
@@ -143,6 +146,6 @@ Anyone wishing to use the augur.js Simplified API to query for information about
 
 The Simplified API runs queries against an Augur Node database rather than directly looking up information on the Ethereum blockchain because retrieving information from the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all [Markets](#markets) created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.
 
-To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node, which runs the request against its database, and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
+To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
 
-To set up an Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once the Augur Node is running, a connection to the Augur Node can be established as shown by the JavaScript sample code on the right.
+To set up an Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). (Alternatively, if the websocket address of a hosted Augur Node are already known, this address can be specified in the JS code without the need to set up an Augur Node.) Once the desired Augur Node is running, a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code on the right.
