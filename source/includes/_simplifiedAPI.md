@@ -316,11 +316,14 @@ augur.reporting.getReportingHistory({
   }
 }
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.reporting.getReportingSummary({ 
-  reportingWindow
+  reportingWindow: "0x1000000000000000000000000000000000000000"
 }, function (allStakeTokens) { /* ... */ })
-// example output: coming soon
+// example output: 
+{
+  "DESIGNATED_REPORTING": 3,
+  "FIRST_REPORTING": 1
+}
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.reporting.getReportingWindowsWithUnclaimedFees({ 
@@ -353,9 +356,10 @@ Returns the Stake Tokens owned by a a user that are either unclaimed or are in [
 Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window.
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
-### augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
+### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
-Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window.
+Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "FORKING" (or the Market that has Forked), and "AWAITING\_FORK\_MIGRATION"
+<!-- Old description: Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window. -->
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getReportingWindowsWithUnclaimedFees({ universe, account }[, callback])

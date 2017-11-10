@@ -1627,7 +1627,7 @@ Allows the `_spender` the ability to spend up to `_value` worth of the specified
 
 #### augur.api.StakeToken.buy({ \_signer, stakeToken, \_attotokens, onSent, onSuccess, onFailed })
 
-This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in an [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
+This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in a [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
 
 #### augur.api.StakeToken.migrateLosingTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
 
