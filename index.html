@@ -903,11 +903,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingSummary</span><span class="p">({</span> 
-  <span class="nx">reportingWindow</span>
+  <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">allStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output: coming soon</span>
+<span class="c1">// example output: </span>
+<span class="p">{</span>
+  <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"FIRST_REPORTING"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
 
 <span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingWindowsWithUnclaimedFees</span><span class="p">({</span> 
@@ -942,9 +945,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 
-<h3 id="augur-reporting-getreportingsummary-reportingwindow-sortby-issortdescending-limit-offset-callback">augur.reporting.getReportingSummary({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+<h3 id="augur-reporting-getreportingsummary-reportingwindow-callback">augur.reporting.getReportingSummary({ reportingWindow }[, callback])</h3>
 
-<p>Returns information about a given <a href="#reporting-window">Reporting Window</a>, including total number of <a href="#market">Markets</a> up for reporting, total number of Markets up for <a href="#dispute">Dispute</a>, total number of Markets undergoing and/or resolved via each <a href="#reporting-round">Reporting Round</a>. <code class="prettyprint">reportingWindow</code> is a string containing the address of a specific Reporting Window.</p>
+<p>Returns the number of Markets in various Reporting Phases, including &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, &ldquo;LAST_REPORTING&rdquo;, &ldquo;FORKING&rdquo; (or the Market that has Forked), and &ldquo;AWAITING_FORK_MIGRATION&rdquo;
+&lt;!&ndash; Old description: Returns information about a given <a href="#reporting-window">Reporting Window</a>, including total number of <a href="#market">Markets</a> up for reporting, total number of Markets up for <a href="#dispute">Dispute</a>, total number of Markets undergoing and/or resolved via each <a href="#reporting-round">Reporting Round</a>. <code class="prettyprint">reportingWindow</code> is a string containing the address of a specific Reporting Window. &ndash;&gt;</p>
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 
@@ -3942,7 +3946,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-staketoken-buy-_signer-staketoken-_attotokens-onsent-onsuccess-onfailed">augur.api.StakeToken.buy({ _signer, stakeToken, _attotokens, onSent, onSuccess, onFailed })</h4>
 
-<p>This transaction is used to purchase Stake Tokens using <a href="#rep">REP</a>. The Stake Token&rsquo;s <a href="#market">Market</a> must be in an <a href="#reporting-round">Reporting Round</a> and Stake Tokens can only be purchased during the <a href="#reporting-phase">Reporting Phase</a> of a <a href="#reporting-window">Reporting Window</a>. Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the <code class="prettyprint">msg.sender</code> also needs to have at least <code class="prettyprint">_attotokens</code> worth of REP to complete this transaction. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">msg.sender</code>), to address (<code class="prettyprint">stakeToken</code>), and the amount of <code class="prettyprint">_attotokens</code> purchased.</p>
+<p>This transaction is used to purchase Stake Tokens using <a href="#rep">REP</a>. The Stake Token&rsquo;s <a href="#market">Market</a> must be in a <a href="#reporting-round">Reporting Round</a> and Stake Tokens can only be purchased during the <a href="#reporting-phase">Reporting Phase</a> of a <a href="#reporting-window">Reporting Window</a>. Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the <code class="prettyprint">msg.sender</code> also needs to have at least <code class="prettyprint">_attotokens</code> worth of REP to complete this transaction. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">msg.sender</code>), to address (<code class="prettyprint">stakeToken</code>), and the amount of <code class="prettyprint">_attotokens</code> purchased.</p>
 
 <h4 id="augur-api-staketoken-migratelosingtokens-_signer-staketoken-onsent-onsuccess-onfailed">augur.api.StakeToken.migrateLosingTokens({ _signer, stakeToken, onSent, onSuccess, onFailed })</h4>
 
