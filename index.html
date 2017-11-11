@@ -889,8 +889,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">:</span> <span class="p">[{</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
       <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
       <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
       <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
@@ -926,12 +926,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">unclaimedStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output: coming soon</span>
 
-<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getUnfinalizedStakeTokens</span><span class="p">({</span> 
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">unfinalizedStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output: coming soon</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">stakeToken</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
+    <span class="nx">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="nx">payout0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">payout1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">payout2</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">payout3</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">payout4</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">payout5</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">payout6</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">payout7</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">isInvalid</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"FIRST_REPORTING"</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 
@@ -947,7 +963,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getreportingsummary-reportingwindow-callback">augur.reporting.getReportingSummary({ reportingWindow }[, callback])</h3>
 
-<p>Returns the number of Markets in various Reporting Phases, including &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, &ldquo;LAST_REPORTING&rdquo;, &ldquo;FORKING&rdquo; (or the Market that has Forked), and &ldquo;AWAITING_FORK_MIGRATION&rdquo;
+<p>Returns the number of Markets in various Reporting Phases, including &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, &ldquo;LAST_REPORTING&rdquo;, &ldquo;FORKING&rdquo; (or the Market that has Forked), and &ldquo;AWAITING_FORK_MIGRATION&rdquo;.
 &lt;!&ndash; Old description: Returns information about a given <a href="#reporting-window">Reporting Window</a>, including total number of <a href="#market">Markets</a> up for reporting, total number of Markets up for <a href="#dispute">Dispute</a>, total number of Markets undergoing and/or resolved via each <a href="#reporting-round">Reporting Round</a>. <code class="prettyprint">reportingWindow</code> is a string containing the address of a specific Reporting Window. &ndash;&gt;</p>
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
