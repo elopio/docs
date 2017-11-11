@@ -302,8 +302,8 @@ augur.reporting.getReportingHistory({
 // example output:
 {
   "0x000000000000000000000000000000000000000b": {
-    "0x0000000000000000000000000000000000000002": [{
-      marketID: "0x0000000000000000000000000000000000000002",
+    "0x0000000000000000000000000000000000000011": [{
+      marketID: "0x0000000000000000000000000000000000000011",
       reportingWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [0, 2],
       amountStaked: 17,
@@ -339,12 +339,28 @@ augur.reporting.getUnclaimedStakeTokens({
 }, function (unclaimedStakeTokens) { /* ... */ })
 // example output: coming soon
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.reporting.getUnfinalizedStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
 }, function (unfinalizedStakeTokens) { /* ... */ })
-// example output: coming soon
+// example output:
+{
+  "0x0000000000000000001000000000000000000001": {
+    stakeToken: "0x0000000000000000001000000000000000000001",
+    marketID: "0x0000000000000000000000000000000000000011",
+    payout0: 0,
+    payout1: 2,
+    payout2: null,
+    payout3: null,
+    payout4: null,
+    payout5: null,
+    payout6: null,
+    payout7: null,
+    isInvalid: 0,
+    amountStaked: 17,
+    reportingState: "FIRST_REPORTING",
+  }
+}
 ```
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getAllStakeTokens({ universe, account[, dateRange] }[, callback]) 
@@ -358,7 +374,7 @@ Returns information about the [Reports](#report) submitted by a particular user.
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
-Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "FORKING" (or the Market that has Forked), and "AWAITING\_FORK\_MIGRATION"
+Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "FORKING" (or the Market that has Forked), and "AWAITING\_FORK\_MIGRATION".
 <!-- Old description: Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window. -->
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
