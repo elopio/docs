@@ -1932,54 +1932,6 @@ successResponse = {
   to: "0xa7f3659c53820346176f7e0e350780df304db179",
   value: "0x0"
 }
-
-augur.api.Universe.getReportingWindowForForkEndTime({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320555,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
-
-augur.api.Universe.getTargetReporterGasCosts({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320556,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
 ```
 #### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
 
@@ -2002,11 +1954,3 @@ Returns a [Child Universe](#child-universe) corresponding to the specified `_par
 #### augur.api.Universe.getReportingFeeDivisor({ \_signer, universe, onSent, onSuccess, onFailed })
 
 Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
-
-#### augur.api.Universe.getReportingWindowForForkEndTime({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends.
-
-#### augur.api.Universe.getTargetReporterGasCosts({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the fee in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a designated no show, or refunded to the [Market Creator](#market-creator) if the [Designated Reporter](#designated-reporter) does show up.

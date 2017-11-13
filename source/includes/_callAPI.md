@@ -1084,6 +1084,12 @@ augur.api.Universe.getReportingWindowByTimestamp({
 // example output:
 reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
+augur.api.Universe.getReportingWindowForForkEndTime({
+  universe: universe
+}, function (reportingWindowForForEndTime) { /* ... */ })
+// example output:
+reportingWindowForForEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+
 augur.api.Universe.getReportingWindowId({
   universe: universe,
   _timestamp: new Date().getTime()
@@ -1094,6 +1100,12 @@ reportingWindowId = "578";
 augur.api.Universe.getReputationToken({ universe: universe }, function (reputationTokenAddress) { /* ... */ })
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
+
+augur.api.Universe.getTargetReporterGasCosts({
+  universe: universe
+}, function (targetReporterGasCosts) { /* ... */ })
+// example output:
+targetReporterGasCosts = "12345";
 
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
@@ -1187,6 +1199,10 @@ Returns the [Reporting Window](#reporting-window) address on the specific `unive
 
 Returns the [Reporting Window](#reporting-window) Contract Address for a specific `universe` and provided `_timestamp`.
 
+#### augur.api.Universe.getReportingWindowForForkEndTime({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends.
+
 #### augur.api.Universe.getReportingWindowId({ universe, \_timestamp }[, callback])
 
 Returns the [Reporting Window](#reporting-window) Id for a specific `universe` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universes'](#universe) Reporting Window duration in seconds.
@@ -1194,6 +1210,10 @@ Returns the [Reporting Window](#reporting-window) Id for a specific `universe` a
 #### augur.api.Universe.getReputationToken({ universe }[, callback])
 
 Returns the [Reputation Token](#rep) Address for a specific `universe`. This is the REP usable within this Universe.
+
+#### augur.api.Universe.getTargetReporterGasCosts({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the fee in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a designated no show, or refunded to the [Market Creator](#market-creator) if the [Designated Reporter](#designated-reporter) does show up.
 
 #### augur.api.Universe.isContainerForMarket({ universe, \_shadyMarket }[, callback])
 
