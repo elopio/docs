@@ -321,8 +321,10 @@ augur.reporting.getReportingSummary({
 }, function (allStakeTokens) { /* ... */ })
 // example output: 
 {
-  "DESIGNATED_REPORTING": 3,
-  "FIRST_REPORTING": 1
+  "AWAITING_FINALIZATION": 1,
+  "DESIGNATED_REPORTING": 8,
+  "FIRST_REPORTING": 2,
+  "FINALIZED": 1,
 }
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
@@ -374,7 +376,7 @@ Returns information about the [Reports](#report) submitted by a particular user.
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
 ### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
-Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "FORKING" (or the Market that has Forked), and "AWAITING\_FORK\_MIGRATION".
+Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "AWAITING_FINALIZATION" (when a Market has been reported on and is in a [Dispute Phase](#dispute-phase)), "FORKING" (for the Market that has Forked), "AWAITING\_FORK\_MIGRATION" (for Markets that are waiting for a Forked Market to resolve), and "FINALIZED".
 <!-- Old description: Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window. -->
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
