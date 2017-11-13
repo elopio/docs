@@ -377,6 +377,7 @@ Returns information about the [Reports](#report) submitted by a particular user.
 ### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
 Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "AWAITING_FINALIZATION" (when a Market has been reported on and is in a [Dispute Phase](#dispute-phase)), "FORKING" (for the Market that has Forked), "AWAITING\_FORK\_MIGRATION" (for Markets that are waiting for a Forked Market to resolve), and "FINALIZED".
+
 <!-- Old description: Returns information about a given [Reporting Window](#reporting-window), including total number of [Markets](#market) up for reporting, total number of Markets up for [Dispute](#dispute), total number of Markets undergoing and/or resolved via each [Reporting Round](#reporting-round). `reportingWindow` is a string containing the address of a specific Reporting Window. -->
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
