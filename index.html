@@ -912,8 +912,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">allStakeTokens</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output: </span>
 <span class="p">{</span>
-  <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"FIRST_REPORTING"</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"AWAITING_FINALIZATION"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"FIRST_REPORTING"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"FINALIZED"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
@@ -967,7 +969,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getreportingsummary-reportingwindow-callback">augur.reporting.getReportingSummary({ reportingWindow }[, callback])</h3>
 
-<p>Returns the number of Markets in various Reporting Phases, including &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, &ldquo;LAST_REPORTING&rdquo;, &ldquo;FORKING&rdquo; (or the Market that has Forked), and &ldquo;AWAITING_FORK_MIGRATION&rdquo;.
+<p>Returns the number of Markets in various Reporting Phases, including &ldquo;DESIGNATED_REPORTING&rdquo;, &ldquo;FIRST_REPORTING&rdquo;, &ldquo;LAST_REPORTING&rdquo;, &ldquo;AWAITING_FINALIZATION&rdquo; (when a Market has been reported on and is in a <a href="#dispute-phase">Dispute Phase</a>), &ldquo;FORKING&rdquo; (for the Market that has Forked), &ldquo;AWAITING_FORK_MIGRATION&rdquo; (for Markets that are waiting for a Forked Market to resolve), and &ldquo;FINALIZED&rdquo;.
 &lt;!&ndash; Old description: Returns information about a given <a href="#reporting-window">Reporting Window</a>, including total number of <a href="#market">Markets</a> up for reporting, total number of Markets up for <a href="#dispute">Dispute</a>, total number of Markets undergoing and/or resolved via each <a href="#reporting-round">Reporting Round</a>. <code class="prettyprint">reportingWindow</code> is a string containing the address of a specific Reporting Window. &ndash;&gt;</p>
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
