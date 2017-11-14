@@ -2185,6 +2185,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">currReportingWindow</span> <span class="o">=</span> <span class="s2">"578"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportNoShowBond</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">designatedReportStake</span> <span class="o">=</span> <span class="s2">"115350000000000000"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportStake</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">designatedReportStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">designatedReportStake</span> <span class="o">=</span> <span class="s2">"124350000000000000"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkEndTime</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">forkEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">forkEndTime</span> <span class="o">=</span> <span class="s2">"1489855429"</span><span class="p">;</span>
@@ -2196,6 +2206,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkReputationGoal</span><span class="p">({</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">forkReputationGoal</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">forkReputationGoal</span> <span class="o">=</span> <span class="s2">"150657"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getMarketCreationCost</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">marketCreationCost</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">marketCreationCost</span> <span class="o">=</span> <span class="s2">"100000000000000000"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getNextReportingWindow</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">nextReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -2217,11 +2231,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">previousReportingWindow</span> <span class="o">=</span> <span class="s2">"577"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingFeeDivisor</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingFeeDivisor</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportingFeeDivisor</span> <span class="o">=</span> <span class="s2">"100"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingPeriodDurationInSeconds</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingPeriodDuration</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingPeriodDuration</span> <span class="o">=</span> <span class="s2">"2592000"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span> <span class="na">_reportingWindowId</span><span class="p">:</span> <span class="mi">579</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> 
+  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span> 
+  <span class="na">_reportingWindowId</span><span class="p">:</span> <span class="mi">579</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
 
@@ -2257,11 +2278,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getTargetReporterGasCosts</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">targetReporterGasCosts</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getTargetReporterGasCosts</span><span class="p">({</span> <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">targetReporterGasCosts</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="nx">targetReporterGasCosts</span> <span class="o">=</span> <span class="s2">"12345"</span><span class="p">;</span>
+<span class="nx">targetReporterGasCosts</span> <span class="o">=</span> <span class="s2">"123450000000000000"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
@@ -2307,6 +2326,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the current running <a href="#reporting-window">Reporting Window</a>&rsquo;s Id belonging to the <code class="prettyprint">universe</code> specified. Every <a href="#universe">Universe</a> has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.</p>
 
+<h4 id="augur-api-universe-getdesignatedreportnoshowbond-universe-callback">augur.api.Universe.getDesignatedReportNoShowBond({ universe }[, callback])</h4>
+
+<p>Returns the <a href="#first-report-rep-bond">First Report REP Bond</a> (formerly called the Designated Report No-Show Bond) for <a href="#market">Markets</a> in the specified <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">AttoREP</a>.</p>
+
+<h4 id="augur-api-universe-getdesignatedreportstake-universe-callback">augur.api.Universe.getDesignatedReportStake({ universe }[, callback])</h4>
+
+<p>Returns the amount of stake in <a href="#atto-prefix">AttoREP</a> that the <a href="#designated-reporter">Designated Reporter</a> must put up when submitting a <a href="#designated-report">Designated Report</a> in the specified <a href="#universe">Universe</a>. </p>
+
 <h4 id="augur-api-universe-getforkendtime-universe-callback">augur.api.Universe.getForkEndTime({ universe }[, callback])</h4>
 
 <p>Returns the timestamp for when the <a href="#fork-period">Fork Period</a> ends that was started on the <code class="prettyprint">universe</code> specified.</p>
@@ -2318,6 +2345,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-universe-getforkreputationgoal-universe-callback">augur.api.Universe.getForkReputationGoal({ universe }[, callback])</h4>
 
 <p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> to be finalized before the end of the <a href="#fork-period">Fork Period</a>.</p>
+
+<h4 id="augur-api-universe-getmarketcreationcost-universe-callback">augur.api.Universe.getMarketCreationCost({ universe }[, callback])</h4>
+
+<p>Returns the estimated amount of <a href="#atto-prefix">AttoETH</a> required to create a <a href="#market">Market</a> in the specified <a href="#universe">Universe</a>. The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.</p>
 
 <h4 id="augur-api-universe-getnextreportingwindow-universe-callback">augur.api.Universe.getNextReportingWindow({ universe }[, callback])</h4>
 
@@ -2339,6 +2370,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the previous <a href="#reporting-window">Reporting Window</a> Id to the current Reporting Window for the specified <code class="prettyprint">universe</code>.</p>
 
+<h4 id="augur-api-universe-getreportingfeedivisor-universe-callback">augur.api.Universe.getReportingFeeDivisor({ universe }[, callback])</h4>
+
+<p>Returns the number by which the total payout amount for a <a href="#market">Market</a> is divided in order to calculate the <a href="#reporting-fee">Reporting Fee</a>.</p>
+
 <h4 id="augur-api-universe-getreportingperioddurationinseconds-universe-callback">augur.api.Universe.getReportingPeriodDurationInSeconds({ universe }[, callback])</h4>
 
 <p>Returns the specified <code class="prettyprint">universe</code>&rsquo;s <a href="#reporting-window">Reporting Window</a> full duration in seconds, also known as the <a href="#reporting-period">Reporting Period</a>. This includes both the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-phase">Dispute Phase</a> of the Reporting Window. The Reporting Phase should last 27 days followed by a 3 day Dispute Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.</p>
@@ -2355,7 +2390,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#reporting-window">Reporting Window</a> Contract Address for a specific <code class="prettyprint">universe</code> and provided <code class="prettyprint">_timestamp</code>.</p>
 
-<h4 id="augur-api-universe-getreportingwindowforforkendtime-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getReportingWindowForForkEndTime({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-universe-getreportingwindowforforkendtime-universe-callback">augur.api.Universe.getReportingWindowForForkEndTime({ universe }[, callback])</h4>
 
 <p>Returns the <a href="#reporting-window">Reporting Window</a> that the current <a href="#fork-period">Fork Period</a> ends.</p>
 
@@ -2367,9 +2402,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#rep">Reputation Token</a> Address for a specific <code class="prettyprint">universe</code>. This is the REP usable within this Universe.</p>
 
-<h4 id="augur-api-universe-gettargetreportergascosts-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getTargetReporterGasCosts({ _signer, universe, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-universe-gettargetreportergascosts-universe-callback">augur.api.Universe.getTargetReporterGasCosts({ universe }[, callback])</h4>
 
-<p>Returns the fee in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#first-reporter">First Reporter</a> in the event of a designated no show, or refunded to the <a href="#market-creator">Market Creator</a> if the <a href="#designated-reporter">Designated Reporter</a> does show up.</p>
+<p>Returns the fee in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#first-reporter">First Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator">Market Creator</a> if the <a href="#designated-reporter">Designated Reporter</a> does show up.</p>
 
 <h4 id="augur-api-universe-iscontainerformarket-universe-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ universe, _shadyMarket }[, callback])</h4>
 
@@ -2956,31 +2991,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">decreaseMarketCreatorSettlementFeeInAttoethPerEth</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">_newFeePerEthInWei</span><span class="p">:</span> <span class="s1">'1000000000'</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320488</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xd513068544920197371d325b08e23ed19c68f326b47eb3a2c7e14aa915417da7"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x4c92c4b3000000000000000000000000000000000000000000000000000000003b9aca00"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x4"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003134</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
 <span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
@@ -3260,10 +3270,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-market-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Contract Code</a></h4>
-
-<h4 id="augur-api-market-decreasemarketcreatorsettlementfeeinattoethpereth-_signer-market-_newfeeperethinwei-onsent-onsuccess-onfailed">augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ _signer, market, _newFeePerEthInWei, onSent, onSuccess, onFailed })</h4>
-
-<p>Lowers the <code class="prettyprint">market</code> creator&rsquo;s settlement fee in attoeth per <code class="prettyprint">Eth</code> settled to the <code class="prettyprint">_newFeePerEthInWei</code> value. This transaction will fail if the <code class="prettyprint">msg.sender</code> is not the creator of the <code class="prettyprint">market</code>, if <code class="prettyprint">_newFeePerEthInWei</code> is 0 or less, or if <code class="prettyprint">_newFeePerEthInWei</code> isn&rsquo;t a lower number than the current fee per <code class="prettyprint">Eth</code>.</p>
 
 <h4 id="augur-api-market-derivepayoutdistributionhash-_signer-market-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.derivePayoutDistributionHash({ _signer, market, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h4>
 
@@ -4169,78 +4175,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportNoShowBond</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320551</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDesignatedReportStake</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320551</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getMarketCreationCost</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320552</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
 <span class="kd">var</span> <span class="nx">_parentPayoutDistributionHash</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Parent</span> <span class="nx">Payout</span> <span class="nx">Distribution</span> <span class="nx">Hash</span> <span class="k">as</span> <span class="mi">32</span> <span class="nx">bytes</span><span class="p">...</span><span class="o">&gt;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCreateChildUniverse</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
@@ -4266,52 +4200,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingFeeDivisor</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="nx">universe</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320554</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0xff8"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
-
-<h4 id="augur-api-universe-getdesignatedreportnoshowbond-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getDesignatedReportNoShowBond({ _signer, universe, onSent, onSuccess, onFailed })</h4>
-
-<p>Returns the current <a href="#designated-report-no-show-bond">Designated Report No-Show Bond</a> for <a href="#market">Markets</a> in the specified <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">AttoREP</a>.</p>
-
-<h4 id="augur-api-universe-getdesignatedreportstake-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getDesignatedReportStake({ _signer, universe, onSent, onSuccess, onFailed })</h4>
-
-<p>Returns the amount of stake in <a href="#atto-prefix">AttoREP</a> that the <a href="#designated-reporter">Designated Reporter</a> must put up when submitting a <a href="#designated-report">Designated Report</a>. </p>
-
-<h4 id="augur-api-universe-getmarketcreationcost-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getMarketCreationCost({ _signer, universe, onSent, onSuccess, onFailed })</h4>
-
-<p>Returns the estimated amount of <a href="#atto-prefix">AttoETH</a> required to create a <a href="#market">Market</a> in the specified <a href="#universe">Universe</a>. The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.</p>
-
-<h4 id="augur-api-universe-getorcreatechilduniverse-_signer-universe-_parentpayoutdistributionhash-onsent-onsuccess-onfailed">augur.api.Universe.getOrCreateChildUniverse({ _signer, universe, _parentPayoutDistributionHash, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-universe-getorcreatechilduniverse-universe-_parentpayoutdistributionhash-callback">augur.api.Universe.getOrCreateChildUniverse({ universe, _parentPayoutDistributionHash }[, callback])</h4>
 
 <p>Returns a <a href="#child-universe">Child Universe</a> corresponding to the specified <code class="prettyprint">_parentPayoutDistributionHash</code>. If the Child Universe does not already exist, it will be created. This transaction will fail if the Universe does not have a <a href="#forked-market">Forked Market</a>.</p>
-
-<h4 id="augur-api-universe-getreportingfeedivisor-_signer-universe-onsent-onsuccess-onfailed">augur.api.Universe.getReportingFeeDivisor({ _signer, universe, onSent, onSuccess, onFailed })</h4>
-
-<p>Returns the number by which the total payout amount for a <a href="#market">Market</a> is divided in order to calculate the <a href="#reporting-fee">Reporting Fee</a>.</p>
 
           <h1 id="events-api">Events API</h1>
 
