@@ -1029,6 +1029,16 @@ augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (c
 // example output:
 currReportingWindow = "578"
 
+augur.api.Universe.getDesignatedReportNoShowBond({
+  universe: universe
+});
+// example output:
+designatedReportStake = "115350000000000000";
+
+augur.api.Universe.getDesignatedReportStake({ universe: universe }, function (designatedReportStake) { /* ... */ })
+// example output:
+designatedReportStake = "124350000000000000";
+
 augur.api.Universe.getForkEndTime({ universe: universe }, function (forkEndTime) { /* ... */ })
 // example output:
 forkEndTime = "1489855429";
@@ -1040,6 +1050,10 @@ forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 augur.api.Universe.getForkReputationGoal({ universe }, function (forkReputationGoal) { /* ... */ })
 // example output:
 forkReputationGoal = "150657";
+
+augur.api.Universe.getMarketCreationCost({ universe: universe }, function (marketCreationCost) { /* ... */ })
+// example output:
+marketCreationCost = "100000000000000000";
 
 augur.api.Universe.getNextReportingWindow({ universe: universe }, function (nextReportingWindow) { /* ... */ })
 // example output:
@@ -1061,11 +1075,18 @@ augur.api.Universe.getPreviousReportingWindow({ universe: universe }, function (
 // example output:
 previousReportingWindow = "577"
 
+augur.api.Universe.getReportingFeeDivisor({ universe: universe }, function (reportingFeeDivisor) { /* ... */ })
+// example output:
+reportingFeeDivisor = "100";
+
 augur.api.Universe.getReportingPeriodDurationInSeconds({ universe: universe }, function (reportingPeriodDuration) { /* ... */ })
 // example output:
 reportingPeriodDuration = "2592000";
 
-augur.api.Universe.getReportingWindow({ universe: universe, _reportingWindowId: 579 }, function (reportingWindow) { /* ... */ })
+augur.api.Universe.getReportingWindow({ 
+  universe: universe, 
+  _reportingWindowId: 579 
+}, function (reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 
@@ -1101,11 +1122,9 @@ augur.api.Universe.getReputationToken({ universe: universe }, function (reputati
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 
-augur.api.Universe.getTargetReporterGasCosts({
-  universe: universe
-}, function (targetReporterGasCosts) { /* ... */ })
+augur.api.Universe.getTargetReporterGasCosts({ universe: universe }, function (targetReporterGasCosts) { /* ... */ })
 // example output:
-targetReporterGasCosts = "12345";
+targetReporterGasCosts = "123450000000000000";
 
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
@@ -1151,6 +1170,14 @@ Returns the Child [Universe](#universe) address for this `universe` address who'
 
 Returns the current running [Reporting Window](#reporting-window)'s Id belonging to the `universe` specified. Every [Universe](#universe) has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.
 
+#### augur.api.Universe.getDesignatedReportNoShowBond({ universe }[, callback])
+
+Returns the [First Report REP Bond](#first-report-rep-bond) (formerly called the Designated Report No-Show Bond) for [Markets](#market) in the specified [Universe](#universe), priced in [AttoREP](#atto-prefix).
+
+#### augur.api.Universe.getDesignatedReportStake({ universe }[, callback])
+
+Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report) in the specified [Universe](#universe). 
+
 #### augur.api.Universe.getForkEndTime({ universe }[, callback])
 
 Returns the timestamp for when the [Fork Period](#fork-period) ends that was started on the `universe` specified.
@@ -1162,6 +1189,10 @@ Returns the contract address of the [Market](#market) that the specified `univer
 #### augur.api.Universe.getForkReputationGoal({ universe }[, callback])
 
 Returns the estimated amount of [REP](#rep) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) to be finalized before the end of the [Fork Period](#fork-period).
+
+#### augur.api.Universe.getMarketCreationCost({ universe }[, callback])
+
+Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the specified [Universe](#universe). The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
 
 #### augur.api.Universe.getNextReportingWindow({ universe }[, callback])
 
@@ -1183,6 +1214,10 @@ Returns the [Parent Universes](#parent-universe)'s [Payout Distribution Hash](#p
 
 Returns the previous [Reporting Window](#reporting-window) Id to the current Reporting Window for the specified `universe`.
 
+#### augur.api.Universe.getReportingFeeDivisor({ universe }[, callback])
+
+Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
+
 #### augur.api.Universe.getReportingPeriodDurationInSeconds({ universe }[, callback])
 
 Returns the specified `universe`'s [Reporting Window](#reporting-window) full duration in seconds, also known as the [Reporting Period](#reporting-period). This includes both the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) of the Reporting Window. The Reporting Phase should last 27 days followed by a 3 day Dispute Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.
@@ -1199,7 +1234,7 @@ Returns the [Reporting Window](#reporting-window) address on the specific `unive
 
 Returns the [Reporting Window](#reporting-window) Contract Address for a specific `universe` and provided `_timestamp`.
 
-#### augur.api.Universe.getReportingWindowForForkEndTime({ \_signer, universe, onSent, onSuccess, onFailed })
+#### augur.api.Universe.getReportingWindowForForkEndTime({ universe }[, callback])
 
 Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends.
 
@@ -1211,9 +1246,9 @@ Returns the [Reporting Window](#reporting-window) Id for a specific `universe` a
 
 Returns the [Reputation Token](#rep) Address for a specific `universe`. This is the REP usable within this Universe.
 
-#### augur.api.Universe.getTargetReporterGasCosts({ \_signer, universe, onSent, onSuccess, onFailed })
+#### augur.api.Universe.getTargetReporterGasCosts({ universe }[, callback])
 
-Returns the fee in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a designated no show, or refunded to the [Market Creator](#market-creator) if the [Designated Reporter](#designated-reporter) does show up.
+Returns the fee in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator](#market-creator) if the [Designated Reporter](#designated-reporter) does show up.
 
 #### augur.api.Universe.isContainerForMarket({ universe, \_shadyMarket }[, callback])
 

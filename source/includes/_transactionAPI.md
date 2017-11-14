@@ -586,31 +586,6 @@ var privateKey = <Buffer ...>;
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _payoutNumerators = [ 0, 1000 ];
 
-augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({
-  _signer: privateKey,
-  market: market,
-  _newFeePerEthInWei: '1000000000',
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xd513068544920197371d325b08e23ed19c68f326b47eb3a2c7e14aa915417da7",
-  input: "0x4c92c4b3000000000000000000000000000000000000000000000000000000003b9aca00",
-  nonce: "0x4",
-  timestamp: 1501003134,
-  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  value: "0x0"
-}
-
 var _invalid = false;
 augur.api.Market.derivePayoutDistributionHash({
   _signer: privateKey,
@@ -890,10 +865,6 @@ successResponse = {
 }
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
-
-#### augur.api.Market.decreaseMarketCreatorSettlementFeeInAttoethPerEth({ \_signer, market, \_newFeePerEthInWei, onSent, onSuccess, onFailed })
-
-Lowers the `market` creator's settlement fee in attoeth per `Eth` settled to the `_newFeePerEthInWei` value. This transaction will fail if the `msg.sender` is not the creator of the `market`, if `_newFeePerEthInWei` is 0 or less, or if `_newFeePerEthInWei` isn't a lower number than the current fee per `Eth`.
 
 #### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
 
@@ -1811,78 +1782,6 @@ Universe Tx API
 var privateKey = <Buffer ...>;
 var universe = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 
-augur.api.Universe.getDesignatedReportNoShowBond({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320551,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
-
-augur.api.Universe.getDesignatedReportStake({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320551,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
-
-augur.api.Universe.getMarketCreationCost({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320552,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
-
 var _parentPayoutDistributionHash = <Parent Payout Distribution Hash as 32 bytes...>
 augur.api.Universe.getOrCreateChildUniverse({
   _signer: privateKey,
@@ -1908,49 +1807,7 @@ successResponse = {
   to: "0xa7f3659c53820346176f7e0e350780df304db179",
   value: "0x0"
 }
-
-augur.api.Universe.getReportingFeeDivisor({
-  _signer: privateKey,
-  universe: universe,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example output:
-successResponse = {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320554,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "",
-  nonce: "0xff8",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  value: "0x0"
-}
 ```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
-
-#### augur.api.Universe.getDesignatedReportNoShowBond({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the current [Designated Report No-Show Bond](#designated-report-no-show-bond) for [Markets](#market) in the specified [Universe](#universe), priced in [AttoREP](#atto-prefix).
-
-#### augur.api.Universe.getDesignatedReportStake({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report). 
-
-#### augur.api.Universe.getMarketCreationCost({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the specified [Universe](#universe). The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
-
-#### augur.api.Universe.getOrCreateChildUniverse({ \_signer, universe, \_parentPayoutDistributionHash, onSent, onSuccess, onFailed })
+#### augur.api.Universe.getOrCreateChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
 
 Returns a [Child Universe](#child-universe) corresponding to the specified `_parentPayoutDistributionHash`. If the Child Universe does not already exist, it will be created. This transaction will fail if the Universe does not have a [Forked Market](#forked-market).
-
-#### augur.api.Universe.getReportingFeeDivisor({ \_signer, universe, onSent, onSuccess, onFailed })
-
-Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
