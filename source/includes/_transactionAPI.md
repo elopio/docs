@@ -1775,6 +1775,39 @@ The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` 
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
 
+TradingEscapeHatch Tx API
+---------------------
+```javascript
+// TradingEscapeHatch Contract Transaction API Examples:
+var market = "0x465407364ccde43ba5159537404924e86ca53aaa";
+augur.api.TradingEscapeHatch.claimSharesInUpdate({
+  _signer: privateKey,
+  market: market,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320540,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003200,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+```
+#### augur.api.TradingEscapeHatch.claimSharesInUpdate({ market }[, callback])
+
+If Augur needs to be halted by the development team (for example, if a vulnerability is discovered), calling this function on a specific [Market](#market) will withdraw the user's funds from that Market and return them to the user's address. This transaction will fail if Augur is not in a halted state.
+
 Universe Tx API
 ---------------------
 ```javascript
