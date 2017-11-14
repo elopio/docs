@@ -900,7 +900,7 @@ topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 
 The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
 
-REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [First Report REP Bond](#first-report-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creators First Report REP Bond will go to the First Reporter to Report on the Market. Their GAS cost for the Report transaction will be covered by the Market Creator's [First Report GAS Bond](#first-report-gas-bond) and the First Report REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
+REP is also used to Challenge the Proposed Outcome of Reports during the [Designated Dispute Phase](#designated-dispute-phase) or the [Dispute Phase](#dispute-phase). If the Challenge successfully changes the Proposed Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Reporter to Report on the Market. Their GAS cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show GAS Bond](#designated-report-no-show-gas-bond) and the Designated Report No-Show REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
 
 The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
@@ -1029,11 +1029,9 @@ augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (c
 // example output:
 currReportingWindow = "578"
 
-augur.api.Universe.getDesignatedReportNoShowBond({
-  universe: universe
-});
+augur.api.Universe.getDesignatedReportNoShowBond({ universe: universe }, function (designatedReportNoShowBond) { /* ... */ })
 // example output:
-designatedReportStake = "115350000000000000";
+designatedReportNoShowBond = "115350000000000000";
 
 augur.api.Universe.getDesignatedReportStake({ universe: universe }, function (designatedReportStake) { /* ... */ })
 // example output:
@@ -1172,7 +1170,7 @@ Returns the current running [Reporting Window](#reporting-window)'s Id belonging
 
 #### augur.api.Universe.getDesignatedReportNoShowBond({ universe }[, callback])
 
-Returns the [First Report REP Bond](#first-report-rep-bond) (formerly called the Designated Report No-Show Bond) for [Markets](#market) in the specified [Universe](#universe), priced in [AttoREP](#atto-prefix).
+Returns the [Designated Report No-Show Bonds](#designated-report) for [Markets](#market) in the specified [Universe](#universe), priced in [AttoREP](#atto-prefix).
 
 #### augur.api.Universe.getDesignatedReportStake({ universe }[, callback])
 
