@@ -578,6 +578,99 @@ successResponse = {
 
 Given an `_orderId` and the amount a [Filler](#order-filler) wants as `_amountFillerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `_amountFillerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `_amountFillerWants` value that the filler requests. This transaction requires `_orderId` and `_amountFillerWants` are defined. The [Creator](#order-creator) of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
 
+Mailbox Tx API
+----------------------
+```javascript
+// Mailbox Contract Transaction API Examples:
+var mailbox = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api.Mailbox.transferOwnership({
+  _signer: privateKey,
+  mailbox: mailbox,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320488,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
+  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
+  nonce: "0x4",
+  timestamp: 1501003134,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+augur.api.Mailbox.withdrawEther({
+  _signer: privateKey,
+  mailbox: mailbox,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320489,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
+  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
+  nonce: "0x4",
+  timestamp: 1501003134,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
+var _shareToken = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api.Mailbox.withdrawTokens({
+  _signer: privateKey,
+  mailbox: mailbox,
+  token: _shareToken,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+})
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320489,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
+  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
+  nonce: "0x4",
+  timestamp: 1501003134,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+```
+#### [Mailbox Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/Mailbox.sol)
+
+#### augur.api.Mailbox.transferOwnership({ \_signer, mailbox, \_newOwner, onSent, onSuccess, onFailed })
+
+The `transferOwnership` transaction will change the current [Market Creator Mailbox](#market-creator-mailbox) owner to the specified `_newOwner`. This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
+
+#### augur.api.Mailbox.withdrawEther({ \_signer, mailbox, onSent, onSuccess, onFailed })
+
+Transfers all ETH in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
+
+#### augur.api.Mailbox.withdrawTokens({ \_signer, mailbox, \_token, onSent, onSuccess, onFailed })
+
+Transfers all tokens of type `_token` in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
+
 Market Tx API
 ----------------------
 ```javascript
@@ -900,7 +993,7 @@ This transaction attempts to migrate the [Market](#market) into a winning [Child
 
 #### augur.api.Market.transferOwnership({ \_signer, market, \_newOwner, onSent, onSuccess, onFailed })
 
-The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the `msg.sender` isn't the Market owner of the specified `disputeBond`. 
+The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the `msg.sender` isn't the owner of the specified `market`. 
 
 #### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
 

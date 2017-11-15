@@ -157,6 +157,10 @@ augur.api.Market.getLastReportersDisputeBond({ market: market }, function (round
 // example output:
 round2ReportersDisputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
+augur.api.Market.getMarketCreatorMailbox({ market: market }, function (marketCreatorMailbox) { /* ... */ })
+// example output:
+marketCreatorMailbox = "0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"
+
 augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
@@ -308,6 +312,10 @@ Returns the [Market](#market) address of the [Forked Market](#forked-market) for
 #### augur.api.Market.getLastReportersDisputeBond({ market }[, callback])
 
 Returns the [Last Report Round](#last-report-round)'s [Dispute Bond](#dispute-bond) address for the `market`. If this [Market](#market) hasn't gone through a Last Report Round or there was no [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) of the Last Report Round then this will return an empty address `0x0`.
+
+#### augur.api.Market.getMarketCreatorMailbox({ market: market }[, callback])
+
+Returns the address of the [Market Creator Mailbox](#market-creator-mailbox) for `market`.
 
 #### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market }[, callback])
 

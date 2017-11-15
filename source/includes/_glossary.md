@@ -102,7 +102,7 @@ The Designated Report No-Show GAS Bond is paid for using ETH by the [Market Crea
 
 ## Designated Report No-Show REP Bond
 
-The Designated Report No-Show REP Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during Market Creation. The Bond is refunded to the Market Creator if the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). If the Designated Reporter fails to Report during the Designated Report Phase then the Designated Report No-Show REP Bond is applied to the stake of the First Reporter for this [Market](#market) in the [Reporting Rounds](#reporting-round) during the next available [Reporting Window](#reporting-window). This actually allows for someone to stake 0 REP for the First Report because the Bond is added to whatever you stake. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported then they can earn REP without having to buy it.
+The Designated Report No-Show REP Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during Market Creation. The Bond is refunded to the Market Creator if the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). If the Designated Reporter fails to Report during the Designated Report Phase then the Designated Report No-Show REP Bond is applied to the stake of the First Reporter for this [Market](#market) in the [Reporting Rounds](#reporting-round) during the next available [Reporting Window](#reporting-window). This actually allows for someone to stake 0 REP for the [First Report](#first-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported then they can earn REP without having to buy it.
 
 ## First Report Round
 
@@ -131,6 +131,10 @@ The Last Report Round is the final [Reporting Round](#reporting-round) in which 
 ## Locked Universe
 
 A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur within it and no longer allows the creation of new [Markets](#markets). All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after [Finalizing](#finalized-market). [REP](#rep) holders within a Locked Universe are given a one time and final option to migrate their REP to one of the new universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.
+
+## Market Creator Mailbox
+
+A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them.
 
 ## Market
 
