@@ -3042,11 +3042,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">_shareToken</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_repToken</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Mailbox</span><span class="p">.</span><span class="nx">withdrawTokens</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">mailbox</span><span class="p">:</span> <span class="nx">mailbox</span><span class="p">,</span>
-  <span class="na">token</span><span class="p">:</span> <span class="nx">_shareToken</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="nx">_repToken</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
