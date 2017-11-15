@@ -631,11 +631,11 @@ successResponse = {
   value: "0x0"
 }
 
-var _shareToken = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _repToken = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.withdrawTokens({
   _signer: privateKey,
   mailbox: mailbox,
-  token: _shareToken,
+  token: _repToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
