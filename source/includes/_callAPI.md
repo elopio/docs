@@ -13,13 +13,13 @@ var params = { market: market };
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
 // asynchronously -- STRONGLY RECOMMENDED --
-augur.api.Market.getNumberOfOutcomes(params, function (numOutcomes) {
+augur.api.Market.getNumberOfOutcomes(params, function (err, numOutcomes) {
   console.log(numOutcomes);
 });
 // console prints 2
 
 // synchronous -- possible but not recommended.
-var outcomes = augur.api.Market.getNumberOfOutcomes(params);
+var outcomes = augur.api.Market.getNumberOfOutcomes(err, params);
 // outcomes = 2
 ```
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
@@ -39,27 +39,27 @@ var _address = "0x3d62bafc1791752393384b902f813da861ddedd9";
 augur.api.DisputeBond.balanceOf({
   disputeBond: disputeBond,
   _address: _address
-}, function (balance) { /* ... */ })
+}, function (err, balance) { /* ... */ })
 // example output:
 balance = "1"
 
-augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond: disputeBond }, function (bondRemainingToBePaidOut) { /* ... */ })
+augur.api.DisputeBond.getBondRemainingToBePaidOut({ disputeBond: disputeBond }, function (err, bondRemainingToBePaidOut) { /* ... */ })
 // example output:
 bondRemainingToBePaidOut = "1100000000000000000000"
 
-augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond: disputeBond }, function (disputedPayoutDistributionHash) { /* ... */ })
+augur.api.DisputeBond.getDisputedPayoutDistributionHash({ disputeBond: disputeBond }, function (err, disputedPayoutDistributionHash) { /* ... */ })
 // example output:
 disputedPayoutDistributionHash = "0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"
 
-augur.api.DisputeBond.getMarket({ disputeBond: disputeBond }, function (market) { /* ... */ })
+augur.api.DisputeBond.getMarket({ disputeBond: disputeBond }, function (err, market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.DisputeBond.getOwner({ disputeBond: disputeBond }, function (owner) { /* ... */ })
+augur.api.DisputeBond.getOwner({ disputeBond: disputeBond }, function (err, owner) { /* ... */ })
 // example output:
 owner = "0x3d62bafc1791752393384b902f813da861ddedd9"
 
-augur.api.DisputeBond.getUniverse({ disputeBond: disputeBond }, function (universe) { /* ... */ })
+augur.api.DisputeBond.getUniverse({ disputeBond: disputeBond }, function (err, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 ```
@@ -93,127 +93,127 @@ Market Call API
 // Market Contract Call API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ market: market }, function (secondPlaceTentativeWinningPayoutDistributionHash) { /* ... */ })
+augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ market: market }, function (err, secondPlaceTentativeWinningPayoutDistributionHash) { /* ... */ })
 // example output:
 secondPlaceTentativeWinningPayoutDistributionHash = "0x20acbb1199c43cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Market.getDenominationToken({ market: market }, function (denominationToken) { /* ... */ })
+augur.api.Market.getDenominationToken({ market: market }, function (err, denominationToken) { /* ... */ })
 // example output:
 denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
 
-augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market: market }, function (designatedReporterDisputeDueTimestamp) { /* ... */ })
+augur.api.Market.getDesignatedReportDisputeDueTimestamp({ market: market }, function (err, designatedReporterDisputeDueTimestamp) { /* ... */ })
 // example output:
 designatedReporterDisputeDueTimestamp = "1500907130"
 
-augur.api.Market.getDesignatedReportDueTimestamp({ market: market }, function (designatedReporterDueTimestamp) { /* ... */ })
+augur.api.Market.getDesignatedReportDueTimestamp({ market: market }, function (err, designatedReporterDueTimestamp) { /* ... */ })
 // example output:
 designatedReporterDueTimestamp = "1500647930"
 
-augur.api.Market.getDesignatedReporter({ market: market }, function (designatedReporter) { /* ... */ })
+augur.api.Market.getDesignatedReporter({ market: market }, function (err, designatedReporter) { /* ... */ })
 // example output:
 designatedReporter = "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
-augur.api.Market.getDesignatedReporterDisputeBond({ market: market }, function (designatedReporterDisputeBond) { /* ... */ })
+augur.api.Market.getDesignatedReporterDisputeBond({ market: market }, function (err, designatedReporterDisputeBond) { /* ... */ })
 // example output:
 designatedReporterDisputeBond = "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
 
-augur.api.Market.getDesignatedReportPayoutHash({ market: market }, function (designatedReportPayoutHash) { /* ... */ })
+augur.api.Market.getDesignatedReportPayoutHash({ market: market }, function (err, designatedReportPayoutHash) { /* ... */ })
 // example output:
 designatedReportPayoutHash = "0x58aff2018af3cb2ca3a3a1862df2d350300904a96039eb50cb0fd1ac3710aad"
 
-augur.api.Market.getDesignatedReportReceivedTime({ market: market }, function (designatedReportReceivedTime) { /* ... */ })
+augur.api.Market.getDesignatedReportReceivedTime({ market: market }, function (err, designatedReportReceivedTime) { /* ... */ })
 // example output:
 designatedReportReceivedTime = "1500388800";
 
-augur.api.Market.getEndTime({ market: market }, function (endTime) { /* ... */ })
+augur.api.Market.getEndTime({ market: market }, function (err, endTime) { /* ... */ })
 // example output:
 endTime = "1500388730";
 
-augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ market: market }, function (extraDisputeBondRemainingToBePaidOut) { /* ... */ })
+augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ market: market }, function (err, extraDisputeBondRemainingToBePaidOut) { /* ... */ })
 // example output:
 extraDisputeBondRemainingToBePaidOut = "1000";
 
-augur.api.Market.getFinalizationTime({ market: market }, function (finalizationTime) { /* ... */ })
+augur.api.Market.getFinalizationTime({ market: market }, function (err, finalizationTime) { /* ... */ })
 // example output:
 finalizationTime = "1500647930";
 
-augur.api.Market.getFinalPayoutDistributionHash({ market: market }, function (finalPayoutDistributionHash) { /* ... */ })
+augur.api.Market.getFinalPayoutDistributionHash({ market: market }, function (err, finalPayoutDistributionHash) { /* ... */ })
 // example output:
 finalPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Market.getFinalWinningStakeToken({ market: market }, function (winningStakeToken) { /* ... */ })
+augur.api.Market.getFinalWinningStakeToken({ market: market }, function (err, winningStakeToken) { /* ... */ })
 // example output:
 winningStakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.Market.getFirstReportersDisputeBond({ market: market }, function (round1ReportersDisputeBond) { /* ... */ })
+augur.api.Market.getFirstReportersDisputeBond({ market: market }, function (err, round1ReportersDisputeBond) { /* ... */ })
 // example output:
 round1ReportersDisputeBond = "0x0151f9153f236359ea3605cef0fffff90aba0327";
 
-augur.api.Market.getForkingMarket({ market: market }, function (forkedMarket) { /* ... */ })
+augur.api.Market.getForkingMarket({ market: market }, function (err, forkedMarket) { /* ... */ })
 // example output:
 forkedMarket = "0x0"
 
-augur.api.Market.getLastReportersDisputeBond({ market: market }, function (round2ReportersDisputeBond) { /* ... */ })
+augur.api.Market.getLastReportersDisputeBond({ market: market }, function (err, round2ReportersDisputeBond) { /* ... */ })
 // example output:
 round2ReportersDisputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
-augur.api.Market.getMarketCreatorMailbox({ market: market }, function (marketCreatorMailbox) { /* ... */ })
+augur.api.Market.getMarketCreatorMailbox({ market: market }, function (err, marketCreatorMailbox) { /* ... */ })
 // example output:
 marketCreatorMailbox = "0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"
 
-augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, function (marketCreatorSettlementFee) { /* ... */ })
+augur.api.Market.getMarketCreatorSettlementFeeDivisor({ market: market }, function (err, marketCreatorSettlementFee) { /* ... */ })
 // example output:
 marketCreatorSettlementFee = "20000000000000000"
 
-augur.api.Market.getOwner({ market: market }, function (owner) { /* ... */ })
+augur.api.Market.getOwner({ market: market }, function (err, owner) { /* ... */ })
 // example output:
 owner = "0x06cbcd92af2571f1419b622a794d65db524f682b"
 
-augur.api.Market.getNumberOfOutcomes({ market: market }, function (numOutcomes) { /* ... */ })
+augur.api.Market.getNumberOfOutcomes({ market: market }, function (err, numOutcomes) { /* ... */ })
 // example output:
 numOutcomes = "2"
 
-augur.api.Market.getNumTicks({ market: market }, function (numTicks) { /* ... */ })
+augur.api.Market.getNumTicks({ market: market }, function (err, numTicks) { /* ... */ })
 // example output:
 numTicks = "1000"
 
-augur.api.Market.getReportingState({ market: market }, function (reportingState) { /* ... */ })
+augur.api.Market.getReportingState({ market: market }, function (err, reportingState) { /* ... */ })
 // example output:
 reportingState = "0";
 
-augur.api.Market.getReportingWindow({ market: market }, function (reportingWindow) { /* ... */ })
+augur.api.Market.getReportingWindow({ market: market }, function (err, reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
 augur.api.Market.getShareToken({
   market: market,
   _outcome: 1
-}, function (shareToken) { /* ... */ })
+}, function (err, shareToken) { /* ... */ })
 // example output:
 shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
-augur.api.Market.getStakeToken({ market: market, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (stakeToken) { /* ... */ })
+augur.api.Market.getStakeToken({ market: market, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (err, stakeToken) { /* ... */ })
 // example output:
 stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
 var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (stakeTokenOrZero) { /* ... */ })
+augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ market: market, _payoutDistributionHash: _payoutDistributionHash }, function (err, stakeTokenOrZero) { /* ... */ })
 // example output:
 stakeTokenOrZero = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
-augur.api.Market.getTentativeWinningPayoutDistributionHash({ market: market }, function (tentativeWinningPayoutDistributionHash) { /* ... */ })
+augur.api.Market.getTentativeWinningPayoutDistributionHash({ market: market }, function (err, tentativeWinningPayoutDistributionHash) { /* ... */ })
 // example output:
 tentativeWinningPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.Market.getTotalStake({ market: market }, function (totalStake) { /* ... */ })
+augur.api.Market.getTotalStake({ market: market }, function (err, totalStake) { /* ... */ })
 // example output:
 totalStake = "1000"
 
-augur.api.Market.getTotalWinningDisputeBondStake({ market: market }, function (_totalDisputeBondStake) { /* ... */ })
+augur.api.Market.getTotalWinningDisputeBondStake({ market: market }, function (err, _totalDisputeBondStake) { /* ... */ })
 // example output:
 _totalDisputeBondStake = "1000"
 
-augur.api.Market.getUniverse({ market: market }, function (universe) { /* ... */ })
+augur.api.Market.getUniverse({ market: market }, function (err, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
@@ -221,7 +221,7 @@ var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 augur.api.Market.isContainerForDisputeBond({
   market: market,
   _shadyDisputeBond: disputeBond
-}, function (isContainerForShareToken) { /* ... */ })
+}, function (err, isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForDisputeBond = "1"
 
@@ -229,7 +229,7 @@ var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 augur.api.Market.isContainerForStakeToken({
   market: market,
   _shadyStakeToken: stakeToken
-}, function (isContainerForStakeToken) { /* ... */ })
+}, function (err, isContainerForStakeToken) { /* ... */ })
 // example output:
 isContainerForStakeToken = "1"
 
@@ -237,13 +237,13 @@ var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 augur.api.Market.isContainerForShareToken({
   market: market,
   _shadyShareToken: shareToken
-}, function (isContainerForShareToken) { /* ... */ })
+}, function (err, isContainerForShareToken) { /* ... */ })
 // example output:
 isContainerForShareToken = "1"
 
 augur.api.Market.isValid({
   market: market
-}, function (isValid) { /* ... */ })
+}, function (err, isValid) { /* ... */ })
 // example output:
 isValid = "1"
 ```
@@ -403,7 +403,7 @@ augur.api.Orders.assertIsNotBetterPrice({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _betterOrderId: _orderId
-}, function (isNotBetterPrice) { /* ... */ })
+}, function (err, isNotBetterPrice) { /* ... */ })
 // example output:
 isNotBetterPrice = "1"
 
@@ -411,11 +411,11 @@ augur.api.Orders.assertIsNotWorsePrice({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _worstOrderId: _orderId
-}, function (isNotWorstPrice) { /* ... */ })
+}, function (err, isNotWorstPrice) { /* ... */ })
 // example output:
 isNotWorstPrice = "0"
 
-augur.api.Orders.getAmount({ _orderId: _orderId }, function (amount) { /* ... */ })
+augur.api.Orders.getAmount({ _orderId: _orderId }, function (err, amount) { /* ... */ })
 // example output:
 amount = "15"
 
@@ -423,56 +423,56 @@ augur.api.Orders.getBestOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (bestOrderID) { /* ... */ })
+}, function (err, bestOrderID) { /* ... */ })
 // example output:
 bestOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 var secondBestOrderID = "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5";
-augur.api.Orders.getBetterOrderId({ _orderId: secondBestOrderID }, function (betterOrderID) { /* ... */ })
+augur.api.Orders.getBetterOrderId({ _orderId: secondBestOrderID }, function (err, betterOrderID) { /* ... */ })
 // example output:
 betterOrderID = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 augur.api.Orders.getLastOutcomePrice({
   _market: _market,
   _outcome: _outcome
-}, function (lastOutcomePrice) { /* ... */ })
+}, function (err, lastOutcomePrice) { /* ... */ })
 // example output:
 lastOutcomePrice = "490000000000000000"
 
-augur.api.Orders.getMarket({ _orderId: _orderId }, function (orderMarket) { /* ... */ })
+augur.api.Orders.getMarket({ _orderId: _orderId }, function (err, orderMarket) { /* ... */ })
 // example output:
 orderMarket = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.Orders.getOrderCreator({ _orderId: _orderId }, function (owner) { /* ... */ })
+augur.api.Orders.getOrderCreator({ _orderId: _orderId }, function (err, owner) { /* ... */ })
 // example output:
 owner = "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 
-augur.api.Orders.getOrderMoneyEscrowed({ _orderId: _orderId }, function (orderMoneyEscrowed) { /* ... */ })
+augur.api.Orders.getOrderMoneyEscrowed({ _orderId: _orderId }, function (err, orderMoneyEscrowed) { /* ... */ })
 // example output:
 orderMoneyEscrowed = "5000000000000000000"
 
-augur.api.Orders.getOrderSharesEscrowed({ _orderId: _orderId }, function (orderSharesEscrowed) { /* ... */ })
+augur.api.Orders.getOrderSharesEscrowed({ _orderId: _orderId }, function (err, orderSharesEscrowed) { /* ... */ })
 // example output:
 orderSharesEscrowed = "0";
 
-augur.api.Orders.getOrderType({ _orderId: _orderId }, function (type) { /* ... */ })
+augur.api.Orders.getOrderType({ _orderId: _orderId }, function (err, type) { /* ... */ })
 // example output:
 type = "1";
 
-augur.api.Orders.getOutcome({ _orderId: _orderId }, function (orderOutcome) { /* ... */ })
+augur.api.Orders.getOutcome({ _orderId: _orderId }, function (err, orderOutcome) { /* ... */ })
 // example output:
 orderOutcome = "1";
 
-augur.api.Orders.getPrice({ _orderId: _orderId }, function (price) { /* ... */ })
+augur.api.Orders.getPrice({ _orderId: _orderId }, function (err, price) { /* ... */ })
 // example output:
 price = "500000000000000000";
 
-augur.api.Orders.getVolume({ _market: _market }, function (volume) { /* ... */ })
+augur.api.Orders.getVolume({ _market: _market }, function (err, volume) { /* ... */ })
 // example output:
 volume = "100000000000000000000000";
 
 var secondWorstOrderID = "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1";
-augur.api.Orders.getWorseOrderId({ _orderId: secondWorstOrderID }, function (worseOrderID) { /* ... */ })
+augur.api.Orders.getWorseOrderId({ _orderId: secondWorstOrderID }, function (err, worseOrderID) { /* ... */ })
 // example output:
 worseOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
@@ -480,7 +480,7 @@ augur.api.Orders.getWorstOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (worstOrderID) { /* ... */ })
+}, function (err, worstOrderID) { /* ... */ })
 // example output:
 worstOrderID = "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
@@ -488,7 +488,7 @@ augur.api.Orders.isBetterPrice({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _orderId: _orderId
-}, function (isBetterPrice) { /* ... */ })
+}, function (err, isBetterPrice) { /* ... */ })
 // example output:
 isBetterPrice = "0"
 
@@ -496,7 +496,7 @@ augur.api.Orders.isWorsePrice({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _orderId: _orderId
-}, function (isWorsePrice) { /* ... */ })
+}, function (err, isWorsePrice) { /* ... */ })
 // example output:
 isWorsePrice = "1"
 ```
@@ -592,7 +592,7 @@ augur.api.OrdersFetcher.ascendOrderList({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _lowestOrderId: _orderId
-}, function (ascendingOrderList) { /* ... */ })
+}, function (err, ascendingOrderList) { /* ... */ })
 // example output:
 ascendingOrderList = [
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
@@ -602,7 +602,7 @@ augur.api.OrdersFetcher.descendOrderList({
   _type: _type,
   _fxpPrice: _fxpPrice,
   _highestOrderId: _orderId
-}, function (decendingOrderList) { /* ... */ })
+}, function (err, decendingOrderList) { /* ... */ })
 // example output:
 decendingOrderList = [
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e",
@@ -615,7 +615,7 @@ augur.api.OrdersFetcher.findBoundingOrders({
   _worstOrderId: 0,
   _betterOrderId: 0,
   _worseOrderId: 0
-}, function (boundingOrders) { /* ... */ })
+}, function (err, boundingOrders) { /* ... */ })
 // example output:
 boundingOrders = [
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
@@ -641,7 +641,7 @@ Participation Token Call API
 // Participation Token Contract Call API Examples:
 var participationToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-augur.api.ParticipationToken.getReportingWindow({ participationToken: participationToken }, function (reportingWindow) { /* ... */ })
+augur.api.ParticipationToken.getReportingWindow({ participationToken: participationToken }, function (err, reportingWindow) { /* ... */ })
 // example output:
 reportingWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 ```
@@ -661,118 +661,118 @@ var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _reporter = "0x2cd999e2f90dfc237ccbc52e2a469e1e11221f75";
 
-augur.api.ReportingWindow.allMarketsFinalized({ reportingWindow: reportingWindow }, function (allMarketsFinalized) { /* ... */ })
+augur.api.ReportingWindow.allMarketsFinalized({ reportingWindow: reportingWindow }, function (err, allMarketsFinalized) { /* ... */ })
 // example output:
 allMarketsFinalized = "1"
 
-augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (avgReportingGasPrice) { /* ... */ })
+augur.api.ReportingWindow.getAvgReportingGasPrice({ reportingWindow: reportingWindow }, function (err, avgReportingGasPrice) { /* ... */ })
 // example output:
 avgReportingGasPrice = "340000"
 
-augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow: reportingWindow }, function (disputeEndTime) { /* ... */ })
+augur.api.ReportingWindow.getDisputeEndTime({ reportingWindow: reportingWindow }, function (err, disputeEndTime) { /* ... */ })
 // example output:
 disputeEndTime = "1500907130"
 
-augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow: reportingWindow }, function (disputeStartTime) { /* ... */ })
+augur.api.ReportingWindow.getDisputeStartTime({ reportingWindow: reportingWindow }, function (err, disputeStartTime) { /* ... */ })
 // example output:
 disputeStartTime = "1500647930"
 
-augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, function (endTime) { /* ... */ })
+augur.api.ReportingWindow.getEndTime({ reportingWindow: reportingWindow }, function (err, endTime) { /* ... */ })
 // example output:
 endTime = "1500388730"
 
-augur.api.ReportingWindow.getFirstReporterMarketsCount({ reportingWindow: reportingWindow }, function (firstReporterMarketsCount) { /* ... */ })
+augur.api.ReportingWindow.getFirstReporterMarketsCount({ reportingWindow: reportingWindow }, function (err, firstReporterMarketsCount) { /* ... */ })
 // example output:
 firstReporterMarketsCount = "54321"
 
-augur.api.ReportingWindow.getLastReporterMarketsCount({ reportingWindow: reportingWindow }, function (lastReporterMarketsCount) { /* ... */ })
+augur.api.ReportingWindow.getLastReporterMarketsCount({ reportingWindow: reportingWindow }, function (err, lastReporterMarketsCount) { /* ... */ })
 // example output:
 lastReporterMarketsCount = "12345"
 
-augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (marketsCount) { /* ... */ })
+augur.api.ReportingWindow.getMarketsCount({ reportingWindow: reportingWindow }, function (err, marketsCount) { /* ... */ })
 // example output:
 marketsCount = "65"
 
-augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow: reportingWindow }, function (nextReportingWindow) { /* ... */ })
+augur.api.ReportingWindow.getNextReportingWindow({ reportingWindow: reportingWindow }, function (err, nextReportingWindow) { /* ... */ })
 // example output:
 nextReportingWindow = "0x0d6b5a54f940bf3d52e438cab785981aaefdf40c"
 
-augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow: reportingWindow }, function (numDesignatedReportNoShows) { /* ... */ })
+augur.api.ReportingWindow.getNumDesignatedReportNoShows({ reportingWindow: reportingWindow }, function (err, numDesignatedReportNoShows) { /* ... */ })
 // example output:
 numDesignatedReportNoShows = "2"
 
-augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow: reportingWindow }, function (numIncorrectDesignatedReportMarkets) { /* ... */ })
+augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ reportingWindow: reportingWindow }, function (err, numIncorrectDesignatedReportMarkets) { /* ... */ })
 // example output:
 numIncorrectDesignatedReportMarkets = "1"
 
-augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow: reportingWindow }, function (numInvalidMarkets) { /* ... */ })
+augur.api.ReportingWindow.getNumInvalidMarkets({ reportingWindow: reportingWindow }, function (err, numInvalidMarkets) { /* ... */ })
 // example output:
 numInvalidMarkets = "3"
 
-augur.api.ReportingWindow.getNumMarkets({ reportingWindow: reportingWindow }, function (numMarkets) { /* ... */ })
+augur.api.ReportingWindow.getNumMarkets({ reportingWindow: reportingWindow }, function (err, numMarkets) { /* ... */ })
 // example output:
 numMarkets = "65"
 
-augur.api.ReportingWindow.getParticipationToken({ reportingWindow: reportingWindow }, function () { /* ... */ })
+augur.api.ReportingWindow.getParticipationToken({ reportingWindow: reportingWindow }, function (err, ) { /* ... */ })
 // example output:
 = "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
 
-augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportingWindow }, function () { /* ... */ })
+augur.api.ReportingWindow.getPreviousReportingWindow({ reportingWindow: reportingWindow }, function (err, ) { /* ... */ })
 // example output:
 = "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
 
-augur.api.ReportingWindow.getReportingEndTime({ reportingWindow: reportingWindow }, function (reportingEndTime) { /* ... */ })
+augur.api.ReportingWindow.getReportingEndTime({ reportingWindow: reportingWindow }, function (err, reportingEndTime) { /* ... */ })
 // example output:
 reportingEndTime = "1500647900"
 
-augur.api.ReportingWindow.getReportingStartTime({ reportingWindow: reportingWindow }, function (reportingStartTime) { /* ... */ })
+augur.api.ReportingWindow.getReportingStartTime({ reportingWindow: reportingWindow }, function (err, reportingStartTime) { /* ... */ })
 // example output:
 reportingStartTime = "14998315100"
 
-augur.api.ReportingWindow.getReputationToken({ reportingWindow: reportingWindow }, function (reputationToken) { /* ... */ })
+augur.api.ReportingWindow.getReputationToken({ reportingWindow: reportingWindow }, function (err, reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (startTime) { /* ... */ })
+augur.api.ReportingWindow.getStartTime({ reportingWindow: reportingWindow }, function (err, startTime) { /* ... */ })
 // example output:
 startTime = "14995895900"
 
-augur.api.ReportingWindow.getTotalStake({ reportingWindow: reportingWindow }, function (totalStake) { /* ... */ })
+augur.api.ReportingWindow.getTotalStake({ reportingWindow: reportingWindow }, function (err, totalStake) { /* ... */ })
 // example output:
 totalStake = "18900512367"
 
-augur.api.ReportingWindow.getTotalWinningStake({ reportingWindow: reportingWindow }, function (totalStake) { /* ... */ })
+augur.api.ReportingWindow.getTotalWinningStake({ reportingWindow: reportingWindow }, function (err, totalStake) { /* ... */ })
 // example output:
 totalStake = "29105"
 
-augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (universe) { /* ... */ })
+augur.api.ReportingWindow.getUniverse({ reportingWindow: reportingWindow }, function (err, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.ReportingWindow.isActive({ reportingWindow: reportingWindow }, function (isActive) { /* ... */ })
+augur.api.ReportingWindow.isActive({ reportingWindow: reportingWindow }, function (err, isActive) { /* ... */ })
 // example output:
 isActive = "1"
 
 augur.api.ReportingWindow.isContainerForMarket({
   reportingWindow: reportingWindow,
   _shadyMarket: _market
-}, function (isContainerForMarket) { /* ... */ })
+}, function (err, isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1"
 
-augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, function (isDisputeActive) { /* ... */ })
+augur.api.ReportingWindow.isDisputeActive({ reportingWindow: reportingWindow }, function (err, isDisputeActive) { /* ... */ })
 // example output:
 isDisputeActive = "1"
 
-augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingWindow }, function (isForkingMarketFinalized) { /* ... */ })
+augur.api.ReportingWindow.isForkingMarketFinalized({ reportingWindow: reportingWindow }, function (err, isForkingMarketFinalized) { /* ... */ })
 // example output:
 isForkingMarketFinalized = "0";
 
-augur.api.ReportingWindow.isOver({ reportingWindow: reportingWindow }, function (isOver) { /* ... */ })
+augur.api.ReportingWindow.isOver({ reportingWindow: reportingWindow }, function (err, isOver) { /* ... */ })
 // example output:
 isOver = "0";
 
-augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }, function (isReportingActive) { /* ... */ })
+augur.api.ReportingWindow.isReportingActive({ reportingWindow: reportingWindow }, function (err, isReportingActive) { /* ... */ })
 // example output:
 isReportingActive = "1"
 ```
@@ -896,11 +896,11 @@ Reputation Token Call API
 // Reputation Token Contract Call API Examples:
 var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 
-augur.api.ReputationToken.getUniverse({ reputationToken: reputationToken }, function (universe) { /* ... */ })
+augur.api.ReputationToken.getUniverse({ reputationToken: reputationToken }, function (err, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.ReputationToken.getTopMigrationDestination({ reputationToken: reputationToken }, function (topMigrationDestination) { /* ... */ })
+augur.api.ReputationToken.getTopMigrationDestination({ reputationToken: reputationToken }, function (err, topMigrationDestination) { /* ... */ })
 // example output:
 topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 ```
@@ -926,11 +926,11 @@ Share Token Call API
 // Share Token Contract Call API Examples:
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-augur.api.ShareToken.getMarket({ shareToken: shareToken }, function (market) { /* ... */ })
+augur.api.ShareToken.getMarket({ shareToken: shareToken }, function (err, market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.ShareToken.getOutcome({ shareToken: shareToken }, function (outcome) { /* ... */ })
+augur.api.ShareToken.getOutcome({ shareToken: shareToken }, function (err, outcome) { /* ... */ })
 // example output:
 outcome = "1"
 
@@ -953,34 +953,34 @@ Stake Token Call API
 // Stake Token Contract Call API Examples:
 var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 
-augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (market) { /* ... */ })
+augur.api.StakeToken.getMarket({ stakeToken: stakeToken }, function (err, market) { /* ... */ })
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.StakeToken.getPayoutDistributionHash({ stakeToken: stakeToken }, function (payoutDistributionHash) { /* ... */ })
+augur.api.StakeToken.getPayoutDistributionHash({ stakeToken: stakeToken }, function (err, payoutDistributionHash) { /* ... */ })
 // example output:
 payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.StakeToken.getPayoutNumerator({
   stakeToken: stakeToken,
   index: 0
-}, function (payoutSetValue) { /* ... */ })
+}, function (err, payoutSetValue) { /* ... */ })
 // example output:
 payoutSetValue = "1000"
 
-augur.api.StakeToken.getStakeWindow({ stakeToken: stakeToken }, function (reportingWindow) { /* ... */ })
+augur.api.StakeToken.getStakeWindow({ stakeToken: stakeToken }, function (err, reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a"
 
-augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (reputationToken) { /* ... */ })
+augur.api.StakeToken.getReputationToken({ stakeToken: stakeToken }, function (err, reputationToken) { /* ... */ })
 // example output:
 reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (universe) { /* ... */ })
+augur.api.StakeToken.getUniverse({ stakeToken: stakeToken }, function (err, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (isValid) { /* ... */ })
+augur.api.StakeToken.isValid({ stakeToken: stakeToken }, function (err, isValid) { /* ... */ })
 // example output:
 isValid = "1"
 ```
@@ -1029,70 +1029,70 @@ var _parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a9
 augur.api.Universe.getChildUniverse({
   universe: universe,
   _parentPayoutDistributionHash: _parentPayoutDistributionHash
-}, function (childUniverse) { /* ... */ })
+}, function (err, childUniverse) { /* ... */ })
 // example output:
 childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 
-augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (currReportingWindow) { /* ... */ })
+augur.api.Universe.getCurrentReportingWindow({ universe: universe }, function (err, currReportingWindow) { /* ... */ })
 // example output:
 currReportingWindow = "578"
 
-augur.api.Universe.getDesignatedReportNoShowBond({ universe: universe }, function (designatedReportNoShowBond) { /* ... */ })
+augur.api.Universe.getDesignatedReportNoShowBond({ universe: universe }, function (err, designatedReportNoShowBond) { /* ... */ })
 // example output:
 designatedReportNoShowBond = "115350000000000000";
 
-augur.api.Universe.getDesignatedReportStake({ universe: universe }, function (designatedReportStake) { /* ... */ })
+augur.api.Universe.getDesignatedReportStake({ universe: universe }, function (err, designatedReportStake) { /* ... */ })
 // example output:
 designatedReportStake = "124350000000000000";
 
-augur.api.Universe.getForkEndTime({ universe: universe }, function (forkEndTime) { /* ... */ })
+augur.api.Universe.getForkEndTime({ universe: universe }, function (err, forkEndTime) { /* ... */ })
 // example output:
 forkEndTime = "1489855429";
 
-augur.api.Universe.getForkingMarket({ universe: universe }, function (forkingMarket) { /* ... */ })
+augur.api.Universe.getForkingMarket({ universe: universe }, function (err, forkingMarket) { /* ... */ })
 // example output:
 forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 
-augur.api.Universe.getForkReputationGoal({ universe }, function (forkReputationGoal) { /* ... */ })
+augur.api.Universe.getForkReputationGoal({ universe }, function (err, forkReputationGoal) { /* ... */ })
 // example output:
 forkReputationGoal = "150657";
 
-augur.api.Universe.getMarketCreationCost({ universe: universe }, function (marketCreationCost) { /* ... */ })
+augur.api.Universe.getMarketCreationCost({ universe: universe }, function (err, marketCreationCost) { /* ... */ })
 // example output:
 marketCreationCost = "100000000000000000";
 
-augur.api.Universe.getNextReportingWindow({ universe: universe }, function (nextReportingWindow) { /* ... */ })
+augur.api.Universe.getNextReportingWindow({ universe: universe }, function (err, nextReportingWindow) { /* ... */ })
 // example output:
 nextReportingWindow = "579"
 
-augur.api.Universe.getOpenInterestInAttoEth({ universe: universe }, function (openInterestInAttoEth) { /* ... */ })
+augur.api.Universe.getOpenInterestInAttoEth({ universe: universe }, function (err, openInterestInAttoEth) { /* ... */ })
 // example output:
 openInterestInAttoEth = "7123876876123"
 
-augur.api.Universe.getParentUniverse({ universe: universe }, function (parentUniverse) { /* ... */ })
+augur.api.Universe.getParentUniverse({ universe: universe }, function (err, parentUniverse) { /* ... */ })
 // example output:
 parentUniverse = "0x63c59544b89cce1dd53b1b566862189b25adec41"
 
-augur.api.Universe.getParentPayoutDistributionHash({ universe: universe }, function (universeParentPayoutDistributionHash) { /* ... */ })
+augur.api.Universe.getParentPayoutDistributionHash({ universe: universe }, function (err, universeParentPayoutDistributionHash) { /* ... */ })
 // example output:
 universeParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Universe.getPreviousReportingWindow({ universe: universe }, function (previousReportingWindow) { /* ... */ })
+augur.api.Universe.getPreviousReportingWindow({ universe: universe }, function (err, previousReportingWindow) { /* ... */ })
 // example output:
 previousReportingWindow = "577"
 
-augur.api.Universe.getReportingFeeDivisor({ universe: universe }, function (reportingFeeDivisor) { /* ... */ })
+augur.api.Universe.getReportingFeeDivisor({ universe: universe }, function (err, reportingFeeDivisor) { /* ... */ })
 // example output:
 reportingFeeDivisor = "100";
 
-augur.api.Universe.getReportingPeriodDurationInSeconds({ universe: universe }, function (reportingPeriodDuration) { /* ... */ })
+augur.api.Universe.getReportingPeriodDurationInSeconds({ universe: universe }, function (err, reportingPeriodDuration) { /* ... */ })
 // example output:
 reportingPeriodDuration = "2592000";
 
 augur.api.Universe.getReportingWindow({ 
   universe: universe, 
   _reportingWindowId: 579 
-}, function (reportingWindow) { /* ... */ })
+}, function (err, reportingWindow) { /* ... */ })
 // example output:
 reportingWindow = "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 
@@ -1100,35 +1100,35 @@ var _endTime = 2524608000;
 augur.api.Universe.getReportingWindowByMarketEndTime({
   universe: universe,
   _endTime: _endTime
-}, function (reportingWindowByEndTime) { /* ... */ })
+}, function (err, reportingWindowByEndTime) { /* ... */ })
 // example output:
 reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api.Universe.getReportingWindowByTimestamp({
   universe: universe,
   _timestamp: _endTime
-}, function (reportingWindowByTimestamp) { /* ... */ })
+}, function (err, reportingWindowByTimestamp) { /* ... */ })
 // example output:
 reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api.Universe.getReportingWindowForForkEndTime({
   universe: universe
-}, function (reportingWindowForForEndTime) { /* ... */ })
+}, function (err, reportingWindowForForEndTime) { /* ... */ })
 // example output:
 reportingWindowForForEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
 augur.api.Universe.getReportingWindowId({
   universe: universe,
   _timestamp: new Date().getTime()
-}, function (reportingWindowId) { /* ... */ })
+}, function (err, reportingWindowId) { /* ... */ })
 // example output:
 reportingWindowId = "578";
 
-augur.api.Universe.getReputationToken({ universe: universe }, function (reputationTokenAddress) { /* ... */ })
+augur.api.Universe.getReputationToken({ universe: universe }, function (err, reputationTokenAddress) { /* ... */ })
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 
-augur.api.Universe.getTargetReporterGasCosts({ universe: universe }, function (targetReporterGasCosts) { /* ... */ })
+augur.api.Universe.getTargetReporterGasCosts({ universe: universe }, function (err, targetReporterGasCosts) { /* ... */ })
 // example output:
 targetReporterGasCosts = "123450000000000000";
 
@@ -1136,7 +1136,7 @@ var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
   universe: universe,
   _shadyMarket: market
-}, function (isContainerForMarket) { /* ... */ })
+}, function (err, isContainerForMarket) { /* ... */ })
 // example output:
 isContainerForMarket = "1";
 
@@ -1144,7 +1144,7 @@ var stakeToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 augur.api.Universe.isContainerForStakeToken({
   universe: universe,
   _shadyStakeToken: stakeToken
-}, function (isContainerForStakeToken) { /* ... */ })
+}, function (err, isContainerForStakeToken) { /* ... */ })
 // example output:
 isContainerForStakeToken = "1";
 
@@ -1152,7 +1152,7 @@ var reportingWindow = "578";
 augur.api.Universe.isContainerForReportingWindow({
   universe: universe,
   _shadyReportingWindow: reportingWindow
-}, function (isContainerForReportingWindow) { /* ... */ })
+}, function (err, isContainerForReportingWindow) { /* ... */ })
 // example output:
 isContainerForReportingWindow = "1";
 
@@ -1160,7 +1160,7 @@ var childUniverse = "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c";
 augur.api.Universe.isParentOf({
   universe: universe,
   _shadyChild: childUniverse
-}, function (isParentOf) { /* ... */ })
+}, function (err, isParentOf) { /* ... */ })
 // example output:
 isParentOf = "1";
 ```
