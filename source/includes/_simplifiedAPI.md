@@ -15,7 +15,7 @@ augur.accounts.getAccountTransferHistory({
   account: "0x0000000000000000000000000000000000000b0b",
   token: "0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
   isSortDescending: false
-}, function (accountTransferHistory) { /* ... */ })
+}, function (error, accountTransferHistory) { /* ... */ })
 // example output:
 [
   {
@@ -40,7 +40,7 @@ augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "popularity",
   isSortDescending: true
-}, function (categoriesInfo) { /* ... */ })
+}, function (error, categoriesInfo) { /* ... */ })
 // example output:
 [
   { category: "finance", popularity: 12345 },
@@ -52,12 +52,12 @@ augur.markets.getCategories({
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.markets.getDisputableMarkets({ 
   reportingWindow: "0x1000000000000000000000000000000000000000"
-}, function (disputableMarkets) { /* ... */ })
+}, function (error, disputableMarkets) { /* ... */ })
 // example output: coming soon
 
 augur.markets.getMarketPriceHistory({
   marketID: "0x0000000000000000000000000000000000000001"
-}, function (marketPriceHistory) { /* ... */ })
+}, function (error, marketPriceHistory) { /* ... */ })
 // example output:
 {
   0: [{
@@ -68,7 +68,7 @@ augur.markets.getMarketPriceHistory({
 
 augur.markets.getMarkets({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (marketsMatched) { /* ... */ })
+}, function (error, marketsMatched) { /* ... */ })
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -81,7 +81,7 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "volume",
   isSortDescending: false,
-}, function (marketsInfo) { /* ... */ })
+}, function (error, marketsInfo) { /* ... */ })
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -92,7 +92,7 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.markets.getMarketsAwaitingReporting({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (marketsAwaitingReporting) { /* ... */ })
+}, function (error, marketsAwaitingReporting) { /* ... */ })
 // example output: coming soon
 
 augur.markets.getMarketsClosingInDateRange({
@@ -100,7 +100,7 @@ augur.markets.getMarketsClosingInDateRange({
   earliestClosingTime: 1506573450,
   latestClosingTime: 1506573470,
   limit: 10,
-}, function (marketsClosingInDateRange) { /* ... */ })
+}, function (error, marketsClosingInDateRange) { /* ... */ })
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -109,7 +109,7 @@ augur.markets.getMarketsClosingInDateRange({
 augur.markets.getMarketsCreatedByUser({
   universe: "0x000000000000000000000000000000000000000b",
   creator: "0x0000000000000000000000000000000000000b0b",
-}, function (marketsCreatedByUser) { /* ... */ })
+}, function (error, marketsCreatedByUser) { /* ... */ })
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -120,7 +120,7 @@ augur.markets.getMarketsCreatedByUser({
 augur.markets.getMarketsInCategory({
   universe: "0x000000000000000000000000000000000000000b",
   category: "augur",
-}, function (marketsInCategory) { /* ... */ })
+}, function (error, marketsInCategory) { /* ... */ })
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -134,7 +134,7 @@ augur.markets.getMarketsInfo({
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002",
   ],
-}, function (marketsInfo) { /* ... */ })
+}, function (error, marketsInfo) { /* ... */ })
 // example output:
 [
   {
@@ -292,13 +292,13 @@ augur.reporting.getAllStakeTokens({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
   dateRange: [1506473500, 1507593600]
-}, function (allStakeTokens) { /* ... */ })
+}, function (error, allStakeTokens) { /* ... */ })
 // example output: coming soon
 
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
-}, function (reportingHistory) { /* ... */ })
+}, function (error, reportingHistory) { /* ... */ })
 // example output:
 {
   "0x000000000000000000000000000000000000000b": {
@@ -318,7 +318,7 @@ augur.reporting.getReportingHistory({
 
 augur.reporting.getReportingSummary({ 
   reportingWindow: "0x1000000000000000000000000000000000000000"
-}, function (allStakeTokens) { /* ... */ })
+}, function (error, allStakeTokens) { /* ... */ })
 // example output: 
 {
   "AWAITING_FINALIZATION": 1,
@@ -331,20 +331,20 @@ augur.reporting.getReportingSummary({
 augur.reporting.getReportingWindowsWithUnclaimedFees({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
-}, function (reportingWindowsWithUnclaimedFees) { /* ... */ })
+}, function (error, reportingWindowsWithUnclaimedFees) { /* ... */ })
 // example output: coming soon
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.reporting.getUnclaimedStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
-}, function (unclaimedStakeTokens) { /* ... */ })
+}, function (error, unclaimedStakeTokens) { /* ... */ })
 // example output: coming soon
 
 augur.reporting.getUnfinalizedStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
-}, function (unfinalizedStakeTokens) { /* ... */ })
+}, function (error, unfinalizedStakeTokens) { /* ... */ })
 // example output:
 {
   "0x0000000000000000001000000000000000000001": {
@@ -404,7 +404,7 @@ augur.trading.getClosedOrders({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
   dateRange: [1506473500, 1507593600]
-}, function (closedOrders) { /* ... */ })
+}, function (error, closedOrders) { /* ... */ })
 // example output: coming soon
 
 augur.trading.getOpenOrders({
@@ -413,7 +413,7 @@ augur.trading.getOpenOrders({
   outcome: null,
   orderType: "buy",
   creator: null,
-}, function (openOrders) { /* ... */ })
+}, function (error, openOrders) { /* ... */ })
 // example output:
 {
   "0x0000000000000000000000000000000000000001": {
@@ -479,7 +479,7 @@ augur.trading.getUserTradingHistory({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (userTradingHistory) { /* ... */ })
+}, function (error, userTradingHistory) { /* ... */ })
 // example output:
 [{
   type: "sell",
@@ -502,7 +502,7 @@ augur.trading.getUserTradingPositions({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (userTradingPositions) { /* ... */ })
+}, function (error, userTradingPositions) { /* ... */ })
 // example output:
 [
   {
