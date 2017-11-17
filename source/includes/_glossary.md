@@ -90,11 +90,7 @@ A Finalized Market is a [Market](#market) that has [Awaited Finalization](#marke
 
 ## First Report
 
-The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report generally will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [First Report Bonds](#first-report-bonds) to the [Market Creator](#market-creator). In the event a Designated Reporter fails to Report then the Market is moved into the next available [Reporting Window](#reporting-window), along with the First Report Bonds, for it's [First Report Round](#first-report-round). The first person to submit a Report and Stake at least 0 [REP](#rep) on their Report will have the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) added to their Stake and their Report transaction's GAS cost covered by the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond). This provides an incentive to submit the First Report as the [First Reporter](#first-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
-
-## First Report Bonds
-
-The First Report Bonds is a term used to indicate the combination of both the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond). Both are returned to the [Market Creator](#market-creator) in the event that the [Designated Reporter](#designated-reporter) [Reports](#report) during the [Designated Report Phase](#designated-report-phase) and both are forfeited to the [First Reporter](#first-reporter) if the Designated Reporter fails to Report during the Designated Report Phase.
+The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report generally will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). In the event a Designated Reporter fails to Report then the Market is moved into the next available [Reporting Window](#reporting-window), along with the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), for it's [First Report Round](#first-report-round). The first person to submit a Report and Stake at least 0 [REP](#rep) on their Report will have the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) added to their Stake and their Report transaction's GAS cost covered by the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond). This provides an incentive to submit the First Report as the [First Reporter](#first-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
 
 ## Designated Report No-Show Gas Bond
 
@@ -134,7 +130,7 @@ A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur with
 
 ## Market Creator Mailbox
 
-A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them.
+A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as [Validity Bonds](#validity-bond), [Designated Report No-Show Gas Bonds](#designated-report-no-show-gas-bond), and [Designated Report No-Show REP Bonds](#designated-report-no-show-rep-bond)) are also sent to the Market Creator Mailbox.
 
 ## Market
 
