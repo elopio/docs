@@ -1132,28 +1132,24 @@ var privateKey = <Buffer ...>;
 var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 var _endTime = 1501015000;
 var _numOutcomes = '2';
-var _payoutDenominator = '2';
+var _numTicks = 4000;
 var _feePerEthInWei = '10000000000000000';
 var currencyContract = "0xb85a75a008e15d134c8ba01679ce2ab82dd7f777";
-var _creator = "0xab11204cfeaccffa63c2d23aef2ea9accdb0a0d5";
-var _minDisplayPrice = "0";
-var _maxDisplayPrice = "1";
 var _designatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
 var _topic = "examples";
+var _extraInfo = "";
 
 augur.api.ReportingWindow.createMarket({
   _signer: privateKey,
   reportingWindow: reportingWindow,
   _endTime: _endTime,
   _numOutcomes: _numOutcomes,
-  _payoutDenominator: _payoutDenominator,
+  _numTicks: _numTicks,
   _feePerEthInWei: _feePerEthInWei,
   _denominationToken: currencyContract,
-  _creator: _creator,
-  _minDisplayPrice: _minDisplayPrice,
-  _maxDisplayPrice: _maxDisplayPrice,
   _designatedReporterAddress: _designatedReporterAddress,
   _topic: _topic,
+  _extraInfo: _extraInfo,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
