@@ -1227,7 +1227,7 @@ Returns the timestamp for when the [Fork Period](#fork-period) ends that was sta
 
 #### augur.api.Universe.getForkingMarket({ tx }[, callback])
 
-Returns the contract address of the [Market](#market) that the [Universe](#universe) specified in `tx` is [Forking](#fork) over. This returns the 0 address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no [Forked Market](#forked-market).
+Returns the contract address of the [Market](#market) that the [Universe](#universe) specified in `tx` is [Forking](#fork) over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no [Forked Market](#forked-market).
 
 #### augur.api.Universe.getForkReputationGoal({ tx }[, callback])
 
@@ -1279,7 +1279,7 @@ Returns the [Reporting Window](#reporting-window) Contract Address for a specifi
 
 #### augur.api.Universe.getReportingWindowForForkEndTime({ tx }[, callback])
 
-Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends in the [Universe](#universe) specified in `tx`. If no [Fork](#fork) has occurred, the 0 address (0x0000000000000000000000000000000000000000) is returned.
+Returns the [Reporting Window](#reporting-window) that the current [Fork Period](#fork-period) ends in the [Universe](#universe) specified in `tx`. If no [Fork](#fork) has occurred, the null address (0x0000000000000000000000000000000000000000) is returned.
 
 #### augur.api.Universe.getReportingWindowId({ tx, \_timestamp }[, callback])
 
