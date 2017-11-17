@@ -853,7 +853,7 @@ Returns the next [Reporting Window](#reporting-window)'s Contract Address. Repor
 
 #### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])
 
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have [First Report Bonds](#first-report-bonds) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
 
 #### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
 
@@ -1120,7 +1120,7 @@ previousReportingWindow = "577"
 
 augur.api.Universe.getReportingFeeDivisor({ tx: { to: universe } }, function (error, reportingFeeDivisor) { /* ... */ })
 // example output:
-reportingFeeDivisor = "100";
+reportingFeeDivisor = "10000";
 
 augur.api.Universe.getReportingPeriodDurationInSeconds({ tx: { to: universe } }, function (error, reportingPeriodDuration) { /* ... */ })
 // example output:
@@ -1283,7 +1283,7 @@ Returns the [Reporting Window](#reporting-window) that the current [Fork Period]
 
 #### augur.api.Universe.getReportingWindowId({ tx, \_timestamp }[, callback])
 
-Returns the [Reporting Window](#reporting-window) Id for a specific `universe` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universes'](#universe) Reporting Window duration in seconds.
+Returns the [Reporting Window](#reporting-window) Id for the [Universe](#universe) specified in `tx` and provided `_timestamp`. This is calculated by dividing the timestamp by the [Universe's](#universe) Reporting Window duration in seconds.
 
 #### augur.api.Universe.getReputationToken({ tx }[, callback])
 
