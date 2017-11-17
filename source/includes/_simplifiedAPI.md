@@ -87,6 +87,11 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   "0x0000000000000000000000000000000000000001",
   "0x0000000000000000000000000000000000000002",
   "0x0000000000000000000000000000000000000003",
+  "0x0000000000000000000000000000000000000012",
+  "0x0000000000000000000000000000000000000014",
+  "0x0000000000000000000000000000000000000015",
+  "0x0000000000000000000000000000000000000016",
+  "0x0000000000000000000000000000000000000017",
 ]
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
@@ -282,19 +287,11 @@ Returns the addresses of the [Markets](#market) in a specific category. `univers
 
 ### augur.markets.getMarketsInfo({ marketIDs }[, callback])
 
-Returns information about [Markets](#market) (`marketIDs`) that are stored on-contract. The returned result includes basic information about the markets as well as information about each market [Outcome](#outcome). It does not include [Order Book](#order-book) information; however the function `augur.trading.getOpenOrders` can be used to get information about [Open Orders](#open-orders) for the specified Market.
+Returns information about [Markets](#market) that are stored on-contract. `marketIDs` is an array of strings containing Market addresses. The returned result includes basic information about the markets as well as information about each market [Outcome](#outcome). It does not include [Order Book](#order-book) information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#orders) for the specified Market.
 
 Reporting API
 -------------
 ```javascript
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.reporting.getAllStakeTokens({ 
-  universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021",
-  dateRange: [1506473500, 1507593600]
-}, function (error, allStakeTokens) { /* ... */ })
-// example output: coming soon
-
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
@@ -334,18 +331,12 @@ augur.reporting.getReportingWindowsWithUnclaimedFees({
 }, function (error, reportingWindowsWithUnclaimedFees) { /* ... */ })
 // example output: coming soon
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.reporting.getUnclaimedStakeTokens({ 
+augur.reporting.getStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021"
-}, function (error, unclaimedStakeTokens) { /* ... */ })
-// example output: coming soon
-
-augur.reporting.getUnfinalizedStakeTokens({ 
-  universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021"
-}, function (error, unfinalizedStakeTokens) { /* ... */ })
-// example output:
+  account: "0x0000000000000000000000000000000000000021",
+  stakeTokenState: "UNFINALIZED",
+}, function (error, allStakeTokens) { /* ... */ })
+// example output: 
 {
   "0x0000000000000000001000000000000000000001": {
     stakeToken: "0x0000000000000000001000000000000000000001",
@@ -358,17 +349,14 @@ augur.reporting.getUnfinalizedStakeTokens({
     payout5: null,
     payout6: null,
     payout7: null,
-    isInvalid: 0,
+    isInvalid: false,
     amountStaked: 17,
+    winningToken: null,
+    claimed: false,
     reportingState: "FIRST_REPORTING",
-  }
+  },
 }
 ```
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
-### augur.reporting.getAllStakeTokens({ universe, account[, dateRange] }[, callback]) 
-
-Returns the Stake Tokens owned by a a user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user. `dateRange` is an array with 2 Unix timestamps for the start time and end time to filter by.
-
 ### augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window.
@@ -385,35 +373,21 @@ Returns the number of Markets in various Reporting Phases, including "DESIGNATED
 
 Returns the [Reporting Windows](#reporting-window) where a user has not claimed his or her [Reporting Fees](#reporting-fee). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
 
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
-### augur.reporting.getUnclaimedStakeTokens({ universe, account }[, callback])
+### augur.reporting.getStakeTokens({ universe, account[, stakeTokenState] }[, callback]) 
 
-Returns the Stake Tokens that a user owns but has not redeemed in [Markets](#market) that are [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
-
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
-### augur.reporting.getUnfinalizedStakeTokens({ universe, account }[, callback])
-
-Returns the Stake Tokens owned by a particular user in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
+Returns the Stake Tokens owned by a a user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user. `stakeTokenState` is a string containing "ALL", "UNCLAIMED", or "UNFINALIZED".
 
 Trading API
 -----------
 ```javascript
-
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.trading.getClosedOrders({ 
-  universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021",
-  dateRange: [1506473500, 1507593600]
-}, function (error, closedOrders) { /* ... */ })
-// example output: coming soon
-
-augur.trading.getOpenOrders({
+augur.trading.getOrders({
   marketID: "0x0000000000000000000000000000000000000001",
   universe: "0x000000000000000000000000000000000000000b",
   outcome: null,
   orderType: "buy",
   creator: null,
-}, function (error, openOrders) { /* ... */ })
+  orderState: "OPEN",
+}, function (error, orders) { /* ... */ })
 // example output:
 {
   "0x0000000000000000000000000000000000000001": {
@@ -424,28 +398,39 @@ augur.trading.getOpenOrders({
           owner: "0x0000000000000000000000000000000000000b0b",
           creationTime: 1506473500,
           creationBlockNumber: 1400001,
+          orderState: "OPEN",
           price: 0.7,
           amount: 1,
           fullPrecisionPrice: 0.7,
           fullPrecisionAmount: 1,
           tokensEscrowed: 0.7,
           sharesEscrowed: 0,
-          betterOrderID: null,
-          worseOrderID: null,
         },
         "0x2000000000000000000000000000000000000000000000000000000000000000": {
           shareToken: "0x1000000000000000000000000000000000000000",
           owner: "0x000000000000000000000000000000000000d00d",
           creationTime: 1506473515,
           creationBlockNumber: 1400002,
+          orderState: "OPEN",
           price: 0.6,
           amount: 2,
           fullPrecisionPrice: 0.600001,
           fullPrecisionAmount: 2,
           tokensEscrowed: 1.200002,
           sharesEscrowed: 0,
-          betterOrderID: null,
-          worseOrderID: null,
+        },
+        "0x5000000000000000000000000000000000000000000000000000000000000000": {
+          amount: 1,
+          creationBlockNumber: 1400001,
+          creationTime: 1506473500,
+          fullPrecisionAmount: 1,
+          fullPrecisionPrice: 0.7,
+          orderState: "OPEN",
+          owner: "0x0000000000000000000000000000000000000b0b",
+          price: 0.7,
+          shareToken: "0x1000000000000000000000000000000000000000",
+          sharesEscrowed: 0,
+          tokensEscrowed: 0.7,
         },
       },
     },
@@ -456,14 +441,13 @@ augur.trading.getOpenOrders({
           owner: "0x000000000000000000000000000000000000d00d",
           creationTime: 1506473515,
           creationBlockNumber: 1400002,
+          orderState: "OPEN",
           price: 0.6,
           amount: 2,
           fullPrecisionPrice: 0.6,
           fullPrecisionAmount: 2.0000001,
           tokensEscrowed: 1.20000006,
           sharesEscrowed: 0,
-          betterOrderID: null,
-          worseOrderID: null,
         },
       },
     },
@@ -496,6 +480,7 @@ augur.trading.getUserTradingHistory({
 
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
+  universe: "0x000000000000000000000000000000000000000b",
   marketID: null,
   outcome: null,
   sortBy: null,
@@ -564,14 +549,9 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
-<!-- TODO: Verify description once function is completed. -->
-### augur.trading.getClosedOrders({ universe, account [, dateRange] }[, callback])
+### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Description pending.
-
-### augur.trading.getOpenOrders({ [universe, marketID, outcome, orderType, creator, sortBy, isSortDescending, limit, offset] }[, callback])
-
-Returns a list of [Open Orders](#open-orders) (i.e., [Orders](#order) on the [Order Book](#order-book) that have not been [Filled](#fill-order)). Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), and `creator` is a string containing a user account address.
+Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN").
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])
