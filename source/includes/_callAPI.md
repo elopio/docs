@@ -1141,9 +1141,10 @@ augur.api.Universe.getReportingWindowByMarketEndTime({
 // example output:
 reportingWindowByEndTime = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
+var _timestamp = 2524608000;
 augur.api.Universe.getReportingWindowByTimestamp({
   tx: { to: universe },
-  _timestamp: _endTime
+  _timestamp: _timestamp
 }, function (error, reportingWindowByTimestamp) { /* ... */ })
 // example output:
 reportingWindowByTimestamp = "0x06cbcd92af2571f1419b622a794d65db524f682a";
@@ -1235,7 +1236,7 @@ Returns the estimated amount of [REP](#rep) that must be migrated to one [Child 
 
 #### augur.api.Universe.getMarketCreationCost({ tx }[, callback])
 
-Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe) specified in `tx`. The amount it returns will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
+Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe) specified in `tx`. The amount returned by this function is equivalent to the sum of augur.api.Universe.getValidityBond() and augur.api.Universe.getTargetReporterGasCosts().
 
 #### augur.api.Universe.getNextReportingWindow({ tx }[, callback])
 
@@ -1291,7 +1292,11 @@ Returns the address of the [Reputation Token](#rep) for the [Universe](#universe
 
 #### augur.api.Universe.getTargetReporterGasCosts({ tx }[, callback])
 
-Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does show up. The [Universe](#universe) must be specified in `tx`.
+Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does show up. The [Universe](#universe) must be specified in `tx`. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
+
+#### augur.api.Universe.getValidityBond({ tx }[, callback])
+
+Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [AttoETH](#atto-prefix), when creating a [Market](#market). (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
 
 #### augur.api.Universe.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
