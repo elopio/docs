@@ -1170,6 +1170,10 @@ augur.api.Universe.getTargetReporterGasCosts({ tx: { to: universe } }, function 
 // example output:
 targetReporterGasCosts = "6000000";
 
+augur.api.Universe.getValidityBond({ tx: { to: universe } }, function (error, validityBond) { /* ... */ })
+// example output:
+targetReporterGasCosts = "10000000000000000";
+
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
   tx: { to: universe },
