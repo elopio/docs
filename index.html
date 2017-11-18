@@ -2646,14 +2646,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">setDebugOptions</span><span class="p">({</span> <span class="na">connect</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span> <span class="s1">'ethereumNode'</span><span class="p">:</span> <span class="p">{</span> <span class="na">http</span><span class="p">:</span> <span class="s2">"http://rinkeby.augur.net:8545"</span><span class="p">,</span> <span class="na">ws</span><span class="p">:</span> <span class="s2">"ws://rinkeby.augur.net:8546"</span> <span class="p">},</span> <span class="s1">'augurNode'</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">vitals</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vitals</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">augur</span> <span class="nx">node</span><span class="p">...</span> <span class="p">{</span> 
-                              <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
-                              <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span> <span class="nl">http</span><span class="p">:</span> <span class="s2">"http://rinkeby.augur.net:8545"</span><span class="p">,</span> <span class="nx">ws</span><span class="p">:</span> <span class="s2">"ws://rinkeby.augur.net:8546"</span> <span class="p">}</span>
-                            <span class="p">}</span>
-<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">ethereum</span> <span class="nx">node</span><span class="p">...</span> <span class="p">{</span> 
-                                 <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
-                                 <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span> <span class="nl">http</span><span class="p">:</span> <span class="s2">"http://rinkeby.augur.net:8545"</span><span class="p">,</span> <span class="nx">ws</span><span class="p">:</span> <span class="s2">"ws://rinkeby.augur.net:8546"</span> <span class="p">}</span>
-                               <span class="p">}</span>
+<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">augur</span> <span class="nx">node</span><span class="p">...</span> 
+<span class="p">{</span> 
+  <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
+  <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span> <span class="nl">http</span><span class="p">:</span> <span class="s2">"http://rinkeby.augur.net:8545"</span><span class="p">,</span> <span class="nx">ws</span><span class="p">:</span> <span class="s2">"ws://rinkeby.augur.net:8546"</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">ethereum</span> <span class="nx">node</span><span class="p">...</span> 
+<span class="p">{</span> 
+  <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
+  <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span> <span class="nl">http</span><span class="p">:</span> <span class="s2">"http://rinkeby.augur.net:8545"</span><span class="p">,</span> <span class="nx">ws</span><span class="p">:</span> <span class="s2">"ws://rinkeby.augur.net:8546"</span> <span class="p">}</span>
+<span class="p">}</span>
 <span class="nx">connected</span> <span class="nx">to</span> <span class="nx">augur</span>
 <span class="nx">Web3</span><span class="p">:</span> <span class="nx">not</span> <span class="nx">connected</span>
 <span class="nx">Sync</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//rinkeby.augur.net:8545</span>
@@ -2664,13 +2666,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">{</span>
   <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
   <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">abi</span><span class="p">:</span> <span class="p">{</span><span class="nl">events</span><span class="p">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span> <span class="nx">functions</span><span class="p">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}},</span>
+    <span class="nl">abi</span><span class="p">:</span> <span class="p">{</span><span class="nl">events</span><span class="p">:</span> <span class="p">{...},</span> <span class="nx">functions</span><span class="p">:</span> <span class="p">{...}},</span>
     <span class="nx">blockNumber</span><span class="p">:</span> <span class="s2">"0x133773"</span><span class="p">,</span>
     <span class="nx">coinbase</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">contracts</span><span class="p">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
+    <span class="nx">contracts</span><span class="p">:</span> <span class="p">{...},</span>
     <span class="nx">gasPrice</span><span class="p">:</span> <span class="mi">20000000000</span><span class="p">,</span>
     <span class="nx">networkID</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
-    <span class="nx">rpc</span><span class="p">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
+    <span class="nx">rpc</span><span class="p">:</span> <span class="p">{...}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -2679,11 +2681,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <!-- TODO: Add example JS for tx: true -->
 
-<p><code class="prettyprint">augur.rpc</code> allows several debugging options to be set:</p>
+<p>The function <code class="prettyprint">augur.rpc.setDebugOptions</code> allows several debugging options to be enabled:</p>
 
-<p><code class="prettyprint">broadcast</code> - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
-<code class="prettyprint">connect</code> - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols 
-<code class="prettyprint">tx</code> - When set to true, this enables printing of information related to transaction construction/submission/confirmation, e.g. the intermediate &ldquo;transaction&rdquo; object with human-readable parameters, the transaction hash once the transaction is submitted, the (best-guess) return value fetched from the follow-up eth_call, when a transaction gets resubmitted, etc.</p>
+<ul>
+<li><p><code class="prettyprint">broadcast</code> - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.</p></li>
+<li><p><code class="prettyprint">connect</code> - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols</p></li>
+<li><p><code class="prettyprint">tx</code> - When set to true, this enables printing of information related to transaction construction/submission/confirmation, e.g. the intermediate &ldquo;transaction&rdquo; object with human-readable parameters, the transaction hash once the transaction is submitted, the (best-guess) return value fetched from the follow-up eth_call, when a transaction gets resubmitted, etc.</p></li>
+</ul>
 
 <h2 id="cancel-order-tx-api">Cancel Order Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cancel Order Contract Transaction API Examples:</span>
