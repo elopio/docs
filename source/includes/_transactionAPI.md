@@ -175,6 +175,73 @@ The `privateKeyOrSigner` is required if we are attempting to execute a transacti
 
 <aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
 
+Transaction Debugging Options
+----------------------------
+```javascript
+augur.rpc.setDebugOptions({ broadcast: true });
+augur.api.Universe.getCurrentReportingWindow();
+// example output:
+packaged: {
+  from: "0x56ddb80fe4e5aa05182d794526ab1eff78c90688", 
+  to: "0xa1d76546015cfe50183497ca65fcbd5c656f7813", 
+  data: "0x6235eef3", 
+  gas: "0x2fd618", 
+  returns: "address"
+}
+Blockchain RPC to http://127.0.0.1:8545 via SyncTransport with payload: 
+{
+  "id":429,
+  "jsonrpc":"2.0",
+  "method":"eth_call",
+  "params":[{"from":"0x56ddb80fe4e5aa05182d794526ab1eff78c90688",
+             "to":"0xa1d76546015cfe50183497ca65fcbd5c656f7813",
+             "data":"0x6235eef3",
+             "gas":"0x2fd618"},
+             "latest"]
+}
+"0x54d134699764375417e4b5dda1e2ac62f62e9725"
+
+augur.rpc.setDebugOptions({ connect: true });
+augur.connect({ 'ethereumNode': { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }, 'augurNode': "ws://127.0.0.1:9001"}, function (err, vitals) { console.log(err); console.log(vitals); });
+// example output:
+connecting to augur node... { 
+                              augurNode: "ws://127.0.0.1:9001",
+                              ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
+                            }
+connecting to ethereum node... { 
+                                 augurNode: "ws://127.0.0.1:9001",
+                                 ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
+                               }
+connected to augur
+Web3: not connected
+Sync: http://rinkeby.augur.net:8545
+HTTP: http://rinkeby.augur.net:8545
+WS: ws://rinkeby.augur.net:8546
+IPC: not connected
+connected to ethereum
+{
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: {
+    abi: {events: {…}, functions: {…}},
+    blockNumber: "0x133773",
+    coinbase: null,
+    contracts: {…},
+    gasPrice: 20000000000,
+    networkID: "4",
+    rpc: {…}
+  }
+}
+
+augur.rpc.setDebugOptions({ tx: true });
+// example output: coming soon
+```
+<!-- TODO: Add example JS for tx: true -->
+`augur.rpc` allows several debugging options to be set:
+
+`broadcast` - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
+`connect` - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols 
+`tx` - When set to true, this enables printing of information related to transaction construction/submission/confirmation, e.g. the intermediate "transaction" object with human-readable parameters, the transaction hash once the transaction is submitted, the (best-guess) return value fetched from the follow-up eth_call, when a transaction gets resubmitted, etc.
+
 Cancel Order Tx API
 ----------------------------
 ```javascript

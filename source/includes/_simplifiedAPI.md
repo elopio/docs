@@ -546,9 +546,9 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
-### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, sortBy, isSortDescending, limit, offset] }[, callback])
+### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN").
+Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])

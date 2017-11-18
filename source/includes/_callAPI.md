@@ -1240,7 +1240,7 @@ Returns the estimated amount of [REP](#rep) that must be migrated to one [Child 
 
 #### augur.api.Universe.getMarketCreationCost({ tx }[, callback])
 
-Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe) specified in `tx`. The amount returned by this function is equivalent to the sum of augur.api.Universe.getValidityBond() and augur.api.Universe.getTargetReporterGasCosts().
+Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe) specified in `tx`. The amount returned by this function is equivalent to the sum of `augur.api.Universe.getValidityBond()` and `augur.api.Universe.getTargetReporterGasCosts()`.
 
 #### augur.api.Universe.getNextReportingWindow({ tx }[, callback])
 
