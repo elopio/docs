@@ -1042,17 +1042,20 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
-  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
-  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+      <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+      <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">userTradingHistory</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="p">[{</span>
+  <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000C00"</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">type</span><span class="p">:</span> <span class="s2">"sell"</span><span class="p">,</span>
   <span class="na">price</span><span class="p">:</span> <span class="mf">5.5</span><span class="p">,</span>
   <span class="na">amount</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
@@ -1142,9 +1145,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 
-<h3 id="augur-trading-getusertradinghistory-account-universe-marketid-outcome-ordertype-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+<h3 id="augur-trading-getusertradinghistory-account-universe-marketid-outcome-ordertype-earliestcreationtime-latestcreationtime-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<p>Returns information about the trades a particular user has made. <code class="prettyprint">account</code> is a string parameter containing the address of a user. Either <code class="prettyprint">universe</code> or <code class="prettyprint">marketID</code> is required as a string parameter containing the address of a <a href="#universe">Universe</a> or <a href="#market">Market</a>. <code class="prettyprint">outcome</code> is an integer denoting a specific Outcome in the Market, and <code class="prettyprint">orderType</code> is a string (i.e., &ldquo;buy&rdquo; or &ldquo;sell&rdquo;).</p>
+<p>Returns information about the trades a particular user has made. <code class="prettyprint">account</code> is a string parameter containing the address of a user. Either <code class="prettyprint">universe</code> or <code class="prettyprint">marketID</code> is required as a string parameter containing the address of a <a href="#universe">Universe</a> or <a href="#market">Market</a>. <code class="prettyprint">outcome</code> is an integer denoting a specific Outcome in the Market, and <code class="prettyprint">orderType</code> is a string (i.e., &ldquo;buy&rdquo; or &ldquo;sell&rdquo;). <code class="prettyprint">earliestCreationTime</code> and <code class="prettyprint">latestCreationTime</code> are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.</p>
 
 <h3 id="augur-trading-getusertradingpositions-account-universe-marketid-outcome-sortby-issortdescending-limit-offset-callback">augur.trading.getUserTradingPositions({ account[, universe, marketID, outcome, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
