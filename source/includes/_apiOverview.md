@@ -2,7 +2,7 @@ API Overview
 ===========
 <aside class="notice">The API Overview section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-Augur.js is a collection of JavaScript APIs that can be used to query for information about Augur's [Markets](#market) and interact with Augur's [smart contracts](https://github.com/AugurProject/augur-core). The documentation for augur.js is divided into four sections: the [Simplified API](#simplified-api), the [Call API](#call-api), the [Transaction API](#transaction-api), and the [Events API](#events-api). The Simplified API provides general information about Markets within Augur and requires a connection to an [Augur Node](#augur-node). The Call and Transaction APIs provide direct mappings to Augur's smart contract methods via the `augur.api` object. The Call API uses `eth_call` to make "get" requests for information stored on the blockchain. The Transaction API uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new [Order](#order) on the [Order Book](#order-book). The Events API enables listening for certain logged events and searching for them. The Call, Transaction, and Events APIs do not require a connection to an Augur Node. Each of these four components of augur.js is covered in greater detail in their respective sections below.
+Augur.js is a collection of JavaScript APIs that can be used to query for information about Augur's [Markets](#market) and interact with Augur's [smart contracts](https://github.com/AugurProject/augur-core). The documentation for augur.js is divided into four sections: the [Simplified API](#simplified-api), the [Call API](#call-api), the [Transaction API](#transaction-api), and the [Events API](#events-api). The Simplified API provides general information about Markets within Augur and requires a connection to an [Augur Node](#augur-node) (covered in the next section). The Call and Transaction APIs provide direct mappings to Augur's smart contract methods via the `augur.api` object. The Call API uses `eth_call` to make "get" requests for information stored on the blockchain. The Transaction API uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new [Order](#order) on the [Order Book](#order-book). The Events API enables listening for certain logged events and searching for them. The Call, Transaction, and Events APIs do not require a connection to an Augur Node. Each of these four components of augur.js is covered in greater detail in their respective sections below.
 
 In this section, we will go over how to import augur.js into your project and connect it to an Ethereum Node. This section will also cover market creation, and initial market loading.
 
@@ -59,6 +59,28 @@ or if you prefer [yarn](https://yarnpkg.com/en/):
 To use the Augur API, `augur.js` must connect to an Ethereum node, which can be either remote (hosted) or local. To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail. The Ethereum node may have multiple http, websocket, or ipc addresses specified as arrays. The Augur Node, however, can only have one websocket address specified.
 
 In the example, we have set our first connection to try as `http://127.0.0.1:8545` which is our local Geth node. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then a `vitals` object will be returned, otherwise an error message will be returned.
+
+Connect to an Augur Node
+----------
+```javascript
+var Augur = require("augur.js");
+var augur = new Augur();
+
+var ethereumNode = { http: "http://127.0.0.1:8545", ws: "ws://127.0.0.1:8546" };
+var augurNode = "ws://127.0.0.1:9001";
+
+augur.connect({ ethereumNode, augurNode }, (err) => {
+  // do stuff
+});
+```
+Anyone wishing to use the augur.js Simplified API to query for information about Augur's markets will need to connect to an Augur Node. An Augur Node is a standalone application that scans the Ethereum blockchain for all Augur event logs and stores them to a SQLite or PostgresSQL database.
+
+The Simplified API runs queries against an Augur Node database rather than directly looking up information on the Ethereum blockchain because retrieving information from the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all [Markets](#markets) created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.
+
+To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
+
+To set up an Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). (Alternatively, if the websocket address of a hosted Augur Node are already known, this address can be specified in the JS code without the need to set up an Augur Node.) Once the desired Augur Node is running, a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code on the right.
+
 
 Accounts
 --------
@@ -125,27 +147,4 @@ Floating-point (decimal) values should be passed to augur.js as strings (e.g., i
 
 Initial market loading
 ----------------------
-To load the basic [Market](#market) info for all markets, first call `augur.markets.getMarketsInfo({ marketIDs }, callback)`. You will likely need to chunk the results so that the request does not time out. More detailed market info (including prices) for each market in each chunk (page) is then loaded using `augur.markets.getMarketInfo({ _market }, callback)`. `getMarketInfo` does not return the full [Order Book](#order-book); to get the order book for a market, call `augur.trading.orderBook.getOrderBook({ _type, _market, _outcome, minPrice, maxPrice[, _startingOrderId, _numOrdersToLoad ]}, callback)`.
-
-<aside class="notice">Cache nodes regularly call <code>augur.markets.getMarketsInfo({ marketIDs } callback)</code>. The first time <code>getMarketsInfo</code> is called, all markets should be loaded. Subsequent <code>getMarketsInfo</code> calls should only load markets created since the previous call.</aside>
-
-Augur Node
-----------
-```javascript
-var Augur = require("augur.js");
-var augur = new Augur();
-
-var ethereumNode = { http: "http://127.0.0.1:8545", ws: "ws://127.0.0.1:8546" };
-var augurNode = "ws://127.0.0.1:9001";
-
-augur.connect({ ethereumNode, augurNode }, (err) => {
-  // do stuff
-});
-```
-Anyone wishing to use the augur.js Simplified API to query for information about Augur's markets will need to connect to an Augur Node. An Augur Node is a standalone application that scans the Ethereum blockchain for all Augur event logs and stores them to a SQLite or PostgresSQL database.
-
-The Simplified API runs queries against an Augur Node database rather than directly looking up information on the Ethereum blockchain because retrieving information from the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all [Markets](#markets) created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.
-
-To alleviate this problem, the Simplified API executes a query by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
-
-To set up an Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). (Alternatively, if the websocket address of a hosted Augur Node are already known, this address can be specified in the JS code without the need to set up an Augur Node.) Once the desired Augur Node is running, a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code on the right.
+To get a list of all [Markets](#market), first call `augur.markets.getMarkets({ universe[, sortBy, isSortDescending, limit, offset] }[, callback])`. More detailed market info (including prices) for each market can then be loaded using `augur.markets.getMarketsInfo({ marketIDs }[, callback])`. `getMarketsInfo` does not return the [Open Orders](#order-book) for the Market; to get the Open Orders, call `augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])`.
