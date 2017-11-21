@@ -340,7 +340,7 @@ Returns the [Share](#shares) Token's address for the specified `market` and `_ou
 
 #### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx, \_payoutDistributionHash }[, callback])
 
-Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Stake Token given a Payout Distribution Hash, much like `getStakeToken` returns the Stake Token given a Payout Set.
+Returns a Stake Token address, or 0 if there is no Stake Token for a specific `_payoutDistributionHash` for a `market`. [Payout Sets](#payout-set) that are valid, that is that they sum of the values in the array equal the [Number of Ticks](#number-of-ticks) for the [Market](#market) and no individual value in the array is greater than the Number of [Ticks](#ticks), become [Payout Distribution Hashes](#payout-distribution-hash). This method returns the Stake Token given a Payout Distribution Hash, much like `getOrCreateStakeToken` returns the Stake Token given a Payout Set.
 
 #### augur.api.Market.getTentativeWinningPayoutDistributionHash({ tx }[, callback])
 
