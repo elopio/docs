@@ -185,10 +185,6 @@ augur.api.Market.getShareToken({
 // example output:
 shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
-augur.api.Market.getStakeToken({ tx: { to: market }, _payoutNumerators: _payoutNumerators, _invalid: _invalid }, function (error, stakeToken) { /* ... */ })
-// example output:
-stakeToken = "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
-
 var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx: { to: market }, _payoutDistributionHash: _payoutDistributionHash }, function (error, stakeTokenOrZero) { /* ... */ })
 // example output:
@@ -341,10 +337,6 @@ Returns the [Reporting Window](#reporting-window) address for the specified `mar
 #### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
 
 Returns the [Share](#shares) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
-
-#### augur.api.Market.getStakeToken({ tx, \_payoutNumerators, \_invalid }[, callback])
-
-Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
 
 #### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx, \_payoutDistributionHash }[, callback])
 
