@@ -13,12 +13,28 @@ Accounts API
 ```javascript
 augur.accounts.getAccountTransferHistory({
   account: "0x0000000000000000000000000000000000000b0b",
-  token: "0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
+  token: null,
   isSortDescending: false
 }, function (error, accountTransferHistory) { /* ... */ })
 // example output:
 [
   {
+    transactionHash: "0x00000000000000000000000000000000000000000000000000000000deadbeef",
+    logIndex: 0,
+    sender: "0x0000000000000000000000000000000000000b0b",
+    recipient: "0x000000000000000000000000000000000000d00d",
+    token: "0x1000000000000000000000000000000000000000",
+    value: 10,
+    blockNumber: 1400000,
+  }, {
+    transactionHash: "0x00000000000000000000000000000000000000000000000000000000d3adb33f",
+    logIndex: 0,
+    sender: "0x000000000000000000000000000000000000d00d",
+    recipient: "0x0000000000000000000000000000000000000b0b",
+    token: "0x1000000000000000000000000000000000000000",
+    value: 2,
+    blockNumber: 1400001,
+  }, {
     transactionHash: "0x00000000000000000000000000000000000000000000000000000000deadb33f",
     logIndex: 1,
     sender: "0x0000000000000000000000000000000000000b0b",
@@ -56,7 +72,11 @@ augur.markets.getDisputableMarkets({
 // example output: coming soon
 
 augur.markets.getMarketPriceHistory({
-  marketID: "0x0000000000000000000000000000000000000001"
+  marketID: "0x0000000000000000000000000000000000000001",
+  sortBy: null,
+  isSortDescending: null,
+  limit: null,
+  offset: null,
 }, function (error, marketPriceHistory) { /* ... */ })
 // example output:
 {
@@ -94,11 +114,24 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   "0x0000000000000000000000000000000000000017",
 ]
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.markets.getMarketsAwaitingReporting({
   universe: "0x000000000000000000000000000000000000000b"
 }, function (error, marketsAwaitingReporting) { /* ... */ })
-// example output: coming soon
+// example output: 
+[
+  "0x0000000000000000000000000000000000000012",
+  "0x0000000000000000000000000000000000000013",
+  "0x0000000000000000000000000000000000000014",
+  "0x0000000000000000000000000000000000000015",
+  "0x0000000000000000000000000000000000000016",
+  "0x0000000000000000000000000000000000000017",
+  "0x0000000000000000000000000000000000000018",
+  "0x0000000000000000000000000000000000000019",
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+  "0x0000000000000000000000000000000000000003",
+  "0x0000000000000000000000000000000000000011"
+]
 
 augur.markets.getMarketsClosingInDateRange({
   universe: "0x000000000000000000000000000000000000000b",
@@ -252,6 +285,7 @@ augur.markets.getMarketsInfo({
 
 Returns a list of all [Market](#market) categories in the required parameter `universe`, which is a string containing the address of a given [Universe](#universe).
 
+<!-- TODO: Add JS example results -->
 ### augur.markets.getDisputableMarkets({ reportingWindow[, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns the [Markets](#market) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market's result. The required `reportingWindow` parameter is a string containing the address of a Reporting Window.
@@ -268,7 +302,6 @@ Returns an array of all [Markets](#markets) in a given [Universe](#universe). `u
 
 Returns the [Markets](#market) in a [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted. `universe` is a string containing the address of a given Universe. `designatedReporter` is an optional string parameter that can be used to restrict the results to [Markets](#market) having a specific [Designated Reporter](#designated-reporter) address.
 
-<!-- TODO: Confirm if this returns Markets awaiting Designated Report & update description accordingly. -->
 ### augur.markets.getMarketsAwaitingReporting({ [universe, reportingWindow, reportingState, sortBy, isSortDescending, limit, offset] }[, callback])
 
 Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](#designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either `universe` or `reportingWindow` must be specified as a string containing an address. `reportingState` is a string where valid values are "DESIGNATED\_REPORTING", "FIRST\_REPORTING", or "LAST\_REPORTING".
@@ -300,11 +333,32 @@ augur.reporting.getReportingHistory({
 {
   "0x000000000000000000000000000000000000000b": {
     "0x0000000000000000000000000000000000000011": [{
+      transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D00",
+      logIndex: 0,
+      creationBlockNumber: 1400051,
+      blockHash: "0x1400051",
+      creationTime: 1506474500,
       marketID: "0x0000000000000000000000000000000000000011",
       reportingWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [0, 2],
       amountStaked: 17,
-      reportingToken: "0x0000000000000000001000000000000000000001",
+      stakeToken: "0x0000000000000000001000000000000000000001",
+      isCategorical: false,
+      isScalar: false,
+      isIndeterminate: false,
+      isSubmitted: true,
+    }],
+    "0x0000000000000000000000000000000000000019": [{
+      transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D03",
+      logIndex: 0,
+      creationBlockNumber: 1400052,
+      blockHash: "0x1400052",
+      creationTime: 1506474515,
+      marketID: "0x0000000000000000000000000000000000000019",
+      reportingWindow: "0x1000000000000000000000000000000000000000",
+      payoutNumerators: [1, 1],
+      amountStaked: 229,
+      stakeToken: "0x0000000000000000001000000000000000000003",
       isCategorical: false,
       isScalar: false,
       isIndeterminate: false,
@@ -357,15 +411,15 @@ augur.reporting.getStakeTokens({
   },
 }
 ```
-### augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, sortBy, isSortDescending, limit, offset] }[, callback])
+### augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window.
+Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.
 
 ### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
 Returns the number of Markets in various Reporting Phases, including "DESIGNATED\_REPORTING", "FIRST\_REPORTING", "LAST\_REPORTING", "AWAITING_FINALIZATION" (when a Market has been reported on and is in a [Dispute Phase](#dispute-phase)), "FORKING" (for the Market that has Forked), "AWAITING\_FORK\_MIGRATION" (for Markets that are waiting for a Forked Market to resolve), and "FINALIZED".
 
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) -->
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 ### augur.reporting.getReportingWindowsWithUnclaimedFees({ universe, account }[, callback])
 
 Returns the [Reporting Windows](#reporting-window) where a user has not claimed his or her [Reporting Fees](#reporting-fee). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user.
@@ -392,6 +446,8 @@ augur.trading.getOrders({
       buy: {
         "0x1000000000000000000000000000000000000000000000000000000000000000": {
           shareToken: "0x1000000000000000000000000000000000000000",
+          transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A00",
+          logIndex: 0,
           owner: "0x0000000000000000000000000000000000000b0b",
           creationTime: 1506473500,
           creationBlockNumber: 1400001,
@@ -405,6 +461,8 @@ augur.trading.getOrders({
         },
         "0x2000000000000000000000000000000000000000000000000000000000000000": {
           shareToken: "0x1000000000000000000000000000000000000000",
+          transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A01",
+          logIndex: 0,
           owner: "0x000000000000000000000000000000000000d00d",
           creationTime: 1506473515,
           creationBlockNumber: 1400002,
@@ -420,6 +478,8 @@ augur.trading.getOrders({
           amount: 1,
           creationBlockNumber: 1400001,
           creationTime: 1506473500,
+          transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A06",
+          logIndex: 0,
           fullPrecisionAmount: 1,
           fullPrecisionPrice: 0.7,
           orderState: "OPEN",
@@ -435,6 +495,8 @@ augur.trading.getOrders({
       buy: {
         "0x3000000000000000000000000000000000000000000000000000000000000000": {
           shareToken: "0x2000000000000000000000000000000000000000",
+          transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A02",
+          logIndex: 0,
           owner: "0x000000000000000000000000000000000000d00d",
           creationTime: 1506473515,
           creationBlockNumber: 1400002,
@@ -463,20 +525,22 @@ augur.trading.getUserTradingHistory({
       offset: null,
 }, function (error, userTradingHistory) { /* ... */ })
 // example output:
-[{
-  transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000C00",
-  transactionIndex: 0,
-  type: "sell",
-  price: 5.5,
-  amount: 0.2,
-  maker: false,
-  settlementFees: 0,
-  marketID: "0x0000000000000000000000000000000000000001",
-  outcome: 0,
-  shareToken: "0x1000000000000000000000000000000000000000",
-  timestamp: 1506474500,
-  tradeGroupID: null,
-}]
+[
+  {
+    transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000C00",
+    logIndex: 0,
+    type: "sell",
+    price: 5.5,
+    amount: 0.2,
+    maker: false,
+    settlementFees: 0,
+    marketID: "0x0000000000000000000000000000000000000001",
+    outcome: 0,
+    shareToken: "0x1000000000000000000000000000000000000000",
+    timestamp: 1506474500,
+    tradeGroupID: null,
+  }
+]
 
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
