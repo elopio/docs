@@ -882,6 +882,31 @@ successResponse = {
   value: "0x0"
 }
 
+augur.api.Market.getOrCreateStakeToken({ 
+  _signer: privateKey,
+  _payoutNumerators: _payoutNumerators, 
+  _invalid: _invalid,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+}
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320489,
+  callReturn: "1",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
+  input: "0x99ea0fd5",
+  nonce: "0x5",
+  timestamp: 1501003135,
+  to: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
+  value: "0x0"
+}
+
 augur.api.Market.migrateDueToNoReports({
   _signer: privateKey,
   market: market,
@@ -1049,6 +1074,10 @@ This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-o
 #### augur.api.Market.disputeLastReporters({ \_signer, market, onSent, onSuccess, onFailed })
 
 `disputeLastReporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
+
+#### augur.api.Market.getOrCreateStakeToken({ \_signer, \_payoutNumerators, \_invalid , onSent, onSuccess, onFailed })
+
+Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. (If the Stake Token with the specified `payoutNumerators` does not exist, it will be created.) When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
 
 #### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
 
