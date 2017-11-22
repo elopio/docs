@@ -1145,14 +1145,14 @@ successResponse = {
 }
 
 var _forgoFees = true;
-augur.api.ParticipationToken.redeem {
+augur.api.ParticipationToken.redeem({
   _signer: privateKey,
   participationToken: participationToken,
   _forgoFees: _forgoFees,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
-}
+});
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
@@ -1170,13 +1170,13 @@ successResponse = {
   value: "0x0"
 }
 
-augur.api.ParticipationToken.withdrawInEmergency {
+augur.api.ParticipationToken.withdrawInEmergency({
   _signer: privateKey,
   participationToken: participationToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
-}
+});
 // example output:
 successResponse = {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
