@@ -613,33 +613,41 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000deadbeef"</span><span class="p">,</span>
     <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
+    <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400000"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
     <span class="na">sender</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">recipient</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
     <span class="na">token</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000d3adb33f"</span><span class="p">,</span>
     <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
+    <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400001"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473500</span><span class="p">,</span>
     <span class="na">sender</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
     <span class="na">recipient</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">token</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000deadb33f"</span><span class="p">,</span>
     <span class="na">logIndex</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
+    <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400001"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473500</span><span class="p">,</span>
     <span class="na">sender</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">recipient</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
     <span class="na">token</span><span class="p">:</span> <span class="s2">"0x7a305d9b681fb164dc5ad628b5992177dc66aec8"</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="mi">47</span><span class="p">,</span>
-    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400001</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<h3 id="augur-accounts-getaccounttransferhistory-account-token-sortby-issortdescending-limit-offset-callback">augur.accounts.getAccountTransferHistory({ account[, token, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
+<h3 id="augur-accounts-getaccounttransferhistory-account-token-earliestclosingtime-latestclosingtime-sortby-issortdescending-limit-offset-callback">augur.accounts.getAccountTransferHistory({ account[, token, earliestClosingTime, latestClosingTime, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
-<p>Returns the token transfers made to or from the required <code class="prettyprint">account</code> parameter, which is a string containing the account address. The optional string parameter <code class="prettyprint">token</code> can be used to restrict the results to a particular token name.</p>
+<p>Returns the token transfers made to or from the required <code class="prettyprint">account</code> parameter, which is a string containing the account address. The optional string parameter <code class="prettyprint">token</code> can be used to restrict the results to a particular token name. <code class="prettyprint">earliestClosingTime</code> and <code class="prettyprint">latestClosingTime</code> are integers representing Unix timestamps that can be used to limit the results.</p>
 
 <h2 id="markets-api">Markets API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
@@ -1550,7 +1558,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getstaketokenorzerobypayoutdistributionhash-tx-_payoutdistributionhash-callback">augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx, _payoutDistributionHash }[, callback])</h4>
 
-<p>Returns a Stake Token address, or 0 if there is no Stake Token for a specific <code class="prettyprint">_payoutDistributionHash</code> for a <code class="prettyprint">market</code>. <a href="#payout-set">Payout Sets</a> that are valid, that is that they sum of the values in the array equal the <a href="#number-of-ticks">Number of Ticks</a> for the <a href="#market">Market</a> and no individual value in the array is greater than the Number of <a href="#ticks">Ticks</a>, become <a href="#payout-distribution-hash">Payout Distribution Hashes</a>. This method returns the Stake Token given a Payout Distribution Hash, much like <code class="prettyprint">getStakeToken</code> returns the Stake Token given a Payout Set.</p>
+<p>Returns a Stake Token address, or 0 if there is no Stake Token for a specific <code class="prettyprint">_payoutDistributionHash</code> for a <code class="prettyprint">market</code>. <a href="#payout-set">Payout Sets</a> that are valid, that is that they sum of the values in the array equal the <a href="#number-of-ticks">Number of Ticks</a> for the <a href="#market">Market</a> and no individual value in the array is greater than the Number of <a href="#ticks">Ticks</a>, become <a href="#payout-distribution-hash">Payout Distribution Hashes</a>. This method returns the Stake Token given a Payout Distribution Hash, much like <code class="prettyprint">getOrCreateStakeToken</code> returns the Stake Token given a Payout Set.</p>
 
 <h4 id="augur-api-market-gettentativewinningpayoutdistributionhash-tx-callback">augur.api.Market.getTentativeWinningPayoutDistributionHash({ tx }[, callback])</h4>
 
@@ -3626,14 +3634,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">_forgoFees</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">redeem</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">redeem</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span><span class="p">,</span>
   <span class="na">_forgoFees</span><span class="p">:</span> <span class="nx">_forgoFees</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
@@ -3651,13 +3659,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">withdrawInEmergency</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">withdrawInEmergency</span><span class="p">({</span>
   <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
   <span class="na">participationToken</span><span class="p">:</span> <span class="nx">participationToken</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">}</span>
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="nx">successResponse</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
