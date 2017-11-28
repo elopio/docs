@@ -721,10 +721,6 @@ augur.api.ReportingWindow.getMarketsCount({ tx: { to: reportingWindow } }, funct
 // example output:
 marketsCount = "65"
 
-augur.api.ReportingWindow.getNextReportingWindow({ tx: { to: reportingWindow } }, function (error, nextReportingWindow) { /* ... */ })
-// example output:
-nextReportingWindow = "0x0d6b5a54f940bf3d52e438cab785981aaefdf40c"
-
 augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx: { to: reportingWindow } }, function (error, numDesignatedReportNoShows) { /* ... */ })
 // example output:
 numDesignatedReportNoShows = "2"
@@ -742,10 +738,6 @@ augur.api.ReportingWindow.getNumMarkets({ tx: { to: reportingWindow } }, functio
 numMarkets = "65"
 
 augur.api.ReportingWindow.getParticipationToken({ tx: { to: reportingWindow } }, function (error, ) { /* ... */ })
-// example output:
-= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
-
-augur.api.ReportingWindow.getPreviousReportingWindow({ tx: { to: reportingWindow } }, function (error, ) { /* ... */ })
 // example output:
 = "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
 
@@ -839,10 +831,6 @@ Returns the number of [Markets](#market) in the specified [Reporting Window](#re
 
 Returns the total number of [Markets](#market) that belong to the [Reporting Window](#reporting-window). This includes [Reporting Round](#reporting-round) Markets.
 
-#### augur.api.ReportingWindow.getNextReportingWindow({ tx }[, callback])
-
-Returns the next [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
-
 #### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])
 
 Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
@@ -862,10 +850,6 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 #### augur.api.ReportingWindow.getParticipationToken({ tx }[, callback])
 
 Returns the Contract Address of the [Participation Token](#participation-token) associated with the specified [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getPreviousReportingWindow({ tx }[, callback])
-
-Returns the previous [Reporting Window](#reporting-window)'s Contract Address. Reporting Windows last 30 days and continually occur, one after the other. Only one Reporting Window can be active at a time in a [Universe](#universe), and every Reporting Window belongs to a Universe.
 
 #### augur.api.ReportingWindow.getReportingEndTime({ tx }[, callback])
 
