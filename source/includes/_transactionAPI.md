@@ -1970,10 +1970,12 @@ TradingEscapeHatch Tx API
 ---------------------
 ```javascript
 // TradingEscapeHatch Contract Transaction API Examples:
-var market = "0x465407364ccde43ba5159537404924e86ca53aaa";
+var privateKey = <Buffer ...\>;
+var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
+
 augur.api.TradingEscapeHatch.claimSharesInUpdate({
   _signer: privateKey,
-  market: market,
+  _market: _market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -1995,7 +1997,7 @@ successResponse = {
   value: "0x0"
 }
 ```
-#### augur.api.TradingEscapeHatch.claimSharesInUpdate({ market }[, callback])
+#### augur.api.TradingEscapeHatch.claimSharesInUpdate({ \_signer, \_market, onSent, onSuccess, onFailed })
 
 If Augur needs to be halted by the development team (for example, if a vulnerability is discovered), calling this function on a specific [Market](#market) will withdraw the user's funds from that Market and return them to the user's address. This transaction will fail if Augur is not in a halted state.
 
@@ -2006,11 +2008,9 @@ Universe Tx API
 var privateKey = <Buffer ...>;
 var universe = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 
-var _parentPayoutDistributionHash = <Parent Payout Distribution Hash as 32 bytes...>
-augur.api.Universe.getOrCreateChildUniverse({
+augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   _signer: privateKey,
   universe: universe,
-  _parentPayoutDistributionHash: _parentPayoutDistributionHash,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -2031,7 +2031,153 @@ successResponse = {
   to: "0xa7f3659c53820346176f7e0e350780df304db179",
   value: "0x0"
 }
+
+augur.api.Universe.getOrCacheDesignatedReportStake({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320555,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getOrCacheMarketCreationCost({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320556,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getOrCacheReportingFeeDivisor({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320557,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+augur.api.Universe.getOrCacheValidityBond({
+  _signer: privateKey,
+  universe: universe,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320558,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
+
+var _parentPayoutDistributionHash = "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1";
+augur.api.Universe.getOrCreateChildUniverse({
+  _signer: privateKey,
+  universe: universe,
+  _parentPayoutDistributionHash: _parentPayoutDistributionHash,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example output:
+successResponse = {
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320559,
+  callReturn: "0",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
+  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
+  nonce: "0xff8",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  value: "0x0"
+}
 ```
-#### augur.api.Universe.getOrCreateChildUniverse({ universe, \_parentPayoutDistributionHash }[, callback])
+#### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe), priced in [AttoREP](#atto-prefix). If the value of the Designated Report No-Show REP Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+
+#### augur.api.Universe.getOrCacheDesignatedReportStake({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report) in the [Universe](#universe). If this value for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+
+#### augur.api.Universe.getOrCacheMarketCreationCost({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe). The amount returned by this function is equivalent to the sum of `augur.api.Universe.getOrCacheValidityBond()` and `augur.api.Universe.getOrCacheTargetReporterGasCosts()`. If the values of the [Validity Bond](#validity-bond) and the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) for the current [Reporting Window](#reporting-window) have not already been cached in the Universe contract, this function will cache them.
+
+#### augur.api.Universe.getOrCacheReportingFeeDivisor({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee). If this value for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+
+#### augur.api.Universe.getOrCacheTargetReporterGasCosts({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+
+#### augur.api.Universe.getOrCacheValidityBond({ \_signer, universe, onSent, onSuccess, onFailed })
+
+Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [AttoETH](#atto-prefix), when creating a [Market](#market). If the Validity Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
+
+#### augur.api.Universe.getOrCreateChildUniverse({ \_signer, universe, \_parentPayoutDistributionHash, onSent, onSuccess, onFailed })
 
 Returns a [Child Universe](#child-universe) corresponding to the specified `_parentPayoutDistributionHash`. If the Child Universe does not already exist, it will be created. This transaction will fail if the Universe does not have a [Forked Market](#forked-market).

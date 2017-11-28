@@ -1050,14 +1050,6 @@ augur.api.Universe.getCurrentReportingWindow({ tx: { to: universe } }, function 
 // example output:
 currReportingWindow = "578"
 
-augur.api.Universe.getDesignatedReportNoShowBond({ tx: { to: universe } }, function (error, designatedReportNoShowBond) { /* ... */ })
-// example output:
-designatedReportNoShowBond = "115350000000000000";
-
-augur.api.Universe.getDesignatedReportStake({ tx: { to: universe } }, function (error, designatedReportStake) { /* ... */ })
-// example output:
-designatedReportStake = "124350000000000000";
-
 augur.api.Universe.getForkEndTime({ tx: { to: universe } }, function (error, forkEndTime) { /* ... */ })
 // example output:
 forkEndTime = "1489855429";
@@ -1069,10 +1061,6 @@ forkingMarket = "0x78f7b43150d27c464359e735781c16ac585f52a8";
 augur.api.Universe.getForkReputationGoal({ universe }, function (error, forkReputationGoal) { /* ... */ })
 // example output:
 forkReputationGoal = "150657";
-
-augur.api.Universe.getMarketCreationCost({ tx: { to: universe } }, function (error, marketCreationCost) { /* ... */ })
-// example output:
-marketCreationCost = "100000000000000000";
 
 augur.api.Universe.getNextReportingWindow({ tx: { to: universe } }, function (error, nextReportingWindow) { /* ... */ })
 // example output:
@@ -1093,10 +1081,6 @@ universeParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d35030090
 augur.api.Universe.getPreviousReportingWindow({ tx: { to: universe } }, function (error, previousReportingWindow) { /* ... */ })
 // example output:
 previousReportingWindow = "577"
-
-augur.api.Universe.getReportingFeeDivisor({ tx: { to: universe } }, function (error, reportingFeeDivisor) { /* ... */ })
-// example output:
-reportingFeeDivisor = "10000";
 
 augur.api.Universe.getReportingPeriodDurationInSeconds({ tx: { to: universe } }, function (error, reportingPeriodDuration) { /* ... */ })
 // example output:
@@ -1142,14 +1126,6 @@ augur.api.Universe.getReputationToken({ tx: { to: universe } }, function (error,
 // example output:
 reputationTokenAddress = "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2";
 
-augur.api.Universe.getTargetReporterGasCosts({ tx: { to: universe } }, function (error, targetReporterGasCosts) { /* ... */ })
-// example output:
-targetReporterGasCosts = "6000000";
-
-augur.api.Universe.getValidityBond({ tx: { to: universe } }, function (error, validityBond) { /* ... */ })
-// example output:
-targetReporterGasCosts = "10000000000000000";
-
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Universe.isContainerForMarket({
   tx: { to: universe },
@@ -1194,14 +1170,6 @@ Returns the Child [Universe](#universe) address for this `universe` address whos
 
 Returns the address of the current running [Reporting Window](#reporting-window) of the [Universe](#universe) specified in `tx`. Every Universe has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.
 
-#### augur.api.Universe.getDesignatedReportNoShowBond({ tx }[, callback])
-
-Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe) specified in `tx`, priced in [AttoREP](#atto-prefix).
-
-#### augur.api.Universe.getDesignatedReportStake({ tx }[, callback])
-
-Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report) in the [Universe](#universe) specified in `tx`. 
-
 #### augur.api.Universe.getForkEndTime({ tx }[, callback])
 
 Returns the timestamp for when the [Fork Period](#fork-period) ends that was started on the [Universe](#universe) specified in `tx`. If there is no [Forked Market](#forked-market) in the Universe, this function will return 0.
@@ -1213,10 +1181,6 @@ Returns the contract address of the [Market](#market) that the [Universe](#unive
 #### augur.api.Universe.getForkReputationGoal({ tx }[, callback])
 
 Returns the estimated amount of [REP](#rep) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) in the [Universe](#universe) specified in `tx` to be finalized before the end of the [Fork Period](#fork-period).
-
-#### augur.api.Universe.getMarketCreationCost({ tx }[, callback])
-
-Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe) specified in `tx`. The amount returned by this function is equivalent to the sum of `augur.api.Universe.getValidityBond()` and `augur.api.Universe.getTargetReporterGasCosts()`.
 
 #### augur.api.Universe.getNextReportingWindow({ tx }[, callback])
 
@@ -1237,10 +1201,6 @@ Returns the [Parent Universes](#parent-universe)'s [Payout Distribution Hash](#p
 #### augur.api.Universe.getPreviousReportingWindow({ tx }[, callback])
 
 Returns the address of the previous [Reporting Window](#reporting-window) to the current Reporting Window for the [Universe](#universe) specified in `tx`.
-
-#### augur.api.Universe.getReportingFeeDivisor({ tx }[, callback])
-
-Returns the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
 
 #### augur.api.Universe.getReportingPeriodDurationInSeconds({ tx }[, callback])
 
@@ -1269,14 +1229,6 @@ Returns the [Reporting Window](#reporting-window) Id for the [Universe](#univers
 #### augur.api.Universe.getReputationToken({ tx }[, callback])
 
 Returns the address of the [Reputation Token](#rep) for the [Universe](#universe) specified in `tx`. This is the REP usable within this Universe.
-
-#### augur.api.Universe.getTargetReporterGasCosts({ tx }[, callback])
-
-Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [First Reporter](#first-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does show up. The [Universe](#universe) must be specified in `tx`. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
-
-#### augur.api.Universe.getValidityBond({ tx }[, callback])
-
-Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [AttoETH](#atto-prefix), when creating a [Market](#market). (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
 
 #### augur.api.Universe.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
