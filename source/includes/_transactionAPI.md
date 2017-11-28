@@ -1230,6 +1230,7 @@ Reporting Window Tx API
 // Reporting Window Contract Transaction API Examples:
 var privateKey = <Buffer ...>;
 var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+var _sender = "0xaa94cec0b62fcb8c3120bc80bdb2b1351c8c2d1d";
 var _endTime = 1501015000;
 var _numOutcomes = '2';
 var _numTicks = 4000;
@@ -1242,6 +1243,7 @@ var _extraInfo = "";
 augur.api.ReportingWindow.createMarket({
   _signer: privateKey,
   reportingWindow: reportingWindow,
+  _sender: _sender,
   _endTime: _endTime,
   _numOutcomes: _numOutcomes,
   _numTicks: _numTicks,
@@ -1273,9 +1275,9 @@ successResponse = {
 ```
 #### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
 
-#### augur.api.ReportingWindow.createMarket({ \_signer, reportingWindow, \_endTime, \_numOutcomes, \_numTicks, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_extraInfo, onSent, onSuccess, onFailed })
+#### augur.api.ReportingWindow.createMarket({ \_signer, reportingWindow, \_sender, \_endTime, \_numOutcomes, \_numTicks, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_extraInfo, onSent, onSuccess, onFailed })
 
-This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if the `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
 
 Reputation Token Tx API
 --------------------------------
