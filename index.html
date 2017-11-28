@@ -855,16 +855,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="p">}],</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
-    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
+    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="na">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
     <span class="na">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
-    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
     <span class="na">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
     <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
@@ -875,9 +875,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="na">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
     <span class="na">reportingWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="na">endDate</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+    <span class="na">endDate</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
     <span class="na">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a binary test market created by b0b."</span><span class="p">,</span>
     <span class="na">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
@@ -886,45 +886,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+      <span class="na">volume</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
       <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 0"</span><span class="p">,</span>
     <span class="p">},</span> <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
+      <span class="na">volume</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+      <span class="na">price</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
       <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 1"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 2"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 3"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 4"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 5"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 6"</span><span class="p">,</span>
-    <span class="p">},</span> <span class="p">{</span>
-      <span class="na">id</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-      <span class="na">volume</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="na">price</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-      <span class="na">description</span><span class="p">:</span> <span class="s2">"outcome 7"</span><span class="p">,</span>
-    <span class="p">}],</span>
+    <span class="p">}]</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -4269,7 +4239,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-staketoken-redeemdisavowedtokens-_signer-staketoken-_reporter-onsent-onsuccess-onfailed">augur.api.StakeToken.redeemDisavowedTokens({ _signer, stakeToken, _reporter, onSent, onSuccess, onFailed })</h4>
 
-<p>In the event of a <a href="#fork">Fork</a>, all <a href="#market">Markets</a>, except for the <a href="#forked-market">Forked Market</a>, that haven&rsquo;t been <a href="#finalized-market">Finalized</a> are placed into a pending state until the <a href="#fork-period">Fork Period</a> concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be &ldquo;Disavowed&rdquo; and are able to be refunded for <a href="#rep">REP</a> back into the <a href="#parent-universe">Parent Universe</a> using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a <a href="#child-universe">Child Universe</a> and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start <a href="#designated-dispute-phase">Designated Dispute Phase</a>. This will fail if the Stake Token hasn&rsquo;t been Disavowed, or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the from address (<code class="prettyprint">stakeToken</code>), to address (<code class="prettyprint">_reporter</code>), and the amount of REP transferred.</p>
+<p>In the event of a <a href="#fork">Fork</a>, all <a href="#market">Markets</a>, except for the <a href="#forked-market">Forked Market</a>, that haven&rsquo;t been <a href="#finalized-market">Finalized</a> are placed into a pending state until the <a href="#fork-period">Fork Period</a> concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be &ldquo;Disavowed&rdquo; and are able to be refunded for <a href="#rep">REP</a> back into the <a href="#parent-universe">Parent Universe</a> using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a <a href="#child-universe">Child Universe</a> and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start <a href="#designated-dispute-phase">Designated Dispute Phase</a>. This will fail if the Stake Token hasn&rsquo;t been &ldquo;Disavowed&rdquo;, or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the from address (<code class="prettyprint">stakeToken</code>), to address (<code class="prettyprint">_reporter</code>), and the amount of REP transferred.</p>
 
 <h4 id="augur-api-staketoken-redeemforkedtokens-_signer-staketoken-onsent-onsuccess-onfailed">augur.api.StakeToken.redeemForkedTokens({ _signer, stakeToken, onSent, onSuccess, onFailed })</h4>
 
