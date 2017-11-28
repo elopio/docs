@@ -24,10 +24,13 @@ augur.accounts.getAccountTransferHistory({
     creationBlockNumber: 1400000,
     blockHash: "0x1400000",
     creationTime: 1506473474,
-    sender: "0x0000000000000000000000000000000000000b0b",
-    recipient: "0x000000000000000000000000000000000000d00d",
-    token: "0x1000000000000000000000000000000000000000",
+    sender: " 0x0000000000000000000000000000000000000b0b",
+    recipient: " 0x000000000000000000000000000000000000d00d",
+    token: " 0x1000000000000000000000000000000000000000",
     value: 10,
+    symbol: "shares",
+    marketID: " 0x0000000000000000000000000000000000000001",
+    outcome: 0,
   },
   {
     transactionHash: "0x00000000000000000000000000000000000000000000000000000000d3adb33f",
@@ -35,10 +38,13 @@ augur.accounts.getAccountTransferHistory({
     creationBlockNumber: 1400001,
     blockHash: "0x1400001",
     creationTime: 1506473500,
-    sender: "0x000000000000000000000000000000000000d00d",
-    recipient: "0x0000000000000000000000000000000000000b0b",
-    token: "0x1000000000000000000000000000000000000000",
+    sender: " 0x000000000000000000000000000000000000d00d",
+    recipient: " 0x0000000000000000000000000000000000000b0b",
+    token: " 0x1000000000000000000000000000000000000000",
     value: 2,
+    symbol: "shares",
+    marketID: " 0x0000000000000000000000000000000000000001",
+    outcome: 0,
   },
   {
     transactionHash: "0x00000000000000000000000000000000000000000000000000000000deadb33f",
@@ -46,16 +52,19 @@ augur.accounts.getAccountTransferHistory({
     creationBlockNumber: 1400001,
     blockHash: "0x1400001",
     creationTime: 1506473500,
-    sender: "0x0000000000000000000000000000000000000b0b",
-    recipient: "0x000000000000000000000000000000000000d00d",
-    token: "0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
+    sender: " 0x0000000000000000000000000000000000000b0b",
+    recipient: " 0x000000000000000000000000000000000000d00d",
+    token: " 0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
     value: 47,
+    symbol: "REP",
+    marketID: null,
+    outcome: null,
   }
 ]
 ```
-### augur.accounts.getAccountTransferHistory({ account[, token, earliestClosingTime, latestClosingTime, sortBy, isSortDescending, limit, offset] }[, callback])
+### augur.accounts.getAccountTransferHistory({ account[, token, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns the token transfers made to or from the required `account` parameter, which is a string containing the account address. The optional string parameter `token` can be used to restrict the results to a particular token name. `earliestClosingTime` and `latestClosingTime` are integers representing Unix timestamps that can be used to limit the results.
+Returns the token transfers made to or from the required `account` parameter, which is a string containing the account address. The optional string parameter `token` can be used to restrict the results to a particular token name. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the transfer took place (that is, when the block on the Ethereum blockchain containing the transfer was created).
 
 Markets API
 ----------------
@@ -347,6 +356,7 @@ augur.reporting.getReportingHistory({
       blockHash: "0x1400051",
       creationTime: 1506474500,
       marketID: "0x0000000000000000000000000000000000000011",
+      marketReportingState: "DESIGNATED_REPORTING",
       reportingWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [0, 2],
       amountStaked: 17,
@@ -363,6 +373,7 @@ augur.reporting.getReportingHistory({
       blockHash: "0x1400052",
       creationTime: 1506474515,
       marketID: "0x0000000000000000000000000000000000000019",
+      marketReportingState: "FIRST_REPORTING",
       reportingWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [1, 1],
       amountStaked: 229,
@@ -421,7 +432,7 @@ augur.reporting.getStakeTokens({
 ```
 ### augur.reporting.getReportingHistory({ reporter[, universe, marketID, reportingWindow, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.
+Returns information about the [Reports](#report) submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user's [Report](#report) matched that Final Outcome, how much [REP](#rep) the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee). `reporter` is a string containing the address of a given [Reporter](#reporter). Either `universe`, `marketID`, or `reportingWindow` must be specified as a string paramter containing the address of a [Universe](#universe), Market, or Reporting Window. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the user submitted the report (that is, when the block on the Ethereum blockchain containing the report was created).
 
 ### augur.reporting.getReportingSummary({ reportingWindow }[, callback])
 
@@ -541,7 +552,9 @@ augur.trading.getUserTradingHistory({
     price: 5.5,
     amount: 0.2,
     maker: false,
-    settlementFees: 0,
+    marketCreatorFees: 0,
+    reporterFees: 0,
+    settlementFees: "0",
     marketID: "0x0000000000000000000000000000000000000001",
     outcome: 0,
     shareToken: "0x1000000000000000000000000000000000000000",
@@ -623,12 +636,12 @@ augur.trading.getUserTradingPositions({
 ```
 ### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.
+Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the order state got changed (that is, when the block on the Ethereum blockchain containing the changing of the order's state was created).
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, and `orderType` is a string (i.e., "buy" or "sell"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps that can be used to limit the results to a specific timeframe.
+Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, and `orderType` is a string (i.e., "buy" or "sell"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the trade was made (that is, when the block on the Ethereum blockchain containing the trade was created).
 
 ### augur.trading.getUserTradingPositions({ account[, universe, marketID, outcome, sortBy, isSortDescending, limit, offset] }[, callback])
 
