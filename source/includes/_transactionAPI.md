@@ -242,16 +242,32 @@ connected to ethereum
 }
 
 augur.rpc.setDebugOptions({ tx: true });
-// example output: coming soon
+augur.api.Universe.getOrCacheMarketCreationCost({
+  onSent: function (result) {...},
+  onSuccess: function (result) {...},
+  onFailed: function (result) {...}
+});
+// example output:
+payload transact: 
+{
+  constant: false,  
+  from: "0x40485264986740c8fb3d11e814bd94cf86012d29"
+  name: "getOrCacheMarketCreationCost"
+  params: [],
+  returns: "uint256",
+  send: true,
+  to: "0xa282b625053e80da550098fdb325a8ece6dfe8ac"
+}
+callReturn: 10000000006000000
+txHash: 0x26f731c948568d9c0a4983fa134431f3fba0c68248f95d35536c9157cafa785a
 ```
-<!-- TODO: Add example JS for tx: true -->
 The function `augur.rpc.setDebugOptions` allows several debugging options to be enabled:
 
 * `broadcast` - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
 
 * `connect` - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols
 
-* `tx` - When set to true, this enables printing of information related to transaction construction/submission/confirmation, e.g. the intermediate "transaction" object with human-readable parameters, the transaction hash once the transaction is submitted, the (best-guess) return value fetched from the follow-up eth_call, when a transaction gets resubmitted, etc.
+* `tx` - When set to true, this enables printing of information related to transaction construction/submission/confirmation. This information includes the intermediate "transaction" object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.
 
 Cancel Order Tx API
 ----------------------------
