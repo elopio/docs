@@ -88,28 +88,37 @@ Accounts
 /**
  * Create an account using the augur.accounts.register method.
  */
-var password = "thisismysupersecurepassword";
+var newAccount;
+var registerParameters = { password: "thisismysupersecurepassword" };
 
-augur.accounts.register(password, function (account) {
+augur.accounts.register(registerParameters, function (error, account) {
+  console.log("Error:", error);
   console.log("Account:", account);
+  newAccount = account;
 });
 
 // output
-account = {
-  address: "0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf",
+Error: null
+Account: {
+  address: "0x7ea83fd6096c9d73867a1e125e79f40e11d9a92b",
   derivedKey: <Buffer ...>,
   keystore: { /* ... */ },
   privateKey: <Buffer ...>
 };
 
-var keystore = account.keystore;
+/**
+ * Log into an account using the augur.accounts.login method.
+ */
+var loginParameters = { keystore: newAccount.keystore, password: registerParameters.password };
 
-augur.accounts.login(keystore, password, function (account) {
+augur.accounts.login(loginParameters, function (error, account) {
+  console.log("Error:", error);
   console.log("Account:", account);
 });
 
 // output
-account = {
+Error: null
+Account: {
   address: "0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf",
   derivedKey: <Buffer ...>,
   keystore: { /* ... */ },
@@ -122,7 +131,7 @@ Augur.js includes a trustless account management system. The purpose of the acco
 
 To use the account system, the user specifies a password. Everything else is done automatically for the user. The only requirement for the password is that it be at least 6 characters long.
 
-A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by Augur.js, the account object will be returned to the callback provided or simply returned if no callback is provided.
+A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by Augur.js. The account object will be returned to the callback provided or simply returned if no callback is provided.
 
 The Augur UI will handle your account information for you, but if you are using Augur.js on it's own you will need to manage the account yourself. Augur.js doesn't sign any transactions for you if you aren't using the Augur UI.
 
@@ -133,7 +142,7 @@ If you want to use the Augur.js API directly, you will need to sign any transact
 Numbers
 -------
 
-Before we move on, lets quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:
+Before we move on, let's quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:
 
 - primitive JS numbers (e.g., `1010101`): ok for integers, but use strings for floating point numbers (see below)
 
