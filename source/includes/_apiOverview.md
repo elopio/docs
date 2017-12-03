@@ -100,9 +100,9 @@ augur.accounts.register(registerParameters, function (error, account) {
 // output
 Error: null
 Account: {
-  address: "0x7ea83fd6096c9d73867a1e125e79f40e11d9a92b",
+  address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
   derivedKey: <Buffer ...>,
-  keystore: { /* ... */ },
+  keystore: { ... },
   privateKey: <Buffer ...>
 };
 
@@ -119,9 +119,9 @@ augur.accounts.login(loginParameters, function (error, account) {
 // output
 Error: null
 Account: {
-  address: "0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf",
+  address: undefined,
   derivedKey: <Buffer ...>,
-  keystore: { /* ... */ },
+  keystore: { ... },
   privateKey: <Buffer ...>
 };
 
