@@ -144,7 +144,7 @@ Transaction failed: {
 
 <aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren't terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
 
-#### augur.rpc.transact(payload, privateKeyOrSigner, onSent, onSuccess, onFailed)
+#### augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)
 
 You can broadcast transactions to the Ethereum Network by calling `augur.rpc.transact` directly. If called directly, the `payload` object needs to be constructed by hand and must be structured correctly.
 
@@ -166,6 +166,8 @@ The `payload` object, also known as the "transaction object", is structured as f
 The `params` and `signature` fields are required if your function accepts parameters; otherwise, these fields can be excluded. The `returns` field is used only to format the output, and does not affect the actual RPC request.
 
 The `privateKeyOrSigner` is required if we are attempting to execute a transaction that will modify the blockchain (`eth_sendTransaction`). If we are simply getting information (`eth_call`) we don't need to pass anything for `privateKeyOrSigner`. `privateKeyOrSigner` should be the Private Key Buffer for the logged in account or a function to sign transactions provided by a hardware wallet.
+
+The `accountType` is a string that can be "privateKey", "uPort", or "ledger", depending on the type of account that is sending the transaction.
 
 **Under the hood `augur.rpc.transact` carries out the following sequence:**
 
