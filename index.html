@@ -532,32 +532,41 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/**
  * Create an account using the augur.accounts.register method.
  */</span>
-<span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">"thisismysupersecurepassword"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">newAccount</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">registerParameters</span> <span class="o">=</span> <span class="p">{</span> <span class="na">password</span><span class="p">:</span> <span class="s2">"thisismysupersecurepassword"</span> <span class="p">};</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">registerParameters</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
+  <span class="nx">newAccount</span> <span class="o">=</span> <span class="nx">account</span><span class="p">;</span>
 <span class="p">});</span>
 
 <span class="c1">// output</span>
-<span class="nx">account</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">address</span><span class="p">:</span> <span class="s2">"0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf"</span><span class="p">,</span>
-  <span class="na">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
-  <span class="na">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
+<span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
+<span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
+  <span class="nx">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="nx">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
 <span class="p">};</span>
 
-<span class="kd">var</span> <span class="nx">keystore</span> <span class="o">=</span> <span class="nx">account</span><span class="p">.</span><span class="nx">keystore</span><span class="p">;</span>
+<span class="cm">/**
+ * Log into an account using the augur.accounts.login method.
+ */</span>
+<span class="kd">var</span> <span class="nx">loginParameters</span> <span class="o">=</span> <span class="p">{</span> <span class="na">keystore</span><span class="p">:</span> <span class="nx">newAccount</span><span class="p">.</span><span class="nx">keystore</span><span class="p">,</span> <span class="na">password</span><span class="p">:</span> <span class="nx">registerParameters</span><span class="p">.</span><span class="nx">password</span> <span class="p">};</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">keystore</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">loginParameters</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="c1">// output</span>
-<span class="nx">account</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">address</span><span class="p">:</span> <span class="s2">"0x0ab5f1a15f2462eba143ecc8e1733f44dfe019bf"</span><span class="p">,</span>
-  <span class="na">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
-  <span class="na">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
+<span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
+<span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="nx">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="nx">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
 <span class="p">};</span>
 
 <span class="c1">// Augur.js does not store any account data. Augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.</span>
@@ -566,7 +575,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>To use the account system, the user specifies a password. Everything else is done automatically for the user. The only requirement for the password is that it be at least 6 characters long.</p>
 
-<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by Augur.js, the account object will be returned to the callback provided or simply returned if no callback is provided.</p>
+<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by Augur.js. The account object will be returned to the callback provided or simply returned if no callback is provided.</p>
 
 <p>The Augur UI will handle your account information for you, but if you are using Augur.js on it&rsquo;s own you will need to manage the account yourself. Augur.js doesn&rsquo;t sign any transactions for you if you aren&rsquo;t using the Augur UI.</p>
 
@@ -576,7 +585,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="numbers">Numbers</h2>
 
-<p>Before we move on, lets quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:</p>
+<p>Before we move on, let&rsquo;s quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:</p>
 
 <ul>
 <li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
@@ -2552,58 +2561,59 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// using augur.rpc.transact() directly example:</span>
 <span class="c1">// payload object (generated by transfer method of the ReputationToken Contract)</span>
 <span class="kd">var</span> <span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">,</span>
-  <span class="na">events</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Transfer"</span><span class="p">],</span>
-  <span class="na">label</span><span class="p">:</span> <span class="s2">"Transfer"</span><span class="p">,</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s2">"transfer"</span><span class="p">,</span>
-  <span class="na">signature</span><span class="p">:</span> <span class="p">[</span><span class="s1">'int256'</span><span class="p">,</span> <span class="s1">'int256'</span><span class="p">],</span>
-  <span class="na">fixed</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b"</span><span class="p">,</span>
-  <span class="na">params</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">"0x6329a1eb5c9c6c5cd3739fd35a1fd028e50c1456"</span><span class="p">,</span>
-    <span class="s2">"1000"</span><span class="p">,</span>
-  <span class="p">],</span>
-  <span class="na">returns</span><span class="p">:</span> <span class="s2">"unfix"</span><span class="p">,</span>
-  <span class="na">send</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="na">constant</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>  
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span> 
+  <span class="na">name</span><span class="p">:</span> <span class="s2">"getOrCacheMarketCreationCost"</span><span class="p">,</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="na">returns</span><span class="p">:</span> <span class="s2">"uint256"</span><span class="p">,</span>
+  <span class="na">send</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span>
 <span class="p">};</span>
-
-<span class="c1">// onSent callback fires when the initial eth_sendTransaction response</span>
-<span class="c1">// is received</span>
-<span class="kd">var</span> <span class="nx">onSent</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"transaction sent:"</span><span class="p">,</span> <span class="nx">sentResponse</span><span class="p">);</span> <span class="p">};</span>
-
-<span class="c1">// onSuccess callback fires</span>
-<span class="kd">var</span> <span class="nx">onSuccess</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"transaction successful:"</span><span class="p">,</span> <span class="nx">successResponse</span><span class="p">);</span> <span class="p">};</span>
-
-<span class="c1">// onFailed callback fires when the transaction is malformed, fails to confirm,</span>
-<span class="c1">// or an object with an error field is received</span>
-<span class="kd">var</span> <span class="nx">onFailed</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"transaction failed:"</span><span class="p">,</span> <span class="nx">failedResponse</span><span class="p">);</span> <span class="p">};</span>
 
 <span class="c1">// privateKeyorSigner is either the privateKey buffer of the account trying to send the transaction or a function to sign a transaction (generally from a hardware wallet). Below we are going to use the Buffer returned from augur.accounts.login.</span>
 <span class="kd">var</span> <span class="nx">privateKeyOrSigner</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">transact</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="nx">privateKeyOrSigner</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
+<span class="c1">// accountType is a string set to "privateKey", "uPort", or "ledger".</span>
+<span class="kd">var</span> <span class="nx">accountType</span> <span class="o">=</span> <span class="s2">"privateKey"</span><span class="p">;</span>
+
+<span class="c1">// onSent callback fires when the initial eth_sendTransaction response is received</span>
+<span class="kd">var</span> <span class="nx">onSent</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">sentResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction sent: "</span><span class="p">,</span> <span class="nx">sentResponse</span><span class="p">);</span> <span class="p">};</span>
+
+<span class="c1">// onSuccess callback fires</span>
+<span class="kd">var</span> <span class="nx">onSuccess</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">successResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction successful: "</span><span class="p">,</span> <span class="nx">successResponse</span><span class="p">);</span> <span class="p">};</span>
+
+<span class="c1">// onFailed callback fires when the transaction is malformed, fails to confirm,</span>
+<span class="c1">// or an object with an error field is received</span>
+<span class="kd">var</span> <span class="nx">onFailed</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">failedResponse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Transaction failed: "</span><span class="p">,</span> <span class="nx">failedResponse</span><span class="p">);</span> <span class="p">};</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">transact</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="nx">privateKeyOrSigner</span><span class="p">,</span> <span class="nx">accountType</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
 <span class="c1">// example onSent output:</span>
-<span class="p">{</span>
-  <span class="nl">txHash</span><span class="p">:</span> <span class="s1">'0xdf096e249638df143118f562868e90285579819e59b09f0784b95fa5fd920413'</span><span class="p">,</span>
-  <span class="nx">callReturn</span><span class="p">:</span> <span class="s1">'1000'</span>
+<span class="nx">Transaction</span> <span class="nx">sent</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">callReturn</span><span class="p">:</span> <span class="s2">"10000000006000000"</span><span class="p">,</span>
+  <span class="nx">hash</span><span class="p">:</span> <span class="s2">"0x269011fe4ed9c7370f8e8237c525062988e8fcce485d93a1a6a419bb3a8e70d3"</span>
 <span class="p">}</span>
 <span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="nl">nonce</span><span class="p">:</span> <span class="s1">'0x4e1'</span><span class="p">,</span>
-  <span class="nx">blockHash</span><span class="p">:</span> <span class="s1">'0xb8e4e78c9cf949729bbb7b94e942d8d63e67e9f48b394f3208cf0d2928e44bad'</span><span class="p">,</span>
-  <span class="nx">blockNumber</span><span class="p">:</span> <span class="s1">'0x6a5f'</span><span class="p">,</span>
-  <span class="nx">transactionIndex</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="k">from</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="nx">to</span><span class="p">:</span> <span class="s1">'0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e'</span><span class="p">,</span>
-  <span class="nx">value</span><span class="p">:</span> <span class="s1">'0x0'</span><span class="p">,</span>
-  <span class="nx">gas</span><span class="p">:</span> <span class="s1">'0x2fd618'</span><span class="p">,</span>
-  <span class="nx">gasPrice</span><span class="p">:</span> <span class="s1">'0xba43b7400'</span><span class="p">,</span>
-  <span class="nx">input</span><span class="p">:</span> <span class="s1">'0x867445580000000000000000000000006329a1eb5c9c6c5cd3739fd35a1fd028e50c145600000000000000000000000000000000000000000000000000000000000003e8'</span><span class="p">,</span>
-  <span class="nx">callReturn</span><span class="p">:</span> <span class="s1">'1000'</span><span class="p">,</span>
-  <span class="nx">txHash</span><span class="p">:</span> <span class="s1">'0xdf096e249638df143118f562868e90285579819e59b09f0784b95fa5fd920413'</span>
+<span class="nx">Transaction</span> <span class="nx">successful</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0x5090c1a25a2accf4cb47a1d99f4fa4215146ac29402688ad3e554169af332e4c"</span><span class="p">,</span>
+  <span class="nx">blockNumber</span><span class="p">:</span> <span class="mi">1348278</span><span class="p">,</span>
+  <span class="nx">callReturn</span><span class="p">:</span> <span class="s2">"10000000006000000"</span><span class="p">,</span>
+  <span class="k">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="nx">gas</span><span class="p">:</span> <span class="s2">"0x2fd618"</span><span class="p">,</span>
+  <span class="nx">gasFees</span><span class="p">:</span> <span class="s2">"0.001882121837379"</span><span class="p">,</span>
+  <span class="nx">gasPrice</span><span class="p">:</span> <span class="s2">"0x5b793ccec"</span><span class="p">,</span>
+  <span class="nx">hash</span><span class="p">:</span> <span class="s2">"0x0f8e4cdf3de1aa3c01bea8b12cbde32b2bc7701d2bc1b6403634cdd5999ad729"</span><span class="p">,</span>
+  <span class="nx">input</span><span class="p">:</span> <span class="s2">"0xec86fdbd"</span><span class="p">,</span>
+  <span class="nx">nonce</span><span class="p">:</span> <span class="s2">"0x12"</span><span class="p">,</span>
+  <span class="nx">r</span><span class="p">:</span> <span class="s2">"0x3bedf73900da86c9afb6721e472a268108c66694a589b3083935a3c3cc0cc764"</span><span class="p">,</span>
+  <span class="nx">s</span><span class="p">:</span> <span class="s2">"0x2c9c24f3bbdd63ba2218de2eddb120f52e966d36fa82989ef6b1e3df0b205ce2"</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1512278406</span><span class="p">,</span>
+  <span class="nx">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+  <span class="nx">transactionIndex</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="nx">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="nx">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 <span class="c1">//example onFailed output: </span>
-<span class="p">{</span>
+<span class="nx">Transaction</span> <span class="nx">failed</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">error</span><span class="p">:</span> <span class="mi">501</span><span class="p">,</span>
   <span class="nx">message</span><span class="p">:</span> <span class="s1">'polled network but could not confirm transaction'</span>
 <span class="p">}</span>
