@@ -2620,7 +2620,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren&rsquo;t terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
 
-<h4 id="augur-rpc-transact-payload-privatekeyorsigner-onsent-onsuccess-onfailed">augur.rpc.transact(payload, privateKeyOrSigner, onSent, onSuccess, onFailed)</h4>
+<h4 id="augur-rpc-transact-payload-privatekeyorsigner-accounttype-onsent-onsuccess-onfailed">augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)</h4>
 
 <p>You can broadcast transactions to the Ethereum Network by calling <code class="prettyprint">augur.rpc.transact</code> directly. If called directly, the <code class="prettyprint">payload</code> object needs to be constructed by hand and must be structured correctly.</p>
 
@@ -2646,6 +2646,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded. The <code class="prettyprint">returns</code> field is used only to format the output, and does not affect the actual RPC request.</p>
 
 <p>The <code class="prettyprint">privateKeyOrSigner</code> is required if we are attempting to execute a transaction that will modify the blockchain (<code class="prettyprint">eth_sendTransaction</code>). If we are simply getting information (<code class="prettyprint">eth_call</code>) we don&rsquo;t need to pass anything for <code class="prettyprint">privateKeyOrSigner</code>. <code class="prettyprint">privateKeyOrSigner</code> should be the Private Key Buffer for the logged in account or a function to sign transactions provided by a hardware wallet.</p>
+
+<p>The <code class="prettyprint">accountType</code> is a string that can be &ldquo;privateKey&rdquo;, &ldquo;uPort&rdquo;, or &ldquo;ledger&rdquo;, depending on the type of account that is sending the transaction.</p>
 
 <p><strong>Under the hood <code class="prettyprint">augur.rpc.transact</code> carries out the following sequence:</strong></p>
 
