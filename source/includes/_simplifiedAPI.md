@@ -460,6 +460,20 @@ Returns the Stake Tokens owned by a a user that are either unclaimed or are in [
 Trading API
 -----------
 ```javascript
+augur.trading.getBetterWorseOrders({
+  marketID: "0x0000000000000000000000000000000000000011",
+  outcome: 1,
+  amount: 1,
+  price: 2,
+}, function (error, betterWorseOrders) { /* ... */ })
+// example output: 
+{
+  immediateFill: true,
+  betterOrderID: 0,
+  worseOrderID: 0,
+}
+
+
 augur.trading.getOrders({
   marketID: "0x0000000000000000000000000000000000000001",
   universe: "0x000000000000000000000000000000000000000b",
@@ -644,15 +658,20 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
+<!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
+### augur.trading.getBetterWorseOrders({ marketID, outcome, price [, amount] }[, callback])
+
+Returns the IDs of the [Orders](#order) for [Outcome](#outcome) `outcome` that have a better and worse price than one specified by `price`. Also returns whether the Order for `amount` [Shares](#shares) can be filled immediately. This function should be called prior to calling `augur.api.CreateOrder.publicCreateOrder` in order to get the `_betterOrderId` and `_worseOrderId` parameters that it accepts. (`_betterOrderId` and `_worseOrderId` are used to optimize the sorting of Orders on the [Order Book](#order-book).) `marketID` is a string parameter containing the address of the Market. `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market. `amount` is a string containing the desired number of Shares. `price` is a string or number containing the desired price. 
+
 ### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific Outcome in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the order state got changed (that is, when the block on the Ethereum blockchain containing the changing of the order's state was created).
+Returns a list of [Orders](#orders) in a given [Universe](#universe) or [Market](#market). Either `universe` or `marketID` is required as a string parameter containing the address of a Universe or Market. `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market, `orderType` is a string (i.e., "buy" or "sell"), `creator` is a string containing a user account address, and `orderState` is a string (i.e., "ALL", "CANCELLED", "CLOSED", or "OPEN"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the order state got changed (that is, when the block on the Ethereum blockchain containing the changing of the order's state was created).
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory({ account[, universe, marketID, outcome, orderType, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market, and `orderType` is a string (i.e., "buy" or "sell"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the trade was made (that is, when the block on the Ethereum blockchain containing the trade was created).
+Returns information about the trades a particular user has made. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market, and `orderType` is a string (i.e., "buy" or "sell"). `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the trade was made (that is, when the block on the Ethereum blockchain containing the trade was created).
 
 ### augur.trading.getUserTradingPositions({ account[, universe, marketID, outcome, sortBy, isSortDescending, limit, offset] }[, callback])
 
-Returns the trading positions held by a particular user. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific Outcome in the Market.
+Returns the trading positions held by a particular user. `account` is a string parameter containing the address of a user. Either `universe` or `marketID` is required as a string parameter containing the address of a [Universe](#universe) or [Market](#market). `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market.
