@@ -1337,64 +1337,6 @@ This transaction will fail if Augur is not currently in a haulted state.
 
 It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-Reporting Window Tx API
---------------------------------
-```javascript
-// Reporting Window Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
-var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-var _sender = "0xaa94cec0b62fcb8c3120bc80bdb2b1351c8c2d1d";
-var _endTime = 1501015000;
-var _numOutcomes = '2';
-var _numTicks = 4000;
-var _feePerEthInWei = '10000000000000000';
-var currencyContract = "0xb85a75a008e15d134c8ba01679ce2ab82dd7f777";
-var _designatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
-var _topic = "examples";
-var _extraInfo = "";
-
-augur.api.ReportingWindow.createMarket({
-  _signer: privateKey,
-  reportingWindow: reportingWindow,
-  _sender: _sender,
-  _endTime: _endTime,
-  _numOutcomes: _numOutcomes,
-  _numTicks: _numTicks,
-  _feePerEthInWei: _feePerEthInWei,
-  _denominationToken: currencyContract,
-  _designatedReporterAddress: _designatedReporterAddress,
-  _topic: _topic,
-  _extraInfo: _extraInfo,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-});
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320502,
-  callReturn: "0x5e3b08cd8a3b909e4396eda0818d5b1e4f43d4da",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x8de51be2ae9140e6db01a97b8578419e8deb542c7de2a615ced10f282bce3cc8",
-  input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
-  nonce: "0xf1",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
-```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
-
-#### augur.api.ReportingWindow.createMarket({ \_signer, reportingWindow, \_sender, \_endTime, \_numOutcomes, \_numTicks, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_extraInfo, onSent, onSuccess, onFailed })
-
-This function will create a new market for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
-
 Reputation Token Tx API
 --------------------------------
 ```javascript
@@ -2187,6 +2129,127 @@ Universe Tx API
 ---------------------
 ```javascript
 // Universe Contract Transaction API Examples:
+```
+<!--
+var privateKey = <Buffer ...>;
+var _sender = "0xaa94cec0b62fcb8c3120bc80bdb2b1351c8c2d1d";
+
+var _endTime = 1577836799;
+var _feePerEthInWei = '10000000000000000';
+var currencyContract = "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689";
+var _designatedReporterAddress = "0x01dcd72e4bed9ecba84f1749b139ae4338b30ce0";
+var _topic = "examples";
+var _description = "Will Texas secede from the United States before January 1, 2020?";
+var _extraInfo = "";
+
+augur.api.Universe.createBinaryMarket({
+  _endTime: _endTime,
+  _feePerEthInWei: _feePerEthInWei,
+  _denominationToken: currencyContract,
+  _designatedReporterAddress: _designatedReporterAddress,
+  _topic: _topic,
+  _description: _description,
+  _extraInfo: _extraInfo,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example onSuccess output:
+{
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "0x5e3b08cd8a3b909e4396eda0818d5b1e4f43d4da",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8de51be2ae9140e6db01a97b8578419e8deb542c7de2a615ced10f282bce3cc8",
+  input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
+  nonce: "0xf1",
+  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
+  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  v: "0x2c",
+  value: "0x0"
+}
+
+var _numOutcomes = '5';
+var _description = "";
+augur.api.Universe.createCategoricalMarket({
+  _endTime: _endTime,
+  _feePerEthInWei: _feePerEthInWei,
+  _denominationToken: currencyContract,
+  _designatedReporterAddress: _designatedReporterAddress,
+  _numOutcomes: _numOutcomes,
+  _topic: _topic,
+  _description: _description,
+  _extraInfo: _extraInfo,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example onSuccess output:
+{
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "0x5e3b08cd8a3b909e4396eda0818d5b1e4f43d4da",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8de51be2ae9140e6db01a97b8578419e8deb542c7de2a615ced10f282bce3cc8",
+  input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
+  nonce: "0xf1",
+  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
+  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  v: "0x2c",
+  value: "0x0"
+}
+
+var _endTime = 1609459199;
+var _minPrice = 0;
+var maxPrice = 1000;
+var _normalizedTicks = ;
+var _description = "What will the price of MSFT be at the end of 2020?";
+augur.api.Universe.createScalarMarket({
+  _endTime: _endTime,
+  _feePerEthInWei: _feePerEthInWei,
+  _denominationToken: currencyContract,
+  _designatedReporterAddress: _designatedReporterAddress,
+  _minPrice: _minPrice,
+  _maxPrice: _maxPrice,
+  _normalizedTicks: _normalizedTicks,
+  _topic: _topic,
+  _description: _description,
+  _extraInfo: _extraInfo,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) }
+});
+// example onSuccess output:
+{
+  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
+  blockNumber: 320502,
+  callReturn: "0x5e3b08cd8a3b909e4396eda0818d5b1e4f43d4da",
+  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
+  gas: "0xb10d2",
+  gasFees: "0.005827878",
+  gasPrice: "0x430e23400",
+  hash: "0x8de51be2ae9140e6db01a97b8578419e8deb542c7de2a615ced10f282bce3cc8",
+  input: "0x55d619ab000000000000000000000000000000000000000000000000000000005977abd800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000002386f26fc10000000000000000000000000000b85a75a008e15d134c8ba01679ce2ab82dd7f777000000000000000000000000ab11204cfeaccffa63c2d23aef2ea9accdb0a0d50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000001dcd72e4bed9ecba84f1749b139ae4338b30ce0000000000000000000000000000000000000000000000000000000000a62cd64",
+  nonce: "0xf1",
+  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
+  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
+  timestamp: 1501003133,
+  to: "0xa7f3659c53820346176f7e0e350780df304db179",
+  v: "0x2c",
+  value: "0x0"
+}
+-->
+```
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -2365,6 +2428,21 @@ augur.api.Universe.getOrCreateChildUniverse({
   value: "0x0"
 }
 ```
+<!-- 
+#### augur.api.Universe.createBinaryMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed })
+
+This function will create a new [Binary Market](#binary-market) for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+
+#### augur.api.Universe.createCategoricalMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_numOutcomes, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed })
+uint256 _endTime, uint256 _feePerEthInWei, ICash _denominationToken, address _designatedReporterAddress, uint8 _numOutcomes, bytes32 _topic, string _description, string _extraInfo
+
+This function will create a new [Categorical Market](#categorical-market) for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+
+#### augur.api.Universe.createScalarMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_minPrice, \_maxPrice, \_numTicks, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed })
+uint256 _endTime, uint256 _feePerEthInWei, ICash _denominationToken, address _designatedReporterAddress, int256 _minPrice, int256 _maxPrice, uint256 _numTicks, bytes32 _topic, string _description, string _extraInfo
+
+This function will create a new [Scalar Market](#scalar-market) for the given `reportingWindow` that will be constructed using the arguments passed and return the new market's address if successful. This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if `_numOutcomes` value isn't within the range of 2 and 8, if the current time is not before the start time of the `_reportingWindow`, if `_numTicks` isn't a multiple of `_numOutcomes`, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+-->
 #### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })
 
 Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe), priced in [AttoREP](#atto-prefix). If the value of the Designated Report No-Show REP Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
