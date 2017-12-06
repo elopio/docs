@@ -2129,6 +2129,44 @@ Universe Tx API
 ---------------------
 ```javascript
 // Universe Contract Transaction API Examples:
+var _extraInfo = JSON.stringify({ "resolutionSource": "http://www.spacex.com", "tags": [ "SpaceX", "spaceflight" ], "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017..." });
+augur.api.Universe.createBinaryMarket({
+  _endTime: 1546329600,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "space",
+  _description: "Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?",
+  _extraInfo: _extraInfo,
+  onSent: function (result) { console.log("sent"); console.log(result) },
+  onSuccess: function (result) { console.log("success"); console.log(result) },
+  onFailed: function (result) { console.log("failed"); console.log(result) },
+  tx: { 
+    to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+    value: "0x2386f2701c8d80",
+    gas: "0x5b8d80" 
+  }
+});
+// example onSuccess output:
+{
+  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
+  blockNumber:1362465,
+  callReturn: null,
+  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  gas: "0x5b8d80",
+  gasFees: "0.072631771174009476",
+  gasPrice: "0x6049b9456",
+  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6",
+  input: "0x593...000",
+  nonce: "0x1e",
+  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
+  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
+  timestamp: 1512491243,
+  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+  v: "0x2c",
+  value: "0x2386f2701c8d80"
+}
+
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -2307,6 +2345,20 @@ augur.api.Universe.getOrCreateChildUniverse({
   value: "0x0"
 }
 ```
+The functions for creating [Markets](#market) accept a parameter called `extraInfo`. This parameter is a stringified JSON object and can contain the following keys:
+
+* `resolutionSource` - A string containing the source that should be referenced when determining the [Outcome](#outcome) of a [Market](#market).
+* `tags` - An array containing up to 2 strings to be used for tagging the Market.
+* `longDescription` - A string containing additional information not included in the Market's `description`.
+* `outcomeNames` - This key is only to be used when creating a [Categorical Market](#categorical-market). It is an array of the outcome names as strings.
+
+<!-- TODO: Verify JS example; Add info on how to determine tx value to pass in; add link to extraInfo section -->
+#### augur.api.Universe.createBinaryMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed })
+
+This function creates a new [Binary Market](#binary-market) and returns the new Market's address if successful. `_endTime` is a Unix timestamp for the [End Time](#end-time) of the [Market](#market). `_feePerEthInWei` is the [Creator Fee](#creator-fee) (in Wei) that is collected for every ETH worth of [Shares](#shares) [Settled](#settlement). `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. `_designatedReporterAddress` is a string containing the address of the [Designated Reporter](#designated-reporter). `topic` is a string containing the Market [Topic](#topic). `description` is a string describing the Market event. `extraInfo` is a stringified JSON object. (See the explanation above for more details.)
+
+This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if the current time is not before the start time of the `_reportingWindow`, if the description length is not greater than 0 bytes, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+
 #### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })
 
 Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe), priced in [AttoREP](#atto-prefix). If the value of the Designated Report No-Show REP Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
