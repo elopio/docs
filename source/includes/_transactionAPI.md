@@ -2129,7 +2129,11 @@ Universe Tx API
 ---------------------
 ```javascript
 // Universe Contract Transaction API Examples:
-var _extraInfo = JSON.stringify({ "resolutionSource": "http://www.spacex.com", "tags": [ "SpaceX", "spaceflight" ], "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017..." });
+var _extraInfo = { 
+  "resolutionSource": "http://www.spacex.com", 
+  "tags": [ "SpaceX", "spaceflight" ], 
+  "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017." 
+};
 augur.api.Universe.createBinaryMarket({
   _endTime: 1546329600,
   _feePerEthInWei: 1193046,
@@ -2137,25 +2141,136 @@ augur.api.Universe.createBinaryMarket({
   _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
   _topic: "space",
   _description: "Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?",
-  _extraInfo: _extraInfo,
-  onSent: function (result) { console.log("sent"); console.log(result) },
-  onSuccess: function (result) { console.log("success"); console.log(result) },
-  onFailed: function (result) { console.log("failed"); console.log(result) },
+  _extraInfo: JSON.stringify(_extraInfo),
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { 
+    console.log("onSuccess result:", result);
+    // Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address
+  },
+  onFailed: function (result) { console.log("onFailed result:", result); },
   tx: { 
     to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-    value: "0x2386f2701c8d80",
-    gas: "0x5b8d80" 
+    value: 10000000006000000, 
+    gas: augur.constants.CREATE_BINARY_MARKET_GAS
   }
 });
-// example onSuccess output:
-{
+// example output:
+onSent result: {
+  callReturn: null
+  hash: "0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769", 
+}
+onSuccess result: {
   blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
   blockNumber:1362465,
   callReturn: null,
   from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   gas: "0x5b8d80",
-  gasFees: "0.072631771174009476",
-  gasPrice: "0x6049b9456",
+  gasFees: "0.02179245429087362",
+  gasPrice: "0x1ce4eb7ee",
+  hash: "0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769",
+  input: "0x593...000",
+  nonce: "0x1e",
+  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
+  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
+  timestamp: 1512491243,
+  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+  transactionIndex: "0x1",
+  v: "0x2c",
+  value: "0x2386f2701c8d80"
+}
+
+var _extraInfo = { 
+  "resolutionSource": "http://www.espn.com", 
+  "tags": ["college football", "football"], 
+  "outcomeNames": ["Georgia", "Florida"], 
+  "longDescription": "" 
+};
+augur.api.Universe.createCategoricalMarket({
+  _endTime: 1540875600,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _numOutcomes: 2,
+  _topic: "sports",
+  _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
+  _extraInfo: JSON.stringify(_extraInfo),
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { 
+    console.log("onSuccess result:", result);
+    // Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address
+  },
+  onFailed: function (result) { console.log("onFailed result:", result); },
+  tx: { 
+    to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+    value: 10000000006000000,
+    gas: augur.constants.CREATE_CATEGORICAL_MARKET_GAS
+  }
+});
+// example output:
+onSent result: {
+  callReturn: null
+  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6", 
+}
+onSuccess result: {
+  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
+  blockNumber:1362465,
+  callReturn: null,
+  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  gas: "0x632ea0",
+  gasFees: "0.021696129637146186",
+  gasPrice: "0x1ce4eb7ee",
+  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6",
+  input: "0x593...000",
+  nonce: "0x1e",
+  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
+  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
+  timestamp: 1512491243,
+  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+  v: "0x2c",
+  value: "0x2386f2701c8d80"
+}
+
+var _extraInfo = { 
+  "resolutionSource": "http://forecast.weather.gov", 
+  "tags": ["San Francisco", "weather"], 
+  "longDescription": "" 
+};
+augur.api.Universe.createScalarMarket({
+  _endTime: 1530507600,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _minPrice: -10,
+  _maxPrice: 120,
+  _numTicks: 10,
+  _topic: "temperature",
+  _description: "High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018",
+  _extraInfo: JSON.stringify(_extraInfo),
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { 
+    console.log("onSuccess result:", result);
+    // Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address
+  },
+  onFailed: function (result) { console.log("onFailed result:", result); },
+  tx: { 
+    to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+    value: 10000000006000000,
+    gas: augur.constants.CREATE_SCALAR_MARKET_GAS
+  }
+});
+// example output:
+onSent result: {
+  callReturn: null
+  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6", 
+}
+onSuccess result: {
+  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
+  blockNumber:1362465,
+  callReturn: null,
+  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  gas: "0x5b8d80",
+  gasFees: "0.021695431576204446",
+  gasPrice: "0x1ce4eb7ee",
   hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6",
   input: "0x593...000",
   nonce: "0x1e",
@@ -2345,19 +2460,74 @@ augur.api.Universe.getOrCreateChildUniverse({
   value: "0x0"
 }
 ```
-The functions for creating [Markets](#market) accept a parameter called `extraInfo`. This parameter is a stringified JSON object and can contain the following keys:
+<!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
+#### augur.api.Universe.createBinaryMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
 
-* `resolutionSource` - A string containing the source that should be referenced when determining the [Outcome](#outcome) of a [Market](#market).
-* `tags` - An array containing up to 2 strings to be used for tagging the Market.
-* `longDescription` - A string containing additional information not included in the Market's `description`.
-* `outcomeNames` - This key is only to be used when creating a [Categorical Market](#categorical-market). It is an array of the outcome names as strings.
+Creates a new [Binary Market](#binary-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
-<!-- TODO: Verify JS example; Add info on how to determine tx value to pass in; add link to extraInfo section -->
-#### augur.api.Universe.createBinaryMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed })
+#### Parameters:
 
-This function creates a new [Binary Market](#binary-market) and returns the new Market's address if successful. `_endTime` is a Unix timestamp for the [End Time](#end-time) of the [Market](#market). `_feePerEthInWei` is the [Creator Fee](#creator-fee) (in Wei) that is collected for every ETH worth of [Shares](#shares) [Settled](#settlement). `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. `_designatedReporterAddress` is a string containing the address of the [Designated Reporter](#designated-reporter). `topic` is a string containing the Market [Topic](#topic). `description` is a string describing the Market event. `extraInfo` is a stringified JSON object. (See the explanation above for more details.)
+* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `denominationToken` - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+* `_designatedReporterAddress` - String containing the address of the [Designated Reporter](#designated-reporter). 
+* `_topic` - Market [Topic](#topic). 
+* `_description` - Description of the Market event. 
+* `_extraInfo` - Stringified JSON object containing the following keys:
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `tags` - Keywords used to tag the Market (maximum of 2).
+  * `longDescription` - Additional information not included in `description`.
+* `tx` - JSON object containing the following keys:
+  * `to` - Address of the Universe contract.
+  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
 
-This transaction will fail if `_sender` is the null address (0x0000000000000000000000000000000000000000), if `_sender` does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), if the current time is not before the start time of the `_reportingWindow`, if the description length is not greater than 0 bytes, if `_feesPerEthInWei` is lower than or equal to 0 or greater than or equal to 0.5 ETH (5 * 10<sup>18</sup>), if the `_designatedReporterAddress` is the null address, or if the `msg.value` amount sent isn't enough to cover the market's validity bond and the estimated gas cost for the target amount of reporters to report.
+<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `_endTime` has already passed, `_feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `_description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
+
+#### augur.api.Universe.createCategoricalMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_numOutcomes, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+
+Creates a new [Categorical Market](#categorical-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+
+#### Parameters:
+
+* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+* `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
+* `_numOutcomes` - Total possible outcomes for the Market event. 
+* `_topic` - Market [Topic](#topic). 
+* `_description` - Description of the Market event. 
+* `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `tags` - Keywords used to tag the Market (maximum of 2).
+  * `longDescription` - Additional information not included in `description`.
+  * `outcomeNames` - Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
+* `tx` - JSON object containing the following keys:
+  * `to` - Address of the Universe contract.
+  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_CATEGORICAL_MARKET_GAS`.
+
+#### augur.api.Universe.createScalarMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_minPrice, \_maxPrice, \_numTicks, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+
+Creates a new [Scalar Market](#scalar-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+
+* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+* `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
+* `_minPrice` - [Minimum Display Price](#minimum-display-price) for the Market.
+* `_maxPrice` - [Maximum Display Price](#maximum-display-price) for the Market.
+* `_numTicks` - [Number of Ticks](#number-of-ticks) for the Market.
+* `_topic` - Market [Topic](#topic). 
+* `_description` - Description of the Market event. 
+* `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `tags` - Keywords used to tag the Market (maximum of 2).
+  * `longDescription` - Additional information not included in `description`.
+* `tx` - JSON object containing the following keys:
+  * `to` - Address of the Universe contract.
+  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
 
 #### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })
 
