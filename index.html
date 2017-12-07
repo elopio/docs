@@ -4595,6 +4595,159 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="universe-tx-api">Universe Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Transaction API Examples:</span>
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.spacex.com"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"SpaceX"</span><span class="p">,</span> <span class="s2">"spaceflight"</span> <span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createBinaryMarket</span><span class="p">({</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546329600</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0x74e88699f5d33f516500c3d9a2430f5e6ffb0689"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"space"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+    <span class="c1">// Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address</span>
+  <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">10000000006000000</span><span class="p">,</span> 
+    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_BINARY_MARKET_GAS</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">onSent</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769"</span><span class="p">,</span> 
+<span class="p">}</span>
+<span class="nx">onSuccess</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span><span class="mi">1362465</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x5b8d80"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.02179245429087362"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x1ce4eb7ee"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x593...000"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x1e"</span><span class="p">,</span>
+  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"</span>
+  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1512491243</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+  <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x2386f2701c8d80"</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.espn.com"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"college football"</span><span class="p">,</span> <span class="s2">"football"</span><span class="p">],</span> 
+  <span class="s2">"outcomeNames"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Georgia"</span><span class="p">,</span> <span class="s2">"Florida"</span><span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createCategoricalMarket</span><span class="p">({</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1540875600</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0x74e88699f5d33f516500c3d9a2430f5e6ffb0689"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"sports"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Who will win the University of Georgia vs. University of Florida football game in 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+    <span class="c1">// Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address</span>
+  <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">10000000006000000</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_CATEGORICAL_MARKET_GAS</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">onSent</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6"</span><span class="p">,</span> 
+<span class="p">}</span>
+<span class="nx">onSuccess</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span><span class="mi">1362465</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.021696129637146186"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x1ce4eb7ee"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x593...000"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x1e"</span><span class="p">,</span>
+  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"</span>
+  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1512491243</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x2386f2701c8d80"</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://forecast.weather.gov"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"weather"</span><span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createScalarMarket</span><span class="p">({</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1530507600</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0x74e88699f5d33f516500c3d9a2430f5e6ffb0689"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_minPrice</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
+  <span class="na">_maxPrice</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+  <span class="na">_numTicks</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"temperature"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+    <span class="c1">// Call `augur.createMarket.getMarketFromCreateMarketReceipt` to retrieve new market's address</span>
+  <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="mi">10000000006000000</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_SCALAR_MARKET_GAS</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">onSent</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6"</span><span class="p">,</span> 
+<span class="p">}</span>
+<span class="nx">onSuccess</span> <span class="na">result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span><span class="mi">1362465</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x5b8d80"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.021695431576204446"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x1ce4eb7ee"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x593...000"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x1e"</span><span class="p">,</span>
+  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"</span>
+  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1512491243</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span><span class="p">,</span>
+  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x2386f2701c8d80"</span>
+<span class="p">}</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCacheDesignatedReportNoShowBond</span><span class="p">({</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
@@ -4773,6 +4926,100 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 </code></pre></div>
+<!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
+
+<h4 id="augur-api-universe-createbinarymarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createBinaryMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+
+<p>Creates a new <a href="#binary-market">Binary Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<h4 id="parameters">Parameters:</h4>
+
+<ul>
+<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">denominationToken</code> - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><code class="prettyprint">_designatedReporterAddress</code> - String containing the address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
+<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
+<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object containing the following keys:
+
+<ul>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
+<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
+</ul></li>
+<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+
+<ul>
+<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
+<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+</ul></li>
+</ul>
+
+<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `_endTime` has already passed, `_feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `_description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
+
+<h4 id="augur-api-universe-createcategoricalmarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_numoutcomes-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createCategoricalMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _numOutcomes, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+
+<p>Creates a new <a href="#categorical-market">Categorical Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<h4 id="parameters">Parameters:</h4>
+
+<ul>
+<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><code class="prettyprint">_numOutcomes</code> - Total possible outcomes for the Market event. </li>
+<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
+<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
+<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
+
+<ul>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
+<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
+<li><code class="prettyprint">outcomeNames</code> - Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
+</ul></li>
+<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+
+<ul>
+<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
+<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_CATEGORICAL_MARKET_GAS</code>.</li>
+</ul></li>
+</ul>
+
+<h4 id="augur-api-universe-createscalarmarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_minprice-_maxprice-_numticks-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createScalarMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _minPrice, _maxPrice, _numTicks, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+
+<p>Creates a new <a href="#scalar-market">Scalar Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<ul>
+<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><code class="prettyprint">_minPrice</code> - <a href="#minimum-display-price">Minimum Display Price</a> for the Market.</li>
+<li><code class="prettyprint">_maxPrice</code> - <a href="#maximum-display-price">Maximum Display Price</a> for the Market.</li>
+<li><code class="prettyprint">_numTicks</code> - <a href="#number-of-ticks">Number of Ticks</a> for the Market.</li>
+<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
+<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
+<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
+
+<ul>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
+<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
+</ul></li>
+<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+
+<ul>
+<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
+<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
+</ul></li>
+</ul>
+
 <h4 id="augur-api-universe-getorcachedesignatedreportnoshowbond-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })</h4>
 
 <p>Returns the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> for <a href="#market">Markets</a> in the <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">AttoREP</a>. If the value of the Designated Report No-Show REP Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
@@ -5055,9 +5302,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <tr>
 <td>OrderCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">creator</code> placed an Order (with ID <code class="prettyprint">orderId</code>) in <code class="prettyprint">universe</code> for the Share Token at address <code class="prettyprint">shareToken</code> in the Trade Group <code class="prettyprint">tradeGroupId</code>.</td>
-<td>universe, shareToken, creator</td>
-<td>orderId, tradeGroupId</td>
+<td><code class="prettyprint">creator</code> placed an <code class="prettyprint">orderType</code> Order with <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for <code class="prettyprint">amount</code> of <code class="prettyprint">shareToken</code> at <code class="prettyprint">price</code> in the Trade Group <code class="prettyprint">tradeGroupId</code>. <code class="prettyprint">creator</code> put up either <code class="prettyprint">moneyEscrowed</code> or <code class="prettyprint">sharesEscrowed</code>.</td>
+<td>creator, universe, shareToken</td>
+<td>orderType, amount, price, moneyEscrowed, sharesEscrowed, tradeGroupId, orderId</td>
 </tr>
 <tr>
 <td>OrderFilled</td>
@@ -5519,7 +5766,7 @@ Goals:
 
 <h2 id="creator-fee">Creator Fee</h2>
 
-<p>A Creator Fee is set by the <a href="#market-creator">Market Creator</a> when he or she creates a new <a href="#market">Market</a>. Once the Creator Fee is set, it can never be increased, only decreased. The Creator Fee must be between 0% and 50%. The Creator Fee and the <a href="#reporting-fee">Reporting Fee</a> are both extracted at the same time whenever <a href="#shares">Shares</a> are <a href="#settlement">Settled</a>. Shares can be Settled when a user amasses a <a href="#complete-set">Complete Set</a> or when the Market has been <a href="#finalized-market">Finalized</a> and you want to close your open <a href="#position">Position</a>. The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting Markets. The <a href="#settlement-fees">Settlement Fees</a> are discussed in more details in the <a href="#trading">Trading</a> section of the documentation.</p>
+<p>A Creator Fee is set by the <a href="#market-creator">Market Creator</a> when he or she creates a new <a href="#market">Market</a>. Once the Creator Fee is set, it cannot be changed. The Creator Fee must be between 0% and 50%. The Creator Fee and the <a href="#reporting-fee">Reporting Fee</a> are both extracted at the same time whenever <a href="#shares">Shares</a> are <a href="#settlement">Settled</a>. Shares can be Settled when a user sells a <a href="#complete-set">Complete Set</a> or when the Market has been <a href="#finalized-market">Finalized</a> and a user wants to close an open <a href="#position">Position</a>. The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting Markets. The <a href="#settlement-fees">Settlement Fees</a> are discussed in more details in the <a href="#trading">Trading</a> section of the documentation.</p>
 
 <h2 id="designated-dispute-phase">Designated Dispute Phase</h2>
 
