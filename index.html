@@ -605,13 +605,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Simplified API section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<aside class="warning">The Simplified API provides an easy way to query for information on accounts, markets, trading, and reporting within Augur. However, in order to use this API, a connection to an <a href="#augur-node">Augur Node</a> is required. Please read the <a href="#augur-node">Augur Node</a> section before using the Simplified API.</aside>
-
-<p>All of the methods in the Simplified API are getter methods that use an <code class="prettyprint">eth_call</code> RPC request; for transactional requests (<code class="prettyprint">eth_sendTransaction</code>), see the <a href="#transaction-api">Transaction API</a> section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.</p>
+<aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
 <p>All optional parameters are listed in brackets. Most of the Simplified API functions contain optional parameters for specifying which results to return and how to sort them.  For example, <code class="prettyprint">sortBy</code> should be a string corresponding to the name of a particular field to sort by, and <code class="prettyprint">isSortDescending</code> should be a boolean value for whether to sort the results in descending order. <code class="prettyprint">limit</code> should be an integer greater than 0 that represents the maximum number of results to return. <code class="prettyprint">offset</code> should be an integer greater than 0. It is used when only a portion of the total query results is desired, and it represents the record number at which to start returning results.</p>
 
-<h2 id="accounts-api">Accounts API</h2>
+<h2 id="accounts-functions">Accounts Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">getAccountTransferHistory</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
   <span class="na">token</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -667,7 +665,31 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the token transfers made to or from the required <code class="prettyprint">account</code> parameter, which is a string containing the account address. The optional string parameter <code class="prettyprint">token</code> can be used to restrict the results to a particular token name. <code class="prettyprint">earliestCreationTime</code> and <code class="prettyprint">latestCreationTime</code> are integers representing Unix timestamps for when the transfer took place (that is, when the block on the Ethereum blockchain containing the transfer was created).</p>
 
-<h2 id="markets-api">Markets API</h2>
+<!--
+Create-Market Functions
+----------------
+```javascript
+var extraInfo = {
+  longDescription: "One Market to rule them all, One Market to bind them, One Market to bring them all, and in the darkness bind them.",
+  tags: ["Ancient evil", "Large flaming eyes"],
+};
+augur.createMarket.createBinaryMarket({
+  universe: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+  _description: "Will this market be the One Market?",
+  _endTime: 2345678901,
+  _feePerEthInWei: "0x4321",
+  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "TOPIC",
+  _extraInfo: extraInfo,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) },
+});
+```
+-->
+
+<h2 id="markets-functions">Markets Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
@@ -820,6 +842,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="na">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="na">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
     <span class="na">numTicks</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
     <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -949,7 +972,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about <a href="#market">Markets</a> that are stored on-contract. <code class="prettyprint">marketIDs</code> is an array of strings containing Market addresses. The returned result includes basic information about the markets as well as information about each market <a href="#outcome">Outcome</a>. It does not include <a href="#order-book">Order Book</a> information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about <a href="#orders">Orders</a> for the specified Market.</p>
 
-<h2 id="reporting-api">Reporting API</h2>
+<h2 id="reporting-functions">Reporting Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
   <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
@@ -1056,18 +1079,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the Stake Tokens owned by a a user that are either unclaimed or are in <a href="#market">Markets</a> that have not been <a href="#finalized-market">Finalized</a>. <code class="prettyprint">universe</code> and <code class="prettyprint">account</code> are strings containing the address of a <a href="#universe">Universe</a> and the address of a user. <code class="prettyprint">stakeTokenState</code> is a string containing &ldquo;ALL&rdquo;, &ldquo;UNCLAIMED&rdquo;, or &ldquo;UNFINALIZED&rdquo;.</p>
 
-<h2 id="trading-api">Trading API</h2>
+<h2 id="trading-functions">Trading Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
-  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-  <span class="na">outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="na">price</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+  <span class="na">price</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">betterWorseOrders</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output: </span>
 <span class="p">{</span>
-  <span class="nl">immediateFill</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="nx">betterOrderID</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="nx">worseOrderID</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nl">betterOrderID</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="nx">worseOrderID</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
 <span class="p">}</span>
 
 
@@ -1257,9 +1279,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
 
-<h3 id="augur-trading-getbetterworseorders-marketid-outcome-price-amount-callback">augur.trading.getBetterWorseOrders({ marketID, outcome, price [, amount] }[, callback])</h3>
+<h3 id="augur-trading-getbetterworseorders-marketid-outcome-ordertype-price-callback">augur.trading.getBetterWorseOrders({ marketID, outcome, orderType, price }[, callback])</h3>
 
-<p>Returns the IDs of the <a href="#order">Orders</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">outcome</code> that have a better and worse price than one specified by <code class="prettyprint">price</code>. Also returns whether the Order for <code class="prettyprint">amount</code> <a href="#shares">Shares</a> can be filled immediately. This function should be called prior to calling <code class="prettyprint">augur.api.CreateOrder.publicCreateOrder</code> in order to get the <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> parameters that it accepts. (<code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> are used to optimize the sorting of Orders on the <a href="#order-book">Order Book</a>.) <code class="prettyprint">marketID</code> is a string parameter containing the address of the Market. <code class="prettyprint">outcome</code> is an integer denoting a specific <a href="#outcome">Outcome</a> in the Market. <code class="prettyprint">amount</code> is a string containing the desired number of Shares. <code class="prettyprint">price</code> is a string or number containing the desired price. </p>
+<p>Returns the IDs of the <a href="#order">Orders</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">outcome</code> that have a better and worse price than one specified by <code class="prettyprint">price</code>. If no better/worse orders exist, null will be returned. This function should be called prior to calling <code class="prettyprint">augur.api.CreateOrder.publicCreateOrder</code> in order to get the <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> parameters that it accepts. (<code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> are used to optimize the sorting of Orders on the <a href="#order-book">Order Book</a>.) <code class="prettyprint">marketID</code> is a string parameter containing the address of the Market. <code class="prettyprint">outcome</code> is an integer denoting a specific <a href="#outcome">Outcome</a> in the Market. <code class="prettyprint">orderType</code> is a string with valid values of &ldquo;buy&rdquo; or &ldquo;sell&rdquo;. <code class="prettyprint">price</code> is a number containing the desired price. </p>
 
 <h3 id="augur-trading-getorders-universe-marketid-outcome-ordertype-creator-orderstate-earliestcreationtime-latestcreationtime-sortby-issortdescending-limit-offset-callback">augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])</h3>
 
