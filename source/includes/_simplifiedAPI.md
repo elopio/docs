@@ -2,13 +2,11 @@ Simplified API
 ===========
 <aside class="notice">The Simplified API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<aside class="warning">The Simplified API provides an easy way to query for information on accounts, markets, trading, and reporting within Augur. However, in order to use this API, a connection to an <a href="#augur-node">Augur Node</a> is required. Please read the <a href="#augur-node">Augur Node</a> section before using the Simplified API.</aside>
-
-All of the methods in the Simplified API are getter methods that use an `eth_call` RPC request; for transactional requests (`eth_sendTransaction`), see the [Transaction API](#transaction-api) section below. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries.
+<aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
 All optional parameters are listed in brackets. Most of the Simplified API functions contain optional parameters for specifying which results to return and how to sort them.  For example, `sortBy` should be a string corresponding to the name of a particular field to sort by, and `isSortDescending` should be a boolean value for whether to sort the results in descending order. `limit` should be an integer greater than 0 that represents the maximum number of results to return. `offset` should be an integer greater than 0. It is used when only a portion of the total query results is desired, and it represents the record number at which to start returning results.
 
-Accounts API
+Accounts Functions
 -----------------
 ```javascript
 augur.accounts.getAccountTransferHistory({
@@ -66,7 +64,29 @@ augur.accounts.getAccountTransferHistory({
 
 Returns the token transfers made to or from the required `account` parameter, which is a string containing the account address. The optional string parameter `token` can be used to restrict the results to a particular token name. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the transfer took place (that is, when the block on the Ethereum blockchain containing the transfer was created).
 
-Markets API
+Create-Market Functions
+----------------
+```javascript
+var extraInfo = {
+  longDescription: "One Market to rule them all, One Market to bind them, One Market to bring them all, and in the darkness bind them.",
+  tags: ["Ancient evil", "Large flaming eyes"],
+};
+augur.createMarket.createBinaryMarket({
+  universe: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
+  _description: "Will this market be the One Market?",
+  _endTime: 2345678901,
+  _feePerEthInWei: "0x4321",
+  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "TOPIC",
+  _extraInfo: extraInfo,
+  onSent: function (result) { console.log(result) },
+  onSuccess: function (result) { console.log(result) },
+  onFailed: function (result) { console.log(result) },
+});
+```
+
+Markets Functions
 ----------------
 ```javascript
 augur.markets.getCategories({
@@ -221,6 +241,7 @@ augur.markets.getMarketsInfo({
     designatedReportStake: 10,
     resolutionSource: "http://www.trusted-third-party.com",
     numTicks: 10000,
+    tickSize: "0.0001",
     consensus: null,
     outcomes: [{
       id: 0,
@@ -349,7 +370,7 @@ Returns the addresses of the [Markets](#market) in a specific category. `univers
 
 Returns information about [Markets](#market) that are stored on-contract. `marketIDs` is an array of strings containing Market addresses. The returned result includes basic information about the markets as well as information about each market [Outcome](#outcome). It does not include [Order Book](#order-book) information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#orders) for the specified Market.
 
-Reporting API
+Reporting Functions
 -------------
 ```javascript
 augur.reporting.getReportingHistory({
@@ -457,20 +478,19 @@ Returns the [Reporting Windows](#reporting-window) where a user has not claimed 
 
 Returns the Stake Tokens owned by a a user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market). `universe` and `account` are strings containing the address of a [Universe](#universe) and the address of a user. `stakeTokenState` is a string containing "ALL", "UNCLAIMED", or "UNFINALIZED".
 
-Trading API
+Trading Functions
 -----------
 ```javascript
 augur.trading.getBetterWorseOrders({
-  marketID: "0x0000000000000000000000000000000000000011",
-  outcome: 1,
-  amount: 1,
-  price: 2,
+  marketID: "0x0000000000000000000000000000000000000001",
+  outcome: 0,
+  orderType: "buy",
+  price: 0.65,
 }, function (error, betterWorseOrders) { /* ... */ })
 // example output: 
 {
-  immediateFill: true,
-  betterOrderID: 0,
-  worseOrderID: 0,
+  betterOrderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
+  worseOrderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
 }
 
 
@@ -659,9 +679,9 @@ augur.trading.getUserTradingPositions({
 ]
 ```
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
-### augur.trading.getBetterWorseOrders({ marketID, outcome, price [, amount] }[, callback])
+### augur.trading.getBetterWorseOrders({ marketID, outcome, orderType, price }[, callback])
 
-Returns the IDs of the [Orders](#order) for [Outcome](#outcome) `outcome` that have a better and worse price than one specified by `price`. Also returns whether the Order for `amount` [Shares](#shares) can be filled immediately. This function should be called prior to calling `augur.api.CreateOrder.publicCreateOrder` in order to get the `_betterOrderId` and `_worseOrderId` parameters that it accepts. (`_betterOrderId` and `_worseOrderId` are used to optimize the sorting of Orders on the [Order Book](#order-book).) `marketID` is a string parameter containing the address of the Market. `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market. `amount` is a string containing the desired number of Shares. `price` is a string or number containing the desired price. 
+Returns the IDs of the [Orders](#order) for [Outcome](#outcome) `outcome` that have a better and worse price than one specified by `price`. If no better/worse orders, null will be returned. This function should be called prior to calling `augur.api.CreateOrder.publicCreateOrder` in order to get the `_betterOrderId` and `_worseOrderId` parameters that it accepts. (`_betterOrderId` and `_worseOrderId` are used to optimize the sorting of Orders on the [Order Book](#order-book).) `marketID` is a string parameter containing the address of the Market. `outcome` is an integer denoting a specific [Outcome](#outcome) in the Market. `orderType` is a string with valid values of "buy" or "sell". `price` is a number containing the desired price. 
 
 ### augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])
 
