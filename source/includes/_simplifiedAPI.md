@@ -64,6 +64,7 @@ augur.accounts.getAccountTransferHistory({
 
 Returns the token transfers made to or from the required `account` parameter, which is a string containing the account address. The optional string parameter `token` can be used to restrict the results to a particular token name. `earliestCreationTime` and `latestCreationTime` are integers representing Unix timestamps for when the transfer took place (that is, when the block on the Ethereum blockchain containing the transfer was created).
 
+<!--
 Create-Market Functions
 ----------------
 ```javascript
@@ -85,7 +86,7 @@ augur.createMarket.createBinaryMarket({
   onFailed: function (result) { console.log(result) },
 });
 ```
-
+-->
 Markets Functions
 ----------------
 ```javascript
