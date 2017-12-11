@@ -189,14 +189,12 @@ Cancel Order Tx API
 ----------------------------
 ```javascript
 // Cancel Order Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 var _type = "1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _outcome = "1";
 
 augur.api.CancelOrder.cancelOrder({
-  _signer: privateKey,
   _orderId: _orderId,
   _type: _type,
   _market: _market,
@@ -227,7 +225,7 @@ augur.api.CancelOrder.cancelOrder({
 ```
 #### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/cancelOrder.se)
 
-#### augur.api.CancelOrder.cancelOrder({ \_signer, \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
+#### augur.api.CancelOrder.cancelOrder({ \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
 
 The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`). It returns true if the order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -235,11 +233,9 @@ Claim Trading Proceeds Tx API
 ------------------------------
 ```javascript
 // Claim Trading Proceeds Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.ClaimTradingProceeds.claimTradingProceeds({
-  _signer: privateKey,
   _market: _market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -268,7 +264,7 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 
 #### [Claim Trading Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/master/src/trading/ClaimProceeds.sol)
 
-#### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_signer, \_market, onSent, onSuccess, onFailed })
+#### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_market, onSent, onSuccess, onFailed })
 
 The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
 
@@ -276,12 +272,10 @@ Complete Sets Tx API
 -----------------------------
 ```javascript
 // Complete Sets Contract
-var privateKey = <Buffer ...>;
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _amount = "50000000000000000000" // 50.0
 
 augur.api.CompleteSets.publicBuyCompleteSets({
-  _signer: privateKey,
   _market: _market,
   _amount: _amount,
   onSent: function (result) { console.log(result) },
@@ -309,7 +303,6 @@ augur.api.CompleteSets.publicBuyCompleteSets({
 }
 
 augur.api.CompleteSets.publicSellCompleteSets({
-  _signer: privateKey,
   _market: _market,
   _amount: _amount,
   onSent: function (result) { console.log(result) },
@@ -338,11 +331,11 @@ augur.api.CompleteSets.publicSellCompleteSets({
 ```
 #### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol)
 
-#### augur.api.CompleteSets.publicBuyCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
+#### augur.api.CompleteSets.publicBuyCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
 
 This transaction will attempt to purchase `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` shares in all outcomes, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing shares, only selling/settling shares.
 
-#### augur.api.CompleteSets.publicSellCompleteSets({ \_signer, \_market, \_amount, onSent, onSuccess, onFailed })
+#### augur.api.CompleteSets.publicSellCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
 
 This transaction will attempt to sell `_amount` worth of shares in all outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't own `_amount` of shares in all outcomes for the `_market`, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (sell), `_amount` sold, number of outcomes in the `_market`, `marketCreatorFee` paid for selling the shares, and the `reportingFee` paid for selling the shares.
 
@@ -350,7 +343,6 @@ Create Order Tx API
 --------------------------
 ```javascript
 // Make Order Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var _type = "1";
 var _attoshares = "10000000000000000000"; // 10 shares
 var _displayPrice = "0.5";
@@ -361,7 +353,6 @@ var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7c
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000001";
 
 augur.api.CreateOrder.publicCreateOrder({
-  _signer: privateKey,
   _type: _type,
   _attoshares: _attoshares,
   _displayPrice: _displayPrice,
@@ -396,7 +387,7 @@ augur.api.CreateOrder.publicCreateOrder({
 ```
 #### [Create Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol)
 
-#### augur.api.CreateOrder.publicCreateOrder({ \_signer, \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.CreateOrder.publicCreateOrder({ \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 This transaction will create a new order on the order book for the specified `_market` trading on the `_outcome` provided. The required fields besides market and outcome are the `_type` of order (1 for a bid, 2 for an ask), amount of shares denoted in `_attoshares`, and the `_displayPrice` for the order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are orderIDs of orders already on the order book which should be better and worse than the order we are intending to create with this transaction. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
 
@@ -406,13 +397,10 @@ Dispute Bond Tx API
 ----------------------------------
 ```javascript
 // Dispute Bond Contract Transaction API Examples:
-// privateKey for the msg.sender of these transactions
-var privateKey = <Buffer ...>;
 var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 var _newOwner = "0xaa895acf2091752393384b902f813da761ca421f";
 
 augur.api.DisputeBond.transferOwnership({
-  _signer: privateKey,
   disputeBond: disputeBond,
   _newOwner: _newOwner,
   onSent: function (result) { console.log(result) },
@@ -440,7 +428,6 @@ augur.api.DisputeBond.transferOwnership({
 }
 
 augur.api.DisputeBond.withdraw({
-  _signer: privateKey,
   disputeBond: disputeBond,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -467,7 +454,6 @@ augur.api.DisputeBond.withdraw({
 }
 
 augur.api.DisputeBond.withdrawDisavowedTokens({
-  _signer: privateKey,
   disputeBond: disputeBond,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -494,7 +480,6 @@ augur.api.DisputeBond.withdrawDisavowedTokens({
 }
 
 augur.api.DisputeBond.withdrawInEmergency({
-  _signer: privateKey,
   disputeBond: disputeBond,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -522,7 +507,6 @@ augur.api.DisputeBond.withdrawInEmergency({
 
 var _shadyUniverse = "0x580f633f475614636ee132a0a355dcdc826d16c8";
 augur.api.DisputeBond.withdrawToUniverse({
-  _signer: privateKey,
   disputeBond: disputeBond,
   _shadyUniverse: _shadyUniverse,
   onSent: function (result) { console.log(result) },
@@ -553,19 +537,19 @@ augur.api.DisputeBond.withdrawToUniverse({
 
 The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Proposed Outcome](#proposed-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
-#### augur.api.DisputeBond.transferOwnership({ \_signer, disputeBond, \_newOwner, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.transferOwnership({ disputeBond, \_newOwner, onSent, onSuccess, onFailed })
 
 The `transferOwnership` transaction will change the current bond holder to the specified `_newOwner`. This is used to transfer ownership of a Dispute Bond from one address to another. This transaction will fail if the `msg.sender` isn't the bond holder of the specified `disputeBond`. 
 
-#### augur.api.DisputeBond.withdraw({ \_signer, disputeBond, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdraw({ disputeBond, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBond`'s [Market](#market). This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBond`, if the Market for the `disputeBond` isn't [Finalized](#finalized-market), if the Market is Finalized but the final [Payout Distribution Hash](#payout-distribution-hash) is the same Distribution Hash Challenged by the `disputeBond`, or if the `disputeBond`'s Market isn't Finalized.
 
-#### augur.api.DisputeBond.withdrawDisavowedTokens({ \_signer, disputeBond, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdrawDisavowedTokens({ disputeBond, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) in the event that another [Market](#market) forks. This transaction will fail if the `msg.sender` isn't the bond holder for the specified `disputeBond` or if the Market for the `disputeBond` is the [Forked Market](#forked-market).
 
-#### augur.api.DisputeBond.withdrawInEmergency({ \_signer, disputeBond, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdrawInEmergency({ disputeBond, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond and convert it into a Reputation Token.
 
@@ -573,7 +557,7 @@ This transaction will fail if Augur is not currently in a haulted state.
 
 It returns true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.DisputeBond.withdrawToUniverse({ \_signer, disputeBond, \_shadyUniverse, onSent, onSuccess, onFailed })
+#### augur.api.DisputeBond.withdrawToUniverse({ disputeBond, \_shadyUniverse, onSent, onSuccess, onFailed })
 
 This transaction is used by the bond holder of the specified `disputeBond` to withdraw [Reputation Tokens](#rep) earned by correctly [Challenging](#challenge) the [Proposed Outcome](#proposed-outcome) of the `disputeBond`'s [Market](#market). This transaction will fail to payout if the `msg.sender` isn't the bond holder for the specified `disputeBond`, if the `_shadyUniverse` isn't the [Child Universe](#child-universe) of the [Universe](#universe) containing this `disputeBond`, if the [Payout Distribution Hash](#payout-distribution-hash) for the [Parent Universe](#parent-universe) of `shadyUniverse` is the same Distribution Hash Challenged by the `disputeBond`.
 
@@ -581,13 +565,11 @@ Fill Order Tx API
 --------------------------
 ```javascript
 // Fill Order Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _amountFillerWants = "10000000000000000000"; // 10.0
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000002";
 
 augur.api.FillOrder.publicFillOrder({
-  _signer: privateKey,
   _orderId: _orderId,
   _amountFillerWants: _amountFillerWants,
   _tradeGroupId: _tradeGroupId,
@@ -617,7 +599,7 @@ augur.api.FillOrder.publicFillOrder({
 ```
 #### [Fill Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TakeOrder.sol)
 
-#### augur.api.FillOrder.publicFillOrder({ \_signer, \_orderID, \_amountFillerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.FillOrder.publicFillOrder({ \_orderID, \_amountFillerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
 
 Given an `_orderId` and the amount a [Filler](#order-filler) wants as `_amountFillerWants` denoted in attoshares this transaction will attempt to fill the order specified. If the `_amountFillerWants` is enough to fill the order completely then the order will be removed from the order book, otherwise it will be adjusted to only include the remaining amount after filling the `_amountFillerWants` value that the filler requests. This transaction requires `_orderId` and `_amountFillerWants` are defined. The [Creator](#order-creator) of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
 
@@ -627,7 +609,6 @@ Mailbox Tx API
 // Mailbox Contract Transaction API Examples:
 var mailbox = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.transferOwnership({
-  _signer: privateKey,
   mailbox: mailbox,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -654,7 +635,6 @@ augur.api.Mailbox.transferOwnership({
 }
 
 augur.api.Mailbox.withdrawEther({
-  _signer: privateKey,
   mailbox: mailbox,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -682,7 +662,6 @@ augur.api.Mailbox.withdrawEther({
 
 var _repToken = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.withdrawTokens({
-  _signer: privateKey,
   mailbox: mailbox,
   token: _repToken,
   onSent: function (result) { console.log(result) },
@@ -711,15 +690,15 @@ augur.api.Mailbox.withdrawTokens({
 ```
 #### [Mailbox Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/Mailbox.sol)
 
-#### augur.api.Mailbox.transferOwnership({ \_signer, mailbox, \_newOwner, onSent, onSuccess, onFailed })
+#### augur.api.Mailbox.transferOwnership({ mailbox, \_newOwner, onSent, onSuccess, onFailed })
 
 The `transferOwnership` transaction will change the current [Market Creator Mailbox](#market-creator-mailbox) owner to the specified `_newOwner`. This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
 
-#### augur.api.Mailbox.withdrawEther({ \_signer, mailbox, onSent, onSuccess, onFailed })
+#### augur.api.Mailbox.withdrawEther({ mailbox, onSent, onSuccess, onFailed })
 
 Transfers all ETH in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
 
-#### augur.api.Mailbox.withdrawTokens({ \_signer, mailbox, \_token, onSent, onSuccess, onFailed })
+#### augur.api.Mailbox.withdrawTokens({ mailbox, \_token, onSent, onSuccess, onFailed })
 
 Transfers all tokens of type `_token` in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  This transaction will fail if the `msg.sender` isn't the owner of the specified `mailbox`. 
 
@@ -727,13 +706,11 @@ Market Tx API
 ----------------------
 ```javascript
 // Market Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _payoutNumerators = [ 0, 1000 ];
 
 var _invalid = false;
 augur.api.Market.derivePayoutDistributionHash({
-  _signer: privateKey,
   market: market,
   _payoutNumerators: _payoutNumerators,
   _invalid: _invalid,
@@ -762,7 +739,6 @@ augur.api.Market.derivePayoutDistributionHash({
 }
 
 augur.api.Market.disavowTokens({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -792,7 +768,6 @@ var _payoutNumerators = [5,10,25,60];
 var _attotokens = 100;
 var _invalid = false;
 augur.api.Market.disputeDesignatedReport({
-  _signer: privateKey,
   market: market,
   _payoutNumerators: _payoutNumerators, 
   _attotokens: _attotokens,
@@ -822,7 +797,6 @@ augur.api.Market.disputeDesignatedReport({
 }
 
 augur.api.Market.disputeFirstReporters({
-  _signer: privateKey,
   market: market,
   _payoutNumerators: _payoutNumerators,
   _attotokens: _attotokens,
@@ -852,7 +826,6 @@ augur.api.Market.disputeFirstReporters({
 }
 
 augur.api.Market.disputeLastReporters({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -879,7 +852,6 @@ augur.api.Market.disputeLastReporters({
 }
 
 augur.api.Market.getOrCreateStakeToken({ 
-  _signer: privateKey,
   _payoutNumerators: _payoutNumerators, 
   _invalid: _invalid,
   onSent: function (result) { console.log(result) },
@@ -907,7 +879,6 @@ augur.api.Market.getOrCreateStakeToken({
 }
 
 augur.api.Market.migrateDueToNoReports({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -934,7 +905,6 @@ augur.api.Market.migrateDueToNoReports({
 }
 
 augur.api.Market.migrateThroughAllForks({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -961,7 +931,6 @@ augur.api.Market.migrateThroughAllForks({
 }
 
 augur.api.Market.migrateThroughOneFork({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -988,7 +957,6 @@ augur.api.Market.migrateThroughOneFork({
 }
 
 augur.api.Market.tryFinalize({
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1016,7 +984,6 @@ augur.api.Market.tryFinalize({
 
 var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 augur.api.Market.updateTentativeWinningPayoutDistributionHash({
-  _signer: privateKey,
   market: market,
   _payoutDistributionHash: _payoutDistributionHash,
   onSent: function (result) { console.log(result) },
@@ -1044,7 +1011,6 @@ augur.api.Market.updateTentativeWinningPayoutDistributionHash({
 }
 
 augur.api.Market.withdrawInEmergency {
-  _signer: privateKey,
   market: market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1072,55 +1038,55 @@ augur.api.Market.withdrawInEmergency {
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
 
-#### augur.api.Market.derivePayoutDistributionHash({ \_signer, market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
+#### augur.api.Market.derivePayoutDistributionHash({ market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
 
 Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and `_invalid` using keccak256.
 
-#### augur.api.Market.disavowTokens({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disavowTokens({ market, onSent, onSuccess, onFailed })
 
 This transaction is used to disavow Stake Tokens for this [Market](#market). When a Stake Token is disavowed it is able to be redeemed from the Market for the full [REP](#rep) price of purchase. This is used in the event of a [Fork](#fork), which causes all Markets that aren't [Finalized](#finalized-market) to enter an Awaiting Fork Migration state for the duration of the [Fork Period](#fork-period). During this time, the Market is unable to proceed through the [Market Resolution](#market-resolution) process until the Fork Period is completed and a winning [Child Universe](#child-universe) is known. To withdraw REP from the Staked Tokens on Markets Awaiting Fork Migration the Stake Tokens must be disavowed by calling `disavowTokens` on the Market. The Stake Tokens are then disavowed for the entire Market and can be sold back to the Market for full REP price. This then allows the REP holder to migrate their REP to their chosen Child Universe.
 
-#### augur.api.Market.disputeDesignatedReport({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeDesignatedReport({ market, onSent, onSuccess, onFailed })
 
 This transaction is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Designated Dispute Phase](#designated-dispute-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [Designated Reporter](#designated-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
 
-#### augur.api.Market.disputeFirstReporters({ \_signer, market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeFirstReporters({ market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })
 
 This transaction will [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [First Report Round](#first-report-round) [Market](#market) if the Market is currently in the [Dispute Phase](#dispute-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for the next [Reporting Round](#reporting-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [First Reporters](#first-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
 
-#### augur.api.Market.disputeLastReporters({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.disputeLastReporters({ market, onSent, onSuccess, onFailed })
 
 `disputeLastReporters` is used to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Phase](#dispute-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Proposed Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
 
-#### augur.api.Market.getOrCreateStakeToken({ \_signer, \_payoutNumerators, \_invalid , onSent, onSuccess, onFailed })
+#### augur.api.Market.getOrCreateStakeToken({ \_payoutNumerators, \_invalid , onSent, onSuccess, onFailed })
 
 Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. (If the Stake Token with the specified `payoutNumerators` does not exist, it will be created.) When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
 
-#### augur.api.Market.migrateDueToNoReports({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.migrateDueToNoReports({ market, onSent, onSuccess, onFailed })
 
 This function is called to move a [Market](#market) to the next [Reporting Window](#reporting-window) if no [Reports](#report) were submitted for the Market during a [Reporting Phase](#reporting-phase). If a Market is in the [First Report Round](#first-report-round) and doesn't receive any Reports, it's moved to the next coming Reporting Window to be Reported on again, however it remains in the First Report Round, however this will be rare as the [First Report](#first-report) is incentivized.
 
-#### augur.api.Market.migrateThroughAllForks({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.migrateThroughAllForks({ market, onSent, onSuccess, onFailed })
 
 This transaction will call `migrateThroughOneFork` repeatedly until the [Market](#market) has migrated through all of the [Forks](#fork) or has reached an active Fork which will throw. See the `migrateThroughOneFork` function for a better explanation of what is going on here (the next method).
 
-#### augur.api.Market.migrateThroughOneFork({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.migrateThroughOneFork({ market, onSent, onSuccess, onFailed })
 
 This transaction attempts to migrate the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a 60 day long [Fork Period](#fork-period) that occurs where in [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling `migrateThroughOneFork` attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This method will throw if the Fork Period isn't over, so there is no Winning Universe to migrate to yet. This will return `1` if the `market` was successfully migrated and return `0` if no migration was required.
 
-#### augur.api.Market.transferOwnership({ \_signer, market, \_newOwner, onSent, onSuccess, onFailed })
+#### augur.api.Market.transferOwnership({ market, \_newOwner, onSent, onSuccess, onFailed })
 
 The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the `msg.sender` isn't the owner of the specified `market`. 
 
-#### augur.api.Market.tryFinalize({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.tryFinalize({ market, onSent, onSuccess, onFailed })
 
 This transaction will attempt to finalize a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). If the Market isn't Awaiting Finalization then this will fail and return `0`. If the Market is Awaiting Finalization and can be finalized then this function will return 1 to indicate that the Market is now finalized and the [Proposed Outcome](#proposed-outcome) is now the [Final Outcome](#final-outcome). Further the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash) will become the Winning Payout Distribution Hash.
 
-#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ \_signer, market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
+#### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
 This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#shares) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
 
-#### augur.api.Market.withdrawInEmergency({ \_signer, market, onSent, onSuccess, onFailed })
+#### augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
 
@@ -1132,12 +1098,10 @@ Participation Token Tx API
 --------------------------------
 ```javascript
 // Participation Token Transaction API Examples:
-var privateKey = <Buffer ...>;
 var participationToken = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 var _attotokens = 100;
 
 augur.api.ParticipationToken.buy({
-  _signer: privateKey,
   participationToken: participationToken,
   _attotokens: _attotokens,
   onSent: function (result) { console.log(result) },
@@ -1166,7 +1130,6 @@ augur.api.ParticipationToken.buy({
 
 var _forgoFees = true;
 augur.api.ParticipationToken.redeem({
-  _signer: privateKey,
   participationToken: participationToken,
   _forgoFees: _forgoFees,
   onSent: function (result) { console.log(result) },
@@ -1194,7 +1157,6 @@ augur.api.ParticipationToken.redeem({
 }
 
 augur.api.ParticipationToken.withdrawInEmergency({
-  _signer: privateKey,
   participationToken: participationToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1222,7 +1184,7 @@ augur.api.ParticipationToken.withdrawInEmergency({
 ```
 #### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
 
-#### augur.api.ParticipationToken.buy({ \_signer, participationToken, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ParticipationToken.buy({ participationToken, \_attotokens, onSent, onSuccess, onFailed })
 
 Purchases the number of participation tokens specified by `_attotokens`. 
 
@@ -1234,7 +1196,7 @@ This transaction will fail if:
 
 Returns: true if the Participation Tokens were successfully purchased. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.ParticipationToken.redeem({ \_signer, participationToken, \_forgoFees, onSent, onSuccess, onFailed })
+#### augur.api.ParticipationToken.redeem({ participationToken, \_forgoFees, onSent, onSuccess, onFailed })
 
 Converts the user's Participation Tokens to Reputation Tokens. Due to the fact that Markets can sometimes take months to Finalize (and, therefore, fees can take months to claim), the parameter `forgoFees` can be set to true if the user would like to redeem his or her Participation Tokens immediately without having to wait.
 
@@ -1242,7 +1204,7 @@ This transaction will fail if `msg.sender` does not have any Participation Token
 
 It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.ParticipationToken.withdrawInEmergency({ \_signer, participationToken, onSent, onSuccess, onFailed })
+#### augur.api.ParticipationToken.withdrawInEmergency({ participationToken, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
@@ -1254,14 +1216,12 @@ Reputation Token Tx API
 --------------------------------
 ```javascript
 // Reputation Token Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 var _spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
 var _from = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 var _value = "100000000000000000000";
 
 augur.api.ReputationToken.approve({
-  _signer: privateKey,
   reputationToken: reputationToken,
   _spender: _spender,
   _value: _value,
@@ -1290,7 +1250,6 @@ augur.api.ReputationToken.approve({
 }
 
 augur.api.ReputationToken.migrateFromLegacyReputationToken({
-  _signer: privateKey,
   reputationToken: reputationToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1318,7 +1277,6 @@ augur.api.ReputationToken.migrateFromLegacyReputationToken({
 
 var _destination = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
-  _signer: privateKey,
   reputationToken: reputationToken,
   _destination: _destination,
   _reporter: _source,
@@ -1348,7 +1306,6 @@ augur.api.ReputationToken.migrateOut({
 }
 
 augur.api.ReputationToken.transfer({
-  _signer: privateKey,
   reputationToken: reputationToken,
   _to: _spender,
   _value,
@@ -1377,7 +1334,6 @@ augur.api.ReputationToken.transfer({
 }
 
 augur.api.ReputationToken.transferFrom({
-  _signer: privateKey,
   reputationToken: reputationToken,
   _from: _from,
   _to: _spender,
@@ -1408,23 +1364,23 @@ augur.api.ReputationToken.transferFrom({
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
 
-#### augur.api.ReputationToken.approve({ \_signer, reputationToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.approve({ reputationToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
 Allows the `_spender` the ability to spend up to `_value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` in attotokens approved.
 
-#### augur.api.ReputationToken.migrateFromLegacyReputationToken({ \_signer, reputationToken, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.migrateFromLegacyReputationToken({ reputationToken, onSent, onSuccess, onFailed })
 
 This function will migrate REP tokens from the legacy rep contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
-#### augur.api.ReputationToken.migrateOut({ \_signer, reputationToken, \_destination, \_reporter, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.migrateOut({ reputationToken, \_destination, \_reporter, \_attotokens, onSent, onSuccess, onFailed })
 
 This function migrates a `_reporter`'s REP (amount of REP denoted in `_attotokens`) from one `reputationToken` address to another (`_destination`). The `msg.sender` of this transaction must be the `_reporter` provided or the `msg.sender` must be approved to spend `_attotokens` amount of REP for the `_reporter` provided.
 
-#### augur.api.ReputationToken.transfer({ \_signer, reputationToken, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.transfer({ reputationToken, \_to, \_value, onSent, onSuccess, onFailed })
 
 If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address and `_value` is a number between 1 and 2<sup>254</sup> then this transaction will send `_value` (in attotokens) worth of `reputationToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
-#### augur.api.ReputationToken.transferFrom({ \_signer, reputationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.transferFrom({ reputationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
 If the `_from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address, `_value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `reputationTokens` for the `_from` address then this transaction will send `_value` worth of `reputationToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` (in attotokens) amount transferred.
 
@@ -1432,13 +1388,11 @@ Share Token Tx API
 ---------------------------
 ```javascript
 // Share Token Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
 var _spender = "0x01f50356c280cd886dd058210937160c73700a4b";
 var _attotokens = "100000000000000000000";
 
 augur.api.ShareToken.approve({
-  _signer: privateKey,
   shareToken: shareToken,
   _spender: _spender,
   _value: _attotokens,
@@ -1466,7 +1420,6 @@ augur.api.ShareToken.approve({
   value: "0x0"
 }
 augur.api.ShareToken.transfer({
-  _signer: privateKey,
   shareToken: shareToken,
   _to: _spender,
   _value: _attotokens,
@@ -1496,7 +1449,6 @@ augur.api.ShareToken.transfer({
 
 var _from = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
-  _signer: privateKey,
   shareToken: shareToken,
   _from: _from,
   _to: _spender,
@@ -1527,15 +1479,15 @@ augur.api.ShareToken.transferFrom({
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
 
-#### augur.api.ShareToken.approve({ \_signer, shareToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.approve({ shareToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
 Allows the `_spender` the ability to spend up to `_value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` denoted in attotokens approved.
 
-#### augur.api.ShareToken.transfer({ \_signer, shareToken, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.transfer({ shareToken, \_to, \_value, onSent, onSuccess, onFailed })
 
 If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `_value` worth to the `_to` address and `_value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred denoted in attotokens.
 
-#### augur.api.ShareToken.transferFrom({ \_signer, shareToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ShareToken.transferFrom({ shareToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
 If the `_from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `_value` worth to the `_to` address, `_value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `shareToken` for `_from` address then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` amount transferred denoted in attotokens.
 
@@ -1543,13 +1495,11 @@ Stake Token Tx API
 -------------------------------
 ```javascript
 // Stake Token Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
 var _spender = "0xfe9d0408be14d1d1ec28671b03bda1b80748977e";
 var _attotokens = "100000000000000000000";
 
 augur.api.StakeToken.approve({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _spender: _spender,
   _value: _attotokens,
@@ -1578,7 +1528,6 @@ augur.api.StakeToken.approve({
 }
 
 augur.api.StakeToken.buy({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _attotokens: _attotokens,
   onSent: function (result) { console.log(result) },
@@ -1606,7 +1555,6 @@ augur.api.StakeToken.buy({
 }
 
 augur.api.StakeToken.migrateLosingTokens({
-  _signer: privateKey,
   stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1633,7 +1581,6 @@ augur.api.StakeToken.migrateLosingTokens({
 }
 
 augur.api.StakeToken.redeemDisavowedTokens({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _reporter: _spender,
   onSent: function (result) { console.log(result) },
@@ -1661,7 +1608,6 @@ augur.api.StakeToken.redeemDisavowedTokens({
 }
 
 augur.api.StakeToken.redeemForkedTokens({
-  _signer: privateKey,
   stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1689,7 +1635,6 @@ augur.api.StakeToken.redeemForkedTokens({
 
 var _forgoFees = true;
 augur.api.StakeToken.redeemWinningTokens({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _forgoFees: _forgoFees,
   onSent: function (result) { console.log(result) },
@@ -1717,7 +1662,6 @@ augur.api.StakeToken.redeemWinningTokens({
 }
 
 augur.api.StakeToken.transfer({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _to: _spender,
   _value: _attotokens,
@@ -1747,7 +1691,6 @@ augur.api.StakeToken.transfer({
 
 var _from = "0x34c85afe56c392e240c64dc09d2a7962afe2920a";
 augur.api.StakeToken.transferFrom({
-  _signer: privateKey,
   stakeToken: stakeToken,
   _from: _from,
   _to: _spender,
@@ -1777,7 +1720,6 @@ augur.api.StakeToken.transferFrom({
 }
 
 augur.api.StakeToken.withdrawInEmergency {
-  _signer: privateKey,
   stakeToken: stakeToken,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1805,39 +1747,39 @@ augur.api.StakeToken.withdrawInEmergency {
 ```
 #### [Stake Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/StakeToken.sol)
 
-#### augur.api.StakeToken.approve({ \_signer, stakeToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.approve({ stakeToken, \_spender, \_value, onSent, onSuccess, onFailed })
 
 Allows the `_spender` the ability to spend up to `_value` worth of the specified `stakeToken` for the `msg.sender`. This transaction is used to allow another person to perform actions with your Stake Tokens on your behalf. This transaction will spawn an `Approval` event which will record a log of the owner's address (`msg.sender`), `_spender` address, and `_value` amount approved.
 
-#### augur.api.StakeToken.buy({ \_signer, stakeToken, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.buy({ stakeToken, \_attotokens, onSent, onSuccess, onFailed })
 
 This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in a [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
 
-#### augur.api.StakeToken.migrateLosingTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.migrateLosingTokens({ stakeToken, onSent, onSuccess, onFailed })
 
 This transaction should be called, though it's not required, once on each Stake Token that isn't the Winning Stake Token once a [Market](#market) has [Finalized](#finalized-market). This method will migrate the [REP](#rep) used to purchase the non-winning Stake Token to the Winning Stake Token so the REP can be redistributed to the Reporters who correctly staked REP on the Winning [Payout Set](#payout-set). If this isn't called, then whatever REP is staked into this Stake Token will remain staked into the Stake Token indefinitely. This function will fail to migrate REP to the winning Stake Token if the Market isn't finalized, the Market caused a Fork, or if This Stake Token represents the Winning Payout Set and is therefor not a losing token.
 
-#### augur.api.StakeToken.redeemDisavowedTokens({ \_signer, stakeToken, \_reporter, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemDisavowedTokens({ stakeToken, \_reporter, onSent, onSuccess, onFailed })
 
 In the event of a [Fork](#fork), all [Markets](#market), except for the [Forked Market](#forked-market), that haven't been [Finalized](#finalized-market) are placed into a pending state until the [Fork Period](#fork-period) concludes and the Fork is Resolved. During this time, any Stake Tokens purchased for these pending Markets are considered to be "Disavowed" and are able to be refunded for [REP](#rep) back into the [Parent Universe](#parent-universe) using this transaction. This is an important tool because REP holders are expected to Migrate their REP to a [Child Universe](#child-universe) and they need to be able to reclaim their REP to do so. Once the Fork is resolved, all pending markets immediately start [Designated Dispute Phase](#designated-dispute-phase). This will fail if the Stake Token hasn't been "Disavowed", or if this is used on a Stake Token belonging to the Forked Market. This transaction will spawn a `Transfer` event which will record the from address (`stakeToken`), to address (`_reporter`), and the amount of REP transferred.
 
-#### augur.api.StakeToken.redeemForkedTokens({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemForkedTokens({ stakeToken, onSent, onSuccess, onFailed })
 
 This transaction is used to migrate [REP](#rep) that is in a [Forked Market](#forked-market). Unlike `redeemDisavowedTokens`, which only works on Disavowed [Markets](#markets) and withdraws the REP to the [Parent Universe](#parent-universe), this transaction only works on the Forked Market and the REP is withdrawn to the [Child Universe](#child-universe) corresponding to the Stake Token's [Payout Set](#payout-set). This transaction will spawn a `Transfer` event which will record a log of the from address (the Child Universe's REP contract), to address (`msg.sender`), and the amount of REP transferred.
 
-#### augur.api.StakeToken.redeemWinningTokens({ \_signer, stakeToken, _forgoFees, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.redeemWinningTokens({ stakeToken, _forgoFees, onSent, onSuccess, onFailed })
 
 This transaction is used to redeem [REP](#rep) from a winning Stake Token on a [Finalized Market](#finalized-market). Calling this method will withdraw REP based on the amount of REP staked into the Stake Token by the `msg.sender` as well as a portion of the REP redistributed from losing Stake Tokens. It's recommended that [Reporters](#reporters) make sure `migrateLosingTokens` was called one time on each of the losing Stake Tokens for this [Market](#market) if they wish to claim the a portion of the REP staked in those losing Tokens. This transaction will only succeed if the Market is Finalized, the `stakeToken` is the winning Stake Token, and this isn't a [Forked Market](#forked-market). Due to the fact that Markets can sometimes take months to Finalize (and, therefore, the fees can take months to claim), the parameter `forgoFees` can be set to true if the user would like to redeem his or her Stake Tokens immediately without having to wait. This transaction will spawn a `Transfer` event which will record a log of the from address (`stakeToken`), to address (`msg.sender`), and the amount of `REP` transferred.
 
-#### augur.api.StakeToken.transfer({ \_signer, stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.transfer({ stakeToken, \_to, \_value, onSent, onSuccess, onFailed })
 
 The transfer transaction is used to transfer a Stake Token's ownership from the `msg.sender` to the `_to` address provided. This transaction will fail if the `msg.sender` doesn't own any Stake Tokens at the `stakeToken` address provided, or if the `_value` provided is greater than the number of Stake Tokens owned by the `msg.sender`. This transaction will spawn a `Transfer` event which will record a log of the `msg.sender` address, `_to` address, and `_value` amount transferred.
 
-#### augur.api.StakeToken.transferFrom({ \_signer, stakeToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.transferFrom({ stakeToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
 Unlike transfer, in transferFrom you specify a `_from` value as the owner of the Stake Token who will be giving up their ownership to the `_to` address provided. This allows Stake Tokens to be completely transferrable and therefor the Staked [REP](#rep) contained is also still transferable even while staked on a [Report](#report). This transaction will fail if the `msg.sender` doesn't have approval of the `_from`, if the `_from` address doesn't own any Stake Tokens, or if the `_value` provided is more than the Stake Tokens owned by the `_from` address. This transaction will also spawn a `Transfer` event which will record a log of the `_from` address, `_to` address, and `_value` amount transferred.
 
-#### augur.api.StakeToken.withdrawInEmergency({ \_signer, stakeToken, onSent, onSuccess, onFailed })
+#### augur.api.StakeToken.withdrawInEmergency({ stakeToken, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Stake Tokens and convert them into Reputation Tokens.
 
@@ -1849,7 +1791,6 @@ Trade Tx API
 ---------------------
 ```javascript
 // Trade Contract Transaction API Examples:
-var privateKey = <Buffer ...>;
 var _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 var _outcome = "1";
 var _fxpAmount = "10000000000000000000"; // 10.0
@@ -1857,7 +1798,6 @@ var _fxpPrice = "500000000000000000"; // 0.5
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000003";
 
 augur.api.Trade.publicBuy({
-  _signer: privateKey,
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
@@ -1888,7 +1828,6 @@ augur.api.Trade.publicBuy({
 }
 
 augur.api.Trade.publicSell({
-  _signer: privateKey,
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
@@ -1919,7 +1858,6 @@ augur.api.Trade.publicSell({
 }
 
 augur.api.Trade.publicTrade({
-  _signer: privateKey,
   _direction: '1',
   _market: _market,
   _outcome: _outcome,
@@ -1951,7 +1889,6 @@ augur.api.Trade.publicTrade({
 }
 
 augur.api.Trade.publicTakeBestOrder({
-  _signer: privateKey,
   _direction: '2',
   _market: _market,
   _outcome: _outcome,
@@ -1984,19 +1921,19 @@ augur.api.Trade.publicTakeBestOrder({
 ```
 #### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol)
 
-#### augur.api.Trade.publicBuy({ \_signer, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicBuy({ \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 The `publicBuy` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to buy at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicSell({ \_signer, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicSell({ \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 The `publicSell` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to sell at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicTrade({ \_signer, \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTrade({ \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicTakeBestOrder({ \_signer, \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTakeBestOrder({ \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
 
 The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
 
@@ -2004,11 +1941,9 @@ TradingEscapeHatch Tx API
 ---------------------
 ```javascript
 // TradingEscapeHatch Contract Transaction API Examples:
-var privateKey = <Buffer ...\>;
 var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
 
 augur.api.TradingEscapeHatch.claimSharesInUpdate({
-  _signer: privateKey,
   _market: _market,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -2034,7 +1969,7 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
   value: "0x0"
 }
 ```
-#### augur.api.TradingEscapeHatch.claimSharesInUpdate({ \_signer, \_market, onSent, onSuccess, onFailed })
+#### augur.api.TradingEscapeHatch.claimSharesInUpdate({ \_market, onSent, onSuccess, onFailed })
 
 If Augur needs to be halted by the development team (for example, if a vulnerability is discovered), calling this function on a specific [Market](#market) will withdraw the user's funds from that Market and return them to the user's address. This transaction will fail if Augur is not in a halted state.
 
