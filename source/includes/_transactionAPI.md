@@ -185,93 +185,6 @@ The `accountType` is a string that can be "privateKey", "uPort", or "ledger", de
 
 <aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
 
-Transaction Debugging Options
-----------------------------
-```javascript
-augur.rpc.setDebugOptions({ broadcast: true });
-augur.api.Universe.getCurrentReportingWindow();
-// example output:
-packaged: {
-  from: "0x56ddb80fe4e5aa05182d794526ab1eff78c90688", 
-  to: "0xa1d76546015cfe50183497ca65fcbd5c656f7813", 
-  data: "0x6235eef3", 
-  gas: "0x2fd618", 
-  returns: "address"
-}
-Blockchain RPC to http://127.0.0.1:8545 via SyncTransport with payload: 
-{
-  "id":429,
-  "jsonrpc":"2.0",
-  "method":"eth_call",
-  "params":[{"from":"0x56ddb80fe4e5aa05182d794526ab1eff78c90688",
-             "to":"0xa1d76546015cfe50183497ca65fcbd5c656f7813",
-             "data":"0x6235eef3",
-             "gas":"0x2fd618"},
-             "latest"]
-}
-"0x54d134699764375417e4b5dda1e2ac62f62e9725"
-
-augur.rpc.setDebugOptions({ connect: true });
-augur.connect({ 'ethereumNode': { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }, 'augurNode': "ws://127.0.0.1:9001"}, function (err, vitals) { console.log(err); console.log(vitals); });
-// example output:
-connecting to augur node... 
-{ 
-  augurNode: "ws://127.0.0.1:9001",
-  ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
-}
-connecting to ethereum node... 
-{ 
-  augurNode: "ws://127.0.0.1:9001",
-  ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
-}
-connected to augur
-Web3: not connected
-Sync: http://rinkeby.augur.net:8545
-HTTP: http://rinkeby.augur.net:8545
-WS: ws://rinkeby.augur.net:8546
-IPC: not connected
-connected to ethereum
-{
-  augurNode: "ws://127.0.0.1:9001",
-  ethereumNode: {
-    abi: {events: {...}, functions: {...}},
-    blockNumber: "0x133773",
-    coinbase: null,
-    contracts: {...},
-    gasPrice: 20000000000,
-    networkID: "4",
-    rpc: {...}
-  }
-}
-
-augur.rpc.setDebugOptions({ tx: true });
-augur.api.Universe.getOrCacheMarketCreationCost({
-  onSent: function (result) {...},
-  onSuccess: function (result) {...},
-  onFailed: function (result) {...}
-});
-// example output:
-payload transact: 
-{
-  constant: false,  
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29"
-  name: "getOrCacheMarketCreationCost"
-  params: [],
-  returns: "uint256",
-  send: true,
-  to: "0xa282b625053e80da550098fdb325a8ece6dfe8ac"
-}
-callReturn: 10000000006000000
-txHash: 0x26f731c948568d9c0a4983fa134431f3fba0c68248f95d35536c9157cafa785a
-```
-The function `augur.rpc.setDebugOptions` allows several debugging options to be enabled:
-
-* `broadcast` - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
-
-* `connect` - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols
-
-* `tx` - When set to true, this enables printing of information related to transaction construction/submission/confirmation. This information includes the intermediate "transaction" object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.
-
 Cancel Order Tx API
 ----------------------------
 ```javascript
@@ -2154,11 +2067,7 @@ augur.api.Universe.createBinaryMarket({
     gas: augur.constants.CREATE_BINARY_MARKET_GAS
   }
 });
-// example output:
-onSent result: {
-  callReturn: null
-  hash: "0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769", 
-}
+// example onSuccess output:
 onSuccess result: {
   blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
   blockNumber:1362465,
@@ -2190,7 +2099,7 @@ augur.api.Universe.createCategoricalMarket({
   _feePerEthInWei: 1193046,
   _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
   _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
-  _numOutcomes: 2,
+  _outcomes: ["outcome1","outcome2"],
   _topic: "sports",
   _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
@@ -2206,11 +2115,7 @@ augur.api.Universe.createCategoricalMarket({
     gas: augur.constants.CREATE_CATEGORICAL_MARKET_GAS
   }
 });
-// example output:
-onSent result: {
-  callReturn: null
-  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6", 
-}
+// example onSuccess output:
 onSuccess result: {
   blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
   blockNumber:1362465,
@@ -2258,11 +2163,7 @@ augur.api.Universe.createScalarMarket({
     gas: augur.constants.CREATE_SCALAR_MARKET_GAS
   }
 });
-// example output:
-onSent result: {
-  callReturn: null
-  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6", 
-}
+// example onSuccess output:
 onSuccess result: {
   blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
   blockNumber:1362465,
@@ -2283,12 +2184,12 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320554,
   callReturn: "0",
@@ -2308,12 +2209,12 @@ augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
 }
 
 augur.api.Universe.getOrCacheDesignatedReportStake({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320555,
   callReturn: "0",
@@ -2333,12 +2234,12 @@ augur.api.Universe.getOrCacheDesignatedReportStake({
 }
 
 augur.api.Universe.getOrCacheMarketCreationCost({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320556,
   callReturn: "0",
@@ -2358,12 +2259,12 @@ augur.api.Universe.getOrCacheMarketCreationCost({
 }
 
 augur.api.Universe.getOrCacheReportingFeeDivisor({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320557,
   callReturn: "0",
@@ -2383,12 +2284,12 @@ augur.api.Universe.getOrCacheReportingFeeDivisor({
 }
 
 augur.api.Universe.getOrCacheTargetReporterGasCosts({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0xdc5e31404be698a6866fbe7d7cf435a2c6fab7deb3acf41d6c9bb981a2630fed",
   blockNumber: 1330897,
   callReturn: "6000000",
@@ -2409,12 +2310,12 @@ augur.api.Universe.getOrCacheTargetReporterGasCosts({
 }
 
 augur.api.Universe.getOrCacheValidityBond({
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320558,
   callReturn: "0",
@@ -2436,12 +2337,12 @@ augur.api.Universe.getOrCacheValidityBond({
 var _parentPayoutDistributionHash = "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1";
 augur.api.Universe.getOrCreateChildUniverse({
   _parentPayoutDistributionHash: _parentPayoutDistributionHash,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
 });
 // example onSuccess output:
-{
+onSuccess result: {
   blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
   blockNumber: 320559,
   callReturn: "0",

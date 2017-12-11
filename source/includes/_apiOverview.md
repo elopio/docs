@@ -157,3 +157,90 @@ Floating-point (decimal) values should be passed to augur.js as strings (e.g., i
 Initial market loading
 ----------------------
 To get a list of all [Markets](#market), first call `augur.markets.getMarkets({ universe[, sortBy, isSortDescending, limit, offset] }[, callback])`. More detailed market info (including prices) for each market can then be loaded using `augur.markets.getMarketsInfo({ marketIDs }[, callback])`. `getMarketsInfo` does not return the [Open Orders](#order-book) for the Market; to get the Open Orders, call `augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])`.
+
+Debugging Options
+----------------------------
+```javascript
+augur.rpc.setDebugOptions({ broadcast: true });
+augur.api.Universe.getCurrentReportingWindow();
+// example output:
+packaged: {
+  from: "0x56ddb80fe4e5aa05182d794526ab1eff78c90688", 
+  to: "0xa1d76546015cfe50183497ca65fcbd5c656f7813", 
+  data: "0x6235eef3", 
+  gas: "0x2fd618", 
+  returns: "address"
+}
+Blockchain RPC to http://127.0.0.1:8545 via SyncTransport with payload: 
+{
+  "id":429,
+  "jsonrpc":"2.0",
+  "method":"eth_call",
+  "params":[{"from":"0x56ddb80fe4e5aa05182d794526ab1eff78c90688",
+             "to":"0xa1d76546015cfe50183497ca65fcbd5c656f7813",
+             "data":"0x6235eef3",
+             "gas":"0x2fd618"},
+             "latest"]
+}
+"0x54d134699764375417e4b5dda1e2ac62f62e9725"
+
+augur.rpc.setDebugOptions({ connect: true });
+augur.connect({ 'ethereumNode': { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }, 'augurNode': "ws://127.0.0.1:9001"}, function (err, vitals) { console.log(err); console.log(vitals); });
+// example output:
+connecting to augur node... 
+{ 
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
+}
+connecting to ethereum node... 
+{ 
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: { http: "http://rinkeby.augur.net:8545", ws: "ws://rinkeby.augur.net:8546" }
+}
+connected to augur
+Web3: not connected
+Sync: http://rinkeby.augur.net:8545
+HTTP: http://rinkeby.augur.net:8545
+WS: ws://rinkeby.augur.net:8546
+IPC: not connected
+connected to ethereum
+{
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: {
+    abi: {events: {...}, functions: {...}},
+    blockNumber: "0x133773",
+    coinbase: null,
+    contracts: {...},
+    gasPrice: 20000000000,
+    networkID: "4",
+    rpc: {...}
+  }
+}
+
+augur.rpc.setDebugOptions({ tx: true });
+augur.api.Universe.getOrCacheMarketCreationCost({
+  onSent: function (result) {...},
+  onSuccess: function (result) {...},
+  onFailed: function (result) {...}
+});
+// example output:
+payload transact: 
+{
+  constant: false,  
+  from: "0x40485264986740c8fb3d11e814bd94cf86012d29"
+  name: "getOrCacheMarketCreationCost"
+  params: [],
+  returns: "uint256",
+  send: true,
+  to: "0xa282b625053e80da550098fdb325a8ece6dfe8ac"
+}
+callReturn: 10000000006000000
+txHash: 0x26f731c948568d9c0a4983fa134431f3fba0c68248f95d35536c9157cafa785a
+```
+The function `augur.rpc.setDebugOptions` allows several debugging options to be enabled:
+
+* `broadcast` - When set to true, this enables printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
+
+* `connect` - When set to true, this enables printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols
+
+* `tx` - When set to true, this enables printing of information related to transaction construction/submission/confirmation. This information includes the intermediate "transaction" object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.
