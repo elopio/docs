@@ -445,7 +445,7 @@ var _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
 var _outcome = "1";
 var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
-var _tradeGroupId = "1";
+var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000001";
 
 augur.api.CreateOrder.publicCreateOrder({
   _signer: privateKey,
@@ -671,7 +671,7 @@ Fill Order Tx API
 var privateKey = <Buffer ...>;
 var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _amountFillerWants = "10000000000000000000"; // 10.0
-var _tradeGroupId = "1";
+var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000002";
 
 augur.api.FillOrder.publicFillOrder({
   _signer: privateKey,
@@ -1941,7 +1941,7 @@ var _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 var _outcome = "1";
 var _fxpAmount = "10000000000000000000"; // 10.0
 var _fxpPrice = "500000000000000000"; // 0.5
-var _tradeGroupId = "1";
+var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000003";
 
 augur.api.Trade.publicBuy({
   _signer: privateKey,
