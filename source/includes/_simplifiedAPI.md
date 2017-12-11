@@ -270,42 +270,42 @@ augur.markets.getMarketsInfo({
       id: 0,
       volume: 100,
       price: 0.125,
-      description: "outcome 0",
+      name: "outcome 0",
     }, {
       id: 1,
       volume: 100,
       price: 0.125,
-      description: "outcome 1",
+      name: "outcome 1",
     }, {
       id: 2,
       volume: 100,
       price: 0.125,
-      description: "outcome 2",
+      name: "outcome 2",
     }, {
       id: 3,
       volume: 100,
       price: 0.125,
-      description: "outcome 3",
+      name: "outcome 3",
     }, {
       id: 4,
       volume: 100,
       price: 0.125,
-      description: "outcome 4",
+      name: "outcome 4",
     }, {
       id: 5,
       volume: 100,
       price: 0.125,
-      description: "outcome 5",
+      name: "outcome 5",
     }, {
       id: 6,
       volume: 100,
       price: 0.125,
-      description: "outcome 6",
+      name: "outcome 6",
     }, {
       id: 7,
       volume: 100,
       price: 0.125,
-      description: "outcome 7",
+      name: "outcome 7",
     }],
   },
   {
@@ -342,12 +342,12 @@ augur.markets.getMarketsInfo({
       id: 0,
       volume: 1000,
       price: 0.5,
-      description: "outcome 0",
+      name: "outcome 0",
     }, {
       id: 1,
       volume: 1000,
       price: 0.5,
-      description: "outcome 1",
+      name: "outcome 1",
     }]
   }
 ]
@@ -542,6 +542,7 @@ augur.trading.getOrders({
     0: {
       buy: {
         "0x1000000000000000000000000000000000000000000000000000000000000000": {
+          orderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x1000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A00",
           logIndex: 0,
@@ -557,6 +558,7 @@ augur.trading.getOrders({
           sharesEscrowed: 0,
         },
         "0x2000000000000000000000000000000000000000000000000000000000000000": {
+          orderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x1000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A01",
           logIndex: 0,
@@ -572,6 +574,7 @@ augur.trading.getOrders({
           sharesEscrowed: 0,
         },
         "0x5000000000000000000000000000000000000000000000000000000000000000": {
+          orderID: "0x5000000000000000000000000000000000000000000000000000000000000000",
           amount: 1,
           creationBlockNumber: 1400001,
           creationTime: 1506473500,
@@ -591,6 +594,7 @@ augur.trading.getOrders({
     1: {
       buy: {
         "0x3000000000000000000000000000000000000000000000000000000000000000": {
+          orderID: "0x3000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x2000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A02",
           logIndex: 0,
