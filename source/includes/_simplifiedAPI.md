@@ -13,7 +13,9 @@ augur.accounts.getAccountTransferHistory({
   account: "0x0000000000000000000000000000000000000b0b",
   token: null,
   isSortDescending: false
-}, function (error, accountTransferHistory) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   {
@@ -94,7 +96,9 @@ augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "popularity",
   isSortDescending: true
-}, function (error, categoriesInfo) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   { category: "finance", popularity: 12345 },
@@ -106,7 +110,9 @@ augur.markets.getCategories({
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.markets.getDisputableMarkets({ 
   reportingWindow: "0x1000000000000000000000000000000000000000"
-}, function (error, disputableMarkets) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: coming soon
 
 augur.markets.getMarketPriceHistory({
@@ -115,7 +121,9 @@ augur.markets.getMarketPriceHistory({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (error, marketPriceHistory) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 {
   0: [{
@@ -126,7 +134,9 @@ augur.markets.getMarketPriceHistory({
 
 augur.markets.getMarkets({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (error, marketsMatched) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -139,7 +149,9 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "volume",
   isSortDescending: false,
-}, function (error, marketsInfo) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -154,7 +166,9 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
 
 augur.markets.getMarketsAwaitingReporting({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (error, marketsAwaitingReporting) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: 
 [
   "0x0000000000000000000000000000000000000012",
@@ -176,7 +190,9 @@ augur.markets.getMarketsClosingInDateRange({
   earliestClosingTime: 1506573450,
   latestClosingTime: 1506573470,
   limit: 10,
-}, function (error, marketsClosingInDateRange) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -185,7 +201,9 @@ augur.markets.getMarketsClosingInDateRange({
 augur.markets.getMarketsCreatedByUser({
   universe: "0x000000000000000000000000000000000000000b",
   creator: "0x0000000000000000000000000000000000000b0b",
-}, function (error, marketsCreatedByUser) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -196,7 +214,9 @@ augur.markets.getMarketsCreatedByUser({
 augur.markets.getMarketsInCategory({
   universe: "0x000000000000000000000000000000000000000b",
   category: "augur",
-}, function (error, marketsInCategory) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   "0x0000000000000000000000000000000000000001",
@@ -210,7 +230,9 @@ augur.markets.getMarketsInfo({
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002",
   ],
-}, function (error, marketsInfo) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   {
@@ -377,7 +399,9 @@ Reporting Functions
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
-}, function (error, reportingHistory) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 {
   "0x000000000000000000000000000000000000000b": {
@@ -420,7 +444,9 @@ augur.reporting.getReportingHistory({
 
 augur.reporting.getReportingSummary({ 
   reportingWindow: "0x1000000000000000000000000000000000000000"
-}, function (error, allStakeTokens) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: 
 {
   "AWAITING_FINALIZATION": 1,
@@ -433,14 +459,18 @@ augur.reporting.getReportingSummary({
 augur.reporting.getReportingWindowsWithUnclaimedFees({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
-}, function (error, reportingWindowsWithUnclaimedFees) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: coming soon
 
 augur.reporting.getStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
   stakeTokenState: "UNFINALIZED",
-}, function (error, allStakeTokens) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: 
 {
   "0x0000000000000000001000000000000000000001": {
@@ -487,13 +517,14 @@ augur.trading.getBetterWorseOrders({
   outcome: 0,
   orderType: "buy",
   price: 0.65,
-}, function (error, betterWorseOrders) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output: 
 {
   betterOrderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
   worseOrderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
 }
-
 
 augur.trading.getOrders({
   marketID: "0x0000000000000000000000000000000000000001",
@@ -502,7 +533,9 @@ augur.trading.getOrders({
   orderType: "buy",
   creator: null,
   orderState: "OPEN",
-}, function (error, orders) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 {
   "0x0000000000000000000000000000000000000001": {
@@ -587,7 +620,9 @@ augur.trading.getUserTradingHistory({
       isSortDescending: null,
       limit: null,
       offset: null,
-}, function (error, userTradingHistory) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   {
@@ -617,7 +652,9 @@ augur.trading.getUserTradingPositions({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (error, userTradingPositions) { /* ... */ })
+}, function (error, result) { 
+  console.log(result);
+});
 // example output:
 [
   {
