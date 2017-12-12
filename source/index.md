@@ -29,13 +29,13 @@ search: true
 ---
 Overview
 ========
-<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur Team plans to have these docs fully updated prior to launching Augur. Please bare with us as we update this document and be advised that some of this information is out of date or may be changed prior to launch. Thank you for your patience.</aside>
+<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur Team plans to have these docs fully updated prior to launching Augur. Please bear with us as we update this document and be advised that some of this information may be out-of-date or could be changed prior to launch. Thank you for your patience.</aside>
 
 [Augur](https://app.augur.net) is a decentralized prediction market platform that runs on Ethereum.
 
 The stable Augur application is built and hosted at [https://app.augur.net](https://app.augur.net). If you want to use or help test Augur, you do not need to download or install anything! Just go to [https://app.augur.net](https://app.augur.net) and start using it. (If you want to use our cutting-edge development client, this is maintained at [https://dev.augur.net](https://dev.augur.net) -- warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using [https://app.augur.net](https://app.augur.net) for a more stable experience.)
 
-Augur has its own dedicated stack exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The stack exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. You can also try our Slack, which is open to the pubic. If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Generally, questions are based asked in the `#dev` or `#general` channels.
+Augur has its own dedicated Stack Exchange which can be found at [augur.stackexchange.com](https://augur.stackexchange.com/). The Stack Exchange allows people to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. Additionally, you can chat with us on [Discord](https://discordapp.com). If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Most questions are best asked in the `#dev` or `#general` channels.
 
 Getting Started
 ---------------
