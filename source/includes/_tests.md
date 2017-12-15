@@ -14,7 +14,7 @@ Once you have Mocha installed, you can run a specific test case like so:
 
 `$ mocha ./test/unit/filters/add-filter.js`
 
-Augur and Augur.js both contain their own sets of unit tests and Augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.
+Augur and augur.js both contain their own sets of unit tests and augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.
 
 Running Tests In Augur
 ----------------------
@@ -42,11 +42,11 @@ and to issue the same command with `yarn`, you would enter this:
 
 `$ yarn lint`
 
-<aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur Team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
+<aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
 
-Running Tests In Augur.js
+Running Tests In augur.js
 -------------------------
-[augur.js](https://github.com/AugurProject/augur.js) includes both Unit tests and integration tests that can be run with `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for Augur.js first by using the following command:
+[augur.js](https://github.com/AugurProject/augur.js) includes both Unit tests and integration tests that can be run with `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for augur.js first by using the following command:
 
 `$ npm install`
 
@@ -54,7 +54,7 @@ or if you are using `yarn`:
 
 `$ yarn`
 
-Once you have installed the dependencies for Augur.js, you can run the following command using `npm` to run the unit tests:
+Once you have installed the dependencies for augur.js, you can run the following command using `npm` to run the unit tests:
 
 `$ npm run test`
 
@@ -70,7 +70,7 @@ to run integration tests, the command is:
 
 `$ yarn integration-test`
 
-Augur.js also follows a standard for it's code and also has a linting command. The command using `npm` is:
+augur.js also follows a standard for it's code and also has a linting command. The command using `npm` is:
 
 `$ npm run lint`
 
@@ -78,4 +78,4 @@ And if you prefer `yarn` then the command is:
 
 `$ yarn lint`
 
-<aside class="notice">All pull requests made to the Augur.js project must be properly linted first and any new functionality added must include tests or updated tests. The Augur Team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the Augur.js codebase.</aside>
+<aside class="notice">All pull requests made to the augur.js project must be properly linted first and any new functionality added must include tests or updated tests. The Augur team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the augur.js codebase.</aside>

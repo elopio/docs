@@ -29,7 +29,7 @@ search: true
 ---
 Overview
 ========
-<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur Team plans to have these docs fully updated prior to launching Augur. Please bear with us as we update this document and be advised that some of this information may be out-of-date or could change prior to launch. Thank you for your patience.</aside>
+<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur team plans to have these docs fully updated prior to launching Augur. Please bear with us as we update this document and be advised that some of this information may be out-of-date or could change prior to launch. Thank you for your patience.</aside>
 
 [Augur](https://app.augur.net) is a decentralized prediction market platform that runs on Ethereum.
 
@@ -52,7 +52,7 @@ Navigate to the newly created `augur` folder by running:
 
 Once this has been done, Augur's dependencies will need to be installed. This can be done using either `npm` or `yarn`. Both methods are detailed in the next sections.
 
-If you plan on submitting a Pull Request to the Augur Project, be sure to read through the [Contributing](#contributing) section of these documents before submitting the request.
+If you plan on submitting a pull request to the Augur Project, please be sure to read through the [Contributing](#contributing) section of these documents before submitting the request.
 
 <aside class="notice"><b>If you are using or helping to develop the Augur client (i.e., the front-end/user interface), it usually is not necessary for you to run a local Ethereum node on your computer.</b> We're already running several <a href="#hosted-node">hosted nodes</a> to which you can connect! If you are running an Ethereum node, the client will automatically detect it and begin talking to it; if you are not, the client will default to using the hosted nodes.</aside>
 
