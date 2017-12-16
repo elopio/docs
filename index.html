@@ -756,9 +756,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<h3 id="strongspan-class-signature-span-rarr-array-lt-accounttransfer-gt-strong"><strong>augur.accounts.getAccountTransferHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;}</span></strong></h3>
+<h3 id="augur-accounts-getaccounttransferhistory-p-callback-rarr-array-lt-accounttransfer-gt">augur.accounts.getAccountTransferHistory(p, callback) &rarr; {Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;}</h3>
 
-<p>Returns the token transfers made to or from a specific Ethereum account. Requires an Augur Node connection.</p>
+<p>Returns the token transfers made to or from a specific Ethereum address. </p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -785,29 +787,158 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Array representing the account&rsquo;s transfer history. (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;)</li>
 </ul>
 
-<!--
-Create-Market Functions
-----------------
-```javascript
-var extraInfo = {
-  longDescription: "One Market to rule them all, One Market to bind them, One Market to bring them all, and in the darkness bind them.",
-  tags: ["Ancient evil", "Large flaming eyes"],
-};
-augur.createMarket.createBinaryMarket({
-  universe: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-  _description: "Will this market be the One Market?",
-  _endTime: 2345678901,
-  _feePerEthInWei: "0x4321",
-  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
-  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
-  _topic: "TOPIC",
-  _extraInfo: extraInfo,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) },
-});
-```
--->
+<h2 id="create-market-functions">Create-Market Functions</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Example JS code coming soon</span>
+
+</code></pre></div>
+<h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
+
+<p>Creates a Binary Market in a specified Universe.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong>Name:</strong> p (Object)</li>
+<li><strong>Description:</strong> Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create a Binary Market.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number) Binary Market expiration timestamp, in seconds.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the Market Creator, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createBinaryMarket transaction fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>Description pending.</p>
+
+<h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
+
+<p>Creates a Categorical Market in a specified Universe.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong>Name:</strong> p (Object)</li>
+<li><strong>Description:</strong> Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create a Categorical Market.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number) Categorical Market expiration timestamp, in seconds.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the market creator, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
+<li><strong><code class="prettyprint">_numOutcomes</code></strong>  (number) Number of outcomes this market has, as an integer on [2, 8].</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createCategoricalMarket transaction fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>Description pending.</p>
+
+<h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
+
+<p>Creates a Scalar Market in a specified Universe.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong>Name:</strong> p (Object)</li>
+<li><strong>Description:</strong> Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create this market.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number) Market expiration timestamp, in seconds.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the market creator, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_minPrice</code></strong>  (string) Minimum display (non-normalized) price for this market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_maxPrice</code></strong>  (string) Maximum display (non-normalized) price for this market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The tick size for this market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>Description pending.</p>
+
+<h3 id="augur-createmarket-getmarketcreationcost-p-callback-rarr-marketcreationcost">augur.createMarket.getMarketCreationCost(p, callback) &rarr; {<a href="#MarketCreationCost">MarketCreationCost</a>}</h3>
+
+<p>Retrieves the Designated Report No-Show REP Bond amount and total ether required to create a new Market.</p>
+
+<p>Note: this function will send a transaction if needed to create the current reporting window.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong>Name:</strong> p (Object)</li>
+<li><strong>Description:</strong> Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
+</ul></li>
+<li><strong>Name:</strong> callback (function)</li>
+<li><strong>Description:</strong> Called after the market creation cost has been looked up.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Costs of creating a new market. (<a href="#MarketCreationCost">MarketCreationCost</a>)</li>
+</ul>
+
+<h3 id="augur-createmarket-getmarketcreationcostbreakdown-p-callback-rarr-marketcreationcostbreakdown">augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}</h3>
+
+<p>Similar to <code class="prettyprint">augur.createMarket.getMarketCreationCost</code>, but provides more detail about the ether costs required to create a new Market. These ether costs are broken down by the gas cost paid to the First Reporter and the cost of the Validity Bond.</p>
+
+<p>Note: this function will send a transaction if needed to create the current Reporting Window.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong>Name:</strong> p (Object)</li>
+<li><strong>Description:</strong> Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
+</ul></li>
+<li><strong>Name:</strong> callback (function)</li>
+<li><strong>Description:</strong> Called when all market creation costs have been looked up.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Cost breakdown for creating a new market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)</li>
+</ul>
 
 <h2 id="markets-functions">Markets Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
@@ -1070,9 +1201,11 @@ augur.createMarket.createBinaryMarket({
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<h3 id="strongspan-class-signature-span-rarr-array-lt-category-gt-strong"><strong>augur.markets.getCategories<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#Category">Category</a>&gt;}</span></strong></h3>
+<h3 id="augur-markets-getcategories-p-callback-rarr-array-lt-category-gt">augur.markets.getCategories(p, callback) &rarr; {Array.&lt;<a href="#Category">Category</a>&gt;}</h3>
 
-<p>Returns the market categories in a specific universe. Requires an Augur Node connection.</p>
+<p>Returns the Market Categories in a specific Universe.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1098,9 +1231,11 @@ augur.createMarket.createBinaryMarket({
 
 <!-- TODO: Add JS example results -->
 
-<h3 id="strongspan-class-signature-span-span"><strong>augur.markets.getDisputableMarkets<span class="signature">(p, callback)</span><span class="type-signature"></span></strong></h3>
+<h3 id="augur-markets-getdisputablemarkets-p-callback">augur.markets.getDisputableMarkets(p, callback)</h3>
 
-<p>This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result. Requires an Augur Node connection.</p>
+<p>This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1124,9 +1259,11 @@ augur.createMarket.createBinaryMarket({
 <li>Pending.</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-marketpricetimeseries-strong"><strong>augur.markets.getMarketPriceHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}</span></strong></h3>
+<h3 id="augur-markets-getmarketpricehistory-p-callback-rarr-marketpricetimeseries">augur.markets.getMarketPriceHistory(p, callback) &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}</h3>
 
-<p>Returns the prices and timestamps of a specific market&rsquo;s outcomes over time. Requires an Augur Node connection.</p>
+<p>Returns the prices and timestamps of a specific Market&rsquo;s Outcomes over time.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1146,9 +1283,11 @@ augur.createMarket.createBinaryMarket({
 <li>This market&rsquo;s price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarkets<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarkets-p-callback-rarr-array-lt-string-gt">augur.markets.getMarkets(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns an array of markets in a specific universe. Requires an Augur Node connection.</p>
+<p>Returns an array of Markets in a specific Universe.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1169,12 +1308,14 @@ augur.createMarket.createBinaryMarket({
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses in the universe, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of Market addresses in the Universe, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarketsAwaitingDesignatedReporting<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketsawaitingdesignatedreporting-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsAwaitingDesignatedReporting(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets in a specific universe that are waiting for a designated report to be submitted. Requires an Augur Node connection.</p>
+<p>Returns the markets in a specific Universe that are waiting for a Designated Report to be submitted.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1199,9 +1340,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarketsAwaitingReporting<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketsawaitingreporting-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsAwaitingReporting(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified. Requires an Augur Node connection.</p>
+<p>Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1227,9 +1370,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarketsClosingInDateRange<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketsclosingindaterange-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets closing between a given time range in a specific universe. Requires an Augur Node connection.</p>
+<p>Returns the markets closing between a given time range in a specific universe.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1255,9 +1400,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of closing market addresses, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarketsCreatedByAccount<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketscreatedbyaccount-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsCreatedByAccount(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user. Requires an Augur Node connection.</p>
+<p>Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1282,9 +1429,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-string-gt-strong"><strong>augur.markets.getMarketsInCategory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketsincategory-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets within a specific category. Requires an Augur Node connection.</p>
+<p>Returns the markets within a specific category.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1309,9 +1458,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of market addresses in the specified category, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-marketinfo-gt-strong"><strong>augur.markets.getMarketsInfo<span class="signature">(p)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;}</span></strong></h3>
+<h3 id="augur-markets-getmarketsinfo-p-rarr-array-lt-marketinfo-gt">augur.markets.getMarketsInfo(p) &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;}</h3>
 
-<p>Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about orders for the specified market. Requires an Augur Node connection.</p>
+<p>Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about orders for the specified market.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1425,9 +1576,11 @@ augur.createMarket.createBinaryMarket({
   <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="strongspan-class-signature-span-rarr-object-strong"><strong>augur.reporting.getReportingHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Object}</span></strong></h3>
+<h3 id="augur-reporting-getreportinghistory-p-callback-rarr-object">augur.reporting.getReportingHistory(p, callback) &rarr; {Object}</h3>
 
-<p>Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees. Requires an Augur Node connection.</p>
+<p>Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1456,9 +1609,11 @@ augur.createMarket.createBinaryMarket({
 <li>Reporting history, keyed by universe or market ID. Each report is of type <a href="#Report">Report</a>. (Object)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-object-strong"><strong>augur.reporting.getReportingSummary<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Object}</span></strong></h3>
+<h3 id="augur-reporting-getreportingsummary-p-callback-rarr-object">augur.reporting.getReportingSummary(p, callback) &rarr; {Object}</h3>
 
-<p>Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”. Requires an Augur Node connection.</p>
+<p>Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1480,9 +1635,11 @@ augur.createMarket.createBinaryMarket({
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 
-<h3 id="strongspan-class-signature-span-span"><strong>augur.reporting.getReportingWindowsWithUnclaimedFees<span class="signature">(p, callback)</span><span class="type-signature"></span></strong></h3>
+<h3 id="augur-reporting-getreportingwindowswithunclaimedfees-p-callback">augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)</h3>
 
-<p>This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees. Requires an Augur Node connection.</p>
+<p>This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1503,9 +1660,11 @@ augur.createMarket.createBinaryMarket({
 <li>Pending.</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-staketoken-gt-strong"><strong>augur.reporting.getStakeTokens<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;}</span></strong></h3>
+<h3 id="augur-reporting-getstaketokens-p-callback-rarr-array-lt-staketoken-gt">augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;}</h3>
 
-<p>Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized. Requires an Augur Node connection.</p>
+<p>Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1738,9 +1897,11 @@ augur.createMarket.createBinaryMarket({
 </code></pre></div>
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
 
-<h3 id="strongspan-class-signature-span-rarr-betterworseorders-strong"><strong>augur.trading.getBetterWorseOrders<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</span></strong></h3>
+<h3 id="augur-trading-getbetterworseorders-p-callback-rarr-betterworseorders">augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</h3>
 
-<p>Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.) Requires an Augur Node connection.</p>
+<p>Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1763,9 +1924,11 @@ augur.createMarket.createBinaryMarket({
 <li>Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-singleoutcomeorderbookside-strong"><strong>augur.trading.getOrders<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}</span></strong></h3>
+<h3 id="augur-trading-getorders-p-callback-rarr-singleoutcomeorderbookside">augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}</h3>
 
-<p>Returns a list of orders in a given universe or market. Requires an Augur Node connection.</p>
+<p>Returns a list of orders in a given universe or market.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1797,9 +1960,11 @@ augur.createMarket.createBinaryMarket({
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-usertrade-gt-strong"><strong>augur.trading.getUserTradingHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;}</span></strong></h3>
+<h3 id="augur-trading-getusertradinghistory-p-callback-rarr-array-lt-usertrade-gt">augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;}</h3>
 
-<p>Returns information about the trades a specific user has made. Requires an Augur Node connection.</p>
+<p>Returns information about the trades a specific user has made.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1827,9 +1992,11 @@ augur.createMarket.createBinaryMarket({
 <li>Array of the user&rsquo;s trades, keyed by universe/market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;)</li>
 </ul>
 
-<h3 id="strongspan-class-signature-span-rarr-array-lt-usertradeposition-gt-strong"><strong>augur.trading.getUserTradingPositions<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;}</span></strong></h3>
+<h3 id="augur-trading-getusertradingpositions-p-callback-rarr-array-lt-usertradeposition-gt">augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;}</h3>
 
-<p>Returns the trading positions held by a specific user. Requires an Augur Node connection.</p>
+<p>Returns the trading positions held by a specific user.</p>
+
+<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1910,7 +2077,7 @@ augur.createMarket.createBinaryMarket({
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">category</code></strong> (string) Name of a category.</li>
+<li><strong><code class="prettyprint">category</code></strong> (string) Name of a Category.</li>
 <li><strong><code class="prettyprint">popularity</code></strong> (number|string) Category popularity. (The exact method for calculating this value is still pending.)</li>
 </ul>
 
@@ -1922,6 +2089,18 @@ augur.createMarket.createBinaryMarket({
 
 <ul>
 <li><strong><code class="prettyprint">iv</code></strong> (string) Initialization vector used for this account, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="ExtraInfo"></a></p>
+
+<h3 id="extrainfo-object">ExtraInfo  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Source that should be referenced when determining the Outcome of a Market.</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Array.<string>|null) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
 </ul>
 
 <p><a name="Keystore"></a></p>
@@ -5773,7 +5952,7 @@ augur.createMarket.createBinaryMarket({
 <li><code class="prettyprint">_extraInfo</code> - Stringified JSON object containing the following keys:
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
 <li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
 <li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
@@ -5805,7 +5984,7 @@ augur.createMarket.createBinaryMarket({
 <li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
 <li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
 <li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
 <li><code class="prettyprint">outcomeNames</code> - Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
@@ -5836,7 +6015,7 @@ augur.createMarket.createBinaryMarket({
 <li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market].</li>
+<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
 <li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
 <li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
