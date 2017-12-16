@@ -2310,7 +2310,7 @@ Creates a new [Binary Market](#binary-market). After the transaction has complet
 * `_topic` - Market [Topic](#topic). 
 * `_description` - Description of the Market event. 
 * `_extraInfo` - Stringified JSON object containing the following keys:
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
   * `tags` - Keywords used to tag the Market (maximum of 2).
   * `longDescription` - Additional information not included in `description`.
 * `tx` - JSON object containing the following keys:
@@ -2334,7 +2334,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 * `_topic` - Market [Topic](#topic). 
 * `_description` - Description of the Market event. 
 * `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
   * `tags` - Keywords used to tag the Market (maximum of 2).
   * `longDescription` - Additional information not included in `description`.
   * `outcomeNames` - Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
@@ -2357,7 +2357,7 @@ Creates a new [Scalar Market](#scalar-market). After the transaction has complet
 * `_topic` - Market [Topic](#topic). 
 * `_description` - Description of the Market event. 
 * `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market].
+  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
   * `tags` - Keywords used to tag the Market (maximum of 2).
   * `longDescription` - Additional information not included in `description`.
 * `tx` - JSON object containing the following keys:

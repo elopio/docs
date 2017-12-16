@@ -62,9 +62,11 @@ augur.accounts.getAccountTransferHistory({
   }
 ]
 ```
-### **augur.accounts.getAccountTransferHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>}</span>**
+### augur.accounts.getAccountTransferHistory(p, callback) &rarr; {Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>}
 
-Returns the token transfers made to or from a specific Ethereum account. Requires an Augur Node connection.
+Returns the token transfers made to or from a specific Ethereum address. 
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -84,29 +86,132 @@ Returns the token transfers made to or from a specific Ethereum account. Require
 
 * Array representing the account's transfer history. (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>)
 
-<!--
 Create-Market Functions
 ----------------
 ```javascript
-var extraInfo = {
-  longDescription: "One Market to rule them all, One Market to bind them, One Market to bring them all, and in the darkness bind them.",
-  tags: ["Ancient evil", "Large flaming eyes"],
-};
-augur.createMarket.createBinaryMarket({
-  universe: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-  _description: "Will this market be the One Market?",
-  _endTime: 2345678901,
-  _feePerEthInWei: "0x4321",
-  _denominationToken: "0x74e88699f5d33f516500c3d9a2430f5e6ffb0689",
-  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
-  _topic: "TOPIC",
-  _extraInfo: extraInfo,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) },
-});
+// Example JS code coming soon
+
 ```
--->
+### augur.createMarket.createBinaryMarket(p)
+
+Creates a Binary Market in a specified Universe.
+
+#### **Parameters:**
+
+* **Name:** p (Object)
+* **Description:** Parameters object.
+* **Properties:**
+    * **`universe`**  (string) Universe in which to create a Binary Market.
+    * **`_endTime`**  (number) Binary Market expiration timestamp, in seconds.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the Market Creator, as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
+    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the market, as a UTF8 string.
+    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
+
+#### **Returns:**
+
+Description pending.
+
+### augur.createMarket.createCategoricalMarket(p)
+
+Creates a Categorical Market in a specified Universe.
+
+#### **Parameters:**
+
+* **Name:** p (Object)
+* **Description:** Parameters object.
+* **Properties:**
+    * **`universe`**  (string) Universe in which to create a Categorical Market.
+    * **`_endTime`**  (number) Categorical Market expiration timestamp, in seconds.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the market creator, as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
+    * **`_numOutcomes`**  (number) Number of outcomes this market has, as an integer on [2, 8].
+    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the market, as a UTF8 string.
+    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
+
+#### **Returns:**
+
+Description pending.
+
+### augur.createMarket.createScalarMarket(p)
+
+Creates a Scalar Market in a specified Universe.
+
+#### **Parameters:**
+
+* **Name:** p (Object)
+* **Description:** Parameters object.
+* **Properties:**
+    * **`universe`**  (string) Universe in which to create this market.
+    * **`_endTime`**  (number) Market expiration timestamp, in seconds.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the market creator, as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
+    * **`_minPrice`**  (string) Minimum display (non-normalized) price for this market, as a base-10 string.
+    * **`_maxPrice`**  (string) Maximum display (non-normalized) price for this market, as a base-10 string.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
+    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the market, as a UTF8 string.
+    * **`tickSize`**  (string) &lt;optional> The tick size for this market, as a base-10 string.
+    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
+
+#### **Returns:**
+
+Description pending.
+
+### augur.createMarket.getMarketCreationCost(p, callback) &rarr; {<a href="#MarketCreationCost">MarketCreationCost</a>}
+
+Retrieves the Designated Report No-Show REP Bond amount and total ether required to create a new Market.
+
+Note: this function will send a transaction if needed to create the current reporting window.
+
+#### **Parameters:**
+
+* **Name:** p (Object)
+* **Description:** Parameters object.
+* **Properties:**
+    * **`universe`**  (string) Universe on which to create this market.
+* **Name:** callback (function)
+* **Description:** Called after the market creation cost has been looked up.
+
+#### **Returns:**
+
+* Costs of creating a new market. (<a href="#MarketCreationCost">MarketCreationCost</a>)
+
+### augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}
+
+Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new Market. These ether costs are broken down by the gas cost paid to the First Reporter and the cost of the Validity Bond.
+
+Note: this function will send a transaction if needed to create the current Reporting Window.
+
+#### **Parameters:**
+
+* **Name:** p (Object)
+* **Description:** Parameters object.
+* **Properties:**
+    * **`universe`**  (string) Universe on which to create this market.
+* **Name:** callback (function)
+* **Description:** Called when all market creation costs have been looked up.
+
+#### **Returns:**
+
+* Cost breakdown for creating a new market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)
+
 Markets Functions
 ----------------
 ```javascript
@@ -370,9 +475,11 @@ augur.markets.getMarketsInfo({
   }
 ]
 ```
-### **augur.markets.getCategories<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#Category">Category</a>>}</span>**
+### augur.markets.getCategories(p, callback) &rarr; {Array.&lt;<a href="#Category">Category</a>>}
 
-Returns the market categories in a specific universe. Requires an Augur Node connection.
+Returns the Market Categories in a specific Universe.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 * **`p`** (Object) Parameters object.  
@@ -388,9 +495,11 @@ Returns the market categories in a specific universe. Requires an Augur Node con
 * Array representing the categories in the specified universe. (Array.&lt;<a href="#Category">Category</a>>)
 
 <!-- TODO: Add JS example results -->
-### **augur.markets.getDisputableMarkets<span class="signature">(p, callback)</span><span class="type-signature"></span>**
+### augur.markets.getDisputableMarkets(p, callback)
 
-This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result. Requires an Augur Node connection.
+This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -407,9 +516,11 @@ This function has not been implemented yet. Returns the markets in a specific re
 
 * Pending.
 
-### **augur.markets.getMarketPriceHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}</span>**
+### augur.markets.getMarketPriceHistory(p, callback) &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}
 
-Returns the prices and timestamps of a specific market's outcomes over time. Requires an Augur Node connection.
+Returns the prices and timestamps of a specific Market's Outcomes over time.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -422,9 +533,11 @@ Returns the prices and timestamps of a specific market's outcomes over time. Req
 
 * This market's price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)
 
-### **augur.markets.getMarkets<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarkets(p, callback) &rarr; {Array.&lt;string>}
 
-Returns an array of markets in a specific universe. Requires an Augur Node connection.
+Returns an array of Markets in a specific Universe.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -439,11 +552,13 @@ Returns an array of markets in a specific universe. Requires an Augur Node conne
 
 #### **Returns:**
 
-* Array of market addresses in the universe, as hexadecimal strings. (Array.&lt;string>)
+* Array of Market addresses in the Universe, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsAwaitingDesignatedReporting<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets in a specific universe that are waiting for a designated report to be submitted. Requires an Augur Node connection.
+Returns the markets in a specific Universe that are waiting for a Designated Report to be submitted.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -461,9 +576,11 @@ Returns the markets in a specific universe that are waiting for a designated rep
 
 * Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsAwaitingReporting<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarketsAwaitingReporting(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified. Requires an Augur Node connection.
+Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -482,9 +599,11 @@ Returns the markets in a particular universe or reporting window that are waitin
 
 * Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsClosingInDateRange<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets closing between a given time range in a specific universe. Requires an Augur Node connection.
+Returns the markets closing between a given time range in a specific universe.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -503,9 +622,11 @@ Returns the markets closing between a given time range in a specific universe. R
 
 * Array of closing market addresses, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsCreatedByAccount<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarketsCreatedByAccount(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user. Requires an Augur Node connection.
+Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -523,9 +644,11 @@ Returns the markets created by a specific user, as well as the total amount of f
 
 * Array of market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsInCategory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>**
+### augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets within a specific category. Requires an Augur Node connection.
+Returns the markets within a specific category.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -543,9 +666,11 @@ Returns the markets within a specific category. Requires an Augur Node connectio
 
 * Array of market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
 
-### **augur.markets.getMarketsInfo<span class="signature">(p)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>>}</span>**
+### augur.markets.getMarketsInfo(p) &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>>}
 
-Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about orders for the specified market. Requires an Augur Node connection.
+Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about orders for the specified market.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -656,9 +781,11 @@ augur.reporting.getStakeTokens({
   },
 }
 ```
-### **augur.reporting.getReportingHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Object}</span>**
+### augur.reporting.getReportingHistory(p, callback) &rarr; {Object}
 
-Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees. Requires an Augur Node connection.
+Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -680,9 +807,11 @@ Returns information about the reports submitted by a particular user. For report
 
 * Reporting history, keyed by universe or market ID. Each report is of type <a href="#Report">Report</a>. (Object)
 
-### **augur.reporting.getReportingSummary<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Object}</span>**
+### augur.reporting.getReportingSummary(p, callback) &rarr; {Object}
 
-Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”. Requires an Augur Node connection.
+Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -696,9 +825,11 @@ Returns the number of markets in various reporting phases, including “DESIGNAT
 * Summary of the number of markets in each reporting phase, keyed by reporting phase. (Object)
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
-### **augur.reporting.getReportingWindowsWithUnclaimedFees<span class="signature">(p, callback)</span><span class="type-signature"></span>**
+### augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)
 
-This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees. Requires an Augur Node connection.
+This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -712,9 +843,11 @@ This function has not been implemented yet. Returns the reporting windows where 
 
 * Pending.
 
-### **augur.reporting.getStakeTokens<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>>}</span>**
+### augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>>}
 
-Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized. Requires an Augur Node connection.
+Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -941,9 +1074,11 @@ augur.trading.getUserTradingPositions({
 ]
 ```
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
-### **augur.trading.getBetterWorseOrders<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</span>**
+### augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}
 
-Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.) Requires an Augur Node connection.
+Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -959,9 +1094,11 @@ Returns the IDs of the orders for a given outcome that have a better and worse p
 
 * Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)
 
-### **augur.trading.getOrders<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}</span>**
+### augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}
 
-Returns a list of orders in a given universe or market. Requires an Augur Node connection.
+Returns a list of orders in a given universe or market.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -985,9 +1122,11 @@ Returns a list of orders in a given universe or market. Requires an Augur Node c
 * One side of the order book (buy or sell) for the specified market/universe and outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
-### **augur.trading.getUserTradingHistory<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>>}</span>**
+### augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>>}
 
-Returns information about the trades a specific user has made. Requires an Augur Node connection.
+Returns information about the trades a specific user has made.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -1008,9 +1147,11 @@ Returns information about the trades a specific user has made. Requires an Augur
 
 * Array of the user's trades, keyed by universe/market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>>)
 
-### **augur.trading.getUserTradingPositions<span class="signature">(p, callback)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>}</span>**
+### augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>}
 
-Returns the trading positions held by a specific user. Requires an Augur Node connection.
+Returns the trading positions held by a specific user.
+
+Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 
@@ -1069,7 +1210,7 @@ Type Definitions
 ### Category  (Object)
 
 #### **Properties:** 
-* **`category`** (string) Name of a category.
+* **`category`** (string) Name of a Category.
 * **`popularity`** (number|string) Category popularity. (The exact method for calculating this value is still pending.)
 
 <a name="CipherParams"></a>
@@ -1077,6 +1218,14 @@ Type Definitions
 
 #### **Properties:** 
 * **`iv`** (string) Initialization vector used for this account, as a hexadecimal string.
+
+<a name="ExtraInfo"></a>
+### ExtraInfo  (Object)
+
+#### **Properties:** 
+* **`resolutionSource`** (string|null) Source that should be referenced when determining the Outcome of a Market.
+* **`tags`** (Array.<string>|null) Keywords used to tag the Market (maximum of 2).
+* **`longDescription`** (string|null) Additional information not included in description of the Market.
 
 <a name="Keystore"></a>
 ### Keystore  (Object)
