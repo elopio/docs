@@ -151,7 +151,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Trading section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur will maintain an <a href="#order-book">Order Book</a> for each of the markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be <a href="#fill-order">Filled</a> immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of your trade will be placed on the Order Book as an Order. If you are the <a href="#order-creator">Creator</a> of the Order you can cancel it to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
+<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur will maintain an <a href="#order-book">Order Book</a> for each of the Markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be <a href="#fill-order">Filled</a> immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of your trade will be placed on the Order Book as an Order. If you are the <a href="#order-creator">Creator</a> of the Order you can cancel it to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
 
 <p>The Augur UI will offer users the best prices first when displaying the Order Book on each Market page. Orders are never executed at a worse price than the limit price set by the trader, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback Orders to attempt to fill our Order in the event that the best Order was filled before we sent the transaction. These backup/fallback Orders will always fit within the limit price set by the trader.</p>
 
@@ -800,7 +800,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
 
-<p>Creates a Binary Market in a specified Universe.</p>
+<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -811,12 +811,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create a Binary Market.</li>
 <li><strong><code class="prettyprint">_endTime</code></strong>  (number) Binary Market expiration timestamp, in seconds.</li>
-<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the Market Creator, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
-<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
-<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
@@ -830,7 +830,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
-<p>Creates a Categorical Market in a specified Universe.</p>
+<p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -841,13 +841,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create a Categorical Market.</li>
 <li><strong><code class="prettyprint">_endTime</code></strong>  (number) Categorical Market expiration timestamp, in seconds.</li>
-<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the market creator, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
-<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
-<li><strong><code class="prettyprint">_numOutcomes</code></strong>  (number) Number of outcomes this market has, as an integer on [2, 8].</li>
-<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
+<li><strong><code class="prettyprint">_numOutcomes</code></strong>  (number) Number of <a href="#outcomes">Outcomes</a> this Market has, as an integer on [2, 8].</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
@@ -861,7 +861,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
-<p>Creates a Scalar Market in a specified Universe.</p>
+<p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -872,15 +872,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Universe in which to create this market.</li>
 <li><strong><code class="prettyprint">_endTime</code></strong>  (number) Market expiration timestamp, in seconds.</li>
-<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the market creator, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this market&rsquo;s currency.</li>
-<li><strong><code class="prettyprint">_minPrice</code></strong>  (string) Minimum display (non-normalized) price for this market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_maxPrice</code></strong>  (string) Maximum display (non-normalized) price for this market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this market&rsquo;s designated reporter.</li>
-<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The tick size for this market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">_minPrice</code></strong>  (string) Minimum display (non-normalized) price for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_maxPrice</code></strong>  (string) Maximum display (non-normalized) price for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The <a href="#tick">Tick</a> size for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
@@ -894,9 +894,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-createmarket-getmarketcreationcost-p-callback-rarr-marketcreationcost">augur.createMarket.getMarketCreationCost(p, callback) &rarr; {<a href="#MarketCreationCost">MarketCreationCost</a>}</h3>
 
-<p>Retrieves the Designated Report No-Show REP Bond amount and total ether required to create a new Market.</p>
+<p>Retrieves the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> amount and total ether required to create a new <a href="#market">Market</a>.</p>
 
-<p>Note: this function will send a transaction if needed to create the current reporting window.</p>
+<p>Note: This function will send a transaction if needed to create the current <a href="#reporting-window">Reporting Window</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -904,22 +904,24 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) <a href="#universe">Universe</a> on which to create this Market.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the market creation cost has been looked up.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market creation cost has been looked up.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Costs of creating a new market. (<a href="#MarketCreationCost">MarketCreationCost</a>)</li>
+<li>Costs of creating a new Market. (<a href="#MarketCreationCost">MarketCreationCost</a>)</li>
 </ul>
+
+<!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 
 <h3 id="augur-createmarket-getmarketcreationcostbreakdown-p-callback-rarr-marketcreationcostbreakdown">augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}</h3>
 
-<p>Similar to <code class="prettyprint">augur.createMarket.getMarketCreationCost</code>, but provides more detail about the ether costs required to create a new Market. These ether costs are broken down by the gas cost paid to the First Reporter and the cost of the Validity Bond.</p>
+<p>Similar to <code class="prettyprint">augur.createMarket.getMarketCreationCost</code>, but provides more detail about the ether costs required to create a new <a href="#market">Market</a>. These ether costs are broken down by the gas cost paid to the <a href="#first-reporter">First Reporter</a> and the cost of the <a href="#validity-bond">Validity Bond</a>.</p>
 
-<p>Note: this function will send a transaction if needed to create the current Reporting Window.</p>
+<p>Note: This function will send a transaction if needed to create the current Reporting Window.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -928,15 +930,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) <a href="#universe">Universe</a> on which to create this Market.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called when all market creation costs have been looked up.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called when all Market creation costs have been looked up.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Cost breakdown for creating a new market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)</li>
+<li>Cost breakdown for creating a new Market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)</li>
 </ul>
 
 <h2 id="markets-functions">Markets Functions</h2>
@@ -1202,7 +1204,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h3 id="augur-markets-getcategories-p-callback-rarr-array-lt-category-gt">augur.markets.getCategories(p, callback) &rarr; {Array.&lt;<a href="#Category">Category</a>&gt;}</h3>
 
-<p>Returns the Market Categories in a specific Universe.</p>
+<p>Returns the Market Categories in a specific <a href="#universe">Universe</a>.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1213,7 +1215,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to retrieve the categories, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the categories.</li>
 <li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort categories in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of categories to return.</li>
@@ -1225,14 +1227,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array representing the categories in the specified universe. (Array.&lt;<a href="#Category">Category</a>&gt;)</li>
+<li>Array representing the categories in the specified Universe. (Array.&lt;<a href="#Category">Category</a>&gt;)</li>
 </ul>
 
 <!-- TODO: Add JS example results -->
 
 <h3 id="augur-markets-getdisputablemarkets-p-callback">augur.markets.getDisputableMarkets(p, callback)</h3>
 
-<p>This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result.</p>
+<p>This function has not been implemented yet. Returns the <a href="#markets">Markets</a> in a specific <a href="#reporting-window">Reporting Window</a> that are able to be disputed, along with the value of the <a href="#dispute-bond">Dispute Bond</a> needed to dispute each Market’s result.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1243,13 +1245,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) Contract address of the reporting window from which to retrieve the disputable markets.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) Contract address of the Reporting Window from which to retrieve the disputable Markets.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -1260,7 +1262,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-markets-getmarketpricehistory-p-callback-rarr-marketpricetimeseries">augur.markets.getMarketPriceHistory(p, callback) &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}</h3>
 
-<p>Returns the prices and timestamps of a specific Market&rsquo;s Outcomes over time.</p>
+<p>Returns the prices and timestamps of a specific <a href="#market">Market&rsquo;s</a> <a href="#outcomes">Outcomes</a> over time.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1279,12 +1281,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>This market&rsquo;s price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)</li>
+<li>The Market&rsquo;s price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)</li>
 </ul>
 
 <h3 id="augur-markets-getmarkets-p-callback-rarr-array-lt-string-gt">augur.markets.getMarkets(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns an array of Markets in a specific Universe.</p>
+<p>Returns an array of <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a>.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1295,13 +1297,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to get transfer history.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markts to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe from which to get transfer history.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -1312,7 +1314,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-markets-getmarketsawaitingdesignatedreporting-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsAwaitingDesignatedReporting(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets in a specific Universe that are waiting for a Designated Report to be submitted.</p>
+<p>Returns the <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1323,25 +1325,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to retrieve markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">designatedReporter</code></strong>  (string) &lt;optional&gt; Address of a specific designated reporter by which to filter the results, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe from which to retrieve Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">designatedReporter</code></strong>  (string) &lt;optional&gt; Address of a specific <a href="#designated-reporter">Designated Reporter</a> by which to filter the results, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsawaitingreporting-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsAwaitingReporting(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified.</p>
+<p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#reporting-window">Reporting Window</a> that are waiting for a <a href="designated-report">Designated Report</a> to be submitted or waiting for the <a href="#reporting-phase">Reporting Phase</a> to end. Either the Universe or Reporting Window must be specified.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1352,26 +1354,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the universe from which to retrieve markets, as a hexadecimal string. If this parameter is not specified, a reporting window must be specified instead.</li>
-<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) &lt;optional&gt; Contract address of the reporting window from which to retrieve the markets, as a hexadecimal string. If this parameter is not specified, a universe must be specified instead.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Reporting Window must be specified instead.</li>
+<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Reporting Window from which to retrieve the markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.</li>
 <li><strong><code class="prettyprint">reportingState</code></strong>  (string) &lt;optional&gt; Description pending.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsclosingindaterange-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets closing between a given time range in a specific universe.</p>
+<p>Returns the <a href="#market">Markets</a> closing between a given time range in a specific <a href="#universe">Universe</a>.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1382,26 +1384,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">earliestClosingTime</code></strong>  (number) Earliest market close timestamp at which to truncate market results, in seconds.</li>
-<li><strong><code class="prettyprint">latestClosingTime</code></strong>  (number) Latest market close timestamp at which to truncate market results, in seconds.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe from which to get the Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">earliestClosingTime</code></strong>  (number) Earliest Market close timestamp at which to truncate Market results, in seconds.</li>
+<li><strong><code class="prettyprint">latestClosingTime</code></strong>  (number) Latest Market close timestamp at which to truncate Market results, in seconds.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of closing market addresses, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
 <h3 id="augur-markets-getmarketscreatedbyaccount-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsCreatedByAccount(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user.</p>
+<p>Returns the <a href="#market">Markets</a> created by a specific user, as well as the total amount of fees earned so far by that user.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1412,25 +1414,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">creator</code></strong>  (string) Ethereum address of the creator who created the markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">creator</code></strong>  (string) Ethereum address of the <a href="#market-creator">Market Creator</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of Market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsincategory-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
 
-<p>Returns the markets within a specific category.</p>
+<p>Returns the <a href="#market">Markets</a> within a specific category.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1441,25 +1443,27 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">category</code></strong>  (string) Name of the category from which to get the markets.</li>
-<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the markets.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of markets to return.</li>
-<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">category</code></strong>  (string) Name of the category from which to get the Markets.</li>
+<li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the markets have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses in the specified category, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
+
+<!-- TODO: Add link to augur.trading.getOrders -->
 
 <h3 id="augur-markets-getmarketsinfo-p-rarr-array-lt-marketinfo-gt">augur.markets.getMarketsInfo(p) &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;}</h3>
 
-<p>Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about orders for the specified market.</p>
+<p>Returns information about <a href="#markets">Markets</a> that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market <a href="#outcome">Outcome</a>. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about <a href="#order">Orders</a> for the specified Market.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1470,7 +1474,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">marketIDs</code></strong>  (Array.&lt;string&gt;) Contract addresses of the markets for which to get details, as hexadecimal strings.</li>
+<li><strong><code class="prettyprint">marketIDs</code></strong>  (Array.&lt;string&gt;) Contract addresses of the Markets for which to get details, as hexadecimal strings.</li>
 </ul></li>
 </ul>
 
@@ -1575,9 +1579,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">},</span>
 <span class="p">}</span>
 </code></pre></div>
+<!-- Add glossary links to section-->
+
 <h3 id="augur-reporting-getreportinghistory-p-callback-rarr-object">augur.reporting.getReportingHistory(p, callback) &rarr; {Object}</h3>
 
-<p>Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.</p>
+<p>Returns information about the reports submitted by a particular user. For Reporting Windows that have ended, this includes the final Outcome of the Market, whether the user’s report matched that final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1589,9 +1595,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">reporter</code></strong>  (string) Ethereum address of the reporter for which to retrieve reporting history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the universe in which to look up the reporting history, as a hexadecimal string. Either this parameter, the market ID, or the reporting window must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the universe, or the reporting window must be specified.</li>
-<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) &lt;optional&gt; Contract address of the reporting window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the universe, or the market ID must be specified.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.</li>
+<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Reporting Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.</li>
 <li><strong><code class="prettyprint">earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the reporting history.</li>
@@ -1605,12 +1611,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Reporting history, keyed by universe or market ID. Each report is of type <a href="#Report">Report</a>. (Object)</li>
+<li>Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)</li>
 </ul>
 
 <h3 id="augur-reporting-getreportingsummary-p-callback-rarr-object">augur.reporting.getReportingSummary(p, callback) &rarr; {Object}</h3>
 
-<p>Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”.</p>
+<p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1621,7 +1627,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) Contract address of the reporting window for which to get the summary, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">reportingWindow</code></strong>  (string) Contract address of the Reporting Window for which to get the summary, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the reporting summary has been retrieved.</li>
 </ul>
@@ -1629,14 +1635,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Summary of the number of markets in each reporting phase, keyed by reporting phase. (Object)</li>
+<li>Summary of the number of Markets in each reporting phase, keyed by reporting phase. (Object)</li>
 </ul>
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 
 <h3 id="augur-reporting-getreportingwindowswithunclaimedfees-p-callback">augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)</h3>
 
-<p>This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees.</p>
+<p>This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1647,10 +1653,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe in which the reporting windows exist, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe in which the Reporting Windows exist, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the user who has unclaimed reporting fees, as a hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the reporting windows have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Reporting Windows have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -1661,7 +1667,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getstaketokens-p-callback-rarr-array-lt-staketoken-gt">augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;}</h3>
 
-<p>Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized.</p>
+<p>Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1672,7 +1678,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the universe in which to retrieve the stake tokens, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Contract address of the Universe in which to retrieve the stake tokens, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Contract address of the account for which to retrieve the stake tokens, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">stakeTokenState</code></strong>  (<a href="#STAKE_TOKEN_STATE">STAKE_TOKEN_STATE</a>) &lt;optional&gt; Token state by which to filter results.</li>
 </ul></li>
@@ -1896,11 +1902,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
+<!-- Add glossary links to section -->
+
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
 
 <h3 id="augur-trading-getbetterworseorders-p-callback-rarr-betterworseorders">augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</h3>
 
-<p>Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
+<p>Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1911,8 +1919,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) Contract address of the market for which to retrieve the better/worse orders, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (string) Market outcome for which to find better/worse orders.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) Contract address of the Market for which to retrieve the better/worse orders, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (string) Market Outcome for which to find better/worse orders.</li>
 <li><strong><code class="prettyprint">orderType</code></strong>  (string) Desired type of order. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">price</code></strong>  (number) Price point at which to find better/worse orders.</li>
 </ul></li>
@@ -1927,7 +1935,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-trading-getorders-p-callback-rarr-singleoutcomeorderbookside">augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}</h3>
 
-<p>Returns a list of orders in a given universe or market.</p>
+<p>Returns a list of orders in a given Universe or Market.</p>
 
 <p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
 
@@ -1938,9 +1946,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the market from which to retrieve orders, as a hexadecimal string. Either this parameter or the universe must be specified.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (number) &lt;optional&gt; Market outcome to filter results by. Valid values are in the range [0,7].</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve orders, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (number) &lt;optional&gt; Market Outcome to filter results by. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the order creator, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
 <li><strong><code class="prettyprint">earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
@@ -1950,13 +1958,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of orders to return.</li>
 <li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of orders to truncate from the beginning of the results.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called when the requested orders for this market/universe have been received and parsed.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called when the requested orders for this Market/Universe have been received and parsed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>One side of the order book (buy or sell) for the specified market/universe and outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)</li>
+<li>One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)</li>
 </ul>
 
 <h3 id="augur-trading-getpositioninmarket-p-rarr-array-lt-string-gt">augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string&gt;}</h3>
@@ -1972,14 +1980,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">address</code></strong>  (string) Address for which to look up share balances.</li>
 <li><strong><code class="prettyprint">market</code></strong>  (string) Market for which to look up share balances.</li>
-<li><strong><code class="prettyprint">tickSize</code></strong>  (string) Tick size (interval) for this market.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) Tick size (interval) for this Market.</li>
 </ul></li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Number of shares for each outcome of this market. (Array.&lt;string&gt;)</li>
+<li>Number of shares for each Outcome of this Market. (Array.&lt;string&gt;)</li>
 </ul>
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
@@ -1998,8 +2006,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the market ID must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the market in which to look up the trading history, as a hexadecimal string. Either this parameter or the universe must be specified.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading history, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">outcome</code></strong>  (string) Outcome of the share being bought/sold.</li>
 <li><strong><code class="prettyprint">orderType</code></strong>  (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading history.</li>
@@ -2013,7 +2021,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of the user&rsquo;s trades, keyed by universe/market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;)</li>
+<li>Array of the user&rsquo;s trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;)</li>
 </ul>
 
 <h3 id="augur-trading-getusertradingpositions-p-callback-rarr-array-lt-usertradeposition-gt">augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;}</h3>
@@ -2030,9 +2038,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the market ID must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the universe must be specified.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (string) Outcome of the share held for the market.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (string) Outcome of the share held for the Market.</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading positions.</li>
 <li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading positions in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of trading positions reports to return.</li>
@@ -2048,6 +2056,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="type-definitions">Type Definitions</h2>
+
+<!-- Add glossary links to section -->
 
 <p><a name="Account"></a></p>
 
@@ -2079,8 +2089,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">token</code></strong> (string) Contract address of the contract for the sent token, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">value</code></strong> (number) Quantity of tokens sent.</li>
 <li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market outcome with which the token is associated (if any).</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the market in which the tranfer took place, as a hexadecimal string (if any).</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).</li>
 </ul>
 
 <p><a name="AuthenticationMetadata"></a></p>
@@ -2187,8 +2197,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
-<li><strong><code class="prettyprint">targetReporterGasCosts</code></strong> (string) Amount of Ether required to pay for the gas to Report on this market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">validityBond</code></strong> (string) Amount of Ether to be held on-contract and repaid when the market is resolved with a non-Invalid outcome, as a base-10 string.</li>
+<li><strong><code class="prettyprint">targetReporterGasCosts</code></strong> (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">validityBond</code></strong> (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.</li>
 </ul>
 
 <p><a name="MarketInfo"></a></p>
@@ -2198,35 +2208,35 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">id</code></strong> (string) Address of a market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong> (string) Address of a universe, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">type</code></strong> (string) Type of market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
-<li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible outcomes for the market.</li>
-<li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a market, in ETH. For binary &amp; categorical markets, this is 0 ETH. For scalar markets, this is the bottom end of the range set by the market creator.</li>
-<li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a market, in ETH. For binary &amp; categorical markets, this is 1 ETH. For scalar markets, this is the top end of the range set by the market creator.</li>
+<li><strong><code class="prettyprint">id</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">type</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
+<li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
 <li><strong><code class="prettyprint">cumulativeScale</code></strong> (string) Difference between maxPrice and minPrice.</li>
-<li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the market creation was created, in seconds.</li>
-<li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the market creation.</li>
-<li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the market creator to create the market, in ETH.</li>
-<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the reporting window containing the market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
-<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the market creator whenever shares are settled.</li>
-<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the market creator collected from the market, in ETH.</li>
-<li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the market is in.</li>
-<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the market has been tagged.</li>
-<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">outstandingShares</code></strong> (number) Total shares in the market. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
+<li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
+<li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
+<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
+<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
+<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
+<li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
+<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">outstandingShares</code></strong> (number) Total shares in the Market. (Method for calculating this is pending.)</li>
 <li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
-<li><strong><code class="prettyprint">reportingWindow</code></strong> (string) Contract address of the reporting window the market is in, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the market event ends, in seconds.</li>
-<li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the market was finalized (if any), in seconds.</li>
-<li><strong><code class="prettyprint">description</code></strong> (string) Description of the market.</li>
-<li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical markets).</li>
-<li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the market&rsquo;s designated report, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Amount of ETH the designated reporter staked on the outcome submitted in the designated report.</li>
-<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the outcome of the market event.</li>
-<li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a market&rsquo;s minimum price and maximum price.</li>
-<li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus outcome for the market.</li>
+<li><strong><code class="prettyprint">reportingWindow</code></strong> (string) Contract address of the Reporting Window the Market is in, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
+<li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
+<li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
+<li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).</li>
+<li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Amount of ETH the designated reporter staked on the Outcome submitted in the designated report.</li>
+<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
+<li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
+<li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
 <li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
 </ul>
 
@@ -2237,7 +2247,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">Price</code></strong> (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single outcome, keyed by outcome ID.</li>
+<li><strong><code class="prettyprint">Price</code></strong> (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.</li>
 </ul>
 
 <p><a name="NoKeystoreAccount"></a></p>
@@ -2296,10 +2306,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">id</code></strong> (number) Market outcome ID</li>
-<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">price</code></strong> (number) Price of the outcome.</li>
-<li><strong><code class="prettyprint">description</code></strong> (string|null) Description for the outcome.</li>
+<li><strong><code class="prettyprint">id</code></strong> (number) Market Outcome ID</li>
+<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">price</code></strong> (number) Price of the Outcome.</li>
+<li><strong><code class="prettyprint">description</code></strong> (string|null) Description for the Outcome.</li>
 </ul>
 
 <p><a name="Pbkdf2Params"></a></p>
@@ -2327,14 +2337,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the reporting transaction.</li>
 <li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the Ethereum block containing the reporting transaction.</li>
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">marketReportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the market.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketReportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
 <li><strong><code class="prettyprint">reportingWindow</code></strong> (string) Reporting window the market is in currently.</li>
 <li><strong><code class="prettyprint">payoutNumerators</code></strong> (Array.&lt;number&gt;) Array representing the payout set.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Description the reporter has staked on the outcome of their report.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Description the reporter has staked on the Outcome of their report.</li>
 <li><strong><code class="prettyprint">stakeToken</code></strong> (string) Contract address of the stake token, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the market is categorical.</li>
-<li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the market is scalar.</li>
+<li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the Market is categorical.</li>
+<li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the Market is scalar.</li>
 <li><strong><code class="prettyprint">isIndeterminate</code></strong> (boolean) Description pending.</li>
 <li><strong><code class="prettyprint">isSubmitted</code></strong> (boolean) Description pending.</li>
 </ul>
@@ -2352,12 +2362,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">DESIGNATED_REPORTING</code></strong> (string) Market&rsquo;s end time has occurred, and it is pending a designated report.</li>
 <li><strong><code class="prettyprint">DESIGNATED_DISPUTE</code></strong> (string) Market&rsquo;s designated report has been submitted and is allowed to be disputed.</li>
 <li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the disignated report was disputed, or the designated reporter failed to submit a report, and the market is waiting for the next reporting phase to begin.</li>
-<li><strong><code class="prettyprint">FIRST_REPORTING</code></strong> (string) Market&rsquo;s designated report was disputed, and users can place stake on outcomes.</li>
+<li><strong><code class="prettyprint">FIRST_REPORTING</code></strong> (string) Market&rsquo;s designated report was disputed, and users can place stake on Outcomes.</li>
 <li><strong><code class="prettyprint">FIRST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed.</li>
-<li><strong><code class="prettyprint">LAST_REPORTING</code></strong> (string) Market&rsquo;s first report was disputed, and users can place stake on outcomes.</li>
+<li><strong><code class="prettyprint">LAST_REPORTING</code></strong> (string) Market&rsquo;s first report was disputed, and users can place stake on Outcomes.</li>
 <li><strong><code class="prettyprint">LAST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed to cause a fork.</li>
-<li><strong><code class="prettyprint">FORKING</code></strong> (string) Market&rsquo;s last report was disputed, causing a fork. Users can migrate their REP to the universe of their choice.</li>
-<li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An outcome for the market has been determined.</li>
+<li><strong><code class="prettyprint">FORKING</code></strong> (string) Market&rsquo;s last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
+<li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An Outcome for the Market has been determined.</li>
 <li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
 <li><strong><code class="prettyprint">AWAITING_FINALIZATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
 </ul>
@@ -2393,7 +2403,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">Array</code></strong> (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>&gt;) of timestamped price points for this outcome.</li>
+<li><strong><code class="prettyprint">Array</code></strong> (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>&gt;) of timestamped price points for this Outcome.</li>
 </ul>
 
 <p><a name="STAKE_TOKEN_STATE"></a></p>
@@ -2406,8 +2416,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">ALL</code></strong> (string) Stake token can be in any state. (If no stake token state is specified, this is the default value.)</li>
-<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Stake token is in a market that has not been finalized.</li>
-<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Stake token is in a finalized market, was staked on the correct outcome, and has not been claimed yet.</li>
+<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Stake token is in a Market that has not been finalized.</li>
+<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Stake token is in a finalized Market, was staked on the correct Outcome, and has not been claimed yet.</li>
 </ul>
 
 <p><a name="StakeToken"></a></p>
@@ -2418,20 +2428,20 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">stakeToken</code></strong> (string) Contract address of the stake token, as a hexidecimal string.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the market, as a hexidecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexidecimal string.</li>
 <li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the stake token&rsquo;s payout set.</li>
 <li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the stake token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the stake token&rsquo;s payout set. Set to null for binary and scalar markets.</li>
-<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the market was determined to be invalid.</li>
+<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market was determined to be invalid.</li>
 <li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the stake token owner has staked, in ETH.</li>
 <li><strong><code class="prettyprint">winningToken</code></strong> (number|null) Description pending.</li>
 <li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the stake token has been claimed by the owner.</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the market.</li>
+<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
 </ul>
 
 <p><a name="TimestampedPrice"></a></p>
@@ -2458,9 +2468,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">price</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">amount</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
-<li><strong><code class="prettyprint">marketCreatorFees</code></strong> (number) Amount of fees paid to market creator, in ETH.</li>
+<li><strong><code class="prettyprint">marketCreatorFees</code></strong> (number) Amount of fees paid to Market creator, in ETH.</li>
 <li><strong><code class="prettyprint">reporterFees</code></strong> (number) Amount of fees paid to reporters, in ETH.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Description pending.</li>
@@ -2474,7 +2484,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
 <li><strong><code class="prettyprint">numShares</code></strong> (number) Quantity of shares currently owned by the user.</li>
 <li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (number) Description pending.</li>
@@ -6317,7 +6327,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <td>stakeToken, amountStaked, payoutNumerators</td>
 </tr>
 <tr>
-<td>MarketCreated</td>
+<td><a name="MarketCreated"></a>MarketCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td><code class="prettyprint">marketCreator</code> has created a <code class="prettyprint">marketType</code> <code class="prettyprint">market</code> with <code class="prettyprint">outcomes</code> and <code class="prettyprint">topic</code> in <code class="prettyprint">universe</code> for a price of <code class="prettyprint">marketCreationFee</code> and a price range of <code class="prettyprint">minPrice</code> to <code class="prettyprint">maxPrice</code>. Additional information about <code class="prettyprint">market</code> can be found in <code class="prettyprint">description</code> and <code class="prettyprint">extraInfo</code>.</td>
 <td>topic, universe, marketCreator</td>
@@ -6947,7 +6957,7 @@ Goals:
 
 <h2 id="outcome">Outcome</h2>
 
-<p>An outcome is a potential result of a <a href="#market">Market</a>&rsquo;s future event. For example, a market with a question of &ldquo;Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?&rdquo; would have three potential <a href="#outcome">Outcomes</a>: Yes, No, and Invalid. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market&rsquo;s Outcome. More realistically this can happen for markets that have too vague of a question. A good example of a vague market that would most likely be voted invalid would be &ldquo;Does God exist?&rdquo; as no one has a definitive answer.</p>
+<p>An outcome is a potential result of a <a href="#market">Market</a>&rsquo;s future event. For example, a market with a question of &ldquo;Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?&rdquo; would have three potential Outcomes: Yes, No, and Invalid. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market&rsquo;s Outcome. More realistically this can happen for markets that have too vague of a question. A good example of a vague market that would most likely be voted invalid would be &ldquo;Does God exist?&rdquo; as no one has a definitive answer.</p>
 
 <h2 id="parent-universe">Parent Universe</h2>
 
