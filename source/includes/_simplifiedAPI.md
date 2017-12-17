@@ -4,8 +4,6 @@ Simplified API
 
 <aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
-All optional parameters are listed in brackets. Most of the Simplified API functions contain optional parameters for specifying which results to return and how to sort them.  For example, `sortBy` should be a string corresponding to the name of a particular field to sort by, and `isSortDescending` should be a boolean value for whether to sort the results in descending order. `limit` should be an integer greater than 0 that represents the maximum number of results to return. `offset` should be an integer greater than 0. It is used when only a portion of the total query results is desired, and it represents the record number at which to start returning results.
-
 Accounts Functions
 -----------------
 ```javascript
