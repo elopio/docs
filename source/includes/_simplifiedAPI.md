@@ -1,9 +1,3 @@
-[//]: # Content todos: Add amount of gas/ether/REP required for transactions; Update places that say "pending"/"coming soon"/"TODO"; update targetReporterGasCosts description; add bytes32 (32-character limit) restriction for outcomes (and possibly topics when creating a market?); remove unused data types.
-[//]: targetReporterGasCosts: Returns the Designated Report No-Show Gas Bond in AttoETH that is paid to the First Reporter in the event of a Designated Report no-show, or refunded to the Market Creator Mailbox if the Designated Reporter does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current Reporting Window has not already been cached in the Universe contract, this function will cache it.
-[//]: # Formatting todos: Add links to glossary terms & other functions
-[//]: # Canned markets are in: https://github.com/AugurProject/augur.js/blob/master/scripts/canned-markets/data/canned-markets.js
-
-
 Simplified API
 ===========
 <aside class="notice">The Simplified API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
