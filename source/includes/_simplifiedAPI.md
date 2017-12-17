@@ -89,8 +89,15 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 Create-Market Functions
 ----------------
 ```javascript
-// Example JS code coming soon
+// augur.createMarket.createBinaryMarket: Example JS code coming soon
 
+// augur.createMarket.createCategoricalMarket: Example JS code coming soon
+
+// augur.createMarket.createScalarMarket: Example JS code coming soon
+
+// augur.createMarket.getMarketCreationCost: Example JS code coming soon
+
+// augur.createMarket.getMarketCreationCostBreakdown: Example JS code coming soon
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
@@ -98,8 +105,7 @@ Creates a Binary Market in a specified Universe.
 
 #### **Parameters:**
 
-* **Name:** p (Object)
-* **Description:** Parameters object.
+* **`p`** (Object) Parameters object. 
 * **Properties:**
     * **`universe`**  (string) Universe in which to create a Binary Market.
     * **`_endTime`**  (number) Binary Market expiration timestamp, in seconds.
@@ -109,7 +115,7 @@ Creates a Binary Market in a specified Universe.
     * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
     * **`_description`**  (string) Description of the market, as a UTF8 string.
     * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
@@ -124,8 +130,7 @@ Creates a Categorical Market in a specified Universe.
 
 #### **Parameters:**
 
-* **Name:** p (Object)
-* **Description:** Parameters object.
+* **`p`** (Object) Parameters object. 
 * **Properties:**
     * **`universe`**  (string) Universe in which to create a Categorical Market.
     * **`_endTime`**  (number) Categorical Market expiration timestamp, in seconds.
@@ -136,7 +141,7 @@ Creates a Categorical Market in a specified Universe.
     * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
     * **`_description`**  (string) Description of the market, as a UTF8 string.
     * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
@@ -151,8 +156,7 @@ Creates a Scalar Market in a specified Universe.
 
 #### **Parameters:**
 
-* **Name:** p (Object)
-* **Description:** Parameters object.
+* **`p`** (Object) Parameters object. 
 * **Properties:**
     * **`universe`**  (string) Universe in which to create this market.
     * **`_endTime`**  (number) Market expiration timestamp, in seconds.
@@ -165,7 +169,7 @@ Creates a Scalar Market in a specified Universe.
     * **`_description`**  (string) Description of the market, as a UTF8 string.
     * **`tickSize`**  (string) &lt;optional> The tick size for this market, as a base-10 string.
     * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
@@ -182,12 +186,9 @@ Note: this function will send a transaction if needed to create the current repo
 
 #### **Parameters:**
 
-* **Name:** p (Object)
-* **Description:** Parameters object.
-* **Properties:**
+* **`p`** (Object) Parameters object. 
     * **`universe`**  (string) Universe on which to create this market.
-* **Name:** callback (function)
-* **Description:** Called after the market creation cost has been looked up.
+* **`callback`** (function) Called after the market creation cost has been looked up.
 
 #### **Returns:**
 
@@ -201,12 +202,10 @@ Note: this function will send a transaction if needed to create the current Repo
 
 #### **Parameters:**
 
-* **Name:** p (Object)
-* **Description:** Parameters object.
+* **`p`** (Object) Parameters object. 
 * **Properties:**
     * **`universe`**  (string) Universe on which to create this market.
-* **Name:** callback (function)
-* **Description:** Called when all market creation costs have been looked up.
+* **`callback`** (function) Called when all market creation costs have been looked up.
 
 #### **Returns:**
 
@@ -967,6 +966,8 @@ augur.trading.getOrders({
   },
 }
 
+// augur.trading.getPositionInMarket: Example JS code coming soon
+
 augur.trading.getUserTradingHistory({
       account: "0x000000000000000000000000000000000000d00d",
       universe: null,
@@ -1121,6 +1122,22 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * One side of the order book (buy or sell) for the specified market/universe and outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
 
+### augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string>}
+
+Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+* **Properties:**
+    * **`address`**  (string) Address for which to look up share balances.
+    * **`market`**  (string) Market for which to look up share balances.
+    * **`tickSize`**  (string) Tick size (interval) for this market.
+
+#### **Returns:**
+
+* Number of shares for each outcome of this market. (Array.&lt;string>)
+
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>>}
 
@@ -1198,6 +1215,15 @@ Type Definitions
 * **`symbol`** (string|null) Token symbol (if any).
 * **`outcome`** (number|null) Market outcome with which the token is associated (if any).
 * **`marketID`** (string|null) Contract address of the market in which the tranfer took place, as a hexadecimal string (if any).
+
+<a name="AuthenticationMetadata"></a>
+### AuthenticationMetadata 
+
+Authentication metadata for raw transactions.
+
+#### **Properties:** 
+* **`signer`** (buffer|function) Description pending.
+* **`accountType`** (string) Description pending.
 
 <a name="BetterWorseOrders"></a>
 ### BetterWorseOrders 
