@@ -1220,7 +1220,7 @@ Type Definitions
 * **`marketID`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
 
 <a name="AuthenticationMetadata"></a>
-### AuthenticationMetadata 
+### AuthenticationMetadata  (Object)
 
 Authentication metadata for raw transactions.
 
@@ -1229,7 +1229,7 @@ Authentication metadata for raw transactions.
 * **`accountType`** (string) Description pending.
 
 <a name="BetterWorseOrders"></a>
-### BetterWorseOrders 
+### BetterWorseOrders  (Object)
 
 #### **Properties:** 
 * **`betterOrderID`** (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.
