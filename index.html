@@ -788,8 +788,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="create-market-functions">Create-Market Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.createMarket.createBinaryMarket: Example JS code coming soon</span>
 
+<span class="c1">// augur.createMarket.createCategoricalMarket: Example JS code coming soon</span>
+
+<span class="c1">// augur.createMarket.createScalarMarket: Example JS code coming soon</span>
+
+<span class="c1">// augur.createMarket.getMarketCreationCost: Example JS code coming soon</span>
+
+<span class="c1">// augur.createMarket.getMarketCreationCostBreakdown: Example JS code coming soon</span>
 </code></pre></div>
 <h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
 
@@ -798,8 +805,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong>Name:</strong> p (Object)</li>
-<li><strong>Description:</strong> Parameters object.</li>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. </li>
 <li><strong>Properties:</strong>
 
 <ul>
@@ -811,7 +817,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createBinaryMarket transaction fails.</li>
@@ -829,8 +835,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong>Name:</strong> p (Object)</li>
-<li><strong>Description:</strong> Parameters object.</li>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. </li>
 <li><strong>Properties:</strong>
 
 <ul>
@@ -843,7 +848,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this market belongs, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createCategoricalMarket transaction fails.</li>
@@ -861,8 +866,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong>Name:</strong> p (Object)</li>
-<li><strong>Description:</strong> Parameters object.</li>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. </li>
 <li><strong>Properties:</strong>
 
 <ul>
@@ -877,7 +881,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The tick size for this market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
@@ -897,15 +901,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong>Name:</strong> p (Object)</li>
-<li><strong>Description:</strong> Parameters object.</li>
-<li><strong>Properties:</strong>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
 
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
 </ul></li>
-<li><strong>Name:</strong> callback (function)</li>
-<li><strong>Description:</strong> Called after the market creation cost has been looked up.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the market creation cost has been looked up.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -923,15 +924,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong>Name:</strong> p (Object)</li>
-<li><strong>Description:</strong> Parameters object.</li>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. </li>
 <li><strong>Properties:</strong>
 
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Universe on which to create this market.</li>
 </ul></li>
-<li><strong>Name:</strong> callback (function)</li>
-<li><strong>Description:</strong> Called when all market creation costs have been looked up.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called when all market creation costs have been looked up.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -1789,6 +1788,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">},</span>
 <span class="p">}</span>
 
+<span class="c1">// augur.trading.getPositionInMarket: Example JS code coming soon</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
       <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
       <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1958,6 +1959,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>One side of the order book (buy or sell) for the specified market/universe and outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)</li>
 </ul>
 
+<h3 id="augur-trading-getpositioninmarket-p-rarr-array-lt-string-gt">augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string&gt;}</h3>
+
+<p>Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. </li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong>  (string) Address for which to look up share balances.</li>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Market for which to look up share balances.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) Tick size (interval) for this market.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Number of shares for each outcome of this market. (Array.&lt;string&gt;)</li>
+</ul>
+
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 
 <h3 id="augur-trading-getusertradinghistory-p-callback-rarr-array-lt-usertrade-gt">augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;}</h3>
@@ -2057,6 +2081,19 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market outcome with which the token is associated (if any).</li>
 <li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the market in which the tranfer took place, as a hexadecimal string (if any).</li>
+</ul>
+
+<p><a name="AuthenticationMetadata"></a></p>
+
+<h3 id="authenticationmetadata">AuthenticationMetadata</h3>
+
+<p>Authentication metadata for raw transactions.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">signer</code></strong> (buffer|function) Description pending.</li>
+<li><strong><code class="prettyprint">accountType</code></strong> (string) Description pending.</li>
 </ul>
 
 <p><a name="BetterWorseOrders"></a></p>
