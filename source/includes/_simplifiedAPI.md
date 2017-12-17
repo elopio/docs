@@ -1,3 +1,9 @@
+[//]: # Content todos: Add amount of gas/ether/REP required for transactions; Update places that say "pending"/"coming soon"/"TODO"; update targetReporterGasCosts description; add bytes32 (32-character limit) restriction for outcomes (and possibly topics when creating a market?); remove unused data types.
+[//]: targetReporterGasCosts: Returns the Designated Report No-Show Gas Bond in AttoETH that is paid to the First Reporter in the event of a Designated Report no-show, or refunded to the Market Creator Mailbox if the Designated Reporter does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current Reporting Window has not already been cached in the Universe contract, this function will cache it.
+[//]: # Formatting todos: Add links to glossary terms & other functions
+[//]: # Canned markets are in: https://github.com/AugurProject/augur.js/blob/master/scripts/canned-markets/data/canned-markets.js
+
+
 Simplified API
 ===========
 <aside class="notice">The Simplified API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
@@ -101,7 +107,7 @@ Create-Market Functions
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
-Creates a Binary Market in a specified Universe.
+Creates a [Binary Market](#binary-market) in a specified [Universe](#universe).
 
 #### **Parameters:**
 
@@ -109,12 +115,12 @@ Creates a Binary Market in a specified Universe.
 * **Properties:**
     * **`universe`**  (string) Universe in which to create a Binary Market.
     * **`_endTime`**  (number) Binary Market expiration timestamp, in seconds.
-    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the Market Creator, as a base-10 string.
-    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
-    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
-    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
-    * **`_description`**  (string) Description of the market, as a UTF8 string.
-    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
+    * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the Market, as a UTF8 string.
+    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
     * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
@@ -126,7 +132,7 @@ Description pending.
 
 ### augur.createMarket.createCategoricalMarket(p)
 
-Creates a Categorical Market in a specified Universe.
+Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe).
 
 #### **Parameters:**
 
@@ -134,13 +140,13 @@ Creates a Categorical Market in a specified Universe.
 * **Properties:**
     * **`universe`**  (string) Universe in which to create a Categorical Market.
     * **`_endTime`**  (number) Categorical Market expiration timestamp, in seconds.
-    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the market creator, as a base-10 string.
-    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
-    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
-    * **`_numOutcomes`**  (number) Number of outcomes this market has, as an integer on [2, 8].
-    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
-    * **`_description`**  (string) Description of the market, as a UTF8 string.
-    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
+    * **`_numOutcomes`**  (number) Number of [Outcomes](#outcomes) this Market has, as an integer on [2, 8].
+    * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the Market, as a UTF8 string.
+    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
     * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
@@ -152,7 +158,7 @@ Description pending.
 
 ### augur.createMarket.createScalarMarket(p)
 
-Creates a Scalar Market in a specified Universe.
+Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe).
 
 #### **Parameters:**
 
@@ -160,15 +166,15 @@ Creates a Scalar Market in a specified Universe.
 * **Properties:**
     * **`universe`**  (string) Universe in which to create this market.
     * **`_endTime`**  (number) Market expiration timestamp, in seconds.
-    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the market creator, as a base-10 string.
-    * **`_denominationToken`**  (string) Ethereum address of the token used as this market's currency.
-    * **`_minPrice`**  (string) Minimum display (non-normalized) price for this market, as a base-10 string.
-    * **`_maxPrice`**  (string) Maximum display (non-normalized) price for this market, as a base-10 string.
-    * **`_designatedReporterAddress`**  (string) Ethereum address of this market's designated reporter.
-    * **`_topic`**  (string) The topic (category) to which this market belongs, as a UTF8 string.
-    * **`_description`**  (string) Description of the market, as a UTF8 string.
-    * **`tickSize`**  (string) &lt;optional> The tick size for this market, as a base-10 string.
-    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the CreateMarket event.
+    * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
+    * **`_denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
+    * **`_minPrice`**  (string) Minimum display (non-normalized) price for this Market, as a base-10 string.
+    * **`_maxPrice`**  (string) Maximum display (non-normalized) price for this Market, as a base-10 string.
+    * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
+    * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string.
+    * **`_description`**  (string) Description of the Market, as a UTF8 string.
+    * **`tickSize`**  (string) &lt;optional> The [Tick](#tick) size for this Market, as a base-10 string.
+    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
     * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
@@ -180,36 +186,37 @@ Description pending.
 
 ### augur.createMarket.getMarketCreationCost(p, callback) &rarr; {<a href="#MarketCreationCost">MarketCreationCost</a>}
 
-Retrieves the Designated Report No-Show REP Bond amount and total ether required to create a new Market.
+Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total ether required to create a new [Market](#market).
 
-Note: this function will send a transaction if needed to create the current reporting window.
+Note: This function will send a transaction if needed to create the current [Reporting Window](#reporting-window).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object. 
-    * **`universe`**  (string) Universe on which to create this market.
-* **`callback`** (function) Called after the market creation cost has been looked up.
+    * **`universe`**  (string) [Universe](#universe) on which to create this Market.
+* **`callback`** (function) Called after the Market creation cost has been looked up.
 
 #### **Returns:**
 
-* Costs of creating a new market. (<a href="#MarketCreationCost">MarketCreationCost</a>)
+* Costs of creating a new Market. (<a href="#MarketCreationCost">MarketCreationCost</a>)
 
+<!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 ### augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}
 
-Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new Market. These ether costs are broken down by the gas cost paid to the First Reporter and the cost of the Validity Bond.
+Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These ether costs are broken down by the gas cost paid to the [First Reporter](#first-reporter) and the cost of the [Validity Bond](#validity-bond).
 
-Note: this function will send a transaction if needed to create the current Reporting Window.
+Note: This function will send a transaction if needed to create the current Reporting Window.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object. 
 * **Properties:**
-    * **`universe`**  (string) Universe on which to create this market.
-* **`callback`** (function) Called when all market creation costs have been looked up.
+    * **`universe`**  (string) [Universe](#universe) on which to create this Market.
+* **`callback`** (function) Called when all Market creation costs have been looked up.
 
 #### **Returns:**
 
-* Cost breakdown for creating a new market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)
+* Cost breakdown for creating a new Market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)
 
 Markets Functions
 ----------------
@@ -476,14 +483,14 @@ augur.markets.getMarketsInfo({
 ```
 ### augur.markets.getCategories(p, callback) &rarr; {Array.&lt;<a href="#Category">Category</a>>}
 
-Returns the Market Categories in a specific Universe.
+Returns the Market Categories in a specific [Universe](#universe).
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
 #### **Parameters:**
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to retrieve the categories, as a hexadecimal string.
+    * **`universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a hexadecimal string.
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
     * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort categories in descending order by sortBy field.
     * **`limit`**  (string) &lt;optional> Maximum number of categories to return.
@@ -491,12 +498,12 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 * **`callback`** (function) Called after the categories have been retrieved.
 
 #### **Returns:**
-* Array representing the categories in the specified universe. (Array.&lt;<a href="#Category">Category</a>>)
+* Array representing the categories in the specified Universe. (Array.&lt;<a href="#Category">Category</a>>)
 
 <!-- TODO: Add JS example results -->
 ### augur.markets.getDisputableMarkets(p, callback)
 
-This function has not been implemented yet. Returns the markets in a specific reporting window that are able to be disputed, along with the value of the dispute bond needed to dispute each market’s result.
+This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market’s result.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -504,12 +511,12 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`reportingWindow`**  (string) Contract address of the reporting window from which to retrieve the disputable markets.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`reportingWindow`**  (string) Contract address of the Reporting Window from which to retrieve the disputable Markets.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
@@ -517,7 +524,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 ### augur.markets.getMarketPriceHistory(p, callback) &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}
 
-Returns the prices and timestamps of a specific Market's Outcomes over time.
+Returns the prices and timestamps of a specific [Market's](#market) [Outcomes](#outcomes) over time.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -530,11 +537,11 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 #### **Returns:**
 
-* This market's price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)
+* The Market's price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)
 
 ### augur.markets.getMarkets(p, callback) &rarr; {Array.&lt;string>}
 
-Returns an array of Markets in a specific Universe.
+Returns an array of [Markets](#market) in a specific [Universe](#universe).
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -542,12 +549,12 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to get transfer history.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markts to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`universe`**  (string) Contract address of the Universe from which to get transfer history.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
@@ -555,7 +562,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 ### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets in a specific Universe that are waiting for a Designated Report to be submitted.
+Returns the [Markets](#market) in a specific [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -563,21 +570,21 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to retrieve markets, as a hexadecimal string.
-    * **`designatedReporter`**  (string) &lt;optional> Address of a specific designated reporter by which to filter the results, as a hexadecimal string.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`universe`**  (string) Contract address of the Universe from which to retrieve Markets, as a hexadecimal string.
+    * **`designatedReporter`**  (string) &lt;optional> Address of a specific [Designated Reporter](#designated-reporter) by which to filter the results, as a hexadecimal string.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
-* Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string>)
+* Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
 
 ### augur.markets.getMarketsAwaitingReporting(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets in a particular universe or reporting window that are waiting for a designated report to be submitted or waiting for the reporting phase to end. Either the universe or reporting window must be specified.
+Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either the Universe or Reporting Window must be specified.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -585,22 +592,22 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) &lt;optional> Contract address of the universe from which to retrieve markets, as a hexadecimal string. If this parameter is not specified, a reporting window must be specified instead.
-    * **`reportingWindow`**  (string) &lt;optional> Contract address of the reporting window from which to retrieve the markets, as a hexadecimal string. If this parameter is not specified, a universe must be specified instead.
+    * **`universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Reporting Window must be specified instead.
+    * **`reportingWindow`**  (string) &lt;optional> Contract address of the Reporting Window from which to retrieve the markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
     * **`reportingState`**  (string) &lt;optional> Description pending.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
-* Array of market addresses awaiting a designated report, as hexadecimal strings. (Array.&lt;string>)
+* Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
 
 ### augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets closing between a given time range in a specific universe.
+Returns the [Markets](#market) closing between a given time range in a specific [Universe](#universe).
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -608,22 +615,22 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.
-    * **`earliestClosingTime`**  (number) Earliest market close timestamp at which to truncate market results, in seconds.
-    * **`latestClosingTime`**  (number) Latest market close timestamp at which to truncate market results, in seconds.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`universe`**  (string) Contract address of the Universe from which to get the Markets, as a hexadecimal string.
+    * **`earliestClosingTime`**  (number) Earliest Market close timestamp at which to truncate Market results, in seconds.
+    * **`latestClosingTime`**  (number) Latest Market close timestamp at which to truncate Market results, in seconds.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
-* Array of closing market addresses, as hexadecimal strings. (Array.&lt;string>)
+* Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string>)
 
 ### augur.markets.getMarketsCreatedByAccount(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets created by a specific user, as well as the total amount of fees earned so far by that user.
+Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -631,21 +638,21 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.
-    * **`creator`**  (string) Ethereum address of the creator who created the markets, as a hexadecimal string.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a hexadecimal string.
+    * **`creator`**  (string) Ethereum address of the [Market Creator](#market-creator), as a hexadecimal string.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
-* Array of market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string>)
+* Array of Market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string>)
 
 ### augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string>}
 
-Returns the markets within a specific category.
+Returns the [Markets](#market) within a specific category.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -653,21 +660,22 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe from which to get the markets, as a hexadecimal string.
-    * **`category`**  (string) Name of the category from which to get the markets.
-    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the markets.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the markets in descending order by sortBy field.
-    * **`limit`**  (string) &lt;optional> Maximum number of markets to return.
-    * **`offset`**  (string) &lt;optional> Number of markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the markets have been retrieved.
+    * **`universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a hexadecimal string.
+    * **`category`**  (string) Name of the category from which to get the Markets.
+    * **`sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
 
-* Array of market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
+* Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
 
+<!-- TODO: Add link to augur.trading.getOrders -->
 ### augur.markets.getMarketsInfo(p) &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>>}
 
-Returns information about markets that are stored on-contract. The returned result includes basic information about the markets as well as information about each market outcome. It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about orders for the specified market.
+Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -675,7 +683,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`marketIDs`**  (Array.&lt;string>) Contract addresses of the markets for which to get details, as hexadecimal strings.
+    * **`marketIDs`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
 
 #### **Returns:**
 
@@ -780,9 +788,10 @@ augur.reporting.getStakeTokens({
   },
 }
 ```
+<!-- Add glossary links to section-->
 ### augur.reporting.getReportingHistory(p, callback) &rarr; {Object}
 
-Returns information about the reports submitted by a particular user. For reporting windows that have ended, this includes the final outcome of the market, whether the user’s report matched that final outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
+Returns information about the reports submitted by a particular user. For Reporting Windows that have ended, this includes the final Outcome of the Market, whether the user’s report matched that final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -791,9 +800,9 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`reporter`**  (string) Ethereum address of the reporter for which to retrieve reporting history, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the universe in which to look up the reporting history, as a hexadecimal string. Either this parameter, the market ID, or the reporting window must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the universe, or the reporting window must be specified.
-    * **`reportingWindow`**  (string) &lt;optional> Contract address of the reporting window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the universe, or the market ID must be specified.
+    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.
+    * **`reportingWindow`**  (string) &lt;optional> Contract address of the Reporting Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
     * **`earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the reporting history.
@@ -804,11 +813,11 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 #### **Returns:**
 
-* Reporting history, keyed by universe or market ID. Each report is of type <a href="#Report">Report</a>. (Object)
+* Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)
 
 ### augur.reporting.getReportingSummary(p, callback) &rarr; {Object}
 
-Returns the number of markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a market has been reported on and is in a dispute phase), “FORKING” (for the market that has forked), “AWAITING_FORK_MIGRATION” (for markets that are waiting for a forked market to resolve), and “FINALIZED”.
+Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -816,17 +825,17 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`reportingWindow`**  (string) Contract address of the reporting window for which to get the summary, as a hexadecimal string.
+    * **`reportingWindow`**  (string) Contract address of the Reporting Window for which to get the summary, as a hexadecimal string.
 * **`callback`** (function) Called after the reporting summary has been retrieved.
 
 #### **Returns:**
 
-* Summary of the number of markets in each reporting phase, keyed by reporting phase. (Object)
+* Summary of the number of Markets in each reporting phase, keyed by reporting phase. (Object)
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 ### augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)
 
-This function has not been implemented yet. Returns the reporting windows where a specific user has unclaimed reporting fees.
+This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -834,9 +843,9 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe in which the reporting windows exist, as a hexadecimal string.
+    * **`universe`**  (string) Contract address of the Universe in which the Reporting Windows exist, as a hexadecimal string.
     * **`account`**  (string) Ethereum address of the user who has unclaimed reporting fees, as a hexadecimal string.
-* **`callback`** (function) Called after the reporting windows have been retrieved.
+* **`callback`** (function) Called after the Reporting Windows have been retrieved.
 
 #### **Returns:**
 
@@ -844,7 +853,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 ### augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>>}
 
-Returns the stake tokens owned by a specific user that are either unclaimed or are in markets that have not been finalized.
+Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -852,7 +861,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the universe in which to retrieve the stake tokens, as a hexadecimal string.
+    * **`universe`**  (string) Contract address of the Universe in which to retrieve the stake tokens, as a hexadecimal string.
     * **`account`**  (string) Contract address of the account for which to retrieve the stake tokens, as a hexadecimal string.
     * **`stakeTokenState`**  (<a href="#STAKE_TOKEN_STATE">STAKE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
 * **`callback`** (function) Called when reporting history has been received and parsed.
@@ -1074,10 +1083,11 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
+<!-- Add glossary links to section -->
 <!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
 ### augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}
 
-Returns the IDs of the orders for a given outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
+Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -1085,8 +1095,8 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`marketID`**  (string) Contract address of the market for which to retrieve the better/worse orders, as a hexadecimal string.
-    * **`outcome`**  (string) Market outcome for which to find better/worse orders.
+    * **`marketID`**  (string) Contract address of the Market for which to retrieve the better/worse orders, as a hexadecimal string.
+    * **`outcome`**  (string) Market Outcome for which to find better/worse orders.
     * **`orderType`**  (string) Desired type of order. Valid values are "buy" and "sell".
     * **`price`**  (number) Price point at which to find better/worse orders.
 * **`callback`** (function) Called when better/worse orders have been retrieved.
@@ -1097,7 +1107,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 ### augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}
 
-Returns a list of orders in a given universe or market.
+Returns a list of orders in a given Universe or Market.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -1105,9 +1115,9 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) &lt;optional> Contract address of the universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the market from which to retrieve orders, as a hexadecimal string. Either this parameter or the universe must be specified.
-    * **`outcome`**  (number) &lt;optional> Market outcome to filter results by. Valid values are in the range [0,7].
+    * **`universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve orders, as a hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
     * **`creator`**  (string) &lt;optional> Ethereum address of the order creator, as a hexadecimal string.
     * **`orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
     * **`earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
@@ -1116,11 +1126,11 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
     * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort orders in descending order by sortBy field.
     * **`limit`**  (string) &lt;optional> Maximum number of orders to return.
     * **`offset`**  (string) &lt;optional> Number of orders to truncate from the beginning of the results.
-* **`callback`** (function) Called when the requested orders for this market/universe have been received and parsed.
+* **`callback`** (function) Called when the requested orders for this Market/Universe have been received and parsed.
 
 #### **Returns:**
 
-* One side of the order book (buy or sell) for the specified market/universe and outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
+* One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
 
 ### augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string>}
 
@@ -1132,11 +1142,11 @@ Gets the number of Shares held by a specific Ethereum address for each Outcome o
 * **Properties:**
     * **`address`**  (string) Address for which to look up share balances.
     * **`market`**  (string) Market for which to look up share balances.
-    * **`tickSize`**  (string) Tick size (interval) for this market.
+    * **`tickSize`**  (string) Tick size (interval) for this Market.
 
 #### **Returns:**
 
-* Number of shares for each outcome of this market. (Array.&lt;string>)
+* Number of shares for each Outcome of this Market. (Array.&lt;string>)
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>>}
@@ -1150,8 +1160,8 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`account`**  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the market ID must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the market in which to look up the trading history, as a hexadecimal string. Either this parameter or the universe must be specified.
+    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the Market ID must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a hexadecimal string. Either this parameter or the Universe must be specified.
     * **`outcome`**  (string) Outcome of the share being bought/sold.
     * **`orderType`**  (string) Type of trade. Valid values are "buy" and "sell".
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the trading history.
@@ -1162,7 +1172,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 #### **Returns:**
 
-* Array of the user's trades, keyed by universe/market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>>)
+* Array of the user's trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>>)
 
 ### augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>}
 
@@ -1175,9 +1185,9 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the market ID must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the universe must be specified.
-    * **`outcome`**  (string) Outcome of the share held for the market.
+    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`outcome`**  (string) Outcome of the share held for the Market.
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the trading positions.
     * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by sortBy field.
     * **`limit`**  (string) &lt;optional> Maximum number of trading positions reports to return.
@@ -1190,6 +1200,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Type Definitions
 -------------
+<!-- Add glossary links to section -->
 <a name="Account"></a>
 ### Account  (Object)
 
@@ -1213,8 +1224,8 @@ Type Definitions
 * **`token`** (string) Contract address of the contract for the sent token, as a hexadecimal string.
 * **`value`** (number) Quantity of tokens sent.
 * **`symbol`** (string|null) Token symbol (if any).
-* **`outcome`** (number|null) Market outcome with which the token is associated (if any).
-* **`marketID`** (string|null) Contract address of the market in which the tranfer took place, as a hexadecimal string (if any).
+* **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
+* **`marketID`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
 
 <a name="AuthenticationMetadata"></a>
 ### AuthenticationMetadata 
@@ -1285,49 +1296,49 @@ Authentication metadata for raw transactions.
 
 #### **Properties:** 
 * **`designatedReportNoShowReputationBond`** (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.
-* **`targetReporterGasCosts`** (string) Amount of Ether required to pay for the gas to Report on this market, as a base-10 string.
-* **`validityBond`** (string) Amount of Ether to be held on-contract and repaid when the market is resolved with a non-Invalid outcome, as a base-10 string.
+* **`targetReporterGasCosts`** (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.
+* **`validityBond`** (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.
 
 <a name="MarketInfo"></a>
 ### MarketInfo  (Object)
 
 #### **Properties:** 
-* **`id`** (string) Address of a market, as a hexadecimal string.
-* **`universe`** (string) Address of a universe, as a hexadecimal string.
-* **`type`** (string) Type of market ("binary", "categorical", or "scalar").
-* **`numOutcomes`** (number) Total possible outcomes for the market.
-* **`minPrice`** (number) Minimum price allowed for a share on a market, in ETH. For binary & categorical markets, this is 0 ETH. For scalar markets, this is the bottom end of the range set by the market creator.
-* **`maxPrice`** (number) Maximum price allowed for a share on a market, in ETH. For binary & categorical markets, this is 1 ETH. For scalar markets, this is the top end of the range set by the market creator.
+* **`id`** (string) Address of a Market, as a hexadecimal string.
+* **`universe`** (string) Address of a Universe, as a hexadecimal string.
+* **`type`** (string) Type of Market ("binary", "categorical", or "scalar").
+* **`numOutcomes`** (number) Total possible Outcomes for the Market.
+* **`minPrice`** (number) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
+* **`maxPrice`** (number) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
 * **`cumulativeScale`** (string) Difference between maxPrice and minPrice.
-* **`author`** (string) Ethereum address of the creator of the market, as a hexadecimal string.
-* **`creationTime`** (number) Timestamp when the Ethereum block containing the market creation was created, in seconds.
-* **`creationBlock`** (number) Number of the Ethereum block containing the market creation.
-* **`creationFee`** (number) Fee paid by the market creator to create the market, in ETH.
-* **`reportingFeeRate`** (number) Percentage rate of ETH sent to the reporting window containing the market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.
-* **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the market creator whenever shares are settled.
-* **`marketCreatorFeesCollected`** (number|null) Amount of fees the market creator collected from the market, in ETH.
-* **`category`** (string) Name of the category the market is in.
-* **`tags`** (Array.&lt;(string|null)>) Names with which the market has been tagged.
-* **`volume`** (number) Trading volume for this outcome. (Method for calculating this is pending.)
-* **`outstandingShares`** (number) Total shares in the market. (Method for calculating this is pending.)
+* **`author`** (string) Ethereum address of the creator of the Market, as a hexadecimal string.
+* **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
+* **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
+* **`creationFee`** (number) Fee paid by the Market Creator to create the Market, in ETH.
+* **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.
+* **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
+* **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
+* **`category`** (string) Name of the category the Market is in.
+* **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
+* **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`outstandingShares`** (number) Total shares in the Market. (Method for calculating this is pending.)
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
-* **`reportingWindow`** (string) Contract address of the reporting window the market is in, as a hexadecimal string.
-* **`endDate`** (number) Timestamp when the market event ends, in seconds.
-* **`finalizationTime`** (number|null) Timestamp when the market was finalized (if any), in seconds.
-* **`description`** (string) Description of the market.
-* **`extraInfo`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical markets).
-* **`designatedReporter`** (string) Ethereum address of the market's designated report, as a hexadecimal string.
-* **`designatedReportStake`** (number) Amount of ETH the designated reporter staked on the outcome submitted in the designated report.
-* **`resolutionSource`** (string|null) Reference source used to determine the outcome of the market event.
-* **`numTicks`** (number) Number of possible prices, or ticks, between a market's minimum price and maximum price.
-* **`consensus`** (number|null) Consensus outcome for the market.
+* **`reportingWindow`** (string) Contract address of the Reporting Window the Market is in, as a hexadecimal string.
+* **`endDate`** (number) Timestamp when the Market event ends, in seconds.
+* **`finalizationTime`** (number|null) Timestamp when the Market was finalized (if any), in seconds.
+* **`description`** (string) Description of the Market.
+* **`extraInfo`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).
+* **`designatedReporter`** (string) Ethereum address of the Market's designated report, as a hexadecimal string.
+* **`designatedReportStake`** (number) Amount of ETH the designated reporter staked on the Outcome submitted in the designated report.
+* **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
+* **`numTicks`** (number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
+* **`consensus`** (number|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
 <a name="MarketPriceTimeSeries"></a>
 ### MarketPriceTimeSeries  (Object)
 
 #### **Properties:** 
-* **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single outcome, keyed by outcome ID.
+* **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.
 
 <a name="NoKeystoreAccount"></a>
 ### NoKeystoreAccount  (Object)
@@ -1370,10 +1381,10 @@ Serves as an enum for the state of an order.
 ### OutcomeInfo  (Object)
 
 #### **Properties:** 
-* **`id`** (number) Market outcome ID
-* **`volume`** (number) Trading volume for this outcome. (Method for calculating this is pending.)
-* **`price`** (number) Price of the outcome.
-* **`description`** (string|null) Description for the outcome.
+* **`id`** (number) Market Outcome ID
+* **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`price`** (number) Price of the Outcome.
+* **`description`** (string|null) Description for the Outcome.
 
 <a name="Pbkdf2Params"></a>
 ### Pbkdf2Params  (Object)
@@ -1393,14 +1404,14 @@ Serves as an enum for the state of an order.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the reporting transaction.
 * **`blockHash`** (string) Hash of the Ethereum block containing the reporting transaction.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.
-* **`marketID`** (string) Contract address of the market, as a hexadecimal string.
-* **`marketReportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the market.
+* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
+* **`marketReportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 * **`reportingWindow`** (string) Reporting window the market is in currently.
 * **`payoutNumerators`** (Array.&lt;number>) Array representing the payout set.
-* **`amountStaked`** (number) Description the reporter has staked on the outcome of their report.
+* **`amountStaked`** (number) Description the reporter has staked on the Outcome of their report.
 * **`stakeToken`** (string) Contract address of the stake token, as a hexadecimal string.
-* **`isCategorical`** (boolean) Whether the market is categorical.
-* **`isScalar`** (boolean) Whether the market is scalar.
+* **`isCategorical`** (boolean) Whether the Market is categorical.
+* **`isScalar`** (boolean) Whether the Market is scalar.
 * **`isIndeterminate`** (boolean) Description pending.
 * **`isSubmitted`** (boolean) Description pending.
 
@@ -1414,12 +1425,12 @@ Serves as an enum for the state of a stake token.
 * **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a designated report.
 * **`DESIGNATED_DISPUTE`** (string) Market's designated report has been submitted and is allowed to be disputed.
 * **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the disignated report was disputed, or the designated reporter failed to submit a report, and the market is waiting for the next reporting phase to begin.
-* **`FIRST_REPORTING`** (string) Market's designated report was disputed, and users can place stake on outcomes.
+* **`FIRST_REPORTING`** (string) Market's designated report was disputed, and users can place stake on Outcomes.
 * **`FIRST_DISPUTE`** (string) Market's first report has been submitted and is allowed to be disputed.
-* **`LAST_REPORTING`** (string) Market's first report was disputed, and users can place stake on outcomes.
+* **`LAST_REPORTING`** (string) Market's first report was disputed, and users can place stake on Outcomes.
 * **`LAST_DISPUTE`** (string) Market's first report has been submitted and is allowed to be disputed to cause a fork.
-* **`FORKING`** (string) Market's last report was disputed, causing a fork. Users can migrate their REP to the universe of their choice.
-* **`FINALIZED`** (string) An outcome for the market has been determined.
+* **`FORKING`** (string) Market's last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.
+* **`FINALIZED`** (string) An Outcome for the Market has been determined.
 * **`AWAITING_FORK_MIGRATION`** (string) Pending documentation. Possibly deprecated.
 * **`AWAITING_FINALIZATION`** (string) Pending documentation. Possibly deprecated.
 
@@ -1443,7 +1454,7 @@ Serves as an enum for the state of a stake token.
 ### SingleOutcomePriceTimeSeries  (Object)
 
 #### **Properties:** 
-* **`Array`** (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>>) of timestamped price points for this outcome.
+* **`Array`** (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>>) of timestamped price points for this Outcome.
 
 <a name="STAKE_TOKEN_STATE"></a>
 ### STAKE_TOKEN_STATE  (Object)
@@ -1452,28 +1463,28 @@ Serves as an enum for the state of a stake token.
 
 #### **Properties:** 
 * **`ALL`** (string) Stake token can be in any state. (If no stake token state is specified, this is the default value.)
-* **`UNFINALIZED`** (string) Stake token is in a market that has not been finalized.
-* **`UNCLAIMED`** (string) Stake token is in a finalized market, was staked on the correct outcome, and has not been claimed yet.
+* **`UNFINALIZED`** (string) Stake token is in a Market that has not been finalized.
+* **`UNCLAIMED`** (string) Stake token is in a finalized Market, was staked on the correct Outcome, and has not been claimed yet.
 
 <a name="StakeToken"></a>
 ### StakeToken  (Object)
 
 #### **Properties:** 
 * **`stakeToken`** (string) Contract address of the stake token, as a hexidecimal string.
-* **`marketID`** (string) ID of the market, as a hexidecimal string.
+* **`marketID`** (string) ID of the Market, as a hexidecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the stake token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the stake token's payout set.
-* **`payout2`** (number|null) Payout numerator 2 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`payout3`** (number|null) Payout numerator 3 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`payout4`** (number|null) Payout numerator 4 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`payout5`** (number|null) Payout numerator 5 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`payout6`** (number|null) Payout numerator 6 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`payout7`** (number|null) Payout numerator 7 of the stake token's payout set. Set to null for binary and scalar markets.
-* **`isInvalid`** (boolean) Whether the market was determined to be invalid.
+* **`payout2`** (number|null) Payout numerator 2 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout3`** (number|null) Payout numerator 3 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout4`** (number|null) Payout numerator 4 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout5`** (number|null) Payout numerator 5 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout6`** (number|null) Payout numerator 6 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout7`** (number|null) Payout numerator 7 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`isInvalid`** (boolean) Whether the Market was determined to be invalid.
 * **`amountStaked`** (number) Amount the stake token owner has staked, in ETH.
 * **`winningToken`** (number|null) Description pending.
 * **`claimed`** (boolean) Whether the stake token has been claimed by the owner.
-* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the market.
+* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 
 <a name="TimestampedPrice"></a>
 ### TimestampedPrice  (Object)
@@ -1492,9 +1503,9 @@ Serves as an enum for the state of a stake token.
 * **`price`** (number) Description pending.
 * **`amount`** (number) Description pending.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
-* **`marketCreatorFees`** (number) Amount of fees paid to market creator, in ETH.
+* **`marketCreatorFees`** (number) Amount of fees paid to Market creator, in ETH.
 * **`reporterFees`** (number) Amount of fees paid to reporters, in ETH.
-* **`marketID`** (string) Contract address of the market, as a hexadecimal string.
+* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
 * **`timestamp`** (number) Description pending.
@@ -1504,7 +1515,7 @@ Serves as an enum for the state of a stake token.
 ### UserTradePosition  (Object)
 
 #### **Properties:** 
-* **`marketID`** (string) Contract address of the market, as a hexadecimal string.
+* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (number) Quantity of shares currently owned by the user.
 * **`numSharesAdjustedForUserIntention`** (number) Description pending.
