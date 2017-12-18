@@ -783,7 +783,7 @@ augur.reporting.getStakeTokens({
 <!-- Add glossary links to section-->
 ### augur.reporting.getReportingHistory(p, callback) &rarr; {Object}
 
-Returns information about the reports submitted by a particular user. For Reporting Windows that have ended, this includes the final Outcome of the Market, whether the user’s report matched that final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
+Returns information about the reports submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
 
 Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
 
@@ -791,8 +791,8 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`reporter`**  (string) Ethereum address of the reporter for which to retrieve reporting history, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.
+    * **`reporter`**  (string) Ethereum address of the Reporter for which to retrieve reporting history, as a hexadecimal string.
+    * **`universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.
     * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.
     * **`reportingWindow`**  (string) &lt;optional> Contract address of the Reporting Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
     * **`earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
@@ -1247,6 +1247,25 @@ Authentication metadata for raw transactions.
 
 #### **Properties:** 
 * **`iv`** (string) Initialization vector used for this account, as a hexadecimal string.
+
+<a name="ConnectOptions"></a>
+### ConnectOptions  (Object)
+
+#### **Properties:** 
+* **`ethereumNode`** (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).
+* **`augurNode`** (string) Websocket address of an [Augur Node](#augur-node).
+
+<a name="EthereumNode"></a>
+### ExtraInfo  (Object)
+
+#### **Properties:** 
+* **`http`** (string|null) HTTP address of an Ethereum node.
+* **`httpAddresses`** (Array.<string>|null) Array of HTTP Ethereum node addresses. (Can be used instead of `http` to specify a list of HTTP addresses to iterate through until a connection is established.)
+* **`ws`** (string|null) Websocket address of an Ethereum node.
+* **`wsAddresses`** (Array.<string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
+* **`ipc`** (string|null) IPC address of an Ethereum node.
+* **`ipcAddresses`** (Array.<string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
+* **`networkID`** (string) Description pending.
 
 <a name="ExtraInfo"></a>
 ### ExtraInfo  (Object)

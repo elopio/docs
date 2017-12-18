@@ -2,11 +2,25 @@ API Overview
 ===========
 <aside class="notice">The API Overview section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-augur.js is a collection of JavaScript APIs that can be used to query for information about Augur's [Markets](#market) and interact with Augur's [smart contracts](https://github.com/AugurProject/augur-core). The documentation for augur.js is divided into four sections: the [Simplified API](#simplified-api), the [Call API](#call-api), the [Transaction API](#transaction-api), and the [Events API](#events-api). The Simplified API provides general information about Markets within Augur, and many of its functions require a connection to an [Augur Node](#augur-node) (covered in the next section). The Call and Transaction APIs provide direct mappings to Augur's smart contract methods via the `augur.api` object. The Call API uses `eth_call` to make "get" requests for information stored on the blockchain. The Transaction API uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new [Order](#order) on the [Order Book](#order-book). The Events API enables listening for certain logged events and searching for them. The Call, Transaction, and Events APIs do not require a connection to an Augur Node. Each of these four components of augur.js is covered in greater detail in their respective sections below.
+[augur.js](https://github.com/AugurProject/augur.js) is a JavaScript SDK that is the developer-facing component of Augur's [middleware](#architecture). It can be used to query for information about Augur's [Markets](#market) and interact with Augur's [smart contracts](https://github.com/AugurProject/augur-core), and it is the recommended way to interact with Augur from a custom application. 
 
-In this section, we will go over how to import augur.js into your project and connect it to an Ethereum Node. This section will also cover market creation, and initial market loading.
+The documentation for augur.js is divided into four sections: the [Simplified API](#simplified-api), the [Call API](#call-api), the [Transaction API](#transaction-api), and the [Events API](#events-api). The Simplified API provides general information about Markets within Augur, and many of its functions require a connection to an [Augur Node](#augur-node). The Call and Transaction APIs provide direct mappings to Augur's smart contract methods via the `augur.api` object. The Call API uses `eth_call` to make "get" requests for information stored on the blockchain. The Transaction API uses `eth_sendTransaction` to make "set" requests to the blockchain in order to modify the blockchain's information in some way, like creating a new [Order](#order) on the [Order Book](#order-book). The Events API enables listening for certain logged events and searching for them. The Call, Transaction, and Events APIs do not require a connection to an Augur Node. Each of these four components of augur.js is covered in greater detail in their respective sections below.
 
-Connect to an Ethereum Node
+This API Overview section explains how to add augur.js to a custom application and how to connect it to an Ethereum node and an Augur Node. It also covers how augur.js' account management works, how numbers should be used in augur.js, how to load and create [Markets](#markets), and debugging options.
+
+<!-- TODO: Consider moving this to the Architecture section. -->
+Augur Node
+---------------------------
+Anyone wishing to query for information about Augur's markets will need to use the augur.js [Simplified API](#simplified-api), which requires a connection to an Augur Node for many of its functions. Augur Node is a standalone application that scans the Ethereum blockchain for all Augur event logs and stores them to a SQLite or PostgresSQL database.
+
+Instead of looking up information about Augur-related events directly on the Ethereum blockchain, the Simplified API sends query requests to an Augur Node's database. This is because looking up information directly on the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all [Markets](#markets) created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.
+
+To alleviate this problem, the Simplified API executes queries by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
+
+To set up a local Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once a local Augur Node is running (or if the websocket address of a hosted node is known), a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code in the [Getting Started with augur.js](#getting-started-with-augur-js) section.
+
+<!-- TODO: add link to augur.connect function in Simplified API section once its complete. -->
+Getting Started with augur.js
 ---------------------------
 ```javascript
 // After installing, just require augur.js to use it.
@@ -25,10 +39,11 @@ var ethereumNode = {
   // ipc addresses can also be specified as:
   // ipcAddresses: [ ... ]
 };
-var augurNode = "ws://127.0.0.1:9001"; // local websocket address for Augur Node
+// To connect to a hosted Augur Node instead of a local Augur Node, substitute its websocket address below.
+var augurNode = "ws://127.0.0.1:9001"; // local websocket address for an Augur Node
 
 // Attempt to connect to a local Ethereum node
-// If that fails, fall back to our hosted node
+// If that fails, fall back to the hosted Ethereum node
 augur.connect({ ethereumNode, augurNode }, function (vitals) { /* ... */ });
 // example vitals object:
 vitals = {
@@ -37,19 +52,13 @@ vitals = {
   coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
   gasPrice: 18000000000,
   api: {
-    events: { /*...*/},
-    functions: { /* ... */ },
+    events: { ... },
+    functions: { ... },
   },
-  contracts: { /* ... */ },
-  rpc: { /* ... */ },
+  contracts: { ... },
+  rpc: { ... },
 };
 ```
-Augur's JavaScript API is a set of JavaScript bindings for the methods encoded in Augur's [Solidity](https://solidity.readthedocs.io/en/develop/) [smart contracts](https://github.com/AugurProject/augur-core). The API method name, as well as its parameters as keys in the `params` object, are generally identical to those of the underlying smart contract method.
-
-Augur's smart contracts run on Ethereum's decentralized network. The various serialization, networking, and formatting tasks required to communicate with the Augur contracts from a web application are carried out by Augur's [middleware](#architecture).
-
-[augur.js](https://github.com/AugurProject/augur.js) is the Augur JavaScript SDK, and is the user-facing component of the middleware. It is the recommended way to interact with Augur's smart contracts from a custom application. 
-
 The easiest way to install augur.js is using [npm](https://www.npmjs.com/package/augur.js):
 
 `$ npm install augur.js`
@@ -58,32 +67,11 @@ Alternatively, this can be done using [yarn](https://yarnpkg.com/en/package/augu
 
 `$ yarn add augur.js`
 
-To use the Augur API, `augur.js` must connect to an Ethereum node, which can be either local or remote (hosted). To specify the connection endpoint, pass your RPC connection info to `augur.connect`. Augur will go through the list of potential connections provided by the `options` argument and attempt to connect to each in turn until one of the connections is successful or all attempts fail. The Ethereum node may have multiple http, websocket, or ipc addresses specified as arrays. The Augur Node, however, can only have one websocket address specified.
+Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur Node](#augur-node). These can be running locally or remotely (hosted). 
 
-In the example, the first connection that will be tried is `http://127.0.0.1:8545`, which is our local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then a `vitals` object will be returned, otherwise an error message will be returned.
+To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or ipc addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. Hhowever, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
-Connect to an Augur Node
-----------
-```javascript
-// Connect to an Augur Node as follows:
-var Augur = require("augur.js");
-var augur = new Augur();
-
-var ethereumNode = { http: "http://127.0.0.1:8545", ws: "ws://127.0.0.1:8546" };
-// To connect to a hosted Augur Node instead of a local Augur Node, substitute its websocket address below.
-var augurNode = "ws://127.0.0.1:9001"; // Websocket address of a locally-running Augur Node
-
-augur.connect({ ethereumNode, augurNode }, (err) => {
-  // do stuff
-});
-```
-Anyone wishing to query for information about Augur's markets will need to use the augur.js [Simplified API](#simplified-api), which requires a connection to an [Augur Node](https://github.com/AugurProject/augur-node). Augur Node is a standalone application that scans the Ethereum blockchain for all Augur event logs and stores them to a SQLite or PostgresSQL database.
-
-Instead of looking up information about Augur-related events directly on the Ethereum blockchain, the Simplified API sends query requests to an Augur Node's database. This is because looking up information directly on the blockchain can be a slow and difficult process, especially when sorting is required. For example, to run a query for all [Markets](#markets) created by a specific user, sorted by volume and limited to 100 results, would require scanning the blockchain for all Market creation events by that user, saving the results locally, querying each Market to obtain its volume, saving those results locally, and then sorting the Markets created by the user and discarding everything after the first 100 results. This would require a large number of RPC requests and would take a long time to complete.
-
-To alleviate this problem, the Simplified API executes queries by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
-
-To set up a local Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once a local Augur Node is running (or if the websocket address of a hosted node is known), a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code on the right.
+In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is our local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
 Accounts
 --------
