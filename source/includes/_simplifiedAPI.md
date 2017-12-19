@@ -359,7 +359,7 @@ augur.markets.getMarketsInfo({
   {
     id: "0x0000000000000000000000000000000000000001",
     universe: "0x000000000000000000000000000000000000000b",
-    type: "categorical",
+    marketType: "categorical",
     numOutcomes: 8,
     minPrice: 0,
     maxPrice: 1,
@@ -368,6 +368,7 @@ augur.markets.getMarketsInfo({
     creationTime: 1506473474,
     creationBlock: 1400000,
     creationFee: 10,
+    settlementFee: "0.03",
     reportingFeeRate: 0.02,
     marketCreatorFeeRate: 0.01,
     marketCreatorFeesCollected: 0,
@@ -432,7 +433,7 @@ augur.markets.getMarketsInfo({
   {
     id: "0x0000000000000000000000000000000000000002",
     universe: "0x000000000000000000000000000000000000000b",
-    type: "binary",
+    marketType: "binary",
     numOutcomes: 2,
     minPrice: 0,
     maxPrice: 1,
@@ -441,6 +442,7 @@ augur.markets.getMarketsInfo({
     creationTime: 1506480000,
     creationBlock: 1400100,
     creationFee: 10,
+    settlementFee: "0.03",
     reportingFeeRate: 0.02,
     marketCreatorFeeRate: 0.01,
     marketCreatorFeesCollected: 0,
@@ -1023,6 +1025,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0.2,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 11,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 1,
@@ -1030,6 +1033,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 2,
@@ -1037,6 +1041,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 3,
@@ -1044,6 +1049,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 4,
@@ -1051,6 +1057,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 5,
@@ -1058,6 +1065,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 6,
@@ -1065,6 +1073,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }, {
     "marketID": "0x0000000000000000000000000000000000000001",
     "outcome": 7,
@@ -1072,6 +1081,7 @@ augur.trading.getUserTradingPositions({
     "numSharesAdjustedForUserIntention": 0,
     "realizedProfitLoss": 0,
     "unrealizedProfitLoss": 0,
+    "averagePrice": 0,
   }
 ]
 ```
@@ -1316,7 +1326,7 @@ Authentication metadata for raw transactions.
 #### **Properties:** 
 * **`id`** (string) Address of a Market, as a hexadecimal string.
 * **`universe`** (string) Address of a Universe, as a hexadecimal string.
-* **`type`** (string) Type of Market ("binary", "categorical", or "scalar").
+* **`marketType`** (string) Type of Market ("binary", "categorical", or "scalar").
 * **`numOutcomes`** (number) Total possible Outcomes for the Market.
 * **`minPrice`** (number) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
 * **`maxPrice`** (number) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
@@ -1325,6 +1335,7 @@ Authentication metadata for raw transactions.
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
 * **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
 * **`creationFee`** (number) Fee paid by the Market Creator to create the Market, in ETH.
+* **`creationFee`** (string) Description pending.
 * **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.
 * **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
 * **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
@@ -1363,6 +1374,7 @@ Authentication metadata for raw transactions.
 ### Order  (Object)
 
 #### **Properties:** 
+* **`orderID` ** (string) ID of the order, as a hexadecimal string.
 * **`shareToken`** (string) Contract address of the share token for which the order was placed, as a hexadecimal string.
 * **`transactionHash`** (string) Hash to look up the order transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the order transaction.
@@ -1532,3 +1544,4 @@ Serves as an enum for the state of a stake token.
 * **`numSharesAdjustedForUserIntention`** (number) Description pending.
 * **`realizedProfitLoss`** (number) Description pending.
 * **`unrealizedProfitLoss`** (number) Description pending.
+* **`averagePrice`** (number) Description pending.
