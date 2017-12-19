@@ -1356,6 +1356,19 @@ Authentication metadata for raw transactions.
 * **`consensus`** (number|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
+<a name="MarketOrderBook"></a>
+### MarketOrderBook  (Object)
+
+#### **Properties:** 
+* **`1`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 1 of this market.
+* **`2`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 2 of this market.
+* **`3`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 3 of this market.
+* **`4`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 4 of this market.
+* **`5`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 5 of this market.
+* **`6`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 6 of this market.
+* **`7`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 7 of this market.
+* **`8`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 8 of this market.
+
 <a name="MarketPriceTimeSeries"></a>
 ### MarketPriceTimeSeries  (Object)
 
@@ -1466,6 +1479,13 @@ Serves as an enum for the state of a stake token.
 * **`p`** (number) Parallelization factor, determines relative CPU cost (usually 1).
 * **`r`** (number) Block size factor used for scrypt's hash, determines relative memory cost (usually 8).
 * **`salt`** (string) The dklen-byte salt used for this account, as a hexadecimal string.
+
+<a name="SingleOutcomeOrderBook"></a>
+### SingleOutcomeOrderBook  (Object)
+
+#### **Properties:** 
+ * **`buy`** (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Buy orders (bids) indexed by order ID.
+ * **`sell`** (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)  Sell orders (asks) indexed by order ID.
 
 <a name="SingleOutcomeOrderBookSide"></a>
 ### SingleOutcomeOrderBookSide  (Object)
