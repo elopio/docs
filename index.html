@@ -750,7 +750,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the token transfers made to or from a specific Ethereum address. </p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1198,7 +1198,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the Market Categories in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1228,7 +1228,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function has not been implemented yet. Returns the <a href="#markets">Markets</a> in a specific <a href="#reporting-window">Reporting Window</a> that are able to be disputed, along with the value of the <a href="#dispute-bond">Dispute Bond</a> needed to dispute each Market’s result.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1256,7 +1256,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the prices and timestamps of a specific <a href="#market">Market&rsquo;s</a> <a href="#outcomes">Outcomes</a> over time.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1280,7 +1280,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns an array of <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1308,7 +1308,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1337,7 +1337,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#reporting-window">Reporting Window</a> that are waiting for a <a href="designated-report">Designated Report</a> to be submitted or waiting for the <a href="#reporting-phase">Reporting Phase</a> to end. Either the Universe or Reporting Window must be specified.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1367,7 +1367,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#market">Markets</a> closing between a given time range in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1397,7 +1397,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#market">Markets</a> created by a specific user, as well as the total amount of fees earned so far by that user.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1426,7 +1426,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#market">Markets</a> within a specific category.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1457,7 +1457,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about <a href="#markets">Markets</a> that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market <a href="#outcome">Outcome</a>. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about <a href="#order">Orders</a> for the specified Market.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1577,7 +1577,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about the reports submitted by a particular user. For <a href="#reporting-window">Reporting Windows</a> that have ended, this includes the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a>, whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1610,7 +1610,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1636,7 +1636,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1661,7 +1661,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1910,7 +1910,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1937,7 +1937,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns a list of orders in a given Universe or Market.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1996,7 +1996,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about the trades a specific user has made.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2028,7 +2028,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the trading positions held by a specific user.</p>
 
-<p>Note: This function requires an <a href="#connect-to-an-augur-node">Augur Node connection</a>.</p>
+<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
