@@ -1078,7 +1078,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+    <span class="na">marketType</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
     <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
     <span class="na">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -1087,6 +1087,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
     <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
     <span class="na">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
     <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
     <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="na">marketCreatorFeesCollected</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1151,7 +1152,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
+    <span class="na">marketType</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
     <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="na">minPrice</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">maxPrice</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -1160,6 +1161,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
     <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
     <span class="na">creationFee</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
     <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
     <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="na">marketCreatorFeesCollected</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -1840,6 +1842,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -1847,6 +1850,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -1854,6 +1858,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -1861,6 +1866,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
@@ -1868,6 +1874,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -1875,6 +1882,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
@@ -1882,6 +1890,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketID"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
@@ -1889,6 +1898,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -2227,7 +2237,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">id</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">type</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
+<li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
 <li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
 <li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
 <li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
@@ -2236,6 +2246,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
 <li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
 <li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
+<li><strong><code class="prettyprint">creationFee</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
 <li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
 <li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
@@ -2286,6 +2297,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
+<li>*<em><code class="prettyprint">orderID</code> *</em> (string) ID of the order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token for which the order was placed, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the order transaction receipt.</li>
 <li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the order transaction.</li>
@@ -2507,6 +2519,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (number) Description pending.</li>
 </ul>
 
           <h1 id="call-api">Call API</h1>
