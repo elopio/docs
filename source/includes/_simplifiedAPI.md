@@ -64,7 +64,7 @@ augur.accounts.getAccountTransferHistory({
 
 Returns the token transfers made to or from a specific Ethereum address. 
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -479,7 +479,7 @@ augur.markets.getMarketsInfo({
 
 Returns the Market Categories in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 * **`p`** (Object) Parameters object.  
@@ -499,7 +499,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market’s result.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -520,7 +520,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the prices and timestamps of a specific [Market's](#market) [Outcomes](#outcomes) over time.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -537,7 +537,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns an array of [Markets](#market) in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -558,7 +558,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the [Markets](#market) in a specific [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -580,7 +580,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either the Universe or Reporting Window must be specified.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -603,7 +603,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the [Markets](#market) closing between a given time range in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -626,7 +626,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -648,7 +648,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the [Markets](#market) within a specific category.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -671,7 +671,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -787,7 +787,7 @@ augur.reporting.getStakeTokens({
 
 Returns information about the reports submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -813,7 +813,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -831,7 +831,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -849,7 +849,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -1091,7 +1091,7 @@ augur.trading.getUserTradingPositions({
 
 Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -1111,7 +1111,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns a list of orders in a given Universe or Market.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -1155,7 +1155,7 @@ Gets the number of Shares held by a specific Ethereum address for each Outcome o
 
 Returns information about the trades a specific user has made.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
@@ -1180,7 +1180,7 @@ Note: This function requires an [Augur Node connection](#connect-to-an-augur-nod
 
 Returns the trading positions held by a specific user.
 
-Note: This function requires an [Augur Node connection](#connect-to-an-augur-node).
+Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Parameters:**
 
