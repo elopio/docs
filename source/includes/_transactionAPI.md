@@ -171,7 +171,7 @@ The `accountType` is a string that can be "privateKey", "uPort", or "ledger", de
 
 **Under the hood `augur.rpc.transact` carries out the following sequence:**
 
-1. `augur.rpc.transact` will first attempt to use `eth_call` on the transaction submitted in order to determine if there is enough GAS to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough GAS, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
+1. `augur.rpc.transact` will first attempt to use `eth_call` on the transaction submitted in order to determine if there is enough gas to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn't provide enough gas, or the transaction will fail then an error is passed to the `onFailed` handler and the `augur.rpc.transact` sequence terminates.
 
 2. After confirming that the Transaction is valid, `augur.rpc.transact` will send a `eth_sendTransaction` RPC request (or `eth_sendRawTransaction` for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the `onFailed` handler and the `augur.rpc.transact` sequence will terminate. Otherwise, the `onSent` handler will be called and return an object containing the `txHash` and `callReturn`.
 

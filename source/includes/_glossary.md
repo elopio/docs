@@ -10,7 +10,7 @@ Goals:
     - alphabetical
   - Human Readable language
  -->
-This section of the documentation is dedicated to terms found and used throughout the rest of documentation. Below you will find sections about terms used in Augur. The goal is to explain everything that might be confusing in an easy to understand way.
+This section of the documentation is dedicated to terms found and used throughout the rest of documentation. Below you will find sections about terms used in Augur. The goal is to explain everything that might be confusing in an easy-to-understand way.
 
 ## Ask Order
 
@@ -48,9 +48,21 @@ A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome)
 
 A Creator Fee is set by the [Market Creator](#market-creator) when he or she creates a new [Market](#market). Once the Creator Fee is set, it cannot be changed. The Creator Fee must be between 0% and 50%. The Creator Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be Settled when a user sells a [Complete Set](#complete-set) or when the Market has been [Finalized](#finalized-market) and a user wants to close an open [Position](#position). The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their market creation cost and ideally turn a profit on posting interesting Markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
 
+## Decentralized Oracle
+
+The heart of Augur is its Decentralized Oracle that allows users and smart contracts to propose questions to Augur and discover accurate information about the real world (based on how REP holders have voted on [Market](#market) [Outcomes](#outcomes)) without having to trust a single person, AI, or organization. Augur’s Oracle allows information to be migrated from the real world to a blockchain without relying on a centralized, trusted third party.
+
 ## Designated Dispute Phase
 
 The Designated Dispute Phase is a three (3) day period immediately following a [Reported](#report) [Proposed Outcome](#proposed-outcome) by an [Designated Reporter](#designated-reporter) during the [Designated Report Phase](#designated-report-phase). During this time, any [REP](#rep) holder can post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the Proposed Outcome of the [Market](#market), which moves the Market into the next available [Reporting Window](#reporting-window) for a [Reporting Round](#reporting-round), specifically the [First Report Round](#first-report-round). If a Dispute Bond is not posted during the Designated Dispute Phase then the Market is [Finalized](#finalized-market) and the Proposed Outcome becomes the [Final Outcome](#final-outcome). The Designated Dispute Phase has identical rules to a Reporting Window's [Dispute Phase](#dispute-phase) with the one exception being that an Designated Dispute Phase is not part of a Reporting Window.
+
+## Designated Report No-Show Gas Bond
+
+The Designated Report No-Show Gas Bond is paid for using ETH by the [Market Creator](#market-creator) during Market Creation. This Bond is completely refunded to the Market Creator as soon as the [Designated Reporter](#designated-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Report Phase. The [Market](#market), as well as the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) and this Bond, are moved into the next [Reporting Window](#reporting-window) for [Reporting Rounds](#reporting-round), starting with the [First Report Round](#first-report-round). During the First Report Round the [First Reporter](#first-reporter)'s transaction to submit the [First Report](#first-report) on this Market is paid for using the Designated Report No-Show Gas Bond. If the transaction costs less than the amount of the Designated Report No-Show Gas Bond then the remaining ETH is sent to the First Reporter.
+
+## Designated Report No-Show REP Bond
+
+The Designated Report No-Show REP Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during Market Creation. The Bond is refunded to the Market Creator if the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). If the Designated Reporter fails to Report during the Designated Report Phase then the Designated Report No-Show REP Bond is applied to the stake of the First Reporter for this [Market](#market) in the [Reporting Rounds](#reporting-round) during the next available [Reporting Window](#reporting-window). This actually allows for someone to stake 0 REP for the [First Report](#first-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported then they can earn REP without having to buy it.
 
 ## Designated Report Phase
 
@@ -60,21 +72,53 @@ The Designated Report Phase is up to three (3) days in length and begins immedia
 
 An Designated Reporter is a single address designated to submit the [Proposed Outcome](#proposed-outcome) for a [Market](#market) during [Designated Reporting](#designated-reporting). The Designated Reporter is set by the [Market Creator](#market-creator) during Market Creation. All Markets must have a Designated Reporter.
 
+## Designated Reporter Stake
+
+When a [Market](#market) is in the [Dispute Round Phase](#dispute-round-phase), users can stake [REP](#rep) on any [Outcome](#outcome) other than the [Tenative Outcome](#tentative-outcome) and get an equivalant number of [Participation Tokens](#participation-tokens) in return. These Participation Tokens allow them to collect fees when the Market [Settles](#settlement). The amount of REP they stake goes toward filling the [Dispute Bond](#dispute-bond).
+
 ## Designated Reporting
 
 Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One address will be responsible for submitting a [Proposed Outcome](#proposed-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time), known as the [Designated Report Phase](#designated-report-phase). After the Report has been submit by the Designated [Reporter](#reporter) then a 3 day [Designated Dispute Phase](#designated-dispute-phase) begins where in any [REP](#rep) Holder can [Challenge](#challenge) the [Market Awaiting Finalization](#market-awaiting-finalization). If the [Dispute Bond](#dispute-bond) is posted then the Market is moved into the next [Reporting Window](#reporting-window) and will be subject to [Reporting Rounds](#reporting-round). Designated Reporting is independent of Reporting Windows.
+
+## Dispute
+
+Disputing is synonymous with the act of [Challenging](#challenge) a [Tenative Outcome](#tentative-outcome).
 
 ## Dispute Bond
 
 A Dispute Bond is a bond posted to force another round of [Reporting](#report) if a [Reporter](#reporter) feels the [Proposed Outcome](#proposed-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization) isn't accurate. If the [Market's](#market) Proposed Outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false [Outcome](#outcome) of the Market.
 
+## Dispute Bond Size
+
+The size of a [Dispute Bond](#dispute-bond) is calculated as follows:
+
+Let <i>A<sub>n</sub></i> denote the total Stake over all of a [Market’s](#market) [Outcomes](#outcome) at the beginning of [Dispute Round](#dispute-round) <i>n</i>. Let &omega; be any Market Outcome other than the Market’s [Tentative Outcome](#tentative-outcome) at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on Outcome &omega; at the beginning of [Dispute](#dispute) <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;, <i>n</i>) and is given by:
+
+<i>B</i>(&omega;, <i>n</i>) = 2<i>A<sub>n</sub></i>-3<i>S</i>(&omega;, <i>n</i>)
+
 ## Dispute Phase
 
 A Dispute Phase is a three (3) day window after a [Market](#market) has been [Reported](#report) on before which the [Proposed Outcome](#proposed-outcome) becomes the [Final Outcome](#final-outcome). During this 3 day period, a [REP](#rep) Holder can post a [Dispute Bond](#dispute-bond) if they would like to force another round of Reporting for the Market. The Market will be moved into the next [Reporting Window](#reporting-window). Markets in the Dispute Phase are referred to as [Markets Awaiting Finalization](#market-awaiting-finalization).
 
+## Dispute Round
+
+Description pending.
+
+## Dispute Round Phase
+
+Description pending.
+
+## Dispute Stake
+
+Description pending.
+
 ## End Time
 
 End Time is the date and time that a [Market](#market)'s event will have come to pass and should be known. After this date and time has passed the Market will get [Reported](#report) on and [Finalized](#finalized-market).
+
+## Fee Window
+
+Description pending.
 
 ## Fill Order
 
@@ -88,17 +132,13 @@ A Final Outcome is a [Proposed Outcome](#proposed-outcome) that is not [Challeng
 
 A Finalized Market is a [Market](#market) that has [Awaited Finalization](#market-awaiting-finalization) and has not been disputed, the [Proposed Outcome](#proposed-outcome) is now considered final. This market will now allow [Share](#shares) holders to [settle](#settlement) their shares with the market.
 
+## Finalized Phase
+
+Description pending.
+
 ## First Report
 
-The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report generally will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). In the event a Designated Reporter fails to Report then the Market is moved into the next available [Reporting Window](#reporting-window), along with the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), for it's [First Report Round](#first-report-round). The first person to submit a Report and Stake at least 0 [REP](#rep) on their Report will have the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) added to their Stake and their Report transaction's GAS cost covered by the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond). This provides an incentive to submit the First Report as the [First Reporter](#first-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
-
-## Designated Report No-Show Gas Bond
-
-The Designated Report No-Show Gas Bond is paid for using ETH by the [Market Creator](#market-creator) during Market Creation. This Bond is completely refunded to the Market Creator as soon as the [Designated Reporter](#designated-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Report Phase. The [Market](#market), as well as the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) and this Bond, are moved into the next [Reporting Window](#reporting-window) for [Reporting Rounds](#reporting-round), starting with the [First Report Round](#first-report-round). During the First Report Round the [First Reporter](#first-reporter)'s transaction to submit the [First Report](#first-report) on this Market is paid for using the Designated Report No-Show Gas Bond. If the transaction costs less than the amount of the Designated Report No-Show Gas Bond then the remaining ETH is sent to the First Reporter.
-
-## Designated Report No-Show REP Bond
-
-The Designated Report No-Show REP Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during Market Creation. The Bond is refunded to the Market Creator if the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Report Phase](#designated-report-phase). If the Designated Reporter fails to Report during the Designated Report Phase then the Designated Report No-Show REP Bond is applied to the stake of the First Reporter for this [Market](#market) in the [Reporting Rounds](#reporting-round) during the next available [Reporting Window](#reporting-window). This actually allows for someone to stake 0 REP for the [First Report](#first-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported then they can earn REP without having to buy it.
+The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report generally will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). In the event a Designated Reporter fails to Report then the Market is moved into the next available [Reporting Window](#reporting-window), along with the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), for it's [First Report Round](#first-report-round). The first person to submit a Report and Stake at least 0 [REP](#rep) on their Report will have the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) added to their Stake and their Report transaction's gas cost covered by the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond). This provides an incentive to submit the First Report as the [First Reporter](#first-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
 
 ## First Report Round
 
@@ -120,6 +160,26 @@ The Fork Period is a sixty (60) day period of time after a [Fork](#fork) has occ
 
 A Forked Market is a [Market](#market) who's [Proposed Outcome](#proposed-outcome) after a [Last Report Round](#last-report-round) is [Disputed](#dispute-bond) and causes a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
 
+## Genesis Universe
+
+This is the first and only [Universe](#universe) to exist at Augur's launch, meaning it has no [Parent Universe](#parent-universe). All [Markets](#market) and [REP](#rep) exist in this Universe until Augur's first [Fork](#fork) occurs. Users are required to migrate their REP from the legacy REP contract into this Universe at launch in order for their REP to be used with Augur.
+
+## Initial Report
+
+Description pending.
+
+## Initial Reporter
+
+Description pending.
+
+## Initial Reporting Phase
+
+Description pending.
+
+## Invalid Outcome
+
+Description pending.
+
 ## Last Report Round
 
 The Last Report Round is the final [Reporting Round](#reporting-round) in which a [Challenge](#challenge) to the [Proposed Outcome](#proposed-outcome) during the [Dispute Phase](#dispute-phase) will result in a [Fork](#fork) instead of another Reporting Round. Unlike previous Reporting Rounds, when a [Market](#market) in the Last Report Round enters the Dispute Phase and it's Proposed Outcome is Challenged then the Market becomes a [Forked Market](#forked-market) and the [Universe](#universe) becomes a [Locked Universe](#locked-universe).
@@ -127,10 +187,6 @@ The Last Report Round is the final [Reporting Round](#reporting-round) in which 
 ## Locked Universe
 
 A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur within it and no longer allows the creation of new [Markets](#markets). All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after [Finalizing](#finalized-market). [REP](#rep) holders within a Locked Universe are given a one time and final option to migrate their REP to one of the new universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.
-
-## Market Creator Mailbox
-
-A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as [Validity Bonds](#validity-bond), [Designated Report No-Show Gas Bonds](#designated-report-no-show-gas-bond), and [Designated Report No-Show REP Bonds](#designated-report-no-show-rep-bond)) are also sent to the Market Creator Mailbox.
 
 ## Market
 
@@ -144,6 +200,10 @@ Market Awaiting Finalization occurs when a [Market](#market) has been [Reported]
 
 A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can determine the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#shares) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being purposed, the type of Market, the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
+## Market Creator Mailbox
+
+A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as [Validity Bonds](#validity-bond), [Designated Report No-Show Gas Bonds](#designated-report-no-show-gas-bond), and [Designated Report No-Show REP Bonds](#designated-report-no-show-rep-bond)) are also sent to the Market Creator Mailbox.
+
 ## Market Resolution
 
 Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#market). [Designated Reporting](#designated-reporting), [Reporting Rounds](#reporting-round) and [Forks](#fork) are all examples of attempts at Market Resolution.
@@ -155,6 +215,11 @@ The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price
 ## Minimum Display Price
 
 The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price allowed for a share on a [market](#market). For [Binary](#binary-market) or [Categorical](#categorical-market) Markets this value is always 0, as in 0 ETH. [Scalar](#scalar-market) markets' Minimum Display Price would be the bottom end of the range set by the [Market Creator](#market-creator).
+
+## No-Show Bond
+
+[Market Creators](#market-creator) must put up a No-Show Bond when creating a new [Market](#market). The No-Show Bond is comprised of two parts: the [No-Show Gas Bond](#designated-report-no-show-gas-bond) and the [No-Show REP Bond](#designated-report-no-show-rep-bond).
+If the [Designated Reporter](#designated-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-report-phase) then the No-Show Bond is returned to the Market Creator. Otherwise, the No-Show Bond is given to the [Initial Reporter](#initial-reporter) to cover their gas costs and the [Stake](#stake-token) in their Reported [Outcome](#outcome).
 
 ## Number of Ticks
 
@@ -204,6 +269,11 @@ A Payout Set, sometimes referred to as the "Payout Numerator" in contract method
 
 A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the [Outcome](#outcome) you are short on, where as closing a long position means selling the Shares you own.
 
+## Pre-Reporting Phase
+
+This is the phase that occurs after a [Market's](#market) creation
+and before that Market's event has come to pass. Typically, it is the most active period of trading. Once the event has occurred, the Market enters the [Designated Reporting Phase](#designated-report-phase).
+
 ## Proposed Outcome
 
 The Proposed Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that is [Awaiting Finalization](#market-awaiting-finalization). In other words, it's the outcome [Reporters](#reporters) have staked their [REP](#rep) on to indicate that it is the correct Outcome of the Market. If a Market isn't [Challenged](#challenge) while Awaiting Finalization by a REP holder posting a [Dispute Bond](#dispute-bond) then the Market will become [Finalized](#finalized-market) and the Prosed Outcome will become a [Final Outcome](#final-outcome).
@@ -241,6 +311,10 @@ Reporting Rounds take place in a [Reporting Window](#reporting-window) during wh
 
 The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). Reporting Windows last for thirty (30) days and consist of two (2) phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). The combined duration of the Reporting Phase and the Dispute Phase is known as the [Reporting Period](#reporting-period). The Reporting Phase lasts twenty seven (27) days in which Markets in a [Reporting Round](#reporting-round) are Reported on. The Dispute Phase lasts three (3) days and during this time any [REP](#rep) holder is allowed to post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Proposed Outcome](#proposed-outcome) of the [Market Awaiting Finalization](#market-awaiting-finalization). Reporting Windows are occasionally referred to as "Reporting Cycles" or "Reporting Periods" as those were legacy terms for a Reporting Window during development of Augur.
 
+## Reward Pool
+
+Description pending.
+
 ## Scalar Market
 
 A Scalar Market is a [Market](#market) with a range for potential [outcomes](#outcome). A scalar market example might be "According to www.weather.com, what will the temperature in Fahrenheit be at SFO on January 3rd, 2062 at 1:00pm?". In this example market, we might set the [minDisplayPrice](#minimum-display-price) of the market to -50 and the [maxDisplayPrice](#maximum-display-price) to 150. This would allow for the market to [Settle](#settlement) on any number between the two. Sometimes you don't need a range of potential outcomes, only a simple yes/no or a small number of choices, in these cases you would want to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market respectively.
@@ -261,6 +335,10 @@ A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outc
 
 A Stake Token is used to represent the amount of Staked [REP](#rep) a [Reporter](#reporter) has on an [Outcome](#outcome) for their [Report](#report). Stake Tokens have a 1:1 cost ratio to REP, so 100 [attoREP](#atto-prefix) would buy you 100 [attoStakeTokens](#atto-prefix).
 
+## Tentative Outcome
+
+Description pending.
+
 ## Tick
 
 A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market) between its [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much [attoETH](#atto-prefix) a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 [attoETH](#atto-prefix). The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Settlement Fees](#settlement-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
@@ -276,3 +354,11 @@ A Universe is a version of Augur. All [Markets](#market) created on Augur belong
 ## Validity Bond
 
 The Validity Bond is paid by the [Market Creator](#market-creator) during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the [Final Outcome](#final-outcome) of the [Market](#market) is not invalid.
+
+## Waiting for the Next Fee Window to Begin Phase
+
+Description pending.
+
+## Winning Universe
+
+Description pending.

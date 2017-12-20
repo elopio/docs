@@ -8,11 +8,11 @@ The Augur UI will offer users the best prices first when displaying the Order Bo
 
 Trading Example
 ---------------
-Let's use an example [Binary Market](#binary-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#shares) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus GAS used to send the transaction.
+Let's use an example [Binary Market](#binary-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#shares) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus gas used to send the transaction.
 
-If there are Orders on the Order Book that match our request for `100` Shares of `Outcome A` at a price of `0.5 ETH`, or cheaper, then Augur will fill those Orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus GAS cost.
+If there are Orders on the Order Book that match our request for `100` Shares of `Outcome A` at a price of `0.5 ETH`, or cheaper, then Augur will fill those Orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus gas cost.
 
-If no Order is available on the Order Book that would partially or completely fill our trade request then a [Bid Order](#bid-order) would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our `50.0 ETH`. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of `ETH`. If we cancel our Order we can get our `50.0 ETH` back, the only currency lost would be the GAS used to pay to place the trade and cancel the trade. When a [Filler](#order-filler) decides to fill our Order on the Order Book, we will get our `100` shares of `Outcome A` transferred to us.
+If no Order is available on the Order Book that would partially or completely fill our trade request then a [Bid Order](#bid-order) would be placed on the Order Book. Whenever an Order is placed on the Order Book something of value is escrowed by the Market. In our example, the value we are giving to the Market to place our bid would be our `50.0 ETH`. If we were attempting to sell Shares that we currently owned then we would escrow the Shares instead of `ETH`. If we cancel our Order we can get our `50.0 ETH` back, the only currency lost would be the gas used to pay to place the trade and cancel the trade. When a [Filler](#order-filler) decides to fill our Order on the Order Book, we will get our `100` shares of `Outcome A` transferred to us.
 
 For more information on how to trade using the Augur API, check the [trade](#trade-tx-api) section of the [Transaction API](#transaction-api).
 
