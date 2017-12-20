@@ -172,6 +172,10 @@ Description pending.
 
 Description pending.
 
+## Initial Reporter Stake
+
+Description pending.
+
 ## Initial Reporting Phase
 
 Description pending.
