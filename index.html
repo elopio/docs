@@ -362,7 +362,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="fee-windows">Fee Windows</h2>
 
-<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. Any <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s reporting process. REP holders who <a href="#designated-reporter-stake">Stake</a> REP during a given Fee Window receive that number of <a href="#participation-token">Participation Tokens</a> for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
+<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. Any <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window receive that number of <a href="#participation-token">Participation Tokens</a> for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
 
 <p>In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that window. Participation includes <a href="#designated-reporting">Designated Reporting</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#dispute">Disputing</a> an Outcome, or simply purchasing Participation Tokens directly.</p>
 
@@ -432,13 +432,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <a href="#designated-report-phase">Designated Reporting Phase</a> lasts a maximum of three (3) days and ends immediately when the Designated Reporter submits their Report and the <a href="#proposed-outcome">Proposed Outcome</a> is set for the Market.</p>
 
-<p>If the Designated Reporter fails to Report within the Designated Report Phase, the No-Show REP Bond, the No-Show Gas Bond and the Market is moved into the <a href="#initial-reporting-phase">Initial Reporting Phase</a>. These No-Show Bonds are then used to help pay for the gas costs and add to the <a href="#rep">REP</a> <a href="#designated-reporter-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a>.</p>
+<p>If the Designated Reporter fails to Report within the Designated Report Phase, the No-Show REP Bond, the No-Show Gas Bond and the Market is moved into the <a href="#initial-reporting-phase">Initial Reporting Phase</a>. These No-Show Bonds are then used to help pay for the gas costs and add to the <a href="#rep">REP</a> <a href="#initial-reporter-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a>.</p>
 
 <p>If the Designated Reporter does successfully Report within the Designated Report Phase, the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> and the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> is refunded to the Market Creator immediately and the Market enters the <a href="#designated-dispute-phase">Designated Dispute Phase</a> which lasts for three (3) days. During this 3 day period any <a href="#rep">REP</a> holder can post a <a href="#dispute-bond">Dispute Bond</a> to Challenge the Proposed Outcome Reported by the Designated Reporter. If a Dispute Bond is posted the Market is moved into the next available Reporting Window for First Round Reporting. If the Market is left unchallenged for the duration of the Designated Dispute Phase then the Market&rsquo;s Proposed Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a> allowing the Settlement of Shares.</p>
 
 <h2 id="fee-window-details">Fee Window Details</h2>
 
-<p><a href="#fee-window">Fee Windows</a> continually occur and last for seven (7) days. During a Fee Window, any <a href="#rep">REP</a> holder is able to <a href="#designated-reporter-stake">Stake</a> REP on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tentative Outcome</a>. By doing so, they receive an equal number of <a href="#participation-tokens">Participation Tokens</a> in return, and the REP they Stake goes toward to a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the Tentative Outcome of the <a href="#market">Market</a>. In order to earn fees as a REP holder in the current Fee Window, users need to participate in the Market&rsquo;s <a href="#dispute-round">Dispute Round</a> in some way, such as submitting a <a href="#designated-report">Designated Report</a> or <a href="#initial-report">Initial Report</a>, <a href="#dispute">Disputing</a> the Tentative Outcome (i.e., staking on an outcome other than the Tentative Outcome), or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
+<p><a href="#fee-window">Fee Windows</a> continually occur and last for seven (7) days. During a Fee Window, any <a href="#rep">REP</a> holder is able to <a href="#dispute-stake">Stake</a> REP on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tentative Outcome</a>. By doing so, they receive an equal number of <a href="#participation-tokens">Participation Tokens</a> in return, and the REP they Stake goes toward to a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the Tentative Outcome of the <a href="#market">Market</a>. In order to earn fees as a REP holder in the current Fee Window, users need to participate in the Market&rsquo;s <a href="#dispute-round">Dispute Round</a> in some way, such as submitting a <a href="#designated-report">Designated Report</a> or <a href="#initial-report">Initial Report</a>, <a href="#dispute">Disputing</a> the Tentative Outcome (i.e., staking on an outcome other than the Tentative Outcome), or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <p>Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward REP holders who participate in Augur’s reporting process. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
 
@@ -462,7 +462,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Holders of REP tokens in the Parent Universe may migrate their tokens to a Child Universe of their choice. This choice should be considered carefully, because migration is one-way; it cannot be reversed. Tokens cannot be sent from one sibling Universe to another. Migration is a permanent commitment of REP tokens to a particular Market Outcome. REP tokens sent to different Child Universes ought to be considered entirely separate currencies, and exchanges ought to list them as such.</p>
 
-<p>When a Fork is initiated, all REP <a href="#designated-reporter-stake">Staked</a> on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.</p>
+<p>When a Fork is initiated, all REP <a href="#dispute-stake">Staked</a> on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.</p>
 
 <p>Whichever Child Universe receives the most migrated REP by the end of the 60-day Forking Period becomes the winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. All un-Finalized Markets in the Parent Universe are automatically migrated to the <a href="#winning-universe">Winning Universe</a> and — if they have received an Initial Report — are reset back to the beginning of their first Dispute Round. The Fork is then complete and the regular 7-day Fee Window cycle continues.</p>
 
@@ -7023,6 +7023,10 @@ Goals:
 <p>Description pending.</p>
 
 <h2 id="initial-reporter">Initial Reporter</h2>
+
+<p>Description pending.</p>
+
+<h2 id="initial-reporter-stake">Initial Reporter Stake</h2>
 
 <p>Description pending.</p>
 
