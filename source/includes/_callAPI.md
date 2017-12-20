@@ -94,14 +94,6 @@ augur.api.Market.getDenominationToken({ tx: { to: market } }, function (error, d
 // example output:
 denominationToken = "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
 
-augur.api.Market.getDesignatedReportDisputeDueTimestamp({ tx: { to: market } }, function (error, designatedReporterDisputeDueTimestamp) { /* ... */ })
-// example output:
-designatedReporterDisputeDueTimestamp = "1500907130"
-
-augur.api.Market.getDesignatedReportDueTimestamp({ tx: { to: market } }, function (error, designatedReporterDueTimestamp) { /* ... */ })
-// example output:
-designatedReporterDueTimestamp = "1500647930"
-
 augur.api.Market.getDesignatedReporter({ tx: { to: market } }, function (error, designatedReporter) { /* ... */ })
 // example output:
 designatedReporter = "0xca3edca4ed326bbcb77e914b379913b12d49654d"
@@ -246,14 +238,6 @@ Returns the second best, or second place, tentatively winning [Payout Distributi
 
 Returns the address of the token used to denominate the specified `market`. A Denomination Token is the ERC20 Token used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this will always return "Cash"; however, Augur will eventually support other types of Denomination Tokens.
 
-#### augur.api.Market.getDesignatedReportDisputeDueTimestamp({ tx }[, callback])
-
-Returns the timestamp for when a specific `market`'s [Designated Report Phase](#designated-report-phase) and [Designated Dispute Phase](#designated-dispute-phase) should end. Can be up to 6 days after the [Market](#market)'s [End Time](#end-time), or as little as 3 days after the End Time, depends on how quickly the [Designated Reporter](#designated-reporter) [Reports](#report).
-
-#### augur.api.Market.getDesignatedReportDueTimestamp({ tx }[, callback])
-
-Returns the timestamp for when a specific `market`'s  [Designated Report Phase](#designated-report-phase) should be completed but doesn't count the [Designated Dispute Phase](#designated-dispute-phase). If the [Designated Reporter](#designated-reporter) has already submit their [Report](#report) for the Designated Report Phase, then this will return the timestamp for when that Report was submit to the [Market](#market).
-
 #### augur.api.Market.getDesignatedReporter({ tx }[, callback])
 
 Returns the address for the [Designated Reporter](#designated-reporter) set for the specified `market`. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market Creation.
@@ -268,11 +252,11 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) of the [Payout
 
 #### augur.api.Market.getDesignatedReportReceivedTime({ tx }[, callback])
 
-Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s [Report](#report) was submit for the specified `market`. Each [Market](#market) is required to have a Designated Reporter who is expected to Report during the [Designated Report Phase](#designated-report-phase). This timestamp is used to determine if they actually submit their Report on time, which would be anytime within 3 days of the Market's [End Time](#end-time).
+Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s [Report](#report) was submit for the specified `market`. Each [Market](#market) is required to have a Designated Reporter who is expected to Report during the [Designated Reporting Phase](#designated-reporting-phase). This timestamp is used to determine if they actually submit their Report on time, which would be anytime within 3 days of the Market's [End Time](#end-time).
 
 #### augur.api.Market.getEndTime({ tx }[, callback])
 
-Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Report Phase](#designated-report-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin [Reporting Rounds](#reporting-round).
+Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes the Market either enters the [Designated Reporting Phase](#designated-reporting-phase) if a [Designated Reporter](#designated-reporter) is assigned or the Market will await the next [Reporting Window](#reporting-window) to begin [Reporting Rounds](#reporting-round).
 
 #### augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ tx }[, callback])
 
@@ -821,7 +805,7 @@ Returns a timestamp for when this [Reporting Window](#reporting-window) will end
 
 #### augur.api.ReportingWindow.getFirstReporterMarketsCount({ tx }[, callback])
 
-Returns the number of [Markets](#market) in the specified [Reporting Window](#reporting-window) that are in the [First Report Round](#first-report-round). NOTE: If the Reporting Window has not begun yet, this number will include Markets that may end up being [Finalized](#finalized-market) in the [Designated Report Round](#designated-report-phase). Since it is unknown whether [Designated Reporters](#designated-reporter) ultimately will submit a report, Augur assumes by default that all new Markets will go to the First Report Round. Once the Reporting Window has begun, this function will return the number of Markets that are actually in the First Report Round.
+Returns the number of [Markets](#market) in the specified [Reporting Window](#reporting-window) that are in the [First Report Round](#first-report-round). NOTE: If the Reporting Window has not begun yet, this number will include Markets that may end up being [Finalized](#finalized-market) in the [Designated Report Round](#designated-reporting-phase). Since it is unknown whether [Designated Reporters](#designated-reporter) ultimately will submit a report, Augur assumes by default that all new Markets will go to the First Report Round. Once the Reporting Window has begun, this function will return the number of Markets that are actually in the First Report Round.
 
 #### augur.api.ReportingWindow.getLastReporterMarketsCount({ tx }[, callback])
 
@@ -833,11 +817,13 @@ Returns the total number of [Markets](#market) that belong to the [Reporting Win
 
 #### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])
 
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Report Phase](#designated-report-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge).
 
 #### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
 
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Designated Dispute Phase](#designated-dispute-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Report Phase](#designated-report-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
+<!-- TODO: Update description -->
+
+Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Proposed Outcome](#proposed-outcome) was [Challenged](#challenge) during the [Dispute Round Phase](#dispute-round-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
 
 #### augur.api.ReportingWindow.getNumInvalidMarkets({ tx }[, callback])
 
