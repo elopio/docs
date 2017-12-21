@@ -1629,7 +1629,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getreportingsummary-p-callback-rarr-object">augur.reporting.getReportingSummary(p, callback) &rarr; {Object}</h3>
 
-<p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
+<p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
 
 <p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
 
@@ -2638,7 +2638,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-disputebond-getmarket-tx-callback">augur.api.DisputeBond.getMarket({ tx }[, callback])</h4>
 
-<p>This transaction will return the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per <a href="#dispute-phase">Dispute Phase</a> for that Market.</p>
+<p>This transaction will return the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per <a href="#dispute-round-phase">Dispute Round Phase</a> for that Market.</p>
 
 <h4 id="augur-api-disputebond-getowner-tx-callback">augur.api.DisputeBond.getOwner({ tx }[, callback])</h4>
 
@@ -2874,7 +2874,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getpayoutdistributionhashstake-tx-_payoutdistributionhash-callback">augur.api.Market.getPayoutDistributionHashStake({ tx, _payoutDistributionHash }[, callback])</h4>
 
-<p>Returns the staked amount of <a href="#rep">REP</a>, in attorep, for a specified <code class="prettyprint">_payoutDistributionHash</code> of a <code class="prettyprint">market</code>. <a href="#reporter">Reporters</a> who stake REP on the same <a href="#outcome">Outcome</a> during the <a href="#reporting-phase">Reporting Phase</a> will have identical <a href="#payout-distribution-hash">Payout Distribution Hashs</a>. This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on it is considered the <a href="#tentative-outcome">Tentative Outcome</a> while the <a href="#market">Market</a> is <a href="#awaiting-finalization">Awaiting Finalization</a>. If the <a href="#dispute-phase">Dispute Phase</a> passes without a <a href="#challenge">Challenge</a> to the Tentative Outcome then the Market is <a href="#finalized-market">Finalized</a> and the Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a>.</p>
+<p>Returns the staked amount of <a href="#rep">REP</a>, in attorep, for a specified <code class="prettyprint">_payoutDistributionHash</code> of a <code class="prettyprint">market</code>. <a href="#reporter">Reporters</a> who stake REP on the same <a href="#outcome">Outcome</a> during the <a href="#reporting-phase">Reporting Phase</a> will have identical <a href="#payout-distribution-hash">Payout Distribution Hashs</a>. This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on it is considered the <a href="#tentative-outcome">Tentative Outcome</a> while the <a href="#market">Market</a> is <a href="#awaiting-finalization">Awaiting Finalization</a>. If the <a href="#dispute-round-phase">Dispute Round Phase</a> passes without a <a href="#challenge">Challenge</a> to the Tentative Outcome then the Market is <a href="#finalized-market">Finalized</a> and the Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a>.</p>
 
 <h4 id="augur-api-market-getreportingstate-tx-callback">augur.api.Market.getReportingState({ tx }[, callback])</h4>
 
@@ -3351,11 +3351,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-getdisputeendtime-tx-callback">augur.api.ReportingWindow.getDisputeEndTime({ tx }[, callback])</h4>
 
-<p>Every <a href="#reporting-window">Reporting Window</a> consists of two phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-phase">Dispute Phase</a>. This method is used to return the timestamp for the end of the Reporting Window&rsquo;s Dispute Phase.</p>
+<p>Every <a href="#reporting-window">Reporting Window</a> consists of two phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-round-phase">Dispute Round Phase</a>. This method is used to return the timestamp for the end of the Reporting Window&rsquo;s Dispute Round Phase.</p>
 
 <h4 id="augur-api-reportingwindow-getdisputestarttime-tx-callback">augur.api.ReportingWindow.getDisputeStartTime({ tx }[, callback])</h4>
 
-<p>As stated above, <a href="#reporting-window">Reporting Windows</a> have two phases, the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-phase">Dispute Phase</a> and this method returns the timestamp of the start of the Dispute Phase.</p>
+<p>As stated above, <a href="#reporting-window">Reporting Windows</a> have two phases, the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a> and this method returns the timestamp of the start of the Dispute Round Phase.</p>
 
 <h4 id="augur-api-reportingwindow-getendtime-tx-callback">augur.api.ReportingWindow.getEndTime({ tx }[, callback])</h4>
 
@@ -3397,11 +3397,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-getreportingendtime-tx-callback">augur.api.ReportingWindow.getReportingEndTime({ tx }[, callback])</h4>
 
-<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-phase">Dispute Phase</a>. The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.</p>
+<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
 
 <h4 id="augur-api-reportingwindow-getreportingstarttime-tx-callback">augur.api.ReportingWindow.getReportingStartTime({ tx }[, callback])</h4>
 
-<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-phase">Dispute Phase</a>. The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.</p>
+<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
 
 <h4 id="augur-api-reportingwindow-getreputationtoken-tx-callback">augur.api.ReportingWindow.getReputationToken({ tx }[, callback])</h4>
 
@@ -3425,7 +3425,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-isactive-tx-callback">augur.api.ReportingWindow.isActive({ tx }[, callback])</h4>
 
-<p>This method returns whether the <a href="#reporting-window">Reporting Window</a> is currently active or not. Reporting Windows are considered active during the Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-phase">Dispute Phase</a>, which last a total of 30 days. Returns <code class="prettyprint">1</code> if the <code class="prettyprint">reportingWindow</code> is active, <code class="prettyprint">0</code> if not.</p>
+<p>This method returns whether the <a href="#reporting-window">Reporting Window</a> is currently active or not. Reporting Windows are considered active during the Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a>, which last a total of 30 days. Returns <code class="prettyprint">1</code> if the <code class="prettyprint">reportingWindow</code> is active, <code class="prettyprint">0</code> if not.</p>
 
 <h4 id="augur-api-reportingwindow-iscontainerformarket-tx-_shadymarket-callback">augur.api.ReportingWindow.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
 
@@ -3433,7 +3433,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-isdisputeactive-tx-callback">augur.api.ReportingWindow.isDisputeActive({ tx }[, callback])</h4>
 
-<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#dispute-phase">Dispute Phase</a> or not. The Dispute Phase is a 3 day long period that follows the Reporting Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a>, which lasts 27 days. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Dispute Phase is active, <code class="prettyprint">0</code> if not.</p>
+<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#dispute-round-phase">Dispute Round Phase</a> or not. The Dispute Round Phase is a 3 day long period that follows the Reporting Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a>, which lasts 27 days. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Dispute Round Phase is active, <code class="prettyprint">0</code> if not.</p>
 
 <h4 id="augur-api-reportingwindow-isforkingmarketfinalized-tx-callback">augur.api.ReportingWindow.isForkingMarketFinalized({ tx }[, callback])</h4>
 
@@ -3445,7 +3445,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-isreportingactive-tx-callback">augur.api.ReportingWindow.isReportingActive({ tx }[, callback])</h4>
 
-<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#reporting-phase">Reporting Phase</a> or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day <a href="#dispute-phase">Dispute Phase</a>. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Reporting Phase is active, <code class="prettyprint">0</code> if not.</p>
+<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#reporting-phase">Reporting Phase</a> or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day <a href="#dispute-round-phase">Dispute Round Phase</a>. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Reporting Phase is active, <code class="prettyprint">0</code> if not.</p>
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
@@ -3695,7 +3695,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
 
-<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Reporting Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that an <a href="#last-report-round">Last Report Round</a> Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-phase">Dispute Phase</a> of a Reporting Window then a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, where as the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
+<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Reporting Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that an <a href="#last-report-round">Last Report Round</a> Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a> of a Reporting Window then a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, where as the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
 
 <h4 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h4>
 
@@ -3739,7 +3739,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getreportingperioddurationinseconds-tx-callback">augur.api.Universe.getReportingPeriodDurationInSeconds({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#reporting-window">Reporting Window</a> full duration in seconds (also known as the <a href="#reporting-period">Reporting Period</a>) for the Universe](#universe) specified in <code class="prettyprint">tx</code>. This includes both the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-phase">Dispute Phase</a> of the Reporting Window. The Reporting Phase should last 27 days followed by a 3-day Dispute Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.</p>
+<p>Returns the <a href="#reporting-window">Reporting Window</a> full duration in seconds (also known as the <a href="#reporting-period">Reporting Period</a>) for the Universe](#universe) specified in <code class="prettyprint">tx</code>. This includes both the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a> of the Reporting Window. The Reporting Phase should last 27 days followed by a 3-day Dispute Round Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.</p>
 
 <h4 id="augur-api-universe-getreportingwindow-tx-_reportingwindowid-callback">augur.api.Universe.getReportingWindow({ tx, _reportingWindowId }[, callback])</h4>
 
@@ -4814,11 +4814,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-disputefirstreporters-market-_payoutnumerators-_attotokens-_invalid-onsent-onsuccess-onfailed">augur.api.Market.disputeFirstReporters({ market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })</h4>
 
-<p>This transaction will <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#first-report-round">First Report Round</a> <a href="#market">Market</a> if the Market is currently in the <a href="#dispute-phase">Dispute Phase</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a>. The <code class="prettyprint">msg.sender</code> needs to have enough <a href="#rep">REP</a> to purchase the <a href="#dispute-bond">Dispute Bond</a> in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available <a href="#reporting-window">Reporting Window</a> for the next <a href="#reporting-round">Reporting Round</a>. If the caller of this function would like to increase the number of <a href="#stake-token">Stake Tokens</a> he or she has on an outcome other than the one reported by the <a href="#first-reporter">First Reporters</a>, that can be done by passing in an amount greater than 0 for <code class="prettyprint">_attotokens</code> equal to the amount of Stake Tokens he or she would like to purchase. Additionally, <code class="prettyprint">_payoutNumerators</code> should be an array of the specific <a href="#payout-set">Payout Set</a> desired, and <code class="prettyprint">_invalid</code> should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as <code class="prettyprint">_attotokens</code> is less than 1.</p>
+<p>This transaction will <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#first-report-round">First Report Round</a> <a href="#market">Market</a> if the Market is currently in the <a href="#dispute-round-phase">Dispute Round Phase</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a>. The <code class="prettyprint">msg.sender</code> needs to have enough <a href="#rep">REP</a> to purchase the <a href="#dispute-bond">Dispute Bond</a> in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available <a href="#reporting-window">Reporting Window</a> for the next <a href="#reporting-round">Reporting Round</a>. If the caller of this function would like to increase the number of <a href="#stake-token">Stake Tokens</a> he or she has on an outcome other than the one reported by the <a href="#first-reporter">First Reporters</a>, that can be done by passing in an amount greater than 0 for <code class="prettyprint">_attotokens</code> equal to the amount of Stake Tokens he or she would like to purchase. Additionally, <code class="prettyprint">_payoutNumerators</code> should be an array of the specific <a href="#payout-set">Payout Set</a> desired, and <code class="prettyprint">_invalid</code> should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as <code class="prettyprint">_attotokens</code> is less than 1.</p>
 
 <h4 id="augur-api-market-disputelastreporters-market-onsent-onsuccess-onfailed">augur.api.Market.disputeLastReporters({ market, onSent, onSuccess, onFailed })</h4>
 
-<p><code class="prettyprint">disputeLastReporters</code> is used to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a> that has gone through the <a href="#last-report-round">Last Report Round</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a> in a <a href="#dispute-phase">Dispute Phase</a>. This method purchases a <a href="#dispute-bond">Dispute Bond</a> for the <code class="prettyprint">msg.sender</code>, who must pay for the Bond using <a href="#rep">REP</a>. Sending this transaction will cause a <a href="#fork">Fork</a>, since this is used to dispute the Last Report Round Tentative Outcome for the Market, which will cause the creation of new <a href="#universe">Universes</a> and cause the current Universe to be <a href="#locked-universe">Locked</a>.</p>
+<p><code class="prettyprint">disputeLastReporters</code> is used to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a> that has gone through the <a href="#last-report-round">Last Report Round</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a> in a <a href="#dispute-round-phase">Dispute Round Phase</a>. This method purchases a <a href="#dispute-bond">Dispute Bond</a> for the <code class="prettyprint">msg.sender</code>, who must pay for the Bond using <a href="#rep">REP</a>. Sending this transaction will cause a <a href="#fork">Fork</a>, since this is used to dispute the Last Report Round Tentative Outcome for the Market, which will cause the creation of new <a href="#universe">Universes</a> and cause the current Universe to be <a href="#locked-universe">Locked</a>.</p>
 
 <h4 id="augur-api-market-getorcreatestaketoken-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.getOrCreateStakeToken({ _payoutNumerators, _invalid , onSent, onSuccess, onFailed })</h4>
 
@@ -6892,57 +6892,87 @@ Goals:
 
 <p>The heart of Augur is its Decentralized Oracle, which allows users and smart contracts to propose questions to Augur and discover accurate information about the real world (based on how REP holders have voted on <a href="#market">Market</a> <a href="#outcomes">Outcomes</a>) without having to trust a single person, AI, or organization. Augur’s Oracle allows information to be migrated from the real world to a blockchain without relying on a centralized, trusted third party.</p>
 
+<h2 id="designated-report">Designated Report</h2>
+
+<p>A Designated Report occurs when a <a href="#designated-reporter">Designated Reporter</a> <a href="#designated-reporter-stake">Stakes</a> <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a>. This Outcome then becomes the <a href="#tentative-outcome">Tentative Outcome</a> for the Market, and the Market changes to the <a href="#waiting-for-the-next-fee Window to Begin Phase">Waiting for the Next Fee Window to Begin Phase</a>. </p>
+
+<!-- TODO: Add explanation for how the exact Designated Report No-Show Gas Bond is calculated. (Need to verify if formula is gas to report * avg gas price in last window * 2) -->
+
 <h2 id="designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</h2>
 
-<p>The Designated Report No-Show Gas Bond is paid for using ETH by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. This Bond is completely refunded to the Market Creator as soon as the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Reporting Phase and an <a href="#initial-reporter">Initial Reporter</a> submitting a Report instead. When an Initial Reporter submits an <a href="#initial-report">Initial Report</a>, they are required to pay the gas cost. However, if the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter will receive the Designated Report No-Show Gas Bond when the Market is <a href="#finalized-market">Finalized</a>.</p>
+<p>The Designated Report No-Show Gas Bond (or No-Show Gas Bond for brevity) is paid for using ETH by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. This Bond is completely refunded to the Market Creator as soon as the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Reporting Phase and an <a href="#initial-reporter">Initial Reporter</a> submitting a Report instead. When an Initial Reporter submits an <a href="#initial-report">Initial Report</a>, they are required to pay the gas cost. However, if the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter will receive the No-Show Gas Bond when the Market is <a href="#finalized-market">Finalized</a>.</p>
+
+<!-- TODO: Add explanation for how the exact Designated Report No-Show REP Bond is calculated (https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol#L331). -->
 
 <h2 id="designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</h2>
 
-<p>The Designated Report No-Show REP Bond is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. The Bond is refunded to the Market Creator if the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the Designated Report No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#initial-reporter">Initial Reporter</a>. If the Tentative Outcome selected by the Initial Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the Designated Report No-Show REP Bond. If the Tentative Outcome selected by the Initial Reporter is Disputed and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the Designated Report No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#initial-report">Initial Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
+<p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#initial-reporter">Initial Reporter</a>. If the Tentative Outcome selected by the Initial Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the Initial Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#initial-report">Initial Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
+
+<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is also calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs.</p>
+
+<p>The minimum value for the No-Show REP Bond is calculated as follows:</p>
+
+<p>Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs, the minimum value for the No-Show REP Bond is 137,500 REP / 2<sup>20</sup> = 0.1311302185 REP.</p>
+
+<h2 id="designated-reporter">Designated Reporter</h2>
+
+<p>A Designated Reporter is a single Ethereum address designated to submit the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. The Designated Reporter is set by the <a href="#market-creator">Market Creator</a> during Market creation. All Markets must have a Designated Reporter.</p>
+
+<!-- TODO: Add explanation for how the exact Designated Reporter Stake is calculated. -->
+
+<h2 id="designated-reporter-stake">Designated Reporter Stake</h2>
+
+<p>When a <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a>, they must put up an amount of REP on an <a href="#outcome">Outcome</a> that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>.</p>
+
+<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is also calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs.</p>
+
+<p>The minimum value for the Designated Reporter Stake is calculated as follows:</p>
+
+<p>Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs, the minimum value for the Designated Reporter Stake is 137,500 REP / 2^20 = 0.1311302185 REP.</p>
+
+<h2 id="designated-reporting">Designated Reporting</h2>
+
+<p>Designated Reporting is the first and fastest way that a <a href="#market">Market</a> can be <a href="#report">Reported</a> on. One Ethereum address will be responsible for submitting a <a href="#tentative-outcome">Tentative Outcome</a> for the Market and will have 3 days to do so after a Market&rsquo;s <a href="#end-time">End Time</a>, known as the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
 <h2 id="designated-reporting-phase">Designated Reporting Phase</h2>
 
 <p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="initial-reporting-phase">Initial Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#initial-reporter-stake">Stake</a> of the <a href="#initial-reporter">Initial Reporter</a> when they submit the <a href="#initial-report">Initial Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the Initial Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market.</p>
 
-<h2 id="designated-reporter">Designated Reporter</h2>
-
-<p>A Designated Reporter is a single address designated to submit the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> during <a href="#designated-reporting">Designated Reporting</a>. The Designated Reporter is set by the <a href="#market-creator">Market Creator</a> during Market Creation. All Markets must have a Designated Reporter.</p>
-
-<h2 id="designated-reporter-stake">Designated Reporter Stake</h2>
-
-<p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can Stake <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a> and get an equivalant number of <a href="#participation-tokens">Participation Tokens</a> in return. These Participation Tokens allow them to collect fees when the Market <a href="#settlement">Settles</a>. The amount of REP they Stake goes toward filling the <a href="#dispute-bond">Dispute Bond</a>.</p>
-
-<h2 id="designated-reporting">Designated Reporting</h2>
-
-<p>Designated Reporting is the first and fastest way that a <a href="#market">Market</a> can be <a href="#report">Reported</a> on. One address will be responsible for submitting a <a href="#tentative-outcome">Tentative Outcome</a> for the Market and will have 3 days to do so after a Market&rsquo;s <a href="#end-time">End Time</a>, known as the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. After the Report has been submit by the Designated <a href="#reporter">Reporter</a> then a 3 day <a href="#dispute-round-phase">Dispute Round Phase</a> begins where in any <a href="#rep">REP</a> Holder can <a href="#challenge">Challenge</a> the <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>. If the <a href="#dispute-bond">Dispute Bond</a> is posted then the Market is moved into the next <a href="#reporting-window">Reporting Window</a> and will be subject to <a href="#reporting-round">Reporting Rounds</a>. Designated Reporting is independent of Reporting Windows.</p>
-
 <h2 id="dispute">Dispute</h2>
 
 <p>Disputing is synonymous with the act of <a href="#challenge">Challenging</a> a <a href="#tentative-outcome">Tenative Outcome</a>.</p>
 
+<!-- TODO: Add explanation of when users get their staked REP returned to them. -->
+
 <h2 id="dispute-bond">Dispute Bond</h2>
 
-<p>A Dispute Bond is a bond posted to force another round of <a href="#report">Reporting</a> if a <a href="#reporter">Reporter</a> feels the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a> isn&rsquo;t accurate. If the <a href="#market">Market&rsquo;s</a> Tentative Outcome is changed in the forced round of reporting then the poster of the dispute bond will get their money back for successfully challenging the false <a href="#outcome">Outcome</a> of the Market.</p>
+<p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users may <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on an <a href="#outome">Outcome</a> other than the <a href="#tentative-outcome">Tentative Outcome</a> if they believe the Tentative Outcome is incorrect. Doing so contributes to a Dispute Bond for that Outcome. Each Outcome other than the Tentative Outcome has its own Dispute Bond that can be filled. Dispute Bonds need not be paid in their entirety by a single user. Augur allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can dispute that Outcome by Staking some REP on an Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully <a href="#dispute">Disputed</a>. For information about how Dispute Stake gets returned to users, refer to the <a href="#dispute-stake">Dispute Stake glossary entry</a>.</p>
 
-<h2 id="dispute-phase">Dispute Phase</h2>
+<p>The amount of REP required to fill a Dispute Bond is calculated as follows.</p>
 
-<p>A Dispute Phase is a three (3) day window after a <a href="#market">Market</a> has been <a href="#report">Reported</a> on before which the <a href="#tentative-outcome">Tentative Outcome</a> becomes the <a href="#final-outcome">Final Outcome</a>. During this 3 day period, a <a href="#rep">REP</a> Holder can post a <a href="#dispute-bond">Dispute Bond</a> if they would like to force another round of Reporting for the Market. The Market will be moved into the next <a href="#reporting-window">Reporting Window</a>. Markets in the Dispute Phase are referred to as <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>.</p>
+<p>Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outcomes at the beginning of Dispute Round <i>n</i>. Let &omega; be any Market Outcome other than the Market’s Tentative Outcome at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on outcome &omega; at the beginning of dispute <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new Outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;,<i>n</i>) and is given by:</p>
+
+<p><i>B</i>(&omega;,<i>n</i>)=2<i>A<sub>n</sub></i>-<i>3S</i>(&omega;,<i>n</i>)</p>
 
 <h2 id="dispute-round">Dispute Round</h2>
 
-<p>Description pending.</p>
+<p>A Dispute Round is one 7-day round out of a maximum of 20 such rounds that can occur during the <a href="#dispute-round-phase">Dispute Round Phase</a> and before a <a href="#fork">Fork</a> occurs in a <a href="#market">Market</a>. During a Dispute Round, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if the current Dispute Round is the 20th round.</p>
 
 <h2 id="dispute-round-phase">Dispute Round Phase</h2>
 
-<p>Description pending.</p>
+<p>The Dispute Round Phase is a seven (7) day window after a <a href="#market">Market</a> has been <a href="#report">Reported</a> on. During the Dispute Round Phase, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if the current <a href="#dispute-round">Dispute Round</a> is the 20th round. With each Dispute Round that successfully Challenges the Tentative Outcome, the next Dispute Round will require an even higher <a href="#dispute-bond">Dispute Bond</a> to Challenge the Tentative Outcome. For details on how the Dispute Bond is calculated, refer to the the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
 <h2 id="dispute-stake">Dispute Stake</h2>
 
+<p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can Stake <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a> and get an equivalant number of <a href="#participation-tokens">Participation Tokens</a> in return. These Participation Tokens allow them to collect fees when the Market <a href="#settlement">Settles</a>. The amount of REP they Stake goes toward filling the <a href="#dispute-bond">Dispute Bond</a>.</p>
+
 <p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reward-pool">Reward Pool</a> from the current <a href="#fee-window">Fee Window</a>.</p>
+
+<p>For details on how the Dispute Bond is calculated, refer to the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
 <h2 id="end-time">End Time</h2>
 
-<p>End Time is the date and time that a <a href="#market">Market</a>&rsquo;s event will have come to pass and should be known. After this date and time has passed the Market will get <a href="#report">Reported</a> on and <a href="#finalized-market">Finalized</a>.</p>
+<p>End Time is the date and time that a <a href="#market">Market</a>&rsquo;s event will have come to pass and should be known. After this date and time has passed the Market will get <a href="#report">Reported</a> on and eventually <a href="#finalized-market">Finalized</a>.</p>
 
 <h2 id="fee-window">Fee Window</h2>
 
@@ -6954,15 +6984,15 @@ Goals:
 
 <h2 id="final-outcome">Final Outcome</h2>
 
-<p>A Final Outcome is a <a href="#tentative-outcome">Tentative Outcome</a> that is not <a href="#challenge">Challenged</a> through a <a href="#dispute-phase">Dispute Phase</a> and the <a href="#market">Market</a> becomes <a href="#finalized-market">Finalized</a>. A Market&rsquo;s Final Outcome cannot be challenged or changed.</p>
+<p>A Final Outcome is a <a href="#tentative-outcome">Tentative Outcome</a> that is not <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a> or is determined through a <a href="#fork">Fork</a>. At this point, the <a href="#market">Market</a> becomes <a href="#finalized-market">Finalized</a> and moves to the <a href="#finalized-phase">Finalized Phase</a>. A Market&rsquo;s Final Outcome cannot be challenged or changed.</p>
 
 <h2 id="finalized-market">Finalized Market</h2>
 
-<p>A Finalized Market is a <a href="#market">Market</a> that has <a href="#market-awaiting-finalization">Awaited Finalization</a> and has not been disputed, the <a href="#tentative-outcome">Tentative Outcome</a> is now considered final. This market will now allow <a href="#shares">Share</a> holders to <a href="#settlement">settle</a> their shares with the market.</p>
+<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will now allow <a href="#shares">Share</a> holders to <a href="#settlement">settle</a> their shares with the market.</p>
 
 <h2 id="finalized-phase">Finalized Phase</h2>
 
-<p>Description pending.</p>
+<p>This is the last phase a Market](#market) can be in, and it occurs once the Market has been <a href="#finalized-market">Finalized</a> .</p>
 
 <h2 id="first-report">First Report</h2>
 
@@ -6982,7 +7012,7 @@ Goals:
 
 <h2 id="fork-period">Fork Period</h2>
 
-<p>The Fork Period is a sixty (60) day period of time after a <a href="#fork">Fork</a> has occurred.</p>
+<p>The Fork Period, or Fork Phase, is a sixty (60) day period of time after a <a href="#fork">Fork</a> has occurred.</p>
 
 <h2 id="forked-market">Forked Market</h2>
 
@@ -7014,7 +7044,7 @@ Goals:
 
 <h2 id="last-report-round">Last Report Round</h2>
 
-<p>The Last Report Round is the final <a href="#reporting-round">Reporting Round</a> in which a <a href="#challenge">Challenge</a> to the <a href="#tentative-outcome">Tentative Outcome</a> during the <a href="#dispute-phase">Dispute Phase</a> will result in a <a href="#fork">Fork</a> instead of another Reporting Round. Unlike previous Reporting Rounds, when a <a href="#market">Market</a> in the Last Report Round enters the Dispute Phase and it&rsquo;s Tentative Outcome is Challenged then the Market becomes a <a href="#forked-market">Forked Market</a> and the <a href="#universe">Universe</a> becomes a <a href="#locked-universe">Locked Universe</a>.</p>
+<p>The Last Report Round is the final <a href="#reporting-round">Reporting Round</a> in which a <a href="#challenge">Challenge</a> to the <a href="#tentative-outcome">Tentative Outcome</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a> will result in a <a href="#fork">Fork</a> instead of another Reporting Round. Unlike previous Reporting Rounds, when a <a href="#market">Market</a> in the Last Report Round enters the Dispute Round Phase and it&rsquo;s Tentative Outcome is Challenged then the Market becomes a <a href="#forked-market">Forked Market</a> and the <a href="#universe">Universe</a> becomes a <a href="#locked-universe">Locked Universe</a>.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
@@ -7026,7 +7056,7 @@ Goals:
 
 <h2 id="market-awaiting-finalization">Market Awaiting Finalization</h2>
 
-<p>Market Awaiting Finalization occurs when a <a href="#market">Market</a> has been <a href="#report">Reported</a> on and has a <a href="#tentative-outcome">Tentative Outcome</a>. Market&rsquo;s await finalization for a period of 3 days, which is the length of the <a href="#dispute-phase">Dispute Phase</a>, in which <a href="#rep">REP</a> Holders are allowed to post a <a href="#dispute-bond">Dispute Bond</a> to force another round of reporting for the Market Awaiting Finalization. If a Market&rsquo;s Tentative Outcome is not <a href="#challenge">Challenged</a> for 3 days it becomes a <a href="#finalized-market">Finalized Market</a> and can no longer be Challenged.</p>
+<p>Market Awaiting Finalization occurs when a <a href="#market">Market</a> has been <a href="#report">Reported</a> on and has a <a href="#tentative-outcome">Tentative Outcome</a>. Market&rsquo;s await finalization for a period of 3 days, which is the length of the <a href="#dispute-round-phase">Dispute Round Phase</a>, in which <a href="#rep">REP</a> Holders are allowed to post a <a href="#dispute-bond">Dispute Bond</a> to force another round of reporting for the Market Awaiting Finalization. If a Market&rsquo;s Tentative Outcome is not <a href="#challenge">Challenged</a> for 3 days it becomes a <a href="#finalized-market">Finalized Market</a> and can no longer be Challenged.</p>
 
 <h2 id="market-creator">Market Creator</h2>
 
@@ -7129,19 +7159,19 @@ Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</
 
 <h2 id="reporting-period">Reporting Period</h2>
 
-<p>The Reporting Period is combined time of the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-phase">Dispute Phase</a> of a <a href="#reporting-window">Reporting Window</a>. In other words, it&rsquo;s a term used to describe the total duration of a Reporting Window.</p>
+<p>The Reporting Period is combined time of the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a> of a <a href="#reporting-window">Reporting Window</a>. In other words, it&rsquo;s a term used to describe the total duration of a Reporting Window.</p>
 
 <h2 id="reporting-phase">Reporting Phase</h2>
 
-<p>The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, <a href="#market">Markets</a> in <a href="#reporting-round">Reporting Rounds</a> are <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Following a Reporting Phase the Market should receive a Report to set a <a href="#tentative-outcome">Tentative Outcome</a> and be moved into a <a href="#dispute-phase">Dispute Phase</a> during which the Market is considered to be <a href="#market-awaiting-finalization">Awaiting Finalization</a>.</p>
+<p>The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, <a href="#market">Markets</a> in <a href="#reporting-round">Reporting Rounds</a> are <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Following a Reporting Phase the Market should receive a Report to set a <a href="#tentative-outcome">Tentative Outcome</a> and be moved into a <a href="#dispute-round-phase">Dispute Round Phase</a> during which the Market is considered to be <a href="#market-awaiting-finalization">Awaiting Finalization</a>.</p>
 
 <h2 id="reporting-round">Reporting Round</h2>
 
-<p>Reporting Rounds take place in a <a href="#reporting-window">Reporting Window</a> during which <a href="#rep">REP</a> holders Stake REP on the <a href="#outcome">Outcome</a> of <a href="#market">Markets</a> currently in a Reporting Round. Markets enter Reporting Rounds if the <a href="#designated-reporter">Designated Reporter</a> fails to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or if the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a>. Markets start in the <a href="#first-report-round">First Report Round</a> which incentivizes a <a href="#first-report">First Report</a> if the Market hasn&rsquo;t received a Report from the Designated Reporter but otherwise acts like any other Reporting Round. Reporting Rounds last the entirety of a Reporting Window and if the Market&rsquo;s Tentative Outcome is Challenged during the <a href="#dispute-phase">Dispute Phase</a> of the Reporting Window, it is moved up to the next level of Reporting Rounds until eventually reaching the <a href="#last-report-round">Last Report Round</a>. A Challenge of the Tentative Outcome following a Last Report Round will cause a <a href="#fork">Fork</a> to occur.</p>
+<p>Reporting Rounds take place in a <a href="#reporting-window">Reporting Window</a> during which <a href="#rep">REP</a> holders Stake REP on the <a href="#outcome">Outcome</a> of <a href="#market">Markets</a> currently in a Reporting Round. Markets enter Reporting Rounds if the <a href="#designated-reporter">Designated Reporter</a> fails to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or if the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a>. Markets start in the <a href="#first-report-round">First Report Round</a> which incentivizes a <a href="#first-report">First Report</a> if the Market hasn&rsquo;t received a Report from the Designated Reporter but otherwise acts like any other Reporting Round. Reporting Rounds last the entirety of a Reporting Window and if the Market&rsquo;s Tentative Outcome is Challenged during the <a href="#dispute-round-phase">Dispute Round Phase</a> of the Reporting Window, it is moved up to the next level of Reporting Rounds until eventually reaching the <a href="#last-report-round">Last Report Round</a>. A Challenge of the Tentative Outcome following a Last Report Round will cause a <a href="#fork">Fork</a> to occur.</p>
 
 <h2 id="reporting-window">Reporting Window</h2>
 
-<p>The Reporting Window is a period of 30 days in which <a href="#markets">Markets</a> that have passed their <a href="#end-time">End Time</a> are expected to be <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Reporting Windows last for thirty (30) days and consist of two (2) phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-phase">Dispute Phase</a>. The combined duration of the Reporting Phase and the Dispute Phase is known as the <a href="#reporting-period">Reporting Period</a>. The Reporting Phase lasts twenty seven (27) days in which Markets in a <a href="#reporting-round">Reporting Round</a> are Reported on. The Dispute Phase lasts three (3) days and during this time any <a href="#rep">REP</a> holder is allowed to post a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of the <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>. Reporting Windows are occasionally referred to as &ldquo;Reporting Cycles&rdquo; or &ldquo;Reporting Periods&rdquo; as those were legacy terms for a Reporting Window during development of Augur.</p>
+<p>The Reporting Window is a period of 30 days in which <a href="#markets">Markets</a> that have passed their <a href="#end-time">End Time</a> are expected to be <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Reporting Windows last for thirty (30) days and consist of two (2) phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The combined duration of the Reporting Phase and the Dispute Round Phase is known as the <a href="#reporting-period">Reporting Period</a>. The Reporting Phase lasts twenty seven (27) days in which Markets in a <a href="#reporting-round">Reporting Round</a> are Reported on. The Dispute Round Phase lasts three (3) days and during this time any <a href="#rep">REP</a> holder is allowed to post a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of the <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>. Reporting Windows are occasionally referred to as &ldquo;Reporting Cycles&rdquo; or &ldquo;Reporting Periods&rdquo; as those were legacy terms for a Reporting Window during development of Augur.</p>
 
 <h2 id="reward-pool">Reward Pool</h2>
 
