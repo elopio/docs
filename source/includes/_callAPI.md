@@ -70,7 +70,7 @@ This transaction will return the [Payout Distribution Hash](#payout-distribution
 
 #### augur.api.DisputeBond.getMarket({ tx }[, callback])
 
-This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Phase](#dispute-phase) for that Market.
+This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Round Phase](#dispute-round-phase) for that Market.
 
 #### augur.api.DisputeBond.getOwner({ tx }[, callback])
 
@@ -308,7 +308,7 @@ Returns the address of the specified [Market's](#market) owner.
 
 #### augur.api.Market.getPayoutDistributionHashStake({ tx, \_payoutDistributionHash }[, callback])
 
-Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDistributionHash` of a `market`. [Reporters](#reporter) who stake REP on the same [Outcome](#outcome) during the [Reporting Phase](#reporting-phase) will have identical [Payout Distribution Hashs](#payout-distribution-hash). This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on it is considered the [Tentative Outcome](#tentative-outcome) while the [Market](#market) is [Awaiting Finalization](#awaiting-finalization). If the [Dispute Phase](#dispute-phase) passes without a [Challenge](#challenge) to the Tentative Outcome then the Market is [Finalized](#finalized-market) and the Tentative Outcome becomes the [Final Outcome](#final-outcome).
+Returns the staked amount of [REP](#rep), in attorep, for a specified `_payoutDistributionHash` of a `market`. [Reporters](#reporter) who stake REP on the same [Outcome](#outcome) during the [Reporting Phase](#reporting-phase) will have identical [Payout Distribution Hashs](#payout-distribution-hash). This method returns the total amount of staked REP for a specific Payout Distribution Hash. The Hash with the most REP staked on it is considered the [Tentative Outcome](#tentative-outcome) while the [Market](#market) is [Awaiting Finalization](#awaiting-finalization). If the [Dispute Round Phase](#dispute-round-phase) passes without a [Challenge](#challenge) to the Tentative Outcome then the Market is [Finalized](#finalized-market) and the Tentative Outcome becomes the [Final Outcome](#final-outcome).
 
 #### augur.api.Market.getReportingState({ tx }[, callback])
 
@@ -793,11 +793,11 @@ Returns the average amount of Gas spent per [Report](#report) submit during the 
 
 #### augur.api.ReportingWindow.getDisputeEndTime({ tx }[, callback])
 
-Every [Reporting Window](#reporting-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Phase](#dispute-phase). This method is used to return the timestamp for the end of the Reporting Window's Dispute Phase.
+Every [Reporting Window](#reporting-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Round Phase](#dispute-round-phase). This method is used to return the timestamp for the end of the Reporting Window's Dispute Round Phase.
 
 #### augur.api.ReportingWindow.getDisputeStartTime({ tx }[, callback])
 
-As stated above, [Reporting Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) and this method returns the timestamp of the start of the Dispute Phase.
+As stated above, [Reporting Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase) and this method returns the timestamp of the start of the Dispute Round Phase.
 
 #### augur.api.ReportingWindow.getEndTime({ tx }[, callback])
 
@@ -839,11 +839,11 @@ Returns the Contract Address of the [Participation Token](#participation-token) 
 
 #### augur.api.ReportingWindow.getReportingEndTime({ tx }[, callback])
 
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
 
 #### augur.api.ReportingWindow.getReportingStartTime({ tx }[, callback])
 
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Phase](#dispute-phase). The Reporting Phase lasts 27 days, the Dispute Phase lasts 3 days.
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
 
 #### augur.api.ReportingWindow.getReputationToken({ tx }[, callback])
 
@@ -867,7 +867,7 @@ Returns the [Universe](#universe) address that the [Reporting Window](#reporting
 
 #### augur.api.ReportingWindow.isActive({ tx }[, callback])
 
-This method returns whether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
+This method returns whether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
 
 #### augur.api.ReportingWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
@@ -875,7 +875,7 @@ Returns whether the `_shadyMarket` address provided is a [Market](#market) that 
 
 #### augur.api.ReportingWindow.isDisputeActive({ tx }[, callback])
 
-Returns whether the [Reporting Window](#reporting-window) is currently in it's [Dispute Phase](#dispute-phase) or not. The Dispute Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Phase is active, `0` if not.
+Returns whether the [Reporting Window](#reporting-window) is currently in it's [Dispute Round Phase](#dispute-round-phase) or not. The Dispute Round Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Round Phase is active, `0` if not.
 
 #### augur.api.ReportingWindow.isForkingMarketFinalized({ tx }[, callback])
 
@@ -887,7 +887,7 @@ Returns whether the 30-day reporting period for the specified [Reporting Window]
 
 #### augur.api.ReportingWindow.isReportingActive({ tx }[, callback])
 
-Returns whether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Phase](#dispute-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
+Returns whether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Round Phase](#dispute-round-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
 
 Reputation Token Call API
 -------------------------
@@ -1146,7 +1146,7 @@ isParentOf = "1";
 ```
 #### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
 
-The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [Last Report Round](#last-report-round) Market's [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) during the [Dispute Phase](#dispute-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
+The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Reporting Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that an [Last Report Round](#last-report-round) Market's [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) during the [Dispute Round Phase](#dispute-round-phase) of a Reporting Window then a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), where as the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
 
 #### augur.api.Universe.getChildUniverse({ tx, \_parentPayoutDistributionHash }[, callback])
 
@@ -1190,7 +1190,7 @@ Returns the address of the previous [Reporting Window](#reporting-window) to the
 
 #### augur.api.Universe.getReportingPeriodDurationInSeconds({ tx }[, callback])
 
-Returns the [Reporting Window](#reporting-window) full duration in seconds (also known as the [Reporting Period](#reporting-period)) for the Universe](#universe) specified in `tx`. This includes both the [Reporting Phase](#reporting-phase) and [Dispute Phase](#dispute-phase) of the Reporting Window. The Reporting Phase should last 27 days followed by a 3-day Dispute Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.
+Returns the [Reporting Window](#reporting-window) full duration in seconds (also known as the [Reporting Period](#reporting-period)) for the Universe](#universe) specified in `tx`. This includes both the [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase) of the Reporting Window. The Reporting Phase should last 27 days followed by a 3-day Dispute Round Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.
 
 #### augur.api.Universe.getReportingWindow({ tx, \_reportingWindowId }[, callback])
 

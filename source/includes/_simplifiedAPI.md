@@ -811,7 +811,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 ### augur.reporting.getReportingSummary(p, callback) &rarr; {Object}
 
-Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a dispute phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
+Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
 
 Note: This function requires an [Augur Node connection](#augur-node).
 
