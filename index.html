@@ -171,7 +171,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Augur also extracts Fees to help support the <a href="#reporting">Reporting System</a> known as the <a href="#reporting-fee">Reporting Fee</a>. <a href="#settlement-fees">Settlement Fees</a> refer to both the Creator Fee and the Reporting Fee combined. The Reporting Fee isn&rsquo;t set by the Market Creator, like the Creator Fee, but is instead set by an automated Augur Market.</p>
 
-<p>Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the <a href="#rep">REP</a> price. This Market will act just like a regular Market and it will go through <a href="#reporting-round">Reporting Rounds</a> process in order to be <a href="#market-resolution">Resolved</a>. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.</p>
+<p>Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the <a href="#rep">REP</a> price. This Market will act just like a regular Market and it will go through the <a href="#dispute-round">Dispute Rounds</a> process in order to be <a href="#market-resolution">Resolved</a>. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.</p>
 
 <p>The Augur contracts will track the open interest of all Markets passively as people interact with Augur, which allows Augur to always have access to the open interest numbers. Once the open interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:</p>
 
@@ -1923,9 +1923,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
-<!-- Add glossary links to section -->
-
-<!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
+<!-- Add links to section -->
 
 <h3 id="augur-trading-getbetterworseorders-p-callback-rarr-betterworseorders">augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</h3>
 
@@ -2696,17 +2694,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">winningStakeToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFirstReportersDisputeBond</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">round1ReportersDisputeBond</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">round1ReportersDisputeBond</span> <span class="o">=</span> <span class="s2">"0x0151f9153f236359ea3605cef0fffff90aba0327"</span><span class="p">;</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getForkingMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkedMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">forkedMarket</span> <span class="o">=</span> <span class="s2">"0x0"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getLastReportersDisputeBond</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">round2ReportersDisputeBond</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">round2ReportersDisputeBond</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorMailbox</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorMailbox</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
@@ -2731,10 +2721,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingState</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingState</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">reportingState</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getShareToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
@@ -2763,14 +2749,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
-
-<span class="kd">var</span> <span class="nx">disputeBond</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForDisputeBond</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_shadyDisputeBond</span><span class="p">:</span> <span class="nx">disputeBond</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isContainerForDisputeBond</span> <span class="o">=</span> <span class="s2">"1"</span>
 
 <span class="kd">var</span> <span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0xbb87186146569514b8cd8b72e57eec3849e3981f"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForStakeToken</span><span class="p">({</span>
@@ -2822,7 +2800,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getendtime-tx-callback">augur.api.Market.getEndTime({ tx }[, callback])</h4>
 
-<p>Returns the timestamp for when the specified <code class="prettyprint">market</code>&rsquo;s event has come to pass. When the <a href="#market">Market</a>&rsquo;s <a href="#end-time">End Time</a> passes the Market either enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a> if a <a href="#designated-reporter">Designated Reporter</a> is assigned or the Market will await the next <a href="#reporting-window">Reporting Window</a> to begin <a href="#reporting-round">Reporting Rounds</a>.</p>
+<p>Returns the timestamp for when the specified <code class="prettyprint">market</code>&rsquo;s event has come to pass. When the <a href="#market">Market</a>&rsquo;s <a href="#end-time">End Time</a> passes, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
 <h4 id="augur-api-market-getextradisputebondremainingtobepaidout-tx-callback">augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ tx }[, callback])</h4>
 
@@ -2840,17 +2818,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the Stake Token address for the <a href="#final-outcome">Final Outcome</a> of a specific <code class="prettyprint">market</code>. If the <a href="#market">Market</a> isn&rsquo;t <a href="#market-settlement">Settled</a> then this will return a null address, <code class="prettyprint">0x0</code>.</p>
 
-<h4 id="augur-api-market-getfirstreportersdisputebond-tx-callback">augur.api.Market.getFirstReportersDisputeBond({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#dispute-bond">Dispute Bond</a> Token address for the <a href="#first-report-round">First Report Round</a> for a specified <code class="prettyprint">market</code>. When a First Report Round <a href="#report">Report</a> is <a href="#challenge">Challenged</a> a Dispute Bond is created and this function is designed to return that bond address. This returns 0 if the <a href="#market">Market</a> doesn&rsquo;t have a First Round Report or if the First Round Report hasn&rsquo;t been Challenged.</p>
-
 <h4 id="augur-api-market-getforkingmarket-tx-callback">augur.api.Market.getForkingMarket({ tx }[, callback])</h4>
 
 <p>Returns the <a href="#market">Market</a> address of the <a href="#forked-market">Forked Market</a> for the <a href="#universe">Universe</a> that contains the specified <code class="prettyprint">market</code> address. If the <code class="prettyprint">market</code> address specified belongs in a Universe that hasn&rsquo;t had a <a href="#fork">Fork</a> take place, this will return <code class="prettyprint">0x0</code>.</p>
-
-<h4 id="augur-api-market-getlastreportersdisputebond-tx-callback">augur.api.Market.getLastReportersDisputeBond({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#last-report-round">Last Report Round</a>&rsquo;s <a href="#dispute-bond">Dispute Bond</a> address for the <code class="prettyprint">market</code>. If this <a href="#market">Market</a> hasn&rsquo;t gone through a Last Report Round or there was no <a href="#challenge">Challenge</a> to the <a href="#tentative-outcome">Tentative Outcome</a> of the Last Report Round then this will return an empty address <code class="prettyprint">0x0</code>.</p>
 
 <h4 id="augur-api-market-getmarketcreatormailbox-tx-callback">augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])</h4>
 
@@ -2880,10 +2850,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the current <a href="#report">Reporting</a> State that the <code class="prettyprint">market</code> is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the <a href="#reporting">Reporting Section</a> of the documentation.</p>
 
-<h4 id="augur-api-market-getreportingwindow-tx-callback">augur.api.Market.getReportingWindow({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> address for the specified <code class="prettyprint">market</code>. This returns the Reporting Window when this <a href="#market">Market</a> is scheduled to be <a href="#report">Reported</a> on for <a href="#reporting-round">Reporting Rounds</a> if a <a href="#designated-reporter">Designated Reporter</a> fails to Report or their Report is <a href="#challenge">Challenged</a>.</p>
-
 <h4 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h4>
 
 <p>Returns the <a href="#shares">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
@@ -2907,10 +2873,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-market-getuniverse-tx-callback">augur.api.Market.getUniverse({ tx }[, callback])</h4>
 
 <p>Returns the <a href="#universe">Universe</a> address of the Universe that the specified <code class="prettyprint">market</code> is contained within. All <a href="#market">Markets</a> are created on a specific Universe and new Universes can be created in the event of a <a href="#fork">Fork</a>.</p>
-
-<h4 id="augur-api-market-iscontainerfordisputebond-tx-_shadydisputebond-callback">augur.api.Market.isContainerForDisputeBond({ tx, _shadyDisputeBond }[, callback])</h4>
-
-<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyDisputeBond</code> address provided. A <code class="prettyprint">_shadyDisputeBond</code> address will return true if it is a <a href="#designated-reporter">Designated Report</a> <a href="#dispute-bond">Dispute Bond</a> token, or a <a href="#reporting-round">Reporting Round</a> Dispute Bond for this <a href="#market">Market</a>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
 <h4 id="augur-api-market-iscontainerforstaketoken-tx-_shadystaketoken-callback">augur.api.Market.isContainerForStakeToken({ tx, _shadyStakeToken }[, callback])</h4>
 
@@ -3251,18 +3213,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getFirstReporterMarketsCount</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">firstReporterMarketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">firstReporterMarketsCount</span> <span class="o">=</span> <span class="s2">"54321"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getLastReporterMarketsCount</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">lastReporterMarketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">lastReporterMarketsCount</span> <span class="o">=</span> <span class="s2">"12345"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getMarketsCount</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketsCount</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">marketsCount</span> <span class="o">=</span> <span class="s2">"65"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getNumDesignatedReportNoShows</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numDesignatedReportNoShows</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
 <span class="nx">numDesignatedReportNoShows</span> <span class="o">=</span> <span class="s2">"2"</span>
@@ -3361,18 +3311,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns a timestamp for when this <a href="#reporting-window">Reporting Window</a> will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.</p>
 
-<h4 id="augur-api-reportingwindow-getfirstreportermarketscount-tx-callback">augur.api.ReportingWindow.getFirstReporterMarketsCount({ tx }[, callback])</h4>
-
-<p>Returns the number of <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> that are in the <a href="#first-report-round">First Report Round</a>. NOTE: If the Reporting Window has not begun yet, this number will include Markets that may end up being <a href="#finalized-market">Finalized</a> in the <a href="#designated-reporting-phase">Designated Report Round</a>. Since it is unknown whether <a href="#designated-reporter">Designated Reporters</a> ultimately will submit a report, Augur assumes by default that all new Markets will go to the First Report Round. Once the Reporting Window has begun, this function will return the number of Markets that are actually in the First Report Round.</p>
-
-<h4 id="augur-api-reportingwindow-getlastreportermarketscount-tx-callback">augur.api.ReportingWindow.getLastReporterMarketsCount({ tx }[, callback])</h4>
-
-<p>Returns the number of <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> that are in the <a href="#last-report-round">Last Report Round</a>.</p>
-
-<h4 id="augur-api-reportingwindow-getmarketscount-tx-callback">augur.api.ReportingWindow.getMarketsCount({ tx }[, callback])</h4>
-
-<p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#reporting-window">Reporting Window</a>. This includes <a href="#reporting-round">Reporting Round</a> Markets.</p>
-
 <h4 id="augur-api-reportingwindow-getnumdesignatedreportnoshows-tx-callback">augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])</h4>
 
 <p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-reporter">First Reporter</a> because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
@@ -3389,7 +3327,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reportingwindow-getnummarkets-tx-callback">augur.api.ReportingWindow.getNumMarkets({ tx }[, callback])</h4>
 
-<p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#reporting-window">Reporting Window</a>. This includes <a href="#reporting-round">Reporting Round</a> Markets.</p>
+<p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#fee-window">Fee Window</a>.</p>
 
 <h4 id="augur-api-reportingwindow-getparticipationtoken-tx-callback">augur.api.ReportingWindow.getParticipationToken({ tx }[, callback])</h4>
 
@@ -3499,75 +3437,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-sharetoken-getoutcome-tx-callback">augur.api.ShareToken.getOutcome({ tx }[, callback])</h4>
 
 <p>Returns the Outcome of the market that the specified <code class="prettyprint">shareToken</code> is for.</p>
-
-<h2 id="stake-token-call-api">Stake Token Call API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Stake Token Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0xbb87186146569514b8cd8b72e57eec3849e3981f"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">payoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">},</span>
-  <span class="na">index</span><span class="p">:</span> <span class="mi">0</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutSetValue</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">payoutSetValue</span> <span class="o">=</span> <span class="s2">"1000"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getStakeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">StakeToken</span><span class="p">.</span><span class="nx">isValid</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">stakeToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isValid</span> <span class="o">=</span> <span class="s2">"1"</span>
-</code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-staketoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/StakeToken.sol">Stake Token Contract Code</a></h4>
-
-<p>The Stake Token is used to represent Staked <a href="#rep">REP</a> by a <a href="#reporter">Reporter</a> for a specific <a href="#report">Report</a> and <a href="#market">Market</a>. When a Reporter submits a Report during a <a href="#reporting-round">Reporting Round</a> for this Market they need to stake REP based on how confident they are in the Report. The REP staked is converted into Stake Tokens. A new type of Stake Token is created for each <a href="#payout-set">Payout Set</a> submit by Reporters. Stake Tokens are then redeemed after <a href="#finalized-market">Finalizing the Market</a>. If your Stake Tokens are the tokens that represent the Winning Payout Set then your Stake Tokens can be redeemed for the amount of REP that was staked as well as a portion of <a href="#reporting-fee">Reporting Fee</a> and REP staked on any other <a href="#outcome">Outcome</a> but the <a href="#final-outcome">Final Outcome</a>. If your tokens are Staked on any other Outcome they are worthless and the Staked REP is redistributed to people with winning Stake Tokens.</p>
-
-<p>The Stake Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
-
-<h4 id="augur-api-staketoken-getmarket-tx-callback">augur.api.StakeToken.getMarket({ tx }[, callback])</h4>
-
-<p>This method will return the <a href="#market">Market</a> address that the Stake Token belongs too. Every Stake Token belongs to a specific Market in which the Token acts as a 1 to 1 representation of Staked <a href="#rep">REP</a> for a particular <a href="#payout-set">Payout Set</a> representing a <a href="#report">Report</a> for the Market.</p>
-
-<h4 id="augur-api-staketoken-getpayoutdistributionhash-tx-callback">augur.api.StakeToken.getPayoutDistributionHash({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a specific <code class="prettyprint">stakeToken</code>. A Payout Distribution Hash is a sha3 hash of the <a href="#payout-set">Payout Set</a> the Stake Token represents. The Payout Distribution Hash is used in other contract methods to identify a particular Payout Set.</p>
-
-<h4 id="augur-api-staketoken-getpayoutnumerator-tx-index-callback">augur.api.StakeToken.getPayoutNumerator({ tx, index }[, callback])</h4>
-
-<p>Returns the value at the <code class="prettyprint">index</code> of the <a href="#payout-set">Payout Set</a> represented by this <code class="prettyprint">stakeToken</code>. The <code class="prettyprint">index</code> is a value between <code class="prettyprint">0</code> and number of <a href="#outcome">Outcomes</a> for the <a href="#market">Market</a> and corresponds to a particular Outcome of the Market. In a <a href="#binary-market">Binary Market</a> for example, there are only two Outcomes, so the allowable <code class="prettyprint">index</code> values are 0 and 1.</p>
-
-<h4 id="augur-api-staketoken-getreportingwindow-tx-callback">augur.api.StakeToken.getReportingWindow({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> address for the specified <code class="prettyprint">stakeToken</code>. All Stake Tokens belong to a specific <a href="#market">Market</a> and all Market&rsquo;s belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Stake Tokens were purchased for.</p>
-
-<h4 id="augur-api-staketoken-getreputationtoken-tx-callback">augur.api.StakeToken.getReputationToken({ tx }[, callback])</h4>
-
-<p>As mentioned above, a Stake Token belongs to a <a href="#market">Market</a> which in turn belongs to a <a href="#reporting-window">Reporting Window</a>. Reporting Windows only interact with a single <a href="#rep">REP</a> contract, and this method will return the contract address of valid REP for this Reporting Window and by extension these Stake Tokens. Stake Tokens can only be purchased with REP that belongs to the Reporting Window the tokens are ultimately contained within.</p>
-
-<h4 id="augur-api-staketoken-getuniverse-tx-callback">augur.api.StakeToken.getUniverse({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#universe">Universe</a> address for the specified <code class="prettyprint">stakeToken</code>&rsquo;s <a href="#reporting-window">Reporting Window</a>. Everything in Augur belongs to a Universe, and Stake Tokens are no different. New Universes are created in the event of a <a href="#fork">Fork</a>, so this method provides an API user the ability to find out which Universe the Stake Token is currently in.</p>
-
-<h4 id="augur-api-staketoken-isvalid-tx-callback">augur.api.StakeToken.isValid({ tx }[, callback])</h4>
-
-<p>This method is used as a way to check if the <code class="prettyprint">stakeToken</code> represents a <a href="#payout-set">Payout Set</a> that indicates the <a href="#market">Market</a> is Invalid. This isn&rsquo;t to say that the Stake Token, the <a href="#report">Report</a>, or the Payout Set is invalid, but rather the <a href="#outcome">Outcome</a> of the Market is unclear based on how the Market is worded or the result of Market doesn&rsquo;t correspond to any of the Outcomes set for the Market.</p>
 
 <h2 id="universe-call-api">Universe Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
@@ -3695,7 +3564,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
 
-<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Reporting Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that an <a href="#last-report-round">Last Report Round</a> Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a> of a Reporting Window then a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, where as the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
+<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Reporting Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round-phase">Dispute Round Phase</a>, a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, where as the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
 
 <h4 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h4>
 
@@ -4526,93 +4395,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">60</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">disputeDesignatedReport</span><span class="p">({</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span> 
-  <span class="na">_attotokens</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
-  <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320490</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xd0d81785960bb128c35748e018ad52e599a80921c39ac02adabdaeb4a23d926c"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x6"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">disputeFirstReporters</span><span class="p">({</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span>
-  <span class="na">_attotokens</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
-  <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320491</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0xd3f644e8904966909a9d974c7ed63ae8ddbb0f23d824f576764afddd7023ef88"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x7"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">disputeLastReporters</span><span class="p">({</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320489</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x99ea0fd5"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x5"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getOrCreateStakeToken</span><span class="p">({</span> 
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span> 
   <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
@@ -4632,32 +4414,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172"</span><span class="p">,</span>
   <span class="na">input</span><span class="p">:</span> <span class="s2">"0x99ea0fd5"</span><span class="p">,</span>
   <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x5"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">migrateDueToNoReports</span><span class="p">({</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320491</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x76acc0f6322ec26e9623158f0b377777b8c7c3e4b4e700de08b39cf8accc39e5"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x2c10270f"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x7"</span><span class="p">,</span>
   <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
   <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
   <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
@@ -4808,25 +4564,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction is used to disavow Stake Tokens for this <a href="#market">Market</a>. When a Stake Token is disavowed it is able to be redeemed from the Market for the full <a href="#rep">REP</a> price of purchase. This is used in the event of a <a href="#fork">Fork</a>, which causes all Markets that aren&rsquo;t <a href="#finalized-market">Finalized</a> to enter an Awaiting Fork Migration state for the duration of the <a href="#fork-period">Fork Period</a>. During this time, the Market is unable to proceed through the <a href="#market-resolution">Market Resolution</a> process until the Fork Period is completed and a winning <a href="#child-universe">Child Universe</a> is known. To withdraw REP from the Staked Tokens on Markets Awaiting Fork Migration the Stake Tokens must be disavowed by calling <code class="prettyprint">disavowTokens</code> on the Market. The Stake Tokens are then disavowed for the entire Market and can be sold back to the Market for full REP price. This then allows the REP holder to migrate their REP to their chosen Child Universe.</p>
 
-<h4 id="augur-api-market-disputedesignatedreport-market-onsent-onsuccess-onfailed">augur.api.Market.disputeDesignatedReport({ market, onSent, onSuccess, onFailed })</h4>
-
-<p>This transaction is used to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a> that was <a href="#report">Reported</a> on by a <a href="#designated-reporter">Designated Reporter</a> and is currently in the <a href="#dispute-round-phase">Dispute Round Phase</a>. The <code class="prettyprint">msg.sender</code> of this transaction must have <a href="#rep">REP</a> to pay for the <a href="#dispute-bond">Dispute Bond</a>. This transaction will cause the Market to go to the first available <a href="#reporting-window">Reporting Window</a> and enter the <a href="#first-report-round">First Report Round</a>. If the caller of this function would like to increase the number of <a href="#stake-token">Stake Tokens</a> he or she has on an outcome other than the one reported by the <a href="#designated-reporter">Designated Reporter</a>, that can be done by passing in an amount greater than 0 for <code class="prettyprint">_attotokens</code> equal to the amount of Stake Tokens he or she would like to purchase. Additionally, <code class="prettyprint">_payoutNumerators</code> should be an array of the specific <a href="#payout-set">Payout Set</a> desired, and <code class="prettyprint">_invalid</code> should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as <code class="prettyprint">_attotokens</code> is less than 1.</p>
-
-<h4 id="augur-api-market-disputefirstreporters-market-_payoutnumerators-_attotokens-_invalid-onsent-onsuccess-onfailed">augur.api.Market.disputeFirstReporters({ market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })</h4>
-
-<p>This transaction will <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#first-report-round">First Report Round</a> <a href="#market">Market</a> if the Market is currently in the <a href="#dispute-round-phase">Dispute Round Phase</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a>. The <code class="prettyprint">msg.sender</code> needs to have enough <a href="#rep">REP</a> to purchase the <a href="#dispute-bond">Dispute Bond</a> in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available <a href="#reporting-window">Reporting Window</a> for the next <a href="#reporting-round">Reporting Round</a>. If the caller of this function would like to increase the number of <a href="#stake-token">Stake Tokens</a> he or she has on an outcome other than the one reported by the <a href="#first-reporter">First Reporters</a>, that can be done by passing in an amount greater than 0 for <code class="prettyprint">_attotokens</code> equal to the amount of Stake Tokens he or she would like to purchase. Additionally, <code class="prettyprint">_payoutNumerators</code> should be an array of the specific <a href="#payout-set">Payout Set</a> desired, and <code class="prettyprint">_invalid</code> should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as <code class="prettyprint">_attotokens</code> is less than 1.</p>
-
-<h4 id="augur-api-market-disputelastreporters-market-onsent-onsuccess-onfailed">augur.api.Market.disputeLastReporters({ market, onSent, onSuccess, onFailed })</h4>
-
-<p><code class="prettyprint">disputeLastReporters</code> is used to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a> that has gone through the <a href="#last-report-round">Last Report Round</a> and is <a href="#market-awaiting-finalization">Awaiting Finalization</a> in a <a href="#dispute-round-phase">Dispute Round Phase</a>. This method purchases a <a href="#dispute-bond">Dispute Bond</a> for the <code class="prettyprint">msg.sender</code>, who must pay for the Bond using <a href="#rep">REP</a>. Sending this transaction will cause a <a href="#fork">Fork</a>, since this is used to dispute the Last Report Round Tentative Outcome for the Market, which will cause the creation of new <a href="#universe">Universes</a> and cause the current Universe to be <a href="#locked-universe">Locked</a>.</p>
-
 <h4 id="augur-api-market-getorcreatestaketoken-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.getOrCreateStakeToken({ _payoutNumerators, _invalid , onSent, onSuccess, onFailed })</h4>
 
 <p>Returns the Stake Token address for <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> on the <code class="prettyprint">market</code> specified. (If the Stake Token with the specified <code class="prettyprint">payoutNumerators</code> does not exist, it will be created.) When a <a href="#reporter">Reporter</a> submits a <a href="#report">Report</a>, they submit a <a href="#payout-set">Payout Set</a> (<code class="prettyprint">_payoutNumerators</code>) array indicating how the <a href="#market">Market</a> should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.</p>
-
-<h4 id="augur-api-market-migrateduetonoreports-market-onsent-onsuccess-onfailed">augur.api.Market.migrateDueToNoReports({ market, onSent, onSuccess, onFailed })</h4>
-
-<p>This function is called to move a <a href="#market">Market</a> to the next <a href="#reporting-window">Reporting Window</a> if no <a href="#report">Reports</a> were submitted for the Market during a <a href="#reporting-phase">Reporting Phase</a>. If a Market is in the <a href="#first-report-round">First Report Round</a> and doesn&rsquo;t receive any Reports, it&rsquo;s moved to the next coming Reporting Window to be Reported on again, however it remains in the First Report Round, however this will be rare as the <a href="#first-report">First Report</a> is incentivized.</p>
 
 <h4 id="augur-api-market-migratethroughallforks-market-onsent-onsuccess-onfailed">augur.api.Market.migrateThroughAllForks({ market, onSent, onSuccess, onFailed })</h4>
 
@@ -5509,7 +5249,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-staketoken-buy-staketoken-_attotokens-onsent-onsuccess-onfailed">augur.api.StakeToken.buy({ stakeToken, _attotokens, onSent, onSuccess, onFailed })</h4>
 
-<p>This transaction is used to purchase Stake Tokens using <a href="#rep">REP</a>. The Stake Token&rsquo;s <a href="#market">Market</a> must be in a <a href="#reporting-round">Reporting Round</a> and Stake Tokens can only be purchased during the <a href="#reporting-phase">Reporting Phase</a> of a <a href="#reporting-window">Reporting Window</a>. Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the <code class="prettyprint">msg.sender</code> also needs to have at least <code class="prettyprint">_attotokens</code> worth of REP to complete this transaction. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">msg.sender</code>), to address (<code class="prettyprint">stakeToken</code>), and the amount of <code class="prettyprint">_attotokens</code> purchased.</p>
+<p>This transaction is used to purchase Stake Tokens using <a href="#rep">REP</a>. The Stake Token&rsquo;s <a href="#market">Market</a> must be in a <a href="#dispute-round">Dispute Round</a> and Stake Tokens can only be purchased during the <a href="#reporting-phase">Reporting Phase</a> of a <a href="#reporting-window">Reporting Window</a>. Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the <code class="prettyprint">msg.sender</code> also needs to have at least <code class="prettyprint">_attotokens</code> worth of REP to complete this transaction. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record a log of the from address (<code class="prettyprint">msg.sender</code>), to address (<code class="prettyprint">stakeToken</code>), and the amount of <code class="prettyprint">_attotokens</code> purchased.</p>
 
 <h4 id="augur-api-staketoken-migratelosingtokens-staketoken-onsent-onsuccess-onfailed">augur.api.StakeToken.migrateLosingTokens({ stakeToken, onSent, onSuccess, onFailed })</h4>
 
@@ -6433,77 +6173,21 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
 </tr>
-<tr>
-<td>ReportsDisputed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">disputer</code> disputed the Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> for the amount of <code class="prettyprint">disputeBondAmount</code> during <code class="prettyprint">reportingPhase</code>.</td>
-<td>universe, disputer, market</td>
-<td>reportingPhase, disputeBondAmount</td>
-</tr>
-<tr>
-<td>ReportSubmitted</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">reporter</code> submitted a Report for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> (either in the First Report Round or the Last Report Round). <code class="prettyprint">reporter</code> staked <code class="prettyprint">amountStaked</code> ETH on Outcome <code class="prettyprint">payoutNumerators</code> using the Stake Token at address <code class="prettyprint">stakeToken</code>.</td>
-<td>universe, reporter, market</td>
-<td>stakeToken, amountStaked, payoutNumerators</td>
-</tr>
-<tr>
-<td>TokensBurned</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
-<td>universe, token, target</td>
-<td>amount</td>
-</tr>
-<tr>
-<td>TokensMinted</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
-<td>universe, token, target</td>
-<td>amount</td>
-</tr>
-<tr>
-<td>TokensTransferred</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
-<td>universe, token, from</td>
-<td>to, value</td>
-</tr>
-<tr>
-<td>TradingProceedsClaimed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>.</td>
-<td>universe, shareToken, sender</td>
-<td>market, numShares, numPayoutTokens, finalTokenBalance</td>
-</tr>
-<tr>
-<td>Transfer</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a></td>
-<td>Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
-<td>from, to</td>
-<td>value</td>
-</tr>
-<tr>
-<td>UniverseCreated</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">childUniverse</code> has been created from <code class="prettyprint">parentUniverse</code>.</td>
-<td>parentUniverse, childUniverse</td>
-<td></td>
-</tr>
-<tr>
-<td>UniverseForked</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A Market in <code class="prettyprint">universe</code> has had its Tentative Outcome disputed during the Last Report Round, which has caused <code class="prettyprint">universe</code> to Fork.</td>
-<td>universe</td>
-<td></td>
-</tr>
-<tr>
-<td>WinningTokensRedeemed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">reporter</code> has converted <code class="prettyprint">amountRedeemed</code> <code class="prettyprint">stakeToken</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> to REP for the Outcome <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also got <code class="prettyprint">reportingFeesReceived</code>.</td>
-<td>universe, reporter, market</td>
-<td>stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
-</tr>
 </tbody></table>
+
+<!-- TODO: Update this once Dispute Round changes are finalized. -->
+
+<p>ReportsDisputed           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">disputer</code> disputed the Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> for the amount of <code class="prettyprint">disputeBondAmount</code> during <code class="prettyprint">reportingPhase</code>. | universe, disputer, market | reportingPhase, disputeBondAmount
+ReportSubmitted           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">reporter</code> submitted a Report for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">reporter</code> staked <code class="prettyprint">amountStaked</code> ETH on Outcome <code class="prettyprint">payoutNumerators</code> using the Stake Token at address <code class="prettyprint">stakeToken</code>. | universe, reporter, market | stakeToken, amountStaked, payoutNumerators
+TokensBurned              | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>. | universe, token, target | amount
+TokensMinted              | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>. | universe, token, target | amount
+TokensTransferred         | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.  | universe, token, from | to, value
+TradingProceedsClaimed    | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>. | universe, shareToken, sender | market, numShares, numPayoutTokens, finalTokenBalance
+Transfer | <a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a> | Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>. | from, to | value
+UniverseCreated           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">childUniverse</code> has been created from <code class="prettyprint">parentUniverse</code>. | parentUniverse, childUniverse | 
+&lt;!&ndash; TODO: Update this once Dispute Round changes are finalized. &ndash;&gt;
+UniverseForked            | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | A Market in <code class="prettyprint">universe</code> has had its Tentative Outcome disputed during the 20th Dispute Round, which has caused <code class="prettyprint">universe</code> to Fork. | universe |
+WinningTokensRedeemed     | <a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">reporter</code> has converted <code class="prettyprint">amountRedeemed</code> <code class="prettyprint">stakeToken</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> to REP for the Outcome <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also got <code class="prettyprint">reportingFeesReceived</code>. | universe, reporter, market | stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators</p>
 
 <p>In addition to these on-contract events, <code class="prettyprint">augur.filters.listen</code> also accepts a callback for the <code class="prettyprint">block</code> listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.</p>
 
@@ -6874,7 +6558,7 @@ Goals:
 
 <h2 id="challenge">Challenge</h2>
 
-<p>Challenge is used to describe the act of a <a href="#rep">REP</a> holder <a href="#dispute-stake">Staking</a> REP on a <a href="#market">Market</a> <a href="#outcome">Outcome</a> other than the <a href="#tenative-outcome">Tentative Outcome</a>. This REP goes toward filling the <a href="#dispute-bond">Dispute Bond</a> in order to <a href="#dispute">Dispute</a> or &ldquo;challenge&rdquo; the Tentative Outcome of a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a> before it is <a href="#finalized-market">Finalized</a>. In return for Staking on a given outcome, the REP holder will receive an amount of <a href="#participation-token">Participation Tokens</a> proportionate to the amount Staked, which will allow the holder to receive fees from the Reward Pool at the end of the current Fee Window.</p>
+<p>Challenge is used to describe the act of a <a href="#rep">REP</a> holder <a href="#dispute-stake">Staking</a> REP on a <a href="#market">Market</a> <a href="#outcome">Outcome</a> other than the <a href="#tenative-outcome">Tentative Outcome</a>. This REP goes toward filling the <a href="#dispute-bond">Dispute Bond</a> in order to <a href="#dispute">Dispute</a> or &ldquo;challenge&rdquo; the Tentative Outcome of a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a> before it is <a href="#finalized-market">Finalized</a>. In return for Staking on a given Outcome that successfully Challenged the Tentative Outcome, the REP holder be able to receive fees from the <a href="#reward-pool">Reward Pool</a> at the end of the current <a href="#fee-window">Fee Window</a>.</p>
 
 <h2 id="child-universe">Child Universe</h2>
 
@@ -6908,11 +6592,7 @@ Goals:
 
 <p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#initial-reporter">Initial Reporter</a>. If the Tentative Outcome selected by the Initial Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the Initial Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the Initial Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#initial-report">Initial Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
 
-<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is also calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs.</p>
-
-<p>The minimum value for the No-Show REP Bond is calculated as follows:</p>
-
-<p>Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs, the minimum value for the No-Show REP Bond is 137,500 REP / 2<sup>20</sup> = 0.1311302185 REP.</p>
+<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise 1.25% of all REP to cause a <a href="#fork">Fork</a>.</p>
 
 <h2 id="designated-reporter">Designated Reporter</h2>
 
@@ -6924,11 +6604,7 @@ Goals:
 
 <p>When a <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a>, they must put up an amount of REP on an <a href="#outcome">Outcome</a> that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>.</p>
 
-<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is also calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs.</p>
-
-<p>The minimum value for the Designated Reporter Stake is calculated as follows:</p>
-
-<p>Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> before a <a href="#fork">Fork</a> occurs, the minimum value for the Designated Reporter Stake is 137,500 REP / 2^20 = 0.1311302185 REP.</p>
+<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise 1.25% of all REP to cause a <a href="#fork">Fork</a>.</p>
 
 <h2 id="designated-reporting">Designated Reporting</h2>
 
@@ -6937,6 +6613,8 @@ Goals:
 <h2 id="designated-reporting-phase">Designated Reporting Phase</h2>
 
 <p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="initial-reporting-phase">Initial Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#initial-reporter-stake">Stake</a> of the <a href="#initial-reporter">Initial Reporter</a> when they submit the <a href="#initial-report">Initial Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the Initial Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market.</p>
+
+<!-- TODO: Add section on dev mode/haulting -->
 
 <h2 id="dispute">Dispute</h2>
 
@@ -6964,7 +6642,7 @@ Goals:
 
 <h2 id="dispute-stake">Dispute Stake</h2>
 
-<p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can Stake <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a> and get an equivalant number of <a href="#participation-tokens">Participation Tokens</a> in return. These Participation Tokens allow them to collect fees when the Market <a href="#settlement">Settles</a>. The amount of REP they Stake goes toward filling the <a href="#dispute-bond">Dispute Bond</a>.</p>
+<p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can put up <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a>. The amount of REP they put up goes toward filling the crowdsourced <a href="#dispute-bond">Dispute Bond</a>, and can range from 1 <a href="#atto-prefix">attoREP</a> to the amount still needed to fill the <a href="#dispute-bond">Dispute Bond</a>.</p>
 
 <p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reward-pool">Reward Pool</a> from the current <a href="#fee-window">Fee Window</a>.</p>
 
@@ -6976,7 +6654,7 @@ Goals:
 
 <h2 id="fee-window">Fee Window</h2>
 
-<p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window receive the same number of <a href="#participation-token">Participation Tokens</a> for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing Participation Tokens directly.</p>
+<p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window will receive an amount of fees from the Reward Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <h2 id="fill-order">Fill Order</h2>
 
@@ -6996,19 +6674,15 @@ Goals:
 
 <h2 id="first-report">First Report</h2>
 
-<p>The First Report is simply the first <a href="#report">Report</a> placed on a <a href="#market">Market</a>. The First Report generally will come from the <a href="#designed-reporter">Designated Reporter</a> for the Market, which would immediately refund the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> to the <a href="#market-creator">Market Creator</a>. In the event a Designated Reporter fails to Report then the Market is moved into the next available <a href="#reporting-window">Reporting Window</a>, along with the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a>, for it&rsquo;s <a href="#first-report-round">First Report Round</a>. The first person to submit a Report and Stake at least 0 <a href="#rep">REP</a> on their Report will have the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> added to their Stake and their Report transaction&rsquo;s gas cost covered by the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a>. This provides an incentive to submit the First Report as the <a href="#first-reporter">First Reporter</a> stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual <a href="#final-outcome">Final Outcome</a>.</p>
-
-<h2 id="first-report-round">First Report Round</h2>
-
-<p>The First Report Round is the first <a href="#reporting-round">Reporting Round</a> a <a href="#market">Market</a> will go through if it requires Reporting Rounds to be <a href="#market-resolution">Resolved</a>.</p>
+<p>The First Report is simply the first <a href="#report">Report</a> placed on a <a href="#market">Market</a>. The First Report often will come from the <a href="#designed-reporter">Designated Reporter</a> for the Market, which would immediately refund the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> to the <a href="#market-creator">Market Creator</a>. However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="initial-reporting-phase">Initial Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#initial-reporter-stake">Stake</a> of the <a href="#initial-reporter">Initial Reporter</a> when they submit the <a href="#initial-report">Initial Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the Initial Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market. This provides an incentive to submit the Initial Report, since the <a href="#initial-reporter">Initial Reporter</a> stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual <a href="#final-outcome">Final Outcome</a>.</p>
 
 <h2 id="first-reporter">First Reporter</h2>
 
-<p>The First Reporter is the person who submits the <a href="#first-report">First Report</a> on a <a href="#market">Market</a>. Generally the First Reporter will be the <a href="#designated-reporter">Designated Reporter</a>, however if the Designated Reporter fails to <a href="#report">Report</a> then the First Reporter will become whoever submits the First Report during the <a href="#first-report-round">First Report Round</a> for this Market.</p>
+<p>The First Reporter is the person who submits the <a href="#first-report">First Report</a> on a <a href="#market">Market</a>. Generally the First Reporter will be the <a href="#designated-reporter">Designated Reporter</a>, however if the Designated Reporter fails to <a href="#report">Report</a> then the First Reporter will become whoever submits the Initial Report during the <a href="#initial-report-phase">Initial Report Phase</a> for this Market.</p>
 
 <h2 id="fork">Fork</h2>
 
-<p>A Fork occurs if a <a href="#market-awaiting-finalization">Market Awaiting Finalization</a> from an <a href="#last-report-round">Last Report Round</a> of <a href="#reporting-round">Reporting Rounds</a> is <a href="#dispute-bond">Disputed</a>. A Fork causes Augur to create multiple <a href="#universe">Universes</a> of itself. Each Universe is empty except for the <a href="#forked-market">Forked Market</a>. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including invalid, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. <a href="#rep">REP</a> holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#shares">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.</p>
+<p>A Fork occurs if the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round">Dispute Round</a>. A Fork causes Augur to create multiple new <a href="#universe">Universes</a>. Each new Universe is empty except for the <a href="#forked-market">Forked Market</a>; they contain no markets or REP tokens. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including the <a href="#invalid-outcome">Invalid Outcome</a>, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. <a href="#rep">REP</a> holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends, and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#shares">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.</p>
 
 <h2 id="fork-period">Fork Period</h2>
 
@@ -7016,7 +6690,7 @@ Goals:
 
 <h2 id="forked-market">Forked Market</h2>
 
-<p>A Forked Market is a <a href="#market">Market</a> who&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> after a <a href="#last-report-round">Last Report Round</a> is <a href="#dispute-bond">Disputed</a> and causes a <a href="#fork">Fork</a> to occur. A Fork will cause the creation of multiple <a href="#universe">Universes</a> of Augur with the Forked Market having a different <a href="#final-outcome">Final Outcome</a> in each Universe. The Universe that contained the Forked Market originally will become a <a href="#locked-universe">Locked Universe</a>.</p>
+<p>A Forked Market is a <a href="#market">Market</a> who&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round">Dispute Round</a>, thus causing a <a href="#fork">Fork</a> to occur. A Fork will cause the creation of multiple <a href="#universe">Universes</a> of Augur with the Forked Market having a different <a href="#final-outcome">Final Outcome</a> in each Universe. The Universe that contained the Forked Market originally will become a <a href="#locked-universe">Locked Universe</a>.</p>
 
 <h2 id="genesis-universe">Genesis Universe</h2>
 
@@ -7024,11 +6698,11 @@ Goals:
 
 <h2 id="initial-report">Initial Report</h2>
 
-<p>When a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="designated-report">Designated Report</a>, and another user submits a <a href="#report">Report</a> instead, this Report is called the Initial Report, or <a href="#first-report">First Report</a>.</p>
+<p>When a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="designated-report">Designated Report</a>, and another user submits a <a href="#report">Report</a> instead, this Report is called the Initial Report (or <a href="#first-report">First Report</a>).</p>
 
 <h2 id="initial-reporter">Initial Reporter</h2>
 
-<p>In the event that a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="#designated-report">Designated Report</a>, the first user to submit a <a href="#report">Report</a> becomes the Initial Reporter, or <a href="#first-reporter">First Reporter</a>. The Initial Reporter can use the <a href="#no-show-bond">No-Show Bond</a> to <a href="#initial-reporter-stake">Stake</a> <a href="#rep">REP</a> on a <a href="#tentative-outcome">Tentative Outcome</a> and pay for gas costs when submitting the Initial Report.</p>
+<p>In the event that a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="#designated-report">Designated Report</a>, the first user to submit a <a href="#report">Report</a> becomes the Initial Reporter (or <a href="#first-reporter">First Reporter</a>). The Initial Reporter can use the <a href="#no-show-rep-bond">No-Show REP Bond</a> to <a href="#initial-reporter-stake">Stake</a> <a href="#rep">REP</a> on a <a href="#tentative-outcome">Tentative Outcome</a> and pay for gas costs when submitting the Initial Report.</p>
 
 <h2 id="initial-reporter-stake">Initial Reporter Stake</h2>
 
@@ -7041,10 +6715,6 @@ Goals:
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
 <p>Description pending.</p>
-
-<h2 id="last-report-round">Last Report Round</h2>
-
-<p>The Last Report Round is the final <a href="#reporting-round">Reporting Round</a> in which a <a href="#challenge">Challenge</a> to the <a href="#tentative-outcome">Tentative Outcome</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a> will result in a <a href="#fork">Fork</a> instead of another Reporting Round. Unlike previous Reporting Rounds, when a <a href="#market">Market</a> in the Last Report Round enters the Dispute Round Phase and it&rsquo;s Tentative Outcome is Challenged then the Market becomes a <a href="#forked-market">Forked Market</a> and the <a href="#universe">Universe</a> becomes a <a href="#locked-universe">Locked Universe</a>.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
@@ -7131,6 +6801,12 @@ If the <a href="#designated-reporter">Designated Reporter</a> submits a <a href=
 
 <p>A Position is the amount of <a href="#share">Shares</a> that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on <a href="#market">Market</a> movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the <a href="#outcome">Outcome</a> you are short on, where as closing a long position means selling the Shares you own.</p>
 
+<!-- TODO: Make sure this lines up with what's in the white paper. -->
+
+<h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
+
+<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait 3 days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and <a href="#developer-mode">hault</a> the Augur system before the attacker could claim the proceeds.</p>
+
 <h2 id="pre-reporting-phase">Pre-Reporting Phase</h2>
 
 <p>This is the phase that occurs after a <a href="#market">Market&rsquo;s</a> creation
@@ -7164,10 +6840,6 @@ Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</
 <h2 id="reporting-phase">Reporting Phase</h2>
 
 <p>The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, <a href="#market">Markets</a> in <a href="#reporting-round">Reporting Rounds</a> are <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Following a Reporting Phase the Market should receive a Report to set a <a href="#tentative-outcome">Tentative Outcome</a> and be moved into a <a href="#dispute-round-phase">Dispute Round Phase</a> during which the Market is considered to be <a href="#market-awaiting-finalization">Awaiting Finalization</a>.</p>
-
-<h2 id="reporting-round">Reporting Round</h2>
-
-<p>Reporting Rounds take place in a <a href="#reporting-window">Reporting Window</a> during which <a href="#rep">REP</a> holders Stake REP on the <a href="#outcome">Outcome</a> of <a href="#market">Markets</a> currently in a Reporting Round. Markets enter Reporting Rounds if the <a href="#designated-reporter">Designated Reporter</a> fails to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or if the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a>. Markets start in the <a href="#first-report-round">First Report Round</a> which incentivizes a <a href="#first-report">First Report</a> if the Market hasn&rsquo;t received a Report from the Designated Reporter but otherwise acts like any other Reporting Round. Reporting Rounds last the entirety of a Reporting Window and if the Market&rsquo;s Tentative Outcome is Challenged during the <a href="#dispute-round-phase">Dispute Round Phase</a> of the Reporting Window, it is moved up to the next level of Reporting Rounds until eventually reaching the <a href="#last-report-round">Last Report Round</a>. A Challenge of the Tentative Outcome following a Last Report Round will cause a <a href="#fork">Fork</a> to occur.</p>
 
 <h2 id="reporting-window">Reporting Window</h2>
 
