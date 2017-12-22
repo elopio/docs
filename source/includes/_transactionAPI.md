@@ -266,7 +266,7 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 
 #### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_market, onSent, onSuccess, onFailed })
 
-The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized.
+The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and hault the Augur system before the attacker could claim the proceeds.)
 
 Complete Sets Tx API
 -----------------------------
