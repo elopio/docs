@@ -66,11 +66,7 @@ The Designated Report No-Show Gas Bond (or No-Show Gas Bond for brevity) is paid
 
 The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using [REP](#rep) by the [Market Creator](#market-creator) during [Market](#market) creation. If the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the [Tentative Outcome](#tentative-outcome) Reported by the [Initial Reporter](#initial-reporter). If the Tentative Outcome selected by the Initial Reporter becomes the [Final Outcome](#final-outcome) of the Market, the Initial Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the Initial Reporter is [Disputed](#disputed) and then still becomes the [Final Outcome](#final-outcome) of the Market, the Initial Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the [Initial Report](#initial-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the [Outcome](#outcome) they reported becomes the Final Outcome.)
 
-The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is also calculated differently than the [Designated Reporter Stake](#designated-reporter-stake); however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day [Dispute Rounds](#dispute-round) before a [Fork](#fork) occurs.
-
-The minimum value for the No-Show REP Bond is calculated as follows:
-
-Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day [Dispute Rounds](#dispute-round) before a [Fork](#fork) occurs, the minimum value for the No-Show REP Bond is 137,500 REP / 2<sup>20</sup> = 0.1311302185 REP.
+The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is calculated differently than the [Designated Reporter Stake](#designated-reporter-stake); however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day [Dispute Rounds](#dispute-round) are required in order to raise 1.25% of all REP to cause a [Fork](#fork).
 
 ## Designated Reporter
 
@@ -81,11 +77,7 @@ A Designated Reporter is a single Ethereum address designated to submit the [Ten
 
 When a [Designated Reporter](#designated-reporter) submits a [Report](#report), they must put up an amount of REP on an [Outcome](#outcome) that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the [No-Show REP Bond](#designated-report-no-show-rep-bond).
 
-The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is also calculated differently than the [No-Show REP Bond](#designated-reporter-no-show-rep-bond); however, their minimum values are calculated in the same way in order to guarantee a maximum of 20 7-day [Dispute Rounds](#dispute-round) before a [Fork](#fork) occurs.
-
-The minimum value for the Designated Reporter Stake is calculated as follows:
-
-Since more than 1.25% of all existing REP must be Staked on an Outcome to cause a Fork to occur, that means that the threshold for causing a Fork is 11,000,000 REP * .0125 = 137,500 REP. In order for there to be a maximum of 20 7-day [Dispute Rounds](#dispute-round) before a [Fork](#fork) occurs, the minimum value for the Designated Reporter Stake is 137,500 REP / 2^20 = 0.1311302185 REP.
+The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is calculated differently than the [No-Show REP Bond](#designated-reporter-no-show-rep-bond); however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day [Dispute Rounds](#dispute-round) are required in order to raise 1.25% of all REP to cause a [Fork](#fork).
 
 ## Designated Reporting
 
