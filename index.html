@@ -4040,7 +4040,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-claimtradingproceeds-claimtradingproceeds-_market-onsent-onsuccess-onfailed">augur.api.ClaimTradingProceeds.claimTradingProceeds({ _market, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding shares in a finalized <code class="prettyprint">_market</code> owned by the <code class="prettyprint">msg.sender</code>. This transaction will fail if the <code class="prettyprint">_market</code> specified is not finalized or if it hasn&rsquo;t been at least 3 days since the <code class="prettyprint">_market</code> was finalized.</p>
+<p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding shares in a finalized <code class="prettyprint">_market</code> owned by the <code class="prettyprint">msg.sender</code>. This transaction will fail if the <code class="prettyprint">_market</code> specified is not finalized or if it hasn&rsquo;t been at least 3 days since the <code class="prettyprint">_market</code> was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and hault the Augur system before the attacker could claim the proceeds.)</p>
 
 <h2 id="complete-sets-tx-api">Complete Sets Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Contract</span>
@@ -6976,11 +6976,11 @@ Goals:
 
 <h2 id="fee-window">Fee Window</h2>
 
-<p>Description pending.</p>
+<p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window receive the same number of <a href="#participation-token">Participation Tokens</a> for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing Participation Tokens directly.</p>
 
 <h2 id="fill-order">Fill Order</h2>
 
-<p>Filling an <a href="#order">Order</a> is when a <a href="#order-filler">Filler</a> provides what the <a href="#order-creator">Creator</a> of the order is seeking in their order. If a Filler only provides some of what the Creator wants then it&rsquo;s known as a partial fill. If the Filler provides exactly what the Creator requests then it&rsquo;s known as completely filling the order.</p>
+<p>Filling an <a href="#order">Order</a> is when a <a href="#order-filler">Filler</a> provides what the <a href="#order-creator">Creator</a> of the order is seeking in their <a href="#order">Order</a>. If a Filler only provides some of what the Creator wants then it&rsquo;s known as a partial fill. If the Filler provides exactly what the Creator requests then it&rsquo;s known as completely filling the order.</p>
 
 <h2 id="final-outcome">Final Outcome</h2>
 
@@ -6988,11 +6988,11 @@ Goals:
 
 <h2 id="finalized-market">Finalized Market</h2>
 
-<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will now allow <a href="#shares">Share</a> holders to <a href="#settlement">settle</a> their shares with the market.</p>
+<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will now allow <a href="#shares">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market.</p>
 
 <h2 id="finalized-phase">Finalized Phase</h2>
 
-<p>This is the last phase a Market](#market) can be in, and it occurs once the Market has been <a href="#finalized-market">Finalized</a> .</p>
+<p>This is the last phase a <a href="#market">Market</a> can be in, and it occurs once the Market has been <a href="#finalized-market">Finalized</a>.</p>
 
 <h2 id="first-report">First Report</h2>
 
