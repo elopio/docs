@@ -34,7 +34,7 @@ A Categorical Market is a [Market](#market) with more than 2 potential [Outcomes
 
 ## Challenge
 
-Challenge is used to describe the act of a [REP](#rep) holder [Staking](#dispute-stake) REP on a [Market](#market) [Outcome](#outcome) other than the [Tentative Outcome](#tenative-outcome). This REP goes toward filling the [Dispute Bond](#dispute-bond) in order to [Dispute](#dispute) or "challenge" the Tentative Outcome of a [Market Awaiting Finalization](#market-awaiting-finalization) before it is [Finalized](#finalized-market). In return for Staking on a given outcome, the REP holder will receive an amount of [Participation Tokens](#participation-token) proportionate to the amount Staked, which will allow the holder to receive fees from the Reward Pool at the end of the current Fee Window.
+Challenge is used to describe the act of a [REP](#rep) holder [Staking](#dispute-stake) REP on a [Market](#market) [Outcome](#outcome) other than the [Tentative Outcome](#tenative-outcome). This REP goes toward filling the [Dispute Bond](#dispute-bond) in order to [Dispute](#dispute) or "challenge" the Tentative Outcome of a [Market Awaiting Finalization](#market-awaiting-finalization) before it is [Finalized](#finalized-market). In return for Staking on a given Outcome that successfully Challenged the Tentative Outcome, the REP holder be able to receive fees from the [Reward Pool](#reward-pool) at the end of the current [Fee Window](#fee-window).
 
 ## Child Universe
 
@@ -95,6 +95,8 @@ Designated Reporting is the first and fastest way that a [Market](#market) can b
 
 The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Initial Reporting Phase](initial-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#initial-reporter-stake) of the [Initial Reporter](#initial-reporter) when they submit the [Initial Report](#initial-report), and the [No-Show Gas Bond](Designated Report No-Show Gas Bond) goes to the Initial Reporter if the Tentative Outcome they Reported becomes the [Final Outcome](#final-outcome) of the Market.
 
+<!-- TODO: Add section on dev mode/haulting -->
+
 ## Dispute
 
 Disputing is synonymous with the act of [Challenging](#challenge) a [Tenative Outcome](#tentative-outcome).
@@ -120,7 +122,7 @@ The Dispute Round Phase is a seven (7) day window after a [Market](#market) has 
 
 ## Dispute Stake
 
-When a [Market](#market) is in the [Dispute Round Phase](#dispute-round-phase), users can Stake [REP](#rep) on any [Outcome](#outcome) other than the [Tenative Outcome](#tentative-outcome) and get an equivalant number of [Participation Tokens](#participation-tokens) in return. These Participation Tokens allow them to collect fees when the Market [Settles](#settlement). The amount of REP they Stake goes toward filling the [Dispute Bond](#dispute-bond).
+When a [Market](#market) is in the [Dispute Round Phase](#dispute-round-phase), users can put up [REP](#rep) on any [Outcome](#outcome) other than the [Tenative Outcome](#tentative-outcome). The amount of REP they put up goes toward filling the crowdsourced [Dispute Bond](#dispute-bond), and can range from 1 [attoREP](#atto-prefix) to the amount still needed to fill the [Dispute Bond](#dispute-bond).
 
 All unsuccesful Dispute Stake is returned to the original owners at the end of every [Dispute Round](#dispute-round). All successful Dispute Stake is applied to the [Outcome](#outcome) it championed, and will remain there until the [Market](#market) is [Finalized](#finalized-market) (or until a [Fork](#fork) occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the [Reward Pool](#reward-pool) from the current [Fee Window](#fee-window).
 
@@ -132,7 +134,7 @@ End Time is the date and time that a [Market](#market)'s event will have come to
 
 ## Fee Window
 
-Augur’s [Reporting](#report) system runs on a cycle of consecutive 7-day long [Fee Windows](#fee-windows). Any fees collected by Augur during a given Fee Window are added to a [Reward Pool](#reward-pool) for that Fee Window. The Reward Pool is used to reward [REP](#rep) holders who participate in Augur’s Reporting process. REP holders who [Stake](#dispute-stake) REP during a given Fee Window receive the same number of [Participation Tokens](#participation-token) for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Initial Reporting](#initial-reporting), [Disputing](#dispute) an [Outcome](#outcome), or simply purchasing Participation Tokens directly.
+Augur’s [Reporting](#report) system runs on a cycle of consecutive 7-day long [Fee Windows](#fee-windows). Any fees collected by Augur during a given Fee Window are added to a [Reward Pool](#reward-pool) for that Fee Window. The Reward Pool is used to reward [REP](#rep) holders who participate in Augur’s Reporting process. REP holders who [Stake](#dispute-stake) REP during a given Fee Window will receive an amount of fees from the Reward Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Initial Reporting](#initial-reporting), [Disputing](#dispute) an [Outcome](#outcome), or simply purchasing [Participation Tokens](#participation-token) directly.
 
 ## Fill Order
 
@@ -152,19 +154,15 @@ This is the last phase a [Market](#market) can be in, and it occurs once the Mar
 
 ## First Report
 
-The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report generally will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). In the event a Designated Reporter fails to Report then the Market is moved into the next available [Reporting Window](#reporting-window), along with the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), for it's [First Report Round](#first-report-round). The first person to submit a Report and Stake at least 0 [REP](#rep) on their Report will have the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) added to their Stake and their Report transaction's gas cost covered by the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond). This provides an incentive to submit the First Report as the [First Reporter](#first-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
-
-## First Report Round
-
-The First Report Round is the first [Reporting Round](#reporting-round) a [Market](#market) will go through if it requires Reporting Rounds to be [Resolved](#market-resolution).
+The First Report is simply the first [Report](#report) placed on a [Market](#market). The First Report often will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Initial Reporting Phase](initial-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#initial-reporter-stake) of the [Initial Reporter](#initial-reporter) when they submit the [Initial Report](#initial-report), and the [No-Show Gas Bond](Designated Report No-Show Gas Bond) goes to the Initial Reporter if the Tentative Outcome they Reported becomes the [Final Outcome](#final-outcome) of the Market. This provides an incentive to submit the Initial Report, since the [Initial Reporter](#initial-reporter) stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
 
 ## First Reporter
 
-The First Reporter is the person who submits the [First Report](#first-report) on a [Market](#market). Generally the First Reporter will be the [Designated Reporter](#designated-reporter), however if the Designated Reporter fails to [Report](#report) then the First Reporter will become whoever submits the First Report during the [First Report Round](#first-report-round) for this Market.
+The First Reporter is the person who submits the [First Report](#first-report) on a [Market](#market). Generally the First Reporter will be the [Designated Reporter](#designated-reporter), however if the Designated Reporter fails to [Report](#report) then the First Reporter will become whoever submits the Initial Report during the [Initial Report Phase](#initial-report-phase) for this Market.
 
 ## Fork
 
-A Fork occurs if a [Market Awaiting Finalization](#market-awaiting-finalization) from an [Last Report Round](#last-report-round) of [Reporting Rounds](#reporting-round) is [Disputed](#dispute-bond). A Fork causes Augur to create multiple [Universes](#universe) of itself. Each Universe is empty except for the [Forked Market](#forked-market). There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including invalid, and the Markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one way and final. After sixty (60) days the [Fork Period](#fork-period) ends and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
+A Fork occurs if the [Tentative Outcome](#tentative-outcome) for a [Market](#market) is [Challenged](#challenge) during the 20th [Dispute Round](#dispute-round). A Fork causes Augur to create multiple new [Universes](#universe). Each new Universe is empty except for the [Forked Market](#forked-market); they contain no markets or REP tokens. There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including the [Invalid Outcome](#invalid-outcome), and the Markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the [Fork Period](#fork-period) ends, and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
 
 ## Fork Period
 
@@ -172,7 +170,7 @@ The Fork Period, or Fork Phase, is a sixty (60) day period of time after a [Fork
 
 ## Forked Market
 
-A Forked Market is a [Market](#market) who's [Tentative Outcome](#tentative-outcome) after a [Last Report Round](#last-report-round) is [Disputed](#dispute-bond) and causes a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
+A Forked Market is a [Market](#market) who's [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) during the 20th [Dispute Round](#dispute-round), thus causing a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
 
 ## Genesis Universe
 
@@ -180,11 +178,11 @@ This is the first and only [Universe](#universe) to exist at Augur's launch, mea
 
 ## Initial Report
 
-When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and another user submits a [Report](#report) instead, this Report is called the Initial Report, or [First Report](#first-report).
+When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and another user submits a [Report](#report) instead, this Report is called the Initial Report (or [First Report](#first-report)).
 
 ## Initial Reporter
 
-In the event that a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](#designated-report), the first user to submit a [Report](#report) becomes the Initial Reporter, or [First Reporter](#first-reporter). The Initial Reporter can use the [No-Show Bond](#no-show-bond) to [Stake](#initial-reporter-stake) [REP](#rep) on a [Tentative Outcome](#tentative-outcome) and pay for gas costs when submitting the Initial Report.
+In the event that a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](#designated-report), the first user to submit a [Report](#report) becomes the Initial Reporter (or [First Reporter](#first-reporter)). The Initial Reporter can use the [No-Show REP Bond](#no-show-rep-bond) to [Stake](#initial-reporter-stake) [REP](#rep) on a [Tentative Outcome](#tentative-outcome) and pay for gas costs when submitting the Initial Report.
  
 ## Initial Reporter Stake
 
@@ -197,10 +195,6 @@ Description pending.
 ## Invalid Outcome
 
 Description pending.
-
-## Last Report Round
-
-The Last Report Round is the final [Reporting Round](#reporting-round) in which a [Challenge](#challenge) to the [Tentative Outcome](#tentative-outcome) during the [Dispute Round Phase](#dispute-round-phase) will result in a [Fork](#fork) instead of another Reporting Round. Unlike previous Reporting Rounds, when a [Market](#market) in the Last Report Round enters the Dispute Round Phase and it's Tentative Outcome is Challenged then the Market becomes a [Forked Market](#forked-market) and the [Universe](#universe) becomes a [Locked Universe](#locked-universe).
 
 ## Locked Universe
 
@@ -287,6 +281,11 @@ A Payout Set, sometimes referred to as the "Payout Numerator" in contract method
 
 A Position is the amount of [Shares](#share) that is owned (a long position) or borrowed and then sold (a short position) by an individual. A position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be Open or Closed. An Open Position simply means you currently own the shares, where as a closed position means you have now redeemed your shares and have cashed out for currency. Closing a short positions means you are buying the Shares of the [Outcome](#outcome) you are short on, where as closing a long position means selling the Shares you own.
 
+<!-- TODO: Make sure this lines up with what's in the white paper. -->
+## Post-Finalization Waiting Period 
+
+Once a [Market](#market) has [Finalized](#finalized-market), users must wait 3 days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [hault](#developer-mode) the Augur system before the attacker could claim the proceeds.
+
 ## Pre-Reporting Phase
 
 This is the phase that occurs after a [Market's](#market) creation
@@ -320,10 +319,6 @@ The Reporting Period is combined time of the [Reporting Phase](#reporting-phase)
 ## Reporting Phase
 
 The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Markets](#market) in [Reporting Rounds](#reporting-round) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should receive a Report to set a [Tentative Outcome](#tentative-outcome) and be moved into a [Dispute Round Phase](#dispute-round-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
-
-## Reporting Round
-
-Reporting Rounds take place in a [Reporting Window](#reporting-window) during which [REP](#rep) holders Stake REP on the [Outcome](#outcome) of [Markets](#market) currently in a Reporting Round. Markets enter Reporting Rounds if the [Designated Reporter](#designated-reporter) fails to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) or if the Designated Reporter's [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) during the [Dispute Round Phase](#dispute-round-phase). Markets start in the [First Report Round](#first-report-round) which incentivizes a [First Report](#first-report) if the Market hasn't received a Report from the Designated Reporter but otherwise acts like any other Reporting Round. Reporting Rounds last the entirety of a Reporting Window and if the Market's Tentative Outcome is Challenged during the [Dispute Round Phase](#dispute-round-phase) of the Reporting Window, it is moved up to the next level of Reporting Rounds until eventually reaching the [Last Report Round](#last-report-round). A Challenge of the Tentative Outcome following a Last Report Round will cause a [Fork](#fork) to occur.
 
 ## Reporting Window
 

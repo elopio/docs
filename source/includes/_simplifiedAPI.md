@@ -1085,8 +1085,7 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
-<!-- Add glossary links to section -->
-<!-- TODO: Update JS returned data; update description for case where no order IDs are found (returns 0?)  -->
+<!-- Add links to section -->
 ### augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}
 
 Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)

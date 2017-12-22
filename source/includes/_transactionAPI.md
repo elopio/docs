@@ -764,93 +764,6 @@ augur.api.Market.disavowTokens({
   value: "0x0"
 }
 
-var _payoutNumerators = [5,10,25,60];
-var _attotokens = 100;
-var _invalid = false;
-augur.api.Market.disputeDesignatedReport({
-  market: market,
-  _payoutNumerators: _payoutNumerators, 
-  _attotokens: _attotokens,
-  _invalid: _invalid
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320490,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xd0d81785960bb128c35748e018ad52e599a80921c39ac02adabdaeb4a23d926c",
-  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0x6",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
-
-augur.api.Market.disputeFirstReporters({
-  market: market,
-  _payoutNumerators: _payoutNumerators,
-  _attotokens: _attotokens,
-  _invalid: _invalid,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320491,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xd3f644e8904966909a9d974c7ed63ae8ddbb0f23d824f576764afddd7023ef88",
-  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0x7",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
-
-augur.api.Market.disputeLastReporters({
-  market: market,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320489,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
-  input: "0x99ea0fd5",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
-
 augur.api.Market.getOrCreateStakeToken({ 
   _payoutNumerators: _payoutNumerators, 
   _invalid: _invalid,
@@ -870,32 +783,6 @@ augur.api.Market.getOrCreateStakeToken({
   hash: "0x80dbc117b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf8a88e6172",
   input: "0x99ea0fd5",
   nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
-
-augur.api.Market.migrateDueToNoReports({
-  market: market,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320491,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x76acc0f6322ec26e9623158f0b377777b8c7c3e4b4e700de08b39cf8accc39e5",
-  input: "0x2c10270f",
-  nonce: "0x7",
   r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
   s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
   timestamp: 1501003133,
@@ -1046,25 +933,9 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payo
 
 This transaction is used to disavow Stake Tokens for this [Market](#market). When a Stake Token is disavowed it is able to be redeemed from the Market for the full [REP](#rep) price of purchase. This is used in the event of a [Fork](#fork), which causes all Markets that aren't [Finalized](#finalized-market) to enter an Awaiting Fork Migration state for the duration of the [Fork Period](#fork-period). During this time, the Market is unable to proceed through the [Market Resolution](#market-resolution) process until the Fork Period is completed and a winning [Child Universe](#child-universe) is known. To withdraw REP from the Staked Tokens on Markets Awaiting Fork Migration the Stake Tokens must be disavowed by calling `disavowTokens` on the Market. The Stake Tokens are then disavowed for the entire Market and can be sold back to the Market for full REP price. This then allows the REP holder to migrate their REP to their chosen Child Universe.
 
-#### augur.api.Market.disputeDesignatedReport({ market, onSent, onSuccess, onFailed })
-
-This transaction is used to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market) that was [Reported](#report) on by a [Designated Reporter](#designated-reporter) and is currently in the [Dispute Round Phase](#dispute-round-phase). The `msg.sender` of this transaction must have [REP](#rep) to pay for the [Dispute Bond](#dispute-bond). This transaction will cause the Market to go to the first available [Reporting Window](#reporting-window) and enter the [First Report Round](#first-report-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [Designated Reporter](#designated-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
-
-#### augur.api.Market.disputeFirstReporters({ market, _payoutNumerators, _attotokens, _invalid, onSent, onSuccess, onFailed })
-
-This transaction will [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [First Report Round](#first-report-round) [Market](#market) if the Market is currently in the [Dispute Round Phase](#dispute-round-phase) and is [Awaiting Finalization](#market-awaiting-finalization). The `msg.sender` needs to have enough [REP](#rep) to purchase the [Dispute Bond](#dispute-bond) in order for this transaction to be successful. Successfully triggering this transaction will move the Market into the next available [Reporting Window](#reporting-window) for the next [Reporting Round](#reporting-round). If the caller of this function would like to increase the number of [Stake Tokens](#stake-token) he or she has on an outcome other than the one reported by the [First Reporters](#first-reporter), that can be done by passing in an amount greater than 0 for `_attotokens` equal to the amount of Stake Tokens he or she would like to purchase. Additionally, `_payoutNumerators` should be an array of the specific [Payout Set](#payout-set) desired, and `_invalid` should be set to true or false, depending on whether the caller thinks the market should be resolved as invalid. Alternatively, if the caller does not wish to increase his or her amount of Stake Tokens on a particular outcome, these parameters will be ignored as long as `_attotokens` is less than 1.
-
-#### augur.api.Market.disputeLastReporters({ market, onSent, onSuccess, onFailed })
-
-`disputeLastReporters` is used to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market) that has gone through the [Last Report Round](#last-report-round) and is [Awaiting Finalization](#market-awaiting-finalization) in a [Dispute Round Phase](#dispute-round-phase). This method purchases a [Dispute Bond](#dispute-bond) for the `msg.sender`, who must pay for the Bond using [REP](#rep). Sending this transaction will cause a [Fork](#fork), since this is used to dispute the Last Report Round Tentative Outcome for the Market, which will cause the creation of new [Universes](#universe) and cause the current Universe to be [Locked](#locked-universe).
-
 #### augur.api.Market.getOrCreateStakeToken({ \_payoutNumerators, \_invalid , onSent, onSuccess, onFailed })
 
 Returns the Stake Token address for `_payoutNumerators` and `_invalid` on the `market` specified. (If the Stake Token with the specified `payoutNumerators` does not exist, it will be created.) When a [Reporter](#reporter) submits a [Report](#report), they submit a [Payout Set](#payout-set) (`_payoutNumerators`) array indicating how the [Market](#market) should payout. Each Payout Set has a Stake Token associated with it, so if two different Reporters submit the same Payout Set as their Report then they will receive the same Stake Token currency. This method will return the Stake Token associated with a specific Payout Set.
-
-#### augur.api.Market.migrateDueToNoReports({ market, onSent, onSuccess, onFailed })
-
-This function is called to move a [Market](#market) to the next [Reporting Window](#reporting-window) if no [Reports](#report) were submitted for the Market during a [Reporting Phase](#reporting-phase). If a Market is in the [First Report Round](#first-report-round) and doesn't receive any Reports, it's moved to the next coming Reporting Window to be Reported on again, however it remains in the First Report Round, however this will be rare as the [First Report](#first-report) is incentivized.
 
 #### augur.api.Market.migrateThroughAllForks({ market, onSent, onSuccess, onFailed })
 
@@ -1753,7 +1624,7 @@ Allows the `_spender` the ability to spend up to `_value` worth of the specified
 
 #### augur.api.StakeToken.buy({ stakeToken, \_attotokens, onSent, onSuccess, onFailed })
 
-This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in a [Reporting Round](#reporting-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
+This transaction is used to purchase Stake Tokens using [REP](#rep). The Stake Token's [Market](#market) must be in a [Dispute Round](#dispute-round) and Stake Tokens can only be purchased during the [Reporting Phase](#reporting-phase) of a [Reporting Window](#reporting-window). Stake Tokens have a 1:1 ratio to REP, which means 100 attoREP is equal to 100 attoStakeTokens, so the `msg.sender` also needs to have at least `_attotokens` worth of REP to complete this transaction. This transaction will spawn a `Transfer` event which will record a log of the from address (`msg.sender`), to address (`stakeToken`), and the amount of `_attotokens` purchased.
 
 #### augur.api.StakeToken.migrateLosingTokens({ stakeToken, onSent, onSuccess, onFailed })
 
