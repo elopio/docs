@@ -132,11 +132,11 @@ End Time is the date and time that a [Market](#market)'s event will have come to
 
 ## Fee Window
 
-Description pending.
+Augur’s [Reporting](#report) system runs on a cycle of consecutive 7-day long [Fee Windows](#fee-windows). Any fees collected by Augur during a given Fee Window are added to a [Reward Pool](#reward-pool) for that Fee Window. The Reward Pool is used to reward [REP](#rep) holders who participate in Augur’s Reporting process. REP holders who [Stake](#dispute-stake) REP during a given Fee Window receive the same number of [Participation Tokens](#participation-token) for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Initial Reporting](#initial-reporting), [Disputing](#dispute) an [Outcome](#outcome), or simply purchasing Participation Tokens directly.
 
 ## Fill Order
 
-Filling an [Order](#order) is when a [Filler](#order-filler) provides what the [Creator](#order-creator) of the order is seeking in their order. If a Filler only provides some of what the Creator wants then it's known as a partial fill. If the Filler provides exactly what the Creator requests then it's known as completely filling the order.
+Filling an [Order](#order) is when a [Filler](#order-filler) provides what the [Creator](#order-creator) of the order is seeking in their [Order](#order). If a Filler only provides some of what the Creator wants then it's known as a partial fill. If the Filler provides exactly what the Creator requests then it's known as completely filling the order.
 
 ## Final Outcome
 
@@ -144,11 +144,11 @@ A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challe
 
 ## Finalized Market
 
-A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will now allow [Share](#shares) holders to [settle](#settlement) their shares with the market.
+A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will now allow [Share](#shares) holders to [Settle](#settlement) their Shares with the Market.
 
 ## Finalized Phase
 
-This is the last phase a Market](#market) can be in, and it occurs once the Market has been [Finalized](#finalized-market) .
+This is the last phase a [Market](#market) can be in, and it occurs once the Market has been [Finalized](#finalized-market).
 
 ## First Report
 
