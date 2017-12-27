@@ -48,10 +48,6 @@ augur.api.DisputeBond.getMarket({ tx: { to: disputeBond } }, function (error, ma
 // example output:
 market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.DisputeBond.getOwner({ tx: { to: disputeBond } }, function (error, owner) { /* ... */ })
-// example output:
-owner = "0x3d62bafc1791752393384b902f813da861ddedd9"
-
 augur.api.DisputeBond.getUniverse({ tx: { to: disputeBond } }, function (error, universe) { /* ... */ })
 // example output:
 universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
@@ -71,10 +67,6 @@ This transaction will return the [Payout Distribution Hash](#payout-distribution
 #### augur.api.DisputeBond.getMarket({ tx }[, callback])
 
 This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Round Phase](#dispute-round-phase) for that Market.
-
-#### augur.api.DisputeBond.getOwner({ tx }[, callback])
-
-This transaction will return the account address of the bond holder for a specified `disputeBond`. This is the person who owns/purchased the bond and would be the person to refund if they correctly [Challenged](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market Awaiting Finalization](#market-awaiting-finalization).
 
 #### augur.api.DisputeBond.getUniverse({ tx }[, callback])
 
@@ -725,10 +717,6 @@ augur.api.ReportingWindow.isForkingMarketFinalized({ tx: { to: reportingWindow }
 // example output:
 isForkingMarketFinalized = "0";
 
-augur.api.ReportingWindow.isOver({ tx: { to: reportingWindow } }, function (error, isOver) { /* ... */ })
-// example output:
-isOver = "0";
-
 augur.api.ReportingWindow.isReportingActive({ tx: { to: reportingWindow } }, function (error, isReportingActive) { /* ... */ })
 // example output:
 isReportingActive = "1"
@@ -821,10 +809,6 @@ Returns whether the [Reporting Window](#reporting-window) is currently in it's [
 
 Returns whether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
 
-#### augur.api.ReportingWindow.isOver({ tx }[, callback])
-
-Returns whether the 30-day reporting period for the specified [Reporting Window](#reporting-window) has ended.
-
 #### augur.api.ReportingWindow.isReportingActive({ tx }[, callback])
 
 Returns whether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Round Phase](#dispute-round-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
@@ -845,7 +829,7 @@ topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
 
-The Reputation Token, known as [REP](#rep), is the key that allows Augur's Decentralized Oracle System to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
+The Reputation Token, known as [REP](#rep), is the key that allows Augur's [Decentralized Oracle](#decentralized-oracle) system to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
 
 REP is also used to Challenge the Tentative Outcome of Reports during the [Dispute Round Phase](#dispute-round-phase). If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and the Designated Report No-Show REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
 
@@ -935,10 +919,6 @@ universeParentPayoutDistributionHash = "0xa310ca2018af3cb2ca244eb862df2d35030090
 augur.api.Universe.getPreviousReportingWindow({ tx: { to: universe } }, function (error, previousReportingWindow) { /* ... */ })
 // example output:
 previousReportingWindow = "577"
-
-augur.api.Universe.getReportingPeriodDurationInSeconds({ tx: { to: universe } }, function (error, reportingPeriodDuration) { /* ... */ })
-// example output:
-reportingPeriodDuration = "2592000";
 
 augur.api.Universe.getReportingWindow({ 
   tx: { to: universe }, 
@@ -1055,10 +1035,6 @@ Returns the [Parent Universes](#parent-universe)'s [Payout Distribution Hash](#p
 #### augur.api.Universe.getPreviousReportingWindow({ tx }[, callback])
 
 Returns the address of the previous [Reporting Window](#reporting-window) to the current Reporting Window for the [Universe](#universe) specified in `tx`.
-
-#### augur.api.Universe.getReportingPeriodDurationInSeconds({ tx }[, callback])
-
-Returns the [Reporting Window](#reporting-window) full duration in seconds (also known as the [Reporting Period](#reporting-period)) for the Universe](#universe) specified in `tx`. This includes both the [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase) of the Reporting Window. The Reporting Phase should last 27 days followed by a 3-day Dispute Round Phase which makes the Reporting Period Duration a total of 30 days, or 2,592,000 seconds.
 
 #### augur.api.Universe.getReportingWindow({ tx, \_reportingWindowId }[, callback])
 
