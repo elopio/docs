@@ -3885,7 +3885,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-claimtradingproceeds-claimtradingproceeds-_market-onsent-onsuccess-onfailed">augur.api.ClaimTradingProceeds.claimTradingProceeds({ _market, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding shares in a finalized <code class="prettyprint">_market</code> owned by the <code class="prettyprint">msg.sender</code>. This transaction will fail if the <code class="prettyprint">_market</code> specified is not finalized or if it hasn&rsquo;t been at least 3 days since the <code class="prettyprint">_market</code> was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and hault the Augur system before the attacker could claim the proceeds.)</p>
+<p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding shares in a finalized <code class="prettyprint">_market</code> owned by the <code class="prettyprint">msg.sender</code>. This transaction will fail if the <code class="prettyprint">_market</code> specified is not finalized or if it hasn&rsquo;t been at least 3 days since the <code class="prettyprint">_market</code> was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and halt the Augur system before the attacker could claim the proceeds.)</p>
 
 <h2 id="complete-sets-tx-api">Complete Sets Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Contract</span>
@@ -4164,9 +4164,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-disputebond-withdrawinemergency-disputebond-onsent-onsuccess-onfailed">augur.api.DisputeBond.withdrawInEmergency({ disputeBond, onSent, onSuccess, onFailed })</h4>
 
-<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Dispute Bond and convert it into a Reputation Token.</p>
+<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Dispute Bond and convert it into a Reputation Token.</p>
 
-<p>This transaction will fail if Augur is not currently in a haulted state.</p>
+<p>This transaction will fail if Augur is not currently in a halted state.</p>
 
 <p>It returns true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -4566,9 +4566,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-withdrawinemergency-market-onsent-onsuccess-onfailed">augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })</h4>
 
-<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Reputation Tokens from a particular Market.</p>
+<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Reputation Tokens from a particular Market.</p>
 
-<p>This transaction will fail if Augur is not currently in a haulted state.</p>
+<p>This transaction will fail if Augur is not currently in a halted state.</p>
 
 <p>It returns true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -4684,9 +4684,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-participationtoken-withdrawinemergency-participationtoken-onsent-onsuccess-onfailed">augur.api.ParticipationToken.withdrawInEmergency({ participationToken, onSent, onSuccess, onFailed })</h4>
 
-<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Participation Tokens and convert them into Reputation Tokens.</p>
+<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Participation Tokens and convert them into Reputation Tokens.</p>
 
-<p>This transaction will fail if Augur is not currently in a haulted state.</p>
+<p>This transaction will fail if Augur is not currently in a halted state.</p>
 
 <p>It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -5253,9 +5253,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-staketoken-withdrawinemergency-staketoken-onsent-onsuccess-onfailed">augur.api.StakeToken.withdrawInEmergency({ stakeToken, onSent, onSuccess, onFailed })</h4>
 
-<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Stake Tokens and convert them into Reputation Tokens.</p>
+<p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Stake Tokens and convert them into Reputation Tokens.</p>
 
-<p>This transaction will fail if Augur is not currently in a haulted state.</p>
+<p>This transaction will fail if Augur is not currently in a halted state.</p>
 
 <p>It returns true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -5439,7 +5439,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="augur-api-tradingescapehatch-claimsharesinupdate-_market-onsent-onsuccess-onfailed">augur.api.TradingEscapeHatch.claimSharesInUpdate({ _market, onSent, onSuccess, onFailed })</h4>
 
-<p>If Augur needs to be halted by the development team (for example, if a vulnerability is discovered), calling this function on a specific <a href="#market">Market</a> will withdraw the user&rsquo;s funds from that Market and return them to the user&rsquo;s address. This transaction will fail if Augur is not in a halted state.</p>
+<p>If Augur needs to be <a href="#developer-mode">halted</a> by the development team (for example, if a vulnerability is discovered), calling this function on a specific <a href="#market">Market</a> will withdraw the user&rsquo;s funds from that Market and return them to the user&rsquo;s address. This transaction will fail if Augur is not in a halted state.</p>
 
 <h2 id="universe-tx-api">Universe Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Transaction API Examples:</span>
@@ -6598,11 +6598,11 @@ Goals:
 
 <p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="initial-reporting-phase">Initial Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#initial-reporter-stake">Stake</a> of the <a href="#initial-reporter">Initial Reporter</a> when they submit the <a href="#initial-report">Initial Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the Initial Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market.</p>
 
-<!-- TODO: Add section on dev mode/haulting -->
-
 <h2 id="developer-mode">Developer Mode</h2>
 
-<p>Description pending.</p>
+<p>During Augur&rsquo;s early stages, its Solidity smart contracts will allow for some special &ldquo;developer mode&rdquo; functionality. This functionality has been added as a security precaution in case an attacker attempts to compromise Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. If a security exploit is found, the Augur team can halt Augur, which will stop all normal functionality, such as trading, reporting, and disputing, and allow users to withdraw their REP and ETH from any Market.</p>
+
+<p>Eventually, once Augur has been thoroughly tested and the Augur team is confident that it is secure, this functionality will be removed so that it is not available to anyone (including the Augur team).</p>
 
 <h2 id="dispute">Dispute</h2>
 
@@ -6700,7 +6700,7 @@ Goals:
 
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
-<p>Description pending.</p>
+<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event is indeterminate, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#binary-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#shares">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
@@ -6708,7 +6708,7 @@ Goals:
 
 <h2 id="market">Market</h2>
 
-<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#shares">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#tick">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
+<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#shares">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#number-of-ticks">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
 
 <!-- TODO: Remove this section and links to it. -->
 
@@ -6764,7 +6764,7 @@ Goals:
 
 <h2 id="outcome">Outcome</h2>
 
-<p>An outcome is a potential result of a <a href="#market">Market</a>&rsquo;s future event. For example, a Market with a question of &ldquo;Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?&rdquo; would have three potential Outcomes: Yes, No, and Invalid. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market&rsquo;s Outcome. More realistically this can happen for markets that have too vague of a question. A good example of a vague Market that would most likely be voted invalid would be &ldquo;Does God exist?&rdquo; as no one has a definitive answer.</p>
+<p>An outcome is a potential result of a <a href="#market">Market</a>&rsquo;s future event. For example, a Market with a question of &ldquo;Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?&rdquo; would have three potential Outcomes: Yes, No, and <a href="#invalid-outcome">Invalid</a>. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market&rsquo;s Outcome. More realistically, this can happen for Markets that have too vague of a question. A good example of a vague Market that would most likely be resolved as Invalid would be &ldquo;Does God exist?&rdquo;, as no one has a definitive answer.</p>
 
 <h2 id="parent-universe">Parent Universe</h2>
 
@@ -6792,7 +6792,7 @@ Goals:
 
 <h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
 
-<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and <a href="#developer-mode">hault</a> the Augur system before the attacker could claim the proceeds.</p>
+<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.</p>
 
 <h2 id="pre-reporting-phase">Pre-Reporting Phase</h2>
 
@@ -6808,37 +6808,41 @@ Goals:
 
 <h2 id="report">Report</h2>
 
-<p>A Report, or Reporting, is the Staking of <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a> that&rsquo;s passed its <a href="#end-time">End Time</a> and doesn&rsquo;t have a <a href="#tentative-outcome">Tentative Outcome</a> yet. Reporting as a term can be used to describe the act of submitting a <a href="#designated-report">Designated Report</a> or <a href="#initial-report">Initial Report</a>. </p>
+<p>A Report, or Reporting, is the Staking of <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a> that&rsquo;s passed its <a href="#end-time">End Time</a> and doesn&rsquo;t have a <a href="#tentative-outcome">Tentative Outcome</a> yet. Reporting as a term can be used to describe the act of submitting a <a href="#designated-report">Designated Report</a> or <a href="#initial-report">Initial Report</a>.</p>
 
 <h2 id="reporter">Reporter</h2>
 
-<p>A Reporter is a <a href="#rep">REP</a> holder who Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> whose <a href="#end-time">End Time</a> has come to pass and does not have a <a href="#tentative-outcome">Tentative Outcome</a> yet. A <a href="#designated-reporter">Designated Reporter</a> is assigned by the <a href="#market-creator">Market Creator</a> during Market Creation for <a href="#designated-reporting">Designated Reporting</a>. If the Designated Reporter fails to submit a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, any other user can submit an <a href="#initial-report">Initial Report</a> instead.</p>
+<p>A Reporter is a <a href="#rep">REP</a> holder who Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> that does not have a <a href="#tentative-outcome">Tentative Outcome</a> but does have an <a href="#end-time">End Time</a> that has passed. A <a href="#designated-reporter">Designated Reporter</a> is assigned by the <a href="#market-creator">Market Creator</a> during Market Creation for <a href="#designated-reporting">Designated Reporting</a>. If the Designated Reporter fails to submit a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, any other user can submit an <a href="#initial-report">Initial Report</a> instead.</p>
 
 <h2 id="reporting-fee">Reporting Fee</h2>
 
-<p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#shares">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract the <a href="#settlement-fees">Settlement Fees</a>, which includes the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
+<p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#shares">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract <a href="#settlement-fees">Settlement Fees</a> in ETH. These Settlement Fees include the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
 
-<p>The Reporting Fee is sent to the <a href="#reporting-window">Reporting Window</a> that contains the <a href="#market">Market</a> being traded on, and are later used to pay <a href="#rep">REP</a> holders for <a href="#report">Reporting</a> on the <a href="#outcome">Outcome</a> of Markets.</p>
+<p>The Reporting Fee is sent to the <a href="#reporting-window">Fee Window</a> that contains the <a href="#market">Market</a> being traded on, and is later used to pay <a href="#rep">REP</a> holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+
+<!-- TODO: Remove this section and links to it. -->
 
 <h2 id="reporting-phase">Reporting Phase</h2>
 
-<p>The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, <a href="#market">Markets</a> in <a href="#reporting-round">Reporting Rounds</a> are <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Following a Reporting Phase the Market should receive a Report to set a <a href="#tentative-outcome">Tentative Outcome</a> and be moved into a <a href="#dispute-round-phase">Dispute Round Phase</a> during which the Market is considered to be <a href="#market-awaiting-finalization">Awaiting Finalization</a>.</p>
+<p>The Reporting Phase has been removed from Augur. Now there is just a series of up to 20 <a href="#dispute-round-phases">Dispute Round Phases</a>, followed by a potential <a href="#fork-period">Fork Phase</a>.</p>
+
+<!-- TODO: Remove this section and links to it. -->
 
 <h2 id="reporting-window">Reporting Window</h2>
 
-<p>The Reporting Window is a period of 30 days in which <a href="#markets">Markets</a> that have passed their <a href="#end-time">End Time</a> are expected to be <a href="#report">Reported</a> on by <a href="#reporter">Reporters</a>. Reporting Windows last for thirty (30) days and consist of two (2) phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The combined duration of the Reporting Phase and the Dispute Round Phase is known as the <a href="#reporting-period">Reporting Period</a>. The Reporting Phase lasts twenty seven (27) days in which Markets in a <a href="#reporting-round">Reporting Round</a> are Reported on. The Dispute Round Phase lasts three (3) days and during this time any <a href="#rep">REP</a> holder is allowed to post a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of the <a href="#market-awaiting-finalization">Market Awaiting Finalization</a>. Reporting Windows are occasionally referred to as &ldquo;Reporting Cycles&rdquo; or &ldquo;Reporting Periods&rdquo; as those were legacy terms for a Reporting Window during development of Augur.</p>
+<p>The Reporting Window has now been removed in favor of the <a href="#fee-window">Fee Window</a>.</p>
 
 <h2 id="reward-pool">Reward Pool</h2>
 
-<p>Description pending.</p>
+<p>Any <a href="#settlement-fees">Settlement Fees</a> (in ETH) collected during a <a href="#fee-window">Fee Window</a> get added to a Reward Pool. At the end of the Fee Window, the Reward Pool is paid out to users in proportion to the number of <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#challenge">Challenging</a> an [Outcome](#outcome, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <h2 id="scalar-market">Scalar Market</h2>
 
-<p>A Scalar Market is a <a href="#market">Market</a> with a wide range of potential <a href="#outcome">Outcomes</a>. An example of a Scalar Market would be &ldquo;According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?&rdquo;. In this example market, we might set the <a href="#minimum-display-price">minDisplayPrice</a> of the market to 0 and the <a href="#maximum-display-price">maxDisplayPrice</a> to 500. This would allow for the market to <a href="#settlement">Settle</a> on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a <a href="#binary-market">Binary</a> or <a href="#categorical-market">Categorical</a> Market.</p>
+<p>A Scalar Market is a <a href="#market">Market</a> with a wide range of potential <a href="#outcome">Outcomes</a>. An example of a Scalar Market would be &ldquo;According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?&rdquo;. In this example Market, the <a href="#minimum-display-price">minDisplayPrice</a> might be set to $0 and the <a href="#maximum-display-price">maxDisplayPrice</a> to $500. This would allow the Market to <a href="#settlement">Settle</a> on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a <a href="#binary-market">Binary</a> or <a href="#categorical-market">Categorical</a> Market.</p>
 
 <h2 id="settlement">Settlement</h2>
 
-<p>Settlement is something that happens one of two ways. The first is when a trader who holds <a href="#shares">Shares</a> would like to cash out of their <a href="#position">Position</a> on a <a href="#finalized-market">Finalized Market</a>. The other is the collection of a <a href="#complete-set">Complete Set</a> which can happen before a Market Finalizes. The <a href="#settlement-fees">Settlement Fees</a>, which includes both the <a href="#creator-fee">Creator Fee</a> and the <a href="#reporting-fee">Reporting Fee</a>, are only extracted during settlement.</p>
+<p>Settlement can happen in one of two ways. The first is when a trader who holds <a href="#shares">Shares</a> would like to cash out of their <a href="#position">Position</a> on a <a href="#finalized-market">Finalized Market</a>. The other is the collection of a <a href="#complete-set">Complete Set</a>, which can happen before a Market Finalizes. The <a href="#settlement-fees">Settlement Fees</a>, which includes both the <a href="#creator-fee">Creator Fee</a> and the <a href="#reporting-fee">Reporting Fee</a>, are only extracted during Settlement.</p>
 
 <h2 id="settlement-fees">Settlement Fees</h2>
 
@@ -6846,7 +6850,7 @@ Goals:
 
 <h2 id="shares">Shares</h2>
 
-<p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> send currency to the market to complete an <a href="#order">Order</a>. Shares are settled (destroyed) when a Complete Set is sold back to the market.</p>
+<p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> send ETH to the Market to complete an <a href="#order">Order</a>. Shares are <a href="#settlement">Settled</a> (destroyed) when a Complete Set is sold back to the Market.</p>
 
 <h2 id="stake-token">Stake Token</h2>
 
@@ -6854,7 +6858,7 @@ Goals:
 
 <h2 id="tentative-outcome">Tentative Outcome</h2>
 
-<p>Description pending.</p>
+<p>A <a href="#market">Market&rsquo;s</a> Tentative Outcome starts off as the <a href="#outcome">Outcome</a> that is submitted by the <a href="#designated-reporter">Designated Reporter</a> or <a href="#initial-reporter">Initial Reporter</a>. Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on other Outcomes if they believe the Tentative Outcome is incorrect. If the <a href="#dispute-bond">Dispute Bond</a> for a particular Outcome gets filled in the current <a href="#dispute-round">Dispute Round</a>, that Outcome will become the new Tentative Outcome.</p>
 
 <h2 id="tick">Tick</h2>
 
@@ -6862,23 +6866,23 @@ Goals:
 
 <h2 id="topic">Topic</h2>
 
-<p>A Topic is a keyword used to categorize <a href="#market">markets</a>. All markets must have a topic, and are optionally allowed up to two sub-topics to further categorize the Market. An example Market for &ldquo;Will the New York Giants win Super Bowl 100?&rdquo; might have a Topic of &ldquo;Sports&rdquo; and sub-topics of &ldquo;American Football&rdquo; and &ldquo;NFL&rdquo;. The Topics are set by the <a href="#market-creator">Market Creator</a> when a new market is made and cannot be changed.</p>
+<p>A Topic is a keyword used to categorize <a href="#market">Markets</a>. All Markets must have a Topic, and are optionally allowed up to two sub-Topics to further categorize the Market. An example Market for &ldquo;Will the New York Giants win Super Bowl 100?&rdquo; might have a Topic of &ldquo;Sports&rdquo; and sub-topics of &ldquo;American Football&rdquo; and &ldquo;NFL&rdquo;. The Topics are set by the <a href="#market-creator">Market Creator</a> when a new Market is made and cannot be changed.</p>
 
 <h2 id="universe">Universe</h2>
 
-<p>A Universe is a version of Augur. All <a href="#market">Markets</a> created on Augur belong to a Universe. Augur will launch with only one Universe, but more can be created in the rare event of a <a href="#fork">Fork</a>. The Universe in which a Fork occurs will become a <a href="#locked-universe">Locked Universe</a> and new Universes will be created, one for each <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>. After a Fork, <a href="#rep">REP</a> holders can choose to migrate their REP to one of the new Universes created. They don&rsquo;t have to migrate, but Locked Universes do not allow the creation of new Markets, and therefor there will be no Markets to <a href="#report">Report</a> on in the future and no fees to earn from Reporting. All Universes of Augur are equally valid, even after a Fork has been resolved, and can continue to operate after the <a href="#fork-period">Fork Period</a> ends. Universes contain only the Forked Market with a <a href="#final-outcome">Final Outcome</a> set to one of the possible outcomes, with a Universe created for each possibility, and no other Markets to begin with.</p>
+<p>All <a href="#market">Markets</a> created on Augur belong to a Universe. Augur has only one Universe at launch (the [Genesis Universe]), but more can be created in the rare event of a <a href="#fork">Fork</a>. The Universe in which a Fork occurs will become a <a href="#locked-universe">Locked Universe</a> and new <a href="#child-universes">Child Universes</a> will be created, one for each <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>. Once a <a href="#fork-period">Fork Phase</a> begins, <a href="#rep">REP</a> holders can choose to migrate their REP to one of the new Child Universes. They don&rsquo;t have to migrate, but Locked Universes do not allow the creation of new Markets, and therefore there will be no Markets to <a href="#report">Report</a> on in the future and no <a href="#reporting-fees">Fees</a> to earn. All Child Universes can continue to operate after the <a href="#fork-period">Fork Phase</a> ends.</p>
 
 <h2 id="validity-bond">Validity Bond</h2>
 
-<p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not invalid.</p>
+<p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not <a href="#invalid-outcome">Invalid</a>.</p>
 
 <h2 id="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</h2>
 
-<p>Description pending.</p>
+<p>Once a <a href="#designated-report">Designated Report</a> or <a href="#initial-report">Initial Report</a> has been submitted, the <a href="#market">Market</a> will enter the Waiting for the Next Fee Window to Begin Phase until the current 7-day <a href="#fee-window">Fee Window</a> has ended. At that point, the Market will move to the <a href="#dispute-round-phase">Dispute Round Phase</a> of the next Fee Window.</p>
 
 <h2 id="winning-universe">Winning Universe</h2>
 
-<p>Description pending.</p>
+<p>When a <a href="#fork">Fork</a> occurs, the <a href="#child-universe">Child Universe</a> that has the most <a href="#rep">REP</a> migrated to it by the end of the <a href="#fork-period">Fork Phase</a> is the Winning Universe for that particular Fork.</p>
 
           <h1 id="contributing">Contributing</h1>
 
