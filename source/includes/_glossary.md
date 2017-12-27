@@ -347,7 +347,7 @@ A Stake Token is used to represent the amount of Staked [REP](#rep) a [Reporter]
 
 ## Tentative Outcome
 
-Description pending.
+A [Market's](#market) Tentative Outcome starts off as the [Outcome](#outcome) that is submitted by the [Designated Reporter](#designated-reporter) or [Initial Reporter](#initial-reporter). Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can [Stake](#dispute-stake) [REP](#rep) on other Outcomes if they believe the Tentative Outcome is incorrect. If the [Dispute Bond](#dispute-bond) for a particular Outcome gets filled in the current [Dispute Round](#dispute-round), that Outcome will become the new Tentative Outcome.
 
 ## Tick
 
