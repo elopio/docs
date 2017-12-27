@@ -300,37 +300,38 @@ REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency
 
 ## Report
 
-A Report, or Reporting, is the Staking of [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market) that's passed its [End Time](#end-time) and doesn't have a [Tentative Outcome](#tentative-outcome) yet. Reporting as a term can be used to describe the act of submitting a [Designated Report](#designated-report) or [Initial Report](#initial-report). 
+A Report, or Reporting, is the Staking of [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market) that's passed its [End Time](#end-time) and doesn't have a [Tentative Outcome](#tentative-outcome) yet. Reporting as a term can be used to describe the act of submitting a [Designated Report](#designated-report) or [Initial Report](#initial-report).
 
 ## Reporter
 
-A Reporter is a [REP](#rep) holder who Stakes REP on the [Outcome](#outcome) of a [Market](#market) whose [End Time](#end-time) has come to pass and does not have a [Tentative Outcome](#tentative-outcome) yet. A [Designated Reporter](#designated-reporter) is assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting). If the Designated Reporter fails to submit a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), any other user can submit an [Initial Report](#initial-report) instead.
+A Reporter is a [REP](#rep) holder who Stakes REP on the [Outcome](#outcome) of a [Market](#market) that does not have a [Tentative Outcome](#tentative-outcome) but does have an [End Time](#end-time) that has passed. A [Designated Reporter](#designated-reporter) is assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting). If the Designated Reporter fails to submit a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), any other user can submit an [Initial Report](#initial-report) instead.
 
 ## Reporting Fee
 
-The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#shares) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract the [Settlement Fees](#settlement-fees), which includes the [Creator Fee](#creator-fee) and the Reporting Fee. 
+The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#shares) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract [Settlement Fees](#settlement-fees) in ETH. These Settlement Fees include the [Creator Fee](#creator-fee) and the Reporting Fee. 
 
-The Reporting Fee is sent to the [Reporting Window](#reporting-window) that contains the [Market](#market) being traded on, and are later used to pay [REP](#rep) holders for [Reporting](#report) on the [Outcome](#outcome) of Markets.
+The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the [Market](#market) being traded on, and is later used to pay [REP](#rep) holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 
+<!-- TODO: Remove links to this section -->
 ## Reporting Phase
 
-The Reporting Phase occurs in the first twenty seven (27) days of a [Reporting Window]. During this phase, [Markets](#market) in [Reporting Rounds](#reporting-round) are [Reported](#report) on by [Reporters](#reporter). Following a Reporting Phase the Market should receive a Report to set a [Tentative Outcome](#tentative-outcome) and be moved into a [Dispute Round Phase](#dispute-round-phase) during which the Market is considered to be [Awaiting Finalization](#market-awaiting-finalization).
+The Reporting Phase has been removed from Augur. Now there is just a series of up to 20 [Dispute Round Phases](#dispute-round-phases), followed by a potential [Fork Phase](#fork-period).
 
 ## Reporting Window
 
-The Reporting Window is a period of 30 days in which [Markets](#markets) that have passed their [End Time](#end-time) are expected to be [Reported](#report) on by [Reporters](#reporter). Reporting Windows last for thirty (30) days and consist of two (2) phases, the [Reporting Phase](#reporting-phase) and the [Dispute Round Phase](#dispute-round-phase). The combined duration of the Reporting Phase and the Dispute Round Phase is known as the [Reporting Period](#reporting-period). The Reporting Phase lasts twenty seven (27) days in which Markets in a [Reporting Round](#reporting-round) are Reported on. The Dispute Round Phase lasts three (3) days and during this time any [REP](#rep) holder is allowed to post a [Dispute Bond](#dispute-bond) to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of the [Market Awaiting Finalization](#market-awaiting-finalization). Reporting Windows are occasionally referred to as "Reporting Cycles" or "Reporting Periods" as those were legacy terms for a Reporting Window during development of Augur.
+The Reporting Window has now been removed in favor of the [Fee Window](#fee-window).
 
 ## Reward Pool
 
-Description pending.
+The Reward Pool is the amount of REP .
 
 ## Scalar Market
 
-A Scalar Market is a [Market](#market) with a wide range of potential [Outcomes](#outcome). An example of a Scalar Market would be "According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?". In this example market, we might set the [minDisplayPrice](#minimum-display-price) of the market to 0 and the [maxDisplayPrice](#maximum-display-price) to 500. This would allow for the market to [Settle](#settlement) on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market.
+A Scalar Market is a [Market](#market) with a wide range of potential [Outcomes](#outcome). An example of a Scalar Market would be "According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?". In this example Market, the [minDisplayPrice](#minimum-display-price) might be set to $0 and the [maxDisplayPrice](#maximum-display-price) to $500. This would allow the Market to [Settle](#settlement) on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market.
 
 ## Settlement
 
-Settlement is something that happens one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set) which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee), are only extracted during settlement.
+Settlement can happen in one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set), which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee), are only extracted during Settlement.
 
 ## Settlement Fees
 
@@ -338,7 +339,7 @@ Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Sett
 
 ## Shares
 
-A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send currency to the market to complete an [Order](#order). Shares are settled (destroyed) when a Complete Set is sold back to the market.
+A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send ETH to the Market to complete an [Order](#order). Shares are [Settled](#settlement) (destroyed) when a Complete Set is sold back to the Market.
 
 ## Stake Token
 
@@ -354,20 +355,20 @@ A Tick is the smallest recognized amount by which a price of a security or futur
 
 ## Topic
 
-A Topic is a keyword used to categorize [markets](#market). All markets must have a topic, and are optionally allowed up to two sub-topics to further categorize the Market. An example Market for "Will the New York Giants win Super Bowl 100?" might have a Topic of "Sports" and sub-topics of "American Football" and "NFL". The Topics are set by the [Market Creator](#market-creator) when a new market is made and cannot be changed.
+A Topic is a keyword used to categorize [Markets](#market). All Markets must have a Topic, and are optionally allowed up to two sub-Topics to further categorize the Market. An example Market for "Will the New York Giants win Super Bowl 100?" might have a Topic of "Sports" and sub-topics of "American Football" and "NFL". The Topics are set by the [Market Creator](#market-creator) when a new Market is made and cannot be changed.
 
 ## Universe
 
-A Universe is a version of Augur. All [Markets](#market) created on Augur belong to a Universe. Augur will launch with only one Universe, but more can be created in the rare event of a [Fork](#fork). The Universe in which a Fork occurs will become a [Locked Universe](#locked-universe) and new Universes will be created, one for each [Outcome](#outcome) of the [Forked Market](#forked-market). After a Fork, [REP](#rep) holders can choose to migrate their REP to one of the new Universes created. They don't have to migrate, but Locked Universes do not allow the creation of new Markets, and therefor there will be no Markets to [Report](#report) on in the future and no fees to earn from Reporting. All Universes of Augur are equally valid, even after a Fork has been resolved, and can continue to operate after the [Fork Period](#fork-period) ends. Universes contain only the Forked Market with a [Final Outcome](#final-outcome) set to one of the possible outcomes, with a Universe created for each possibility, and no other Markets to begin with.
+All [Markets](#market) created on Augur belong to a Universe. Augur has only one Universe at launch (the [Genesis Universe]), but more can be created in the rare event of a [Fork](#fork). The Universe in which a Fork occurs will become a [Locked Universe](#locked-universe) and new [Child Universes](#child-universes) will be created, one for each [Outcome](#outcome) of the [Forked Market](#forked-market). Once a [Fork Phase](#fork-period) begins, [REP](#rep) holders can choose to migrate their REP to one of the new Child Universes. They don't have to migrate, but Locked Universes do not allow the creation of new Markets, and therefore there will be no Markets to [Report](#report) on in the future and no [Fees](#reporting-fees) to earn. All Child Universes can continue to operate after the [Fork Phase](#fork-period) ends.
 
 ## Validity Bond
 
-The Validity Bond is paid by the [Market Creator](#market-creator) during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the [Final Outcome](#final-outcome) of the [Market](#market) is not invalid.
+The Validity Bond is paid by the [Market Creator](#market-creator) during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the [Final Outcome](#final-outcome) of the [Market](#market) is not [Invalid](#invalid-outcome).
 
 ## Waiting for the Next Fee Window to Begin Phase
 
-Description pending.
+Once a [Designated Report](#designated-report) or [Initial Report](#initial-report) has been submitted, the [Market](#market) will enter the Waiting for the Next Fee Window to Begin Phase until the current 7-day [Fee Window](#fee-window) has ended. At that point, the Market will move to the [Dispute Round Phase](#dispute-round-phase) of the next Fee Window.
 
 ## Winning Universe
 
-Description pending.
+When a [Fork](#fork) occurs, the [Child Universe](#child-universe) that has the most [REP](#rep) migrated to it by the end of the [Fork Phase](#fork-period) is the Winning Universe for that particular Fork.
