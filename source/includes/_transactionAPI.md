@@ -266,7 +266,7 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 
 #### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_market, onSent, onSuccess, onFailed })
 
-The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and hault the Augur system before the attacker could claim the proceeds.)
+The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding shares in a finalized `_market` owned by the `msg.sender`. This transaction will fail if the `_market` specified is not finalized or if it hasn't been at least 3 days since the `_market` was finalized. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and halt the Augur system before the attacker could claim the proceeds.)
 
 Complete Sets Tx API
 -----------------------------
@@ -551,9 +551,9 @@ This transaction is used by the bond holder of the specified `disputeBond` to wi
 
 #### augur.api.DisputeBond.withdrawInEmergency({ disputeBond, onSent, onSuccess, onFailed })
 
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond and convert it into a Reputation Token.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Dispute Bond and convert it into a Reputation Token.
 
-This transaction will fail if Augur is not currently in a haulted state.
+This transaction will fail if Augur is not currently in a halted state.
 
 It returns true if the Dispute Bond was successfully withdrawn and converted to a Reputation Token. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -959,9 +959,9 @@ This method is used to potentially update the Tentatively Winning [Payout Distri
 
 #### augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })
 
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
 
-This transaction will fail if Augur is not currently in a haulted state.
+This transaction will fail if Augur is not currently in a halted state.
 
 It returns true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -1077,9 +1077,9 @@ It returns true if the Participation Tokens were successfully withdrawn and conv
 
 #### augur.api.ParticipationToken.withdrawInEmergency({ participationToken, onSent, onSuccess, onFailed })
 
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
-This transaction will fail if Augur is not currently in a haulted state.
+This transaction will fail if Augur is not currently in a halted state.
 
 It returns true if the Participation Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -1652,9 +1652,9 @@ Unlike transfer, in transferFrom you specify a `_from` value as the owner of the
 
 #### augur.api.StakeToken.withdrawInEmergency({ stakeToken, onSent, onSuccess, onFailed })
 
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a haulted state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Stake Tokens and convert them into Reputation Tokens.
+If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Stake Tokens and convert them into Reputation Tokens.
 
-This transaction will fail if Augur is not currently in a haulted state.
+This transaction will fail if Augur is not currently in a halted state.
 
 It returns true if the Stake Tokens were successfully withdrawn and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -1842,7 +1842,7 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
 ```
 #### augur.api.TradingEscapeHatch.claimSharesInUpdate({ \_market, onSent, onSuccess, onFailed })
 
-If Augur needs to be halted by the development team (for example, if a vulnerability is discovered), calling this function on a specific [Market](#market) will withdraw the user's funds from that Market and return them to the user's address. This transaction will fail if Augur is not in a halted state.
+If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on a specific [Market](#market) will withdraw the user's funds from that Market and return them to the user's address. This transaction will fail if Augur is not in a halted state.
 
 Universe Tx API
 ---------------------
