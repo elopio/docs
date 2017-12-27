@@ -95,10 +95,11 @@ Designated Reporting is the first and fastest way that a [Market](#market) can b
 
 The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Initial Reporting Phase](initial-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#initial-reporter-stake) of the [Initial Reporter](#initial-reporter) when they submit the [Initial Report](#initial-report), and the [No-Show Gas Bond](Designated Report No-Show Gas Bond) goes to the Initial Reporter if the Tentative Outcome they Reported becomes the [Final Outcome](#final-outcome) of the Market.
 
-<!-- TODO: Add section on dev mode/haulting -->
 ## Developer Mode
 
-Description pending.
+During Augur's early stages, its Solidity smart contracts will allow for some special "developer mode" functionality. This functionality has been added as a security precaution in case an attacker attempts to compromise Augur's [Decentralized Oracle](#decentralized-oracle) system. If a security exploit is found, the Augur team can halt Augur, which will stop all normal functionality, such as trading, reporting, and disputing, and allow users to withdraw their REP and ETH from any Market.
+
+Eventually, once Augur has been thoroughly tested and the Augur team is confident that it is secure, this functionality will be removed so that it is not available to anyone (including the Augur team).
 
 ## Dispute
 
@@ -196,7 +197,7 @@ In the event that a [Market's](#market) [Designated Reporter](#designated-report
 
 ## Invalid Outcome
 
-Description pending.
+If the [Outcome](#outcome) of a [Market's](#market) event is indeterminate, or if the Market's question is worded in a way that is vague or does not have a clear answer, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#binary-market) with 500 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of [Share](#shares) in the Market receive the same payout during [Settlement](#settlement).
 
 ## Locked Universe
 
@@ -204,7 +205,7 @@ A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur with
 
 ## Market
 
-A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#tick) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
+A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
 <!-- TODO: Remove this section and links to it. -->
 ## Market Awaiting Finalization
@@ -258,7 +259,7 @@ An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#
 
 ## Outcome
 
-An outcome is a potential result of a [Market](#market)'s future event. For example, a Market with a question of "Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?" would have three potential Outcomes: Yes, No, and Invalid. Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market's Outcome. More realistically this can happen for markets that have too vague of a question. A good example of a vague Market that would most likely be voted invalid would be "Does God exist?" as no one has a definitive answer.
+An outcome is a potential result of a [Market](#market)'s future event. For example, a Market with a question of "Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?" would have three potential Outcomes: Yes, No, and [Invalid](#invalid-outcome). Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market's Outcome. More realistically, this can happen for Markets that have too vague of a question. A good example of a vague Market that would most likely be resolved as Invalid would be "Does God exist?", as no one has a definitive answer.
 
 ## Parent Universe
 
@@ -284,7 +285,7 @@ A Position is the amount of [Shares](#share) that are owned (a long position) or
 <!-- TODO: Make sure this lines up with what's in the white paper. -->
 ## Post-Finalization Waiting Period
 
-Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [hault](#developer-mode) the Augur system before the attacker could claim the proceeds.
+Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.
 
 ## Pre-Reporting Phase
 
@@ -312,18 +313,19 @@ The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decent
 
 The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the [Market](#market) being traded on, and is later used to pay [REP](#rep) holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 
-<!-- TODO: Remove links to this section -->
+<!-- TODO: Remove this section and links to it. -->
 ## Reporting Phase
 
 The Reporting Phase has been removed from Augur. Now there is just a series of up to 20 [Dispute Round Phases](#dispute-round-phases), followed by a potential [Fork Phase](#fork-period).
 
+<!-- TODO: Remove this section and links to it. -->
 ## Reporting Window
 
 The Reporting Window has now been removed in favor of the [Fee Window](#fee-window).
 
 ## Reward Pool
 
-The Reward Pool is the amount of REP .
+Any [Settlement Fees](#settlement-fees) (in ETH) collected during a [Fee Window](#fee-window) get added to a Reward Pool. At the end of the Fee Window, the Reward Pool is paid out to users in proportion to the number of [REP](#rep) they [Staked](#dispute-stake) during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Initial Reporting](#initial-reporting), [Challenging](#challenge) an [Outcome](#outcome, or simply purchasing [Participation Tokens](#participation-token) directly.
 
 ## Scalar Market
 
