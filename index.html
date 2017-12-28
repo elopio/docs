@@ -157,7 +157,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="trading-example">Trading Example</h2>
 
-<p>Let&rsquo;s use an example <a href="#binary-market">Binary Market</a> trading on the &ldquo;super big event&rdquo; coming up. For this example, we want to go long on <code class="prettyprint">Outcome A</code>. We would submit a trade request to buy <code class="prettyprint">100</code> <a href="#shares">Shares</a> of <code class="prettyprint">Outcome A</code> with a limit price of <code class="prettyprint">0.5 ETH</code>, which will cost <code class="prettyprint">50.0 ETH</code> plus gas used to send the transaction.</p>
+<p>Let&rsquo;s use an example <a href="#binary-market">Binary Market</a> trading on the &ldquo;super big event&rdquo; coming up. For this example, we want to go long on <code class="prettyprint">Outcome A</code>. We would submit a trade request to buy <code class="prettyprint">100</code> <a href="#share">Shares</a> of <code class="prettyprint">Outcome A</code> with a limit price of <code class="prettyprint">0.5 ETH</code>, which will cost <code class="prettyprint">50.0 ETH</code> plus gas used to send the transaction.</p>
 
 <p>If there are Orders on the Order Book that match our request for <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> at a price of <code class="prettyprint">0.5 ETH</code>, or cheaper, then Augur will fill those Orders. We will now own <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> and we will have lost <code class="prettyprint">50.0 ETH</code> plus gas cost.</p>
 
@@ -190,7 +190,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="calculating-trades">Calculating Trades</h2>
 
-<p>In this section we break down all potential trade situations and their expected result. There are two types of <a href="#order">Orders</a>, <a href="#bid-order">Bid Orders</a> (requesting to buy) and <a href="#ask-order">Ask Orders</a> (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the <a href="#order-book">Order Book</a> by <a href="#order-creator">Order Creators</a> and contain four important details: The Creator of the Order, the price of the Order, The amount of <a href="#shares">Shares</a> or ETH escrowed, and the <a href="#outcome">Outcome</a> we plan to trade on. The price can be any value between 0 and the <a href="#number-of-ticks">Number of Ticks</a>. The calculations below use <code class="prettyprint">num_shares</code> as the number of Shares the Order is requesting, <code class="prettyprint">price</code> as the price per Share for the Order, <code class="prettyprint">outcome</code> for the Outcome our Order is trading on, <code class="prettyprint">num_ticks</code> as the Number of Ticks, and <code class="prettyprint">fee_rate</code> as the <a href="#settlement-fees">Settlement Fees</a> extracted during the <a href="#settlement">Settlement</a> of Shares.</p>
+<p>In this section we break down all potential trade situations and their expected result. There are two types of <a href="#order">Orders</a>, <a href="#bid-order">Bid Orders</a> (requesting to buy) and <a href="#ask-order">Ask Orders</a> (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the <a href="#order-book">Order Book</a> by <a href="#order-creator">Order Creators</a> and contain four important details: The Creator of the Order, the price of the Order, The amount of <a href="#share">Shares</a> or ETH escrowed, and the <a href="#outcome">Outcome</a> we plan to trade on. The price can be any value between 0 and the <a href="#number-of-ticks">Number of Ticks</a>. The calculations below use <code class="prettyprint">num_shares</code> as the number of Shares the Order is requesting, <code class="prettyprint">price</code> as the price per Share for the Order, <code class="prettyprint">outcome</code> for the Outcome our Order is trading on, <code class="prettyprint">num_ticks</code> as the Number of Ticks, and <code class="prettyprint">fee_rate</code> as the <a href="#settlement-fees">Settlement Fees</a> extracted during the <a href="#settlement">Settlement</a> of Shares.</p>
 
 <p>The Formulas for determining how much opening a Long or Short position costs are as follows:</p>
 
@@ -428,7 +428,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="designated-reporting-details">Designated Reporting Details</h2>
 
-<p>During the creation of a Market, a <a href="#market-creator">Market Creator</a> must assign a <a href="#designated-reporter">Designated Reporter</a>. <a href="#designated-reporting">Designated Reporting</a> is designed to be a quick way to bring about a <a href="#market-resolution">Market Resolution</a>. This is pleasing to Traders who want to <a href="#settlement">Settle</a> their <a href="#shares">Shares</a> and collect their earnings as soon as possible after a Market&rsquo;s <a href="#end-time">End Time</a> has passed. The <a href="#designated-reporting-phase">Designated Reporting Phase</a> begins immediately following the End Time of a Market. The result of Designated Reporting is still <a href="#challenge">Challengeable</a> with a <a href="#dispute-bond">Dispute Bond</a> so if the Designated Reporter does incorrectly <a href="#report">Report</a> the <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, it can be adjudicated by <a href="#dispute-round">Dispute Rounds</a>. With the dispute system in place, we don&rsquo;t actually lose any security or truth as an incorrect <a href="#tentative-outcome">Tentative Outcome</a> for a Market can be Challenged.</p>
+<p>During the creation of a Market, a <a href="#market-creator">Market Creator</a> must assign a <a href="#designated-reporter">Designated Reporter</a>. <a href="#designated-reporting">Designated Reporting</a> is designed to be a quick way to bring about a <a href="#market-resolution">Market Resolution</a>. This is pleasing to Traders who want to <a href="#settlement">Settle</a> their <a href="#share">Shares</a> and collect their earnings as soon as possible after a Market&rsquo;s <a href="#end-time">End Time</a> has passed. The <a href="#designated-reporting-phase">Designated Reporting Phase</a> begins immediately following the End Time of a Market. The result of Designated Reporting is still <a href="#challenge">Challengeable</a> with a <a href="#dispute-bond">Dispute Bond</a> so if the Designated Reporter does incorrectly <a href="#report">Report</a> the <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, it can be adjudicated by <a href="#dispute-round">Dispute Rounds</a>. With the dispute system in place, we don&rsquo;t actually lose any security or truth as an incorrect <a href="#tentative-outcome">Tentative Outcome</a> for a Market can be Challenged.</p>
 
 <p>The <a href="#designated-reporting-phase">Designated Reporting Phase</a> lasts a maximum of three (3) days and ends immediately when the Designated Reporter submits their Report and the <a href="#tentative-outcome">Tentative Outcome</a> is set for the Market.</p>
 
@@ -1705,7 +1705,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="trading-functions">Trading Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.trading.claimMarketsTradingProceeds: Example JS code coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
   <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
@@ -1923,6 +1925,54 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
+<h3 id="augur-trading-claimmarketstradingproceeds-p">augur.trading.claimMarketsTradingProceeds(p)</h3>
+
+<p>Similar to the function <code class="prettyprint">augur.trading.claimTradingProceeds</code>, but attempts to collect trading profits in Ether from a user&rsquo;s outstanding Shares in multiple Finalized Markets instead of a single Finalized Market.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">markets</code></strong>  (Array.<string>) Array of Market addresses for which to claim proceeds.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when each transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>Description pending.</p>
+
+<h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
+
+<p>Attempts to collect trading profits in Ether from a user&rsquo;s outstanding Shares in a single Finalized Market.</p>
+
+<p>Note: This transaction will fail if <code class="prettyprint">_market</code> is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Market address for which to claim proceeds.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when each transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>Description pending.</p>
+
 <!-- Add links to section -->
 
 <h3 id="augur-trading-getbetterworseorders-p-callback-rarr-betterworseorders">augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</h3>
@@ -2784,7 +2834,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getdesignatedreportpayouthash-tx-callback">augur.api.Market.getDesignatedReportPayoutHash({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the <a href="#payout-set">Payout Set</a> submit by the <a href="#designated-reporter">Designated Reporter</a> for their <a href="#report">Report</a>. The Payout Set is used to determine how the <a href="#market">Market</a> should <a href="#settlement">Settle</a> for particular <a href="#shares">Shares</a> after being <a href="#finalized-market">Finalized</a>.</p>
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the <a href="#payout-set">Payout Set</a> submit by the <a href="#designated-reporter">Designated Reporter</a> for their <a href="#report">Report</a>. The Payout Set is used to determine how the <a href="#market">Market</a> should <a href="#settlement">Settle</a> for particular <a href="#share">Shares</a> after being <a href="#finalized-market">Finalized</a>.</p>
 
 <h4 id="augur-api-market-getdesignatedreportreceivedtime-tx-callback">augur.api.Market.getDesignatedReportReceivedTime({ tx }[, callback])</h4>
 
@@ -2804,7 +2854,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getfinalpayoutdistributionhash-tx-callback">augur.api.Market.getFinalPayoutDistributionHash({ tx }[, callback])</h4>
 
-<p>Returns the final <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a specified <code class="prettyprint">market</code>. The Final Payout Distribution Hash determines how a <a href="#finalized-market">Finalized Market</a> payouts out for a specific <a href="#shares">Share</a> of an <a href="#outcome">Outcome</a>.</p>
+<p>Returns the final <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a specified <code class="prettyprint">market</code>. The Final Payout Distribution Hash determines how a <a href="#finalized-market">Finalized Market</a> payouts out for a specific <a href="#share">Share</a> of an <a href="#outcome">Outcome</a>.</p>
 
 <h4 id="augur-api-market-getfinalwinningstaketoken-tx-callback">augur.api.Market.getFinalWinningStakeToken({ tx }[, callback])</h4>
 
@@ -2844,7 +2894,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h4>
 
-<p>Returns the <a href="#shares">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
+<p>Returns the <a href="#share">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
 
 <h4 id="augur-api-market-getstaketokenorzerobypayoutdistributionhash-tx-_payoutdistributionhash-callback">augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx, _payoutDistributionHash }[, callback])</h4>
 
@@ -2872,7 +2922,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Market.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyShareToken</code> address provided. The <code class="prettyprint">_shadyShareToken</code> address will return true if it&rsquo;s a <a href="#shares">Share</a> Token belonging to the <a href="#market">Market</a>, otherwise it will return false if the address is not a Share Token belonging to this Market. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyShareToken</code> address provided. The <code class="prettyprint">_shadyShareToken</code> address will return true if it&rsquo;s a <a href="#share">Share</a> Token belonging to the <a href="#market">Market</a>, otherwise it will return false if the address is not a Share Token belonging to this Market. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
 <h4 id="augur-api-market-isvalid-tx-callback">augur.api.Market.isValid({ tx }[, callback])</h4>
 
@@ -3040,7 +3090,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-orders-getamount-tx-_orderid-callback">augur.api.Orders.getAmount({ tx, _orderId }[, callback])</h4>
 
-<p>Returns the amount of <a href="#shares">Shares</a> requested on a specified <code class="prettyprint">_orderId</code>.</p>
+<p>Returns the amount of <a href="#share">Shares</a> requested on a specified <code class="prettyprint">_orderId</code>.</p>
 
 <h4 id="augur-api-orders-getbestorderid-tx-_type-_market-_outcome-callback">augur.api.Orders.getBestOrderId({ tx, _type, _market, _outcome }[, callback])</h4>
 
@@ -4562,7 +4612,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-updatetentativewinningpayoutdistributionhash-market-_payoutdistributionhash-onsent-onsuccess-onfailed">augur.api.Market.updateTentativeWinningPayoutDistributionHash({ market, _payoutDistributionHash, onSent, onSuccess, onFailed })</h4>
 
-<p>This method is used to potentially update the Tentatively Winning <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most <a href="#rep">REP</a> staked on it so far by <a href="#reporter">Reporters</a>. If the <a href="#market">Market</a> is successfully <a href="#finalized-market">Finalized</a> the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various <a href="#shares">Shares</a> of <a href="#outcome">Outcomes</a> will payout during <a href="#settlement">Settlement</a>. This transaction will not change the Tentative Winning Payout Distribution Hash if the <code class="prettyprint">_payoutDistributionHash</code> submitted to it doesn&rsquo;t have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns <code class="prettyprint">1</code> regardless of if the Tentatively Winning Distribution Hash was changed or not.</p>
+<p>This method is used to potentially update the Tentatively Winning <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most <a href="#rep">REP</a> staked on it so far by <a href="#reporter">Reporters</a>. If the <a href="#market">Market</a> is successfully <a href="#finalized-market">Finalized</a> the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various <a href="#share">Shares</a> of <a href="#outcome">Outcomes</a> will payout during <a href="#settlement">Settlement</a>. This transaction will not change the Tentative Winning Payout Distribution Hash if the <code class="prettyprint">_payoutDistributionHash</code> submitted to it doesn&rsquo;t have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns <code class="prettyprint">1</code> regardless of if the Tentatively Winning Distribution Hash was changed or not.</p>
 
 <h4 id="augur-api-market-withdrawinemergency-market-onsent-onsuccess-onfailed">augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })</h4>
 
@@ -5772,7 +5822,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
 <li><code class="prettyprint">denominationToken</code> - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
 <li><code class="prettyprint">_designatedReporterAddress</code> - String containing the address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
 <li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
@@ -5803,7 +5853,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
 <li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
 <li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
 <li><code class="prettyprint">_numOutcomes</code> - Total possible outcomes for the Market event. </li>
@@ -5832,7 +5882,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#shares">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
 <li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
 <li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
 <li><code class="prettyprint">_minPrice</code> - <a href="#minimum-display-price">Minimum Display Price</a> for the Market.</li>
@@ -6514,7 +6564,7 @@ Goals:
 
 <h2 id="ask-order">Ask Order</h2>
 
-<p>An Ask Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to sell <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of a <a href="#bid-order">Bid Order</a>.</p>
+<p>An Ask Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to sell <a href="#share">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of a <a href="#bid-order">Bid Order</a>.</p>
 
 <h2 id="atto-prefix">Atto- (Prefix)</h2>
 
@@ -6522,7 +6572,7 @@ Goals:
 
 <h2 id="bid-order">Bid Order</h2>
 
-<p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to buy <a href="#shares">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
+<p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to buy <a href="#share">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
 
 <h2 id="binary-market">Binary Market</h2>
 
@@ -6542,11 +6592,11 @@ Goals:
 
 <h2 id="complete-set">Complete Set</h2>
 
-<p>A Complete Set is a collection of <a href="#shares">Shares</a> in every <a href="#outcome">Outcome</a>. Complete Sets are created when the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the <a href="#trading">Trade</a>. When both parties use shares to complete a trade, then a Complete Set will be formed and <a href="#settlement">Settled</a> (destroyed). The cost in <a href="#atto-prefix">attoETH</a> of a Complete Set for a particular <a href="#market">Market</a> is determined by the <a href="#number-of-ticks">Number of Ticks</a> for that Market. When Complete Sets are Settled, <a href="#settlement-fees">Settlement Fees</a> are extracted from the value of the Complete Set and are paid proportionally by both parties. Therefore, users who get a larger payout from Settlement also pay a larger portion of the fees. The Settlement Fees extracted from Share Settlement go toward paying for the <a href="#report">Reporting</a> system, in the form of a <a href="#reporting-fee">Reporting Fee</a>, and paying the <a href="#market-creator">Market Creator</a> their set <a href="#creator-fee">Creator Fee</a>.</p>
+<p>A Complete Set is a collection of <a href="#share">Shares</a> in every <a href="#outcome">Outcome</a>. Complete Sets are created when the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the <a href="#trading">Trade</a>. When both parties use shares to complete a trade, then a Complete Set will be formed and <a href="#settlement">Settled</a> (destroyed). The cost in <a href="#atto-prefix">attoETH</a> of a Complete Set for a particular <a href="#market">Market</a> is determined by the <a href="#number-of-ticks">Number of Ticks</a> for that Market. When Complete Sets are Settled, <a href="#settlement-fees">Settlement Fees</a> are extracted from the value of the Complete Set and are paid proportionally by both parties. Therefore, users who get a larger payout from Settlement also pay a larger portion of the fees. The Settlement Fees extracted from Share Settlement go toward paying for the <a href="#report">Reporting</a> system, in the form of a <a href="#reporting-fee">Reporting Fee</a>, and paying the <a href="#market-creator">Market Creator</a> their set <a href="#creator-fee">Creator Fee</a>.</p>
 
 <h2 id="creator-fee">Creator Fee</h2>
 
-<p>A Creator Fee is a percentage fee, in ETH, that is collected by the <a href="#market-creator">Market Creator</a> whenever <a href="#shares">Shares</a> are <a href="#settlement">Settled</a>. It is set by the Market Creator when he or she creates a new <a href="#market">Market</a>. The Creator Fee must be between 0% and 50%, and it cannot be changed once it has been set. The Creator Fee and the <a href="#reporting-fee">Reporting Fee</a> are both extracted at the same time whenever <a href="#shares">Shares</a> are <a href="#settlement">Settled</a>. Shares can be Settled when a user sells a <a href="#complete-set">Complete Set</a> or when the Market has been <a href="#finalized-market">Finalized</a> and a user wants to close an open <a href="#position">Position</a>. The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their Market creation cost and ideally turn a profit on posting interesting Markets. The <a href="#settlement-fees">Settlement Fees</a> are discussed in more details in the <a href="#trading">Trading</a> section of the documentation.</p>
+<p>A Creator Fee is a percentage fee, in ETH, that is collected by the <a href="#market-creator">Market Creator</a> whenever <a href="#share">Shares</a> are <a href="#settlement">Settled</a>. It is set by the Market Creator when he or she creates a new <a href="#market">Market</a>. The Creator Fee must be between 0% and 50%, and it cannot be changed once it has been set. The Creator Fee and the <a href="#reporting-fee">Reporting Fee</a> are both extracted at the same time whenever <a href="#share">Shares</a> are <a href="#settlement">Settled</a>. Shares can be Settled when a user sells a <a href="#complete-set">Complete Set</a> or when the Market has been <a href="#finalized-market">Finalized</a> and a user wants to close an open <a href="#position">Position</a>. The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their Market creation cost and ideally turn a profit on posting interesting Markets. The <a href="#settlement-fees">Settlement Fees</a> are discussed in more details in the <a href="#trading">Trading</a> section of the documentation.</p>
 
 <h2 id="crowdsourcer">Crowdsourcer</h2>
 
@@ -6630,7 +6680,7 @@ Goals:
 
 <p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can put up <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a>. The amount of REP they put up goes toward filling the crowdsourced <a href="#dispute-bond">Dispute Bond</a>, and can range from 1 <a href="#atto-prefix">attoREP</a> to the amount still needed to fill the <a href="#dispute-bond">Dispute Bond</a>.</p>
 
-<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reward-pool">Reward Pool</a> from the current <a href="#fee-window">Fee Window</a> in ETH. (This ETH comes from trading and winning <a href="#shares">Share</a> redemption: fees are collected in ETH whenever a <a href="#complete-set">Complete Set</a> is sold or winning Shares are redeemed and given to <a href="#fee-window">Fee Windows</a>.)</p>
+<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reward-pool">Reward Pool</a> from the current <a href="#fee-window">Fee Window</a> in ETH. (This ETH comes from trading and winning <a href="#share">Share</a> redemption: fees are collected in ETH whenever a <a href="#complete-set">Complete Set</a> is sold or winning Shares are redeemed and given to <a href="#fee-window">Fee Windows</a>.)</p>
 
 <p>By design, the Dispute Bond sizes for each Dispute Round are chosen such that anyone who successfully <a href="#challenge">Challenges</a> an Outcome in favor of the Market’s <a href="#final-outcome">Final Outcome</a> is rewarded with a 50% ROI on their Dispute Stake. For details on how the Dispute Bond is calculated, refer to the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
@@ -6652,7 +6702,7 @@ Goals:
 
 <h2 id="finalized-market">Finalized Market</h2>
 
-<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#shares">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed.</p>
+<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#share">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed.</p>
 
 <h2 id="finalized-phase">Finalized Phase</h2>
 
@@ -6668,7 +6718,7 @@ Goals:
 
 <h2 id="fork">Fork</h2>
 
-<p>A Fork occurs if the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round">Dispute Round</a>. A Fork causes Augur to create multiple new <a href="#universe">Universes</a>. Each new Universe is empty except for the <a href="#forked-market">Forked Market</a>; they contain no markets or REP tokens. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including the <a href="#invalid-outcome">Invalid Outcome</a>, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. <a href="#rep">REP</a> holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends, and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#shares">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.</p>
+<p>A Fork occurs if the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round">Dispute Round</a>. A Fork causes Augur to create multiple new <a href="#universe">Universes</a>. Each new Universe is empty except for the <a href="#forked-market">Forked Market</a>; they contain no markets or REP tokens. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including the <a href="#invalid-outcome">Invalid Outcome</a>, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. <a href="#rep">REP</a> holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends, and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#share">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.</p>
 
 <h2 id="fork-period">Fork Period</h2>
 
@@ -6700,7 +6750,7 @@ Goals:
 
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
-<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event is indeterminate, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#binary-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#shares">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
+<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event is indeterminate, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#binary-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
@@ -6708,7 +6758,7 @@ Goals:
 
 <h2 id="market">Market</h2>
 
-<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#shares">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#number-of-ticks">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
+<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#share">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#number-of-ticks">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
 
 <!-- TODO: Remove this section and links to it. -->
 
@@ -6718,7 +6768,7 @@ Goals:
 
 <h2 id="market-creator">Market Creator</h2>
 
-<p>A Market Creator is a user who created a <a href="#market">Market</a>. They are charged a small fee to make a new Market but can set the <a href="#creator-fee">Creator Fee</a> for <a href="#settlement">Settlement</a> of <a href="#shares">Shares</a> on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of <a href="#settlement-fees">Settlement Fees</a> for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, or <a href="#scalar-market">Scalar</a>), the number of <a href="#outcome">Outcomes</a>, <a href="#end-time">End Time</a>, and a <a href="#topic">Topic</a>.</p>
+<p>A Market Creator is a user who created a <a href="#market">Market</a>. They are charged a small fee to make a new Market but can set the <a href="#creator-fee">Creator Fee</a> for <a href="#settlement">Settlement</a> of <a href="#share">Shares</a> on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of <a href="#settlement-fees">Settlement Fees</a> for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, or <a href="#scalar-market">Scalar</a>), the number of <a href="#outcome">Outcomes</a>, <a href="#end-time">End Time</a>, and a <a href="#topic">Topic</a>.</p>
 
 <h2 id="market-creator-mailbox">Market Creator Mailbox</h2>
 
@@ -6738,7 +6788,7 @@ Goals:
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
-<p>The Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a> for a <a href="#market">Market</a>. It&rsquo;s also the amount of <a href="#atto-prefix">attoETH</a> required to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#shares">Shares</a> for a Market. When Shares are <a href="#settlement">Settled</a>, then each Complete Set will yield Number of Ticks <a href="#atto-prefix">attoETH</a>. The yield from the Complete Sets Settlement is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the <a href="#number-of-ticks">Number of Ticks</a> set for the Market.</p>
+<p>The Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a> for a <a href="#market">Market</a>. It&rsquo;s also the amount of <a href="#atto-prefix">attoETH</a> required to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. When Shares are <a href="#settlement">Settled</a>, then each Complete Set will yield Number of Ticks <a href="#atto-prefix">attoETH</a>. The yield from the Complete Sets Settlement is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the <a href="#number-of-ticks">Number of Ticks</a> set for the Market.</p>
 
 <h2 id="open-order">Open Order</h2>
 
@@ -6748,7 +6798,7 @@ Goals:
 
 <h2 id="order">Order</h2>
 
-<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#shares">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#order-creator">Creator</a> of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the <a href="#market">Market</a> the Order is trading on, the <a href="#outcome">Outcome</a> the Order is concerned with buying or selling, the Order Creator&rsquo;s address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.</p>
+<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#share">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#order-creator">Creator</a> of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the <a href="#market">Market</a> the Order is trading on, the <a href="#outcome">Outcome</a> the Order is concerned with buying or selling, the Order Creator&rsquo;s address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.</p>
 
 <h2 id="order-book">Order Book</h2>
 
@@ -6756,11 +6806,11 @@ Goals:
 
 <h2 id="order-creator">Order Creator</h2>
 
-<p>An Order Creator is the person who places an <a href="#order">Order</a> on the <a href="#order-book">Order Book</a>. They escrow currency or <a href="#shares">Shares</a> into their Order to buy or sell Shares of an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
+<p>An Order Creator is the person who places an <a href="#order">Order</a> on the <a href="#order-book">Order Book</a>. They escrow currency or <a href="#share">Shares</a> into their Order to buy or sell Shares of an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
 
 <h2 id="order-filler">Order Filler</h2>
 
-<p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#shares">Shares</a> to fill the Open Order and complete their half of the trade described in the <a href="#order">Order</a>.</p>
+<p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#share">Shares</a> to fill the Open Order and complete their half of the trade described in the <a href="#order">Order</a>.</p>
 
 <h2 id="outcome">Outcome</h2>
 
@@ -6770,11 +6820,9 @@ Goals:
 
 <p>A Parent Universe is a <a href="#universe">Universe</a> that has spawned <a href="#child-universe">Child Universes</a> because a <a href="#fork">Fork</a> had occurred on the Parent Universe and caused it to make new Universes. In other words, <a href="#locked-universe">Locked Universes</a> are Parent Universes to the Universes created due to the Fork.</p>
 
-<!-- Confirm the Participation Token info is correct. -->
-
 <h2 id="participation-token">Participation Token</h2>
 
-<p>Participation Tokens are used to determine how <a href="#reporting-fee">Reporting Fees</a> are divided up. The more Participation Tokens a user buys (purchased with REP), the larger his or her share of the Fees. The user gets back that REP after Fees are distributed, so it essentially acts like a deposit. It&rsquo;s a way of encouraging <a href="#reporter">Reporters</a> to be active in the platform even when they&rsquo;re not needed, so they&rsquo;ll be around when they are needed. Buying Participation Tokens is not required. Participation Tokens can be purchased at any time before a <a href="#reporting-window">Reporting Window</a> ends. They are only used in the case that only <a href="#designated-reporter">Designated Reporters</a> are needed for reporting (everyone shows up) and no one disputes the Designated Reporters. Participation Tokens are purchased after all <a href="#market">Markets</a> in the <a href="#fee-window">Fee Window</a> have <a href="#finalized-market">Finalized</a>.</p>
+<p>At any time during a <a href="#fee-window">Fee Window</a>, users can purchase Participation Tokens in exchange for <a href="#rep">REP</a>. Once the Fee Window ends, users can redeem their Participation Tokens for a portion of the <a href="#reporting-fee">Reporting Fees</a> (in Ether) that Augur collected during that Fee Window. The more Participation Tokens a user purchases, the bigger the portion of the Reporting Fees they will receive. Users are not required to purchase Participation Tokens, but their purpose is to incentivize users to be active on Augur in the even that they will be needed, such as when a <a href="#market">Market</a> <a href="#fork">Forks</a>.</p>
 
 <h2 id="payout-distribution-hash">Payout Distribution Hash</h2>
 
@@ -6782,7 +6830,7 @@ Goals:
 
 <h2 id="payout-set">Payout Set</h2>
 
-<p>A Payout Set, sometimes referred to as the &ldquo;Payout Numerator&rdquo; in Augur&rsquo;s smart contract methods, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, on a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, if we wanted to submit a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code>, we would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of how Markets should payout, or the Payout Distribution, when <a href="#finalized-market">Finalized</a>, so in the above example, only <a href="#shares">Shares</a> of Outcome <code class="prettyprint">0</code> will payout on the Finalized Market. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+<p>A Payout Set, sometimes referred to as the &ldquo;Payout Numerator&rdquo; in Augur&rsquo;s smart contract methods, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, on a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, if we wanted to submit a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code>, we would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of how Markets should payout, or the Payout Distribution, when <a href="#finalized-market">Finalized</a>, so in the above example, only <a href="#share">Shares</a> of Outcome <code class="prettyprint">0</code> will payout on the Finalized Market. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
 
 <h2 id="position">Position</h2>
 
@@ -6816,7 +6864,7 @@ Goals:
 
 <h2 id="reporting-fee">Reporting Fee</h2>
 
-<p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#shares">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract <a href="#settlement-fees">Settlement Fees</a> in ETH. These Settlement Fees include the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
+<p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#share">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract <a href="#settlement-fees">Settlement Fees</a> in ETH. These Settlement Fees include the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
 
 <p>The Reporting Fee is sent to the <a href="#reporting-window">Fee Window</a> that contains the <a href="#market">Market</a> being traded on, and is later used to pay <a href="#rep">REP</a> holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
@@ -6842,13 +6890,19 @@ Goals:
 
 <h2 id="settlement">Settlement</h2>
 
-<p>Settlement can happen in one of two ways. The first is when a trader who holds <a href="#shares">Shares</a> would like to cash out of their <a href="#position">Position</a> on a <a href="#finalized-market">Finalized Market</a>. The other is the collection of a <a href="#complete-set">Complete Set</a>, which can happen before a Market Finalizes. The <a href="#settlement-fees">Settlement Fees</a>, which includes both the <a href="#creator-fee">Creator Fee</a> and the <a href="#reporting-fee">Reporting Fee</a>, are only extracted during Settlement.</p>
+<p>A trader can close their <a href="#position">Position</a> in one of two ways: by selling the <a href="#share">Shares</a> they hold to another trader in exchange for Ether, or by Settling their Shares with Augur&rsquo;s smart contracts. Every Share in a Market comes into existence as part of a <a href="#complete-set">Complete Set</a> when an amount of Ether equal to the <a href="#number-of-ticks">Number of Ticks</a> for that Market has been escrowed with Augur. To get that Ether out of escrow, traders must give Augur either a Complete Set, or — if the <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a> — a Share of the winning <a href="#outcome">Outcome</a>. This exchange is referred to as Settlement.</p>
+
+<p>For example, consider a non-Finalized Market with possible Outcomes A and B. Suppose Alice has a Share of Outcome A that she wants to sell for 0.70 ETH and Bob has a Share of Outcome B that he wants to sell for 0.30 ETH. First, Augur matches these <a href="#order">Orders</a> and collects the A and B Shares from the participants. Then Augur gives 0.70 ETH (minus <a href="#settlement-fees">Settlement Fees</a>) to Alice and 0.30 ETH (minus Settlement Fees) to Bob.</p>
+
+<p>As a second example, consider a Finalized Market whose winning Outcome is A. Alice has a Share of A and wants to cash it in. She sends her share of A to Augur and in return receives 1 ETH (minus Settlement Fees).</p>
+
+<p>The <a href="#settlement-fees">Settlement Fees</a>, which include both the <a href="#creator-fee">Creator Fee</a> and the <a href="#reporting-fee">Reporting Fee</a>, are only extracted during Settlement.</p>
 
 <h2 id="settlement-fees">Settlement Fees</h2>
 
 <p>Settlement Fees are fees extracted when a <a href="#complete-set">Complete Set</a> is <a href="#settlement">Settled</a>. It&rsquo;s the combination of the <a href="#creator-fee">Creator Fee</a> and the <a href="#reporting-fee">Reporting Fee</a>.</p>
 
-<h2 id="shares">Shares</h2>
+<h2 id="share">Share</h2>
 
 <p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> send ETH to the Market to complete an <a href="#order">Order</a>. Shares are <a href="#settlement">Settled</a> (destroyed) when a Complete Set is sold back to the Market.</p>
 
@@ -6862,7 +6916,7 @@ Goals:
 
 <h2 id="tick">Tick</h2>
 
-<p>A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a <a href="#shares">Share</a> of an <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> between its <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>. When a <a href="#market-creator">Market Creator</a> creates a new Market they are asked to enter the <a href="#number-of-ticks">Number of Ticks</a> for the Market. This number represents how much <a href="#atto-prefix">attoETH</a> a <a href="#complete-set">Complete Set</a> of Shares will cost to buy for this Market. A <a href="#scalar-market">Scalar Market</a> with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 <a href="#atto-prefix">attoETH</a>. The <a href="#settlement">Settlement</a> of a Complete Set of Shares will yield 4000 attoeth, which <a href="#settlement-fees">Settlement Fees</a> are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an <a href="#order">Order</a> with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.</p>
+<p>A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a <a href="#share">Share</a> of an <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> between its <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>. When a <a href="#market-creator">Market Creator</a> creates a new Market they are asked to enter the <a href="#number-of-ticks">Number of Ticks</a> for the Market. This number represents how much <a href="#atto-prefix">attoETH</a> a <a href="#complete-set">Complete Set</a> of Shares will cost to buy for this Market. A <a href="#scalar-market">Scalar Market</a> with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 <a href="#atto-prefix">attoETH</a>. The <a href="#settlement">Settlement</a> of a Complete Set of Shares will yield 4000 attoeth, which <a href="#settlement-fees">Settlement Fees</a> are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an <a href="#order">Order</a> with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.</p>
 
 <h2 id="topic">Topic</h2>
 
