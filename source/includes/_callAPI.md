@@ -220,7 +220,7 @@ Returns the [Dispute Bond](#dispute-bond) Token address for the [Designated Repo
 
 #### augur.api.Market.getDesignatedReportPayoutHash({ tx }[, callback])
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) of the [Payout Set](#payout-set) submit by the [Designated Reporter](#designated-reporter) for their [Report](#report). The Payout Set is used to determine how the [Market](#market) should [Settle](#settlement) for particular [Shares](#shares) after being [Finalized](#finalized-market).
+Returns the [Payout Distribution Hash](#payout-distribution-hash) of the [Payout Set](#payout-set) submit by the [Designated Reporter](#designated-reporter) for their [Report](#report). The Payout Set is used to determine how the [Market](#market) should [Settle](#settlement) for particular [Shares](#share) after being [Finalized](#finalized-market).
 
 #### augur.api.Market.getDesignatedReportReceivedTime({ tx }[, callback])
 
@@ -240,7 +240,7 @@ Returns the timestamp for when the specified `market` was [Finalized](#finalized
 
 #### augur.api.Market.getFinalPayoutDistributionHash({ tx }[, callback])
 
-Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a specified `market`. The Final Payout Distribution Hash determines how a [Finalized Market](#finalized-market) payouts out for a specific [Share](#shares) of an [Outcome](#outcome).
+Returns the final [Payout Distribution Hash](#payout-distribution-hash) for a specified `market`. The Final Payout Distribution Hash determines how a [Finalized Market](#finalized-market) payouts out for a specific [Share](#share) of an [Outcome](#outcome).
 
 #### augur.api.Market.getFinalWinningStakeToken({ tx }[, callback])
 
@@ -280,7 +280,7 @@ Returns the current [Reporting](#report) State that the `market` is in. This met
 
 #### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
 
-Returns the [Share](#shares) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
+Returns the [Share](#share) Token's address for the specified `market` and `_outcome`. Every [Outcome](#outcome) of a [Market](#market) has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
 
 #### augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx, \_payoutDistributionHash }[, callback])
 
@@ -308,7 +308,7 @@ Returns whether the specific `market` is a container for the `_shadyStakeToken` 
 
 #### augur.api.Market.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
 
-Returns whether the specific `market` is a container for the `_shadyShareToken` address provided. The `_shadyShareToken` address will return true if it's a [Share](#shares) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyShareToken` address provided. The `_shadyShareToken` address will return true if it's a [Share](#share) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
 
 #### augur.api.Market.isValid({ tx }[, callback])
 
@@ -478,7 +478,7 @@ Returns whether the specified `_fxpPrice` is not a worst price than the `_worstO
 
 #### augur.api.Orders.getAmount({ tx, \_orderId }[, callback])
 
-Returns the amount of [Shares](#shares) requested on a specified `_orderId`.
+Returns the amount of [Shares](#share) requested on a specified `_orderId`.
 
 #### augur.api.Orders.getBestOrderId({ tx, \_type, \_market, \_outcome }[, callback])
 

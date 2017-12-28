@@ -14,7 +14,7 @@ This section of the documentation is dedicated to terms found and used throughou
 
 ## Ask Order
 
-An Ask Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to sell [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
+An Ask Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to sell [Shares](#share) of one or more [Outcomes](#outcome). This is the opposite of a [Bid Order](#bid-order).
 
 ## Atto- (Prefix)
 
@@ -22,7 +22,7 @@ Atto- is a unit prefix in the metric system denoting a factor of 10^−18, or 0.
 
 ## Bid Order
 
-A Bid Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to buy [Shares](#shares) of one or more [Outcomes](#outcome). This is the opposite of an [Ask Order](#ask-order).
+A Bid Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to buy [Shares](#share) of one or more [Outcomes](#outcome). This is the opposite of an [Ask Order](#ask-order).
 
 ## Binary Market
 
@@ -42,11 +42,11 @@ A Child Universe is a [Universe](#universe) created after a [Market](#market) [F
 
 ## Complete Set
 
-A Complete Set is a collection of [Shares](#shares) in every [Outcome](#outcome). Complete Sets are created when the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the [Trade](#trading). When both parties use shares to complete a trade, then a Complete Set will be formed and [Settled](#settlement) (destroyed). The cost in [attoETH](#atto-prefix) of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are Settled, [Settlement Fees](#settlement-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties. Therefore, users who get a larger payout from Settlement also pay a larger portion of the fees. The Settlement Fees extracted from Share Settlement go toward paying for the [Reporting](#report) system, in the form of a [Reporting Fee](#reporting-fee), and paying the [Market Creator](#market-creator) their set [Creator Fee](#creator-fee).
+A Complete Set is a collection of [Shares](#share) in every [Outcome](#outcome). Complete Sets are created when the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) both use currency to pay for the trade, as opposed to one or both parties using Shares to complete the [Trade](#trading). When both parties use shares to complete a trade, then a Complete Set will be formed and [Settled](#settlement) (destroyed). The cost in [attoETH](#atto-prefix) of a Complete Set for a particular [Market](#market) is determined by the [Number of Ticks](#number-of-ticks) for that Market. When Complete Sets are Settled, [Settlement Fees](#settlement-fees) are extracted from the value of the Complete Set and are paid proportionally by both parties. Therefore, users who get a larger payout from Settlement also pay a larger portion of the fees. The Settlement Fees extracted from Share Settlement go toward paying for the [Reporting](#report) system, in the form of a [Reporting Fee](#reporting-fee), and paying the [Market Creator](#market-creator) their set [Creator Fee](#creator-fee).
 
 ## Creator Fee
 
-A Creator Fee is a percentage fee, in ETH, that is collected by the [Market Creator](#market-creator) whenever [Shares](#shares) are [Settled](#settlement). It is set by the Market Creator when he or she creates a new [Market](#market). The Creator Fee must be between 0% and 50%, and it cannot be changed once it has been set. The Creator Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#shares) are [Settled](#settlement). Shares can be Settled when a user sells a [Complete Set](#complete-set) or when the Market has been [Finalized](#finalized-market) and a user wants to close an open [Position](#position). The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their Market creation cost and ideally turn a profit on posting interesting Markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
+A Creator Fee is a percentage fee, in ETH, that is collected by the [Market Creator](#market-creator) whenever [Shares](#share) are [Settled](#settlement). It is set by the Market Creator when he or she creates a new [Market](#market). The Creator Fee must be between 0% and 50%, and it cannot be changed once it has been set. The Creator Fee and the [Reporting Fee](#reporting-fee) are both extracted at the same time whenever [Shares](#share) are [Settled](#settlement). Shares can be Settled when a user sells a [Complete Set](#complete-set) or when the Market has been [Finalized](#finalized-market) and a user wants to close an open [Position](#position). The Creator Fee is designed to incentivize users to make popular Markets as they stand to earn money if enough people trade on the Market. They can then recoup their Market creation cost and ideally turn a profit on posting interesting Markets. The [Settlement Fees](#settlement-fees) are discussed in more details in the [Trading](#trading) section of the documentation.
 
 ## Crowdsourcer
 
@@ -127,7 +127,7 @@ The Dispute Round Phase is a seven (7) day window after a [Market](#market) has 
 
 When a [Market](#market) is in the [Dispute Round Phase](#dispute-round-phase), users can put up [REP](#rep) on any [Outcome](#outcome) other than the [Tenative Outcome](#tentative-outcome). The amount of REP they put up goes toward filling the crowdsourced [Dispute Bond](#dispute-bond), and can range from 1 [attoREP](#atto-prefix) to the amount still needed to fill the [Dispute Bond](#dispute-bond).
 
-All unsuccesful Dispute Stake is returned to the original owners at the end of every [Dispute Round](#dispute-round). All successful Dispute Stake is applied to the [Outcome](#outcome) it championed, and will remain there until the [Market](#market) is [Finalized](#finalized-market) (or until a [Fork](#fork) occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the [Reward Pool](#reward-pool) from the current [Fee Window](#fee-window) in ETH. (This ETH comes from trading and winning [Share](#shares) redemption: fees are collected in ETH whenever a [Complete Set](#complete-set) is sold or winning Shares are redeemed and given to [Fee Windows](#fee-window).)
+All unsuccesful Dispute Stake is returned to the original owners at the end of every [Dispute Round](#dispute-round). All successful Dispute Stake is applied to the [Outcome](#outcome) it championed, and will remain there until the [Market](#market) is [Finalized](#finalized-market) (or until a [Fork](#fork) occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the [Reward Pool](#reward-pool) from the current [Fee Window](#fee-window) in ETH. (This ETH comes from trading and winning [Share](#share) redemption: fees are collected in ETH whenever a [Complete Set](#complete-set) is sold or winning Shares are redeemed and given to [Fee Windows](#fee-window).)
 
 By design, the Dispute Bond sizes for each Dispute Round are chosen such that anyone who successfully [Challenges](#challenge) an Outcome in favor of the Market’s [Final Outcome](#final-outcome) is rewarded with a 50% ROI on their Dispute Stake. For details on how the Dispute Bond is calculated, refer to the [Dispute Bond glossary entry](#dispute-bond).
 
@@ -149,7 +149,7 @@ A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challe
 
 ## Finalized Market
 
-A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#shares) holders to [Settle](#settlement) their Shares with the Market once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed.
+A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#share) holders to [Settle](#settlement) their Shares with the Market once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed.
 
 ## Finalized Phase
 
@@ -165,7 +165,7 @@ The First Reporter is the person who submits the [First Report](#first-report) o
 
 ## Fork
 
-A Fork occurs if the [Tentative Outcome](#tentative-outcome) for a [Market](#market) is [Challenged](#challenge) during the 20th [Dispute Round](#dispute-round). A Fork causes Augur to create multiple new [Universes](#universe). Each new Universe is empty except for the [Forked Market](#forked-market); they contain no markets or REP tokens. There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including the [Invalid Outcome](#invalid-outcome), and the Markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the [Fork Period](#fork-period) ends, and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#shares) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
+A Fork occurs if the [Tentative Outcome](#tentative-outcome) for a [Market](#market) is [Challenged](#challenge) during the 20th [Dispute Round](#dispute-round). A Fork causes Augur to create multiple new [Universes](#universe). Each new Universe is empty except for the [Forked Market](#forked-market); they contain no markets or REP tokens. There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including the [Invalid Outcome](#invalid-outcome), and the Markets will be [Finalized](#finalized-market) on each Universe. [REP](#rep) holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the [Fork Period](#fork-period) ends, and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#share) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
 
 ## Fork Period
 
@@ -197,7 +197,7 @@ In the event that a [Market's](#market) [Designated Reporter](#designated-report
 
 ## Invalid Outcome
 
-If the [Outcome](#outcome) of a [Market's](#market) event is indeterminate, or if the Market's question is worded in a way that is vague or does not have a clear answer, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#binary-market) with 500 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of [Share](#shares) in the Market receive the same payout during [Settlement](#settlement).
+If the [Outcome](#outcome) of a [Market's](#market) event is indeterminate, or if the Market's question is worded in a way that is vague or does not have a clear answer, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#binary-market) with 500 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).
 
 ## Locked Universe
 
@@ -205,7 +205,7 @@ A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur with
 
 ## Market
 
-A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#shares) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
+A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#share) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
 <!-- TODO: Remove this section and links to it. -->
 ## Market Awaiting Finalization
@@ -214,7 +214,7 @@ Market Awaiting Finalization occurs when a [Market](#market) has been [Reported]
 
 ## Market Creator
 
-A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can set the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#shares) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., [Binary](#binary-market), [Categorical](#categorical-market), or [Scalar](#scalar-market)), the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
+A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can set the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#share) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., [Binary](#binary-market), [Categorical](#categorical-market), or [Scalar](#scalar-market)), the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
 ## Market Creator Mailbox
 
@@ -234,7 +234,7 @@ The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price
 
 ## Number of Ticks
 
-The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of [attoETH](#atto-prefix) required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#shares) for a Market. When Shares are [Settled](#settlement), then each Complete Set will yield Number of Ticks [attoETH](#atto-prefix). The yield from the Complete Sets Settlement is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the [Number of Ticks](#number-of-ticks) set for the Market.
+The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of [attoETH](#atto-prefix) required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#share) for a Market. When Shares are [Settled](#settlement), then each Complete Set will yield Number of Ticks [attoETH](#atto-prefix). The yield from the Complete Sets Settlement is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the [Number of Ticks](#number-of-ticks) set for the Market.
 
 ## Open Order
 
@@ -243,7 +243,7 @@ An Open Order is an [Order](#order) that is currently on the [Order Book](#order
 <!-- TODO: Confirm that an Order still consists of the listed parts. -->
 ## Order
 
-An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#shares) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.
+An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#share) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.
 
 ## Order Book
 
@@ -251,11 +251,11 @@ The Order Book is the collection of all [Open Orders](#open-order) currently ava
 
 ## Order Creator
 
-An Order Creator is the person who places an [Order](#order) on the [Order Book](#order-book). They escrow currency or [Shares](#shares) into their Order to buy or sell Shares of an [Outcome](#outcome) of a [Market](#market).
+An Order Creator is the person who places an [Order](#order) on the [Order Book](#order-book). They escrow currency or [Shares](#share) into their Order to buy or sell Shares of an [Outcome](#outcome) of a [Market](#market).
 
 ## Order Filler
 
-An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Order Fillers send currency or [Shares](#shares) to fill the Open Order and complete their half of the trade described in the [Order](#order).
+An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Order Fillers send currency or [Shares](#share) to fill the Open Order and complete their half of the trade described in the [Order](#order).
 
 ## Outcome
 
@@ -265,10 +265,9 @@ An outcome is a potential result of a [Market](#market)'s future event. For exam
 
 A Parent Universe is a [Universe](#universe) that has spawned [Child Universes](#child-universe) because a [Fork](#fork) had occurred on the Parent Universe and caused it to make new Universes. In other words, [Locked Universes](#locked-universe) are Parent Universes to the Universes created due to the Fork.
 
-<!-- Confirm the Participation Token info is correct. -->
 ## Participation Token
 
-Participation Tokens are used to determine how [Reporting Fees](#reporting-fee) are divided up. The more Participation Tokens a user buys (purchased with REP), the larger his or her share of the Fees. The user gets back that REP after Fees are distributed, so it essentially acts like a deposit. It's a way of encouraging [Reporters](#reporter) to be active in the platform even when they're not needed, so they'll be around when they are needed. Buying Participation Tokens is not required. Participation Tokens can be purchased at any time before a [Reporting Window](#reporting-window) ends. They are only used in the case that only [Designated Reporters](#designated-reporter) are needed for reporting (everyone shows up) and no one disputes the Designated Reporters. Participation Tokens are purchased after all [Markets](#market) in the [Fee Window](#fee-window) have [Finalized](#finalized-market).
+At any time during a [Fee Window](#fee-window), users can purchase Participation Tokens in exchange for [REP](#rep). Once the Fee Window ends, users can redeem their Participation Tokens for a portion of the [Reporting Fees](#reporting-fee) (in Ether) that Augur collected during that Fee Window. The more Participation Tokens a user purchases, the bigger the portion of the Reporting Fees they will receive. Users are not required to purchase Participation Tokens, but their purpose is to incentivize users to be active on Augur in the even that they will be needed, such as when a [Market](#market) [Forks](#fork).
 
 ## Payout Distribution Hash
 
@@ -276,7 +275,7 @@ The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). W
 
 ## Payout Set
 
-A Payout Set, sometimes referred to as the "Payout Numerator" in Augur's smart contract methods, is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, on a [Binary Market](#binary-market) with 1000 [Ticks](#tick), if we wanted to submit a [Report](#report) that Stakes [REP](#rep) on Outcome `0`, we would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of how Markets should payout, or the Payout Distribution, when [Finalized](#finalized-market), so in the above example, only [Shares](#shares) of Outcome `0` will payout on the Finalized Market. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a [Payout Distribution Hash](#payout-distribution-hash).
+A Payout Set, sometimes referred to as the "Payout Numerator" in Augur's smart contract methods, is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, on a [Binary Market](#binary-market) with 1000 [Ticks](#tick), if we wanted to submit a [Report](#report) that Stakes [REP](#rep) on Outcome `0`, we would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of how Markets should payout, or the Payout Distribution, when [Finalized](#finalized-market), so in the above example, only [Shares](#share) of Outcome `0` will payout on the Finalized Market. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a [Payout Distribution Hash](#payout-distribution-hash).
 
 ## Position
 
@@ -309,7 +308,7 @@ A Reporter is a [REP](#rep) holder who Stakes REP on the [Outcome](#outcome) of 
 
 ## Reporting Fee
 
-The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#shares) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract [Settlement Fees](#settlement-fees) in ETH. These Settlement Fees include the [Creator Fee](#creator-fee) and the Reporting Fee. 
+The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#share) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract [Settlement Fees](#settlement-fees) in ETH. These Settlement Fees include the [Creator Fee](#creator-fee) and the Reporting Fee. 
 
 The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the [Market](#market) being traded on, and is later used to pay [REP](#rep) holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 
@@ -333,13 +332,19 @@ A Scalar Market is a [Market](#market) with a wide range of potential [Outcomes]
 
 ## Settlement
 
-Settlement can happen in one of two ways. The first is when a trader who holds [Shares](#shares) would like to cash out of their [Position](#position) on a [Finalized Market](#finalized-market). The other is the collection of a [Complete Set](#complete-set), which can happen before a Market Finalizes. The [Settlement Fees](#settlement-fees), which includes both the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee), are only extracted during Settlement.
+A trader can close their [Position](#position) in one of two ways: by selling the [Shares](#share) they hold to another trader in exchange for Ether, or by Settling their Shares with Augur's smart contracts. Every Share in a Market comes into existence as part of a [Complete Set](#complete-set) when an amount of Ether equal to the [Number of Ticks](#number-of-ticks) for that Market has been escrowed with Augur. To get that Ether out of escrow, traders must give Augur either a Complete Set, or — if the [Market](#market) has [Finalized](#finalized-market) — a Share of the winning [Outcome](#outcome). This exchange is referred to as Settlement.
+
+For example, consider a non-Finalized Market with possible Outcomes A and B. Suppose Alice has a Share of Outcome A that she wants to sell for 0.70 ETH and Bob has a Share of Outcome B that he wants to sell for 0.30 ETH. First, Augur matches these [Orders](#order) and collects the A and B Shares from the participants. Then Augur gives 0.70 ETH (minus [Settlement Fees](#settlement-fees)) to Alice and 0.30 ETH (minus Settlement Fees) to Bob.
+
+As a second example, consider a Finalized Market whose winning Outcome is A. Alice has a Share of A and wants to cash it in. She sends her share of A to Augur and in return receives 1 ETH (minus Settlement Fees).
+
+The [Settlement Fees](#settlement-fees), which include both the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee), are only extracted during Settlement.
 
 ## Settlement Fees
 
 Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Settled](#settlement). It's the combination of the [Creator Fee](#creator-fee) and the [Reporting Fee](#reporting-fee).
 
-## Shares
+## Share
 
 A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send ETH to the Market to complete an [Order](#order). Shares are [Settled](#settlement) (destroyed) when a Complete Set is sold back to the Market.
 
@@ -353,7 +358,7 @@ A [Market's](#market) Tentative Outcome starts off as the [Outcome](#outcome) th
 
 ## Tick
 
-A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#shares) of an [Outcome](#outcome) for a [Market](#market) between its [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much [attoETH](#atto-prefix) a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 [attoETH](#atto-prefix). The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Settlement Fees](#settlement-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
+A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#share) of an [Outcome](#outcome) for a [Market](#market) between its [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much [attoETH](#atto-prefix) a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 [attoETH](#atto-prefix). The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoeth, which [Settlement Fees](#settlement-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.
 
 ## Topic
 

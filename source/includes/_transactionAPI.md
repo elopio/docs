@@ -955,7 +955,7 @@ This transaction will attempt to finalize a [Market](#market) that is [Awaiting 
 
 #### augur.api.Market.updateTentativeWinningPayoutDistributionHash({ market, \_payoutDistributionHash, onSent, onSuccess, onFailed })
 
-This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#shares) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
+This method is used to potentially update the Tentatively Winning [Payout Distribution Hash](#payout-distribution-hash). The Tentatively Winning Payout Distribution Hash is the Payout Distribution Hash with the most [REP](#rep) staked on it so far by [Reporters](#reporter). If the [Market](#market) is successfully [Finalized](#finalized-market) the Tentatively Winning Payout Distribution Hash becomes the Winning Payout Distribution Hash and determines how various [Shares](#share) of [Outcomes](#outcome) will payout during [Settlement](#settlement). This transaction will not change the Tentative Winning Payout Distribution Hash if the `_payoutDistributionHash` submitted to it doesn't have enough REP stakes to overtake the current Tentatively Winning Payout Distribution Hash. Returns `1` regardless of if the Tentatively Winning Distribution Hash was changed or not.
 
 #### augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })
 
@@ -2175,7 +2175,7 @@ Creates a new [Binary Market](#binary-market). After the transaction has complet
 #### Parameters:
 
 * `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
 * `denominationToken` - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
 * `_designatedReporterAddress` - String containing the address of the [Designated Reporter](#designated-reporter). 
 * `_topic` - Market [Topic](#topic). 
@@ -2198,7 +2198,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 #### Parameters:
 
 * `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
 * `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
 * `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
 * `_numOutcomes` - Total possible outcomes for the Market event. 
@@ -2219,7 +2219,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 Creates a new [Scalar Market](#scalar-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 * `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#shares) [Settled](#settlement). 
+* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
 * `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
 * `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
 * `_minPrice` - [Minimum Display Price](#minimum-display-price) for the Market.

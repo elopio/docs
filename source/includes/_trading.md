@@ -8,7 +8,7 @@ The Augur UI will offer users the best prices first when displaying the Order Bo
 
 Trading Example
 ---------------
-Let's use an example [Binary Market](#binary-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#shares) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus gas used to send the transaction.
+Let's use an example [Binary Market](#binary-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#share) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus gas used to send the transaction.
 
 If there are Orders on the Order Book that match our request for `100` Shares of `Outcome A` at a price of `0.5 ETH`, or cheaper, then Augur will fill those Orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus gas cost.
 
@@ -41,7 +41,7 @@ Selling a Complete Set can be thought of as exiting your market [Position](#posi
 Calculating Trades
 ------------------
 
-In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Order Creators](#order-creator) and contain four important details: The Creator of the Order, the price of the Order, The amount of [Shares](#shares) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The price can be any value between 0 and the [Number of Ticks](#number-of-ticks). The calculations below use `num_shares` as the number of Shares the Order is requesting, `price` as the price per Share for the Order, `outcome` for the Outcome our Order is trading on, `num_ticks` as the Number of Ticks, and `fee_rate` as the [Settlement Fees](#settlement-fees) extracted during the [Settlement](#settlement) of Shares.
+In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Order Creators](#order-creator) and contain four important details: The Creator of the Order, the price of the Order, The amount of [Shares](#share) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The price can be any value between 0 and the [Number of Ticks](#number-of-ticks). The calculations below use `num_shares` as the number of Shares the Order is requesting, `price` as the price per Share for the Order, `outcome` for the Outcome our Order is trading on, `num_ticks` as the Number of Ticks, and `fee_rate` as the [Settlement Fees](#settlement-fees) extracted during the [Settlement](#settlement) of Shares.
 
 The Formulas for determining how much opening a Long or Short position costs are as follows:
 

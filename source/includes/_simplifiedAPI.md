@@ -867,6 +867,8 @@ Note: This function requires an [Augur Node connection](#augur-node).
 Trading Functions
 -----------
 ```javascript
+// augur.trading.claimMarketsTradingProceeds: Example JS code coming soon
+
 augur.trading.getBetterWorseOrders({
   marketID: "0x0000000000000000000000000000000000000001",
   outcome: 0,
@@ -1085,6 +1087,44 @@ augur.trading.getUserTradingPositions({
   }
 ]
 ```
+### augur.trading.claimMarketsTradingProceeds(p)
+
+Similar to the function `augur.trading.claimTradingProceeds`, but attempts to collect trading profits in Ether from a user's outstanding Shares in multiple Finalized Markets instead of a single Finalized Market.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`markets`**  (Array.<string>) Array of Market addresses for which to claim proceeds.
+    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when any of the transactions fail.
+
+#### **Returns:**
+
+Description pending.
+
+### augur.trading.claimTradingProceeds(p)
+
+Attempts to collect trading profits in Ether from a user's outstanding Shares in a single Finalized Market.
+
+Note: This transaction will fail if `_market` is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.)
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`_market`**  (string) Market address for which to claim proceeds.
+    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when any of the transactions fail.
+
+#### **Returns:**
+
+Description pending.
+
 <!-- Add links to section -->
 ### augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}
 
