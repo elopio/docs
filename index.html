@@ -3480,201 +3480,220 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getChildUniverse</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
   <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="nx">_parentPayoutDistributionHash</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">childUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">childUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childUniverse</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">childUniverse</span> <span class="o">=</span> <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span>
+<span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getCurrentReportingWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">currReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getCurrentFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">currFeeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">currFeeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">currReportingWindow</span> <span class="o">=</span> <span class="s2">"578"</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDisputeRoundDurationInSeconds</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeRoundDuration</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">disputeRoundDuration</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">forkEndTime</span> <span class="o">=</span> <span class="s2">"1489855429"</span><span class="p">;</span>
+<span class="s2">"604800"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkingMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkingMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">forkingMarket</span> <span class="o">=</span> <span class="s2">"0x78f7b43150d27c464359e735781c16ac585f52a8"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkReputationGoal</span><span class="p">({</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkReputationGoal</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">forkReputationGoal</span> <span class="o">=</span> <span class="s2">"150657"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getNextReportingWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">nextReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">nextReportingWindow</span> <span class="o">=</span> <span class="s2">"579"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOpenInterestInAttoEth</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">openInterestInAttoEth</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">openInterestInAttoEth</span> <span class="o">=</span> <span class="s2">"7123876876123"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getParentUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">parentUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">parentUniverse</span> <span class="o">=</span> <span class="s2">"0x63c59544b89cce1dd53b1b566862189b25adec41"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getParentPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universeParentPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">universeParentPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getPreviousReportingWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">previousReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">previousReportingWindow</span> <span class="o">=</span> <span class="s2">"577"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> 
-  <span class="na">_reportingWindowId</span><span class="p">:</span> <span class="mi">579</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="kd">var</span> <span class="nx">_endTime</span> <span class="o">=</span> <span class="mi">2524608000</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowByMarketEndTime</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowByTimestamp</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="nx">_endTime</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindowByEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindowByEndTime</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="kd">var</span> <span class="nx">_timestamp</span> <span class="o">=</span> <span class="mi">2524608000</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowByTimestamp</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowForForkEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowId</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_timestamp</span><span class="p">:</span> <span class="nx">_timestamp</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindowByTimestamp</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindowId</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindowId</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindowByTimestamp</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
+<span class="s2">"578"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowForForkEndTime</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindowForForkEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">forkEndTime</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindowForForkEndTime</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
+<span class="s2">"1489855429"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReportingWindowId</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkingMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkingMarket</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">forkingMarket</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x78f7b43150d27c464359e735781c16ac585f52a8"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getForkReputationGoal</span><span class="p">({</span> <span class="nx">universe</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkReputationGoal</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">forkReputationGoal</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"150657"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getNextFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">nextFeeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nextFeeWindow</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"579"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOpenInterestInAttoEth</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">openInterestInAttoEth</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">openInterestInAttoEth</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"7123876876123"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getParentPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universeParentPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">universeParentPayoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getParentUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">parentUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parentUniverse</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x63c59544b89cce1dd53b1b566862189b25adec41"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getPreviousFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">previousFeeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">previousFeeWindow</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"577"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationTokenAddress</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationTokenAddress</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getWinningChildUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningChildUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">winningChildUniverse</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x432561b2bdbcd1ae1995bdd6aff6776d6f4292f2"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForFeeToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_timestamp</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindowId</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyFeeToken</span><span class="p">:</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForFeeToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForFeeToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindowId</span> <span class="o">=</span> <span class="s2">"578"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationTokenAddress</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForFeeWindow</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
+  <span class="na">_shadyFeeWindow</span><span class="p">:</span> <span class="s2">"0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 
-<span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadytx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForMarket</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isContainerForMarket</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 
-<span class="kd">var</span> <span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForStakeToken</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForReportingParticipant</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyStakeToken</span><span class="p">:</span> <span class="nx">stakeToken</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForStakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingParticipant</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingParticipant</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isContainerForStakeToken</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 
-<span class="kd">var</span> <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"578"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForReportingWindow</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForShareToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyReportingWindow</span><span class="p">:</span> <span class="nx">reportingWindow</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForShareToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isContainerForReportingWindow</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 
-<span class="kd">var</span> <span class="nx">childUniverse</span> <span class="o">=</span> <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isForking</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isParentOf</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isParentOf</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isParentOf</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyChild</span><span class="p">:</span> <span class="nx">childUniverse</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isParentOf</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyChild</span><span class="p">:</span> <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isParentOf</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isParentOf</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isParentOf</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="s2">"1"</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
 
-<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Reporting Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round-phase">Dispute Round Phase</a>, a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, where as the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
+<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Fee Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round-phase">Dispute Round Phase</a>, a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, whereas the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
 
 <h4 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h4>
 
-<p>Returns the Child <a href="#universe">Universe</a> address for this <code class="prettyprint">universe</code> address whose <a href="#forked-market">Forked Market</a>&rsquo;s <a href="#final-outcome">Final Outcome</a> is the <code class="prettyprint">_parentPayoutDistributionHash</code> <a href="#payout-distribution-hash">Payout Distribution Hash</a> provided.</p>
+<p>Returns the Ethereum contract address of a <a href="#universe">Universe&rsquo;s</a> <a href="#child-universe">Child Universe</a> that has its <a href="#forked-market">Forked Market</a>&rsquo;s <a href="#final-outcome">Final Outcome</a> set to <code class="prettyprint">_parentPayoutDistributionHash</code> <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Ethereum contract address is returned as a hexidecimal string.</p>
 
-<h4 id="augur-api-universe-getcurrentreportingwindow-tx-callback">augur.api.Universe.getCurrentReportingWindow({ tx }[, callback])</h4>
+<h4 id="augur-api-universe-getcurrentfeewindow-tx-callback">augur.api.Universe.getCurrentFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the address of the current running <a href="#reporting-window">Reporting Window</a> of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. Every Universe has Reporting Windows that are continually run for a duration of 30 days before immediately starting the next Window.</p>
+<p>Returns the Ethereum contract address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window. The Ethereum contract address is returned as a hexidecimal string.</p>
+
+<h4 id="augur-api-universe-getdisputerounddurationinseconds-tx-callback">augur.api.Universe.getDisputeRoundDurationInSeconds({ tx }[, callback])</h4>
+
+<p>Returns the number of seconds in a <a href="#universe">Universe&rsquo;s</a> <a href="#dispute-round">Dispute Round</a>.</p>
+
+<h4 id="augur-api-universe-getfeewindow-tx-_feewindowid-callback">augur.api.Universe.getFeeWindow({ tx, _feeWindowId  }[, callback])</h4>
+
+<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+
+<h4 id="augur-api-universe-getfeewindowbytimestamp-tx-_timestamp-callback">augur.api.Universe.getFeeWindowByTimestamp({ tx, _timestamp }[, callback])</h4>
+
+<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> running at <code class="prettyprint">_timestamp</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+
+<h4 id="augur-api-universe-getfeewindowforforkendtime-tx-callback">augur.api.Universe.getFeeWindowForForkEndTime({ tx } [, callback])</h4>
+
+<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends, as a hexidecimal string.</p>
+
+<h4 id="augur-api-universe-getfeewindowid-tx-_timestamp-callback">augur.api.Universe.getFeeWindowId({ tx, _timestamp } [, callback])</h4>
+
+<p>Returns the <a href="#fee-window">Fee Window</a> ID for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> and <code class="prettyprint">_timestamp</code>, as an integer. This is calculated by dividing the timestamp by the <a href="#universe">Universe&rsquo;s</a> Fee Window duration in seconds.</p>
 
 <h4 id="augur-api-universe-getforkendtime-tx-callback">augur.api.Universe.getForkEndTime({ tx }[, callback])</h4>
 
-<p>Returns the timestamp for when the <a href="#fork-period">Fork Period</a> ends that was started on the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. If there is no <a href="#forked-market">Forked Market</a> in the Universe, this function will return 0.</p>
+<p>Returns the timestamp for when the <a href="#fork-period">Fork Phase</a> ends that was started on the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. If there is no <a href="#forked-market">Forked Market</a> in the Universe, this function will return 0.</p>
 
 <h4 id="augur-api-universe-getforkingmarket-tx-callback">augur.api.Universe.getForkingMarket({ tx }[, callback])</h4>
 
-<p>Returns the contract address of the <a href="#market">Market</a> that the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> is <a href="#fork">Forking</a> over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no <a href="#forked-market">Forked Market</a>.</p>
+<p>Returns the Ethereum contract address of the <a href="#market">Market</a> that the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> is <a href="#fork">Forking</a> over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no <a href="#forked-market">Forked Market</a>.</p>
 
 <h4 id="augur-api-universe-getforkreputationgoal-tx-callback">augur.api.Universe.getForkReputationGoal({ tx }[, callback])</h4>
 
-<p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> to be finalized before the end of the <a href="#fork-period">Fork Period</a>.</p>
+<p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> to be <a href="#finalized-market">Finalized</a> before the end of the <a href="#fork-period">Fork Phase</a>.</p>
 
-<h4 id="augur-api-universe-getnextreportingwindow-tx-callback">augur.api.Universe.getNextReportingWindow({ tx }[, callback])</h4>
+<h4 id="augur-api-universe-getnextfeewindow-tx-callback">augur.api.Universe.getNextFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the address of the <a href="#reporting-window">Reporting Window</a> coming up after the current Reporting Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>.</p>
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum contract address is returned as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getopeninterestinattoeth-tx-callback">augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])</h4>
 
-<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, priced in attoETH.</p>
-
-<h4 id="augur-api-universe-getparentuniverse-tx-callback">augur.api.Universe.getParentUniverse({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#parent-universe">Parent Universe</a> address of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. When a <a href="#fork">Fork</a> occurs, <a href="#child-universe">Child Universes</a> are created and the original <a href="#universe">Universe</a> that contained the <a href="#forked-market">Forked Market</a> would become a Parent Universe to the newly created Universes. If this is called on the very first Augur Universe then it will return 0, as the first Universe had no Parent Universe.</p>
+<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, priced in attoETH. This value is returned as an integer.</p>
 
 <h4 id="augur-api-universe-getparentpayoutdistributionhash-tx-callback">augur.api.Universe.getParentPayoutDistributionHash({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#parent-universe">Parent Universes</a>&rsquo;s <a href="#payout-distribution-hash">Payout Distribution Hash</a> for <a href="#child-universe">Child Universe</a> specified in <code class="prettyprint">tx</code>. The Payout Distrubution Hash is a hash of the <a href="#dispute-bond">Disputed</a> <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>.</p>
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of a <a href="#universe">Universe&rsquo;s</a> <a href="#parent-universe">Parent Universe</a> for a <a href="#child-universe">Child Universe</a> specified in <code class="prettyprint">tx</code>. The Payout Distribution Hash is a hash of the winning <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>.</p>
 
-<h4 id="augur-api-universe-getpreviousreportingwindow-tx-callback">augur.api.Universe.getPreviousReportingWindow({ tx }[, callback])</h4>
+<h4 id="augur-api-universe-getparentuniverse-tx-callback">augur.api.Universe.getParentUniverse({ tx }[, callback])</h4>
 
-<p>Returns the address of the previous <a href="#reporting-window">Reporting Window</a> to the current Reporting Window for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>.</p>
+<p>Returns the <a href="#parent-universe">Parent Universe</a> Ethereum contract address of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. When a <a href="#fork">Fork</a> occurs, <a href="#child-universe">Child Universes</a> are created and the original <a href="#universe">Universe</a> that contained the <a href="#forked-market">Forked Market</a> would become a Parent Universe to the newly created Universes. If this is called on the <a href="#genesis-universe">Genesis Universe</a>, it will return 0, as the first Universe has no Parent Universe.</p>
 
-<h4 id="augur-api-universe-getreportingwindow-tx-_reportingwindowid-callback">augur.api.Universe.getReportingWindow({ tx, _reportingWindowId }[, callback])</h4>
+<h4 id="augur-api-universe-getpreviousfeewindow-tx-callback">augur.api.Universe.getPreviousFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#reporting-window">Reporting Window</a> Contract Address belonging to this <code class="prettyprint">universe</code> that matches <code class="prettyprint">_reportingWindowId</code>.</p>
-
-<h4 id="augur-api-universe-getreportingwindowbymarketendtime-tx-_endtime-callback">augur.api.Universe.getReportingWindowByMarketEndTime({ tx, _endTime }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> address on the specific <code class="prettyprint">universe</code> given an <code class="prettyprint">_endTime</code>.</p>
-
-<h4 id="augur-api-universe-getreportingwindowbytimestamp-tx-_timestamp-callback">augur.api.Universe.getReportingWindowByTimestamp({ tx, _timestamp }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> Contract Address for a specific <code class="prettyprint">universe</code> and provided <code class="prettyprint">_timestamp</code>.</p>
-
-<h4 id="augur-api-universe-getreportingwindowforforkendtime-tx-callback">augur.api.Universe.getReportingWindowForForkEndTime({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> that the current <a href="#fork-period">Fork Period</a> ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. If no <a href="#fork">Fork</a> has occurred, the null address (0x0000000000000000000000000000000000000000) is returned.</p>
-
-<h4 id="augur-api-universe-getreportingwindowid-tx-_timestamp-callback">augur.api.Universe.getReportingWindowId({ tx, _timestamp }[, callback])</h4>
-
-<p>Returns the <a href="#reporting-window">Reporting Window</a> Id for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> and provided <code class="prettyprint">_timestamp</code>. This is calculated by dividing the timestamp by the <a href="#universe">Universe&rsquo;s</a> Reporting Window duration in seconds.</p>
+<p>Returns the Ethereum contract address of the previous <a href="#fee-window">Fee Window</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getreputationtoken-tx-callback">augur.api.Universe.getReputationToken({ tx }[, callback])</h4>
 
-<p>Returns the address of the <a href="#rep">Reputation Token</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. This is the REP usable within this Universe.</p>
+<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. REP associated with this contract address are usable within this Universe.</p>
+
+<h4 id="augur-api-universe-getwinningchilduniverse-tx-callback">augur.api.Universe.getWinningChildUniverse({ tx }[, callback])</h4>
+
+<p>Returns the Ethereum contract address of the <a href="#winning-universe">Winning Universe</a> for a particular <a href="#universe">Universe</a> that has <a href="#fork">Forked</a>.</p>
+
+<h4 id="augur-api-universe-iscontainerforfeewindow-tx-_shadyfeewindow-callback">augur.api.Universe.isContainerForFeeWindow({ tx, _shadyFeeWindow }[, callback])</h4>
+
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_shadyFeeWindow</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. Every Fee Window belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Window address belongs to the Universe in question.</p>
 
 <h4 id="augur-api-universe-iscontainerformarket-tx-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market is actually attached to the Universe in question.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market exists within the Universe in question.</p>
 
-<h4 id="augur-api-universe-iscontainerforstaketoken-tx-_shadystaketoken-callback">augur.api.Universe.isContainerForStakeToken({ tx, _shadyStakeToken }[, callback])</h4>
+<h4 id="augur-api-universe-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Universe.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting">Reporting</a> Token <code class="prettyprint">_shadyStakeToken</code> address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. <a href="#stake-tokens">Stake Tokens</a> are 1:1 exchangeable for <a href="#rep">REP</a> by <a href="#reporter">Reporters</a> to represent their staked REP for a <a href="#report">Report</a>. This method is designed determine whether the Universe contains the Stake Token specified.</p>
+<p><a href="#share">Shares</a> are represented within Augur&rsquo;s smart contracts as <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20</a> tokens called Share Tokens. Returns whether the specific <code class="prettyprint">universe</code> is a container for the Share Token <code class="prettyprint">_shadyShareToken</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. </p>
 
-<h4 id="augur-api-universe-iscontainerforreportingwindow-tx-_shadyreportingwindow-callback">augur.api.Universe.isContainerForReportingWindow({ tx, _shadyReportingWindow }[, callback])</h4>
+<h4 id="augur-api-universe-isforking-tx-callback">augur.api.Universe.isForking({ tx }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#reporting-window">Reporting Window</a> <code class="prettyprint">_shadyReportingWindow</code> Contract Address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. Every Reporting Window belongs to a Universe and this method is used to see if a specific Reporting Window Address belongs to the Universe in question.</p>
+<p>Returns <code class="prettyprint">1</code> if the current <a href="#universe">Universe</a> is Forking or <code class="prettyprint">0</code> otherwise.</p>
 
 <h4 id="augur-api-universe-isparentof-tx-_shadychild-callback">augur.api.Universe.isParentOf({ tx, _shadyChild }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyChild</code> <a href="#child-universe">Child Universe</a> Address provided. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false. If you want to see if a specific <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> to a Child Universe you would use this function to determine that.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyChild</code> <a href="#child-universe">Child Universe</a> Ethereum contract address provided. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. This function can be used to see if a specific <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> to a Child Universe.</p>
 
           <h1 id="transaction-api">Transaction API</h1>
 
@@ -6146,16 +6165,23 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <tr>
 <td>Burn</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/VariableSupplyToken.sol">VariableSupplyToken</a></td>
-<td>Burned (i.e., completely destroyed) <code class="prettyprint">value</code> amount of <code class="prettyprint">target</code>&rsquo;s tokens.</td>
+<td><code class="prettyprint">value</code> amount of <code class="prettyprint">target</code>&rsquo;s tokens have been burned (i.e., completely destroyed) .</td>
 <td>target</td>
 <td>value</td>
 </tr>
 <tr>
 <td>DesignatedReportSubmitted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">reporter</code> has submitted a Designated Report for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> Stake Tokens (at the address <code class="prettyprint">stakeToken</code>) staked on the Outcome <code class="prettyprint">payoutNumerators</code>.</td>
+<td><code class="prettyprint">reporter</code> has submitted a Designated Report for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> REP  staked on the Outcome <code class="prettyprint">payoutNumerators</code>.</td>
 <td>universe, reporter, market</td>
-<td>stakeToken, amountStaked, payoutNumerators</td>
+<td>amountStaked, payoutNumerators</td>
+</tr>
+<tr>
+<td>FeeWindowCreated</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The Ethereum contract address <code class="prettyprint">feeWindow</code> has created a new <a href="#fee-window">Fee Window</a> (with ID <code class="prettyprint">id</code> and running from <code class="prettyprint">startTime</code> to <code class="prettyprint">endTime</code>) in <code class="prettyprint">universe</code>.</td>
+<td>universe</td>
+<td>feeWindow, startTime, endTime, id</td>
 </tr>
 <tr>
 <td><a name="MarketCreated"></a>MarketCreated</td>
@@ -6199,21 +6225,70 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
 </tr>
+<tr>
+<td>ReportSubmitted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> staked <code class="prettyprint">amountStaked</code> REP on Outcome <code class="prettyprint">payoutNumerators</code> <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> through the Ethereum contract address <code class="prettyprint">reportingParticipant</code>.</td>
+<td>universe, reporter, market</td>
+<td>reportingParticipant, amountStaked, payoutNumerators</td>
+</tr>
+<tr>
+<td>TokensBurned</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
+<td>universe, token, target</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>TokensMinted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
+<td>universe, token, target</td>
+<td>amount</td>
+</tr>
+<tr>
+<td>TokensTransferred</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
+<td>universe, token, from</td>
+<td>to, value</td>
+</tr>
+<tr>
+<td>TradingProceedsClaimed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>.</td>
+<td>universe, shareToken, sender</td>
+<td>market, numShares, numPayoutTokens, finalTokenBalance</td>
+</tr>
+<tr>
+<td>Transfer</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a></td>
+<td>Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
+<td>from, to</td>
+<td>value</td>
+</tr>
+<tr>
+<td>UniverseCreated</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">childUniverse</code> has been created from <code class="prettyprint">parentUniverse</code>.</td>
+<td>parentUniverse, childUniverse</td>
+<td></td>
+</tr>
+<tr>
+<td>UniverseForked</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>A <a href="#market">Market</a> in <code class="prettyprint">universe</code> has had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> during the 20th <a href="#dispute-round">Dispute Round</a>, which has caused <code class="prettyprint">universe</code> to <a href="#fork">Fork</a>.</td>
+<td>universe</td>
+<td></td>
+</tr>
+<tr>
+<td>WinningsRedeemed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a></td>
+<td>The Ethereum contract address <code class="prettyprint">reportingParticipant</code> has allowed <code class="prettyprint">reporter</code> to redeem <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> for the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also received <code class="prettyprint">reportingFeesReceived</code> in ETH.</td>
+<td>universe, reporter, market</td>
+<td>reportingParticipant, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
+</tr>
 </tbody></table>
-
-<!-- TODO: Update this once Dispute Round changes are finalized. -->
-
-<p>ReportsDisputed           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">disputer</code> disputed the Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> for the amount of <code class="prettyprint">disputeBondAmount</code> during <code class="prettyprint">reportingPhase</code>. | universe, disputer, market | reportingPhase, disputeBondAmount
-ReportSubmitted           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">reporter</code> submitted a Report for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">reporter</code> staked <code class="prettyprint">amountStaked</code> ETH on Outcome <code class="prettyprint">payoutNumerators</code> using the Stake Token at address <code class="prettyprint">stakeToken</code>. | universe, reporter, market | stakeToken, amountStaked, payoutNumerators
-TokensBurned              | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>. | universe, token, target | amount
-TokensMinted              | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>. | universe, token, target | amount
-TokensTransferred         | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.  | universe, token, from | to, value
-TradingProceedsClaimed    | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>. | universe, shareToken, sender | market, numShares, numPayoutTokens, finalTokenBalance
-Transfer | <a href="https://github.com/AugurProject/augur-core/blob/develop/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a> | Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>. | from, to | value
-UniverseCreated           | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">childUniverse</code> has been created from <code class="prettyprint">parentUniverse</code>. | parentUniverse, childUniverse | 
-&lt;!&ndash; TODO: Update this once Dispute Round changes are finalized. &ndash;&gt;
-UniverseForked            | <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a> | A Market in <code class="prettyprint">universe</code> has had its Tentative Outcome disputed during the 20th Dispute Round, which has caused <code class="prettyprint">universe</code> to Fork. | universe |
-WinningTokensRedeemed     | <a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a> | <code class="prettyprint">reporter</code> has converted <code class="prettyprint">amountRedeemed</code> <code class="prettyprint">stakeToken</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> to REP for the Outcome <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also got <code class="prettyprint">reportingFeesReceived</code>. | universe, reporter, market | stakeToken, amountRedeemed, reportingFeesReceived, payoutNumerators</p>
 
 <p>In addition to these on-contract events, <code class="prettyprint">augur.filters.listen</code> also accepts a callback for the <code class="prettyprint">block</code> listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.</p>
 
@@ -6688,6 +6763,12 @@ Goals:
 
 <p>End Time is the date and time that a <a href="#market">Market</a>&rsquo;s event will have come to pass and should be known. After this date and time has passed the Market will get <a href="#report">Reported</a> on and eventually <a href="#finalized-market">Finalized</a>.</p>
 
+<!-- TODO: Possibly remove this entry if it's not linked to elsewhere. -->
+
+<h2 id="fee-token">Fee Token</h2>
+
+<p>Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur&rsquo;s Solidity smart contracts to allow users to redeem <a href="#rep">REP</a> Staked either in an <a href="#initial-report">Initial Report</a> or in a <a href="#crowdsourcer">Crowdsourcer</a>. When an <a href="#initial-reporter">Initial Reporter</a> submits an <a href="#initial-report">Initial Report</a> in a given <a href="#fee-window">Fee Window</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Similarly, when a user Stakes REP in a Crowdsourcer to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated that user to determine what proportion of the Fee Window&rsquo;s <a href="#reporting-fee">Reporting Fees</a> (in Ether) to distribute to them.</p>
+
 <h2 id="fee-window">Fee Window</h2>
 
 <p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window will receive an amount of fees from the Reward Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#initial-reporting">Initial Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
@@ -6790,6 +6871,10 @@ Goals:
 
 <p>The Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a> for a <a href="#market">Market</a>. It&rsquo;s also the amount of <a href="#atto-prefix">attoETH</a> required to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. When Shares are <a href="#settlement">Settled</a>, then each Complete Set will yield Number of Ticks <a href="#atto-prefix">attoETH</a>. The yield from the Complete Sets Settlement is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the <a href="#number-of-ticks">Number of Ticks</a> set for the Market.</p>
 
+<h2 id="open-interest">Open Interest</h2>
+
+<p>Open Interest is the number of <a href="#complete-set">Complete Sets</a> that exist in a <a href="#market">Market</a>.</p>
+
 <h2 id="open-order">Open Order</h2>
 
 <p>An Open Order is an <a href="#order">Order</a> that is currently on the <a href="#order-book">Order Book</a> and has not been completely <a href="#fill-order">Filled</a>.</p>
@@ -6862,11 +6947,15 @@ Goals:
 
 <p>A Reporter is a <a href="#rep">REP</a> holder who Stakes REP on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> that does not have a <a href="#tentative-outcome">Tentative Outcome</a> but does have an <a href="#end-time">End Time</a> that has passed. A <a href="#designated-reporter">Designated Reporter</a> is assigned by the <a href="#market-creator">Market Creator</a> during Market Creation for <a href="#designated-reporting">Designated Reporting</a>. If the Designated Reporter fails to submit a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, any other user can submit an <a href="#initial-report">Initial Report</a> instead.</p>
 
+<!-- TODO: Add better explanation on how Reporting Fee is calculated. (Actual code for this is in Universe:getOrCacheReportingFeeDivisor) -->
+
 <h2 id="reporting-fee">Reporting Fee</h2>
 
 <p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#share">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract <a href="#settlement-fees">Settlement Fees</a> in ETH. These Settlement Fees include the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
 
-<p>The Reporting Fee is sent to the <a href="#reporting-window">Fee Window</a> that contains the <a href="#market">Market</a> being traded on, and is later used to pay <a href="#rep">REP</a> holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+<p>The Reporting Fee is a dynamic amount based on the price of <a href="#rep">REP</a> and the value of the <a href="#open-interest">Open Interest</a> across all of Augur&rsquo;s <a href="#market">Markets</a>. Augur sets the Reporting Fee so as to target a REP market cap that is 5 times the value of the Open Interest across all of Augur&rsquo;s markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.</p>
+
+<p>The Reporting Fee is sent to the <a href="#reporting-window">Fee Window</a> that contains the Market being traded on, and is later used to pay REP holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <!-- TODO: Remove this section and links to it. -->
 
@@ -6926,9 +7015,13 @@ Goals:
 
 <p>All <a href="#market">Markets</a> created on Augur belong to a Universe. Augur has only one Universe at launch (the [Genesis Universe]), but more can be created in the rare event of a <a href="#fork">Fork</a>. The Universe in which a Fork occurs will become a <a href="#locked-universe">Locked Universe</a> and new <a href="#child-universes">Child Universes</a> will be created, one for each <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>. Once a <a href="#fork-period">Fork Phase</a> begins, <a href="#rep">REP</a> holders can choose to migrate their REP to one of the new Child Universes. They don&rsquo;t have to migrate, but Locked Universes do not allow the creation of new Markets, and therefore there will be no Markets to <a href="#report">Report</a> on in the future and no <a href="#reporting-fees">Fees</a> to earn. All Child Universes can continue to operate after the <a href="#fork-period">Fork Phase</a> ends.</p>
 
+<!-- TODO: Add better desription on how the Validity Bond amount is calculated. -->
+
 <h2 id="validity-bond">Validity Bond</h2>
 
-<p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not <a href="#invalid-outcome">Invalid</a>.</p>
+<p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not <a href="#invalid-outcome">Invalid</a>.</p>
+
+<p>The Validity Bond is a dynamic amount based on the percentage of Markets in Augur that are being <a href="#finalized-market">Finalized</a> as Invalid. Augur targets having 1% of its Markets Finalized as Invalid. This means that this amount will go up if the percentage of Markets that Finalized as Invalid in the last Fee Window is greater than 1% and will go down if that percentage is lower than 1%.</p>
 
 <h2 id="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</h2>
 
