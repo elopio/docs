@@ -135,6 +135,11 @@ By design, the Dispute Bond sizes for each Dispute Round are chosen such that an
 
 End Time is the date and time that a [Market](#market)'s event will have come to pass and should be known. After this date and time has passed the Market will get [Reported](#report) on and eventually [Finalized](#finalized-market).
 
+<!-- TODO: Possibly remove this entry if it's not linked to elsewhere. -->
+## Fee Token
+
+Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur's Solidity smart contracts to allow users to redeem [REP](#rep) Staked either in an [Initial Report](#initial-report) or in a [Crowdsourcer](#crowdsourcer). When an [Initial Reporter](#initial-reporter) submits an [Initial Report](#initial-report) in a given [Fee Window](#fee-window), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Similarly, when a user Stakes REP in a Crowdsourcer to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated that user to determine what proportion of the Fee Window's [Reporting Fees](#reporting-fee) (in Ether) to distribute to them.
+
 ## Fee Window
 
 Augur’s [Reporting](#report) system runs on a cycle of consecutive 7-day long [Fee Windows](#fee-windows). Any fees collected by Augur during a given Fee Window are added to a [Reward Pool](#reward-pool) for that Fee Window. The Reward Pool is used to reward [REP](#rep) holders who participate in Augur’s Reporting process. REP holders who [Stake](#dispute-stake) REP during a given Fee Window will receive an amount of fees from the Reward Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Initial Reporting](#initial-reporting), [Disputing](#dispute) an [Outcome](#outcome), or simply purchasing [Participation Tokens](#participation-token) directly.
@@ -236,6 +241,10 @@ The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price
 
 The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of [attoETH](#atto-prefix) required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#share) for a Market. When Shares are [Settled](#settlement), then each Complete Set will yield Number of Ticks [attoETH](#atto-prefix). The yield from the Complete Sets Settlement is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the [Number of Ticks](#number-of-ticks) set for the Market.
 
+## Open Interest
+
+Open Interest is the number of [Complete Sets](#complete-set) that exist in a [Market](#market).
+
 ## Open Order
 
 An Open Order is an [Order](#order) that is currently on the [Order Book](#order-book) and has not been completely [Filled](#fill-order).
@@ -306,11 +315,14 @@ A Report, or Reporting, is the Staking of [REP](#rep) on a particular [Outcome](
 
 A Reporter is a [REP](#rep) holder who Stakes REP on the [Outcome](#outcome) of a [Market](#market) that does not have a [Tentative Outcome](#tentative-outcome) but does have an [End Time](#end-time) that has passed. A [Designated Reporter](#designated-reporter) is assigned by the [Market Creator](#market-creator) during Market Creation for [Designated Reporting](#designated-reporting). If the Designated Reporter fails to submit a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), any other user can submit an [Initial Report](#initial-report) instead.
 
+<!-- TODO: Add better explanation on how Reporting Fee is calculated. (Actual code for this is in Universe:getOrCacheReportingFeeDivisor) -->
 ## Reporting Fee
 
 The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#share) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract [Settlement Fees](#settlement-fees) in ETH. These Settlement Fees include the [Creator Fee](#creator-fee) and the Reporting Fee. 
 
-The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the [Market](#market) being traded on, and is later used to pay [REP](#rep) holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
+The Reporting Fee is a dynamic amount based on the price of [REP](#rep) and the value of the [Open Interest](#open-interest) across all of Augur's [Markets](#market). Augur sets the Reporting Fee so as to target a REP market cap that is 5 times the value of the Open Interest across all of Augur's markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.
+
+The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the Market being traded on, and is later used to pay REP holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 
 <!-- TODO: Remove this section and links to it. -->
 ## Reporting Phase
@@ -368,9 +380,12 @@ A Topic is a keyword used to categorize [Markets](#market). All Markets must hav
 
 All [Markets](#market) created on Augur belong to a Universe. Augur has only one Universe at launch (the [Genesis Universe]), but more can be created in the rare event of a [Fork](#fork). The Universe in which a Fork occurs will become a [Locked Universe](#locked-universe) and new [Child Universes](#child-universes) will be created, one for each [Outcome](#outcome) of the [Forked Market](#forked-market). Once a [Fork Phase](#fork-period) begins, [REP](#rep) holders can choose to migrate their REP to one of the new Child Universes. They don't have to migrate, but Locked Universes do not allow the creation of new Markets, and therefore there will be no Markets to [Report](#report) on in the future and no [Fees](#reporting-fees) to earn. All Child Universes can continue to operate after the [Fork Phase](#fork-period) ends.
 
+<!-- TODO: Add better desription on how the Validity Bond amount is calculated. -->
 ## Validity Bond
 
-The Validity Bond is paid by the [Market Creator](#market-creator) during Market Creation. The bond is paid in ETH and is refunded to the Market Creator if the [Final Outcome](#final-outcome) of the [Market](#market) is not [Invalid](#invalid-outcome).
+The Validity Bond is paid by the [Market Creator](#market-creator) during [Market](#market) creation. The bond is paid in ETH and is refunded to the Market Creator if the [Final Outcome](#final-outcome) of the [Market](#market) is not [Invalid](#invalid-outcome).
+
+The Validity Bond is a dynamic amount based on the percentage of Markets in Augur that are being [Finalized](#finalized-market) as Invalid. Augur targets having 1% of its Markets Finalized as Invalid. This means that this amount will go up if the percentage of Markets that Finalized as Invalid in the last Fee Window is greater than 1% and will go down if that percentage is lower than 1%.
 
 ## Waiting for the Next Fee Window to Begin Phase
 
