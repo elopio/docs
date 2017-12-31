@@ -196,9 +196,6 @@ var _outcome = "1";
 
 augur.api.CancelOrder.cancelOrder({
   _orderId: _orderId,
-  _type: _type,
-  _market: _market,
-  _outcome: _outcome,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -225,9 +222,9 @@ augur.api.CancelOrder.cancelOrder({
 ```
 #### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/cancelOrder.se)
 
-#### augur.api.CancelOrder.cancelOrder({ \_orderId, \_type, \_market, \_outcome, onSent, onSuccess, onFailed })
+#### augur.api.CancelOrder.cancelOrder({ \_orderId, onSent, onSuccess, onFailed })
 
-The `cancelOrder` transaction is used to cancel and refund an existing order on the specified `_market` of `_type` for the `_outcome` given its `_orderId`. This will fail if `msg.sender` isn't the owner of the order, if the `_market` or `_orderId` is not defined, or if `_type` is not an expected value (`1` for a `BID`, `2` for an `ASK`). It returns true if the order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)
+The `cancelOrder` transaction is used to cancel and refund an existing [Order](#order) on the [Order Book](#order-book) with the specified `_orderId`. This will fail if `msg.sender` isn't the owner of the Order, if the `_orderId` is undefined. It returns true if the Order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Claim Trading Proceeds Tx API
 ------------------------------
