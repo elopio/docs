@@ -3887,9 +3887,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CancelOrder</span><span class="p">.</span><span class="nx">cancelOrder</span><span class="p">({</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span><span class="p">,</span>
-  <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
@@ -3916,9 +3913,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-cancelorder-se-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/cancelOrder.se">Cancel Order Contract Code</a></h4>
 
-<h4 id="augur-api-cancelorder-cancelorder-_orderid-_type-_market-_outcome-onsent-onsuccess-onfailed">augur.api.CancelOrder.cancelOrder({ _orderId, _type, _market, _outcome, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-cancelorder-cancelorder-_orderid-onsent-onsuccess-onfailed">augur.api.CancelOrder.cancelOrder({ _orderId, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">cancelOrder</code> transaction is used to cancel and refund an existing order on the specified <code class="prettyprint">_market</code> of <code class="prettyprint">_type</code> for the <code class="prettyprint">_outcome</code> given its <code class="prettyprint">_orderId</code>. This will fail if <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the order, if the <code class="prettyprint">_market</code> or <code class="prettyprint">_orderId</code> is not defined, or if <code class="prettyprint">_type</code> is not an expected value (<code class="prettyprint">1</code> for a <code class="prettyprint">BID</code>, <code class="prettyprint">2</code> for an <code class="prettyprint">ASK</code>). It returns true if the order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>The <code class="prettyprint">cancelOrder</code> transaction is used to cancel and refund an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with the specified <code class="prettyprint">_orderId</code>. This will fail if <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the Order, if the <code class="prettyprint">_orderId</code> is undefined. It returns true if the Order was successfully canceled. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
 <h2 id="claim-trading-proceeds-tx-api">Claim Trading Proceeds Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Claim Trading Proceeds Contract Transaction API Examples:</span>
