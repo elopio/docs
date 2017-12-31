@@ -135,7 +135,7 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
     * **`_denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
     * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
-    * **`_numOutcomes`**  (number) Number of [Outcomes](#outcomes) this Market has, as an integer on [2, 8].
+    * **`_outcomes`**  (Array.<string>) Array of names for all possible outcomes for the Market event. 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).

@@ -1665,15 +1665,19 @@ Trade Tx API
 var _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 var _outcome = "1";
 var _fxpAmount = "10000000000000000000"; // 10.0
-var _fxpPrice = "500000000000000000"; // 0.5
+var _price = "500000000000000000"; // 0.5
+var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
+var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000003";
 
 augur.api.Trade.publicBuy({
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
-  _fxpPrice: _fxpPrice,
-  _tradeGroupId: _tradeGroupId,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupID,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
   onFailed: function (result) { console.log(result) }
@@ -1702,7 +1706,9 @@ augur.api.Trade.publicSell({
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1733,7 +1739,9 @@ augur.api.Trade.publicTrade({
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1764,7 +1772,9 @@ augur.api.Trade.publicTakeBestOrder({
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
   onSent: function (result) { console.log(result) },
   onSuccess: function (result) { console.log(result) },
@@ -1792,21 +1802,21 @@ augur.api.Trade.publicTakeBestOrder({
 ```
 #### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol)
 
-#### augur.api.Trade.publicBuy({ \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicBuy({ \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicBuy` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to buy at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to buy `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
+The `publicBuy` transaction is used to purchase [Shares](#share) for a specified `_market` and `_outcome`. The amount of Shares to purchase is `_fxpAmount`, denoted in [attoshares](#atto-prefix), and the price point to buy at is `_price`, denoted in attotokens of the `_market`'s denomination token. This transaction will take [Orders](#order) off the [Order Book](#order-book) that can be filled with this request, otherwise this transaction will create a new Order to buy `_fxpAmount` of Shares at `_price`. In order to optimize the process of putting the Order on the Order Book, `_betterOrderId` and `_worseOrderId` must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after `_price`, and their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this Order was filled completely, or if this Order can't be filled immediately, an Order will be created and the `_orderId` of that new Order will be returned.
 
-#### augur.api.Trade.publicSell({ \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicSell({ \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicSell` transaction is used to purchase shares for a specified `_market` and `_outcome`. The amount of shares you wish to purchase is `_fxpAmount` denoted in attoshares and the price point you would like to sell at is `_fxpPrice` denoted in attotokens of the `_market`'s denomination token. This transaction will take orders off the order book that can be filled with this request, otherwise this transaction will create a new order to sell `_fxpAmount` of shares at `_fxpPrice`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
+The `publicSell` transaction is used to purchase [Shares](#share) for a specified `_market` and `_outcome`. The amount of Shares to purchase is `_fxpAmount`, denoted in [attoshares](#atto-prefix), and the price point  to sell at is `_price`, denoted in attotokens of the `_market`'s denomination token. This transaction will take [Orders](#order) off the [Order Book](#order-book) that can be filled with this request, otherwise this transaction will create a new Order to sell `_fxpAmount` of Shares at `_price`. In order to optimize the process of sorting the new Order on the Order Book, `_betterOrderId` and `_worseOrderId` must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after `_price`, and their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. This transaction returns `1` if this Order was filled completely, or if this Order can't be filled immediately, an Order will be created and the `_orderId` of that new Order will be returned.
 
-#### augur.api.Trade.publicTrade({ \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTrade({ \_direction, \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicTrade` transaction is works exactly like `publicBuy` or `publicSell` however a direction must be specified this time. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
+The `publicTrade` transaction works like `publicBuy` or `publicSell`; however a direction must be specified. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
 
-#### augur.api.Trade.publicTakeBestOrder({ \_direction, \_market, \_outcome, \_fxpAmount, \_fxpPrice, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicTakeBestOrder({ \_direction, \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicTakeBestOrder` transaction will work very similarly to `publicTrade` except it will not create an order if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
+The `publicTakeBestOrder` transaction works similarly to `augur.api.Trade.publicTrade`, except it does not create an [Order](#order) if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. This transaction returns the fixed point amount not filled by the order, so `0` for a completely filled order, some other number if this request could only be partially filled.
 
 TradingEscapeHatch Tx API
 ---------------------
@@ -2191,7 +2201,7 @@ Creates a new [Binary Market](#binary-market). After the transaction has complet
 
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `_endTime` has already passed, `_feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `_description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
-#### augur.api.Universe.createCategoricalMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_numOutcomes, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+#### augur.api.Universe.createCategoricalMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_outcomes, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
 
 Creates a new [Categorical Market](#categorical-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
@@ -2201,7 +2211,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 * `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
 * `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
 * `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
-* `_numOutcomes` - Total possible outcomes for the Market event. 
+* `_outcomes` (Array.<string>) Array of names for all possible outcomes for the Market event. 
 * `_topic` - Market [Topic](#topic). 
 * `_description` - Description of the Market event. 
 * `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
