@@ -2211,7 +2211,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 * `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
 * `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
 * `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
-* `_outcomes` (Array.<string>) Array of names for all possible outcomes for the Market event. 
+* `_outcomes` (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
 * `_topic` - Market [Topic](#topic). 
 * `_description` - Description of the Market event. 
 * `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
