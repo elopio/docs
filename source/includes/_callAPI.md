@@ -92,97 +92,97 @@ Fee Window Call API
 // Fee Window Contract Call API Examples:
 var feeWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api.FeeWindow.allMarketsFinalized({ tx: { to: feeWindow } }, function (error, allMarketsFinalized) { /* ... */ })
+augur.api.FeeWindow.allMarketsFinalized({ tx: { to: feeWindow } }, function (error, allMarketsFinalized) { console.log(allMarketsFinalized); });
 // example output:
-allMarketsFinalized = "1"
+"1"
 
-augur.api.FeeWindow.getAvgReportingGasPrice({ tx: { to: feeWindow } }, function (error, avgReportingGasPrice) { /* ... */ })
+augur.api.FeeWindow.getAvgReportingGasPrice({ tx: { to: feeWindow } }, function (error, avgReportingGasPrice) { console.log(avgReportingGasPrice); });
 // example output:
-avgReportingGasPrice = "340000"
+"340000"
 
-augur.api.FeeWindow.getDisputeEndTime({ tx: { to: feeWindow } }, function (error, disputeEndTime) { /* ... */ })
+augur.api.FeeWindow.getDisputeEndTime({ tx: { to: feeWindow } }, function (error, disputeEndTime) { console.log(disputeEndTime); });
 // example output:
-disputeEndTime = "1500907130"
+"1500907130"
 
-augur.api.FeeWindow.getDisputeStartTime({ tx: { to: feeWindow } }, function (error, disputeStartTime) { /* ... */ })
+augur.api.FeeWindow.getDisputeStartTime({ tx: { to: feeWindow } }, function (error, disputeStartTime) { console.log(disputeStartTime); });
 // example output:
-disputeStartTime = "1500647930"
+"1500647930"
 
-augur.api.FeeWindow.getEndTime({ tx: { to: feeWindow } }, function (error, endTime) { /* ... */ })
+augur.api.FeeWindow.getEndTime({ tx: { to: feeWindow } }, function (error, endTime) { console.log(endTime); });
 // example output:
-endTime = "1500388730"
+"1500388730"
 
-augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx: { to: feeWindow } }, function (error, numDesignatedReportNoShows) { /* ... */ })
+augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx: { to: feeWindow } }, function (error, numDesignatedReportNoShows) { console.log(numDesignatedReportNoShows); });
 // example output:
-numDesignatedReportNoShows = "2"
+"2"
 
-augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx: { to: feeWindow } }, function (error, numIncorrectDesignatedReportMarkets) { /* ... */ })
+augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx: { to: feeWindow } }, function (error, numIncorrectDesignatedReportMarkets) { console.log(numIncorrectDesignatedReportMarkets); });
 // example output:
-numIncorrectDesignatedReportMarkets = "1"
+"1"
 
-augur.api.FeeWindow.getNumInvalidMarkets({ tx: { to: feeWindow } }, function (error, numInvalidMarkets) { /* ... */ })
+augur.api.FeeWindow.getNumInvalidMarkets({ tx: { to: feeWindow } }, function (error, numInvalidMarkets) { console.log(numInvalidMarkets); });
 // example output:
-numInvalidMarkets = "3"
+"3"
 
-augur.api.FeeWindow.getNumMarkets({ tx: { to: feeWindow } }, function (error, numMarkets) { /* ... */ })
+augur.api.FeeWindow.getNumMarkets({ tx: { to: feeWindow } }, function (error, numMarkets) { console.log(numMarkets); });
 // example output:
-numMarkets = "65"
+"65"
 
-augur.api.FeeWindow.getParticipationToken({ tx: { to: feeWindow } }, function (error, ) { /* ... */ })
+augur.api.FeeWindow.getParticipationToken({ tx: { to: feeWindow } }, function (error, participationToken) { console.log(participationToken); });
 // example output:
-= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
+"0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
 
-augur.api.FeeWindow.getReportingEndTime({ tx: { to: feeWindow } }, function (error, reportingEndTime) { /* ... */ })
+augur.api.FeeWindow.getReportingEndTime({ tx: { to: feeWindow } }, function (error, reportingEndTime) { console.log(reportingEndTime); });
 // example output:
-reportingEndTime = "1500647900"
+"1500647900"
 
-augur.api.FeeWindow.getReportingStartTime({ tx: { to: feeWindow } }, function (error, reportingStartTime) { /* ... */ })
+augur.api.FeeWindow.getReportingStartTime({ tx: { to: feeWindow } }, function (error, reportingStartTime) { console.log(reportingStartTime); });
 // example output:
-reportingStartTime = "14998315100"
+"14998315100"
 
-augur.api.FeeWindow.getReputationToken({ tx: { to: feeWindow } }, function (error, reputationToken) { /* ... */ })
+augur.api.FeeWindow.getReputationToken({ tx: { to: feeWindow } }, function (error, reputationToken) { console.log(reputationToken); });
 // example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.FeeWindow.getStartTime({ tx: { to: feeWindow } }, function (error, startTime) { /* ... */ })
+augur.api.FeeWindow.getStartTime({ tx: { to: feeWindow } }, function (error, startTime) { console.log(startTime); });
 // example output:
-startTime = "14995895900"
+"14995895900"
 
-augur.api.FeeWindow.getTotalStake({ tx: { to: feeWindow } }, function (error, totalStake) { /* ... */ })
+augur.api.FeeWindow.getTotalStake({ tx: { to: feeWindow } }, function (error, totalStake) { console.log(totalStake); });
 // example output:
-totalStake = "18900512367"
+"18900512367"
 
-augur.api.FeeWindow.getTotalWinningStake({ tx: { to: feeWindow } }, function (error, totalStake) { /* ... */ })
+augur.api.FeeWindow.getTotalWinningStake({ tx: { to: feeWindow } }, function (error, totalWinningStake) { console.log(totalWinningStake); });
 // example output:
-totalStake = "29105"
+"29105"
 
-augur.api.FeeWindow.getUniverse({ tx: { to: feeWindow } }, function (error, universe) { /* ... */ })
+augur.api.FeeWindow.getUniverse({ tx: { to: feeWindow } }, function (error, universe) { console.log(universe); });
 // example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+"0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.FeeWindow.isActive({ tx: { to: feeWindow } }, function (error, isActive) { /* ... */ })
+augur.api.FeeWindow.isActive({ tx: { to: feeWindow } }, function (error, isActive) { console.log(isActive); });
 // example output:
-isActive = "1"
+"1"
 
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.FeeWindow.isContainerForMarket({
   tx: { to: feeWindow },
   _shadyMarket: _market
-}, function (error, isContainerForMarket) { /* ... */ })
+}, function (error, isContainerForMarket) { console.log(isContainerForMarket); });
 // example output:
-isContainerForMarket = "1"
+"1"
 
-augur.api.FeeWindow.isDisputeActive({ tx: { to: feeWindow } }, function (error, isDisputeActive) { /* ... */ })
+augur.api.FeeWindow.isDisputeActive({ tx: { to: feeWindow } }, function (error, isDisputeActive) { console.log(isDisputeActive); });
 // example output:
-isDisputeActive = "1"
+"1"
 
-augur.api.FeeWindow.isForkingMarketFinalized({ tx: { to: feeWindow } }, function (error, isForkingMarketFinalized) { /* ... */ })
+augur.api.FeeWindow.isForkingMarketFinalized({ tx: { to: feeWindow } }, function (error, isForkingMarketFinalized) { console.log(isForkingMarketFinalized); });
 // example output:
-isForkingMarketFinalized = "0";
+"0";
 
-augur.api.FeeWindow.isReportingActive({ tx: { to: feeWindow } }, function (error, isReportingActive) { /* ... */ })
+augur.api.FeeWindow.isReportingActive({ tx: { to: feeWindow } }, function (error, isReportingActive) { console.log(isReportingActive); });
 // example output:
-isReportingActive = "1"
+"1"
 ```
 #### [Fee Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
 
@@ -192,7 +192,7 @@ Returns true if all [Markets](#market) in the specified [Fee Window](#reporting-
 
 #### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
 
-Returns the average amount of Gas spent per [Report](#report) submit during the [Fee Window](#fee-window).
+Returns the average amount of gas spent to submit either a [Designated Report](#designated-report) or [First Public Report](#first-public-report) during the [Fee Window](#fee-window).
 
 #### augur.api.FeeWindow.getDisputeEndTime({ tx }[, callback])
 
@@ -204,11 +204,11 @@ As stated above, [Fee Windows](#reporting-window) have two phases, the [Reportin
 
 #### augur.api.FeeWindow.getEndTime({ tx }[, callback])
 
-Returns a timestamp for when this [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
+Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active.
 
 #### augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])
 
-Returns the number of [Markets](#market) belonging to this [Fee Window](#fee-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+Returns the number of [Markets](#market) belonging to this [Fee Window](#fee-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
 
 <!-- TODO: Update description -->
 #### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
@@ -217,11 +217,11 @@ Returns the number of [Markets](#market) belonging to this [Fee Window](#fee-win
 
 #### augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])
 
-Returns the number of [Markets](#market) that were [Reported](#report) to be Invalid during a [Fee Window](#fee-window). Invalid Markets are Markets that aren't clearly defined or doesn't fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
+Returns the number of [Markets](#market) that were [Reported](#report) to be [Invalid](#invalid-outcome) during the specified [Fee Window](#fee-window). [Invalid](#invalid-outcome) Markets are Markets that aren't clearly defined or do not fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
 
 #### augur.api.FeeWindow.getNumMarkets({ tx }[, callback])
 
-Returns the total number of [Markets](#market) that belong to the [Fee Window](#fee-window).
+Returns the total number of [Markets](#market) that are in the [Dispute Round Phase](#dispute-round-phase) for the specified [Fee Window](#fee-window).
 
 #### augur.api.FeeWindow.getParticipationToken({ tx }[, callback])
 
@@ -241,7 +241,7 @@ Returns the [Reputation Token (REP)](#rep) address for the specified [Fee Window
 
 #### augur.api.FeeWindow.getStartTime({ tx }[, callback])
 
-Returns a timestamp of when a [Fee Window](#fee-window) becomes active and starts. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Fee Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Fee Window.
+Returns a Unix timestamp of when a [Fee Window](#fee-window) becomes active and starts. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active. Only active Fee Windows allow [Reporters](#reporter) to [Challenge](#challenge) the [Tentative Outcomes](#tentative-outcome) of [Markets](#market) contained in the Fee Window.
 
 #### augur.api.FeeWindow.getTotalStake({ tx }[, callback])
 
@@ -253,11 +253,11 @@ Returns the total amount [Participation Tokens](#participation-token) purchased 
 
 #### augur.api.FeeWindow.getUniverse({ tx }[, callback])
 
-Returns the [Universe](#universe) address that the [Fee Window](#fee-window) belongs to. Every Fee Window belongs to a specific Universe in which they were created and operate within.
+Returns the [Universe](#universe) Ethereum contract address that the [Fee Window](#fee-window) belongs to. Every Fee Window belongs to a specific Universe in which they were created and can operate.
 
 #### augur.api.FeeWindow.isActive({ tx }[, callback])
 
-This method returns whether the [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase), which last a total of 30 days. Returns `1` if the `feeWindow` is active, `0` if not.
+This method returns whether the [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Dispute Round Phase](#dispute-round-phase), which last a total of 7 days. Returns `1` if the specified Fee Window is active, or `0` otherwise.
 
 #### augur.api.FeeWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
@@ -488,7 +488,7 @@ Returns the timestamp of when the [Designated Reporter](#designated-reporter)'s 
 
 #### augur.api.Market.getEndTime({ tx }[, callback])
 
-Returns the timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes, the Market enters the [Designated Reporting Phase](#designated-reporting-phase).
+Returns the Unix timestamp for when the specified `market`'s event has come to pass. When the [Market](#market)'s [End Time](#end-time) passes, the Market enters the [Designated Reporting Phase](#designated-reporting-phase).
 
 #### augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ tx }[, callback])
 
@@ -544,7 +544,7 @@ Returns the current [Reporting](#report) State that the `market` is in. This met
 
 #### augur.api.Market.getReputationToken({ tx }[, callback])
 
-Returns the Ethereum contract address of the [Reputation Token (REP)](#rep) for the specified [Market](#market). REP is Staked whenever a First Report is submitted or when users attempt to Challenge the Tentative Outcome of a Market. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+Returns the Ethereum contract address of the [Reputation Token (REP)](#rep) for the specified [Market](#market). REP is Staked whenever an [Initial Report](#initial-report) is submitted or when users attempt to Challenge the Tentative Outcome of a Market. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
 #### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
 
@@ -924,7 +924,7 @@ topMigrationDestination = "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 
 The Reputation Token, known as [REP](#rep), is the key that allows Augur's [Decentralized Oracle](#decentralized-oracle) system to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a Market, and as a bond when creating a Market. [Reporters](#reporter) stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
 
-REP is also used to Challenge the Tentative Outcome of Reports during the [Dispute Round Phase](#dispute-round-phase). If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and the Designated Report No-Show REP Bond is added to whatever the First Reporter staked, there by improving her stake and potential rewards if correctly staked.
+REP is also used to Challenge the Tentative Outcome of Reports during the [Dispute Round Phase](#dispute-round-phase). If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Designated Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Public Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), and the Designated Report No-Show REP Bond is added to whatever the First Public Reporter staked, there by improving her stake and potential rewards if correctly staked.
 
 The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 

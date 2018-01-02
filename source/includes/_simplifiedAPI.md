@@ -195,7 +195,7 @@ Note: This function will send a transaction if needed to create the current [Rep
 <!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 ### augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}
 
-Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These ether costs are broken down by the gas cost paid to the [First Reporter](#first-reporter) and the cost of the [Validity Bond](#validity-bond).
+Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
 
 Note: This function will send a transaction if needed to create the current Reporting Window.
 
@@ -1494,7 +1494,7 @@ Serves as an enum for the state of an order.
 ### REPORTING_STATE  (Object)
 
 Serves as an enum for the state of a stake token.
-
+<!-- TODO: Update references to first report -->
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
 * **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a designated report.
