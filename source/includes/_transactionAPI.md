@@ -704,36 +704,6 @@ Market Tx API
 ```javascript
 // Market Contract Transaction API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _payoutNumerators = [ 0, 1000 ];
-
-var _invalid = false;
-augur.api.Market.derivePayoutDistributionHash({
-  market: market,
-  _payoutNumerators: _payoutNumerators,
-  _invalid: _invalid,
-  onSent: function (result) { console.log(result) },
-  onSuccess: function (result) { console.log(result) },
-  onFailed: function (result) { console.log(result) }
-})
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.disavowTokens({
   market: market,
@@ -761,6 +731,8 @@ augur.api.Market.disavowTokens({
   value: "0x0"
 }
 
+var _payoutNumerators = [ 0, 1000 ];
+var _invalid = false;
 augur.api.Market.getOrCreateStakeToken({ 
   _payoutNumerators: _payoutNumerators, 
   _invalid: _invalid,
@@ -921,10 +893,6 @@ augur.api.Market.withdrawInEmergency {
 }
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
-
-#### augur.api.Market.derivePayoutDistributionHash({ market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
-
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and `_invalid` using keccak256.
 
 #### augur.api.Market.disavowTokens({ market, onSent, onSuccess, onFailed })
 

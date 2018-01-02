@@ -29,6 +29,20 @@ Augur's Call API is made up of "getter" methods that retrieve information from t
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
+Augur Call API
+---------------------------
+```javascript
+var augur = "0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7";
+augur.api.Augur.isKnownUniverse({ 
+  tx: { to: augur },
+  _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
+}, function (error, isKnownUniverse) { console.log(isKnownUniverse); });
+// example output:
+"1"
+```
+### augur.api.Augur.isKnownUniverse({ tx, _universe }[, callback])
+
+Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns `1` if the specified `_universe` is in that list of known [Universes](#universe), or `0` otherwise.
 
 Dispute Bond Call API
 ---------------------------
@@ -54,7 +68,7 @@ universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 ```
 #### [Dispute Bond Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol)
 
-The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Reporting Window](#reporting-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Tentative Outcome](#tentative-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
+The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Fee Window](#fee-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Tentative Outcome](#tentative-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
 
 #### augur.api.DisputeBond.getBondRemainingToBePaidOut({ tx }[, callback])
 
@@ -72,45 +86,246 @@ This transaction will return the [Market](#market) that a specified `disputeBond
 
 This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBond` belongs to.
 
+Fee Window Call API
+-------------------------
+```javascript
+// Fee Window Contract Call API Examples:
+var feeWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
+
+augur.api.FeeWindow.allMarketsFinalized({ tx: { to: feeWindow } }, function (error, allMarketsFinalized) { /* ... */ })
+// example output:
+allMarketsFinalized = "1"
+
+augur.api.FeeWindow.getAvgReportingGasPrice({ tx: { to: feeWindow } }, function (error, avgReportingGasPrice) { /* ... */ })
+// example output:
+avgReportingGasPrice = "340000"
+
+augur.api.FeeWindow.getDisputeEndTime({ tx: { to: feeWindow } }, function (error, disputeEndTime) { /* ... */ })
+// example output:
+disputeEndTime = "1500907130"
+
+augur.api.FeeWindow.getDisputeStartTime({ tx: { to: feeWindow } }, function (error, disputeStartTime) { /* ... */ })
+// example output:
+disputeStartTime = "1500647930"
+
+augur.api.FeeWindow.getEndTime({ tx: { to: feeWindow } }, function (error, endTime) { /* ... */ })
+// example output:
+endTime = "1500388730"
+
+augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx: { to: feeWindow } }, function (error, numDesignatedReportNoShows) { /* ... */ })
+// example output:
+numDesignatedReportNoShows = "2"
+
+augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx: { to: feeWindow } }, function (error, numIncorrectDesignatedReportMarkets) { /* ... */ })
+// example output:
+numIncorrectDesignatedReportMarkets = "1"
+
+augur.api.FeeWindow.getNumInvalidMarkets({ tx: { to: feeWindow } }, function (error, numInvalidMarkets) { /* ... */ })
+// example output:
+numInvalidMarkets = "3"
+
+augur.api.FeeWindow.getNumMarkets({ tx: { to: feeWindow } }, function (error, numMarkets) { /* ... */ })
+// example output:
+numMarkets = "65"
+
+augur.api.FeeWindow.getParticipationToken({ tx: { to: feeWindow } }, function (error, ) { /* ... */ })
+// example output:
+= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
+
+augur.api.FeeWindow.getReportingEndTime({ tx: { to: feeWindow } }, function (error, reportingEndTime) { /* ... */ })
+// example output:
+reportingEndTime = "1500647900"
+
+augur.api.FeeWindow.getReportingStartTime({ tx: { to: feeWindow } }, function (error, reportingStartTime) { /* ... */ })
+// example output:
+reportingStartTime = "14998315100"
+
+augur.api.FeeWindow.getReputationToken({ tx: { to: feeWindow } }, function (error, reputationToken) { /* ... */ })
+// example output:
+reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api.FeeWindow.getStartTime({ tx: { to: feeWindow } }, function (error, startTime) { /* ... */ })
+// example output:
+startTime = "14995895900"
+
+augur.api.FeeWindow.getTotalStake({ tx: { to: feeWindow } }, function (error, totalStake) { /* ... */ })
+// example output:
+totalStake = "18900512367"
+
+augur.api.FeeWindow.getTotalWinningStake({ tx: { to: feeWindow } }, function (error, totalStake) { /* ... */ })
+// example output:
+totalStake = "29105"
+
+augur.api.FeeWindow.getUniverse({ tx: { to: feeWindow } }, function (error, universe) { /* ... */ })
+// example output:
+universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.FeeWindow.isActive({ tx: { to: feeWindow } }, function (error, isActive) { /* ... */ })
+// example output:
+isActive = "1"
+
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+augur.api.FeeWindow.isContainerForMarket({
+  tx: { to: feeWindow },
+  _shadyMarket: _market
+}, function (error, isContainerForMarket) { /* ... */ })
+// example output:
+isContainerForMarket = "1"
+
+augur.api.FeeWindow.isDisputeActive({ tx: { to: feeWindow } }, function (error, isDisputeActive) { /* ... */ })
+// example output:
+isDisputeActive = "1"
+
+augur.api.FeeWindow.isForkingMarketFinalized({ tx: { to: feeWindow } }, function (error, isForkingMarketFinalized) { /* ... */ })
+// example output:
+isForkingMarketFinalized = "0";
+
+augur.api.FeeWindow.isReportingActive({ tx: { to: feeWindow } }, function (error, isReportingActive) { /* ... */ })
+// example output:
+isReportingActive = "1"
+```
+#### [Fee Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
+
+#### augur.api.FeeWindow.allMarketsFinalized({ tx }[, callback])
+
+Returns true if all [Markets](#market) in the specified [Fee Window](#reporting-window) are [Finalized Markets](#finalized-market). Otherwise, returns false.
+
+#### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
+
+Returns the average amount of Gas spent per [Report](#report) submit during the [Fee Window](#fee-window).
+
+#### augur.api.FeeWindow.getDisputeEndTime({ tx }[, callback])
+
+Every [Fee Window](#fee-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Round Phase](#dispute-round-phase). This method is used to return the timestamp for the end of the Fee Window's Dispute Round Phase.
+
+#### augur.api.FeeWindow.getDisputeStartTime({ tx }[, callback])
+
+As stated above, [Fee Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase) and this method returns the timestamp of the start of the Dispute Round Phase.
+
+#### augur.api.FeeWindow.getEndTime({ tx }[, callback])
+
+Returns a timestamp for when this [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
+
+#### augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Fee Window](#fee-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+
+<!-- TODO: Update description -->
+#### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
+
+Returns the number of [Markets](#market) belonging to this [Fee Window](#fee-window) in which [Designated Reporter's](#designated-reporter) [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge) during the [Dispute Round Phase](#dispute-round-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
+
+#### augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])
+
+Returns the number of [Markets](#market) that were [Reported](#report) to be Invalid during a [Fee Window](#fee-window). Invalid Markets are Markets that aren't clearly defined or doesn't fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
+
+#### augur.api.FeeWindow.getNumMarkets({ tx }[, callback])
+
+Returns the total number of [Markets](#market) that belong to the [Fee Window](#fee-window).
+
+#### augur.api.FeeWindow.getParticipationToken({ tx }[, callback])
+
+Returns the Contract Address of the [Participation Token](#participation-token) associated with the specified [Fee Window](#fee-window).
+
+#### augur.api.FeeWindow.getReportingEndTime({ tx }[, callback])
+
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Fee Window](#fee-window) will be ending. Fee Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
+
+#### augur.api.FeeWindow.getReportingStartTime({ tx }[, callback])
+
+Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Fee Window](#fee-window) will be starting. Fee Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
+
+#### augur.api.FeeWindow.getReputationToken({ tx }[, callback])
+
+Returns the [Reputation Token (REP)](#rep) address for the specified [Fee Window](#fee-window). Every Fee Window has a [Reporting Phase](#reporting-phase) where [Reporters](#reporter) submit [Reports](#report) on the [Outcomes](#outcome) of [Markets](#market). In order to Report, Reporters need to stake REP. A Fee Window only accepts one REP contract as the source of staked REP and this method returns that contract's address.
+
+#### augur.api.FeeWindow.getStartTime({ tx }[, callback])
+
+Returns a timestamp of when a [Fee Window](#fee-window) becomes active and starts. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Fee Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Fee Window.
+
+#### augur.api.FeeWindow.getTotalStake({ tx }[, callback])
+
+Returns the total amount staked across all [Markets](#market) in the specified [Fee Window](#fee-window).
+
+#### augur.api.FeeWindow.getTotalWinningStake({ tx }[, callback])
+
+Returns the total amount [Participation Tokens](#participation-token) purchased in the specified [Fee Window](#fee-window). NOTE: Participation Tokens are only purchasable in the event that no [Market](#market) in a Fee Window can be reported on.
+
+#### augur.api.FeeWindow.getUniverse({ tx }[, callback])
+
+Returns the [Universe](#universe) address that the [Fee Window](#fee-window) belongs to. Every Fee Window belongs to a specific Universe in which they were created and operate within.
+
+#### augur.api.FeeWindow.isActive({ tx }[, callback])
+
+This method returns whether the [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase), which last a total of 30 days. Returns `1` if the `feeWindow` is active, `0` if not.
+
+#### augur.api.FeeWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
+
+Returns whether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Fee Window](#fee-window). Markets are assigned a Fee Window that is the first Fee Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `feeWindow`, `0` if not.
+
+#### augur.api.FeeWindow.isDisputeActive({ tx }[, callback])
+
+Returns whether the [Fee Window](#fee-window) is currently in it's [Dispute Round Phase](#dispute-round-phase) or not. The Dispute Round Phase is a 3 day long period that follows the Fee Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Fee Window's Dispute Round Phase is active, `0` if not.
+
+#### augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])
+
+Returns whether the [Forked Market](#forked-market) that caused this [Fee Window's](#fee-window) [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Fee Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
+
+#### augur.api.FeeWindow.isReportingActive({ tx }[, callback])
+
+Returns whether the [Fee Window](#fee-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Fee Window and is followed by a 3 day [Dispute Round Phase](#dispute-round-phase). Returns `1` if the Fee Window's Reporting Phase is active, `0` if not.
+
+
+
+
+
 Market Call API
 ----------------
 ```javascript
 // Market Contract Call API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
-augur.api.Market.designatedReporterShowed({ tx: { to: market } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); })
+augur.api.Market.derivePayoutDistributionHash({
+  tx: { to: market } },
+  _payoutNumerators: [ 0, 1000 ],
+  _invalid: false,
+});
 // example output:
 "1"
 
-augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ tx: { to: market } }, function (error, secondPlaceTentativeWinningPayoutDistributionHash) { console.log(secondPlaceTentativeWinningPayoutDistributionHash); })
+augur.api.Market.designatedReporterShowed({ tx: { to: market } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); });
+// example output:
+"1"
+
+augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ tx: { to: market } }, function (error, secondPlaceTentativeWinningPayoutDistributionHash) { console.log(secondPlaceTentativeWinningPayoutDistributionHash); });
 // example output:
 "0x20acbb1199c43cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Market.getDenominationToken({ tx: { to: market } }, function (error, denominationToken) { console.log(denominationToken); })
+augur.api.Market.getDenominationToken({ tx: { to: market } }, function (error, denominationToken) { console.log(denominationToken); });
 // example output:
 "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
 
-augur.api.Market.getDesignatedReporter({ tx: { to: market } }, function (error, designatedReporter) { console.log(designatedReporter); })
+augur.api.Market.getDesignatedReporter({ tx: { to: market } }, function (error, designatedReporter) { console.log(designatedReporter); });
 // example output:
 "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
-augur.api.Market.getDesignatedReporterDisputeBond({ tx: { to: market } }, function (error, designatedReporterDisputeBond) { console.log(designatedReporterDisputeBond); })
+augur.api.Market.getDesignatedReporterDisputeBond({ tx: { to: market } }, function (error, designatedReporterDisputeBond) { console.log(designatedReporterDisputeBond); });
 // example output:
 "0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"
 
-augur.api.Market.getDesignatedReportPayoutHash({ tx: { to: market } }, function (error, designatedReportPayoutHash) { console.log(designatedReportPayoutHash); })
+augur.api.Market.getDesignatedReportPayoutHash({ tx: { to: market } }, function (error, designatedReportPayoutHash) { console.log(designatedReportPayoutHash); });
 // example output:
 "0x58aff2018af3cb2ca3a3a1862df2d350300904a96039eb50cb0fd1ac3710aad"
 
-augur.api.Market.getDesignatedReportReceivedTime({ tx: { to: market } }, function (error, designatedReportReceivedTime) { console.log(designatedReportReceivedTime); })
+augur.api.Market.getDesignatedReportReceivedTime({ tx: { to: market } }, function (error, designatedReportReceivedTime) { console.log(designatedReportReceivedTime); });
 // example output:
 "1500388800";
 
-augur.api.Market.getEndTime({ tx: { to: market } }, function (error, endTime) { console.log(endTime); })
+augur.api.Market.getEndTime({ tx: { to: market } }, function (error, endTime) { console.log(endTime); });
 // example output:
 "1500388730";
 
-augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ tx: { to: market } }, function (error, extraDisputeBondRemainingToBePaidOut) { console.log(extraDisputeBondRemainingToBePaidOut); })
+augur.api.Market.getExtraDisputeBondRemainingToBePaidOut({ tx: { to: market } }, function (error, extraDisputeBondRemainingToBePaidOut) { console.log(extraDisputeBondRemainingToBePaidOut); });
 // example output:
 "1000";
 
@@ -121,105 +336,131 @@ augur.api.Market.getFeeWindow({
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.Market.getFinalizationTime({ tx: { to: market } }, function (error, finalizationTime) { console.log(finalizationTime); })
+augur.api.Market.getFinalizationTime({ tx: { to: market } }, function (error, finalizationTime) { console.log(finalizationTime); });
 // example output:
 "1500647930";
 
-augur.api.Market.getFinalPayoutDistributionHash({ tx: { to: market } }, function (error, finalPayoutDistributionHash) { console.log(finalPayoutDistributionHash); })
+augur.api.Market.getFinalPayoutDistributionHash({ tx: { to: market } }, function (error, finalPayoutDistributionHash) { console.log(finalPayoutDistributionHash); });
 // example output:
 "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Market.getFinalWinningStakeToken({ tx: { to: market } }, function (error, winningStakeToken) { console.log(winningStakeToken); })
+augur.api.Market.getFinalWinningStakeToken({ tx: { to: market } }, function (error, winningStakeToken) { console.log(winningStakeToken); });
 // example output:
 "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.Market.getForkingMarket({ tx: { to: market } }, function (error, forkedMarket) { console.log(forkedMarket); })
+augur.api.Market.getForkingMarket({ tx: { to: market } }, function (error, forkedMarket) { console.log(forkedMarket); });
 // example output:
 "0x0"
 
-augur.api.Market.getMarketCreatorMailbox({ tx: { to: market } }, function (error, marketCreatorMailbox) { console.log(marketCreatorMailbox); })
+augur.api.Market.getMarketCreatorMailbox({ tx: { to: market } }, function (error, marketCreatorMailbox) { console.log(marketCreatorMailbox); });
 // example output:
 "0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"
 
-augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx: { to: market } }, function (error, marketCreatorSettlementFee) { console.log(marketCreatorSettlementFee); })
+augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx: { to: market } }, function (error, marketCreatorSettlementFee) { console.log(marketCreatorSettlementFee); });
 // example output:
 "20000000000000000"
 
-augur.api.Market.getOwner({ tx: { to: market } }, function (error, owner) { console.log(owner); })
+augur.api.Market.getOwner({ tx: { to: market } }, function (error, owner) { console.log(owner); });
 // example output:
 "0x06cbcd92af2571f1419b622a794d65db524f682b"
 
-augur.api.Market.getNumberOfOutcomes({ tx: { to: market } }, function (error, numOutcomes) { console.log(numOutcomes); })
+augur.api.Market.getNumberOfOutcomes({ tx: { to: market } }, function (error, numOutcomes) { console.log(numOutcomes); });
 // example output:
 "2"
 
-augur.api.Market.getNumTicks({ tx: { to: market } }, function (error, numTicks) { console.log(numTicks); })
+augur.api.Market.getNumTicks({ tx: { to: market } }, function (error, numTicks) { console.log(numTicks); });
 // example output:
 "1000"
 
-augur.api.Market.getReportingState({ tx: { to: market } }, function (error, reportingState) { console.log(reportingState); })
+augur.api.Market.getReportingState({ tx: { to: market } }, function (error, reportingState) { console.log(reportingState); });
 // example output:
 "0";
 
-augur.api.Market.getReputationToken({ tx: { to: market } }, function (error, reputationToken) { console.log(reputationToken); })
+augur.api.Market.getReputationToken({ tx: { to: market } }, function (error, reputationToken) { console.log(reputationToken); });
 // example output:
 "0x23b17188ce3c491f6ab4427258d92452be5c8045"
 
 augur.api.Market.getShareToken({
   tx: { to: market },
   _outcome: 1
-}, function (error, shareToken) { console.log(shareToken); })
+}, function (error, shareToken) { console.log(shareToken); });
 // example output:
 "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
 var _payoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
-augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx: { to: market }, _payoutDistributionHash: _payoutDistributionHash }, function (error, stakeTokenOrZero) { console.log(stakeTokenOrZero); })
+augur.api.Market.getStakeTokenOrZeroByPayoutDistributionHash({ tx: { to: market }, _payoutDistributionHash: _payoutDistributionHash }, function (error, stakeTokenOrZero) { console.log(stakeTokenOrZero); });
 // example output:
 "0x5caa66408617f77601d0dc19c163621e7f4b8b38"
 
-augur.api.Market.getTentativeWinningPayoutDistributionHash({ tx: { to: market } }, function (error, tentativeWinningPayoutDistributionHash) { console.log(tentativeWinningPayoutDistributionHash); })
+augur.api.Market.getTentativeWinningPayoutDistributionHash({ tx: { to: market } }, function (error, tentativeWinningPayoutDistributionHash) { console.log(tentativeWinningPayoutDistributionHash); });
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.Market.getTotalStake({ tx: { to: market } }, function (error, totalStake) { console.log(totalStake); })
+augur.api.Market.getTotalStake({ tx: { to: market } }, function (error, totalStake) { console.log(totalStake); });
 // example output:
 "1000"
 
-augur.api.Market.getTotalWinningDisputeBondStake({ tx: { to: market } }, function (error, totalWinningDisputeBondStake) { console.log(totalWinningDisputeBondStake); })
+augur.api.Market.getTotalWinningDisputeBondStake({ tx: { to: market } }, function (error, totalWinningDisputeBondStake) { console.log(totalWinningDisputeBondStake); });
 // example output:
 "1000"
 
-augur.api.Market.getUniverse({ tx: { to: market } }, function (error, universe) { console.log(universe); })
+augur.api.Market.getUniverse({ tx: { to: market } }, function (error, universe) { console.log(universe); });
 // example output:
 "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-var stakeToken = "0xbb87186146569514b8cd8b72e57eec3849e3981f";
-augur.api.Market.isContainerForStakeToken({
+augur.api.Market.getWinningPayoutDistributionHash({ tx: { to: market } }, function (error, winningDistributionHash) { console.log(winningDistributionHash); });
+// example output:
+"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api.Market.getWinningPayoutNumerator({
   tx: { to: market },
-  _shadyStakeToken: stakeToken
-}, function (error, isContainerForStakeToken) { console.log(isContainerForStakeToken); })
+  _outcome: "0"
+}, function (error, getWinningPayoutNumerator) { console.log(getWinningPayoutNumerator); });
+// example output:
+"1000"
+
+augur.api.Market.isContainerForReportingParticipant({
+  tx: { to: market },
+  _shadyReportingParticipant: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
+}, function (error, isContainerForReportingParticipant) { console.log(isContainerForReportingParticipant); });
 // example output:
 "1"
 
-var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
+augur.api.Market.isContainerForStakeToken({
+  tx: { to: market },
+  _shadyStakeToken: "0xbb87186146569514b8cd8b72e57eec3849e3981f"
+}, function (error, isContainerForStakeToken) { console.log(isContainerForStakeToken); });
+// example output:
+"1"
+
 augur.api.Market.isContainerForShareToken({
   tx: { to: market },
-  _shadyShareToken: shareToken
-}, function (error, isContainerForShareToken) { console.log(isContainerForShareToken); })
+  _shadyShareToken: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
+}, function (error, isContainerForShareToken) { console.log(isContainerForShareToken); });
+// example output:
+"1"
+
+augur.api.Market.isFinalized({
+  tx: { to: market },
+}, function (error, isFinalized) { console.log(isFinalized); });
 // example output:
 "1"
 
 augur.api.Market.isInvalid({
   tx: { to: market }
-}, function (error, isInvalid) { console.log(isInvalid); })
+}, function (error, isInvalid) { console.log(isInvalid); });
 // example output:
 "1"
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
 
+#### augur.api.Market.derivePayoutDistributionHash({ tx, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specified [Market](#market) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Sets](#payout-set), referred to as Payout Numerators in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and `_invalid` using the keccak256 algorithm.
+
 #### augur.api.Market.designatedReporterShowed({ tx }[, callback]) 
 
-Returns `1` if the [Designated Reporting Phase](#designated-reporting-phase) of the [Market](#market) has passed and the [Designated Reporter](#designated-reporter) submitted a Report, `0` otherwise.
+Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
 
 #### augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ tx }[, callback])
 
@@ -329,13 +570,28 @@ Returns the sum of all [Dispute Bonds](#dispute-bond) staked on challenging a [P
 
 Returns the [Universe](#universe) address of the Universe that the specified `market` is contained within. All [Markets](#market) are created on a specific Universe and new Universes can be created in the event of a [Fork](#fork).
 
+#### augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])
+
+Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a particular [Market](#market), as a 32-byte hexadecimal string.
+
+#### augur.api.Market.getWinningPayoutNumerator({ tx, \_outcome }[, callback])
+
+Returns the winning [Payout Numerator](#payout-set) for [Outcome](#outcome) `_outcome` in a particular [Market](#market), as an unsigned integer.
+
+#### augur.api.Market.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
+
+Returns whether the specific `market` is a container for the `_shadyReportingParticipant` Ethereum contract address provided, as a hexadecimal string. The `_shadyReportingParticipant` address will return `1` if the address is a Reporting Participant that belongs to the [Market](#market), otherwise `0` will be returned.
+
 #### augur.api.Market.isContainerForStakeToken({ tx, \_shadyStakeToken }[, callback])
 
-Returns whether the specific `market` is a container for the `_shadyStakeToken` address provided. The `_shadyStakeToken` address will return true if the address is a Stake Token that belongs to the [Market](#market), otherwise false will be returned. Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyStakeToken` address provided. The `_shadyStakeToken` address will return `1` if the address is a Stake Token that belongs to the [Market](#market), otherwise `0` will be returned.
 
 #### augur.api.Market.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
 
-Returns whether the specific `market` is a container for the `_shadyShareToken` address provided. The `_shadyShareToken` address will return true if it's a [Share](#share) Token belonging to the [Market](#market), otherwise it will return false if the address is not a Share Token belonging to this Market. Returns `1` if true, `0` if false.
+Returns whether the specific `market` is a container for the `_shadyShareToken` address provided. The `_shadyShareToken` address will return `1` if it's a [Share](#share) Token belonging to the [Market](#market), otherwise it will return `0` if the address is not a Share Token belonging to this Market.
+
+#### augur.api.Market.isFinalized({ tx }[, callback])
+Returns `1` if the [Market](#market) has been [Finalized](#finalized-market) (that is, its winning [Payout Distribution Hash](#payout-distribution-hash) is set), or `0` otherwise.
 
 #### augur.api.Market.isInvalid({ tx }[, callback])
 
@@ -638,207 +894,17 @@ Participation Token Call API
 // Participation Token Contract Call API Examples:
 var participationToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-augur.api.ParticipationToken.getReportingWindow({ tx: { to: participationToken } }, function (error, reportingWindow) { /* ... */ })
+augur.api.ParticipationToken.getFeeWindow({ tx: { to: participationToken } }, function (error, feeWindow) { /* ... */ })
 // example output:
-reportingWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
+feeWindow =  "0x1f90cc6b4e89303e451c9b852827b5791667f570";
 ```
 #### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
 
 The Participation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
-#### augur.api.ParticipationToken.getReportingWindow({ tx }[, callback])
+#### augur.api.ParticipationToken.getFeeWindow({ tx }[, callback])
 
-Returns the [Reporting Window](#reporting-window) address for the specified `participationToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Participation Tokens were purchased for.
-
-Reporting Window Call API
--------------------------
-```javascript
-// Reporting Window Contract Call API Examples:
-var reportingWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
-
-augur.api.ReportingWindow.allMarketsFinalized({ tx: { to: reportingWindow } }, function (error, allMarketsFinalized) { /* ... */ })
-// example output:
-allMarketsFinalized = "1"
-
-augur.api.ReportingWindow.getAvgReportingGasPrice({ tx: { to: reportingWindow } }, function (error, avgReportingGasPrice) { /* ... */ })
-// example output:
-avgReportingGasPrice = "340000"
-
-augur.api.ReportingWindow.getDisputeEndTime({ tx: { to: reportingWindow } }, function (error, disputeEndTime) { /* ... */ })
-// example output:
-disputeEndTime = "1500907130"
-
-augur.api.ReportingWindow.getDisputeStartTime({ tx: { to: reportingWindow } }, function (error, disputeStartTime) { /* ... */ })
-// example output:
-disputeStartTime = "1500647930"
-
-augur.api.ReportingWindow.getEndTime({ tx: { to: reportingWindow } }, function (error, endTime) { /* ... */ })
-// example output:
-endTime = "1500388730"
-
-augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx: { to: reportingWindow } }, function (error, numDesignatedReportNoShows) { /* ... */ })
-// example output:
-numDesignatedReportNoShows = "2"
-
-augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ tx: { to: reportingWindow } }, function (error, numIncorrectDesignatedReportMarkets) { /* ... */ })
-// example output:
-numIncorrectDesignatedReportMarkets = "1"
-
-augur.api.ReportingWindow.getNumInvalidMarkets({ tx: { to: reportingWindow } }, function (error, numInvalidMarkets) { /* ... */ })
-// example output:
-numInvalidMarkets = "3"
-
-augur.api.ReportingWindow.getNumMarkets({ tx: { to: reportingWindow } }, function (error, numMarkets) { /* ... */ })
-// example output:
-numMarkets = "65"
-
-augur.api.ReportingWindow.getParticipationToken({ tx: { to: reportingWindow } }, function (error, ) { /* ... */ })
-// example output:
-= "0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"
-
-augur.api.ReportingWindow.getReportingEndTime({ tx: { to: reportingWindow } }, function (error, reportingEndTime) { /* ... */ })
-// example output:
-reportingEndTime = "1500647900"
-
-augur.api.ReportingWindow.getReportingStartTime({ tx: { to: reportingWindow } }, function (error, reportingStartTime) { /* ... */ })
-// example output:
-reportingStartTime = "14998315100"
-
-augur.api.ReportingWindow.getReputationToken({ tx: { to: reportingWindow } }, function (error, reputationToken) { /* ... */ })
-// example output:
-reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-
-augur.api.ReportingWindow.getStartTime({ tx: { to: reportingWindow } }, function (error, startTime) { /* ... */ })
-// example output:
-startTime = "14995895900"
-
-augur.api.ReportingWindow.getTotalStake({ tx: { to: reportingWindow } }, function (error, totalStake) { /* ... */ })
-// example output:
-totalStake = "18900512367"
-
-augur.api.ReportingWindow.getTotalWinningStake({ tx: { to: reportingWindow } }, function (error, totalStake) { /* ... */ })
-// example output:
-totalStake = "29105"
-
-augur.api.ReportingWindow.getUniverse({ tx: { to: reportingWindow } }, function (error, universe) { /* ... */ })
-// example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
-
-augur.api.ReportingWindow.isActive({ tx: { to: reportingWindow } }, function (error, isActive) { /* ... */ })
-// example output:
-isActive = "1"
-
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api.ReportingWindow.isContainerForMarket({
-  tx: { to: reportingWindow },
-  _shadyMarket: _market
-}, function (error, isContainerForMarket) { /* ... */ })
-// example output:
-isContainerForMarket = "1"
-
-augur.api.ReportingWindow.isDisputeActive({ tx: { to: reportingWindow } }, function (error, isDisputeActive) { /* ... */ })
-// example output:
-isDisputeActive = "1"
-
-augur.api.ReportingWindow.isForkingMarketFinalized({ tx: { to: reportingWindow } }, function (error, isForkingMarketFinalized) { /* ... */ })
-// example output:
-isForkingMarketFinalized = "0";
-
-augur.api.ReportingWindow.isReportingActive({ tx: { to: reportingWindow } }, function (error, isReportingActive) { /* ... */ })
-// example output:
-isReportingActive = "1"
-```
-#### [Reporting Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol)
-
-#### augur.api.ReportingWindow.allMarketsFinalized({ tx }[, callback])
-
-Returns true if all [Markets](#market) in the specified [Reporting Window](#reporting-window) are [Finalized Markets](#finalized-market). Otherwise, returns false.
-
-#### augur.api.ReportingWindow.getAvgReportingGasPrice({ tx }[, callback ])
-
-Returns the average amount of Gas spent per [Report](#report) submit during the [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getDisputeEndTime({ tx }[, callback])
-
-Every [Reporting Window](#reporting-window) consists of two phases, the [Reporting Phase](#reporting-phase) and the [Dispute Round Phase](#dispute-round-phase). This method is used to return the timestamp for the end of the Reporting Window's Dispute Round Phase.
-
-#### augur.api.ReportingWindow.getDisputeStartTime({ tx }[, callback])
-
-As stated above, [Reporting Windows](#reporting-window) have two phases, the [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase) and this method returns the timestamp of the start of the Dispute Round Phase.
-
-#### augur.api.ReportingWindow.getEndTime({ tx }[, callback])
-
-Returns a timestamp for when this [Reporting Window](#reporting-window) will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.
-
-#### augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])
-
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Reporter](#first-reporter) because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
-
-#### augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
-
-<!-- TODO: Update description -->
-
-Returns the number of [Markets](#market) belonging to this [Reporting Window](#reporting-window) in which [Designated Reporter's](#designated-reporter) [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge) during the [Dispute Round Phase](#dispute-round-phase). This is only the count of Markets where Designated Reporters did [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) but the Market didn't get [Finalized](#finalized-market). This doesn't include Markets where the Designated Reporter failed to submit a Report.
-
-#### augur.api.ReportingWindow.getNumInvalidMarkets({ tx }[, callback])
-
-Returns the number of [Markets](#market) that were [Reported](#report) to be Invalid during a [Reporting Window](#reporting-window). Invalid Markets are Markets that aren't clearly defined or doesn't fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to Report the Market as Invalid if they can't confidently stake their [REP](#rep) into a single Outcome for the Market.
-
-#### augur.api.ReportingWindow.getNumMarkets({ tx }[, callback])
-
-Returns the total number of [Markets](#market) that belong to the [Fee Window](#fee-window).
-
-#### augur.api.ReportingWindow.getParticipationToken({ tx }[, callback])
-
-Returns the Contract Address of the [Participation Token](#participation-token) associated with the specified [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getReportingEndTime({ tx }[, callback])
-
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
-
-#### augur.api.ReportingWindow.getReportingStartTime({ tx }[, callback])
-
-Returns a timestamp of when the [Reporting Phase](#reporting-phase) of a specific [Reporting Window](#reporting-window) will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the [Dispute Round Phase](#dispute-round-phase). The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.
-
-#### augur.api.ReportingWindow.getReputationToken({ tx }[, callback])
-
-Returns the [Reputation Token (REP)](#rep) address for the specified [Reporting Window](#reporting-window). Every Reporting Window has a [Reporting Phase](#reporting-phase) where [Reporters](#reporter) submit [Reports](#report) on the [Outcomes](#outcome) of [Markets](#market). In order to Report, Reporters need to stake REP. A Reporting Window only accepts one REP contract as the source of staked REP and this method returns that contract's address.
-
-#### augur.api.ReportingWindow.getStartTime({ tx }[, callback])
-
-Returns a timestamp of when a [Reporting Window](#reporting-window) becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow [Reporters](#reporter) to [Report](#report) on the [Outcomes](#outcome) of the [Markets](#market) contained in the Reporting Window.
-
-#### augur.api.ReportingWindow.getTotalStake({ tx }[, callback])
-
-Returns the total amount staked across all [Markets](#market) in the specified [Reporting Window](#reporting-window).
-
-#### augur.api.ReportingWindow.getTotalWinningStake({ tx }[, callback])
-
-Returns the total amount [Participation Tokens](#participation-token) purchased in the specified [Reporting Window](#reporting-window). NOTE: Participation Tokens are only purchasable in the event that no [Market](#market) in a Reporting Window can be reported on.
-
-#### augur.api.ReportingWindow.getUniverse({ tx }[, callback])
-
-Returns the [Universe](#universe) address that the [Reporting Window](#reporting-window) belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.
-
-#### augur.api.ReportingWindow.isActive({ tx }[, callback])
-
-This method returns whether the [Reporting Window](#reporting-window) is currently active or not. Reporting Windows are considered active during the Window's [Reporting Phase](#reporting-phase) and [Dispute Round Phase](#dispute-round-phase), which last a total of 30 days. Returns `1` if the `reportingWindow` is active, `0` if not.
-
-#### augur.api.ReportingWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
-
-Returns whether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Reporting Window](#reporting-window). Markets are assigned a Reporting Window that is the first Reporting Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the `reportingWindow`, `0` if not.
-
-#### augur.api.ReportingWindow.isDisputeActive({ tx }[, callback])
-
-Returns whether the [Reporting Window](#reporting-window) is currently in it's [Dispute Round Phase](#dispute-round-phase) or not. The Dispute Round Phase is a 3 day long period that follows the Reporting Window's [Reporting Phase](#reporting-phase), which lasts 27 days. Returns `1` if the Reporting Window's Dispute Round Phase is active, `0` if not.
-
-#### augur.api.ReportingWindow.isForkingMarketFinalized({ tx }[, callback])
-
-Returns whether the [Forked Market](#forked-market) that caused this [Reporting Window](#reporting-window)'s [Universe](#universe) to be created has been [Finalized](#finalized-market) or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, `0` it not.
-
-#### augur.api.ReportingWindow.isReportingActive({ tx }[, callback])
-
-Returns whether the [Reporting Window](#reporting-window) is currently in it's [Reporting Phase](#reporting-phase) or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day [Dispute Round Phase](#dispute-round-phase). Returns `1` if the Reporting Window's Reporting Phase is active, `0` if not.
+Returns the [Fee Window](#fee-window) address for the specified `participationToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Fee Window. This method will return the Fee Window that contains the Market that these Participation Tokens were purchased for.
 
 Reputation Token Call API
 -------------------------
@@ -994,7 +1060,7 @@ augur.api.Universe.isContainerForFeeToken({
 augur.api.Universe.isContainerForFeeWindow({
   tx: { to: universe },
   _shadyFeeWindow: "0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-}, function (error, isContainerForReportingWindow) { console.log(isContainerForReportingWindow); });
+}, function (error, isContainerForFeeWindow) { console.log(isContainerForFeeWindow); });
 // example output:
 "1"
 
@@ -1109,6 +1175,10 @@ Returns whether the specific `universe` is a container for the [Fee Window](#fee
 #### augur.api.Universe.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
 Returns whether the specific `universe` is a container for the [Market](#market) `_shadyMarket` Ethereum contract address. Returns `1` if true or `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market exists within the Universe in question.
+
+#### augur.api.Universe.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
+
+Returns whether the specific `universe` is a container for the `_shadyReportingParticipant` Ethereum contract address provided, as a hexadecimal string. The `_shadyReportingParticipant` address will return `1` if the address is a Reporting Participant that belongs to the [Universe](#universe), otherwise `0` will be returned.
 
 #### augur.api.Universe.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
 
