@@ -2648,6 +2648,19 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
+<h2 id="augur-call-api">Augur Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="s2">"0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">augur</span> <span class="p">},</span>
+  <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownUniverse</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+</code></pre></div>
+<h3 id="augur-api-augur-isknownuniverse-tx-_universe-callback">augur.api.Augur.isKnownUniverse({ tx, _universe }[, callback])</h3>
+
+<p>Augur keeps track of the <a href="#genesis-universe">Genesis Universe</a> and all <a href="#child-universe">Child Universes</a> internally. This function returns <code class="prettyprint">1</code> if the specified <code class="prettyprint">_universe</code> is in that list of known <a href="#universe">Universes</a>, or <code class="prettyprint">0</code> otherwise.</p>
+
 <h2 id="dispute-bond-call-api">Dispute Bond Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Bond Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">disputeBond</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
@@ -2670,7 +2683,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputebond-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol">Dispute Bond Contract Code</a></h4>
 
-<p>The <a href="#dispute-bond">Dispute Bond</a> Token is used by <a href="#rep">REP</a> holders to <a href="#challenge">Challenge</a> the <a href="#outcome">Outcome</a> of <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>. The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of <a href="#reporting">Reporting</a> in order for the Market to move to the next state of <a href="#report">Reporting</a> in the next upcoming <a href="#reporting-window">Reporting Window</a>. If a Challenge is successful, which means the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is something other than the <a href="#tentative-outcome">Tentative Outcome</a> that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.</p>
+<p>The <a href="#dispute-bond">Dispute Bond</a> Token is used by <a href="#rep">REP</a> holders to <a href="#challenge">Challenge</a> the <a href="#outcome">Outcome</a> of <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>. The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of <a href="#reporting">Reporting</a> in order for the Market to move to the next state of <a href="#report">Reporting</a> in the next upcoming <a href="#fee-window">Fee Window</a>. If a Challenge is successful, which means the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is something other than the <a href="#tentative-outcome">Tentative Outcome</a> that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.</p>
 
 <h4 id="augur-api-disputebond-getbondremainingtobepaidout-tx-callback">augur.api.DisputeBond.getBondRemainingToBePaidOut({ tx }[, callback])</h4>
 
@@ -2688,133 +2701,374 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction will return the <a href="#universe">Universe</a> that contained the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to.</p>
 
+<h2 id="fee-window-call-api">Fee Window Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Contract Call API Examples:</span>
+<span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">allMarketsFinalized</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allMarketsFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">allMarketsFinalized</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">avgReportingGasPrice</span> <span class="o">=</span> <span class="s2">"340000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getDisputeEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">disputeEndTime</span> <span class="o">=</span> <span class="s2">"1500907130"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getDisputeStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeStartTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">disputeStartTime</span> <span class="o">=</span> <span class="s2">"1500647930"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumDesignatedReportNoShows</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numDesignatedReportNoShows</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">numDesignatedReportNoShows</span> <span class="o">=</span> <span class="s2">"2"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumIncorrectDesignatedReportMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">numIncorrectDesignatedReportMarkets</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumInvalidMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numInvalidMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">numInvalidMarkets</span> <span class="o">=</span> <span class="s2">"3"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">numMarkets</span> <span class="o">=</span> <span class="s2">"65"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getParticipationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="o">=</span> <span class="s2">"0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getReportingEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportingEndTime</span> <span class="o">=</span> <span class="s2">"1500647900"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getReportingStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingStartTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">reportingStartTime</span> <span class="o">=</span> <span class="s2">"14998315100"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">startTime</span> <span class="o">=</span> <span class="s2">"14995895900"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"18900512367"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getTotalWinningStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"29105"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isActive</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">},</span>
+  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="nx">_market</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isContainerForMarket</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isDisputeActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isDisputeActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isDisputeActive</span> <span class="o">=</span> <span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isForkingMarketFinalized</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForkingMarketFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isForkingMarketFinalized</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isReportingActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isReportingActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="c1">// example output:</span>
+<span class="nx">isReportingActive</span> <span class="o">=</span> <span class="s2">"1"</span>
+</code></pre></div>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-feewindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">Fee Window Contract Code</a></h4>
+
+<h4 id="augur-api-feewindow-allmarketsfinalized-tx-callback">augur.api.FeeWindow.allMarketsFinalized({ tx }[, callback])</h4>
+
+<p>Returns true if all <a href="#market">Markets</a> in the specified <a href="#reporting-window">Fee Window</a> are <a href="#finalized-market">Finalized Markets</a>. Otherwise, returns false.</p>
+
+<h4 id="augur-api-feewindow-getavgreportinggasprice-tx-callback">augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])</h4>
+
+<p>Returns the average amount of Gas spent per <a href="#report">Report</a> submit during the <a href="#fee-window">Fee Window</a>.</p>
+
+<h4 id="augur-api-feewindow-getdisputeendtime-tx-callback">augur.api.FeeWindow.getDisputeEndTime({ tx }[, callback])</h4>
+
+<p>Every <a href="#fee-window">Fee Window</a> consists of two phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-round-phase">Dispute Round Phase</a>. This method is used to return the timestamp for the end of the Fee Window&rsquo;s Dispute Round Phase.</p>
+
+<h4 id="augur-api-feewindow-getdisputestarttime-tx-callback">augur.api.FeeWindow.getDisputeStartTime({ tx }[, callback])</h4>
+
+<p>As stated above, <a href="#reporting-window">Fee Windows</a> have two phases, the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a> and this method returns the timestamp of the start of the Dispute Round Phase.</p>
+
+<h4 id="augur-api-feewindow-getendtime-tx-callback">augur.api.FeeWindow.getEndTime({ tx }[, callback])</h4>
+
+<p>Returns a timestamp for when this <a href="#fee-window">Fee Window</a> will end. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.</p>
+
+<h4 id="augur-api-feewindow-getnumdesignatedreportnoshows-tx-callback">augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#fee-window">Fee Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-reporter">First Reporter</a> because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
+
+<!-- TODO: Update description -->
+
+<h4 id="augur-api-feewindow-getnumincorrectdesignatedreportmarkets-tx-callback">augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#fee-window">Fee Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a>. This is only the count of Markets where Designated Reporters did <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> but the Market didn&rsquo;t get <a href="#finalized-market">Finalized</a>. This doesn&rsquo;t include Markets where the Designated Reporter failed to submit a Report.</p>
+
+<h4 id="augur-api-feewindow-getnuminvalidmarkets-tx-callback">augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])</h4>
+
+<p>Returns the number of <a href="#market">Markets</a> that were <a href="#report">Reported</a> to be Invalid during a <a href="#fee-window">Fee Window</a>. Invalid Markets are Markets that aren&rsquo;t clearly defined or doesn&rsquo;t fit one of the <a href="#outcome">Outcomes</a> set for this Market. <a href="#reporter">Reporters</a> are encouraged to Report the Market as Invalid if they can&rsquo;t confidently stake their <a href="#rep">REP</a> into a single Outcome for the Market.</p>
+
+<h4 id="augur-api-feewindow-getnummarkets-tx-callback">augur.api.FeeWindow.getNumMarkets({ tx }[, callback])</h4>
+
+<p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#fee-window">Fee Window</a>.</p>
+
+<h4 id="augur-api-feewindow-getparticipationtoken-tx-callback">augur.api.FeeWindow.getParticipationToken({ tx }[, callback])</h4>
+
+<p>Returns the Contract Address of the <a href="#participation-token">Participation Token</a> associated with the specified <a href="#fee-window">Fee Window</a>.</p>
+
+<h4 id="augur-api-feewindow-getreportingendtime-tx-callback">augur.api.FeeWindow.getReportingEndTime({ tx }[, callback])</h4>
+
+<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#fee-window">Fee Window</a> will be ending. Fee Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
+
+<h4 id="augur-api-feewindow-getreportingstarttime-tx-callback">augur.api.FeeWindow.getReportingStartTime({ tx }[, callback])</h4>
+
+<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#fee-window">Fee Window</a> will be starting. Fee Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
+
+<h4 id="augur-api-feewindow-getreputationtoken-tx-callback">augur.api.FeeWindow.getReputationToken({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#rep">Reputation Token (REP)</a> address for the specified <a href="#fee-window">Fee Window</a>. Every Fee Window has a <a href="#reporting-phase">Reporting Phase</a> where <a href="#reporter">Reporters</a> submit <a href="#report">Reports</a> on the <a href="#outcome">Outcomes</a> of <a href="#market">Markets</a>. In order to Report, Reporters need to stake REP. A Fee Window only accepts one REP contract as the source of staked REP and this method returns that contract&rsquo;s address.</p>
+
+<h4 id="augur-api-feewindow-getstarttime-tx-callback">augur.api.FeeWindow.getStartTime({ tx }[, callback])</h4>
+
+<p>Returns a timestamp of when a <a href="#fee-window">Fee Window</a> becomes active and starts. A Fee Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Fee Windows allow <a href="#reporter">Reporters</a> to <a href="#report">Report</a> on the <a href="#outcome">Outcomes</a> of the <a href="#market">Markets</a> contained in the Fee Window.</p>
+
+<h4 id="augur-api-feewindow-gettotalstake-tx-callback">augur.api.FeeWindow.getTotalStake({ tx }[, callback])</h4>
+
+<p>Returns the total amount staked across all <a href="#market">Markets</a> in the specified <a href="#fee-window">Fee Window</a>.</p>
+
+<h4 id="augur-api-feewindow-gettotalwinningstake-tx-callback">augur.api.FeeWindow.getTotalWinningStake({ tx }[, callback])</h4>
+
+<p>Returns the total amount <a href="#participation-token">Participation Tokens</a> purchased in the specified <a href="#fee-window">Fee Window</a>. NOTE: Participation Tokens are only purchasable in the event that no <a href="#market">Market</a> in a Fee Window can be reported on.</p>
+
+<h4 id="augur-api-feewindow-getuniverse-tx-callback">augur.api.FeeWindow.getUniverse({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#universe">Universe</a> address that the <a href="#fee-window">Fee Window</a> belongs to. Every Fee Window belongs to a specific Universe in which they were created and operate within.</p>
+
+<h4 id="augur-api-feewindow-isactive-tx-callback">augur.api.FeeWindow.isActive({ tx }[, callback])</h4>
+
+<p>This method returns whether the <a href="#fee-window">Fee Window</a> is currently active. Fee Windows are considered active during the Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a>, which last a total of 30 days. Returns <code class="prettyprint">1</code> if the <code class="prettyprint">feeWindow</code> is active, <code class="prettyprint">0</code> if not.</p>
+
+<h4 id="augur-api-feewindow-iscontainerformarket-tx-_shadymarket-callback">augur.api.FeeWindow.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
+
+<p>Returns whether the <code class="prettyprint">_shadyMarket</code> address provided is a <a href="#market">Market</a> that is set to be <a href="#report">Reported</a> on during the <a href="#fee-window">Fee Window</a>. Markets are assigned a Fee Window that is the first Fee Window following the Market&rsquo;s <a href="#end-time">End Time</a>. Returns <code class="prettyprint">1</code> if the Market belongs to the <code class="prettyprint">feeWindow</code>, <code class="prettyprint">0</code> if not.</p>
+
+<h4 id="augur-api-feewindow-isdisputeactive-tx-callback">augur.api.FeeWindow.isDisputeActive({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#fee-window">Fee Window</a> is currently in it&rsquo;s <a href="#dispute-round-phase">Dispute Round Phase</a> or not. The Dispute Round Phase is a 3 day long period that follows the Fee Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a>, which lasts 27 days. Returns <code class="prettyprint">1</code> if the Fee Window&rsquo;s Dispute Round Phase is active, <code class="prettyprint">0</code> if not.</p>
+
+<h4 id="augur-api-feewindow-isforkingmarketfinalized-tx-callback">augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#forked-market">Forked Market</a> that caused this <a href="#fee-window">Fee Window&rsquo;s</a> <a href="#universe">Universe</a> to be created has been <a href="#finalized-market">Finalized</a> or not. Every Fee Window belongs to a Universe and all Universes, except for the first Universe, are created because of a <a href="#fork">Fork</a>. Returns <code class="prettyprint">1</code> if the Forked Market is Finalized, <code class="prettyprint">0</code> it not.</p>
+
+<h4 id="augur-api-feewindow-isreportingactive-tx-callback">augur.api.FeeWindow.isReportingActive({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#fee-window">Fee Window</a> is currently in it&rsquo;s <a href="#reporting-phase">Reporting Phase</a> or not. The Reporting Phase lasts 27 days at the start of a Fee Window and is followed by a 3 day <a href="#dispute-round-phase">Dispute Round Phase</a>. Returns <code class="prettyprint">1</code> if the Fee Window&rsquo;s Reporting Phase is active, <code class="prettyprint">0</code> if not.</p>
+
 <h2 id="market-call-api">Market Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">secondPlaceTentativeWinningPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span>
+  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">],</span>
+  <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">secondPlaceTentativeWinningPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x20acbb1199c43cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
+<span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDenominationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">denominationToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">designatedReporterShowed</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterShowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporterShowed</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">denominationToken</span> <span class="o">=</span> <span class="s2">"0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"</span>
+<span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReporter</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">secondPlaceTentativeWinningPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">secondPlaceTentativeWinningPayoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">designatedReporter</span> <span class="o">=</span> <span class="s2">"0xca3edca4ed326bbcb77e914b379913b12d49654d"</span>
+<span class="s2">"0x20acbb1199c43cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReporterDisputeBond</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterDisputeBond</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDenominationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">denominationToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">denominationToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">designatedReporterDisputeBond</span> <span class="o">=</span> <span class="s2">"0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"</span>
+<span class="s2">"0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReportPayoutHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReportPayoutHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReporter</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporter</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporter</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">designatedReportPayoutHash</span> <span class="o">=</span> <span class="s2">"0x58aff2018af3cb2ca3a3a1862df2d350300904a96039eb50cb0fd1ac3710aad"</span>
+<span class="s2">"0xca3edca4ed326bbcb77e914b379913b12d49654d"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReportReceivedTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReportReceivedTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReporterDisputeBond</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterDisputeBond</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporterDisputeBond</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">designatedReportReceivedTime</span> <span class="o">=</span> <span class="s2">"1500388800"</span><span class="p">;</span>
+<span class="s2">"0xe783e32cfeea2d2be8df1ae6e978e6d4de63fe26"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReportPayoutHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReportPayoutHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReportPayoutHash</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span><span class="p">;</span>
+<span class="s2">"0x58aff2018af3cb2ca3a3a1862df2d350300904a96039eb50cb0fd1ac3710aad"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getExtraDisputeBondRemainingToBePaidOut</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">extraDisputeBondRemainingToBePaidOut</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDesignatedReportReceivedTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReportReceivedTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReportReceivedTime</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">extraDisputeBondRemainingToBePaidOut</span> <span class="o">=</span> <span class="s2">"1000"</span><span class="p">;</span>
+<span class="s2">"1500388800"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalizationTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">finalizationTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">endTime</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">finalizationTime</span> <span class="o">=</span> <span class="s2">"1500647930"</span><span class="p">;</span>
+<span class="s2">"1500388730"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">finalPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getExtraDisputeBondRemainingToBePaidOut</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">extraDisputeBondRemainingToBePaidOut</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">extraDisputeBondRemainingToBePaidOut</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">finalPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
+<span class="s2">"1000"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalWinningStakeToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningStakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
+  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">winningStakeToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getForkingMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkedMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalizationTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">finalizationTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">finalizationTime</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">forkedMarket</span> <span class="o">=</span> <span class="s2">"0x0"</span>
+<span class="s2">"1500647930"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorMailbox</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorMailbox</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">finalPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">finalPayoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">marketCreatorMailbox</span> <span class="o">=</span> <span class="s2">"0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"</span>
+<span class="s2">"0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorSettlementFeeDivisor</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorSettlementFee</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFinalWinningStakeToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningStakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">winningStakeToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">marketCreatorSettlementFee</span> <span class="o">=</span> <span class="s2">"20000000000000000"</span>
+<span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getOwner</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">owner</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getForkingMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">forkedMarket</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">forkedMarket</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">owner</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682b"</span>
+<span class="s2">"0x0"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorMailbox</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorMailbox</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">marketCreatorMailbox</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">numOutcomes</span> <span class="o">=</span> <span class="s2">"2"</span>
+<span class="s2">"0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumTicks</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numTicks</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorSettlementFeeDivisor</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorSettlementFee</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">marketCreatorSettlementFee</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">numTicks</span> <span class="o">=</span> <span class="s2">"1000"</span>
+<span class="s2">"20000000000000000"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingState</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingState</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getOwner</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">owner</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">owner</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingState</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
+<span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682b"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numOutcomes</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"2"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumTicks</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numTicks</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numTicks</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingState</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingState</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reportingState</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationToken</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x23b17188ce3c491f6ab4427258d92452be5c8045"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getShareToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="mi">1</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">shareToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">shareToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shareToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
+<span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
 
 <span class="kd">var</span> <span class="nx">_payoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeTokenOrZeroByPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="nx">_payoutDistributionHash</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stakeTokenOrZero</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeTokenOrZeroByPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="nx">_payoutDistributionHash</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stakeTokenOrZero</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stakeTokenOrZero</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">stakeTokenOrZero</span> <span class="o">=</span> <span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
+<span class="s2">"0x5caa66408617f77601d0dc19c163621e7f4b8b38"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTentativeWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">tentativeWinningPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTentativeWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">tentativeWinningPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tentativeWinningPayoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">tentativeWinningPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+<span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalStake</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"1000"</span>
+<span class="s2">"1000"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalWinningDisputeBondStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">_totalDisputeBondStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalWinningDisputeBondStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalWinningDisputeBondStake</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalWinningDisputeBondStake</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">_totalDisputeBondStake</span> <span class="o">=</span> <span class="s2">"1000"</span>
+<span class="s2">"1000"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">universe</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
+<span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
 
-<span class="kd">var</span> <span class="nx">stakeToken</span> <span class="o">=</span> <span class="s2">"0xbb87186146569514b8cd8b72e57eec3849e3981f"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">winningDistributionHash</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutNumerator</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">getWinningPayoutNumerator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getWinningPayoutNumerator</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForReportingParticipant</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
+  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingParticipant</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingParticipant</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForStakeToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_shadyStakeToken</span><span class="p">:</span> <span class="nx">stakeToken</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForStakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyStakeToken</span><span class="p">:</span> <span class="s2">"0xbb87186146569514b8cd8b72e57eec3849e3981f"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForStakeToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForStakeToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isContainerForStakeToken</span> <span class="o">=</span> <span class="s2">"1"</span>
+<span class="s2">"1"</span>
 
-<span class="kd">var</span> <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForShareToken</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="nx">shareToken</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForShareToken</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isContainerForShareToken</span> <span class="o">=</span> <span class="s2">"1"</span>
+<span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isValid</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isFinalized</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isFinalized</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">isValid</span> <span class="o">=</span> <span class="s2">"1"</span>
+<span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isInvalid</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isInvalid</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isInvalid</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-market-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Contract Code</a></h4>
+
+<h4 id="augur-api-market-derivepayoutdistributionhash-tx-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.derivePayoutDistributionHash({ tx, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h4>
+
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#market">Market</a> for the <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> passed in. If the <a href="#payout-set">Payout Sets</a>, referred to as Payout Numerators in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and <code class="prettyprint">_invalid</code> using the keccak256 algorithm.</p>
+
+<h4 id="augur-api-market-designatedreportershowed-tx-callback">augur.api.Market.designatedReporterShowed({ tx }[, callback])</h4>
+
+<p>Returns <code class="prettyprint">1</code> if the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, or <code class="prettyprint">0</code> otherwise.</p>
 
 <h4 id="augur-api-market-getbestguesssecondplacetentativewinningpayoutdistributionhash-tx-callback">augur.api.Market.getBestGuessSecondPlaceTentativeWinningPayoutDistributionHash({ tx }[, callback])</h4>
 
@@ -2822,7 +3076,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getdenominationtoken-tx-callback">augur.api.Market.getDenominationToken({ tx }[, callback])</h4>
 
-<p>Returns the address of the token used to denominate the specified <code class="prettyprint">market</code>. A Denomination Token is the ERC20 Token used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this will always return &ldquo;Cash&rdquo;; however, Augur will eventually support other types of Denomination Tokens.</p>
+<p>Returns the address of the token used to denominate the specified <code class="prettyprint">market</code>. A Denomination Token is the ERC20 Token used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this will always return the address of a &ldquo;Cash&rdquo; contract; however, Augur will eventually support other types of Denomination Tokens.</p>
 
 <h4 id="augur-api-market-getdesignatedreporter-tx-callback">augur.api.Market.getDesignatedReporter({ tx }[, callback])</h4>
 
@@ -2848,6 +3102,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the amount of <a href="#rep">REP</a> that is available in a <a href="#market">Market</a> to be migrated to other <a href="#universe">Universes</a> to reward <a href="#dispute-bond">Dispute Bond</a> holders.</p>
 
+<h4 id="augur-api-market-getfeewindow-tx-_feewindowid-callback">augur.api.Market.getFeeWindow({ tx, _feeWindowId  }[, callback])</h4>
+
+<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#market">Market</a>, as a hexidecimal string.</p>
+
 <h4 id="augur-api-market-getfinalizationtime-tx-callback">augur.api.Market.getFinalizationTime({ tx }[, callback])</h4>
 
 <p>Returns the timestamp for when the specified <code class="prettyprint">market</code> was <a href="#finalized-market">Finalized</a>. A Finalized Market has a <a href="#final-outcome">Final Outcome</a> set from successful <a href="#market-resolution">Market Resolution</a> which cannot be <a href="#challenge">Challenged</a> and the Market is considered <a href="#settlement">Settled</a>.</p>
@@ -2866,7 +3124,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getmarketcreatormailbox-tx-callback">augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])</h4>
 
-<p>Returns the address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for <code class="prettyprint">market</code>.</p>
+<p>Returns the address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for <code class="prettyprint">market</code>. <a href="#market-creator">Market Creators</a> can use this address to collect their fees.</p>
 
 <h4 id="augur-api-market-getmarketcreatorsettlementfeedivisor-tx-callback">augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])</h4>
 
@@ -2892,6 +3150,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the current <a href="#report">Reporting</a> State that the <code class="prettyprint">market</code> is in. This method returns a number between 0 and 12, which corresponds to the various Reporting States outlined in the <a href="#reporting">Reporting Section</a> of the documentation.</p>
 
+<h4 id="augur-api-market-getreputationtoken-tx-callback">augur.api.Market.getReputationToken({ tx }[, callback])</h4>
+
+<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>. REP is Staked whenever a First Report is submitted or when users attempt to Challenge the Tentative Outcome of a Market. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+
 <h4 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h4>
 
 <p>Returns the <a href="#share">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
@@ -2916,17 +3178,33 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the <a href="#universe">Universe</a> address of the Universe that the specified <code class="prettyprint">market</code> is contained within. All <a href="#market">Markets</a> are created on a specific Universe and new Universes can be created in the event of a <a href="#fork">Fork</a>.</p>
 
+<h4 id="augur-api-market-getwinningpayoutdistributionhash-tx-callback">augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])</h4>
+
+<p>Returns the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a particular <a href="#market">Market</a>, as a 32-byte hexadecimal string.</p>
+
+<h4 id="augur-api-market-getwinningpayoutnumerator-tx-_outcome-callback">augur.api.Market.getWinningPayoutNumerator({ tx, _outcome }[, callback])</h4>
+
+<p>Returns the winning <a href="#payout-set">Payout Numerator</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> in a particular <a href="#market">Market</a>, as an unsigned integer.</p>
+
+<h4 id="augur-api-market-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Market.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h4>
+
+<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyReportingParticipant</code> Ethereum contract address provided, as a hexadecimal string. The <code class="prettyprint">_shadyReportingParticipant</code> address will return <code class="prettyprint">1</code> if the address is a Reporting Participant that belongs to the <a href="#market">Market</a>, otherwise <code class="prettyprint">0</code> will be returned.</p>
+
 <h4 id="augur-api-market-iscontainerforstaketoken-tx-_shadystaketoken-callback">augur.api.Market.isContainerForStakeToken({ tx, _shadyStakeToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyStakeToken</code> address provided. The <code class="prettyprint">_shadyStakeToken</code> address will return true if the address is a Stake Token that belongs to the <a href="#market">Market</a>, otherwise false will be returned. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyStakeToken</code> address provided. The <code class="prettyprint">_shadyStakeToken</code> address will return <code class="prettyprint">1</code> if the address is a Stake Token that belongs to the <a href="#market">Market</a>, otherwise <code class="prettyprint">0</code> will be returned.</p>
 
 <h4 id="augur-api-market-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Market.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyShareToken</code> address provided. The <code class="prettyprint">_shadyShareToken</code> address will return true if it&rsquo;s a <a href="#share">Share</a> Token belonging to the <a href="#market">Market</a>, otherwise it will return false if the address is not a Share Token belonging to this Market. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyShareToken</code> address provided. The <code class="prettyprint">_shadyShareToken</code> address will return <code class="prettyprint">1</code> if it&rsquo;s a <a href="#share">Share</a> Token belonging to the <a href="#market">Market</a>, otherwise it will return <code class="prettyprint">0</code> if the address is not a Share Token belonging to this Market.</p>
 
-<h4 id="augur-api-market-isvalid-tx-callback">augur.api.Market.isValid({ tx }[, callback])</h4>
+<h4 id="augur-api-market-isfinalized-tx-callback">augur.api.Market.isFinalized({ tx }[, callback])</h4>
 
-<p>Returns True or False depending on if the <a href="#market">Market</a> passed as <code class="prettyprint">market</code> has been <a href="#finalized-market">Finalized</a> as Invalid. This means the Market is unable to be finalized to a single <a href="#final-outcome">Final Outcome</a> due to an unclear Market or an indeterminate <a href="#outcome">Outcome</a>. Returns <code class="prettyprint">1</code> for True in the event that the Market is valid, <code class="prettyprint">0</code> is False, the Market is invalid.</p>
+<p>Returns <code class="prettyprint">1</code> if the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> (that is, its winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> is set), or <code class="prettyprint">0</code> otherwise.</p>
+
+<h4 id="augur-api-market-isinvalid-tx-callback">augur.api.Market.isInvalid({ tx }[, callback])</h4>
+
+<p>Returns <code class="prettyprint">1</code> if the <a href="#market">Market</a> passed as <code class="prettyprint">market</code> has been <a href="#finalized-market">Finalized</a> as <a href="#invalid-outcome">Invalid</a>, or returns <code class="prettyprint">0</code> otherwise. This means the Market is unable to be Finalized to a single <a href="#final-outcome">Final Outcome</a> due to an unclear Market or an indeterminate <a href="#outcome">Outcome</a>.</p>
 
 <h2 id="orders-call-api">Orders Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Contract Call API Examples:</span>
@@ -3219,205 +3497,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Participation Token Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">participationToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getReportingWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
 <span class="c1">// example output:</span>
-<span class="nx">reportingWindow</span> <span class="o">=</span>  <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
+<span class="nx">feeWindow</span> <span class="o">=</span>  <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-participationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol">Participation Token Contract Code</a></h4>
 
 <p>The Participation Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
 
-<h4 id="augur-api-participationtoken-getreportingwindow-tx-callback">augur.api.ParticipationToken.getReportingWindow({ tx }[, callback])</h4>
+<h4 id="augur-api-participationtoken-getfeewindow-tx-callback">augur.api.ParticipationToken.getFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#reporting-window">Reporting Window</a> address for the specified <code class="prettyprint">participationToken</code>. All Stake Tokens belong to a specific <a href="#market">Market</a> and all Market&rsquo;s belong to a specific Reporting Window. This method will return the Reporting Window that contains the Market that these Participation Tokens were purchased for.</p>
-
-<h2 id="reporting-window-call-api">Reporting Window Call API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reporting Window Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">reportingWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">allMarketsFinalized</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allMarketsFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">allMarketsFinalized</span> <span class="o">=</span> <span class="s2">"1"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">avgReportingGasPrice</span> <span class="o">=</span> <span class="s2">"340000"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getDisputeEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">disputeEndTime</span> <span class="o">=</span> <span class="s2">"1500907130"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getDisputeStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeStartTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">disputeStartTime</span> <span class="o">=</span> <span class="s2">"1500647930"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">endTime</span> <span class="o">=</span> <span class="s2">"1500388730"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getNumDesignatedReportNoShows</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numDesignatedReportNoShows</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">numDesignatedReportNoShows</span> <span class="o">=</span> <span class="s2">"2"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getNumIncorrectDesignatedReportMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">numIncorrectDesignatedReportMarkets</span> <span class="o">=</span> <span class="s2">"1"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getNumInvalidMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numInvalidMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">numInvalidMarkets</span> <span class="o">=</span> <span class="s2">"3"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getNumMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">numMarkets</span> <span class="o">=</span> <span class="s2">"65"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getParticipationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="o">=</span> <span class="s2">"0x3d1db1cac3153879b1c190aeb9bb7292f09ad83e"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getReportingEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingEndTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reportingEndTime</span> <span class="o">=</span> <span class="s2">"1500647900"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getReportingStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingStartTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reportingStartTime</span> <span class="o">=</span> <span class="s2">"14998315100"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">startTime</span> <span class="o">=</span> <span class="s2">"14995895900"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"18900512367"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getTotalWinningStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">totalStake</span> <span class="o">=</span> <span class="s2">"29105"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isActive</span> <span class="o">=</span> <span class="s2">"1"</span>
-
-<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">},</span>
-  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="nx">_market</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isContainerForMarket</span> <span class="o">=</span> <span class="s2">"1"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isDisputeActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isDisputeActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isDisputeActive</span> <span class="o">=</span> <span class="s2">"1"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isForkingMarketFinalized</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForkingMarketFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isForkingMarketFinalized</span> <span class="o">=</span> <span class="s2">"0"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReportingWindow</span><span class="p">.</span><span class="nx">isReportingActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reportingWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isReportingActive</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-<span class="c1">// example output:</span>
-<span class="nx">isReportingActive</span> <span class="o">=</span> <span class="s2">"1"</span>
-</code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reportingwindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReportingWindow.sol">Reporting Window Contract Code</a></h4>
-
-<h4 id="augur-api-reportingwindow-allmarketsfinalized-tx-callback">augur.api.ReportingWindow.allMarketsFinalized({ tx }[, callback])</h4>
-
-<p>Returns true if all <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a> are <a href="#finalized-market">Finalized Markets</a>. Otherwise, returns false.</p>
-
-<h4 id="augur-api-reportingwindow-getavgreportinggasprice-tx-callback">augur.api.ReportingWindow.getAvgReportingGasPrice({ tx }[, callback ])</h4>
-
-<p>Returns the average amount of Gas spent per <a href="#report">Report</a> submit during the <a href="#reporting-window">Reporting Window</a>.</p>
-
-<h4 id="augur-api-reportingwindow-getdisputeendtime-tx-callback">augur.api.ReportingWindow.getDisputeEndTime({ tx }[, callback])</h4>
-
-<p>Every <a href="#reporting-window">Reporting Window</a> consists of two phases, the <a href="#reporting-phase">Reporting Phase</a> and the <a href="#dispute-round-phase">Dispute Round Phase</a>. This method is used to return the timestamp for the end of the Reporting Window&rsquo;s Dispute Round Phase.</p>
-
-<h4 id="augur-api-reportingwindow-getdisputestarttime-tx-callback">augur.api.ReportingWindow.getDisputeStartTime({ tx }[, callback])</h4>
-
-<p>As stated above, <a href="#reporting-window">Reporting Windows</a> have two phases, the <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a> and this method returns the timestamp of the start of the Dispute Round Phase.</p>
-
-<h4 id="augur-api-reportingwindow-getendtime-tx-callback">augur.api.ReportingWindow.getEndTime({ tx }[, callback])</h4>
-
-<p>Returns a timestamp for when this <a href="#reporting-window">Reporting Window</a> will end. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active.</p>
-
-<h4 id="augur-api-reportingwindow-getnumdesignatedreportnoshows-tx-callback">augur.api.ReportingWindow.getNumDesignatedReportNoShows({ tx }[, callback])</h4>
-
-<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-reporter">First Reporter</a> because these Markets have yet to receive a Report. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
-
-<h4 id="augur-api-reportingwindow-getnumincorrectdesignatedreportmarkets-tx-callback">augur.api.ReportingWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])</h4>
-
-<!-- TODO: Update description -->
-
-<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#reporting-window">Reporting Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a> during the <a href="#dispute-round-phase">Dispute Round Phase</a>. This is only the count of Markets where Designated Reporters did <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> but the Market didn&rsquo;t get <a href="#finalized-market">Finalized</a>. This doesn&rsquo;t include Markets where the Designated Reporter failed to submit a Report.</p>
-
-<h4 id="augur-api-reportingwindow-getnuminvalidmarkets-tx-callback">augur.api.ReportingWindow.getNumInvalidMarkets({ tx }[, callback])</h4>
-
-<p>Returns the number of <a href="#market">Markets</a> that were <a href="#report">Reported</a> to be Invalid during a <a href="#reporting-window">Reporting Window</a>. Invalid Markets are Markets that aren&rsquo;t clearly defined or doesn&rsquo;t fit one of the <a href="#outcome">Outcomes</a> set for this Market. <a href="#reporter">Reporters</a> are encouraged to Report the Market as Invalid if they can&rsquo;t confidently stake their <a href="#rep">REP</a> into a single Outcome for the Market.</p>
-
-<h4 id="augur-api-reportingwindow-getnummarkets-tx-callback">augur.api.ReportingWindow.getNumMarkets({ tx }[, callback])</h4>
-
-<p>Returns the total number of <a href="#market">Markets</a> that belong to the <a href="#fee-window">Fee Window</a>.</p>
-
-<h4 id="augur-api-reportingwindow-getparticipationtoken-tx-callback">augur.api.ReportingWindow.getParticipationToken({ tx }[, callback])</h4>
-
-<p>Returns the Contract Address of the <a href="#participation-token">Participation Token</a> associated with the specified <a href="#reporting-window">Reporting Window</a>.</p>
-
-<h4 id="augur-api-reportingwindow-getreportingendtime-tx-callback">augur.api.ReportingWindow.getReportingEndTime({ tx }[, callback])</h4>
-
-<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be ending. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
-
-<h4 id="augur-api-reportingwindow-getreportingstarttime-tx-callback">augur.api.ReportingWindow.getReportingStartTime({ tx }[, callback])</h4>
-
-<p>Returns a timestamp of when the <a href="#reporting-phase">Reporting Phase</a> of a specific <a href="#reporting-window">Reporting Window</a> will be starting. Reporting Windows are 30 days long and split into two Phases, the Reporting Phase and the <a href="#dispute-round-phase">Dispute Round Phase</a>. The Reporting Phase lasts 27 days, the Dispute Round Phase lasts 3 days.</p>
-
-<h4 id="augur-api-reportingwindow-getreputationtoken-tx-callback">augur.api.ReportingWindow.getReputationToken({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#rep">Reputation Token (REP)</a> address for the specified <a href="#reporting-window">Reporting Window</a>. Every Reporting Window has a <a href="#reporting-phase">Reporting Phase</a> where <a href="#reporter">Reporters</a> submit <a href="#report">Reports</a> on the <a href="#outcome">Outcomes</a> of <a href="#market">Markets</a>. In order to Report, Reporters need to stake REP. A Reporting Window only accepts one REP contract as the source of staked REP and this method returns that contract&rsquo;s address.</p>
-
-<h4 id="augur-api-reportingwindow-getstarttime-tx-callback">augur.api.ReportingWindow.getStartTime({ tx }[, callback])</h4>
-
-<p>Returns a timestamp of when a <a href="#reporting-window">Reporting Window</a> becomes active and starts. A Reporting Window is considered active for a total of 30 days, then ends, and is no longer considered to be active. Only active Reporting Windows allow <a href="#reporter">Reporters</a> to <a href="#report">Report</a> on the <a href="#outcome">Outcomes</a> of the <a href="#market">Markets</a> contained in the Reporting Window.</p>
-
-<h4 id="augur-api-reportingwindow-gettotalstake-tx-callback">augur.api.ReportingWindow.getTotalStake({ tx }[, callback])</h4>
-
-<p>Returns the total amount staked across all <a href="#market">Markets</a> in the specified <a href="#reporting-window">Reporting Window</a>.</p>
-
-<h4 id="augur-api-reportingwindow-gettotalwinningstake-tx-callback">augur.api.ReportingWindow.getTotalWinningStake({ tx }[, callback])</h4>
-
-<p>Returns the total amount <a href="#participation-token">Participation Tokens</a> purchased in the specified <a href="#reporting-window">Reporting Window</a>. NOTE: Participation Tokens are only purchasable in the event that no <a href="#market">Market</a> in a Reporting Window can be reported on.</p>
-
-<h4 id="augur-api-reportingwindow-getuniverse-tx-callback">augur.api.ReportingWindow.getUniverse({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#universe">Universe</a> address that the <a href="#reporting-window">Reporting Window</a> belongs to. Every Reporting Window belongs to a specific Universe in which they were created and operate within.</p>
-
-<h4 id="augur-api-reportingwindow-isactive-tx-callback">augur.api.ReportingWindow.isActive({ tx }[, callback])</h4>
-
-<p>This method returns whether the <a href="#reporting-window">Reporting Window</a> is currently active or not. Reporting Windows are considered active during the Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a> and <a href="#dispute-round-phase">Dispute Round Phase</a>, which last a total of 30 days. Returns <code class="prettyprint">1</code> if the <code class="prettyprint">reportingWindow</code> is active, <code class="prettyprint">0</code> if not.</p>
-
-<h4 id="augur-api-reportingwindow-iscontainerformarket-tx-_shadymarket-callback">augur.api.ReportingWindow.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
-
-<p>Returns whether the <code class="prettyprint">_shadyMarket</code> address provided is a <a href="#market">Market</a> that is set to be <a href="#report">Reported</a> on during the <a href="#reporting-window">Reporting Window</a>. Markets are assigned a Reporting Window that is the first Reporting Window following the Market&rsquo;s <a href="#end-time">End Time</a>. Returns <code class="prettyprint">1</code> if the Market belongs to the <code class="prettyprint">reportingWindow</code>, <code class="prettyprint">0</code> if not.</p>
-
-<h4 id="augur-api-reportingwindow-isdisputeactive-tx-callback">augur.api.ReportingWindow.isDisputeActive({ tx }[, callback])</h4>
-
-<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#dispute-round-phase">Dispute Round Phase</a> or not. The Dispute Round Phase is a 3 day long period that follows the Reporting Window&rsquo;s <a href="#reporting-phase">Reporting Phase</a>, which lasts 27 days. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Dispute Round Phase is active, <code class="prettyprint">0</code> if not.</p>
-
-<h4 id="augur-api-reportingwindow-isforkingmarketfinalized-tx-callback">augur.api.ReportingWindow.isForkingMarketFinalized({ tx }[, callback])</h4>
-
-<p>Returns whether the <a href="#forked-market">Forked Market</a> that caused this <a href="#reporting-window">Reporting Window</a>&rsquo;s <a href="#universe">Universe</a> to be created has been <a href="#finalized-market">Finalized</a> or not. Every Reporting Window belongs to a Universe and all Universes, except for the first Universe, are created because of a <a href="#fork">Fork</a>. Returns <code class="prettyprint">1</code> if the Forked Market is Finalized, <code class="prettyprint">0</code> it not.</p>
-
-<h4 id="augur-api-reportingwindow-isreportingactive-tx-callback">augur.api.ReportingWindow.isReportingActive({ tx }[, callback])</h4>
-
-<p>Returns whether the <a href="#reporting-window">Reporting Window</a> is currently in it&rsquo;s <a href="#reporting-phase">Reporting Phase</a> or not. The Reporting Phase lasts 27 days at the start of a Reporting Window and is followed by a 3 day <a href="#dispute-round-phase">Dispute Round Phase</a>. Returns <code class="prettyprint">1</code> if the Reporting Window&rsquo;s Reporting Phase is active, <code class="prettyprint">0</code> if not.</p>
+<p>Returns the <a href="#fee-window">Fee Window</a> address for the specified <code class="prettyprint">participationToken</code>. All Stake Tokens belong to a specific <a href="#market">Market</a> and all Market&rsquo;s belong to a specific Fee Window. This method will return the Fee Window that contains the Market that these Participation Tokens were purchased for.</p>
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
@@ -3567,7 +3657,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForFeeWindow</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
   <span class="na">_shadyFeeWindow</span><span class="p">:</span> <span class="s2">"0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingWindow</span><span class="p">);</span> <span class="p">});</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForFeeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForFeeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 
@@ -3592,7 +3682,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isForking</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isParentOf</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isParentOf</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isForking</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForking</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isForking</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0"</span>
 
@@ -3682,6 +3772,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-universe-iscontainerformarket-tx-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
 
 <p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market exists within the Universe in question.</p>
+
+<h4 id="augur-api-universe-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Universe.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h4>
+
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyReportingParticipant</code> Ethereum contract address provided, as a hexadecimal string. The <code class="prettyprint">_shadyReportingParticipant</code> address will return <code class="prettyprint">1</code> if the address is a Reporting Participant that belongs to the <a href="#universe">Universe</a>, otherwise <code class="prettyprint">0</code> will be returned.</p>
 
 <h4 id="augur-api-universe-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Universe.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
@@ -4380,36 +4474,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="market-tx-api">Market Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
-
-<span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
-  <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
-  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span>
-  <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">}</span>
-<span class="p">})</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">320488</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0xa47eb7af47b8722c3100b49c256a94c742bb26b6"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0xb10d2"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.005827878"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x430e23400"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x4"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1501003133</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xa7f3659c53820346176f7e0e350780df304db179"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
-<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">disavowTokens</span><span class="p">({</span>
   <span class="na">market</span><span class="p">:</span> <span class="nx">market</span><span class="p">,</span>
@@ -4437,6 +4501,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 
+<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
+<span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getOrCreateStakeToken</span><span class="p">({</span> 
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span> 
   <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
@@ -4597,10 +4663,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-market-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Contract Code</a></h4>
-
-<h4 id="augur-api-market-derivepayoutdistributionhash-market-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.derivePayoutDistributionHash({ market, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h4>
-
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> passed in. If the <a href="#payout-set">Payout Sets</a>, referred to as Payout Numerator in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and <code class="prettyprint">_invalid</code> using keccak256.</p>
 
 <h4 id="augur-api-market-disavowtokens-market-onsent-onsuccess-onfailed">augur.api.Market.disavowTokens({ market, onSent, onSuccess, onFailed })</h4>
 
@@ -6922,7 +6984,7 @@ Goals:
 
 <h2 id="payout-set">Payout Set</h2>
 
-<p>A Payout Set, sometimes referred to as the &ldquo;Payout Numerator&rdquo; in Augur&rsquo;s smart contract methods, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, on a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, if we wanted to submit a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code>, we would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of how Markets should payout, or the Payout Distribution, when <a href="#finalized-market">Finalized</a>, so in the above example, only <a href="#share">Shares</a> of Outcome <code class="prettyprint">0</code> will payout on the Finalized Market. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+<p>A Payout Set, sometimes referred to as &ldquo;Payout Numerators&rdquo; in Augur&rsquo;s smart contract methods, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, in a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
 
 <h2 id="position">Position</h2>
 
