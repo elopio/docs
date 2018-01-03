@@ -44,47 +44,82 @@ augur.api.Augur.isKnownUniverse({
 
 Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns `1` if the specified `_universe` is in that list of known [Universes](#universe), or `0` otherwise.
 
-Dispute Bond Call API
----------------------------
+Dispute Crowdsourcer Call API
+-------------------------
 ```javascript
-// Dispute Bond Contract Call API Examples:
-var disputeBond = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
-
-augur.api.DisputeBond.getBondRemainingToBePaidOut({ tx: { to: disputeBond } }, function (error, bondRemainingToBePaidOut) { /* ... */ })
+// Dispute Crowdsourcer Contract Call API Examples:
+augur.api.DisputeCrowdsourcer.getFeeWindow({ tx: { to: disputeCrowdsourcer } }, function (error, feeWindow) { console.log(feeWindow); });
 // example output:
-bondRemainingToBePaidOut = "1100000000000000000000"
+"0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.DisputeBond.getDisputedPayoutDistributionHash({ tx: { to: disputeBond } }, function (error, disputedPayoutDistributionHash) { /* ... */ })
+augur.api.DisputeCrowdsourcer.getMarket({ tx: { to: disputeCrowdsourcer } }, function (error, market) { console.log(market); });
 // example output:
-disputedPayoutDistributionHash = "0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"
+"0xaa90cc6b4e89303e451c9b852827b5791667f5aa"
 
-augur.api.DisputeBond.getMarket({ tx: { to: disputeBond } }, function (error, market) { /* ... */ })
+augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx: { to: disputeCrowdsourcer } }, function (error, payoutDistributionHash) { console.log(payoutDistributionHash); });
 // example output:
-market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
+"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.DisputeBond.getUniverse({ tx: { to: disputeBond } }, function (error, universe) { /* ... */ })
+augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx: { to: disputeCrowdsourcer } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
 // example output:
-universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+"1000"
+
+augur.api.DisputeCrowdsourcer.getReputationToken({ tx: { to: disputeCrowdsourcer } }, function (error, reputationToken) { console.log(reputationToken); });
+// example output:
+"0xff90cc6b4e89303e451c9b852827b5791667f5ff"
+
+augur.api.DisputeCrowdsourcer.getSize({ tx: { to: disputeCrowdsourcer } }, function (error, size) { console.log(size); });
+// example output:
+
+augur.api.DisputeCrowdsourcer.getStake({ tx: { to: disputeCrowdsourcer } }, function (error, stake) { console.log(stake); });
+// example output:
+"78123523"
+
+augur.api.DisputeCrowdsourcer.isDisavowed({ tx: { to: disputeCrowdsourcer } }, function (error, isDisavowed) { console.log(isDisavowed); });
+// example output:
+"1"
+
+augur.api.DisputeCrowdsourcer.isInvalid({ tx: { to: disputeCrowdsourcer } }, function (error, isInvalid) { console.log(isInvalid); });
+// example output:
+"1"
 ```
-#### [Dispute Bond Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol)
+#### [Dispute Crowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
 
-The [Dispute Bond](#dispute-bond) Token is used by [REP](#rep) holders to [Challenge](#challenge) the [Outcome](#outcome) of [Markets Awaiting Finalization](#market-awaiting-finalization). The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of [Reporting](#reporting) in order for the Market to move to the next state of [Reporting](#report) in the next upcoming [Fee Window](#fee-window). If a Challenge is successful, which means the [Final Outcome](#final-outcome) of the [Market](#market) is something other than the [Tentative Outcome](#tentative-outcome) that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.
+#### augur.api.DisputeCrowdsourcer.getFeeWindow({ tx }[, callback])
 
-#### augur.api.DisputeBond.getBondRemainingToBePaidOut({ tx }[, callback])
+Returns the Ethereum contract address of the [Fee Window](#fee-window) to which the specified [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs, as a hexadecimal string.
 
-This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified `disputeBond`. Bonds are paid back to the Bond Holder if they correctly [Challenged](#challenge) a [Tentative Outcome](#tentative-outcome) and the [Final Outcome](#final-outcome) for the [Market](#market) is something different than the Challenged Tentative Outcome. Otherwise, the Bond is paid out to [Reporters](#reporter) who confirmed the Tentative Outcome to be the Final Outcome of the Market.
+#### augur.api.DisputeCrowdsourcer.getMarket({ tx }[, callback])
 
-#### augur.api.DisputeBond.getDisputedPayoutDistributionHash({ tx }[, callback])
+Returns the [Market](#market) Ethereum contract address for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as a hexadecimal string.
 
-This transaction will return the [Payout Distribution Hash](#payout-distribution-hash) for the dispute payout given a specified `disputeBond`. The Payout Distribution Hash in this case refers the Hash that was the [Tentative Outcome](#tentative-outcome) but was [Challenged](#challenged) by the [Dispute Bond](#dispute-bond).
+#### augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx }[, callback])
 
-#### augur.api.DisputeBond.getMarket({ tx }[, callback])
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as a 32-byte hexadecimal string.
 
-This transaction will return the [Market](#market) that a specified `disputeBond` belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per [Dispute Round Phase](#dispute-round-phase) for that Market.
+#### augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx }[, callback])
 
-#### augur.api.DisputeBond.getUniverse({ tx }[, callback])
+Returns the [Payout Numerator](#payout-set) for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as an unsigned integer.
 
-This transaction will return the [Universe](#universe) that contained the [Market](#market) that a specified `disputeBond` belongs to.
+#### augur.api.DisputeCrowdsourcer.getReputationToken({ tx }[, callback])
+
+Returns the [Reputation Token (REP)](#rep) Ethereum contract address for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer). In order to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) on a Dispute Crowdsourcer, Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+
+#### augur.api.DisputeCrowdsourcer.getSize({ tx }[, callback])
+
+Description pending. Add example JS response.
+
+#### augur.api.DisputeCrowdsourcer.getStake({ tx }[, callback])
+
+Description pending. Update JS example response to atto.
+
+#### augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])
+
+Description pending.
+
+#### augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])
+
+Description pending.
 
 Fee Window Call API
 -------------------------
@@ -201,6 +236,117 @@ Returns whether the [Forked Market](#forked-market) that caused this [Fee Window
 #### augur.api.FeeWindow.isOver({ tx }[, callback])
 
 Returns whether the 7-day [Fee Window](#fee-window) specified has ended.
+
+Initial Reporter Call API
+-------------------------
+```javascript
+// Initial Reporter Contract Call API Examples:
+augur.api.InitialReporter.designatedReporterShowed({ tx: { to: initialReporter } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); });
+// example output:
+"1"
+
+augur.api.InitialReporter.designatedReporterWasCorrect({ tx: { to: initialReporter } }, function (error, designatedReporterWasCorrect) { console.log(designatedReporterWasCorrect); });
+// example output:
+"1"
+
+augur.api.InitialReporter.getDesignatedReporter({ tx: { to: initialReporter } }, function (error, designatedReporter) { console.log(designatedReporter); });
+// example output:
+"0xca3edca4ed326bbcb77e914b379913b12d49654d"
+
+augur.api.InitialReporter.getFeeWindow({ tx: { to: initialReporter } }, function (error, feeWindow) { console.log(feeWindow); });
+// example output:
+"0x1f90cc6b4e89303e451c9b852827b5791667f570"
+
+augur.api.InitialReporter.getMarket({ tx: { to: disputeCrowdsourcer } }, function (error, market) { console.log(market); });
+// example output:
+"0xaa90cc6b4e89303e451c9b852827b5791667f5aa"
+
+augur.api.InitialReporter.getPayoutDistributionHash({ tx: { to: disputeCrowdsourcer } }, function (error, payoutDistributionHash) { console.log(payoutDistributionHash); });
+// example output:
+"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
+
+augur.api.InitialReporter.getPayoutNumerator({ tx: { to: disputeCrowdsourcer } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+// example output:
+"1000"
+
+augur.api.InitialReporter.getReportTimestamp({ tx: { to: initialReporter } }, function (error, reportTimestamp) { console.log(reportTimestamp); });
+// example output:
+"1514956848"
+
+augur.api.InitialReporter.getReputationToken({ tx: { to: initialReporter } }, function (error, reputationToken) { console.log(reputationToken); });
+// example output:
+"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
+
+augur.api.InitialReporter.getSize({ tx: { to: disputeCrowdsourcer } }, function (error, size) { console.log(size); });
+// example output:
+
+augur.api.InitialReporter.getStake({ tx: { to: initialReporter } }, function (error, stake) { console.log(stake); });
+// example output:
+"78000"
+
+augur.api.InitialReporter.isDisavowed({ tx: { to: disputeCrowdsourcer } }, function (error, isDisavowed) { console.log(isDisavowed); });
+// example output:
+"1"
+
+augur.api.InitialReporter.isInvalid({ tx: { to: disputeCrowdsourcer } }, function (error, isInvalid) { console.log(isInvalid); });
+// example output:
+"1"
+```
+#### [Initial Reporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
+
+The Initial Reporter contract handles functionality related to both [Designated Reporting](#designated-reporting) and [Open Reporting](open-reporting).
+
+#### augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])
+
+Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
+
+#### augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])
+
+Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified InitialReporter contract.
+
+#### augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])
+
+Returns the Ethereum contract address for the [Designated Reporter](#designated-reporter) set for the specified InitialReporter contract, as a hexadecimal string.
+
+#### augur.api.InitialReporter.getFeeWindow({ tx }[, callback])
+
+Returns the Ethereum contract address of the [Fee Window](#fee-window) to which the specified InitialReporter contract belongs, as a hexadecimal string.
+
+#### augur.api.InitialReporter.getMarket({ tx }[, callback])
+
+Returns the [Market](#market) Ethereum contract address for the specified InitialReporter contract, as a hexadecimal string.
+
+#### augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the specified InitialReporter contract, as a 32-byte hexadecimal string.
+
+#### augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])
+
+Returns the [Payout Numerator](#payout-set) for the specified InitialReporter contract, as an unsigned integer.
+
+#### augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])
+
+Description pending.
+
+#### augur.api.InitialReporter.getReputationToken({ tx }[, callback])
+
+Returns the [Reputation Token (REP)](#rep) Ethereum contract address for the specified InitialReporter contract. In order to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer), Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+
+#### augur.api.InitialReporter.getSize({ tx }[, callback])
+
+Description pending. Add example JS response.
+
+#### augur.api.InitialReporter.getStake({ tx }[, callback])
+
+Description pending. Update JS example response to atto.
+
+#### augur.api.InitialReporter.isDisavowed({ tx }[, callback])
+
+Description pending.
+
+#### augur.api.InitialReporter.isInvalid({ tx }[, callback])
+
+Description pending.
 
 Market Call API
 ----------------
@@ -350,7 +496,7 @@ Returns the address of the token used to denominate the specified `market`. A De
 
 #### augur.api.Market.getDesignatedReporter({ tx }[, callback])
 
-Returns the address for the [Designated Reporter](#designated-reporter) set for the specified `market`. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market Creation.
+Returns the address for the [Designated Reporter](#designated-reporter) set for the specified `market`, as a hexadecimal string. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market Creation.
 
 #### augur.api.Market.getEndTime({ tx }[, callback])
 
@@ -358,7 +504,7 @@ Returns the Unix timestamp for when the specified `market`'s event has come to p
 
 #### augur.api.Market.getFeeWindow({ tx, \_feeWindowId  }[, callback])
 
-Returns the Ethereum contract address of the Fee Window `_feeWindowId` in a [Market](#market), as a hexidecimal string.
+Returns the Ethereum contract address of the [Fee Window](#fee-window) `_feeWindowId` in a [Market](#market), as a hexidecimal string.
 
 #### augur.api.Market.getFinalizationTime({ tx }[, callback])
 
@@ -713,24 +859,6 @@ Returns an array containing the order IDs that should be set to better Order ID 
 
 Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_betterOrderId` and `_worseOrderId` should be orders that are better or worse than the `_fxpPrice` for an order of `_type`. `_bestOrderId` and `_worstOrderId` should be the best and worst order IDs on the order book for the specified `_type`.
 
-Participation Token Call API
---------------------
-```javascript
-// Participation Token Contract Call API Examples:
-var participationToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
-
-augur.api.ParticipationToken.getFeeWindow({ tx: { to: participationToken } }, function (error, feeWindow) { console.log(feeWindow); });
-// example output:
-"0x1f90cc6b4e89303e451c9b852827b5791667f570";
-```
-#### [Participation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol)
-
-The Participation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
-
-#### augur.api.ParticipationToken.getFeeWindow({ tx }[, callback])
-
-Returns the [Fee Window](#fee-window) address for the specified `participationToken`. All Stake Tokens belong to a specific [Market](#market) and all Market's belong to a specific Fee Window. This method will return the Fee Window that contains the Market that these Participation Tokens were purchased for.
-
 Reputation Token Call API
 -------------------------
 ```javascript
@@ -751,7 +879,7 @@ The Reputation Token, known as [REP](#rep), is the key that allows Augur's [Dece
 
 REP is also used to Challenge the Tentative Outcome of Reports during the [Dispute Round Phase](#dispute-round-phase). If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Designated Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Public Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), and the Designated Report No-Show REP Bond is added to whatever the First Public Reporter staked, there by improving her stake and potential rewards if correctly staked.
 
-The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
+The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
 #### augur.api.ReputationToken.getUniverse({ tx }[, callback])
 
@@ -777,7 +905,7 @@ augur.api.ShareToken.getOutcome({ tx: { to: shareToken } }, function (error, out
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
 
-The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard] (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
+The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
 #### augur.api.ShareToken.getMarket({ tx }[, callback])
 
