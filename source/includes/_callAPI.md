@@ -74,6 +74,7 @@ augur.api.DisputeCrowdsourcer.getReputationToken({ tx: { to: disputeCrowdsourcer
 
 augur.api.DisputeCrowdsourcer.getSize({ tx: { to: disputeCrowdsourcer } }, function (error, size) { console.log(size); });
 // example output:
+"174435000000000000"
 
 augur.api.DisputeCrowdsourcer.getStake({ tx: { to: disputeCrowdsourcer } }, function (error, stake) { console.log(stake); });
 // example output:
@@ -111,19 +112,19 @@ Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified [D
 
 #### augur.api.DisputeCrowdsourcer.getSize({ tx }[, callback])
 
-Description pending. Add example JS response.
+Returns the amount of [attoREP](#atto-prefix) required to be [Staked](#dispute-stake) on the [Outcome](#outcome) of the specified [Dispute Crowdsourcer](#dispute-crowdsourcer) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market).
 
 #### augur.api.DisputeCrowdsourcer.getStake({ tx }[, callback])
 
-Description pending. Update JS example response to atto.
+Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the specified [Dispute Crowdsourcer](#dispute-crowdsourcer).
 
 #### augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])
 
-Description pending.
+Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is no longer valid. A Dispute Crowdsourcer will get disavowed when its [Market](#market) migrates to a new [Universe](#universe) after a [Fork](#fork) in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the [Designated Reporting Phase](#designated-reporting-phase) or [Open Reporting Phase](open-reporting-phase) (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a [Dispute Round](#dispute-round) when the Fork occurred, it will get reset to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) and all Stake in the Market's Dispute Crowdsourcers will be reset. If the Dispute Crowdsourcer has been disavowed, the function will return `1`; otherwise, it will return `0`.
 
 #### augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])
 
-Description pending.
+Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is for the [Invalid Outcome](#invalid-outcome) of a [Market](#market). If it is, the function will return `1`; otherwise, it will return `0`.
 
 Fee Window Call API
 -------------------------
@@ -261,7 +262,7 @@ augur.api.InitialReporter.getFeeWindow({ tx: { to: initialReporter } }, function
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.InitialReporter.getMarket({ tx: { to: disputeCrowdsourcer } }, function (error, market) { console.log(market); });
+augur.api.InitialReporter.getMarket({ tx: { to: initialReporter } }, function (error, market) { console.log(market); });
 // example output:
 "0xaa90cc6b4e89303e451c9b852827b5791667f5aa"
 
@@ -269,7 +270,7 @@ augur.api.InitialReporter.getPayoutDistributionHash({ tx: { to: disputeCrowdsour
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.InitialReporter.getPayoutNumerator({ tx: { to: disputeCrowdsourcer } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+augur.api.InitialReporter.getPayoutNumerator({ tx: { to: initialReporter } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
 // example output:
 "1000"
 
@@ -281,18 +282,15 @@ augur.api.InitialReporter.getReputationToken({ tx: { to: initialReporter } }, fu
 // example output:
 "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.InitialReporter.getSize({ tx: { to: disputeCrowdsourcer } }, function (error, size) { console.log(size); });
+augur.api.InitialReporter.getSize({ tx: { to: initialReporter } }, function (error, size) { console.log(size); });
 // example output:
+"87443500000000000"
 
 augur.api.InitialReporter.getStake({ tx: { to: initialReporter } }, function (error, stake) { console.log(stake); });
 // example output:
 "78000"
 
-augur.api.InitialReporter.isDisavowed({ tx: { to: disputeCrowdsourcer } }, function (error, isDisavowed) { console.log(isDisavowed); });
-// example output:
-"1"
-
-augur.api.InitialReporter.isInvalid({ tx: { to: disputeCrowdsourcer } }, function (error, isInvalid) { console.log(isInvalid); });
+augur.api.InitialReporter.isInvalid({ tx: { to: initialReporter } }, function (error, isInvalid) { console.log(isInvalid); });
 // example output:
 "1"
 ```
@@ -330,7 +328,7 @@ Returns the [Payout Numerator](#payout-set) for the specified InitialReporter co
 
 #### augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])
 
-Description pending.
+Returns the Unix timestamp of when the [Initial Report](#initial-report) (either the [Designated Report](#designated-report) or the [First Public Report](#first-public-report)) was submitted.
 
 #### augur.api.InitialReporter.getReputationToken({ tx }[, callback])
 
@@ -338,19 +336,15 @@ Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified In
 
 #### augur.api.InitialReporter.getSize({ tx }[, callback])
 
-Description pending. Add example JS response.
+Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) [Outcome](#outcome) for the [Initial Report](#initial-report).
 
 #### augur.api.InitialReporter.getStake({ tx }[, callback])
 
-Description pending. Update JS example response to atto.
-
-#### augur.api.InitialReporter.isDisavowed({ tx }[, callback])
-
-Description pending.
+Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [Initial Report](#initial-report) for the [Market](#market) of the specified InitialReporter contract.
 
 #### augur.api.InitialReporter.isInvalid({ tx }[, callback])
 
-Description pending.
+Returns whether the [Outcome](#outcome) submitted in the [Initial Report](#initial-report) is for the [Invalid Outcome](#invalid-outcome) of a [Market](#market). If it is, the function will return `1`; otherwise, it will return `0`.
 
 Market Call API
 ----------------
@@ -437,7 +431,7 @@ augur.api.Market.getStakeInOutcome({
 
 augur.api.Market.getTotalStake({ tx: { to: market } }, function (error, totalStake) { console.log(totalStake); });
 // example output:
-"1000"
+"161278368761238475"
 
 augur.api.Market.getUniverse({ tx: { to: market } }, function (error, universe) { console.log(universe); });
 // example output:
@@ -548,7 +542,7 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 
 #### augur.api.Market.getTotalStake({ tx }[, callback])
 
-Returns the total amount staked on the specified [Market](#market).
+Returns the total amount of [attoREP](#atto-prefix) Staked on the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
 
 #### augur.api.Market.getUniverse({ tx }[, callback])
 
