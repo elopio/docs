@@ -2645,9 +2645,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Augur&rsquo;s Call API is made up of &ldquo;getter&rdquo; methods that retrieve information from the blockchain (using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC) but does not write information to the blockchain. The Call API is for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a <code class="prettyprint">params</code> object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract Name&gt;.&lt;Contract Method&gt;(&lt;Params Object&gt;, &lt;Callback Function&gt;)</code>. Although technically optional, the Augur team <strong>strongly recommends</strong> using a callback. Without the callback the calls will be synchronous which can lock up your browser until they complete.</p>
+<p>Augur&rsquo;s Call API is made up of &ldquo;getter&rdquo; methods that retrieve information from the blockchain (using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC) but does not write information to the blockchain. The Call API is for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a <code class="prettyprint">params</code> object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract Name&gt;.&lt;Contract Method&gt;(&lt;Params Object&gt;, &lt;Callback Function&gt;)</code>. Although technically optional, the Augur team <strong>strongly recommends</strong> using a callback. Without the callback, the calls will be synchronous, which can lock up the web browser until they complete.</p>
 
-<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in the browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 <h2 id="augur-call-api">Augur Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="s2">"0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7"</span><span class="p">;</span>
@@ -2658,49 +2658,89 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 </code></pre></div>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-augur-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur Contract Code</a></h4>
+
+<p>The Augur contract maintains the existing <a href="#universe">Universes</a> within Augur and handles much of Augur&rsquo;s event logging.</p>
+
 <h3 id="augur-api-augur-isknownuniverse-tx-_universe-callback">augur.api.Augur.isKnownUniverse({ tx, _universe }[, callback])</h3>
 
 <p>Augur keeps track of the <a href="#genesis-universe">Genesis Universe</a> and all <a href="#child-universe">Child Universes</a> internally. This function returns <code class="prettyprint">1</code> if the specified <code class="prettyprint">_universe</code> is in that list of known <a href="#universe">Universes</a>, or <code class="prettyprint">0</code> otherwise.</p>
 
-<h2 id="dispute-bond-call-api">Dispute Bond Call API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Bond Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">disputeBond</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getBondRemainingToBePaidOut</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">bondRemainingToBePaidOut</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<h2 id="dispute-crowdsourcer-call-api">Dispute Crowdsourcer Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Contract Call API Examples:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">bondRemainingToBePaidOut</span> <span class="o">=</span> <span class="s2">"1100000000000000000000"</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getDisputedPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputedPayoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">market</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">disputedPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0xff89be2020af3cb2ca244eb862df2d350300904a96039eb53cbacf380f13f21b"</span>
+<span class="s2">"0xaa90cc6b4e89303e451c9b852827b5791667f5aa"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
+<span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeBond</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeBond</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
+<span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationToken</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xff90cc6b4e89303e451c9b852827b5791667f5ff"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getSize</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"174435000000000000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stake</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stake</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"78123523"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">isDisavowed</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isDisavowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isDisavowed</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">isInvalid</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isInvalid</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isInvalid</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputebond-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeBond.sol">Dispute Bond Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputecrowdsourcer-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">Dispute Crowdsourcer Contract Code</a></h4>
 
-<p>The <a href="#dispute-bond">Dispute Bond</a> Token is used by <a href="#rep">REP</a> holders to <a href="#challenge">Challenge</a> the <a href="#outcome">Outcome</a> of <a href="#market-awaiting-finalization">Markets Awaiting Finalization</a>. The Dispute Bond is only purchasable with REP. Only one Dispute Bond needs to be purchased for a Market per round of <a href="#reporting">Reporting</a> in order for the Market to move to the next state of <a href="#report">Reporting</a> in the next upcoming <a href="#fee-window">Fee Window</a>. If a Challenge is successful, which means the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is something other than the <a href="#tentative-outcome">Tentative Outcome</a> that was disputed, then the Bond Holder is entitled to up to 2x the Dispute Bond cost in REP. After 2x the cost of the Dispute Bond is paid to the Bond Holder any remaining REP is redistributed as normal to other Reporters who correctly staked on the Final Outcome.</p>
+<h4 id="augur-api-disputecrowdsourcer-getfeewindow-tx-callback">augur.api.DisputeCrowdsourcer.getFeeWindow({ tx }[, callback])</h4>
 
-<h4 id="augur-api-disputebond-getbondremainingtobepaidout-tx-callback">augur.api.DisputeBond.getBondRemainingToBePaidOut({ tx }[, callback])</h4>
+<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> to which the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> belongs, as a hexadecimal string.</p>
 
-<p>This transaction will return the amount of REP, denoted in attotokens, of bond remaining to be paid out for a specified <code class="prettyprint">disputeBond</code>. Bonds are paid back to the Bond Holder if they correctly <a href="#challenge">Challenged</a> a <a href="#tentative-outcome">Tentative Outcome</a> and the <a href="#final-outcome">Final Outcome</a> for the <a href="#market">Market</a> is something different than the Challenged Tentative Outcome. Otherwise, the Bond is paid out to <a href="#reporter">Reporters</a> who confirmed the Tentative Outcome to be the Final Outcome of the Market.</p>
+<h4 id="augur-api-disputecrowdsourcer-getmarket-tx-callback">augur.api.DisputeCrowdsourcer.getMarket({ tx }[, callback])</h4>
 
-<h4 id="augur-api-disputebond-getdisputedpayoutdistributionhash-tx-callback">augur.api.DisputeBond.getDisputedPayoutDistributionHash({ tx }[, callback])</h4>
+<p>Returns the <a href="#market">Market</a> Ethereum address for the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, as a hexadecimal string.</p>
 
-<p>This transaction will return the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the dispute payout given a specified <code class="prettyprint">disputeBond</code>. The Payout Distribution Hash in this case refers the Hash that was the <a href="#tentative-outcome">Tentative Outcome</a> but was <a href="#challenged">Challenged</a> by the <a href="#dispute-bond">Dispute Bond</a>.</p>
+<h4 id="augur-api-disputecrowdsourcer-getpayoutdistributionhash-tx-callback">augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx }[, callback])</h4>
 
-<h4 id="augur-api-disputebond-getmarket-tx-callback">augur.api.DisputeBond.getMarket({ tx }[, callback])</h4>
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, as a 32-byte hexadecimal string.</p>
 
-<p>This transaction will return the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to. All Dispute Bonds belong to a Market, and there can only be one Dispute Bond per <a href="#dispute-round-phase">Dispute Round Phase</a> for that Market.</p>
+<h4 id="augur-api-disputecrowdsourcer-getpayoutnumerator-tx-callback">augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx }[, callback])</h4>
 
-<h4 id="augur-api-disputebond-getuniverse-tx-callback">augur.api.DisputeBond.getUniverse({ tx }[, callback])</h4>
+<p>Returns the <a href="#payout-set">Payout Numerator</a> for the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, as an unsigned integer.</p>
 
-<p>This transaction will return the <a href="#universe">Universe</a> that contained the <a href="#market">Market</a> that a specified <code class="prettyprint">disputeBond</code> belongs to.</p>
+<h4 id="augur-api-disputecrowdsourcer-getreputationtoken-tx-callback">augur.api.DisputeCrowdsourcer.getReputationToken({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum address for the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, as a hexadecimal string. In order to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> on a Dispute Crowdsourcer, Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+
+<h4 id="augur-api-disputecrowdsourcer-getsize-tx-callback">augur.api.DisputeCrowdsourcer.getSize({ tx }[, callback])</h4>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> required to be <a href="#dispute-stake">Staked</a> on the <a href="#outcome">Outcome</a> of the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> in order to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a>.</p>
+
+<h4 id="augur-api-disputecrowdsourcer-getstake-tx-callback">augur.api.DisputeCrowdsourcer.getStake({ tx }[, callback])</h4>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> <a href="#dispute-stake">Staked</a> on the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>.</p>
+
+<h4 id="augur-api-disputecrowdsourcer-isdisavowed-tx-callback">augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> is no longer valid. A Dispute Crowdsourcer will get disavowed when its <a href="#market">Market</a> migrates to a new <a href="#universe">Universe</a> after a <a href="#fork">Fork</a> in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or <a href="open-reporting-phase">Open Reporting Phase</a> (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a <a href="#dispute-round">Dispute Round</a> when the Fork occurred, it will get reset to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> and all Stake in the Market&rsquo;s Dispute Crowdsourcers will be reset. If the Dispute Crowdsourcer has been disavowed, the function will return <code class="prettyprint">1</code>; otherwise, it will return <code class="prettyprint">0</code>.</p>
+
+<h4 id="augur-api-disputecrowdsourcer-isinvalid-tx-callback">augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> is for the <a href="#invalid-outcome">Invalid Outcome</a> of a <a href="#market">Market</a>. If it is, the function will return <code class="prettyprint">1</code>; otherwise, it will return <code class="prettyprint">0</code>.</p>
 
 <h2 id="fee-window-call-api">Fee Window Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Contract Call API Examples:</span>
@@ -2766,7 +2806,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-feewindow-getavgreportinggasprice-tx-callback">augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])</h4>
 
-<p>Returns the average amount of gas spent to submit either a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a> during the <a href="#fee-window">Fee Window</a>.</p>
+<p>Returns the average amount of gas spent to submit either a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a> in the specified <a href="#fee-window">Fee Window</a>.</p>
 
 <h4 id="augur-api-feewindow-getendtime-tx-callback">augur.api.FeeWindow.getEndTime({ tx }[, callback])</h4>
 
@@ -2774,11 +2814,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-feewindow-getnumdesignatedreportnoshows-tx-callback">augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])</h4>
 
-<p>Returns the number of <a href="#market">Markets</a> belonging to this <a href="#fee-window">Fee Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-public-reporter">First Public Reporter</a> because these Markets have yet to receive a <a href="#report">Report</a>. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
+<p>Returns the number of <a href="#market">Markets</a> belonging to the specified <a href="#fee-window">Fee Window</a> in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-public-reporter">First Public Reporter</a> because these Markets have yet to receive a <a href="#report">Report</a>. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
 
 <h4 id="augur-api-feewindow-getnumincorrectdesignatedreportmarkets-tx-callback">augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])</h4>
 
-<p>Returns the number of <a href="#finalized-market">Unfinalized Markets</a> belonging to this <a href="#fee-window">Fee Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a> during the current <a href="#dispute-round-phase">Dispute Round Phase</a>, or the <a href="#designated-reporter">Designated Reporter</a> failed to submit a <a href="#designated-report">Designated Report</a>.</p>
+<p>Returns the number of <a href="#finalized-market">Unfinalized Markets</a> belonging to the specified <a href="#fee-window">Fee Window</a> in which <a href="#designated-reporter">Designated Reporter&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a> during the current <a href="#dispute-round-phase">Dispute Round Phase</a>, or the <a href="#designated-reporter">Designated Reporter</a> failed to submit a <a href="#designated-report">Designated Report</a>.</p>
 
 <h4 id="augur-api-feewindow-getnuminvalidmarkets-tx-callback">augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])</h4>
 
@@ -2790,7 +2830,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-feewindow-getreputationtoken-tx-callback">augur.api.FeeWindow.getReputationToken({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum contract address for the specified <a href="#fee-window">Fee Window</a>. Every Fee Window has a <a href="#dispute-phase">Dispute Phase</a> where <a href="#reporter">Reporters</a> can <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of <a href="#market">Markets</a>. In order to Challenge a Tentative Outcome, Reporters need to stake REP. A Fee Window only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum address for the specified <a href="#fee-window">Fee Window</a>, as a hexadecimal string. Every Fee Window has a <a href="#dispute-phase">Dispute Phase</a> where <a href="#reporter">Reporters</a> can <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of <a href="#market">Markets</a>. In order to Challenge a Tentative Outcome, Reporters need to <a href="#dispute-stake">Stake</a> REP. A Fee Window only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
 
 <h4 id="augur-api-feewindow-getstarttime-tx-callback">augur.api.FeeWindow.getStartTime({ tx }[, callback])</h4>
 
@@ -2798,15 +2838,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-feewindow-getuniverse-tx-callback">augur.api.FeeWindow.getUniverse({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#universe">Universe</a> Ethereum contract address that the <a href="#fee-window">Fee Window</a> belongs to. Every Fee Window belongs to a specific Universe in which they were created and can operate.</p>
+<p>Returns the <a href="#universe">Universe</a> Ethereum address that the specified <a href="#fee-window">Fee Window</a> belongs to, as a hexadecimal string. Every Fee Window belongs to a specific Universe in which they were created and can operate.</p>
 
 <h4 id="augur-api-feewindow-isactive-tx-callback">augur.api.FeeWindow.isActive({ tx }[, callback])</h4>
 
-<p>This method returns whether the <a href="#fee-window">Fee Window</a> is currently active. Fee Windows are considered active during the Window&rsquo;s <a href="#dispute-round-phase">Dispute Round Phase</a>, which last a total of 7 days. Returns <code class="prettyprint">1</code> if the specified Fee Window is active, or <code class="prettyprint">0</code> otherwise.</p>
+<p>This method returns whether the specified <a href="#fee-window">Fee Window</a> is currently active. Fee Windows are considered active during the Window&rsquo;s <a href="#dispute-round-phase">Dispute Round Phase</a>, which last a total of 7 days. Returns <code class="prettyprint">1</code> if the specified Fee Window is active, or <code class="prettyprint">0</code> otherwise.</p>
 
 <h4 id="augur-api-feewindow-iscontainerformarket-tx-_shadymarket-callback">augur.api.FeeWindow.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
 
-<p>Returns whether the <code class="prettyprint">_shadyMarket</code> address provided is a <a href="#market">Market</a> that is set to be <a href="#report">Reported</a> on during the <a href="#fee-window">Fee Window</a>. Markets are assigned a Fee Window that is the first Fee Window following the Market&rsquo;s <a href="#end-time">End Time</a>. Returns <code class="prettyprint">1</code> if the Market belongs to the <code class="prettyprint">feeWindow</code>, <code class="prettyprint">0</code> if not.</p>
+<p>Returns whether the <code class="prettyprint">_shadyMarket</code> address provided is a <a href="#market">Market</a> that is set to be <a href="#report">Reported</a> on during the <a href="#fee-window">Fee Window</a>. Markets are assigned a Fee Window that is the first Fee Window following the Market&rsquo;s <a href="#end-time">End Time</a>. Returns <code class="prettyprint">1</code> if the Market belongs to the specified Fee Window, or <code class="prettyprint">0</code> if not.</p>
 
 <h4 id="augur-api-feewindow-isforkingmarketfinalized-tx-callback">augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])</h4>
 
@@ -2815,6 +2855,108 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-feewindow-isover-tx-callback">augur.api.FeeWindow.isOver({ tx }[, callback])</h4>
 
 <p>Returns whether the 7-day <a href="#fee-window">Fee Window</a> specified has ended.</p>
+
+<h2 id="initial-reporter-call-api">Initial Reporter Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Initial Reporter Contract Call API Examples:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">designatedReporterShowed</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterShowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporterShowed</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">designatedReporterWasCorrect</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterWasCorrect</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporterWasCorrect</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getDesignatedReporter</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporter</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporter</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xca3edca4ed326bbcb77e914b379913b12d49654d"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">market</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xaa90cc6b4e89303e451c9b852827b5791667f5aa"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getPayoutDistributionHash</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutDistributionHash</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getReportTimestamp</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportTimestamp</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reportTimestamp</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1514956848"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationToken</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getSize</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"87443500000000000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stake</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stake</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"78000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">isInvalid</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isInvalid</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isInvalid</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+</code></pre></div>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-initialreporter-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">Initial Reporter Contract Code</a></h4>
+
+<p>The Initial Reporter contract handles functionality related to both <a href="#designated-reporting">Designated Reporting</a> and <a href="open-reporting">Open Reporting</a>.</p>
+
+<h4 id="augur-api-initialreporter-designatedreportershowed-tx-callback">augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])</h4>
+
+<p>Returns <code class="prettyprint">1</code> if the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, or <code class="prettyprint">0</code> otherwise.</p>
+
+<h4 id="augur-api-initialreporter-designatedreporterwascorrect-tx-callback">augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])</h4>
+
+<p>Returns <code class="prettyprint">1</code> if the <a href="#payout-distribution-hash">Payout Distribution Hash</a> submitted in the <a href="#designated-report">Designated Report</a> is the same as the winning Payout Distribution Hash for the specified InitialReporter contract.</p>
+
+<h4 id="augur-api-initialreporter-getdesignatedreporter-tx-callback">augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])</h4>
+
+<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified InitialReporter contract, as a hexadecimal string.</p>
+
+<h4 id="augur-api-initialreporter-getfeewindow-tx-callback">augur.api.InitialReporter.getFeeWindow({ tx }[, callback])</h4>
+
+<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> to which the specified InitialReporter contract belongs, as a hexadecimal string.</p>
+
+<h4 id="augur-api-initialreporter-getmarket-tx-callback">augur.api.InitialReporter.getMarket({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#market">Market</a> Ethereum address for the specified InitialReporter contract, as a hexadecimal string.</p>
+
+<h4 id="augur-api-initialreporter-getpayoutdistributionhash-tx-callback">augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the specified InitialReporter contract, as a 32-byte hexadecimal string.</p>
+
+<h4 id="augur-api-initialreporter-getpayoutnumerator-tx-callback">augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#payout-set">Payout Numerator</a> for the specified InitialReporter contract, as an unsigned integer.</p>
+
+<h4 id="augur-api-initialreporter-getreporttimestamp-tx-callback">augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])</h4>
+
+<p>Returns the Unix timestamp of when the <a href="#initial-report">Initial Report</a> (either the <a href="#designated-report">Designated Report</a> or the <a href="#first-public-report">First Public Report</a>) was submitted.</p>
+
+<h4 id="augur-api-initialreporter-getreputationtoken-tx-callback">augur.api.InitialReporter.getReputationToken({ tx }[, callback])</h4>
+
+<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum address for the specified InitialReporter contract. In order to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+
+<h4 id="augur-api-initialreporter-getsize-tx-callback">augur.api.InitialReporter.getSize({ tx }[, callback])</h4>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> Staked on the <a href="#report">Reported</a> <a href="#outcome">Outcome</a> for the <a href="#initial-report">Initial Report</a>.</p>
+
+<h4 id="augur-api-initialreporter-getstake-tx-callback">augur.api.InitialReporter.getStake({ tx }[, callback])</h4>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> <a href="#dispute-stake">Staked</a> on the <a href="#initial-report">Initial Report</a> for the <a href="#market">Market</a> of the specified InitialReporter contract.</p>
+
+<h4 id="augur-api-initialreporter-isinvalid-tx-callback">augur.api.InitialReporter.isInvalid({ tx }[, callback])</h4>
+
+<p>Returns whether the <a href="#outcome">Outcome</a> submitted in the <a href="#initial-report">Initial Report</a> is for the <a href="#invalid-outcome">Invalid Outcome</a> of a <a href="#market">Market</a>. If it is, the function will return <code class="prettyprint">1</code>; otherwise, it will return <code class="prettyprint">0</code>.</p>
 
 <h2 id="market-call-api">Market Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Call API Examples:</span>
@@ -2899,7 +3041,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalStake</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1000"</span>
+<span class="s2">"161278368761238475"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">universe</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
@@ -2946,7 +3088,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-derivepayoutdistributionhash-tx-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.derivePayoutDistributionHash({ tx, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#market">Market</a> for the <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> passed in. If the <a href="#payout-set">Payout Sets</a>, referred to as Payout Numerators in the function, is valid, then a Payout Distribution Hash is created by hashing the Payout Sets and <code class="prettyprint">_invalid</code> using the keccak256 algorithm.</p>
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#market">Market</a> for the <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> passed in. If the <a href="#payout-set">Payout Set</a> (referred to as Payout Numerators in the function), is valid, then a Payout Distribution Hash is created by hashing the Payout Set and <code class="prettyprint">_invalid</code> using the keccak256 algorithm.</p>
 
 <h4 id="augur-api-market-designatedreportershowed-tx-callback">augur.api.Market.designatedReporterShowed({ tx }[, callback])</h4>
 
@@ -2958,63 +3100,63 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-getdenominationtoken-tx-callback">augur.api.Market.getDenominationToken({ tx }[, callback])</h4>
 
-<p>Returns the address of the token used to denominate the specified <code class="prettyprint">market</code>. A Denomination Token is the ERC20 Token used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this will always return the address of a &ldquo;Cash&rdquo; contract; however, Augur will eventually support other types of Denomination Tokens.</p>
+<p>Returns the Ethereum address of the token used to denominate the specified <a href="#market">Market</a>, as a hexadecimal string. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
 
 <h4 id="augur-api-market-getdesignatedreporter-tx-callback">augur.api.Market.getDesignatedReporter({ tx }[, callback])</h4>
 
-<p>Returns the address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified <code class="prettyprint">market</code>. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market Creation.</p>
+<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified <a href="#market">Market</a>, as a hexadecimal string. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market creation.</p>
 
 <h4 id="augur-api-market-getendtime-tx-callback">augur.api.Market.getEndTime({ tx }[, callback])</h4>
 
-<p>Returns the Unix timestamp for when the specified <code class="prettyprint">market</code>&rsquo;s event has come to pass. When the <a href="#market">Market</a>&rsquo;s <a href="#end-time">End Time</a> passes, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
+<p>Returns the Unix timestamp for when the specified <a href="#market">Market&rsquo;s</a> event has come to pass. When the Market&rsquo;s <a href="#end-time">End Time</a> passes, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
 <h4 id="augur-api-market-getfeewindow-tx-_feewindowid-callback">augur.api.Market.getFeeWindow({ tx, _feeWindowId  }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#market">Market</a>, as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_feeWindowId</code> in a <a href="#market">Market</a>, as a hexidecimal string.</p>
 
 <h4 id="augur-api-market-getfinalizationtime-tx-callback">augur.api.Market.getFinalizationTime({ tx }[, callback])</h4>
 
-<p>Returns the timestamp for when the specified <code class="prettyprint">market</code> was <a href="#finalized-market">Finalized</a>. A Finalized Market has a <a href="#final-outcome">Final Outcome</a> set from successful <a href="#market-resolution">Market Resolution</a> which cannot be <a href="#challenge">Challenged</a> and the Market is considered <a href="#settlement">Settled</a>.</p>
+<p>Returns the timestamp for when the specified <a href="#market">Market</a> was <a href="#finalized-market">Finalized</a>. A Finalized Market has a <a href="#final-outcome">Final Outcome</a> set from successful <a href="#market-resolution">Market Resolution</a> which cannot be <a href="#challenge">Challenged</a>, and the Market is considered <a href="#settlement">Settled</a>.</p>
 
 <h4 id="augur-api-market-getforkingmarket-tx-callback">augur.api.Market.getForkingMarket({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#market">Market</a> address of the <a href="#forked-market">Forked Market</a> for the <a href="#universe">Universe</a> that contains the specified <code class="prettyprint">market</code> address. If the <code class="prettyprint">market</code> address specified belongs in a Universe that hasn&rsquo;t had a <a href="#fork">Fork</a> take place, this will return <code class="prettyprint">0x0</code>.</p>
+<p>Returns the Ethereum address of the <a href="#forked-market">Forked Market</a> for the <a href="#universe">Universe</a> that contains the specified <a href="#market">Market</a> address. If the <a href="#market">Market</a> address specified belongs in a Universe that hasn&rsquo;t had a <a href="#fork">Fork</a> take place, this will return <code class="prettyprint">0x0</code>.</p>
 
 <h4 id="augur-api-market-getmarketcreatormailbox-tx-callback">augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])</h4>
 
-<p>Returns the address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for <code class="prettyprint">market</code>. <a href="#market-creator">Market Creators</a> can use this address to collect their fees.</p>
+<p>Returns the Ethereum address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for <code class="prettyprint">market</code>. <a href="#market-creator">Market Creators</a> can use this address to collect their fees.</p>
 
 <h4 id="augur-api-market-getmarketcreatorsettlementfeedivisor-tx-callback">augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#creator-fee">Creator Fee</a> set by the <a href="#market-creator">Market Creator</a>, denominated in attotokens per <a href="#settlement">Settlement</a> of a <a href="#complete-set">Complete Set</a>, for the <code class="prettyprint">market</code>.</p>
+<p>Returns the <a href="#creator-fee">Creator Fee</a> set by the <a href="#market-creator">Market Creator</a>, denominated in <a href="#atto-prefix">attotokens</a> per <a href="#settlement">Settlement</a> of a <a href="#complete-set">Complete Set</a>, for the specified <a href="#market">Market</a>.</p>
 
 <h4 id="augur-api-market-getnumberofoutcomes-tx-callback">augur.api.Market.getNumberOfOutcomes({ tx }[, callback])</h4>
 
-<p>Returns the number of <a href="#outcome">Outcomes</a> for a specified <code class="prettyprint">market</code>. The number of outcomes is the number of potential results of the <a href="#market">Market</a>.</p>
+<p>Returns the number of <a href="#outcome">Outcomes</a> for a specified <a href="#market">Market</a>. The number of Outcomes is the number of potential results for the <a href="#market">Market</a> event.</p>
 
 <h4 id="augur-api-market-getnumticks-tx-callback">augur.api.Market.getNumTicks({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#number-of-ticks">Number of Ticks</a> set for a specific <code class="prettyprint">market</code>. The Number of <a href="#ticks">Ticks</a> represents the number of valid price points between the <a href="#market">Market</a>&rsquo;s <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>.</p>
+<p>Returns the <a href="#number-of-ticks">Number of Ticks</a> set for a specific <a href="#market">Market</a>. The Number of Ticks represents the number of valid price points between the <a href="#market">Market</a>&rsquo;s <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>.</p>
 
 <h4 id="augur-api-market-getreputationtoken-tx-callback">augur.api.Market.getReputationToken({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>. REP is Staked whenever an <a href="#initial-report">Initial Report</a> is submitted or when users attempt to Challenge the Tentative Outcome of a Market. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+<p>Returns the Ethereum address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>, as a hexadecimal string. REP is Staked whenever an <a href="#initial-report">Initial Report</a> is submitted or when users attempt to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a>. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
 
 <h4 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h4>
 
-<p>Returns the <a href="#share">Share</a> Token&rsquo;s address for the specified <code class="prettyprint">market</code> and <code class="prettyprint">_outcome</code>. Every <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
+<p>Returns the Ethereum address of the <a href="#share-token-call-api">Share Token</a> for the specified <a href="#market">Market</a> and <a href="#outcome">Outcome</a>. Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
 
 <h4 id="augur-api-market-getstakeinoutcome-tx-_payoutdistributionhash-callback">augur.api.Market.getStakeInOutcome({ tx, _payoutDistributionHash }[, callback])</h4>
 
-<p>Returns the amount of <a href="#atto-prefix">AttoREP</a> that has been Staked on the <a href="#outcome">Outcome</a> with the <a href="#payout-distribution-hash">Payout Distribution Hash</a> <code class="prettyprint">_payoutDistributionHash</code> in the specified <a href="#market">Market</a>.</p>
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> that has been Staked on the <a href="#outcome">Outcome</a> with the <a href="#payout-distribution-hash">Payout Distribution Hash</a> <code class="prettyprint">_payoutDistributionHash</code> in the specified <a href="#market">Market</a>.</p>
 
 <h4 id="augur-api-market-gettotalstake-tx-callback">augur.api.Market.getTotalStake({ tx }[, callback])</h4>
 
-<p>Returns the total amount staked on the specified <a href="#market">Market</a>.</p>
+<p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>.</p>
 
 <h4 id="augur-api-market-getuniverse-tx-callback">augur.api.Market.getUniverse({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#universe">Universe</a> address of the Universe that the specified <code class="prettyprint">market</code> is contained within. All <a href="#market">Markets</a> are created on a specific Universe and new Universes can be created in the event of a <a href="#fork">Fork</a>.</p>
+<p>Returns the Etherem address of the <a href="#universe">Universe</a> that the specified <code class="prettyprint">market</code> is contained within. All <a href="#market">Markets</a> are created in a specific Universe, and new Universes are created if a <a href="#fork">Fork</a> occurs.</p>
 
 <h4 id="augur-api-market-getwinningpayoutdistributionhash-tx-callback">augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])</h4>
 
@@ -3026,11 +3168,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Market.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h4>
 
-<p>Returns <code class="prettyprint">1</code> if the specified <a href="#market">Market</a> is a container for <code class="prettyprint">_shadyReportingParticipant</code> Ethereum contract address provided, as a hexadecimal string. Otherwise, this function returns <code class="prettyprint">0</code>. Both the <code class="prettyprint">DisputeCrowdsourcers</code> and <code class="prettyprint">InitialReporter</code> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
+<p>Returns whether the specified <a href="#market">Market</a> is a container for the Ethereum address of Reporting Participant contract <code class="prettyprint">_shadyReportingParticipant</code>. If the Market is a container for the Reporting Participant contract, this function returns <code class="prettyprint">1</code>; otherwise, it returns <code class="prettyprint">0</code>. Both the <a href="#dispute-crowdsourcer-call-api">DisputeCrowdsourcer</a> and <a href="#initial-reporter-call-api">InitialReporter</a> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
 
 <h4 id="augur-api-market-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Market.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">market</code> is a container for the <code class="prettyprint">_shadyShareToken</code> address provided. The <code class="prettyprint">_shadyShareToken</code> address will return <code class="prettyprint">1</code> if it&rsquo;s a <a href="#share">Share</a> Token belonging to the <a href="#market">Market</a>, otherwise it will return <code class="prettyprint">0</code> if the address is not a Share Token belonging to this Market.</p>
+<p>Returns whether the specified <a href="#market">Market</a> is a container for the <a href="#share-token-call-api">Share Token</a> Ethereum address <code class="prettyprint">_shadyShareToken</code>. This function will return <code class="prettyprint">1</code> if <code class="prettyprint">_shadyShareToken</code> is a Share Token belonging to the <a href="#market">Market</a>, otherwise it will return <code class="prettyprint">0</code>.</p>
 
 <h4 id="augur-api-market-isfinalized-tx-callback">augur.api.Market.isFinalized({ tx }[, callback])</h4>
 
@@ -3038,7 +3180,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-isinvalid-tx-callback">augur.api.Market.isInvalid({ tx }[, callback])</h4>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#market">Market</a> passed as <code class="prettyprint">market</code> has been <a href="#finalized-market">Finalized</a> as <a href="#invalid-outcome">Invalid</a>, or returns <code class="prettyprint">0</code> otherwise. This means the Market is unable to be Finalized to a single <a href="#final-outcome">Final Outcome</a> due to an unclear Market or an indeterminate <a href="#outcome">Outcome</a>.</p>
+<p>Returns <code class="prettyprint">1</code> if the specified <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> as <a href="#invalid-outcome">Invalid</a>, or returns <code class="prettyprint">0</code> otherwise.</p>
 
 <h2 id="orders-call-api">Orders Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Contract Call API Examples:</span>
@@ -3192,7 +3334,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-orders-assertisnotbetterprice-tx-_type-_fxpprice-_betterorderid-callback">augur.api.Orders.assertIsNotBetterPrice({ tx, _type, _fxpPrice, _betterOrderId }[, callback])</h4>
 
-<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a better price than the <code class="prettyprint">_betterOrderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a better price than the <code class="prettyprint">_betterOrderId</code> for a given <a href="#order">Order</a> <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
 <h4 id="augur-api-orders-assertisnotworseprice-tx-_type-_fxpprice-_worstorderid-callback">augur.api.Orders.assertIsNotWorsePrice({ tx, _type, _fxpPrice, _worstOrderId }[, callback])</h4>
 
@@ -3322,22 +3464,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at <code class="prettyprint">_fxpPrice</code>. <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> should be orders that are better or worse than the <code class="prettyprint">_fxpPrice</code> for an order of <code class="prettyprint">_type</code>. <code class="prettyprint">_bestOrderId</code> and <code class="prettyprint">_worstOrderId</code> should be the best and worst order IDs on the order book for the specified <code class="prettyprint">_type</code>.</p>
 
-<h2 id="participation-token-call-api">Participation Token Call API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Participation Token Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">participationToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ParticipationToken</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">participationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span><span class="p">;</span>
-</code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-participationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ParticipationToken.sol">Participation Token Contract Code</a></h4>
-
-<p>The Participation Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
-
-<h4 id="augur-api-participationtoken-getfeewindow-tx-callback">augur.api.ParticipationToken.getFeeWindow({ tx }[, callback])</h4>
-
-<p>Returns the <a href="#fee-window">Fee Window</a> address for the specified <code class="prettyprint">participationToken</code>. All Stake Tokens belong to a specific <a href="#market">Market</a> and all Market&rsquo;s belong to a specific Fee Window. This method will return the Fee Window that contains the Market that these Participation Tokens were purchased for.</p>
-
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span>
@@ -3352,7 +3478,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reputationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token Contract Code</a></h4>
 
-<p>The Reputation Token, known as <a href="#rep">REP</a>, is the key that allows Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system to function, and by extension the entirety of Augur. REP has three major functions, it&rsquo;s used to <a href="#report">Report</a> on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>, <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a Market, and as a bond when creating a Market. <a href="#reporter">Reporters</a> stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the <a href="#final-outcome">Final Outcome</a> of the Market they can claim their REP back, earn <a href="#reporting-fee">Reporting Fees</a> proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.</p>
+<p>The Reputation Token, known as <a href="#rep">REP</a>, is the key that allows Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system to function, and by extension the entirety of Augur. REP has three major functions, it&rsquo;s used to <a href="#report">Report</a> on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>, <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a Market, and as a <a href="#no-show-rep-bond">Bond</a> when creating a Market. <a href="#reporter">Reporters</a> Stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the <a href="#final-outcome">Final Outcome</a> of the Market they can claim their REP back, earn <a href="#reporting-fee">Reporting Fees</a> proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.</p>
 
 <p>REP is also used to Challenge the Tentative Outcome of Reports during the <a href="#dispute-round-phase">Dispute Round Phase</a>. If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the <a href="#dispute-bond">Dispute Bond</a> holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> to ensure the Designated Reporter shows up. If the Designated Reporter doesn&rsquo;t show up, the Market Creator&rsquo;s Designated Report No-Show REP Bond will go to the First Public Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator&rsquo;s <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a>, and the Designated Report No-Show REP Bond is added to whatever the First Public Reporter staked, there by improving her stake and potential rewards if correctly staked.</p>
 
@@ -3380,15 +3506,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-sharetoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol">Share Token Contract Code</a></h4>
 
-<p>The Share Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
+<p>The Share Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions. Within Augur, it represents <a href="#share">Shares</a> in <a href="#market">Market</a> <a href="#outcome">Outcomes</a>.</p>
 
 <h4 id="augur-api-sharetoken-getmarket-tx-callback">augur.api.ShareToken.getMarket({ tx }[, callback])</h4>
 
-<p>Returns the market address for the specified <code class="prettyprint">shareToken</code>.</p>
+<p>Returns the <a href="#market">Market</a> Ethereum address for the specified ShareToken.</p>
 
 <h4 id="augur-api-sharetoken-getoutcome-tx-callback">augur.api.ShareToken.getOutcome({ tx }[, callback])</h4>
 
-<p>Returns the Outcome of the market that the specified <code class="prettyprint">shareToken</code> is for.</p>
+<p>Returns the <a href="#outcome">Outcome</a> of the <a href="#market">Market</a> that the specified ShareToken is for.</p>
 
 <h2 id="universe-call-api">Universe Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
@@ -3539,11 +3665,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of a <a href="#universe">Universe&rsquo;s</a> <a href="#child-universe">Child Universe</a> that has its <a href="#forked-market">Forked Market</a>&rsquo;s <a href="#final-outcome">Final Outcome</a> set to <code class="prettyprint">_parentPayoutDistributionHash</code> <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Ethereum contract address is returned as a hexidecimal string.</p>
+<p>Returns the Ethereum address of a <a href="#universe">Universe&rsquo;s</a> <a href="#child-universe">Child Universe</a> that has its <a href="#forked-market">Forked Market</a>&rsquo;s <a href="#final-outcome">Final Outcome</a> set to <code class="prettyprint">_parentPayoutDistributionHash</code> <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Ethereum address is returned as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getcurrentfeewindow-tx-callback">augur.api.Universe.getCurrentFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window. The Ethereum contract address is returned as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window. The Ethereum address is returned as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getdisputerounddurationinseconds-tx-callback">augur.api.Universe.getDisputeRoundDurationInSeconds({ tx }[, callback])</h4>
 
@@ -3551,15 +3677,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getfeewindow-tx-_feewindowid-callback">augur.api.Universe.getFeeWindow({ tx, _feeWindowId  }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getfeewindowbytimestamp-tx-_timestamp-callback">augur.api.Universe.getFeeWindowByTimestamp({ tx, _timestamp }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> running at <code class="prettyprint">_timestamp</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> running at <code class="prettyprint">_timestamp</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getfeewindowforforkendtime-tx-callback">augur.api.Universe.getFeeWindowForForkEndTime({ tx } [, callback])</h4>
 
-<p>Returns the Ethereum contract address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends, as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends, as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getfeewindowid-tx-_timestamp-callback">augur.api.Universe.getFeeWindowId({ tx, _timestamp } [, callback])</h4>
 
@@ -3571,7 +3697,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getforkingmarket-tx-callback">augur.api.Universe.getForkingMarket({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the <a href="#market">Market</a> that the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> is <a href="#fork">Forking</a> over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no <a href="#forked-market">Forked Market</a>.</p>
+<p>Returns the Ethereum address of the <a href="#market">Market</a> that the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> is <a href="#fork">Forking</a> over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no <a href="#forked-market">Forked Market</a>.</p>
 
 <h4 id="augur-api-universe-getforkreputationgoal-tx-callback">augur.api.Universe.getForkReputationGoal({ tx }[, callback])</h4>
 
@@ -3579,15 +3705,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getinitialreportstakesize-tx-callback">augur.api.Universe.getInitialReportStakeSize({ tx }[, callback])</h4>
 
-<p>Returns either the size of the <a href="#no-show-rep-bond">No-Show REP Bond</a> or the size of the Stake placed on the <a href="#designated-report">Designated Report</a> (whichever is greater), in <a href="#atto-prefix">AttoREP</a>, as a hexadecimal string.</p>
+<p>Returns either the size of the <a href="#no-show-rep-bond">No-Show REP Bond</a> or the size of the Stake placed on the <a href="#designated-report">Designated Report</a> (whichever is greater), in <a href="#atto-prefix">attoREP</a>, as a hexadecimal string.</p>
 
 <h4 id="augur-api-universe-getnextfeewindow-tx-callback">augur.api.Universe.getNextFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum contract address is returned as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum address is returned as a hexadecimal string.</p>
 
 <h4 id="augur-api-universe-getopeninterestinattoeth-tx-callback">augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])</h4>
 
-<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, priced in attoETH. This value is returned as an integer.</p>
+<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, priced in <a href="#atto-prefix">attoETH</a>. This value is returned as an integer.</p>
 
 <h4 id="augur-api-universe-getparentpayoutdistributionhash-tx-callback">augur.api.Universe.getParentPayoutDistributionHash({ tx }[, callback])</h4>
 
@@ -3595,11 +3721,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getparentuniverse-tx-callback">augur.api.Universe.getParentUniverse({ tx }[, callback])</h4>
 
-<p>Returns the <a href="#parent-universe">Parent Universe</a> Ethereum contract address of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. When a <a href="#fork">Fork</a> occurs, <a href="#child-universe">Child Universes</a> are created and the original <a href="#universe">Universe</a> that contained the <a href="#forked-market">Forked Market</a> would become a Parent Universe to the newly created Universes. If this is called on the <a href="#genesis-universe">Genesis Universe</a>, it will return 0, as the first Universe has no Parent Universe.</p>
+<p>Returns the <a href="#parent-universe">Parent Universe</a> Ethereum address of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. When a <a href="#fork">Fork</a> occurs, <a href="#child-universe">Child Universes</a> are created and the original <a href="#universe">Universe</a> that contained the <a href="#forked-market">Forked Market</a> would become a Parent Universe to the newly created Universes. If this is called on the <a href="#genesis-universe">Genesis Universe</a>, it will return 0, as the first Universe has no Parent Universe.</p>
 
 <h4 id="augur-api-universe-getpreviousfeewindow-tx-callback">augur.api.Universe.getPreviousFeeWindow({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the previous <a href="#fee-window">Fee Window</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string.</p>
+<p>Returns the Ethereum address of the previous <a href="#fee-window">Fee Window</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string.</p>
 
 <h4 id="augur-api-universe-getrepmarketcapinattoeth-tx-callback">augur.api.Universe.getRepMarketCapInAttoeth({ tx }[, callback])</h4>
 
@@ -3607,7 +3733,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getreputationtoken-tx-callback">augur.api.Universe.getReputationToken({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. REP associated with this contract address are usable within this Universe.</p>
+<p>Returns the Ethereum address of the <a href="#rep">Reputation Token</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. REP associated with this contract address are usable within this Universe.</p>
 
 <h4 id="augur-api-universe-gettargetrepmarketcapinattoeth-tx-callback">augur.api.Universe.getTargetRepMarketCapInAttoeth({ tx }[, callback])</h4>
 
@@ -3615,23 +3741,23 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getwinningchilduniverse-tx-callback">augur.api.Universe.getWinningChildUniverse({ tx }[, callback])</h4>
 
-<p>Returns the Ethereum contract address of the <a href="#winning-universe">Winning Universe</a> for a particular <a href="#universe">Universe</a> that has <a href="#fork">Forked</a>.</p>
+<p>Returns the Ethereum address of the <a href="#winning-universe">Winning Universe</a> for a particular <a href="#universe">Universe</a> that has <a href="#fork">Forked</a>.</p>
 
 <h4 id="augur-api-universe-iscontainerforfeewindow-tx-_shadyfeewindow-callback">augur.api.Universe.isContainerForFeeWindow({ tx, _shadyFeeWindow }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_shadyFeeWindow</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. Every Fee Window belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Window address belongs to the Universe in question.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_shadyFeeWindow</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. Every Fee Window belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Window address belongs to the Universe in question.</p>
 
 <h4 id="augur-api-universe-iscontainerformarket-tx-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ tx, _shadyMarket }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market exists within the Universe in question.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market exists within the Universe in question.</p>
 
 <h4 id="augur-api-universe-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Universe.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h4>
 
-<p>Returns <code class="prettyprint">1</code> if the specified <a href="#universe">Universe</a> is a container for <code class="prettyprint">_shadyReportingParticipant</code> Ethereum contract address provided, as a hexadecimal string. Otherwise, this function returns <code class="prettyprint">0</code>. Both the <code class="prettyprint">DisputeCrowdsourcers</code> and <code class="prettyprint">InitialReporter</code> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
+<p>Returns <code class="prettyprint">1</code> if the specified <a href="#universe">Universe</a> is a container for <code class="prettyprint">_shadyReportingParticipant</code> Ethereum address provided, as a hexadecimal string. Otherwise, this function returns <code class="prettyprint">0</code>. Both the <code class="prettyprint">DisputeCrowdsourcers</code> and <code class="prettyprint">InitialReporter</code> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
 
 <h4 id="augur-api-universe-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Universe.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h4>
 
-<p><a href="#share">Shares</a> are represented within Augur&rsquo;s smart contracts as <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20</a> tokens called Share Tokens. Returns whether the specific <code class="prettyprint">universe</code> is a container for the Share Token <code class="prettyprint">_shadyShareToken</code> Ethereum contract address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. </p>
+<p><a href="#share">Shares</a> are represented within Augur&rsquo;s smart contracts as <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20</a> tokens called Share Tokens. Returns whether the specific <code class="prettyprint">universe</code> is a container for the Share Token <code class="prettyprint">_shadyShareToken</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. </p>
 
 <h4 id="augur-api-universe-isforking-tx-callback">augur.api.Universe.isForking({ tx }[, callback])</h4>
 
@@ -3639,7 +3765,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-isparentof-tx-_shadychild-callback">augur.api.Universe.isParentOf({ tx, _shadyChild }[, callback])</h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyChild</code> <a href="#child-universe">Child Universe</a> Ethereum contract address provided. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. This function can be used to see if a specific <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> to a Child Universe.</p>
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyChild</code> <a href="#child-universe">Child Universe</a> Ethereum address provided. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. This function can be used to see if a specific <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> to a Child Universe.</p>
 
           <h1 id="transaction-api">Transaction API</h1>
 
@@ -5848,15 +5974,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getorcachedesignatedreportnoshowbond-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> for <a href="#market">Markets</a> in the <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">AttoREP</a>. If the value of the Designated Report No-Show REP Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
+<p>Returns the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> for <a href="#market">Markets</a> in the <a href="#universe">Universe</a>, priced in <a href="#atto-prefix">attoREP</a>. If the value of the Designated Report No-Show REP Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
 
 <h4 id="augur-api-universe-getorcachedesignatedreportstake-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheDesignatedReportStake({ onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the amount of stake in <a href="#atto-prefix">AttoREP</a> that the <a href="#designated-reporter">Designated Reporter</a> must put up when submitting a <a href="#designated-report">Designated Report</a> in the <a href="#universe">Universe</a>. If this value for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
+<p>Returns the amount of stake in <a href="#atto-prefix">attoREP</a> that the <a href="#designated-reporter">Designated Reporter</a> must put up when submitting a <a href="#designated-report">Designated Report</a> in the <a href="#universe">Universe</a>. If this value for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
 
 <h4 id="augur-api-universe-getorcachemarketcreationcost-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheMarketCreationCost({ onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the estimated amount of <a href="#atto-prefix">AttoETH</a> required to create a <a href="#market">Market</a> in the <a href="#universe">Universe</a>. The amount returned by this function is equivalent to the sum of <code class="prettyprint">augur.api.Universe.getOrCacheValidityBond()</code> and <code class="prettyprint">augur.api.Universe.getOrCacheTargetReporterGasCosts()</code>. If the values of the <a href="#validity-bond">Validity Bond</a> and the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> for the current <a href="#reporting-window">Reporting Window</a> have not already been cached in the Universe contract, this function will cache them.</p>
+<p>Returns the estimated amount of <a href="#atto-prefix">attoETH</a> required to create a <a href="#market">Market</a> in the <a href="#universe">Universe</a>. The amount returned by this function is equivalent to the sum of <code class="prettyprint">augur.api.Universe.getOrCacheValidityBond()</code> and <code class="prettyprint">augur.api.Universe.getOrCacheTargetReporterGasCosts()</code>. If the values of the <a href="#validity-bond">Validity Bond</a> and the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> for the current <a href="#reporting-window">Reporting Window</a> have not already been cached in the Universe contract, this function will cache them.</p>
 
 <h4 id="augur-api-universe-getorcachereportingfeedivisor-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheReportingFeeDivisor({ onSent, onSuccess, onFailed })</h4>
 
@@ -5864,11 +5990,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-universe-getorcachetargetreportergascosts-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheTargetReporterGasCosts({ onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#first-public-reporter">First Public Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator-mailbox">Market Creator Mailbox</a> if the <a href="#designated-reporter">Designated Reporter</a> does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
+<p>Returns the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> in <a href="#atto-prefix">attoETH</a> that is paid to the <a href="#first-public-reporter">First Public Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator-mailbox">Market Creator Mailbox</a> if the <a href="#designated-reporter">Designated Reporter</a> does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
 
 <h4 id="augur-api-universe-getorcachevaliditybond-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheValidityBond({ onSent, onSuccess, onFailed })</h4>
 
-<p>Returns the amount the <a href="#market-creator">Market Creator</a> must pay for the <a href="#validity-bond">Validity Bond</a>, denominated in <a href="#atto-prefix">AttoETH</a>, when creating a <a href="#market">Market</a>. If the Validity Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the Market is not invalid.)</p>
+<p>Returns the amount the <a href="#market-creator">Market Creator</a> must pay for the <a href="#validity-bond">Validity Bond</a>, denominated in <a href="#atto-prefix">attoETH</a>, when creating a <a href="#market">Market</a>. If the Validity Bond for the current <a href="#reporting-window">Reporting Window</a> has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the Market is not invalid.)</p>
 
 <h4 id="augur-api-universe-getorcreatechilduniverse-_parentpayoutdistributionhash-onsent-onsuccess-onfailed">augur.api.Universe.getOrCreateChildUniverse({ _parentPayoutDistributionHash, onSent, onSuccess, onFailed })</h4>
 
@@ -6748,7 +6874,7 @@ Goals:
 
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
-<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event is indeterminate, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#binary-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
+<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event does not fit any of the Outcomes set for that Market, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#binary-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
