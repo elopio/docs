@@ -2213,15 +2213,15 @@ Creates a new [Scalar Market](#scalar-market). After the transaction has complet
 
 #### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ onSent, onSuccess, onFailed })
 
-Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe), priced in [AttoREP](#atto-prefix). If the value of the Designated Report No-Show REP Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+Returns the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the [Universe](#universe), priced in [attoREP](#atto-prefix). If the value of the Designated Report No-Show REP Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
 
 #### augur.api.Universe.getOrCacheDesignatedReportStake({ onSent, onSuccess, onFailed })
 
-Returns the amount of stake in [AttoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report) in the [Universe](#universe). If this value for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+Returns the amount of stake in [attoREP](#atto-prefix) that the [Designated Reporter](#designated-reporter) must put up when submitting a [Designated Report](#designated-report) in the [Universe](#universe). If this value for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
 
 #### augur.api.Universe.getOrCacheMarketCreationCost({ onSent, onSuccess, onFailed })
 
-Returns the estimated amount of [AttoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe). The amount returned by this function is equivalent to the sum of `augur.api.Universe.getOrCacheValidityBond()` and `augur.api.Universe.getOrCacheTargetReporterGasCosts()`. If the values of the [Validity Bond](#validity-bond) and the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) for the current [Reporting Window](#reporting-window) have not already been cached in the Universe contract, this function will cache them.
+Returns the estimated amount of [attoETH](#atto-prefix) required to create a [Market](#market) in the [Universe](#universe). The amount returned by this function is equivalent to the sum of `augur.api.Universe.getOrCacheValidityBond()` and `augur.api.Universe.getOrCacheTargetReporterGasCosts()`. If the values of the [Validity Bond](#validity-bond) and the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) for the current [Reporting Window](#reporting-window) have not already been cached in the Universe contract, this function will cache them.
 
 #### augur.api.Universe.getOrCacheReportingFeeDivisor({ onSent, onSuccess, onFailed })
 
@@ -2229,11 +2229,11 @@ Returns the number by which the total payout amount for a [Market](#market) is d
 
 #### augur.api.Universe.getOrCacheTargetReporterGasCosts({ onSent, onSuccess, onFailed })
 
-Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [First Public Reporter](#first-public-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
+Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [attoETH](#atto-prefix) that is paid to the [First Public Reporter](#first-public-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it.
 
 #### augur.api.Universe.getOrCacheValidityBond({ onSent, onSuccess, onFailed })
 
-Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [AttoETH](#atto-prefix), when creating a [Market](#market). If the Validity Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
+Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [attoETH](#atto-prefix), when creating a [Market](#market). If the Validity Bond for the current [Reporting Window](#reporting-window) has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
 
 #### augur.api.Universe.getOrCreateChildUniverse({ \_parentPayoutDistributionHash, onSent, onSuccess, onFailed })
 
