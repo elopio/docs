@@ -3,7 +3,7 @@ Call API
 ```javascript
 // Call API Example
 /**
-* Get the Number of Outcomes for the Market:
+* Get the Number of Outcomes for the Market at address:
 * 0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42
 */
 
@@ -12,27 +12,37 @@ var params = { tx: { to: market } };
 
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
-// asynchronously -- STRONGLY RECOMMENDED --
+// Asynchronous call -- STRONGLY RECOMMENDED.
 augur.api.Market.getNumberOfOutcomes(params, function (error, numOutcomes) {
   console.log(error);
   console.log(numOutcomes);
 });
 // console prints 2
 
-// synchronous -- possible but not recommended.
+// Synchronous call -- Possible, but not recommended.
 var outcomes = augur.api.Market.getNumberOfOutcomes(error, params);
 // outcomes = 2
 ```
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-Augur's Call API is made up of "getter" methods that retrieve information from the blockchain (using Ethereum's `eth_call` RPC) but does not write information to the blockchain. The Call API is for more granular "gets" than the [Simplified API](#simplified-api) allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a `params` object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>)`. Although technically optional, the Augur team **strongly recommends** using a callback. Without the callback, the calls will be synchronous, which can lock up the web browser until they complete.
+The Call API of augur.js is made up of "getter" functions that retrieve information from Augur's Solidity smart contracts using Ethereum's `eth_call` RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular "gets" than the [Simplified API](#simplified-api) allows, and its functions are directly mapped to the public functions of Augur's Solidity smart contracts. 
 
-<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+All functions in the Call API accept two arguments: 
+
+1. A `params` object that contains the Ethereum contract address to call and any key/value pairs that match the input parameters for the contract method.
+2. A callback function. 
+
+The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Params Object>, <Callback Function>)`.
+
+While technically optional, the Augur team **strongly recommends** using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.
+
+<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 Augur Call API
 ---------------------------
 ```javascript
 var augur = "0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7";
+
 augur.api.Augur.isKnownUniverse({ 
   tx: { to: augur },
   _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
@@ -52,6 +62,8 @@ Dispute Crowdsourcer Call API
 -------------------------
 ```javascript
 // Dispute Crowdsourcer Contract Call API Examples:
+var disputeCrowdsourcer = "0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5";
+
 augur.api.DisputeCrowdsourcer.getFeeWindow({ tx: { to: disputeCrowdsourcer } }, function (error, feeWindow) { console.log(feeWindow); });
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
@@ -88,7 +100,7 @@ augur.api.DisputeCrowdsourcer.isInvalid({ tx: { to: disputeCrowdsourcer } }, fun
 // example output:
 "1"
 ```
-#### [Dispute Crowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
+#### [DisputeCrowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
 
 #### augur.api.DisputeCrowdsourcer.getFeeWindow({ tx }[, callback])
 
@@ -188,7 +200,7 @@ augur.api.FeeWindow.isOver({ tx: { to: feeWindow } }, function (error, isOver) {
 // example output:
 "0"
 ```
-#### [Fee Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
+#### [FeeWindow Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
 
 #### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
 
@@ -246,6 +258,8 @@ Initial Reporter Call API
 -------------------------
 ```javascript
 // Initial Reporter Contract Call API Examples:
+var initialReporter = "0xbcb6eaefcfaf7ea1e17c4768a554d57800699ed3";
+
 augur.api.InitialReporter.designatedReporterShowed({ tx: { to: initialReporter } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); });
 // example output:
 "1"
@@ -294,7 +308,7 @@ augur.api.InitialReporter.isInvalid({ tx: { to: initialReporter } }, function (e
 // example output:
 "1"
 ```
-#### [Initial Reporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
+#### [InitialReporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
 
 The Initial Reporter contract handles functionality related to both [Designated Reporting](#designated-reporting) and [Open Reporting](open-reporting).
 
@@ -843,7 +857,7 @@ augur.api.OrdersFetcher.findBoundingOrders({
 [ "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
 ```
-#### [Orders Fetcher Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol)
+#### [OrdersFetcher Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol)
 
 #### augur.api.OrdersFetcher.ascendOrderList({ tx, \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
@@ -871,7 +885,7 @@ augur.api.ReputationToken.getTopMigrationDestination({ tx: { to: reputationToken
 // example output:
 "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
+#### [ReputationToken Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
 
 The Reputation Token, known as [REP](#rep), is the key that allows Augur's [Decentralized Oracle](#decentralized-oracle) system to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a Market, and as a [Bond](#no-show-rep-bond) when creating a Market. [Reporters](#reporter) Stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
 
@@ -901,7 +915,7 @@ augur.api.ShareToken.getOutcome({ tx: { to: shareToken } }, function (error, out
 // example output:
 "1"
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
+#### [ShareToken Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
 
