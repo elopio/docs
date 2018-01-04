@@ -2623,7 +2623,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
           <h1 id="call-api">Call API</h1>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Call API Example</span>
 <span class="cm">/**
-* Get the Number of Outcomes for the Market:
+* Get the Number of Outcomes for the Market at address:
 * 0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42
 */</span>
 
@@ -2632,25 +2632,37 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="c1">// augur.api.&lt;Contract Name&gt;.&lt;Contract Method&gt;(&lt;Params Object&gt;, &lt;Callback Function&gt;);</span>
 
-<span class="c1">// asynchronously -- STRONGLY RECOMMENDED --</span>
+<span class="c1">// Asynchronous call -- STRONGLY RECOMMENDED.</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numOutcomes</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// console prints 2</span>
 
-<span class="c1">// synchronous -- possible but not recommended.</span>
+<span class="c1">// Synchronous call -- Possible, but not recommended.</span>
 <span class="kd">var</span> <span class="nx">outcomes</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
 <span class="c1">// outcomes = 2</span>
 </code></pre></div>
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Augur&rsquo;s Call API is made up of &ldquo;getter&rdquo; methods that retrieve information from the blockchain (using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC) but does not write information to the blockchain. The Call API is for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows for. The Call API is directly mapped to the Augur Contracts and their publicly exposed methods. All Call API functions will accept two arguments, a <code class="prettyprint">params</code> object with key/value pairs that match inputs for the contract method and a callback function. The Augur API functions are attached to the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract Name&gt;.&lt;Contract Method&gt;(&lt;Params Object&gt;, &lt;Callback Function&gt;)</code>. Although technically optional, the Augur team <strong>strongly recommends</strong> using a callback. Without the callback, the calls will be synchronous, which can lock up the web browser until they complete.</p>
+<p>The Call API of augur.js is made up of &ldquo;getter&rdquo; functions that retrieve information from Augur&rsquo;s Solidity smart contracts using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows, and its functions are directly mapped to the public functions of Augur&rsquo;s Solidity smart contracts. </p>
 
-<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running in a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
+<p>All functions in the Call API accept two arguments: </p>
+
+<ol>
+<li>A <code class="prettyprint">params</code> object that contains the Ethereum contract address to call and any key/value pairs that match the input parameters for the contract method.</li>
+<li>A callback function. </li>
+</ol>
+
+<p>The Call API functions are part of the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract Name&gt;.&lt;Contract Function&gt;(&lt;Params Object&gt;, &lt;Callback Function&gt;)</code>.</p>
+
+<p>While technically optional, the Augur team <strong>strongly recommends</strong> using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.</p>
+
+<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 <h2 id="augur-call-api">Augur Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">augur</span> <span class="o">=</span> <span class="s2">"0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">augur</span> <span class="p">},</span>
   <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"</span>
@@ -2668,6 +2680,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="dispute-crowdsourcer-call-api">Dispute Crowdsourcer Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Contract Call API Examples:</span>
+<span class="kd">var</span> <span class="nx">disputeCrowdsourcer</span> <span class="o">=</span> <span class="s2">"0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
@@ -2704,7 +2718,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputecrowdsourcer-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">Dispute Crowdsourcer Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputecrowdsourcer-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">DisputeCrowdsourcer Contract Code</a></h4>
 
 <h4 id="augur-api-disputecrowdsourcer-getfeewindow-tx-callback">augur.api.DisputeCrowdsourcer.getFeeWindow({ tx }[, callback])</h4>
 
@@ -2802,7 +2816,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"0"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-feewindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">Fee Window Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-feewindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">FeeWindow Contract Code</a></h4>
 
 <h4 id="augur-api-feewindow-getavgreportinggasprice-tx-callback">augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])</h4>
 
@@ -2858,6 +2872,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="initial-reporter-call-api">Initial Reporter Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Initial Reporter Contract Call API Examples:</span>
+<span class="kd">var</span> <span class="nx">initialReporter</span> <span class="o">=</span> <span class="s2">"0xbcb6eaefcfaf7ea1e17c4768a554d57800699ed3"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">designatedReporterShowed</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">designatedReporterShowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">designatedReporterShowed</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
@@ -2906,7 +2922,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-initialreporter-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">Initial Reporter Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-initialreporter-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">InitialReporter Contract Code</a></h4>
 
 <p>The Initial Reporter contract handles functionality related to both <a href="#designated-reporting">Designated Reporting</a> and <a href="open-reporting">Open Reporting</a>.</p>
 
@@ -3450,7 +3466,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">[</span> <span class="s2">"0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"</span><span class="p">,</span>
   <span class="s2">"0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"</span><span class="p">]</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-ordersfetcher-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol">Orders Fetcher Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-ordersfetcher-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol">OrdersFetcher Contract Code</a></h4>
 
 <h4 id="augur-api-ordersfetcher-ascendorderlist-tx-_type-_fxpprice-_lowestorderid-callback">augur.api.OrdersFetcher.ascendOrderList({ tx, _type, _fxpPrice, _lowestOrderId }[, callback])</h4>
 
@@ -3476,7 +3492,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reputationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reputationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">ReputationToken Contract Code</a></h4>
 
 <p>The Reputation Token, known as <a href="#rep">REP</a>, is the key that allows Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system to function, and by extension the entirety of Augur. REP has three major functions, it&rsquo;s used to <a href="#report">Report</a> on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>, <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a Market, and as a <a href="#no-show-rep-bond">Bond</a> when creating a Market. <a href="#reporter">Reporters</a> Stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the <a href="#final-outcome">Final Outcome</a> of the Market they can claim their REP back, earn <a href="#reporting-fee">Reporting Fees</a> proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.</p>
 
@@ -3504,7 +3520,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 </code></pre></div>
-<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-sharetoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol">Share Token Contract Code</a></h4>
+<h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-sharetoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol">ShareToken Contract Code</a></h4>
 
 <p>The Share Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions. Within Augur, it represents <a href="#share">Shares</a> in <a href="#market">Market</a> <a href="#outcome">Outcomes</a>.</p>
 
