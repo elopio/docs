@@ -4035,9 +4035,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <code class="prettyprint">cancelOrder</code> transaction is used to cancel and refund an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with the <code class="prettyprint">_orderId</code> specified as a 32-byte hexadecimal string. To get the order ID for a specific order, call the function <code class="prettyprint">augur.api.Order.getOrderId</code>.</p>
 
-<p>This function will fail if:
-* <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the Order.
-* <code class="prettyprint">_orderId</code> is undefined.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the Order.</li>
+<li><code class="prettyprint">_orderId</code> is undefined.</li>
+</ul>
 
 <p>Returns: true if the Order was successfully canceled, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
