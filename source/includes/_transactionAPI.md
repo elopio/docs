@@ -259,8 +259,8 @@ augur.api.CancelOrder.cancelOrder({
 The `cancelOrder` transaction is used to cancel and refund an existing [Order](#order) on the [Order Book](#order-book) with the `_orderId` specified as a 32-byte hexadecimal string. To get the order ID for a specific order, call the function `augur.api.Order.getOrderId`.
 
 This function will fail if:
-- `msg.sender` isn't the owner of the Order.
-- `_orderId` is undefined.
+* `msg.sender` isn't the owner of the Order.
+* `_orderId` is undefined.
 
 Returns: true if the Order was successfully canceled, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
