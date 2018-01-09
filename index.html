@@ -2750,7 +2750,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-disputecrowdsourcer-isdisavowed-tx-callback">augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])</h4>
 
-<p>Returns whether the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> is no longer valid. A Dispute Crowdsourcer will get disavowed when its <a href="#market">Market</a> migrates to a new <a href="#universe">Universe</a> after a <a href="#fork">Fork</a> in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or <a href="open-reporting-phase">Open Reporting Phase</a> (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a <a href="#dispute-round">Dispute Round</a> when the Fork occurred, it will get reset to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> and all Stake in the Market&rsquo;s Dispute Crowdsourcers will be reset. If the Dispute Crowdsourcer has been disavowed, the function will return <code class="prettyprint">1</code>; otherwise, it will return <code class="prettyprint">0</code>.</p>
+<p>Returns whether the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> is no longer valid. A Dispute Crowdsourcer will get disavowed when its <a href="#market">Market</a> migrates to a new <a href="#universe">Universe</a> after a <a href="#fork">Fork</a> in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the <a href="#designated-reporting-phase">Designated Reporting Phase</a> or <a href="open-reporting-phase">Open Reporting Phase</a> (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a <a href="#dispute-round">Dispute Round</a> when the Fork occurred, it will get reset to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> and all Stake in the Market&rsquo;s Dispute Crowdsourcers will be reset. </p>
+
+<p>Returns: <code class="prettyprint">1</code> if the Dispute Crowdsourcer has been disavowed, or <code class="prettyprint">0</code> otherwise.</p>
 
 <h4 id="augur-api-disputecrowdsourcer-isinvalid-tx-callback">augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])</h4>
 
@@ -4082,8 +4084,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding <a href="#share">Shares</a> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">_market</code> owned by <code class="prettyprint">_shareHolder</code>. </p>
 
-<p>This transaction will fail if:
-  - <code class="prettyprint">_market</code> has not been Finalized and passed the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a>.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_market</code> has not been Finalized and passed the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a>.</li>
+</ul>
 
 <p>Returns: true if the transaction was executed without any errors, or false otherwise.</p>
 
@@ -4150,7 +4155,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-completesets-publicbuycompletesets-_market-_amount-onsent-onsuccess-onfailed">augur.api.CompleteSets.publicBuyCompleteSets({ _market, _amount, onSent, onSuccess, onFailed })</h4>
 
-<p>This transaction will attempt to purchase <code class="prettyprint">_amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> for a specified <code class="prettyprint">_market</code>. This transaction will fail if the <code class="prettyprint">msg.sender</code> doesn&rsquo;t have enough of the <code class="prettyprint">_market</code>&rsquo;s denomination token to be able to afford <code class="prettyprint">_amount</code> Shares in all Outcomes, or if the <code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. When successful, this transaction will spawn a <code class="prettyprint">CompleteSets</code> event which will record the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
+<p>This transaction will attempt to purchase <code class="prettyprint">_amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> for a specified <code class="prettyprint">_market</code>. </p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> doesn&rsquo;t have enough of the <code class="prettyprint">_market</code>&rsquo;s denomination token to be able to afford <code class="prettyprint">_amount</code> Shares in all Outcomes.</li>
+<li><code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. </li>
+</ul>
+
+<p>When successful, this transaction will spawn a <code class="prettyprint">CompleteSets</code> event which will record the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
 
 <h4 id="augur-api-completesets-publicsellcompletesets-_market-_amount-onsent-onsuccess-onfailed">augur.api.CompleteSets.publicSellCompleteSets({ _market, _amount, onSent, onSuccess, onFailed })</h4>
 
@@ -4206,12 +4220,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction will create a new <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> for <a href="#market">Market</a> <code class="prettyprint">_market</code> trading on <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code>. The required fields besides <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code> are the <code class="prettyprint">_type</code> of Order (1 for a bid, 2 for an ask), amount of <a href="#share">Shares</a>, <code class="prettyprint">_attoshares</code>, denoted in <a href="#atto-prefix">attoshares</a>, and the <code class="prettyprint">_displayPrice</code> for the Order. Optional params include <code class="prettyprint">_betterOrderId</code>, <code class="prettyprint">_worseOrderId</code>, <code class="prettyprint">_tradeGroupId</code>, and the callbacks. The <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> are Order IDs of Orders already on the Order Book which should be better and worse than the order this transaction is intending to create. The <code class="prettyprint">_tradeGroupId</code> is a field used by the Augur UI to group transactions and can be left blank.</p>
 
-<p>This transaction will fail if:
-  - <code class="prettyprint">_type</code> is not a valid value of 1 or 2.
-  - <code class="prettyprint">_attoshares</code> is less than 0.
-  - <code class="prettyprint">_market</code> is undefined.
-  - <code class="prettyprint">_outcome</code> is less than 0 or greater than the total number of Outcomes for <code class="prettyprint">_market</code>.
-  - <code class="prettyprint">_displayPrice</code> is below the <code class="prettyprint">_market</code>&rsquo;s minimum <code class="prettyprint">_displayPrice</code> or above the <code class="prettyprint">market</code>&rsquo;s maximum <code class="prettyprint">_displayPrice</code>.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_type</code> is not a valid value of 1 or 2.</li>
+<li><code class="prettyprint">_attoshares</code> is less than 0.</li>
+<li><code class="prettyprint">_market</code> is undefined.</li>
+<li><code class="prettyprint">_outcome</code> is less than 0 or greater than the total number of Outcomes for <code class="prettyprint">_market</code>.</li>
+<li><code class="prettyprint">_displayPrice</code> is below the <code class="prettyprint">_market</code>&rsquo;s minimum <code class="prettyprint">_displayPrice</code> or above the <code class="prettyprint">market</code>&rsquo;s maximum <code class="prettyprint">_displayPrice</code>.</li>
+</ul>
 
 <p>Returns: the Order ID of the newly created Order, as a 32-byte hexadecimal value.</p>
 
@@ -4323,7 +4340,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#outcome">Outcome</a>. Calling this function will not redeem any <a href="#reporting-fee">Reporting Fees</a> because the total amount of Reporting Fees is not known until the end of the <a href="#fee-window">Fee Window</a>.</p>
 
-<p>This transaction will fail if Augur is not currently in a halted state.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>Augur is not currently in a halted state.</li>
+</ul>
 
 <p>Returns: true if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Transaction API Examples:</span>
@@ -4439,7 +4460,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Participation Tokens and convert them into Reputation Tokens.</p>
 
-<p>This transaction will fail if Augur is not currently in a halted state.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>Augur is not currently in a halted state.</li>
+</ul>
 
 <p>Returns: true if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -4611,8 +4636,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <code class="prettyprint">transferOwnership</code> transaction will change the owner of <code class="prettyprint">initialReporter</code> from the existing owner to the Ethereum address hexadecimal string <code class="prettyprint">_newOwner</code>. </p>
 
-<p>This function will fail if:
-  - <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">initialReporter</code>. </p>
+<p>This function will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">initialReporter</code>. </li>
+</ul>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
@@ -4620,7 +4648,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, <a href="#initial-reporter">Initial Reporters</a> can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Initial Report</a> <a href="#outcome">Outcome</a>, as well as the <a href="no-show-gas-bond">No-Show Gas Bond</a> (in cases where the <a href="#first-public-reporter">First Public Reporter</a> submitted the Initial Report instead of the <a href="#designated-reporter">Designated Reporter</a>).</p>
 
-<p>This transaction will fail if Augur is not currently in a halted state.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>Augur is not currently in a halted state.</li>
+</ul>
 
 <p>Returns: true if the REP and was successfully withdrawn from <code class="prettyprint">initialReporter</code> contract without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -4714,8 +4746,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market-creator-mailbox">Market Creator Mailbox</a> owner to the specified <code class="prettyprint">_newOwner</code>.</p>
 
-<p>This function will fail if:
-  - <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">mailbox</code>. </p>
+<p>This function will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">mailbox</code>. </li>
+</ul>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
@@ -4723,8 +4758,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Transfers all ETH in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the Market Creator&rsquo;s address.  </p>
 
-<p>This transaction will fail if:
-  - <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </li>
+</ul>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
@@ -4732,8 +4770,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Transfers all tokens of type <code class="prettyprint">_token</code> in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the Market Creator&rsquo;s address.  </p>
 
-<p>This transaction will fail if:
-  - <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </li>
+</ul>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
@@ -4952,9 +4993,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>. Calling it will &ldquo;disavow&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of the Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> will be reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers will be redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. </p>
 
-<p>This function will fail if:
-  - There is not a Forked Market in <code class="prettyprint">market</code>&rsquo;s Universe.
-  - <code class="prettyprint">market</code> is a Forked Market.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>There is not a Forked Market in <code class="prettyprint">market</code>&rsquo;s Universe.</li>
+<li><code class="prettyprint">market</code> is a Forked Market.</li>
+</ul>
 
 <p>Returns: true if the function executed without any errors, or false otherwise.</p>
 
@@ -4962,10 +5006,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Submits an <a href="#initial-report">Initial Report</a> for <a href="#market">Market</a> <code class="prettyprint">market</code> with <a href="#payout-set">Payout Set</a> <code class="prettyprint">_payoutNumerators</code> as an array and <code class="prettyprint">_invalid</code> as a boolean value for whether the Market is <a href="#invalid-outcome">Invalid</a>.</p>
 
-<p>This function will fail if:
-  - The Market&rsquo;s event end time has not passed.
-  - The caller of the function is not the <a href="#designated-reporter">Designated Reporter</a> and the <a href="#designated-reporting-phase">Designated Reporting Phase</a> has not ended.
-  - <code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The Market&rsquo;s event end time has not passed.</li>
+<li>The caller of the function is not the <a href="#designated-reporter">Designated Reporter</a> and the <a href="#designated-reporting-phase">Designated Reporting Phase</a> has not ended.</li>
+<li><code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
+</ul>
 
 <p>Returns: true if the function executed without any errors, or false otherwise.</p>
 
@@ -4973,7 +5020,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function will <a href="#finalized-market">Finalize</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>, meaning it will set the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistribute <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distribute the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
-<p>This function will fail if:</p>
+<p>This transaction will fail if:</p>
 
 <ul>
 <li>The <a href="#initial-report">Initial Report</a> has not been submitted.</li>
@@ -4987,7 +5034,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function will <a href="#finalized-market">Finalize</a> the <a href="#forked-market">Forked Market</a> <code class="prettyprint">market</code>, meaning it will set the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
-<p>This function will fail if:</p>
+<p>This transaction will fail if:</p>
 
 <ul>
 <li><code class="prettyprint">market</code> is not a Forked Market.</li>
@@ -5003,14 +5050,23 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-market-transferownership-market-_newowner-onsent-onsuccess-onfailed">augur.api.Market.transferOwnership({ market, _newOwner, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market">Market</a> owner to the specified <code class="prettyprint">_newOwner</code>. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the <code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">market</code>. </p>
+<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market">Market</a> owner to the specified <code class="prettyprint">_newOwner</code>. This is used to transfer ownership of a Market from one address to another. </p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">market</code>. </li>
+</ul>
 
 <h4 id="augur-api-market-withdrawinemergency-market-onsent-onsuccess-onfailed">augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Reputation Tokens from a particular Market.</p>
 
-<p>This transaction will fail if:
-  - Augur is not currently in a halted state.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>Augur is not currently in a halted state.</li>
+</ul>
 
 <p>Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
 
@@ -5171,13 +5227,20 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="augur-api-reputationtoken-migratefromlegacyreputationtoken-reputationtoken-onsent-onsuccess-onfailed">augur.api.ReputationToken.migrateFromLegacyReputationToken({ reputationToken, onSent, onSuccess, onFailed })</h4>
 
-<p>This function will migrate <a href="#legacy-rep">Legacy REP</a> tokens from the Legacy REP contract owned by <code class="prettyprint">msg.sender</code> to the <code class="prettyprint">reputationToken</code> provided. <code class="prettyprint">msg.sender</code> will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the legacy rep contract to the <code class="prettyprint">reputationToken</code> contract.</p>
+<p>This transaction will migrate <a href="#legacy-rep">Legacy REP</a> tokens from the Legacy REP contract owned by <code class="prettyprint">msg.sender</code> to the <code class="prettyprint">reputationToken</code> provided. <code class="prettyprint">msg.sender</code> will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the legacy rep contract to the <code class="prettyprint">reputationToken</code> contract.</p>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
 <h4 id="augur-api-reputationtoken-migrateout-reputationtoken-_destination-_attotokens-onsent-onsuccess-onfailed">augur.api.ReputationToken.migrateOut({ reputationToken, _destination, _attotokens, onSent, onSuccess, onFailed })</h4>
 
-<p>This function migrates a <code class="prettyprint">_reporter</code>&rsquo;s <a href="#rep">REP</a> (denoted as <a href="#atto-prefix">attoREP</a> in <code class="prettyprint">_attotokens</code>) from one <code class="prettyprint">reputationToken</code> address to another (<code class="prettyprint">_destination</code>). The <code class="prettyprint">msg.sender</code> of this transaction must be the <code class="prettyprint">_reporter</code> provided or the <code class="prettyprint">msg.sender</code> must be approved to spend <code class="prettyprint">_attotokens</code> amount of REP for the <code class="prettyprint">_reporter</code> provided.</p>
+<p>This transaction migrates a <code class="prettyprint">_reporter</code>&rsquo;s <a href="#rep">REP</a> (denoted in <a href="#atto-prefix">attoREP</a> as <code class="prettyprint">_attotokens</code>) from one <code class="prettyprint">reputationToken</code> address to another (<code class="prettyprint">_destination</code>) in the case of a <a href="#fork">Fork</a>.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_attotokens</code> is not greater than 0.</li>
+<li><code class="prettyprint">_destination</code>&rsquo;s <a href="#universe">Universe</a> is not a <a href="#child-universe">Child Universe</a> of <code class="prettyprint">reputationToken</code>&rsquo;s Universe.</li>
+</ul>
 
 <p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
@@ -5508,10 +5571,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If Augur needs to be <a href="#developer-mode">halted</a> by the development team (for example, if a vulnerability is discovered), calling this function on <a href="#market">Market</a> <code class="prettyprint">_market</code> will cash out the caller&rsquo;s <a href="#share">Shares</a> to Ether for that Market and return them to the caller&rsquo;s Ethereum address. </p>
 
-<p>This transaction will fail if:
-  - Augur is not in a halted state.</p>
+<p>This transaction will fail if:</p>
 
-<p>Returns: true if , or false otherwise.</p>
+<ul>
+<li>Augur is not in a halted state.</li>
+</ul>
+
+<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
 <h2 id="universe-tx-api">Universe Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Transaction API Examples:</span>
@@ -6080,9 +6146,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns Ethereum contract address corresponding the <a href="#child-universe">Child Universe</a> with <a href="#payout-set">Payout Set</a> <code class="prettyprint">_parentPayoutNumerators</code>, as an array of integers, and <code class="prettyprint">_parentInvalid</code>, as a boolean value. If the Child Universe does not already exist, it will be created. </p>
 
-<p>This transaction will fail if:
-  - The Universe does not have a <a href="#forked-market">Forked Market</a>.
-  - <code class="prettyprint">_parentInvalid</code> is true and the Numerators in <code class="prettyprint">_parentPayoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid <a href="#market">Market</a>, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The Universe does not have a <a href="#forked-market">Forked Market</a>.</li>
+<li><code class="prettyprint">_parentInvalid</code> is true and the Numerators in <code class="prettyprint">_parentPayoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid <a href="#market">Market</a>, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
+</ul>
 
 <h4 id="augur-api-universe-createscalarmarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_minprice-_maxprice-_numticks-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createScalarMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _minPrice, _maxPrice, _numTicks, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
 
@@ -6162,7 +6231,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Calls the <code class="prettyprint">redeem</code> function for all Ethereum contract addresses in the arrays <code class="prettyprint">_reportingParticipants</code> and <code class="prettyprint">_feeWindows</code> using the caller&rsquo;s address as the redeemer. <code class="prettyprint">_reportingParticipants</code> can contain Ethereum contract addresses for <a href="#dispute-crowdsourcer-tx-api">DisputeCrowdsourcers</a>, <a href="#initial-reporter-tx-api">InitialReporters</a>, or both, as hexadecimal strings. <code class="prettyprint">_feeWindows</code> can only contain the Ethereum contract addresses of <a href="#fee-window">Fee Windows</a>. This function is intended as easy way to redeem Stake in multiple <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a>, <a href="#initial-report">Initial Reports</a>, and Fee Windows at once.</p>
 
-<p>Returns: true if the function executed without any errors.</p>
+<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
           <h1 id="events-api">Events API</h1>
 
