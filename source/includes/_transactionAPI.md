@@ -306,7 +306,8 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding [Shares](#share) in [Finalized Market](#finalized-market) `_market` owned by `_shareHolder`. 
 
 This transaction will fail if:
-  - `_market` has not been Finalized and passed the [Post-Finalization Waiting Period](post-finalization-waiting-period).
+
+* `_market` has not been Finalized and passed the [Post-Finalization Waiting Period](post-finalization-waiting-period).
 
 Returns: true if the transaction was executed without any errors, or false otherwise.
 
@@ -375,7 +376,14 @@ augur.api.CompleteSets.publicSellCompleteSets({
 
 #### augur.api.CompleteSets.publicBuyCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
 
-This transaction will attempt to purchase `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) for a specified `_market`. This transaction will fail if the `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful, this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
+This transaction will attempt to purchase `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) for a specified `_market`. 
+
+This transaction will fail if:
+
+* `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes.
+* `_amount` is not a number between 1 and 2<sup>254</sup>. 
+
+When successful, this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
 
 #### augur.api.CompleteSets.publicSellCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
 
@@ -434,11 +442,12 @@ augur.api.CreateOrder.publicCreateOrder({
 This transaction will create a new [Order](#order) on the [Order Book](#order-book) for [Market](#market) `_market` trading on [Outcome](#outcome) `_outcome`. The required fields besides `_market` and `_outcome` are the `_type` of Order (1 for a bid, 2 for an ask), amount of [Shares](#share), `_attoshares`, denoted in [attoshares](#atto-prefix), and the `_displayPrice` for the Order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are Order IDs of Orders already on the Order Book which should be better and worse than the order this transaction is intending to create. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
 
 This transaction will fail if:
-  - `_type` is not a valid value of 1 or 2.
-  - `_attoshares` is less than 0.
-  - `_market` is undefined.
-  - `_outcome` is less than 0 or greater than the total number of Outcomes for `_market`.
-  - `_displayPrice` is below the `_market`'s minimum `_displayPrice` or above the `market`'s maximum `_displayPrice`.
+
+* `_type` is not a valid value of 1 or 2.
+* `_attoshares` is less than 0.
+* `_market` is undefined.
+* `_outcome` is less than 0 or greater than the total number of Outcomes for `_market`.
+* `_displayPrice` is below the `_market`'s minimum `_displayPrice` or above the `market`'s maximum `_displayPrice`.
 
 Returns: the Order ID of the newly created Order, as a 32-byte hexadecimal value.
 
@@ -552,7 +561,9 @@ Returns: true if `redeemer`'s Staked REP was redeemed without errors, or false o
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome). Calling this function will not redeem any [Reporting Fees](#reporting-fee) because the total amount of Reporting Fees is not known until the end of the [Fee Window](#fee-window).
 
-This transaction will fail if Augur is not currently in a halted state.
+This transaction will fail if:
+
+* Augur is not currently in a halted state.
 
 Returns: true if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -650,9 +661,9 @@ Purchases the number of [Participation Tokens](#participation-token) specified b
 
 This transaction will fail if:
 
-- `_attotokens` is <= 0.
-- Reporting is not currently active in the [Fee Window](#fee-window).
-- All markets have not been [Finalized](#finalized-market) in the Fee Window.
+* `_attotokens` is <= 0.
+* Reporting is not currently active in the [Fee Window](#fee-window).
+* All markets have not been [Finalized](#finalized-market) in the Fee Window.
 
 These Participation Tokens can later be redeemed once the Fee Window is no longer active using the function `augur.api.FeeWindow.redeem`.
 
@@ -668,7 +679,9 @@ Returns: true if the Participation Tokens were withdrawn and converted to Reputa
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
-This transaction will fail if Augur is not currently in a halted state.
+This transaction will fail if:
+
+* Augur is not currently in a halted state.
 
 Returns: true if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -845,7 +858,8 @@ Returns: true if the REP (and, in the case of First Public Reporters, Ether) was
 The `transferOwnership` transaction will change the owner of `initialReporter` from the existing owner to the Ethereum address hexadecimal string `_newOwner`. 
 
 This function will fail if:
-  - `msg.sender` isn't the owner of `initialReporter`. 
+
+* `msg.sender` isn't the owner of `initialReporter`. 
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
@@ -853,7 +867,9 @@ Returns: true if the transaction executed without any errors, or false otherwise
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, [Initial Reporters](#initial-reporter) can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Initial Report](#dispute-crowdsourcer) [Outcome](#outcome), as well as the [No-Show Gas Bond](no-show-gas-bond) (in cases where the [First Public Reporter](#first-public-reporter) submitted the Initial Report instead of the [Designated Reporter](#designated-reporter)).
 
-This transaction will fail if Augur is not currently in a halted state.
+This transaction will fail if:
+
+* Augur is not currently in a halted state.
 
 Returns: true if the REP and was successfully withdrawn from `initialReporter` contract without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -950,7 +966,8 @@ augur.api.Mailbox.withdrawTokens({
 The `transferOwnership` transaction will change the current [Market Creator Mailbox](#market-creator-mailbox) owner to the specified `_newOwner`.
 
 This function will fail if:
-  - `msg.sender` isn't the owner of `mailbox`. 
+
+* `msg.sender` isn't the owner of `mailbox`. 
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
@@ -959,7 +976,8 @@ Returns: true if the transaction executed without any errors, or false otherwise
 Transfers all ETH in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  
 
 This transaction will fail if:
-  - `msg.sender` isn't the owner of the specified `mailbox`. 
+
+* `msg.sender` isn't the owner of the specified `mailbox`. 
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
@@ -968,7 +986,8 @@ Returns: true if the transaction executed without any errors, or false otherwise
 Transfers all tokens of type `_token` in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  
 
 This transaction will fail if:
-  - `msg.sender` isn't the owner of the specified `mailbox`. 
+
+* `msg.sender` isn't the owner of the specified `mailbox`. 
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
@@ -1190,8 +1209,9 @@ Returns: true if the function executed without any errors, or false otherwise.
 This function may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork). Calling it will "disavow" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of the Market, meaning the Market's [Tentative Outcome](#tentative-outcome) will be reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers will be redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. 
 
 This function will fail if:
-  - There is not a Forked Market in `market`'s Universe.
-  - `market` is a Forked Market.
+
+* There is not a Forked Market in `market`'s Universe.
+* `market` is a Forked Market.
 
 Returns: true if the function executed without any errors, or false otherwise.
 
@@ -1199,10 +1219,11 @@ Returns: true if the function executed without any errors, or false otherwise.
 
 Submits an [Initial Report](#initial-report) for [Market](#market) `market` with [Payout Set](#payout-set) `_payoutNumerators` as an array and `_invalid` as a boolean value for whether the Market is [Invalid](#invalid-outcome).
 
-This function will fail if:
-  - The Market's event end time has not passed.
-  - The caller of the function is not the [Designated Reporter](#designated-reporter) and the [Designated Reporting Phase](#designated-reporting-phase) has not ended.
-  - `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
+This transaction will fail if:
+
+* The Market's event end time has not passed.
+* The caller of the function is not the [Designated Reporter](#designated-reporter) and the [Designated Reporting Phase](#designated-reporting-phase) has not ended.
+* `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
 Returns: true if the function executed without any errors, or false otherwise.
 
@@ -1210,11 +1231,11 @@ Returns: true if the function executed without any errors, or false otherwise.
 
 This function will [Finalize](#finalized-market) the [Market](#market) `market`, meaning it will set the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistribute [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distribute the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
 
-This function will fail if:
+This transaction will fail if:
 
-  - The [Initial Report](#initial-report) has not been submitted.
-  - The [Fee Window](#fee-window) has not ended.
-  - `market` is a Forked Market.
+* The [Initial Report](#initial-report) has not been submitted.
+* The [Fee Window](#fee-window) has not ended.
+* `market` is a Forked Market.
 
 Returns: true if the function executed without any errors, or false otherwise.
 
@@ -1222,9 +1243,9 @@ Returns: true if the function executed without any errors, or false otherwise.
 
 This function will [Finalize](#finalized-market) the [Forked Market](#forked-market) `market`, meaning it will set the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market. Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
 
-This function will fail if:
+This transaction will fail if:
   
-  - `market` is not a Forked Market.
+* `market` is not a Forked Market.
 
 Returns: true if the function executed without any errors, or false otherwise.
 
@@ -1236,14 +1257,19 @@ Returns: `1` if `market` was successfully migrated and `0` if no migration was r
 
 #### augur.api.Market.transferOwnership({ market, \_newOwner, onSent, onSuccess, onFailed })
 
-The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. This transaction will fail if the `msg.sender` isn't the owner of the specified `market`. 
+The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. 
+
+This transaction will fail if:
+
+* `msg.sender` isn't the owner of `market`. 
 
 #### augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
 
 This transaction will fail if:
-  - Augur is not currently in a halted state.
+
+* Augur is not currently in a halted state.
 
 Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
@@ -1406,13 +1432,18 @@ Returns: true if the transaction executed without any errors, or false otherwise
 
 #### augur.api.ReputationToken.migrateFromLegacyReputationToken({ reputationToken, onSent, onSuccess, onFailed })
 
-This function will migrate [Legacy REP](#legacy-rep) tokens from the Legacy REP contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
+This transaction will migrate [Legacy REP](#legacy-rep) tokens from the Legacy REP contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
 #### augur.api.ReputationToken.migrateOut({ reputationToken, \_destination, \_attotokens, onSent, onSuccess, onFailed })
 
-This function migrates a `_reporter`'s [REP](#rep) (denoted as [attoREP](#atto-prefix) in `_attotokens`) from one `reputationToken` address to another (`_destination`). The `msg.sender` of this transaction must be the `_reporter` provided or the `msg.sender` must be approved to spend `_attotokens` amount of REP for the `_reporter` provided.
+This transaction migrates a `_reporter`'s [REP](#rep) (denoted in [attoREP](#atto-prefix) as `_attotokens`) from one `reputationToken` address to another (`_destination`) in the case of a [Fork](#fork).
+
+This transaction will fail if:
+
+* `_attotokens` is not greater than 0.
+* `_destination`'s [Universe](#universe) is not a [Child Universe](#child-universe) of `reputationToken`'s Universe.
 
 Returns: true if the transaction executed without any errors, or false otherwise.
 
@@ -1750,9 +1781,10 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
 If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on [Market](#market) `_market` will cash out the caller's [Shares](#share) to Ether for that Market and return them to the caller's Ethereum address. 
 
 This transaction will fail if:
-  - Augur is not in a halted state.
 
-Returns: true if , or false otherwise.
+* Augur is not in a halted state.
+
+Returns: true if the transaction executed without any errors, or false otherwise.
 
 Universe Tx API
 ---------------------
@@ -2306,8 +2338,9 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 Returns Ethereum contract address corresponding the [Child Universe](#child-universe) with [Payout Set](#payout-set) `_parentPayoutNumerators`, as an array of integers, and `_parentInvalid`, as a boolean value. If the Child Universe does not already exist, it will be created. 
 
 This transaction will fail if:
-  - The Universe does not have a [Forked Market](#forked-market).
-  - `_parentInvalid` is true and the Numerators in `_parentPayoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid [Market](#market), refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
+
+* The Universe does not have a [Forked Market](#forked-market).
+* `_parentInvalid` is true and the Numerators in `_parentPayoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid [Market](#market), refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
 #### augur.api.Universe.createScalarMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_minPrice, \_maxPrice, \_numTicks, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
 
@@ -2379,4 +2412,4 @@ Returns the Ethereum contract address, as a hexadecimal string, of the [Fee Wind
 
 Calls the `redeem` function for all Ethereum contract addresses in the arrays `_reportingParticipants` and `_feeWindows` using the caller's address as the redeemer. `_reportingParticipants` can contain Ethereum contract addresses for [DisputeCrowdsourcers](#dispute-crowdsourcer-tx-api), [InitialReporters](#initial-reporter-tx-api), or both, as hexadecimal strings. `_feeWindows` can only contain the Ethereum contract addresses of [Fee Windows](#fee-window). This function is intended as easy way to redeem Stake in multiple [Dispute Crowdsourcers](#dispute-crowdsourcer), [Initial Reports](#initial-report), and Fee Windows at once.
 
-Returns: true if the function executed without any errors.
+Returns: true if the transaction executed without any errors, or false otherwise.

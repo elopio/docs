@@ -132,7 +132,9 @@ Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the sp
 
 #### augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])
 
-Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is no longer valid. A Dispute Crowdsourcer will get disavowed when its [Market](#market) migrates to a new [Universe](#universe) after a [Fork](#fork) in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the [Designated Reporting Phase](#designated-reporting-phase) or [Open Reporting Phase](open-reporting-phase) (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a [Dispute Round](#dispute-round) when the Fork occurred, it will get reset to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) and all Stake in the Market's Dispute Crowdsourcers will be reset. If the Dispute Crowdsourcer has been disavowed, the function will return `1`; otherwise, it will return `0`.
+Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is no longer valid. A Dispute Crowdsourcer will get disavowed when its [Market](#market) migrates to a new [Universe](#universe) after a [Fork](#fork) in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the [Designated Reporting Phase](#designated-reporting-phase) or [Open Reporting Phase](open-reporting-phase) (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a [Dispute Round](#dispute-round) when the Fork occurred, it will get reset to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) and all Stake in the Market's Dispute Crowdsourcers will be reset. 
+
+Returns: `1` if the Dispute Crowdsourcer has been disavowed, or `0` otherwise.
 
 #### augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])
 
