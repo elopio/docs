@@ -97,9 +97,9 @@ The Designated Reporting Phase lasts up to three (3) days and begins immediately
 
 ## Developer Mode
 
-During Augur's early stages, its Solidity smart contracts will allow for some special "developer mode" functionality. This functionality has been added as a security precaution in case an attacker attempts to compromise Augur's [Decentralized Oracle](#decentralized-oracle) system. If a security exploit is found, the Augur team can halt Augur, which will stop all normal functionality, such as trading, reporting, and disputing, and allow users to withdraw their REP and ETH from any Market.
+During Augur's early stages, its Solidity smart contracts will allow for some special "developer mode" functionality. This functionality has been added as a security precaution in case an attacker attempts to compromise Augur's [Decentralized Oracle](#decentralized-oracle) system. If a security exploit is found, the Augur development team can halt Augur, which will stop all normal functionality, such as trading, reporting, and disputing, and allow users to withdraw their REP and ETH from any Market.
 
-Eventually, once Augur has been thoroughly tested and the Augur team is confident that it is secure, this functionality will be removed so that it is not available to anyone (including the Augur team).
+Eventually, once Augur has been thoroughly tested and the Augur development team is confident that it is secure, this functionality will be removed so that it is not available to anyone (including the Augur development team).
 
 ## Dispute
 
@@ -135,10 +135,10 @@ By design, the Dispute Bond sizes for each Dispute Round are chosen such that an
 
 End Time is the date and time that a [Market](#market)'s event will have come to pass and should be known. After this date and time has passed the Market will get [Reported](#report) on and eventually [Finalized](#finalized-market).
 
-<!-- TODO: Possibly remove this entry if it's not linked to elsewhere. -->
+<!-- TODO: Remove this section if it is not linked to anywhere else. -->
 ## Fee Token
 
-Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur's Solidity smart contracts to allow users to redeem [REP](#rep) Staked either in a [First Public Report](#first-public-report) or in a [Crowdsourcer](#crowdsourcer). When a [First Public Reporter](#first-public-reporter) submits a First Public Report in a given [Fee Window](#fee-window), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Similarly, when a user Stakes REP in a Crowdsourcer to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated that user to determine what proportion of the Fee Window's [Reporting Fees](#reporting-fee) (in Ether) to distribute to them.
+Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur's Solidity smart contracts to allow users to redeem [REP](#rep) Staked either in a [First Public Report](#first-public-report) or in a [Crowdsourcer](#crowdsourcer). When a [First Public Reporter](#first-public-reporter) submits a First Public Report in a given [Fee Window](#fee-window), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Similarly, when a user Stakes REP in a Crowdsourcer to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome), Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated that user to determine what proportion of the Fee Window's [Reporting Fees](#reporting-fee) (in ETH) to distribute to them.
 
 ## Fee Window
 
@@ -172,6 +172,22 @@ The First Public Reporter is any user who [Stakes](#first-public-reporter-stake)
 
 When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and the [First Public Reporter](#first-public-reporter) submits a [Report](#report) instead, the [No-Show REP Bond](#designated-report-no-show-rep-bond) gets used to [Stake](#stake-token) on a [Tentative Outcome](#tentative-outcome). If that Tentative Outcome becomes the [Final Outcome](#final-outcome), the First Public Reporter will receive the No-Show REP Bond back.
 
+## Fork
+
+A Fork occurs if the [Tentative Outcome](#tentative-outcome) for a [Market](#market) is [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than 1.25% of all existing [REP](#rep). A Fork causes Augur to create multiple new [Universes](#universe). Each new Universe is empty except for the [Forked Market](#forked-market); they contain no markets or REP tokens. There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including the [Invalid Outcome](#invalid-outcome), and the Markets will be [Finalized](#finalized-market) on each Universe. REP holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the [Fork Period](#fork-period) ends, and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#share) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork. In the event of a Fork, all non-Forked Markets in each Child Universe will have their Tentative Outcome reset to the Outcome that was reported by the [Initial Reporter](#initial-reporter), and any REP [Staked](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer) in these Markets will be redeemable by the users who originally Staked that REP. These Markets will start off back in the [Waiting for the Next Fee Window to Begin Phase](waiting-for-the-next-fee-window-to-begin-phase).
+
+## Fork Period
+
+The Fork Period, or Fork Phase, is period lasting a maximum of sixty (60) days once a [Fork](#fork) has begun. Once a majority of [REP](#rep) has been migrated to a specific [Child Universe](#child-universe) or sixty days have elapsed, the [Market](#market) will become [Finalized](#finalized-market).
+
+## Forked Market
+
+A Forked Market is a [Market](#market) whose [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than 1.25% of all existing [REP](#rep), thus causing a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
+
+## Genesis Universe
+
+A Genesis Universe is a [Universe](#universe) that does not have a [Parent Universe](#parent-universe). At the launch of Augur, only a single Genesis Universe exists. However, users can create other Genesis Universes using the `augur.api.Augur.createGenesisUniverse` function. (One reason they may want to do this, for example, is if they wish to create a competing Genesis Universe because they do not agree with the [Final Outcome](#final-outcome) of a particular [Market](#market) in the original Genesis Universe.) Initially, a new Genesis Universe does not contain any Markets, nor any supply of [REP](#rep). In order to add a REP supply to a Genesis Universe, users must migrate their [Legacy REP](#legacy-rep) to the REP smart contract for that Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`.)
+
 ## Initial Report
 
 The Initial Report is simply the first [Report](#report) placed on a [Market](#market). The Initial Report often will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public), and the [No-Show Gas Bond](Designated Report No-Show Gas Bond) goes to the First Public Reporter if the Tentative Outcome they Reported becomes the [Final Outcome](#final-outcome) of the Market. This provides an incentive to submit the First Public Report, since the First Public Reporter stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
@@ -180,25 +196,13 @@ The Initial Report is simply the first [Report](#report) placed on a [Market](#m
 
 The Initial Reporter is the person who submits the [Initial Report](#initial-report) on a [Market](#market). Generally, the Initial Reporter will be the [Designated Reporter](#designated-reporter), however if the Designated Reporter fails to [Report](#report), then the Initial Reporter will become whoever submits the First Public Report during the [Open Reporting Phase](#open-reporting-phase) for this Market.
 
-## Fork
-
-A Fork occurs if the [Tentative Outcome](#tentative-outcome) for a [Market](#market) is [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than 1.25% of all existing [REP](#rep). A Fork causes Augur to create multiple new [Universes](#universe). Each new Universe is empty except for the [Forked Market](#forked-market); they contain no markets or REP tokens. There will be a Universe created for each possible [Outcome](#outcome) of the [Market](#market), including the [Invalid Outcome](#invalid-outcome), and the Markets will be [Finalized](#finalized-market) on each Universe. REP holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the [Fork Period](#fork-period) ends, and the Universe with the most REP migrated too it will allow traders to [Settle](#settlement) [Shares](#share) for the [Forked Market](#forked-market) and [Reporting Fees](#reporting-fee) will be paid out to [Reporters](#reporter) for that Universe only. The original Universe that contained the Forked Market is known as the [Parent Universe](#parent-universe) and is considered [Locked](#locked-universe). All of the new Universes created are known as [Child Universes](#child-universe). Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork.
-
-## Fork Period
-
-The Fork Period, or Fork Phase, is a sixty (60) day period of time after a [Fork](#fork) has occurred.
-
-## Forked Market
-
-A Forked Market is a [Market](#market) whose [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than 1.25% of all existing [REP](#rep), thus causing a [Fork](#fork) to occur. A Fork will cause the creation of multiple [Universes](#universe) of Augur with the Forked Market having a different [Final Outcome](#final-outcome) in each Universe. The Universe that contained the Forked Market originally will become a [Locked Universe](#locked-universe).
-
-## Genesis Universe
-
-This is the first and only [Universe](#universe) to exist at Augur's launch, meaning it has no [Parent Universe](#parent-universe). All [Markets](#market) and [REP](#rep) exist in this Universe until Augur's first [Fork](#fork) occurs. Users are required to migrate their REP from the legacy REP contract into this Universe at launch in order for their REP to be used with Augur.
-
 ## Invalid Outcome
 
 If the [Outcome](#outcome) of a [Market's](#market) event does not fit any of the Outcomes set for that Market, or if the Market's question is worded in a way that is vague or does not have a clear answer, [Reporters](#reporters) can [Report](#report) its [Tentative Outcome](#tentative-outcome) as Invalid. Additionally, if the Market is in a [Dispute Round](#dispute-round), users can [Stake](#dispute-stake) [REP](#rep) on Invalid as the Tentative Outcome, or if the Market has [Forked](#fork), users can migrate their REP to the [Child Universe](#child-universe) where the Outcome is Invalid. If the Market's [Final Outcome](#final-outcome) becomes Invalid, its [Payout Set](#payout-set) will be the [Number of Ticks](#number-of-ticks) divided evenly among each Outcome. For example, in a [Categorical Market](#binary-market) with 500 [Ticks](#tick) and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).
+
+## Legacy REP
+
+Legacy [Reputation Tokens](#rep), or Legacy REP, are REP that exist in the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/legacy_reputation/LegacyRepToken.sol) and have not been migrated to the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), for a particular [Universe](#universe). Legacy REP must be migrated to the Reputation Token smart contract by calling the `augur.api.ReputationToken.migrateFromLegacyReputationToken` function before they can be used within Augur.
 
 ## Locked Universe
 
@@ -211,7 +215,7 @@ A Market is created by users of Augur for a small fee. They are used to describe
 <!-- TODO: Remove this section and links to it. -->
 ## Market Awaiting Finalization
 
-Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Tentative Outcome](#tentative-outcome), but has not gotten past the [Dispute Round Phase](#dispute-round-phase) or [Fork Phase](#fork-phase). If a Market is in the Dispute Round Phase and does not have its Tentative Outcome [Challenged](#challenge) for 7 days, or if it has gotten past the 60-day Fork Phase, it becomes a [Finalized Market](#finalized-market) with a [Final Outcome](final-outcome).
+Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Tentative Outcome](#tentative-outcome), but has not gotten past the [Dispute Round Phase](#dispute-round-phase) or [Fork Phase](#fork-phase). If a Market is in the Dispute Round Phase and does not have its Tentative Outcome [Challenged](#challenge) for 7 days, or if it has gotten past the Fork Phase, it becomes a [Finalized Market](#finalized-market) with a [Final Outcome](final-outcome).
 
 ## Market Creator
 
@@ -284,7 +288,7 @@ At any time during a [Fee Window](#fee-window), users can purchase Participation
 
 ## Payout Distribution Hash
 
-The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). When a [Market](#market) is [Awaiting Finalization](#market-awaiting-finalization), it is said to have a tentative Payout Distribution Hash. Once the Market is Finalized, this tentative hash becomes the winning Payout Distribution Hash. Payout Distribution Hashes of [Forked Markets](#forked-markets) are used as identifiers for [Child Universes](#child-universe) and [Parent Universes](#parent-universe).
+The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). When a [Market](#market) is [Awaiting Finalization](#market-awaiting-finalization), it is said to have a tentative Payout Distribution Hash. Once the Market is Finalized, this tentative hash becomes the winning Payout Distribution Hash. Payout Distribution Hashes of [Forked Markets](#forked-market) are used as identifiers for [Child Universes](#child-universe) and [Parent Universes](#parent-universe).
 
 ## Payout Set
 
@@ -297,7 +301,7 @@ A Position is the amount of [Shares](#share) that are owned (a long position) or
 <!-- TODO: Make sure this lines up with what's in the white paper. -->
 ## Post-Finalization Waiting Period
 
-Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.
+Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.
 
 ## Pre-Reporting Phase
 
@@ -305,7 +309,7 @@ This is the phase that occurs after a [Market's](#market) creation and before th
 
 ## Tentative Outcome
 
-The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market makes it through the [Dispute Round Phase](#dispute-round-phase) without being Challenged, or if the Market passes through the 60-day [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
+The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market makes it through the [Dispute Round Phase](#dispute-round-phase) without being Challenged, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
 
 ## REP
 

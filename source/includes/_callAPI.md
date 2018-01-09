@@ -25,7 +25,7 @@ var outcomes = augur.api.Market.getNumberOfOutcomes(error, params);
 ```
 <aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-The Call API of augur.js is made up of "getter" functions that retrieve information from Augur's Solidity smart contracts using Ethereum's `eth_call` RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular "gets" than the [Simplified API](#simplified-api) allows, and its functions are directly mapped to the public functions of Augur's Solidity smart contracts. 
+The Call API of augur.js is made up of "getter" functions that retrieve information from Augur's Solidity smart contracts using Ethereum's `eth_call` RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular "gets" than the [Simplified API](#simplified-api) allows, and its functions are mapped directly to the public functions of Augur's Solidity smart contracts. 
 
 All functions in the Call API accept two arguments: 
 
@@ -34,7 +34,7 @@ All functions in the Call API accept two arguments:
 
 The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Params Object>, <Callback Function>)`.
 
-While technically optional, the Augur team **strongly recommends** using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.
+While technically optional, the Augur development team **strongly recommends** using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.
 
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
@@ -899,7 +899,7 @@ Returns the [Universe](#universe) address for the [REP](#rep) address provided. 
 
 #### augur.api.ReputationToken.getTopMigrationDestination({ tx }[, callback])
 
-As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the 60 day [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
+As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
 
 Share Token Call API
 --------------------
@@ -1142,7 +1142,7 @@ Returns the Ethereum address of the previous [Fee Window](#fee-window) for the [
 
 #### augur.api.Universe.getRepMarketCapInAttoeth({ tx }[, callback])
 
-Returns an estimate for the market cap of [REP](#rep), priced in [attoETH](#atto-prefix). This estimate is updated manually by the Augur team, roughly once every [Fee Window](#fee-window). It is used by Augur to set the price of the [Reporting Fee](#reporting-fee).
+Returns an estimate for the market cap of [REP](#rep), priced in [attoETH](#atto-prefix). This estimate is updated manually by the Augur development team, roughly once every [Fee Window](#fee-window). It is used by Augur to set the price of the [Reporting Fee](#reporting-fee).
 
 #### augur.api.Universe.getReputationToken({ tx }[, callback])
 

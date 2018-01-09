@@ -2,7 +2,7 @@ Architecture
 ============
 <aside class="notice">The Architecture section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-Augur is designed to work with a locally-running Ethereum node; however, if one is not available, Augur can be configured to use a hosted Ethereum node instead. A hosted Ethereum node is one that is hosted on a public server by the Augur team. The sections below explain a bit about each setup and provide a diagram of what's going on under the hood.
+Augur is designed to work with a locally-running Ethereum node; however, if one is not available, Augur can be configured to use a hosted Ethereum node instead. A hosted Ethereum node is one that is hosted on a public server by the Augur development team. The sections below explain a bit about each setup and provide a diagram of what's going on under the hood.
 
 Local Ethereum Node
 ----------

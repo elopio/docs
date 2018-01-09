@@ -1109,7 +1109,7 @@ Description pending.
 
 Attempts to collect trading profits in Ether from a user's outstanding Shares in a single Finalized Market.
 
-Note: This transaction will fail if `_market` is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.)
+Note: This transaction will fail if `_market` is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.)
 
 #### **Parameters:**
 
