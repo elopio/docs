@@ -216,9 +216,21 @@ augur.api.Augur.createGenesisUniverse({
 ```
 #### [Augur Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol)
 
-#### augur.api.Augur.createGenesisUniverse({ onSent, onSuccess, onFailed })
+#### augur.api.Augur.createGenesisUniverse(p)
 
-This function allows users to create a new [Genesis Universe](#genesis-universe) if, for example, they wish to create a [Universe](#universe) to compete with another existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol) for the new Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`. (NOTE: The return value cannot be obtained reliably when calling externally.)
+Allows the caller to create a new [Genesis Universe](#genesis-universe). Users may wish to create a new Genesis Universe if, for example, they would like to create a separate [Universe](#universe) to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate their [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol) of the new Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Cancel Order Tx API
 ----------------------------
@@ -254,16 +266,27 @@ augur.api.CancelOrder.cancelOrder({
 ```
 #### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol)
 
-#### augur.api.CancelOrder.cancelOrder({ \_orderId, onSent, onSuccess, onFailed })
+#### augur.api.CancelOrder.cancelOrder(p)
 
-The `cancelOrder` transaction is used to cancel and refund an existing [Order](#order) on the [Order Book](#order-book) with the `_orderId` specified as a 32-byte hexadecimal string. To get the order ID for a specific order, call the function `augur.api.Order.getOrderId`.
+Cancels and refunds an existing [Order](#order) on the [Order Book](#order-book) with ID `_orderId`.
 
 This function will fail if:
 
 * `msg.sender` isn't the owner of the Order.
 * `_orderId` is undefined.
 
-Returns: true if the Order was successfully canceled, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`orderId`** (string) ID of the Order to cancel, as a 32-byte hexadecimal value. (To get the order ID for a specific order, call the function `augur.api.Order.getOrderId`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Order was successfully canceled, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Claim Trading Proceeds Tx API
 ------------------------------
@@ -301,15 +324,27 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 ```
 #### [Claim Trading Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol)
 
-#### augur.api.ClaimTradingProceeds.claimTradingProceeds({ \_market, \_shareHolder, onSent, onSuccess, onFailed })
+#### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
-The `claimTradingProceeds` transaction attempts to collect trading profits from outstanding [Shares](#share) in [Finalized Market](#finalized-market) `_market` owned by `_shareHolder`. 
+Collects trading profits from outstanding [Shares](#share) in [Finalized Market](#finalized-market) `_market` owned by `_shareHolder`. 
 
 This transaction will fail if:
 
 * `_market` has not been Finalized and passed the [Post-Finalization Waiting Period](post-finalization-waiting-period).
 
-Returns: true if the transaction was executed without any errors, or false otherwise.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 16-byte hexadecimal value.
+    * **`_shareHolder`** (string) Ethereum address of the Share holder for which to claim trading proceeds, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the trading proceeds were successfully canceled, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Complete Sets Tx API
 -----------------------------
@@ -374,20 +409,57 @@ augur.api.CompleteSets.publicSellCompleteSets({
 ```
 #### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol)
 
-#### augur.api.CompleteSets.publicBuyCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
+<!-- TODO: Add links to events. -->
+#### augur.api.CompleteSets.publicBuyCompleteSets(p)
 
-This transaction will attempt to purchase `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) for a specified `_market`. 
+Purchases `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) of [Market](#market) `_market`. 
 
 This transaction will fail if:
 
-* `msg.sender` doesn't have enough of the `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes.
+* `msg.sender` doesn't have enough of `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes.
 * `_amount` is not a number between 1 and 2<sup>254</sup>. 
 
-When successful, this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
+When successful, this transaction will trigger a `CompleteSets` event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
 
-#### augur.api.CompleteSets.publicSellCompleteSets({ \_market, \_amount, onSent, onSuccess, onFailed })
+#### **Parameters:**
 
-This transaction will attempt to sell `_amount` worth of Shares in all Outcomes for a specified `_market`. This transaction will fail if the `msg.sender` doesn't own `_amount` of Shares in all Outcomes for the `_market`, or if the `_amount` is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a `CompleteSets` event which will record the `msg.sender`, `_market`, type (sell), `_amount` sold, number of Outcomes in the `_market`, `marketCreatorFee` paid for selling the Shares, and the `reportingFee` paid for selling the Shares.
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`** (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.
+    * **`_amount`** (number|string) Number of Shares to purchase of each Outcome.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Complete Set was successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+<!-- TODO: Add links to events. -->
+#### augur.api.CompleteSets.publicSellCompleteSets(p)
+
+Sell `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) of [Market](#market) `_market`. 
+
+This transaction will fail if:
+
+* `msg.sender` doesn't own `_amount` Shares of all Outcomes in `_market`.
+* `_amount` is not a number between 1 and 2<sup>254</sup>. 
+
+When successful, this transaction will trigger a `CompleteSets` event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (sell), `_amount` sold, number of Outcomes in the `_market`, `marketCreatorFee` paid for selling the Shares, and the `reportingFee` paid for selling the Shares.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`** (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.
+    * **`_amount`** (number|string) Number of Shares to sell of each Outcome.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Complete Set was successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Create Order Tx API
 --------------------------
@@ -437,9 +509,9 @@ augur.api.CreateOrder.publicCreateOrder({
 ```
 #### [Create Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol)
 
-#### augur.api.CreateOrder.publicCreateOrder({ \_type, \_attoshares, \_displayPrice, \_market, \_outcome, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.CreateOrder.publicCreateOrder(p)
 
-This transaction will create a new [Order](#order) on the [Order Book](#order-book) for [Market](#market) `_market` trading on [Outcome](#outcome) `_outcome`. The required fields besides `_market` and `_outcome` are the `_type` of Order (1 for a bid, 2 for an ask), amount of [Shares](#share), `_attoshares`, denoted in [attoshares](#atto-prefix), and the `_displayPrice` for the Order. Optional params include `_betterOrderId`, `_worseOrderId`, `_tradeGroupId`, and the callbacks. The `_betterOrderId` and `_worseOrderId` are Order IDs of Orders already on the Order Book which should be better and worse than the order this transaction is intending to create. The `_tradeGroupId` is a field used by the Augur UI to group transactions and can be left blank.
+Creates a new [Bid Order](#bid-order) or [Ask Order](#ask-order) on the [Order Book](#order-book). The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_displayPrice`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
 
 This transaction will fail if:
 
@@ -449,7 +521,25 @@ This transaction will fail if:
 * `_outcome` is less than 0 or greater than the total number of Outcomes for `_market`.
 * `_displayPrice` is below the `_market`'s minimum `_displayPrice` or above the `market`'s maximum `_displayPrice`.
 
-Returns: the Order ID of the newly created Order, as a 32-byte hexadecimal value.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_type`** (number|string) Type of Order to create (1 for a [Bid](#bid-order), 2 for an [Ask](#ask-order)).
+    * **`_attoshares`** (number|string) Number of [attoshares](#atto-prefix) to buy or sell.
+    * **`_displayPrice`** (string) Desired price at which to purchase Shares, in [attoETH](#atto-prefix).
+    * **`_market`** (string) Market in which to place the Order, as a 16-byte hexadecimal value.
+    * **`_outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`_betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `_betterOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `_worseOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) Order ID of the newly-created Order, as a 32-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Dispute Crowdsourcer Tx API
 ----------------------------
@@ -539,25 +629,54 @@ augur.api.DisputeCrowdsourcer.withdrawInEmergency({
 ```
 #### [Dispute Crowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
 
-#### augur.api.DisputeCrowdsourcer.fork({ disputeCrowdsourcer, onSent, onSuccess, onFailed }) 
+#### augur.api.DisputeCrowdsourcer.fork(p) 
 
-Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the specified [Dispute Crowdsourcer](#dispute-crowdsourcer) and migrates the [REP](#rep) in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once this function is called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in ETH) that they are owed.
+Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of [Dispute Crowdsourcer](#dispute-crowdsourcer) `disputeCrowdsourcer` and migrates the [REP](#rep) in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). 
 
-Returns: true if the function successfully completed without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+Once this function has been called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed.
 
-#### augur.api.DisputeCrowdsourcer.redeem({ disputeCrowdsourcer, \_redeemer, onSent, onSuccess, onFailed }) 
+This transaction will fail if:
 
-This function can be called only when a [Market](#market) in the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Universe](#universe) has [Forked](#fork) and `augur.api.Market.disavowCrowdsourcers` (in the case of Dispute Crowdsourcers of non-[Forked Markets](#forked-market)) or `augur.api.DisputeCrowdsourcer.fork` (in the case of Dispute Crowdsourcers of Forked Markets) has been called. 
+* `disputeCrowdsourcer` belongs to a Market that is not Forked.
 
-When called on Dispute Crowdsourcers of non-Forked Markets, it will redeem any [REP](#rep) that `_redeemer` [Staked](#dispute-stake) on that Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `_redeemer` is owed, to the Universe containing the Forked Market.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`disputeCrowdsourcer`** (string) Ethereum address of the Forked Market's Dispute Crowdsourcer, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the transaction successfully completed without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+#### augur.api.DisputeCrowdsourcer.redeem(p) 
+
+Can be called only when a [Market](#market) in the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Universe](#universe) has [Forked](#fork) and `augur.api.Market.disavowCrowdsourcers` (in the case of Dispute Crowdsourcers of non-[Forked Markets](#forked-market)) or `augur.api.DisputeCrowdsourcer.fork` (in the case of Dispute Crowdsourcers of Forked Markets) has been called. 
+
+When called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any [REP](#rep) that `_redeemer` [Staked](#dispute-stake) on that Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `_redeemer` is owed, to the Universe containing the Forked Market.
 
 When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that `_redeemer` Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that `_redeemer` is owed, to the [Child Universe](#child-universe) for the [Outcome](#outcome) of that Crowdsourcer.
 
-This function can be called on Dispute Crowdsourcers that have filled their [Dispute Bond](#dispute-bond), as well as ones that have not, provided that either `augur.api.Market.disavowCrowdsourcers` or `augur.api.DisputeCrowdsourcer.fork` has already been called. When a [Fork](#fork) occurs, all non-Forked Markets will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase).
+This function can be called on Dispute Crowdsourcers that have filled their [Dispute Bond](#dispute-bond), as well as ones that have not, provided that either `augur.api.Market.disavowCrowdsourcers` or `augur.api.DisputeCrowdsourcer.fork` has been called first. When a [Fork](#fork) occurs, all non-Forked Markets will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase).
 
-Returns: true if `redeemer`'s Staked REP was redeemed without errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
 
-#### augur.api.DisputeCrowdsourcer.withdrawInEmergency({ disputeCrowdsourcer, onSent, onSuccess, onFailed }) 
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`disputeCrowdsourcer`** (string) Ethereum address of a Market's Dispute Crowdsourcer, as a 16-byte hexadecimal value.
+    * **`_redeemer`** (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `redeemer`'s Staked REP was redeemed without errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+#### augur.api.DisputeCrowdsourcer.withdrawInEmergency(p) 
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome). Calling this function will not redeem any [Reporting Fees](#reporting-fee) because the total amount of Reporting Fees is not known until the end of the [Fee Window](#fee-window).
 
@@ -565,7 +684,18 @@ This transaction will fail if:
 
 * Augur is not currently in a halted state.
 
-Returns: true if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`disputeCrowdsourcer`** (string) Ethereum address of a Market's Dispute Crowdsourcer, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ```javascript
 // Fee Window Transaction API Examples:
@@ -655,27 +785,51 @@ augur.api.FeeWindow.withdrawInEmergency({
 ```
 #### [Fee Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
 
-#### augur.api.FeeWindow.buy({ feeWindow, \_attotokens, onSent, onSuccess, onFailed })
+#### augur.api.FeeWindow.buy(p)
 
-Purchases the number of [Participation Tokens](#participation-token) specified by the integer `_attotokens`. 
+Purchases the number of [Participation Tokens](#participation-token) specified by `_attotokens`. 
 
 This transaction will fail if:
 
 * `_attotokens` is <= 0.
 * Reporting is not currently active in the [Fee Window](#fee-window).
-* All markets have not been [Finalized](#finalized-market) in the Fee Window.
+* All Markets have not been [Finalized](#finalized-market) in the Fee Window.
 
-These Participation Tokens can later be redeemed once the Fee Window is no longer active using the function `augur.api.FeeWindow.redeem`.
+These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function `augur.api.FeeWindow.redeem`.
 
-Returns: true if the Participation Tokens were successfully purchased. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
 
-#### augur.api.FeeWindow.redeem({ feeWindow, \_sender, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`feeWindow`** (string) Ethereum address of the current Fee Window, as a 16-byte hexadecimal value.
+    * **`_attotokens`** (number|string) Number of Participation Tokens to purchase, in [attotokens](#atto-prefix).
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-Converts any [Participation Tokens](#participation-token) `_sender` has in the specified [Fee Window](#fee-window) to [Reputation Tokens](#rep), and gives the user any [Reporting Fees](#reporting-fee) he or she is owed in Ether. The parameter `_sender` is the Ethereum address of the user redeeming the Participation Tokens, as a hexadecimal string.
+#### **Returns:**
 
-Returns: true if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return true, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `1` if the Participation Tokens were successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-#### augur.api.FeeWindow.withdrawInEmergency({ feeWindow, onSent, onSuccess, onFailed })
+#### augur.api.FeeWindow.redeem(p)
+
+Converts any [Participation Tokens](#participation-token) `_sender` has in the specified [Fee Window](#fee-window) to [Reputation Tokens](#rep), and gives the user any [Reporting Fees](#reporting-fee) he or she is owed in Ether. The parameter `_sender` is the Ethereum address of the user redeeming the Participation Tokens, as a 16-byte hexadecimal string.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`feeWindow`** (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.
+    * **`_sender`** (number|string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `0` otherwise. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `1`, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+#### augur.api.FeeWindow.withdrawInEmergency(p)
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
 
@@ -683,7 +837,18 @@ This transaction will fail if:
 
 * Augur is not currently in a halted state.
 
-Returns: true if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`feeWindow`** (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Fill Order Tx API
 --------------------------
@@ -723,9 +888,29 @@ augur.api.FillOrder.publicFillOrder({
 ```
 #### [Fill Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol)
 
-#### augur.api.FillOrder.publicFillOrder({ fillOrder, \_orderID, \_amountFillerWants, \_tradeGroupID, onSent, onSuccess, onFailed })
+#### augur.api.FillOrder.publicFillOrder(p)
 
-Given an `_orderId` and the amount a [Filler](#order-filler) wants as `_amountFillerWants` denoted in [attoshares](#atto-prefix), this transaction will attempt to fill the [Order](#order) specified. If the `_amountFillerWants` is enough to fill the Order completely, then the Order will be removed from the [Order Book](#order-book), otherwise it will be adjusted to only include the remaining amount after filling the `_amountFillerWants` value that the [Filler](#order-filler) requests. This transaction requires `_orderId` and `_amountFillerWants` are defined. The [Creator](#order-creator) of the order specified by `_orderId` cannot be the `msg.sender` of this transaction. This transaction will return the fixed point amount remaining of the Order specified by `_orderId` after being filled, if it's completely filled this will return `0`. The `_tradeGroupId` is an optional value that is used by the Augur UI and can be left `undefined`.
+Attempts to Fill `_amountFillerWants` [attoshares](#atto-prefix) for [Order](#order) `_orderId`. If `_amountFillerWants` is enough to fill the Order completely, the Order will be removed from the [Order Book](#order-book). Otherwise, it will be adjusted to only include the remaining amount after Filling the `_amountFillerWants` value that the [Filler](#order-filler) requests. 
+
+This transaction will fail if:
+
+* `_orderId` or `_amountFillerWants` is `undefined`. 
+* `msg.sender` of this transaction is the [Creator](#order-creator) of `_orderId`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_orderID`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
+    * **`_amountFillerWants`** (number|string) Number of Shares to Fill, in attoshares. 
+    * **`_tradeGroupID`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (number) Fixed point amount remaining of the Order specified by `_orderId` after being filled, or `0` if it's completely filled.
 
 Initial Reporter Tx API
 ----------------------
@@ -841,29 +1026,69 @@ augur.api.InitialReporter.withdrawInEmergency({
 ```
 #### [Initial Reporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
 
-#### augur.api.InitialReporter.fork({ initialReporter, onSent, onSuccess, onFailed })
+#### augur.api.InitialReporter.fork(p)
 
-Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe. This function can be called only on the `initialReporter` contract of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once this function is called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market.
+Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe. 
 
-Returns: true if the function successfully completed without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+This transaction will fail if:
 
-#### augur.api.InitialReporter.redeem({ initialReporter, onSent, onSuccess, onFailed })
+* `initialReporter` does not belong to a [Forked Market](#forked-market).
+
+This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`initialReporter`** (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the REP was successfully migrated to the new Child Universe without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+#### augur.api.InitialReporter.redeem(p)
 
 Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) Staked on the [Outcome](#outcome) of the [Initial Report](#initial-report). If the First Public Reporter submitted the Initial Report, this function will also redeem the [No-Show Gas Bond](#no-show-gas-bond) in Ether.
 
-Returns: true if the REP (and, in the case of First Public Reporters, Ether) was successfully redeemed for the [Initial Reporter](#initial-reporter) without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
 
-#### augur.api.InitialReporter.transferOwnership({ initialReporter, \_newOwner, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`initialReporter`** (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-The `transferOwnership` transaction will change the owner of `initialReporter` from the existing owner to the Ethereum address hexadecimal string `_newOwner`. 
+#### **Returns:**
+
+* (boolean) `1` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+
+#### augur.api.InitialReporter.transferOwnership(p)
+
+Changes the owner of `initialReporter` from the existing owner to `_newOwner`. 
 
 This function will fail if:
 
 * `msg.sender` isn't the owner of `initialReporter`. 
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.InitialReporter.withdrawInEmergency({ initialReporter, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`initialReporter`** (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.
+    * **`_newOwner`** (string) Ethereum address of the desired new owner for `initialReporter`, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the ownership of `initialReporter` was successfully transferred to `_newOwner`, or `0` otherwise.
+
+#### augur.api.InitialReporter.withdrawInEmergency(p)
 
 If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, [Initial Reporters](#initial-reporter) can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Initial Report](#dispute-crowdsourcer) [Outcome](#outcome), as well as the [No-Show Gas Bond](no-show-gas-bond) (in cases where the [First Public Reporter](#first-public-reporter) submitted the Initial Report instead of the [Designated Reporter](#designated-reporter)).
 
@@ -871,7 +1096,18 @@ This transaction will fail if:
 
 * Augur is not currently in a halted state.
 
-Returns: true if the REP and was successfully withdrawn from `initialReporter` contract without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`initialReporter`** (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the REP was successfully withdrawn from the `initialReporter` contract without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Mailbox Tx API
 ----------------------
@@ -961,35 +1197,72 @@ augur.api.Mailbox.withdrawTokens({
 ```
 #### [Mailbox Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol)
 
-#### augur.api.Mailbox.transferOwnership({ mailbox, \_newOwner, onSent, onSuccess, onFailed })
+Handles the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
 
-The `transferOwnership` transaction will change the current [Market Creator Mailbox](#market-creator-mailbox) owner to the specified `_newOwner`.
+#### augur.api.Mailbox.transferOwnership(p)
 
-This function will fail if:
+Changes the current owner of [Market Creator Mailbox](#market-creator-mailbox) `mailbox` to  `_newOwner`.
+
+This transaction will fail if:
 
 * `msg.sender` isn't the owner of `mailbox`. 
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Mailbox.withdrawEther({ mailbox, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`mailbox`** (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.
+    * **`_newOwner`** (string) Ethereum address of the desired new owner of `mailbox`, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-Transfers all ETH in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  
+#### **Returns:**
+
+* (boolean) `1` if ownership of `mailbox` was successfully transferred to `_newOwner` without any errors, or `0` otherwise.
+
+#### augur.api.Mailbox.withdrawEther(p)
+
+Transfers all Ether in the [Market Creator Mailbox](#market-creator-mailbox) to the [Market Creator's](#market-creator) Ethereum address.  
 
 This transaction will fail if:
 
 * `msg.sender` isn't the owner of the specified `mailbox`. 
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Mailbox.withdrawTokens({ mailbox, \_token, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`mailbox`** (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-Transfers all tokens of type `_token` in the [Market Creator Mailbox](#market-creator-mailbox) to the Market Creator's address.  
+#### **Returns:**
+
+* (boolean) `1` if the Ether was successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
+
+#### augur.api.Mailbox.withdrawTokens(p)
+
+Transfers all tokens of type `_token` in the [Market Creator Mailbox](#market-creator-mailbox) to the [Market Creator's](#market-creator) Ethereum address.  
 
 This transaction will fail if:
 
 * `msg.sender` isn't the owner of the specified `mailbox`. 
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`mailbox`** (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.
+    * **`_token`** (string) Ethereum address of an [ERC20Basic](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol) token contract, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the tokens were successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
 
 Market Tx API
 ----------------------
@@ -1191,45 +1464,80 @@ augur.api.Market.withdrawInEmergency {
 ```
 #### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
 
-#### augur.api.Market.contribute({ market, \_payoutNumerators, \_invalid, \_amount, onSent, onSuccess, onFailed })
+#### augur.api.Market.contribute(p)
 
 Contributes `_amount` [REP](#rep) to the [Dispute Crowdsourcer](#dispute-crowdsourcer) represented by [Payout Set](#payout-set) `_payoutNumerators` and `_invalid` in order to help [Challenge](#challenge) the [Market](#market) `market`'s [Tentative Outcome](#tentative-outcome). If the amount of REP in the Dispute Crowdsourcer plus `amount` is greater than the total REP required to fill the [Dispute Bond](#dispute-bond), this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.
-
-`_payoutNumerators` is an array representing the [Payout Set](#payout-set) for the Market, and `_invalid` is a boolean value for whether the Market is [Invalid](#invalid-outcome). (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
 This function will fail if:
   - The Market is in a [Fee Window](#fee-window) that is not active.
   - The [Outcome](#outcome) specified by `_payoutNumerators` and `_invalid` is already the Tentative Outcome of the Market.
-  - `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value.
+  - `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
-Returns: true if the function executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Market.disavowCrowdsourcers({ market, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`_payoutNumerators`**  (Array.<number>|Array.<string>) Array representing the Market's Payout Set.
+    * **`_invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-This function may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork). Calling it will "disavow" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of the Market, meaning the Market's [Tentative Outcome](#tentative-outcome) will be reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers will be redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. 
+#### **Returns:**
+
+* (boolean) `1` if the transaction executed without any errors, or `0` otherwise.
+
+#### augur.api.Market.disavowCrowdsourcers(p)
+
+"Disavows" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of a Market, meaning the Market's [Tentative Outcome](#tentative-outcome) are reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers are redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. This transaction may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork). 
 
 This function will fail if:
 
 * There is not a Forked Market in `market`'s Universe.
 * `market` is a Forked Market.
 
-Returns: true if the function executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Market.doInitialReport({ market, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-Submits an [Initial Report](#initial-report) for [Market](#market) `market` with [Payout Set](#payout-set) `_payoutNumerators` as an array and `_invalid` as a boolean value for whether the Market is [Invalid](#invalid-outcome).
+#### **Returns:**
+
+* (boolean) `1` if `market's` Crowdsourcers were disavowed without any errors, or `0` otherwise.
+
+#### augur.api.Market.doInitialReport(p)
+
+Submits an [Initial Report](#initial-report) for [Market](#market) `market`.
 
 This transaction will fail if:
 
 * The Market's event end time has not passed.
 * The caller of the function is not the [Designated Reporter](#designated-reporter) and the [Designated Reporting Phase](#designated-reporting-phase) has not ended.
-* `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
+* `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the [Payout Set](#payout-set) should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
-Returns: true if the function executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Market.finalize({ market, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`_payoutNumerators`**  (Array.<number>|Array.<string>) Array representing the Market's Payout Set.
+    * **`_invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-This function will [Finalize](#finalized-market) the [Market](#market) `market`, meaning it will set the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistribute [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distribute the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
+#### **Returns:**
+
+* (boolean) `1` if the Initial Report was submitted without any errors, or `0` otherwise.
+
+#### augur.api.Market.finalize(p)
+
+[Finalizes](#finalized-market) the [Market](#market) `market`, meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
 
 This transaction will fail if:
 
@@ -1237,33 +1545,84 @@ This transaction will fail if:
 * The [Fee Window](#fee-window) has not ended.
 * `market` is a Forked Market.
 
-Returns: true if the function executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Market.finalizeFork({ market, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-This function will [Finalize](#finalized-market) the [Forked Market](#forked-market) `market`, meaning it will set the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market. Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
+#### **Returns:**
+
+* (boolean) `1` if `market` was Finalized without any errors, or `0` otherwise.
+
+#### augur.api.Market.finalizeFork(p)
+
+[Finalizes](#finalized-market) the [Forked Market](#forked-market) `market`, meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market. Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
 
 This transaction will fail if:
   
 * `market` is not a Forked Market.
 
-Returns: true if the function executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.Market.migrateThroughOneFork({ market, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-This transaction attempts to migrate the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period) that occurs wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling `migrateThroughOneFork` attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This method will throw if the Fork Period isn't over, so there is no Winning Universe to migrate to yet. 
+#### **Returns:**
 
-Returns: `1` if `market` was successfully migrated and `0` if no migration was required.
+* (boolean) `1` if the Forked Market was Finalized without any errors, or `0` otherwise.
 
-#### augur.api.Market.transferOwnership({ market, \_newOwner, onSent, onSuccess, onFailed })
+#### augur.api.Market.migrateThroughOneFork(p)
 
-The `transferOwnership` transaction will change the current [Market](#market) owner to the specified `_newOwner`. This is used to transfer ownership of a Market from one address to another. 
+Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling `migrateThroughOneFork` attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. 
+
+This transaction will fail if:
+
+* The Fork Period is not over (that is, there is no Winning Universe to migrate to). 
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `market` was successfully migrated to the Winning Universe without any errors, or `0` otherwise.
+
+#### augur.api.Market.transferOwnership(p)
+
+Changes the owner of [Market](#market) `market` from the current owner to `_newOwner`.
 
 This transaction will fail if:
 
 * `msg.sender` isn't the owner of `market`. 
 
-#### augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
+    * **`_newOwner`**  (string) Ethereum address of the desired new owner of `market`, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if ownership of `market` was transferred to `_newOwner` without any errors, or `0` otherwise.
+
+#### augur.api.Market.withdrawInEmergency(p)
 
 If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
 
@@ -1271,7 +1630,18 @@ This transaction will fail if:
 
 * Augur is not currently in a halted state.
 
-Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`market`**  (string) Ethereum address of a [Market](#market), as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Reputation Tokens were withdrawn from `market` without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Reputation Token Tx API
 --------------------------------
@@ -1424,40 +1794,117 @@ augur.api.ReputationToken.transferFrom({
 ```
 #### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
 
-#### augur.api.ReputationToken.approve({ reputationToken, \_spender, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.approve(p)
 
-Allows the `_spender` the ability to spend up to `_value` (denoted in attotokens) worth of the specified `reputationToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` in attotokens approved.
+Allows `_spender` to spend up to `_value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an `Approval` event, which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoREP](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+This function will fail if:
 
-#### augur.api.ReputationToken.migrateFromLegacyReputationToken({ reputationToken, onSent, onSuccess, onFailed })
+* `_value` has already been set to a number higher than 0.
 
-This transaction will migrate [Legacy REP](#legacy-rep) tokens from the Legacy REP contract owned by `msg.sender` to the `reputationToken` provided. `msg.sender` will add whatever `msg.sender`'s balance was for the legacy rep contract to the `reputationToken` contract.
+#### **Parameters:**
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`reputationToken`**  (string) Ethereum address of a [Reputation Token](#reputation-token) contract, as a 16-byte hexadecimal value.
+    * **`_spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoREP to allow `_spender` to spend on behalf of `msg.sender`.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-#### augur.api.ReputationToken.migrateOut({ reputationToken, \_destination, \_attotokens, onSent, onSuccess, onFailed })
+#### **Returns:**
 
-This transaction migrates a `_reporter`'s [REP](#rep) (denoted in [attoREP](#atto-prefix) as `_attotokens`) from one `reputationToken` address to another (`_destination`) in the case of a [Fork](#fork).
+* (boolean) `1` if `_spender` is approved without any errors, or `0` otherwise.
+
+#### augur.api.ReputationToken.migrateFromLegacyReputationToken(p)
+
+Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy REP contract to the `reputationToken` provided. This transaction will add whatever `msg.sender`'s balance was for the [Legacy REP contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) to the `reputationToken` contract.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`reputationToken`**  (string) Ethereum address of a [Reputation Token](#reputation-token) contract, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Legacy REP was migrated to `reputationToken` without any errors, or `0` otherwise.
+
+#### augur.api.ReputationToken.migrateOut(p)
+
+This transaction migrates `_attotokens` of `msg.sender`'s [REP](#rep) from contract address `reputationToken` to `_destination` contract address in the case of a [Fork](#fork).
 
 This transaction will fail if:
 
 * `_attotokens` is not greater than 0.
 * `_destination`'s [Universe](#universe) is not a [Child Universe](#child-universe) of `reputationToken`'s Universe.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
 
-#### augur.api.ReputationToken.transfer({ reputationToken, \_to, \_value, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`reputationToken`**  (string) Ethereum address of a [Reputation Token](#reputation-token) contract, as a 16-byte hexadecimal value.
+    * **`_destination`**  (string) Ethereum address of the destination [Reputation Token](#reputation-token) contract to migrate REP to, as a 16-byte hexadecimal value.
+    * **`_attotokens`**  (number|string) Number of REP to migrate, in [attoREP](#atto-prefix).
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-If the `msg.sender` of the `transfer` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address and `_value` is a number between 1 and 2<sup>254</sup> then this transaction will send `_value` (in attotokens) worth of `reputationToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
+#### **Returns:**
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+* (boolean) `1` if the REP is migrated to `_destination` without any errors, or `0` otherwise.
 
-#### augur.api.ReputationToken.transferFrom({ reputationToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
+#### augur.api.ReputationToken.transfer(p)
 
-If the `_from` address of the `transferFrom` transaction has enough of `reputationToken` to be able to transfer `_value` (denoted in attotokens) worth to the `_to` address, `_value` is a number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `reputationTokens` for the `_from` address then this transaction will send `_value` worth of `reputationToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` (in attotokens) amount transferred.
+Sends `_value` worth of [attoREP](#atto-prefix) to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+This transaction will fail if:
+
+* `msg.sender` does not have enough REP to be able to transfer `_value` attoREP to the `_to` address.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`reputationToken`**  (string) Ethereum address of a [Reputation Token](#reputation-token) contract, as a 16-byte hexadecimal value.
+    * **`_to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `_value` REP are sent from the caller to `_to` without any errors, or `0` otherwise.
+
+#### augur.api.ReputationToken.transferFrom(p)
+
+Sends `_value` worth of [attoREP](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the `_from` address, `_to` address, and `_value` (in attoREP) amount transferred.
+
+This transaction will fail if:
+
+* `_from` does not have enough REP to be able to transfer `_value` attoREP to the `_to` address.
+* `msg.sender` does not have the approval (see `augur.api.ReputationToken.approve`) to spend at least `_value` worth of REP for the `_from` address.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`reputationToken`**  (string) Ethereum address of a [Reputation Token](#reputation-token) contract, as a 16-byte hexadecimal value.
+    * **`_from`**  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.
+    * **`_to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `_value` REP is sent from `_from` to `_to` without any errors, or `0` otherwise.
 
 Share Token Tx API
 ---------------------------
@@ -1556,23 +2003,78 @@ augur.api.ShareToken.transferFrom({
 ```
 #### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
 
-#### augur.api.ShareToken.approve({ shareToken, \_spender, \_value, onSent, onSuccess, onFailed })
+Handles the functionality related to [Shares](#share) (referred to as Share Tokens within Augur's Solidty smart contracts).
 
-Allows the `_spender` the ability to spend up to `_value` worth of the specified `shareToken` for the `msg.sender` of this `approve` transaction. This transaction will spawn an `Approval` event which will record the owner address (`msg.sender`), `_spender`, and `_value` denoted in [attotokens](#atto-prefix) approved.
+#### augur.api.ShareToken.approve(p)
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+Allows `_spender` to spend up to `_value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an `Approval` event, which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoshares](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
 
-#### augur.api.ShareToken.transfer({ shareToken, \_to, \_value, onSent, onSuccess, onFailed })
+This function will fail if:
 
-If the `msg.sender` of the `transfer` transaction has enough of `shareToken`s to be able to transfer `_value` worth to the `_to` address and `_value` is a valid number between 1 and 2<sup>254</sup> then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `msg.sender`. This transaction will spawn a `Transfer` event which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred denoted in [attotokens](#atto-prefix).
+* `_value` has already been set to a number higher than 0.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
+    * **`_spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoshares to allow `_spender` to spend on behalf of `msg.sender`.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `_spender` is approved without any errors, or `0` otherwise.
+
+#### augur.api.ShareToken.transfer(p)
+
+Sends `_value` worth of [attoshares](#atto-prefix) to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
+
+This transaction will fail if:
+
+* `msg.sender` does not have enough Shares to be able to transfer `_value` attoshares to the `_to` address.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
+    * **`_to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `_value` Shares are sent from the caller to `_to` without any errors, or `0` otherwise.
 
 #### augur.api.ShareToken.transferFrom({ shareToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-If the `_from` address of the `transferFrom` transaction has enough of `shareToken` to be able to transfer `_value` worth to the `_to` address, `_value` is a valid number between 1 and 2<sup>254</sup>, and the `msg.sender` has the approval to spend at least `_value` worth of `shareToken` for `_from` address then this transaction will send `_value` worth of `shareToken` to the specified `_to` address from the `_from` address. This transaction will spawn a `Transfer` event which will record the `_from` address, `_to` address, and `_value` amount transferred denoted in [attotokens](#atto-prefix).
+Sends `_value` worth of [attoshares](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the `_from` address, `_to` address, and `_value` (in attoshares) amount transferred.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+This transaction will fail if:
+
+* `_from` does not have enough Shares to be able to transfer `_value` attoshares to the `_to` address.
+* `msg.sender` does not have the approval (see `augur.api.ShareToken.approve`) to spend at least `_value` worth of Share Tokens for the `_from` address.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
+    * **`_from`**  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.
+    * **`_to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
+    * **`_value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if `_value` Shares are sent from `_from` to `_to` without any errors, or `0` otherwise.
 
 Trade Tx API
 ---------------------
@@ -1718,29 +2220,99 @@ augur.api.Trade.publicTakeBestOrder({
 ```
 #### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol)
 
-#### augur.api.Trade.publicBuy({ \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicBuy(p)
 
-The `publicBuy` transaction is used to purchase [Shares](#share) for a specified `_market` and `_outcome`. The amount of Shares to purchase is `_fxpAmount`, denoted in [attoshares](#atto-prefix), and the price point to buy at is `_price`, denoted in attotokens of the `_market`'s denomination token. This transaction will take [Orders](#order) off the [Order Book](#order-book) that can be filled with this request, otherwise this transaction will create a new Order to buy `_fxpAmount` of Shares at `_price`. In order to optimize the process of putting the Order on the Order Book, `_betterOrderId` and `_worseOrderId` must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after `_price`, and their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. 
+Buys `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to buy `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
 
-Returns: `1` if this Order was filled completely, or if this Order can't be filled immediately, an Order will be created and the `_orderId` of that new Order will be returned.
+#### **Parameters:**
 
-#### augur.api.Trade.publicSell({ \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`**  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.
+    * **`_outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`_fxpAmount`**  (number|string) Amount of Shares to buy, in [attoshares](#atto-prefix).
+    * **`_price`**  (number|string) Price at which to buy Shares, in attoETH.
+    * **`_betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-The `publicSell` transaction is used to purchase [Shares](#share) for a specified `_market` and `_outcome`. The amount of Shares to purchase is `_fxpAmount`, denoted in [attoshares](#atto-prefix), and the price point  to sell at is `_price`, denoted in attotokens of the `_market`'s denomination token. This transaction will take [Orders](#order) off the [Order Book](#order-book) that can be filled with this request, otherwise this transaction will create a new Order to sell `_fxpAmount` of Shares at `_price`. In order to optimize the process of sorting the new Order on the Order Book, `_betterOrderId` and `_worseOrderId` must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after `_price`, and their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. The `_tradeGroupId` is an optional argument used by the Augur UI and can be left `undefined`. 
+#### **Returns:**
 
-Returns: `1` if this Order was filled completely, or if this Order can't be filled immediately, an Order will be created and the `_orderId` of that new Order will be returned.
+* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
 
-#### augur.api.Trade.publicTrade({ \_direction, \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
+#### augur.api.Trade.publicSell(p)
 
-The `publicTrade` transaction works like `publicBuy` or `publicSell`; however a direction must be specified. The `_direction` must be either `1` for buying or `2` for selling. 
+Sells `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price with respect to `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
 
-Returns: `1` if this order was filled completely, or if this order can't be filled immediately an order will be created and the `_orderId` of that new order will be returned.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`**  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.
+    * **`_outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`_fxpAmount`**  (number|string) Amount of Shares to sell, in [attoshares](#atto-prefix).
+    * **`_price`**  (number|string) Price at which to sell Shares, in attoETH.
+    * **`_betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be [Filled](#fill-order) completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
+
+#### augur.api.Trade.publicTrade(p)
+
+Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `_direction` must be either `1` for buying or `2` for selling. 
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_direction`** (number|string) Direction of the trade, as an integer. `1` for buying or `2` for selling.
+    * **`_market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
+    * **`_outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`_fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix).
+    * **`_price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix).
+    * **`_betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
 
 #### augur.api.Trade.publicTakeBestOrder({ \_direction, \_market, \_outcome, \_fxpAmount, \_price, \_betterOrderId, \_worseOrderId, \_tradeGroupId, onSent, onSuccess, onFailed })
 
-The `publicTakeBestOrder` transaction works similarly to `augur.api.Trade.publicTrade`, except it does not create an [Order](#order) if the request can't be filled. The `_direction` must be either `1` for buying or `2` for selling. 
+Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [Order](#order) if the request can't be [Filled](#fill-order). Instead, it will take the best Order available on the [Order Book](#order-book).
 
-Returns: the fixed point amount not filled by the order, so `0` for a completely Filled Order, some other number if this request could only be partially filled.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_direction`** (number|string) Direction of the trade, as an integer. `1` for buying or `2` for selling.
+    * **`_market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
+    * **`_outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`_fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix).
+    * **`_price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix).
+    * **`_betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`_tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (number) Number of attoshares not Filled by the Order, as a 32-byte hexadecimal value. This means the transaction will return `0x0000000000000000000000000000000000000000000000000000000000000000` for a completely Filled Order, or a larger number if the Order could only be partially Filled.
 
 TradingEscapeHatch Tx API
 ---------------------
@@ -1784,7 +2356,18 @@ This transaction will fail if:
 
 * Augur is not in a halted state.
 
-Returns: true if the transaction executed without any errors, or false otherwise.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`_market`**  (string) Ethereum address of a Market to claim Shares from, as a 16-byte hexadecimal value.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `1` if the Shares were claimed without any errors, or false otherwise.
 
 Universe Tx API
 ---------------------
@@ -2287,82 +2870,129 @@ onSuccess result: {
 ```
 #### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
 <!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
-#### augur.api.Universe.createBinaryMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+#### augur.api.Universe.createBinaryMarket(p)
 
 Creates a new [Binary Market](#binary-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
-* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
-* `denominationToken` - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
-* `_designatedReporterAddress` - String containing the address of the [Designated Reporter](#designated-reporter). 
-* `_topic` - Market [Topic](#topic). 
-* `_description` - Description of the Market event. 
-* `_extraInfo` - Stringified JSON object containing the following keys:
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-  * `tags` - Keywords used to tag the Market (maximum of 2).
-  * `longDescription` - Additional information not included in `description`.
-* `tx` - JSON object containing the following keys:
-  * `to` - Address of the Universe contract.
-  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`universe`**  (string) Ethereum address of the [Universe](#universe) in which to create the new Binary Market, as a 16-byte hexadecimal value.
+    * **`_endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+    * **`_feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement). 
+    * **`_denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+    * **`_designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter). 
+    * **`_topic`**  (string) Market [Topic](#topic). 
+    * **`_description`**  (string) Description of the Market event. 
+    * **`_extraInfo`**  (string) Stringified JSON object containing the following keys:
+      * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
+      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`longDescription`**  (string) Additional information not included in `description`.
+    * **`tx`**  (object) JSON object containing the following keys:
+      * **`to`**  (string) Ethereum Address of the Universe contract.
+      * **`value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+      * **`gas`**  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) Ethereum address of the newly-created Binary Market, as a 16-byte hexadecimal value.
 
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `_endTime` has already passed, `_feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `_description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
-#### augur.api.Universe.createCategoricalMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_outcomes, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+#### augur.api.Universe.createCategoricalMarket(p)
 
 Creates a new [Categorical Market](#categorical-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
-* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
-* `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
-* `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
-* `_outcomes` (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
-* `_topic` - Market [Topic](#topic). 
-* `_description` - Description of the Market event. 
-* `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-  * `tags` - Keywords used to tag the Market (maximum of 2).
-  * `longDescription` - Additional information not included in `description`.
-  * `outcomeNames` - Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
-* `tx` - JSON object containing the following keys:
-  * `to` - Address of the Universe contract.
-  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_CATEGORICAL_MARKET_GAS`.
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`universe`**  (string) Ethereum address of the [Universe](#universe) in which to create the new Categorical Market, as a 16-byte hexadecimal value.
+    * **`_endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+    * **`_feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement). 
+    * **`_denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+    * **`_designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter). 
+    * **`_outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
+    * **`_topic`**  (string) Market [Topic](#topic). 
+    * **`_description`**  (string) Description of the Market event. 
+    * **`_extraInfo`**  (string) Stringified JSON object. (See the explanation above for more details.)
+      * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
+      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`longDescription`**  (string) Additional information not included in `description`.
+      * **`outcomeNames`**  (Array.<string>) Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
+    * **`tx`**  (object) JSON object containing the following keys:
+      * **`to`**  (string) Ethereum address of the Universe contract.
+      * **`value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+      * **`gas`**  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_CATEGORICAL_MARKET_GAS`.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
 
-#### augur.api.Universe.createChildUniverse({ \_parentPayoutNumerators, \_parentInvalid, onSent, onSuccess, onFailed })
+#### **Returns:**
 
-Returns Ethereum contract address corresponding the [Child Universe](#child-universe) with [Payout Set](#payout-set) `_parentPayoutNumerators`, as an array of integers, and `_parentInvalid`, as a boolean value. If the Child Universe does not already exist, it will be created. 
+* (string) Ethereum address of the newly-created Categorical Market, as a 16-byte hexadecimal value.
+
+#### augur.api.Universe.createChildUniverse(p)
+
+Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `_parentPayoutNumerators` and `_parentInvalid`. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. 
 
 This transaction will fail if:
 
 * The Universe does not have a [Forked Market](#forked-market).
 * `_parentInvalid` is true and the Numerators in `_parentPayoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid [Market](#market), refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
-#### augur.api.Universe.createScalarMarket({ \_endTime, \_feePerEthInWei, \_denominationToken, \_designatedReporterAddress, \_minPrice, \_maxPrice, \_numTicks, \_topic, \_description, \_extraInfo, onSent, onSuccess, onFailed, tx })
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`universe`**  (string) Ethereum address of the [Universe](#universe) containing the Forked Market, as a 16-byte hexadecimal value.
+    * **`_parentPayoutNumerators`**  (Array.<number>) Payout Set of the Parent Universe's [Parent Universe's](#parent-universe) [Forked Market](#forked-market).
+    * **`_parentInvalid`**  (boolean) Whether the Parent Universe's Forked Market is [Invalid](#invalid-outcome).
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) Ethereum address of the newly-created Child Universe, as a 16-byte hexadecimal value.
+
+#### augur.api.Universe.createScalarMarket(p)
 
 Creates a new [Scalar Market](#scalar-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
-* `_endTime` - Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
-* `_feePerEthInWei` - [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 ETH worth of [Shares](#share) [Settled](#settlement). 
-* `denominationToken` is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
-* `_designatedReporterAddress` - Address of the [Designated Reporter](#designated-reporter). 
-* `_minPrice` - [Minimum Display Price](#minimum-display-price) for the Market.
-* `_maxPrice` - [Maximum Display Price](#maximum-display-price) for the Market.
-* `_numTicks` - [Number of Ticks](#number-of-ticks) for the Market.
-* `_topic` - Market [Topic](#topic). 
-* `_description` - Description of the Market event. 
-* `_extraInfo` - Stringified JSON object. (See the explanation above for more details.)
-  * `resolutionSource` - Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-  * `tags` - Keywords used to tag the Market (maximum of 2).
-  * `longDescription` - Additional information not included in `description`.
-* `tx` - JSON object containing the following keys:
-  * `to` - Address of the Universe contract.
-  * `value` - Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-  * `gas` - Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
+#### Parameters:
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`universe`**  (string) Ethereum address of the [Universe](#universe) in which to create the new Scalar Market, as a 16-byte hexadecimal value.
+    * **`_endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market). 
+    * **`_feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement). 
+    * **`_denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future. 
+    * **`_designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter). 
+    * **`_minPrice`**  (number|string) [Minimum Display Price](#minimum-display-price) for the Market.
+    * **`_maxPrice`**  (number|string) [Maximum Display Price](#maximum-display-price) for the Market.
+    * **`_numTicks`**  (number|string) [Number of Ticks](#number-of-ticks) for the Market.
+    * **`_topic`**  (string) Market [Topic](#topic). 
+    * **`_description`**  (string) Description of the Market event. 
+    * **`_extraInfo`**  (string) Stringified JSON object. (See the explanation above for more details.)
+      * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
+      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`longDescription`**  (string) Additional information not included in `description`.
+    * **`tx`**  (object) JSON object containing the following keys:
+      * **`to`**  (string) Ethereum address of the Universe contract.
+      * **`value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+      * **`gas`**  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
+    * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (string) Ethereum address of the newly-created Scalar Market, as a 16-byte hexadecimal value.
 
 #### augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ universe, onSent, onSuccess, onFailed })
 
@@ -2411,5 +3041,3 @@ Returns the Ethereum contract address, as a hexadecimal string, of the [Fee Wind
 #### augur.api.Universe.redeemStake({ universe, _reportingParticipants, _feeWindows, onSent, onSuccess, onFailed })
 
 Calls the `redeem` function for all Ethereum contract addresses in the arrays `_reportingParticipants` and `_feeWindows` using the caller's address as the redeemer. `_reportingParticipants` can contain Ethereum contract addresses for [DisputeCrowdsourcers](#dispute-crowdsourcer-tx-api), [InitialReporters](#initial-reporter-tx-api), or both, as hexadecimal strings. `_feeWindows` can only contain the Ethereum contract addresses of [Fee Windows](#fee-window). This function is intended as easy way to redeem Stake in multiple [Dispute Crowdsourcers](#dispute-crowdsourcer), [Initial Reports](#initial-report), and Fee Windows at once.
-
-Returns: true if the transaction executed without any errors, or false otherwise.
