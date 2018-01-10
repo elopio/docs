@@ -3997,9 +3997,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-augur-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur Contract Code</a></h4>
 
-<h4 id="augur-api-augur-creategenesisuniverse-onsent-onsuccess-onfailed">augur.api.Augur.createGenesisUniverse({ onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-augur-creategenesisuniverse-p">augur.api.Augur.createGenesisUniverse(p)</h4>
 
-<p>This function allows users to create a new <a href="#genesis-universe">Genesis Universe</a> if, for example, they wish to create a <a href="#universe">Universe</a> to compete with another existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any <a href="#market">Markets</a> or <a href="#rep">REP</a> supply. In order to add a supply of REP, users must migrate <a href="#legacy-rep">Legacy REP</a> from the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP smart contract</a> into the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token smart contract</a> for the new Genesis Universe using the function <code class="prettyprint">augur.api.ReputationToken.migrateFromLegacyReputationToken</code>. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>Allows the caller to create a new <a href="#genesis-universe">Genesis Universe</a>. Users may wish to create a new Genesis Universe if, for example, they would like to create a separate <a href="#universe">Universe</a> to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any <a href="#market">Markets</a> or <a href="#rep">REP</a> supply. In order to add a supply of REP, users must migrate their <a href="#legacy-rep">Legacy REP</a> from the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP smart contract</a> into the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token smart contract</a> of the new Genesis Universe using the function <code class="prettyprint">augur.api.ReputationToken.migrateFromLegacyReputationToken</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="cancel-order-tx-api">Cancel Order Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cancel Order Transaction API Examples:</span>
@@ -4033,9 +4052,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-cancelorder-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol">Cancel Order Contract Code</a></h4>
 
-<h4 id="augur-api-cancelorder-cancelorder-_orderid-onsent-onsuccess-onfailed">augur.api.CancelOrder.cancelOrder({ _orderId, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-cancelorder-cancelorder-p">augur.api.CancelOrder.cancelOrder(p)</h4>
 
-<p>The <code class="prettyprint">cancelOrder</code> transaction is used to cancel and refund an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with the <code class="prettyprint">_orderId</code> specified as a 32-byte hexadecimal string. To get the order ID for a specific order, call the function <code class="prettyprint">augur.api.Order.getOrderId</code>.</p>
+<p>Cancels and refunds an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with ID <code class="prettyprint">_orderId</code>.</p>
 
 <p>This function will fail if:</p>
 
@@ -4044,7 +4063,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_orderId</code> is undefined.</li>
 </ul>
 
-<p>Returns: true if the Order was successfully canceled, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">orderId</code></strong> (string) ID of the Order to cancel, as a 32-byte hexadecimal value. (To get the order ID for a specific order, call the function <code class="prettyprint">augur.api.Order.getOrderId</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Order was successfully canceled, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="claim-trading-proceeds-tx-api">Claim Trading Proceeds Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Claim Trading Proceeds Transaction API Examples:</span>
@@ -4080,9 +4117,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-claimtradingproceeds-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol">Claim Trading Proceeds Contract Code</a></h4>
 
-<h4 id="augur-api-claimtradingproceeds-claimtradingproceeds-_market-_shareholder-onsent-onsuccess-onfailed">augur.api.ClaimTradingProceeds.claimTradingProceeds({ _market, _shareHolder, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-claimtradingproceeds-claimtradingproceeds-p">augur.api.ClaimTradingProceeds.claimTradingProceeds(p)</h4>
 
-<p>The <code class="prettyprint">claimTradingProceeds</code> transaction attempts to collect trading profits from outstanding <a href="#share">Shares</a> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">_market</code> owned by <code class="prettyprint">_shareHolder</code>. </p>
+<p>Collects trading profits from outstanding <a href="#share">Shares</a> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">_market</code> owned by <code class="prettyprint">_shareHolder</code>. </p>
 
 <p>This transaction will fail if:</p>
 
@@ -4090,7 +4127,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_market</code> has not been Finalized and passed the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a>.</li>
 </ul>
 
-<p>Returns: true if the transaction was executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong> (string) Ethereum address of the Market in which to claim trading proceeds, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_shareHolder</code></strong> (string) Ethereum address of the Share holder for which to claim trading proceeds, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the trading proceeds were successfully canceled, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="complete-sets-tx-api">Complete Sets Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Contract</span>
@@ -4153,22 +4209,77 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-completesets-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol">Complete Sets Contract Code</a></h4>
 
-<h4 id="augur-api-completesets-publicbuycompletesets-_market-_amount-onsent-onsuccess-onfailed">augur.api.CompleteSets.publicBuyCompleteSets({ _market, _amount, onSent, onSuccess, onFailed })</h4>
+<!-- TODO: Add links to events. -->
 
-<p>This transaction will attempt to purchase <code class="prettyprint">_amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> for a specified <code class="prettyprint">_market</code>. </p>
+<h4 id="augur-api-completesets-publicbuycompletesets-p">augur.api.CompleteSets.publicBuyCompleteSets(p)</h4>
+
+<p>Purchases <code class="prettyprint">_amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> of <a href="#market">Market</a> <code class="prettyprint">_market</code>. </p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
-<li><code class="prettyprint">msg.sender</code> doesn&rsquo;t have enough of the <code class="prettyprint">_market</code>&rsquo;s denomination token to be able to afford <code class="prettyprint">_amount</code> Shares in all Outcomes.</li>
+<li><code class="prettyprint">msg.sender</code> doesn&rsquo;t have enough of <code class="prettyprint">_market</code>&rsquo;s denomination token to be able to afford <code class="prettyprint">_amount</code> Shares in all Outcomes.</li>
 <li><code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. </li>
 </ul>
 
-<p>When successful, this transaction will spawn a <code class="prettyprint">CompleteSets</code> event which will record the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
+<p>When successful, this transaction will trigger a <code class="prettyprint">CompleteSets</code> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
 
-<h4 id="augur-api-completesets-publicsellcompletesets-_market-_amount-onsent-onsuccess-onfailed">augur.api.CompleteSets.publicSellCompleteSets({ _market, _amount, onSent, onSuccess, onFailed })</h4>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>This transaction will attempt to sell <code class="prettyprint">_amount</code> worth of Shares in all Outcomes for a specified <code class="prettyprint">_market</code>. This transaction will fail if the <code class="prettyprint">msg.sender</code> doesn&rsquo;t own <code class="prettyprint">_amount</code> of Shares in all Outcomes for the <code class="prettyprint">_market</code>, or if the <code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. When successful this transaction will spawn a <code class="prettyprint">CompleteSets</code> event which will record the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (sell), <code class="prettyprint">_amount</code> sold, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code> paid for selling the Shares, and the <code class="prettyprint">reportingFee</code> paid for selling the Shares.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_amount</code></strong> (number|string) Number of Shares to purchase of each Outcome.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Complete Set was successfully purchased, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<!-- TODO: Add links to events. -->
+
+<h4 id="augur-api-completesets-publicsellcompletesets-p">augur.api.CompleteSets.publicSellCompleteSets(p)</h4>
+
+<p>Sell <code class="prettyprint">_amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> of <a href="#market">Market</a> <code class="prettyprint">_market</code>. </p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> doesn&rsquo;t own <code class="prettyprint">_amount</code> Shares of all Outcomes in <code class="prettyprint">_market</code>.</li>
+<li><code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. </li>
+</ul>
+
+<p>When successful, this transaction will trigger a <code class="prettyprint">CompleteSets</code> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (sell), <code class="prettyprint">_amount</code> sold, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code> paid for selling the Shares, and the <code class="prettyprint">reportingFee</code> paid for selling the Shares.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_amount</code></strong> (number|string) Number of Shares to sell of each Outcome.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Complete Set was successfully purchased, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="create-order-tx-api">Create Order Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Make Order Transaction API Examples:</span>
@@ -4216,9 +4327,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-createorder-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol">Create Order Contract Code</a></h4>
 
-<h4 id="augur-api-createorder-publiccreateorder-_type-_attoshares-_displayprice-_market-_outcome-_betterorderid-_worseorderid-_tradegroupid-onsent-onsuccess-onfailed">augur.api.CreateOrder.publicCreateOrder({ _type, _attoshares, _displayPrice, _market, _outcome, _betterOrderId, _worseOrderId, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-createorder-publiccreateorder-p">augur.api.CreateOrder.publicCreateOrder(p)</h4>
 
-<p>This transaction will create a new <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> for <a href="#market">Market</a> <code class="prettyprint">_market</code> trading on <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code>. The required fields besides <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code> are the <code class="prettyprint">_type</code> of Order (1 for a bid, 2 for an ask), amount of <a href="#share">Shares</a>, <code class="prettyprint">_attoshares</code>, denoted in <a href="#atto-prefix">attoshares</a>, and the <code class="prettyprint">_displayPrice</code> for the Order. Optional params include <code class="prettyprint">_betterOrderId</code>, <code class="prettyprint">_worseOrderId</code>, <code class="prettyprint">_tradeGroupId</code>, and the callbacks. The <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> are Order IDs of Orders already on the Order Book which should be better and worse than the order this transaction is intending to create. The <code class="prettyprint">_tradeGroupId</code> is a field used by the Augur UI to group transactions and can be left blank.</p>
+<p>Creates a new <a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a> on the <a href="#order-book">Order Book</a>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_displayPrice</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
 
 <p>This transaction will fail if:</p>
 
@@ -4230,7 +4341,32 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_displayPrice</code> is below the <code class="prettyprint">_market</code>&rsquo;s minimum <code class="prettyprint">_displayPrice</code> or above the <code class="prettyprint">market</code>&rsquo;s maximum <code class="prettyprint">_displayPrice</code>.</li>
 </ul>
 
-<p>Returns: the Order ID of the newly created Order, as a 32-byte hexadecimal value.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_type</code></strong> (number|string) Type of Order to create (1 for a <a href="#bid-order">Bid</a>, 2 for an <a href="#ask-order">Ask</a>).</li>
+<li><strong><code class="prettyprint">_attoshares</code></strong> (number|string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell.</li>
+<li><strong><code class="prettyprint">_displayPrice</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">_market</code></strong> (string) Market in which to place the Order, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">_betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_betterOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_worseOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Order ID of the newly-created Order, as a 32-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="dispute-crowdsourcer-tx-api">Dispute Crowdsourcer Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Transaction API Examples:</span>
@@ -4318,25 +4454,70 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-disputecrowdsourcer-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">Dispute Crowdsourcer Contract Code</a></h4>
 
-<h4 id="augur-api-disputecrowdsourcer-fork-disputecrowdsourcer-onsent-onsuccess-onfailed">augur.api.DisputeCrowdsourcer.fork({ disputeCrowdsourcer, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-disputecrowdsourcer-fork-p">augur.api.DisputeCrowdsourcer.fork(p)</h4>
 
-<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the specified <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> and migrates the <a href="#rep">REP</a> in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a <a href="#forked-market">Forked Market</a>, and it can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once this function is called, <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code> may be called by users who <a href="#dispute-stake">Staked</a> on the Dispute Crowdsourcer&rsquo;s Outcome to redeem their Staked REP and collect any <a href="#reporting-fee">Reporting Fees</a> (in ETH) that they are owed.</p>
+<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> <code class="prettyprint">disputeCrowdsourcer</code> and migrates the <a href="#rep">REP</a> in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a <a href="#forked-market">Forked Market</a>, and it can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). </p>
 
-<p>Returns: true if the function successfully completed without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>Once this function has been called, <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code> may be called by users who <a href="#dispute-stake">Staked</a> on the Dispute Crowdsourcer&rsquo;s Outcome to redeem their Staked REP and collect any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that they are owed.</p>
 
-<h4 id="augur-api-disputecrowdsourcer-redeem-disputecrowdsourcer-_redeemer-onsent-onsuccess-onfailed">augur.api.DisputeCrowdsourcer.redeem({ disputeCrowdsourcer, _redeemer, onSent, onSuccess, onFailed })</h4>
+<p>This transaction will fail if:</p>
 
-<p>This function can be called only when a <a href="#market">Market</a> in the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#universe">Universe</a> has <a href="#fork">Forked</a> and <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> (in the case of Dispute Crowdsourcers of non-<a href="#forked-market">Forked Markets</a>) or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> (in the case of Dispute Crowdsourcers of Forked Markets) has been called. </p>
+<ul>
+<li><code class="prettyprint">disputeCrowdsourcer</code> belongs to a Market that is not Forked.</li>
+</ul>
 
-<p>When called on Dispute Crowdsourcers of non-Forked Markets, it will redeem any <a href="#rep">REP</a> that <code class="prettyprint">_redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the Universe containing the Forked Market.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">disputeCrowdsourcer</code></strong> (string) Ethereum address of the Forked Market&rsquo;s Dispute Crowdsourcer, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the transaction successfully completed without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-disputecrowdsourcer-redeem-p">augur.api.DisputeCrowdsourcer.redeem(p)</h4>
+
+<p>Can be called only when a <a href="#market">Market</a> in the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#universe">Universe</a> has <a href="#fork">Forked</a> and <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> (in the case of Dispute Crowdsourcers of non-<a href="#forked-market">Forked Markets</a>) or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> (in the case of Dispute Crowdsourcers of Forked Markets) has been called. </p>
+
+<p>When called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">_redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the Universe containing the Forked Market.</p>
 
 <p>When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">_redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
 
-<p>This function can be called on Dispute Crowdsourcers that have filled their <a href="#dispute-bond">Dispute Bond</a>, as well as ones that have not, provided that either <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> has already been called. When a <a href="#fork">Fork</a> occurs, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
+<p>This function can be called on Dispute Crowdsourcers that have filled their <a href="#dispute-bond">Dispute Bond</a>, as well as ones that have not, provided that either <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> has been called first. When a <a href="#fork">Fork</a> occurs, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
 
-<p>Returns: true if <code class="prettyprint">redeemer</code>&rsquo;s Staked REP was redeemed without errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-disputecrowdsourcer-withdrawinemergency-disputecrowdsourcer-onsent-onsuccess-onfailed">augur.api.DisputeCrowdsourcer.withdrawInEmergency({ disputeCrowdsourcer, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">disputeCrowdsourcer</code></strong> (string) Ethereum address of a Market&rsquo;s Dispute Crowdsourcer, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_redeemer</code></strong> (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">redeemer</code>&rsquo;s Staked REP was redeemed without errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-disputecrowdsourcer-withdrawinemergency-p">augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#outcome">Outcome</a>. Calling this function will not redeem any <a href="#reporting-fee">Reporting Fees</a> because the total amount of Reporting Fees is not known until the end of the <a href="#fee-window">Fee Window</a>.</p>
 
@@ -4346,7 +4527,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Augur is not currently in a halted state.</li>
 </ul>
 
-<p>Returns: true if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">disputeCrowdsourcer</code></strong> (string) Ethereum address of a Market&rsquo;s Dispute Crowdsourcer, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
@@ -4434,29 +4633,67 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-feewindow-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">Fee Window Contract Code</a></h4>
 
-<h4 id="augur-api-feewindow-buy-feewindow-_attotokens-onsent-onsuccess-onfailed">augur.api.FeeWindow.buy({ feeWindow, _attotokens, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-feewindow-buy-p">augur.api.FeeWindow.buy(p)</h4>
 
-<p>Purchases the number of <a href="#participation-token">Participation Tokens</a> specified by the integer <code class="prettyprint">_attotokens</code>. </p>
+<p>Purchases the number of <a href="#participation-token">Participation Tokens</a> specified by <code class="prettyprint">_attotokens</code>. </p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
 <li><code class="prettyprint">_attotokens</code> is &lt;= 0.</li>
 <li>Reporting is not currently active in the <a href="#fee-window">Fee Window</a>.</li>
-<li>All markets have not been <a href="#finalized-market">Finalized</a> in the Fee Window.</li>
+<li>All Markets have not been <a href="#finalized-market">Finalized</a> in the Fee Window.</li>
 </ul>
 
-<p>These Participation Tokens can later be redeemed once the Fee Window is no longer active using the function <code class="prettyprint">augur.api.FeeWindow.redeem</code>.</p>
+<p>These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function <code class="prettyprint">augur.api.FeeWindow.redeem</code>.</p>
 
-<p>Returns: true if the Participation Tokens were successfully purchased. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-feewindow-redeem-feewindow-_sender-onsent-onsuccess-onfailed">augur.api.FeeWindow.redeem({ feeWindow, _sender, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>Converts any <a href="#participation-token">Participation Tokens</a> <code class="prettyprint">_sender</code> has in the specified <a href="#fee-window">Fee Window</a> to <a href="#rep">Reputation Tokens</a>, and gives the user any <a href="#reporting-fee">Reporting Fees</a> he or she is owed in Ether. The parameter <code class="prettyprint">_sender</code> is the Ethereum address of the user redeeming the Participation Tokens, as a hexadecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum address of the current Fee Window, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_attotokens</code></strong> (number|string) Number of Participation Tokens to purchase, in <a href="#atto-prefix">attotokens</a>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
 
-<p>Returns: true if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors. If <code class="prettyprint">_sender</code> does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return true, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h4 id="augur-api-feewindow-withdrawinemergency-feewindow-onsent-onsuccess-onfailed">augur.api.FeeWindow.withdrawInEmergency({ feeWindow, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Participation Tokens were successfully purchased, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-feewindow-redeem-p">augur.api.FeeWindow.redeem(p)</h4>
+
+<p>Converts any <a href="#participation-token">Participation Tokens</a> <code class="prettyprint">_sender</code> has in the specified <a href="#fee-window">Fee Window</a> to <a href="#rep">Reputation Tokens</a>, and gives the user any <a href="#reporting-fee">Reporting Fees</a> he or she is owed in Ether. The parameter <code class="prettyprint">_sender</code> is the Ethereum address of the user redeeming the Participation Tokens, as a 16-byte hexadecimal string.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_sender</code></strong> (number|string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or <code class="prettyprint">0</code> otherwise. If <code class="prettyprint">_sender</code> does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return <code class="prettyprint">1</code>, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-feewindow-withdrawinemergency-p">augur.api.FeeWindow.withdrawInEmergency(p)</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Participation Tokens and convert them into Reputation Tokens.</p>
 
@@ -4466,7 +4703,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Augur is not currently in a halted state.</li>
 </ul>
 
-<p>Returns: true if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="fill-order-tx-api">Fill Order Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fill Order Transaction API Examples:</span>
@@ -4504,9 +4759,38 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-fillorder-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol">Fill Order Contract Code</a></h4>
 
-<h4 id="augur-api-fillorder-publicfillorder-fillorder-_orderid-_amountfillerwants-_tradegroupid-onsent-onsuccess-onfailed">augur.api.FillOrder.publicFillOrder({ fillOrder, _orderID, _amountFillerWants, _tradeGroupID, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-fillorder-publicfillorder-p">augur.api.FillOrder.publicFillOrder(p)</h4>
 
-<p>Given an <code class="prettyprint">_orderId</code> and the amount a <a href="#order-filler">Filler</a> wants as <code class="prettyprint">_amountFillerWants</code> denoted in <a href="#atto-prefix">attoshares</a>, this transaction will attempt to fill the <a href="#order">Order</a> specified. If the <code class="prettyprint">_amountFillerWants</code> is enough to fill the Order completely, then the Order will be removed from the <a href="#order-book">Order Book</a>, otherwise it will be adjusted to only include the remaining amount after filling the <code class="prettyprint">_amountFillerWants</code> value that the <a href="#order-filler">Filler</a> requests. This transaction requires <code class="prettyprint">_orderId</code> and <code class="prettyprint">_amountFillerWants</code> are defined. The <a href="#order-creator">Creator</a> of the order specified by <code class="prettyprint">_orderId</code> cannot be the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will return the fixed point amount remaining of the Order specified by <code class="prettyprint">_orderId</code> after being filled, if it&rsquo;s completely filled this will return <code class="prettyprint">0</code>. The <code class="prettyprint">_tradeGroupId</code> is an optional value that is used by the Augur UI and can be left <code class="prettyprint">undefined</code>.</p>
+<p>Attempts to Fill <code class="prettyprint">_amountFillerWants</code> <a href="#atto-prefix">attoshares</a> for <a href="#order">Order</a> <code class="prettyprint">_orderId</code>. If <code class="prettyprint">_amountFillerWants</code> is enough to fill the Order completely, the Order will be removed from the <a href="#order-book">Order Book</a>. Otherwise, it will be adjusted to only include the remaining amount after Filling the <code class="prettyprint">_amountFillerWants</code> value that the <a href="#order-filler">Filler</a> requests. </p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_orderId</code> or <code class="prettyprint">_amountFillerWants</code> is <code class="prettyprint">undefined</code>. </li>
+<li><code class="prettyprint">msg.sender</code> of this transaction is the <a href="#order-creator">Creator</a> of <code class="prettyprint">_orderId</code>.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_orderID</code></strong> (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_amountFillerWants</code></strong> (number|string) Number of Shares to Fill, in attoshares. </li>
+<li><strong><code class="prettyprint">_tradeGroupID</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Fixed point amount remaining of the Order specified by <code class="prettyprint">_orderId</code> after being filled, or <code class="prettyprint">0</code> if it&rsquo;s completely filled.</li>
+</ul>
 
 <h2 id="initial-reporter-tx-api">Initial Reporter Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Initial Reporter Transaction API Examples:</span>
@@ -4620,21 +4904,65 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-initialreporter-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">Initial Reporter Contract Code</a></h4>
 
-<h4 id="augur-api-initialreporter-fork-initialreporter-onsent-onsuccess-onfailed">augur.api.InitialReporter.fork({ initialReporter, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-initialreporter-fork-p">augur.api.InitialReporter.fork(p)</h4>
 
-<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe. This function can be called only on the <code class="prettyprint">initialReporter</code> contract of a <a href="#forked-market">Forked Market</a>, and it can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once this function is called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market.</p>
+<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe. </p>
 
-<p>Returns: true if the function successfully completed without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<p>This transaction will fail if:</p>
 
-<h4 id="augur-api-initialreporter-redeem-initialreporter-onsent-onsuccess-onfailed">augur.api.InitialReporter.redeem({ initialReporter, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><code class="prettyprint">initialReporter</code> does not belong to a <a href="#forked-market">Forked Market</a>.</li>
+</ul>
+
+<p>This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once it has been called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the REP was successfully migrated to the new Child Universe without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-initialreporter-redeem-p">augur.api.InitialReporter.redeem(p)</h4>
 
 <p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether.</p>
 
-<p>Returns: true if the REP (and, in the case of First Public Reporters, Ether) was successfully redeemed for the <a href="#initial-reporter">Initial Reporter</a> without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-initialreporter-transferownership-initialreporter-_newowner-onsent-onsuccess-onfailed">augur.api.InitialReporter.transferOwnership({ initialReporter, _newOwner, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>The <code class="prettyprint">transferOwnership</code> transaction will change the owner of <code class="prettyprint">initialReporter</code> from the existing owner to the Ethereum address hexadecimal string <code class="prettyprint">_newOwner</code>. </p>
+<ul>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the <a href="#initial-reporter">Initial Reporter</a> without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
+
+<h4 id="augur-api-initialreporter-transferownership-p">augur.api.InitialReporter.transferOwnership(p)</h4>
+
+<p>Changes the owner of <code class="prettyprint">initialReporter</code> from the existing owner to <code class="prettyprint">_newOwner</code>. </p>
 
 <p>This function will fail if:</p>
 
@@ -4642,9 +4970,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">initialReporter</code>. </li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-initialreporter-withdrawinemergency-initialreporter-onsent-onsuccess-onfailed">augur.api.InitialReporter.withdrawInEmergency({ initialReporter, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_newOwner</code></strong> (string) Ethereum address of the desired new owner for <code class="prettyprint">initialReporter</code>, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the ownership of <code class="prettyprint">initialReporter</code> was successfully transferred to <code class="prettyprint">_newOwner</code>, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-initialreporter-withdrawinemergency-p">augur.api.InitialReporter.withdrawInEmergency(p)</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, <a href="#initial-reporter">Initial Reporters</a> can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Initial Report</a> <a href="#outcome">Outcome</a>, as well as the <a href="no-show-gas-bond">No-Show Gas Bond</a> (in cases where the <a href="#first-public-reporter">First Public Reporter</a> submitted the Initial Report instead of the <a href="#designated-reporter">Designated Reporter</a>).</p>
 
@@ -4654,7 +5001,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Augur is not currently in a halted state.</li>
 </ul>
 
-<p>Returns: true if the REP and was successfully withdrawn from <code class="prettyprint">initialReporter</code> contract without any errors, or false otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of an InitialReporter smart contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the REP was successfully withdrawn from the <code class="prettyprint">initialReporter</code> contract without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="mailbox-tx-api">Mailbox Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Mailbox Transaction API Examples:</span>
@@ -4742,21 +5107,42 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-mailbox-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol">Mailbox Contract Code</a></h4>
 
-<h4 id="augur-api-mailbox-transferownership-mailbox-_newowner-onsent-onsuccess-onfailed">augur.api.Mailbox.transferOwnership({ mailbox, _newOwner, onSent, onSuccess, onFailed })</h4>
+<p>Handles the functionality of the <a href="#market-creator-mailbox">Market Creator Mailbox</a>.</p>
 
-<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market-creator-mailbox">Market Creator Mailbox</a> owner to the specified <code class="prettyprint">_newOwner</code>.</p>
+<h4 id="augur-api-mailbox-transferownership-p">augur.api.Mailbox.transferOwnership(p)</h4>
 
-<p>This function will fail if:</p>
+<p>Changes the current owner of <a href="#market-creator-mailbox">Market Creator Mailbox</a> <code class="prettyprint">mailbox</code> to  <code class="prettyprint">_newOwner</code>.</p>
+
+<p>This transaction will fail if:</p>
 
 <ul>
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">mailbox</code>. </li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-mailbox-withdrawether-mailbox-onsent-onsuccess-onfailed">augur.api.Mailbox.withdrawEther({ mailbox, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>Transfers all ETH in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the Market Creator&rsquo;s address.  </p>
+<ul>
+<li><strong><code class="prettyprint">mailbox</code></strong> (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_newOwner</code></strong> (string) Ethereum address of the desired new owner of <code class="prettyprint">mailbox</code>, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if ownership of <code class="prettyprint">mailbox</code> was successfully transferred to <code class="prettyprint">_newOwner</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-mailbox-withdrawether-p">augur.api.Mailbox.withdrawEther(p)</h4>
+
+<p>Transfers all Ether in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the <a href="#market-creator">Market Creator&rsquo;s</a> Ethereum address.  </p>
 
 <p>This transaction will fail if:</p>
 
@@ -4764,11 +5150,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-mailbox-withdrawtokens-mailbox-_token-onsent-onsuccess-onfailed">augur.api.Mailbox.withdrawTokens({ mailbox, _token, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>Transfers all tokens of type <code class="prettyprint">_token</code> in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the Market Creator&rsquo;s address.  </p>
+<ul>
+<li><strong><code class="prettyprint">mailbox</code></strong> (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Ether was successfully withdrawn from <code class="prettyprint">mailbox</code> to the owner&rsquo;s Ethereum address, or false otherwise.</li>
+</ul>
+
+<h4 id="augur-api-mailbox-withdrawtokens-p">augur.api.Mailbox.withdrawTokens(p)</h4>
+
+<p>Transfers all tokens of type <code class="prettyprint">_token</code> in the <a href="#market-creator-mailbox">Market Creator Mailbox</a> to the <a href="#market-creator">Market Creator&rsquo;s</a> Ethereum address.  </p>
 
 <p>This transaction will fail if:</p>
 
@@ -4776,7 +5180,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the specified <code class="prettyprint">mailbox</code>. </li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">mailbox</code></strong> (string) Ethereum address of a Market Creator Mailbox, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_token</code></strong> (string) Ethereum address of an <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol">ERC20Basic</a> token contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the tokens were successfully withdrawn from <code class="prettyprint">mailbox</code> to the owner&rsquo;s Ethereum address, or false otherwise.</li>
+</ul>
 
 <h2 id="market-tx-api">Market Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Transaction API Examples:</span>
@@ -4976,22 +5399,40 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-market-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Contract Code</a></h4>
 
-<h4 id="augur-api-market-contribute-market-_payoutnumerators-_invalid-_amount-onsent-onsuccess-onfailed">augur.api.Market.contribute({ market, _payoutNumerators, _invalid, _amount, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-market-contribute-p">augur.api.Market.contribute(p)</h4>
 
 <p>Contributes <code class="prettyprint">_amount</code> <a href="#rep">REP</a> to the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> represented by <a href="#payout-set">Payout Set</a> <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> in order to help <a href="#challenge">Challenge</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a>. If the amount of REP in the Dispute Crowdsourcer plus <code class="prettyprint">amount</code> is greater than the total REP required to fill the <a href="#dispute-bond">Dispute Bond</a>, this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.</p>
-
-<p><code class="prettyprint">_payoutNumerators</code> is an array representing the <a href="#payout-set">Payout Set</a> for the Market, and <code class="prettyprint">_invalid</code> is a boolean value for whether the Market is <a href="#invalid-outcome">Invalid</a>. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</p>
 
 <p>This function will fail if:
   - The Market is in a <a href="#fee-window">Fee Window</a> that is not active.
   - The <a href="#outcome">Outcome</a> specified by <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> is already the Tentative Outcome of the Market.
-  - <code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value.</p>
+  - <code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</p>
 
-<p>Returns: true if the function executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-market-disavowcrowdsourcers-market-onsent-onsuccess-onfailed">augur.api.Market.disavowCrowdsourcers({ market, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>This function may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>. Calling it will &ldquo;disavow&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of the Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> will be reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers will be redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. </p>
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.<number>|Array.<string>) Array representing the Market&rsquo;s Payout Set.</li>
+<li><strong><code class="prettyprint">_invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the transaction executed without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-disavowcrowdsourcers-p">augur.api.Market.disavowCrowdsourcers(p)</h4>
+
+<p>&ldquo;Disavows&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of a Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> are reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers are redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. This transaction may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>. </p>
 
 <p>This function will fail if:</p>
 
@@ -5000,25 +5441,63 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">market</code> is a Forked Market.</li>
 </ul>
 
-<p>Returns: true if the function executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-market-doinitialreport-market-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.doInitialReport({ market, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>Submits an <a href="#initial-report">Initial Report</a> for <a href="#market">Market</a> <code class="prettyprint">market</code> with <a href="#payout-set">Payout Set</a> <code class="prettyprint">_payoutNumerators</code> as an array and <code class="prettyprint">_invalid</code> as a boolean value for whether the Market is <a href="#invalid-outcome">Invalid</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">market&#39;s</code> Crowdsourcers were disavowed without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-doinitialreport-p">augur.api.Market.doInitialReport(p)</h4>
+
+<p>Submits an <a href="#initial-report">Initial Report</a> for <a href="#market">Market</a> <code class="prettyprint">market</code>.</p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
 <li>The Market&rsquo;s event end time has not passed.</li>
 <li>The caller of the function is not the <a href="#designated-reporter">Designated Reporter</a> and the <a href="#designated-reporting-phase">Designated Reporting Phase</a> has not ended.</li>
-<li><code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
+<li><code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the <a href="#payout-set">Payout Set</a> should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
 </ul>
 
-<p>Returns: true if the function executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-market-finalize-market-onsent-onsuccess-onfailed">augur.api.Market.finalize({ market, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>This function will <a href="#finalized-market">Finalize</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>, meaning it will set the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistribute <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distribute the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.<number>|Array.<string>) Array representing the Market&rsquo;s Payout Set.</li>
+<li><strong><code class="prettyprint">_invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Initial Report was submitted without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-finalize-p">augur.api.Market.finalize(p)</h4>
+
+<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5028,11 +5507,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">market</code> is a Forked Market.</li>
 </ul>
 
-<p>Returns: true if the function executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-market-finalizefork-market-onsent-onsuccess-onfailed">augur.api.Market.finalizeFork({ market, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>This function will <a href="#finalized-market">Finalize</a> the <a href="#forked-market">Forked Market</a> <code class="prettyprint">market</code>, meaning it will set the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">market</code> was Finalized without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-finalizefork-p">augur.api.Market.finalizeFork(p)</h4>
+
+<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a> <code class="prettyprint">market</code>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5040,17 +5537,59 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">market</code> is not a Forked Market.</li>
 </ul>
 
-<p>Returns: true if the function executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-market-migratethroughonefork-market-onsent-onsuccess-onfailed">augur.api.Market.migrateThroughOneFork({ market, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>This transaction attempts to migrate the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a> that occurs wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it will be declared the Winning Universe. Calling <code class="prettyprint">migrateThroughOneFork</code> attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This method will throw if the Fork Period isn&rsquo;t over, so there is no Winning Universe to migrate to yet. </p>
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
 
-<p>Returns: <code class="prettyprint">1</code> if <code class="prettyprint">market</code> was successfully migrated and <code class="prettyprint">0</code> if no migration was required.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h4 id="augur-api-market-transferownership-market-_newowner-onsent-onsuccess-onfailed">augur.api.Market.transferOwnership({ market, _newOwner, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Forked Market was Finalized without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
 
-<p>The <code class="prettyprint">transferOwnership</code> transaction will change the current <a href="#market">Market</a> owner to the specified <code class="prettyprint">_newOwner</code>. This is used to transfer ownership of a Market from one address to another. </p>
+<h4 id="augur-api-market-migratethroughonefork-p">augur.api.Market.migrateThroughOneFork(p)</h4>
+
+<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling <code class="prettyprint">migrateThroughOneFork</code> attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. </p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The Fork Period is not over (that is, there is no Winning Universe to migrate to). </li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">market</code> was successfully migrated to the Winning Universe without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-transferownership-p">augur.api.Market.transferOwnership(p)</h4>
+
+<p>Changes the owner of <a href="#market">Market</a> <code class="prettyprint">market</code> from the current owner to <code class="prettyprint">_newOwner</code>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5058,7 +5597,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of <code class="prettyprint">market</code>. </li>
 </ul>
 
-<h4 id="augur-api-market-withdrawinemergency-market-onsent-onsuccess-onfailed">augur.api.Market.withdrawInEmergency({ market, onSent, onSuccess, onFailed })</h4>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_newOwner</code></strong>  (string) Ethereum address of the desired new owner of <code class="prettyprint">market</code>, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if ownership of <code class="prettyprint">market</code> was transferred to <code class="prettyprint">_newOwner</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-market-withdrawinemergency-p">augur.api.Market.withdrawInEmergency(p)</h4>
 
 <p>If a critical bug or vulnerability is found in Augur, the development team can put it the system into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, users can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw their Reputation Tokens from a particular Market.</p>
 
@@ -5068,7 +5628,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Augur is not currently in a halted state.</li>
 </ul>
 
-<p>Returns: true if the Reputation Tokens were successfully withdrawn from the Market. (NOTE: The return value cannot be obtained reliably when calling externally.)</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a <a href="#market">Market</a>, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Reputation Tokens were withdrawn from <code class="prettyprint">market</code> without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+</ul>
 
 <h2 id="reputation-token-tx-api">Reputation Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Transaction API Examples:</span>
@@ -5219,21 +5797,65 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-reputationtoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token Contract Code</a></h4>
 
-<h4 id="augur-api-reputationtoken-approve-reputationtoken-_spender-_value-onsent-onsuccess-onfailed">augur.api.ReputationToken.approve({ reputationToken, _spender, _value, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-reputationtoken-approve-p">augur.api.ReputationToken.approve(p)</h4>
 
-<p>Allows the <code class="prettyprint">_spender</code> the ability to spend up to <code class="prettyprint">_value</code> (denoted in attotokens) worth of the specified <code class="prettyprint">reputationToken</code> for the <code class="prettyprint">msg.sender</code> of this <code class="prettyprint">approve</code> transaction. This transaction will spawn an <code class="prettyprint">Approval</code> event which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in attotokens approved.</p>
+<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <code class="prettyprint">Approval</code> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoREP</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<p>This function will fail if:</p>
 
-<h4 id="augur-api-reputationtoken-migratefromlegacyreputationtoken-reputationtoken-onsent-onsuccess-onfailed">augur.api.ReputationToken.migrateFromLegacyReputationToken({ reputationToken, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><code class="prettyprint">_value</code> has already been set to a number higher than 0.</li>
+</ul>
 
-<p>This transaction will migrate <a href="#legacy-rep">Legacy REP</a> tokens from the Legacy REP contract owned by <code class="prettyprint">msg.sender</code> to the <code class="prettyprint">reputationToken</code> provided. <code class="prettyprint">msg.sender</code> will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the legacy rep contract to the <code class="prettyprint">reputationToken</code> contract.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<h4 id="augur-api-reputationtoken-migrateout-reputationtoken-_destination-_attotokens-onsent-onsuccess-onfailed">augur.api.ReputationToken.migrateOut({ reputationToken, _destination, _attotokens, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
 
-<p>This transaction migrates a <code class="prettyprint">_reporter</code>&rsquo;s <a href="#rep">REP</a> (denoted in <a href="#atto-prefix">attoREP</a> as <code class="prettyprint">_attotokens</code>) from one <code class="prettyprint">reputationToken</code> address to another (<code class="prettyprint">_destination</code>) in the case of a <a href="#fork">Fork</a>.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_spender</code> is approved without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-reputationtoken-migratefromlegacyreputationtoken-p">augur.api.ReputationToken.migrateFromLegacyReputationToken(p)</h4>
+
+<p>Migrates <a href="#legacy-rep">Legacy REP</a> tokens owned by <code class="prettyprint">msg.sender</code> from the Legacy REP contract to the <code class="prettyprint">reputationToken</code> provided. This transaction will add whatever <code class="prettyprint">msg.sender</code>&rsquo;s balance was for the <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol">Legacy REP contract</a> to the <code class="prettyprint">reputationToken</code> contract.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Legacy REP was migrated to <code class="prettyprint">reputationToken</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-reputationtoken-migrateout-p">augur.api.ReputationToken.migrateOut(p)</h4>
+
+<p>This transaction migrates <code class="prettyprint">_attotokens</code> of <code class="prettyprint">msg.sender</code>&rsquo;s <a href="#rep">REP</a> from contract address <code class="prettyprint">reputationToken</code> to <code class="prettyprint">_destination</code> contract address in the case of a <a href="#fork">Fork</a>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5242,19 +5864,93 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_destination</code>&rsquo;s <a href="#universe">Universe</a> is not a <a href="#child-universe">Child Universe</a> of <code class="prettyprint">reputationToken</code>&rsquo;s Universe.</li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-reputationtoken-transfer-reputationtoken-_to-_value-onsent-onsuccess-onfailed">augur.api.ReputationToken.transfer({ reputationToken, _to, _value, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>If the <code class="prettyprint">msg.sender</code> of the <code class="prettyprint">transfer</code> transaction has enough of <code class="prettyprint">reputationToken</code> to be able to transfer <code class="prettyprint">_value</code> (denoted in attotokens) worth to the <code class="prettyprint">_to</code> address and <code class="prettyprint">_value</code> is a number between 1 and 2<sup>254</sup> then this transaction will send <code class="prettyprint">_value</code> (in attotokens) worth of <code class="prettyprint">reputationToken</code> to the specified <code class="prettyprint">_to</code> address from the <code class="prettyprint">msg.sender</code>. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
+<ul>
+<li><strong><code class="prettyprint">reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_destination</code></strong>  (string) Ethereum address of the destination <a href="#reputation-token">Reputation Token</a> contract to migrate REP to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_attotokens</code></strong>  (number|string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h4 id="augur-api-reputationtoken-transferfrom-reputationtoken-_from-_to-_value-onsent-onsuccess-onfailed">augur.api.ReputationToken.transferFrom({ reputationToken, _from, _to, _value, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the REP is migrated to <code class="prettyprint">_destination</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
 
-<p>If the <code class="prettyprint">_from</code> address of the <code class="prettyprint">transferFrom</code> transaction has enough of <code class="prettyprint">reputationToken</code> to be able to transfer <code class="prettyprint">_value</code> (denoted in attotokens) worth to the <code class="prettyprint">_to</code> address, <code class="prettyprint">_value</code> is a number between 1 and 2<sup>254</sup>, and the <code class="prettyprint">msg.sender</code> has the approval to spend at least <code class="prettyprint">_value</code> worth of <code class="prettyprint">reputationTokens</code> for the <code class="prettyprint">_from</code> address then this transaction will send <code class="prettyprint">_value</code> worth of <code class="prettyprint">reputationToken</code> to the specified <code class="prettyprint">_to</code> address from the <code class="prettyprint">_from</code> address. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attotokens) amount transferred.</p>
+<h4 id="augur-api-reputationtoken-transfer-p">augur.api.ReputationToken.transfer(p)</h4>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> does not have enough REP to be able to transfer <code class="prettyprint">_value</code> attoREP to the <code class="prettyprint">_to</code> address.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> REP are sent from the caller to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-reputationtoken-transferfrom-p">augur.api.ReputationToken.transferFrom(p)</h4>
+
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoREP) amount transferred.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_from</code> does not have enough REP to be able to transfer <code class="prettyprint">_value</code> attoREP to the <code class="prettyprint">_to</code> address.</li>
+<li><code class="prettyprint">msg.sender</code> does not have the approval (see <code class="prettyprint">augur.api.ReputationToken.approve</code>) to spend at least <code class="prettyprint">_value</code> worth of REP for the <code class="prettyprint">_from</code> address.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_from</code></strong>  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> REP is sent from <code class="prettyprint">_from</code> to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
 
 <h2 id="share-token-tx-api">Share Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Transaction API Examples:</span>
@@ -5351,23 +6047,105 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-sharetoken-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol">Share Token Contract Code</a></h4>
 
-<h4 id="augur-api-sharetoken-approve-sharetoken-_spender-_value-onsent-onsuccess-onfailed">augur.api.ShareToken.approve({ shareToken, _spender, _value, onSent, onSuccess, onFailed })</h4>
+<p>Handles the functionality related to <a href="#share">Shares</a> (referred to as Share Tokens within Augur&rsquo;s Solidty smart contracts).</p>
 
-<p>Allows the <code class="prettyprint">_spender</code> the ability to spend up to <code class="prettyprint">_value</code> worth of the specified <code class="prettyprint">shareToken</code> for the <code class="prettyprint">msg.sender</code> of this <code class="prettyprint">approve</code> transaction. This transaction will spawn an <code class="prettyprint">Approval</code> event which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> denoted in <a href="#atto-prefix">attotokens</a> approved.</p>
+<h4 id="augur-api-sharetoken-approve-p">augur.api.ShareToken.approve(p)</h4>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <code class="prettyprint">Approval</code> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoshares</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
 
-<h4 id="augur-api-sharetoken-transfer-sharetoken-_to-_value-onsent-onsuccess-onfailed">augur.api.ShareToken.transfer({ shareToken, _to, _value, onSent, onSuccess, onFailed })</h4>
+<p>This function will fail if:</p>
 
-<p>If the <code class="prettyprint">msg.sender</code> of the <code class="prettyprint">transfer</code> transaction has enough of <code class="prettyprint">shareToken</code>s to be able to transfer <code class="prettyprint">_value</code> worth to the <code class="prettyprint">_to</code> address and <code class="prettyprint">_value</code> is a valid number between 1 and 2<sup>254</sup> then this transaction will send <code class="prettyprint">_value</code> worth of <code class="prettyprint">shareToken</code> to the specified <code class="prettyprint">_to</code> address from the <code class="prettyprint">msg.sender</code>. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred denoted in <a href="#atto-prefix">attotokens</a>.</p>
+<ul>
+<li><code class="prettyprint">_value</code> has already been set to a number higher than 0.</li>
+</ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoshares to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_spender</code> is approved without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h4 id="augur-api-sharetoken-transfer-p">augur.api.ShareToken.transfer(p)</h4>
+
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">msg.sender</code> does not have enough Shares to be able to transfer <code class="prettyprint">_value</code> attoshares to the <code class="prettyprint">_to</code> address.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> Shares are sent from the caller to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
 
 <h4 id="augur-api-sharetoken-transferfrom-sharetoken-_from-_to-_value-onsent-onsuccess-onfailed">augur.api.ShareToken.transferFrom({ shareToken, _from, _to, _value, onSent, onSuccess, onFailed })</h4>
 
-<p>If the <code class="prettyprint">_from</code> address of the <code class="prettyprint">transferFrom</code> transaction has enough of <code class="prettyprint">shareToken</code> to be able to transfer <code class="prettyprint">_value</code> worth to the <code class="prettyprint">_to</code> address, <code class="prettyprint">_value</code> is a valid number between 1 and 2<sup>254</sup>, and the <code class="prettyprint">msg.sender</code> has the approval to spend at least <code class="prettyprint">_value</code> worth of <code class="prettyprint">shareToken</code> for <code class="prettyprint">_from</code> address then this transaction will send <code class="prettyprint">_value</code> worth of <code class="prettyprint">shareToken</code> to the specified <code class="prettyprint">_to</code> address from the <code class="prettyprint">_from</code> address. This transaction will spawn a <code class="prettyprint">Transfer</code> event which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred denoted in <a href="#atto-prefix">attotokens</a>.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoshares) amount transferred.</p>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_from</code> does not have enough Shares to be able to transfer <code class="prettyprint">_value</code> attoshares to the <code class="prettyprint">_to</code> address.</li>
+<li><code class="prettyprint">msg.sender</code> does not have the approval (see <code class="prettyprint">augur.api.ShareToken.approve</code>) to spend at least <code class="prettyprint">_value</code> worth of Share Tokens for the <code class="prettyprint">_from</code> address.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_from</code></strong>  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> Shares are sent from <code class="prettyprint">_from</code> to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
 
 <h2 id="trade-tx-api">Trade Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trade Transaction API Examples:</span>
@@ -5511,29 +6289,127 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-trading-trade-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol">Trade Contract Code</a></h4>
 
-<h4 id="augur-api-trade-publicbuy-_market-_outcome-_fxpamount-_price-_betterorderid-_worseorderid-_tradegroupid-onsent-onsuccess-onfailed">augur.api.Trade.publicBuy({ _market, _outcome, _fxpAmount, _price, _betterOrderId, _worseOrderId, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
+<h4 id="augur-api-trade-publicbuy-p">augur.api.Trade.publicBuy(p)</h4>
 
-<p>The <code class="prettyprint">publicBuy</code> transaction is used to purchase <a href="#share">Shares</a> for a specified <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code>. The amount of Shares to purchase is <code class="prettyprint">_fxpAmount</code>, denoted in <a href="#atto-prefix">attoshares</a>, and the price point to buy at is <code class="prettyprint">_price</code>, denoted in attotokens of the <code class="prettyprint">_market</code>&rsquo;s denomination token. This transaction will take <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be filled with this request, otherwise this transaction will create a new Order to buy <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. In order to optimize the process of putting the Order on the Order Book, <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after <code class="prettyprint">_price</code>, and their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. The <code class="prettyprint">_tradeGroupId</code> is an optional argument used by the Augur UI and can be left <code class="prettyprint">undefined</code>. </p>
+<p>Buys <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
 
-<p>Returns: <code class="prettyprint">1</code> if this Order was filled completely, or if this Order can&rsquo;t be filled immediately, an Order will be created and the <code class="prettyprint">_orderId</code> of that new Order will be returned.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h4 id="augur-api-trade-publicsell-_market-_outcome-_fxpamount-_price-_betterorderid-_worseorderid-_tradegroupid-onsent-onsuccess-onfailed">augur.api.Trade.publicSell({ _market, _outcome, _fxpAmount, _price, _betterOrderId, _worseOrderId, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
-<p>The <code class="prettyprint">publicSell</code> transaction is used to purchase <a href="#share">Shares</a> for a specified <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code>. The amount of Shares to purchase is <code class="prettyprint">_fxpAmount</code>, denoted in <a href="#atto-prefix">attoshares</a>, and the price point  to sell at is <code class="prettyprint">_price</code>, denoted in attotokens of the <code class="prettyprint">_market</code>&rsquo;s denomination token. This transaction will take <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be filled with this request, otherwise this transaction will create a new Order to sell <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. In order to optimize the process of sorting the new Order on the Order Book, <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> must be specified as 32-byte hexadecimal strings. These are the orders with the next best/next worse price after <code class="prettyprint">_price</code>, and their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. The <code class="prettyprint">_tradeGroupId</code> is an optional argument used by the Augur UI and can be left <code class="prettyprint">undefined</code>. </p>
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">_fxpAmount</code></strong>  (number|string) Amount of Shares to buy, in <a href="#atto-prefix">attoshares</a>.</li>
+<li><strong><code class="prettyprint">_price</code></strong>  (number|string) Price at which to buy Shares, in attoETH.</li>
+<li><strong><code class="prettyprint">_betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
 
-<p>Returns: <code class="prettyprint">1</code> if this Order was filled completely, or if this Order can&rsquo;t be filled immediately, an Order will be created and the <code class="prettyprint">_orderId</code> of that new Order will be returned.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h4 id="augur-api-trade-publictrade-_direction-_market-_outcome-_fxpamount-_price-_betterorderid-_worseorderid-_tradegroupid-onsent-onsuccess-onfailed">augur.api.Trade.publicTrade({ _direction, _market, _outcome, _fxpAmount, _price, _betterOrderId, _worseOrderId, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
+<ul>
+<li>(string) <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000001</code> if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.</li>
+</ul>
 
-<p>The <code class="prettyprint">publicTrade</code> transaction works like <code class="prettyprint">publicBuy</code> or <code class="prettyprint">publicSell</code>; however a direction must be specified. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. </p>
+<h4 id="augur-api-trade-publicsell-p">augur.api.Trade.publicSell(p)</h4>
 
-<p>Returns: <code class="prettyprint">1</code> if this order was filled completely, or if this order can&rsquo;t be filled immediately an order will be created and the <code class="prettyprint">_orderId</code> of that new order will be returned.</p>
+<p>Sells <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">_fxpAmount</code></strong>  (number|string) Amount of Shares to sell, in <a href="#atto-prefix">attoshares</a>.</li>
+<li><strong><code class="prettyprint">_price</code></strong>  (number|string) Price at which to sell Shares, in attoETH.</li>
+<li><strong><code class="prettyprint">_betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000001</code> if the Order can be <a href="#fill-order">Filled</a> completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.</li>
+</ul>
+
+<h4 id="augur-api-trade-publictrade-p">augur.api.Trade.publicTrade(p)</h4>
+
+<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. </p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_direction</code></strong> (number|string) Direction of the trade, as an integer. <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling.</li>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">_fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>.</li>
+<li><strong><code class="prettyprint">_price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">_betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000001</code> if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.</li>
+</ul>
 
 <h4 id="augur-api-trade-publictakebestorder-_direction-_market-_outcome-_fxpamount-_price-_betterorderid-_worseorderid-_tradegroupid-onsent-onsuccess-onfailed">augur.api.Trade.publicTakeBestOrder({ _direction, _market, _outcome, _fxpAmount, _price, _betterOrderId, _worseOrderId, _tradeGroupId, onSent, onSuccess, onFailed })</h4>
 
-<p>The <code class="prettyprint">publicTakeBestOrder</code> transaction works similarly to <code class="prettyprint">augur.api.Trade.publicTrade</code>, except it does not create an <a href="#order">Order</a> if the request can&rsquo;t be filled. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. </p>
+<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicTrade</code>, except it does not create an <a href="#order">Order</a> if the request can&rsquo;t be <a href="#fill-order">Filled</a>. Instead, it will take the best Order available on the <a href="#order-book">Order Book</a>.</p>
 
-<p>Returns: the fixed point amount not filled by the order, so <code class="prettyprint">0</code> for a completely Filled Order, some other number if this request could only be partially filled.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_direction</code></strong> (number|string) Direction of the trade, as an integer. <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling.</li>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">_fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>.</li>
+<li><strong><code class="prettyprint">_price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">_betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Number of attoshares not Filled by the Order, as a 32-byte hexadecimal value. This means the transaction will return <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000000</code> for a completely Filled Order, or a larger number if the Order could only be partially Filled.</li>
+</ul>
 
 <h2 id="tradingescapehatch-tx-api">TradingEscapeHatch Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TradingEscapeHatch Transaction API Examples:</span>
@@ -5577,7 +6453,25 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Augur is not in a halted state.</li>
 </ul>
 
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Ethereum address of a Market to claim Shares from, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">1</code> if the Shares were claimed without any errors, or false otherwise.</li>
+</ul>
 
 <h2 id="universe-tx-api">Universe Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Transaction API Examples:</span>
@@ -6080,71 +6974,101 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
 
-<h4 id="augur-api-universe-createbinarymarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createBinaryMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+<h4 id="augur-api-universe-createbinarymarket-p">augur.api.Universe.createBinaryMarket(p)</h4>
 
 <p>Creates a new <a href="#binary-market">Binary Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
 <ul>
-<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
-<li><code class="prettyprint">denominationToken</code> - Address of the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
-<li><code class="prettyprint">_designatedReporterAddress</code> - String containing the address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
-<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
-<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
-<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object containing the following keys:
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
-<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
-</ul></li>
-<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of the <a href="#universe">Universe</a> in which to create the new Binary Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) Market <a href="#topic">Topic</a>. </li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market event. </li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (string) Stringified JSON object containing the following keys:
 
 <ul>
-<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
-<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
+<li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
+
+<ul>
+<li><strong><code class="prettyprint">to</code></strong>  (string) Ethereum Address of the Universe contract.</li>
+<li><strong><code class="prettyprint">value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">gas</code></strong>  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+</ul></li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the newly-created Binary Market, as a 16-byte hexadecimal value.</li>
 </ul>
 
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `_endTime` has already passed, `_feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `_designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `_description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
-<h4 id="augur-api-universe-createcategoricalmarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_outcomes-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createCategoricalMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _outcomes, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+<h4 id="augur-api-universe-createcategoricalmarket-p">augur.api.Universe.createCategoricalMarket(p)</h4>
 
 <p>Creates a new <a href="#categorical-market">Categorical Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
 <ul>
-<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
-<li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
-<li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
-<li><code class="prettyprint">_outcomes</code> (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event. </li>
-<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
-<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
-<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
-<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
-<li><code class="prettyprint">outcomeNames</code> - Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of the <a href="#universe">Universe</a> in which to create the new Categorical Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><strong><code class="prettyprint">_outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event. </li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) Market <a href="#topic">Topic</a>. </li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market event. </li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (string) Stringified JSON object. (See the explanation above for more details.)
+
+<ul>
+<li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
+<li><strong><code class="prettyprint">outcomeNames</code></strong>  (Array.<string>) Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
 </ul></li>
-<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+<li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
 
 <ul>
-<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
-<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_CATEGORICAL_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">to</code></strong>  (string) Ethereum address of the Universe contract.</li>
+<li><strong><code class="prettyprint">value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">gas</code></strong>  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_CATEGORICAL_MARKET_GAS</code>.</li>
+</ul></li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
 </ul></li>
 </ul>
 
-<h4 id="augur-api-universe-createchilduniverse-_parentpayoutnumerators-_parentinvalid-onsent-onsuccess-onfailed">augur.api.Universe.createChildUniverse({ _parentPayoutNumerators, _parentInvalid, onSent, onSuccess, onFailed })</h4>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns Ethereum contract address corresponding the <a href="#child-universe">Child Universe</a> with <a href="#payout-set">Payout Set</a> <code class="prettyprint">_parentPayoutNumerators</code>, as an array of integers, and <code class="prettyprint">_parentInvalid</code>, as a boolean value. If the Child Universe does not already exist, it will be created. </p>
+<ul>
+<li>(string) Ethereum address of the newly-created Categorical Market, as a 16-byte hexadecimal value.</li>
+</ul>
+
+<h4 id="augur-api-universe-createchilduniverse-p">augur.api.Universe.createChildUniverse(p)</h4>
+
+<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-set">Payout Set</a> <code class="prettyprint">_parentPayoutNumerators</code> and <code class="prettyprint">_parentInvalid</code>. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. </p>
 
 <p>This transaction will fail if:</p>
 
@@ -6153,34 +7077,73 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_parentInvalid</code> is true and the Numerators in <code class="prettyprint">_parentPayoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid <a href="#market">Market</a>, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
 </ul>
 
-<h4 id="augur-api-universe-createscalarmarket-_endtime-_feeperethinwei-_denominationtoken-_designatedreporteraddress-_minprice-_maxprice-_numticks-_topic-_description-_extrainfo-onsent-onsuccess-onfailed-tx">augur.api.Universe.createScalarMarket({ _endTime, _feePerEthInWei, _denominationToken, _designatedReporterAddress, _minPrice, _maxPrice, _numTicks, _topic, _description, _extraInfo, onSent, onSuccess, onFailed, tx })</h4>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of the <a href="#universe">Universe</a> containing the Forked Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_parentPayoutNumerators</code></strong>  (Array.<number>) Payout Set of the Parent Universe&rsquo;s <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>.</li>
+<li><strong><code class="prettyprint">_parentInvalid</code></strong>  (boolean) Whether the Parent Universe&rsquo;s Forked Market is <a href="#invalid-outcome">Invalid</a>.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the newly-created Child Universe, as a 16-byte hexadecimal value.</li>
+</ul>
+
+<h4 id="augur-api-universe-createscalarmarket-p">augur.api.Universe.createScalarMarket(p)</h4>
 
 <p>Creates a new <a href="#scalar-market">Scalar Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
-<ul>
-<li><code class="prettyprint">_endTime</code> - Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
-<li><code class="prettyprint">_feePerEthInWei</code> - <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 ETH worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
-<li><code class="prettyprint">denominationToken</code> is the token the Market is denominated in. Currently, Markets are only denominated in ETH (i.e., the Cash contract in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
-<li><code class="prettyprint">_designatedReporterAddress</code> - Address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
-<li><code class="prettyprint">_minPrice</code> - <a href="#minimum-display-price">Minimum Display Price</a> for the Market.</li>
-<li><code class="prettyprint">_maxPrice</code> - <a href="#maximum-display-price">Maximum Display Price</a> for the Market.</li>
-<li><code class="prettyprint">_numTicks</code> - <a href="#number-of-ticks">Number of Ticks</a> for the Market.</li>
-<li><code class="prettyprint">_topic</code> - Market <a href="#topic">Topic</a>. </li>
-<li><code class="prettyprint">_description</code> - Description of the Market event. </li>
-<li><code class="prettyprint">_extraInfo</code> - Stringified JSON object. (See the explanation above for more details.)
+<h4 id="parameters">Parameters:</h4>
 
 <ul>
-<li><code class="prettyprint">resolutionSource</code> - Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><code class="prettyprint">tags</code> - Keywords used to tag the Market (maximum of 2).</li>
-<li><code class="prettyprint">longDescription</code> - Additional information not included in <code class="prettyprint">description</code>.</li>
-</ul></li>
-<li><code class="prettyprint">tx</code> - JSON object containing the following keys:
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<strong>Properties:</strong>
 
 <ul>
-<li><code class="prettyprint">to</code> - Address of the Universe contract.</li>
-<li><code class="prettyprint">value</code> - Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><code class="prettyprint">gas</code> - Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of the <a href="#universe">Universe</a> in which to create the new Scalar Market, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">_endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>. </li>
+<li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>. </li>
+<li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future. </li>
+<li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>. </li>
+<li><strong><code class="prettyprint">_minPrice</code></strong>  (number|string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market.</li>
+<li><strong><code class="prettyprint">_maxPrice</code></strong>  (number|string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market.</li>
+<li><strong><code class="prettyprint">_numTicks</code></strong>  (number|string) <a href="#number-of-ticks">Number of Ticks</a> for the Market.</li>
+<li><strong><code class="prettyprint">_topic</code></strong>  (string) Market <a href="#topic">Topic</a>. </li>
+<li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market event. </li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (string) Stringified JSON object. (See the explanation above for more details.)
+
+<ul>
+<li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
+<li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
+
+<ul>
+<li><strong><code class="prettyprint">to</code></strong>  (string) Ethereum address of the Universe contract.</li>
+<li><strong><code class="prettyprint">value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">gas</code></strong>  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
+</ul></li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the newly-created Scalar Market, as a 16-byte hexadecimal value.</li>
 </ul>
 
 <h4 id="augur-api-universe-getorcachedesignatedreportnoshowbond-universe-onsent-onsuccess-onfailed">augur.api.Universe.getOrCacheDesignatedReportNoShowBond({ universe, onSent, onSuccess, onFailed })</h4>
@@ -6230,8 +7193,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="augur-api-universe-redeemstake-universe-_reportingparticipants-_feewindows-onsent-onsuccess-onfailed">augur.api.Universe.redeemStake({ universe, _reportingParticipants, _feeWindows, onSent, onSuccess, onFailed })</h4>
 
 <p>Calls the <code class="prettyprint">redeem</code> function for all Ethereum contract addresses in the arrays <code class="prettyprint">_reportingParticipants</code> and <code class="prettyprint">_feeWindows</code> using the caller&rsquo;s address as the redeemer. <code class="prettyprint">_reportingParticipants</code> can contain Ethereum contract addresses for <a href="#dispute-crowdsourcer-tx-api">DisputeCrowdsourcers</a>, <a href="#initial-reporter-tx-api">InitialReporters</a>, or both, as hexadecimal strings. <code class="prettyprint">_feeWindows</code> can only contain the Ethereum contract addresses of <a href="#fee-window">Fee Windows</a>. This function is intended as easy way to redeem Stake in multiple <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a>, <a href="#initial-report">Initial Reports</a>, and Fee Windows at once.</p>
-
-<p>Returns: true if the transaction executed without any errors, or false otherwise.</p>
 
           <h1 id="events-api">Events API</h1>
 
