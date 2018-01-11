@@ -1385,7 +1385,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
 </ul>
 
-<h3 id="augur-markets-getmarketsclosingindaterange-p-callback-rarr-array-lt-string-gt">augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string&gt;}</h3>
+<h3 id="augur-markets-getmarketsclosingindaterange-p-callback">augur.markets.getMarketsClosingInDateRange(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> closing between a given time range in a specific <a href="#universe">Universe</a>.</p>
 
@@ -1628,7 +1628,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)</li>
 </ul>
 
-<h3 id="augur-reporting-getreportingsummary-p-callback-rarr-object">augur.reporting.getReportingSummary(p, callback) &rarr; {Object}</h3>
+<h3 id="augur-reporting-getreportingsummary-p-callback">augur.reporting.getReportingSummary(p, callback)</h3>
 
 <p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
 
@@ -1679,7 +1679,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Pending.</li>
 </ul>
 
-<h3 id="augur-reporting-getstaketokens-p-callback-rarr-array-lt-staketoken-gt">augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;}</h3>
+<h3 id="augur-reporting-getstaketokens-p-callback">augur.reporting.getStakeTokens(p, callback)</h3>
 
 <p>Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.</p>
 
@@ -1976,7 +1976,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- Add links to section -->
 
-<h3 id="augur-trading-getbetterworseorders-p-callback-rarr-betterworseorders">augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}</h3>
+<h3 id="augur-trading-getbetterworseorders-p-callback">augur.trading.getBetterWorseOrders(p, callback)</h3>
 
 <p>Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
 
@@ -2003,7 +2003,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)</li>
 </ul>
 
-<h3 id="augur-trading-getorders-p-callback-rarr-singleoutcomeorderbookside">augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}</h3>
+<h3 id="augur-trading-getorders-p-callback">augur.trading.getOrders(p, callback)</h3>
 
 <p>Returns a list of orders in a given Universe or Market.</p>
 
@@ -2037,7 +2037,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)</li>
 </ul>
 
-<h3 id="augur-trading-getpositioninmarket-p-rarr-array-lt-string-gt">augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string&gt;}</h3>
+<h3 id="augur-trading-getpositioninmarket-p">augur.trading.getPositionInMarket(p)</h3>
 
 <p>Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.</p>
 
@@ -2062,7 +2062,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 
-<h3 id="augur-trading-getusertradinghistory-p-callback-rarr-array-lt-usertrade-gt">augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;}</h3>
+<h3 id="augur-trading-getusertradinghistory-p-callback">augur.trading.getUserTradingHistory(p, callback)</h3>
 
 <p>Returns information about the trades a specific user has made.</p>
 
@@ -2094,7 +2094,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Array of the user&rsquo;s trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;)</li>
 </ul>
 
-<h3 id="augur-trading-getusertradingpositions-p-callback-rarr-array-lt-usertradeposition-gt">augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;}</h3>
+<h3 id="augur-trading-getusertradingpositions-p-callback">augur.trading.getUserTradingPositions(p, callback)</h3>
 
 <p>Returns the trading positions held by a specific user.</p>
 
@@ -7830,7 +7830,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 <tr>
 <td><a name="Transfer"></a>Transfer</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20.sol">ERC20Basic</a></td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol">ERC20Basic</a></td>
 <td>Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
 <td>from, to</td>
 <td>value</td>
@@ -7858,7 +7858,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 <tr>
 <td><a name="WinningsRedeemed"></a>WinningsRedeemed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/ master/source/contracts/Augur.sol">Augur</a></td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td>The Ethereum contract address <code class="prettyprint">reportingParticipant</code> has allowed <code class="prettyprint">reporter</code> to redeem <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> for the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also received <code class="prettyprint">reportingFeesReceived</code> in ETH.</td>
 <td>universe, reporter, market</td>
 <td>reportingParticipant, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
