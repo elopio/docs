@@ -600,7 +600,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsClosingInDateRange(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarketsClosingInDateRange(p, callback)
 
 Returns the [Markets](#market) closing between a given time range in a specific [Universe](#universe).
 
@@ -810,7 +810,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)
 
-### augur.reporting.getReportingSummary(p, callback) &rarr; {Object}
+### augur.reporting.getReportingSummary(p, callback)
 
 Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
 
@@ -846,7 +846,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Pending.
 
-### augur.reporting.getStakeTokens(p, callback) &rarr; {Array.&lt;<a href="#StakeToken">StakeToken</a>>}
+### augur.reporting.getStakeTokens(p, callback)
 
 Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.
 
@@ -1127,7 +1127,7 @@ Note: This transaction will fail if `_market` is not Finalized or the 3-day wait
 Description pending.
 
 <!-- Add links to section -->
-### augur.trading.getBetterWorseOrders(p, callback) &rarr; {<a href="#BetterWorseOrders">BetterWorseOrders</a>}
+### augur.trading.getBetterWorseOrders(p, callback)
 
 Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
 
@@ -1147,7 +1147,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)
 
-### augur.trading.getOrders(p, callback) &rarr; {<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>}
+### augur.trading.getOrders(p, callback)
 
 Returns a list of orders in a given Universe or Market.
 
@@ -1174,7 +1174,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
 
-### augur.trading.getPositionInMarket(p) &rarr; {Array.&lt;string>}
+### augur.trading.getPositionInMarket(p)
 
 Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.
 
@@ -1191,7 +1191,7 @@ Gets the number of Shares held by a specific Ethereum address for each Outcome o
 * Number of shares for each Outcome of this Market. (Array.&lt;string>)
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
-### augur.trading.getUserTradingHistory(p, callback) &rarr; {Array.&lt;<a href="#UserTrade">UserTrade</a>>}
+### augur.trading.getUserTradingHistory(p, callback)
 
 Returns information about the trades a specific user has made.
 
@@ -1216,7 +1216,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of the user's trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>>)
 
-### augur.trading.getUserTradingPositions(p, callback) &rarr; {Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>}
+### augur.trading.getUserTradingPositions(p, callback)
 
 Returns the trading positions held by a specific user.
 
