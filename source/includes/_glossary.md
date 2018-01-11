@@ -28,6 +28,10 @@ A Bid Order is an [Order](#order) indicating the desire of the [Order Creator](#
 
 A Binary Market is a [Market](#market) with only two [Outcomes](#outcome) (as well as [Invalid](#invalid-outcome), which is always a possible Outcome). Binary Markets are for yes-or-no questions; if more potential Outcomes are needed, a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market should be used.
 
+## Cash
+
+Cash is an ERC-20 token that is used within Augur's Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur's functionality. Users do not interact directly with Cash tokens.
+
 ## Categorical Market
 
 A Categorical Market is a [Market](#market) with more than 2 potential [Outcomes](#outcome), but no more than 8. As with all Markets, [Invalid](#invalid-outcome) is also a potential Outcome, but it does not count toward the 8-Outcome maximum. Categorical Markets are best for multiple choice questions, such as "Which team will win Tournament X?" or "What color tie will the U.S. President wear at the next presidential press conference?". If a Market is based around a simple yes-or-no question, it is better to use a [Binary Market](#binary-market). For a Market about what a particular stock price will be on a given date, a [Scalar Market](#scalar-market) should be used, as 8 potential outcomes would not be sufficient.
