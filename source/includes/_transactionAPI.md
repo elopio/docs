@@ -214,7 +214,7 @@ augur.api.Augur.createGenesisUniverse({
   value: "0x0"
 }
 ```
-#### [Augur Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol)
+Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
 ### augur.api.Augur.createGenesisUniverse(p)
 
@@ -264,7 +264,7 @@ augur.api.CancelOrder.cancelOrder({
   value: "0x0"
 }
 ```
-#### [Cancel Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol)
+Provides JavaScript bindings for the [CancelOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol), which allows for cancellation of [Orders](#order) on the [Order Book](#order-book).
 
 ### augur.api.CancelOrder.cancelOrder(p)
 
@@ -352,7 +352,7 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
   value: "0x0"
 }
 ```
-#### [Claim Trading Proceeds Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol)
+Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed. 
 
 ### augur.api.ClaimTradingProceeds.calculateProceeds(p)
 
@@ -456,7 +456,7 @@ augur.api.CompleteSets.publicSellCompleteSets({
   value: "0x0"
 }
 ```
-#### [Complete Sets Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol)
+Provides JavaScript bindings for the [CompleteSets Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol), which allows for buying and selling of [Complete Sets](#complete-set).
 
 <!-- TODO: Add links to events. -->
 ### augur.api.CompleteSets.publicBuyCompleteSets(p)
@@ -556,7 +556,7 @@ augur.api.CreateOrder.publicCreateOrder({
   value: "0x0"
 }
 ```
-#### [Create Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol)
+Provides JavaScript bindings for the [CreateOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol), which enables new [Orders](#order) to be created.
 
 ### augur.api.CreateOrder.publicCreateOrder(p)
 
@@ -676,7 +676,7 @@ augur.api.DisputeCrowdsourcer.withdrawInEmergency({
   value: "0x0"
 }
 ```
-#### [Dispute Crowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
+Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
 ### augur.api.DisputeCrowdsourcer.fork(p) 
 
@@ -832,7 +832,7 @@ augur.api.FeeWindow.withdrawInEmergency({
   value: "0x0"
 }
 ```
-#### [Fee Window Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
+Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
 ### augur.api.FeeWindow.buy(p)
 
@@ -935,7 +935,7 @@ augur.api.FillOrder.publicFillOrder({
   value: "0x0"
 }
 ```
-#### [Fill Order Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol)
+Provides JavaScript bindings for the [FillOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol), which allows for the [Filling](#fill-order) of [Orders](#order) on the [Order Book](#order-book).
 
 ### augur.api.FillOrder.publicFillOrder(p)
 
@@ -1073,7 +1073,7 @@ augur.api.InitialReporter.withdrawInEmergency({
   value: "0x0"
 }
 ```
-#### [Initial Reporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
+Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
 ### augur.api.InitialReporter.fork(p)
 
@@ -1244,9 +1244,7 @@ augur.api.Mailbox.withdrawTokens({
   value: "0x0"
 }
 ```
-#### [Mailbox Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol)
-
-Handles the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
+Provides JavaScript bindings for the [Mailbox Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol), which enables the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
 
 ### augur.api.Mailbox.transferOwnership(p)
 
@@ -1511,7 +1509,7 @@ augur.api.Market.withdrawInEmergency {
   value: "0x0"
 }
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
+Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
 ### augur.api.Market.contribute(p)
 
@@ -1841,7 +1839,7 @@ augur.api.ReputationToken.transferFrom({
   value: "0x0"
 }
 ```
-#### [Reputation Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
+Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [REP](#rep).
 
 ### augur.api.ReputationToken.approve(p)
 
@@ -2050,9 +2048,7 @@ augur.api.ShareToken.transferFrom({
   value: "0x0"
 }
 ```
-#### [Share Token Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
-
-Handles the functionality related to [Shares](#share) (referred to as Share Tokens within Augur's Solidty smart contracts).
+Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. (Shares are implemented as an [ERC-20 token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) in Augur's smart contracts.)
 
 ### augur.api.ShareToken.approve(p)
 
@@ -2267,7 +2263,7 @@ augur.api.Trade.publicTakeBestOrder({
   value: "0x0"
 }
 ```
-#### [Trade Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol)
+Provides JavaScript bindings for the [Trade Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol), which allows for the buying and selling of [Shares](#share) of a particular [Outcome](#outcome) in a [Market](#market).
 
 ### augur.api.Trade.publicBuy(p)
 
@@ -2395,7 +2391,7 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
   value: "0x0"
 }
 ```
-#### [Trading Escape Hatch Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TradingEscapeHatch.sol)
+Provides JavaScript bindings for the [TradingEscapeHatch Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TradingEscapeHatch.sol), which allows funds to be withdrawn from Augur in the event that Augur needs to be [halted](#developer-mode) by the development team.
 
 ### augur.api.TradingEscapeHatch.claimSharesInUpdate({ \_market, onSent, onSuccess, onFailed })
 
@@ -2917,7 +2913,7 @@ onSuccess result: {
   value: "0x0"
 }
 ```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
+Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](3market) and provides functions for obtaining information about a given [Universe](#universe).
 <!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
 ### augur.api.Universe.createBinaryMarket(p)
 

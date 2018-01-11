@@ -321,15 +321,16 @@ augur.markets.getMarketsClosingInDateRange({
 
 augur.markets.getMarketsCreatedByUser({
   universe: "0x000000000000000000000000000000000000000b",
-  creator: "0x0000000000000000000000000000000000000b0b",
+  creator: "0x000000000000000000000000000000000000d00d",
 }, function (error, result) { 
   console.log(result);
 });
 // example output:
 [
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000002",
-  "0x0000000000000000000000000000000000000011",
+  {
+    creationTime: 1506480015,
+    marketID: " 0x0000000000000000000000000000000000000003",
+  }
 ]
 
 augur.markets.getMarketsInCategory({
@@ -622,7 +623,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsCreatedByAccount(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarketsCreatedByUser(p, callback) &rarr; {Array.&lt;<a href="#MarketContractAddressRows">MarketContractAddressRows</a>>}
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
@@ -642,7 +643,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of Market addresses created by the specified user, as hexadecimal strings. (Array.&lt;string>)
+* Array of [MarketContractAddressRows](#MarketContractAddressRows), as hexadecimal strings. (Array.&lt;<a href="#MarketContractAddressRows">MarketContractAddressRows</a>>)
 
 ### augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string>}
 
@@ -1413,6 +1414,13 @@ Authentication metadata for raw transactions.
 
 #### **Properties:** 
 * **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.
+
+<a name="MarketsContractAddressRow"></a>
+MarketsContractAddressRow
+
+#### **Properties:** 
+* **`creationTime`** (number) Unix time when the Market was created.
+* **`marketID`** (string) Address of a Market, as a hexadecimal string.
 
 <a name="NoKeystoreAccount"></a>
 ### NoKeystoreAccount  (Object)
