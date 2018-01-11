@@ -623,7 +623,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsCreatedByUser(p, callback) &rarr; {Array.&lt;<a href="#MarketContractAddressRows">MarketContractAddressRows</a>>}
+### augur.markets.getMarketsCreatedByUser(p, callback) &rarr; {Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>}
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
@@ -643,7 +643,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of [MarketContractAddressRows](#MarketContractAddressRows), as hexadecimal strings. (Array.&lt;<a href="#MarketContractAddressRows">MarketContractAddressRows</a>>)
+* Array of [MarketsContractAddressRows](#MarketsContractAddressRow), as hexadecimal strings. (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>)
 
 ### augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string>}
 
