@@ -1416,7 +1416,7 @@ Authentication metadata for raw transactions.
 * **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.
 
 <a name="MarketsContractAddressRow"></a>
-MarketsContractAddressRow
+### MarketsContractAddressRow
 
 #### **Properties:** 
 * **`creationTime`** (number) Unix time when the Market was created.
