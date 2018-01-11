@@ -60,7 +60,7 @@ augur.accounts.getAccountTransferHistory({
   }
 ]
 ```
-### augur.accounts.getAccountTransferHistory(p, callback) &rarr; {Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>}
+### augur.accounts.getAccountTransferHistory(p, callback)
 
 Returns the token transfers made to or from a specific Ethereum address. 
 
@@ -176,7 +176,7 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe).
 
 Description pending.
 
-### augur.createMarket.getMarketCreationCost(p, callback) &rarr; {<a href="#MarketCreationCost">MarketCreationCost</a>}
+### augur.createMarket.getMarketCreationCost(p, callback)
 
 Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total ether required to create a new [Market](#market).
 
@@ -193,7 +193,7 @@ Note: This function will send a transaction if needed to create the current [Rep
 * Costs of creating a new Market. (<a href="#MarketCreationCost">MarketCreationCost</a>)
 
 <!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
-### augur.createMarket.getMarketCreationCostBreakdown(p, callback) &rarr; {<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>}
+### augur.createMarket.getMarketCreationCostBreakdown(p, callback)
 
 Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
 
@@ -476,7 +476,7 @@ augur.markets.getMarketsInfo({
   }
 ]
 ```
-### augur.markets.getCategories(p, callback) &rarr; {Array.&lt;<a href="#Category">Category</a>>}
+### augur.markets.getCategories(p, callback)
 
 Returns the Market Categories in a specific [Universe](#universe).
 
@@ -517,7 +517,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Pending.
 
-### augur.markets.getMarketPriceHistory(p, callback) &rarr; {<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>}
+### augur.markets.getMarketPriceHistory(p, callback)
 
 Returns the prices and timestamps of a specific [Market's](#market) [Outcomes](#outcomes) over time.
 
@@ -534,7 +534,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * The Market's price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)
 
-### augur.markets.getMarkets(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarkets(p, callback)
 
 Returns an array of [Markets](#market) in a specific [Universe](#universe).
 
@@ -555,7 +555,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of Market addresses in the Universe, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)
 
 Returns the [Markets](#market) in a specific [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted.
 
@@ -577,7 +577,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsAwaitingReporting(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarketsAwaitingReporting(p, callback)
 
 Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either the Universe or Reporting Window must be specified.
 
@@ -623,7 +623,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string>)
 
-### augur.markets.getMarketsCreatedByUser(p, callback) &rarr; {Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>}
+### augur.markets.getMarketsCreatedByUser(p, callback)
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
@@ -645,7 +645,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 * Array of [MarketsContractAddressRows](#MarketsContractAddressRow), as hexadecimal strings. (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>)
 
-### augur.markets.getMarketsInCategory(p, callback) &rarr; {Array.&lt;string>}
+### augur.markets.getMarketsInCategory(p, callback)
 
 Returns the [Markets](#market) within a specific category.
 
@@ -668,7 +668,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 * Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
 
 <!-- TODO: Add link to augur.trading.getOrders -->
-### augur.markets.getMarketsInfo(p) &rarr; {Array.&lt;<a href="#MarketInfo">MarketInfo</a>>}
+### augur.markets.getMarketsInfo(p)
 
 Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
 
@@ -784,7 +784,7 @@ augur.reporting.getStakeTokens({
 }
 ```
 <!-- Add glossary links to section-->
-### augur.reporting.getReportingHistory(p, callback) &rarr; {Object}
+### augur.reporting.getReportingHistory(p, callback)
 
 Returns information about the reports submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
 
@@ -1416,7 +1416,7 @@ Authentication metadata for raw transactions.
 * **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.
 
 <a name="MarketsContractAddressRow"></a>
-### MarketsContractAddressRow
+### MarketsContractAddressRow  (Object)
 
 #### **Properties:** 
 * **`creationTime`** (number) Unix time when the Market was created.
