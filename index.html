@@ -412,7 +412,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <a href="#dispute-bond">Dispute Bonds</a> need not be paid in their entirety by a single user. Augur allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking some REP on some Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.</p>
 
-<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (6). If the size of the filled Dispute Bond is greater than 1.25% of all REP in existence, then the market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than 1.25% of all REP in existence, then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.</p>
+<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (6). If the size of the filled Dispute Bond is greater than the <a href="#fork-threshold">Fork Threshold</a>, then the market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than the <a href="#fork-threshold">Fork Threshold</a>, then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.</p>
 
 <p>If no Dispute is successful during the 7-day Dispute Round, the Market enters the <a href="#finalized-phase">Finalized State</a> (7) with its Tentative Outcome accepted as the <a href="#final-outcome">Final Outcome</a>.</p>
 
@@ -434,7 +434,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If the Designated Reporter fails to Report within the Designated Reporting Phase, the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>, the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a>, and the Market is moved into the <a href="#open-reporting-phase">Open Reporting Phase</a>. These <a href="#no-show-bond">No-Show Bonds</a> are then used to help pay for the gas costs and add to the <a href="#rep">REP</a> <a href="#first-public-reporter-stake">Staked</a> by the <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
-<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond and the No-Show Gas Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> will allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than 1.25% of all REP Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
+<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond and the No-Show Gas Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> will allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than the <a href="#fork-threshold">Fork Threshold</a> Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
 
 <h2 id="fee-window-details">Fee Window Details</h2>
 
@@ -448,7 +448,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="forking-details">Forking Details</h2>
 
-<p>The <a href="#market-resolution">Market Resolution</a> method of last resort is the <a href="#fork">Fork</a>. Forks are initiated when a <a href="#market">Market</a> has its <a href="#tentative-outcome">Tentative Outcome</a> successfully <a href="#dispute">Disputed</a> during a <a href="#dispute-round">Dispute Round</a> by filling a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all <a href="#rep">REP</a> in existence. We refer to such a Market as a <a href="#forked-market">Forking Market</a>. </p>
+<p>The <a href="#market-resolution">Market Resolution</a> method of last resort is the <a href="#fork">Fork</a>. Forks are initiated when a <a href="#market">Market</a> has its <a href="#tentative-outcome">Tentative Outcome</a> successfully <a href="#dispute">Disputed</a> during a <a href="#dispute-round">Dispute Round</a> by filling a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>. We refer to such a Market as a <a href="#forked-market">Forking Market</a>. </p>
 
 <p>When a Fork is initiated, the usual 7-day <a href="#fee-window">Fee window</a> is interrupted, and the <a href="#fork-period">Forking Period</a> begins. </p>
 
@@ -795,7 +795,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array representing the account&rsquo;s transfer history. (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;)</li>
+<li>(Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;) Array representing the account&rsquo;s transfer history.</li>
 </ul>
 
 <h2 id="create-market-functions">Create-Market Functions</h2>
@@ -811,7 +811,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
 
-<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>.</p>
+<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -841,7 +841,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
-<p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>.</p>
+<p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -872,7 +872,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
-<p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>.</p>
+<p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1475,7 +1475,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <!-- TODO: Add link to augur.trading.getOrders -->
 
-<h3 id="augur-markets-getmarketsinfo-p">augur.markets.getMarketsInfo(p)</h3>
+<h3 id="augur-markets-getmarketsinfo-p-callback">augur.markets.getMarketsInfo(p, callback)</h3>
 
 <p>Returns information about <a href="#markets">Markets</a> that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market <a href="#outcome">Outcome</a>. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about <a href="#order">Orders</a> for the specified Market.</p>
 
@@ -1490,6 +1490,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">marketIDs</code></strong>  (Array.&lt;string&gt;) Contract addresses of the Markets for which to get details, as hexadecimal strings.</li>
 </ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market info has been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -3691,7 +3692,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h4 id="a-href-https-github-com-augurproject-augur-core-blob-master-source-contracts-reporting-universe-sol-a"><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Contract Code</a></h4>
 
-<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Fee Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing <a href="#rep">REP</a>, a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, whereas the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
+<p>The Universe Contract is the contract that defines an Augur <a href="#universe">Universe</a> and the methods used to interact with them. All of Augur&rsquo;s <a href="#market">Markets</a>, <a href="#order-book">Order Books</a>, <a href="#reporting-window">Fee Windows</a>, and <a href="#rep">REP</a> belong to a specific Universe. In the rare event that a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>, a <a href="#fork">Fork</a> will occur and new Universes will be created. The Universe that originally contained the <a href="#forked-market">Forked Market</a> will become a <a href="#locked-universe">Locked Universe</a>, thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as <a href="#child-universe">Child Universes</a>, whereas the original and now Locked Universe is considered those Child Universes&rsquo; <a href="#parent-universe">Parent Universe</a>.</p>
 
 <h4 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h4>
 
@@ -4066,7 +4067,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-cancelorder-cancelorder-p">augur.api.CancelOrder.cancelOrder(p)</h3>
 
-<p>Cancels and refunds an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with ID <code class="prettyprint">_orderId</code>.</p>
+<p>Cancels and refunds an existing <a href="#order">Order</a> on the <a href="#order-book">Order Book</a> with ID <code class="prettyprint">_orderId</code>. This transaction will trigger an <a href="#OrderCanceled"><code class="prettyprint">OrderCanceled</code> event</a> if the Order is canceled without any errors.</p>
 
 <p>This function will fail if:</p>
 
@@ -4187,7 +4188,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-claimtradingproceeds-claimtradingproceeds-p">augur.api.ClaimTradingProceeds.claimTradingProceeds(p)</h3>
 
-<p>Collects trading profits from outstanding <a href="#share">Shares</a> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">_market</code> owned by <code class="prettyprint">_shareHolder</code>. </p>
+<p>Collects trading profits from outstanding <a href="#share">Shares</a> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">_market</code> owned by <code class="prettyprint">_shareHolder</code>. This transaction will trigger a <a href="#TradingProceedsClaimed"><code class="prettyprint">TradingProceedsClaimed</code> event</a> if the trading proceeds are claimed without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -4290,7 +4291,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. </li>
 </ul>
 
-<p>When successful, this transaction will trigger a <code class="prettyprint">CompleteSets</code> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
+<p>When successful, this transaction will trigger a <a href="#CompleteSets"><code class="prettyprint">CompleteSets</code> event</a>, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (buy), <code class="prettyprint">_amount</code> purchased, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be <code class="prettyprint">0</code> because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -4326,7 +4327,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">_amount</code> is not a number between 1 and 2<sup>254</sup>. </li>
 </ul>
 
-<p>When successful, this transaction will trigger a <code class="prettyprint">CompleteSets</code> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (sell), <code class="prettyprint">_amount</code> sold, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code> paid for selling the Shares, and the <code class="prettyprint">reportingFee</code> paid for selling the Shares.</p>
+<p>When successful, this transaction will trigger a <a href="#CompleteSets"><code class="prettyprint">CompleteSets</code> event</a>, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">_market</code>, type (sell), <code class="prettyprint">_amount</code> sold, number of Outcomes in the <code class="prettyprint">_market</code>, <code class="prettyprint">marketCreatorFee</code> paid for selling the Shares, and the <code class="prettyprint">reportingFee</code> paid for selling the Shares.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -4397,7 +4398,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-createorder-publiccreateorder-p">augur.api.CreateOrder.publicCreateOrder(p)</h3>
 
-<p>Creates a new <a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a> on the <a href="#order-book">Order Book</a>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_displayPrice</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
+<p>Creates a new <a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a> on the <a href="#order-book">Order Book</a>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_displayPrice</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code> event</a> if the Order is created without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -4563,6 +4564,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <p>When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">_redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
 
 <p>This function can be called on Dispute Crowdsourcers that have filled their <a href="#dispute-bond">Dispute Bond</a>, as well as ones that have not, provided that either <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> has been called first. When a <a href="#fork">Fork</a> occurs, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
+
+<p>This transaction will trigger a <a href="#WinningsRedeemed"><code class="prettyprint">WinningsRedeemed</code> event</a> if the REP/Ether was redeemed without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -4829,7 +4832,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-fillorder-publicfillorder-p">augur.api.FillOrder.publicFillOrder(p)</h3>
 
-<p>Attempts to Fill <code class="prettyprint">_amountFillerWants</code> <a href="#atto-prefix">attoshares</a> for <a href="#order">Order</a> <code class="prettyprint">_orderId</code>. If <code class="prettyprint">_amountFillerWants</code> is enough to fill the Order completely, the Order will be removed from the <a href="#order-book">Order Book</a>. Otherwise, it will be adjusted to only include the remaining amount after Filling the <code class="prettyprint">_amountFillerWants</code> value that the <a href="#order-filler">Filler</a> requests. </p>
+<p>Attempts to Fill <code class="prettyprint">_amountFillerWants</code> <a href="#atto-prefix">attoshares</a> for <a href="#order">Order</a> <code class="prettyprint">_orderId</code>. If <code class="prettyprint">_amountFillerWants</code> is enough to <a href="#fill-order">Fill</a> the Order completely, the Order will be removed from the <a href="#order-book">Order Book</a>. Otherwise, it will be adjusted to only include the remaining amount after Filling the <code class="prettyprint">_amountFillerWants</code> value that the <a href="#order-filler">Filler</a> requests. This transaction will trigger an <a href="#OrderFilled"><code class="prettyprint">OrderFilled</code> event</a> if the Order is Filled without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5006,7 +5009,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-initialreporter-redeem-p">augur.api.InitialReporter.redeem(p)</h3>
 
-<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether.</p>
+<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether. This transaction will trigger a <a href="#WinningsRedeemed"><code class="prettyprint">WinningsRedeemed</code> event</a> if the REP/Ether was redeemed without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -5467,7 +5470,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-contribute-p">augur.api.Market.contribute(p)</h3>
 
-<p>Contributes <code class="prettyprint">_amount</code> <a href="#rep">REP</a> to the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> represented by <a href="#payout-set">Payout Set</a> <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> in order to help <a href="#challenge">Challenge</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a>. If the amount of REP in the Dispute Crowdsourcer plus <code class="prettyprint">amount</code> is greater than the total REP required to fill the <a href="#dispute-bond">Dispute Bond</a>, this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.</p>
+<p>Contributes <code class="prettyprint">_amount</code> <a href="#rep">REP</a> to the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> represented by <a href="#payout-set">Payout Set</a> <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> in order to help <a href="#challenge">Challenge</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a>. If the amount of REP in the Dispute Crowdsourcer plus <code class="prettyprint">amount</code> is greater than the total REP required to fill the <a href="#dispute-bond">Dispute Bond</a>, this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller. </p>
+
+<p>This transaction will trigger a <code class="prettyprint">DisputeCrowdsourcerContribution</code> event if it executes without any errors. It will also trigger a <code class="prettyprint">DisputeCrowdsourcerCompleted</code> event if the Dispute Bond is successfullly filled, and it will trigger a <a href="#UniverseForked"><code class="prettyprint">UniverseForked</code> event</a> if enough REP has been <a href="#dispute-stake">Staked</a> in the Dispute Crowdsourcer to cause the Market to <a href="#fork">Fork</a>.</p>
 
 <p>This function will fail if:
   - The Market is in a <a href="#fee-window">Fee Window</a> that is not active.
@@ -5529,7 +5534,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-doinitialreport-p">augur.api.Market.doInitialReport(p)</h3>
 
-<p>Submits an <a href="#initial-report">Initial Report</a> for <a href="#market">Market</a> <code class="prettyprint">market</code>.</p>
+<p>Submits an <a href="#initial-report">Initial Report</a> for <a href="#market">Market</a> <code class="prettyprint">market</code>. This transaction will trigger an <a href="#InitialReportSubmitted"><code class="prettyprint">InitialReportSubmitted</code> event</a> if it submits the Initial Report successfully.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5563,7 +5568,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-finalize-p">augur.api.Market.finalize(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a> <code class="prettyprint">market</code>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code> event</a> if the Market Finalized without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5865,7 +5870,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-reputationtoken-approve-p">augur.api.ReputationToken.approve(p)</h3>
 
-<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <code class="prettyprint">Approval</code> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoREP</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
+<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code> event</a>, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoREP</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
 
 <p>This function will fail if:</p>
 
@@ -5954,7 +5959,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-reputationtoken-transfer-p">augur.api.ReputationToken.transfer(p)</h3>
 
-<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> to the Ethereum address <code class="prettyprint">_to</code>. If this transaction transfers without any errors, it will trigger a <a href="#Transfer"><code class="prettyprint">Transfer</code> event</a>, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -5986,7 +5991,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-reputationtoken-transferfrom-p">augur.api.ReputationToken.transferFrom(p)</h3>
 
-<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoREP) amount transferred.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoREP</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. If this transaction transfers without any errors, it will trigger a <code class="prettyprint">Transfer</code> event, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoREP) amount transferred.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -6115,7 +6120,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-sharetoken-approve-p">augur.api.ShareToken.approve(p)</h3>
 
-<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <code class="prettyprint">Approval</code> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoshares</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
+<p>Allows <code class="prettyprint">_spender</code> to spend up to <code class="prettyprint">_value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code> event</a>, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_spender</code>, and <code class="prettyprint">_value</code> in <a href="#atto-prefix">attoshares</a> approved. The only way to change <code class="prettyprint">_value</code> after it has been set is by first calling this transaction with <code class="prettyprint">_value</code> set to 0 and then calling it again with <code class="prettyprint">_value</code> set to the desired value.</p>
 
 <p>This function will fail if:</p>
 
@@ -6147,7 +6152,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-sharetoken-transfer-p">augur.api.ShareToken.transfer(p)</h3>
 
-<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> to the Ethereum address <code class="prettyprint">_to</code>. If this transaction transfers without any errors, it will trigger a <a href="#Transfer"><code class="prettyprint">Transfer</code> event</a>, which will record the from address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> amount transferred.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -6179,7 +6184,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-sharetoken-transferfrom-sharetoken-_from-_to-_value-onsent-onsuccess-onfailed">augur.api.ShareToken.transferFrom({ shareToken, _from, _to, _value, onSent, onSuccess, onFailed })</h3>
 
-<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. This transaction will trigger a <code class="prettyprint">Transfer</code> event, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoshares) amount transferred.</p>
+<p>Sends <code class="prettyprint">_value</code> worth of <a href="#atto-prefix">attoshares</a> from the Ethereum addres <code class="prettyprint">_from</code> to the Ethereum address <code class="prettyprint">_to</code>. If this transaction transfers without any errors, it will trigger a<a href="#Transfer"><code class="prettyprint">Transfer</code> event</a>, which will record the <code class="prettyprint">_from</code> address, <code class="prettyprint">_to</code> address, and <code class="prettyprint">_value</code> (in attoshares) amount transferred.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -6355,7 +6360,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-trade-publicbuy-p">augur.api.Trade.publicBuy(p)</h3>
 
-<p>Buys <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
+<p>Buys <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code> event</a> if the Order is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -6385,7 +6390,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-trade-publicsell-p">augur.api.Trade.publicSell(p)</h3>
 
-<p>Sells <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. </p>
+<p>Sells <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code> event</a> if the Order is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -6415,7 +6420,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-trade-publictrade-p">augur.api.Trade.publicTrade(p)</h3>
 
-<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. </p>
+<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">_direction</code> must be either <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code> event</a> if the Order is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -7039,7 +7044,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-createbinarymarket-p">augur.api.Universe.createBinaryMarket(p)</h3>
 
-<p>Creates a new <a href="#binary-market">Binary Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+<p>Creates a new <a href="#binary-market">Binary Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code> event</a> if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -7085,7 +7090,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-createcategoricalmarket-p">augur.api.Universe.createCategoricalMarket(p)</h3>
 
-<p>Creates a new <a href="#categorical-market">Categorical Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+<p>Creates a new <a href="#categorical-market">Categorical Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code> event</a> if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -7131,7 +7136,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-createchilduniverse-p">augur.api.Universe.createChildUniverse(p)</h3>
 
-<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-set">Payout Set</a> <code class="prettyprint">_parentPayoutNumerators</code> and <code class="prettyprint">_parentInvalid</code>. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. </p>
+<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-set">Payout Set</a> <code class="prettyprint">_parentPayoutNumerators</code> and <code class="prettyprint">_parentInvalid</code>. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. This transaction will trigger a <a href="#UniverseCreated"><code class="prettyprint">UniverseCreated</code> event</a> if the Child Universe has not been created yet.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -7164,7 +7169,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-createscalarmarket-p">augur.api.Universe.createScalarMarket(p)</h3>
 
-<p>Creates a new <a href="#scalar-market">Scalar Market</a>. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+<p>Creates a new <a href="#scalar-market">Scalar Market</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -7379,7 +7384,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-getorcreatefeewindowbytimestamp-p">augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>. If the Ethereum contract address for the Fee Window does not already exist, this function will create it.</p>
+<p>Gets the Ethereum contract address, as a hexadecimal string, of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>. If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a <a href="#FeeWindowCreated"><code class="prettyprint">FeeWindowCreated</code> event</a> if the Fee window is created without any errors.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -7803,14 +7808,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <tr>
 <td><a name="TokensBurned"></a>TokensBurned</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
+<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s <a href="#atto-prefix">attotokens</a> (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
 <td>universe, token, target</td>
 <td>amount</td>
 </tr>
 <tr>
 <td><a name="TokensMinted"></a>TokensMinted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Created <code class="prettyprint">amount</code> of brand new tokens (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
+<td>Created <code class="prettyprint">amount</code> brand new <a href="#atto-prefix">attotokens</a> (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
 <td>universe, token, target</td>
 <td>amount</td>
 </tr>
@@ -7831,7 +7836,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <tr>
 <td><a name="Transfer"></a>Transfer</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol">ERC20Basic</a></td>
-<td>Transferred <code class="prettyprint">value</code> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
+<td>Transferred <code class="prettyprint">value</code> <a href="#atto-prefix">attotokens</a> between accounts <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
 <td>from, to</td>
 <td>value</td>
 </tr>
@@ -7845,7 +7850,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <tr>
 <td><a name="UniverseForked"></a>UniverseForked</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>A <a href="#market">Market</a> in <code class="prettyprint">universe</code> has had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing <a href="#rep">REP</a>, which has caused <code class="prettyprint">universe</code> to <a href="#fork">Fork</a>.</td>
+<td>A <a href="#market">Market</a> in <code class="prettyprint">universe</code> has had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>, which has caused <code class="prettyprint">universe</code> to <a href="#fork">Fork</a>.</td>
 <td>universe</td>
 <td></td>
 </tr>
@@ -8254,7 +8259,7 @@ Goals:
 
 <h2 id="crowdsourcer">Crowdsourcer</h2>
 
-<p>Each <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has its own Crowdsourcer, which is a Solidity smart contract that keeps track of how much <a href="#rep">REP</a> has been Staked on a particular Outcome during a given <a href="#fee-window">Fee Window</a>. If users Stake enough REP on that Outcome to fill the <a href="#dispute-bond">Dispute Bond</a> and <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a>, that Outcome will become the new Tentative Outcome (and the Market will go through another Dispute Round), or the Market will Fork (if a Dispute Bond greater than 1.25% of all existing REP is filled). If the Dispute Bond is successfully filled, and that Outcome becomes the <a href="#final-outcome">Final Outcome</a> for the Market, the users who Staked REP on that Outcome can get back 1.5x the amount of REP they originally Staked, once the Market is <a href="#finalized-market">Finalized</a>. If the Dispute Bond is successfully filled, but that Outcome does not become the <a href="#final-outcome">Final Outcome</a> for the Market, the users who Staked REP on that Outcome will forfeit all of the REP they Staked. If the Dispute Bond is not successfully filled, the users who Staked on that Outcome can redeem their REP once the Fee Window has elapsed.</p>
+<p>Each <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> has its own Crowdsourcer, which is a Solidity smart contract that keeps track of how much <a href="#rep">REP</a> has been Staked on a particular Outcome during a given <a href="#fee-window">Fee Window</a>. If users Stake enough REP on that Outcome to fill the <a href="#dispute-bond">Dispute Bond</a> and <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a>, that Outcome will become the new Tentative Outcome (and the Market will go through another Dispute Round), or the Market will Fork (if a Dispute Bond greater than the <a href="#fork-threshold">Fork Threshold</a> is filled). If the Dispute Bond is successfully filled, and that Outcome becomes the <a href="#final-outcome">Final Outcome</a> for the Market, the users who Staked REP on that Outcome can get back 1.5x the amount of REP they originally Staked, once the Market is <a href="#finalized-market">Finalized</a>. If the Dispute Bond is successfully filled, but that Outcome does not become the <a href="#final-outcome">Final Outcome</a> for the Market, the users who Staked REP on that Outcome will forfeit all of the REP they Staked. If the Dispute Bond is not successfully filled, the users who Staked on that Outcome can redeem their REP once the Fee Window has elapsed.</p>
 
 <h2 id="decentralized-oracle">Decentralized Oracle</h2>
 
@@ -8280,7 +8285,7 @@ Goals:
 
 <p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
 
-<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise 1.25% of all REP to cause a <a href="#fork">Fork</a>.</p>
+<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise the <a href="#fork-threshold">Fork Threshold</a> to cause a <a href="#fork">Fork</a>.</p>
 
 <h2 id="designated-reporter">Designated Reporter</h2>
 
@@ -8292,7 +8297,7 @@ Goals:
 
 <p>When a <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a>, they must put up an amount of REP on an <a href="#outcome">Outcome</a> that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>.</p>
 
-<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise 1.25% of all REP to cause a <a href="#fork">Fork</a>.</p>
+<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise the <a href="#fork-threshold">Fork Threshold</a> to cause a <a href="#fork">Fork</a>.</p>
 
 <h2 id="designated-reporting">Designated Reporting</h2>
 
@@ -8324,11 +8329,11 @@ Goals:
 
 <h2 id="dispute-round">Dispute Round</h2>
 
-<p>A Dispute Round is one 7-day round out of a maximum of 20 such rounds that can occur during the <a href="#dispute-round-phase">Dispute Round Phase</a> and before a <a href="#fork">Fork</a> occurs in a <a href="#market">Market</a>. During a Dispute Round, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing REP is filled.</p>
+<p>A Dispute Round is one 7-day round out of a maximum of 20 such rounds that can occur during the <a href="#dispute-round-phase">Dispute Round Phase</a> and before a <a href="#fork">Fork</a> occurs in a <a href="#market">Market</a>. During a Dispute Round, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a> is filled.</p>
 
 <h2 id="dispute-round-phase">Dispute Round Phase</h2>
 
-<p>The Dispute Round Phase is a seven (7) day window after a <a href="#market">Market</a> has been <a href="#report">Reported</a> on. During the Dispute Round Phase, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing REP is filled. With each Dispute Round that successfully Challenges the Tentative Outcome, the next Dispute Round will require an even higher <a href="#dispute-bond">Dispute Bond</a> to Challenge the Tentative Outcome. For details on how the Dispute Bond is calculated, refer to the the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
+<p>The Dispute Round Phase is a seven (7) day window after a <a href="#market">Market</a> has been <a href="#report">Reported</a> on. During the Dispute Round Phase, <a href="#rep">REP</a> holders who do not agree that the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is accurate can <a href="#dispute-stake">Stake</a> REP on a different <a href="#outcome">Outcome</a> in an attempt to <a href="#challenge">Challenge</a> it. If the Challenge is successful, the Tentative Outcome will be changed to the Outcome that was Staked on, or the Market will <a href="#fork">Fork</a> if a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a> is filled. With each Dispute Round that successfully Challenges the Tentative Outcome, the next Dispute Round will require an even higher <a href="#dispute-bond">Dispute Bond</a> to Challenge the Tentative Outcome. For details on how the Dispute Bond is calculated, refer to the the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
 <h2 id="dispute-stake">Dispute Stake</h2>
 
@@ -8382,7 +8387,7 @@ Goals:
 
 <h2 id="fork">Fork</h2>
 
-<p>A Fork occurs if the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing <a href="#rep">REP</a>. A Fork causes Augur to create multiple new <a href="#universe">Universes</a>. Each new Universe is empty except for the <a href="#forked-market">Forked Market</a>; they contain no markets or REP tokens. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including the <a href="#invalid-outcome">Invalid Outcome</a>, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. REP holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends, and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#share">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork. In the event of a Fork, all non-Forked Markets in each Child Universe will have their Tentative Outcome reset to the Outcome that was reported by the <a href="#initial-reporter">Initial Reporter</a>, and any REP <a href="#dispute-stake">Staked</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> in these Markets will be redeemable by the users who originally Staked that REP. These Markets will start off back in the <a href="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
+<p>A Fork occurs if the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>. A Fork causes Augur to create multiple new <a href="#universe">Universes</a>. Each new Universe is empty except for the <a href="#forked-market">Forked Market</a>; they contain no markets or REP tokens. There will be a Universe created for each possible <a href="#outcome">Outcome</a> of the <a href="#market">Market</a>, including the <a href="#invalid-outcome">Invalid Outcome</a>, and the Markets will be <a href="#finalized-market">Finalized</a> on each Universe. REP holders will need to choose which Universe they want to migrate their REP tokens too. Migration is one-way and final. After sixty (60) days the <a href="#fork-period">Fork Period</a> ends, and the Universe with the most REP migrated too it will allow traders to <a href="#settlement">Settle</a> <a href="#share">Shares</a> for the <a href="#forked-market">Forked Market</a> and <a href="#reporting-fee">Reporting Fees</a> will be paid out to <a href="#reporter">Reporters</a> for that Universe only. The original Universe that contained the Forked Market is known as the <a href="#parent-universe">Parent Universe</a> and is considered <a href="#locked-universe">Locked</a>. All of the new Universes created are known as <a href="#child-universe">Child Universes</a>. Forking will result in a new REP Token contract belonging to each Child Universe spawned by the Fork. In the event of a Fork, all non-Forked Markets in each Child Universe will have their Tentative Outcome reset to the Outcome that was reported by the <a href="#initial-reporter">Initial Reporter</a>, and any REP <a href="#dispute-stake">Staked</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> in these Markets will be redeemable by the users who originally Staked that REP. These Markets will start off back in the <a href="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
 
 <h2 id="fork-period">Fork Period</h2>
 
@@ -8390,7 +8395,11 @@ Goals:
 
 <h2 id="forked-market">Forked Market</h2>
 
-<p>A Forked Market is a <a href="#market">Market</a> whose <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than 1.25% of all existing <a href="#rep">REP</a>, thus causing a <a href="#fork">Fork</a> to occur. A Fork will cause the creation of multiple <a href="#universe">Universes</a> of Augur with the Forked Market having a different <a href="#final-outcome">Final Outcome</a> in each Universe. The Universe that contained the Forked Market originally will become a <a href="#locked-universe">Locked Universe</a>.</p>
+<p>A Forked Market is a <a href="#market">Market</a> whose <a href="#tentative-outcome">Tentative Outcome</a> is <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>, thus causing a <a href="#fork">Fork</a> to occur. A Fork will cause the creation of multiple <a href="#universe">Universes</a> of Augur with the Forked Market having a different <a href="#final-outcome">Final Outcome</a> in each Universe. The Universe that contained the Forked Market originally will become a <a href="#locked-universe">Locked Universe</a>.</p>
+
+<h2 id="fork-threshold">Fork Threshold</h2>
+
+<p>The Fork Threshold is the amount of <a href="#rep">REP</a> that must be <a href="#dispute-stake">Staked</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> in order to cause a <a href="#market">Market</a> to <a href="#fork">Fork</a>. In Augur, if 2.5% of all existing REP is Staked on the Dispute Crowdsourcer of a Market, that Market will Fork.</p>
 
 <h2 id="genesis-universe">Genesis Universe</h2>
 
