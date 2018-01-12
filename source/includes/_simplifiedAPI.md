@@ -82,7 +82,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array representing the account's transfer history. (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>)
+* (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>) Array representing the account's transfer history.
 
 Create-Market Functions
 ----------------
@@ -99,7 +99,7 @@ Create-Market Functions
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
-Creates a [Binary Market](#binary-market) in a specified [Universe](#universe).
+Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -124,7 +124,7 @@ Description pending.
 
 ### augur.createMarket.createCategoricalMarket(p)
 
-Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe).
+Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -150,7 +150,7 @@ Description pending.
 
 ### augur.createMarket.createScalarMarket(p)
 
-Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe).
+Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -668,7 +668,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 * Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
 
 <!-- TODO: Add link to augur.trading.getOrders -->
-### augur.markets.getMarketsInfo(p)
+### augur.markets.getMarketsInfo(p, callback)
 
 Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
 
@@ -679,6 +679,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`marketIDs`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
+* **`callback`** (function) Called after the Market info has been retrieved.
 
 #### **Returns:**
 

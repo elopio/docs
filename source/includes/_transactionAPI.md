@@ -268,7 +268,7 @@ Provides JavaScript bindings for the [CancelOrder Solidity Contract](https://git
 
 ### augur.api.CancelOrder.cancelOrder(p)
 
-Cancels and refunds an existing [Order](#order) on the [Order Book](#order-book) with ID `_orderId`.
+Cancels and refunds an existing [Order](#order) on the [Order Book](#order-book) with ID `_orderId`. This transaction will trigger an [`OrderCanceled` event](#OrderCanceled) if the Order is canceled without any errors.
 
 This function will fail if:
 
@@ -375,7 +375,7 @@ Calculates the amount of [attoETH](#atto-prefix) that `_numberOfShares` attoshar
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
-Collects trading profits from outstanding [Shares](#share) in [Finalized Market](#finalized-market) `_market` owned by `_shareHolder`. 
+Collects trading profits from outstanding [Shares](#share) in [Finalized Market](#finalized-market) `_market` owned by `_shareHolder`. This transaction will trigger a [`TradingProceedsClaimed` event](#TradingProceedsClaimed) if the trading proceeds are claimed without any errors.
 
 This transaction will fail if:
 
@@ -468,7 +468,7 @@ This transaction will fail if:
 * `msg.sender` doesn't have enough of `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes.
 * `_amount` is not a number between 1 and 2<sup>254</sup>. 
 
-When successful, this transaction will trigger a `CompleteSets` event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
+When successful, this transaction will trigger a [`CompleteSets` event](#CompleteSets), which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
 
 #### **Parameters:**
 
@@ -494,7 +494,7 @@ This transaction will fail if:
 * `msg.sender` doesn't own `_amount` Shares of all Outcomes in `_market`.
 * `_amount` is not a number between 1 and 2<sup>254</sup>. 
 
-When successful, this transaction will trigger a `CompleteSets` event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (sell), `_amount` sold, number of Outcomes in the `_market`, `marketCreatorFee` paid for selling the Shares, and the `reportingFee` paid for selling the Shares.
+When successful, this transaction will trigger a [`CompleteSets` event](#CompleteSets), which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (sell), `_amount` sold, number of Outcomes in the `_market`, `marketCreatorFee` paid for selling the Shares, and the `reportingFee` paid for selling the Shares.
 
 #### **Parameters:**
 
@@ -560,7 +560,7 @@ Provides JavaScript bindings for the [CreateOrder Solidity Contract](https://git
 
 ### augur.api.CreateOrder.publicCreateOrder(p)
 
-Creates a new [Bid Order](#bid-order) or [Ask Order](#ask-order) on the [Order Book](#order-book). The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_displayPrice`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
+Creates a new [Bid Order](#bid-order) or [Ask Order](#ask-order) on the [Order Book](#order-book). The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_displayPrice`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated` event](#OrderCreated) if the Order is created without any errors.
 
 This transaction will fail if:
 
@@ -710,6 +710,8 @@ When called on Dispute Crowdsourcers of non-Forked Markets, this transaction wil
 When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that `_redeemer` Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that `_redeemer` is owed, to the [Child Universe](#child-universe) for the [Outcome](#outcome) of that Crowdsourcer.
 
 This function can be called on Dispute Crowdsourcers that have filled their [Dispute Bond](#dispute-bond), as well as ones that have not, provided that either `augur.api.Market.disavowCrowdsourcers` or `augur.api.DisputeCrowdsourcer.fork` has been called first. When a [Fork](#fork) occurs, all non-Forked Markets will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase).
+
+This transaction will trigger a [`WinningsRedeemed` event](#WinningsRedeemed) if the REP/Ether was redeemed without any errors.
 
 #### **Parameters:**
 
@@ -939,7 +941,7 @@ Provides JavaScript bindings for the [FillOrder Solidity Contract](https://githu
 
 ### augur.api.FillOrder.publicFillOrder(p)
 
-Attempts to Fill `_amountFillerWants` [attoshares](#atto-prefix) for [Order](#order) `_orderId`. If `_amountFillerWants` is enough to fill the Order completely, the Order will be removed from the [Order Book](#order-book). Otherwise, it will be adjusted to only include the remaining amount after Filling the `_amountFillerWants` value that the [Filler](#order-filler) requests. 
+Attempts to Fill `_amountFillerWants` [attoshares](#atto-prefix) for [Order](#order) `_orderId`. If `_amountFillerWants` is enough to [Fill](#fill-order) the Order completely, the Order will be removed from the [Order Book](#order-book). Otherwise, it will be adjusted to only include the remaining amount after Filling the `_amountFillerWants` value that the [Filler](#order-filler) requests. This transaction will trigger an [`OrderFilled` event](#OrderFilled) if the Order is Filled without any errors.
 
 This transaction will fail if:
 
@@ -1100,7 +1102,7 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 ### augur.api.InitialReporter.redeem(p)
 
-Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) Staked on the [Outcome](#outcome) of the [Initial Report](#initial-report). If the First Public Reporter submitted the Initial Report, this function will also redeem the [No-Show Gas Bond](#no-show-gas-bond) in Ether.
+Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) Staked on the [Outcome](#outcome) of the [Initial Report](#initial-report). If the First Public Reporter submitted the Initial Report, this function will also redeem the [No-Show Gas Bond](#no-show-gas-bond) in Ether. This transaction will trigger a [`WinningsRedeemed` event](#WinningsRedeemed) if the REP/Ether was redeemed without any errors.
 
 #### **Parameters:**
 
@@ -1513,7 +1515,9 @@ Provides JavaScript bindings for the [Market Solidity Contract](https://github.c
 
 ### augur.api.Market.contribute(p)
 
-Contributes `_amount` [REP](#rep) to the [Dispute Crowdsourcer](#dispute-crowdsourcer) represented by [Payout Set](#payout-set) `_payoutNumerators` and `_invalid` in order to help [Challenge](#challenge) the [Market](#market) `market`'s [Tentative Outcome](#tentative-outcome). If the amount of REP in the Dispute Crowdsourcer plus `amount` is greater than the total REP required to fill the [Dispute Bond](#dispute-bond), this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.
+Contributes `_amount` [REP](#rep) to the [Dispute Crowdsourcer](#dispute-crowdsourcer) represented by [Payout Set](#payout-set) `_payoutNumerators` and `_invalid` in order to help [Challenge](#challenge) the [Market](#market) `market`'s [Tentative Outcome](#tentative-outcome). If the amount of REP in the Dispute Crowdsourcer plus `amount` is greater than the total REP required to fill the [Dispute Bond](#dispute-bond), this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller. 
+
+This transaction will trigger a `DisputeCrowdsourcerContribution` event if it executes without any errors. It will also trigger a `DisputeCrowdsourcerCompleted` event if the Dispute Bond is successfullly filled, and it will trigger a [`UniverseForked` event](#UniverseForked) if enough REP has been [Staked](#dispute-stake) in the Dispute Crowdsourcer to cause the Market to [Fork](#fork).
 
 This function will fail if:
   - The Market is in a [Fee Window](#fee-window) that is not active.
@@ -1559,7 +1563,7 @@ This function will fail if:
 
 ### augur.api.Market.doInitialReport(p)
 
-Submits an [Initial Report](#initial-report) for [Market](#market) `market`.
+Submits an [Initial Report](#initial-report) for [Market](#market) `market`. This transaction will trigger an [`InitialReportSubmitted` event](#InitialReportSubmitted) if it submits the Initial Report successfully.
 
 This transaction will fail if:
 
@@ -1584,7 +1588,7 @@ This transaction will fail if:
 
 ### augur.api.Market.finalize(p)
 
-[Finalizes](#finalized-market) the [Market](#market) `market`, meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
+[Finalizes](#finalized-market) the [Market](#market) `market`, meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized` event](#MarketFinalized) if the Market Finalized without any errors.
 
 This transaction will fail if:
 
@@ -1843,7 +1847,7 @@ Provides JavaScript bindings for the [ReputationToken Solidity Contract](https:/
 
 ### augur.api.ReputationToken.approve(p)
 
-Allows `_spender` to spend up to `_value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an `Approval` event, which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoREP](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
+Allows `_spender` to spend up to `_value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval` event](#Approval), which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoREP](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
 
 This function will fail if:
 
@@ -1907,7 +1911,7 @@ This transaction will fail if:
 
 ### augur.api.ReputationToken.transfer(p)
 
-Sends `_value` worth of [attoREP](#atto-prefix) to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
+Sends `_value` worth of [attoREP](#atto-prefix) to the Ethereum address `_to`. If this transaction transfers without any errors, it will trigger a [`Transfer` event](#Transfer), which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
 This transaction will fail if:
 
@@ -1930,7 +1934,7 @@ This transaction will fail if:
 
 ### augur.api.ReputationToken.transferFrom(p)
 
-Sends `_value` worth of [attoREP](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the `_from` address, `_to` address, and `_value` (in attoREP) amount transferred.
+Sends `_value` worth of [attoREP](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. If this transaction transfers without any errors, it will trigger a `Transfer` event, which will record the `_from` address, `_to` address, and `_value` (in attoREP) amount transferred.
 
 This transaction will fail if:
 
@@ -2052,7 +2056,7 @@ Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.c
 
 ### augur.api.ShareToken.approve(p)
 
-Allows `_spender` to spend up to `_value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an `Approval` event, which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoshares](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
+Allows `_spender` to spend up to `_value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval` event](#Approval), which will record the owner address (`msg.sender`), `_spender`, and `_value` in [attoshares](#atto-prefix) approved. The only way to change `_value` after it has been set is by first calling this transaction with `_value` set to 0 and then calling it again with `_value` set to the desired value.
 
 This function will fail if:
 
@@ -2075,7 +2079,7 @@ This function will fail if:
 
 ### augur.api.ShareToken.transfer(p)
 
-Sends `_value` worth of [attoshares](#atto-prefix) to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
+Sends `_value` worth of [attoshares](#atto-prefix) to the Ethereum address `_to`. If this transaction transfers without any errors, it will trigger a [`Transfer` event](#Transfer), which will record the from address (`msg.sender`), `_to` address, and `_value` amount transferred.
 
 This transaction will fail if:
 
@@ -2098,7 +2102,7 @@ This transaction will fail if:
 
 ### augur.api.ShareToken.transferFrom({ shareToken, \_from, \_to, \_value, onSent, onSuccess, onFailed })
 
-Sends `_value` worth of [attoshares](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. This transaction will trigger a `Transfer` event, which will record the `_from` address, `_to` address, and `_value` (in attoshares) amount transferred.
+Sends `_value` worth of [attoshares](#atto-prefix) from the Ethereum addres `_from` to the Ethereum address `_to`. If this transaction transfers without any errors, it will trigger a[`Transfer` event](#Transfer), which will record the `_from` address, `_to` address, and `_value` (in attoshares) amount transferred.
 
 This transaction will fail if:
 
@@ -2267,7 +2271,7 @@ Provides JavaScript bindings for the [Trade Solidity Contract](https://github.co
 
 ### augur.api.Trade.publicBuy(p)
 
-Buys `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to buy `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
+Buys `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to buy `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price after `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated` event](#OrderCreated) if the Order is created without any errors.
 
 #### **Parameters:**
 
@@ -2290,7 +2294,7 @@ Buys `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` o
 
 ### augur.api.Trade.publicSell(p)
 
-Sells `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price with respect to `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. 
+Sells `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` of [Market](#market) `market` at `price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `_fxpAmount` of Shares at `_price`. The parameters `_betterOrderId` and `worseOrderId` are the Orders with the next best/next worse price with respect to `_price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated` event](#OrderCreated) if the Order is created without any errors.
 
 #### **Parameters:**
 
@@ -2313,7 +2317,7 @@ Sells `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` 
 
 ### augur.api.Trade.publicTrade(p)
 
-Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `_direction` must be either `1` for buying or `2` for selling. 
+Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `_direction` must be either `1` for buying or `2` for selling. This transaction will trigger an [`OrderCreated` event](#OrderCreated) if the Order is created without any errors.
 
 #### **Parameters:**
 
@@ -2917,7 +2921,7 @@ Provides JavaScript bindings for the [Universe Solidity Contract](https://github
 <!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
 ### augur.api.Universe.createBinaryMarket(p)
 
-Creates a new [Binary Market](#binary-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+Creates a new [Binary Market](#binary-market). This transaction will trigger a [`MarketCreated` event](#MarketCreated) if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
@@ -2950,7 +2954,7 @@ Creates a new [Binary Market](#binary-market). After the transaction has complet
 
 ### augur.api.Universe.createCategoricalMarket(p)
 
-Creates a new [Categorical Market](#categorical-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+Creates a new [Categorical Market](#categorical-market). This transaction will trigger a [`MarketCreated` event](#MarketCreated) if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
@@ -2983,7 +2987,7 @@ Creates a new [Categorical Market](#categorical-market). After the transaction h
 
 ### augur.api.Universe.createChildUniverse(p)
 
-Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `_parentPayoutNumerators` and `_parentInvalid`. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. 
+Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `_parentPayoutNumerators` and `_parentInvalid`. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. This transaction will trigger a [`UniverseCreated` event](#UniverseCreated) if the Child Universe has not been created yet.
 
 This transaction will fail if:
 
@@ -3007,7 +3011,7 @@ This transaction will fail if:
 
 ### augur.api.Universe.createScalarMarket(p)
 
-Creates a new [Scalar Market](#scalar-market). After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
@@ -3160,7 +3164,7 @@ Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window]
 
 ### augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe). If the Ethereum contract address for the Fee Window does not already exist, this function will create it.
+Gets the Ethereum contract address, as a hexadecimal string, of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe). If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a [`FeeWindowCreated` event](#FeeWindowCreated) if the Fee window is created without any errors.
 
 #### Parameters:
 
