@@ -370,10 +370,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p><a href="images/Detailed Reporting Diagram.png"><img src="images/Detailed Reporting Diagram.png"></a></p>
 
-<p>The Reporting Diagram above is a high level overview of <a href="#report">Reporting</a> implemented by Augur. There are two ways for a <a href="#market">Market</a> to attempt to <a href="#finalized-market">Finalize</a>: if the <a href="#tentative-outcome">Tentative Outcome</a> was not disputed during a <a href="#dispute-round">Dispute Round</a>, or (rarely) during a <a href="#fork">Fork</a>. Augur Markets have 7 potential states after creation. The potential states, or “phases”, of a Market are as follows:</p>
+<p>The Reporting Diagram above is a high level overview of <a href="#report">Reporting</a> implemented by Augur. There are two ways for a <a href="#market">Market</a> to attempt to <a href="#finalized-market">Finalize</a>: if the <a href="#tentative-outcome">Tentative Outcome</a> was not disputed during a <a href="#dispute-round">Dispute Round</a>, or (rarely) during a <a href="#fork">Fork</a>. Augur Markets have 6 potential states after creation. The potential states, or “phases”, of a Market are as follows:</p>
 
 <ol>
-<li>Pre-Reporting</li>
 <li>Designated Reporting</li>
 <li>Open Reporting</li>
 <li>Waiting for the Next Fee Window to Begin</li>
@@ -382,15 +381,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>Finalized</li>
 </ol>
 
-<h3 id="pre-reporting">Pre-Reporting</h3>
-
-<p>The <a href="#pre-reporting-phase">Pre-Reporting Phase</a> (1) is the time period where the Market&rsquo;s <a href="#end-time">End Time</a> has not come to pass, generally this is the most active trading period. Once the End Time has come to pass, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a> (2).</p>
-
 <h3 id="designated-reporting">Designated Reporting</h3>
 
-<p>When creating a Market, the <a href="#market-creator">Market Creator</a> is required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (2), the Market’s Designated Reporter has at most three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (3).</p>
+<p>When creating a Market, the <a href="#market-creator">Market Creator</a> is required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (1), the Market’s Designated Reporter has at most three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (2).</p>
 
-<p>If the Designated Reporter submits a Report on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on the Reported Outcome, which it will forfeit if the Market finalizes to any outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the Waiting for the Next Fee Window to Begin Phase (4), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+<p>If the Designated Reporter submits a Report on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on the Reported Outcome, which it will forfeit if the Market finalizes to any outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the Waiting for the Next Fee Window to Begin Phase (3), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <h3 id="open-reporting">Open Reporting</h3>
 
@@ -400,11 +395,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The First Public Reporter does not need to Stake any of their own <a href="#rep">REP</a> when Reporting the Outcome of the Market. Because the No-Show REP Bond is applied as Stake on the First Public Reporter’s chosen Outcome, they may claim the No-Show REP Bond only if their Reported Outcome ultimately agrees with consensus. In this way, any Market whose Designated Reporter fails to Report is expected to have its Outcome reported by someone very soon after entering the Open Reporting Phase.</p>
 
-<p>Once a <a href="#first-public-report">First Public Report</a> has been received, the Reported Outcome becomes the Market’s Tentative Outcome, and the Market enters the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (4).</p>
+<p>Once a <a href="#first-public-report">First Public Report</a> has been received, the Reported Outcome becomes the Market’s Tentative Outcome, and the Market enters the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (3).</p>
 
 <h3 id="waiting-for-the-next-fee-window-to-begin">Waiting for the Next Fee Window to Begin</h3>
 
-<p>Once the market receives its Initial Report &ndash; whether by the Designated Reporter or by a First Public Reporter from the community &ndash; the Market enters the Waiting for the Next Fee Window to Begin Phase. During this phase, Reporting for the Market is on hold until end of the current <a href="#fee-window">Fee Window</a>. Once the current Fee Window comes to an end, the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a> (5).</p>
+<p>Once the market receives its Initial Report &ndash; whether by the Designated Reporter or by a First Public Reporter from the community &ndash; the Market enters the Waiting for the Next Fee Window to Begin Phase. During this phase, Reporting for the Market is on hold until end of the current <a href="#fee-window">Fee Window</a>. Once the current Fee Window comes to an end, the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a> (4).</p>
 
 <h3 id="dispute-round">Dispute Round</h3>
 
@@ -412,15 +407,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The <a href="#dispute-bond">Dispute Bonds</a> need not be paid in their entirety by a single user. Augur allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking some REP on some Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.</p>
 
-<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (6). If the size of the filled Dispute Bond is greater than the <a href="#fork-threshold">Fork Threshold</a>, then the market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than the <a href="#fork-threshold">Fork Threshold</a>, then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.</p>
+<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (5). If the size of the filled Dispute Bond is greater than the <a href="#fork-threshold">Fork Threshold</a>, then the market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than the <a href="#fork-threshold">Fork Threshold</a>, then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.</p>
 
-<p>If no Dispute is successful during the 7-day Dispute Round, the Market enters the <a href="#finalized-phase">Finalized State</a> (7) with its Tentative Outcome accepted as the <a href="#final-outcome">Final Outcome</a>.</p>
+<p>If no Dispute is successful during the 7-day Dispute Round, the Market enters the <a href="#finalized-phase">Finalized State</a> (6) with its Tentative Outcome accepted as the <a href="#final-outcome">Final Outcome</a>.</p>
 
 <p>All unsuccesful Dispute Stake is returned to the original owners at the end of every Dispute Round. All successful Dispute Stake is applied to the Outcome it championed, and will remain there until the Market is Finalized (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the reward pool from the current Fee Window.</p>
 
 <h3 id="fork">Fork</h3>
 
-<p>The Fork Phase is a special state that lasts up to 60 days and is intended to be an exceedingly rare occurrence. The outcome of a Fork cannot be Disputed. The Disputed Market that caused the Fork, referred to as the <a href="#forked-market">Forking Market</a>, enters the <a href="#finalized-phase">Finalized State</a> (7) at the end of the Fork Phase. For more information on the Forking process, refer to the <a href="#forking-details">Forking Details</a> section.</p>
+<p>The Fork Phase is a special state that lasts up to 60 days and is intended to be an exceedingly rare occurrence. The outcome of a Fork cannot be Disputed. The Disputed Market that caused the Fork, referred to as the <a href="#forked-market">Forking Market</a>, enters the <a href="#finalized-phase">Finalized State</a> (6) at the end of the Fork Phase. For more information on the Forking process, refer to the <a href="#forking-details">Forking Details</a> section.</p>
 
 <h3 id="finalized">Finalized</h3>
 
@@ -771,7 +766,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the token transfers made to or from a specific Ethereum address. </p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -828,7 +827,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createBinaryMarket transaction fails.</li>
@@ -837,7 +836,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Description pending.</p>
+<ul>
+<li>Description pending.</li>
+</ul>
 
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
@@ -859,7 +860,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createCategoricalMarket transaction fails.</li>
@@ -868,7 +869,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Description pending.</p>
+<ul>
+<li>Description pending.</li>
+</ul>
 
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
@@ -892,7 +895,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The <a href="#tick">Tick</a> size for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
@@ -901,7 +904,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Description pending.</p>
+<ul>
+<li>Description pending.</li>
+</ul>
 
 <h3 id="augur-createmarket-getmarketcreationcost-p-callback">augur.createMarket.getMarketCreationCost(p, callback)</h3>
 
@@ -923,7 +928,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Costs of creating a new Market. (<a href="#MarketCreationCost">MarketCreationCost</a>)</li>
+<li>(<a href="#MarketCreationCost">MarketCreationCost</a>) Costs of creating a new Market.</li>
 </ul>
 
 <!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
@@ -949,7 +954,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Cost breakdown for creating a new Market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)</li>
+<li>(<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.</li>
 </ul>
 
 <h2 id="markets-functions">Markets Functions</h2>
@@ -1220,7 +1225,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns the Market Categories in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1241,7 +1250,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array representing the categories in the specified Universe. (Array.&lt;<a href="#Category">Category</a>&gt;)</li>
+<li>(Array.&lt;<a href="#Category">Category</a>&gt;) Array representing the categories in the specified Universe.</li>
 </ul>
 
 <!-- TODO: Add JS example results -->
@@ -1250,7 +1259,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function has not been implemented yet. Returns the <a href="#markets">Markets</a> in a specific <a href="#reporting-window">Reporting Window</a> that are able to be disputed, along with the value of the <a href="#dispute-bond">Dispute Bond</a> needed to dispute each Market’s result.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1271,14 +1284,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Pending.</li>
+<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketpricehistory-p-callback">augur.markets.getMarketPriceHistory(p, callback)</h3>
 
 <p>Returns the prices and timestamps of a specific <a href="#market">Market&rsquo;s</a> <a href="#outcomes">Outcomes</a> over time.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1295,14 +1312,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>The Market&rsquo;s price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)</li>
+<li>(<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>) The Market&rsquo;s price time-series, keyed by outcome ID.</li>
 </ul>
 
 <h3 id="augur-markets-getmarkets-p-callback">augur.markets.getMarkets(p, callback)</h3>
 
 <p>Returns an array of <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1323,14 +1344,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of Market addresses in the Universe, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Array of Market addresses in the Universe, as hexadecimal strings. </li>
 </ul>
 
 <h3 id="augur-markets-getmarketsawaitingdesignatedreporting-p-callback">augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1352,14 +1377,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. </li>
 </ul>
 
 <h3 id="augur-markets-getmarketsawaitingreporting-p-callback">augur.markets.getMarketsAwaitingReporting(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#reporting-window">Reporting Window</a> that are waiting for a <a href="designated-report">Designated Report</a> to be submitted or waiting for the <a href="#reporting-phase">Reporting Phase</a> to end. Either the Universe or Reporting Window must be specified.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1382,14 +1411,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Array of market addresses awaiting a Designated Report, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsclosingindaterange-p-callback">augur.markets.getMarketsClosingInDateRange(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> closing between a given time range in a specific <a href="#universe">Universe</a>.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1412,14 +1445,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Array of closing Market addresses, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketscreatedbyuser-p-callback">augur.markets.getMarketsCreatedByUser(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> created by a specific user, as well as the total amount of fees earned so far by that user.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1441,14 +1478,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of <a href="#MarketsContractAddressRow">MarketsContractAddressRows</a>, as hexadecimal strings. (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>&gt;)</li>
+<li>(Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>&gt;) Array of <a href="#MarketsContractAddressRow">MarketsContractAddressRows</a>, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsincategory-p-callback">augur.markets.getMarketsInCategory(p, callback)</h3>
 
 <p>Returns the <a href="#market">Markets</a> within a specific category.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1470,7 +1511,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Array of Market addresses in the specified category, as hexadecimal strings.</li>
 </ul>
 
 <!-- TODO: Add link to augur.trading.getOrders -->
@@ -1479,7 +1520,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about <a href="#markets">Markets</a> that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market <a href="#outcome">Outcome</a>. It does not include Order Book information; however the function <code class="prettyprint">augur.trading.getOrders</code> can be used to get information about <a href="#order">Orders</a> for the specified Market.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1495,7 +1540,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>(Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;)</p>
+<ul>
+<li>(Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;)</li>
+</ul>
 
 <h2 id="reporting-functions">Reporting Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
@@ -1600,7 +1647,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about the reports submitted by a particular user. For <a href="#reporting-window">Reporting Windows</a> that have ended, this includes the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a>, whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1626,14 +1677,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)</li>
+<li>(Object) Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>.</li>
 </ul>
 
 <h3 id="augur-reporting-getreportingsummary-p-callback">augur.reporting.getReportingSummary(p, callback)</h3>
 
 <p>Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1650,7 +1705,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Summary of the number of Markets in each reporting phase, keyed by reporting phase. (Object)</li>
+<li>(Object) Summary of the number of Markets in each reporting phase, keyed by reporting phase. </li>
 </ul>
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
@@ -1659,7 +1714,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1677,14 +1736,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Pending.</li>
+<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-reporting-getstaketokens-p-callback">augur.reporting.getStakeTokens(p, callback)</h3>
 
 <p>Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1703,11 +1766,40 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Stake token details, keyed by stake token ID. (Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;)</li>
+<li>(Array.&lt;<a href="#StakeToken">StakeToken</a>&gt;) Stake token details, keyed by stake token ID.</li>
 </ul>
 
 <h2 id="trading-functions">Trading Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.trading.claimMarketsTradingProceeds: Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateProfitLoss</span><span class="p">({</span>
+  <span class="na">trades</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="na">maker</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">}],</span> 
+  <span class="na">lastPrice</span><span class="p">:</span> <span class="s2">"2"</span>
+<span class="p">});</span>
+
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="nx">meanOpenPrice</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="nx">realized</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="nx">queued</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="nx">unrealized</span><span class="p">:</span> <span class="s2">"0"</span>
+<span class="p">}</span>
+
+<span class="c1">// augur.trading.claimMarketsTradingProceeds: Example JS code coming soon</span>
+
+<span class="c1">// augur.trading.claimTradingProceeds: Example JS code coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">denormalizePrice</span><span class="p">({</span>
+  <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="na">normalizedPrice</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0.4"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
   <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -1811,7 +1903,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="p">},</span>
 <span class="p">}</span>
 
-<span class="c1">// augur.trading.getPositionInMarket: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getPositionInMarket</span><span class="p">({</span>
+  <span class="na">address</span><span class="p">:</span> <span class="s2">"0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3"</span><span class="p">,</span>
+  <span class="na">market</span><span class="p">:</span> <span class="s2">"0x2221185d7f125b84ac4a1837a0688d2bb58e8491"</span><span class="p">,</span>
+  <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"0.5"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1.5"</span><span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
       <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
@@ -1926,10 +2026,67 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
-</code></pre></div>
-<h3 id="augur-trading-claimmarketstradingproceeds-p">augur.trading.claimMarketsTradingProceeds(p)</h3>
 
-<p>Similar to the function <code class="prettyprint">augur.trading.claimTradingProceeds</code>, but attempts to collect trading profits in Ether from a user&rsquo;s outstanding Shares in multiple Finalized Markets instead of a single Finalized Market.</p>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">normalizePrice</span><span class="p">({</span>
+  <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="na">price</span><span class="p">:</span> <span class="s2">"0.4"</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0.2"</span>
+
+<span class="c1">// augur.trading.placeTrade: Example JS code coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">simulateTrade</span><span class="p">({</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">shares</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+  <span class="na">shareBalances</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"5"</span><span class="p">],</span>
+  <span class="na">tokenBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">userAddress</span><span class="p">:</span> <span class="s2">"0x111327d07fc17907b4db788e5adf2ed424addff6"</span><span class="p">,</span>
+  <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="na">price</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
+  <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
+  <span class="na">shouldCollectReportingFees</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">marketOrderBook</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">buy</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">BID_0</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
+        <span class="na">sharesEscrowed</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x2228238db7ad03e505840bd361dc2f521a72adbc"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="na">sell</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">ASK_0</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
+        <span class="na">sharesEscrowed</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x2228238db7ad03e505840bd361dc2f521a72adbc"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="nl">settlementFees</span><span class="p">:</span> <span class="s2">"0.006"</span><span class="p">,</span>
+  <span class="nx">worstCaseFees</span><span class="p">:</span> <span class="s2">"0.009"</span><span class="p">,</span>
+  <span class="nx">gasFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="nx">otherSharesDepleted</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+  <span class="nx">sharesDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="nx">tokensDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="nx">shareBalances</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="c1">// augur.trading.tradeUntilAmountIsZero: Example JS code coming soon</span>
+</code></pre></div>
+<h3 id="augur-trading-calculateprofitloss-p">augur.trading.calculateProfitLoss(p)</h3>
+
+<p>Calculates realized and unrealized profit/loss for trades in a single <a href="#outcome">Outcome</a>. Note: buy/sell labels are from taker&rsquo;s point-of-view.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1938,8 +2095,30 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">markets</code></strong>  (Array.<string>) Array of Market addresses for which to claim proceeds.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">trades</code></strong>  (Array.<Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.</li>
+<li><strong><code class="prettyprint">lastPrice</code></strong>  (string) &lt;optional&gt; Price of this Outcome&rsquo;s most recent trade, as a base-10 string (default: 0).</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.</li>
+</ul>
+
+<h3 id="augur-trading-claimmarketstradingproceeds-p">augur.trading.claimMarketsTradingProceeds(p)</h3>
+
+<p>Similar to the function <code class="prettyprint">augur.trading.claimTradingProceeds</code>, but attempts to collect trading profits in Ether from a user&rsquo;s outstanding <a href="#share">Shares</a> in multiple <a href="#finalized-market">Finalized Markets</a> instead of a single Finalized Market.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">markets</code></strong>  (Array.<string>) Array of <a href="#market">Market</a> addresses for which to claim proceeds.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when each transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
@@ -1948,13 +2127,20 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Description pending.</p>
+<ul>
+<li>Description pending.</li>
+</ul>
 
 <h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
 
-<p>Attempts to collect trading profits in Ether from a user&rsquo;s outstanding Shares in a single Finalized Market.</p>
+<p>Attempts to collect trading profits in Ether from a user&rsquo;s outstanding <a href="#share">Shares</a> in a single <a href="#finalized-market">Finalized Market</a>.</p>
 
-<p>Note: This transaction will fail if <code class="prettyprint">_market</code> is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.)</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">_market</code> is not Finalized.</li>
+<li>The <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1963,8 +2149,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">_market</code></strong>  (string) Market address for which to claim proceeds.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (<a href="#AuthenticationMetadata">AuthenticationMetadata</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) <a href="#market">Market</a> address for which to claim proceeds.</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when each transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
@@ -1973,15 +2159,44 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Description pending.</p>
+<ul>
+<li>Description pending.</li>
+</ul>
+
+<h3 id="augur-trading-denormalizeprice-p">augur.trading.denormalizePrice(p)</h3>
+
+<p>Rescales a price to its display range [minPrice, maxPrice]: displayPrice = normalizedPrice*(maxPrice - minPrice) + minPrice.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">minPrice</code></strong>  (BigNumber|string) This <a href="#market">Market&rsquo;s</a> minimum possible price, as a BigNumber or base-10 string.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong>  (BigNumber|string) This Market&rsquo;s maximum possible price, as a BigNumber or base-10 string.</li>
+<li><strong><code class="prettyprint">normalizedPrice</code></strong>  (BigNumber|string) The price to be denormalized, as a BigNumber or base-10 string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Price rescaled to [minPrice, maxPrice], as a base-10 string.</li>
+</ul>
 
 <!-- Add links to section -->
 
 <h3 id="augur-trading-getbetterworseorders-p-callback">augur.trading.getBetterWorseOrders(p, callback)</h3>
 
-<p>Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)</p>
+<p>Returns the IDs of the <a href="#order">Orders</a> for a given <a href="#outcome">Outcome</a> that have a better and worse price than the specified <code class="prettyprint">price</code>. If no better/worse Orders exist, null will be returned. This function should be called prior to calling <code class="prettyprint">augur.api.CreateOrder.publicCreateOrder</code> in order to get the <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> parameters that it accepts. (<code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> are used to optimize the sorting of Orders on the <a href="#order-book">Order Book</a>.)</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1990,25 +2205,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) Contract address of the Market for which to retrieve the better/worse orders, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (string) Market Outcome for which to find better/worse orders.</li>
-<li><strong><code class="prettyprint">orderType</code></strong>  (string) Desired type of order. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
-<li><strong><code class="prettyprint">price</code></strong>  (number) Price point at which to find better/worse orders.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) Contract address of the <a href="#market">Market</a> for which to retrieve the better/worse Orders, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (string) Market Outcome for which to find better/worse Orders.</li>
+<li><strong><code class="prettyprint">orderType</code></strong>  (string) Desired type of Order. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
+<li><strong><code class="prettyprint">price</code></strong>  (number) Price point at which to find better/worse Orders.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called when better/worse orders have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called when better/worse Orders have been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)</li>
+<li>(<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexidecimal strings.</li>
 </ul>
 
 <h3 id="augur-trading-getorders-p-callback">augur.trading.getOrders(p, callback)</h3>
 
 <p>Returns a list of orders in a given Universe or Market.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2018,9 +2237,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve orders, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve Orders, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">outcome</code></strong>  (number) &lt;optional&gt; Market Outcome to filter results by. Valid values are in the range [0,7].</li>
-<li><strong><code class="prettyprint">creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the order creator, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the Order creator, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
 <li><strong><code class="prettyprint">earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
@@ -2035,12 +2254,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)</li>
+<li>(<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) One side of the Order Book (buy or sell) for the specified Market/Universe and Outcome.</li>
 </ul>
 
-<h3 id="augur-trading-getpositioninmarket-p">augur.trading.getPositionInMarket(p)</h3>
+<h3 id="augur-trading-getpositioninmarket-p-callback">augur.trading.getPositionInMarket(p, callback)</h3>
 
-<p>Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.</p>
+<p>Gets the number of <a href="#share">Shares</a> held by a specific Ethereum address for each <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2049,16 +2268,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">address</code></strong>  (string) Address for which to look up share balances.</li>
-<li><strong><code class="prettyprint">market</code></strong>  (string) Market for which to look up share balances.</li>
-<li><strong><code class="prettyprint">tickSize</code></strong>  (string) Tick size (interval) for this Market.</li>
+<li><strong><code class="prettyprint">address</code></strong>  (string) Address for which to look up Share balances.</li>
+<li><strong><code class="prettyprint">market</code></strong>  (string) Market for which to look up Share balances.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) <a href="#tick">Tick</a> size (interval) for this Market.</li>
 </ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called when the requested Market position has been received and parsed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Number of shares for each Outcome of this Market. (Array.&lt;string&gt;)</li>
+<li>(Array.&lt;string&gt;) Number of Shares for each Outcome of this Market.</li>
 </ul>
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
@@ -2067,7 +2287,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Returns information about the trades a specific user has made.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2077,12 +2301,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading history, as a hexadecimal string. Either this parameter or the <a href="#market">Market</a> ID must be specified.</li>
 <li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading history, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (string) Outcome of the share being bought/sold.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> being bought/sold.</li>
 <li><strong><code class="prettyprint">orderType</code></strong>  (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading history.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading history in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading history in descending order by <code class="prettyprint">sortBy</code> field.</li>
 <li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of trading history reports to return.</li>
 <li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of trading history reports to truncate from the beginning of the results.</li>
 </ul></li>
@@ -2092,14 +2316,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of the user&rsquo;s trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;)</li>
+<li>(Array.&lt;<a href="#UserTrade">UserTrade</a>&gt;) Array of the user&rsquo;s trades, keyed by Universe/Market ID.</li>
 </ul>
 
 <h3 id="augur-trading-getusertradingpositions-p-callback">augur.trading.getUserTradingPositions(p, callback)</h3>
 
 <p>Returns the trading positions held by a specific user.</p>
 
-<p>Note: This function requires an <a href="#augur-node">Augur Node connection</a>.</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>A connection to an <a href="#augur-node">Augur Node</a> cannot be established.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2109,11 +2337,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
-<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
-<li><strong><code class="prettyprint">outcome</code></strong>  (string) Outcome of the share held for the Market.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">marketID</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#market">Market</a> in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> held for the Market.</li>
 <li><strong><code class="prettyprint">sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading positions.</li>
-<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading positions in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading positions in descending order by <code class="prettyprint">sortBy</code> field.</li>
 <li><strong><code class="prettyprint">limit</code></strong>  (string) &lt;optional&gt; Maximum number of trading positions reports to return.</li>
 <li><strong><code class="prettyprint">offset</code></strong>  (string) &lt;optional&gt; Number of trading positions reports to truncate from the beginning of the results.</li>
 </ul></li>
@@ -2123,7 +2351,133 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Array of the user&rsquo;s trading positions. (Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;)</li>
+<li>(Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>&gt;) Array of the user&rsquo;s trading positions.</li>
+</ul>
+
+<h3 id="augur-trading-normalizeprice-p">augur.trading.normalizePrice(p)</h3>
+
+<p>Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPrice - minPrice).</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">minPrice</code></strong>  (BigNumber|string) This <a href="#market">Market&rsquo;s</a> minimum possible price, as a BigNumber or base-10 string.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong>  (BigNumber|string) This Market&rsquo;s maximum possible price, as a BigNumber or base-10 string.</li>
+<li><strong><code class="prettyprint">normalizedPrice</code></strong>  (BigNumber|string) The price to be normalized, as a BigNumber or base-10 string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Price rescaled to [0, 1], as a base-10 string.</li>
+</ul>
+
+<h3 id="augur-trading-placetrade-p">augur.trading.placeTrade(p)</h3>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">amount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">limitPrice</code></strong>  (string) Display (non-normalized) limit price for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> (non-normalized) for this <a href="#market">Market</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market.</li>
+<li><strong><code class="prettyprint">_direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Market in which to trade, as a hex string.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hex string.</li>
+<li><strong><code class="prettyprint">doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing Orders off the <a href="#order-book">Order Book</a>, not create new ones (default: false).</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called when the first trading transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called when the full trade completes successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if any part of the trade fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
+<h3 id="augur-trading-simulatetrade-p-callback">augur.trading.simulateTrade(p, callback)</h3>
+
+<p>Determines the sequence of makes/takes that will be executed to <a href="#fill-order">Fill</a> the specified <a href="#order">Order</a>, and returns the user&rsquo;s projected balances and fees paid after this sequence is completed. Note: This function automatically normalizes <a href="#share">Share</a> prices, so &ldquo;display prices&rdquo; can be passed in directly for <code class="prettyprint">minPrice</code>, <code class="prettyprint">maxPrice</code>, and <code class="prettyprint">price</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Trade simulation parameters.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">orderType</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+<li><strong><code class="prettyprint">outcome</code></strong>  (number)  <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">shareBalances</code></strong>  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.</li>
+<li><strong><code class="prettyprint">tokenBalance</code></strong>  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.</li>
+<li><strong><code class="prettyprint">userAddress</code></strong>  (string)  The user&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong>  (string)  This <a href="#market">Market&rsquo;s</a> minimum possible price, as a base-10 string.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong>  (string)  This Market&rsquo;s maximum possible price, as a base-10 string.</li>
+<li><strong><code class="prettyprint">price</code></strong>  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
+<li><strong><code class="prettyprint">shares</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong>  (string) The fee rate charged by the Market creator (e.g., pass in &ldquo;0.01&rdquo; if the fee is 1%), as a base-10 string.</li>
+<li><strong><code class="prettyprint">marketOrderBook</code></strong>  (MarketOrderBook) The full <a href="#order-book">Order Book</a> (buy and sell) for this Market and Outcome.</li>
+<li><strong><code class="prettyprint">shouldCollectReportingFees</code></strong>  (boolean) &lt;optional&gt; False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(SimulatedTrade) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.</li>
+</ul>
+
+<h3 id="augur-trading-tradeuntilamountiszero-p-callback">augur.trading.tradeUntilAmountIsZero(p, callback)</h3>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">_price</code></strong>  (string) Display (non-normalized) limit price for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">_fxpAmount</code></strong>  (string) Number of <a href="share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (string) The Tick size (interval) for this Market.</li>
+<li><strong><code class="prettyprint">_direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+<li><strong><code class="prettyprint">_market</code></strong>  (string) Market in which to trade, as a hex string.</li>
+<li><strong><code class="prettyprint">_outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">_tradeGroupId</code></strong>  (string} &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hex string.</li>
+<li><strong><code class="prettyprint">doNotCreateOrders</code></strong>  (boolean} &lt;optional&gt; If set to true, this trade will only take existing orders off the book, not create new ones (default: false).</li>
+<li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}} &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called when the first trading transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called when the full trade completes successfully.</li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if any part of the trade fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
 </ul>
 
 <h2 id="type-definitions">Type Definitions</h2>
@@ -2162,19 +2516,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
 <li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).</li>
-</ul>
-
-<p><a name="AuthenticationMetadata"></a></p>
-
-<h3 id="authenticationmetadata-object">AuthenticationMetadata  (Object)</h3>
-
-<p>Authentication metadata for raw transactions.</p>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">signer</code></strong> (buffer|function) Description pending.</li>
-<li><strong><code class="prettyprint">accountType</code></strong> (string) Description pending.</li>
 </ul>
 
 <p><a name="BetterWorseOrders"></a></p>
@@ -4193,7 +4534,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <p>This transaction will fail if:</p>
 
 <ul>
-<li><code class="prettyprint">_market</code> has not been Finalized and passed the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a>.</li>
+<li><code class="prettyprint">_market</code> has not been Finalized.</li>
+<li>The <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -8522,10 +8864,6 @@ Goals:
 <h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
 
 <p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.</p>
-
-<h2 id="pre-reporting-phase">Pre-Reporting Phase</h2>
-
-<p>This is the phase that occurs after a <a href="#market">Market&rsquo;s</a> creation and before that Market&rsquo;s event has come to pass. Typically, it is the most active period of trading. Once the event has occurred, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
 <h2 id="tentative-outcome">Tentative Outcome</h2>
 
