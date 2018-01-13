@@ -137,7 +137,7 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`_feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
     * **`_denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
     * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
-    * **`_outcomes`**  (Array.<string>) Array of names for all possible outcomes for the Market event. 
+    * **`_outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
@@ -1221,7 +1221,7 @@ Calculates realized and unrealized profit/loss for trades in a single [Outcome](
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`trades`**  (Array.<Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.
+    * **`trades`**  (Array.&lt;Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.
     * **`lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string (default: 0).
 
 #### **Returns:**
@@ -1236,7 +1236,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`markets`**  (Array.<string>) Array of [Market](#market) addresses for which to claim proceeds.
+    * **`markets`**  (Array.&lt;string>) Array of [Market](#market) addresses for which to claim proceeds.
     * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
@@ -1563,11 +1563,11 @@ Type Definitions
 
 #### **Properties:** 
 * **`http`** (string|null) HTTP address of an Ethereum node.
-* **`httpAddresses`** (Array.<string>|null) Array of HTTP Ethereum node addresses. (Can be used instead of `http` to specify a list of HTTP addresses to iterate through until a connection is established.)
+* **`httpAddresses`** (Array.&lt;string>|null) Array of HTTP Ethereum node addresses. (Can be used instead of `http` to specify a list of HTTP addresses to iterate through until a connection is established.)
 * **`ws`** (string|null) Websocket address of an Ethereum node.
-* **`wsAddresses`** (Array.<string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
+* **`wsAddresses`** (Array.&lt;string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
 * **`ipc`** (string|null) IPC address of an Ethereum node.
-* **`ipcAddresses`** (Array.<string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
+* **`ipcAddresses`** (Array.&lt;string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
 * **`networkID`** (string) Description pending.
 
 <a name="ExtraInfo"></a>
@@ -1575,7 +1575,7 @@ Type Definitions
 
 #### **Properties:** 
 * **`resolutionSource`** (string|null) Source that should be referenced when determining the Outcome of a Market.
-* **`tags`** (Array.<string>|null) Keywords used to tag the Market (maximum of 2).
+* **`tags`** (Array.&lt;string>|null) Keywords used to tag the Market (maximum of 2).
 * **`longDescription`** (string|null) Additional information not included in description of the Market.
 
 <a name="Keystore"></a>
