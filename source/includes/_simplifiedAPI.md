@@ -1215,20 +1215,18 @@ augur.trading.simulateTrade({
 ```
 ### augur.trading.calculateProfitLoss(p)
 
-Calculates realized and unrealized profit/loss for trades in a single [Outcome](#outcome).
-
-Note: buy/sell labels are from taker's point-of-view.
+Calculates realized and unrealized profit/loss for trades in a single [Outcome](#outcome). Note: buy/sell labels are from taker's point-of-view.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
     * **`trades`**  (Array.<Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.
-     * **`lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string (default: 0).
+    * **`lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string (default: 0).
 
- #### **Returns:**
+#### **Returns:**
 
- * (Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.
+* (Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.
 
 ### augur.trading.claimMarketsTradingProceeds(p)
 
