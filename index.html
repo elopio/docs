@@ -856,7 +856,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
 <li><strong><code class="prettyprint">_denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
 <li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
-<li><strong><code class="prettyprint">_outcomes</code></strong>  (Array.<string>) Array of names for all possible outcomes for the Market event. </li>
+<li><strong><code class="prettyprint">_outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event. </li>
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
@@ -2095,7 +2095,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">trades</code></strong>  (Array.<Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.</li>
+<li><strong><code class="prettyprint">trades</code></strong>  (Array.&lt;Object&gt;) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.</li>
 <li><strong><code class="prettyprint">lastPrice</code></strong>  (string) &lt;optional&gt; Price of this Outcome&rsquo;s most recent trade, as a base-10 string (default: 0).</li>
 </ul></li>
 </ul>
@@ -2117,7 +2117,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">markets</code></strong>  (Array.<string>) Array of <a href="#market">Market</a> addresses for which to claim proceeds.</li>
+<li><strong><code class="prettyprint">markets</code></strong>  (Array.&lt;string&gt;) Array of <a href="#market">Market</a> addresses for which to claim proceeds.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when each transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
@@ -2569,11 +2569,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">http</code></strong> (string|null) HTTP address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">httpAddresses</code></strong> (Array.<string>|null) Array of HTTP Ethereum node addresses. (Can be used instead of <code class="prettyprint">http</code> to specify a list of HTTP addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">httpAddresses</code></strong> (Array.&lt;string&gt;|null) Array of HTTP Ethereum node addresses. (Can be used instead of <code class="prettyprint">http</code> to specify a list of HTTP addresses to iterate through until a connection is established.)</li>
 <li><strong><code class="prettyprint">ws</code></strong> (string|null) Websocket address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.<string>|null) Array of websocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of websocket addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.&lt;string&gt;|null) Array of websocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of websocket addresses to iterate through until a connection is established.)</li>
 <li><strong><code class="prettyprint">ipc</code></strong> (string|null) IPC address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.<string>|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.&lt;string&gt;|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
 <li><strong><code class="prettyprint">networkID</code></strong> (string) Description pending.</li>
 </ul>
 
@@ -2585,7 +2585,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Source that should be referenced when determining the Outcome of a Market.</li>
-<li><strong><code class="prettyprint">tags</code></strong> (Array.<string>|null) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;string&gt;|null) Keywords used to tag the Market (maximum of 2).</li>
 <li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
 </ul>
 
