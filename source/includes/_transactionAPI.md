@@ -379,7 +379,8 @@ Collects trading profits from outstanding [Shares](#share) in [Finalized Market]
 
 This transaction will fail if:
 
-* `_market` has not been Finalized and passed the [Post-Finalization Waiting Period](post-finalization-waiting-period).
+* `_market` has not been Finalized.
+* The [Post-Finalization Waiting Period](post-finalization-waiting-period) has not passed.
 
 #### **Parameters:**
 

@@ -64,7 +64,9 @@ augur.accounts.getAccountTransferHistory({
 
 Returns the token transfers made to or from a specific Ethereum address. 
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -113,14 +115,14 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
-    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
 
 #### **Returns:**
 
-Description pending.
+* Description pending.
 
 ### augur.createMarket.createCategoricalMarket(p)
 
@@ -139,14 +141,14 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
-    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
 
 #### **Returns:**
 
-Description pending.
+* Description pending.
 
 ### augur.createMarket.createScalarMarket(p)
 
@@ -167,14 +169,14 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`tickSize`**  (string) &lt;optional> The [Tick](#tick) size for this Market, as a base-10 string.
     * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
-    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
 
 #### **Returns:**
 
-Description pending.
+* Description pending.
 
 ### augur.createMarket.getMarketCreationCost(p, callback)
 
@@ -190,7 +192,7 @@ Note: This function will send a transaction if needed to create the current [Rep
 
 #### **Returns:**
 
-* Costs of creating a new Market. (<a href="#MarketCreationCost">MarketCreationCost</a>)
+* (<a href="#MarketCreationCost">MarketCreationCost</a>) Costs of creating a new Market.
 
 <!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 ### augur.createMarket.getMarketCreationCostBreakdown(p, callback)
@@ -208,7 +210,7 @@ Note: This function will send a transaction if needed to create the current Repo
 
 #### **Returns:**
 
-* Cost breakdown for creating a new Market. (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>)
+* (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.
 
 Markets Functions
 ----------------
@@ -480,7 +482,9 @@ augur.markets.getMarketsInfo({
 
 Returns the Market Categories in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 * **`p`** (Object) Parameters object.  
@@ -493,14 +497,16 @@ Note: This function requires an [Augur Node connection](#augur-node).
 * **`callback`** (function) Called after the categories have been retrieved.
 
 #### **Returns:**
-* Array representing the categories in the specified Universe. (Array.&lt;<a href="#Category">Category</a>>)
+* (Array.&lt;<a href="#Category">Category</a>>) Array representing the categories in the specified Universe.
 
 <!-- TODO: Add JS example results -->
 ### augur.markets.getDisputableMarkets(p, callback)
 
 This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market’s result.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -515,13 +521,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Pending.
+* Description pending.
 
 ### augur.markets.getMarketPriceHistory(p, callback)
 
 Returns the prices and timestamps of a specific [Market's](#market) [Outcomes](#outcomes) over time.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -532,13 +540,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* The Market's price time-series, keyed by outcome ID. (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>)
+* (<a href="#MarketPriceTimeSeries">MarketPriceTimeSeries</a>) The Market's price time-series, keyed by outcome ID.
 
 ### augur.markets.getMarkets(p, callback)
 
 Returns an array of [Markets](#market) in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -553,13 +563,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of Market addresses in the Universe, as hexadecimal strings. (Array.&lt;string>)
+* (Array.&lt;string>) Array of Market addresses in the Universe, as hexadecimal strings. 
 
 ### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)
 
 Returns the [Markets](#market) in a specific [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -575,13 +587,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
+* (Array.&lt;string>) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. 
 
 ### augur.markets.getMarketsAwaitingReporting(p, callback)
 
 Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either the Universe or Reporting Window must be specified.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -598,13 +612,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of market addresses awaiting a Designated Report, as hexadecimal strings. (Array.&lt;string>)
+* (Array.&lt;string>) Array of market addresses awaiting a Designated Report, as hexadecimal strings.
 
 ### augur.markets.getMarketsClosingInDateRange(p, callback)
 
 Returns the [Markets](#market) closing between a given time range in a specific [Universe](#universe).
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -621,13 +637,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of closing Market addresses, as hexadecimal strings. (Array.&lt;string>)
+* (Array.&lt;string>) Array of closing Market addresses, as hexadecimal strings.
 
 ### augur.markets.getMarketsCreatedByUser(p, callback)
 
 Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -643,13 +661,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of [MarketsContractAddressRows](#MarketsContractAddressRow), as hexadecimal strings. (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>)
+* (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>) Array of [MarketsContractAddressRows](#MarketsContractAddressRow), as hexadecimal strings.
 
 ### augur.markets.getMarketsInCategory(p, callback)
 
 Returns the [Markets](#market) within a specific category.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -665,14 +685,16 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Array of Market addresses in the specified category, as hexadecimal strings. (Array.&lt;string>)
+* (Array.&lt;string>) Array of Market addresses in the specified category, as hexadecimal strings.
 
 <!-- TODO: Add link to augur.trading.getOrders -->
 ### augur.markets.getMarketsInfo(p, callback)
 
 Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -683,7 +705,7 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
- (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>)
+* (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>)
 
 Reporting Functions
 -------------
@@ -789,7 +811,9 @@ augur.reporting.getStakeTokens({
 
 Returns information about the reports submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -809,13 +833,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>. (Object)
+* (Object) Reporting history, keyed by Universe or Market ID. Each report is of type <a href="#Report">Report</a>.
 
 ### augur.reporting.getReportingSummary(p, callback)
 
 Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -826,14 +852,16 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Summary of the number of Markets in each reporting phase, keyed by reporting phase. (Object)
+* (Object) Summary of the number of Markets in each reporting phase, keyed by reporting phase. 
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 ### augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)
 
 This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -845,13 +873,15 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Pending.
+* Description pending.
 
 ### augur.reporting.getStakeTokens(p, callback)
 
 Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
@@ -864,12 +894,41 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* Stake token details, keyed by stake token ID. (Array.&lt;<a href="#StakeToken">StakeToken</a>>)
+* (Array.&lt;<a href="#StakeToken">StakeToken</a>>) Stake token details, keyed by stake token ID.
 
 Trading Functions
 -----------
 ```javascript
+augur.trading.calculateProfitLoss({
+  trades: [{
+    type: "buy",
+    amount: "1",
+    price: "2",
+    maker: false,
+  }], 
+  lastPrice: "2"
+});
+
+// example output:
+{
+  position: "1",
+  meanOpenPrice: "2",
+  realized: "0",
+  queued: "0",
+  unrealized: "0"
+}
+
 // augur.trading.claimMarketsTradingProceeds: Example JS code coming soon
+
+// augur.trading.claimTradingProceeds: Example JS code coming soon
+
+augur.trading.denormalizePrice({
+  minPrice: "0",
+  maxPrice: "2",
+  normalizedPrice: "0.2",
+});
+// example output:
+"0.4"
 
 augur.trading.getBetterWorseOrders({
   marketID: "0x0000000000000000000000000000000000000001",
@@ -973,7 +1032,15 @@ augur.trading.getOrders({
   },
 }
 
-// augur.trading.getPositionInMarket: Example JS code coming soon
+augur.trading.getPositionInMarket({
+  address: "0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3",
+  market: "0x2221185d7f125b84ac4a1837a0688d2bb58e8491",
+  tickSize: "0.0001",
+}, function (error, result) { 
+  console.log(result);
+});
+// example output:
+["1", "0.5", "1", "0", "0", "1", "1.5"]
 
 augur.trading.getUserTradingHistory({
       account: "0x000000000000000000000000000000000000d00d",
@@ -1088,80 +1155,177 @@ augur.trading.getUserTradingPositions({
     "averagePrice": 0,
   }
 ]
-```
-### augur.trading.claimMarketsTradingProceeds(p)
 
-Similar to the function `augur.trading.claimTradingProceeds`, but attempts to collect trading profits in Ether from a user's outstanding Shares in multiple Finalized Markets instead of a single Finalized Market.
+augur.trading.normalizePrice({
+  minPrice: "0",
+  maxPrice: "2",
+  price: "0.4",
+});
+// example output:
+"0.2"
+
+// augur.trading.placeTrade: Example JS code coming soon
+
+augur.trading.simulateTrade({
+  orderType: 0,
+  outcome: 0,
+  shares: "3",
+  shareBalances: ["0", "5"],
+  tokenBalance: "0",
+  userAddress: "0x111327d07fc17907b4db788e5adf2ed424addff6",
+  minPrice: "0",
+  maxPrice: "1",
+  price: "0.7",
+  marketCreatorFeeRate: "0",
+  reportingFeeRate: "0.01",
+  shouldCollectReportingFees: 1,
+  marketOrderBook: {
+    buy: {
+      BID_0: {
+        amount: "2",
+        fullPrecisionPrice: "0.7",
+        sharesEscrowed: "2",
+        owner: "0x2228238db7ad03e505840bd361dc2f521a72adbc",
+      },
+    },
+    sell: {
+      ASK_0: {
+        amount: "2",
+        fullPrecisionPrice: "0.7",
+        sharesEscrowed: "2",
+        owner: "0x2228238db7ad03e505840bd361dc2f521a72adbc",
+      },
+    },
+  },
+}, function (error, result) { 
+  console.log(result);
+});
+// example output:
+{
+  settlementFees: "0.006",
+  worstCaseFees: "0.009",
+  gasFees: "0",
+  otherSharesDepleted: "3",
+  sharesDepleted: "0",
+  tokensDepleted: "0",
+  shareBalances: ["0", "4"],
+}
+
+// augur.trading.tradeUntilAmountIsZero: Example JS code coming soon
+```
+### augur.trading.calculateProfitLoss(p)
+
+Calculates realized and unrealized profit/loss for trades in a single [Outcome](#outcome).
+
+Note: buy/sell labels are from taker's point-of-view.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`markets`**  (Array.<string>) Array of Market addresses for which to claim proceeds.
-    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`trades`**  (Array.<Object>) Trades for a single Outcome {type: string, amount: string, price: string, maker: boolean}.
+     * **`lastPrice`**  (string) &lt;optional> Price of this Outcome's most recent trade, as a base-10 string (default: 0).
+
+ #### **Returns:**
+
+ * (Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.
+
+### augur.trading.claimMarketsTradingProceeds(p)
+
+Similar to the function `augur.trading.claimTradingProceeds`, but attempts to collect trading profits in Ether from a user's outstanding [Shares](#share) in multiple [Finalized Markets](#finalized-market) instead of a single Finalized Market.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`markets`**  (Array.<string>) Array of [Market](#market) addresses for which to claim proceeds.
+    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
 
 #### **Returns:**
 
-Description pending.
+* Description pending.
 
 ### augur.trading.claimTradingProceeds(p)
 
-Attempts to collect trading profits in Ether from a user's outstanding Shares in a single Finalized Market.
+Attempts to collect trading profits in Ether from a user's outstanding [Shares](#share) in a single [Finalized Market](#finalized-market).
 
-Note: This transaction will fail if `_market` is not Finalized or the 3-day waiting period after Finalization has not yet passed. (This 3-day waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.)
+This function will fail if:
+
+* `_market` is not Finalized.
+* The [Post-Finalization Waiting Period](#post-finalization-waiting-period) has not passed.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`_market`**  (string) Market address for which to claim proceeds.
-    * **`meta`**  ([AuthenticationMetadata](#AuthenticationMetadata)) &lt;optional> Authentication metadata for raw transactions.
+    * **`_market`**  (string) [Market](#market) address for which to claim proceeds.
+    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
 
 #### **Returns:**
 
-Description pending.
+* Description pending.
+
+### augur.trading.denormalizePrice(p)
+
+Rescales a price to its display range [minPrice, maxPrice]: displayPrice = normalizedPrice*(maxPrice - minPrice) + minPrice.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`minPrice`**  (BigNumber|string) This [Market's](#market) minimum possible price, as a BigNumber or base-10 string.
+    * **`maxPrice`**  (BigNumber|string) This Market's maximum possible price, as a BigNumber or base-10 string.
+    * **`normalizedPrice`**  (BigNumber|string) The price to be denormalized, as a BigNumber or base-10 string.
+
+#### **Returns:**
+
+* (string) Price rescaled to [minPrice, maxPrice], as a base-10 string.
 
 <!-- Add links to section -->
 ### augur.trading.getBetterWorseOrders(p, callback)
 
-Returns the IDs of the orders for a given Outcome that have a better and worse price than the specified price. If no better/worse orders exist, null will be returned. This function should be called prior to calling augur.api.CreateOrder.publicCreateOrder in order to get the _betterOrderId and _worseOrderId parameters that it accepts. (_betterOrderId and _worseOrderId are used to optimize the sorting of Orders on the Order Book.)
+Returns the IDs of the [Orders](#order) for a given [Outcome](#outcome) that have a better and worse price than the specified `price`. If no better/worse Orders exist, null will be returned. This function should be called prior to calling `augur.api.CreateOrder.publicCreateOrder` in order to get the `_betterOrderId` and `_worseOrderId` parameters that it accepts. (`_betterOrderId` and `_worseOrderId` are used to optimize the sorting of Orders on the [Order Book](#order-book).)
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`marketID`**  (string) Contract address of the Market for which to retrieve the better/worse orders, as a hexadecimal string.
-    * **`outcome`**  (string) Market Outcome for which to find better/worse orders.
-    * **`orderType`**  (string) Desired type of order. Valid values are "buy" and "sell".
-    * **`price`**  (number) Price point at which to find better/worse orders.
-* **`callback`** (function) Called when better/worse orders have been retrieved.
+    * **`marketID`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a hexadecimal string.
+    * **`outcome`**  (string) Market Outcome for which to find better/worse Orders.
+    * **`orderType`**  (string) Desired type of Order. Valid values are "buy" and "sell".
+    * **`price`**  (number) Price point at which to find better/worse Orders.
+* **`callback`** (function) Called when better/worse Orders have been retrieved.
 
 #### **Returns:**
 
-* Object containing the better/worse order IDs, as hexidecimal strings. (<a href="#BetterWorseOrders">BetterWorseOrders</a>)
+* (<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexidecimal strings.
 
 ### augur.trading.getOrders(p, callback)
 
 Returns a list of orders in a given Universe or Market.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve orders, as a hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a hexadecimal string. Either this parameter or the Universe must be specified.
     * **`outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
-    * **`creator`**  (string) &lt;optional> Ethereum address of the order creator, as a hexadecimal string.
+    * **`creator`**  (string) &lt;optional> Ethereum address of the Order creator, as a hexadecimal string.
     * **`orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
     * **`earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
@@ -1173,73 +1337,172 @@ Note: This function requires an [Augur Node connection](#augur-node).
 
 #### **Returns:**
 
-* One side of the order book (buy or sell) for the specified Market/Universe and Outcome. (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)
+* (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) One side of the Order Book (buy or sell) for the specified Market/Universe and Outcome.
 
-### augur.trading.getPositionInMarket(p)
+### augur.trading.getPositionInMarket(p, callback)
 
-Gets the number of Shares held by a specific Ethereum address for each Outcome of a Market.
+Gets the number of [Shares](#share) held by a specific Ethereum address for each [Outcome](#outcome) of a [Market](#market).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object. 
 * **Properties:**
-    * **`address`**  (string) Address for which to look up share balances.
-    * **`market`**  (string) Market for which to look up share balances.
-    * **`tickSize`**  (string) Tick size (interval) for this Market.
+    * **`address`**  (string) Address for which to look up Share balances.
+    * **`market`**  (string) Market for which to look up Share balances.
+    * **`tickSize`**  (string) [Tick](#tick) size (interval) for this Market.
+* **`callback`** (function) Called when the requested Market position has been received and parsed.
 
 #### **Returns:**
 
-* Number of shares for each Outcome of this Market. (Array.&lt;string>)
+* (Array.&lt;string>) Number of Shares for each Outcome of this Market.
 
 <!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory(p, callback)
 
 Returns information about the trades a specific user has made.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`account`**  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the trading history, as a hexadecimal string. Either this parameter or the Market ID must be specified.
+    * **`universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading history, as a hexadecimal string. Either this parameter or the [Market](#market) ID must be specified.
     * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a hexadecimal string. Either this parameter or the Universe must be specified.
-    * **`outcome`**  (string) Outcome of the share being bought/sold.
+    * **`outcome`**  (string) [Outcome](#outcome) of the [Share](#share) being bought/sold.
     * **`orderType`**  (string) Type of trade. Valid values are "buy" and "sell".
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the trading history.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading history in descending order by sortBy field.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading history in descending order by `sortBy` field.
     * **`limit`**  (string) &lt;optional> Maximum number of trading history reports to return.
     * **`offset`**  (string) &lt;optional> Number of trading history reports to truncate from the beginning of the results.
 * **`callback`** (function) Called when trading history has been received and parsed.
 
 #### **Returns:**
 
-* Array of the user's trades, keyed by Universe/Market ID. (Array.&lt;<a href="#UserTrade">UserTrade</a>>)
+* (Array.&lt;<a href="#UserTrade">UserTrade</a>>) Array of the user's trades, keyed by Universe/Market ID.
 
 ### augur.trading.getUserTradingPositions(p, callback)
 
 Returns the trading positions held by a specific user.
 
-Note: This function requires an [Augur Node connection](#augur-node).
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) cannot be established.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.
-    * **`universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.
-    * **`marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.
-    * **`outcome`**  (string) Outcome of the share held for the Market.
+    * **`universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.
+    * **`marketID`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`outcome`**  (string) [Outcome](#outcome) of the [Share](#share) held for the Market.
     * **`sortBy`**  (string) &lt;optional> Field name by which to sort the trading positions.
-    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by sortBy field.
+    * **`isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by `sortBy` field.
     * **`limit`**  (string) &lt;optional> Maximum number of trading positions reports to return.
     * **`offset`**  (string) &lt;optional> Number of trading positions reports to truncate from the beginning of the results.
 * **`callback`** (function) Called when the trading positions have been received and parsed.
 
 #### **Returns:**
 
-* Array of the user's trading positions. (Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>)
+* (Array.&lt;<a href="#UserTradePosition">UserTradePosition</a>>) Array of the user's trading positions.
+
+### augur.trading.normalizePrice(p)
+
+Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPrice - minPrice).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`minPrice`**  (BigNumber|string) This [Market's](#market) minimum possible price, as a BigNumber or base-10 string.
+    * **`maxPrice`**  (BigNumber|string) This Market's maximum possible price, as a BigNumber or base-10 string.
+    * **`normalizedPrice`**  (BigNumber|string) The price to be normalized, as a BigNumber or base-10 string.
+
+#### **Returns:**
+
+* (string) Price rescaled to [0, 1], as a base-10 string.
+
+### augur.trading.placeTrade(p)
+
+* Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`amount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
+    * **`limitPrice`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
+    * **`minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this [Market](#market), as a base-10 string.
+    * **`maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
+    * **`tickSize`**  (string) The [Tick](#tick) size (interval) for this Market.
+    * **`_direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
+    * **`_market`**  (string) Market in which to trade, as a hex string.
+    * **`_outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`_tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
+    * **`doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
+    * **`meta`**  ({signer: buffer|function, accountType: string}) Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called when the full trade completes successfully.
+    * **`onFailed`**  (function) Called if any part of the trade fails.
+
+#### **Returns:**
+
+* Description pending.
+
+### augur.trading.simulateTrade(p, callback)
+
+Determines the sequence of makes/takes that will be executed to [Fill](#fill-order) the specified [Order](#order), and returns the user's projected balances and fees paid after this sequence is completed. Note: This function automatically normalizes [Share](#share) prices, so "display prices" can be passed in directly for `minPrice`, `maxPrice`, and `price`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Trade simulation parameters.
+  **Properties:**
+    * **`orderType`**  (number) Order type (0 for "buy", 1 for "sell").
+    * **`outcome`**  (number)  [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`shareBalances`**  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.
+    * **`tokenBalance`**  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.
+    * **`userAddress`**  (string)  The user's Ethereum address, as a hexadecimal string.
+    * **`minPrice`**  (string)  This [Market's](#market) minimum possible price, as a base-10 string.
+    * **`maxPrice`**  (string)  This Market's maximum possible price, as a base-10 string.
+    * **`price`**  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
+    * **`shares`**  (string) Number of Shares to trade, as a base-10 string.
+    * **`marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
+    * **`marketOrderBook`**  (MarketOrderBook) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
+    * **`shouldCollectReportingFees`**  (boolean) &lt;optional> False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).
+ 
+#### **Returns:**
+
+* (SimulatedTrade) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.
+
+### augur.trading.tradeUntilAmountIsZero(p, callback)
+
+* Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  **Properties:**
+      * **`_price`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
+      * **`_fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
+      * **`numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
+      * **`tickSize`**  (string) The Tick size (interval) for this Market.
+      * **`_direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
+      * **`_market`**  (string) Market in which to trade, as a hex string.
+      * **`_outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+      * **`_tradeGroupId`**  (string} &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
+      * **`doNotCreateOrders`**  (boolean} &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
+      * **`meta`**  ({signer: buffer|function, accountType: string}} &lt;optional> Authentication metadata for raw transactions.
+      * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
+      * **`onSuccess`**  (function) Called when the full trade completes successfully.
+      * **`onFailed`**  (function) Called if any part of the trade fails.
+
+#### **Returns:**
+
+* Description pending.
 
 Type Definitions
 -------------
@@ -1269,15 +1532,6 @@ Type Definitions
 * **`symbol`** (string|null) Token symbol (if any).
 * **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
 * **`marketID`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
-
-<a name="AuthenticationMetadata"></a>
-### AuthenticationMetadata  (Object)
-
-Authentication metadata for raw transactions.
-
-#### **Properties:** 
-* **`signer`** (buffer|function) Description pending.
-* **`accountType`** (string) Description pending.
 
 <a name="BetterWorseOrders"></a>
 ### BetterWorseOrders  (Object)

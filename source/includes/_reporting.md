@@ -17,25 +17,20 @@ Reporting States
 
 <a href="images/Detailed Reporting Diagram.png"><img src="images/Detailed Reporting Diagram.png"></a>
 
-The Reporting Diagram above is a high level overview of [Reporting](#report) implemented by Augur. There are two ways for a [Market](#market) to attempt to [Finalize](#finalized-market): if the [Tentative Outcome](#tentative-outcome) was not disputed during a [Dispute Round](#dispute-round), or (rarely) during a [Fork](#fork). Augur Markets have 7 potential states after creation. The potential states, or “phases”, of a Market are as follows:
+The Reporting Diagram above is a high level overview of [Reporting](#report) implemented by Augur. There are two ways for a [Market](#market) to attempt to [Finalize](#finalized-market): if the [Tentative Outcome](#tentative-outcome) was not disputed during a [Dispute Round](#dispute-round), or (rarely) during a [Fork](#fork). Augur Markets have 6 potential states after creation. The potential states, or “phases”, of a Market are as follows:
 
-1. Pre-Reporting
-2. Designated Reporting
-3. Open Reporting
-4. Waiting for the Next Fee Window to Begin
-5. Dispute Round
-6. Fork
-7. Finalized
-
-### Pre-Reporting
-
-The [Pre-Reporting Phase](#pre-reporting-phase) (1) is the time period where the Market's [End Time](#end-time) has not come to pass, generally this is the most active trading period. Once the End Time has come to pass, the Market enters the [Designated Reporting Phase](#designated-reporting-phase) (2).
+1. Designated Reporting
+2. Open Reporting
+3. Waiting for the Next Fee Window to Begin
+4. Dispute Round
+5. Fork
+6. Finalized
 
 ### Designated Reporting
 
-When creating a Market, the [Market Creator](#market-creator) is required to choose a [Designated Reporter](#designated-reporter) and post a [No-Show Bond](#no-show-bond). During the Designated Reporting Phase (2), the Market’s Designated Reporter has at most three days to Report on the [Outcome](#outcome) of the event. If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market automatically enters the [Open Reporting Phase](#open-reporting-phase) (3).
+When creating a Market, the [Market Creator](#market-creator) is required to choose a [Designated Reporter](#designated-reporter) and post a [No-Show Bond](#no-show-bond). During the Designated Reporting Phase (1), the Market’s Designated Reporter has at most three days to Report on the [Outcome](#outcome) of the event. If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market automatically enters the [Open Reporting Phase](#open-reporting-phase) (2).
 
-If the Designated Reporter submits a Report on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the [Designated Reporter Stake](#designated-reporter-stake) on the Reported Outcome, which it will forfeit if the Market finalizes to any outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the Waiting for the Next Fee Window to Begin Phase (4), and the Reported Outcome becomes the Market’s [Tentative Outcome](#tentative-outcome).
+If the Designated Reporter submits a Report on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the [Designated Reporter Stake](#designated-reporter-stake) on the Reported Outcome, which it will forfeit if the Market finalizes to any outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the Waiting for the Next Fee Window to Begin Phase (3), and the Reported Outcome becomes the Market’s [Tentative Outcome](#tentative-outcome).
 
 ### Open Reporting
 
@@ -45,11 +40,11 @@ The Market’s First Public Reporter receives the No-Show Bond that was forfeite
 
 The First Public Reporter does not need to Stake any of their own [REP](#rep) when Reporting the Outcome of the Market. Because the No-Show REP Bond is applied as Stake on the First Public Reporter’s chosen Outcome, they may claim the No-Show REP Bond only if their Reported Outcome ultimately agrees with consensus. In this way, any Market whose Designated Reporter fails to Report is expected to have its Outcome reported by someone very soon after entering the Open Reporting Phase.
 
-Once a [First Public Report](#first-public-report) has been received, the Reported Outcome becomes the Market’s Tentative Outcome, and the Market enters the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) (4).
+Once a [First Public Report](#first-public-report) has been received, the Reported Outcome becomes the Market’s Tentative Outcome, and the Market enters the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) (3).
 
 ### Waiting for the Next Fee Window to Begin
 
-Once the market receives its Initial Report -- whether by the Designated Reporter or by a First Public Reporter from the community -- the Market enters the Waiting for the Next Fee Window to Begin Phase. During this phase, Reporting for the Market is on hold until end of the current [Fee Window](#fee-window). Once the current Fee Window comes to an end, the Market enters the [Dispute Round Phase](#dispute-round-phase) (5).
+Once the market receives its Initial Report -- whether by the Designated Reporter or by a First Public Reporter from the community -- the Market enters the Waiting for the Next Fee Window to Begin Phase. During this phase, Reporting for the Market is on hold until end of the current [Fee Window](#fee-window). Once the current Fee Window comes to an end, the Market enters the [Dispute Round Phase](#dispute-round-phase) (4).
 
 ### Dispute Round
 
@@ -57,15 +52,15 @@ The [Dispute Round](#dispute-round) is a 7-day period, during which any REP hold
 
 The [Dispute Bonds](#dispute-bond) need not be paid in their entirety by a single user. Augur allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking some REP on some Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.
 
-In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the [Fork Phase](#fork-period) (6). If the size of the filled Dispute Bond is greater than the [Fork Threshold](#fork-threshold), then the market will enter the [Fork Phase](#fork-period). If the size of the filled Dispute bond is less than the [Fork Threshold](#fork-threshold), then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.
+In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the [Fork Phase](#fork-period) (5). If the size of the filled Dispute Bond is greater than the [Fork Threshold](#fork-threshold), then the market will enter the [Fork Phase](#fork-period). If the size of the filled Dispute bond is less than the [Fork Threshold](#fork-threshold), then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.
 
-If no Dispute is successful during the 7-day Dispute Round, the Market enters the [Finalized State](#finalized-phase) (7) with its Tentative Outcome accepted as the [Final Outcome](#final-outcome).
+If no Dispute is successful during the 7-day Dispute Round, the Market enters the [Finalized State](#finalized-phase) (6) with its Tentative Outcome accepted as the [Final Outcome](#final-outcome).
 
 All unsuccesful Dispute Stake is returned to the original owners at the end of every Dispute Round. All successful Dispute Stake is applied to the Outcome it championed, and will remain there until the Market is Finalized (or until a [Fork](#fork) occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the reward pool from the current Fee Window.
 
 ### Fork
 
-The Fork Phase is a special state that lasts up to 60 days and is intended to be an exceedingly rare occurrence. The outcome of a Fork cannot be Disputed. The Disputed Market that caused the Fork, referred to as the [Forking Market](#forked-market), enters the [Finalized State](#finalized-phase) (7) at the end of the Fork Phase. For more information on the Forking process, refer to the [Forking Details](#forking-details) section.
+The Fork Phase is a special state that lasts up to 60 days and is intended to be an exceedingly rare occurrence. The outcome of a Fork cannot be Disputed. The Disputed Market that caused the Fork, referred to as the [Forking Market](#forked-market), enters the [Finalized State](#finalized-phase) (6) at the end of the Fork Phase. For more information on the Forking process, refer to the [Forking Details](#forking-details) section.
 
 ### Finalized
 

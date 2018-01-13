@@ -311,10 +311,6 @@ A Position is the amount of [Shares](#share) that are owned (a long position) or
 
 Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.
 
-## Pre-Reporting Phase
-
-This is the phase that occurs after a [Market's](#market) creation and before that Market's event has come to pass. Typically, it is the most active period of trading. Once the event has occurred, the Market enters the [Designated Reporting Phase](#designated-reporting-phase).
-
 ## Tentative Outcome
 
 The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market makes it through the [Dispute Round Phase](#dispute-round-phase) without being Challenged, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
