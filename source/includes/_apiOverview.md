@@ -69,7 +69,7 @@ Alternatively, this can be done using [yarn](https://yarnpkg.com/en/package/augu
 
 Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur Node](#augur-node). These can be running locally or remotely (hosted). 
 
-To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or ipc addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. Hhowever, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
+To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is our local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
@@ -124,7 +124,7 @@ To use the account system, the user specifies a password. Everything else is don
 
 A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by augur.js. The account object will be returned to the callback provided or simply returned if no callback is provided.
 
-The Augur UI will handle your account information for you, but if you are using augur.js on it's own you will need to manage the account yourself. augur.js doesn't sign any transactions for you if you aren't using the Augur UI.
+The Augur UI will handle your account information for you, but if you are using augur.js on its own you will need to manage the account yourself. augur.js doesn't sign any transactions for you if you aren't using the Augur UI.
 
 If you want to use the augur.js API directly, you will need to sign any transaction that will modify information on the blockchain (non-call transactions). All transactions take a `_signer` parameter which should be set to the sending account's `privateKey` Buffer or a function that will sign a transaction (hardware wallet).
 

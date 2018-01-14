@@ -59,6 +59,96 @@ augur.accounts.getAccountTransferHistory({
     outcome: null,
   }
 ]
+
+// augur.accounts.importAccount: Example JS code coming soon
+
+augur.accounts.login({
+  keystore: {
+    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  password: "thisismysupersecurepassword"
+}, function (error, account) {
+  console.log(account);
+});
+// example output:
+{
+  address: undefined,
+  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
+  keystore: {
+    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+};
+
+// augur.accounts.loginWithMasterKey: Example JS code coming soon
+
+// augur.accounts.logout: Example JS code coming soon
+
+augur.accounts.register({
+    password: "thisismysupersecurepassword",
+}, function (error, account) {
+  console.log(account);
+});
+// example output:
+{
+  address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
+  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
+  keystore: {
+    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+};
 ```
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
@@ -86,6 +176,166 @@ This function will fail if:
 
 * (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>) Array representing the account's transfer history.
 
+### augur.accounts.importAccount(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`password`**  (string) Password for the account being imported.
+    * **`address`**  (string) Ethereum address of the account being imported.
+    * **`keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
+* **`callback`** (function) Called after the account's private key has been successfully decrypted.
+
+#### **Returns:**
+
+*  (<a href="#Account">Account</a>) Logged-in account object.
+
+### augur.accounts.login(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`password`**  (string) Password for the account being imported.
+    * **`address`**  (string) Ethereum address for this account, as a hexadecimal string.
+    * **`keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
+* **`callback`** (function) Called after the account has been successfully generated.
+
+#### **Returns:**
+
+*  (<a href="#Account">Account</a>) Logged-in account object.
+
+### augur.accounts.loginWithMasterKey(p)
+
+Login with a user-supplied plaintext private key.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`privateKey`** (buffer|string) The private key for this account, as a Buffer or a hexadecimal string.
+
+#### **Returns:**
+
+*  (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).
+
+### augur.accounts.login(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`password`**  (string) Password for the account being imported.
+    * **`address`**  (string) Ethereum address for this account, as a hexadecimal string.
+    * **`keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
+* **`callback`** (function) Called after the account has been successfully generated.
+
+#### **Returns:**
+
+*  (<a href="#Account">Account</a>) Logged-in account object.
+
+### augur.accounts.register(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`password`**  (string) Password for the account being imported.
+* **`callback`** (function) Called after the account has been successfully generated.
+
+#### **Returns:**
+
+*  (<a href="#Account">Account</a>) Logged-in account object.
+
+Assets Functions
+----------------
+```javascript
+// augur.assets.depositEther: Example JS code coming soon
+
+// augur.assets.sendEther: Example JS code coming soon
+
+// augur.assets.sendReputation: Example JS code coming soon
+```
+### augur.assets.depositEther(p)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`etherToDeposit`**  (string) Amount of Ether to convert to "wrapped Ether" (AKA Ether tokens), as a base-10 string.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the transaction fails.
+
+#### **Returns:**
+
+*  Description pending.
+
+### augur.assets.sendEther(p)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`etherToSend`**  (string) Amount of Ether to send, as a base-10 string.
+    * **`to`**  (string) Ethereum address of the recipient, as a hexadecimal string.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the transaction fails.
+
+#### **Returns:**
+
+*  Description pending.
+
+### augur.assets.sendReputation(p)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`universe`**  (string) The universe of Reputation to use.
+    * **`reputationToSend`**  (string) Amount of Reputation to send, as a base-10 string.
+    * **`_to`**  (string) Ethereum address of the recipient, as a hexadecimal string.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the transaction fails.
+
+#### **Returns:**
+
+*  Description pending.
+
+Connect Function
+----------------
+```javascript
+// augur.connect: Example JS code coming soon
+```
+### augur.connect(connectOptions, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`connectOptions`** (<a href="ConnectOptions">ConnectOptions</a>) Options used to connect to an Ethereum node and an Augur Node.
+* **`callback`** (function) &lt;optional> Callback function.
+
 Create-Market Functions
 ----------------
 ```javascript
@@ -95,9 +345,28 @@ Create-Market Functions
 
 // augur.createMarket.createScalarMarket: Example JS code coming soon
 
-// augur.createMarket.getMarketCreationCost: Example JS code coming soon
+augur.createMarket.getMarketCreationCost({
+    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
+}, function (error, result) { 
+  console.log(result);
+});
+// example output:
+{
+  designatedReportNoShowReputationBond: "0.174840291341145834",
+  etherRequiredToCreateMarket: "0.025"
+}
 
-// augur.createMarket.getMarketCreationCostBreakdown: Example JS code coming soon
+augur.createMarket.getMarketCreationCostBreakdown({
+    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
+}, function (error, result) { 
+  console.log(result);
+});
+// example output:
+{
+  validityBond: "0.01",
+  designatedReportNoShowReputationBond: "0.174840291341145834",
+  targetReporterGasCosts: "0.015"
+}
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
@@ -180,7 +449,7 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
 
 ### augur.createMarket.getMarketCreationCost(p, callback)
 
-Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total ether required to create a new [Market](#market).
+Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total Ether required to create a new [Market](#market).
 
 Note: This function will send a transaction if needed to create the current [Reporting Window](#reporting-window).
 
@@ -197,9 +466,9 @@ Note: This function will send a transaction if needed to create the current [Rep
 <!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 ### augur.createMarket.getMarketCreationCostBreakdown(p, callback)
 
-Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
+Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These Ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
 
-Note: This function will send a transaction if needed to create the current Reporting Window.
+Note: This function will send a transaction if needed to create the current [Reporting Window](#reporting-window).
 
 #### **Parameters:**
 
@@ -211,6 +480,106 @@ Note: This function will send a transaction if needed to create the current Repo
 #### **Returns:**
 
 * (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.
+
+Events Functions
+----------------
+```javascript
+// augur.events.getAllAugurLogs: Example JS code coming soon
+
+// augur.events.startAugurNodeEventListeners: Example JS code coming soon
+
+// augur.events.startBlockchainEventListeners: Example JS code coming soon
+
+// augur.events.startBlockListeners: Example JS code coming soon
+
+// augur.events.stopAugurNodeEventListeners: Example JS code coming soon
+
+// augur.events.stopBlockchainEventListeners: Example JS code coming soon
+
+// augur.events.stopBlockListeners: Example JS code coming soon
+```
+### augur.events.getAllAugurLogs(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`).
+    * **`toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
+* **`callback`** (function) Called when all data has been received and parsed.
+
+#### **Returns:**
+
+* ({ contractName => { eventName => [parsed event logs] } }) Description pending.
+
+### augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)
+
+Start listening for events emitted by augur-node.
+
+#### **Parameters:**
+
+* **`eventCallbacks`** (Object.&lt;function()>) Callbacks to fire when events are received, keyed by event name.
+* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
+
+#### **Returns:**
+
+*  Description pending.
+
+### augur.events.startBlockchainEventListeners(eventCallbacks, onSetupComplete)
+
+Start listening for events emitted by the Ethereum blockchain.
+
+#### **Parameters:**
+
+* **`eventCallbacks`** (Object.&lt;function()>) &lt;optional> Callbacks to fire when events are received, keyed by contract name and event name.
+* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
+
+#### **Returns:**
+
+*  Description pending.
+
+### augur.events.startBlockListeners()
+
+Start listening for blocks.
+
+#### **Parameters:**
+
+* **`blockCallbacks.onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
+* **`blockCallbacks.onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully started; false otherwise.
+
+### augur.events.stopAugurNodeEventListeners(callback)
+
+Removes all active listeners for events emitted by augur-node.
+
+#### **Parameters:**
+
+* **`callback`** (function) &lt;optional> 
+
+#### **Returns:**
+
+*  Description pending.
+
+### augur.events.stopBlockchainEventListeners()
+
+Removes all active listeners for events emitted by the Ethereum blockchain.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully stopped; false otherwise.
+
+### augur.events.stopBlockListeners()
+
+Stop listening for blocks and block removals.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully stopped; false otherwise.
 
 Markets Functions
 ----------------
@@ -778,6 +1147,14 @@ augur.reporting.getReportingWindowsWithUnclaimedFees({
 });
 // example output: coming soon
 
+augur.reporting.getStakeRequiredForDesignatedReporter({
+    universe: "0x000000000000000000000000000000000000000b"
+}, function (error, result) { 
+  console.log(result);
+});
+// example output:
+"1.2345"
+
 augur.reporting.getStakeTokens({ 
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
@@ -806,6 +1183,24 @@ augur.reporting.getStakeTokens({
   },
 }
 ```
+### augur.reporting.finalizeMarket(p)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`market`**  (string) Address of the Market to Finalize, as a hex string.
+    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
+    * **`onFailed`**  (function) Called if/when the transaction fails.
+
+#### **Returns:**
+
+* Description pending.
+
 <!-- Add glossary links to section-->
 ### augur.reporting.getReportingHistory(p, callback)
 
@@ -875,9 +1270,24 @@ This function will fail if:
 
 * Description pending.
 
+### augur.reporting.getStakeRequiredForDesignatedReporter(p, callback)
+
+Description pending.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`universe`**  (string) [Universe](#universe) address.
+* **`callback`** (function) Called after Stake required has been retrieved.
+
+#### **Returns:**
+
+*  (string) Amount of Stake required for the [Designated Reporter](#designated-reporter) on this [Universe](#universe), as a base-10 string.
+
 ### augur.reporting.getStakeTokens(p, callback)
 
-Returns the stake tokens owned by a specific user that are either unclaimed or are in Markets that have not been finalized.
+Returns the Stake tokens owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
 
 This function will fail if:
 
@@ -887,8 +1297,8 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`universe`**  (string) Contract address of the Universe in which to retrieve the stake tokens, as a hexadecimal string.
-    * **`account`**  (string) Contract address of the account for which to retrieve the stake tokens, as a hexadecimal string.
+    * **`universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Stake tokens, as a hexadecimal string.
+    * **`account`**  (string) Contract address of the account for which to retrieve the Stake tokens, as a hexadecimal string.
     * **`stakeTokenState`**  (<a href="#STAKE_TOKEN_STATE">STAKE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
 * **`callback`** (function) Called when reporting history has been received and parsed.
 
@@ -1559,7 +1969,7 @@ Type Definitions
 * **`augurNode`** (string) Websocket address of an [Augur Node](#augur-node).
 
 <a name="EthereumNode"></a>
-### ExtraInfo  (Object)
+### EthereumNode  (Object)
 
 #### **Properties:** 
 * **`http`** (string|null) HTTP address of an Ethereum node.
