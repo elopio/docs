@@ -55,13 +55,13 @@
 
 <p>The stable Augur application is built and hosted at <a href="https://app.augur.net">https://app.augur.net</a>. If you want to use or help test Augur, you do not need to download or install anything! Just go to <a href="https://app.augur.net">https://app.augur.net</a> and start using it. (If you want to use our cutting-edge development client, this is maintained at <a href="https://dev.augur.net">https://dev.augur.net</a> &ndash; warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using <a href="https://app.augur.net">https://app.augur.net</a> for a more stable experience.)</p>
 
-<p>Augur has its own dedicated Stack Exchange which can be found at <a href="https://augur.stackexchange.com/">augur.stackexchange.com</a>. The Stack Exchange allows people to ask questions about Augur and get answers to those questions. It&rsquo;s a great resource to find the answers for questions you might have that aren&rsquo;t answered directly in these documents. Additionally, you can chat with us on <a href="https://discordapp.com">Discord</a>. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. Most questions are best asked in the <code class="prettyprint">#dev</code> or <code class="prettyprint">#general</code> channels.</p>
+<p>Augur has its own dedicated <a href="https://augur.stackexchange.com">Stack Exchange</a>, which allows anyone to ask questions about Augur and get answers to those questions. It&rsquo;s a great resource to find the answers for questions you might have that aren&rsquo;t answered directly in these documents. Additionally, you can chat with us on <a href="https://discordapp.com">Discord</a>. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. Most questions are best asked in the <code class="prettyprint">#dev</code> or <code class="prettyprint">#general</code> channels.</p>
 
 <h2 id="getting-started">Getting Started</h2>
 
 <p>If you would like to help develop Augur, you&rsquo;ll need to build the client from source. To do this, first install <a href="https://nodejs.org/">Node.js</a>, and <a href="https://git-scm.com/downloads">Git</a>.</p>
 
-<p>Next, clone the <a href="https://github.com/AugurProject/augur">Augur repository</a> from Github by opening a terminal window and typing:</p>
+<p>Next, clone the <a href="https://github.com/AugurProject/augur">Augur GitHub repository</a> by opening a terminal window and typing:</p>
 
 <p><code class="prettyprint">$ git clone https://github.com/AugurProject/augur.git</code></p>
 
@@ -69,7 +69,7 @@
 
 <p><code class="prettyprint">$ cd augur</code></p>
 
-<p>Once this has been done, Augur&rsquo;s dependencies will need to be installed. This can be done using either <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. Both methods are detailed in the next sections.</p>
+<p>Once this has been done, Augur&rsquo;s dependencies will need to be installed. This can be done using <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. Both methods are detailed in the next sections.</p>
 
 <p>If you plan on submitting a pull request to the Augur Project, please be sure to read through the <a href="#contributing">Contributing</a> section of these documents before submitting the request.</p>
 
@@ -139,11 +139,11 @@
 
 The <code>--ws</code> flag allows websocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
-<p><strong>Note to Geth users:</strong> Geth&rsquo;s RPC server uses regular (unencrypted) HTTP and because of this, in order for the Augur app to communicate with your local Geth node, it must be served over HTTP.</p>
+<p><strong>Note to Geth users:</strong> Since Geth&rsquo;s RPC server uses regular (unencrypted) HTTP, the Augur app must also use regular HTTP to communicate with a local Geth node.</p>
 
 <h2 id="hosted-ethereum-node">Hosted Ethereum Node</h2>
 
-<p>Since many users do not wish to go to the trouble of running a full Ethereum node solely for the purpose of using Augur, Augur maintains a public (testnet during the beta) Ethereum node at <a href="https://eth9000.augur.net">https://eth9000.augur.net</a>, which is used automatically by <a href="https://app.augur.net">https://app.augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).</p>
+<p>Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public (testnet during the beta) Ethereum node at <a href="https://eth9000.augur.net">https://eth9000.augur.net</a>, which is used automatically by <a href="https://app.augur.net">https://app.augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).</p>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'"></p>
 
@@ -151,9 +151,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Trading section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur will maintain an <a href="#order-book">Order Book</a> for each of the Markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, if there is an Order on the book that will fulfill your trade request then it will be <a href="#fill-order">Filled</a> immediately. If there is no matching Order, or your trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of your trade will be placed on the Order Book as an Order. If you are the <a href="#order-creator">Creator</a> of the Order you can cancel it to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
+<p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur maintains an <a href="#order-book">Order Book</a> for each of the Markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, that trade request will be <a href="#fill-order">Filled</a> immediately if there is an Order on the Order Book that will fulfill it. If there is no matching Order, or if the trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of the trade will be placed on the Order Book as an Order. Order <a href="#order-creator">Creators</a> may cancel their Order to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
 
-<p>The Augur UI will offer users the best prices first when displaying the Order Book on each Market page. Orders are never executed at a worse price than the limit price set by the trader, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback Orders to attempt to fill our Order in the event that the best Order was filled before we sent the transaction. These backup/fallback Orders will always fit within the limit price set by the trader.</p>
+<p>The Augur UI offers users the best prices first when displaying the Order Book on each Market page. Orders are never executed at a worse price than the limit price set by the trader, however they can settle for better than the limit price. Orders can also be partially filled. The UI will automatically include multiple backup/fallback Orders to attempt to fill the Order in the event that the best Order was filled before the transaction was sent. These backup/fallback Orders are always within the limit price set by the trader.</p>
 
 <h2 id="trading-example">Trading Example</h2>
 
@@ -358,13 +358,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Reporting section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Once the event underlying an Augur <a href="#market">Market</a> occurs, the <a href="#outcome">Outcome</a> needs to be determined in order for the Market to <a href="#finalized-market">Finalize</a> and begin <a href="#settlement">Settlement</a>. The Outcomes of events are reported by Augur’s <a href="#decentralized-oracle">Decentralized Oracle</a>, which consists of profit-motivated <a href="#reporter">Reporters</a> reporting on the Outcome of events. Anyone who owns <a href="#rep">REP</a> tokens may participate in the <a href="#report">Reporting</a> process by submitting a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a>, or by <a href="#dispute">Disputing</a> <a href="#tentative-outcomes">Tentative Outcomes</a>. Reporters whose <a href="#report">Reports</a> concur with consensus are financially rewarded, while those whose Reports do not concur with consensus are financially penalized.</p>
+<p>Once the event underlying an Augur <a href="#market">Market</a> occurs, the <a href="#outcome">Outcome</a> needs to be determined in order for the Market to <a href="#finalized-market">Finalize</a> and begin <a href="#settlement">Settlement</a>. The Outcomes of events are reported by Augur’s <a href="#decentralized-oracle">Decentralized Oracle</a>, which consists of profit-motivated <a href="#reporter">Reporters</a> reporting on the Outcome of events. Anyone who owns <a href="#rep">REP</a> tokens may participate in the reporting and disputing of Outcomes. Reporters whose <a href="#report">Reports</a> concur with consensus are financially rewarded, while those whose Reports do not concur with consensus are financially penalized.</p>
 
 <h2 id="fee-windows">Fee Windows</h2>
 
-<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. Any <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window receive that number of <a href="#participation-token">Participation Tokens</a> for that Fee Window. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
+<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. Any <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to a <a href="#reporting-fee-pool">Reporting Fee Fee Pool</a> for that Fee Window. At the end of the Fee Window, the Reporting Fee Pool is paid out to <a href="#rep">REP</a> holders who participated in that reporting process. <a href="#reporter">Reporters</a> receive rewards in proportion to the amount of REP they Staked during that Fee Window. Participation includes: Staking during an <a href="#initial-report">Initial Report</a>, <a href="#dispute">Disputing</a> a <a href="#tentative-outcome">Tentative Outcome</a>, or purchasing a <a href="#participation-token">Participation Token</a>.</p>
 
-<p>In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that window. Participation includes <a href="#designated-reporting">Designated Reporting</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#dispute">Disputing</a> an Outcome, or simply purchasing Participation Tokens directly.</p>
+<h2 id="participation-tokens">Participation Tokens</h2>
+
+<p>During any <a href="#fee-window">Fee Window</a>, <a href="#rep">REP</a> holders may purchase any number of <a href="#participation-token">Participation Tokens</a> for one <a href="#atto-prefix">attoREP</a> each. At the end of the Fee Window, they may redeem their Participation Tokens for one attoREP each, in addition to a proportional share of the Fee Window’s <a href="#reporting-fee-pool">Reporting Fee Pool</a>.</p>
+
+<p>It is important that REP holders are ready to participate in <a href="#market">Market</a> resolution the event of a threatened <a href="#fork">Fork</a> of the <a href="#decentralized-oracle">Oracle</a>. The Participation Token provides an incentive for REP holders to monitor the platform at least once per week, and, thus, be ready to participate if the need arises. Even REP holders who don’t want to participate in the reporting process are incentivized to check in with Augur once per 7-day Fee Window in order to buy Participation Tokens and collect fees. This regular, active checking in means they will be familiar with how to use Augur, will be aware of Forks when they occur, and thus should be more ready to participate in Forks when they happen.</p>
 
 <h2 id="reporting-states">Reporting States</h2>
 
@@ -429,13 +433,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>If the Designated Reporter fails to Report within the Designated Reporting Phase, the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>, the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a>, and the Market is moved into the <a href="#open-reporting-phase">Open Reporting Phase</a>. These <a href="#no-show-bond">No-Show Bonds</a> are then used to help pay for the gas costs and add to the <a href="#rep">REP</a> <a href="#first-public-reporter-stake">Staked</a> by the <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
-<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond and the No-Show Gas Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> will allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than the <a href="#fork-threshold">Fork Threshold</a> Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
+<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond and the No-Show Gas Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than the <a href="#fork-threshold">Fork Threshold</a> Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
 
 <h2 id="fee-window-details">Fee Window Details</h2>
 
 <p><a href="#fee-window">Fee Windows</a> continually occur and last for seven (7) days. During a Fee Window, any <a href="#rep">REP</a> holder is able to <a href="#dispute-stake">Stake</a> REP on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tentative Outcome</a>. By doing so, they receive an equal number of <a href="#participation-tokens">Participation Tokens</a> in return, and the REP they Stake goes toward to a <a href="#dispute-bond">Dispute Bond</a> to <a href="#challenge">Challenge</a> the Tentative Outcome of the <a href="#market">Market</a>. In order to earn fees as a REP holder in the current Fee Window, users need to participate in the Market&rsquo;s <a href="#dispute-round">Dispute Round</a> in some way, such as submitting a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a>, <a href="#dispute">Disputing</a> the Tentative Outcome (i.e., staking on an outcome other than the Tentative Outcome), or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
-<p>Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward REP holders who participate in Augur’s reporting process. At the end of the Fee Window, the Reward Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
+<p>Any fees collected by Augur during a given Fee Window are added to a <a href="#reporting-fee-pool">Reporting Fee Pool</a> for that Fee Window. The Reporting Fee Pool is used to reward REP holders who participate in Augur’s reporting process. At the end of the Fee Window, the Reporting Fee Pool is paid out to holders of Participation Tokens in proportion to the number of Participation Tokens they hold.</p>
 
 <p>Markets are placed into the next available Fee Window once the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> submits a <a href="#report">Report</a>. For example, if a Market&rsquo;s Designated Report is submitted at 12:00 AM EST on January 3rd, 2053 and a Fee Window was just started on January 1st 2053, the Market would move into the next Fee Window that would be starting on January 8th, 2053, or 7 days since the start of the January 1st Window.</p>
 
@@ -561,10 +565,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
 <span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
-<span class="p">};</span>
+  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
+  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
+    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
+      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
+      <span class="p">},</span>
+      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
+      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
+      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
+        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
+      <span class="p">},</span>
+      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
+    <span class="p">},</span>
+    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
+    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span>
+  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">}</span>
 
 <span class="cm">/**
  * Log into an account using the augur.accounts.login method.
@@ -580,10 +603,29 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
 <span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">,</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span>
-<span class="p">};</span>
+  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
+  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
+    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
+      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
+      <span class="p">},</span>
+      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
+      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
+      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
+        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
+      <span class="p">},</span>
+      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
+    <span class="p">},</span>
+    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
+    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="p">},</span>
+  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">}</span>
 
 <span class="c1">// augur.js does not store any account data. augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.</span>
 </code></pre></div>
@@ -814,7 +856,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
   <span class="p">},</span>
   <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">};</span>
+<span class="p">}</span>
 
 <span class="c1">// augur.accounts.loginWithMasterKey: Example JS code coming soon</span>
 
@@ -850,7 +892,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
     <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
   <span class="p">},</span>
   <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">};</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="augur-accounts-getaccounttransferhistory-p-callback">augur.accounts.getAccountTransferHistory(p, callback)</h3>
 
@@ -1088,16 +1130,52 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="connect-function">Connect Function</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.connect: Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span> 
+  <span class="na">ethereumNode</span><span class="p">:</span> <span class="p">{</span>  
+    <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local http address for Geth node</span>
+      <span class="s2">"https://eth9000.augur.net"</span> <span class="c1">// hosted http address for Geth node</span>
+    <span class="p">],</span>
+    <span class="na">wsAddresses</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span> <span class="c1">// local websocket address for Geth node</span>
+      <span class="s2">"wss://ws9000.augur.net"</span> <span class="c1">// hosted websocket address for Geth node</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="na">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span> <span class="c1">// local websocket address for an Augur Node</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">connectionInfo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">connectionInfo</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">augur</span><span class="o">-</span><span class="nx">node</span><span class="p">:</span> <span class="nx">ws</span><span class="p">:</span><span class="c1">//127.0.0.1:9001</span>
+<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">ethereum</span><span class="o">-</span><span class="nx">node</span><span class="p">:</span> <span class="p">{</span><span class="s2">"httpAddresses"</span><span class="p">:[</span><span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span><span class="s2">"https://eth9000.augur.net"</span><span class="p">],</span><span class="s2">"wsAddresses"</span><span class="p">:[</span><span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span><span class="s2">"wss://ws9000.augur.net"</span><span class="p">]}</span>
+<span class="nx">connected</span> <span class="nx">to</span> <span class="nx">augur</span>
+<span class="nx">Web3</span><span class="p">:</span> <span class="nx">not</span> <span class="nx">connected</span>
+<span class="nx">Sync</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//127.0.0.1:8545</span>
+<span class="nx">HTTP</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//127.0.0.1:8545</span>
+<span class="nx">WS</span><span class="p">:</span> <span class="nx">ws</span><span class="p">:</span><span class="c1">//127.0.0.1:8546</span>
+<span class="nx">IPC</span><span class="p">:</span> <span class="nx">not</span> <span class="nx">connected</span>
+<span class="nx">connected</span> <span class="nx">to</span> <span class="nx">ethereum</span>
+<span class="p">{</span>
+  <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
+  <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">abi</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+    <span class="nx">blockNumber</span><span class="p">:</span> <span class="s2">"0x184e24"</span><span class="p">,</span>
+    <span class="nx">coinbase</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+    <span class="nx">contracts</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+    <span class="nx">gasPrice</span><span class="p">:</span> <span class="mi">20000000000</span><span class="p">,</span>
+    <span class="nx">networkID</span><span class="p">:</span> <span class="s2">"4"</span>
+    <span class="nx">rpc</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="augur-connect-connectoptions-callback">augur.connect(connectOptions, callback)</h3>
 
-<p>Description pending.</p>
+<p>Connects augur.js to an Ethereum node and an <a href="#augur-node">Augur Node</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">connectOptions</code></strong> (<a href="ConnectOptions">ConnectOptions</a>) Options used to connect to an Ethereum node and an Augur Node.</li>
+<li><strong><code class="prettyprint">connectOptions</code></strong> (<a href="#ConnectOptions">ConnectOptions</a>) Options used to connect to an Ethereum node and an Augur Node.</li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Callback function.</li>
 </ul>
 
@@ -1359,8 +1437,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">blockCallbacks.onAdded</code></strong> (function) &lt;optional&gt; Callback to fire when new blocks are received.</li>
-<li><strong><code class="prettyprint">blockCallbacks.onRemoved</code></strong> (function) &lt;optional&gt; Callback to fire when blocks are removed.</li>
+<li><strong><code class="prettyprint">blockCallbacks</code></strong> (Object) Parameters object. </li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">onAdded</code></strong> (function) &lt;optional&gt; Callback to fire when new blocks are received.</li>
+<li><strong><code class="prettyprint">onRemoved</code></strong> (function) &lt;optional&gt; Callback to fire when blocks are removed.</li>
+</ul></li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -3061,7 +3144,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">ethereumNode</code></strong> (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).</li>
-<li><strong><code class="prettyprint">augurNode</code></strong> (string) Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
+<li><strong><code class="prettyprint">augurNode</code></strong> (string) &lt;optional&gt; Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
 </ul>
 
 <p><a name="EthereumNode"></a></p>
@@ -3077,7 +3160,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.&lt;string&gt;|null) Array of websocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of websocket addresses to iterate through until a connection is established.)</li>
 <li><strong><code class="prettyprint">ipc</code></strong> (string|null) IPC address of an Ethereum node.</li>
 <li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.&lt;string&gt;|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
-<li><strong><code class="prettyprint">networkID</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">networkID</code></strong> (string|null) Description pending.</li>
 </ul>
 
 <p><a name="ExtraInfo"></a></p>
@@ -3325,8 +3408,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="reporting_state-object">REPORTING_STATE  (Object)</h3>
 
-<p>Serves as an enum for the state of a stake token.
-&lt;!&ndash; TODO: Update references to first report &ndash;&gt;</p>
+<p>Serves as an enum for the state of a stake token.</p>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
@@ -7884,8 +7966,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="3market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.
-&lt;!&ndash; TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples &ndash;&gt;</p>
+<!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
+
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="3market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
 <h3 id="augur-api-universe-createbinarymarket-p">augur.api.Universe.createBinaryMarket(p)</h3>
 
@@ -8530,7 +8613,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.</span>
 <span class="c1">// Also, the tears of functional programmers are delicious. ;)</span>
 </code></pre></div>
-<p>There are a variety of &ldquo;events&rdquo; emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur: submitting a report, closing a <a href="#market">Market</a>, filling an <a href="#open-order">Open Order</a>, etc.</p>
+<p>There are a variety of &ldquo;events&rdquo; emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an <a href="#initial-report">Initial Report</a>, <a href="#finalized-market">Finalizing</a> a <a href="#market">Market</a>, <a href="#fill-order">Filling</a> an <a href="#open-order">Open Order</a>, etc.</p>
 
 <aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of &ldquo;events&rdquo; that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of &ldquo;event&rdquo; is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
 
@@ -9184,7 +9267,7 @@ Goals:
 
 <p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users can put up <a href="#rep">REP</a> on any <a href="#outcome">Outcome</a> other than the <a href="#tentative-outcome">Tenative Outcome</a>. The amount of REP they put up goes toward filling the crowdsourced <a href="#dispute-bond">Dispute Bond</a>, and can range from 1 <a href="#atto-prefix">attoREP</a> to the amount still needed to fill the <a href="#dispute-bond">Dispute Bond</a>.</p>
 
-<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reward-pool">Reward Pool</a> from the current <a href="#fee-window">Fee Window</a> in ETH. (This ETH comes from trading and winning <a href="#share">Share</a> redemption: fees are collected in ETH whenever a <a href="#complete-set">Complete Set</a> is sold or winning Shares are redeemed and given to <a href="#fee-window">Fee Windows</a>.)</p>
+<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reporting-fee-pool">Reporting Fee Pool</a> from the current <a href="#fee-window">Fee Window</a> in ETH. (This ETH comes from trading and winning <a href="#share">Share</a> redemption: fees are collected in ETH whenever a <a href="#complete-set">Complete Set</a> is sold or winning Shares are redeemed and given to <a href="#fee-window">Fee Windows</a>.)</p>
 
 <p>By design, the Dispute Bond sizes for each Dispute Round are chosen such that anyone who successfully <a href="#challenge">Challenges</a> an Outcome in favor of the Market’s <a href="#final-outcome">Final Outcome</a> is rewarded with a 50% ROI on their Dispute Stake. For details on how the Dispute Bond is calculated, refer to the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
@@ -9200,7 +9283,7 @@ Goals:
 
 <h2 id="fee-window">Fee Window</h2>
 
-<p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reward-pool">Reward Pool</a> for that Fee Window. The Reward Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window will receive an amount of fees from the Reward Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
+<p>Augur’s <a href="#report">Reporting</a> system runs on a cycle of consecutive 7-day long <a href="#fee-windows">Fee Windows</a>. Any fees collected by Augur during a given Fee Window are added to a <a href="#reporting-fee-pool">Reporting Fee Pool</a> for that Fee Window. The Reporting Fee Pool is used to reward <a href="#rep">REP</a> holders who participate in Augur’s Reporting process. REP holders who <a href="#dispute-stake">Stake</a> REP during a given Fee Window will receive an amount of fees from the Reporting Fee Pool that is proportionate to the amount of REP they Staked. In this way, all REP holders who participate during a Fee Window will receive a portion of the fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#dispute">Disputing</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <h2 id="fill-order">Fill Order</h2>
 
@@ -9406,9 +9489,9 @@ Goals:
 
 <p>The Reporting Window has now been removed in favor of the <a href="#fee-window">Fee Window</a>.</p>
 
-<h2 id="reward-pool">Reward Pool</h2>
+<h2 id="reporting-fee-pool">Reporting Fee Pool</h2>
 
-<p>Any <a href="#settlement-fees">Settlement Fees</a> (in ETH) collected during a <a href="#fee-window">Fee Window</a> get added to a Reward Pool. At the end of the Fee Window, the Reward Pool is paid out to users in proportion to the number of <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#challenge">Challenging</a> an [Outcome](#outcome, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
+<p>Any <a href="#settlement-fees">Settlement Fees</a> (in ETH) collected during a <a href="#fee-window">Fee Window</a> get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#challenge">Challenging</a> an [Outcome](#outcome, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <h2 id="scalar-market">Scalar Market</h2>
 
