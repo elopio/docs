@@ -112,7 +112,7 @@ augur.accounts.login({
     version: 3
   },
   privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-};
+}
 
 // augur.accounts.loginWithMasterKey: Example JS code coming soon
 
@@ -148,7 +148,7 @@ augur.accounts.register({
     version: 3
   },
   privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-};
+}
 ```
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
@@ -325,15 +325,51 @@ Description pending.
 Connect Function
 ----------------
 ```javascript
-// augur.connect: Example JS code coming soon
+augur.connect({ 
+  ethereumNode: {  
+    httpAddresses: [
+      "http://127.0.0.1:8545", // local http address for Geth node
+      "https://eth9000.augur.net" // hosted http address for Geth node
+    ],
+    wsAddresses: [
+      "ws://127.0.0.1:8546", // local websocket address for Geth node
+      "wss://ws9000.augur.net" // hosted websocket address for Geth node
+    ]
+  },
+  augurNode: "ws://127.0.0.1:9001" // local websocket address for an Augur Node
+}, function (error, connectionInfo) {
+  console.log(connectionInfo);
+});
+// example output:
+connecting to augur-node: ws://127.0.0.1:9001
+connecting to ethereum-node: {"httpAddresses":["http://127.0.0.1:8545","https://eth9000.augur.net"],"wsAddresses":["ws://127.0.0.1:8546","wss://ws9000.augur.net"]}
+connected to augur
+Web3: not connected
+Sync: http://127.0.0.1:8545
+HTTP: http://127.0.0.1:8545
+WS: ws://127.0.0.1:8546
+IPC: not connected
+connected to ethereum
+{
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: {
+    abi: { ... },
+    blockNumber: "0x184e24",
+    coinbase: "0x40485264986740c8fb3d11e814bd94cf86012d29",
+    contracts: { ... },
+    gasPrice: 20000000000,
+    networkID: "4"
+    rpc: { ... }
+  }
+}
 ```
 ### augur.connect(connectOptions, callback)
 
-Description pending.
+Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 
 #### **Parameters:**
 
-* **`connectOptions`** (<a href="ConnectOptions">ConnectOptions</a>) Options used to connect to an Ethereum node and an Augur Node.
+* **`connectOptions`** ([ConnectOptions](#ConnectOptions)) Options used to connect to an Ethereum node and an Augur Node.
 * **`callback`** (function) &lt;optional> Callback function.
 
 Create-Market Functions
@@ -546,8 +582,10 @@ Start listening for blocks.
 
 #### **Parameters:**
 
-* **`blockCallbacks.onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
-* **`blockCallbacks.onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
+* **`blockCallbacks`** (Object) Parameters object. 
+* **Properties:**
+  * **`onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
+  * **`onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
 
 #### **Returns:**
 
@@ -1966,7 +2004,7 @@ Type Definitions
 
 #### **Properties:** 
 * **`ethereumNode`** (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).
-* **`augurNode`** (string) Websocket address of an [Augur Node](#augur-node).
+* **`augurNode`** (string) &lt;optional> Websocket address of an [Augur Node](#augur-node).
 
 <a name="EthereumNode"></a>
 ### EthereumNode  (Object)
@@ -1978,7 +2016,7 @@ Type Definitions
 * **`wsAddresses`** (Array.&lt;string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
 * **`ipc`** (string|null) IPC address of an Ethereum node.
 * **`ipcAddresses`** (Array.&lt;string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
-* **`networkID`** (string) Description pending.
+* **`networkID`** (string|null) Description pending.
 
 <a name="ExtraInfo"></a>
 ### ExtraInfo  (Object)
@@ -2165,7 +2203,6 @@ Serves as an enum for the state of an order.
 ### REPORTING_STATE  (Object)
 
 Serves as an enum for the state of a stake token.
-<!-- TODO: Update references to first report -->
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
 * **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a designated report.

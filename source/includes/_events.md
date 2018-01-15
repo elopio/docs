@@ -180,7 +180,7 @@ augur.logs.getLogs(params, function (err, logs) {
 // bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.
 // Also, the tears of functional programmers are delicious. ;)
 ```
-There are a variety of "events" emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur: submitting a report, closing a [Market](#market), filling an [Open Order](#open-order), etc.
+There are a variety of "events" emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an [Initial Report](#initial-report), [Finalizing](#finalized-market) a [Market](#market), [Filling](#fill-order) an [Open Order](#open-order), etc.
 
 <aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of "events" that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of "event" is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
 

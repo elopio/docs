@@ -92,10 +92,29 @@ augur.accounts.register(registerParameters, function (error, account) {
 Error: null
 Account: {
   address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
-  derivedKey: <Buffer ...>,
-  keystore: { ... },
-  privateKey: <Buffer ...>
-};
+  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
+  keystore: {
+    address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+}
 
 /**
  * Log into an account using the augur.accounts.login method.
@@ -111,10 +130,29 @@ augur.accounts.login(loginParameters, function (error, account) {
 Error: null
 Account: {
   address: undefined,
-  derivedKey: <Buffer ...>,
-  keystore: { ... },
-  privateKey: <Buffer ...>
-};
+  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
+  keystore: {
+    address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+}
 
 // augur.js does not store any account data. augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.
 ```

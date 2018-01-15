@@ -2918,8 +2918,9 @@ onSuccess result: {
   value: "0x0"
 }
 ```
-Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](3market) and provides functions for obtaining information about a given [Universe](#universe).
 <!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
+Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](3market) and provides functions for obtaining information about a given [Universe](#universe).
+
 ### augur.api.Universe.createBinaryMarket(p)
 
 Creates a new [Binary Market](#binary-market). This transaction will trigger a [`MarketCreated` event](#MarketCreated) if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
