@@ -1530,7 +1530,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
-    * **`_payoutNumerators`**  (Array.<number>|Array.<string>) Array representing the Market's Payout Set.
+    * **`_payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`_invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
     * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -1577,7 +1577,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
-    * **`_payoutNumerators`**  (Array.<number>|Array.<string>) Array representing the Market's Payout Set.
+    * **`_payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`_invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
     * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2938,7 +2938,7 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
     * **`_description`**  (string) Description of the Market event. 
     * **`_extraInfo`**  (string) Stringified JSON object containing the following keys:
       * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
       * **`longDescription`**  (string) Additional information not included in `description`.
     * **`tx`**  (object) JSON object containing the following keys:
       * **`to`**  (string) Ethereum Address of the Universe contract.
@@ -2972,9 +2972,9 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
     * **`_description`**  (string) Description of the Market event. 
     * **`_extraInfo`**  (string) Stringified JSON object. (See the explanation above for more details.)
       * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
       * **`longDescription`**  (string) Additional information not included in `description`.
-      * **`outcomeNames`**  (Array.<string>) Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
+      * **`outcomeNames`**  (Array.&lt;string>) Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
     * **`tx`**  (object) JSON object containing the following keys:
       * **`to`**  (string) Ethereum address of the Universe contract.
       * **`value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
@@ -3001,7 +3001,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`universe`**  (string) Ethereum address of the [Universe](#universe) containing the Forked Market, as a 16-byte hexadecimal value.
-    * **`_parentPayoutNumerators`**  (Array.<number>) Payout Set of the Parent Universe's [Parent Universe's](#parent-universe) [Forked Market](#forked-market).
+    * **`_parentPayoutNumerators`**  (Array.&lt;number>) Payout Set of the Parent Universe's [Parent Universe's](#parent-universe) [Forked Market](#forked-market).
     * **`_parentInvalid`**  (boolean) Whether the Parent Universe's Forked Market is [Invalid](#invalid-outcome).
     * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -3031,7 +3031,7 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `
     * **`_description`**  (string) Description of the Market event. 
     * **`_extraInfo`**  (string) Stringified JSON object. (See the explanation above for more details.)
       * **`resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-      * **`tags`**  (Array.<string>) Keywords used to tag the Market (maximum of 2).
+      * **`tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
       * **`longDescription`**  (string) Additional information not included in `description`.
     * **`tx`**  (object) JSON object containing the following keys:
       * **`to`**  (string) Ethereum address of the Universe contract.
@@ -3242,8 +3242,8 @@ Calls the `redeem` function for all Ethereum contract addresses in the arrays `_
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`universe`**  (string) Ethereum address of a Universe, as a 16-byte hexadecimal value.
-    * **`_reportingParticipants`**  (Array.<string>) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 16-byte hexadecimal values.
-    * **`_feeWindows`**  (Array.<string>) Ethereum contract addresses of FeeWindows, as 16-byte hexadecimal values.
+    * **`_reportingParticipants`**  (Array.&lt;string>) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 16-byte hexadecimal values.
+    * **`_feeWindows`**  (Array.&lt;string>) Ethereum contract addresses of FeeWindows, as 16-byte hexadecimal values.
     * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.

@@ -160,8 +160,8 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
-  **Properties:**
+* **`p`** (Object) Parameters object.
+* **Properties:**
     * **`account`**  (string) Ethereum address of the account for which to get transfer history, as a hexadecimal string.
     * **`token`**  (string) &lt;optional> Contract address of the token contract by which to limit the history results, as a hexadecimal string.
     * **`earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
@@ -212,7 +212,7 @@ Description pending.
 
 ### augur.accounts.loginWithMasterKey(p)
 
-Login with a user-supplied plaintext private key.
+Logs into an account with a user-supplied plaintext private key.
 
 #### **Parameters:**
 
@@ -224,22 +224,9 @@ Login with a user-supplied plaintext private key.
 
 *  (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).
 
-### augur.accounts.login(p, callback)
+### augur.accounts.logout()
 
-Description pending.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-* **Properties:**
-    * **`password`**  (string) Password for the account being imported.
-    * **`address`**  (string) Ethereum address for this account, as a hexadecimal string.
-    * **`keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
-* **`callback`** (function) Called after the account has been successfully generated.
-
-#### **Returns:**
-
-*  (<a href="#Account">Account</a>) Logged-in account object.
+Logs out the account that is currently logged in.
 
 ### augur.accounts.register(p, callback)
 
@@ -259,52 +246,98 @@ Description pending.
 Assets Functions
 ----------------
 ```javascript
-// augur.assets.depositEther: Example JS code coming soon
+augur.assets.sendEther({
+    etherToSend: "0.001", 
+    from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+    meta: {
+        signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+        accountType: "privateKey"
+    },
+    onSent: function() {},
+    onSuccess: function(result) {
+        console.log(result);
+    },
+    onFailed: function() {},
+});
+// example output:
+{
+  "callReturn": null,
+  "blockHash": "0xbb21d95d9370d88fd7a8259300476b1084cfcf54ae6c6684f77a60876107c980",
+  "blockNumber": 1599690,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0xcf08",
+  "gasPrice": "0x4a817c800",
+  "hash": "0xf6f476c21bb4084729d268eb1392ac9bfc1b543fb89862ad188e1c3f2db4f4b7",
+  "input": "0x3af39c21",
+  "nonce": "0x16",
+  "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  "transactionIndex": "0x0",
+  "value": "0x38d7ea4c68000",
+  "v": "0x2b",
+  "r": "0x5239d5ccf324ed41125e63ef6b49ba5f79a4f27678a9caad0f1c480f36faa026",
+  "s": "0x33184fe7ebaa3bdfc414c0147cb902d6a9d43033f3254996a3283cc990adb50f",
+  "timestamp": 1516065072,
+  "gasFees": "0.00042544"
+}
 
-// augur.assets.sendEther: Example JS code coming soon
+augur.assets.sendReputation({
+    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+    reputationToSend: "0.001", 
+    _to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+    meta: {
+        signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+        accountType: "privateKey"
+    },
+    onSent: function() {
+    },
+    onSuccess: function(result) {
+        console.log(result);
+    },
+    onFailed: function() {
+    },
+});
 
-// augur.assets.sendReputation: Example JS code coming soon
+// example output:
+{
+  "callReturn": null,
+  "blockHash": "0xd4bbd077575d2006b19570d546a6f02a4ef45d4cb91d64286026431eda313fb8",
+  "blockNumber": 1599717,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0x2fd618",
+  "gasPrice": "0x4a817c800",
+  "hash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
+  "input": "0xa9059cbb00000000000000000000000040485264986740c8fb3d11e814bd94cf86012d2900000000000000000000000000000000000000000000000000038d7ea4c68000",
+  "nonce": "0x17",
+  "to": "0x13fa2334966b3cb6263ed56148323014c2ece753",
+  "transactionIndex": "0x2",
+  "value": "0x0",
+  "v": "0x2c",
+  "r": "0xc2b1869475afa6e7b6ecc4965da765f71fee57cd8863c340e3ce02e0ee47ab37",
+  "s": "0x4b6baec6d873fa784d70ac9867005204febdf6d1d0274dbf6f774971e01daf7b",
+  "timestamp": 1516065477,
+  "gasFees": "0.00146872"
+}
 ```
-### augur.assets.depositEther(p)
-
-Description pending.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-* **Properties:**
-    * **`etherToDeposit`**  (string) Amount of Ether to convert to "wrapped Ether" (AKA Ether tokens), as a base-10 string.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
-    * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
-    * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
-    * **`onFailed`**  (function) Called if/when the transaction fails.
-
-#### **Returns:**
-
-*  Description pending.
-
 ### augur.assets.sendEther(p)
 
-Description pending.
+Sends Ether to a specified Ethereum address.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
     * **`etherToSend`**  (string) Amount of Ether to send, as a base-10 string.
+    * **`from`**  (string) Ethereum address of the sender, as a hexadecimal string.
     * **`to`**  (string) Ethereum address of the recipient, as a hexadecimal string.
     * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
 
-#### **Returns:**
-
-*  Description pending.
-
 ### augur.assets.sendReputation(p)
 
-Description pending.
+Sends [REP](#rep) to a specified Ethereum address. This function will trigger a [`TokensTransferred` event](#TokensTransferred) if the REP is successfully sent.
 
 #### **Parameters:**
 
@@ -317,10 +350,6 @@ Description pending.
     * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
-
-#### **Returns:**
-
-*  Description pending.
 
 Connect Function
 ----------------
@@ -375,11 +404,82 @@ Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 Create-Market Functions
 ----------------
 ```javascript
-// augur.createMarket.createBinaryMarket: Example JS code coming soon
+var _extraInfo = { 
+  "resolutionSource": "http://www.nasdaq.com/symbol/msft", 
+  "tags": [ "Stocks", "Microsoft" ], 
+  "longDescription": "" 
+};
+augur.createMarket.createBinaryMarket({
+  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  _endTime: 1546300799,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "stocks",
+  _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
+  _extraInfo: JSON.stringify(_extraInfo),
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
+});
+// example output coming soon
 
-// augur.createMarket.createCategoricalMarket: Example JS code coming soon
+var _extraInfo = { 
+  "resolutionSource": "http://www.espn.com", 
+  "tags": ["college football", "football"], 
+  "outcomeNames": ["Georgia", "Florida"], 
+  "longDescription": "" 
+};
+augur.createMarket.createCategoricalMarket({
+  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  _endTime: 1540875600,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _outcomes: ["outcome1","outcome2"],
+  _topic: "sports",
+  _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
+  _extraInfo: JSON.stringify(_extraInfo),
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
+});
+// example output coming soon
 
-// augur.createMarket.createScalarMarket: Example JS code coming soon
+var _extraInfo = { 
+  "resolutionSource": "http://forecast.weather.gov", 
+  "tags": ["San Francisco", "weather"], 
+  "longDescription": "" 
+};
+augur.createMarket.createScalarMarket({
+  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  _endTime: 1530507600,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _minPrice: -10,
+  _maxPrice: 120,
+  _numTicks: 10,
+  _topic: "temperature",
+  _description: "High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018",
+  _extraInfo: JSON.stringify(_extraInfo),
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) { console.log("onSuccess result:", result); },
+  onFailed: function (result) { console.log("onFailed result:", result); }
+});
+// example output coming soon
 
 augur.createMarket.getMarketCreationCost({
     universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
@@ -406,7 +506,7 @@ augur.createMarket.getMarketCreationCostBreakdown({
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
-Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
+Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -419,19 +519,15 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`_designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
-    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
+    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
 
-#### **Returns:**
-
-* Description pending.
-
 ### augur.createMarket.createCategoricalMarket(p)
 
-Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
+Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -445,19 +541,15 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`_outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
-    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
+    * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
 
-#### **Returns:**
-
-* Description pending.
-
 ### augur.createMarket.createScalarMarket(p)
 
-Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. 
+Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -473,15 +565,11 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`tickSize`**  (string) &lt;optional> The [Tick](#tick) size for this Market, as a base-10 string.
-    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the [MarketCreated event](#MarketCreated).
+    * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.createMarket.getMarketCreationCost(p, callback)
 
@@ -520,23 +608,91 @@ Note: This function will send a transaction if needed to create the current [Rep
 Events Functions
 ----------------
 ```javascript
-// augur.events.getAllAugurLogs: Example JS code coming soon
+augur.events.getAllAugurLogs({
+  fromBlock: 1490000
+}, function(error, result) {
+  console.log(result); 
+});
+// example output:
+[
+  {
+    "key": "0x4175677572000000000000000000000000000000000000000000000000000000",
+    "addition": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "commitHash": "0x28562806a46f89eaf53726c288f5294fa9c34827",
+    "bytecodeHash": "0x1e649bc7bb83f3f7bba3440afadec07fe666377f4c56f34557a050dedc4d76d0",
+    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "removed": false,
+    "transactionHash": "0x6d18853ed20b8bc7b344a89b9fb1eafa0d46fcf80ad5bb3965a856446c24bfe2",
+    "transactionIndex": 0,
+    "logIndex": 0,
+    "blockNumber": 1541700,
+    "contractName": "Augur",
+    "eventName": "RegistryAddition"
+  },
+  ...
+  {
+    "universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+    "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
+    "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
+    "value": "0.001",
+    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "removed": false,
+    "transactionHash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
+    "transactionIndex": 2,
+    "logIndex": 1,
+    "blockNumber": 1599717,
+    "contractName": "Augur",
+    "eventName": "TokensTransferred"
+  }
+]
 
-// augur.events.startAugurNodeEventListeners: Example JS code coming soon
+augur.events.startAugurNodeEventListeners({
+  TokensTransferred: function(error, result){
+    console.log("A new TokensTransferred event has occurred: ", result); 
+  }
+}, function() {
+  console.log("Started Augur Node event listeners!");
+}
+);
+// example output:
+"Started Augur Node event listeners!"
+// example output after a TokensTransferred event occurs:
+"A new TokensTransferred event has occurred:"
+{
+  "transactionHash": "0xbcb517796168347d92ef9448c8aec6f3112dfd5a41ebd9de0c097927cb01ca6b",
+  "logIndex": 1,
+  "sender": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "recipient": "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
+  "value": "0.001",
+  "blockNumber": 1600771
+}
 
 // augur.events.startBlockchainEventListeners: Example JS code coming soon
 
 // augur.events.startBlockListeners: Example JS code coming soon
 
-// augur.events.stopAugurNodeEventListeners: Example JS code coming soon
+augur.events.stopAugurNodeEventListeners(
+  function() {
+    console.log("Stopped Augur Node event listeners!");
+  }
+);
+// example output:
+"Unsubscribed from 1e08901c-0797-49f2-b13f-e688e5695905"
+"Stopped Augur Node event listeners!"
 
-// augur.events.stopBlockchainEventListeners: Example JS code coming soon
+augur.events.stopBlockchainEventListeners();
+// example output: 
+"true"
 
-// augur.events.stopBlockListeners: Example JS code coming soon
+augur.events.stopBlockListeners();
+// example output:
+"true"
 ```
 ### augur.events.getAllAugurLogs(p, callback)
 
-Description pending.
+Returns all Augur event logs on the Ethereum blockchain within a certain block range.
 
 #### **Parameters:**
 
@@ -552,7 +708,7 @@ Description pending.
 
 ### augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)
 
-Start listening for events emitted by augur-node.
+Begins listening for events emitted by an [Augur Node](#augur-node).
 
 #### **Parameters:**
 
@@ -565,7 +721,7 @@ Start listening for events emitted by augur-node.
 
 ### augur.events.startBlockchainEventListeners(eventCallbacks, onSetupComplete)
 
-Start listening for events emitted by the Ethereum blockchain.
+Begins listening for events emitted by the Ethereum blockchain.
 
 #### **Parameters:**
 
@@ -598,10 +754,6 @@ Removes all active listeners for events emitted by augur-node.
 #### **Parameters:**
 
 * **`callback`** (function) &lt;optional> 
-
-#### **Returns:**
-
-*  Description pending.
 
 ### augur.events.stopBlockchainEventListeners()
 
@@ -1235,10 +1387,6 @@ Description pending.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
 
-#### **Returns:**
-
-* Description pending.
-
 <!-- Add glossary links to section-->
 ### augur.reporting.getReportingHistory(p, callback)
 
@@ -1310,18 +1458,18 @@ This function will fail if:
 
 ### augur.reporting.getStakeRequiredForDesignatedReporter(p, callback)
 
-Description pending.
+Returns the amount of [REP](#rep) a [Designated Reporter](#designated-reporter) must Stake when submitting a [Designated Report](#designated-report) in a given [Universe](#universe).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`universe`**  (string) [Universe](#universe) address.
+    * **`universe`**  (string) Ethereum address of a Universe.
 * **`callback`** (function) Called after Stake required has been retrieved.
 
 #### **Returns:**
 
-*  (string) Amount of Stake required for the [Designated Reporter](#designated-reporter) on this [Universe](#universe), as a base-10 string.
+*  (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.
 
 ### augur.reporting.getStakeTokens(p, callback)
 
@@ -1663,7 +1811,7 @@ augur.trading.simulateTrade({
 ```
 ### augur.trading.calculateProfitLoss(p)
 
-Calculates realized and unrealized profit/loss for trades in a single [Outcome](#outcome). Note: buy/sell labels are from taker's point-of-view.
+Calculates realized and unrealized profit/loss for trades in a single [Outcome](#outcome). Note: buy/sell labels are from taker's point of view.
 
 #### **Parameters:**
 
@@ -1674,7 +1822,13 @@ Calculates realized and unrealized profit/loss for trades in a single [Outcome](
 
 #### **Returns:**
 
-* (Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.
+* (Object) Realized and unrealized P/L 
+* **Properties:**
+  * **`position`**  (string) Description pending.
+  * **`meanOpenPrice`**  (string) Description pending.
+  * **`realized`**  (string) Description pending.
+  * **`queued`**  (string) Description pending.
+  * **`unrealized`**  (string) Description pending.
 
 ### augur.trading.claimMarketsTradingProceeds(p)
 
@@ -1689,10 +1843,6 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.trading.claimTradingProceeds(p)
 
@@ -1712,10 +1862,6 @@ This function will fail if:
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.trading.denormalizePrice(p)
 
@@ -1874,30 +2020,26 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
 
 ### augur.trading.placeTrade(p)
 
-* Description pending.
+* Places an [Order](#order) for a certain number of [Shares](#share) in a particular [Outcome](#outcome) of a [Market](#market).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
 * **Properties:**
-    * **`amount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
+    * **`amount`**  (string) Number of Shares to trade, as a base-10 string.
     * **`limitPrice`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
-    * **`minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this [Market](#market), as a base-10 string.
+    * **`minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`tickSize`**  (string) The [Tick](#tick) size (interval) for this Market.
-    * **`_direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
+    * **`_direction`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`_market`**  (string) Market in which to trade, as a hex string.
-    * **`_outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`_outcome`**  (number) Outcome ID to trade, must be an integer value on [0, 7].
     * **`_tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
     * **`doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
     * **`meta`**  ({signer: buffer|function, accountType: string}) Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called when the full trade completes successfully.
     * **`onFailed`**  (function) Called if any part of the trade fails.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.trading.simulateTrade(p, callback)
 
@@ -1945,10 +2087,6 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
       * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
       * **`onSuccess`**  (function) Called when the full trade completes successfully.
       * **`onFailed`**  (function) Called if any part of the trade fails.
-
-#### **Returns:**
-
-* Description pending.
 
 Type Definitions
 -------------
