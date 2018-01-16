@@ -907,8 +907,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-<strong>Properties:</strong>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
+<li><strong>Properties:</strong>
 
 <ul>
 <li><strong><code class="prettyprint">account</code></strong>  (string) Ethereum address of the account for which to get transfer history, as a hexadecimal string.</li>
@@ -979,7 +979,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-accounts-loginwithmasterkey-p">augur.accounts.loginWithMasterKey(p)</h3>
 
-<p>Login with a user-supplied plaintext private key.</p>
+<p>Logs into an account with a user-supplied plaintext private key.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -998,29 +998,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li> (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).</li>
 </ul>
 
-<h3 id="augur-accounts-login-p-callback">augur.accounts.login(p, callback)</h3>
+<h3 id="augur-accounts-logout">augur.accounts.logout()</h3>
 
-<p>Description pending.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
-<li><strong>Properties:</strong>
-
-<ul>
-<li><strong><code class="prettyprint">password</code></strong>  (string) Password for the account being imported.</li>
-<li><strong><code class="prettyprint">address</code></strong>  (string) Ethereum address for this account, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">keystore</code></strong>  (<a href="#Keystore">Keystore</a>) Keystore object containing this account&rsquo;s encryption parameters.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account has been successfully generated.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> (<a href="#Account">Account</a>) Logged-in account object.</li>
-</ul>
+<p>Logs out the account that is currently logged in.</p>
 
 <h3 id="augur-accounts-register-p-callback">augur.accounts.register(p, callback)</h3>
 
@@ -1045,40 +1025,82 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="assets-functions">Assets Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.assets.depositEther: Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">sendEther</span><span class="p">({</span>
+    <span class="na">etherToSend</span><span class="p">:</span> <span class="s2">"0.001"</span><span class="p">,</span> 
+    <span class="na">from</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="na">to</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span> 
+    <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">251</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+        <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+    <span class="p">},</span>
+    <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xbb21d95d9370d88fd7a8259300476b1084cfcf54ae6c6684f77a60876107c980"</span><span class="p">,</span>
+  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599690</span><span class="p">,</span>
+  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0xcf08"</span><span class="p">,</span>
+  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x4a817c800"</span><span class="p">,</span>
+  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0xf6f476c21bb4084729d268eb1392ac9bfc1b543fb89862ad188e1c3f2db4f4b7"</span><span class="p">,</span>
+  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0x3af39c21"</span><span class="p">,</span>
+  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x16"</span><span class="p">,</span>
+  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0x38d7ea4c68000"</span><span class="p">,</span>
+  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
+  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0x5239d5ccf324ed41125e63ef6b49ba5f79a4f27678a9caad0f1c480f36faa026"</span><span class="p">,</span>
+  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x33184fe7ebaa3bdfc414c0147cb902d6a9d43033f3254996a3283cc990adb50f"</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516065072</span><span class="p">,</span>
+  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.00042544"</span>
+<span class="p">}</span>
 
-<span class="c1">// augur.assets.sendEther: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">sendReputation</span><span class="p">({</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+    <span class="na">reputationToSend</span><span class="p">:</span> <span class="s2">"0.001"</span><span class="p">,</span> 
+    <span class="na">_to</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span> 
+    <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">251</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+        <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+    <span class="p">},</span>
+    <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+    <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+<span class="p">});</span>
 
-<span class="c1">// augur.assets.sendReputation: Example JS code coming soon</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xd4bbd077575d2006b19570d546a6f02a4ef45d4cb91d64286026431eda313fb8"</span><span class="p">,</span>
+  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599717</span><span class="p">,</span>
+  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0x2fd618"</span><span class="p">,</span>
+  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x4a817c800"</span><span class="p">,</span>
+  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde"</span><span class="p">,</span>
+  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0xa9059cbb00000000000000000000000040485264986740c8fb3d11e814bd94cf86012d2900000000000000000000000000000000000000000000000000038d7ea4c68000"</span><span class="p">,</span>
+  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x17"</span><span class="p">,</span>
+  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">,</span>
+  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x2"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0xc2b1869475afa6e7b6ecc4965da765f71fee57cd8863c340e3ce02e0ee47ab37"</span><span class="p">,</span>
+  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x4b6baec6d873fa784d70ac9867005204febdf6d1d0274dbf6f774971e01daf7b"</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516065477</span><span class="p">,</span>
+  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.00146872"</span>
+<span class="p">}</span>
 </code></pre></div>
-<h3 id="augur-assets-depositether-p">augur.assets.depositEther(p)</h3>
-
-<p>Description pending.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.</li>
-<li><strong>Properties:</strong>
-
-<ul>
-<li><strong><code class="prettyprint">etherToDeposit</code></strong>  (string) Amount of Ether to convert to &ldquo;wrapped Ether&rdquo; (AKA Ether tokens), as a base-10 string.</li>
-<li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the transaction is broadcast to the network.</li>
-<li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
-<li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the transaction fails.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> Description pending.</li>
-</ul>
-
 <h3 id="augur-assets-sendether-p">augur.assets.sendEther(p)</h3>
 
-<p>Description pending.</p>
+<p>Sends Ether to a specified Ethereum address.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1088,6 +1110,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">etherToSend</code></strong>  (string) Amount of Ether to send, as a base-10 string.</li>
+<li><strong><code class="prettyprint">from</code></strong>  (string) Ethereum address of the sender, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">to</code></strong>  (string) Ethereum address of the recipient, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  (Object) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the transaction is broadcast to the network.</li>
@@ -1096,15 +1119,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> Description pending.</li>
-</ul>
-
 <h3 id="augur-assets-sendreputation-p">augur.assets.sendReputation(p)</h3>
 
-<p>Description pending.</p>
+<p>Sends <a href="#rep">REP</a> to a specified Ethereum address. This function will trigger a <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code> event</a> if the REP is successfully sent.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1121,12 +1138,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the transaction fails.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> Description pending.</li>
 </ul>
 
 <h2 id="connect-function">Connect Function</h2>
@@ -1180,11 +1191,82 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="create-market-functions">Create-Market Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.createMarket.createBinaryMarket: Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createBinaryMarket</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546300799</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"stocks"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will Microsoft stock (MSFT) be below $50 at any point during 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">251</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output coming soon</span>
 
-<span class="c1">// augur.createMarket.createCategoricalMarket: Example JS code coming soon</span>
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.espn.com"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"college football"</span><span class="p">,</span> <span class="s2">"football"</span><span class="p">],</span> 
+  <span class="s2">"outcomeNames"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Georgia"</span><span class="p">,</span> <span class="s2">"Florida"</span><span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createCategoricalMarket</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1540875600</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_outcomes</span><span class="p">:</span> <span class="p">[</span><span class="s2">"outcome1"</span><span class="p">,</span><span class="s2">"outcome2"</span><span class="p">],</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"sports"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Who will win the University of Georgia vs. University of Florida football game in 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">251</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output coming soon</span>
 
-<span class="c1">// augur.createMarket.createScalarMarket: Example JS code coming soon</span>
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://forecast.weather.gov"</span><span class="p">,</span> 
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"weather"</span><span class="p">],</span> 
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span> 
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createScalarMarket</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1530507600</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_minPrice</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
+  <span class="na">_maxPrice</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+  <span class="na">_numTicks</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"temperature"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">251</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">51</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example output coming soon</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">getMarketCreationCost</span><span class="p">({</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span> 
@@ -1194,7 +1276,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">designatedReportNoShowReputationBond</span><span class="p">:</span> <span class="s2">"0.174840291341145834"</span><span class="p">,</span>
-  <span class="nx">etherRequiredToCreateMarket</span><span class="p">:</span> <span class="s2">"0.025"</span>
+  <span class="na">etherRequiredToCreateMarket</span><span class="p">:</span> <span class="s2">"0.025"</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">getMarketCreationCostBreakdown</span><span class="p">({</span>
@@ -1205,13 +1287,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">validityBond</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
-  <span class="nx">designatedReportNoShowReputationBond</span><span class="p">:</span> <span class="s2">"0.174840291341145834"</span><span class="p">,</span>
-  <span class="nx">targetReporterGasCosts</span><span class="p">:</span> <span class="s2">"0.015"</span>
+  <span class="na">designatedReportNoShowReputationBond</span><span class="p">:</span> <span class="s2">"0.174840291341145834"</span><span class="p">,</span>
+  <span class="na">targetReporterGasCosts</span><span class="p">:</span> <span class="s2">"0.015"</span>
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
 
-<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
+<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code> event</a> and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code> event</a> if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1227,7 +1309,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
@@ -1235,15 +1317,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
-</ul>
-
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
-<p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
+<p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code> event</a> and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code> event</a> if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1260,7 +1336,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event. </li>
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
@@ -1268,15 +1344,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
-</ul>
-
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
-<p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. </p>
+<p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code> event</a> and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code> event</a> if the <a href="#market">Market</a> is created successfully. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1295,18 +1365,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">_topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
 <li><strong><code class="prettyprint">_description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">tickSize</code></strong>  (string) &lt;optional&gt; The <a href="#tick">Tick</a> size for this Market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <a href="#MarketCreated">MarketCreated event</a>.</li>
+<li><strong><code class="prettyprint">_extraInfo</code></strong>  (ExtraInfo) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
 <li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-createmarket-getmarketcreationcost-p-callback">augur.createMarket.getMarketCreationCost(p, callback)</h3>
@@ -1359,23 +1423,91 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="events-functions">Events Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// augur.events.getAllAugurLogs: Example JS code coming soon</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">getAllAugurLogs</span><span class="p">({</span>
+  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">1490000</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"0x4175677572000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="s2">"addition"</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+    <span class="s2">"commitHash"</span><span class="p">:</span> <span class="s2">"0x28562806a46f89eaf53726c288f5294fa9c34827"</span><span class="p">,</span>
+    <span class="s2">"bytecodeHash"</span><span class="p">:</span> <span class="s2">"0x1e649bc7bb83f3f7bba3440afadec07fe666377f4c56f34557a050dedc4d76d0"</span><span class="p">,</span>
+    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+    <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0x6d18853ed20b8bc7b344a89b9fb1eafa0d46fcf80ad5bb3965a856446c24bfe2"</span><span class="p">,</span>
+    <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1541700</span><span class="p">,</span>
+    <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
+    <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"RegistryAddition"</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+  <span class="p">{</span>
+    <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">,</span>
+    <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0.001"</span><span class="p">,</span>
+    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+    <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde"</span><span class="p">,</span>
+    <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599717</span><span class="p">,</span>
+    <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
+    <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"TokensTransferred"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 
-<span class="c1">// augur.events.startAugurNodeEventListeners: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">startAugurNodeEventListeners</span><span class="p">({</span>
+  <span class="na">TokensTransferred</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A new TokensTransferred event has occurred: "</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> 
+  <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Started Augur Node event listeners!"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">);</span>
+<span class="c1">// example output:</span>
+<span class="s2">"Started Augur Node event listeners!"</span>
+<span class="c1">// example output after a TokensTransferred event occurs:</span>
+<span class="s2">"A new TokensTransferred event has occurred:"</span>
+<span class="p">{</span>
+  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xbcb517796168347d92ef9448c8aec6f3112dfd5a41ebd9de0c097927cb01ca6b"</span><span class="p">,</span>
+  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"sender"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="s2">"recipient"</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0.001"</span><span class="p">,</span>
+  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1600771</span>
+<span class="p">}</span>
 
 <span class="c1">// augur.events.startBlockchainEventListeners: Example JS code coming soon</span>
 
 <span class="c1">// augur.events.startBlockListeners: Example JS code coming soon</span>
 
-<span class="c1">// augur.events.stopAugurNodeEventListeners: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">stopAugurNodeEventListeners</span><span class="p">(</span>
+  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Stopped Augur Node event listeners!"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+<span class="c1">// example output:</span>
+<span class="s2">"Unsubscribed from 1e08901c-0797-49f2-b13f-e688e5695905"</span>
+<span class="s2">"Stopped Augur Node event listeners!"</span>
 
-<span class="c1">// augur.events.stopBlockchainEventListeners: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">stopBlockchainEventListeners</span><span class="p">();</span>
+<span class="c1">// example output: </span>
+<span class="s2">"true"</span>
 
-<span class="c1">// augur.events.stopBlockListeners: Example JS code coming soon</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">stopBlockListeners</span><span class="p">();</span>
+<span class="c1">// example output:</span>
+<span class="s2">"true"</span>
 </code></pre></div>
 <h3 id="augur-events-getallaugurlogs-p-callback">augur.events.getAllAugurLogs(p, callback)</h3>
 
-<p>Description pending.</p>
+<p>Returns all Augur event logs on the Ethereum blockchain within a certain block range.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1398,7 +1530,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-events-startaugurnodeeventlisteners-eventcallbacks-onsetupcomplete">augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)</h3>
 
-<p>Start listening for events emitted by augur-node.</p>
+<p>Begins listening for events emitted by an <a href="#augur-node">Augur Node</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1415,7 +1547,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-events-startblockchaineventlisteners-eventcallbacks-onsetupcomplete">augur.events.startBlockchainEventListeners(eventCallbacks, onSetupComplete)</h3>
 
-<p>Start listening for events emitted by the Ethereum blockchain.</p>
+<p>Begins listening for events emitted by the Ethereum blockchain.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1460,12 +1592,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; </li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> Description pending.</li>
 </ul>
 
 <h3 id="augur-events-stopblockchaineventlisteners">augur.events.stopBlockchainEventListeners()</h3>
@@ -2199,12 +2325,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
-</ul>
-
 <!-- Add glossary links to section-->
 
 <h3 id="augur-reporting-getreportinghistory-p-callback">augur.reporting.getReportingHistory(p, callback)</h3>
@@ -2305,7 +2425,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getstakerequiredfordesignatedreporter-p-callback">augur.reporting.getStakeRequiredForDesignatedReporter(p, callback)</h3>
 
-<p>Description pending.</p>
+<p>Returns the amount of <a href="#rep">REP</a> a <a href="#designated-reporter">Designated Reporter</a> must Stake when submitting a <a href="#designated-report">Designated Report</a> in a given <a href="#universe">Universe</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2314,7 +2434,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">universe</code></strong>  (string) <a href="#universe">Universe</a> address.</li>
+<li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of a Universe.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after Stake required has been retrieved.</li>
 </ul>
@@ -2322,7 +2442,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li> (string) Amount of Stake required for the <a href="#designated-reporter">Designated Reporter</a> on this <a href="#universe">Universe</a>, as a base-10 string.</li>
+<li> (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.</li>
 </ul>
 
 <h3 id="augur-reporting-getstaketokens-p-callback">augur.reporting.getStakeTokens(p, callback)</h3>
@@ -2672,7 +2792,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <h3 id="augur-trading-calculateprofitloss-p">augur.trading.calculateProfitLoss(p)</h3>
 
-<p>Calculates realized and unrealized profit/loss for trades in a single <a href="#outcome">Outcome</a>. Note: buy/sell labels are from taker&rsquo;s point-of-view.</p>
+<p>Calculates realized and unrealized profit/loss for trades in a single <a href="#outcome">Outcome</a>. Note: buy/sell labels are from taker&rsquo;s point of view.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2689,7 +2809,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Object) Realized and unrealized P/L {position: string, meanOpenPrice: string, realized: string, queued: string, unrealized: string}.</li>
+<li>(Object) Realized and unrealized P/L </li>
+<li><strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">position</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">meanOpenPrice</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">realized</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">queued</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">unrealized</code></strong>  (string) Description pending.</li>
+</ul></li>
 </ul>
 
 <h3 id="augur-trading-claimmarketstradingproceeds-p">augur.trading.claimMarketsTradingProceeds(p)</h3>
@@ -2709,12 +2838,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
@@ -2741,12 +2864,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-trading-denormalizeprice-p">augur.trading.denormalizePrice(p)</h3>
@@ -2966,7 +3083,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h3 id="augur-trading-placetrade-p">augur.trading.placeTrade(p)</h3>
 
 <ul>
-<li>Description pending.</li>
+<li>Places an <a href="#order">Order</a> for a certain number of <a href="#share">Shares</a> in a particular <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -2976,14 +3093,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">amount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">amount</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">limitPrice</code></strong>  (string) Display (non-normalized) limit price for this trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> (non-normalized) for this <a href="#market">Market</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market.</li>
-<li><strong><code class="prettyprint">_direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+<li><strong><code class="prettyprint">_direction</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">_market</code></strong>  (string) Market in which to trade, as a hex string.</li>
-<li><strong><code class="prettyprint">_outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">_outcome</code></strong>  (number) Outcome ID to trade, must be an integer value on [0, 7].</li>
 <li><strong><code class="prettyprint">_tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hex string.</li>
 <li><strong><code class="prettyprint">doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing Orders off the <a href="#order-book">Order Book</a>, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">meta</code></strong>  ({signer: buffer|function, accountType: string}) Authentication metadata for raw transactions.</li>
@@ -2991,12 +3108,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called when the full trade completes successfully.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if any part of the trade fails.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-trading-simulatetrade-p-callback">augur.trading.simulateTrade(p, callback)</h3>
@@ -3058,12 +3169,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) Called when the full trade completes successfully.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) Called if any part of the trade fails.</li>
 </ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h2 id="type-definitions">Type Definitions</h2>
@@ -6414,7 +6519,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.<number>|Array.<string>) Array representing the Market&rsquo;s Payout Set.</li>
+<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">_invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
@@ -6479,7 +6584,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.<number>|Array.<string>) Array representing the Market&rsquo;s Payout Set.</li>
+<li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">_invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
@@ -7992,7 +8097,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.&lt;string&gt;) Keywords used to tag the Market (maximum of 2).</li>
 <li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
@@ -8039,9 +8144,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.&lt;string&gt;) Keywords used to tag the Market (maximum of 2).</li>
 <li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
-<li><strong><code class="prettyprint">outcomeNames</code></strong>  (Array.<string>) Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
+<li><strong><code class="prettyprint">outcomeNames</code></strong>  (Array.&lt;string&gt;) Names for possible Outcomes of the Market. (Only used when creating a <a href="#categorical-market">Categorical Market</a>.)</li>
 </ul></li>
 <li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
 
@@ -8081,7 +8186,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of the <a href="#universe">Universe</a> containing the Forked Market, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">_parentPayoutNumerators</code></strong>  (Array.<number>) Payout Set of the Parent Universe&rsquo;s <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>.</li>
+<li><strong><code class="prettyprint">_parentPayoutNumerators</code></strong>  (Array.&lt;number&gt;) Payout Set of the Parent Universe&rsquo;s <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>.</li>
 <li><strong><code class="prettyprint">_parentInvalid</code></strong>  (boolean) Whether the Parent Universe&rsquo;s Forked Market is <a href="#invalid-outcome">Invalid</a>.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
@@ -8120,7 +8225,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><strong><code class="prettyprint">tags</code></strong>  (Array.<string>) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">tags</code></strong>  (Array.&lt;string&gt;) Keywords used to tag the Market (maximum of 2).</li>
 <li><strong><code class="prettyprint">longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">description</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">tx</code></strong>  (object) JSON object containing the following keys:
@@ -8419,8 +8524,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">universe</code></strong>  (string) Ethereum address of a Universe, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">_reportingParticipants</code></strong>  (Array.<string>) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 16-byte hexadecimal values.</li>
-<li><strong><code class="prettyprint">_feeWindows</code></strong>  (Array.<string>) Ethereum contract addresses of FeeWindows, as 16-byte hexadecimal values.</li>
+<li><strong><code class="prettyprint">_reportingParticipants</code></strong>  (Array.&lt;string&gt;) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 16-byte hexadecimal values.</li>
+<li><strong><code class="prettyprint">_feeWindows</code></strong>  (Array.&lt;string&gt;) Ethereum contract addresses of FeeWindows, as 16-byte hexadecimal values.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
