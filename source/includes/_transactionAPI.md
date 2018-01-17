@@ -704,13 +704,17 @@ This transaction will fail if:
 
 ### augur.api.DisputeCrowdsourcer.redeem(p) 
 
-Can be called only when a [Market](#market) in the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Universe](#universe) has [Forked](#fork) and `augur.api.Market.disavowCrowdsourcers` (in the case of Dispute Crowdsourcers of non-[Forked Markets](#forked-market)) or `augur.api.DisputeCrowdsourcer.fork` (in the case of Dispute Crowdsourcers of Forked Markets) has been called. 
+Redeems [REP](#rep) that `_redeemer` [Staked](#dispute-stake) on a particular Dispute Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `_redeemer` is owed.
 
-When called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any [REP](#rep) that `_redeemer` [Staked](#dispute-stake) on that Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `_redeemer` is owed, to the Universe containing the Forked Market.
+If the Dispute Crowdsourcer's [Market](#market) has been [Finalized](#finalized), and the Dispute Crowdsourcer filled its [Dispute Bond](#dispute-bond), the user will receive their Reporting Fees for the [Fee Window](#fee-window) plus 1.5 times the amount of REP they Staked (if the Outcome of the Dispute Crowdsourcer is the [Final Outcome](#final-outcome) of the Market), or the user will just receive Reporting Fees for the Fee Window (if the Outcome of the Dispute Crowdsourcer is not the Final Outcome of the Market).
 
-When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that `_redeemer` Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that `_redeemer` is owed, to the [Child Universe](#child-universe) for the [Outcome](#outcome) of that Crowdsourcer.
+If the Dispute Crowdsourcer's [Market](#market) has been [Finalized](#finalized), and the Dispute Crowdsourcer did not fill its [Dispute Bond](#dispute-bond), the user will receive Reporting Fees for the Fee Window (but not the REP they originally Staked).
 
-This function can be called on Dispute Crowdsourcers that have filled their [Dispute Bond](#dispute-bond), as well as ones that have not, provided that either `augur.api.Market.disavowCrowdsourcers` or `augur.api.DisputeCrowdsourcer.fork` has been called first. When a [Fork](#fork) occurs, all non-Forked Markets will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase).
+If a Fork has occurred, all non-Forked Markets will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). All non-[Forked Markets](#forked-market) will need to have `augur.api.Market.disavowCrowdsourcers` called before the `redeem` transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have `augur.api.DisputeCrowdsourcer.fork` called on them before the `redeem` transaction can be called. 
+
+When `redeem` is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any [REP](#rep) that `_redeemer` [Staked](#dispute-stake) on that Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `_redeemer` is owed, to the Universe containing the Forked Market.
+
+When `redeem` is called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that `_redeemer` Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that `_redeemer` is owed, to the [Child Universe](#child-universe) for the [Outcome](#outcome) of that Crowdsourcer.
 
 This transaction will trigger a [`WinningsRedeemed` event](#WinningsRedeemed) if the REP/Ether was redeemed without any errors.
 
@@ -1533,6 +1537,7 @@ This function will fail if:
     * **`market`**  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.
     * **`_payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`_invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
+    * **`_amount`**  (string) Amount to contribute to the Dispute Crowdsourcer, in [attoREP](#atto-prefix).
     * **`onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -1618,6 +1623,7 @@ This transaction will fail if:
 This transaction will fail if:
   
 * `market` is not a Forked Market.
+* The [Fork Threshold](#fork-threshold) has not been reached, and the [Fork Period](#fork-period) is not over.
 
 #### **Parameters:**
 
