@@ -805,6 +805,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">importAccount</span><span class="p">({</span>
+  <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
   <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
     <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
@@ -831,7 +832,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+  <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
   <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
   <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
@@ -5624,13 +5625,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-disputecrowdsourcer-redeem-p">augur.api.DisputeCrowdsourcer.redeem(p)</h3>
 
-<p>Can be called only when a <a href="#market">Market</a> in the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#universe">Universe</a> has <a href="#fork">Forked</a> and <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> (in the case of Dispute Crowdsourcers of non-<a href="#forked-market">Forked Markets</a>) or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> (in the case of Dispute Crowdsourcers of Forked Markets) has been called. </p>
+<p>Redeems <a href="#rep">REP</a> that <code class="prettyprint">_redeemer</code> <a href="#dispute-stake">Staked</a> on a particular Dispute Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">_redeemer</code> is owed.</p>
 
-<p>When called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">_redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the Universe containing the Forked Market.</p>
+<p>If the Dispute Crowdsourcer&rsquo;s <a href="#market">Market</a> has been <a href="#finalized">Finalized</a>, and the Dispute Crowdsourcer filled its <a href="#dispute-bond">Dispute Bond</a>, the user will receive their Reporting Fees for the <a href="#fee-window">Fee Window</a> plus 1.5 times the amount of REP they Staked (if the Outcome of the Dispute Crowdsourcer is the <a href="#final-outcome">Final Outcome</a> of the Market), or the user will just receive Reporting Fees for the Fee Window (if the Outcome of the Dispute Crowdsourcer is not the Final Outcome of the Market).</p>
 
-<p>When called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">_redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
+<p>If the Dispute Crowdsourcer&rsquo;s <a href="#market">Market</a> has been <a href="#finalized">Finalized</a>, and the Dispute Crowdsourcer did not fill its <a href="#dispute-bond">Dispute Bond</a>, the user will receive Reporting Fees for the Fee Window (but not the REP they originally Staked).</p>
 
-<p>This function can be called on Dispute Crowdsourcers that have filled their <a href="#dispute-bond">Dispute Bond</a>, as well as ones that have not, provided that either <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> or <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> has been called first. When a <a href="#fork">Fork</a> occurs, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>.</p>
+<p>If a Fork has occurred, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. All non-<a href="#forked-market">Forked Markets</a> will need to have <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called before the <code class="prettyprint">redeem</code> transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on them before the <code class="prettyprint">redeem</code> transaction can be called. </p>
+
+<p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">_redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the Universe containing the Forked Market.</p>
+
+<p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">_redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">_redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
 
 <p>This transaction will trigger a <a href="#WinningsRedeemed"><code class="prettyprint">WinningsRedeemed</code> event</a> if the REP/Ether was redeemed without any errors.</p>
 
@@ -6557,6 +6562,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">market</code></strong>  (string) Ethereum address of a Market, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">_payoutNumerators</code></strong>  (Array.&lt;number&gt;|Array.&lt;string&gt;) Array representing the Market&rsquo;s Payout Set.</li>
 <li><strong><code class="prettyprint">_invalid</code></strong>  (boolean) Whether the Outcome of the Market is Invalid.</li>
+<li><strong><code class="prettyprint">_amount</code></strong>  (string) Amount to contribute to the Dispute Crowdsourcer, in <a href="#atto-prefix">attoREP</a>.</li>
 <li><strong><code class="prettyprint">onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -6674,6 +6680,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><code class="prettyprint">market</code> is not a Forked Market.</li>
+<li>The <a href="#fork-threshold">Fork Threshold</a> has not been reached, and the <a href="#fork-period">Fork Period</a> is not over.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
