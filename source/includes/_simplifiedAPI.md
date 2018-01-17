@@ -61,6 +61,7 @@ augur.accounts.getAccountTransferHistory({
 ]
 
 augur.accounts.importAccount({
+  address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
   keystore: {
     address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
     crypto: {
@@ -87,7 +88,7 @@ augur.accounts.importAccount({
 });
 // example output:
 {
-  address: undefined,
+  address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
   derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
   keystore: {
     address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
