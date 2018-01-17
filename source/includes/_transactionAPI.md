@@ -749,6 +749,8 @@ This transaction will fail if:
 
 * (boolean) `1` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
+Fee Window Tx API
+-----------------
 ```javascript
 // Fee Window Transaction API Examples:
 var feeWindow = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
@@ -845,7 +847,6 @@ This transaction will fail if:
 
 * `_attotokens` is <= 0.
 * Reporting is not currently active in the [Fee Window](#fee-window).
-* All Markets have not been [Finalized](#finalized-market) in the Fee Window.
 
 These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function `augur.api.FeeWindow.redeem`.
 
