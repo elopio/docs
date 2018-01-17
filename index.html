@@ -5684,6 +5684,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li>(boolean) <code class="prettyprint">1</code> if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or <code class="prettyprint">0</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
 </ul>
+
+<h2 id="fee-window-tx-api">Fee Window Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
@@ -5780,7 +5782,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><code class="prettyprint">_attotokens</code> is &lt;= 0.</li>
 <li>Reporting is not currently active in the <a href="#fee-window">Fee Window</a>.</li>
-<li>All Markets have not been <a href="#finalized-market">Finalized</a> in the Fee Window.</li>
 </ul>
 
 <p>These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function <code class="prettyprint">augur.api.FeeWindow.redeem</code>.</p>
