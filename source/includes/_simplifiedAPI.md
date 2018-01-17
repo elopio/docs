@@ -60,7 +60,57 @@ augur.accounts.getAccountTransferHistory({
   }
 ]
 
-// augur.accounts.importAccount: Example JS code coming soon
+augur.accounts.importAccount({
+  keystore: {
+    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  password: "thisismysupersecurepassword"
+}, function (error, account) {
+  console.log(account);
+});
+// example output:
+{
+  address: undefined,
+  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
+  keystore: {
+    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
+    crypto: {
+      cipher: "aes-128-ctr",
+      cipherparams: {
+        iv: "1be316027cc38223635f54dced8fefb4"
+      },
+      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
+      kdf: "pbkdf2",
+      kdfparams: {
+        c: 65536,
+        dklen: 32,
+        prf: "hmac-sha256",
+        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
+      },
+      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
+    },
+    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
+    version: 3
+  },
+  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+}
 
 augur.accounts.login({
   keystore: {
@@ -111,44 +161,21 @@ augur.accounts.login({
     id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
     version: 3
   },
-  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 }
 
-// augur.accounts.loginWithMasterKey: Example JS code coming soon
-
-// augur.accounts.logout: Example JS code coming soon
-
-augur.accounts.register({
-    password: "thisismysupersecurepassword",
-}, function (error, account) {
-  console.log(account);
+augur.accounts.loginWithMasterKey({
+  privateKey: [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 });
 // example output:
 {
-  address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
-  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
-  keystore: {
-    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
+  address: "0x0cad0e04f71c7f202d546ab71b047410bce3277c"
+  derivedKey: Uint8Array(32) [201, 255, 60, 63, 53, 230, 36, 85, 169, 202, 221, 48, 231, 73, 203, 250, 107, 208, 201, 39, 72, 68, 185, 10, 218, 102, 13, 174, 197, 154, 41, 196]
+  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 }
+
+augur.accounts.logout();
+// This function does not produce any output.
 ```
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
@@ -195,7 +222,7 @@ Description pending.
 
 ### augur.accounts.login(p, callback)
 
-Description pending.
+Logs into an account using a password 
 
 #### **Parameters:**
 
@@ -227,21 +254,6 @@ Logs into an account with a user-supplied plaintext private key.
 ### augur.accounts.logout()
 
 Logs out the account that is currently logged in.
-
-### augur.accounts.register(p, callback)
-
-Description pending.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-* **Properties:**
-    * **`password`**  (string) Password for the account being imported.
-* **`callback`** (function) Called after the account has been successfully generated.
-
-#### **Returns:**
-
-*  (<a href="#Account">Account</a>) Logged-in account object.
 
 Assets Functions
 ----------------
@@ -330,7 +342,7 @@ Sends Ether to a specified Ethereum address.
     * **`etherToSend`**  (string) Amount of Ether to send, as a base-10 string.
     * **`from`**  (string) Ethereum address of the sender, as a hexadecimal string.
     * **`to`**  (string) Ethereum address of the recipient, as a hexadecimal string.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
@@ -346,10 +358,57 @@ Sends [REP](#rep) to a specified Ethereum address. This function will trigger a 
     * **`universe`**  (string) The universe of Reputation to use.
     * **`reputationToSend`**  (string) Amount of Reputation to send, as a base-10 string.
     * **`_to`**  (string) Ethereum address of the recipient, as a hexadecimal string.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
+
+Augur-Node Functions
+--------------------
+```javascript
+augur.augurNode.getContractAddresses(
+  function(error, result) {
+    console.log(result);
+  }
+);
+// example output:
+{
+  "version": "4.7.0-47",
+  "addresses": {
+    "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
+    "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+    "Augur": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "LegacyReputationToken": "0x097c198dcc997086d1555ad9ae6f52375cfb58d0",
+    "CancelOrder": "0x389c0b3f0d51cfba9e4d214712a1142f5685814d",
+    "Cash": "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+    "ClaimTradingProceeds": "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce",
+    "CompleteSets": "0xbf749b00e42751dba8e0872e66d3ba854f6c2632",
+    "CreateOrder": "0xdadc071ecc3b7e97b139d2ef692defdc398c8211",
+    "FillOrder": "0x0c77f6af7b3b5fed8ca980414a97c62da283098a",
+    "Order": "0x4811d582f64e68e657bec21834012af38ef093bc",
+    "Orders": "0x1ba5cf0ce546bf7d7943c4d4fb21ea59f6bb0eee",
+    "OrdersFetcher": "0xb9f2cf78542de87ba7542d92e2937d0eedec5feb",
+    "ShareToken": "0x925bee44fec28deb228d2251e1a9d32f7c73ebed",
+    "Trade": "0x0dec7fd04933b8673cef99b64978113065b03926",
+    "TradingEscapeHatch": "0x157a8998f5470a2be3917aab31d334109f56c30c"
+  }
+}
+```
+### augur.augurNode.getContractAddresses(callback)
+
+Returns the version and contract address set from an [Augur Node](#augur-node). 
+
+This function will fail if:
+
+* A connection to an Augur Node cannot be established.
+
+#### **Parameters:**
+
+* **`callback`**  (function) Called after the version and contract addresses have been retrieved.
+
+#### **Returns:**
+
+* (<a href="ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.
 
 Connect Function
 ----------------
@@ -520,7 +579,7 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
-    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
@@ -542,7 +601,7 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`_topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`_extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
-    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
@@ -566,7 +625,7 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`_description`**  (string) Description of the Market, as a UTF8 string.
     * **`tickSize`**  (string) &lt;optional> The [Tick](#tick) size for this Market, as a base-10 string.
     * **`_extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
-    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
@@ -604,172 +663,6 @@ Note: This function will send a transaction if needed to create the current [Rep
 #### **Returns:**
 
 * (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.
-
-Events Functions
-----------------
-```javascript
-augur.events.getAllAugurLogs({
-  fromBlock: 1490000
-}, function(error, result) {
-  console.log(result); 
-});
-// example output:
-[
-  {
-    "key": "0x4175677572000000000000000000000000000000000000000000000000000000",
-    "addition": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "commitHash": "0x28562806a46f89eaf53726c288f5294fa9c34827",
-    "bytecodeHash": "0x1e649bc7bb83f3f7bba3440afadec07fe666377f4c56f34557a050dedc4d76d0",
-    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "removed": false,
-    "transactionHash": "0x6d18853ed20b8bc7b344a89b9fb1eafa0d46fcf80ad5bb3965a856446c24bfe2",
-    "transactionIndex": 0,
-    "logIndex": 0,
-    "blockNumber": 1541700,
-    "contractName": "Augur",
-    "eventName": "RegistryAddition"
-  },
-  ...
-  {
-    "universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
-    "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-    "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
-    "value": "0.001",
-    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "removed": false,
-    "transactionHash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
-    "transactionIndex": 2,
-    "logIndex": 1,
-    "blockNumber": 1599717,
-    "contractName": "Augur",
-    "eventName": "TokensTransferred"
-  }
-]
-
-augur.events.startAugurNodeEventListeners({
-  TokensTransferred: function(error, result){
-    console.log("A new TokensTransferred event has occurred: ", result); 
-  }
-}, function() {
-  console.log("Started Augur Node event listeners!");
-}
-);
-// example output:
-"Started Augur Node event listeners!"
-// example output after a TokensTransferred event occurs:
-"A new TokensTransferred event has occurred:"
-{
-  "transactionHash": "0xbcb517796168347d92ef9448c8aec6f3112dfd5a41ebd9de0c097927cb01ca6b",
-  "logIndex": 1,
-  "sender": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-  "recipient": "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
-  "value": "0.001",
-  "blockNumber": 1600771
-}
-
-// augur.events.startBlockchainEventListeners: Example JS code coming soon
-
-// augur.events.startBlockListeners: Example JS code coming soon
-
-augur.events.stopAugurNodeEventListeners(
-  function() {
-    console.log("Stopped Augur Node event listeners!");
-  }
-);
-// example output:
-"Unsubscribed from 1e08901c-0797-49f2-b13f-e688e5695905"
-"Stopped Augur Node event listeners!"
-
-augur.events.stopBlockchainEventListeners();
-// example output: 
-"true"
-
-augur.events.stopBlockListeners();
-// example output:
-"true"
-```
-### augur.events.getAllAugurLogs(p, callback)
-
-Returns all Augur event logs on the Ethereum blockchain within a certain block range.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-* **Properties:**
-    * **`fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`).
-    * **`toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
-* **`callback`** (function) Called when all data has been received and parsed.
-
-#### **Returns:**
-
-* ({ contractName => { eventName => [parsed event logs] } }) Description pending.
-
-### augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)
-
-Begins listening for events emitted by an [Augur Node](#augur-node).
-
-#### **Parameters:**
-
-* **`eventCallbacks`** (Object.&lt;function()>) Callbacks to fire when events are received, keyed by event name.
-* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
-
-#### **Returns:**
-
-*  Description pending.
-
-### augur.events.startBlockchainEventListeners(eventCallbacks, onSetupComplete)
-
-Begins listening for events emitted by the Ethereum blockchain.
-
-#### **Parameters:**
-
-* **`eventCallbacks`** (Object.&lt;function()>) &lt;optional> Callbacks to fire when events are received, keyed by contract name and event name.
-* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
-
-#### **Returns:**
-
-*  Description pending.
-
-### augur.events.startBlockListeners()
-
-Start listening for blocks.
-
-#### **Parameters:**
-
-* **`blockCallbacks`** (Object) Parameters object. 
-* **Properties:**
-  * **`onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
-  * **`onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
-
-#### **Returns:**
-
-*  (boolean) True if listeners were successfully started; false otherwise.
-
-### augur.events.stopAugurNodeEventListeners(callback)
-
-Removes all active listeners for events emitted by augur-node.
-
-#### **Parameters:**
-
-* **`callback`** (function) &lt;optional> 
-
-### augur.events.stopBlockchainEventListeners()
-
-Removes all active listeners for events emitted by the Ethereum blockchain.
-
-#### **Returns:**
-
-*  (boolean) True if listeners were successfully stopped; false otherwise.
-
-### augur.events.stopBlockListeners()
-
-Stop listening for blocks and block removals.
-
-#### **Returns:**
-
-*  (boolean) True if listeners were successfully stopped; false otherwise.
 
 Markets Functions
 ----------------
@@ -1036,6 +929,26 @@ augur.markets.getMarketsInfo({
     }]
   }
 ]
+
+augur.markets.getUnclaimedMarketCreatorFees({
+  marketIDs: [
+    "0x0000000000000000000000000000000000000001",
+    "0x0000000000000000000000000000000000000002"
+  ]
+}, function(error, result) {
+  console.log(result);
+});
+// example output:
+[
+  {
+    marketID: "0x0000000000000000000000000000000000000001",
+    unclaimedFee: 0,
+  },
+  {
+    marketID: "0x0000000000000000000000000000000000000002",
+    unclaimedFee: 0,
+  }
+]
 ```
 ### augur.markets.getCategories(p, callback)
 
@@ -1266,6 +1179,21 @@ This function will fail if:
 
 * (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>)
 
+### augur.markets.getUnclaimedMarketCreatorFees
+
+Returns information about unclaimed [Market Creator Fees](#creator-fee). Fees are only available on [Finalized Markets](#finalized-market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`marketIDs`**  (Array.<string>) Contract addresses of the [Markets](#market) for which to get details, as 16-byte hexadecimal values.
+* **`callback`** (function) Called after the Market info has been retrieved.
+
+#### **Returns:**
+
+* (Array.&lt;<a href="#MarketCreatorFee">MarketCreatorFee</a>>)
+
 Reporting Functions
 -------------
 ```javascript
@@ -1382,7 +1310,7 @@ Description pending.
 * **`p`** (Object) Parameters object.
 * **Properties:**
     * **`market`**  (string) Address of the Market to Finalize, as a hex string.
-    * **`meta`**  (Object) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when the transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`onFailed`**  (function) Called if/when the transaction fails.
@@ -1514,9 +1442,36 @@ augur.trading.calculateProfitLoss({
   unrealized: "0"
 }
 
-// augur.trading.claimMarketsTradingProceeds: Example JS code coming soon
+augur.trading.claimMarketsTradingProceeds({
+  _markets: [
+    "0x0000000000000000000000000000000000000001",
+    "0x0000000000000000000000000000000000000002",
+  ],
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function() {},
+  onSuccess: function(result) {
+    console.log(result);
+  },
+  onFailed: function() {}
+});
+// example output coming soon
 
-// augur.trading.claimTradingProceeds: Example JS code coming soon
+augur.trading.claimTradingProceeds({
+  _market: "0x0000000000000000000000000000000000000001",
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function() {},
+  onSuccess: function(result) {
+    console.log(result);
+  },
+  onFailed: function() {}
+});
+// example output coming soon
 
 augur.trading.denormalizePrice({
   minPrice: "0",
@@ -1760,7 +1715,28 @@ augur.trading.normalizePrice({
 // example output:
 "0.2"
 
-// augur.trading.placeTrade: Example JS code coming soon
+augur.trading.placeTrade({
+  amount: "10",
+  limitPrice: "2",
+  minPrice: "1",
+  maxPrice: "3",
+  tickSize: "0.0001",
+  _direction: 0,
+  _market: "MARKET_ADDRESS",
+  _outcome: 2,
+  _tradeGroupId: "0x1",
+  doNotCreateOrders: false,
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    accountType: "privateKey"
+  },
+  onSent: function() {},
+  onSuccess: function(result) {
+      console.log(result);
+  },
+  onFailed: function() {},
+});
+// example output coming soon
 
 augur.trading.simulateTrade({
   orderType: 0,
@@ -1807,7 +1783,27 @@ augur.trading.simulateTrade({
   shareBalances: ["0", "4"],
 }
 
-// augur.trading.tradeUntilAmountIsZero: Example JS code coming soon
+augur.trading.tradeUntilAmountIsZero({
+  _price: "0.5",
+  _fxpAmount: "10",
+  numTicks: "10000",
+  tickSize: "0.0001",
+  _direction: 1,
+  _market: "MARKET_ADDRESS",
+  _outcome: 2,
+  _tradeGroupId: "0x1",
+  doNotCreateOrders: true,
+  meta: {
+      signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+      accountType: "privateKey"
+  },
+  onSent: function() {},
+  onSuccess: function(result) {
+      console.log(result);
+  },
+  onFailed: function() {}
+});
+// example output coming soon
 ```
 ### augur.trading.calculateProfitLoss(p)
 
@@ -1822,13 +1818,7 @@ Calculates realized and unrealized profit/loss for trades in a single [Outcome](
 
 #### **Returns:**
 
-* (Object) Realized and unrealized P/L 
-* **Properties:**
-  * **`position`**  (string) Description pending.
-  * **`meanOpenPrice`**  (string) Description pending.
-  * **`realized`**  (string) Description pending.
-  * **`queued`**  (string) Description pending.
-  * **`unrealized`**  (string) Description pending.
+* (<a href="#ProfitLoss">ProfitLoss</a>) Realized and unrealized P/L.
 
 ### augur.trading.claimMarketsTradingProceeds(p)
 
@@ -1839,7 +1829,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 * **`p`** (Object) Parameters object.
 * **Properties:**
     * **`markets`**  (Array.&lt;string>) Array of [Market](#market) addresses for which to claim proceeds.
-    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
@@ -1858,7 +1848,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
 * **Properties:**
     * **`_market`**  (string) [Market](#market) address for which to claim proceeds.
-    * **`meta`**  ({signer: buffer|function, accountType: string}) &lt;optional> Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`onFailed`**  (function) Called if/when any of the transactions fail.
@@ -2036,7 +2026,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`_outcome`**  (number) Outcome ID to trade, must be an integer value on [0, 7].
     * **`_tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
     * **`doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
-    * **`meta`**  ({signer: buffer|function, accountType: string}) Authentication metadata for raw transactions.
+    * **`meta`**  (<a href="#Meta">Meta</a>) Authentication metadata for raw transactions.
     * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`onSuccess`**  (function) Called when the full trade completes successfully.
     * **`onFailed`**  (function) Called if any part of the trade fails.
@@ -2048,7 +2038,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
 #### **Parameters:**
 
 * **`p`** (Object) Trade simulation parameters.
-  **Properties:**
+* **Properties:**
     * **`orderType`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`outcome`**  (number)  [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
     * **`shareBalances`**  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.
@@ -2073,20 +2063,20 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
-      * **`_price`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
-      * **`_fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
-      * **`numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
-      * **`tickSize`**  (string) The Tick size (interval) for this Market.
-      * **`_direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
-      * **`_market`**  (string) Market in which to trade, as a hex string.
-      * **`_outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
-      * **`_tradeGroupId`**  (string} &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
-      * **`doNotCreateOrders`**  (boolean} &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
-      * **`meta`**  ({signer: buffer|function, accountType: string}} &lt;optional> Authentication metadata for raw transactions.
-      * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
-      * **`onSuccess`**  (function) Called when the full trade completes successfully.
-      * **`onFailed`**  (function) Called if any part of the trade fails.
+* **Properties:**
+    * **`_price`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
+    * **`_fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
+    * **`numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
+    * **`tickSize`**  (string) The Tick size (interval) for this Market.
+    * **`_direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
+    * **`_market`**  (string) Market in which to trade, as a hex string.
+    * **`_outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`_tradeGroupId`**  (string} &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
+    * **`doNotCreateOrders`**  (boolean} &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
+    * **`meta`**  (<a href="#Meta">Meta</a>} &lt;optional> Authentication metadata for raw transactions.
+    * **`onSent`**  (function) Called when the first trading transaction is broadcast to the network.
+    * **`onSuccess`**  (function) Called when the full trade completes successfully.
+    * **`onFailed`**  (function) Called if any part of the trade fails.
 
 Type Definitions
 -------------
@@ -2117,12 +2107,36 @@ Type Definitions
 * **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
 * **`marketID`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
 
+<a name="AugurEventLog"></a>
+### AugurEventLog  (Object)
+
+#### **Properties:** 
+* **`key`**  (string) A 32-byte hexadecimal value. Description pending.
+* **`addition`**  (string) A 20-byte hexadecimal value. Description pending.
+* **`commitHash`**  (string) A 20-byte hexadecimal value. Description pending.
+* **`bytecodeHash`**  (string) A 32-byte hexadecimal value. Description pending.
+* **`address`**  (string) A 20-byte hexadecimal value. Description pending.
+* **`removed`**  (boolean) Whether the transaction this event was created from was removed from the Ethereum blockchain (due to an orphaned block) or never gotten to (due to a rejected transaction).
+* **`transactionHash`**  (string) Hash of the transactions this log was created from, as a 32-byte hexadecimal value.
+* **`transactionIndex`**  (number) Integer of the transaction's index position in the block.
+* **`logIndex`**  (number) Integer of the log index position in the block.
+* **`blockNumber`**  (number) Number of the block on the Ethereum blockchain where the event was logged.
+* **`contractName`**  (string) Name of the Solidity contract in which the event is defined.
+* **`eventName`**  (string) Name of the event type being logged.
+
 <a name="BetterWorseOrders"></a>
 ### BetterWorseOrders  (Object)
 
 #### **Properties:** 
 * **`betterOrderID`** (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.
 * **`worseOrderID`** (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.
+
+<a name="ContractAddresses"></a>
+### ContractAddresses  (Object)
+
+#### **Properties:** 
+* **`version`** (string) Version of the contracts.
+* **`addresses`** (Object) Object containing the 16-byte Ethereum contract addresses used by Augur, keyed by contract name.
 
 <a name="Category"></a>
 ### Category  (Object)
@@ -2199,6 +2213,13 @@ Type Definitions
 * **`targetReporterGasCosts`** (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.
 * **`validityBond`** (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.
 
+<a name="MarketCreatorFee"></a>
+### MarketCreatorFee  (Object)
+
+#### **Properties:** 
+* **`marketID`** (string) Address of a Market, as a hexadecimal string.
+* **`unclaimedFee`** (number|string) Fee available to be claimed from the Market, by the Market Creator, in attoETH.
+
 <a name="MarketInfo"></a>
 ### MarketInfo  (Object)
 
@@ -2261,6 +2282,15 @@ Type Definitions
 * **`creationTime`** (number) Unix time when the Market was created.
 * **`marketID`** (string) Address of a Market, as a hexadecimal string.
 
+<a name="Meta"></a>
+### Meta  (Object)
+
+Authentication metadata for raw transactions.
+
+#### **Properties:** 
+* **`signer`** (buffer|function) Description pending.
+* **`accountType`** (string) Type of account that is signing the transaction (e.g. "privateKey").
+
 <a name="NoKeystoreAccount"></a>
 ### NoKeystoreAccount  (Object)
 
@@ -2316,6 +2346,16 @@ Serves as an enum for the state of an order.
 * **`c`** (number) Number of PBKDF2 iterations used to derive the secret key.
 * **`prf`** (string) Pseudorandom function used with PBKDF2 (usually hmac-sha256).
 * **`salt`** (string) The dklen-byte salt used for this account, as a hexadecimal string.
+
+<a name="ProfitLoss"></a>
+### ProfitLoss  (Object)
+
+#### **Properties:**
+  * **`position`**  (string) Description pending.
+  * **`meanOpenPrice`**  (string) Description pending.
+  * **`realized`**  (string) Description pending.
+  * **`queued`**  (string) Description pending.
+  * **`unrealized`**  (string) Description pending.
 
 <a name="Report"></a>
 ### Report  (Object)

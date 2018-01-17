@@ -2,194 +2,231 @@ Events API
 ===========
 <aside class="notice">The Events section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
+There are a variety of "events" that are emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an [Initial Report](#initial-report), [Finalizing](#finalized-market) a [Market](#market), [Filling](#fill-order) an [Open Order](#open-order), etc. For a full list, please refer to the [Event Types](#event-types) section.
+
+<aside class="notice">The Events API described here should not be confused with the (unrelated) concept of "events" that <a href="#reporter">Reporters</a> <a href="#report">Report</a> on. These concepts are sufficiently different that the context should always make clear which kind of "event" is being discussed. However, if this documentation is ever ambiguous about this, feel free to drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, <a href="https://www.reddit.com/r/augur">Reddit</a>, or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
+
+The augur.js Events API includes event listeners, which provide notifications of events that are currently happening. The functions `augur.events.startAugurNodeEventListeners`, `augur.events.startBlockchainEventListeners`, and `augur.events.startBlockListeners` can be used to listen for incoming events. 
+
+The function `augur.events.getAllAugurLogs` can be used to get an array of all Augur-related events that have been logged in the past.
+
+<aside class="success">Events are retrieved either via push notification (if connected via websocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
+
+Events Functions
+-----------
 ```javascript
-// Listen for Events emitted by the Augur contracts
-// contractAddresses is a JSON object containing the name and address of the Augur contracts.
-var contractAddresses = {
-  ReputationToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
- /* ... */
-};
-// Events API is a JSON object containing the event labels, and information about each event
-var eventsAPI = {
-  Approval: {
-    address: "0x9308cf21b5a11f182f9707ca284bbb71bb84f893",
-    /* ... */
-  },
-  /* ... */
-}
-// Both contractAddress and eventsAPI can be found in successful connection object received from calling the augur.connect() function. The contractAddresses can be found in connectionObject.contracts and the events API can be found at connectionObject.api.events.
-
-// Start listening for Events
-augur.filters.listen(contractAddresses, eventsAPI, {
-    approval: function (event) { /* ... */ },
-    block: function (blockhash) { /* ... */ },
-    burn: function (event) { /* ... */ },
-    cancelOrder: function (event) { /* ... */ },
-    completeSets: function (event) { /* ... */ },
-    depositEther: function (event) { /* ... */ },
-    initiateWithdrawEther: function (event) { /* ... */ },
-    makeOrder: function (event) { /* ... */ },
-    mint: function (event) { /* ... */ },
-    takeOrder: function (event) { /* ... */ },
-    transfer: function (event) { /* ... */ },
-    withdrawEther: function (event) { /* ... */ },
-  },
-  function (filters) { console.log('Listening to filters:', filters); }
-);
-
-// Stop listening for events and delete (uninstall) filters
-augur.filters.ignore();
-
-/**
- * Search for historical events.
- */
-var myAccountAddress = "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b";
-var myFriendsAddress = "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1";
-
-// Look up Transfers from my account to my friends account.
-var params = {
-  label: "Transfer",
-  filter: { from: myAccountAddress, to: myFriendsAddress }
-};
-
-augur.logs.getLogs(params, function (err, logs) { /* ... */ });
-
-// Logs will look something like this:
-logs = [{
-  blockNumber: 6200,
-  removed: false,
-  from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-  to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
-  value: "1000000000000",
-  timestamp: 1502305142,
-  transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028"
-}];
-
-// now only look for Transfers between block 2000 and 6000.
-params = {
-  label: "Transfer",
-  filter: {
-    from: myAccountAddress,
-    to: myFriendsAddress,
-    toBlock: 6000,
-    fromBlock: 2000
-  }
-};
-
-augur.logs.getLogs(params, function (err, logs) { /* ... */ });
-
-// in this case we have no logs in those blocks for the filters specified
-// so an empty array is returned.
-logs = [];
-
-// lets add the aux object to our params.
-// In this case we are going to look for all Transfer transactions from myAccountAddress
-// to myFriendsAddress, starting from block 2000 all the way to the latest block.
-// We would also like to have the logs object organized by from field, in this case just myAccountAddress as we specified that as the only from address to look for.
-// We also would like to add an extra field to each log called "anotherField"
-// its value should always be "testing"
-params = {
-  label: "Transfer",
-  filter: {
-    from: myAccountAddress,
-    to: myFriendsAddress,
-    toBlock: "latest",
-    fromBlock: 2000
-  },
-  aux: {
-    index: "from",
-    extraField: { name: "anotherField", value: "testing" }
-  }
-};
-
-augur.logs.getLogs(params, function (err, logs) { /* ... */ });
-
-// The transactions are organized by from address and this time they have an added extra field
-logs = {
-  "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b": [{
-    blockNumber: 6200,
-    removed: false,
-    from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-    to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
-    value: "1000000000000",
-    timestamp: 1502305142,
-    transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028",
-    anotherField: "testing"
-  },
-  {
-    blockNumber: 6400,
-    removed: false,
-    from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-    to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
-    value: "100000000000000",
-    timestamp: 1502306213,
-    transactionHash: "0x13c40b9ed0fd124e9bfcae2bd41e6dc8163d4ac0012c69c0efe57f502ecf81ea",
-    anotherField: "testing"
-  }]
-};
-
-// finally, we can merge more than one search by adding the mergedLogs object to the aux object.
-params = {
-  label: "Transfer",
-  filter: {
-    from: myAccountAddress,
-    to: myFriendsAddress,
-    toBlock: 6300,
-    fromBlock: 5000
-  },
-  aux: {
-    index: "from",
-    extraField: { name: "firstSearch", value: true },
-    mergedLogs: {}
-  }
-};
-
-augur.logs.getLogs(params, function (err, logs) {
-  // the first set of logs have been returned, change the params and
-  // call again to merge these calls together
-  params.filter.toBlock = 'latest';
-  params.filter.fromBlock = 6300;
-  params.aux.extraField = null;
-
-  augur.logs.getLogs(params, function (err, logs) {
-    // logs will look something like this, only the first searches logs have the extra field.
-    logs = {
-      "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b": [{
-        blockNumber: 6200,
-        removed: false,
-        from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-        to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
-        value: "1000000000000",
-        timestamp: 1502305142,
-        transactionHash: "0xba9c4044153059f584ddc8ea61d89c4cfb5421fe81c014baf90b8918a1622028",
-        firstSearch: true
-      },
-      {
-        blockNumber: 6400,
-        removed: false,
-        from: "0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b",
-        to: "0x6c15291028d082e1b9358e19f15c83b9c54f2ba1",
-        value: "100000000000000",
-        timestamp: 1502306213,
-        transactionHash: "0x13c40b9ed0fd124e9bfcae2bd41e6dc8163d4ac0012c69c0efe57f502ecf81ea",
-      }]
-    };
-  });
+augur.events.getAllAugurLogs({
+  fromBlock: 1490000
+}, function(error, allAugurLogs) {
+  console.log(allAugurLogs); 
 });
-// (Note: for efficiency, the mergedLogs field in aux is mutated by getLogs.  If this
-// bothers you, feel free to use lodash's merge, ES6/7 spread, etc. to accomplish the same thing.
-// Also, the tears of functional programmers are delicious. ;)
+// example output:
+[
+  {
+    "key": "0x4175677572000000000000000000000000000000000000000000000000000000",
+    "addition": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "commitHash": "0x28562806a46f89eaf53726c288f5294fa9c34827",
+    "bytecodeHash": "0x1e649bc7bb83f3f7bba3440afadec07fe666377f4c56f34557a050dedc4d76d0",
+    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "removed": false,
+    "transactionHash": "0x6d18853ed20b8bc7b344a89b9fb1eafa0d46fcf80ad5bb3965a856446c24bfe2",
+    "transactionIndex": 0,
+    "logIndex": 0,
+    "blockNumber": 1541700,
+    "contractName": "Augur",
+    "eventName": "RegistryAddition"
+  },
+  ...
+  {
+    "universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+    "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
+    "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
+    "value": "0.001",
+    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "removed": false,
+    "transactionHash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
+    "transactionIndex": 2,
+    "logIndex": 1,
+    "blockNumber": 1599717,
+    "contractName": "Augur",
+    "eventName": "TokensTransferred"
+  }
+]
+
+augur.events.startAugurNodeEventListeners({
+  TokensTransferred: function(error, result){
+    console.log("A new TokensTransferred event has occurred: ", result); 
+  }
+}, function() {
+  console.log("Started Augur Node event listeners!");
+});
+// example output:
+"Started Augur Node event listeners!"
+// example output after a TokensTransferred event occurs:
+"A new TokensTransferred event has occurred:"
+{
+  "transactionHash": "0xbcb517796168347d92ef9448c8aec6f3112dfd5a41ebd9de0c097927cb01ca6b",
+  "logIndex": 1,
+  "sender": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "recipient": "0x40485264986740c8fb3d11e814bd94cf86012d29",
+  "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
+  "value": "0.001",
+  "blockNumber": 1600771
+}
+
+augur.events.startBlockchainEventListeners(
+  {
+    Augur: {
+      TokensTransferred: function() { console.log("A new TokensTransferred event has occurred."); }
+    }
+  }, 
+  1490000, 
+  function() {
+    console.log("Setup is complete!");
+  }
+); 
+// example output: 
+"Starting blockstream at block  1490000"
+"Setup is complete!"
+// example output after a TokensTransferred event occurs: coming soon
+
+augur.events.startBlockListeners({
+  onAdded: function(block) {
+    console.log("New block added!", block);
+  }, 
+  onRemoved: function(block) {
+    console.log("Block removed!", block);
+  }
+});
+// example output:
+"true"
+// example output after a block is added to the Ethereum blockchain:
+"New block added!"
+{
+  "difficulty": "0x2",
+  "extraData": "0xd783010703846765746887676f312e392e32856c696e75780000000000000000e76b9e0b0711c73221a771804a8c61f01d1ebf0cf6c8bafb17f93e671d38944422c9d3503d5e9ea9763907af5dd1064256b5bdb320f9c5247708a486dfd4292b01",
+  "gasLimit": "0x6a9bc4",
+  "gasUsed": "0x337bf",
+  "hash": "0xaae5645ad53b51f85c55971ffcbfad7c5e44a940794fac1fab6fd93560c5055b",
+  "logsBloom": "0x00000000040000000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000020000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000011000000000000000000000",
+  "miner": "0x0000000000000000000000000000000000000000",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "nonce": "0x0000000000000000",
+  "number": "0x1877a7",
+  "parentHash": "0xcb656990d8b7993183bed724f1af4b74d8a5e9ab1e6f7abdb3e5209504272cd2",
+  "receiptsRoot": "0x4a0b60d86057241ca030d4ebe75df43ca7857ad30a542c21db8876fa7f6c836b",
+  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+  "size": "0x5b4",
+  "stateRoot": "0xd13fadf3b2edc48c2597900aa0bda6a97d17f4e907161eb061e34821b6067af0",
+  "timestamp": "0x5a5e3023",
+  "totalDifficulty": "0x2d6a4a",
+  "transactions": [
+    "0xce2fa17a608bfad0f1520e307b16f4bffbe1d8b6ec399fc5af7f8b6ab3327e1d",
+    "0xcd54f9e1335e723448690876794664f21a270984f0f34153e891577df181c3d9",
+    "0x776fbb3f73dee8f40361b06f642406909551d67e146d3e80ffe5a6fdf6f087a9",
+    "0xc2efc2f39bf738cfbbf00f7d6ee89ecb6edaac2d0e0c1ae6a495786daf68b168",
+    "0x422095f55a36c1f752328a82873a5724fde7c29b49b545a27762037303cac71f",
+    "0x439b923062e2d23aa672a09ff221afdb81b6d0622fc29981ee742702a3157524"
+  ],
+  "transactionsRoot": "0x1b1b70c302dc90d27075af34bfb4bd42bb505822570b5f8131cfcc8cf0368396",
+  "uncles": []
+}
+
+augur.events.stopAugurNodeEventListeners(
+  function() {
+    console.log("Stopped Augur Node event listeners!");
+  }
+);
+// example output:
+"Unsubscribed from 1e08901c-0797-49f2-b13f-e688e5695905"
+"Stopped Augur Node event listeners!"
+
+augur.events.stopBlockchainEventListeners();
+// example output: 
+"true"
+
+augur.events.stopBlockListeners();
+// example output:
+"true"
 ```
-There are a variety of "events" emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an [Initial Report](#initial-report), [Finalizing](#finalized-market) a [Market](#market), [Filling](#fill-order) an [Open Order](#open-order), etc.
+### augur.events.getAllAugurLogs(p, callback)
 
-<aside class="notice">The events API described here should not be confused with the (entirely unrelated) concept of "events" that Reporters Report on.  We think that the concepts are sufficiently different that the context should always make it clear which kind of "event" is being referred to.  In the event that you encounter an ambiguity, please drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, or just violently rage at us on <a href="https://www.reddit.com/r/augur">Reddit</a> or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
+Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by `blockNumber` and `logIndex`.
 
-The augur.js events API includes event listeners, which notify you of events happening now, and a search function for historical events ("logs"):
+#### **Parameters:**
 
-- *Event listeners* ("filters") can be turned on using the `augur.filters.listen` function.  `augur.filters.listen` accepts four arguments: a JSON object containing the contracts and their addresses, a JSON object containing information about each event, an object with event labels as keys (see table below), and callbacks for these events as values.  Each callback has a single argument, an object containing the "Data" fields shown in the table below.
-- *Event search* can be accomplished with the `augur.logs.getLogs` function.  `augur.logs.getLogs` can search for any combination of an event's *indexed* data fields (enumerated in the table below), and also accepts optional upper- and lower-bound block numbers to further narrow down the search.
+* **`p`** (Object) Parameters object.
+* **Properties:**
+    * **`fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`). (Note: While this parameter is optional, specifying a `fromBlock` is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)
+    * **`toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
+* **`callback`** (function) Called when all data has been received and parsed.
 
-The following table shows the events that can be passed to `augur.filters.listen`.  All of these events are optional; if you don't need some of these events for your application, don't include the event in your call to `augur.filters.listen`.  In this table, "Contract" refers to the Ethereum contract on which the event is defined ([source code](https://github.com/AugurProject/augur-core) / [contract addresses](https://github.com/AugurProject/augur-contracts)), "Data (indexed)" refers to fields included in the event log that are searchable using the `augur.logs.getLogs` function.
+#### **Returns:**
+
+* (Array.&lt;[AugurEventLog](#AugurEventLog)>) Array of AugurEventLog objects found on the Ethereum blockchain, sorted by `blockNumber` and `logIndex`.
+
+### augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)
+
+Begins listening for events emitted by an [Augur Node](#augur-node).
+
+#### **Parameters:**
+
+* **`eventCallbacks`** (Object.&lt;function()>) Callbacks to fire when events are received, keyed by event name.
+* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
+
+### augur.events.startBlockchainEventListeners(eventCallbacks, startingBlockNumber, onSetupComplete)
+
+Begins listening for events emitted by the Ethereum blockchain.
+
+#### **Parameters:**
+
+* **`eventCallbacks`** (Object.&lt;function()>) &lt;optional> Callbacks to fire when events are received, keyed by contract name and event name.
+* **`startingBlockNumber`** (number) &lt;optional> Block number at which to start listening for blockchain events.
+* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
+
+### augur.events.startBlockListeners()
+
+Start listening for blocks.
+
+#### **Parameters:**
+
+* **`blockCallbacks`** (Object) Parameters object. 
+* **Properties:**
+  * **`onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
+  * **`onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully started; false otherwise.
+
+### augur.events.stopAugurNodeEventListeners(callback)
+
+Removes all active listeners for events emitted by augur-node.
+
+#### **Parameters:**
+
+* **`callback`** (function) &lt;optional> 
+
+### augur.events.stopBlockchainEventListeners()
+
+Removes all active listeners for events emitted by the Ethereum blockchain.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully stopped; false otherwise.
+
+### augur.events.stopBlockListeners()
+
+Stop listening for blocks and block removals.
+
+#### **Returns:**
+
+*  (boolean) True if listeners were successfully stopped; false otherwise.
+
+Event Types
+-----------
+The following table shows the different types of events that Augur's smart contracts log to the Ethereum blockchain. In this table, the `Contract` field refers to the Solidity contract in which the event is defined ([source code](https://github.com/AugurProject/augur-core) / [contract addresses](https://github.com/AugurProject/augur-contracts/blob/master/addresses.json)), and and the `Data (indexed)` field describes which event fields are indexed on the Ethereum blockchain.
 
 Label                     | Contract                                                                                   | Event Description | Data (indexed) | Data (non-indexed)
 ------------------------- | ------------------------------------------------------------------------------------------ | ----------------- | -------------- | ------------------
@@ -216,7 +253,3 @@ Label                     | Contract                                            
 <a name="UniverseForked"></a>UniverseForked            | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | A [Market](#market) in `universe` has had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than the [Fork Threshold](#fork-threshold), which has caused `universe` to [Fork](#fork). | universe |
 <a name="WhitelistAddition"></a>WhitelistAddition    | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | The Ethereum contract address `addition` was added to Augur's whitelisted contracts. (Many of the functions in Augur's Solidity smart contracts are only callable by contracts that have been whitelisted.) | &nbsp; | addition
 <a name="WinningsRedeemed"></a>WinningsRedeemed     | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | The Ethereum contract address `reportingParticipant` has allowed `reporter` to redeem `amountRedeemed` [REP](#rep) in `market` of `universe` for the [Outcome](#outcome) `payoutNumerators`. `reporter` also received `reportingFeesReceived` in ETH. | universe, reporter, market | reportingParticipant, amountRedeemed, reportingFeesReceived, payoutNumerators
-
-In addition to these on-contract events, `augur.filters.listen` also accepts a callback for the `block` listener, which fires whenever a new block arrives.  The argument passed to its callback is the hash (as a hex string) of the new block.
-
-<aside class="success">Events are retrieved either via push notification (if connected via websocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
