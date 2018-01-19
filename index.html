@@ -5274,6 +5274,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>As mentioned in the previous method description, all of Augur&rsquo;s <a href="#universe">Universes</a> have their own <a href="#rep">REP</a> contract, specific to that Universe. In the event of a <a href="#fork">Fork</a> occurring, REP holders are expected to migrate their REP to one of the newly created <a href="#child-universe">Child Universes</a>. The Child Universe with the most REP migrated to it at the end of the <a href="#fork-period">Fork Period</a> will be the only Universe that allows for <a href="#settlement">Settlement</a> on the <a href="#forked-market">Forked Market</a> and will be the Universe that all pending <a href="#market">Markets</a> will migrate to for <a href="#report">Reporting</a>. What this method does is returns the Universe address of the currently &ldquo;winning&rdquo; migration destination. In other words, this returns the Universe with the most REP migrated to it so far.</p>
 
+<h3 id="augur-api-reputationtoken-gettotalmigrated-tx-callback">augur.api.ReputationToken.getTotalMigrated({ tx }[, callback])</h3>
+
+<p>Returns total amount of <a href="#rep">REP</a> that has been migrated into the current ReputationToken contract from the ReputationToken contract of its <a href="#universe">Universe&rsquo;s</a> <a href="#parent-universe">Parent Universe</a>.</p>
+
+<h3 id="augur-api-reputationtoken-gettotaltheoreticalsupply-tx-callback">augur.api.ReputationToken.getTotalTheoreticalSupply({ tx }[, callback])</h3>
+
+<p>Returns the total <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract. Note: To ensure this number is as accurate as possible, <code class="prettyprint">augur.api.ReputationToken.updateParentTotalTheoreticalSupply</code> should first be called on the ReputationToken contract, and <code class="prettyprint">augur.api.ReputationToken.updateSiblingMigrationTotal</code> should be called on any ReputationToken contracts that have the same <a href="#parent-universe">Parent Universe</a>.</p>
+
 <h2 id="share-token-call-api">Share Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
@@ -7746,6 +7754,58 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> REP is sent from <code class="prettyprint">_from</code> to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-updateparenttotaltheoreticalsupply-p">augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)</h3>
+
+<p>Gets the current <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract&rsquo;s <a href="#parent-universe">Parent Universe</a>, and updates this ReputationToken contract&rsquo;s Theoretical REP Supply accordingly.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the ReputationToken contract&rsquo;s Theoretical REP Supply was updated without any errors, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-updatesiblingmigrationtotal-p">augur.api.ReputationToken.updateSiblingMigrationTotal(p)</h3>
+
+<p>Gets the current <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for a ReputationToken contract sharing the same <a href="#parent-universe">Parent Universe</a> as the specified ReputationToken, and updates the specified ReputationToken contract&rsquo;s Theoretical REP Supply accordingly.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._token</code> is the same ReputationToken contract as one this transaction is being called on.</li>
+<li><code class="prettyprint">p._token</code> does not have the same Parent Universe as the ReputationToken contract this transaction is being called on.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._token</code></strong>  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the ReputationToken contract&rsquo;s Theoretical REP Supply was updated without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="share-token-tx-api">Share Token Tx API</h2>
@@ -10459,6 +10519,10 @@ Goals:
 <h2 id="tentative-outcome">Tentative Outcome</h2>
 
 <p>A <a href="#market">Market&rsquo;s</a> Tentative Outcome starts off as the <a href="#outcome">Outcome</a> that is submitted by the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a>. Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on other Outcomes if they believe the Tentative Outcome is incorrect. If the <a href="#dispute-bond">Dispute Bond</a> for a particular Outcome gets filled in the current <a href="#dispute-round">Dispute Round</a>, that Outcome will become the new Tentative Outcome.</p>
+
+<h2 id="theoretical-rep-supply">Theoretical REP Supply</h2>
+
+<p>The theoretical <a href="#rep">REP</a> supply for a <a href="#universe">Universe</a> is the amount of REP that has been migrated to it, plus the REP supply of its <a href="#parent-universe">Parent Universe</a>.</p>
 
 <h2 id="tick">Tick</h2>
 
