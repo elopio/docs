@@ -380,6 +380,10 @@ A Stake Token is used to represent the amount of Staked [REP](#rep) a [Reporter]
 
 A [Market's](#market) Tentative Outcome starts off as the [Outcome](#outcome) that is submitted by the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter). Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can [Stake](#dispute-stake) [REP](#rep) on other Outcomes if they believe the Tentative Outcome is incorrect. If the [Dispute Bond](#dispute-bond) for a particular Outcome gets filled in the current [Dispute Round](#dispute-round), that Outcome will become the new Tentative Outcome.
 
+## Theoretical REP Supply
+
+The theoretical [REP](#rep) supply for a [Universe](#universe) is the amount of REP that has been migrated to it, plus the REP supply of its [Parent Universe](#parent-universe).
+
 ## Tick
 
 A Tick is the smallest recognized amount by which a price of a security or future may fluctuate. Ticks are each individually a potential price point for a [Share](#share) of an [Outcome](#outcome) for a [Market](#market) between its [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price). When a [Market Creator](#market-creator) creates a new Market they are asked to enter the [Number of Ticks](#number-of-ticks) for the Market. This number represents how much [attoETH](#atto-prefix) a [Complete Set](#complete-set) of Shares will cost to buy for this Market. A [Scalar Market](#scalar-market) with a Minimum Price of -10 and a Maximum Price of 30 could have a number of ticks set to 4000. This would mean that to purchase a Complete Set for this Market, you would need to spend 4000 attoETH. The [Settlement](#settlement) of a Complete Set of Shares will yield 4000 attoETH, which [Settlement Fees](#settlement-fees) are then extracted from prior to payout. It also indicates that there are 4000 valid price points between -10 and 30 in this Market, which means an [Order](#order) with a price of 1.24 or 20.5 is valid for this Market, but a price of 5.725 would be invalid.

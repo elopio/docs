@@ -1149,6 +1149,14 @@ Returns the [Universe](#universe) address for the [REP](#rep) address provided. 
 
 As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
 
+### augur.api.ReputationToken.getTotalMigrated({ tx }[, callback])
+
+Returns total amount of [REP](#rep) that has been migrated into the current ReputationToken contract from the ReputationToken contract of its [Universe's](#universe) [Parent Universe](#parent-universe).
+
+### augur.api.ReputationToken.getTotalTheoreticalSupply({ tx }[, callback])
+
+Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract. Note: To ensure this number is as accurate as possible, `augur.api.ReputationToken.updateParentTotalTheoreticalSupply` should first be called on the ReputationToken contract, and `augur.api.ReputationToken.updateSiblingMigrationTotal` should be called on any ReputationToken contracts that have the same [Parent Universe](#parent-universe).
+
 Share Token Call API
 --------------------
 ```javascript

@@ -1582,7 +1582,7 @@ This function will fail if:
 * (Array.&lt;<a href="#StakeToken">StakeToken</a>>) Stake token details, keyed by stake token ID.
 
 Trading Functions
------------
+-----------------
 ```javascript
 augur.trading.calculateProfitLoss({
   trades: [{

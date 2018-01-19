@@ -1933,6 +1933,42 @@ This transaction will fail if:
 
 * (boolean) `1` if `_value` REP is sent from `_from` to `_to` without any errors, or `0` otherwise.
 
+### augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)
+
+Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract's [Parent Universe](#parent-universe), and updates this ReputationToken contract's Theoretical REP Supply accordingly.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors, or `false` otherwise.
+
+### augur.api.ReputationToken.updateSiblingMigrationTotal(p)
+
+Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for a ReputationToken contract sharing the same [Parent Universe](#parent-universe) as the specified ReputationToken, and updates the specified ReputationToken contract's Theoretical REP Supply accordingly.
+
+This transaction will fail if:
+
+* `p._token` is the same ReputationToken contract as one this transaction is being called on.
+* `p._token` does not have the same Parent Universe as the ReputationToken contract this transaction is being called on.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._token`**  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors, or `false` otherwise.
+
 Share Token Tx API
 ---------------------------
 ```javascript
