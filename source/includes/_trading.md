@@ -36,7 +36,7 @@ Settlement Fees are extracted anytime [Settlement](#settlement) occurs and Share
 - Selling a [Complete Set](#complete-set)
 - Redeeming shares for the finalized outcome in a [Finalized Market](#finalized-market)
 
-Selling a Complete Set can be thought of as exiting your market [Position](#position). Complete Sets are a set of Shares for each [Outcome](#outcome). Complete Sets are priced differently for each Market, and are determined by the [Number of Ticks](#number-of-ticks), which represents all possible price points, or [Ticks](#tick), for a Market as well as the amount of attoeth it costs to purchase a Complete Set for the Market. If you own a set of Shares in each Outcome, you can Settle those Shares and receive `ETH` back for their value minus Settlement Fees.
+Selling a Complete Set can be thought of as exiting your market [Position](#position). Complete Sets are a set of Shares for each [Outcome](#outcome). Complete Sets are priced differently for each Market, and are determined by the [Number of Ticks](#number-of-ticks), which represents all possible price points, or [Ticks](#tick), for a Market as well as the amount of [attoETH](#atto-prefix) it costs to purchase a Complete Set for the Market. If you own a set of Shares in each Outcome, you can Settle those Shares and receive `ETH` back for their value minus Settlement Fees.
 
 Calculating Trades
 ------------------

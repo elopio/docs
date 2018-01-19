@@ -142,6 +142,8 @@ Gets the [Market](#market) to which a [Dispute Crowdsourcer](#dispute-crowdsourc
 
 Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
 
+#### **Parameters:**
+
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
@@ -154,6 +156,8 @@ Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Cr
 ### augur.api.DisputeCrowdsourcer.getPayoutNumerator(p, callback)
 
 Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+
+#### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
@@ -169,6 +173,8 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 
 Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer](#dispute-crowdsourcer) is denominated.
 
+#### **Parameters:**
+
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
@@ -182,6 +188,8 @@ Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer]
 
 Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispute-stake) on a [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of its [Market](#market).
 
+#### **Parameters:**
+
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
@@ -194,6 +202,8 @@ Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispu
 ### augur.api.DisputeCrowdsourcer.getStake(p, callback)
 
 Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+
+#### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
@@ -212,6 +222,8 @@ Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavo
 2. A Market other than the Dispute Crowdsourcer's Market causes a [Fork](#fork), and `augur.api.Market.disavowCrowdsourcers` is called on the Dispute Crowdsourcer's Market.
 3. The Dispute Crowdsourcer's Market Forks, and `augur.api.DisputeCrowdsourcer.fork` is called on the Dispute Crowdsourcer.
 
+#### **Parameters:**
+
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
@@ -224,6 +236,8 @@ Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavo
 ### augur.api.DisputeCrowdsourcer.isInvalid(p, callback)
 
 Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) represents the [Invalid Outcome](#invalid-outcome) for its [Market](#market).
+
+#### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
@@ -298,57 +312,201 @@ augur.api.FeeWindow.isOver({ tx: { to: feeWindow } }, function (error, isOver) {
 ```
 Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
-### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
+### augur.api.FeeWindow.getAvgReportingGasPrice(p, callback)
 
 Returns the average amount of gas spent to submit either a [Designated Report](#designated-report) or [First Public Report](#first-public-report) in the specified [Fee Window](#fee-window).
 
-### augur.api.FeeWindow.getEndTime({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getEndTime(p, callback)
 
 Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active.
 
-### augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])
+#### **Parameters:**
 
-Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
+#### **Returns:**
+
+* (number) Unix timestamp at which the Fee Window ends, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)
+
+Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window), in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Markets belonging to the Fee Window, where the Designated Reporter failed to Report during the Designated Reporting Phase, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets(p, callback)
 
 Returns the number of [Unfinalized Markets](#finalized-market) belonging to the specified [Fee Window](#fee-window) in which [Designated Reporter's](#designated-reporter) [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge) during the current [Dispute Round Phase](#dispute-round-phase), or the [Designated Reporter](#designated-reporter) failed to submit a [Designated Report](#designated-report).
 
-### augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Markets in the Fee Window, where the Designated Report was Challenged in the current Dispute Round Phase or the Designated Reporter did not Report, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getNumInvalidMarkets(p, callback)
 
 Returns the number of [Markets](#market) that were [Reported](#report) to be [Invalid](#invalid-outcome) during the specified [Fee Window](#fee-window). [Invalid](#invalid-outcome) Markets are Markets that aren't clearly defined or do not fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to [Report](#report) the Market as Invalid if they can't confidently Stake their [REP](#rep) into a single Outcome for the Market.
 
-### augur.api.FeeWindow.getNumMarkets({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Markets Reported as Invalid in the Fee Window, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getNumMarkets(p, callback)
 
 Returns the total number of [Markets](#market) that are in the [Dispute Round Phase](#dispute-round-phase) for the specified [Fee Window](#fee-window).
 
-### augur.api.FeeWindow.getReputationToken({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified [Fee Window](#fee-window), as a hexadecimal string. Every Fee Window has a [Dispute Phase](#dispute-phase) where [Reporters](#reporter) can [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of [Markets](#market). In order to Challenge a Tentative Outcome, Reporters need to [Stake](#dispute-stake) REP. A Fee Window only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.FeeWindow.getStartTime({ tx }[, callback])
+#### **Returns:**
+
+* (number) Number of Markets in the Dispute Round Phase for the Fee Window, as an unsigned 256-bit integer.
+
+### augur.api.FeeWindow.getReputationToken(p, callback)
+
+Returns the [Reputation Token (REP)](#rep) used by the specified [Fee Window](#fee-window). Every Fee Window has a [Dispute Phase](#dispute-phase) where [Reporters](#reporter) can [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of [Markets](#market). In order to Challenge a Tentative Outcome, Reporters need to [Stake](#dispute-stake) REP. A Fee Window only accepts one REP contract as the source of Staked REP, and this function returns that contract's address.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Reputation Token used by the Fee Window, as a hexadecimal string.
+
+### augur.api.FeeWindow.getStartTime(p, callback)
 
 Returns a Unix timestamp of when a [Fee Window](#fee-window) becomes active and starts. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active. Only active Fee Windows allow [Reporters](#reporter) to [Challenge](#challenge) the [Tentative Outcomes](#tentative-outcome) of [Markets](#market) contained in the Fee Window.
 
-### augur.api.FeeWindow.getUniverse({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Universe](#universe) Ethereum address that the specified [Fee Window](#fee-window) belongs to, as a hexadecimal string. Every Fee Window belongs to a specific Universe in which they were created and can operate.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.FeeWindow.isActive({ tx }[, callback])
+#### **Returns:**
 
-This method returns whether the specified [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Dispute Round Phase](#dispute-round-phase), which last a total of 7 days. Returns `1` if the specified Fee Window is active, or `0` otherwise.
+* (number) Unix timestamp at which the Fee Window starts, as an unsigned 256-bit integer.
 
-### augur.api.FeeWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
+### augur.api.FeeWindow.getUniverse(p, callback)
 
-Returns whether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Fee Window](#fee-window). Markets are assigned a Fee Window that is the first Fee Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the specified Fee Window, or `0` if not.
+Returns the [Universe](#universe) to which the specified [Fee Window](#fee-window) belongs. Every Fee Window belongs to a specific Universe in which they were created and can operate.
 
-### augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])
+#### **Parameters:**
 
-Returns whether the [Forked Market](#forked-market) that caused this [Fee Window's](#fee-window) [Universe](#universe) to be created has been [Finalized](#finalized-market). Every Fee Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, or `0` otherwise.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.FeeWindow.isOver({ tx }[, callback])
+#### **Returns:**
+
+* (string) Ethereum contract address of the Universe to which the Fee Window belongs, as a hexadecimal string.
+
+### augur.api.FeeWindow.isActive(p, callback)
+
+Returns whether the specified [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Dispute Round Phase](#dispute-round-phase), which last a total of 7 days. 
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* `true` if the specified Fee Window is active, or `false` otherwise.
+
+### augur.api.FeeWindow.isContainerForMarket(p, callback)
+
+Returns whether `p._shadyMarket` is a [Market](#market) that is set to be [Reported](#report) on during the specified [Fee Window](#fee-window). Markets are assigned to the first Fee Window that begins after the Market's [End Time](#end-time).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+    * **`p._shadyMarket`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Market belongs to the Fee Window, or `false` otherwise.
+
+### augur.api.FeeWindow.isForkingMarketFinalized(p, callback)
+
+Returns whether the [Forked Market](#forked-market) in this [Fee Window's](#fee-window) [Universe](#universe) has been [Finalized](#finalized-market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Forked Market is Finalized, or `false` otherwise.
+
+### augur.api.FeeWindow.isOver(p, callback)
 
 Returns whether the 7-day [Fee Window](#fee-window) specified has ended.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Fee Window has ended, or `false` otherwise.
 
 Initial Reporter Call API
 -------------------------
