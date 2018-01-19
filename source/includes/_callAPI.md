@@ -8,12 +8,13 @@ Call API
 */
 
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var params = { tx: { to: market } };
 
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
 // Asynchronous call -- STRONGLY RECOMMENDED.
-augur.api.Market.getNumberOfOutcomes(params, function (error, numOutcomes) {
+augur.api.Market.getNumberOfOutcomes({ 
+  tx: { to: market } 
+}, function (error, numOutcomes) {
   console.log(error);
   console.log(numOutcomes);
 });
@@ -29,10 +30,10 @@ The Call API of augur.js is made up of "getter" functions that retrieve informat
 
 All functions in the Call API accept two arguments: 
 
-1. A `params` object that contains the Ethereum contract address to call and any key/value pairs that match the input parameters for the contract method.
+1. `p`, a parameters object that can contain the Ethereum contract address to call, as well as any key/value pairs that match the input parameters for the contract method.
 2. A callback function. 
 
-The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Params Object>, <Callback Function>)`.
+The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Parameters Object>, <Callback Function>)`.
 
 While technically optional, the Augur development team **strongly recommends** using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.
 
@@ -41,22 +42,27 @@ While technically optional, the Augur development team **strongly recommends** u
 Augur Call API
 ---------------------------
 ```javascript
-var augur = "0xd6d6eaefcfaf7ea1e17c4768a554d57800699eb7";
-
 augur.api.Augur.isKnownUniverse({ 
-  tx: { to: augur },
   _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
 }, function (error, isKnownUniverse) { console.log(isKnownUniverse); });
 // example output:
-"1"
+"true"
 ```
-#### [Augur Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol)
+Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
-The Augur contract maintains the existing [Universes](#universe) within Augur and handles much of Augur's event logging.
+### augur.api.Augur.isKnownUniverse(p, callback)
 
-### augur.api.Augur.isKnownUniverse({ tx, _universe }[, callback])
+Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns whether `_universe` is a [Universe](#universe) contract address that is known to Augur.
 
-Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns `1` if the specified `_universe` is in that list of known [Universes](#universe), or `0` otherwise.
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  * **`p._universe`** (string) Universe contract address, as a 16-byte hexadecimal value.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the specified `_universe` is in Augur's list of known Universe, or `false` otherwise.
 
 Dispute Crowdsourcer Call API
 -------------------------
@@ -100,45 +106,133 @@ augur.api.DisputeCrowdsourcer.isInvalid({ tx: { to: disputeCrowdsourcer } }, fun
 // example output:
 "1"
 ```
-#### [DisputeCrowdsourcer Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol)
+Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
-#### augur.api.DisputeCrowdsourcer.getFeeWindow({ tx }[, callback])
+### augur.api.DisputeCrowdsourcer.getFeeWindow(p, callback)
 
-Returns the Ethereum address of the [Fee Window](#fee-window) to which the specified [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs, as a hexadecimal string.
+Gets the [Fee Window](#fee-window) to which a [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs.
 
-#### augur.api.DisputeCrowdsourcer.getMarket({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Market](#market) Ethereum address for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as a hexadecimal string.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-#### augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx }[, callback])
+#### **Returns:**
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as a 32-byte hexadecimal string.
+* (string)  Ethereum contract address of the Dispute Crowdsourcer's Fee Window, as a 16-byte hexadecimal string.
 
-#### augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx }[, callback])
+### augur.api.DisputeCrowdsourcer.getMarket(p, callback)
 
-Returns the [Payout Numerator](#payout-set) for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as an unsigned integer.
+Gets the [Market](#market) to which a [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs.
 
-#### augur.api.DisputeCrowdsourcer.getReputationToken({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified [Dispute Crowdsourcer](#dispute-crowdsourcer), as a hexadecimal string. In order to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) on a Dispute Crowdsourcer, Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-#### augur.api.DisputeCrowdsourcer.getSize({ tx }[, callback])
+#### **Returns:**
 
-Returns the amount of [attoREP](#atto-prefix) required to be [Staked](#dispute-stake) on the [Outcome](#outcome) of the specified [Dispute Crowdsourcer](#dispute-crowdsourcer) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market).
+* (string)  Ethereum contract address of the Dispute Crowdsourcer's Market, as a 16-byte hexadecimal string.
 
-#### augur.api.DisputeCrowdsourcer.getStake({ tx }[, callback])
+### augur.api.DisputeCrowdsourcer.getPayoutDistributionHash(p, callback)
 
-Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the specified [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
 
-#### augur.api.DisputeCrowdsourcer.isDisavowed({ tx }[, callback])
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is no longer valid. A Dispute Crowdsourcer will get disavowed when its [Market](#market) migrates to a new [Universe](#universe) after a [Fork](#fork) in another Market is resolved. If the Market has been migrated to a new Universe, it will get reset back to the [Designated Reporting Phase](#designated-reporting-phase) or [Open Reporting Phase](open-reporting-phase) (if it was in either of those Phases when the Fork occurred), or if it was in the middle of a [Dispute Round](#dispute-round) when the Fork occurred, it will get reset to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) and all Stake in the Market's Dispute Crowdsourcers will be reset. 
+#### **Returns:**
 
-Returns: `1` if the Dispute Crowdsourcer has been disavowed, or `0` otherwise.
+* (string)  Payout Distribution Hash for the Dispute Crowdsourcer, as a 32-byte hexadecimal string.
 
-#### augur.api.DisputeCrowdsourcer.isInvalid({ tx }[, callback])
+### augur.api.DisputeCrowdsourcer.getPayoutNumerator(p, callback)
 
-Returns whether the [Dispute Crowdsourcer](#dispute-crowdsourcer) is for the [Invalid Outcome](#invalid-outcome) of a [Market](#market). If it is, the function will return `1`; otherwise, it will return `0`.
+Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number)  Payout Numerator for the Dispute Crowdsourcer, as an unsigned 256-bit integer.
+
+### augur.api.DisputeCrowdsourcer.getReputationToken(p, callback)
+
+Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer](#dispute-crowdsourcer) is denominated.
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string)  Ethereum contract address of the Dispute Crowdsourcer's Reputation Token, as a 16-byte hexadecimal string.
+
+### augur.api.DisputeCrowdsourcer.getSize(p, callback)
+
+Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispute-stake) on a [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of its [Market](#market).
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number)  attoREP required by the Dispute Crowdsourcer to Challenge the Tentative Outcome of its Market, as an unsigned 256-bit integer.
+
+### augur.api.DisputeCrowdsourcer.getStake(p, callback)
+
+Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number)  attoREP Staked on the Dispute Crowdsourcer, as an unsigned 256-bit integer.
+
+### augur.api.DisputeCrowdsourcer.isDisavowed(p, callback)
+
+Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavowed". A disavowed Dispute Crowdsourcer is one from which [Staked](#dispute-stake) [REP](#rep) and/or [Reporting Fees](#reporting-fee) can be redeemed (by calling `augur.api.DisputeCrowdsourcer.redeem`) and whose [Market](#market) has not necessarily been [Finalized](#finalized-market). A Dispute Crowdsourcer can become disavowed if any of the following occurs:
+
+1. Another Dispute Crowdsourcer belonging to the same Market and in the same [Fee Window](fee-window) successfully fills its [Dispute Bond](#dispute-bond).
+2. A Market other than the Dispute Crowdsourcer's Market causes a [Fork](#fork), and `augur.api.Market.disavowCrowdsourcers` is called on the Dispute Crowdsourcer's Market.
+3. The Dispute Crowdsourcer's Market Forks, and `augur.api.DisputeCrowdsourcer.fork` is called on the Dispute Crowdsourcer.
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Dispute Crowdsourcer has been disavowed, or `false` otherwise.
+
+### augur.api.DisputeCrowdsourcer.isInvalid(p, callback)
+
+Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) represents the [Invalid Outcome](#invalid-outcome) for its [Market](#market).
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean)  `true` if the Dispute Crowdsourcer represents the Invalid Outcome for its Market, or `false` otherwise.
 
 Fee Window Call API
 -------------------------
@@ -202,57 +296,57 @@ augur.api.FeeWindow.isOver({ tx: { to: feeWindow } }, function (error, isOver) {
 // example output:
 "0"
 ```
-#### [FeeWindow Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol)
+Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
-#### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
+### augur.api.FeeWindow.getAvgReportingGasPrice({ tx }[, callback ])
 
 Returns the average amount of gas spent to submit either a [Designated Report](#designated-report) or [First Public Report](#first-public-report) in the specified [Fee Window](#fee-window).
 
-#### augur.api.FeeWindow.getEndTime({ tx }[, callback])
+### augur.api.FeeWindow.getEndTime({ tx }[, callback])
 
 Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active.
 
-#### augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])
+### augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx }[, callback])
 
 Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window) in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
 
-#### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
+### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx }[, callback])
 
 Returns the number of [Unfinalized Markets](#finalized-market) belonging to the specified [Fee Window](#fee-window) in which [Designated Reporter's](#designated-reporter) [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge) during the current [Dispute Round Phase](#dispute-round-phase), or the [Designated Reporter](#designated-reporter) failed to submit a [Designated Report](#designated-report).
 
-#### augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])
+### augur.api.FeeWindow.getNumInvalidMarkets({ tx }[, callback])
 
 Returns the number of [Markets](#market) that were [Reported](#report) to be [Invalid](#invalid-outcome) during the specified [Fee Window](#fee-window). [Invalid](#invalid-outcome) Markets are Markets that aren't clearly defined or do not fit one of the [Outcomes](#outcome) set for this Market. [Reporters](#reporter) are encouraged to [Report](#report) the Market as Invalid if they can't confidently Stake their [REP](#rep) into a single Outcome for the Market.
 
-#### augur.api.FeeWindow.getNumMarkets({ tx }[, callback])
+### augur.api.FeeWindow.getNumMarkets({ tx }[, callback])
 
 Returns the total number of [Markets](#market) that are in the [Dispute Round Phase](#dispute-round-phase) for the specified [Fee Window](#fee-window).
 
-#### augur.api.FeeWindow.getReputationToken({ tx }[, callback])
+### augur.api.FeeWindow.getReputationToken({ tx }[, callback])
 
 Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified [Fee Window](#fee-window), as a hexadecimal string. Every Fee Window has a [Dispute Phase](#dispute-phase) where [Reporters](#reporter) can [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of [Markets](#market). In order to Challenge a Tentative Outcome, Reporters need to [Stake](#dispute-stake) REP. A Fee Window only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
-#### augur.api.FeeWindow.getStartTime({ tx }[, callback])
+### augur.api.FeeWindow.getStartTime({ tx }[, callback])
 
 Returns a Unix timestamp of when a [Fee Window](#fee-window) becomes active and starts. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active. Only active Fee Windows allow [Reporters](#reporter) to [Challenge](#challenge) the [Tentative Outcomes](#tentative-outcome) of [Markets](#market) contained in the Fee Window.
 
-#### augur.api.FeeWindow.getUniverse({ tx }[, callback])
+### augur.api.FeeWindow.getUniverse({ tx }[, callback])
 
 Returns the [Universe](#universe) Ethereum address that the specified [Fee Window](#fee-window) belongs to, as a hexadecimal string. Every Fee Window belongs to a specific Universe in which they were created and can operate.
 
-#### augur.api.FeeWindow.isActive({ tx }[, callback])
+### augur.api.FeeWindow.isActive({ tx }[, callback])
 
 This method returns whether the specified [Fee Window](#fee-window) is currently active. Fee Windows are considered active during the Window's [Dispute Round Phase](#dispute-round-phase), which last a total of 7 days. Returns `1` if the specified Fee Window is active, or `0` otherwise.
 
-#### augur.api.FeeWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
+### augur.api.FeeWindow.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
 Returns whether the `_shadyMarket` address provided is a [Market](#market) that is set to be [Reported](#report) on during the [Fee Window](#fee-window). Markets are assigned a Fee Window that is the first Fee Window following the Market's [End Time](#end-time). Returns `1` if the Market belongs to the specified Fee Window, or `0` if not.
 
-#### augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])
+### augur.api.FeeWindow.isForkingMarketFinalized({ tx }[, callback])
 
 Returns whether the [Forked Market](#forked-market) that caused this [Fee Window's](#fee-window) [Universe](#universe) to be created has been [Finalized](#finalized-market). Every Fee Window belongs to a Universe and all Universes, except for the first Universe, are created because of a [Fork](#fork). Returns `1` if the Forked Market is Finalized, or `0` otherwise.
 
-#### augur.api.FeeWindow.isOver({ tx }[, callback])
+### augur.api.FeeWindow.isOver({ tx }[, callback])
 
 Returns whether the 7-day [Fee Window](#fee-window) specified has ended.
 
@@ -310,55 +404,53 @@ augur.api.InitialReporter.isInvalid({ tx: { to: initialReporter } }, function (e
 // example output:
 "1"
 ```
-#### [InitialReporter Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol)
+Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
-The Initial Reporter contract handles functionality related to both [Designated Reporting](#designated-reporting) and [Open Reporting](open-reporting).
-
-#### augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])
+### augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])
 
 Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
 
-#### augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])
+### augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])
 
 Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified InitialReporter contract.
 
-#### augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])
+### augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])
 
 Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified InitialReporter contract, as a hexadecimal string.
 
-#### augur.api.InitialReporter.getFeeWindow({ tx }[, callback])
+### augur.api.InitialReporter.getFeeWindow({ tx }[, callback])
 
 Returns the Ethereum address of the [Fee Window](#fee-window) to which the specified InitialReporter contract belongs, as a hexadecimal string.
 
-#### augur.api.InitialReporter.getMarket({ tx }[, callback])
+### augur.api.InitialReporter.getMarket({ tx }[, callback])
 
 Returns the [Market](#market) Ethereum address for the specified InitialReporter contract, as a hexadecimal string.
 
-#### augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])
+### augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])
 
 Returns the [Payout Distribution Hash](#payout-distribution-hash) for the specified InitialReporter contract, as a 32-byte hexadecimal string.
 
-#### augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])
+### augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])
 
 Returns the [Payout Numerator](#payout-set) for the specified InitialReporter contract, as an unsigned integer.
 
-#### augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])
+### augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])
 
 Returns the Unix timestamp of when the [Initial Report](#initial-report) (either the [Designated Report](#designated-report) or the [First Public Report](#first-public-report)) was submitted.
 
-#### augur.api.InitialReporter.getReputationToken({ tx }[, callback])
+### augur.api.InitialReporter.getReputationToken({ tx }[, callback])
 
 Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified InitialReporter contract. In order to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer), Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
-#### augur.api.InitialReporter.getSize({ tx }[, callback])
+### augur.api.InitialReporter.getSize({ tx }[, callback])
 
 Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) [Outcome](#outcome) for the [Initial Report](#initial-report).
 
-#### augur.api.InitialReporter.getStake({ tx }[, callback])
+### augur.api.InitialReporter.getStake({ tx }[, callback])
 
 Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [Initial Report](#initial-report) for the [Market](#market) of the specified InitialReporter contract.
 
-#### augur.api.InitialReporter.isInvalid({ tx }[, callback])
+### augur.api.InitialReporter.isInvalid({ tx }[, callback])
 
 Returns whether the [Outcome](#outcome) submitted in the [Initial Report](#initial-report) is for the [Invalid Outcome](#invalid-outcome) of a [Market](#market). If it is, the function will return `1`; otherwise, it will return `0`.
 
@@ -490,100 +582,100 @@ augur.api.Market.isInvalid({
 // example output:
 "1"
 ```
-#### [Market Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol)
+Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
-#### augur.api.Market.derivePayoutDistributionHash({ tx, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
+### augur.api.Market.derivePayoutDistributionHash({ tx, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
 
 Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specified [Market](#market) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Set](#payout-set) (referred to as Payout Numerators in the function), is valid, then a Payout Distribution Hash is created by hashing the Payout Set and `_invalid` using the keccak256 algorithm.
 
-#### augur.api.Market.designatedReporterShowed({ tx }[, callback]) 
+### augur.api.Market.designatedReporterShowed({ tx }[, callback]) 
 
 Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
 
-#### augur.api.Market.designatedReporterWasCorrect({ tx }[, callback]) 
+### augur.api.Market.designatedReporterWasCorrect({ tx }[, callback]) 
 
 Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified [Market](#market).
 
-#### augur.api.Market.getDenominationToken({ tx }[, callback])
+### augur.api.Market.getDenominationToken({ tx }[, callback])
 
 Returns the Ethereum address of the token used to denominate the specified [Market](#market), as a hexadecimal string. A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
 
-#### augur.api.Market.getDesignatedReporter({ tx }[, callback])
+### augur.api.Market.getDesignatedReporter({ tx }[, callback])
 
 Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified [Market](#market), as a hexadecimal string. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market creation.
 
-#### augur.api.Market.getEndTime({ tx }[, callback])
+### augur.api.Market.getEndTime({ tx }[, callback])
 
 Returns the Unix timestamp for when the specified [Market's](#market) event has come to pass. When the Market's [End Time](#end-time) passes, the Market enters the [Designated Reporting Phase](#designated-reporting-phase).
 
-#### augur.api.Market.getFeeWindow({ tx, \_feeWindowId  }[, callback])
+### augur.api.Market.getFeeWindow({ tx, \_feeWindowId  }[, callback])
 
 Returns the Ethereum address of the [Fee Window](#fee-window) `_feeWindowId` in a [Market](#market), as a hexidecimal string.
 
-#### augur.api.Market.getFinalizationTime({ tx }[, callback])
+### augur.api.Market.getFinalizationTime({ tx }[, callback])
 
 Returns the timestamp for when the specified [Market](#market) was [Finalized](#finalized-market). A Finalized Market has a [Final Outcome](#final-outcome) set from successful [Market Resolution](#market-resolution) which cannot be [Challenged](#challenge), and the Market is considered [Settled](#settlement).
 
-#### augur.api.Market.getForkingMarket({ tx }[, callback])
+### augur.api.Market.getForkingMarket({ tx }[, callback])
 
 Returns the Ethereum address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified [Market](#market) address. If the [Market](#market) address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
 
-#### augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])
+### augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])
 
 Returns the Ethereum address of the [Market Creator Mailbox](#market-creator-mailbox) for `market`. [Market Creators](#market-creator) can use this address to collect their fees.
 
-#### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])
+### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])
 
 Returns the [Creator Fee](#creator-fee) set by the [Market Creator](#market-creator), denominated in [attotokens](#atto-prefix) per [Settlement](#settlement) of a [Complete Set](#complete-set), for the specified [Market](#market).
 
-#### augur.api.Market.getNumberOfOutcomes({ tx }[, callback])
+### augur.api.Market.getNumberOfOutcomes({ tx }[, callback])
 
 Returns the number of [Outcomes](#outcome) for a specified [Market](#market). The number of Outcomes is the number of potential results for the [Market](#market) event.
 
-#### augur.api.Market.getNumTicks({ tx }[, callback])
+### augur.api.Market.getNumTicks({ tx }[, callback])
 
 Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#market). The Number of Ticks represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
 
-#### augur.api.Market.getReputationToken({ tx }[, callback])
+### augur.api.Market.getReputationToken({ tx }[, callback])
 
 Returns the Ethereum address of the [Reputation Token (REP)](#rep) for the specified [Market](#market), as a hexadecimal string. REP is Staked whenever an [Initial Report](#initial-report) is submitted or when users attempt to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market). A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
-#### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
+### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
 
 Returns the Ethereum address of the [Share Token](#share-token-call-api) for the specified [Market](#market) and [Outcome](#outcome). Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
 
-#### augur.api.Market.getStakeInOutcome({ tx, \_payoutDistributionHash }[, callback])
+### augur.api.Market.getStakeInOutcome({ tx, \_payoutDistributionHash }[, callback])
 
 Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outcome](#outcome) with the [Payout Distribution Hash](#payout-distribution-hash) `_payoutDistributionHash` in the specified [Market](#market).
 
-#### augur.api.Market.getTotalStake({ tx }[, callback])
+### augur.api.Market.getTotalStake({ tx }[, callback])
 
 Returns the total amount of [attoREP](#atto-prefix) Staked on the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
 
-#### augur.api.Market.getUniverse({ tx }[, callback])
+### augur.api.Market.getUniverse({ tx }[, callback])
 
 Returns the Etherem address of the [Universe](#universe) that the specified `market` is contained within. All [Markets](#market) are created in a specific Universe, and new Universes are created if a [Fork](#fork) occurs.
 
-#### augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])
+### augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])
 
 Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a particular [Market](#market), as a 32-byte hexadecimal string.
 
-#### augur.api.Market.getWinningPayoutNumerator({ tx, \_outcome }[, callback])
+### augur.api.Market.getWinningPayoutNumerator({ tx, \_outcome }[, callback])
 
 Returns the winning [Payout Numerator](#payout-set) for [Outcome](#outcome) `_outcome` in a particular [Market](#market), as an unsigned integer.
 
-#### augur.api.Market.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
+### augur.api.Market.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
 
 Returns whether the specified [Market](#market) is a container for the Ethereum address of Reporting Participant contract `_shadyReportingParticipant`. If the Market is a container for the Reporting Participant contract, this function returns `1`; otherwise, it returns `0`. Both the [DisputeCrowdsourcer](#dispute-crowdsourcer-call-api) and [InitialReporter](#initial-reporter-call-api) classes in Augur's Solidity smart contracts are considered Reporting Participants, since they have the parent class `BaseReportingParticipant`.
 
-#### augur.api.Market.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
+### augur.api.Market.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
 
 Returns whether the specified [Market](#market) is a container for the [Share Token](#share-token-call-api) Ethereum address `_shadyShareToken`. This function will return `1` if `_shadyShareToken` is a Share Token belonging to the [Market](#market), otherwise it will return `0`.
 
-#### augur.api.Market.isFinalized({ tx }[, callback])
+### augur.api.Market.isFinalized({ tx }[, callback])
 Returns `1` if the [Market](#market) has been [Finalized](#finalized-market) (that is, its winning [Payout Distribution Hash](#payout-distribution-hash) is set), or `0` otherwise.
 
-#### augur.api.Market.isInvalid({ tx }[, callback])
+### augur.api.Market.isInvalid({ tx }[, callback])
 
 Returns `1` if the specified [Market](#market) has been [Finalized](#finalized-market) as [Invalid](#invalid-outcome), or returns `0` otherwise.
 
@@ -737,81 +829,81 @@ augur.api.Orders.isWorsePrice({
 // example output:
 "1"
 ```
-#### [Orders Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol)
+Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
 
-#### augur.api.Orders.assertIsNotBetterPrice({ tx, \_type, \_fxpPrice, \_betterOrderId }[, callback])
+### augur.api.Orders.assertIsNotBetterPrice({ tx, \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is not a better price than the `_betterOrderId` for a given [Order](#order) `_type`. Returns `1` if true, `0` if false.
 
-#### augur.api.Orders.assertIsNotWorsePrice({ tx, \_type, \_fxpPrice, \_worstOrderId }[, callback])
+### augur.api.Orders.assertIsNotWorsePrice({ tx, \_type, \_fxpPrice, \_worstOrderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is not a worst price than the `_worstOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
-#### augur.api.Orders.getAmount({ tx, \_orderId }[, callback])
+### augur.api.Orders.getAmount({ tx, \_orderId }[, callback])
 
 Returns the amount of [Shares](#share) requested on a specified `_orderId`.
 
-#### augur.api.Orders.getBestOrderId({ tx, \_type, \_market, \_outcome }[, callback])
+### augur.api.Orders.getBestOrderId({ tx, \_type, \_market, \_outcome }[, callback])
 
 Returns the order ID of the best order on the `_market` of `_type` trading on the provided `_outcome`.
 
-#### augur.api.Orders.getBestOrderWorstOrderHash({ tx, \_market, \_outcome, \_type }[, callback])
+### augur.api.Orders.getBestOrderWorstOrderHash({ tx, \_market, \_outcome, \_type }[, callback])
 
 Returns a sha256 order hash containing the inputted params `_market`, `_outcome`, and `_type`.
 
-#### augur.api.Orders.getBetterOrderId({ tx, \_orderId }[, callback])
+### augur.api.Orders.getBetterOrderId({ tx, \_orderId }[, callback])
 
 Returns a better order ID than the `_orderId`.
 
-#### augur.api.Orders.getLastOutcomePrice({ tx, \_market, \_outcome }[, callback])
+### augur.api.Orders.getLastOutcomePrice({ tx, \_market, \_outcome }[, callback])
 
 Returns the fixed point value of the last price traded for a specified `_market` and `_outcome`.
 
-#### augur.api.Orders.getMarket({ tx, \_orderId }[, callback])
+### augur.api.Orders.getMarket({ tx, \_orderId }[, callback])
 
 Returns the [Market](#market) address for the specified `_orderId`.
 
-#### augur.api.Orders.getOrderCreator({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderCreator({ tx, \_orderId }[, callback])
 
 Returns the [Creator](#order-creator) address of the specified `_orderId`.
 
-#### augur.api.Orders.getOrderMoneyEscrowed({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderMoneyEscrowed({ tx, \_orderId }[, callback])
 
 Returns the fixed point value of the amount of money escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
-#### augur.api.Orders.getOrderSharesEscrowed({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderSharesEscrowed({ tx, \_orderId }[, callback])
 
 Returns the fixed point value of the amount of shares escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
-#### augur.api.Orders.getOrderType({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderType({ tx, \_orderId }[, callback])
 
 Returns the trade type, `1` for bid and `2` for ask, for a specified `_orderId`.
 
-#### augur.api.Orders.getOutcome({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOutcome({ tx, \_orderId }[, callback])
 
 Returns the [Outcome](#outcome) being traded on for the specified `_orderId`.
 
-#### augur.api.Orders.getPrice({ tx, \_orderId }[, callback])
+### augur.api.Orders.getPrice({ tx, \_orderId }[, callback])
 
 Returns the fixed point value of the price of a specified `_orderId`.
 
-#### augur.api.Orders.getVolume({ tx, \_market }[, callback])
+### augur.api.Orders.getVolume({ tx, \_market }[, callback])
 
 Returns the fixed point value of the volume of a specified `_market`.
 
-#### augur.api.Orders.getWorseOrderId({ tx, \_orderId }[, callback])
+### augur.api.Orders.getWorseOrderId({ tx, \_orderId }[, callback])
 
 Returns a worse order ID than the `_orderId`.
 
-#### augur.api.Orders.getWorstOrderId({ tx, \_type, \_market, \_outcome }[, callback])
+### augur.api.Orders.getWorstOrderId({ tx, \_type, \_market, \_outcome }[, callback])
 
 Returns the order ID of the worst order on the `_market` of `_type` trading on the provided `_outcome`.
 
-#### augur.api.Orders.isBetterPrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
+### augur.api.Orders.isBetterPrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is a better price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
-#### augur.api.Orders.isWorsePrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
+### augur.api.Orders.isWorsePrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is a worst price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
@@ -859,17 +951,17 @@ augur.api.OrdersFetcher.findBoundingOrders({
 [ "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
 ```
-#### [OrdersFetcher Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol)
+Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related retrieving [Orders](#order) from the [Order Book](#order-book).
 
-#### augur.api.OrdersFetcher.ascendOrderList({ tx, \_type, \_fxpPrice, \_lowestOrderId }[, callback])
+### augur.api.OrdersFetcher.ascendOrderList({ tx, \_type, \_fxpPrice, \_lowestOrderId }[, callback])
 
 Returns an array containing the order IDs that should be the better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_lowestOrderId` is an order ID expected to be a worse price than the `_fxpPrice` specified for an order of `_type`.
 
-#### augur.api.OrdersFetcher.descendOrderList({ tx, \_type, \_fxpPrice, \_highestOrderId }[, callback])
+### augur.api.OrdersFetcher.descendOrderList({ tx, \_type, \_fxpPrice, \_highestOrderId }[, callback])
 
 Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_highestOrderId` is an order ID expected to be a better price than the `_fxpPrice` specified for an order of `_type`.
 
-#### augur.api.OrdersFetcher.findBoundingOrders({ tx, \_type, \_fxpPrice, \_bestOrderId, \_worstOrderId, \_betterOrderId, \_worseOrderId }[, callback])
+### augur.api.OrdersFetcher.findBoundingOrders({ tx, \_type, \_fxpPrice, \_bestOrderId, \_worstOrderId, \_betterOrderId, \_worseOrderId }[, callback])
 
 Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_betterOrderId` and `_worseOrderId` should be orders that are better or worse than the `_fxpPrice` for an order of `_type`. `_bestOrderId` and `_worstOrderId` should be the best and worst order IDs on the order book for the specified `_type`.
 
@@ -887,19 +979,15 @@ augur.api.ReputationToken.getTopMigrationDestination({ tx: { to: reputationToken
 // example output:
 "0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
 ```
-#### [ReputationToken Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol)
+Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
 
-The Reputation Token, known as [REP](#rep), is the key that allows Augur's [Decentralized Oracle](#decentralized-oracle) system to function, and by extension the entirety of Augur. REP has three major functions, it's used to [Report](#report) on the [Outcome](#outcome) of a [Market](#market), [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a Market, and as a [Bond](#no-show-rep-bond) when creating a Market. [Reporters](#reporter) Stake REP on the Outcome of a Market as a show of confidence in their Report. If the Reporter correctly staked on the [Final Outcome](#final-outcome) of the Market they can claim their REP back, earn [Reporting Fees](#reporting-fee) proportional to their staked REP, and a portion of the REP incorrectly staked on other Outcomes.
+The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
-REP is also used to Challenge the Tentative Outcome of Reports during the [Dispute Round Phase](#dispute-round-phase). If the Challenge successfully changes the Tentative Outcome of a Market and that outcome becomes the Final Outcome, the [Dispute Bond](#dispute-bond) holder can redeem the bond for up to double the REP it cost to place. When creating a Market, the Market Creator is required to specify a Designated Reporter and pay a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to ensure the Designated Reporter shows up. If the Designated Reporter doesn't show up, the Market Creator's Designated Report No-Show REP Bond will go to the First Public Reporter to Report on the Market. Their gas cost for the Report transaction will be covered by the Market Creator's [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), and the Designated Report No-Show REP Bond is added to whatever the First Public Reporter staked, there by improving her stake and potential rewards if correctly staked.
-
-The Reputation Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
-
-#### augur.api.ReputationToken.getUniverse({ tx }[, callback])
+### augur.api.ReputationToken.getUniverse({ tx }[, callback])
 
 Returns the [Universe](#universe) address for the [REP](#rep) address provided. All of Augur's information belongs to a Universe and each Universe has it's own REP contract. New Universes are created in the event of a [Fork](#fork).
 
-#### augur.api.ReputationToken.getTopMigrationDestination({ tx }[, callback])
+### augur.api.ReputationToken.getTopMigrationDestination({ tx }[, callback])
 
 As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
 
@@ -917,15 +1005,15 @@ augur.api.ShareToken.getOutcome({ tx: { to: shareToken } }, function (error, out
 // example output:
 "1"
 ```
-#### [ShareToken Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol)
+Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
 
-#### augur.api.ShareToken.getMarket({ tx }[, callback])
+### augur.api.ShareToken.getMarket({ tx }[, callback])
 
 Returns the [Market](#market) Ethereum address for the specified ShareToken.
 
-#### augur.api.ShareToken.getOutcome({ tx }[, callback])
+### augur.api.ShareToken.getOutcome({ tx }[, callback])
 
 Returns the [Outcome](#outcome) of the [Market](#market) that the specified ShareToken is for.
 
@@ -1074,110 +1162,108 @@ augur.api.Universe.isParentOf({
 // example output:
 "1"
 ```
-#### [Universe Contract Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol)
+Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
-The Universe Contract is the contract that defines an Augur [Universe](#universe) and the methods used to interact with them. All of Augur's [Markets](#market), [Order Books](#order-book), [Fee Windows](#reporting-window), and [REP](#rep) belong to a specific Universe. In the rare event that a Market's [Tentative Outcome](#tentative-outcome) is [Challenged](#challenge) with a [Dispute Bond](#dispute-bond) greater than the [Fork Threshold](#fork-threshold), a [Fork](#fork) will occur and new Universes will be created. The Universe that originally contained the [Forked Market](#forked-market) will become a [Locked Universe](#locked-universe), thereby not allowing any Market creation to take place in the Locked Universe. The newly created Universes are known as [Child Universes](#child-universe), whereas the original and now Locked Universe is considered those Child Universes' [Parent Universe](#parent-universe).
-
-#### augur.api.Universe.getChildUniverse({ tx, \_parentPayoutDistributionHash }[, callback])
+### augur.api.Universe.getChildUniverse({ tx, \_parentPayoutDistributionHash }[, callback])
 
 Returns the Ethereum address of a [Universe's](#universe) [Child Universe](#child-universe) that has its [Forked Market](#forked-market)'s [Final Outcome](#final-outcome) set to `_parentPayoutDistributionHash` [Payout Distribution Hash](#payout-distribution-hash). The Ethereum address is returned as a hexidecimal string.
 
-#### augur.api.Universe.getCurrentFeeWindow({ tx }[, callback])
+### augur.api.Universe.getCurrentFeeWindow({ tx }[, callback])
 
 Returns the Ethereum address of the current running [Fee Window](#reporting-window) of a [Universe](#universe). Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window. The Ethereum address is returned as a hexidecimal string.
 
-#### augur.api.Universe.getDisputeRoundDurationInSeconds({ tx }[, callback])
+### augur.api.Universe.getDisputeRoundDurationInSeconds({ tx }[, callback])
 
 Returns the number of seconds in a [Universe's](#universe) [Dispute Round](#dispute-round).
 
-#### augur.api.Universe.getFeeWindow({ tx, \_feeWindowId  }[, callback])
+### augur.api.Universe.getFeeWindow({ tx, \_feeWindowId  }[, callback])
 
 Returns the Ethereum address of the Fee Window `_feeWindowId` in a [Universe](#universe), as a hexidecimal string.
 
-#### augur.api.Universe.getFeeWindowByTimestamp({ tx, \_timestamp }[, callback])
+### augur.api.Universe.getFeeWindowByTimestamp({ tx, \_timestamp }[, callback])
 
 Returns the Ethereum address of the Fee Window `_feeWindowId` running at `_timestamp` in a [Universe](#universe), as a hexidecimal string.
 
-#### augur.api.Universe.getFeeWindowForForkEndTime({ tx } [, callback])
+### augur.api.Universe.getFeeWindowForForkEndTime({ tx } [, callback])
 
 Returns the Ethereum address of the Fee Window `_feeWindowId` in a [Universe](#universe) once the current [Fork](#fork) ends, as a hexidecimal string.
 
-#### augur.api.Universe.getFeeWindowId({ tx, \_timestamp } [, callback])
+### augur.api.Universe.getFeeWindowId({ tx, \_timestamp } [, callback])
 
 Returns the [Fee Window](#fee-window) ID for the [Universe](#universe) specified in `tx` and `_timestamp`, as an integer. This is calculated by dividing the timestamp by the [Universe's](#universe) Fee Window duration in seconds.
 
-#### augur.api.Universe.getForkEndTime({ tx }[, callback])
+### augur.api.Universe.getForkEndTime({ tx }[, callback])
 
 Returns the timestamp for when the [Fork Phase](#fork-period) ends that was started on the [Universe](#universe) specified in `tx`. If there is no [Forked Market](#forked-market) in the Universe, this function will return 0.
 
-#### augur.api.Universe.getForkingMarket({ tx }[, callback])
+### augur.api.Universe.getForkingMarket({ tx }[, callback])
 
 Returns the Ethereum address of the [Market](#market) that the [Universe](#universe) specified in `tx` is [Forking](#fork) over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no [Forked Market](#forked-market).
 
-#### augur.api.Universe.getForkReputationGoal({ tx }[, callback])
+### augur.api.Universe.getForkReputationGoal({ tx }[, callback])
 
 Returns the estimated amount of [REP](#rep) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) in the [Universe](#universe) specified in `tx` to be [Finalized](#finalized-market) before the end of the [Fork Phase](#fork-period).
 
-#### augur.api.Universe.getInitialReportStakeSize({ tx }[, callback])
+### augur.api.Universe.getInitialReportStakeSize({ tx }[, callback])
 
 Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size of the Stake placed on the [Designated Report](#designated-report) (whichever is greater), in [attoREP](#atto-prefix), as a hexadecimal string.
 
-#### augur.api.Universe.getNextFeeWindow({ tx }[, callback])
+### augur.api.Universe.getNextFeeWindow({ tx }[, callback])
 
 Returns the Ethereum address of the [Fee Window](#fee-window) coming up after the current Fee Window ends in the [Universe](#universe) specified in `tx`. The Ethereum address is returned as a hexadecimal string.
 
-#### augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])
+### augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])
 
 Returns the total value of all [Complete Sets](#complete-sets) that exist across all [Markets](#market) the [Universe](#universe) specified in `tx`, priced in [attoETH](#atto-prefix). This value is returned as an integer.
 
-#### augur.api.Universe.getParentPayoutDistributionHash({ tx }[, callback])
+### augur.api.Universe.getParentPayoutDistributionHash({ tx }[, callback])
 
 Returns the [Payout Distribution Hash](#payout-distribution-hash) of a [Universe's](#universe) [Parent Universe](#parent-universe) for a [Child Universe](#child-universe) specified in `tx`. The Payout Distribution Hash is a hash of the winning [Outcome](#outcome) of the [Forked Market](#forked-market).
 
-#### augur.api.Universe.getParentUniverse({ tx }[, callback])
+### augur.api.Universe.getParentUniverse({ tx }[, callback])
 
 Returns the [Parent Universe](#parent-universe) Ethereum address of the [Universe](#universe) specified in `tx`, as a hexidecimal string. When a [Fork](#fork) occurs, [Child Universes](#child-universe) are created and the original [Universe](#universe) that contained the [Forked Market](#forked-market) would become a Parent Universe to the newly created Universes. If this is called on the [Genesis Universe](#genesis-universe), it will return 0, as the first Universe has no Parent Universe.
 
-#### augur.api.Universe.getPreviousFeeWindow({ tx }[, callback])
+### augur.api.Universe.getPreviousFeeWindow({ tx }[, callback])
 
 Returns the Ethereum address of the previous [Fee Window](#fee-window) for the [Universe](#universe) specified in `tx`, as a hexidecimal string.
 
-#### augur.api.Universe.getRepMarketCapInAttoeth({ tx }[, callback])
+### augur.api.Universe.getRepMarketCapInAttoeth({ tx }[, callback])
 
 Returns an estimate for the market cap of [REP](#rep), priced in [attoETH](#atto-prefix). This estimate is updated manually by the Augur development team, roughly once every [Fee Window](#fee-window). It is used by Augur to set the price of the [Reporting Fee](#reporting-fee).
 
-#### augur.api.Universe.getReputationToken({ tx }[, callback])
+### augur.api.Universe.getReputationToken({ tx }[, callback])
 
 Returns the Ethereum address of the [Reputation Token](#rep) for the [Universe](#universe) specified in `tx`, as a hexidecimal string. REP associated with this contract address are usable within this Universe.
 
-#### augur.api.Universe.getTargetRepMarketCapInAttoeth({ tx }[, callback])
+### augur.api.Universe.getTargetRepMarketCapInAttoeth({ tx }[, callback])
 
 Returns the [REP](#rep) market cap that Augur targets when calculating [Reporting Fees](#reporting-fee), in [attoETH](#atto-prefix). Augur attempts to set Reporting Fees such that the REP market cap equals 5 times the amount of [Open Interest](#open-interest). 
 
-#### augur.api.Universe.getWinningChildUniverse({ tx }[, callback])
+### augur.api.Universe.getWinningChildUniverse({ tx }[, callback])
 
 Returns the Ethereum address of the [Winning Universe](#winning-universe) for a particular [Universe](#universe) that has [Forked](#fork).
 
-#### augur.api.Universe.isContainerForFeeWindow({ tx, \_shadyFeeWindow }[, callback])
+### augur.api.Universe.isContainerForFeeWindow({ tx, \_shadyFeeWindow }[, callback])
 
 Returns whether the specific `universe` is a container for the [Fee Window](#fee-window) `_shadyFeeWindow` Ethereum address. Returns `1` if true or `0` if false. Every Fee Window belongs to a [Universe](#universe), and this method is used to see if a specific Fee Window address belongs to the Universe in question.
 
-#### augur.api.Universe.isContainerForMarket({ tx, \_shadyMarket }[, callback])
+### augur.api.Universe.isContainerForMarket({ tx, \_shadyMarket }[, callback])
 
 Returns whether the specific `universe` is a container for the [Market](#market) `_shadyMarket` Ethereum address. Returns `1` if true or `0` if false. All Markets are created within a [Universe](#universe), and this function is used to help confirm if a Market exists within the Universe in question.
 
-#### augur.api.Universe.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
+### augur.api.Universe.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
 
 Returns `1` if the specified [Universe](#universe) is a container for `_shadyReportingParticipant` Ethereum address provided, as a hexadecimal string. Otherwise, this function returns `0`. Both the `DisputeCrowdsourcers` and `InitialReporter` classes in Augur's Solidity smart contracts are considered Reporting Participants, since they have the parent class `BaseReportingParticipant`.
 
-#### augur.api.Universe.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
+### augur.api.Universe.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
 
 [Shares](#share) are represented within Augur's smart contracts as [ERC-20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) tokens called Share Tokens. Returns whether the specific `universe` is a container for the Share Token `_shadyShareToken` Ethereum address. Returns `1` if true or `0` if false. 
 
-#### augur.api.Universe.isForking({ tx }[, callback])
+### augur.api.Universe.isForking({ tx }[, callback])
 
 Returns `1` if the current [Universe](#universe) is Forking or `0` otherwise.
 
-#### augur.api.Universe.isParentOf({ tx, \_shadyChild }[, callback])
+### augur.api.Universe.isParentOf({ tx, \_shadyChild }[, callback])
 
 Returns whether the specific `universe` is a container for the `_shadyChild` [Child Universe](#child-universe) Ethereum address provided. Returns `1` if true or `0` if false. This function can be used to see if a specific [Universe](#universe) is the [Parent Universe](#parent-universe) to a Child Universe.

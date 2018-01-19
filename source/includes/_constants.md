@@ -1,0 +1,107 @@
+API Constants
+========
+augur.js contains a number of constants in the `augur.constants` object, which are listed below.
+
+### augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER (string)
+
+Description pending.
+
+### augur.constants.BLOCKS_PER_CHUNK (number)
+
+Description pending.
+
+### augur.constants.CANCEL_ORDER_GAS (string)
+
+Amount of gas required to cancel an [Order](#order) on the [Order Book](#order-book).
+
+### augur.constants.CREATE_BINARY_MARKET_GAS (string)
+
+Amount of gas required to create a new [Binary Market](#binary-market), as a hexadecimal string.
+
+### augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)
+
+Amount of gas required to create a new [Categorical Market](#categorical-market), as a hexadecimal string.
+
+### augur.constants.CREATE_ORDER_GAS (string)
+
+Amount of gas required to create an [Order](#order).
+
+### augur.constants.CREATE_SCALAR_MARKET_GAS (string)
+
+Amount of gas required to create a new [Scalar Market](#scalar-market), as a hexadecimal string.
+
+### augur.constants.DEFAULT_GASPRICE (number)
+
+Description pending.
+
+### augur.constants.DEFAULT_NETWORK_ID (string)
+
+Description pending.
+
+### augur.constants.DEFAULT_NUM_TICKS (Object)
+
+Description pending.
+
+### augur.constants.DEFAULT_SCALAR_TICK_SIZE (string)
+
+[Tick](#tick) size that is used when creating a [Scalar Market](#scalar-market) if one is not specified.
+
+### augur.constants.ETERNAL_APPROVAL_VALUE (string)
+
+Description pending.
+
+### augur.constants.GET_LOGS_DEFAULT_FROM_BLOCK (string)
+
+Description pending.
+
+### augur.constants.GET_LOGS_DEFAULT_TO_BLOCK (string)
+
+Description pending.
+
+### augur.constants.IVSIZE (number)
+
+Description pending.
+
+### augur.constants.KDF (string)
+
+Description pending.
+
+### augur.constants.KEYSIZE (number)
+
+Description pending.
+
+### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
+
+Description pending.
+
+### augur.constants.ORDER_STATE (Object)
+
+Contains the constants used to represent each of the states an [Order](#order) can be in.
+
+### augur.constants.PARALLEL_LIMIT (number)
+
+Maximum number of transactions to auto-submit in parallel.
+
+### augur.constants.PRECISION (Object)
+
+Description pending.
+
+### augur.constants.REPORTING_STATE (Object)
+
+Contains the constants used to represent each of the [Reporting](report) states a [Market](#market) can be in.
+
+### augur.constants.ROUNDS (number)
+
+Description pending.
+
+### augur.constants.STAKE_TOKEN_STATE (Object)
+
+Description pending.
+
+### augur.constants.TRADE_GAS (string)
+
+Description pending.
+
+### augur.constants.ZERO (BigNumber)
+
+A BigNumber with the value of 0.

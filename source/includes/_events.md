@@ -157,9 +157,8 @@ Returns all Augur event logs on the Ethereum blockchain within a certain block r
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-* **Properties:**
-    * **`fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`). (Note: While this parameter is optional, specifying a `fromBlock` is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)
-    * **`toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
+    * **`p.fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`). (Note: While this parameter is optional, specifying a `fromBlock` is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)
+    * **`p.toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
 * **`callback`** (function) Called when all data has been received and parsed.
 
 #### **Returns:**
@@ -187,18 +186,17 @@ Begins listening for events emitted by the Ethereum blockchain.
 
 ### augur.events.startBlockListeners()
 
-Start listening for blocks.
+Start listening for blocks being added/removed from the Ethereum blockchain.
 
 #### **Parameters:**
 
 * **`blockCallbacks`** (Object) Parameters object. 
-* **Properties:**
-  * **`onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
-  * **`onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
+    * **`blockCallbacks.onAdded`** (function) &lt;optional> Callback to fire when new blocks are received.
+    * **`blockCallbacks.onRemoved`** (function) &lt;optional> Callback to fire when blocks are removed.
 
 #### **Returns:**
 
-*  (boolean) True if listeners were successfully started; false otherwise.
+*  (boolean) `true` if listeners were successfully started, or `false` otherwise.
 
 ### augur.events.stopAugurNodeEventListeners(callback)
 
@@ -214,7 +212,7 @@ Removes all active listeners for events emitted by the Ethereum blockchain.
 
 #### **Returns:**
 
-*  (boolean) True if listeners were successfully stopped; false otherwise.
+*  (boolean) `true` if listeners were successfully stopped, or `false` otherwise.
 
 ### augur.events.stopBlockListeners()
 
@@ -222,7 +220,7 @@ Stop listening for blocks and block removals.
 
 #### **Returns:**
 
-*  (boolean) True if listeners were successfully stopped; false otherwise.
+*  (boolean) `true` if listeners were successfully stopped, or `false` otherwise.
 
 Event Types
 -----------
