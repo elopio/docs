@@ -82,7 +82,7 @@ augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx: { to: disputeCrowd
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx: { to: disputeCrowdsourcer } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx: { to: disputeCrowdsourcer }, _outcome: 0 }, function (error, payoutNumerator) { console.log(payoutNumerator); });
 // example output:
 "1000"
 
@@ -538,7 +538,7 @@ augur.api.InitialReporter.getPayoutDistributionHash({ tx: { to: disputeCrowdsour
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.InitialReporter.getPayoutNumerator({ tx: { to: initialReporter } }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+augur.api.InitialReporter.getPayoutNumerator({ tx: { to: initialReporter }, _outcome: 0 }, function (error, payoutNumerator) { console.log(payoutNumerator); });
 // example output:
 "1000"
 
@@ -663,7 +663,7 @@ Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for t
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
-        * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
