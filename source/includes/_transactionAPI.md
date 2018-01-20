@@ -3144,7 +3144,7 @@ Gets the amount the [Market Creator](#market-creator) must pay for the [Validity
 
 ### augur.api.Universe.getOrCreateCurrentFeeWindow(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window](#fee-window) that is currently active in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
+Gets the Ethereum contract address of the [Fee Window](#fee-window) that is currently active in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
 
 #### Parameters:
 
@@ -3156,11 +3156,11 @@ Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window]
 
 #### **Returns:**
 
-* (string) Ethereum address, as a hexadecimal string, of the Fee Window that is currently active in the specified Universe.
+* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that is currently active in the specified Universe.
 
 ### augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe). If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a [`FeeWindowCreated` event](#FeeWindowCreated) if the Fee window is created without any errors.
+Gets the Ethereum contract address of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe). If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a [`FeeWindowCreated` event](#FeeWindowCreated) if the Fee window is created without any errors.
 
 #### Parameters:
 
@@ -3173,11 +3173,11 @@ Gets the Ethereum contract address, as a hexadecimal string, of the active [Fee 
 
 #### **Returns:**
 
-* (string) Ethereum address, as a hexadecimal string, of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe).
+* (string) Ethereum address, as a 16-byte hexadecimal string, of the active [Fee Window](#fee-window) at the Unix timestamp `_timestamp` in the specified [Universe](#universe).
 
 ### augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window](#fee-window) starting at the end of the current [Fork](#fork) in the [Universe](#universe). If the contract address for the Fee Window does not already exist, this function will create it.
+Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at the end of the current [Fork](#fork) in the [Universe](#universe). If the contract address for the Fee Window does not already exist, this function will create it.
 
 #### Parameters:
 
@@ -3189,11 +3189,11 @@ Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window]
 
 #### **Returns:**
 
-* (string) Ethereum address, as a hexadecimal string, of the [Fee Window](#fee-window) starting at the end of the current [Fork](#fork) in the [Universe](#universe).
+* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window starting at the end of the current Fork in the Universe.
 
 ### augur.api.Universe.getOrCreateNextFeeWindow(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window](#fee-window) that will be active after the current Fee Window ends in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
+Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be active after the current Fee Window ends in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
 
 #### Parameters:
 
@@ -3205,11 +3205,11 @@ Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window]
 
 #### **Returns:**
 
-* (string) Ethereum address, as a hexadecimal string, of the Fee Window that will be active after the current Fee Window ends in the specified Universe.
+* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that will be active after the current Fee Window ends in the specified Universe.
 
 ### augur.api.Universe.getOrCreatePreviousFeeWindow(p)
 
-Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window](#fee-window) that was active just before the current Fee Window in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
+Gets the Ethereum contract address of the [Fee Window](#fee-window) that was active just before the current Fee Window in the specified [Universe](#universe). If the contract address for the Fee Window does not exist yet, this function will create it.
 
 #### Parameters:
 
@@ -3221,7 +3221,7 @@ Gets the Ethereum contract address, as a hexadecimal string, of the [Fee Window]
 
 #### **Returns:**
 
-* (string) Ethereum address, as a hexadecimal string, of the Fee Window that was active just before the current Fee Window in the specified Universe.
+* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that was active just before the current Fee Window in the specified Universe.
 
 ### augur.api.Universe.redeemStake(p)
 

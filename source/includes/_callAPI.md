@@ -415,7 +415,7 @@ Returns the [Reputation Token (REP)](#rep) used by the specified [Fee Window](#f
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Reputation Token used by the Fee Window, as a hexadecimal string.
+* (string) Ethereum contract address of the Reputation Token used by the Fee Window, as a 16-byte hexadecimal string.
 
 ### augur.api.FeeWindow.getStartTime(p, callback)
 
@@ -445,7 +445,7 @@ Returns the [Universe](#universe) to which the specified [Fee Window](#fee-windo
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Universe to which the Fee Window belongs, as a hexadecimal string.
+* (string) Ethereum contract address of the Universe to which the Fee Window belongs, as a 16-byte hexadecimal string.
 
 ### augur.api.FeeWindow.isActive(p, callback)
 
@@ -564,53 +564,186 @@ augur.api.InitialReporter.isInvalid({ tx: { to: initialReporter } }, function (e
 ```
 Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
-### augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])
+### augur.api.InitialReporter.designatedReporterShowed(p, callback)
 
-Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
+Returns whether the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase).
 
-### augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])
+#### **Parameters:**
 
-Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified InitialReporter contract.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])
+#### **Returns:**
 
-Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified InitialReporter contract, as a hexadecimal string.
+* (boolean) `true` if the Designated Reporter submitted a Report within the Designated Reporting Phase, or `false` otherwise.
 
-### augur.api.InitialReporter.getFeeWindow({ tx }[, callback])
+### augur.api.InitialReporter.designatedReporterWasCorrect(p, callback)
 
-Returns the Ethereum address of the [Fee Window](#fee-window) to which the specified InitialReporter contract belongs, as a hexadecimal string.
+Returns whether the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the InitialReporter contract.
 
-### augur.api.InitialReporter.getMarket({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Market](#market) Ethereum address for the specified InitialReporter contract, as a hexadecimal string.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])
+#### **Returns:**
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) for the specified InitialReporter contract, as a 32-byte hexadecimal string.
+* (boolean) `true` if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the InitialReporter contract, or `false` otherwise.
 
-### augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])
+### augur.api.InitialReporter.getDesignatedReporter(p, callback)
 
-Returns the [Payout Numerator](#payout-set) for the specified InitialReporter contract, as an unsigned integer.
+Returns the Ethereum address for the [Designated Reporter](#designated-reporter) for the InitialReporter contract.
 
-### augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the Designated Reporter for the InitialReporter contract, as a 16-byte hexadecimal string.
+
+### augur.api.InitialReporter.getFeeWindow(p, callback)
+
+Returns the Ethereum contract address of the [Fee Window](#fee-window) to which the InitialReporter contract belongs.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Fee Window to which the InitialReporter contract belongs, as a 16-byte hexadecimal string.
+
+### augur.api.InitialReporter.getMarket(p, callback)
+
+Returns the Ethereum contract address of the [Market](#market) to which the InitialReporter contract belongs.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Market to which the InitialReporter contract belongs, as a 16-byte hexadecimal string.
+
+### augur.api.InitialReporter.getPayoutDistributionHash(p, callback)
+
+Returns the [Payout Distribution Hash](#payout-distribution-hash) for the InitialReporter contract.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Payout Distribution Hash for the InitialReporter contract, as a 32-byte hexadecimal string.
+
+### augur.api.InitialReporter.getPayoutNumerator(p, callback)
+
+Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for the InitialReporter contract.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Payout Numerator of a given Outcome for the InitialReporter contract, as an unsigned 256-bit integer.
+
+### augur.api.InitialReporter.getReportTimestamp(p, callback)
 
 Returns the Unix timestamp of when the [Initial Report](#initial-report) (either the [Designated Report](#designated-report) or the [First Public Report](#first-public-report)) was submitted.
 
-### augur.api.InitialReporter.getReputationToken({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Reputation Token (REP)](#rep) Ethereum address for the specified InitialReporter contract. In order to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer), Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.InitialReporter.getSize({ tx }[, callback])
+#### **Returns:**
 
-Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) [Outcome](#outcome) for the [Initial Report](#initial-report).
+* (number) Unix timestamp of when the Initial Report was submitted, as an unsigned 256-bit integer.
 
-### augur.api.InitialReporter.getStake({ tx }[, callback])
+### augur.api.InitialReporter.getReputationToken(p, callback)
+
+Returns the [Reputation Token (REP)](#rep) Ethereum contract address used by the InitialReporter contract.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Reputation Token Ethereum contract address used by the InitialReporter contract, as a 16-byte hexadecimal string.
+
+### augur.api.InitialReporter.getSize(p, callback)
+
+Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) [Outcome](#outcome) of the [Initial Report](#initial-report).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as an unsigned 256-bit integer.
+
+### augur.api.InitialReporter.getStake(p, callback)
 
 Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [Initial Report](#initial-report) for the [Market](#market) of the specified InitialReporter contract.
 
-### augur.api.InitialReporter.isInvalid({ tx }[, callback])
+#### **Parameters:**
 
-Returns whether the [Outcome](#outcome) submitted in the [Initial Report](#initial-report) is for the [Invalid Outcome](#invalid-outcome) of a [Market](#market). If it is, the function will return `1`; otherwise, it will return `0`.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as an unsigned 256-bit integer.
+
+### augur.api.InitialReporter.isInvalid(p, callback)
+
+Returns whether the submitted [Initial Report](#initial-report) said the[Market](#market) for the InitialReporter contract was [Invalid](#invalid-outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Initial Report said the Market for the InitialReporter contract was Invalid, or `false` otherwise.
 
 Market Call API
 ----------------
@@ -756,11 +889,11 @@ Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitt
 
 ### augur.api.Market.getDenominationToken({ tx }[, callback])
 
-Returns the Ethereum address of the token used to denominate the specified [Market](#market), as a hexadecimal string. A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
+Returns the Ethereum contract address of the token used to denominate the specified [Market](#market), as a 16-byte hexadecimal string. A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
 
 ### augur.api.Market.getDesignatedReporter({ tx }[, callback])
 
-Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified [Market](#market), as a hexadecimal string. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market creation.
+Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified [Market](#market), as a 16-byte hexadecimal string. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market creation.
 
 ### augur.api.Market.getEndTime({ tx }[, callback])
 
@@ -796,7 +929,7 @@ Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#mar
 
 ### augur.api.Market.getReputationToken({ tx }[, callback])
 
-Returns the Ethereum address of the [Reputation Token (REP)](#rep) for the specified [Market](#market), as a hexadecimal string. REP is Staked whenever an [Initial Report](#initial-report) is submitted or when users attempt to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market). A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
+Returns the Ethereum contract address of the [Reputation Token (REP)](#rep) for the specified [Market](#market), as a 16-byte hexadecimal string. REP is Staked whenever an [Initial Report](#initial-report) is submitted or when users attempt to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market). A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
 ### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
 
@@ -820,7 +953,7 @@ Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a 
 
 ### augur.api.Market.getWinningPayoutNumerator({ tx, \_outcome }[, callback])
 
-Returns the winning [Payout Numerator](#payout-set) for [Outcome](#outcome) `_outcome` in a particular [Market](#market), as an unsigned integer.
+Returns the winning [Payout Numerator](#payout-set) for [Outcome](#outcome) `_outcome` in a particular [Market](#market), as an unsigned 256-bit integer.
 
 ### augur.api.Market.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
 
@@ -1376,7 +1509,7 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 
 ### augur.api.Universe.getNextFeeWindow({ tx }[, callback])
 
-Returns the Ethereum address of the [Fee Window](#fee-window) coming up after the current Fee Window ends in the [Universe](#universe) specified in `tx`. The Ethereum address is returned as a hexadecimal string.
+Returns the Ethereum contract address of the [Fee Window](#fee-window) coming up after the current Fee Window ends in the [Universe](#universe) specified in `tx`. The Ethereum contract address is returned as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])
 
