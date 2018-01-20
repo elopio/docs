@@ -4488,7 +4488,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum contract address of the Reputation Token used by the Fee Window, as a hexadecimal string.</li>
+<li>(string) Ethereum contract address of the Reputation Token used by the Fee Window, as a 16-byte hexadecimal string.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getstarttime-p-callback">augur.api.FeeWindow.getStartTime(p, callback)</h3>
@@ -4538,7 +4538,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum contract address of the Universe to which the Fee Window belongs, as a hexadecimal string.</li>
+<li>(string) Ethereum contract address of the Universe to which the Fee Window belongs, as a 16-byte hexadecimal string.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-isactive-p-callback">augur.api.FeeWindow.isActive(p, callback)</h3>
@@ -4696,53 +4696,306 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">InitialReporter Solidity Contract</a>, which enables functionality related to <a href="#initial-report">Initial Reports</a>.</p>
 
-<h3 id="augur-api-initialreporter-designatedreportershowed-tx-callback">augur.api.InitialReporter.designatedReporterShowed({ tx }[, callback])</h3>
+<h3 id="augur-api-initialreporter-designatedreportershowed-p-callback">augur.api.InitialReporter.designatedReporterShowed(p, callback)</h3>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, or <code class="prettyprint">0</code> otherwise.</p>
+<p>Returns whether the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
-<h3 id="augur-api-initialreporter-designatedreporterwascorrect-tx-callback">augur.api.InitialReporter.designatedReporterWasCorrect({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#payout-distribution-hash">Payout Distribution Hash</a> submitted in the <a href="#designated-report">Designated Report</a> is the same as the winning Payout Distribution Hash for the specified InitialReporter contract.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-initialreporter-getdesignatedreporter-tx-callback">augur.api.InitialReporter.getDesignatedReporter({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified InitialReporter contract, as a hexadecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-initialreporter-getfeewindow-tx-callback">augur.api.InitialReporter.getFeeWindow({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> to which the specified InitialReporter contract belongs, as a hexadecimal string.</p>
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Designated Reporter submitted a Report within the Designated Reporting Phase, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
 
-<h3 id="augur-api-initialreporter-getmarket-tx-callback">augur.api.InitialReporter.getMarket({ tx }[, callback])</h3>
+<h3 id="augur-api-initialreporter-designatedreporterwascorrect-p-callback">augur.api.InitialReporter.designatedReporterWasCorrect(p, callback)</h3>
 
-<p>Returns the <a href="#market">Market</a> Ethereum address for the specified InitialReporter contract, as a hexadecimal string.</p>
+<p>Returns whether the <a href="#payout-distribution-hash">Payout Distribution Hash</a> submitted in the <a href="#designated-report">Designated Report</a> is the same as the winning Payout Distribution Hash for the InitialReporter contract.</p>
 
-<h3 id="augur-api-initialreporter-getpayoutdistributionhash-tx-callback">augur.api.InitialReporter.getPayoutDistributionHash({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the specified InitialReporter contract, as a 32-byte hexadecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-initialreporter-getpayoutnumerator-tx-callback">augur.api.InitialReporter.getPayoutNumerator({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the <a href="#payout-set">Payout Numerator</a> for the specified InitialReporter contract, as an unsigned integer.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-initialreporter-getreporttimestamp-tx-callback">augur.api.InitialReporter.getReportTimestamp({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the InitialReporter contract, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getdesignatedreporter-p-callback">augur.api.InitialReporter.getDesignatedReporter(p, callback)</h3>
+
+<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> for the InitialReporter contract.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the Designated Reporter for the InitialReporter contract, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getfeewindow-p-callback">augur.api.InitialReporter.getFeeWindow(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> to which the InitialReporter contract belongs.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Fee Window to which the InitialReporter contract belongs, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getmarket-p-callback">augur.api.InitialReporter.getMarket(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#market">Market</a> to which the InitialReporter contract belongs.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Market to which the InitialReporter contract belongs, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getpayoutdistributionhash-p-callback">augur.api.InitialReporter.getPayoutDistributionHash(p, callback)</h3>
+
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the InitialReporter contract.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Payout Distribution Hash for the InitialReporter contract, as a 32-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getpayoutnumerator-p-callback">augur.api.InitialReporter.getPayoutNumerator(p, callback)</h3>
+
+<p>Returns the <a href="#payout-set">Payout Numerator</a> of a given <a href="#outcome">Outcome</a> for the InitialReporter contract.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Payout Numerator of a given Outcome for the InitialReporter contract, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getreporttimestamp-p-callback">augur.api.InitialReporter.getReportTimestamp(p, callback)</h3>
 
 <p>Returns the Unix timestamp of when the <a href="#initial-report">Initial Report</a> (either the <a href="#designated-report">Designated Report</a> or the <a href="#first-public-report">First Public Report</a>) was submitted.</p>
 
-<h3 id="augur-api-initialreporter-getreputationtoken-tx-callback">augur.api.InitialReporter.getReputationToken({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum address for the specified InitialReporter contract. In order to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>, Reporters need REP. A Dispute Crowdsourcer only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-initialreporter-getsize-tx-callback">augur.api.InitialReporter.getSize({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the amount of <a href="#atto-prefix">attoREP</a> Staked on the <a href="#report">Reported</a> <a href="#outcome">Outcome</a> for the <a href="#initial-report">Initial Report</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-initialreporter-getstake-tx-callback">augur.api.InitialReporter.getStake({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Unix timestamp of when the Initial Report was submitted, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getreputationtoken-p-callback">augur.api.InitialReporter.getReputationToken(p, callback)</h3>
+
+<p>Returns the <a href="#rep">Reputation Token (REP)</a> Ethereum contract address used by the InitialReporter contract.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Reputation Token Ethereum contract address used by the InitialReporter contract, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getsize-p-callback">augur.api.InitialReporter.getSize(p, callback)</h3>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> Staked on the <a href="#report">Reported</a> <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-getstake-p-callback">augur.api.InitialReporter.getStake(p, callback)</h3>
 
 <p>Returns the amount of <a href="#atto-prefix">attoREP</a> <a href="#dispute-stake">Staked</a> on the <a href="#initial-report">Initial Report</a> for the <a href="#market">Market</a> of the specified InitialReporter contract.</p>
 
-<h3 id="augur-api-initialreporter-isinvalid-tx-callback">augur.api.InitialReporter.isInvalid({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns whether the <a href="#outcome">Outcome</a> submitted in the <a href="#initial-report">Initial Report</a> is for the <a href="#invalid-outcome">Invalid Outcome</a> of a <a href="#market">Market</a>. If it is, the function will return <code class="prettyprint">1</code>; otherwise, it will return <code class="prettyprint">0</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-initialreporter-isinvalid-p-callback">augur.api.InitialReporter.isInvalid(p, callback)</h3>
+
+<p>Returns whether the submitted <a href="#initial-report">Initial Report</a> said the<a href="#market">Market</a> for the InitialReporter contract was <a href="#invalid-outcome">Invalid</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Initial Report said the Market for the InitialReporter contract was Invalid, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
 
 <h2 id="market-call-api">Market Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Call API Examples:</span>
@@ -4886,11 +5139,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-getdenominationtoken-tx-callback">augur.api.Market.getDenominationToken({ tx }[, callback])</h3>
 
-<p>Returns the Ethereum address of the token used to denominate the specified <a href="#market">Market</a>, as a hexadecimal string. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
+<p>Returns the Ethereum contract address of the token used to denominate the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
 
 <h3 id="augur-api-market-getdesignatedreporter-tx-callback">augur.api.Market.getDesignatedReporter({ tx }[, callback])</h3>
 
-<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified <a href="#market">Market</a>, as a hexadecimal string. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market creation.</p>
+<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market creation.</p>
 
 <h3 id="augur-api-market-getendtime-tx-callback">augur.api.Market.getEndTime({ tx }[, callback])</h3>
 
@@ -4926,7 +5179,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-getreputationtoken-tx-callback">augur.api.Market.getReputationToken({ tx }[, callback])</h3>
 
-<p>Returns the Ethereum address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>, as a hexadecimal string. REP is Staked whenever an <a href="#initial-report">Initial Report</a> is submitted or when users attempt to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a>. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
+<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. REP is Staked whenever an <a href="#initial-report">Initial Report</a> is submitted or when users attempt to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a>. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
 
 <h3 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h3>
 
@@ -4950,7 +5203,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-getwinningpayoutnumerator-tx-_outcome-callback">augur.api.Market.getWinningPayoutNumerator({ tx, _outcome }[, callback])</h3>
 
-<p>Returns the winning <a href="#payout-set">Payout Numerator</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> in a particular <a href="#market">Market</a>, as an unsigned integer.</p>
+<p>Returns the winning <a href="#payout-set">Payout Numerator</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> in a particular <a href="#market">Market</a>, as an unsigned 256-bit integer.</p>
 
 <h3 id="augur-api-market-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Market.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h3>
 
@@ -5497,7 +5750,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-getnextfeewindow-tx-callback">augur.api.Universe.getNextFeeWindow({ tx }[, callback])</h3>
 
-<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum address is returned as a hexadecimal string.</p>
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum contract address is returned as a 16-byte hexadecimal string.</p>
 
 <h3 id="augur-api-universe-getopeninterestinattoeth-tx-callback">augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])</h3>
 
@@ -9130,7 +9383,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-getorcreatecurrentfeewindow-p">augur.api.Universe.getOrCreateCurrentFeeWindow(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the <a href="#fee-window">Fee Window</a> that is currently active in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
+<p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> that is currently active in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -9148,12 +9401,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address, as a hexadecimal string, of the Fee Window that is currently active in the specified Universe.</li>
+<li>(string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that is currently active in the specified Universe.</li>
 </ul>
 
 <h3 id="augur-api-universe-getorcreatefeewindowbytimestamp-p">augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>. If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a <a href="#FeeWindowCreated"><code class="prettyprint">FeeWindowCreated</code> event</a> if the Fee window is created without any errors.</p>
+<p>Gets the Ethereum contract address of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>. If the Ethereum contract address for the Fee Window does not already exist, this function will create it. This transaction will trigger a <a href="#FeeWindowCreated"><code class="prettyprint">FeeWindowCreated</code> event</a> if the Fee window is created without any errors.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -9172,12 +9425,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address, as a hexadecimal string, of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>.</li>
+<li>(string) Ethereum address, as a 16-byte hexadecimal string, of the active <a href="#fee-window">Fee Window</a> at the Unix timestamp <code class="prettyprint">_timestamp</code> in the specified <a href="#universe">Universe</a>.</li>
 </ul>
 
 <h3 id="augur-api-universe-getorcreatefeewindowforforkendtime-p">augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the <a href="#fee-window">Fee Window</a> starting at the end of the current <a href="#fork">Fork</a> in the <a href="#universe">Universe</a>. If the contract address for the Fee Window does not already exist, this function will create it.</p>
+<p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> starting at the end of the current <a href="#fork">Fork</a> in the <a href="#universe">Universe</a>. If the contract address for the Fee Window does not already exist, this function will create it.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -9195,12 +9448,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address, as a hexadecimal string, of the <a href="#fee-window">Fee Window</a> starting at the end of the current <a href="#fork">Fork</a> in the <a href="#universe">Universe</a>.</li>
+<li>(string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window starting at the end of the current Fork in the Universe.</li>
 </ul>
 
 <h3 id="augur-api-universe-getorcreatenextfeewindow-p">augur.api.Universe.getOrCreateNextFeeWindow(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the <a href="#fee-window">Fee Window</a> that will be active after the current Fee Window ends in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
+<p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> that will be active after the current Fee Window ends in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -9218,12 +9471,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address, as a hexadecimal string, of the Fee Window that will be active after the current Fee Window ends in the specified Universe.</li>
+<li>(string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that will be active after the current Fee Window ends in the specified Universe.</li>
 </ul>
 
 <h3 id="augur-api-universe-getorcreatepreviousfeewindow-p">augur.api.Universe.getOrCreatePreviousFeeWindow(p)</h3>
 
-<p>Gets the Ethereum contract address, as a hexadecimal string, of the <a href="#fee-window">Fee Window</a> that was active just before the current Fee Window in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
+<p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> that was active just before the current Fee Window in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -9241,7 +9494,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address, as a hexadecimal string, of the Fee Window that was active just before the current Fee Window in the specified Universe.</li>
+<li>(string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that was active just before the current Fee Window in the specified Universe.</li>
 </ul>
 
 <h3 id="augur-api-universe-redeemstake-p">augur.api.Universe.redeemStake(p)</h3>
