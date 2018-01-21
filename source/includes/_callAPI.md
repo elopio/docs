@@ -890,8 +890,8 @@ This call will fail if:
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-      * **`p._payoutNumerators`** (Array.&lt;uint256>) Payout Numerators from which to derive the Payout Distribution Hash.
-      * **`p._invalid`** (boolean) Whether the Market is Invalid.
+    * **`p._payoutNumerators`** (Array.&lt;uint256>) Payout Numerators from which to derive the Payout Distribution Hash.
+    * **`p._invalid`** (boolean) Whether the Market is Invalid.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
