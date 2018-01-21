@@ -661,7 +661,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="debugging-options">Debugging Options</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">setDebugOptions</span><span class="p">({</span> <span class="na">broadcast</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getCurrentReportingWindow</span><span class="p">();</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getCurrentFeeWindow</span><span class="p">();</span>
 <span class="c1">// example output:</span>
 <span class="nl">packaged</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">from</span><span class="p">:</span> <span class="s2">"0x56ddb80fe4e5aa05182d794526ab1eff78c90688"</span><span class="p">,</span> 
@@ -4035,7 +4035,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4060,7 +4060,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4085,7 +4085,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4110,7 +4110,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.</li>
 </ul></li>
@@ -4136,7 +4136,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4161,7 +4161,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4186,7 +4186,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4217,7 +4217,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4242,7 +4242,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4329,7 +4329,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4354,7 +4354,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4379,7 +4379,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4404,7 +4404,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4429,7 +4429,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4454,7 +4454,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4479,7 +4479,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4504,7 +4504,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4529,7 +4529,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4554,7 +4554,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4579,7 +4579,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p._shadyMarket</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
 </ul></li>
@@ -4605,7 +4605,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4630,7 +4630,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4709,7 +4709,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4734,7 +4734,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4759,7 +4759,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4784,7 +4784,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4809,7 +4809,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4834,7 +4834,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4859,7 +4859,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.</li>
 </ul></li>
@@ -4885,7 +4885,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4910,7 +4910,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4935,7 +4935,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4960,7 +4960,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -4985,7 +4985,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5005,6 +5005,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> <span class="p">},</span>
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">],</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutDistributionHash</span><span class="p">);</span> 
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
@@ -5125,101 +5127,624 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Solidity Contract</a>, which enables functionality for Augur&rsquo;s <a href="#market">Markets</a>.</p>
 
-<h3 id="augur-api-market-derivepayoutdistributionhash-tx-_payoutnumerators-_invalid-onsent-onsuccess-onfailed">augur.api.Market.derivePayoutDistributionHash({ tx, _payoutNumerators, _invalid, onSent, onSuccess, onFailed })</h3>
+<h3 id="augur-api-market-derivepayoutdistributionhash-p-callback">augur.api.Market.derivePayoutDistributionHash(p, callback)</h3>
 
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#market">Market</a> for the <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> passed in. If the <a href="#payout-set">Payout Set</a> (referred to as Payout Numerators in the function), is valid, then a Payout Distribution Hash is created by hashing the Payout Set and <code class="prettyprint">_invalid</code> using the keccak256 algorithm.</p>
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#market">Market</a> by hashing <a href="#payout-set">Payout Numerators</a> <code class="prettyprint">_payoutNumerators</code> and <a href="#invalid-outcome">Invalid</a> status <code class="prettyprint">_invalid</code> using the keccak256 algorithm.</p>
 
-<h3 id="augur-api-market-designatedreportershowed-tx-callback">augur.api.Market.designatedReporterShowed({ tx }[, callback])</h3>
+<p>This call will fail if:</p>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, or <code class="prettyprint">0</code> otherwise.</p>
+<ul>
+<li><code class="prettyprint">p._invalid</code> is <code class="prettyprint">true</code> and the values in p._payoutNumerators are not all the same.</li>
+</ul>
 
-<h3 id="augur-api-market-designatedreporterwascorrect-tx-callback">augur.api.Market.designatedReporterWasCorrect({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#payout-distribution-hash">Payout Distribution Hash</a> submitted in the <a href="#designated-report">Designated Report</a> is the same as the winning Payout Distribution Hash for the specified <a href="#market">Market</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-getdenominationtoken-tx-callback">augur.api.Market.getDenominationToken({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the Ethereum contract address of the token used to denominate the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._payoutNumerators</code></strong> (Array.&lt;uint256&gt;) Payout Numerators from which to derive the Payout Distribution Hash.</li>
+<li><strong><code class="prettyprint">p._invalid</code></strong> (boolean) Whether the Market is Invalid.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-market-getdesignatedreporter-tx-callback">augur.api.Market.getDesignatedReporter({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address for the <a href="#designated-reporter">Designated Reporter</a> set for the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market creation.</p>
+<ul>
+<li>(string) Payout Distribution Hash of the specified Market, as a 32-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-market-getendtime-tx-callback">augur.api.Market.getEndTime({ tx }[, callback])</h3>
+<h3 id="augur-api-market-designatedreportershowed-p-callback">augur.api.Market.designatedReporterShowed(p, callback)</h3>
+
+<p>Returns whether the <a href="#designated-reporter">Designated Reporter</a> submitted a <a href="#report">Report</a> within the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Designated Reporter submitted a Report within the Designated Reporting Phase, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-market-designatedreporterwascorrect-p-callback">augur.api.Market.designatedReporterWasCorrect(p, callback)</h3>
+
+<p>Returns whether the <a href="#payout-distribution-hash">Payout Distribution Hash</a> submitted in the <a href="#designated-report">Designated Report</a> is the same as the winning Payout Distribution Hash for the specified <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the specified Market, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-market-getdenominationtoken-p-callback">augur.api.Market.getDenominationToken(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the token used to denominate the specified <a href="#market">Market</a>. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the token used to denominate the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getdesignatedreporter-p-callback">augur.api.Market.getDesignatedReporter(p, callback)</h3>
+
+<p>Returns the Ethereum address of the <a href="#designated-reporter">Designated Reporter</a> for the specified <a href="#market">Market</a>. Every <a href="#market">Market</a> is required to have an assigned Designated Reporter, which is set by the <a href="#market-creator">Market Creator</a> during Market creation.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the Designated Reporter for the Market, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getendtime-p-callback">augur.api.Market.getEndTime(p, callback)</h3>
 
 <p>Returns the Unix timestamp for when the specified <a href="#market">Market&rsquo;s</a> event has come to pass. When the Market&rsquo;s <a href="#end-time">End Time</a> passes, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
-<h3 id="augur-api-market-getfeewindow-tx-_feewindowid-callback">augur.api.Market.getFeeWindow({ tx, _feeWindowId  }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_feeWindowId</code> in a <a href="#market">Market</a>, as a hexidecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-getfinalizationtime-tx-callback">augur.api.Market.getFinalizationTime({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the timestamp for when the specified <a href="#market">Market</a> was <a href="#finalized-market">Finalized</a>. A Finalized Market has a <a href="#final-outcome">Final Outcome</a> set from successful <a href="#market-resolution">Market Resolution</a> which cannot be <a href="#challenge">Challenged</a>, and the Market is considered <a href="#settlement">Settled</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-market-getforkingmarket-tx-callback">augur.api.Market.getForkingMarket({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#forked-market">Forked Market</a> for the <a href="#universe">Universe</a> that contains the specified <a href="#market">Market</a> address. If the <a href="#market">Market</a> address specified belongs in a Universe that hasn&rsquo;t had a <a href="#fork">Fork</a> take place, this will return <code class="prettyprint">0x0</code>.</p>
+<ul>
+<li>(number) Unix timestamp for when the specified <a href="#market">Market&rsquo;s</a> event has come to pass, as an unsigned 256-bit integer.</li>
+</ul>
 
-<h3 id="augur-api-market-getmarketcreatormailbox-tx-callback">augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])</h3>
+<h3 id="augur-api-market-getfeewindow-p-callback">augur.api.Market.getFeeWindow(p, callback)</h3>
 
-<p>Returns the Ethereum address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for <code class="prettyprint">market</code>. <a href="#market-creator">Market Creators</a> can use this address to collect their fees.</p>
+<p>Returns the Ethereum contract address of the <a href="#market">Market&rsquo;s</a> <a href="#fee-window">Fee Window</a>.</p>
 
-<h3 id="augur-api-market-getmarketcreatorsettlementfeedivisor-tx-callback">augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Market&rsquo;s Fee Window, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getfinalizationtime-p-callback">augur.api.Market.getFinalizationTime(p, callback)</h3>
+
+<p>Returns the Unix timestamp for when the specified <a href="#market">Market</a> was <a href="#finalized-market">Finalized</a>. A Finalized Market has a <a href="#final-outcome">Final Outcome</a> set from successful <a href="#market-resolution">Market Resolution</a> which cannot be <a href="#challenge">Challenged</a>, and the Market is considered <a href="#settlement">Settled</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Unix timestamp for when the Market was Finalized, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getforkingmarket-p-callback">augur.api.Market.getForkingMarket(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#forked-market">Forked Market</a> for the <a href="#universe">Universe</a> that contains the specified <a href="#market">Market</a> address. If the <a href="#market">Market</a> address specified belongs in a Universe that hasn&rsquo;t had a <a href="#fork">Fork</a> take place, this will return <code class="prettyprint">0x0</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Forked Market for the Universe in which the specified Market exists, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getmarketcreatormailbox-p-callback">augur.api.Market.getMarketCreatorMailbox(p, callback)</h3>
+
+<p>Returns the Ethereum address of the <a href="#market-creator-mailbox">Market Creator Mailbox</a> for the specified Market. <a href="#market-creator">Market Creators</a> can use this address to collect their fees.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the Market Creator Mailbox for the Market, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getmarketcreatorsettlementfeedivisor-p-callback">augur.api.Market.getMarketCreatorSettlementFeeDivisor(p, callback)</h3>
 
 <p>Returns the <a href="#creator-fee">Creator Fee</a> set by the <a href="#market-creator">Market Creator</a>, denominated in <a href="#atto-prefix">attotokens</a> per <a href="#settlement">Settlement</a> of a <a href="#complete-set">Complete Set</a>, for the specified <a href="#market">Market</a>.</p>
 
-<h3 id="augur-api-market-getnumberofoutcomes-tx-callback">augur.api.Market.getNumberOfOutcomes({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the number of <a href="#outcome">Outcomes</a> for a specified <a href="#market">Market</a>. The number of Outcomes is the number of potential results for the <a href="#market">Market</a> event.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-getnumticks-tx-callback">augur.api.Market.getNumTicks({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getnumberofoutcomes-p-callback">augur.api.Market.getNumberOfOutcomes(p, callback)</h3>
+
+<p>Returns the number of <a href="#outcome">Outcomes</a> for the specified <a href="#market">Market</a>. The number of Outcomes is the number of potential results for the <a href="#market">Market</a> event.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Number of Outcomes for the Market, as an unsigned 8-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getnumticks-p-callback">augur.api.Market.getNumTicks(p, callback)</h3>
 
 <p>Returns the <a href="#number-of-ticks">Number of Ticks</a> set for a specific <a href="#market">Market</a>. The Number of Ticks represents the number of valid price points between the <a href="#market">Market</a>&rsquo;s <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a>.</p>
 
-<h3 id="augur-api-market-getreputationtoken-tx-callback">augur.api.Market.getReputationToken({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Number of Ticks for the Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getreputationtoken-p-callback">augur.api.Market.getReputationToken(p, callback)</h3>
 
 <p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token (REP)</a> for the specified <a href="#market">Market</a>, as a 16-byte hexadecimal string. REP is Staked whenever an <a href="#initial-report">Initial Report</a> is submitted or when users attempt to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of a <a href="#market">Market</a>. A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract&rsquo;s address.</p>
 
-<h3 id="augur-api-market-getsharetoken-tx-_outcome-callback">augur.api.Market.getShareToken({ tx, _outcome }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#share-token-call-api">Share Token</a> for the specified <a href="#market">Market</a> and <a href="#outcome">Outcome</a>. Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-getstakeinoutcome-tx-_payoutdistributionhash-callback">augur.api.Market.getStakeInOutcome({ tx, _payoutDistributionHash }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the amount of <a href="#atto-prefix">attoREP</a> that has been Staked on the <a href="#outcome">Outcome</a> with the <a href="#payout-distribution-hash">Payout Distribution Hash</a> <code class="prettyprint">_payoutDistributionHash</code> in the specified <a href="#market">Market</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-market-gettotalstake-tx-callback">augur.api.Market.getTotalStake({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>.</p>
+<ul>
+<li>(string) Ethereum contract address of the Reputation Token for the Market, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-market-getuniverse-tx-callback">augur.api.Market.getUniverse({ tx }[, callback])</h3>
+<h3 id="augur-api-market-getsharetoken-p-callback">augur.api.Market.getShareToken(p, callback)</h3>
 
-<p>Returns the Etherem address of the <a href="#universe">Universe</a> that the specified <code class="prettyprint">market</code> is contained within. All <a href="#market">Markets</a> are created in a specific Universe, and new Universes are created if a <a href="#fork">Fork</a> occurs.</p>
+<p>Returns the Ethereum contract address of the <a href="#share-token-call-api">Share Token</a> for the specified <a href="#market">Market</a> and <a href="#outcome">Outcome</a>. Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome. Share Tokens are used within Augur to represent <a href="#share">Shares</a>.</p>
 
-<h3 id="augur-api-market-getwinningpayoutdistributionhash-tx-callback">augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a particular <a href="#market">Market</a>, as a 32-byte hexadecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-getwinningpayoutnumerator-tx-_outcome-callback">augur.api.Market.getWinningPayoutNumerator({ tx, _outcome }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the winning <a href="#payout-set">Payout Numerator</a> for <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> in a particular <a href="#market">Market</a>, as an unsigned 256-bit integer.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned 8-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-market-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Market.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns whether the specified <a href="#market">Market</a> is a container for the Ethereum address of Reporting Participant contract <code class="prettyprint">_shadyReportingParticipant</code>. If the Market is a container for the Reporting Participant contract, this function returns <code class="prettyprint">1</code>; otherwise, it returns <code class="prettyprint">0</code>. Both the <a href="#dispute-crowdsourcer-call-api">DisputeCrowdsourcer</a> and <a href="#initial-reporter-call-api">InitialReporter</a> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
+<ul>
+<li>(string) Ethereum contract address of the Share Token for the specified Market and Outcome, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-market-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Market.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h3>
+<h3 id="augur-api-market-getstakeinoutcome-p-callback">augur.api.Market.getStakeInOutcome(p, callback)</h3>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> that has been Staked on the <a href="#outcome">Outcome</a> with the specified <a href="#payout-distribution-hash">Payout Distribution Hash</a> in a given <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._payoutDistributionHash</code></strong> (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-gettotalstake-p-callback">augur.api.Market.getTotalStake(p, callback)</h3>
+
+<p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on all <a href="#outcome">Outcomes</a> of the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Total attoREP Staked on the Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getuniverse-p-callback">augur.api.Market.getUniverse(p, callback)</h3>
+
+<p>Returns the Etherem address of the <a href="#universe">Universe</a> in which the specified Market exists. All <a href="#market">Markets</a> are created in a specific Universe, and new Universes are created if a <a href="#fork">Fork</a> occurs.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Etherem address of the Universe in which the Market exists, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getwinningpayoutdistributionhash-p-callback">augur.api.Market.getWinningPayoutDistributionHash(p, callback)</h3>
+
+<p>Returns the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for a particular <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Winning Payout Distribution Hash for the Market, as a 32-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getwinningpayoutnumerator-p-callback">augur.api.Market.getWinningPayoutNumerator(p, callback)</h3>
+
+<p>Returns the winning <a href="#payout-set">Payout Numerator</a> for an <a href="#outcome">Outcome</a> in a particular <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned 8-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Winning Payout Numerator for an Outcome in the Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-market-iscontainerforreportingparticipant-p-callback">augur.api.Market.isContainerForReportingParticipant(p, callback)</h3>
+
+<p>Returns whether the ReportingParticipant contract <code class="prettyprint">_shadyReportingParticipant</code> belongs to the specified <a href="#market">Market</a>. (Both the <a href="#dispute-crowdsourcer-call-api">DisputeCrowdsourcer</a> and <a href="#initial-reporter-call-api">InitialReporter</a> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Market is a container for the ReportingParticipant contract, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-market-iscontainerforsharetoken-p-callback">augur.api.Market.isContainerForShareToken(p, callback)</h3>
 
 <p>Returns whether the specified <a href="#market">Market</a> is a container for the <a href="#share-token-call-api">Share Token</a> Ethereum address <code class="prettyprint">_shadyShareToken</code>. This function will return <code class="prettyprint">1</code> if <code class="prettyprint">_shadyShareToken</code> is a Share Token belonging to the <a href="#market">Market</a>, otherwise it will return <code class="prettyprint">0</code>.</p>
 
-<h3 id="augur-api-market-isfinalized-tx-callback">augur.api.Market.isFinalized({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns <code class="prettyprint">1</code> if the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> (that is, its winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> is set), or <code class="prettyprint">0</code> otherwise.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-market-isinvalid-tx-callback">augur.api.Market.isInvalid({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns <code class="prettyprint">1</code> if the specified <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> as <a href="#invalid-outcome">Invalid</a>, or returns <code class="prettyprint">0</code> otherwise.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) </li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Market is a container for the specified Share Token, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-market-isfinalized-p-callback">augur.api.Market.isFinalized(p, callback)</h3>
+
+<p>Returns whether the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> (that is, its winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> is set).</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Market has been Finalized, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-market-isinvalid-p-callback">augur.api.Market.isInvalid(p, callback)</h3>
+
+<p>Returns whether the specified <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a> as <a href="#invalid-outcome">Invalid</a>.</p>
+
+<p>This call will fail if:</p>
+
+<ul>
+<li>The Market is not Finalized.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Market has been Finalized as Invalid, or returns <code class="prettyprint">false</code> otherwise.</li>
+</ul>
 
 <h2 id="orders-call-api">Orders Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Contract Call API Examples:</span>
@@ -5371,79 +5896,79 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol">Orders Solidity Contract</a>, which handles functionality related to the <a href="#order-book">Order Book</a>.</p>
 
-<h3 id="augur-api-orders-assertisnotbetterprice-tx-_type-_fxpprice-_betterorderid-callback">augur.api.Orders.assertIsNotBetterPrice({ tx, _type, _fxpPrice, _betterOrderId }[, callback])</h3>
+<h3 id="augur-api-orders-assertisnotbetterprice-_type-_fxpprice-_betterorderid-callback">augur.api.Orders.assertIsNotBetterPrice({ _type, _fxpPrice, _betterOrderId }[, callback])</h3>
 
 <p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a better price than the <code class="prettyprint">_betterOrderId</code> for a given <a href="#order">Order</a> <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
-<h3 id="augur-api-orders-assertisnotworseprice-tx-_type-_fxpprice-_worstorderid-callback">augur.api.Orders.assertIsNotWorsePrice({ tx, _type, _fxpPrice, _worstOrderId }[, callback])</h3>
+<h3 id="augur-api-orders-assertisnotworseprice-_type-_fxpprice-_worstorderid-callback">augur.api.Orders.assertIsNotWorsePrice({ _type, _fxpPrice, _worstOrderId }[, callback])</h3>
 
 <p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a worst price than the <code class="prettyprint">_worstOrderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
-<h3 id="augur-api-orders-getamount-tx-_orderid-callback">augur.api.Orders.getAmount({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getamount-_orderid-callback">augur.api.Orders.getAmount({ _orderId }[, callback])</h3>
 
 <p>Returns the amount of <a href="#share">Shares</a> requested on a specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getbestorderid-tx-_type-_market-_outcome-callback">augur.api.Orders.getBestOrderId({ tx, _type, _market, _outcome }[, callback])</h3>
+<h3 id="augur-api-orders-getbestorderid-_type-_market-_outcome-callback">augur.api.Orders.getBestOrderId({ _type, _market, _outcome }[, callback])</h3>
 
 <p>Returns the order ID of the best order on the <code class="prettyprint">_market</code> of <code class="prettyprint">_type</code> trading on the provided <code class="prettyprint">_outcome</code>.</p>
 
-<h3 id="augur-api-orders-getbestorderworstorderhash-tx-_market-_outcome-_type-callback">augur.api.Orders.getBestOrderWorstOrderHash({ tx, _market, _outcome, _type }[, callback])</h3>
+<h3 id="augur-api-orders-getbestorderworstorderhash-_market-_outcome-_type-callback">augur.api.Orders.getBestOrderWorstOrderHash({ _market, _outcome, _type }[, callback])</h3>
 
 <p>Returns a sha256 order hash containing the inputted params <code class="prettyprint">_market</code>, <code class="prettyprint">_outcome</code>, and <code class="prettyprint">_type</code>.</p>
 
-<h3 id="augur-api-orders-getbetterorderid-tx-_orderid-callback">augur.api.Orders.getBetterOrderId({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getbetterorderid-_orderid-callback">augur.api.Orders.getBetterOrderId({ _orderId }[, callback])</h3>
 
 <p>Returns a better order ID than the <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getlastoutcomeprice-tx-_market-_outcome-callback">augur.api.Orders.getLastOutcomePrice({ tx, _market, _outcome }[, callback])</h3>
+<h3 id="augur-api-orders-getlastoutcomeprice-_market-_outcome-callback">augur.api.Orders.getLastOutcomePrice({ _market, _outcome }[, callback])</h3>
 
 <p>Returns the fixed point value of the last price traded for a specified <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code>.</p>
 
-<h3 id="augur-api-orders-getmarket-tx-_orderid-callback">augur.api.Orders.getMarket({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getmarket-_orderid-callback">augur.api.Orders.getMarket({ _orderId }[, callback])</h3>
 
 <p>Returns the <a href="#market">Market</a> address for the specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getordercreator-tx-_orderid-callback">augur.api.Orders.getOrderCreator({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getordercreator-_orderid-callback">augur.api.Orders.getOrderCreator({ _orderId }[, callback])</h3>
 
 <p>Returns the <a href="#order-creator">Creator</a> address of the specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getordermoneyescrowed-tx-_orderid-callback">augur.api.Orders.getOrderMoneyEscrowed({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getordermoneyescrowed-_orderid-callback">augur.api.Orders.getOrderMoneyEscrowed({ _orderId }[, callback])</h3>
 
 <p>Returns the fixed point value of the amount of money escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getordersharesescrowed-tx-_orderid-callback">augur.api.Orders.getOrderSharesEscrowed({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getordersharesescrowed-_orderid-callback">augur.api.Orders.getOrderSharesEscrowed({ _orderId }[, callback])</h3>
 
 <p>Returns the fixed point value of the amount of shares escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getordertype-tx-_orderid-callback">augur.api.Orders.getOrderType({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getordertype-_orderid-callback">augur.api.Orders.getOrderType({ _orderId }[, callback])</h3>
 
 <p>Returns the trade type, <code class="prettyprint">1</code> for bid and <code class="prettyprint">2</code> for ask, for a specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getoutcome-tx-_orderid-callback">augur.api.Orders.getOutcome({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getoutcome-_orderid-callback">augur.api.Orders.getOutcome({ _orderId }[, callback])</h3>
 
 <p>Returns the <a href="#outcome">Outcome</a> being traded on for the specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getprice-tx-_orderid-callback">augur.api.Orders.getPrice({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getprice-_orderid-callback">augur.api.Orders.getPrice({ _orderId }[, callback])</h3>
 
 <p>Returns the fixed point value of the price of a specified <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getvolume-tx-_market-callback">augur.api.Orders.getVolume({ tx, _market }[, callback])</h3>
+<h3 id="augur-api-orders-getvolume-_market-callback">augur.api.Orders.getVolume({ _market }[, callback])</h3>
 
 <p>Returns the fixed point value of the volume of a specified <code class="prettyprint">_market</code>.</p>
 
-<h3 id="augur-api-orders-getworseorderid-tx-_orderid-callback">augur.api.Orders.getWorseOrderId({ tx, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getworseorderid-_orderid-callback">augur.api.Orders.getWorseOrderId({ _orderId }[, callback])</h3>
 
 <p>Returns a worse order ID than the <code class="prettyprint">_orderId</code>.</p>
 
-<h3 id="augur-api-orders-getworstorderid-tx-_type-_market-_outcome-callback">augur.api.Orders.getWorstOrderId({ tx, _type, _market, _outcome }[, callback])</h3>
+<h3 id="augur-api-orders-getworstorderid-_type-_market-_outcome-callback">augur.api.Orders.getWorstOrderId({ _type, _market, _outcome }[, callback])</h3>
 
 <p>Returns the order ID of the worst order on the <code class="prettyprint">_market</code> of <code class="prettyprint">_type</code> trading on the provided <code class="prettyprint">_outcome</code>.</p>
 
-<h3 id="augur-api-orders-isbetterprice-tx-_type-_fxpprice-_orderid-callback">augur.api.Orders.isBetterPrice({ tx, _type, _fxpPrice, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-isbetterprice-_type-_fxpprice-_orderid-callback">augur.api.Orders.isBetterPrice({ _type, _fxpPrice, _orderId }[, callback])</h3>
 
 <p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is a better price than the <code class="prettyprint">_orderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
-<h3 id="augur-api-orders-isworseprice-tx-_type-_fxpprice-_orderid-callback">augur.api.Orders.isWorsePrice({ tx, _type, _fxpPrice, _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-isworseprice-_type-_fxpprice-_orderid-callback">augur.api.Orders.isWorsePrice({ _type, _fxpPrice, _orderId }[, callback])</h3>
 
 <p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is a worst price than the <code class="prettyprint">_orderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
 
