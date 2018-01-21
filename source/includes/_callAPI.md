@@ -116,7 +116,7 @@ Gets the [Fee Window](#fee-window) to which a [Dispute Crowdsourcer](#dispute-cr
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -131,7 +131,7 @@ Gets the [Market](#market) to which a [Dispute Crowdsourcer](#dispute-crowdsourc
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -146,7 +146,7 @@ Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Cr
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -161,7 +161,7 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
     * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -177,7 +177,7 @@ Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer]
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -192,7 +192,7 @@ Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispu
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -207,7 +207,7 @@ Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -226,7 +226,7 @@ Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavo
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -241,7 +241,7 @@ Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) represents the [
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -320,7 +320,7 @@ Returns the average amount of gas spent to submit either a [Designated Report](#
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -335,7 +335,7 @@ Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will e
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -350,7 +350,7 @@ Returns the number of [Markets](#market) belonging to the specified [Fee Window]
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -365,7 +365,7 @@ Returns the number of [Unfinalized Markets](#finalized-market) belonging to the 
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -380,7 +380,7 @@ Returns the number of [Markets](#market) that were [Reported](#report) to be [In
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -395,7 +395,7 @@ Returns the total number of [Markets](#market) that are in the [Dispute Round Ph
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -410,7 +410,7 @@ Returns the [Reputation Token (REP)](#rep) used by the specified [Fee Window](#f
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -425,7 +425,7 @@ Returns a Unix timestamp of when a [Fee Window](#fee-window) becomes active and 
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -440,7 +440,7 @@ Returns the [Universe](#universe) to which the specified [Fee Window](#fee-windo
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -455,7 +455,7 @@ Returns whether the specified [Fee Window](#fee-window) is currently active. Fee
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -470,7 +470,7 @@ Returns whether `p._shadyMarket` is a [Market](#market) that is set to be [Repor
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
     * **`p._shadyMarket`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -486,7 +486,7 @@ Returns whether the [Forked Market](#forked-market) in this [Fee Window's](#fee-
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -501,7 +501,7 @@ Returns whether the 7-day [Fee Window](#fee-window) specified has ended.
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -572,7 +572,7 @@ Returns whether the [Designated Reporter](#designated-reporter) submitted a [Rep
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -587,7 +587,7 @@ Returns whether the [Payout Distribution Hash](#payout-distribution-hash) submit
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -602,7 +602,7 @@ Returns the Ethereum address for the [Designated Reporter](#designated-reporter)
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -617,7 +617,7 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) to which 
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -632,7 +632,7 @@ Returns the Ethereum contract address of the [Market](#market) to which the Init
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -647,7 +647,7 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) for the Initia
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -662,7 +662,7 @@ Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for t
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
     * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -678,7 +678,7 @@ Returns the Unix timestamp of when the [Initial Report](#initial-report) (either
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -693,7 +693,7 @@ Returns the [Reputation Token (REP)](#rep) Ethereum contract address used by the
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -708,7 +708,7 @@ Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) 
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -723,7 +723,7 @@ Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [I
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -738,7 +738,7 @@ Returns whether the submitted [Initial Report](#initial-report) said the[Market]
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -755,6 +755,8 @@ augur.api.Market.derivePayoutDistributionHash({
   tx: { to: market } },
   _payoutNumerators: [ 0, 1000 ],
   _invalid: false,
+}, function (error, payoutDistributionHash) { 
+  console.log(payoutDistributionHash); 
 });
 // example output:
 "1"
@@ -875,100 +877,379 @@ augur.api.Market.isInvalid({
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
-### augur.api.Market.derivePayoutDistributionHash({ tx, \_payoutNumerators, \_invalid, onSent, onSuccess, onFailed })
+### augur.api.Market.derivePayoutDistributionHash(p, callback)
 
-Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specified [Market](#market) for the `_payoutNumerators` and `_invalid` passed in. If the [Payout Set](#payout-set) (referred to as Payout Numerators in the function), is valid, then a Payout Distribution Hash is created by hashing the Payout Set and `_invalid` using the keccak256 algorithm.
+Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specified [Market](#market) by hashing [Payout Numerators](#payout-set) `_payoutNumerators` and [Invalid](#invalid-outcome) status `_invalid` using the keccak256 algorithm.
 
-### augur.api.Market.designatedReporterShowed({ tx }[, callback]) 
+This call will fail if:
 
-Returns `1` if the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase), or `0` otherwise.
+* `p._invalid` is `true` and the values in p._payoutNumerators are not all the same.
 
-### augur.api.Market.designatedReporterWasCorrect({ tx }[, callback]) 
+#### **Parameters:**
 
-Returns `1` if the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified [Market](#market).
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+      * **`p._payoutNumerators`** (Array.&lt;uint256>) Payout Numerators from which to derive the Payout Distribution Hash.
+      * **`p._invalid`** (boolean) Whether the Market is Invalid.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getDenominationToken({ tx }[, callback])
+#### **Returns:**
 
-Returns the Ethereum contract address of the token used to denominate the specified [Market](#market), as a 16-byte hexadecimal string. A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
+* (string) Payout Distribution Hash of the specified Market, as a 32-byte hexadecimal string.
 
-### augur.api.Market.getDesignatedReporter({ tx }[, callback])
+### augur.api.Market.designatedReporterShowed(p, callback) 
 
-Returns the Ethereum address for the [Designated Reporter](#designated-reporter) set for the specified [Market](#market), as a 16-byte hexadecimal string. Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market creation.
+Returns whether the [Designated Reporter](#designated-reporter) submitted a [Report](#report) within the [Designated Reporting Phase](#designated-reporting-phase).
 
-### augur.api.Market.getEndTime({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Designated Reporter submitted a Report within the Designated Reporting Phase, or `false` otherwise.
+
+### augur.api.Market.designatedReporterWasCorrect(p, callback) 
+
+Returns whether the [Payout Distribution Hash](#payout-distribution-hash) submitted in the [Designated Report](#designated-report) is the same as the winning Payout Distribution Hash for the specified [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the specified Market, or `false` otherwise.
+
+### augur.api.Market.getDenominationToken(p, callback)
+
+Returns the Ethereum contract address of the token used to denominate the specified [Market](#market). A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the token used to denominate the specified [Market](#market), as a 16-byte hexadecimal string.
+
+### augur.api.Market.getDesignatedReporter(p, callback)
+
+Returns the Ethereum address of the [Designated Reporter](#designated-reporter) for the specified [Market](#market). Every [Market](#market) is required to have an assigned Designated Reporter, which is set by the [Market Creator](#market-creator) during Market creation.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the Designated Reporter for the Market, as a 16-byte hexadecimal string.
+
+### augur.api.Market.getEndTime(p, callback)
 
 Returns the Unix timestamp for when the specified [Market's](#market) event has come to pass. When the Market's [End Time](#end-time) passes, the Market enters the [Designated Reporting Phase](#designated-reporting-phase).
 
-### augur.api.Market.getFeeWindow({ tx, \_feeWindowId  }[, callback])
+#### **Parameters:**
 
-Returns the Ethereum address of the [Fee Window](#fee-window) `_feeWindowId` in a [Market](#market), as a hexidecimal string.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getFinalizationTime({ tx }[, callback])
+#### **Returns:**
 
-Returns the timestamp for when the specified [Market](#market) was [Finalized](#finalized-market). A Finalized Market has a [Final Outcome](#final-outcome) set from successful [Market Resolution](#market-resolution) which cannot be [Challenged](#challenge), and the Market is considered [Settled](#settlement).
+* (number) Unix timestamp for when the specified [Market's](#market) event has come to pass, as an unsigned 256-bit integer.
 
-### augur.api.Market.getForkingMarket({ tx }[, callback])
+### augur.api.Market.getFeeWindow(p, callback)
 
-Returns the Ethereum address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified [Market](#market) address. If the [Market](#market) address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
+Returns the Ethereum contract address of the [Market's](#market) [Fee Window](#fee-window).
 
-### augur.api.Market.getMarketCreatorMailbox({ tx }[, callback])
+#### **Parameters:**
 
-Returns the Ethereum address of the [Market Creator Mailbox](#market-creator-mailbox) for `market`. [Market Creators](#market-creator) can use this address to collect their fees.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx }[, callback])
+#### **Returns:**
+
+* (string) Ethereum contract address of the Market's Fee Window, as a 16-byte hexadecimal string.
+
+### augur.api.Market.getFinalizationTime(p, callback)
+
+Returns the Unix timestamp for when the specified [Market](#market) was [Finalized](#finalized-market). A Finalized Market has a [Final Outcome](#final-outcome) set from successful [Market Resolution](#market-resolution) which cannot be [Challenged](#challenge), and the Market is considered [Settled](#settlement).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Unix timestamp for when the Market was Finalized, as an unsigned 256-bit integer.
+
+### augur.api.Market.getForkingMarket(p, callback)
+
+Returns the Ethereum contract address of the [Forked Market](#forked-market) for the [Universe](#universe) that contains the specified [Market](#market) address. If the [Market](#market) address specified belongs in a Universe that hasn't had a [Fork](#fork) take place, this will return `0x0`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Forked Market for the Universe in which the specified Market exists, as a 16-byte hexadecimal string.
+
+### augur.api.Market.getMarketCreatorMailbox(p, callback)
+
+Returns the Ethereum address of the [Market Creator Mailbox](#market-creator-mailbox) for the specified Market. [Market Creators](#market-creator) can use this address to collect their fees.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the Market Creator Mailbox for the Market, as a 16-byte hexadecimal string.
+
+### augur.api.Market.getMarketCreatorSettlementFeeDivisor(p, callback)
 
 Returns the [Creator Fee](#creator-fee) set by the [Market Creator](#market-creator), denominated in [attotokens](#atto-prefix) per [Settlement](#settlement) of a [Complete Set](#complete-set), for the specified [Market](#market).
 
-### augur.api.Market.getNumberOfOutcomes({ tx }[, callback])
+#### **Parameters:**
 
-Returns the number of [Outcomes](#outcome) for a specified [Market](#market). The number of Outcomes is the number of potential results for the [Market](#market) event.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getNumTicks({ tx }[, callback])
+#### **Returns:**
+
+* (number) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as an unsigned 256-bit integer.
+
+### augur.api.Market.getNumberOfOutcomes(p, callback)
+
+Returns the number of [Outcomes](#outcome) for the specified [Market](#market). The number of Outcomes is the number of potential results for the [Market](#market) event.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Outcomes for the Market, as an unsigned 8-bit integer.
+
+### augur.api.Market.getNumTicks(p, callback)
 
 Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#market). The Number of Ticks represents the number of valid price points between the [Market](#market)'s [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price).
 
-### augur.api.Market.getReputationToken({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Ticks for the Market, as an unsigned 256-bit integer.
+
+### augur.api.Market.getReputationToken(p, callback)
 
 Returns the Ethereum contract address of the [Reputation Token (REP)](#rep) for the specified [Market](#market), as a 16-byte hexadecimal string. REP is Staked whenever an [Initial Report](#initial-report) is submitted or when users attempt to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of a [Market](#market). A Market only accepts one REP contract as the source of Staked REP, and this method returns that contract's address.
 
-### augur.api.Market.getShareToken({ tx, \_outcome }[, callback])
+#### **Parameters:**
 
-Returns the Ethereum address of the [Share Token](#share-token-call-api) for the specified [Market](#market) and [Outcome](#outcome). Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getStakeInOutcome({ tx, \_payoutDistributionHash }[, callback])
+#### **Returns:**
 
-Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outcome](#outcome) with the [Payout Distribution Hash](#payout-distribution-hash) `_payoutDistributionHash` in the specified [Market](#market).
+* (string) Ethereum contract address of the Reputation Token for the Market, as a 16-byte hexadecimal string.
 
-### augur.api.Market.getTotalStake({ tx }[, callback])
+### augur.api.Market.getShareToken(p, callback)
 
-Returns the total amount of [attoREP](#atto-prefix) Staked on the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Returns the Ethereum contract address of the [Share Token](#share-token-call-api) for the specified [Market](#market) and [Outcome](#outcome). Every Outcome of a Market has a separate Share Token used to handle trading around that Outcome and this method returns the contract address of the Share Tokens for the specified Outcome. Share Tokens are used within Augur to represent [Shares](#share).
 
-### augur.api.Market.getUniverse({ tx }[, callback])
+#### **Parameters:**
 
-Returns the Etherem address of the [Universe](#universe) that the specified `market` is contained within. All [Markets](#market) are created in a specific Universe, and new Universes are created if a [Fork](#fork) occurs.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.getWinningPayoutDistributionHash({ tx }[, callback])
+#### **Returns:**
 
-Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a particular [Market](#market), as a 32-byte hexadecimal string.
+* (string) Ethereum contract address of the Share Token for the specified Market and Outcome, as a 16-byte hexadecimal string.
 
-### augur.api.Market.getWinningPayoutNumerator({ tx, \_outcome }[, callback])
+### augur.api.Market.getStakeInOutcome(p, callback)
 
-Returns the winning [Payout Numerator](#payout-set) for [Outcome](#outcome) `_outcome` in a particular [Market](#market), as an unsigned 256-bit integer.
+Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outcome](#outcome) with the specified [Payout Distribution Hash](#payout-distribution-hash) in a given [Market](#market).
 
-### augur.api.Market.isContainerForReportingParticipant({ tx, \_shadyReportingParticipant }[, callback])
+#### **Parameters:**
 
-Returns whether the specified [Market](#market) is a container for the Ethereum address of Reporting Participant contract `_shadyReportingParticipant`. If the Market is a container for the Reporting Participant contract, this function returns `1`; otherwise, it returns `0`. Both the [DisputeCrowdsourcer](#dispute-crowdsourcer-call-api) and [InitialReporter](#initial-reporter-call-api) classes in Augur's Solidity smart contracts are considered Reporting Participants, since they have the parent class `BaseReportingParticipant`.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._payoutDistributionHash`** (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Market.isContainerForShareToken({ tx, \_shadyShareToken }[, callback])
+#### **Returns:**
+
+* (number) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as an unsigned 256-bit integer.
+
+### augur.api.Market.getTotalStake(p, callback)
+
+Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Total attoREP Staked on the Market, as an unsigned 256-bit integer.
+
+### augur.api.Market.getUniverse(p, callback)
+
+Returns the Etherem address of the [Universe](#universe) in which the specified Market exists. All [Markets](#market) are created in a specific Universe, and new Universes are created if a [Fork](#fork) occurs.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Etherem address of the Universe in which the Market exists, as a 16-byte hexadecimal string.
+
+### augur.api.Market.getWinningPayoutDistributionHash(p, callback)
+
+Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a particular [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Winning Payout Distribution Hash for the Market, as a 32-byte hexadecimal string.
+
+### augur.api.Market.getWinningPayoutNumerator(p, callback)
+
+Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) in a particular [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Winning Payout Numerator for an Outcome in the Market, as an unsigned 256-bit integer.
+
+### augur.api.Market.isContainerForReportingParticipant(p, callback)
+
+Returns whether the ReportingParticipant contract `_shadyReportingParticipant` belongs to the specified [Market](#market). (Both the [DisputeCrowdsourcer](#dispute-crowdsourcer-call-api) and [InitialReporter](#initial-reporter-call-api) classes in Augur's Solidity smart contracts are considered Reporting Participants, since they have the parent class `BaseReportingParticipant`.)
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._shadyReportingParticipant`** (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Market is a container for the ReportingParticipant contract, or `false` otherwise.
+
+### augur.api.Market.isContainerForShareToken(p, callback)
 
 Returns whether the specified [Market](#market) is a container for the [Share Token](#share-token-call-api) Ethereum address `_shadyShareToken`. This function will return `1` if `_shadyShareToken` is a Share Token belonging to the [Market](#market), otherwise it will return `0`.
 
-### augur.api.Market.isFinalized({ tx }[, callback])
-Returns `1` if the [Market](#market) has been [Finalized](#finalized-market) (that is, its winning [Payout Distribution Hash](#payout-distribution-hash) is set), or `0` otherwise.
+#### **Parameters:**
 
-### augur.api.Market.isInvalid({ tx }[, callback])
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._shadyShareToken`** (string) 
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-Returns `1` if the specified [Market](#market) has been [Finalized](#finalized-market) as [Invalid](#invalid-outcome), or returns `0` otherwise.
+#### **Returns:**
+
+* (boolean) `true` if the Market is a container for the specified Share Token, or `false` otherwise.
+
+### augur.api.Market.isFinalized(p, callback)
+Returns whether the [Market](#market) has been [Finalized](#finalized-market) (that is, its winning [Payout Distribution Hash](#payout-distribution-hash) is set).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Market has been Finalized, or `false` otherwise.
+
+### augur.api.Market.isInvalid(p, callback)
+
+Returns whether the specified [Market](#market) has been [Finalized](#finalized-market) as [Invalid](#invalid-outcome).
+
+This call will fail if:
+
+* The Market is not Finalized.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Market has been Finalized as Invalid, or returns `false` otherwise.
 
 Orders Call API
 ---------------
@@ -1122,79 +1403,79 @@ augur.api.Orders.isWorsePrice({
 ```
 Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
 
-### augur.api.Orders.assertIsNotBetterPrice({ tx, \_type, \_fxpPrice, \_betterOrderId }[, callback])
+### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is not a better price than the `_betterOrderId` for a given [Order](#order) `_type`. Returns `1` if true, `0` if false.
 
-### augur.api.Orders.assertIsNotWorsePrice({ tx, \_type, \_fxpPrice, \_worstOrderId }[, callback])
+### augur.api.Orders.assertIsNotWorsePrice({ \_type, \_fxpPrice, \_worstOrderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is not a worst price than the `_worstOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
-### augur.api.Orders.getAmount({ tx, \_orderId }[, callback])
+### augur.api.Orders.getAmount({ \_orderId }[, callback])
 
 Returns the amount of [Shares](#share) requested on a specified `_orderId`.
 
-### augur.api.Orders.getBestOrderId({ tx, \_type, \_market, \_outcome }[, callback])
+### augur.api.Orders.getBestOrderId({ \_type, \_market, \_outcome }[, callback])
 
 Returns the order ID of the best order on the `_market` of `_type` trading on the provided `_outcome`.
 
-### augur.api.Orders.getBestOrderWorstOrderHash({ tx, \_market, \_outcome, \_type }[, callback])
+### augur.api.Orders.getBestOrderWorstOrderHash({ \_market, \_outcome, \_type }[, callback])
 
 Returns a sha256 order hash containing the inputted params `_market`, `_outcome`, and `_type`.
 
-### augur.api.Orders.getBetterOrderId({ tx, \_orderId }[, callback])
+### augur.api.Orders.getBetterOrderId({ \_orderId }[, callback])
 
 Returns a better order ID than the `_orderId`.
 
-### augur.api.Orders.getLastOutcomePrice({ tx, \_market, \_outcome }[, callback])
+### augur.api.Orders.getLastOutcomePrice({ \_market, \_outcome }[, callback])
 
 Returns the fixed point value of the last price traded for a specified `_market` and `_outcome`.
 
-### augur.api.Orders.getMarket({ tx, \_orderId }[, callback])
+### augur.api.Orders.getMarket({ \_orderId }[, callback])
 
 Returns the [Market](#market) address for the specified `_orderId`.
 
-### augur.api.Orders.getOrderCreator({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderCreator({ \_orderId }[, callback])
 
 Returns the [Creator](#order-creator) address of the specified `_orderId`.
 
-### augur.api.Orders.getOrderMoneyEscrowed({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderMoneyEscrowed({ \_orderId }[, callback])
 
 Returns the fixed point value of the amount of money escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
-### augur.api.Orders.getOrderSharesEscrowed({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderSharesEscrowed({ \_orderId }[, callback])
 
 Returns the fixed point value of the amount of shares escrowed by the [Creator](#order-creator) for a specified `_orderId`.
 
-### augur.api.Orders.getOrderType({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOrderType({ \_orderId }[, callback])
 
 Returns the trade type, `1` for bid and `2` for ask, for a specified `_orderId`.
 
-### augur.api.Orders.getOutcome({ tx, \_orderId }[, callback])
+### augur.api.Orders.getOutcome({ \_orderId }[, callback])
 
 Returns the [Outcome](#outcome) being traded on for the specified `_orderId`.
 
-### augur.api.Orders.getPrice({ tx, \_orderId }[, callback])
+### augur.api.Orders.getPrice({ \_orderId }[, callback])
 
 Returns the fixed point value of the price of a specified `_orderId`.
 
-### augur.api.Orders.getVolume({ tx, \_market }[, callback])
+### augur.api.Orders.getVolume({ \_market }[, callback])
 
 Returns the fixed point value of the volume of a specified `_market`.
 
-### augur.api.Orders.getWorseOrderId({ tx, \_orderId }[, callback])
+### augur.api.Orders.getWorseOrderId({ \_orderId }[, callback])
 
 Returns a worse order ID than the `_orderId`.
 
-### augur.api.Orders.getWorstOrderId({ tx, \_type, \_market, \_outcome }[, callback])
+### augur.api.Orders.getWorstOrderId({ \_type, \_market, \_outcome }[, callback])
 
 Returns the order ID of the worst order on the `_market` of `_type` trading on the provided `_outcome`.
 
-### augur.api.Orders.isBetterPrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
+### augur.api.Orders.isBetterPrice({ \_type, \_fxpPrice, \_orderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is a better price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 
-### augur.api.Orders.isWorsePrice({ tx, \_type, \_fxpPrice, \_orderId }[, callback])
+### augur.api.Orders.isWorsePrice({ \_type, \_fxpPrice, \_orderId }[, callback])
 
 Returns whether the specified `_fxpPrice` is a worst price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
 

@@ -191,7 +191,7 @@ Debugging Options
 ----------------------------
 ```javascript
 augur.rpc.setDebugOptions({ broadcast: true });
-augur.api.Universe.getCurrentReportingWindow();
+augur.api.Universe.getCurrentFeeWindow();
 // example output:
 packaged: {
   from: "0x56ddb80fe4e5aa05182d794526ab1eff78c90688", 
