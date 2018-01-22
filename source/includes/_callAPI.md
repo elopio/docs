@@ -1853,7 +1853,7 @@ Returns the Outcome of the Market that the specified ShareToken is for.
 
 #### **Returns:**
 
-* (number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit hexadecimal string.
+* (number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit integer.
 
 Universe Call API
 ---------------
