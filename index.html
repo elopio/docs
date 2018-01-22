@@ -143,7 +143,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="hosted-ethereum-node">Hosted Ethereum Node</h2>
 
-<p>Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public (testnet during the beta) Ethereum node at <a href="https://eth9000.augur.net">https://eth9000.augur.net</a>, which is used automatically by <a href="https://app.augur.net">https://app.augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).</p>
+<p>Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public Ethereum node on the Rinkeby test network (while in beta) at <code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>, which is used automatically by <a href="https://app.augur.net">https://app.augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).</p>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'"></p>
 
@@ -505,11 +505,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">ethereumNode</span> <span class="o">=</span> <span class="p">{</span> 
   <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local http address for Geth node</span>
-    <span class="s2">"https://eth9000.augur.net"</span> <span class="c1">// hosted http address for Geth node</span>
+    <span class="s2">"rinkeby.ethereum.nodes.augur.net"</span> <span class="c1">// hosted http address for Geth node on the Rinkeby test network</span>
   <span class="p">],</span>
   <span class="na">wsAddresses</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span> <span class="c1">// local websocket address for Geth node</span>
-    <span class="s2">"wss://ws9000.augur.net"</span> <span class="c1">// hosted websocket address for Geth node</span>
+    <span class="s2">"wss://websocket-rinkeby.ethereum.nodes.augur.net"</span> <span class="c1">// hosted websocket address for Geth node on the Rinkeby test network</span>
   <span class="p">]</span>
   <span class="c1">// ipc addresses can also be specified as:</span>
   <span class="c1">// ipcAddresses: [ ... ]</span>
@@ -546,7 +546,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">augur.connect</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
-<p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is our local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (<code class="prettyprint">https://eth9000.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
+<p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
 
 <h2 id="accounts">Accounts</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="cm">/**
@@ -1364,7 +1364,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">ethereumNode</span><span class="p">:</span> <span class="p">{</span>  
     <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
       <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local http address for Geth node</span>
-      <span class="s2">"https://eth9000.augur.net"</span> <span class="c1">// hosted http address for Geth node</span>
+      <span class="s2">"https://rinkeby.ethereum.nodes.augur.net"</span> <span class="c1">// hosted http address for Geth node on the Ethereum Rinkeby test network</span>
     <span class="p">],</span>
     <span class="na">wsAddresses</span><span class="p">:</span> <span class="p">[</span>
       <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span> <span class="c1">// local websocket address for Geth node</span>
@@ -1377,7 +1377,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">augur</span><span class="o">-</span><span class="nx">node</span><span class="p">:</span> <span class="nx">ws</span><span class="p">:</span><span class="c1">//127.0.0.1:9001</span>
-<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">ethereum</span><span class="o">-</span><span class="nx">node</span><span class="p">:</span> <span class="p">{</span><span class="s2">"httpAddresses"</span><span class="p">:[</span><span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span><span class="s2">"https://eth9000.augur.net"</span><span class="p">],</span><span class="s2">"wsAddresses"</span><span class="p">:[</span><span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span><span class="s2">"wss://ws9000.augur.net"</span><span class="p">]}</span>
+<span class="nx">connecting</span> <span class="nx">to</span> <span class="nx">ethereum</span><span class="o">-</span><span class="nx">node</span><span class="p">:</span> <span class="p">{</span><span class="s2">"httpAddresses"</span><span class="p">:[</span><span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span><span class="s2">"https://rinkeby.ethereum.nodes.augur.net"</span><span class="p">],</span><span class="s2">"wsAddresses"</span><span class="p">:[</span><span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span><span class="s2">"wss://websocket-rinkeby.ethereum.nodes.augur.net"</span><span class="p">]}</span>
 <span class="nx">connected</span> <span class="nx">to</span> <span class="nx">augur</span>
 <span class="nx">Web3</span><span class="p">:</span> <span class="nx">not</span> <span class="nx">connected</span>
 <span class="nx">Sync</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//127.0.0.1:8545</span>
@@ -5134,7 +5134,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <p>This call will fail if:</p>
 
 <ul>
-<li><code class="prettyprint">p._invalid</code> is <code class="prettyprint">true</code> and the values in p._payoutNumerators are not all the same.</li>
+<li><code class="prettyprint">p._invalid</code> is <code class="prettyprint">true</code> and the values in <code class="prettyprint">p._payoutNumerators</code> are not all the same.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -5748,40 +5748,35 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="orders-call-api">Orders Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">orders</span> <span class="o">=</span> <span class="s2">"0x8868ff3e9ce1c0459b309fac6dd4e69229b91a56"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_fxpPrice</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
+<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">assertIsNotBetterPrice</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isNotBetterPrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isNotBetterPrice</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">assertIsNotWorsePrice</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_worstOrderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isNotWorstPrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isNotWorstPrice</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span> 
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">amount</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">amount</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"15"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getBestOrderId</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span>
@@ -5790,14 +5785,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getBetterOrderId</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="s2">"0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">betterOrderId</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">betterOrderId</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getLastOutcomePrice</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">lastOutcomePrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">lastOutcomePrice</span><span class="p">);</span> <span class="p">});</span>
@@ -5805,70 +5798,60 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"490000000000000000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">market</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">market</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getOrderCreator</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">creator</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">creator</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x438f2aeb8a16745b1cd711e168581ebce744ffaa"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getOrderMoneyEscrowed</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">orderMoneyEscrowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderMoneyEscrowed</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"5000000000000000000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getOrderSharesEscrowed</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">orderSharesEscrowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderSharesEscrowed</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getOrderType</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">orderType</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orderType</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getOutcome</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">outcome</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">outcome</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">price</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">price</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"500000000000000000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getVolume</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">volume</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">volume</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"100000000000000000000000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getWorseOrderId</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="s2">"0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1"</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">worseOrderID</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">worseOrderID</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getWorstOrderId</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span>
@@ -5877,18 +5860,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">isBetterPrice</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isBetterPrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isBetterPrice</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">isWorsePrice</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">orders</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isWorsePrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isWorsePrice</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
@@ -5896,95 +5877,408 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol">Orders Solidity Contract</a>, which handles functionality related to the <a href="#order-book">Order Book</a>.</p>
 
-<h3 id="augur-api-orders-assertisnotbetterprice-_type-_fxpprice-_betterorderid-callback">augur.api.Orders.assertIsNotBetterPrice({ _type, _fxpPrice, _betterOrderId }[, callback])</h3>
+<h3 id="augur-api-orders-assertisnotbetterprice-p-callback">augur.api.Orders.assertIsNotBetterPrice(p, callback)</h3>
 
-<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a better price than the <code class="prettyprint">_betterOrderId</code> for a given <a href="#order">Order</a> <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<p>Returns whether a specific price is not a better price than a particular <a href="#order">Order</a>.</p>
 
-<h3 id="augur-api-orders-assertisnotworseprice-_type-_fxpprice-_worstorderid-callback">augur.api.Orders.assertIsNotWorsePrice({ _type, _fxpPrice, _worstOrderId }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is not a worst price than the <code class="prettyprint">_worstOrderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-orders-getamount-_orderid-callback">augur.api.Orders.getAmount({ _orderId }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._betterOrderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<p>Returns the amount of <a href="#share">Shares</a> requested on a specified <code class="prettyprint">_orderId</code>.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h3 id="augur-api-orders-getbestorderid-_type-_market-_outcome-callback">augur.api.Orders.getBestOrderId({ _type, _market, _outcome }[, callback])</h3>
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">p._price</code> is not a better price than <code class="prettyprint">p._betterOrderId</code>.</li>
+</ul>
 
-<p>Returns the order ID of the best order on the <code class="prettyprint">_market</code> of <code class="prettyprint">_type</code> trading on the provided <code class="prettyprint">_outcome</code>.</p>
+<h3 id="augur-api-orders-assertisnotworseprice-p-callback">augur.api.Orders.assertIsNotWorsePrice(p, callback)</h3>
 
-<h3 id="augur-api-orders-getbestorderworstorderhash-_market-_outcome-_type-callback">augur.api.Orders.getBestOrderWorstOrderHash({ _market, _outcome, _type }[, callback])</h3>
+<p>Returns whether a specific price is not a worse price than a particular <a href="#order">Order</a>.</p>
 
-<p>Returns a sha256 order hash containing the inputted params <code class="prettyprint">_market</code>, <code class="prettyprint">_outcome</code>, and <code class="prettyprint">_type</code>.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h3 id="augur-api-orders-getbetterorderid-_orderid-callback">augur.api.Orders.getBetterOrderId({ _orderId }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<p>Returns a better order ID than the <code class="prettyprint">_orderId</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._worseOrderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-orders-getlastoutcomeprice-_market-_outcome-callback">augur.api.Orders.getLastOutcomePrice({ _market, _outcome }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the fixed point value of the last price traded for a specified <code class="prettyprint">_market</code> and <code class="prettyprint">_outcome</code>.</p>
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">p._price</code> is not a worse price than <code class="prettyprint">p._worseOrderId</code>.</li>
+</ul>
 
-<h3 id="augur-api-orders-getmarket-_orderid-callback">augur.api.Orders.getMarket({ _orderId }[, callback])</h3>
+<h3 id="augur-api-orders-getamount-p-callback">augur.api.Orders.getAmount(p, callback)</h3>
 
-<p>Returns the <a href="#market">Market</a> address for the specified <code class="prettyprint">_orderId</code>.</p>
+<p>Returns the amount of <a href="#share">Shares</a> requested when a particular <a href="#order">Order</a> was placed.</p>
 
-<h3 id="augur-api-orders-getordercreator-_orderid-callback">augur.api.Orders.getOrderCreator({ _orderId }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the <a href="#order-creator">Creator</a> address of the specified <code class="prettyprint">_orderId</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-orders-getordermoneyescrowed-_orderid-callback">augur.api.Orders.getOrderMoneyEscrowed({ _orderId }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (number) ID of the Order, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<p>Returns the fixed point value of the amount of money escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h3 id="augur-api-orders-getordersharesescrowed-_orderid-callback">augur.api.Orders.getOrderSharesEscrowed({ _orderId }[, callback])</h3>
+<ul>
+<li>(number) Amount of Shares requested when the Order was placed.</li>
+</ul>
 
-<p>Returns the fixed point value of the amount of shares escrowed by the <a href="#order-creator">Creator</a> for a specified <code class="prettyprint">_orderId</code>.</p>
+<h3 id="augur-api-orders-getbestorderid-p-callback">augur.api.Orders.getBestOrderId(p, callback)</h3>
 
-<h3 id="augur-api-orders-getordertype-_orderid-callback">augur.api.Orders.getOrderType({ _orderId }[, callback])</h3>
+<p>Returns the <a href="#order">Order</a> ID of the best Order of a particular type (either <a href="#ask-order">Ask Orders</a> or <a href="#bid-order">Bid Orders</a>), for a specific <a href="#outcome">Outcome</a>, in a given <a href="#market">Market</a>.</p>
 
-<p>Returns the trade type, <code class="prettyprint">1</code> for bid and <code class="prettyprint">2</code> for ask, for a specified <code class="prettyprint">_orderId</code>.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<h3 id="augur-api-orders-getoutcome-_orderid-callback">augur.api.Orders.getOutcome({ _orderId }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<p>Returns the <a href="#outcome">Outcome</a> being traded on for the specified <code class="prettyprint">_orderId</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a Bid Order, <code class="prettyprint">2</code> for an Ask Order), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned 8-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-orders-getprice-_orderid-callback">augur.api.Orders.getPrice({ _orderId }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the fixed point value of the price of a specified <code class="prettyprint">_orderId</code>.</p>
+<ul>
+<li>(string) Order ID with the best price, as a 32-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-orders-getvolume-_market-callback">augur.api.Orders.getVolume({ _market }[, callback])</h3>
+<h3 id="augur-api-orders-getbetterorderid-p-callback">augur.api.Orders.getBetterOrderId(p, callback)</h3>
 
-<p>Returns the fixed point value of the volume of a specified <code class="prettyprint">_market</code>.</p>
+<p>Returns the <a href="#order">Order</a> ID of an Order with a better price than the specified Order.</p>
 
-<h3 id="augur-api-orders-getworseorderid-_orderid-callback">augur.api.Orders.getWorseOrderId({ _orderId }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns a worse order ID than the <code class="prettyprint">_orderId</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-orders-getworstorderid-_type-_market-_outcome-callback">augur.api.Orders.getWorstOrderId({ _type, _market, _outcome }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<p>Returns the order ID of the worst order on the <code class="prettyprint">_market</code> of <code class="prettyprint">_type</code> trading on the provided <code class="prettyprint">_outcome</code>.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<h3 id="augur-api-orders-isbetterprice-_type-_fxpprice-_orderid-callback">augur.api.Orders.isBetterPrice({ _type, _fxpPrice, _orderId }[, callback])</h3>
+<ul>
+<li>(string) ID of an Order with a better price than the specified Order, as a 32-byte hexadecimal string.</li>
+</ul>
 
-<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is a better price than the <code class="prettyprint">_orderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<h3 id="augur-api-orders-getlastoutcomeprice-p-callback">augur.api.Orders.getLastOutcomePrice(p, callback)</h3>
 
-<h3 id="augur-api-orders-isworseprice-_type-_fxpprice-_orderid-callback">augur.api.Orders.isWorsePrice({ _type, _fxpPrice, _orderId }[, callback])</h3>
+<p>Returns the last price traded for a specific <a href="#outcome">Outcome</a> in a given <a href="#market">Market</a>.</p>
 
-<p>Returns whether the specified <code class="prettyprint">_fxpPrice</code> is a worst price than the <code class="prettyprint">_orderId</code> for a given order <code class="prettyprint">_type</code>. Returns <code class="prettyprint">1</code> if true, <code class="prettyprint">0</code> if false.</p>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number) Outcome of the Market, as an unsigned 8-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Last price traded for a specific Outcome in a given Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getmarket-p-callback">augur.api.Orders.getMarket(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#market">Market</a> for the specified <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Market for the specified Order, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-orders-getordercreator-p-callback">augur.api.Orders.getOrderCreator(p, callback)</h3>
+
+<p>Returns the Ethereum address of the <a href="#order-creator">Creator</a> of the specified <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the Creator of the specified Order, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-orders-getordermoneyescrowed-p-callback">augur.api.Orders.getOrderMoneyEscrowed(p, callback)</h3>
+
+<p>Returns the amount of money escrowed by the <a href="#order-creator">Order Creator</a> for a given <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Amount of money escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getordersharesescrowed-p-callback">augur.api.Orders.getOrderSharesEscrowed(p, callback)</h3>
+
+<p>Returns the number of <a href="#share">Shares</a> escrowed by the <a href="#order-creator">Order Creator</a> for a given <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Number of Shares escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getordertype-p-callback">augur.api.Orders.getOrderType(p, callback)</h3>
+
+<p>Returns the order type (<a href="#bid-order">Bid Order</a> or <a href="#ask-order">Ask Order</a>) of a given <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Order type of the Order (<code class="prettyprint">1</code> for Bid Orders, or <code class="prettyprint">2</code> for Ask Orders).</li>
+</ul>
+
+<h3 id="augur-api-orders-getoutcome-p-callback">augur.api.Orders.getOutcome(p, callback)</h3>
+
+<p>Returns the <a href="#outcome">Outcome</a> being traded on for the specified <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Outcome being traded on for the specified Order, as a unsigned 8-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getprice-p-callback">augur.api.Orders.getPrice(p, callback)</h3>
+
+<p>Returns the price of a specified <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Price of the Order, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getvolume-p-callback">augur.api.Orders.getVolume(p, callback)</h3>
+
+<p>Returns the volume of a specified <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Volume of the Market, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-orders-getworseorderid-p-callback">augur.api.Orders.getWorseOrderId(p, callback)</h3>
+
+<p>Returns the <a href="#order">Order</a> ID of an Order with a worse price than the specified Order.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) Order ID, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) ID of an Order with a worse price than the specified Order, as a 32-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-orders-getworstorderid-p-callback">augur.api.Orders.getWorstOrderId(p, callback)</h3>
+
+<p>Returns the <a href="#order">Order</a> ID of the worst Order of a particular type (either <a href="#ask-order">Ask Orders</a> or <a href="#bid-order">Bid Orders</a>), for a specific <a href="#outcome">Outcome</a>, in a given <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a Bid Order, <code class="prettyprint">2</code> for an Ask Order), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned 8-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Order ID with the worst price, as a 32-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-orders-isbetterprice-p-callback">augur.api.Orders.isBetterPrice(p, callback)</h3>
+
+<p>Returns whether a specific price is a better price than a particular <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">p._price</code> is a better price than <code class="prettyprint">p._orderId</code>.</li>
+</ul>
+
+<h3 id="augur-api-orders-isworseprice-p-callback">augur.api.Orders.isWorsePrice(p, callback)</h3>
+
+<p>Returns whether a specific price is a worse price than a particular <a href="#order">Order</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">p._price</code> is a worse price than <code class="prettyprint">p._orderId</code>.</li>
+</ul>
 
 <h2 id="orders-fetcher-call-api">Orders Fetcher Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Fetcher Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">ordersFetcher</span> <span class="o">=</span> <span class="s2">"0x7768ff3e9ce1c0459b309fac6dd4e69229b91a77"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_fxpPrice</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
+<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">OrdersFetcher</span><span class="p">.</span><span class="nx">ascendOrderList</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">ordersFetcher</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_lowestOrderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">ascendingOrderList</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ascendingOrderList</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
@@ -5992,9 +6286,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"</span><span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">OrdersFetcher</span><span class="p">.</span><span class="nx">descendOrderList</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">ordersFetcher</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_highestOrderId</span><span class="p">:</span> <span class="nx">_orderId</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">decendingOrderList</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">decendingOrderList</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
@@ -6002,9 +6295,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">OrdersFetcher</span><span class="p">.</span><span class="nx">findBoundingOrders</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">ordersFetcher</span> <span class="p">},</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
-  <span class="na">_fxpPrice</span><span class="p">:</span> <span class="nx">_fxpPrice</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_bestOrderId</span><span class="p">:</span> <span class="nx">_orderId</span><span class="p">,</span>
   <span class="na">_worstOrderId</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -6016,17 +6308,77 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol">Orders Solidity Contract</a>, which handles functionality related retrieving <a href="#order">Orders</a> from the <a href="#order-book">Order Book</a>.</p>
 
-<h3 id="augur-api-ordersfetcher-ascendorderlist-tx-_type-_fxpprice-_lowestorderid-callback">augur.api.OrdersFetcher.ascendOrderList({ tx, _type, _fxpPrice, _lowestOrderId }[, callback])</h3>
+<h3 id="augur-api-ordersfetcher-ascendorderlist-p-callback">augur.api.OrdersFetcher.ascendOrderList(p, callback)</h3>
 
-<p>Returns an array containing the order IDs that should be the better Order ID and worse Order ID respectively for an order inserted at <code class="prettyprint">_fxpPrice</code>. <code class="prettyprint">_lowestOrderId</code> is an order ID expected to be a worse price than the <code class="prettyprint">_fxpPrice</code> specified for an order of <code class="prettyprint">_type</code>.</p>
+<p>Traverses the <a href="#order-book">Order Book</a> in ascending order and returns an array containing the better <a href="#order">Order</a> ID and worse Order ID, respectively, for a specified price and Order type.</p>
 
-<h3 id="augur-api-ordersfetcher-descendorderlist-tx-_type-_fxpprice-_highestorderid-callback">augur.api.OrdersFetcher.descendOrderList({ tx, _type, _fxpPrice, _highestOrderId }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at <code class="prettyprint">_fxpPrice</code>. <code class="prettyprint">_highestOrderId</code> is an order ID expected to be a better price than the <code class="prettyprint">_fxpPrice</code> specified for an order of <code class="prettyprint">_type</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-ordersfetcher-findboundingorders-tx-_type-_fxpprice-_bestorderid-_worstorderid-_betterorderid-_worseorderid-callback">augur.api.OrdersFetcher.findBoundingOrders({ tx, _type, _fxpPrice, _bestOrderId, _worstOrderId, _betterOrderId, _worseOrderId }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._lowestOrderId</code></strong> (string) Order ID expected to be a worse price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<p>Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at <code class="prettyprint">_fxpPrice</code>. <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">_worseOrderId</code> should be orders that are better or worse than the <code class="prettyprint">_fxpPrice</code> for an order of <code class="prettyprint">_type</code>. <code class="prettyprint">_bestOrderId</code> and <code class="prettyprint">_worstOrderId</code> should be the best and worst order IDs on the order book for the specified <code class="prettyprint">_type</code>.</p>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+</ul>
+
+<h3 id="augur-api-ordersfetcher-descendorderlist-p-callback">augur.api.OrdersFetcher.descendOrderList(p, callback)</h3>
+
+<p>Traverses the <a href="#order-book">Order Book</a> in descending order and returns an array containing the better <a href="#order">Order</a> ID and worse Order ID, respectively, for a specified price and Order type.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._highestOrderId</code></strong> (string) Order ID expected to be a better price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+</ul>
+
+<h3 id="augur-api-ordersfetcher-findboundingorders-p-callback">augur.api.OrdersFetcher.findBoundingOrders(p, callback)</h3>
+
+<p>Returns an array containing the <a href="#order">Order</a> IDs from the <a href="#order-book">Order Book</a> that should be set to better Order ID and worse Order ID, respectively, for an Order placed with price <code class="prettyprint">p._price</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._bestOrderId</code></strong> (string) Best Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._worstOrderId</code></strong> (string) Worst Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID with a better price than <code class="prettyprint">p._price</code>, as a 32-byte-hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID with a worse price than <code class="prettyprint">p._price</code>, as a 32-byte-hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+</ul>
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
@@ -6036,29 +6388,90 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">getTopMigrationDestination</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">topMigrationDestination</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">topMigrationDestination</span><span class="p">);</span> <span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">getTotalMigrated</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalMigrated</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalMigrated</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">getTotalTheoreticalSupply</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalTheoreticalSupply</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalTheoreticalSupply</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output coming soon</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">ReputationToken Solidity Contract</a>, which handles the approval, migration, and transfering of <a href="#rep">Reputation Tokens</a>. </p>
 
 <p>The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
 
-<h3 id="augur-api-reputationtoken-getuniverse-tx-callback">augur.api.ReputationToken.getUniverse({ tx }[, callback])</h3>
+<h3 id="augur-api-reputationtoken-getuniverse-p-callback">augur.api.ReputationToken.getUniverse(p, callback)</h3>
 
-<p>Returns the <a href="#universe">Universe</a> address for the <a href="#rep">REP</a> address provided. All of Augur&rsquo;s information belongs to a Universe and each Universe has it&rsquo;s own REP contract. New Universes are created in the event of a <a href="#fork">Fork</a>.</p>
+<p>Returns the Ethereum contract address of the <a href="#universe">Universe</a> in which the <a href="#rep">REP</a> of the ReputationToken contract can be used.</p>
 
-<h3 id="augur-api-reputationtoken-gettopmigrationdestination-tx-callback">augur.api.ReputationToken.getTopMigrationDestination({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>As mentioned in the previous method description, all of Augur&rsquo;s <a href="#universe">Universes</a> have their own <a href="#rep">REP</a> contract, specific to that Universe. In the event of a <a href="#fork">Fork</a> occurring, REP holders are expected to migrate their REP to one of the newly created <a href="#child-universe">Child Universes</a>. The Child Universe with the most REP migrated to it at the end of the <a href="#fork-period">Fork Period</a> will be the only Universe that allows for <a href="#settlement">Settlement</a> on the <a href="#forked-market">Forked Market</a> and will be the Universe that all pending <a href="#market">Markets</a> will migrate to for <a href="#report">Reporting</a>. What this method does is returns the Universe address of the currently &ldquo;winning&rdquo; migration destination. In other words, this returns the Universe with the most REP migrated to it so far.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-reputationtoken-gettotalmigrated-tx-callback">augur.api.ReputationToken.getTotalMigrated({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Universe in which the REP of the ReputationToken contract can be used, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-gettotalmigrated-p-callback">augur.api.ReputationToken.getTotalMigrated(p, callback)</h3>
 
 <p>Returns total amount of <a href="#rep">REP</a> that has been migrated into the current ReputationToken contract from the ReputationToken contract of its <a href="#universe">Universe&rsquo;s</a> <a href="#parent-universe">Parent Universe</a>.</p>
 
-<h3 id="augur-api-reputationtoken-gettotaltheoreticalsupply-tx-callback">augur.api.ReputationToken.getTotalTheoreticalSupply({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe&rsquo;s Parent Universe, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-gettotaltheoreticalsupply-p-callback">augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)</h3>
 
 <p>Returns the total <a href="#theoretical-rep-supply">Theoretical REP Supply</a> for this ReputationToken contract. Note: To ensure this number is as accurate as possible, <code class="prettyprint">augur.api.ReputationToken.updateParentTotalTheoreticalSupply</code> should first be called on the ReputationToken contract, and <code class="prettyprint">augur.api.ReputationToken.updateSiblingMigrationTotal</code> should be called on any ReputationToken contracts that have the same <a href="#parent-universe">Parent Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Total Theoretical REP Supply for this ReputationToken contract, as an unsigned 256-bit integer.</li>
+</ul>
 
 <h2 id="share-token-call-api">Share Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
@@ -6076,13 +6489,55 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>The Share Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions. Within Augur, it represents <a href="#share">Shares</a> in <a href="#market">Market</a> <a href="#outcome">Outcomes</a>.</p>
 
-<h3 id="augur-api-sharetoken-getmarket-tx-callback">augur.api.ShareToken.getMarket({ tx }[, callback])</h3>
+<h3 id="augur-api-sharetoken-getmarket-p-callback">augur.api.ShareToken.getMarket(p, callback)</h3>
 
-<p>Returns the <a href="#market">Market</a> Ethereum address for the specified ShareToken.</p>
+<p>Returns the Ethereum contract address of the <a href="#market">Market</a> for the specified ShareToken.</p>
 
-<h3 id="augur-api-sharetoken-getoutcome-tx-callback">augur.api.ShareToken.getOutcome({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the <a href="#outcome">Outcome</a> of the <a href="#market">Market</a> that the specified ShareToken is for.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ShareToken contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Returns the Ethereum contract address of the Market for the specified ShareToken, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-sharetoken-getoutcome-p-callback">augur.api.ShareToken.getOutcome(p, callback)</h3>
+
+<p>Returns the Outcome of the Market that the specified ShareToken is for.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ShareToken contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit hexadecimal string.</li>
+</ul>
 
 <h2 id="universe-call-api">Universe Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
