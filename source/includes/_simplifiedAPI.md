@@ -564,7 +564,7 @@ augur.connect({
   ethereumNode: {  
     httpAddresses: [
       "http://127.0.0.1:8545", // local http address for Geth node
-      "https://eth9000.augur.net" // hosted http address for Geth node
+      "https://rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Ethereum Rinkeby test network
     ],
     wsAddresses: [
       "ws://127.0.0.1:8546", // local websocket address for Geth node
@@ -577,7 +577,7 @@ augur.connect({
 });
 // example output:
 connecting to augur-node: ws://127.0.0.1:9001
-connecting to ethereum-node: {"httpAddresses":["http://127.0.0.1:8545","https://eth9000.augur.net"],"wsAddresses":["ws://127.0.0.1:8546","wss://ws9000.augur.net"]}
+connecting to ethereum-node: {"httpAddresses":["http://127.0.0.1:8545","https://rinkeby.ethereum.nodes.augur.net"],"wsAddresses":["ws://127.0.0.1:8546","wss://websocket-rinkeby.ethereum.nodes.augur.net"]}
 connected to augur
 Web3: not connected
 Sync: http://127.0.0.1:8545

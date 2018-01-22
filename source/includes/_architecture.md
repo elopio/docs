@@ -20,6 +20,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 Hosted Ethereum Node
 -----------
-Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public (testnet during the beta) Ethereum node at [https://eth9000.augur.net](https://eth9000.augur.net), which is used automatically by [https://app.augur.net](https://app.augur.net) (and by [local.augur.net](http://local.augur.net) if a local Ethereum node is not detected).
+Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public Ethereum node on the Rinkeby test network (while in beta) at `rinkeby.ethereum.nodes.augur.net`, which is used automatically by [https://app.augur.net](https://app.augur.net) (and by [local.augur.net](http://local.augur.net) if a local Ethereum node is not detected).
 
 <img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'">

@@ -30,11 +30,11 @@ var augur = new Augur();
 var ethereumNode = { 
   httpAddresses: [
     "http://127.0.0.1:8545", // local http address for Geth node
-    "https://eth9000.augur.net" // hosted http address for Geth node
+    "rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Rinkeby test network
   ],
   wsAddresses: [
     "ws://127.0.0.1:8546", // local websocket address for Geth node
-    "wss://ws9000.augur.net" // hosted websocket address for Geth node
+    "wss://websocket-rinkeby.ethereum.nodes.augur.net" // hosted websocket address for Geth node on the Rinkeby test network
   ]
   // ipc addresses can also be specified as:
   // ipcAddresses: [ ... ]
@@ -71,7 +71,7 @@ Once augur.js has been installed, it will need to be connected to an Ethereum no
 
 To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
-In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is our local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node (`https://eth9000.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
+In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
 Accounts
 --------

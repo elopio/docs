@@ -883,7 +883,7 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specifi
 
 This call will fail if:
 
-* `p._invalid` is `true` and the values in p._payoutNumerators are not all the same.
+* `p._invalid` is `true` and the values in `p._payoutNumerators` are not all the same.
 
 #### **Parameters:**
 
@@ -1255,40 +1255,35 @@ Orders Call API
 ---------------
 ```javascript
 // Orders Contract Call API Examples:
-var orders = "0x8868ff3e9ce1c0459b309fac6dd4e69229b91a56";
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 var _type = "1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _outcome = "1";
-var _fxpPrice = "450000000000000000"; // 0.45
+var _price = "450000000000000000"; // 0.45
 
 augur.api.Orders.assertIsNotBetterPrice({
-  tx: { to: orders },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _betterOrderId: _orderId
 }, function (error, isNotBetterPrice) { console.log(isNotBetterPrice); });
 // example output:
 "1"
 
 augur.api.Orders.assertIsNotWorsePrice({
-  tx: { to: orders },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _worstOrderId: _orderId
 }, function (error, isNotWorstPrice) { console.log(isNotWorstPrice); });
 // example output:
 "0"
 
 augur.api.Orders.getAmount({ 
-  tx: { to: orders }, 
   _orderId: _orderId 
 }, function (error, amount) { console.log(amount); });
 // example output:
 "15"
 
 augur.api.Orders.getBestOrderId({
-  tx: { to: orders },
   _type: _type,
   _market: _market,
   _outcome: _outcome
@@ -1297,14 +1292,12 @@ augur.api.Orders.getBestOrderId({
 "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 augur.api.Orders.getBetterOrderId({ 
-  tx: { to: orders },
   _orderId: "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5"
 }, function (error, betterOrderId) { console.log(betterOrderId); });
 // example output:
 "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 augur.api.Orders.getLastOutcomePrice({
-  tx: { to: orders },
   _market: _market,
   _outcome: _outcome
 }, function (error, lastOutcomePrice) { console.log(lastOutcomePrice); });
@@ -1312,70 +1305,60 @@ augur.api.Orders.getLastOutcomePrice({
 "490000000000000000"
 
 augur.api.Orders.getMarket({ 
-  tx: { to: orders },
   _orderId: _orderId
 }, function (error, market) { console.log(market); });
 // example output:
 "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Orders.getOrderCreator({ 
-  tx: { to: orders },
   _orderId: _orderId 
 }, function (error, creator) { console.log(creator); });
 // example output:
 "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 
 augur.api.Orders.getOrderMoneyEscrowed({ 
-  tx: { to: orders },
   _orderId: _orderId 
 }, function (error, orderMoneyEscrowed) { console.log(orderMoneyEscrowed); });
 // example output:
 "5000000000000000000"
 
 augur.api.Orders.getOrderSharesEscrowed({ 
-  tx: { to: orders },
   _orderId: _orderId
 }, function (error, orderSharesEscrowed) { console.log(orderSharesEscrowed); });
 // example output:
 "0"
 
 augur.api.Orders.getOrderType({ 
-  tx: { to: orders },
   _orderId: _orderId 
 }, function (error, orderType) { console.log(orderType); });
 // example output:
 "1"
 
 augur.api.Orders.getOutcome({ 
-  tx: { to: orders },
   _orderId: _orderId 
 }, function (error, outcome) { console.log(outcome); });
 // example output:
 "1"
 
 augur.api.Orders.getPrice({ 
-  tx: { to: orders },
   _orderId: _orderId 
 }, function (error, price) { console.log(price); });
 // example output:
 "500000000000000000"
 
 augur.api.Orders.getVolume({ 
-  tx: { to: orders },
   _market: _market 
 }, function (error, volume) { console.log(volume); });
 // example output:
 "100000000000000000000000"
 
 augur.api.Orders.getWorseOrderId({ 
-  tx: { to: orders },
   _orderId: "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1" 
 }, function (error, worseOrderID) { console.log(worseOrderID); });
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
 augur.api.Orders.getWorstOrderId({
-  tx: { to: orders },
   _type: _type,
   _market: _market,
   _outcome: _outcome
@@ -1384,18 +1367,16 @@ augur.api.Orders.getWorstOrderId({
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
 augur.api.Orders.isBetterPrice({
-  tx: { to: orders },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _orderId: _orderId
 }, function (error, isBetterPrice) { console.log(isBetterPrice); });
 // example output:
 "0"
 
 augur.api.Orders.isWorsePrice({
-  tx: { to: orders },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _orderId: _orderId
 }, function (error, isWorsePrice) { console.log(isWorsePrice); });
 // example output:
@@ -1403,97 +1384,284 @@ augur.api.Orders.isWorsePrice({
 ```
 Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
 
-### augur.api.Orders.assertIsNotBetterPrice({ \_type, \_fxpPrice, \_betterOrderId }[, callback])
+### augur.api.Orders.assertIsNotBetterPrice(p, callback)
 
-Returns whether the specified `_fxpPrice` is not a better price than the `_betterOrderId` for a given [Order](#order) `_type`. Returns `1` if true, `0` if false.
+Returns whether a specific price is not a better price than a particular [Order](#order).
 
-### augur.api.Orders.assertIsNotWorsePrice({ \_type, \_fxpPrice, \_worstOrderId }[, callback])
+#### **Parameters:**
 
-Returns whether the specified `_fxpPrice` is not a worst price than the `_worstOrderId` for a given order `_type`. Returns `1` if true, `0` if false.
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price to compare `p._betterOrderId` to, as an unsigned 256-bit integer.
+    * **`p._betterOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.getAmount({ \_orderId }[, callback])
+#### **Returns:**
 
-Returns the amount of [Shares](#share) requested on a specified `_orderId`.
+* (boolean) `true` if `p._price` is not a better price than `p._betterOrderId`.
 
-### augur.api.Orders.getBestOrderId({ \_type, \_market, \_outcome }[, callback])
+### augur.api.Orders.assertIsNotWorsePrice(p, callback)
 
-Returns the order ID of the best order on the `_market` of `_type` trading on the provided `_outcome`.
+Returns whether a specific price is not a worse price than a particular [Order](#order).
 
-### augur.api.Orders.getBestOrderWorstOrderHash({ \_market, \_outcome, \_type }[, callback])
+#### **Parameters:**
 
-Returns a sha256 order hash containing the inputted params `_market`, `_outcome`, and `_type`.
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price to compare `p._worseOrderId` to, as an unsigned 256-bit integer.
+    * **`p._worseOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.getBetterOrderId({ \_orderId }[, callback])
+#### **Returns:**
 
-Returns a better order ID than the `_orderId`.
+* (boolean) `true` if `p._price` is not a worse price than `p._worseOrderId`.
 
-### augur.api.Orders.getLastOutcomePrice({ \_market, \_outcome }[, callback])
+### augur.api.Orders.getAmount(p, callback)
 
-Returns the fixed point value of the last price traded for a specified `_market` and `_outcome`.
+Returns the amount of [Shares](#share) requested when a particular [Order](#order) was placed.
 
-### augur.api.Orders.getMarket({ \_orderId }[, callback])
+#### **Parameters:**
 
-Returns the [Market](#market) address for the specified `_orderId`.
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (number) ID of the Order, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.getOrderCreator({ \_orderId }[, callback])
+#### **Returns:**
 
-Returns the [Creator](#order-creator) address of the specified `_orderId`.
+* (number) Amount of Shares requested when the Order was placed.
 
-### augur.api.Orders.getOrderMoneyEscrowed({ \_orderId }[, callback])
+### augur.api.Orders.getBestOrderId(p, callback)
 
-Returns the fixed point value of the amount of money escrowed by the [Creator](#order-creator) for a specified `_orderId`.
+Returns the [Order](#order) ID of the best Order of a particular type (either [Ask Orders](#ask-order) or [Bid Orders](#bid-order)), for a specific [Outcome](#outcome), in a given [Market](#market).
 
-### augur.api.Orders.getOrderSharesEscrowed({ \_orderId }[, callback])
+#### **Parameters:**
 
-Returns the fixed point value of the amount of shares escrowed by the [Creator](#order-creator) for a specified `_orderId`.
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a Bid Order, `2` for an Ask Order), as an unsigned 8-bit integer. 
+    * **`p._market`** (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.
+    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.getOrderType({ \_orderId }[, callback])
+#### **Returns:**
 
-Returns the trade type, `1` for bid and `2` for ask, for a specified `_orderId`.
+* (string) Order ID with the best price, as a 32-byte hexadecimal string.
 
-### augur.api.Orders.getOutcome({ \_orderId }[, callback])
+### augur.api.Orders.getBetterOrderId(p, callback)
 
-Returns the [Outcome](#outcome) being traded on for the specified `_orderId`.
+Returns the [Order](#order) ID of an Order with a better price than the specified Order.
 
-### augur.api.Orders.getPrice({ \_orderId }[, callback])
+#### **Parameters:**
 
-Returns the fixed point value of the price of a specified `_orderId`.
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.getVolume({ \_market }[, callback])
+#### **Returns:**
 
-Returns the fixed point value of the volume of a specified `_market`.
+* (string) ID of an Order with a better price than the specified Order, as a 32-byte hexadecimal string.
 
-### augur.api.Orders.getWorseOrderId({ \_orderId }[, callback])
+### augur.api.Orders.getLastOutcomePrice(p, callback)
 
-Returns a worse order ID than the `_orderId`.
+Returns the last price traded for a specific [Outcome](#outcome) in a given [Market](#market).
 
-### augur.api.Orders.getWorstOrderId({ \_type, \_market, \_outcome }[, callback])
+#### **Parameters:**
 
-Returns the order ID of the worst order on the `_market` of `_type` trading on the provided `_outcome`.
+* **`p`** (Object) Parameters object.  
+    * **`p._market`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
+    * **`p._outcome`** (number) Outcome of the Market, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.Orders.isBetterPrice({ \_type, \_fxpPrice, \_orderId }[, callback])
+#### **Returns:**
 
-Returns whether the specified `_fxpPrice` is a better price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
+* (number) Last price traded for a specific Outcome in a given Market, as an unsigned 256-bit integer.
 
-### augur.api.Orders.isWorsePrice({ \_type, \_fxpPrice, \_orderId }[, callback])
+### augur.api.Orders.getMarket(p, callback)
 
-Returns whether the specified `_fxpPrice` is a worst price than the `_orderId` for a given order `_type`. Returns `1` if true, `0` if false.
+Returns the Ethereum contract address of the [Market](#market) for the specified [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Market for the specified Order, as a 16-byte hexadecimal string.
+
+### augur.api.Orders.getOrderCreator(p, callback)
+
+Returns the Ethereum address of the [Creator](#order-creator) of the specified [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the Creator of the specified Order, as a 16-byte hexadecimal string.
+
+### augur.api.Orders.getOrderMoneyEscrowed(p, callback)
+
+Returns the amount of money escrowed by the [Order Creator](#order-creator) for a given [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Amount of money escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.
+
+### augur.api.Orders.getOrderSharesEscrowed(p, callback)
+
+Returns the number of [Shares](#share) escrowed by the [Order Creator](#order-creator) for a given [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Number of Shares escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.
+
+### augur.api.Orders.getOrderType(p, callback)
+
+Returns the order type ([Bid Order](#bid-order) or [Ask Order](#ask-order)) of a given [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Order type of the Order (`1` for Bid Orders, or `2` for Ask Orders).
+
+### augur.api.Orders.getOutcome(p, callback)
+
+Returns the [Outcome](#outcome) being traded on for the specified [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Outcome being traded on for the specified Order, as a unsigned 8-bit integer.
+
+### augur.api.Orders.getPrice(p, callback)
+
+Returns the price of a specified [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Price of the Order, as an unsigned 256-bit integer.
+
+### augur.api.Orders.getVolume(p, callback)
+
+Returns the volume of a specified [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._market`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Volume of the Market, as an unsigned 256-bit integer.
+
+### augur.api.Orders.getWorseOrderId(p, callback)
+
+Returns the [Order](#order) ID of an Order with a worse price than the specified Order.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._orderId`** (string) Order ID, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) ID of an Order with a worse price than the specified Order, as a 32-byte hexadecimal string.
+
+### augur.api.Orders.getWorstOrderId(p, callback)
+
+Returns the [Order](#order) ID of the worst Order of a particular type (either [Ask Orders](#ask-order) or [Bid Orders](#bid-order)), for a specific [Outcome](#outcome), in a given [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a Bid Order, `2` for an Ask Order), as an unsigned 8-bit integer. 
+    * **`p._market`** (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.
+    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned 8-bit integer.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Order ID with the worst price, as a 32-byte hexadecimal string.
+
+### augur.api.Orders.isBetterPrice(p, callback)
+
+Returns whether a specific price is a better price than a particular [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if `p._price` is a better price than `p._orderId`.
+
+### augur.api.Orders.isWorsePrice(p, callback)
+
+Returns whether a specific price is a worse price than a particular [Order](#order).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if `p._price` is a worse price than `p._orderId`.
 
 Orders Fetcher Call API
 -----------------------
 ```javascript
 // Orders Fetcher Contract Call API Examples:
-var ordersFetcher = "0x7768ff3e9ce1c0459b309fac6dd4e69229b91a77";
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 var _type = "1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _outcome = "1";
-var _fxpPrice = "450000000000000000"; // 0.45
+var _price = "450000000000000000"; // 0.45
 
 augur.api.OrdersFetcher.ascendOrderList({
-  tx: { to: ordersFetcher },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _lowestOrderId: _orderId
 }, function (error, ascendingOrderList) { console.log(ascendingOrderList); });
 // example output:
@@ -1501,9 +1669,8 @@ augur.api.OrdersFetcher.ascendOrderList({
   "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
 
 augur.api.OrdersFetcher.descendOrderList({
-  tx: { to: ordersFetcher },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _highestOrderId: _orderId
 }, function (error, decendingOrderList) { console.log(decendingOrderList); });
 // example output:
@@ -1511,9 +1678,8 @@ augur.api.OrdersFetcher.descendOrderList({
   "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"]
 
 augur.api.OrdersFetcher.findBoundingOrders({
-  tx: { to: ordersFetcher },
   _type: _type,
-  _fxpPrice: _fxpPrice,
+  _price: _price,
   _bestOrderId: _orderId,
   _worstOrderId: 0,
   _betterOrderId: 0,
@@ -1525,17 +1691,56 @@ augur.api.OrdersFetcher.findBoundingOrders({
 ```
 Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related retrieving [Orders](#order) from the [Order Book](#order-book).
 
-### augur.api.OrdersFetcher.ascendOrderList({ tx, \_type, \_fxpPrice, \_lowestOrderId }[, callback])
+### augur.api.OrdersFetcher.ascendOrderList(p, callback)
 
-Returns an array containing the order IDs that should be the better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_lowestOrderId` is an order ID expected to be a worse price than the `_fxpPrice` specified for an order of `_type`.
+Traverses the [Order Book](#order-book) in ascending order and returns an array containing the better [Order](#order) ID and worse Order ID, respectively, for a specified price and Order type.
 
-### augur.api.OrdersFetcher.descendOrderList({ tx, \_type, \_fxpPrice, \_highestOrderId }[, callback])
+#### **Parameters:**
 
-Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_highestOrderId` is an order ID expected to be a better price than the `_fxpPrice` specified for an order of `_type`.
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.
+    * **`p._lowestOrderId`** (string) Order ID expected to be a worse price than `p._price`, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.OrdersFetcher.findBoundingOrders({ tx, \_type, \_fxpPrice, \_bestOrderId, \_worstOrderId, \_betterOrderId, \_worseOrderId }[, callback])
+#### **Returns:**
 
-Returns an array containing the order IDs that should be set to better Order ID and worse Order ID respectively for an order inserted at `_fxpPrice`. `_betterOrderId` and `_worseOrderId` should be orders that are better or worse than the `_fxpPrice` for an order of `_type`. `_bestOrderId` and `_worstOrderId` should be the best and worst order IDs on the order book for the specified `_type`.
+* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+
+### augur.api.OrdersFetcher.descendOrderList(p, callback)
+
+Traverses the [Order Book](#order-book) in descending order and returns an array containing the better [Order](#order) ID and worse Order ID, respectively, for a specified price and Order type.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.
+    * **`p._highestOrderId`** (string) Order ID expected to be a better price than `p._price`, as a 32-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+
+### augur.api.OrdersFetcher.findBoundingOrders(p, callback)
+
+Returns an array containing the [Order](#order) IDs from the [Order Book](#order-book) that should be set to better Order ID and worse Order ID, respectively, for an Order placed with price `p._price`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
+    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._bestOrderId`** (string) Best Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
+    * **`p._worstOrderId`** (string) Worst Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
+    * **`p._betterOrderId`** (string) Order ID with a better price than `p._price`, as a 32-byte-hexadecimal string.
+    * **`p._worseOrderId`** (string) Order ID with a worse price than `p._price`, as a 32-byte-hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
 
 Reputation Token Call API
 -------------------------
@@ -1547,29 +1752,60 @@ augur.api.ReputationToken.getUniverse({ tx: { to: reputationToken } }, function 
 // example output:
 "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.ReputationToken.getTopMigrationDestination({ tx: { to: reputationToken } }, function (error, topMigrationDestination) { console.log(topMigrationDestination); });
-// example output:
-"0x1aa30942000ac72dee6580e1ac32d1d01ac1af00"
+augur.api.ReputationToken.getTotalMigrated({ tx: { to: reputationToken } }, function (error, totalMigrated) { console.log(totalMigrated); });
+// example output coming soon
+
+augur.api.ReputationToken.getTotalTheoreticalSupply({ tx: { to: reputationToken } }, function (error, totalTheoreticalSupply) { console.log(totalTheoreticalSupply); });
+// example output coming soon
 ```
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
 
 The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
 
-### augur.api.ReputationToken.getUniverse({ tx }[, callback])
+### augur.api.ReputationToken.getUniverse(p, callback)
 
-Returns the [Universe](#universe) address for the [REP](#rep) address provided. All of Augur's information belongs to a Universe and each Universe has it's own REP contract. New Universes are created in the event of a [Fork](#fork).
+Returns the Ethereum contract address of the [Universe](#universe) in which the [REP](#rep) of the ReputationToken contract can be used.
 
-### augur.api.ReputationToken.getTopMigrationDestination({ tx }[, callback])
+#### **Parameters:**
 
-As mentioned in the previous method description, all of Augur's [Universes](#universe) have their own [REP](#rep) contract, specific to that Universe. In the event of a [Fork](#fork) occurring, REP holders are expected to migrate their REP to one of the newly created [Child Universes](#child-universe). The Child Universe with the most REP migrated to it at the end of the [Fork Period](#fork-period) will be the only Universe that allows for [Settlement](#settlement) on the [Forked Market](#forked-market) and will be the Universe that all pending [Markets](#market) will migrate to for [Reporting](#report). What this method does is returns the Universe address of the currently "winning" migration destination. In other words, this returns the Universe with the most REP migrated to it so far.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
-### augur.api.ReputationToken.getTotalMigrated({ tx }[, callback])
+#### **Returns:**
+
+* (string) Ethereum contract address of the Universe in which the REP of the ReputationToken contract can be used, as a 16-byte hexadecimal string.
+
+### augur.api.ReputationToken.getTotalMigrated(p, callback)
 
 Returns total amount of [REP](#rep) that has been migrated into the current ReputationToken contract from the ReputationToken contract of its [Universe's](#universe) [Parent Universe](#parent-universe).
 
-### augur.api.ReputationToken.getTotalTheoreticalSupply({ tx }[, callback])
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe's Parent Universe, as an unsigned 256-bit integer.
+
+### augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)
 
 Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this ReputationToken contract. Note: To ensure this number is as accurate as possible, `augur.api.ReputationToken.updateParentTotalTheoreticalSupply` should first be called on the ReputationToken contract, and `augur.api.ReputationToken.updateSiblingMigrationTotal` should be called on any ReputationToken contracts that have the same [Parent Universe](#parent-universe).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Total Theoretical REP Supply for this ReputationToken contract, as an unsigned 256-bit integer.
 
 Share Token Call API
 --------------------
@@ -1589,13 +1825,35 @@ Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.c
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
 
-### augur.api.ShareToken.getMarket({ tx }[, callback])
+### augur.api.ShareToken.getMarket(p, callback)
 
-Returns the [Market](#market) Ethereum address for the specified ShareToken.
+Returns the Ethereum contract address of the [Market](#market) for the specified ShareToken.
 
-### augur.api.ShareToken.getOutcome({ tx }[, callback])
+#### **Parameters:**
 
-Returns the [Outcome](#outcome) of the [Market](#market) that the specified ShareToken is for.
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the ShareToken contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Returns the Ethereum contract address of the Market for the specified ShareToken, as a 16-byte hexadecimal string.
+
+### augur.api.ShareToken.getOutcome(p, callback)
+
+Returns the Outcome of the Market that the specified ShareToken is for.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the ShareToken contract on which to call this function, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit hexadecimal string.
 
 Universe Call API
 ---------------
