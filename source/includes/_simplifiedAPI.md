@@ -1096,16 +1096,10 @@ augur.markets.getUnclaimedMarketCreatorFees({
   console.log(result);
 });
 // example output:
-[
-  {
-    marketID: "0x0000000000000000000000000000000000000001",
-    unclaimedFee: 0,
-  },
-  {
-    marketID: "0x0000000000000000000000000000000000000002",
-    unclaimedFee: 0,
-  }
-]
+{
+  "0x0000000000000000000000000000000000000001": 0,
+  "0x0000000000000000000000000000000000000002": 0
+}
 ```
 ### augur.markets.getCategories(p, callback)
 
@@ -1349,7 +1343,7 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 
 #### **Returns:**
 
-* (Array.&lt;<a href="#MarketCreatorFee">MarketCreatorFee</a>>)
+* (Object) Market creator fees, in [attoETH](#atto-prefix), keyed by Market ID.
 
 Reporting Functions
 -------------
