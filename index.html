@@ -1928,16 +1928,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="p">{</span>
-    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">unclaimedFee</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-    <span class="na">unclaimedFee</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="p">}</span>
-<span class="p">]</span>
+<span class="p">{</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 </code></pre></div>
 <h3 id="augur-markets-getcategories-p-callback">augur.markets.getCategories(p, callback)</h3>
 
@@ -2281,7 +2275,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.&lt;<a href="#MarketCreatorFee">MarketCreatorFee</a>&gt;)</li>
+<li>(Object) Market creator fees, in <a href="#atto-prefix">attoETH</a>, keyed by Market ID.</li>
 </ul>
 
 <h2 id="reporting-functions">Reporting Functions</h2>
