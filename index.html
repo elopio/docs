@@ -8254,6 +8254,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><code class="prettyprint">_attotokens</code> is &lt;= 0.</li>
 <li>Reporting is not currently active in the <a href="#fee-window">Fee Window</a>.</li>
+<li>The <a href="#fee-window">Fee Window&rsquo;s</a> <a href="#universe">Universe</a> has a <a href="#forked-market">Forked Market</a>.</li>
 </ul>
 
 <p>These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function <code class="prettyprint">augur.api.FeeWindow.redeem</code>.</p>
@@ -9003,10 +9004,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>This transaction will trigger a <code class="prettyprint">DisputeCrowdsourcerContribution</code> event if it executes without any errors. It will also trigger a <code class="prettyprint">DisputeCrowdsourcerCompleted</code> event if the Dispute Bond is successfullly filled, and it will trigger a <a href="#UniverseForked"><code class="prettyprint">UniverseForked</code> event</a> if enough REP has been <a href="#dispute-stake">Staked</a> in the Dispute Crowdsourcer to cause the Market to <a href="#fork">Fork</a>.</p>
 
-<p>This function will fail if:
-  - The Market is in a <a href="#fee-window">Fee Window</a> that is not active.
-  - The <a href="#outcome">Outcome</a> specified by <code class="prettyprint">_payoutNumerators</code> and <code class="prettyprint">_invalid</code> is already the Tentative Outcome of the Market.
-  - <code class="prettyprint">_invalid</code> is true and the Numerators in <code class="prettyprint">_payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</p>
+<p>This function will fail if:</p>
+
+<ul>
+<li>The Market is in a <a href="#fee-window">Fee Window</a> that is not active.</li>
+<li>The <a href="#market">Market&rsquo;s</a> <a href="#universe">Universe</a> has a <a href="#forked-market">Forked Market</a>.</li>
+<li>The <a href="#outcome">Outcome</a> specified by <code class="prettyprint">p._payoutNumerators</code> and <code class="prettyprint">_invalid</code> is already the Tentative Outcome of the Market.</li>
+<li><code class="prettyprint">p._invalid</code> is true and the Numerators in <code class="prettyprint">p._payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
