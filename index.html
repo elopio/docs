@@ -1140,7 +1140,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h2 id="augur-node-functions">Augur-Node Functions</h2>
+<h2 id="augur-node-functions">Augur Node Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
   <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span> 
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">wsTransport</span><span class="p">)</span> <span class="p">{</span>
@@ -1409,7 +1409,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Callback function.</li>
 </ul>
 
-<h2 id="create-market-functions">Create-Market Functions</h2>
+<h2 id="create-market-functions">Create Market Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span> 
   <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span> 
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span> 
@@ -1637,7 +1637,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>(<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.</li>
 </ul>
 
-<h2 id="generate-contracts-api-function">Generate-Contracts-API Function</h2>
+<h2 id="generate-contracts-api-function">Generate Contracts API Function</h2>
 
 <h3 id="augur-generatecontractapi-functionsabi">augur.generateContractApi(functionsAbi)</h3>
 
@@ -6534,6 +6534,38 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>(number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit integer.</li>
 </ul>
 
+<h2 id="time-controlled-call-api">Time Controlled Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TimeControlled Contract Call API Examples:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TimeControlled</span><span class="p">.</span><span class="nx">getTimestamp</span><span class="p">({</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1516744206"</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol">Time Controlled Solidity Contract</a>, which allows for the setting and updating of Augur&rsquo;s internal timestamp for the current time.</p>
+
+<h2 id="augur-api-timecontrolled-gettimestamp-p-callback">augur.api.TimeControlled.getTimestamp(p, callback)</h2>
+
+<p>Returns Augur&rsquo;s internal Unix timestamp. This function can only be called if the contract is running on a network that is not the Ethereum public main network.</p>
+
+<p>This call will fail if:</p>
+
+<ul>
+<li>The <code class="prettyprint">TimeControlled</code> contract is on the Ethereum public main network.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Augur&rsquo;s internal Unix timestamp, as an unsigned 256-bit integer.</li>
+</ul>
+
 <h2 id="universe-call-api">Universe Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span><span class="p">;</span>
@@ -9787,6 +9819,86 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>(boolean) <code class="prettyprint">1</code> if <code class="prettyprint">_value</code> Shares are sent from <code class="prettyprint">_from</code> to <code class="prettyprint">_to</code> without any errors, or <code class="prettyprint">0</code> otherwise.</li>
 </ul>
 
+<h2 id="time-controlled-tx-api">Time Controlled Tx API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TimeControlled Transaction API Examples:</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TimeControlled</span><span class="p">.</span><span class="nx">incrementTimestamp</span><span class="p">({</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output: coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TimeControlled</span><span class="p">.</span><span class="nx">setTimestamp</span><span class="p">({</span>
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">6000</span><span class="p">,</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output: coming soon</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol">Time Controlled Solidity Contract</a>, which allows for the setting and updating of Augur&rsquo;s internal timestamp for the current time.</p>
+
+<h3 id="augur-api-timecontrolled-incrementtimestamp-p">augur.api.TimeControlled.incrementTimestamp(p)</h3>
+
+<p>Increments Augur&rsquo;s current timestamp by a specified number of seconds. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The caller of this function is not the owner of the TimeControlled contract.</li>
+<li>The <code class="prettyprint">TimeControlled</code> contract is on the Ethereum public main network.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (number) Amount of seconds by which to increment Augur&rsquo;s timestamp.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the timestamp was incremented without any errors.</li>
+</ul>
+
+<h3 id="augur-api-timecontrolled-settimestamp-p">augur.api.TimeControlled.setTimestamp(p)</h3>
+
+<p>Sets Augur&rsquo;s current timestamp to a new Unix timestamp. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The caller of this function is not the owner of the TimeControlled contract.</li>
+<li>The <code class="prettyprint">TimeControlled</code> contract is on the Ethereum public main network.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number) Unix timestamp to set Augur&rsquo;s timestamp to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the timestamp was set without any errors.</li>
+</ul>
+
 <h2 id="trade-tx-api">Trade Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trade Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
@@ -11412,6 +11524,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <td>The Ethereum contract address <code class="prettyprint">addition</code> was added to Augur&rsquo;s registry, which is an array of all of the contracts Augur uses. The contract has a 32-byte <code class="prettyprint">key</code> (for looking up the contract in Augur&rsquo;s registry), a 20-byte <code class="prettyprint">commitHash</code>, and a 32-byte <code class="prettyprint">bytecodeHash</code></td>
 <td>&nbsp;</td>
 <td>key, addition, commitHash, bytecodeHash</td>
+</tr>
+<tr>
+<td><a name="TimestampSet"></a>TimestampSet</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The timestamp used by Augur was set/updated to <code class="prettyprint">newTimestamp</code>. This event will be logged whenever <code class="prettyprint">TimeControlled.setTimestamp</code> or <code class="prettyprint">TimeControlled.incrementTimestamp</code> is called by the owner of the <a href="#time-controlled-tx-api">TimeControlled</a> contract.</td>
+<td></td>
+<td>newTimestamp</td>
 </tr>
 <tr>
 <td><a name="TokensBurned"></a>TokensBurned</td>
