@@ -841,6 +841,7 @@ This transaction will fail if:
 
 * `_attotokens` is <= 0.
 * Reporting is not currently active in the [Fee Window](#fee-window).
+* The [Fee Window's](#fee-window) [Universe](#universe) has a [Forked Market](#forked-market).
 
 These Participation Tokens can be redeemed later once the Fee Window is no longer active using the function `augur.api.FeeWindow.redeem`.
 
@@ -1505,9 +1506,11 @@ Contributes `_amount` [REP](#rep) to the [Dispute Crowdsourcer](#dispute-crowdso
 This transaction will trigger a `DisputeCrowdsourcerContribution` event if it executes without any errors. It will also trigger a `DisputeCrowdsourcerCompleted` event if the Dispute Bond is successfullly filled, and it will trigger a [`UniverseForked` event](#UniverseForked) if enough REP has been [Staked](#dispute-stake) in the Dispute Crowdsourcer to cause the Market to [Fork](#fork).
 
 This function will fail if:
-  - The Market is in a [Fee Window](#fee-window) that is not active.
-  - The [Outcome](#outcome) specified by `_payoutNumerators` and `_invalid` is already the Tentative Outcome of the Market.
-  - `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
+
+* The Market is in a [Fee Window](#fee-window) that is not active.
+* The [Market's](#market) [Universe](#universe) has a [Forked Market](#forked-market).
+* The [Outcome](#outcome) specified by `p._payoutNumerators` and `_invalid` is already the Tentative Outcome of the Market.
+* `p._invalid` is true and the Numerators in `p._payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
 #### **Parameters:**
 
@@ -1551,9 +1554,9 @@ Submits an [Initial Report](#initial-report) for [Market](#market) `market`. Thi
 
 This transaction will fail if:
 
-* The Market's event end time has not passed.
-* The caller of the function is not the [Designated Reporter](#designated-reporter) and the [Designated Reporting Phase](#designated-reporting-phase) has not ended.
-* `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the [Payout Set](#payout-set) should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
+  * The Market's event end time has not passed.
+  * The caller of the function is not the [Designated Reporter](#designated-reporter) and the [Designated Reporting Phase](#designated-reporting-phase) has not ended.
+  * `_invalid` is true and the Numerators in `_payoutNumerators` are not all the same value. (For information about what the [Payout Set](#payout-set) should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
 #### **Parameters:**
 
