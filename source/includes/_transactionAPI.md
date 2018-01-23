@@ -2139,6 +2139,70 @@ This transaction will fail if:
 
 * (boolean) `1` if `_value` Shares are sent from `_from` to `_to` without any errors, or `0` otherwise.
 
+Time Controlled Tx API
+---------------------
+```javascript
+// TimeControlled Transaction API Examples:
+augur.api.TimeControlled.incrementTimestamp({
+  _amount: 60,
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+// example onSuccess output: coming soon
+
+augur.api.TimeControlled.setTimestamp({
+  _timestamp: 6000,
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+// example onSuccess output: coming soon
+```
+Provides JavaScript bindings for the [Time Controlled Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol), which allows for the setting and updating of Augur's internal timestamp for the current time.
+
+### augur.api.TimeControlled.incrementTimestamp(p)
+
+Increments Augur's current timestamp by a specified number of seconds. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
+
+This transaction will fail if:
+
+* The caller of this function is not the owner of the TimeControlled contract.
+* The `TimeControlled` contract is on the Ethereum public main network.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._amount`**  (number) Amount of seconds by which to increment Augur's timestamp.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `true` if the timestamp was incremented without any errors.
+
+### augur.api.TimeControlled.setTimestamp(p)
+
+Sets Augur's current timestamp to a Unix timestamp. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
+
+This transaction will fail if:
+
+* The caller of this function is not the owner of the TimeControlled contract.
+* The `TimeControlled` contract is on the Ethereum public main network.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._timestamp`**  (number) Unix timestamp to set Augur's timestamp to, as an unsigned 256-bit integer.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (boolean) `true` if the timestamp was set without any errors.
+
 Trade Tx API
 ---------------------
 ```javascript

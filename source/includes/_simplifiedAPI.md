@@ -358,7 +358,7 @@ Sends [REP](#rep) to a specified Ethereum address. This function will trigger a 
     * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
-Augur-Node Functions
+Augur Node Functions
 --------------------
 ```javascript
 augur.augurNode.connect(
@@ -607,7 +607,7 @@ Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 * **`connectOptions`** ([ConnectOptions](#ConnectOptions)) Options used to connect to an Ethereum node and an Augur Node.
 * **`callback`** (function) &lt;optional> Callback function.
 
-Create-Market Functions
+Create Market Functions
 ----------------
 ```javascript
 var _extraInfo = { 
@@ -807,7 +807,7 @@ Note: This function will send a transaction if needed to create the current [Rep
 
 * (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.
 
-Generate-Contracts-API Function
+Generate Contracts API Function
 -------------------------------
 ### augur.generateContractApi(functionsAbi)
 

@@ -1855,6 +1855,34 @@ Returns the Outcome of the Market that the specified ShareToken is for.
 
 * (number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit integer.
 
+Time Controlled Call API
+---------------
+```javascript
+// TimeControlled Contract Call API Examples:
+augur.api.TimeControlled.getTimestamp({
+}, function (error, timestamp) { console.log(timestamp); });
+// example output:
+"1516744206"
+```
+Provides JavaScript bindings for the [Time Controlled Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol), which allows for the setting and updating of Augur's internal timestamp for the current time.
+
+## augur.api.TimeControlled.getTimestamp(p, callback)
+
+Returns Augur's internal Unix timestamp. This function can only be called if the contract is running on a network that is not the Ethereum public main network.
+
+This call will fail if:
+
+* The `TimeControlled` contract is on the Ethereum public main network.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (number) Augur's internal Unix timestamp, as an unsigned 256-bit integer.
+
 Universe Call API
 ---------------
 ```javascript
