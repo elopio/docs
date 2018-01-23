@@ -841,7 +841,7 @@ augur.markets.getCategories({
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
 augur.markets.getDisputableMarkets({ 
-  reportingWindow: "0x1000000000000000000000000000000000000000"
+  feeWindow: "0x1000000000000000000000000000000000000000"
 }, function (error, result) { 
   console.log(result);
 });
@@ -989,7 +989,7 @@ augur.markets.getMarketsInfo({
     volume: 0,
     outstandingShares: 0,
     reportingState: "DESIGNATED_REPORTING",
-    reportingWindow: "0x1000000000000000000000000000000000000000",
+    feeWindow: "0x1000000000000000000000000000000000000000",
     endDate: 1506573470,
     finalizationTime: null,
     description: "This is a categorical test market created by b0b.",
@@ -1063,7 +1063,7 @@ augur.markets.getMarketsInfo({
     volume: 0,
     outstandingShares: 0,
     reportingState: "DESIGNATED_REPORTING",
-    reportingWindow: "0x1000000000000000000000000000000000000000",
+    feeWindow: "0x1000000000000000000000000000000000000000",
     endDate: 1506573480,
     finalizationTime: null,
     description: "This is a binary test market created by b0b.",
@@ -1131,7 +1131,7 @@ This function will fail if:
 <!-- TODO: Add JS example results -->
 ### augur.markets.getDisputableMarkets(p, callback)
 
-This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Reporting Window](#reporting-window) that are able to be disputed, along with the value of the [Dispute Bond](#dispute-bond) needed to dispute each Market’s result.
+This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Fee Window](#fee-window) that are able to be [Disputed](#dispute), along with the value of the [Dispute Bond](#dispute-bond) needed to Dispute each Market’s result.
 
 This function will fail if:
 
@@ -1141,7 +1141,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`p.reportingWindow`**  (string) Contract address of the Reporting Window from which to retrieve the disputable Markets.
+    * **`p.feeWindow`**  (string) Contract address of the Fee Window from which to retrieve the disputable Markets.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort Markets in descending order by sortBy field.
     * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
@@ -1220,7 +1220,7 @@ This function will fail if:
 
 ### augur.markets.getMarketsAwaitingReporting(p, callback)
 
-Returns the [Markets](#market) in a particular [Universe](#universe) or [Reporting Window](#reporting-window) that are waiting for a [Designated Report](designated-report) to be submitted or waiting for the [Reporting Phase](#reporting-phase) to end. Either the Universe or Reporting Window must be specified.
+Returns the [Markets](#market) in a particular [Universe](#universe) or [Fee Window](#fee-window) that have not been [Finalized](#finalized-market). Either the Universe or Fee Window must be specified.
 
 This function will fail if:
 
@@ -1231,7 +1231,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Reporting Window must be specified instead.
-    * **`p.reportingWindow`**  (string) &lt;optional> Contract address of the Reporting Window from which to retrieve the markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
+    * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window from which to retrieve the Markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
     * **`p.reportingState`**  (string) &lt;optional> Description pending.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
@@ -1354,6 +1354,43 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 Reporting Functions
 -------------
 ```javascript
+augur.reporting.getDisputeTokens({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021",
+  disputeTokenState: "UNFINALIZED",
+}, function (error, result) { 
+  console.log(result);
+});
+// example output: 
+{
+  "0x0000000000000000001000000000000000000001": {
+    disputeToken: "0x0000000000000000001000000000000000000001",
+    marketID: "0x0000000000000000000000000000000000000011",
+    payout0: 0,
+    payout1: 2,
+    payout2: null,
+    payout3: null,
+    payout4: null,
+    payout5: null,
+    payout6: null,
+    payout7: null,
+    isInvalid: false,
+    amountStaked: 17,
+    winning: null,
+    claimed: false,
+    reportingState: "FIRST_REPORTING",
+  },
+}
+
+// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
+augur.reporting.getFeeWindowsWithUnclaimedFees({ 
+  universe: "0x000000000000000000000000000000000000000b",
+  account: "0x0000000000000000000000000000000000000021"
+}, function (error, result) { 
+  console.log(result);
+});
+// example output: coming soon
+
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
@@ -1370,14 +1407,13 @@ augur.reporting.getReportingHistory({
       blockHash: "0x1400051",
       creationTime: 1506474500,
       marketID: "0x0000000000000000000000000000000000000011",
-      marketReportingState: "DESIGNATED_REPORTING",
-      reportingWindow: "0x1000000000000000000000000000000000000000",
+      feeWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [0, 2],
       amountStaked: 17,
-      stakeToken: "0x0000000000000000001000000000000000000001",
+      crowdsourcerID: "0x0000000000000000001000000000000000000001",
       isCategorical: false,
       isScalar: false,
-      isIndeterminate: false,
+      isInvalid: false,
       isSubmitted: true,
     }],
     "0x0000000000000000000000000000000000000019": [{
@@ -1387,21 +1423,20 @@ augur.reporting.getReportingHistory({
       blockHash: "0x1400052",
       creationTime: 1506474515,
       marketID: "0x0000000000000000000000000000000000000019",
-      marketReportingState: "FIRST_REPORTING",
-      reportingWindow: "0x1000000000000000000000000000000000000000",
+      feeWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [1, 1],
       amountStaked: 229,
-      stakeToken: "0x0000000000000000001000000000000000000003",
+      crowdsourcerID: "0x0000000000000000001000000000000000000003",
       isCategorical: false,
       isScalar: false,
-      isIndeterminate: false,
+      isInvalid: false,
       isSubmitted: true,
     }],
   }
 }
 
 augur.reporting.getReportingSummary({ 
-  reportingWindow: "0x1000000000000000000000000000000000000000"
+  feeWindow: "0x1000000000000000000000000000000000000000"
 }, function (error, result) { 
   console.log(result);
 });
@@ -1413,15 +1448,6 @@ augur.reporting.getReportingSummary({
   "FINALIZED": 1,
 }
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.reporting.getReportingWindowsWithUnclaimedFees({ 
-  universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021"
-}, function (error, result) { 
-  console.log(result);
-});
-// example output: coming soon
-
 augur.reporting.getStakeRequiredForDesignatedReporter({
     universe: "0x000000000000000000000000000000000000000b"
 }, function (error, result) { 
@@ -1429,34 +1455,6 @@ augur.reporting.getStakeRequiredForDesignatedReporter({
 });
 // example output:
 "1.2345"
-
-augur.reporting.getStakeTokens({ 
-  universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021",
-  stakeTokenState: "UNFINALIZED",
-}, function (error, result) { 
-  console.log(result);
-});
-// example output: 
-{
-  "0x0000000000000000001000000000000000000001": {
-    stakeToken: "0x0000000000000000001000000000000000000001",
-    marketID: "0x0000000000000000000000000000000000000011",
-    payout0: 0,
-    payout1: 2,
-    payout2: null,
-    payout3: null,
-    payout4: null,
-    payout5: null,
-    payout6: null,
-    payout7: null,
-    isInvalid: false,
-    amountStaked: 17,
-    winningToken: null,
-    claimed: false,
-    reportingState: "FIRST_REPORTING",
-  },
-}
 ```
 ### augur.reporting.finalizeMarket(p)
 
@@ -1477,10 +1475,9 @@ This transaction will fail if:
     * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
-<!-- Add glossary links to section-->
-### augur.reporting.getReportingHistory(p, callback)
+### augur.reporting.getDisputeTokens(p, callback)
 
-Returns information about the reports submitted by a particular user. For [Reporting Windows](#reporting-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in reporting fees.
+Returns the Dispute Tokens owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
 
 This function will fail if:
 
@@ -1490,10 +1487,52 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`p.reporter`**  (string) Ethereum address of the Reporter for which to retrieve reporting history, as a hexadecimal string.
+    * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Dispute Tokens, as a hexadecimal string.
+    * **`p.account`**  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a hexadecimal string.
+    * **`p.disputeTokenState`**  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
+* **`callback`** (function) Called when reporting history has been received and parsed.
+
+#### **Returns:**
+
+* (Array.&lt;<a href="#DisputeToken">DisputeToken</a>>) Dispute Token details, keyed by Dispute Token ID.
+
+<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
+### augur.reporting.getFeeWindowsWithUnclaimedFees(p, callback)
+
+This function has not been implemented yet. Returns the [Fee Windows](#fee-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee).
+
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) has not been established.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.
+    * **`p.account`**  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a hexadecimal string.
+* **`callback`** (function) Called after the Fee Windows have been retrieved.
+
+#### **Returns:**
+
+* Description pending.
+
+### augur.reporting.getReportingHistory(p, callback)
+
+Returns information about the [Reports](#report) submitted by a particular user. For [Fee Windows](#fee-window) that have ended, this includes the [Final Outcome](#final-outcome) of the [Market](#market), whether the user’s Report matched that Final Outcome, how much REP the user gained or lost from redistribution, and how much the user earned in [Reporting Fees](#reporting-fee).
+
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) has not been established.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  **Properties:**
+    * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting history, as a hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.
-    * **`p.reportingWindow`**  (string) &lt;optional> Contract address of the Reporting Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
+    * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the reporting history.
@@ -1508,7 +1547,7 @@ This function will fail if:
 
 ### augur.reporting.getReportingSummary(p, callback)
 
-Returns the number of Markets in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been reported on and is in a Dispute Round Phase), “FORKING” (for the Market that has forked), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a forked Market to resolve), and “FINALIZED”.
+Returns the number of [Markets](#market) in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been [Reported](#report) on and is in a [Dispute Round Phase](#dispute-round-phase)), “FORKING” (for the Market that has [Forked](#fork)), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a [Forked Market](#forked-market) to resolve), and “FINALIZED”.
 
 This function will fail if:
 
@@ -1518,33 +1557,12 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`p.reportingWindow`**  (string) Contract address of the Reporting Window for which to get the summary, as a hexadecimal string.
+    * **`p.feeWindow`**  (string) Contract address of the [Fee Window](#fee-window) for which to get the summary, as a hexadecimal string.
 * **`callback`** (function) Called after the reporting summary has been retrieved.
 
 #### **Returns:**
 
 * (Object) Summary of the number of Markets in each reporting phase, keyed by reporting phase. 
-
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
-### augur.reporting.getReportingWindowsWithUnclaimedFees(p, callback)
-
-This function has not been implemented yet. Returns the Reporting Windows where a specific user has unclaimed reporting fees.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-  **Properties:**
-    * **`p.universe`**  (string) Contract address of the Universe in which the Reporting Windows exist, as a hexadecimal string.
-    * **`p.account`**  (string) Ethereum address of the user who has unclaimed reporting fees, as a hexadecimal string.
-* **`callback`** (function) Called after the Reporting Windows have been retrieved.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.reporting.getStakeRequiredForDesignatedReporter(p, callback)
 
@@ -1559,27 +1577,6 @@ Returns the amount of [REP](#rep) a [Designated Reporter](#designated-reporter) 
 #### **Returns:**
 
 *  (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.
-
-### augur.reporting.getStakeTokens(p, callback)
-
-Returns the Stake tokens owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-  **Properties:**
-    * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Stake tokens, as a hexadecimal string.
-    * **`p.account`**  (string) Contract address of the account for which to retrieve the Stake tokens, as a hexadecimal string.
-    * **`p.stakeTokenState`**  (<a href="#STAKE_TOKEN_STATE">STAKE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
-* **`callback`** (function) Called when reporting history has been received and parsed.
-
-#### **Returns:**
-
-* (Array.&lt;<a href="#StakeToken">StakeToken</a>>) Stake token details, keyed by stake token ID.
 
 Trading Functions
 -----------------
@@ -2395,7 +2392,7 @@ Type Definitions
 * **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
 * **`outstandingShares`** (number) Total shares in the Market. (Method for calculating this is pending.)
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
-* **`reportingWindow`** (string) Contract address of the Reporting Window the Market is in, as a hexadecimal string.
+* **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endDate`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationTime`** (number|null) Timestamp when the Market was finalized (if any), in seconds.
 * **`description`** (string) Description of the Market.
@@ -2518,14 +2515,13 @@ Serves as an enum for the state of an order.
 * **`blockHash`** (string) Hash of the Ethereum block containing the reporting transaction.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.
 * **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
-* **`marketReportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
-* **`reportingWindow`** (string) Reporting window the market is in currently.
+* **`feeWindow`** (string) Fee Window the Market is in currently.
 * **`payoutNumerators`** (Array.&lt;number>) Array representing the payout set.
 * **`amountStaked`** (number) Description the reporter has staked on the Outcome of their report.
-* **`stakeToken`** (string) Contract address of the stake token, as a hexadecimal string.
-* **`isCategorical`** (boolean) Whether the Market is categorical.
-* **`isScalar`** (boolean) Whether the Market is scalar.
-* **`isIndeterminate`** (boolean) Description pending.
+* **`crowdsourcerID`** (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.
+* **`isCategorical`** (boolean) Whether the Market is a Categorical Market.
+* **`isScalar`** (boolean) Whether the Market is a Scalar Market.
+* **`isInvalid`** (boolean) Whether the Market is [Invalid](#invalid-outcome).
 * **`isSubmitted`** (boolean) Description pending.
 
 <a name="REPORTING_STATE"></a>
@@ -2575,21 +2571,21 @@ Serves as an enum for the state of a stake token.
 #### **Properties:** 
 * **`Array`** (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>>) of timestamped price points for this Outcome.
 
-<a name="STAKE_TOKEN_STATE"></a>
-### STAKE_TOKEN_STATE  (Object)
+<a name="DISPUTE_TOKEN_STATE"></a>
+### DISPUTE_TOKEN_STATE  (Object)
 
-Serves as an enum for the state of a stake token.
-
-#### **Properties:** 
-* **`ALL`** (string) Stake token can be in any state. (If no stake token state is specified, this is the default value.)
-* **`UNFINALIZED`** (string) Stake token is in a Market that has not been finalized.
-* **`UNCLAIMED`** (string) Stake token is in a finalized Market, was staked on the correct Outcome, and has not been claimed yet.
-
-<a name="StakeToken"></a>
-### StakeToken  (Object)
+Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
-* **`stakeToken`** (string) Contract address of the stake token, as a hexadecimal string.
+* **`ALL`** (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)
+* **`UNFINALIZED`** (string) Dispute Token is in a Market that has not been Finalized.
+* **`UNCLAIMED`** (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.
+
+<a name="DisputeToken"></a>
+### DisputeToken  (Object)
+
+#### **Properties:** 
+* **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
 * **`marketID`** (string) ID of the Market, as a hexadecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the stake token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the stake token's payout set.
@@ -2601,7 +2597,7 @@ Serves as an enum for the state of a stake token.
 * **`payout7`** (number|null) Payout numerator 7 of the stake token's payout set. Set to null for binary and scalar Markets.
 * **`isInvalid`** (boolean) Whether the Market was determined to be invalid.
 * **`amountStaked`** (number) Amount the stake token owner has staked, in ETH.
-* **`winningToken`** (number|null) Description pending.
+* **`winning`** (number|null) Description pending.
 * **`claimed`** (boolean) Whether the stake token has been claimed by the owner.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 
