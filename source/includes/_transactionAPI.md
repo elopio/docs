@@ -2184,7 +2184,7 @@ This transaction will fail if:
 
 ### augur.api.TimeControlled.setTimestamp(p)
 
-Sets Augur's current timestamp to a Unix timestamp. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
+Sets Augur's current timestamp to a new Unix timestamp. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
 
 This transaction will fail if:
 
