@@ -2047,7 +2047,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexidecimal strings.
+* (<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexadecimal strings.
 
 ### augur.trading.getOrders(p, callback)
 
@@ -2589,8 +2589,8 @@ Serves as an enum for the state of a stake token.
 ### StakeToken  (Object)
 
 #### **Properties:** 
-* **`stakeToken`** (string) Contract address of the stake token, as a hexidecimal string.
-* **`marketID`** (string) ID of the Market, as a hexidecimal string.
+* **`stakeToken`** (string) Contract address of the stake token, as a hexadecimal string.
+* **`marketID`** (string) ID of the Market, as a hexadecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the stake token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the stake token's payout set.
 * **`payout2`** (number|null) Payout numerator 2 of the stake token's payout set. Set to null for binary and scalar Markets.
