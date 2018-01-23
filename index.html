@@ -3063,7 +3063,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexidecimal strings.</li>
+<li>(<a href="#BetterWorseOrders">BetterWorseOrders</a>) Object containing the better/worse Order IDs, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-trading-getorders-p-callback">augur.trading.getOrders(p, callback)</h3>
@@ -3806,8 +3806,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">stakeToken</code></strong> (string) Contract address of the stake token, as a hexidecimal string.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexidecimal string.</li>
+<li><strong><code class="prettyprint">stakeToken</code></strong> (string) Contract address of the stake token, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the stake token&rsquo;s payout set.</li>
 <li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the stake token&rsquo;s payout set.</li>
 <li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
@@ -6542,11 +6542,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="universe-call-api">Universe Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_parentPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getChildUniverse</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="nx">_parentPayoutDistributionHash</span>
+  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">childUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childUniverse</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span>
@@ -6684,109 +6683,664 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="#market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-getchilduniverse-tx-_parentpayoutdistributionhash-callback">augur.api.Universe.getChildUniverse({ tx, _parentPayoutDistributionHash }[, callback])</h3>
+<h3 id="augur-api-universe-getchilduniverse-p-callback">augur.api.Universe.getChildUniverse(p, callback)</h3>
 
-<p>Returns the Ethereum address of a <a href="#universe">Universe&rsquo;s</a> <a href="#child-universe">Child Universe</a> that has its <a href="#forked-market">Forked Market</a>&rsquo;s <a href="#final-outcome">Final Outcome</a> set to <code class="prettyprint">_parentPayoutDistributionHash</code> <a href="#payout-distribution-hash">Payout Distribution Hash</a>. The Ethereum address is returned as a hexidecimal string.</p>
+<p>Returns the Ethereum contract address of a <a href="#universe">Universe&rsquo;s</a> <a href="#child-universe">Child Universe</a> that has <a href="#final-outcome">Final Outcome</a> set to a specific <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
 
-<h3 id="augur-api-universe-getcurrentfeewindow-tx-callback">augur.api.Universe.getCurrentFeeWindow({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the Ethereum address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window. The Ethereum address is returned as a hexidecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-getdisputerounddurationinseconds-tx-callback">augur.api.Universe.getDisputeRoundDurationInSeconds({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the number of seconds in a <a href="#universe">Universe&rsquo;s</a> <a href="#dispute-round">Dispute Round</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._parentPayoutDistributionHash</code></strong> (string) Payout Distribution Hash for Final Outcome of the desired Child Universe, as a 32-byte hexadecimal string. </li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-getfeewindow-tx-_feewindowid-callback">augur.api.Universe.getFeeWindow({ tx, _feeWindowId  }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+<ul>
+<li>(string) Ethereum contract address of the Universe&rsquo;s Child Universe that has its Final Outcome set to the specified Payout Distribution Hash, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-universe-getfeewindowbytimestamp-tx-_timestamp-callback">augur.api.Universe.getFeeWindowByTimestamp({ tx, _timestamp }[, callback])</h3>
+<h3 id="augur-api-universe-getcurrentfeewindow-p-callback">augur.api.Universe.getCurrentFeeWindow(p, callback)</h3>
 
-<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> running at <code class="prettyprint">_timestamp</code> in a <a href="#universe">Universe</a>, as a hexidecimal string.</p>
+<p>Returns the Ethereum contract address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window.</p>
 
-<h3 id="augur-api-universe-getfeewindowforforkendtime-tx-callback">augur.api.Universe.getFeeWindowForForkEndTime({ tx } [, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the Ethereum address of the Fee Window <code class="prettyprint">_feeWindowId</code> in a <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends, as a hexidecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-getfeewindowid-tx-_timestamp-callback">augur.api.Universe.getFeeWindowId({ tx, _timestamp } [, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the <a href="#fee-window">Fee Window</a> ID for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> and <code class="prettyprint">_timestamp</code>, as an integer. This is calculated by dividing the timestamp by the <a href="#universe">Universe&rsquo;s</a> Fee Window duration in seconds.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-getforkendtime-tx-callback">augur.api.Universe.getForkEndTime({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the timestamp for when the <a href="#fork-period">Fork Phase</a> ends that was started on the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. If there is no <a href="#forked-market">Forked Market</a> in the Universe, this function will return 0.</p>
+<ul>
+<li>(string) Ethereum contract address of the current running Fee Window of the Universe, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-universe-getforkingmarket-tx-callback">augur.api.Universe.getForkingMarket({ tx }[, callback])</h3>
+<h3 id="augur-api-universe-getdisputerounddurationinseconds-p-callback">augur.api.Universe.getDisputeRoundDurationInSeconds(p, callback)</h3>
 
-<p>Returns the Ethereum address of the <a href="#market">Market</a> that the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> is <a href="#fork">Forking</a> over. This returns the null address (0x0000000000000000000000000000000000000000) if the Universe has never Forked and there is no <a href="#forked-market">Forked Market</a>.</p>
+<p>Returns the number of seconds in a <a href="#dispute-round">Dispute Round</a> within the specified <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-getforkreputationgoal-tx-callback">augur.api.Universe.getForkReputationGoal({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code> to be <a href="#finalized-market">Finalized</a> before the end of the <a href="#fork-period">Fork Phase</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-getinitialreportstakesize-tx-callback">augur.api.Universe.getInitialReportStakeSize({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns either the size of the <a href="#no-show-rep-bond">No-Show REP Bond</a> or the size of the Stake placed on the <a href="#designated-report">Designated Report</a> (whichever is greater), in <a href="#atto-prefix">attoREP</a>, as a hexadecimal string.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-getnextfeewindow-tx-callback">augur.api.Universe.getNextFeeWindow({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>. The Ethereum contract address is returned as a 16-byte hexadecimal string.</p>
+<ul>
+<li>(number) Number of seconds in a Universe&rsquo;s Dispute Round, as an unsigned 256-bit integer.</li>
+</ul>
 
-<h3 id="augur-api-universe-getopeninterestinattoeth-tx-callback">augur.api.Universe.getOpenInterestInAttoEth({ tx }[, callback])</h3>
+<h3 id="augur-api-universe-getfeewindow-p-callback">augur.api.Universe.getFeeWindow(p, callback)</h3>
 
-<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, priced in <a href="#atto-prefix">attoETH</a>. This value is returned as an integer.</p>
+<p>Returns the Ethereum contract address of a given <a href="#fee-window">Fee Window</a> in the specified <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-getparentpayoutdistributionhash-tx-callback">augur.api.Universe.getParentPayoutDistributionHash({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of a <a href="#universe">Universe&rsquo;s</a> <a href="#parent-universe">Parent Universe</a> for a <a href="#child-universe">Child Universe</a> specified in <code class="prettyprint">tx</code>. The Payout Distribution Hash is a hash of the winning <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-getparentuniverse-tx-callback">augur.api.Universe.getParentUniverse({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the <a href="#parent-universe">Parent Universe</a> Ethereum address of the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. When a <a href="#fork">Fork</a> occurs, <a href="#child-universe">Child Universes</a> are created and the original <a href="#universe">Universe</a> that contained the <a href="#forked-market">Forked Market</a> would become a Parent Universe to the newly created Universes. If this is called on the <a href="#genesis-universe">Genesis Universe</a>, it will return 0, as the first Universe has no Parent Universe.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (number) Fee Window ID, as an unsigned 256-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-getpreviousfeewindow-tx-callback">augur.api.Universe.getPreviousFeeWindow({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address of the previous <a href="#fee-window">Fee Window</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string.</p>
+<ul>
+<li>(string) Ethereum contract address of the given Fee Window in the Universe, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-universe-getrepmarketcapinattoeth-tx-callback">augur.api.Universe.getRepMarketCapInAttoeth({ tx }[, callback])</h3>
+<h3 id="augur-api-universe-getfeewindowbytimestamp-p-callback">augur.api.Universe.getFeeWindowByTimestamp(p, callback)</h3>
 
-<p>Returns an estimate for the market cap of <a href="#rep">REP</a>, priced in <a href="#atto-prefix">attoETH</a>. This estimate is updated manually by the Augur development team, roughly once every <a href="#fee-window">Fee Window</a>. It is used by Augur to set the price of the <a href="#reporting-fee">Reporting Fee</a>.</p>
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> running at a given timestamp in the <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-getreputationtoken-tx-callback">augur.api.Universe.getReputationToken({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#rep">Reputation Token</a> for the <a href="#universe">Universe</a> specified in <code class="prettyprint">tx</code>, as a hexidecimal string. REP associated with this contract address are usable within this Universe.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-gettargetrepmarketcapinattoeth-tx-callback">augur.api.Universe.getTargetRepMarketCapInAttoeth({ tx }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns the <a href="#rep">REP</a> market cap that Augur targets when calculating <a href="#reporting-fee">Reporting Fees</a>, in <a href="#atto-prefix">attoETH</a>. Augur attempts to set Reporting Fees such that the REP market cap equals 5 times the amount of <a href="#open-interest">Open Interest</a>. </p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (number) Unix timestamp for which to get the corresponding Fee Window, as an unsigned 256-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-getwinningchilduniverse-tx-callback">augur.api.Universe.getWinningChildUniverse({ tx }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>Returns the Ethereum address of the <a href="#winning-universe">Winning Universe</a> for a particular <a href="#universe">Universe</a> that has <a href="#fork">Forked</a>.</p>
+<ul>
+<li>(string) Ethereum contract address of the Fee Window running in the Universe at the specified timestamp, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-universe-iscontainerforfeewindow-tx-_shadyfeewindow-callback">augur.api.Universe.isContainerForFeeWindow({ tx, _shadyFeeWindow }[, callback])</h3>
+<h3 id="augur-api-universe-getfeewindowforforkendtime-p-callback">augur.api.Universe.getFeeWindowForForkEndTime(p, callback)</h3>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#fee-window">Fee Window</a> <code class="prettyprint">_shadyFeeWindow</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. Every Fee Window belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Window address belongs to the Universe in question.</p>
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> of the specified <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends.</p>
 
-<h3 id="augur-api-universe-iscontainerformarket-tx-_shadymarket-callback">augur.api.Universe.isContainerForMarket({ tx, _shadyMarket }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to help confirm if a Market exists within the Universe in question.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
-<h3 id="augur-api-universe-iscontainerforreportingparticipant-tx-_shadyreportingparticipant-callback">augur.api.Universe.isContainerForReportingParticipant({ tx, _shadyReportingParticipant }[, callback])</h3>
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
-<p>Returns <code class="prettyprint">1</code> if the specified <a href="#universe">Universe</a> is a container for <code class="prettyprint">_shadyReportingParticipant</code> Ethereum address provided, as a hexadecimal string. Otherwise, this function returns <code class="prettyprint">0</code>. Both the <code class="prettyprint">DisputeCrowdsourcers</code> and <code class="prettyprint">InitialReporter</code> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
 
-<h3 id="augur-api-universe-iscontainerforsharetoken-tx-_shadysharetoken-callback">augur.api.Universe.isContainerForShareToken({ tx, _shadyShareToken }[, callback])</h3>
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p><a href="#share">Shares</a> are represented within Augur&rsquo;s smart contracts as <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20</a> tokens called Share Tokens. Returns whether the specific <code class="prettyprint">universe</code> is a container for the Share Token <code class="prettyprint">_shadyShareToken</code> Ethereum address. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. </p>
+<ul>
+<li>(string) Ethereum contract address of the Fee Window of the specified Universe once the current Fork ends, as a 16-byte hexadecimal string.</li>
+</ul>
 
-<h3 id="augur-api-universe-isforking-tx-callback">augur.api.Universe.isForking({ tx }[, callback])</h3>
+<h3 id="augur-api-universe-getfeewindowid-p-callback">augur.api.Universe.getFeeWindowId(p, callback)</h3>
 
-<p>Returns <code class="prettyprint">1</code> if the current <a href="#universe">Universe</a> is Forking or <code class="prettyprint">0</code> otherwise.</p>
+<p>Returns the <a href="#fee-window">Fee Window</a> ID for the <a href="#universe">Universe</a> at the specified timestamp. This ID is calculated by dividing the timestamp by the <a href="#universe">Universe&rsquo;s</a> Fee Window duration in seconds.</p>
 
-<h3 id="augur-api-universe-isparentof-tx-_shadychild-callback">augur.api.Universe.isParentOf({ tx, _shadyChild }[, callback])</h3>
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
-<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <code class="prettyprint">_shadyChild</code> <a href="#child-universe">Child Universe</a> Ethereum address provided. Returns <code class="prettyprint">1</code> if true or <code class="prettyprint">0</code> if false. This function can be used to see if a specific <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> to a Child Universe.</p>
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (number) Unix timestamp for which to get the corresponding Fee Window, as an unsigned 256-bit integer.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) ID of the Fee Window running the the Universe at the specified timestamp, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getforkendtime-p-callback">augur.api.Universe.getForkEndTime(p, callback)</h3>
+
+<p>Returns the Unix timestamp for when the <a href="#fork-period">Fork Phase</a> ends that was started on the specified <a href="#universe">Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Unix timestamp when the Fork Phase ends that was started on the specified Universe, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getforkingmarket-p-callback">augur.api.Universe.getForkingMarket(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#market">Market</a> that the specified <a href="#universe">Universe</a> is <a href="#fork">Forking</a> over.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Market that the specified Universe is Forking over, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-universe-getforkreputationgoal-p-callback">augur.api.Universe.getForkReputationGoal(p, callback)</h3>
+
+<p>Returns the estimated amount of <a href="#rep">REP</a> that must be migrated to one <a href="#child-universe">Child Universe</a> in order to allow a <a href="#fork">Fork</a> in the specified <a href="#universe">Universe</a> to be <a href="#finalized-market">Finalized</a> before the end of the <a href="#fork-period">Fork Phase</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Estimated amount of REP that must be migrated to one Child Universe in order to allow a Fork in the specified Universe to be Finalized before the end of the Fork Phase, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getinitialreportstakesize-p-callback">augur.api.Universe.getInitialReportStakeSize(p, callback)</h3>
+
+<p>Returns either the size of the <a href="#no-show-rep-bond">No-Show REP Bond</a> or the size of the Stake placed on the <a href="#designated-report">Designated Report</a> (whichever is greater).</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) The size of the No-Show REP Bond or the size of the Stake placed on the Designated Report (whichever is greater), in <a href="#atto-prefix">attoREP</a>, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getnextfeewindow-p-callback">augur.api.Universe.getNextFeeWindow(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> coming up after the current Fee Window ends in the specified <a href="#universe">Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Fee Window coming up after the current Fee Window ends in the specified Universe, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-universe-getopeninterestinattoeth-p-callback">augur.api.Universe.getOpenInterestInAttoEth(p, callback)</h3>
+
+<p>Returns the total value of all <a href="#complete-sets">Complete Sets</a> that exist across all <a href="#market">Markets</a> the specified <a href="#universe">Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Total value of all Complete Sets that exist across all Markets the specified Universe, priced in <a href="#atto-prefix">attoETH</a>, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getparentpayoutdistributionhash-p-callback">augur.api.Universe.getParentPayoutDistributionHash(p, callback)</h3>
+
+<p>Returns the <a href="#payout-distribution-hash">Payout Distribution Hash</a> of the specified <a href="#universe">Universe&rsquo;s</a> <a href="#parent-universe">Parent Universe</a>. The Payout Distribution Hash is a hash of the winning <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Payout Distribution Hash of the Universe&rsquo;s Parent Universe, as a 32-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-universe-getparentuniverse-p-callback">augur.api.Universe.getParentUniverse(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#parent-universe">Parent Universe</a> for the specified <a href="#universe">Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Parent Universe for the specified Universe. If this is called on a Genesis Universe, it will return <code class="prettyprint">0</code>, as Genesis Universes do not have a Parent Universe.</li>
+</ul>
+
+<h3 id="augur-api-universe-getpreviousfeewindow-p-callback">augur.api.Universe.getPreviousFeeWindow(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the previous <a href="#fee-window">Fee Window</a> for the specified <a href="#universe">Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the previous Fee Window for the specified Universe, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-universe-getrepmarketcapinattoeth-p-callback">augur.api.Universe.getRepMarketCapInAttoeth(p, callback)</h3>
+
+<p>Returns an estimate for the market cap in <a href="#rep">REP</a> of the specified <a href="#universe">Universe</a>. This estimate is updated manually by the Augur development team, roughly once every <a href="#fee-window">Fee Window</a>. It is used by Augur to set the price of the <a href="#reporting-fee">Reporting Fee</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) Estimated market cap in REP of the specified Universe, priced in attoETH, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getreputationtoken-p-callback">augur.api.Universe.getReputationToken(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#rep">Reputation Token</a> for the specified <a href="#universe">Universe</a>. REP associated with this contract address are usable only within this Universe.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Reputation Token for the specified Universe.</li>
+</ul>
+
+<h3 id="augur-api-universe-gettargetrepmarketcapinattoeth-p-callback">augur.api.Universe.getTargetRepMarketCapInAttoeth(p, callback)</h3>
+
+<p>Returns the <a href="#rep">REP</a> market cap that Augur targets when calculating <a href="#reporting-fee">Reporting Fees</a>. Augur attempts to set Reporting Fees such that the REP market cap equals 5 times the amount of <a href="#open-interest">Open Interest</a>. </p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(number) REP market cap that Augur targets when calculating Reporting Fees, in <a href="#atto-prefix">attoETH</a>, as an unsigned 256-bit integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getwinningchilduniverse-p-callback">augur.api.Universe.getWinningChildUniverse(p, callback)</h3>
+
+<p>Returns the Ethereum contract address of the <a href="#winning-universe">Winning Universe</a> for a particular <a href="#universe">Universe</a> that has <a href="#fork">Forked</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum contract address of the Winning Universe for a Universe that has Forked, as a 16-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-universe-iscontainerforfeewindow-p-callback">augur.api.Universe.isContainerForFeeWindow(p, callback)</h3>
+
+<p>Returns whether the given <a href="#universe">Universe</a> is a container for a particular <a href="#fee-window">Fee Window</a>. Every Fee Window belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Window address belongs to the Universe in question.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyFeeWindow</code></strong> (string) Ethereum contract address of the Fee Window for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Fee Window belongs to the Universe, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-universe-iscontainerformarket-p-callback">augur.api.Universe.isContainerForMarket(p, callback)</h3>
+
+<p>Returns whether the specific <code class="prettyprint">universe</code> is a container for the <a href="#market">Market</a> <code class="prettyprint">_shadyMarket</code> Ethereum address. All Markets are created within a <a href="#universe">Universe</a>, and this function is used to confirm if a Market exists within the Universe in question.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyMarket</code></strong> (string) Ethereum contract address of the Market for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Market belongs to the Universe, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-universe-iscontainerforreportingparticipant-p-callback">augur.api.Universe.isContainerForReportingParticipant(p, callback)</h3>
+
+<p>Returns whether the specified <a href="#universe">Universe</a> is a container for a particular Reporting Participant. Both the <code class="prettyprint">DisputeCrowdsourcers</code> and <code class="prettyprint">InitialReporter</code> classes in Augur&rsquo;s Solidity smart contracts are considered Reporting Participants, since they have the parent class <code class="prettyprint">BaseReportingParticipant</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) Ethereum contract address of the Reporting Participant for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Reporting Participant belongs to the Universe, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-universe-iscontainerforsharetoken-p-callback">augur.api.Universe.isContainerForShareToken(p, callback)</h3>
+
+<p>Returns whether the specific <a href="#universe">Universe</a> is a container for a given Share Token. (<a href="#share">Shares</a> are represented within Augur&rsquo;s smart contracts as <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20</a> tokens called Share Tokens.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) Ethereum contract address of the Share Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the Share Token belongs to the Universe, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-universe-isforking-p-callback">augur.api.Universe.isForking(p, callback)</h3>
+
+<p>Returns whether the specified <a href="#universe">Universe</a> has a <a href="#market">Market</a> that has <a href="#fork">Forked</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the specified Universe has a Market that has Forked, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-universe-isparentof-p-callback">augur.api.Universe.isParentOf(p, callback)</h3>
+
+<p>Returns whether the <a href="#universe">Universe</a> is the <a href="#parent-universe">Parent Universe</a> for the specified <a href="#child-universe">Child Universe</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p._shadyChild</code></strong> (string) Ethereum contract address of the Universe for which to check if it is a Child Universe of the Universe, as a 16-byte hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the specified Universe is a Child Universe, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
 
           <h1 id="transaction-api">Transaction API</h1>
 
