@@ -115,7 +115,7 @@ Whichever Child Universe receives the most migrated REP by the end of the Forkin
 
 There are a few important things to note about the Forking process:
 
-First, there is no time limit on migrating tokens from the Parent Universe to a Child Universe. Tokens may be migrated after the Forking Period; they simply will not count towards the determination of the Winning Universe. To encourage greater participation during the Forking Period, all token holders who migrate their REP during the Forking Period will receive 5% additional REP in the Child Universe to which they migrated. This reward is paid for via currency inflation. 
+First, there is no time limit on migrating tokens from the Parent Universe to a Child Universe. Tokens may be migrated after the Forking Period; they simply will not count towards the determination of the Winning Universe. To encourage greater participation during the Forking Period, all token holders who migrate their REP within 60 days of the start of a Fork will receive 5% additional REP in the Child Universe to which they migrated. This reward is paid for via currency inflation. 
 
 Second, [Reporters](#reporter) that have Staked REP on one of the Forking Market’s Outcomes cannot change their position during a Fork. That is, REP that was Staked on an Outcome in the Parent Universe can be migrated only to the Child Universe that corresponds to that Outcome. For example, if a Reporter helped fulfill a successful Dispute Bond in favor of Outcome A during some previous Dispute Round, then the REP they have Staked on Outcome A can only be migrated to Universe A during a Fork.
 
