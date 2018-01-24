@@ -6537,7 +6537,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol">Time Controlled Solidity Contract</a>, which allows for the setting and updating of Augur&rsquo;s internal timestamp for the current time.</p>
 
-<h2 id="augur-api-timecontrolled-gettimestamp-p-callback">augur.api.TimeControlled.getTimestamp(p, callback)</h2>
+<h3 id="augur-api-timecontrolled-gettimestamp-p-callback">augur.api.TimeControlled.getTimestamp(p, callback)</h3>
 
 <p>Returns Augur&rsquo;s internal Unix timestamp. This function can only be called if the contract is running on a network that is not the Ethereum public main network.</p>
 
@@ -7415,11 +7415,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">message</span><span class="p">:</span> <span class="s1">'no response or bad input'</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Augur&rsquo;s Transaction API (&ldquo;Tx API&rdquo; for short) is made up of &ldquo;setter&rdquo; methods that can both read from and write to the blockchain using Ethereum&rsquo;s <code class="prettyprint">eth_sendTransaction</code> RPC. Under the hood, the API uses augur.js&rsquo;s convenience wrapper for <code class="prettyprint">eth_sendTransaction</code> which can be accessed using <code class="prettyprint">augur.rpc.transact</code>. Although it is possible to call <code class="prettyprint">augur.rpc.transact</code> directly (which is discussed in greater detail below), it is generally better and easier to use the built in API functions. The API functions are attached to the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract&gt;.&lt;Method&gt;(&lt;Argument Object&gt;)</code>. The API method name, as well as its parameters as keys in the params object, are generally identical to those of the underlying smart contract method.</p>
+<p>Augur&rsquo;s Transaction API (&ldquo;Tx API&rdquo; for short) is made up of &ldquo;setter&rdquo; methods that can both read from and write to the blockchain using Ethereum&rsquo;s <code class="prettyprint">eth_sendTransaction</code> RPC. Under the hood, the API uses augur.js&rsquo;s convenience wrapper for <code class="prettyprint">eth_sendTransaction</code> which can be accessed using <code class="prettyprint">augur.rpc.transact</code>. Although it is possible to call <code class="prettyprint">augur.rpc.transact</code> directly (which is discussed in greater detail below), it is generally better and easier to use the built-in API functions. The API functions are attached to the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract&gt;.&lt;Method&gt;(&lt;Argument Object&gt;)</code>. The API method name, as well as its parameters as keys in the params object, are generally identical to those of the underlying smart contract method.</p>
 
 <h3 id="arguments">Arguments</h3>
 
-<p>All Transaction API methods accept a single object argument. This single object must contain the <code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the <a href="#call-api">Call API</a> methods which accept a params object and a second optional argument for the callback. It is <strong>strongly recommended</strong> that you use a callback, even if it&rsquo;s optional in the Call API, as that will ensure your requests are made asynchronously.</p>
+<p>All Transaction API methods accept a single object argument. This single object must contain the <code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> callback fields. This single object should contain all required parameters for the transactions as key/value pairs. This is different from the <a href="#call-api">Call API</a> methods, which accept a params object and a second optional argument for the callback. Using a callback function is <strong>strongly recommended</strong> when calling a Call API function, even though it&rsquo;s optional, as that will ensure the requests are made asynchronously.</p>
 
 <h3 id="callbacks">Callbacks</h3>
 
