@@ -99,7 +99,7 @@ The [Market Resolution](#market-resolution) method of last resort is the [Fork](
 
 When a Fork is initiated, the usual 7-day [Fee window](#fee-window) is interrupted, and the [Forking Period](#fork-period) begins. 
 
-Forking is a very disruptive process and is intended to be rare. They are disruptive because Augur needs to assume its [Decentralized Oracle](#decentralized-oracle) is under attack if a Fork occurs. Since Augur assumes it's under attack, [Reporting](#report) for all other non-[Finalized Markets](#finalized-market) is put on hold until the end of the Forking Period. The Forking Period is much longer than the usual Fee Window so that there can be ample time for REP holders and exchanges to prepare for a Fork. The Forking process has final jurisdiction; a Fork’s outcome cannot be disputed.
+Forking is a very disruptive process and is intended to be rare. They are disruptive because Augur needs to assume its [Decentralized Oracle](#decentralized-oracle) is under attack if a Fork occurs. Since Augur assumes it's under attack, Disputing for all other non-[Finalized Markets](#finalized-market) is put on hold until the Forking Period ends and those Markets are migrated to the [Winning Universe](#winning-universe). The Forking Period is much longer than the usual Fee Window so that there can be ample time for REP holders and exchanges to prepare for a Fork. The Forking process has final jurisdiction; a Fork’s outcome cannot be disputed.
 
 Every Augur Market exists in some Augur [Universe](#universe). When Augur first launches, there will be only one Universe — the [Genesis Universe](#genesis-universe). Users will be required to migrate their REP from the legacy REP contract into the Genesis Universe in order for their REP to be used with Augur. Importantly, REP can be used to Report on [Outcomes](#outcome) (and thus earn fees) only if it exists in the same Universe as the Market on which it is reporting. When Augur first launches, all Markets and all REP will exist in the Genesis Universe.
 
@@ -111,7 +111,7 @@ Holders of REP tokens in the Parent Universe may migrate their tokens to a Child
 
 When a Fork is initiated, all REP [Staked](#dispute-stake) on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.
 
-Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. All un-Finalized Markets in the Parent Universe are automatically migrated to the [Winning Universe](#winning-universe) and — if they have received an [Initial Report](#initial-report) — are reset back to the beginning of their first Dispute Round. The Fork is then complete and the regular 7-day Fee Window cycle continues.
+Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the Winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated to the Winning Universe and, if they have received an [Initial Report](#initial-report), are reset back to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). The Fork is then complete and the regular 7-day Fee Window cycle continues.
 
 There are a few important things to note about the Forking process:
 
