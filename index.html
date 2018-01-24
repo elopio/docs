@@ -451,7 +451,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>When a Fork is initiated, the usual 7-day <a href="#fee-window">Fee window</a> is interrupted, and the <a href="#fork-period">Forking Period</a> begins. </p>
 
-<p>Forking is a very disruptive process and is intended to be rare. They are disruptive because Augur needs to assume its <a href="#decentralized-oracle">Decentralized Oracle</a> is under attack if a Fork occurs. Since Augur assumes it&rsquo;s under attack, <a href="#report">Reporting</a> for all other non-<a href="#finalized-market">Finalized Markets</a> is put on hold until the end of the Forking Period. The Forking Period is much longer than the usual Fee Window so that there can be ample time for REP holders and exchanges to prepare for a Fork. The Forking process has final jurisdiction; a Fork’s outcome cannot be disputed.</p>
+<p>Forking is a very disruptive process and is intended to be rare. They are disruptive because Augur needs to assume its <a href="#decentralized-oracle">Decentralized Oracle</a> is under attack if a Fork occurs. Since Augur assumes it&rsquo;s under attack, Disputing for all other non-<a href="#finalized-market">Finalized Markets</a> is put on hold until the Forking Period ends and those Markets are migrated to the <a href="#winning-universe">Winning Universe</a>. The Forking Period is much longer than the usual Fee Window so that there can be ample time for REP holders and exchanges to prepare for a Fork. The Forking process has final jurisdiction; a Fork’s outcome cannot be disputed.</p>
 
 <p>Every Augur Market exists in some Augur <a href="#universe">Universe</a>. When Augur first launches, there will be only one Universe — the <a href="#genesis-universe">Genesis Universe</a>. Users will be required to migrate their REP from the legacy REP contract into the Genesis Universe in order for their REP to be used with Augur. Importantly, REP can be used to Report on <a href="#outcome">Outcomes</a> (and thus earn fees) only if it exists in the same Universe as the Market on which it is reporting. When Augur first launches, all Markets and all REP will exist in the Genesis Universe.</p>
 
@@ -463,7 +463,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>When a Fork is initiated, all REP <a href="#dispute-stake">Staked</a> on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.</p>
 
-<p>Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. All un-Finalized Markets in the Parent Universe are automatically migrated to the <a href="#winning-universe">Winning Universe</a> and — if they have received an <a href="#initial-report">Initial Report</a> — are reset back to the beginning of their first Dispute Round. The Fork is then complete and the regular 7-day Fee Window cycle continues.</p>
+<p>Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the Winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated to the Winning Universe and, if they have received an <a href="#initial-report">Initial Report</a>, are reset back to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. The Fork is then complete and the regular 7-day Fee Window cycle continues.</p>
 
 <p>There are a few important things to note about the Forking process:</p>
 
@@ -1593,7 +1593,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Retrieves the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> amount and total Ether required to create a new <a href="#market">Market</a>.</p>
 
-<p>Note: This function will send a transaction if needed to create the current <a href="#reporting-window">Reporting Window</a>.</p>
+<p>Note: This function will send a transaction if needed to create the current <a href="#fee-window">Fee Window</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1618,7 +1618,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Similar to <code class="prettyprint">augur.createMarket.getMarketCreationCost</code>, but provides more detail about the ether costs required to create a new <a href="#market">Market</a>. These Ether costs are broken down by the gas cost paid to the <a href="#first-public-reporter">First Public Reporter</a> and the cost of the <a href="#validity-bond">Validity Bond</a>.</p>
 
-<p>Note: This function will send a transaction if needed to create the current <a href="#reporting-window">Reporting Window</a>.</p>
+<p>Note: This function will send a transaction if needed to create the current <a href="#fee-window">Fee Window</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -2109,7 +2109,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Reporting Window must be specified instead.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.</li>
 <li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window from which to retrieve the Markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.</li>
 <li><strong><code class="prettyprint">p.reportingState</code></strong>  (string) &lt;optional&gt; Description pending.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
@@ -2486,8 +2486,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.reporter</code></strong>  (string) Ethereum address of the <a href="#reporter">Reporter</a> for which to retrieve reporting history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.</li>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.</li>
 <li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
@@ -2553,6 +2553,56 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li> (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.</li>
 </ul>
+
+<h2 id="rpc-functions">RPC Functions</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">setDebugOptions</span><span class="p">(</span><span class="nx">debugOptions</span><span class="p">):</span> <span class="nx">JS</span> <span class="nx">sample</span> <span class="nx">code</span> <span class="nx">coming</span> <span class="nx">soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">transact</span><span class="p">(</span><span class="nx">payload</span><span class="p">,</span> <span class="nx">privateKeyOrSigner</span><span class="p">,</span> <span class="nx">accountType</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">):</span> <span class="nx">JS</span> <span class="nx">sample</span> <span class="nx">code</span> <span class="nx">coming</span> <span class="nx">soon</span>
+</code></pre></div>
+<h3 id="augur-rpc-setdebugoptions-debugoptions">augur.rpc.setDebugOptions(debugOptions)</h3>
+
+<p>Enables/Disables printing of information related to <a href="https://github.com/ethereumjs/ethrpc">ethrpc</a> connectivity and transactions.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">debugOptions</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">debugOptions.broadcast</code></strong>  (boolean) Whether to enable printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.</li>
+<li><strong><code class="prettyprint">debugOptions.connect</code></strong>  (boolean) Whether to enable printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols.</li>
+<li><strong><code class="prettyprint">debugOptions.tx</code></strong>  (boolean) Whether to enable printing of information related to transaction construction/submission/confirmation. This information includes the intermediate “transaction” object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.</li>
+</ul></li>
+</ul>
+
+<h3 id="augur-rpc-transact-payload-privatekeyorsigner-accounttype-onsent-onsuccess-onfailed">augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)</h3>
+
+<p>For a more detailed explanation of how <code class="prettyprint">augur.rpc.transact</code>, please refer to the <a href="#using-transact-directly">Using Transact Directly</a> section.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">payload</code></strong>  (Object) 
+
+<ul>
+<li><strong><code class="prettyprint">payload.to</code></strong>  (string) Address of the Ethereum contract containing the function to be called, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">payload.name</code></strong>  (string)</li>
+<li><strong><code class="prettyprint">payload.signature</code></strong>  (Array)</li>
+<li><strong><code class="prettyprint">payload.params</code></strong>  (Object)</li>
+<li><strong><code class="prettyprint">payload.send</code></strong>  (boolean) &lt;optional&gt;  Whether to use <code class="prettyprint">sendTransaction</code> when calling the desired function.</li>
+<li><strong><code class="prettyprint">payload.from</code></strong>  (string) &lt;optional&gt; Sender&rsquo;s Ethereum address, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">payload.returns</code></strong>  (string) &lt;optional&gt; Data type to return, as a string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">privateKeyOrSigner</code></strong>  () </li>
+<li><strong><code class="prettyprint">accountType</code></strong>  () </li>
+<li><strong><code class="prettyprint">onSent</code></strong>  () </li>
+<li><strong><code class="prettyprint">onSuccess</code></strong>  () </li>
+<li><strong><code class="prettyprint">onFailed</code></strong>  () </li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>*</p>
 
 <h2 id="trading-functions">Trading Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateProfitLoss</span><span class="p">({</span>
@@ -3521,7 +3571,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
 <li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
 <li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
-<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
+<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
 <li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
 <li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
 <li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
@@ -7367,18 +7417,20 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Transaction section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Transaction API (Tx API for short) example:</span>
-<span class="kd">var</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">transferTarget</span> <span class="o">=</span> <span class="s2">"0xea674fdde714fd979de3edf0f56aa9716b898ec8"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span> <span class="c1">// Ethereum contract address for the REP token</span>
+<span class="kd">var</span> <span class="nx">transferTarget</span> <span class="o">=</span> <span class="s2">"0xea674fdde714fd979de3edf0f56aa9716b898ec8"</span><span class="p">;</span> <span class="c1">// Ethereum address of the account to send REP tokens to</span>
 <span class="kd">var</span> <span class="nx">attotokens</span> <span class="o">=</span> <span class="s2">"100000000000000000000"</span><span class="p">;</span> <span class="c1">// 1000.00 REP</span>
 
-<span class="c1">// the Augur API is organized by Contract and then Method like so:</span>
+<span class="c1">// The Augur API is organized by Contract and then Method like so:</span>
 <span class="c1">// augur.api.&lt;Contract&gt;.&lt;Method&gt;(&lt;argument object&gt;);</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
-  <span class="na">_signer</span><span class="p">:</span> <span class="nx">privateKey</span><span class="p">,</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
   <span class="na">_to</span><span class="p">:</span> <span class="nx">transferTarget</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">attotokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -7419,11 +7471,26 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="arguments">Arguments</h3>
 
-<p>All Transaction API methods accept a single object argument. This single object must contain the <code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> callback fields. This single object should contain all required parameters for the transactions as key/value pairs. This is different from the <a href="#call-api">Call API</a> methods, which accept a params object and a second optional argument for the callback. Using a callback function is <strong>strongly recommended</strong> when calling a Call API function, even though it&rsquo;s optional, as that will ensure the requests are made asynchronously.</p>
+<p>All Transaction API methods accept a single object argument, containing the following:</p>
+
+<ul>
+<li>All required parameters for the smart contract function as key/value pairs.</li>
+<li>A <code class="prettyprint">tx</code> object containing a <code class="prettyprint">to</code> property, which is the Ethereum address of the smart contract containing the function.</li>
+<li>A <code class="prettyprint">meta</code> object, which contains information for signing the transaction.</li>
+<li><code class="prettyprint">onSent</code>, <code class="prettyprint">onSuccess</code>, and <code class="prettyprint">onFailed</code> callback functions.</li>
+</ul>
+
+<h3 id="the-tx-object">The <code class="prettyprint">tx</code> Object</h3>
+
+<p>The <code class="prettyprint">tx</code> object must contain a <code class="prettyprint">to</code> property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on.</p>
+
+<h3 id="the-meta-object">The <code class="prettyprint">meta</code> Object</h3>
+
+<p>All Transaction API functions accept a <code class="prettyprint">meta</code> object as a parameter in order to sign the transaction. The <code class="prettyprint">meta</code> object contains a <code class="prettyprint">signer</code> property, which should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account that wishes to initiate the transaction. It also contains an <code class="prettyprint">accountType</code> property, which should be set to &ldquo;privateKey&rdquo;, &ldquo;ledger&rdquo;, or &ldquo;uPort&rdquo;. The Transaction API functions attempt to modify information on the blockchain, which requires the transaction to be signed. Any function being called with the intention of modifying or &ldquo;setting&rdquo; information on the blockchain must have a <code class="prettyprint">meta</code> parameter. This concept is discussed in a bit more detail in the next section.</p>
 
 <h3 id="callbacks">Callbacks</h3>
 
-<p>All Transaction API methods accept three callback functions within the argument object. The following keys are used for each callback:</p>
+<p>Whereas the callback function parameter used by <a href="#call-api">Call API</a> is optional, but <strong>strongly recommended</strong>, the three callback function parameters used by the Transaction API functions are required. The following keys are used for each callback:</p>
 
 <h4 id="onsent-sentresponse">onSent(sentResponse)</h4>
 
@@ -7437,13 +7504,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Fires if the transaction is unsuccessful. <code class="prettyprint">failedResponse</code> has <code class="prettyprint">error</code> (error code) and <code class="prettyprint">message</code> (error description) fields, describing the way in which the transaction failed.</p>
 
-<h3 id="signer">Signer</h3>
-
-<p>In addition to the arguments and callbacks, all Transaction API functions require a <code class="prettyprint">_signer</code> param. The <code class="prettyprint">_signer</code> param should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account who wishes to initiate the transaction. The Transaction API functions all attempt to modify information on the blockchain which requires a signed transaction. Anytime you plan to modify or &ldquo;set&rdquo; information on the blockchain you will need to include a <code class="prettyprint">_signer</code> param. This concept is discussed in a bit more detail in the next section.</p>
-
 <h2 id="using-transact-directly">Using Transact Directly</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// using augur.rpc.transact() directly example:</span>
-<span class="c1">// payload object (generated by transfer method of the ReputationToken Contract)</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Example using `augur.rpc.transact` directly</span>
+<span class="c1">// payload object (generated by transfer method of the ReputationToken contract):</span>
 <span class="kd">var</span> <span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">constant</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>  
   <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
@@ -7454,10 +7517,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">to</span><span class="p">:</span> <span class="s2">"0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb"</span>
 <span class="p">};</span>
 
-<span class="c1">// privateKeyorSigner is either the privateKey buffer of the account trying to send the transaction or a function to sign a transaction (generally from a hardware wallet). Below we are going to use the Buffer returned from augur.accounts.login.</span>
-<span class="kd">var</span> <span class="nx">privateKeyOrSigner</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Buffer</span> <span class="p">...</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="c1">// privateKeyorSigner is either the privateKey buffer of the account trying to send the transaction or a function to sign a transaction (generally from a hardware wallet). This example uses the Buffer returned from the `augur.accounts.login` function.</span>
+<span class="kd">var</span> <span class="nx">privateKeyOrSigner</span> <span class="o">=</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">];</span>
 
-<span class="c1">// accountType is a string set to "privateKey", "uPort", or "ledger".</span>
+<span class="c1">// accountType is a string set to "privateKey", "ledger", or "uPort".</span>
 <span class="kd">var</span> <span class="nx">accountType</span> <span class="o">=</span> <span class="s2">"privateKey"</span><span class="p">;</span>
 
 <span class="c1">// onSent callback fires when the initial eth_sendTransaction response is received</span>
@@ -7502,13 +7565,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="nx">message</span><span class="p">:</span> <span class="s1">'polled network but could not confirm transaction'</span>
 <span class="p">}</span>
 </code></pre></div>
-<aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren&rsquo;t terribly curious about the augur.js/ethrpc plumbing under the hood should jump to the next section!</aside>
+<aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren&rsquo;t terribly curious about the augur.js/ethrpc plumbing under the hood should skip to the next section!</aside>
 
 <h4 id="augur-rpc-transact-payload-privatekeyorsigner-accounttype-onsent-onsuccess-onfailed">augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)</h4>
 
-<p>You can broadcast transactions to the Ethereum Network by calling <code class="prettyprint">augur.rpc.transact</code> directly. If called directly, the <code class="prettyprint">payload</code> object needs to be constructed by hand and must be structured correctly.</p>
+<p>You can broadcast transactions to the Ethereum Network by calling <code class="prettyprint">augur.rpc.transact</code> directly. If called directly, the <code class="prettyprint">payload</code> object must be constructed manually and needs to be structured correctly.</p>
 
-<p>The <code class="prettyprint">payload</code> object, also known as the &ldquo;transaction object&rdquo;, is structured as follows:</p>
+<p>The <code class="prettyprint">payload</code> object, also known as the <code class="prettyprint">tx</code> object, is structured as follows:</p>
 
 <p><strong>Required:</strong></p>
 
@@ -7527,21 +7590,21 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>returns: <code class="prettyprint">&lt;&quot;int256&quot; (default), &quot;int&quot;, &quot;number&quot;, &quot;int256[]&quot;, &quot;number[]&quot;, or &quot;string&quot;&gt;</code></li>
 </ul>
 
-<p>The <code class="prettyprint">params</code> and <code class="prettyprint">signature</code> fields are required if your function accepts parameters; otherwise, these fields can be excluded. The <code class="prettyprint">returns</code> field is used only to format the output, and does not affect the actual RPC request.</p>
+<p>The <code class="prettyprint">signature</code> and <code class="prettyprint">params</code> fields are required if the transaction function being called accepts parameters; otherwise, these fields can be excluded. The <code class="prettyprint">returns</code> field is used only to format the output, and does not affect the actual RPC request.</p>
 
-<p>The <code class="prettyprint">privateKeyOrSigner</code> is required if we are attempting to execute a transaction that will modify the blockchain (<code class="prettyprint">eth_sendTransaction</code>). If we are simply getting information (<code class="prettyprint">eth_call</code>) we don&rsquo;t need to pass anything for <code class="prettyprint">privateKeyOrSigner</code>. <code class="prettyprint">privateKeyOrSigner</code> should be the Private Key Buffer for the logged in account or a function to sign transactions provided by a hardware wallet.</p>
+<p>The <code class="prettyprint">privateKeyOrSigner</code> is required when attempting to execute a transaction that will modify the blockchain (<code class="prettyprint">eth_sendTransaction</code>). If the function is simply getting information (<code class="prettyprint">eth_call</code>) <code class="prettyprint">privateKeyOrSigner</code> can be null. Otherwise, <code class="prettyprint">privateKeyOrSigner</code> should be the Private Key Buffer for the logged-in account or a function to sign transactions provided by a hardware wallet.</p>
 
 <p>The <code class="prettyprint">accountType</code> is a string that can be &ldquo;privateKey&rdquo;, &ldquo;uPort&rdquo;, or &ldquo;ledger&rdquo;, depending on the type of account that is sending the transaction.</p>
 
-<p><strong>Under the hood <code class="prettyprint">augur.rpc.transact</code> carries out the following sequence:</strong></p>
+<p><strong>Under the hood, <code class="prettyprint">augur.rpc.transact</code> carries out the following sequence:</strong></p>
 
 <ol>
-<li><p><code class="prettyprint">augur.rpc.transact</code> will first attempt to use <code class="prettyprint">eth_call</code> on the transaction submitted in order to determine if there is enough gas to perform the transaction and that the transaction is properly formed. If you have a malformed transaction, didn&rsquo;t provide enough gas, or the transaction will fail then an error is passed to the <code class="prettyprint">onFailed</code> handler and the <code class="prettyprint">augur.rpc.transact</code> sequence terminates.</p></li>
-<li><p>After confirming that the Transaction is valid, <code class="prettyprint">augur.rpc.transact</code> will send a <code class="prettyprint">eth_sendTransaction</code> RPC request (or <code class="prettyprint">eth_sendRawTransaction</code> for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, then the error will be passed to the <code class="prettyprint">onFailed</code> handler and the <code class="prettyprint">augur.rpc.transact</code> sequence will terminate. Otherwise, the <code class="prettyprint">onSent</code> handler will be called and return an object containing the <code class="prettyprint">txHash</code> and <code class="prettyprint">callReturn</code>.</p></li>
-<li><p>After calling the <code class="prettyprint">onSent</code> handler, Augur will add the transaction to the <code class="prettyprint">transactions</code> object (which is indexed by transaction hash, e.g. <code class="prettyprint">transactions[txHash]</code>) and assign the transaction a <code class="prettyprint">status</code> of <code class="prettyprint">&quot;pending&quot;</code>. Use <code class="prettyprint">augur.rpc.getTransactions()</code> to access the <code class="prettyprint">transactions</code> object.</p></li>
-<li><p>Augur then uses <code class="prettyprint">eth_getTransactionByHash</code> to determine if the transaction has been mined or not, indicated by a <code class="prettyprint">null</code> response. A <code class="prettyprint">null</code> response indicates that the transaction has been (silently) removed from geth&rsquo;s transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore geth does not fire a duplicate transaction error), or if the transaction&rsquo;s nonce (but not its other fields) is a duplicate. If a <code class="prettyprint">null</code> response is received from <code class="prettyprint">eth_getTransactionByHash</code> then Augur will attempt to re-submit the transaction to <code class="prettyprint">augur.rpc.transact</code> as long the amount of attempts hasn&rsquo;t exceeded <code class="prettyprint">augur.constants.TX_RETRY_MAX</code>. If the attempts to submit the transaction exceed <code class="prettyprint">augur.constants.TX_RETRY_MAX</code> then a <code class="prettyprint">TRANSACTION_RETRY_MAX_EXCEEDED</code> error will be sent to the <code class="prettyprint">onFailed</code> handler and the <code class="prettyprint">augur.rpc.transact</code> sequence will terminate.</p></li>
+<li><p><code class="prettyprint">augur.rpc.transact</code> first attempts to use <code class="prettyprint">eth_call</code> on the transaction submitted in order to determine if there is enough gas to perform the transaction and that the transaction is properly formed. If the transaction is malformed, does not provide enough gas, or will fail, an error is passed to the <code class="prettyprint">onFailed</code> handler, and the <code class="prettyprint">augur.rpc.transact</code> sequence terminates.</p></li>
+<li><p>After confirming that the Transaction is valid, <code class="prettyprint">augur.rpc.transact</code> sends an <code class="prettyprint">eth_sendTransaction</code> RPC request (or <code class="prettyprint">eth_sendRawTransaction</code> for transactions which are already signed), which broadcasts the transaction to the Ethereum Network. If no transaction hash is received or there is an error, the error is passed to the <code class="prettyprint">onFailed</code> handler, and the <code class="prettyprint">augur.rpc.transact</code> sequence terminates. Otherwise, the <code class="prettyprint">onSent</code> handler is called and returns an object containing the <code class="prettyprint">txHash</code> and <code class="prettyprint">callReturn</code>.</p></li>
+<li><p>After calling the <code class="prettyprint">onSent</code> handler, Augur adds the transaction to the <code class="prettyprint">transactions</code> object (which is indexed by transaction hash, e.g. <code class="prettyprint">transactions[txHash]</code>) and assigns the transaction a <code class="prettyprint">status</code> of <code class="prettyprint">&quot;pending&quot;</code>. The function <code class="prettyprint">augur.rpc.getTransactions</code> can be used to access the <code class="prettyprint">transactions</code> object.</p></li>
+<li><p>Augur then uses <code class="prettyprint">eth_getTransactionByHash</code> to determine if the transaction has been mined or not, indicated by a <code class="prettyprint">null</code> response. A <code class="prettyprint">null</code> response means that the transaction has been (silently) removed from Geth&rsquo;s transaction pool. This can happen if the transaction is a duplicate of another transaction that has not yet cleared the transaction pool (and therefore Geth does not fire a duplicate transaction error), or if the transaction&rsquo;s nonce (but not its other fields) is a duplicate. If a <code class="prettyprint">null</code> response is received from <code class="prettyprint">eth_getTransactionByHash</code>, Augur will attempt to re-submit the transaction to <code class="prettyprint">augur.rpc.transact</code> as long as the number of attempts has not exceeded <code class="prettyprint">augur.constants.TX_RETRY_MAX</code>. Once the number of attempts exceeds this threshold, a <code class="prettyprint">TRANSACTION_RETRY_MAX_EXCEEDED</code> error is sent to the <code class="prettyprint">onFailed</code> handler, and the <code class="prettyprint">augur.rpc.transact</code> sequence will terminate.</p></li>
 <li><p>Once the transaction has been successfully mined (<code class="prettyprint">eth_getTransactionByHash</code> successfully returns the transaction object) the transaction is updated to include the <code class="prettyprint">blockNumber</code> and <code class="prettyprint">blockHash</code> and its <code class="prettyprint">status</code> is changed to <code class="prettyprint">&quot;sealed&quot;</code>.</p></li>
-<li><p>When the amount of confirmations of our transaction exceeds <code class="prettyprint">augur.constants.REQUIRED_CONFIRMATIONS</code> then the transaction is updated to a status of <code class="prettyprint">&quot;confirmed&quot;</code>. A <code class="prettyprint">callReturn</code> field is added to the transaction object, which is then passed to the <code class="prettyprint">onSuccess</code> handler, completing the sequence.</p></li>
+<li><p>When the number of confirmations of the transaction exceeds <code class="prettyprint">augur.constants.REQUIRED_CONFIRMATIONS</code>, the transaction&rsquo;s status is updated to <code class="prettyprint">&quot;confirmed&quot;</code>. A <code class="prettyprint">callReturn</code> field is added to the transaction object, which is then passed to the <code class="prettyprint">onSuccess</code> handler, completing the sequence.</p></li>
 </ol>
 
 <aside class="notice">The <code>augur.rpc</code> object is simply an instance of <a href="https://github.com/AugurProject/ethrpc">ethrpc</a> that has its state synchronized with the <code>augur</code> object.</aside>
@@ -7780,7 +7843,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="complete-sets-tx-api">Complete Sets Tx API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Contract</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="s2">"50000000000000000000"</span><span class="p">;</span> <span class="c1">// 50.0</span>
 
@@ -7911,7 +7974,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="create-order-tx-api">Create Order Tx API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Make Order Transaction API Examples:</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Create Order Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_attoshares</span> <span class="o">=</span> <span class="s2">"10000000000000000000"</span><span class="p">;</span> <span class="c1">// 10 shares</span>
 <span class="kd">var</span> <span class="nx">_displayPrice</span> <span class="o">=</span> <span class="s2">"0.5"</span><span class="p">;</span>
@@ -9182,7 +9245,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-migratethroughonefork-p">augur.api.Market.migrateThroughOneFork(p)</h3>
 
-<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling <code class="prettyprint">migrateThroughOneFork</code> attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided.</p>
+<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling <code class="prettyprint">migrateThroughOneFork</code> attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="Designated Report No-Show Bond">No-Show Bond</a> to the winning Universe.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9270,15 +9333,21 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="reputation-token-tx-api">Reputation Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Transaction API Examples:</span>
+
+<span class="c1">// The ReputationToken contract address can be obtained </span>
+<span class="c1">// by calling the function augur.api.Universe.getReputationToken</span>
 <span class="kd">var</span> <span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_spender</span> <span class="o">=</span> <span class="s2">"0xea674fdde714fd979de3edf0f56aa9716b898ec8"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_from</span> <span class="o">=</span> <span class="s2">"0x1a05071893b764109f0bbc5b75d78e3e38b69ab3"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"100000000000000000000"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">,</span>
   <span class="na">_spender</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -9304,7 +9373,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">migrateFromLegacyReputationToken</span><span class="p">({</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -9331,9 +9404,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="kd">var</span> <span class="nx">_destination</span> <span class="o">=</span> <span class="s2">"0x73295d3c0ca46113ca226222c81c79adabf9f391"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">migrateOut</span><span class="p">({</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">,</span>
   <span class="na">_destination</span><span class="p">:</span> <span class="nx">_destination</span><span class="p">,</span>
   <span class="na">_attotokens</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -9359,9 +9436,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">,</span>
   <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -9387,10 +9468,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">({</span>
-  <span class="na">reputationToken</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">,</span>
-  <span class="na">_from</span><span class="p">:</span> <span class="nx">_from</span><span class="p">,</span>
+  <span class="na">_from</span><span class="p">:</span> <span class="s2">"0x1a05071893b764109f0bbc5b75d78e3e38b69ab3"</span><span class="p">,</span>
   <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
@@ -9414,6 +9499,31 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">updateParentTotalTheoreticalSupply</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">updateSiblingMigrationTotal</span><span class="p">({</span>
+  <span class="na">_token</span><span class="p">:</span> <span class="s2">"0x72a3cec0b62fcb8c3120bc80bdb2b1351c8c2111"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span><span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output coming soon</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">ReputationToken Solidity Contract</a>, which handles the approval, migration, and transfering of <a href="#rep">Reputation Tokens</a>.</p>
 
@@ -9435,9 +9545,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9460,7 +9575,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9490,9 +9610,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._destination</code></strong>  (string) Ethereum address of the destination <a href="#reputation-token">Reputation Token</a> contract to migrate REP to, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._attotokens</code></strong>  (number|string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9521,9 +9646,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9553,10 +9683,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.reputationToken</code></strong>  (string) Ethereum address of a <a href="#reputation-token">Reputation Token</a> contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._from</code></strong>  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9579,6 +9714,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9609,6 +9750,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._token</code></strong>  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9814,7 +9961,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul>
 
 <h2 id="time-controlled-tx-api">Time Controlled Tx API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TimeControlled Transaction API Examples:</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Time Controlled Transaction API Examples:</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TimeControlled</span><span class="p">.</span><span class="nx">incrementTimestamp</span><span class="p">({</span>
   <span class="na">_amount</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
@@ -10153,8 +10300,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li>(number) Number of attoshares not Filled by the Order, as a 32-byte hexadecimal value. This means the transaction will return <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000000</code> for a completely Filled Order, or a larger number if the Order could only be partially Filled.</li>
 </ul>
 
-<h2 id="tradingescapehatch-tx-api">TradingEscapeHatch Tx API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TradingEscapeHatch Transaction API Examples:</span>
+<h2 id="trading-escape-hatch-tx-api">Trading Escape Hatch Tx API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trading Escape Hatch Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x465407364ccde43ba5159537404924e86ca53aaa"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TradingEscapeHatch</span><span class="p">.</span><span class="nx">claimSharesInUpdate</span><span class="p">({</span>
