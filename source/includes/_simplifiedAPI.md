@@ -778,7 +778,7 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
 
 Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total Ether required to create a new [Market](#market).
 
-Note: This function will send a transaction if needed to create the current [Reporting Window](#reporting-window).
+Note: This function will send a transaction if needed to create the current [Fee Window](#fee-window).
 
 #### **Parameters:**
 
@@ -795,7 +795,7 @@ Note: This function will send a transaction if needed to create the current [Rep
 
 Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These Ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
 
-Note: This function will send a transaction if needed to create the current [Reporting Window](#reporting-window).
+Note: This function will send a transaction if needed to create the current [Fee Window](#fee-window).
 
 #### **Parameters:**
 
@@ -1224,7 +1224,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
   **Properties:**
-    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Reporting Window must be specified instead.
+    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.
     * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window from which to retrieve the Markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
     * **`p.reportingState`**  (string) &lt;optional> Description pending.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1524,8 +1524,8 @@ This function will fail if:
 * **`p`** (Object) Parameters object.  
   **Properties:**
     * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting history, as a hexadecimal string.
-    * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Reporting Window must be specified.
-    * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Reporting Window must be specified.
+    * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.
+    * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.
     * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
@@ -1571,6 +1571,48 @@ Returns the amount of [REP](#rep) a [Designated Reporter](#designated-reporter) 
 #### **Returns:**
 
 *  (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.
+
+RPC Functions
+-------------
+```javascript
+augur.rpc.setDebugOptions(debugOptions): JS sample code coming soon
+
+augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed): JS sample code coming soon
+```
+### augur.rpc.setDebugOptions(debugOptions)
+
+Enables/Disables printing of information related to [ethrpc](https://github.com/ethereumjs/ethrpc) connectivity and transactions.
+
+#### **Parameters:**
+
+* **`debugOptions`** (Object) Parameters object.  
+    * **`debugOptions.broadcast`**  (boolean) Whether to enable printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
+    * **`debugOptions.connect`**  (boolean) Whether to enable printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols.
+    * **`debugOptions.tx`**  (boolean) Whether to enable printing of information related to transaction construction/submission/confirmation. This information includes the intermediate “transaction” object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.
+
+### augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)
+
+For a more detailed explanation of how `augur.rpc.transact`, please refer to the [Using Transact Directly](#using-transact-directly) section.
+
+#### **Parameters:**
+
+* **`payload`**  (Object) 
+    * **`payload.to`**  (string) Address of the Ethereum contract containing the function to be called, as a 16-byte hexadecimal string.
+    * **`payload.name`**  (string)
+    * **`payload.signature`**  (Array)
+    * **`payload.params`**  (Object)
+    * **`payload.send`**  (boolean) &lt;optional>  Whether to use `sendTransaction` when calling the desired function.
+    * **`payload.from`**  (string) &lt;optional> Sender's Ethereum address, as a 16-byte hexadecimal string.
+    * **`payload.returns`**  (string) &lt;optional> Data type to return, as a string.
+* **`privateKeyOrSigner`**  () 
+* **`accountType`**  () 
+* **`onSent`**  () 
+* **`onSuccess`**  () 
+* **`onFailed`**  () 
+
+#### **Returns:**
+
+*
 
 Trading Functions
 -----------------
@@ -2378,7 +2420,7 @@ Type Definitions
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
 * **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
 * **`creationFee`** (number) Fee paid by the Market Creator to create the Market, in ETH.
-* **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Reporting Window containing the Market whenever shares are settled. Reporting fees are later used to pay REP holders for Reporting on the Outcome of Markets.
+* **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
 * **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
 * **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
 * **`category`** (string) Name of the category the Market is in.
