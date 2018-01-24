@@ -52,11 +52,11 @@ augur.api.ReputationToken.transfer({
   message: 'no response or bad input'
 }
 ```
-Augur's Transaction API ("Tx API" for short) is made up of "setter" methods that can both read from and write to the blockchain using Ethereum's `eth_sendTransaction` RPC. Under the hood, the API uses augur.js's convenience wrapper for `eth_sendTransaction` which can be accessed using `augur.rpc.transact`. Although it is possible to call `augur.rpc.transact` directly (which is discussed in greater detail below), it is generally better and easier to use the built in API functions. The API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`. The API method name, as well as its parameters as keys in the params object, are generally identical to those of the underlying smart contract method.
+Augur's Transaction API ("Tx API" for short) is made up of "setter" methods that can both read from and write to the blockchain using Ethereum's `eth_sendTransaction` RPC. Under the hood, the API uses augur.js's convenience wrapper for `eth_sendTransaction` which can be accessed using `augur.rpc.transact`. Although it is possible to call `augur.rpc.transact` directly (which is discussed in greater detail below), it is generally better and easier to use the built-in API functions. The API functions are attached to the `augur.api` object and follow a pattern of `augur.api.<Contract>.<Method>(<Argument Object>)`. The API method name, as well as its parameters as keys in the params object, are generally identical to those of the underlying smart contract method.
 
 ### Arguments
 
-All Transaction API methods accept a single object argument. This single object must contain the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required params for the transactions as key/value pairs. This is different to the [Call API](#call-api) methods which accept a params object and a second optional argument for the callback. It is **strongly recommended** that you use a callback, even if it's optional in the Call API, as that will ensure your requests are made asynchronously.
+All Transaction API methods accept a single object argument. This single object must contain the `onSent`, `onSuccess`, and `onFailed` callback fields. This single object should contain all required parameters for the transactions as key/value pairs. This is different from the [Call API](#call-api) methods, which accept a params object and a second optional argument for the callback. Using a callback function is **strongly recommended** when calling a Call API function, even though it's optional, as that will ensure the requests are made asynchronously.
 
 ### Callbacks
 
