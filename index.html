@@ -7878,8 +7878,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to calculate trading proceeds, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to calculate trading proceeds, as an integer.</li>
-<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (number|string) Quantity of attoshares for which to calculate trading proceeds, as an integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (number|string) Quantity of attoshares for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -8006,7 +8006,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to purchase of each Outcome.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to purchase of each Outcome, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -8041,7 +8041,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to sell of each Outcome.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to sell of each Outcome, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -8120,11 +8120,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order to create (1 for a <a href="#bid-order">Bid</a>, 2 for an <a href="#ask-order">Ask</a>).</li>
-<li><strong><code class="prettyprint">p._attoshares</code></strong> (number|string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order to create, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._attoshares</code></strong> (number|string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._displayPrice</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Market in which to place the Order, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_betterOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_worseOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -8431,7 +8431,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.feeWindow</code></strong> (string) Ethereum address of the current Fee Window, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._attotokens</code></strong> (number|string) Number of Participation Tokens to purchase, in <a href="#atto-prefix">attotokens</a>.</li>
+<li><strong><code class="prettyprint">p._attotokens</code></strong> (number|string) Number of Participation Tokens to purchase, in <a href="#atto-prefix">attotokens</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -8455,7 +8455,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.feeWindow</code></strong> (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._sender</code></strong> (number|string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._sender</code></strong> (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -8551,7 +8551,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._orderID</code></strong> (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (number|string) Number of Shares to Fill, in attoshares.</li>
+<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (number|string) Number of Shares to Fill, in attoshares, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._tradeGroupID</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
@@ -8562,7 +8562,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Fixed point amount remaining of the Order specified by <code class="prettyprint">_orderId</code> after being filled, or <code class="prettyprint">0</code> if it&rsquo;s completely filled.</li>
+<li>(string) Fixed point amount remaining of the Order specified by <code class="prettyprint">_orderId</code> after being filled, as a stringified unsigned integer.  If the Order is completely filled, &ldquo;0&rdquo; will be returned.</li>
 </ul>
 
 <h2 id="initial-reporter-tx-api">Initial Reporter Tx API</h2>
@@ -9627,7 +9627,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
 
 <ul>
@@ -9692,7 +9692,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._destination</code></strong>  (string) Ethereum address of the destination <a href="#reputation-token">Reputation Token</a> contract to migrate REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._attotokens</code></strong>  (number|string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>.</li>
+<li><strong><code class="prettyprint">p._attotokens</code></strong>  (number|string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
 
 <ul>
@@ -9728,7 +9728,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
 
 <ul>
@@ -9766,7 +9766,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p._from</code></strong>  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Transaction object.
 
 <ul>
@@ -9964,7 +9964,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -9995,7 +9995,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -10028,7 +10028,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.shareToken</code></strong>  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._from</code></strong>  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -10078,7 +10078,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._amount</code></strong>  (number) Amount of seconds by which to increment Augur&rsquo;s timestamp.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong>  (number|string) Amount of seconds by which to increment Augur&rsquo;s timestamp, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
@@ -10274,9 +10274,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy, in <a href="#atto-prefix">attoshares</a>.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy Shares, in attoETH.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy Shares, in attoETH, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -10303,9 +10303,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to sell, in <a href="#atto-prefix">attoshares</a>.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to sell Shares, in attoETH.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to sell Shares, in attoETH, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -10331,11 +10331,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an integer. <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling.</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. (&ldquo;1&rdquo; for buying or &ldquo;2&rdquo; for selling.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -10361,11 +10361,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an integer. <code class="prettyprint">1</code> for buying or <code class="prettyprint">2</code> for selling.</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. (&ldquo;1&rdquo; for buying or &ldquo;2&rdquo; for selling.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -10378,7 +10378,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of attoshares not Filled by the Order, as a 32-byte hexadecimal value. This means the transaction will return <code class="prettyprint">0x0000000000000000000000000000000000000000000000000000000000000000</code> for a completely Filled Order, or a larger number if the Order could only be partially Filled.</li>
+<li>(string) Number of attoshares not Filled by the Order, as a stringified unsigned integer. This means the transaction will return &ldquo;0&rdquo; for a completely Filled Order, or a larger number if the Order could only be partially Filled.</li>
 </ul>
 
 <h2 id="trading-escape-hatch-tx-api">Trading Escape Hatch Tx API</h2>
@@ -11035,8 +11035,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
@@ -11052,8 +11052,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Amount of gas required to execute the transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.<br></li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -11080,8 +11080,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event.</li>
@@ -11162,13 +11162,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
-<li><strong><code class="prettyprint">p._minPrice</code></strong>  (number|string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market.</li>
-<li><strong><code class="prettyprint">p._maxPrice</code></strong>  (number|string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market.</li>
-<li><strong><code class="prettyprint">p._numTicks</code></strong>  (number|string) <a href="#number-of-ticks">Number of Ticks</a> for the Market.</li>
+<li><strong><code class="prettyprint">p._minPrice</code></strong>  (number|string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._maxPrice</code></strong>  (number|string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._numTicks</code></strong>  (number|string) <a href="#number-of-ticks">Number of Ticks</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
 <li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market event.</li>
 <li><strong><code class="prettyprint">p._extraInfo</code></strong>  (string) Stringified JSON object. (See the explanation above for more details.)
@@ -11182,8 +11182,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Amount of gas required to execute the transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -11432,7 +11432,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number|string) Unix timestamp that falls within the desired Fee Window.</li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number|string) Unix timestamp that falls within the desired Fee Window, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong>  (Object) Transaction object.
 
 <ul>
