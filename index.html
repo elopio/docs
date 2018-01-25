@@ -4151,7 +4151,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -4159,7 +4159,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number)  Payout Numerator for the Dispute Crowdsourcer, as an unsigned 256-bit integer.</li>
+<li>(string)  Payout Numerator for the Dispute Crowdsourcer, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-disputecrowdsourcer-getreputationtoken-p-callback">augur.api.DisputeCrowdsourcer.getReputationToken(p, callback)</h3>
@@ -4209,7 +4209,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number)  attoREP required by the Dispute Crowdsourcer to Challenge the Tentative Outcome of its Market, as an unsigned 256-bit integer.</li>
+<li>(string)  attoREP required by the Dispute Crowdsourcer to Challenge the Tentative Outcome of its Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-disputecrowdsourcer-getstake-p-callback">augur.api.DisputeCrowdsourcer.getStake(p, callback)</h3>
@@ -4234,7 +4234,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number)  attoREP Staked on the Dispute Crowdsourcer, as an unsigned 256-bit integer.</li>
+<li>(string)  attoREP Staked on the Dispute Crowdsourcer, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-disputecrowdsourcer-isdisavowed-p-callback">augur.api.DisputeCrowdsourcer.isDisavowed(p, callback)</h3>
@@ -4377,7 +4377,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as an unsigned 256-bit integer.</li>
+<li>(string) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getendtime-p-callback">augur.api.FeeWindow.getEndTime(p, callback)</h3>
@@ -4402,7 +4402,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp at which the Fee Window ends, as an unsigned 256-bit integer.</li>
+<li>(string) Unix timestamp at which the Fee Window ends, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getnumdesignatedreportnoshows-p-callback">augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)</h3>
@@ -4427,7 +4427,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Markets belonging to the Fee Window, where the Designated Reporter failed to Report during the Designated Reporting Phase, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Markets belonging to the Fee Window, where the Designated Reporter failed to Report during the Designated Reporting Phase, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getnumincorrectdesignatedreportmarkets-p-callback">augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets(p, callback)</h3>
@@ -4452,7 +4452,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Markets in the Fee Window, where the Designated Report was Challenged in the current Dispute Round Phase or the Designated Reporter did not Report, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Markets in the Fee Window, where the Designated Report was Challenged in the current Dispute Round Phase or the Designated Reporter did not Report, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getnuminvalidmarkets-p-callback">augur.api.FeeWindow.getNumInvalidMarkets(p, callback)</h3>
@@ -4477,7 +4477,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Markets Reported as Invalid in the Fee Window, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Markets Reported as Invalid in the Fee Window, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getnummarkets-p-callback">augur.api.FeeWindow.getNumMarkets(p, callback)</h3>
@@ -4502,7 +4502,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Markets in the Dispute Round Phase for the Fee Window, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Markets in the Dispute Round Phase for the Fee Window, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getreputationtoken-p-callback">augur.api.FeeWindow.getReputationToken(p, callback)</h3>
@@ -4552,7 +4552,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp at which the Fee Window starts, as an unsigned 256-bit integer.</li>
+<li>(string) Unix timestamp at which the Fee Window starts, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-getuniverse-p-callback">augur.api.FeeWindow.getUniverse(p, callback)</h3>
@@ -4900,7 +4900,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -4908,7 +4908,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Payout Numerator of a given Outcome for the InitialReporter contract, as an unsigned 256-bit integer.</li>
+<li>(string) Payout Numerator of a given Outcome for the InitialReporter contract, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-getreporttimestamp-p-callback">augur.api.InitialReporter.getReportTimestamp(p, callback)</h3>
@@ -4933,7 +4933,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp of when the Initial Report was submitted, as an unsigned 256-bit integer.</li>
+<li>(string) Unix timestamp of when the Initial Report was submitted, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-getreputationtoken-p-callback">augur.api.InitialReporter.getReputationToken(p, callback)</h3>
@@ -4983,7 +4983,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as an unsigned 256-bit integer.</li>
+<li>(string) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-getstake-p-callback">augur.api.InitialReporter.getStake(p, callback)</h3>
@@ -5008,7 +5008,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as an unsigned 256-bit integer.</li>
+<li>(string) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-isinvalid-p-callback">augur.api.InitialReporter.isInvalid(p, callback)</h3>
@@ -5321,7 +5321,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp for when the specified <a href="#market">Market&rsquo;s</a> event has come to pass, as an unsigned 256-bit integer.</li>
+<li>(string) Unix timestamp for when the specified <a href="#market">Market&rsquo;s</a> event has come to pass, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getfeewindow-p-callback">augur.api.Market.getFeeWindow(p, callback)</h3>
@@ -5371,7 +5371,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Unix timestamp for when the Market was Finalized, as an unsigned 256-bit integer.</li>
+<li>(string) Unix timestamp for when the Market was Finalized, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getforkingmarket-p-callback">augur.api.Market.getForkingMarket(p, callback)</h3>
@@ -5446,7 +5446,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as an unsigned 256-bit integer.</li>
+<li>(string) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getnumberofoutcomes-p-callback">augur.api.Market.getNumberOfOutcomes(p, callback)</h3>
@@ -5471,7 +5471,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Outcomes for the Market, as an unsigned 8-bit integer.</li>
+<li>(string) Number of Outcomes for the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getnumticks-p-callback">augur.api.Market.getNumTicks(p, callback)</h3>
@@ -5496,7 +5496,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Ticks for the Market, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Ticks for the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getreputationtoken-p-callback">augur.api.Market.getReputationToken(p, callback)</h3>
@@ -5539,7 +5539,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5573,7 +5573,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as an unsigned 256-bit integer.</li>
+<li>(string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-gettotalstake-p-callback">augur.api.Market.getTotalStake(p, callback)</h3>
@@ -5598,7 +5598,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Total attoREP Staked on the Market, as an unsigned 256-bit integer.</li>
+<li>(string) Total attoREP Staked on the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-getuniverse-p-callback">augur.api.Market.getUniverse(p, callback)</h3>
@@ -5666,7 +5666,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5674,7 +5674,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Winning Payout Numerator for an Outcome in the Market, as an unsigned 256-bit integer.</li>
+<li>(string) Winning Payout Numerator for an Outcome in the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-market-iscontainerforreportingparticipant-p-callback">augur.api.Market.isContainerForReportingParticipant(p, callback)</h3>
@@ -5926,8 +5926,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._betterOrderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._betterOrderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5949,8 +5949,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._worseOrderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._worseOrderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5972,7 +5972,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._orderId</code></strong> (number) ID of the Order, as a 32-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (number|string) ID of the Order, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5980,7 +5980,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Amount of Shares requested when the Order was placed.</li>
+<li>(string) Amount of Shares requested when the Order was placed, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getbestorderid-p-callback">augur.api.Orders.getBestOrderId(p, callback)</h3>
@@ -5993,9 +5993,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a Bid Order, <code class="prettyprint">2</code> for an Ask Order), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a Bid Order, &ldquo;2&rdquo; for an Ask Order).</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6038,7 +6038,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number) Outcome of the Market, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome of the Market, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6046,7 +6046,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Last price traded for a specific Outcome in a given Market, as an unsigned 256-bit integer.</li>
+<li>(string) Last price traded for a specific Outcome in a given Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getmarket-p-callback">augur.api.Orders.getMarket(p, callback)</h3>
@@ -6109,7 +6109,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Amount of money escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.</li>
+<li>(string) Amount of money escrowed by the Order Creator for a given Order, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getordersharesescrowed-p-callback">augur.api.Orders.getOrderSharesEscrowed(p, callback)</h3>
@@ -6130,7 +6130,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Number of Shares escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.</li>
+<li>(string) Number of Shares escrowed by the Order Creator for a given Order, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getordertype-p-callback">augur.api.Orders.getOrderType(p, callback)</h3>
@@ -6151,7 +6151,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Order type of the Order (<code class="prettyprint">1</code> for Bid Orders, or <code class="prettyprint">2</code> for Ask Orders).</li>
+<li>(string) Order type of the Order, as a stringified unsigned integer (&ldquo;1&rdquo; for Bid Orders, or &ldquo;2&rdquo; for Ask Orders).</li>
 </ul>
 
 <h3 id="augur-api-orders-getoutcome-p-callback">augur.api.Orders.getOutcome(p, callback)</h3>
@@ -6172,7 +6172,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Outcome being traded on for the specified Order, as a unsigned 8-bit integer.</li>
+<li>(string) Outcome being traded on for the specified Order, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getprice-p-callback">augur.api.Orders.getPrice(p, callback)</h3>
@@ -6193,7 +6193,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Price of the Order, as an unsigned 256-bit integer.</li>
+<li>(string) Price of the Order, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getvolume-p-callback">augur.api.Orders.getVolume(p, callback)</h3>
@@ -6214,7 +6214,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Volume of the Market, as an unsigned 256-bit integer.</li>
+<li>(string) Volume of the Market, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-orders-getworseorderid-p-callback">augur.api.Orders.getWorseOrderId(p, callback)</h3>
@@ -6248,9 +6248,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a Bid Order, <code class="prettyprint">2</code> for an Ask Order), as an unsigned 8-bit integer. </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a Bid Order, &ldquo;2&rdquo; for an Ask Order). </li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned 8-bit integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) <a href="#outcome">Outcome</a> of the Market, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6271,8 +6271,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -6294,8 +6294,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -6357,8 +6357,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._lowestOrderId</code></strong> (string) Order ID expected to be a worse price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -6380,8 +6380,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._highestOrderId</code></strong> (string) Order ID expected to be a better price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -6403,8 +6403,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number) Type of Order (<code class="prettyprint">1</code> for a <a href="#bid-order">Bid Order</a>, <code class="prettyprint">2</code> for an <a href="#ask-order">Ask Order</a>), as an unsigned 8-bit integer. </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p._bestOrderId</code></strong> (string) Best Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._worstOrderId</code></strong> (string) Worst Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID with a better price than <code class="prettyprint">p._price</code>, as a 32-byte-hexadecimal string.</li>
@@ -6484,7 +6484,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe&rsquo;s Parent Universe, as an unsigned 256-bit integer.</li>
+<li>(string) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe&rsquo;s Parent Universe, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-reputationtoken-gettotaltheoreticalsupply-p-callback">augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)</h3>
@@ -6509,7 +6509,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Total Theoretical REP Supply for this ReputationToken contract, as an unsigned 256-bit integer.</li>
+<li>(string) Total Theoretical REP Supply for this ReputationToken contract, as a stringified unsigned integer.</li>
 </ul>
 
 <h2 id="share-token-call-api">Share Token Call API</h2>
@@ -6575,7 +6575,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit integer.</li>
+<li>(string) Returns the Outcome of the Market that the specified ShareToken is for, as a stringified unsigned integer.</li>
 </ul>
 
 <h2 id="time-controlled-call-api">Time Controlled Call API</h2>
@@ -6607,7 +6607,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(number) Augur&rsquo;s internal Unix timestamp, as an unsigned 256-bit integer.</li>
+<li>(string) Augur&rsquo;s internal Unix timestamp, as a stringified unsigned integer.</li>
 </ul>
 
 <h2 id="universe-call-api">Universe Call API</h2>
@@ -10108,7 +10108,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number) Unix timestamp to set Augur&rsquo;s timestamp to, as an unsigned 256-bit integer.</li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number|string) Unix timestamp to set Augur&rsquo;s timestamp to, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
