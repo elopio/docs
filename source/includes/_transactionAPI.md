@@ -371,8 +371,8 @@ Calculates the amount of [attoETH](#atto-prefix) that `_numberOfShares` attoshar
 
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to calculate trading proceeds, as an integer.
-    * **`p._numberOfShares`** (number|string) Quantity of attoshares for which to calculate trading proceeds, as an integer.
+    * **`p._outcome`** (number|string) Outcome for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.
+    * **`p._numberOfShares`** (number|string) Quantity of attoshares for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -482,7 +482,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 * **`p`** (Object) Parameters object.
     * **`p._market`** (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.
-    * **`p._amount`** (number|string) Number of Shares to purchase of each Outcome.
+    * **`p._amount`** (number|string) Number of Shares to purchase of each Outcome, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -507,7 +507,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 * **`p`** (Object) Parameters object.
     * **`p._market`** (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.
-    * **`p._amount`** (number|string) Number of Shares to sell of each Outcome.
+    * **`p._amount`** (number|string) Number of Shares to sell of each Outcome, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -579,11 +579,11 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._type`** (number|string) Type of Order to create (1 for a [Bid](#bid-order), 2 for an [Ask](#ask-order)).
-    * **`p._attoshares`** (number|string) Number of [attoshares](#atto-prefix) to buy or sell.
+    * **`p._type`** (number|string) Type of Order to create, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)).
+    * **`p._attoshares`** (number|string) Number of [attoshares](#atto-prefix) to buy or sell, as an unsigned integer or stringified unsigned integer.
     * **`p._displayPrice`** (string) Desired price at which to purchase Shares, in [attoETH](#atto-prefix).
     * **`p._market`** (string) Market in which to place the Order, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an integer.
+    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `_betterOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `_worseOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -860,7 +860,7 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 
 * **`p`** (Object) Parameters object.
     * **`p.feeWindow`** (string) Ethereum address of the current Fee Window, as a 16-byte hexadecimal value.
-    * **`p._attotokens`** (number|string) Number of Participation Tokens to purchase, in [attotokens](#atto-prefix).
+    * **`p._attotokens`** (number|string) Number of Participation Tokens to purchase, in [attotokens](#atto-prefix), as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -877,7 +877,7 @@ Converts any [Participation Tokens](#participation-token) `_sender` has in the s
 
 * **`p`** (Object) Parameters object.
     * **`p.feeWindow`** (string) Ethereum address of a Fee Window, as a 16-byte hexadecimal value.
-    * **`p._sender`** (number|string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
+    * **`p._sender`** (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -957,7 +957,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.    
     * **`p._orderID`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
-    * **`p._amountFillerWants`** (number|string) Number of Shares to Fill, in attoshares.
+    * **`p._amountFillerWants`** (number|string) Number of Shares to Fill, in attoshares, as an unsigned integer or stringified unsigned integer.
     * **`p._tradeGroupID`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -965,7 +965,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (number) Fixed point amount remaining of the Order specified by `_orderId` after being filled, or `0` if it's completely filled.
+* (string) Fixed point amount remaining of the Order specified by `_orderId` after being filled, as a stringified unsigned integer.  If the Order is completely filled, "0" will be returned.
 
 Initial Reporter Tx API
 ----------------------
@@ -1899,7 +1899,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoREP to allow `_spender` to spend on behalf of `msg.sender`.
+    * **`p._value`**  (number|string) Number of attoREP to allow `_spender` to spend on behalf of `msg.sender`, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Transaction object.
         * **`p.tx.to`** (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -1942,7 +1942,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._destination`**  (string) Ethereum address of the destination [Reputation Token](#reputation-token) contract to migrate REP to, as a 16-byte hexadecimal value.
-    * **`p._attotokens`**  (number|string) Number of REP to migrate, in [attoREP](#atto-prefix).
+    * **`p._attotokens`**  (number|string) Number of REP to migrate, in [attoREP](#atto-prefix), as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Transaction object.
         * **`p.tx.to`** (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -1966,7 +1966,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.
+    * **`p._value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Transaction object.
         * **`p.tx.to`** (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -1992,7 +1992,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._from`**  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.
     * **`p._to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>.
+    * **`p._value`**  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Transaction object.
         * **`p.tx.to`** (string) Ethereum address of the ReputationToken contract to run the transaction on, as a 16-byte hexadecimal value.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2158,7 +2158,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoshares to allow `_spender` to spend on behalf of `msg.sender`.
+    * **`p._value`**  (number|string) Number of attoshares to allow `_spender` to spend on behalf of `msg.sender`, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -2180,7 +2180,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
     * **`p._to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.
+    * **`p._value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -2204,7 +2204,7 @@ This transaction will fail if:
     * **`p.shareToken`**  (string) Ethereum address of a Share Token contract, as a 16-byte hexadecimal value.
     * **`p._from`**  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.
     * **`p._to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
-    * **`p._value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>.
+    * **`p._value`**  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -2247,7 +2247,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._amount`**  (number) Amount of seconds by which to increment Augur's timestamp.
+    * **`p._amount`**  (number|string) Amount of seconds by which to increment Augur's timestamp, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
@@ -2429,9 +2429,9 @@ Buys `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` o
 
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an integer.
-    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy, in [attoshares](#atto-prefix).
-    * **`p._price`**  (number|string) Price at which to buy Shares, in attoETH.
+    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.
+    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy, in [attoshares](#atto-prefix), as an unsigned integer or stringified unsigned integer.
+    * **`p._price`**  (number|string) Price at which to buy Shares, in attoETH, as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -2451,9 +2451,9 @@ Sells `_fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `_outcome` 
 
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an integer.
-    * **`p._fxpAmount`**  (number|string) Amount of Shares to sell, in [attoshares](#atto-prefix).
-    * **`p._price`**  (number|string) Price at which to sell Shares, in attoETH.
+    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.
+    * **`p._fxpAmount`**  (number|string) Amount of Shares to sell, in [attoshares](#atto-prefix), as an unsigned integer or stringified unsigned integer.
+    * **`p._price`**  (number|string) Price at which to sell Shares, in attoETH, as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -2472,11 +2472,11 @@ Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`;
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._direction`** (number|string) Direction of the trade, as an integer. `1` for buying or `2` for selling.
+    * **`p._direction`** (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. ("1" for buying or "2" for selling.)
     * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an integer.
-    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix).
-    * **`p._price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix).
+    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.
+    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix), as an unsigned integer or stringified unsigned integer.
+    * **`p._price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -2495,11 +2495,11 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._direction`** (number|string) Direction of the trade, as an integer. `1` for buying or `2` for selling.
+    * **`p._direction`** (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. ("1" for buying or "2" for selling.)
     * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
-    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an integer.
-    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix).
-    * **`p._price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix).
+    * **`p._outcome`** (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.
+    * **`p._fxpAmount`**  (number|string) Amount of Shares to buy/sell, in [attoshares](#atto-prefix), as an unsigned integer or stringified unsigned integer
+    * **`p._price`**  (number|string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -2509,7 +2509,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 
 #### **Returns:**
 
-* (number) Number of attoshares not Filled by the Order, as a 32-byte hexadecimal value. This means the transaction will return `0x0000000000000000000000000000000000000000000000000000000000000000` for a completely Filled Order, or a larger number if the Order could only be partially Filled.
+* (string) Number of attoshares not Filled by the Order, as a stringified unsigned integer. This means the transaction will return "0" for a completely Filled Order, or a larger number if the Order could only be partially Filled.
 
 Trading Escape Hatch Tx API
 ---------------------
@@ -3156,8 +3156,8 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
 #### Parameters:
 
 * **`p`** (Object) Parameters object.
-    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market).
-    * **`p._feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement).
+    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as an unsigned integer or stringified unsigned integer.
+    * **`p._feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as an unsigned integer or stringified unsigned integer.
     * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
     * **`p._topic`**  (string) Market [Topic](#topic).
@@ -3168,8 +3168,8 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
         * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
     * **`p.tx`**  (Object) Transaction object.
         * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
-        * **`p.tx.value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-        * **`p.tx.gas`**  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
+        * **`p.tx.value`**  (number|string) Number of Wei required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+        * **`p.tx.gas`**  (number|string) Amount of gas required to execute the transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.    
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -3188,8 +3188,8 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
 #### Parameters:
 
 * **`p`** (Object) Parameters object.
-    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market).
-    * **`p._feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement).
+    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as an unsigned integer or stringified unsigned integer.
+    * **`p._feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as an unsigned integer or stringified unsigned integer.
     * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
     * **`p._outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event.
@@ -3245,13 +3245,13 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `
 #### Parameters:
 
 * **`p`** (Object) Parameters object.
-    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market).
+    * **`p._endTime`**  (number|string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as an unsigned integer or stringified unsigned integer.
     * **`p._feePerEthInWei`**  (number|string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement).
     * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
-    * **`p._minPrice`**  (number|string) [Minimum Display Price](#minimum-display-price) for the Market.
-    * **`p._maxPrice`**  (number|string) [Maximum Display Price](#maximum-display-price) for the Market.
-    * **`p._numTicks`**  (number|string) [Number of Ticks](#number-of-ticks) for the Market.
+    * **`p._minPrice`**  (number|string) [Minimum Display Price](#minimum-display-price) for the Market, as an unsigned integer or stringified unsigned integer.
+    * **`p._maxPrice`**  (number|string) [Maximum Display Price](#maximum-display-price) for the Market, as an unsigned integer or stringified unsigned integer.
+    * **`p._numTicks`**  (number|string) [Number of Ticks](#number-of-ticks) for the Market, as an unsigned integer or stringified unsigned integer.
     * **`p._topic`**  (string) Market [Topic](#topic).
     * **`p._description`**  (string) Description of the Market event.
     * **`p._extraInfo`**  (string) Stringified JSON object. (See the explanation above for more details.)
@@ -3260,8 +3260,8 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `
         * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
     * **`p.tx`**  (Object) Transaction object.
         * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
-        * **`p.tx.value`**  (number|string) Number of Wei required to create the Market. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-        * **`p.tx.gas`**  (number|string) Amount of gas required to execute the transaction. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
+        * **`p.tx.value`**  (number|string) Number of Wei required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+        * **`p.tx.gas`**  (number|string) Amount of gas required to execute the transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -3422,7 +3422,7 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
 #### Parameters:
 
 * **`p`** (Object) Parameters object.
-    * **`p._timestamp`**  (number|string) Unix timestamp that falls within the desired Fee Window.
+    * **`p._timestamp`**  (number|string) Unix timestamp that falls within the desired Fee Window, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`**  (Object) Transaction object.
         * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
