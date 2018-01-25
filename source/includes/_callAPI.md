@@ -1892,140 +1892,220 @@ var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 augur.api.Universe.getChildUniverse({
   tx: { to: universe },
   _parentPayoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
-}, function (error, childUniverse) { console.log(childUniverse); });
+}, function (error, childUniverse) { 
+  console.log(childUniverse); 
+});
 // example output:
 "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 
-augur.api.Universe.getCurrentFeeWindow({ tx: { to: universe } }, function (error, currFeeWindow) { console.log(currFeeWindow); });
+augur.api.Universe.getCurrentFeeWindow({ 
+  tx: { to: universe } 
+}, function (error, currFeeWindow) { 
+  console.log(currFeeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.Universe.getDisputeRoundDurationInSeconds({ tx: { to: universe } }, function (error, disputeRoundDuration) { console.log(disputeRoundDuration); });
+augur.api.Universe.getDisputeRoundDurationInSeconds({ 
+  tx: { to: universe } 
+}, function (error, disputeRoundDuration) { 
+  console.log(disputeRoundDuration); 
+});
 // example output:
 "604800"
 
 augur.api.Universe.getFeeWindow({ 
   tx: { to: universe }, 
   _feeWindowId: 578,
-}, function (error, feeWindow) { console.log(feeWindow); });
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
 augur.api.Universe.getFeeWindowByTimestamp({ 
   tx: { to: universe },
   _timestamp: 1514500367
-}, function (error, feeWindow) { console.log(feeWindow); });
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.Universe.getFeeWindowForForkEndTime({ tx: { to: universe } }, function (error, feeWindow) { console.log(feeWindow); });
+augur.api.Universe.getFeeWindowForForkEndTime({ 
+  tx: { to: universe } 
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
 augur.api.Universe.getFeeWindowId({ 
   tx: { to: universe },
   _timestamp: 1514500367
-}, function (error, feeWindowId) { console.log(feeWindowId); });
+}, function (error, feeWindowId) {
+  console.log(feeWindowId); 
+});
 // example output:
 "578"
 
-augur.api.Universe.getForkEndTime({ tx: { to: universe } }, function (error, forkEndTime) { console.log(forkEndTime); });
+augur.api.Universe.getForkEndTime({ 
+  tx: { to: universe } 
+}, function (error, forkEndTime) { 
+  console.log(forkEndTime); 
+});
 // example output:
 "1489855429"
 
-augur.api.Universe.getForkingMarket({ tx: { to: universe } }, function (error, forkingMarket) { console.log(forkingMarket); });
+augur.api.Universe.getForkingMarket({ 
+  tx: { to: universe } 
+}, function (error, forkingMarket) { 
+  console.log(forkingMarket); 
+});
 // example output:
 "0x78f7b43150d27c464359e735781c16ac585f52a8"
 
-augur.api.Universe.getForkReputationGoal({ tx: { to: universe } }, function (error, forkReputationGoal) { console.log(forkReputationGoal); });
+augur.api.Universe.getForkReputationGoal({ 
+  tx: { to: universe } 
+}, function (error, forkReputationGoal) { 
+  console.log(forkReputationGoal); 
+});
 // example output:
-"150657"
+"5500000000000000000000000"
 
-augur.api.Universe.getInitialReportStakeSize({ tx: { to: universe } }, function (error, initialReportStakeSize) { console.log(initialReportStakeSize); });
-// example output:
-"0x000000000000000000000000000000000000000000000000026d285191d096ea"
-
-augur.api.Universe.getNextFeeWindow({ tx: { to: universe } }, function (error, nextFeeWindow) { console.log(nextFeeWindow); });
+augur.api.Universe.getNextFeeWindow({ 
+  tx: { to: universe } 
+}, function (error, nextFeeWindow) { 
+  console.log(nextFeeWindow); 
+});
 // example output:
 "0x45659544b89cce1dd53b1b566862189b25adec49"
 
-augur.api.Universe.getOpenInterestInAttoEth({ tx: { to: universe } }, function (error, openInterestInAttoEth) { console.log(openInterestInAttoEth); });
+augur.api.Universe.getOpenInterestInAttoEth({ 
+  tx: { to: universe } 
+}, function (error, openInterestInAttoEth) { 
+  console.log(openInterestInAttoEth); 
+});
 // example output:
-"7123876876123"
+"42250000000000000000"
 
-augur.api.Universe.getParentPayoutDistributionHash({ tx: { to: universe } }, function (error, universeParentPayoutDistributionHash) { console.log(universeParentPayoutDistributionHash); });
+augur.api.Universe.getParentPayoutDistributionHash({ 
+  tx: { to: universe } 
+}, function (error, universeParentPayoutDistributionHash) { 
+  console.log(universeParentPayoutDistributionHash); 
+});
 // example output:
 "0xa310ca2018af3cb2ca244eb862df2d350300904a96039eb53cbaff012c92d10c"
 
-augur.api.Universe.getParentUniverse({ tx: { to: universe } }, function (error, parentUniverse) { console.log(parentUniverse); });
+augur.api.Universe.getParentUniverse({ 
+  tx: { to: universe } 
+}, function (error, parentUniverse) { 
+  console.log(parentUniverse); 
+});
 // example output:
 "0x63c59544b89cce1dd53b1b566862189b25adec41"
 
-augur.api.Universe.getPreviousFeeWindow({ tx: { to: universe } }, function (error, previousFeeWindow) { console.log(previousFeeWindow); });
+augur.api.Universe.getPreviousFeeWindow({ 
+  tx: { to: universe } 
+}, function (error, previousFeeWindow) { 
+  console.log(previousFeeWindow); 
+});
 // example output:
-"577"
+"0xc0adccd7c65ea05c2e91a148af988d776e683643"
 
-augur.api.Universe.getRepMarketCapInAttoeth({ tx: { to: universe } }, function (error, repMarketCapInAttoeth) { console.log(repMarketCapInAttoeth); });
+augur.api.Universe.getRepMarketCapInAttoeth({ 
+  tx: { to: universe } 
+}, function (error, repMarketCapInAttoeth) { 
+  console.log(repMarketCapInAttoeth); 
+});
 // example output:
-"985864880000000000"
+"36000000000000000000000000000000000000000"
 
-augur.api.Universe.getReputationToken({ tx: { to: universe } }, function (error, reputationTokenAddress) { console.log(reputationTokenAddress); });
+augur.api.Universe.getReputationToken({ 
+  tx: { to: universe } 
+}, function (error, reputationTokenAddress) { 
+  console.log(reputationTokenAddress); 
+});
 // example output:
 "0x2fb561b2bdbcd1ae1995bdd6aff6776d6f4292f2"
 
-augur.api.Universe.getTargetRepMarketCapInAttoeth({ tx: { to: universe } }, function (error, targetRepMarketCapInAttoeth) { console.log(targetRepMarketCapInAttoeth); });
+augur.api.Universe.getTargetRepMarketCapInAttoeth({ 
+  tx: { to: universe } 
+}, function (error, targetRepMarketCapInAttoeth) { 
+  console.log(targetRepMarketCapInAttoeth); 
+});
 // example output:
-"985865890000000000"
+"211250000000000000000"
 
-augur.api.Universe.getWinningChildUniverse({ tx: { to: universe } }, function (error, winningChildUniverse) { console.log(winningChildUniverse); });
+augur.api.Universe.getWinningChildUniverse({ 
+  tx: { to: universe } 
+}, function (error, winningChildUniverse) { 
+  console.log(winningChildUniverse); 
+});
 // example output:
 "0x432561b2bdbcd1ae1995bdd6aff6776d6f4292f2"
 
 augur.api.Universe.isContainerForFeeToken({
   tx: { to: universe },
   _shadyFeeToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-}, function (error, isContainerForFeeToken) { console.log(isContainerForFeeToken); });
+}, function (error, isContainerForFeeToken) { 
+  console.log(isContainerForFeeToken); 
+});
 // example output:
-"1"
+true
 
 augur.api.Universe.isContainerForFeeWindow({
   tx: { to: universe },
   _shadyFeeWindow: "0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
-}, function (error, isContainerForFeeWindow) { console.log(isContainerForFeeWindow); });
+}, function (error, isContainerForFeeWindow) { 
+  console.log(isContainerForFeeWindow); 
+});
 // example output:
-"1"
+true
 
 augur.api.Universe.isContainerForMarket({
   tx: { to: universe },
   _shadyMarket: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
-}, function (error, isContainerForMarket) { console.log(isContainerForMarket); });
+}, function (error, isContainerForMarket) { 
+  console.log(isContainerForMarket); 
+});
 // example output:
-"1"
+false
 
 augur.api.Universe.isContainerForReportingParticipant({
   tx: { to: universe },
   _shadyReportingParticipant: "0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41"
-}, function (error, isContainerForReportingParticipant) { console.log(isContainerForReportingParticipant); });
+}, function (error, isContainerForReportingParticipant) { 
+  console.log(isContainerForReportingParticipant); 
+});
 // example output:
-"1"
+true
 
 augur.api.Universe.isContainerForShareToken({
   tx: { to: universe },
   _shadyShareToken: "0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61"
-}, function (error, isContainerForShareToken) { console.log(isContainerForShareToken); });
+}, function (error, isContainerForShareToken) { 
+  console.log(isContainerForShareToken); 
+});
 // example output:
-"1"
+true
 
-augur.api.Universe.isForking({ tx: { to: universe } }, function (error, isForking) { console.log(isForking); });
+augur.api.Universe.isForking({ 
+  tx: { to: universe } 
+}, function (error, isForking) { 
+  console.log(isForking); 
+});
 // example output:
-"0"
+false
 
 augur.api.Universe.isParentOf({
   tx: { to: universe },
   _shadyChild: "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
-}, function (error, isParentOf) { console.log(isParentOf); });
+}, function (error, isParentOf) { 
+  console.log(isParentOf); 
+});
 // example output:
-"1"
+true
 ```
 Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
@@ -2043,7 +2123,7 @@ Returns the Ethereum contract address of a [Universe's](#universe) [Child Univer
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Universe's Child Universe that has its Final Outcome set to the specified Payout Distribution Hash, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the Universe's Child Universe that has its Final Outcome set to the specified Payout Distribution Hash, as a 16-byte hexadecimal string. If no such Child Universe exists, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getCurrentFeeWindow(p, callback)
 
@@ -2073,7 +2153,7 @@ Returns the number of seconds in a [Dispute Round](#dispute-round) within the sp
 
 #### **Returns:**
 
-* (number) Number of seconds in a Universe's Dispute Round, as an unsigned 256-bit integer.
+* (string) Number of seconds in a Universe's Dispute Round, as a stringified unsigned integer.
 
 ### augur.api.Universe.getFeeWindow(p, callback)
 
@@ -2084,12 +2164,12 @@ Returns the Ethereum contract address of a given [Fee Window](#fee-window) in th
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._feeWindowId`** (number) Fee Window ID, as an unsigned 256-bit integer.
+    * **`p._feeWindowId`** (number|string) Fee Window ID, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the given Fee Window in the Universe, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the given Fee Window in the Universe, as a 16-byte hexadecimal string. If a Fee Window with the specified ID does not exist, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getFeeWindowByTimestamp(p, callback)
 
@@ -2100,12 +2180,12 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) running a
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._timestamp`** (number) Unix timestamp for which to get the corresponding Fee Window, as an unsigned 256-bit integer.
+    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Fee Window running in the Universe at the specified timestamp, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the Fee Window running in the Universe at the specified timestamp, as a 16-byte hexadecimal string. If a Fee Window with the specified timestamp does not exist, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getFeeWindowForForkEndTime(p, callback)
 
@@ -2120,7 +2200,7 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) of the sp
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Fee Window of the specified Universe once the current Fork ends, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the Fee Window of the specified Universe once the current Fork ends, as a 16-byte hexadecimal string. If no Market in the Universe has Forked, or if the Fee Window contract does not exist yet, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getFeeWindowId(p, callback)
 
@@ -2131,12 +2211,12 @@ Returns the [Fee Window](#fee-window) ID for the [Universe](#universe) at the sp
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._timestamp`** (number) Unix timestamp for which to get the corresponding Fee Window, as an unsigned 256-bit integer.
+    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number) ID of the Fee Window running the the Universe at the specified timestamp, as an unsigned 256-bit integer.
+* (string) ID of the Fee Window running the the Universe at the specified timestamp, as a stringified unsigned integer. If the Fee Window contract does not currently exist, "0" will be returned.
 
 ### augur.api.Universe.getForkEndTime(p, callback)
 
@@ -2151,7 +2231,7 @@ Returns the Unix timestamp for when the [Fork Phase](#fork-period) ends that was
 
 #### **Returns:**
 
-* (number) Unix timestamp when the Fork Phase ends that was started on the specified Universe, as an unsigned 256-bit integer.
+* (string) Unix timestamp when the Fork Phase ends that was started on the specified Universe, as a stringified unsigned integer. If a Fork has not occurred in the Universe, "0" will be returned.
 
 ### augur.api.Universe.getForkingMarket(p, callback)
 
@@ -2166,11 +2246,11 @@ Returns the Ethereum contract address of the [Market](#market) that the specifie
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Market that the specified Universe is Forking over, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the Market that the specified Universe is Forking over, as a 16-byte hexadecimal string. If the Universe does not contain a [Forked Market](#forked-market), the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getForkReputationGoal(p, callback)
 
-Returns the estimated amount of [REP](#rep) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) in the specified [Universe](#universe) to be [Finalized](#finalized-market) before the end of the [Fork Phase](#fork-period).
+Returns the estimated amount of [attoREP](#atto-prefix) that must be migrated to one [Child Universe](#child-universe) in order to allow a [Fork](#fork) in the specified [Universe](#universe) to be [Finalized](#finalized-market) before the end of the [Fork Phase](#fork-period).
 
 #### **Parameters:**
 
@@ -2181,22 +2261,7 @@ Returns the estimated amount of [REP](#rep) that must be migrated to one [Child 
 
 #### **Returns:**
 
-* (number) Estimated amount of REP that must be migrated to one Child Universe in order to allow a Fork in the specified Universe to be Finalized before the end of the Fork Phase, as an unsigned 256-bit integer.
-
-### augur.api.Universe.getInitialReportStakeSize(p, callback)
-
-Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size of the Stake placed on the [Designated Report](#designated-report) (whichever is greater).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (number) The size of the No-Show REP Bond or the size of the Stake placed on the Designated Report (whichever is greater), in [attoREP](#atto-prefix), as an unsigned 256-bit integer.
+* (string) Estimated amount of attoREP that must be migrated to one Child Universe in order to allow a Fork in the specified Universe to be Finalized before the end of the Fork Phase, as a stringified unsigned integer.
 
 ### augur.api.Universe.getNextFeeWindow(p, callback)
 
@@ -2211,7 +2276,7 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) coming up
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Fee Window coming up after the current Fee Window ends in the specified Universe, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the Fee Window coming up after the current Fee Window ends in the specified Universe, as a 16-byte hexadecimal string. If the Fee Window contract for the next Fee Window does not exist yet, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getOpenInterestInAttoEth(p, callback)
 
@@ -2226,7 +2291,7 @@ Returns the total value of all [Complete Sets](#complete-sets) that exist across
 
 #### **Returns:**
 
-* (number) Total value of all Complete Sets that exist across all Markets the specified Universe, priced in [attoETH](#atto-prefix), as an unsigned 256-bit integer.
+* (string) Total value of all Complete Sets that exist across all Markets the specified Universe, priced in [attoETH](#atto-prefix), as a stringified unsigned integer.
 
 ### augur.api.Universe.getParentPayoutDistributionHash(p, callback)
 
@@ -2241,7 +2306,7 @@ Returns the [Payout Distribution Hash](#payout-distribution-hash) of the specifi
 
 #### **Returns:**
 
-* (string) Payout Distribution Hash of the Universe's Parent Universe, as a 32-byte hexadecimal string.
+* (string) Payout Distribution Hash of the Universe's Parent Universe, as a 32-byte hexadecimal string.  If the Universe does not have a Parent Universe (that is, it is a [Genesis Universe](#genesis-universe)), the string "0x0000000000000000000000000000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getParentUniverse(p, callback)
 
@@ -2256,7 +2321,7 @@ Returns the Ethereum contract address of the [Parent Universe](#parent-universe)
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Parent Universe for the specified Universe. If this is called on a Genesis Universe, it will return `0`, as Genesis Universes do not have a Parent Universe.
+* (string) Ethereum contract address of the Parent Universe for the specified Universe. If the Universe does not have a Parent Universe (that is, it is a [Genesis Universe](#genesis-universe)), the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getPreviousFeeWindow(p, callback)
 
@@ -2271,11 +2336,11 @@ Returns the Ethereum contract address of the previous [Fee Window](#fee-window) 
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the previous Fee Window for the specified Universe, as a 16-byte hexadecimal string.
+* (string) Ethereum contract address of the previous Fee Window for the specified Universe, as a 16-byte hexadecimal string.  If the Fee Window contract for the previous Fee Window does not exist yet, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getRepMarketCapInAttoeth(p, callback)
 
-Returns an estimate for the market cap in [REP](#rep) of the specified [Universe](#universe). This estimate is updated manually by the Augur development team, roughly once every [Fee Window](#fee-window). It is used by Augur to set the price of the [Reporting Fee](#reporting-fee).
+Returns an estimate for the REP market cap of the specified [Universe](#universe). This estimate is updated manually by the Augur development team, roughly once every [Fee Window](#fee-window). It is used by Augur to set the price of the [Reporting Fee](#reporting-fee).
 
 #### **Parameters:**
 
@@ -2286,7 +2351,7 @@ Returns an estimate for the market cap in [REP](#rep) of the specified [Universe
 
 #### **Returns:**
 
-* (number) Estimated market cap in REP of the specified Universe, priced in attoETH, as an unsigned 256-bit integer.
+* (string) Estimated REP market cap of the specified Universe, priced in attoETH, as a stringified unsigned integer.
 
 ### augur.api.Universe.getReputationToken(p, callback)
 
@@ -2316,7 +2381,7 @@ Returns the [REP](#rep) market cap that Augur targets when calculating [Reportin
 
 #### **Returns:**
 
-* (number) REP market cap that Augur targets when calculating Reporting Fees, in [attoETH](#atto-prefix), as an unsigned 256-bit integer.
+* (string) REP market cap that Augur targets when calculating Reporting Fees, in [attoETH](#atto-prefix), as a stringified unsigned integer.
 
 ### augur.api.Universe.getWinningChildUniverse(p, callback)
 
@@ -2332,6 +2397,22 @@ Returns the Ethereum contract address of the [Winning Universe](#winning-univers
 #### **Returns:**
 
 * (string) Ethereum contract address of the Winning Universe for a Universe that has Forked, as a 16-byte hexadecimal string.
+
+### augur.api.Universe.isContainerForFeeToken(p, callback)
+
+Returns whether the given [Universe](#universe) is a container for a particular Fee Token. Every Fee Token belongs to a [Universe](#universe), and this method is used to see if a specific Fee Token address belongs to the Universe in question.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
+    * **`p._shadyFeeToken`** (string) Ethereum contract address of the Fee Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the Fee Token belongs to the Universe, or `false` otherwise.
 
 ### augur.api.Universe.isContainerForFeeWindow(p, callback)
 

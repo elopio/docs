@@ -111,7 +111,7 @@ Holders of REP tokens in the Parent Universe may migrate their tokens to a Child
 
 When a Fork is initiated, all REP [Staked](#dispute-stake) on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.
 
-Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the Winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated to the Winning Universe and, if they are un-Finalized and have received an [Initial Report](#initial-report), are reset back to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). The Fork is then complete and the regular 7-day Fee Window cycle continues.
+Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the Winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated only to the Winning Universe and, if they are un-Finalized and have received an [Initial Report](#initial-report), are reset back to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). The Fork is then complete and the regular 7-day Fee Window cycle continues.
 
 There are a few important things to note about the Forking process:
 

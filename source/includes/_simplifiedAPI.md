@@ -345,7 +345,7 @@ Sends Ether to a specified Ethereum address.
 
 ### augur.assets.sendReputation(p)
 
-Sends [REP](#rep) to a specified Ethereum address. This function will trigger a [`TokensTransferred` event](#TokensTransferred) if the REP is successfully sent.
+Sends [REP](#rep) to a specified Ethereum address. This function will trigger a [`TokensTransferred`](#TokensTransferred) event if the REP is successfully sent.
 
 #### **Parameters:**
 
@@ -712,7 +712,7 @@ augur.createMarket.getMarketCreationCostBreakdown({
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
-Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
+Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -732,7 +732,7 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
 
 ### augur.createMarket.createCategoricalMarket(p)
 
-Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
+Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -753,7 +753,7 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
 
 ### augur.createMarket.createScalarMarket(p)
 
-Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated` event](#MarketCreated) and [`TokensTransferred` event](#TokensTransferred) if the [Market](#market) is created successfully. 
+Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
 
 #### **Parameters:**
 
@@ -1452,7 +1452,7 @@ augur.reporting.getStakeRequiredForDesignatedReporter({
 ```
 ### augur.reporting.finalizeMarket(p)
 
-[Finalizes](#finalized-market) a [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized` event](#MarketFinalized) if the Market Finalized without any errors.
+[Finalizes](#finalized-market) a [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
 
 This transaction will fail if:
 
