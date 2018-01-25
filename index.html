@@ -3962,9 +3962,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// Asynchronous call -- STRONGLY RECOMMENDED.</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numOutcomes</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numberOfOutcomes</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numOutcomes</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberOfOutcomes</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// console prints 2</span>
 
@@ -3992,15 +3992,17 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="augur-call-api">Augur Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
   <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownUniverse</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownUniverse</span><span class="p">);</span> <span class="p">});</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownUniverse</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownUniverse</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"true"</span>
+<span class="kc">true</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur Solidity Contract</a>, which handles <a href="#universe">Universe</a> creation and event logging.</p>
 
 <h3 id="augur-api-augur-isknownuniverse-p-callback">augur.api.Augur.isKnownUniverse(p, callback)</h3>
 
-<p>Augur keeps track of the <a href="#genesis-universe">Genesis Universe</a> and all <a href="#child-universe">Child Universes</a> internally. This function returns whether <code class="prettyprint">_universe</code> is a <a href="#universe">Universe</a> contract address that is known to Augur.</p>
+<p>Augur keeps track of its <a href="#genesis-universe">Genesis Universes</a> and all <a href="#child-universe">Child Universes</a> internally. This function returns whether the specified <a href="#universe">Universe</a> is a Universe contract address that is known to Augur.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -4016,7 +4018,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the specified <code class="prettyprint">_universe</code> is in Augur&rsquo;s list of known Universe, or <code class="prettyprint">false</code> otherwise.</li>
+<li>(boolean) <code class="prettyprint">true</code> if the specified Universe is in Augur&rsquo;s list of known Universe, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="dispute-crowdsourcer-call-api">Dispute Crowdsourcer Call API</h2>
@@ -4053,11 +4055,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">isDisavowed</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isDisavowed</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isDisavowed</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1"</span>
+<span class="kc">true</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">isInvalid</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isInvalid</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isInvalid</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1"</span>
+<span class="kc">true</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">DisputeCrowdsourcer Solidity Contract</a>, which allows users to <a href="#dispute-stake">Stake</a> and redeem <a href="#rep">REP</a> on <a href="#outcome">Outcomes</a> other than a <a href="#market">Market&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
@@ -4295,63 +4297,106 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="fee-window-call-api">Fee Window Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Contract Call API Examples:</span>
-<span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0x06cbcd92af2571f1419b622a794d65db524f682a"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">avgReportingGasPrice</span><span class="p">);</span> <span class="p">});</span>
+<span class="c1">// Fee Window contract addresses can be obtained using a variety of Call API functions, </span>
+<span class="c1">// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`</span>
+<span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0x37a809f8139e5637fd94c7d34912cb15c6496111"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">avgReportingGasPrice</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"340000"</span>
+<span class="s2">"12500000000"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">endTime</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">endTime</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1500388730"</span>
+<span class="s2">"1517443200"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumDesignatedReportNoShows</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numDesignatedReportNoShows</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numDesignatedReportNoShows</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumDesignatedReportNoShows</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numDesignatedReportNoShows</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numDesignatedReportNoShows</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"2"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumIncorrectDesignatedReportMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumIncorrectDesignatedReportMarkets</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numIncorrectDesignatedReportMarkets</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"10"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumInvalidMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numInvalidMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numInvalidMarkets</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumInvalidMarkets</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numInvalidMarkets</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numInvalidMarkets</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"3"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumMarkets</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numMarkets</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numMarkets</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getNumMarkets</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">numMarkets</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numMarkets</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"65"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationToken</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reputationToken</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reputationToken</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getStartTime</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">startTime</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getStartTime</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">startTime</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"14995895900"</span>
+<span class="s2">"1516838400"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">universe</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">universe</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isActive</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isActive</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isActive</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isActive</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isActive</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isActive</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1"</span>
+<span class="kc">true</span>
 
-<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">},</span>
-  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="nx">_market</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForMarket</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isForkingMarketFinalized</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForkingMarketFinalized</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isForkingMarketFinalized</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1"</span>
+<span class="kc">true</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isForkingMarketFinalized</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForkingMarketFinalized</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isForkingMarketFinalized</span><span class="p">);</span> <span class="p">});</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isOver</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isOver</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isOver</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"0"</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isOver</span><span class="p">({</span> <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isOver</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isOver</span><span class="p">);</span> <span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"0"</span>
+<span class="kc">false</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">FeeWindow Solidity Contract</a>, which allows for the buying and redeeming of <a href="#participation-token">Participation Tokens</a>.</p>
 
@@ -4605,36 +4650,16 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><code class="prettyprint">true</code> if the specified Fee Window is active, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
-<h3 id="augur-api-feewindow-iscontainerformarket-p-callback">augur.api.FeeWindow.isContainerForMarket(p, callback)</h3>
-
-<p>Returns whether <code class="prettyprint">p._shadyMarket</code> is a <a href="#market">Market</a> that is set to be <a href="#report">Reported</a> on during the specified <a href="#fee-window">Fee Window</a>. Markets are assigned to the first Fee Window that begins after the Market&rsquo;s <a href="#end-time">End Time</a>.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p._shadyMarket</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Market belongs to the Fee Window, or <code class="prettyprint">false</code> otherwise.</li>
-</ul>
-
 <h3 id="augur-api-feewindow-isforkingmarketfinalized-p-callback">augur.api.FeeWindow.isForkingMarketFinalized(p, callback)</h3>
 
 <p>Returns whether the <a href="#forked-market">Forked Market</a> in this <a href="#fee-window">Fee Window&rsquo;s</a> <a href="#universe">Universe</a> has been <a href="#finalized-market">Finalized</a>.</p>
 
+<p>This call will fail if:</p>
+
+<ul>
+<li>The Fee Window does not contain a Forked Market.</li>
+</ul>
+
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -4653,7 +4678,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Forked Market is Finalized, or <code class="prettyprint">false</code> otherwise.</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Fee Window contains a Forked Market that is Finalized, or <code class="prettyprint">false</code> if it contains a Forked Market that is not Finalized.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-isover-p-callback">augur.api.FeeWindow.isOver(p, callback)</h3>
@@ -6581,7 +6606,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="time-controlled-call-api">Time Controlled Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// TimeControlled Contract Call API Examples:</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">TimeControlled</span><span class="p">.</span><span class="nx">getTimestamp</span><span class="p">({</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span> <span class="p">});</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span> 
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1516744206"</span>
 </code></pre></div>
