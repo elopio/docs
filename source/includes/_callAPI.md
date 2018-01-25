@@ -14,9 +14,9 @@ var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 // Asynchronous call -- STRONGLY RECOMMENDED.
 augur.api.Market.getNumberOfOutcomes({ 
   tx: { to: market } 
-}, function (error, numOutcomes) {
+}, function (error, numberOfOutcomes) {
   console.log(error);
-  console.log(numOutcomes);
+  console.log(numberOfOutcomes);
 });
 // console prints 2
 
@@ -44,15 +44,17 @@ Augur Call API
 ```javascript
 augur.api.Augur.isKnownUniverse({ 
   _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
-}, function (error, isKnownUniverse) { console.log(isKnownUniverse); });
+}, function (error, isKnownUniverse) { 
+  console.log(isKnownUniverse); 
+});
 // example output:
-"true"
+true
 ```
 Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
 ### augur.api.Augur.isKnownUniverse(p, callback)
 
-Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns whether `_universe` is a [Universe](#universe) contract address that is known to Augur.
+Augur keeps track of its [Genesis Universes](#genesis-universe) and all [Child Universes](#child-universe) internally. This function returns whether the specified [Universe](#universe) is a Universe contract address that is known to Augur.
 
 #### **Parameters:**
 
@@ -62,7 +64,7 @@ Augur keeps track of the [Genesis Universe](#genesis-universe) and all [Child Un
 
 #### **Returns:**
 
-* (boolean) `true` if the specified `_universe` is in Augur's list of known Universe, or `false` otherwise.
+* (boolean) `true` if the specified Universe is in Augur's list of known Universe, or `false` otherwise.
 
 Dispute Crowdsourcer Call API
 -------------------------
@@ -100,11 +102,11 @@ augur.api.DisputeCrowdsourcer.getStake({ tx: { to: disputeCrowdsourcer } }, func
 
 augur.api.DisputeCrowdsourcer.isDisavowed({ tx: { to: disputeCrowdsourcer } }, function (error, isDisavowed) { console.log(isDisavowed); });
 // example output:
-"1"
+true
 
 augur.api.DisputeCrowdsourcer.isInvalid({ tx: { to: disputeCrowdsourcer } }, function (error, isInvalid) { console.log(isInvalid); });
 // example output:
-"1"
+true
 ```
 Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
@@ -252,63 +254,106 @@ Fee Window Call API
 -------------------------
 ```javascript
 // Fee Window Contract Call API Examples:
-var feeWindow = "0x06cbcd92af2571f1419b622a794d65db524f682a";
 
-augur.api.FeeWindow.getAvgReportingGasPrice({ tx: { to: feeWindow } }, function (error, avgReportingGasPrice) { console.log(avgReportingGasPrice); });
+// Fee Window contract addresses can be obtained using a variety of Call API functions, 
+// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`
+var feeWindow = "0x37a809f8139e5637fd94c7d34912cb15c6496111";
+
+augur.api.FeeWindow.getAvgReportingGasPrice({ 
+  tx: { to: feeWindow } 
+}, function (error, avgReportingGasPrice) { 
+  console.log(avgReportingGasPrice); 
+});
 // example output:
-"340000"
+"12500000000"
 
-augur.api.FeeWindow.getEndTime({ tx: { to: feeWindow } }, function (error, endTime) { console.log(endTime); });
+augur.api.FeeWindow.getEndTime({ 
+  tx: { to: feeWindow } 
+}, function (error, endTime) { 
+  console.log(endTime); 
+});
 // example output:
-"1500388730"
+"1517443200"
 
-augur.api.FeeWindow.getNumDesignatedReportNoShows({ tx: { to: feeWindow } }, function (error, numDesignatedReportNoShows) { console.log(numDesignatedReportNoShows); });
+augur.api.FeeWindow.getNumDesignatedReportNoShows({ 
+  tx: { to: feeWindow } 
+}, function (error, numDesignatedReportNoShows) { 
+  console.log(numDesignatedReportNoShows); 
+});
 // example output:
 "2"
 
-augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ tx: { to: feeWindow } }, function (error, numIncorrectDesignatedReportMarkets) { console.log(numIncorrectDesignatedReportMarkets); });
+augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets({ 
+  tx: { to: feeWindow } 
+}, function (error, numIncorrectDesignatedReportMarkets) { 
+  console.log(numIncorrectDesignatedReportMarkets); 
+});
 // example output:
 "10"
 
-augur.api.FeeWindow.getNumInvalidMarkets({ tx: { to: feeWindow } }, function (error, numInvalidMarkets) { console.log(numInvalidMarkets); });
+augur.api.FeeWindow.getNumInvalidMarkets({ 
+  tx: { to: feeWindow } 
+}, function (error, numInvalidMarkets) { 
+  console.log(numInvalidMarkets); 
+});
 // example output:
 "3"
 
-augur.api.FeeWindow.getNumMarkets({ tx: { to: feeWindow } }, function (error, numMarkets) { console.log(numMarkets); });
+augur.api.FeeWindow.getNumMarkets({ 
+  tx: { to: feeWindow } 
+}, function (error, numMarkets) { 
+  console.log(numMarkets); 
+});
 // example output:
 "65"
 
-augur.api.FeeWindow.getReputationToken({ tx: { to: feeWindow } }, function (error, reputationToken) { console.log(reputationToken); });
+augur.api.FeeWindow.getReputationToken({ 
+  tx: { to: feeWindow } 
+}, function (error, reputationToken) { 
+  console.log(reputationToken); 
+});
 // example output:
 "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.FeeWindow.getStartTime({ tx: { to: feeWindow } }, function (error, startTime) { console.log(startTime); });
+augur.api.FeeWindow.getStartTime({ 
+  tx: { to: feeWindow } 
+}, function (error, startTime) { 
+  console.log(startTime); 
+});
 // example output:
-"14995895900"
+"1516838400"
 
-augur.api.FeeWindow.getUniverse({ tx: { to: feeWindow } }, function (error, universe) { console.log(universe); });
+augur.api.FeeWindow.getUniverse({ 
+  tx: { to: feeWindow } 
+}, function (error, universe) { 
+  console.log(universe); 
+});
 // example output:
 "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.FeeWindow.isActive({ tx: { to: feeWindow } }, function (error, isActive) { console.log(isActive); });
+augur.api.FeeWindow.isActive({ 
+  tx: { to: feeWindow } 
+}, function (error, isActive) { 
+  console.log(isActive); 
+});
 // example output:
-"1"
+true
 
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-augur.api.FeeWindow.isContainerForMarket({
-  tx: { to: feeWindow },
-  _shadyMarket: _market
-}, function (error, isContainerForMarket) { console.log(isContainerForMarket); });
+augur.api.FeeWindow.isForkingMarketFinalized({ 
+  tx: { to: feeWindow } 
+}, function (error, isForkingMarketFinalized) { 
+  console.log(isForkingMarketFinalized); 
+});
 // example output:
-"1"
+true
 
-augur.api.FeeWindow.isForkingMarketFinalized({ tx: { to: feeWindow } }, function (error, isForkingMarketFinalized) { console.log(isForkingMarketFinalized); });
+augur.api.FeeWindow.isOver({ 
+  tx: { to: feeWindow } 
+}, function (error, isOver) { 
+  console.log(isOver); 
+});
 // example output:
-"0"
-
-augur.api.FeeWindow.isOver({ tx: { to: feeWindow } }, function (error, isOver) { console.log(isOver); });
-// example output:
-"0"
+false
 ```
 Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
@@ -462,26 +507,14 @@ Returns whether the specified [Fee Window](#fee-window) is currently active. Fee
 
 * `true` if the specified Fee Window is active, or `false` otherwise.
 
-### augur.api.FeeWindow.isContainerForMarket(p, callback)
-
-Returns whether `p._shadyMarket` is a [Market](#market) that is set to be [Reported](#report) on during the specified [Fee Window](#fee-window). Markets are assigned to the first Fee Window that begins after the Market's [End Time](#end-time).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyMarket`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (boolean) `true` if the Market belongs to the Fee Window, or `false` otherwise.
-
 ### augur.api.FeeWindow.isForkingMarketFinalized(p, callback)
 
 Returns whether the [Forked Market](#forked-market) in this [Fee Window's](#fee-window) [Universe](#universe) has been [Finalized](#finalized-market).
 
+This call will fail if:
+
+* The Fee Window does not contain a Forked Market.
+
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
@@ -491,7 +524,7 @@ Returns whether the [Forked Market](#forked-market) in this [Fee Window's](#fee-
 
 #### **Returns:**
 
-* (boolean) `true` if the Forked Market is Finalized, or `false` otherwise.
+* (boolean) `true` if the Fee Window contains a Forked Market that is Finalized, or `false` if it contains a Forked Market that is not Finalized.
 
 ### augur.api.FeeWindow.isOver(p, callback)
 
@@ -1860,7 +1893,9 @@ Time Controlled Call API
 ```javascript
 // TimeControlled Contract Call API Examples:
 augur.api.TimeControlled.getTimestamp({
-}, function (error, timestamp) { console.log(timestamp); });
+}, function (error, timestamp) { 
+  console.log(timestamp); 
+});
 // example output:
 "1516744206"
 ```
