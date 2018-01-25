@@ -2268,7 +2268,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._timestamp`**  (number) Unix timestamp to set Augur's timestamp to, as an unsigned 256-bit integer.
+    * **`p._timestamp`**  (number|string) Unix timestamp to set Augur's timestamp to, as an unsigned integer or stringified unsigned integer.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
     * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.

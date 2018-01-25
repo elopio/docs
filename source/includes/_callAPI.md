@@ -162,12 +162,12 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number)  Payout Numerator for the Dispute Crowdsourcer, as an unsigned 256-bit integer.
+* (string)  Payout Numerator for the Dispute Crowdsourcer, as a stringified unsigned integer.
 
 ### augur.api.DisputeCrowdsourcer.getReputationToken(p, callback)
 
@@ -197,7 +197,7 @@ Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispu
 
 #### **Returns:**
 
-* (number)  attoREP required by the Dispute Crowdsourcer to Challenge the Tentative Outcome of its Market, as an unsigned 256-bit integer.
+* (string)  attoREP required by the Dispute Crowdsourcer to Challenge the Tentative Outcome of its Market, as a stringified unsigned integer.
 
 ### augur.api.DisputeCrowdsourcer.getStake(p, callback)
 
@@ -212,7 +212,7 @@ Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake
 
 #### **Returns:**
 
-* (number)  attoREP Staked on the Dispute Crowdsourcer, as an unsigned 256-bit integer.
+* (string)  attoREP Staked on the Dispute Crowdsourcer, as a stringified unsigned integer.
 
 ### augur.api.DisputeCrowdsourcer.isDisavowed(p, callback)
 
@@ -325,7 +325,7 @@ Returns the average amount of gas spent to submit either a [Designated Report](#
 
 #### **Returns:**
 
-* (number) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as an unsigned 256-bit integer.
+* (string) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getEndTime(p, callback)
 
@@ -340,7 +340,7 @@ Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will e
 
 #### **Returns:**
 
-* (number) Unix timestamp at which the Fee Window ends, as an unsigned 256-bit integer.
+* (string) Unix timestamp at which the Fee Window ends, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)
 
@@ -355,7 +355,7 @@ Returns the number of [Markets](#market) belonging to the specified [Fee Window]
 
 #### **Returns:**
 
-* (number) Number of Markets belonging to the Fee Window, where the Designated Reporter failed to Report during the Designated Reporting Phase, as an unsigned 256-bit integer.
+* (string) Number of Markets belonging to the Fee Window, where the Designated Reporter failed to Report during the Designated Reporting Phase, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getNumIncorrectDesignatedReportMarkets(p, callback)
 
@@ -370,7 +370,7 @@ Returns the number of [Unfinalized Markets](#finalized-market) belonging to the 
 
 #### **Returns:**
 
-* (number) Number of Markets in the Fee Window, where the Designated Report was Challenged in the current Dispute Round Phase or the Designated Reporter did not Report, as an unsigned 256-bit integer.
+* (string) Number of Markets in the Fee Window, where the Designated Report was Challenged in the current Dispute Round Phase or the Designated Reporter did not Report, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getNumInvalidMarkets(p, callback)
 
@@ -385,7 +385,7 @@ Returns the number of [Markets](#market) that were [Reported](#report) to be [In
 
 #### **Returns:**
 
-* (number) Number of Markets Reported as Invalid in the Fee Window, as an unsigned 256-bit integer.
+* (string) Number of Markets Reported as Invalid in the Fee Window, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getNumMarkets(p, callback)
 
@@ -400,7 +400,7 @@ Returns the total number of [Markets](#market) that are in the [Dispute Round Ph
 
 #### **Returns:**
 
-* (number) Number of Markets in the Dispute Round Phase for the Fee Window, as an unsigned 256-bit integer.
+* (string) Number of Markets in the Dispute Round Phase for the Fee Window, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getReputationToken(p, callback)
 
@@ -430,7 +430,7 @@ Returns a Unix timestamp of when a [Fee Window](#fee-window) becomes active and 
 
 #### **Returns:**
 
-* (number) Unix timestamp at which the Fee Window starts, as an unsigned 256-bit integer.
+* (string) Unix timestamp at which the Fee Window starts, as a stringified unsigned integer.
 
 ### augur.api.FeeWindow.getUniverse(p, callback)
 
@@ -663,12 +663,12 @@ Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for t
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number) Payout Numerator of a given Outcome for the InitialReporter contract, as an unsigned 256-bit integer.
+* (string) Payout Numerator of a given Outcome for the InitialReporter contract, as a stringified unsigned integer.
 
 ### augur.api.InitialReporter.getReportTimestamp(p, callback)
 
@@ -683,7 +683,7 @@ Returns the Unix timestamp of when the [Initial Report](#initial-report) (either
 
 #### **Returns:**
 
-* (number) Unix timestamp of when the Initial Report was submitted, as an unsigned 256-bit integer.
+* (string) Unix timestamp of when the Initial Report was submitted, as a stringified unsigned integer.
 
 ### augur.api.InitialReporter.getReputationToken(p, callback)
 
@@ -713,7 +713,7 @@ Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) 
 
 #### **Returns:**
 
-* (number) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as an unsigned 256-bit integer.
+* (string) Amount of attoREP Staked on the Reported Outcome of the Initial Report, as a stringified unsigned integer.
 
 ### augur.api.InitialReporter.getStake(p, callback)
 
@@ -728,7 +728,7 @@ Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [I
 
 #### **Returns:**
 
-* (number) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as an unsigned 256-bit integer.
+* (string) Amount of attoREP Staked on the Initial Report for the Market of the specified InitialReporter contract, as a stringified unsigned integer.
 
 ### augur.api.InitialReporter.isInvalid(p, callback)
 
@@ -971,7 +971,7 @@ Returns the Unix timestamp for when the specified [Market's](#market) event has 
 
 #### **Returns:**
 
-* (number) Unix timestamp for when the specified [Market's](#market) event has come to pass, as an unsigned 256-bit integer.
+* (string) Unix timestamp for when the specified [Market's](#market) event has come to pass, as a stringified unsigned integer.
 
 ### augur.api.Market.getFeeWindow(p, callback)
 
@@ -1001,7 +1001,7 @@ Returns the Unix timestamp for when the specified [Market](#market) was [Finaliz
 
 #### **Returns:**
 
-* (number) Unix timestamp for when the Market was Finalized, as an unsigned 256-bit integer.
+* (string) Unix timestamp for when the Market was Finalized, as a stringified unsigned integer.
 
 ### augur.api.Market.getForkingMarket(p, callback)
 
@@ -1046,7 +1046,7 @@ Returns the [Creator Fee](#creator-fee) set by the [Market Creator](#market-crea
 
 #### **Returns:**
 
-* (number) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as an unsigned 256-bit integer.
+* (string) Creator Fee set by the Market Creator, denominated in attotokens per Settlement of a Complete Set, as a stringified unsigned integer.
 
 ### augur.api.Market.getNumberOfOutcomes(p, callback)
 
@@ -1061,7 +1061,7 @@ Returns the number of [Outcomes](#outcome) for the specified [Market](#market). 
 
 #### **Returns:**
 
-* (number) Number of Outcomes for the Market, as an unsigned 8-bit integer.
+* (string) Number of Outcomes for the Market, as a stringified unsigned integer.
 
 ### augur.api.Market.getNumTicks(p, callback)
 
@@ -1076,7 +1076,7 @@ Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#mar
 
 #### **Returns:**
 
-* (number) Number of Ticks for the Market, as an unsigned 256-bit integer.
+* (string) Number of Ticks for the Market, as a stringified unsigned integer.
 
 ### augur.api.Market.getReputationToken(p, callback)
 
@@ -1102,7 +1102,7 @@ Returns the Ethereum contract address of the [Share Token](#share-token-call-api
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1123,7 +1123,7 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 
 #### **Returns:**
 
-* (number) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as an unsigned 256-bit integer.
+* (string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.
 
 ### augur.api.Market.getTotalStake(p, callback)
 
@@ -1138,7 +1138,7 @@ Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#ou
 
 #### **Returns:**
 
-* (number) Total attoREP Staked on the Market, as an unsigned 256-bit integer.
+* (string) Total attoREP Staked on the Market, as a stringified unsigned integer.
 
 ### augur.api.Market.getUniverse(p, callback)
 
@@ -1179,12 +1179,12 @@ Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) i
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number) Winning Payout Numerator for an Outcome in the Market, as an unsigned 256-bit integer.
+* (string) Winning Payout Numerator for an Outcome in the Market, as a stringified unsigned integer.
 
 ### augur.api.Market.isContainerForReportingParticipant(p, callback)
 
@@ -1391,8 +1391,8 @@ Returns whether a specific price is not a better price than a particular [Order]
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price to compare `p._betterOrderId` to, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price to compare `p._betterOrderId` to, as an unsigned integer or stringified unsigned integer.
     * **`p._betterOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1407,8 +1407,8 @@ Returns whether a specific price is not a worse price than a particular [Order](
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price to compare `p._worseOrderId` to, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price to compare `p._worseOrderId` to, as an unsigned integer or stringified unsigned integer.
     * **`p._worseOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1423,12 +1423,12 @@ Returns the amount of [Shares](#share) requested when a particular [Order](#orde
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._orderId`** (number) ID of the Order, as a 32-byte hexadecimal string.
+    * **`p._orderId`** (number|string) ID of the Order, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number) Amount of Shares requested when the Order was placed.
+* (string) Amount of Shares requested when the Order was placed, as a stringified unsigned integer.
 
 ### augur.api.Orders.getBestOrderId(p, callback)
 
@@ -1437,9 +1437,9 @@ Returns the [Order](#order) ID of the best Order of a particular type (either [A
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a Bid Order, `2` for an Ask Order), as an unsigned 8-bit integer. 
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a Bid Order, "2" for an Ask Order).
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1468,12 +1468,12 @@ Returns the last price traded for a specific [Outcome](#outcome) in a given [Mar
 
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number) Outcome of the Market, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) Outcome of the Market, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
 
-* (number) Last price traded for a specific Outcome in a given Market, as an unsigned 256-bit integer.
+* (string) Last price traded for a specific Outcome in a given Market, as a stringified unsigned integer.
 
 ### augur.api.Orders.getMarket(p, callback)
 
@@ -1515,7 +1515,7 @@ Returns the amount of money escrowed by the [Order Creator](#order-creator) for 
 
 #### **Returns:**
 
-* (number) Amount of money escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.
+* (string) Amount of money escrowed by the Order Creator for a given Order, as a stringified unsigned integer.
 
 ### augur.api.Orders.getOrderSharesEscrowed(p, callback)
 
@@ -1529,7 +1529,7 @@ Returns the number of [Shares](#share) escrowed by the [Order Creator](#order-cr
 
 #### **Returns:**
 
-* (number) Number of Shares escrowed by the Order Creator for a given Order, as an unsigned 256-bit integer.
+* (string) Number of Shares escrowed by the Order Creator for a given Order, as a stringified unsigned integer.
 
 ### augur.api.Orders.getOrderType(p, callback)
 
@@ -1543,7 +1543,7 @@ Returns the order type ([Bid Order](#bid-order) or [Ask Order](#ask-order)) of a
 
 #### **Returns:**
 
-* (number) Order type of the Order (`1` for Bid Orders, or `2` for Ask Orders).
+* (string) Order type of the Order, as a stringified unsigned integer ("1" for Bid Orders, or "2" for Ask Orders).
 
 ### augur.api.Orders.getOutcome(p, callback)
 
@@ -1557,7 +1557,7 @@ Returns the [Outcome](#outcome) being traded on for the specified [Order](#order
 
 #### **Returns:**
 
-* (number) Outcome being traded on for the specified Order, as a unsigned 8-bit integer.
+* (string) Outcome being traded on for the specified Order, as a stringified unsigned integer.
 
 ### augur.api.Orders.getPrice(p, callback)
 
@@ -1571,7 +1571,7 @@ Returns the price of a specified [Order](#order).
 
 #### **Returns:**
 
-* (number) Price of the Order, as an unsigned 256-bit integer.
+* (string) Price of the Order, as a stringified unsigned integer.
 
 ### augur.api.Orders.getVolume(p, callback)
 
@@ -1585,7 +1585,7 @@ Returns the volume of a specified [Market](#market).
 
 #### **Returns:**
 
-* (number) Volume of the Market, as an unsigned 256-bit integer.
+* (string) Volume of the Market, as a stringified unsigned integer.
 
 ### augur.api.Orders.getWorseOrderId(p, callback)
 
@@ -1608,9 +1608,9 @@ Returns the [Order](#order) ID of the worst Order of a particular type (either [
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a Bid Order, `2` for an Ask Order), as an unsigned 8-bit integer. 
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a Bid Order, "2" for an Ask Order). 
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned 8-bit integer.
+    * **`p._outcome`** (number|string) [Outcome](#outcome) of the Market, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1624,8 +1624,8 @@ Returns whether a specific price is a better price than a particular [Order](#or
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1640,8 +1640,8 @@ Returns whether a specific price is a worse price than a particular [Order](#ord
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1698,8 +1698,8 @@ Traverses the [Order Book](#order-book) in ascending order and returns an array 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.
     * **`p._lowestOrderId`** (string) Order ID expected to be a worse price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1714,8 +1714,8 @@ Traverses the [Order Book](#order-book) in descending order and returns an array
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.
     * **`p._highestOrderId`** (string) Order ID expected to be a better price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1730,8 +1730,8 @@ Returns an array containing the [Order](#order) IDs from the [Order Book](#order
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number) Type of Order (`1` for a [Bid Order](#bid-order), `2` for an [Ask Order](#ask-order)), as an unsigned 8-bit integer. 
-    * **`p._price`** (number) Price to compare `p._orderId` to, as an unsigned 256-bit integer.
+    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
     * **`p._bestOrderId`** (string) Best Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
     * **`p._worstOrderId`** (string) Worst Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID with a better price than `p._price`, as a 32-byte-hexadecimal string.
@@ -1790,7 +1790,7 @@ Returns total amount of [REP](#rep) that has been migrated into the current Repu
 
 #### **Returns:**
 
-* (number) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe's Parent Universe, as an unsigned 256-bit integer.
+* (string) Total amount of REP that has been migrated into the current ReputationToken contract from the ReputationToken contract of its Universe's Parent Universe, as a stringified unsigned integer.
 
 ### augur.api.ReputationToken.getTotalTheoreticalSupply(p, callback)
 
@@ -1805,7 +1805,7 @@ Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this Rep
 
 #### **Returns:**
 
-* (number) Total Theoretical REP Supply for this ReputationToken contract, as an unsigned 256-bit integer.
+* (string) Total Theoretical REP Supply for this ReputationToken contract, as a stringified unsigned integer.
 
 Share Token Call API
 --------------------
@@ -1853,7 +1853,7 @@ Returns the Outcome of the Market that the specified ShareToken is for.
 
 #### **Returns:**
 
-* (number) Returns the Outcome of the Market that the specified ShareToken is for, as an unsigned 256-bit integer.
+* (string) Returns the Outcome of the Market that the specified ShareToken is for, as a stringified unsigned integer.
 
 Time Controlled Call API
 ---------------
@@ -1881,7 +1881,7 @@ This call will fail if:
 
 #### **Returns:**
 
-* (number) Augur's internal Unix timestamp, as an unsigned 256-bit integer.
+* (string) Augur's internal Unix timestamp, as a stringified unsigned integer.
 
 Universe Call API
 ---------------
