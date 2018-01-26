@@ -2601,7 +2601,7 @@ Returns the Ethereum contract address of the [Winning Universe](#winning-univers
 
 ### augur.api.Universe.isContainerForFeeToken(p, callback)
 
-Returns whether the given [Universe](#universe) is a container for a particular Fee Token. Every Fee Token belongs to a [Universe](#universe), and this method is used to see if a specific Fee Token address belongs to the Universe in question.
+Returns whether the given [Universe](#universe) is a container for a particular [Fee Token](#fee-token). Every Fee Token belongs to a [Universe](#universe), and this method is used to see if a specific Fee Token address belongs to the Universe in question.
 
 #### **Parameters:**
 

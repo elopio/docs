@@ -20,6 +20,7 @@ includes:
   - callAPI
   - transactionAPI
   - events
+  - typeDefinitions
   - constants
   - tests
   - uiConventions
