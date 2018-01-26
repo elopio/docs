@@ -176,7 +176,7 @@ augur.accounts.loginWithMasterKey({
 }
 
 augur.accounts.logout();
-// This function does not produce any output.
+// This function does not accept parameters or a callback function, and does not return a value.
 ```
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
@@ -250,26 +250,24 @@ Logs into an account with a user-supplied plaintext private key.
 
 ### augur.accounts.logout()
 
-Logs out the account that is currently logged in.
+Logs out the account that is currently logged in. This function does not accept parameters or a callback function, and does not return a value.
 
 Assets Functions
 ----------------
 ```javascript
 augur.assets.sendEther({
-    etherToSend: "0.001", 
-    from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-    to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
-    meta: {
-        signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
-        accountType: "privateKey"
-    },
-    onSent: function() {},
-    onSuccess: function(result) {
-        console.log(result);
-    },
-    onFailed: function() {},
+  etherToSend: "0.001", 
+  from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
-// example output:
+// example onSuccess output:
 {
   "callReturn": null,
   "blockHash": "0xbb21d95d9370d88fd7a8259300476b1084cfcf54ae6c6684f77a60876107c980",
@@ -291,23 +289,19 @@ augur.assets.sendEther({
 }
 
 augur.assets.sendReputation({
-    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    reputationToSend: "0.001", 
-    _to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
-    meta: {
-        signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
-        accountType: "privateKey"
-    },
-    onSent: function() {
-    },
-    onSuccess: function(result) {
-        console.log(result);
-    },
-    onFailed: function() {
-    },
+  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  reputationToSend: "0.001", 
+  _to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+  meta: {
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
 
-// example output:
+// example onSuccess output:
 {
   "callReturn": null,
   "blockHash": "0xd4bbd077575d2006b19570d546a6f02a4ef45d4cb91d64286026431eda313fb8",
@@ -625,14 +619,33 @@ augur.createMarket.createBinaryMarket({
   _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output:
+{
+  "callReturn": "0xc841ee153e45e74074eae9685e815d08dee965eb",
+  "blockHash": "0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df",
+  "blockNumber": 1657080,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0x5b8d80",
+  "gasPrice": "0x1a13b8600",
+  "hash": "0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2",
+  "input": "0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000",
+  "nonce": "0x43",
+  "to": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  "transactionIndex": "0x0",
+  "value": "0xa8c0ff92d4c000",
+  "v": "0x2b",
+  "r": "0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de",
+  "s": "0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9",
+  "timestamp": 1516925924,
+  "gasFees": "0.022312465"
+}
 
 var _extraInfo = { 
   "resolutionSource": "http://www.espn.com", 
@@ -651,14 +664,33 @@ augur.createMarket.createCategoricalMarket({
   _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output:
+{
+  "callReturn": "0xc841ee153e45e74074eae9685e815d08dee965eb",
+  "blockHash": "0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df",
+  "blockNumber": 1657080,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0x5b8d80",
+  "gasPrice": "0x1a13b8600",
+  "hash": "0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2",
+  "input": "0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000",
+  "nonce": "0x43",
+  "to": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  "transactionIndex": "0x0",
+  "value": "0xa8c0ff92d4c000",
+  "v": "0x2b",
+  "r": "0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de",
+  "s": "0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9",
+  "timestamp": 1516925924,
+  "gasFees": "0.022312465"
+}
 
 var _extraInfo = { 
   "resolutionSource": "http://forecast.weather.gov", 
@@ -678,14 +710,33 @@ augur.createMarket.createScalarMarket({
   _description: "High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output:
+{
+  "callReturn": "0x008f89903707dbaaed3c42202ec00a94673e96db",
+  "blockHash": "0xfbb0b8ced5dab79a5ef58dd0eb45c28e5124832e5c27c0479ea8d6947fef4ed2",
+  "blockNumber": 1657371,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0x5b8d80",
+  "gasPrice": "0x4a817c800",
+  "hash": "0x7f52926eac45ec6483cc19b5da795b7425fd3caf191c3eeb208627f4ea0e43b9",
+  "input": "0x72d61dfa000000000000000000000000000000000000000000000000000000005b39b1500000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12acffffffffffffffffffffffffffffffffffffffffffffffff7538dcfb761800000000000000000000000000000000000000000000000000068155a43676e00000000000000000000000000000000000000000000000000000000000000013d62074656d7065726174757265000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001c00000000000000000000000000000000000000000000000000000000000000056486967682074656d70657261747572652028696e20646567726565732046616872656e686569742920696e2053616e204672616e636973636f2c2043616c69666f726e69612c206f6e204a756c7920312c203230313800000000000000000000000000000000000000000000000000000000000000000000000000000000007a227b5c227265736f6c7574696f6e536f757263655c223a5c22687474703a2f2f666f7265636173742e776561746865722e676f765c222c5c22746167735c223a5b5c2253616e204672616e636973636f5c222c5c22776561746865725c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000",
+  "nonce": "0x45",
+  "to": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  "transactionIndex": "0x0",
+  "value": "0xa8c0ff92d4c000",
+  "v": "0x2b",
+  "r": "0xa8dee275a834a3dc9b2f36c0f7bb9564557d6943623013d772b966ce7045e029",
+  "s": "0x14355beeb51c6565f923e2f2e4133261765cc6357a3d8038b18a4d25e874fec8",
+  "timestamp": 1516930289,
+  "gasFees": "0.0618542"
+}
 
 augur.createMarket.getMarketCreationCost({
     universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
@@ -1572,48 +1623,6 @@ Returns the amount of [REP](#rep) a [Designated Reporter](#designated-reporter) 
 
 *  (string) Amount of Stake required for the Designated Reporter on this Universe, as a base-10 string.
 
-RPC Functions
--------------
-```javascript
-augur.rpc.setDebugOptions(debugOptions): JS sample code coming soon
-
-augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed): JS sample code coming soon
-```
-### augur.rpc.setDebugOptions(debugOptions)
-
-Enables/Disables printing of information related to [ethrpc](https://github.com/ethereumjs/ethrpc) connectivity and transactions.
-
-#### **Parameters:**
-
-* **`debugOptions`** (Object) Parameters object.  
-    * **`debugOptions.broadcast`**  (boolean) Whether to enable printing of verbose, low-level information related to sending/receiving transactions, such as the transaction JSON that gets sent out over the wire, incoming eth_subscription messages, etc.
-    * **`debugOptions.connect`**  (boolean) Whether to enable printing of the result of the initial connection of ethrpc to the underlying Ethereum node, as well as which endpoints are connected, on which protocols.
-    * **`debugOptions.tx`**  (boolean) Whether to enable printing of information related to transaction construction/submission/confirmation. This information includes the intermediate “transaction” object with human-readable parameters, the (best-guess) return value fetched from the follow-up eth_call when a transaction gets resubmitted, and the transaction hash once the transaction is submitted.
-
-### augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)
-
-For a more detailed explanation of how `augur.rpc.transact`, please refer to the [Using Transact Directly](#using-transact-directly) section.
-
-#### **Parameters:**
-
-* **`payload`**  (Object) 
-    * **`payload.to`**  (string) Address of the Ethereum contract containing the function to be called, as a 16-byte hexadecimal string.
-    * **`payload.name`**  (string)
-    * **`payload.signature`**  (Array)
-    * **`payload.params`**  (Object)
-    * **`payload.send`**  (boolean) &lt;optional>  Whether to use `sendTransaction` when calling the desired function.
-    * **`payload.from`**  (string) &lt;optional> Sender's Ethereum address, as a 16-byte hexadecimal string.
-    * **`payload.returns`**  (string) &lt;optional> Data type to return, as a string.
-* **`privateKeyOrSigner`**  () 
-* **`accountType`**  () 
-* **`onSent`**  () 
-* **`onSuccess`**  () 
-* **`onFailed`**  () 
-
-#### **Returns:**
-
-*
-
 Trading Functions
 -----------------
 ```javascript
@@ -1637,35 +1646,33 @@ augur.trading.calculateProfitLoss({
 }
 
 augur.trading.claimMarketsTradingProceeds({
-  _markets: [
+  markets: [
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002",
   ],
+  _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function() {},
-  onSuccess: function(result) {
-    console.log(result);
-  },
-  onFailed: function() {}
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
 // example output coming soon
 
 augur.trading.claimTradingProceeds({
   _market: "0x0000000000000000000000000000000000000001",
+  _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function() {},
-  onSuccess: function(result) {
-    console.log(result);
-  },
-  onFailed: function() {}
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output: coming soon
 
 augur.trading.denormalizePrice({
   minPrice: "0",
@@ -1921,16 +1928,14 @@ augur.trading.placeTrade({
   _tradeGroupId: "0x1",
   doNotCreateOrders: false,
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  onSent: function() {},
-  onSuccess: function(result) {
-      console.log(result);
-  },
-  onFailed: function() {},
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output: coming soon
 
 augur.trading.simulateTrade({
   orderType: 0,
@@ -1988,16 +1993,14 @@ augur.trading.tradeUntilAmountIsZero({
   _tradeGroupId: "0x1",
   doNotCreateOrders: true,
   meta: {
-      signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 51],
-      accountType: "privateKey"
+    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
   },
-  onSent: function() {},
-  onSuccess: function(result) {
-      console.log(result);
-  },
-  onFailed: function() {}
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output: coming soon
 ```
 ### augur.trading.calculateProfitLoss(p)
 
@@ -2021,6 +2024,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 
 * **`p`** (Object) Parameters object.
     * **`p.markets`**  (Array.&lt;string>) Array of [Market](#market) addresses for which to claim proceeds.
+    * **`p._shareHolder`**  (string) User address that holds the shares, as a 16-byte hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
@@ -2039,6 +2043,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) [Market](#market) address for which to claim proceeds.
+    * **`p._shareHolder`**  (string) User address that holds the shares, as a 16-byte hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.

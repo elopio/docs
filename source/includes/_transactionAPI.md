@@ -3,7 +3,7 @@ Transaction API
 <aside class="notice">The Transaction section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 ```javascript
-// Transaction API (Tx API for short) example:
+// Transaction API example:
 var reputationTokenAddress = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"; // Ethereum contract address for the REP token
 var transferTarget = "0xea674fdde714fd979de3edf0f56aa9716b898ec8"; // Ethereum address of the account to send REP tokens to
 var attotokens = "100000000000000000000"; // 1000.00 REP
@@ -67,7 +67,7 @@ All Transaction API methods accept a single object argument, containing the foll
 
 ### The `tx` Object
 
-The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on.
+The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. The other properties of the `tx` object are discussed in the [Using Transact Directly](#using-transact-directly) section.
 
 ### The `meta` Object
 
@@ -1868,7 +1868,7 @@ augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output coming soon
+// example onSuccess output: coming soon
 
 augur.api.ReputationToken.updateSiblingMigrationTotal({
   _token: "0x72a3cec0b62fcb8c3120bc80bdb2b1351c8c2111",
@@ -1881,7 +1881,7 @@ augur.api.ReputationToken.updateSiblingMigrationTotal({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output coming soon
+// example onSuccess output: coming soon
 ```
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep).
 
@@ -2768,7 +2768,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getInitialReportStakeSize({ 
-  tx: { to: universeAddress } 
+  tx: { 
+    to: universeAddress,
+    send: false,
+  },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2777,7 +2780,8 @@ augur.api.Universe.getInitialReportStakeSize({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example output coming soon
+// example onSuccess output:
+"174840291341145834"
 
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   tx: { to: universeAddress },

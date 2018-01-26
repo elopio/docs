@@ -72,39 +72,76 @@ Dispute Crowdsourcer Call API
 // Dispute Crowdsourcer Contract Call API Examples:
 var disputeCrowdsourcer = "0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5";
 
-augur.api.DisputeCrowdsourcer.getFeeWindow({ tx: { to: disputeCrowdsourcer } }, function (error, feeWindow) { console.log(feeWindow); });
+augur.api.DisputeCrowdsourcer.getFeeWindow({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.DisputeCrowdsourcer.getMarket({ tx: { to: disputeCrowdsourcer } }, function (error, market) { console.log(market); });
+augur.api.DisputeCrowdsourcer.getMarket({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, market) { 
+  console.log(market); 
+});
 // example output:
 "0xaa90cc6b4e89303e451c9b852827b5791667f5aa"
 
-augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ tx: { to: disputeCrowdsourcer } }, function (error, payoutDistributionHash) { console.log(payoutDistributionHash); });
+augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, payoutDistributionHash) { 
+  console.log(payoutDistributionHash); 
+});
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.DisputeCrowdsourcer.getPayoutNumerator({ tx: { to: disputeCrowdsourcer }, _outcome: 0 }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+augur.api.DisputeCrowdsourcer.getPayoutNumerator({ 
+  tx: { to: disputeCrowdsourcer }, 
+  _outcome: 0 
+}, function (error, payoutNumerator) { 
+  console.log(payoutNumerator); 
+});
 // example output:
 "1000"
 
-augur.api.DisputeCrowdsourcer.getReputationToken({ tx: { to: disputeCrowdsourcer } }, function (error, reputationToken) { console.log(reputationToken); });
+augur.api.DisputeCrowdsourcer.getReputationToken({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, reputationToken) { 
+  console.log(reputationToken); 
+});
 // example output:
 "0xff90cc6b4e89303e451c9b852827b5791667f5ff"
 
-augur.api.DisputeCrowdsourcer.getSize({ tx: { to: disputeCrowdsourcer } }, function (error, size) { console.log(size); });
+augur.api.DisputeCrowdsourcer.getSize({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, size) { 
+  console.log(size); 
+});
 // example output:
 "174435000000000000"
 
-augur.api.DisputeCrowdsourcer.getStake({ tx: { to: disputeCrowdsourcer } }, function (error, stake) { console.log(stake); });
+augur.api.DisputeCrowdsourcer.getStake({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, stake) { 
+  console.log(stake); 
+});
 // example output:
 "78123523"
 
-augur.api.DisputeCrowdsourcer.isDisavowed({ tx: { to: disputeCrowdsourcer } }, function (error, isDisavowed) { console.log(isDisavowed); });
+augur.api.DisputeCrowdsourcer.isDisavowed({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, isDisavowed) { 
+  console.log(isDisavowed); 
+});
 // example output:
 true
 
-augur.api.DisputeCrowdsourcer.isInvalid({ tx: { to: disputeCrowdsourcer } }, function (error, isInvalid) { console.log(isInvalid); });
+augur.api.DisputeCrowdsourcer.isInvalid({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, isInvalid) { 
+  console.log(isInvalid); 
+});
 // example output:
 true
 ```
@@ -547,53 +584,102 @@ Initial Reporter Call API
 // Initial Reporter Contract Call API Examples:
 var initialReporter = "0xbcb6eaefcfaf7ea1e17c4768a554d57800699ed3";
 
-augur.api.InitialReporter.designatedReporterShowed({ tx: { to: initialReporter } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); });
+augur.api.InitialReporter.designatedReporterShowed({ 
+  tx: { to: initialReporter } 
+}, function (error, designatedReporterShowed) { 
+  console.log(designatedReporterShowed); 
+});
 // example output:
-"1"
+true
 
-augur.api.InitialReporter.designatedReporterWasCorrect({ tx: { to: initialReporter } }, function (error, designatedReporterWasCorrect) { console.log(designatedReporterWasCorrect); });
+augur.api.InitialReporter.designatedReporterWasCorrect({ 
+  tx: { to: initialReporter } 
+}, function (error, designatedReporterWasCorrect) { 
+  console.log(designatedReporterWasCorrect); 
+});
 // example output:
-"1"
+true
 
-augur.api.InitialReporter.getDesignatedReporter({ tx: { to: initialReporter } }, function (error, designatedReporter) { console.log(designatedReporter); });
+augur.api.InitialReporter.getDesignatedReporter({ 
+  tx: { to: initialReporter } 
+}, function (error, designatedReporter) { 
+  console.log(designatedReporter); 
+});
 // example output:
 "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
-augur.api.InitialReporter.getFeeWindow({ tx: { to: initialReporter } }, function (error, feeWindow) { console.log(feeWindow); });
+augur.api.InitialReporter.getFeeWindow({ 
+  tx: { to: initialReporter } 
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.InitialReporter.getMarket({ tx: { to: initialReporter } }, function (error, market) { console.log(market); });
+augur.api.InitialReporter.getMarket({ 
+  tx: { to: initialReporter } 
+}, function (error, market) { 
+  console.log(market); 
+});
 // example output:
 "0xaa90cc6b4e89303e451c9b852827b5791667f5aa"
 
-augur.api.InitialReporter.getPayoutDistributionHash({ tx: { to: disputeCrowdsourcer } }, function (error, payoutDistributionHash) { console.log(payoutDistributionHash); });
+augur.api.InitialReporter.getPayoutDistributionHash({ 
+  tx: { to: disputeCrowdsourcer } 
+}, function (error, payoutDistributionHash) { 
+  console.log(payoutDistributionHash); 
+});
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
-augur.api.InitialReporter.getPayoutNumerator({ tx: { to: initialReporter }, _outcome: 0 }, function (error, payoutNumerator) { console.log(payoutNumerator); });
+augur.api.InitialReporter.getPayoutNumerator({ 
+  tx: { to: initialReporter }, 
+  _outcome: 0 
+}, function (error, payoutNumerator) { 
+  console.log(payoutNumerator); 
+});
 // example output:
 "1000"
 
-augur.api.InitialReporter.getReportTimestamp({ tx: { to: initialReporter } }, function (error, reportTimestamp) { console.log(reportTimestamp); });
+augur.api.InitialReporter.getReportTimestamp({ 
+  tx: { to: initialReporter } 
+}, function (error, reportTimestamp) { 
+  console.log(reportTimestamp); 
+});
 // example output:
 "1514956848"
 
-augur.api.InitialReporter.getReputationToken({ tx: { to: initialReporter } }, function (error, reputationToken) { console.log(reputationToken); });
+augur.api.InitialReporter.getReputationToken({ 
+  tx: { to: initialReporter } 
+}, function (error, reputationToken) { 
+  console.log(reputationToken); 
+});
 // example output:
 "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 
-augur.api.InitialReporter.getSize({ tx: { to: initialReporter } }, function (error, size) { console.log(size); });
+augur.api.InitialReporter.getSize({ 
+  tx: { to: initialReporter } 
+}, function (error, size) { 
+  console.log(size); 
+});
 // example output:
 "87443500000000000"
 
-augur.api.InitialReporter.getStake({ tx: { to: initialReporter } }, function (error, stake) { console.log(stake); });
+augur.api.InitialReporter.getStake({ 
+  tx: { to: initialReporter } 
+}, function (error, stake) { 
+  console.log(stake); 
+});
 // example output:
 "78000"
 
-augur.api.InitialReporter.isInvalid({ tx: { to: initialReporter } }, function (error, isInvalid) { console.log(isInvalid); });
+augur.api.InitialReporter.isInvalid({ 
+  tx: { to: initialReporter } 
+}, function (error, isInvalid) { 
+  console.log(isInvalid); 
+});
 // example output:
-"1"
+true
 ```
 Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
@@ -785,7 +871,7 @@ Market Call API
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Market.derivePayoutDistributionHash({
-  tx: { to: market } },
+  tx: { to: market },
   _payoutNumerators: [ 0, 1000 ],
   _invalid: false,
 }, function (error, payoutDistributionHash) { 
@@ -794,119 +880,195 @@ augur.api.Market.derivePayoutDistributionHash({
 // example output:
 "1"
 
-augur.api.Market.designatedReporterShowed({ tx: { to: market } }, function (error, designatedReporterShowed) { console.log(designatedReporterShowed); });
+augur.api.Market.designatedReporterShowed({ 
+  tx: { to: market } 
+}, function (error, designatedReporterShowed) { 
+  console.log(designatedReporterShowed); 
+});
 // example output:
-"1"
+true
 
-augur.api.Market.designatedReporterWasCorrect({ tx: { to: market } }, function (error, designatedReporterWasCorrect) { console.log(designatedReporterWasCorrect); });
+augur.api.Market.designatedReporterWasCorrect({ 
+  tx: { to: market } 
+}, function (error, designatedReporterWasCorrect) { 
+  console.log(designatedReporterWasCorrect); 
+});
 // example output:
-"1"
+true
 
-augur.api.Market.getDenominationToken({ tx: { to: market } }, function (error, denominationToken) { console.log(denominationToken); });
+augur.api.Market.getDenominationToken({ 
+  tx: { to: market } 
+}, function (error, denominationToken) { 
+  console.log(denominationToken); 
+});
 // example output:
 "0x30e3852448f4ab5d62bbf7544ca3c92daca5c957"
 
-augur.api.Market.getDesignatedReporter({ tx: { to: market } }, function (error, designatedReporter) { console.log(designatedReporter); });
+augur.api.Market.getDesignatedReporter({ 
+  tx: { to: market } 
+}, function (error, designatedReporter) { 
+  console.log(designatedReporter); 
+});
 // example output:
 "0xca3edca4ed326bbcb77e914b379913b12d49654d"
 
-augur.api.Market.getEndTime({ tx: { to: market } }, function (error, endTime) { console.log(endTime); });
+augur.api.Market.getEndTime({ 
+  tx: { to: market } 
+}, function (error, endTime) { 
+  console.log(endTime); 
+});
 // example output:
 "1500388730";
 
 augur.api.Market.getFeeWindow({ 
   tx: { to: market }, 
   _feeWindowId: 578,
-}, function (error, feeWindow) { console.log(feeWindow); });
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.Market.getFinalizationTime({ tx: { to: market } }, function (error, finalizationTime) { console.log(finalizationTime); });
+augur.api.Market.getFinalizationTime({ 
+  tx: { to: market } 
+}, function (error, finalizationTime) { 
+  console.log(finalizationTime); 
+});
 // example output:
 "1500647930";
 
-augur.api.Market.getForkingMarket({ tx: { to: market } }, function (error, forkedMarket) { console.log(forkedMarket); });
+augur.api.Market.getForkingMarket({ 
+  tx: { to: market } 
+}, function (error, forkedMarket) { 
+  console.log(forkedMarket); 
+});
 // example output:
-"0x0"
+"0x1230cc6b4e89303e451c9b852827b5791667f234"
 
-augur.api.Market.getMarketCreatorMailbox({ tx: { to: market } }, function (error, marketCreatorMailbox) { console.log(marketCreatorMailbox); });
+augur.api.Market.getMarketCreatorMailbox({ 
+  tx: { to: market } 
+}, function (error, marketCreatorMailbox) { 
+  console.log(marketCreatorMailbox); 
+});
 // example output:
 "0xeabdeaefcfaf7ea1e17c4768a554d5780069eabd"
 
-augur.api.Market.getMarketCreatorSettlementFeeDivisor({ tx: { to: market } }, function (error, marketCreatorSettlementFee) { console.log(marketCreatorSettlementFee); });
+augur.api.Market.getMarketCreatorSettlementFeeDivisor({ 
+  tx: { to: market } 
+}, function (error, marketCreatorSettlementFee) { 
+  console.log(marketCreatorSettlementFee); 
+});
 // example output:
 "20000000000000000"
 
-augur.api.Market.getNumberOfOutcomes({ tx: { to: market } }, function (error, numOutcomes) { console.log(numOutcomes); });
+augur.api.Market.getNumberOfOutcomes({ 
+  tx: { to: market } 
+}, function (error, numOutcomes) { 
+  console.log(numOutcomes); 
+});
 // example output:
 "2"
 
-augur.api.Market.getNumTicks({ tx: { to: market } }, function (error, numTicks) { console.log(numTicks); });
+augur.api.Market.getNumTicks({ 
+  tx: { to: market } 
+}, function (error, numTicks) { 
+  console.log(numTicks); 
+});
 // example output:
 "1000"
 
-augur.api.Market.getReputationToken({ tx: { to: market } }, function (error, reputationToken) { console.log(reputationToken); });
+augur.api.Market.getReputationToken({ 
+  tx: { to: market } 
+}, function (error, reputationToken) { 
+  console.log(reputationToken); 
+});
 // example output:
 "0x23b17188ce3c491f6ab4427258d92452be5c8045"
 
 augur.api.Market.getShareToken({
   tx: { to: market },
   _outcome: 1
-}, function (error, shareToken) { console.log(shareToken); });
+}, function (error, shareToken) { 
+  console.log(shareToken); 
+});
 // example output:
 "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
 augur.api.Market.getStakeInOutcome({ 
   tx: { to: market }, 
   _payoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a" 
-}, function (error, stakeInOutcome) { console.log(stakeInOutcome); });
+}, function (error, stakeInOutcome) { 
+  console.log(stakeInOutcome); 
+});
 // example output:
 "12378786123"
 
-augur.api.Market.getTotalStake({ tx: { to: market } }, function (error, totalStake) { console.log(totalStake); });
+augur.api.Market.getTotalStake({ 
+  tx: { to: market } 
+}, function (error, totalStake) { 
+  console.log(totalStake); 
+});
 // example output:
 "161278368761238475"
 
-augur.api.Market.getUniverse({ tx: { to: market } }, function (error, universe) { console.log(universe); });
+augur.api.Market.getUniverse({ 
+  tx: { to: market } 
+}, function (error, universe) { 
+  console.log(universe); 
+});
 // example output:
 "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
 
-augur.api.Market.getWinningPayoutDistributionHash({ tx: { to: market } }, function (error, winningDistributionHash) { console.log(winningDistributionHash); });
+augur.api.Market.getWinningPayoutDistributionHash({ 
+  tx: { to: market } 
+}, function (error, winningDistributionHash) { 
+  console.log(winningDistributionHash); 
+});
 // example output:
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.Market.getWinningPayoutNumerator({
   tx: { to: market },
   _outcome: "0"
-}, function (error, getWinningPayoutNumerator) { console.log(getWinningPayoutNumerator); });
+}, function (error, getWinningPayoutNumerator) { 
+  console.log(getWinningPayoutNumerator); 
+});
 // example output:
 "1000"
 
 augur.api.Market.isContainerForReportingParticipant({
   tx: { to: market },
   _shadyReportingParticipant: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
-}, function (error, isContainerForReportingParticipant) { console.log(isContainerForReportingParticipant); });
+}, function (error, isContainerForReportingParticipant) { 
+  console.log(isContainerForReportingParticipant); 
+});
 // example output:
-"1"
+true
 
 augur.api.Market.isContainerForShareToken({
   tx: { to: market },
   _shadyShareToken: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
-}, function (error, isContainerForShareToken) { console.log(isContainerForShareToken); });
+}, function (error, isContainerForShareToken) { 
+  console.log(isContainerForShareToken); 
+});
 // example output:
-"1"
+true
 
 augur.api.Market.isFinalized({
   tx: { to: market },
-}, function (error, isFinalized) { console.log(isFinalized); });
+}, function (error, isFinalized) { 
+  console.log(isFinalized); 
+});
 // example output:
-"1"
+true
 
 augur.api.Market.isInvalid({
   tx: { to: market }
-}, function (error, isInvalid) { console.log(isInvalid); });
+}, function (error, isInvalid) { 
+  console.log(isInvalid); 
+});
 // example output:
-"1"
+true
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
@@ -1034,7 +1196,7 @@ Returns the Unix timestamp for when the specified [Market](#market) was [Finaliz
 
 #### **Returns:**
 
-* (string) Unix timestamp for when the Market was Finalized, as a stringified unsigned integer.
+* (string) Unix timestamp for when the Market was Finalized, as a stringified unsigned integer. If the Market does not have a finalization time yet, "0" will be returned.
 
 ### augur.api.Market.getForkingMarket(p, callback)
 
@@ -1292,27 +1454,12 @@ var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f8
 var _type = "1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 var _outcome = "1";
-var _price = "450000000000000000"; // 0.45
-
-augur.api.Orders.assertIsNotBetterPrice({
-  _type: _type,
-  _price: _price,
-  _betterOrderId: _orderId
-}, function (error, isNotBetterPrice) { console.log(isNotBetterPrice); });
-// example output:
-"1"
-
-augur.api.Orders.assertIsNotWorsePrice({
-  _type: _type,
-  _price: _price,
-  _worstOrderId: _orderId
-}, function (error, isNotWorstPrice) { console.log(isNotWorstPrice); });
-// example output:
-"0"
 
 augur.api.Orders.getAmount({ 
   _orderId: _orderId 
-}, function (error, amount) { console.log(amount); });
+}, function (error, amount) { 
+  console.log(amount); 
+});
 // example output:
 "15"
 
@@ -1320,74 +1467,98 @@ augur.api.Orders.getBestOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (error, bestOrderID) { console.log(bestOrderID); });
+}, function (error, bestOrderID) { 
+  console.log(bestOrderID); 
+});
 // example output:
 "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 augur.api.Orders.getBetterOrderId({ 
   _orderId: "0x49cb49f610b5f6e31ee163a8ad65f964af1088e38c8a1b07f1218177b5e006b5"
-}, function (error, betterOrderId) { console.log(betterOrderId); });
+}, function (error, betterOrderId) { 
+  console.log(betterOrderId); 
+});
 // example output:
 "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
 
 augur.api.Orders.getLastOutcomePrice({
   _market: _market,
   _outcome: _outcome
-}, function (error, lastOutcomePrice) { console.log(lastOutcomePrice); });
+}, function (error, lastOutcomePrice) { 
+  console.log(lastOutcomePrice); 
+});
 // example output:
 "490000000000000000"
 
 augur.api.Orders.getMarket({ 
   _orderId: _orderId
-}, function (error, market) { console.log(market); });
+}, function (error, market) { 
+  console.log(market); 
+});
 // example output:
 "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Orders.getOrderCreator({ 
   _orderId: _orderId 
-}, function (error, creator) { console.log(creator); });
+}, function (error, creator) { 
+  console.log(creator); 
+});
 // example output:
 "0x438f2aeb8a16745b1cd711e168581ebce744ffaa";
 
 augur.api.Orders.getOrderMoneyEscrowed({ 
   _orderId: _orderId 
-}, function (error, orderMoneyEscrowed) { console.log(orderMoneyEscrowed); });
+}, function (error, orderMoneyEscrowed) { 
+  console.log(orderMoneyEscrowed); 
+});
 // example output:
 "5000000000000000000"
 
 augur.api.Orders.getOrderSharesEscrowed({ 
   _orderId: _orderId
-}, function (error, orderSharesEscrowed) { console.log(orderSharesEscrowed); });
+}, function (error, orderSharesEscrowed) { 
+  console.log(orderSharesEscrowed); 
+});
 // example output:
 "0"
 
 augur.api.Orders.getOrderType({ 
   _orderId: _orderId 
-}, function (error, orderType) { console.log(orderType); });
+}, function (error, orderType) { 
+  console.log(orderType); 
+});
 // example output:
 "1"
 
 augur.api.Orders.getOutcome({ 
   _orderId: _orderId 
-}, function (error, outcome) { console.log(outcome); });
+}, function (error, outcome) { 
+  console.log(outcome); 
+});
 // example output:
 "1"
 
 augur.api.Orders.getPrice({ 
   _orderId: _orderId 
-}, function (error, price) { console.log(price); });
+}, function (error, price) { 
+  console.log(price); 
+});
 // example output:
 "500000000000000000"
 
 augur.api.Orders.getVolume({ 
   _market: _market 
-}, function (error, volume) { console.log(volume); });
+}, function (error, volume) { 
+  console.log(volume); 
+});
 // example output:
 "100000000000000000000000"
 
 augur.api.Orders.getWorseOrderId({ 
   _orderId: "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1" 
-}, function (error, worseOrderID) { console.log(worseOrderID); });
+}, function (error, worseOrderID) { 
+  console.log(worseOrderID); 
+});
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
@@ -1395,59 +1566,34 @@ augur.api.Orders.getWorstOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (error, worstOrderID) { console.log(worstOrderID); });
+}, function (error, worstOrderID) { 
+  console.log(worstOrderID); 
+});
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
+var _price = "450000000000000000"; // 0.45
 augur.api.Orders.isBetterPrice({
   _type: _type,
   _price: _price,
   _orderId: _orderId
-}, function (error, isBetterPrice) { console.log(isBetterPrice); });
+}, function (error, isBetterPrice) { 
+  console.log(isBetterPrice); 
+});
 // example output:
-"0"
+false
 
 augur.api.Orders.isWorsePrice({
   _type: _type,
   _price: _price,
   _orderId: _orderId
-}, function (error, isWorsePrice) { console.log(isWorsePrice); });
+}, function (error, isWorsePrice) { 
+  console.log(isWorsePrice); 
+});
 // example output:
-"1"
+true
 ```
 Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related to the [Order Book](#order-book).
-
-### augur.api.Orders.assertIsNotBetterPrice(p, callback)
-
-Returns whether a specific price is not a better price than a particular [Order](#order).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price to compare `p._betterOrderId` to, as an unsigned integer or stringified unsigned integer.
-    * **`p._betterOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (boolean) `true` if `p._price` is not a better price than `p._betterOrderId`.
-
-### augur.api.Orders.assertIsNotWorsePrice(p, callback)
-
-Returns whether a specific price is not a worse price than a particular [Order](#order).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price to compare `p._worseOrderId` to, as an unsigned integer or stringified unsigned integer.
-    * **`p._worseOrderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (boolean) `true` if `p._price` is not a worse price than `p._worseOrderId`.
 
 ### augur.api.Orders.getAmount(p, callback)
 
@@ -1652,7 +1798,7 @@ Returns the [Order](#order) ID of the worst Order of a particular type (either [
 
 ### augur.api.Orders.isBetterPrice(p, callback)
 
-Returns whether a specific price is a better price than a particular [Order](#order).
+Returns whether a given price is greater than the price of a particular [Order](#order) (for Bid Orders), or whether the price is less than the price of the Order (for Ask Orders).
 
 #### **Parameters:**
 
@@ -1664,11 +1810,11 @@ Returns whether a specific price is a better price than a particular [Order](#or
 
 #### **Returns:**
 
-* (boolean) `true` if `p._price` is a better price than `p._orderId`.
+* (boolean) `true` if the price is greater than the Order price (for Bid Orders), or if the price is less than the Order price (for Ask Orders). Otherwise, the function will return `false`.
 
 ### augur.api.Orders.isWorsePrice(p, callback)
 
-Returns whether a specific price is a worse price than a particular [Order](#order).
+Returns whether a given price is less than the price of a particular [Order](#order) (for Bid Orders), or whether the price is greater than the price of the Order (for Ask Orders).
 
 #### **Parameters:**
 
@@ -1680,7 +1826,7 @@ Returns whether a specific price is a worse price than a particular [Order](#ord
 
 #### **Returns:**
 
-* (boolean) `true` if `p._price` is a worse price than `p._orderId`.
+* (boolean) `true` if the price is less than the Order price (for Bid Orders), or if the price is greater than the Order price (for Ask Orders). Otherwise, the function will return `false`.
 
 Orders Fetcher Call API
 -----------------------
@@ -1699,7 +1845,7 @@ augur.api.OrdersFetcher.ascendOrderList({
 }, function (error, ascendingOrderList) { console.log(ascendingOrderList); });
 // example output:
 [ "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870",
-  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"]
+  "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0" ]
 
 augur.api.OrdersFetcher.descendOrderList({
   _type: _type,
@@ -1720,7 +1866,7 @@ augur.api.OrdersFetcher.findBoundingOrders({
 }, function (error, boundingOrders) { console.log(boundingOrders); });
 // example output:
 [ "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
-  "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"]
+  "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e" ]
 ```
 Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related retrieving [Orders](#order) from the [Order Book](#order-book).
 
@@ -1779,17 +1925,29 @@ Reputation Token Call API
 -------------------------
 ```javascript
 // Reputation Token Contract Call API Examples:
-var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+var reputationToken = "0x13fa2334966b3cb6263ed56148323014c2ece753";
 
-augur.api.ReputationToken.getUniverse({ tx: { to: reputationToken } }, function (error, universe) { console.log(universe); });
+augur.api.ReputationToken.getUniverse({ 
+  tx: { to: reputationToken } 
+}, function (error, universe) { 
+  console.log(universe); 
+});
 // example output:
-"0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+"0x1f732847fbbcc46ffe859f28e916d993b2b08831"
 
-augur.api.ReputationToken.getTotalMigrated({ tx: { to: reputationToken } }, function (error, totalMigrated) { console.log(totalMigrated); });
-// example output coming soon
+augur.api.ReputationToken.getTotalMigrated({ 
+  tx: { to: reputationToken } 
+}, function (error, totalMigrated) { 
+  console.log(totalMigrated); 
+});
+"0"
 
-augur.api.ReputationToken.getTotalTheoreticalSupply({ tx: { to: reputationToken } }, function (error, totalTheoreticalSupply) { console.log(totalTheoreticalSupply); });
-// example output coming soon
+augur.api.ReputationToken.getTotalTheoreticalSupply({ 
+  tx: { to: reputationToken } 
+}, function (error, totalTheoreticalSupply) { 
+  console.log(totalTheoreticalSupply); 
+});
+"11000000000000000000000000"
 ```
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
 
@@ -1846,11 +2004,19 @@ Share Token Call API
 // Share Token Contract Call API Examples:
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
-augur.api.ShareToken.getMarket({ tx: { to: shareToken } }, function (error, market) { console.log(market); });
+augur.api.ShareToken.getMarket({ 
+  tx: { to: shareToken } 
+}, function (error, market) { 
+  console.log(market); 
+});
 // example output:
 "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 
-augur.api.ShareToken.getOutcome({ tx: { to: shareToken } }, function (error, outcome) { console.log(outcome); });
+augur.api.ShareToken.getOutcome({ 
+  tx: { to: shareToken } 
+}, function (error, outcome) { 
+  console.log(outcome); 
+});
 // example output:
 "1"
 ```
