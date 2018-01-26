@@ -3347,604 +3347,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
-<h2 id="type-definitions">Type Definitions</h2>
-
-<!-- Add glossary links to section -->
-
-<p><a name="Account"></a></p>
-
-<h3 id="account-object">Account  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">keystore</code></strong> (<a href="#Keystore">Keystore</a>) Keystore object containing this account&rsquo;s encryption parameters.</li>
-<li><strong><code class="prettyprint">privateKey</code></strong> (buffer) The private key for this account.</li>
-<li><strong><code class="prettyprint">derivedKey</code></strong> (buffer) The secret key (derived from the password) used to encrypt this account&rsquo;s private key.</li>
-</ul>
-
-<p><a name="AccountTransfer"></a></p>
-
-<h3 id="accounttransfer-object">AccountTransfer  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash returned by token transfer.</li>
-<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the transfer.</li>
-<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the transfer.</li>
-<li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the Ethereum block containing the transfer.</li>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the transfer was created.</li>
-<li><strong><code class="prettyprint">sender</code></strong> (string|null) Ethereum address of the token sender. If null, this indicates that new tokens were minted and sent to the user.</li>
-<li><strong><code class="prettyprint">recipient</code></strong> (string|null) Ethereum address of the token recipient. If null, this indicates that tokens were burned (i.e., destroyed).</li>
-<li><strong><code class="prettyprint">token</code></strong> (string) Contract address of the contract for the sent token, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">value</code></strong> (number) Quantity of tokens sent.</li>
-<li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).</li>
-</ul>
-
-<p><a name="AugurEventLog"></a></p>
-
-<h3 id="augureventlog-object">AugurEventLog  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">key</code></strong>  (string) A 32-byte hexadecimal value. Description pending.</li>
-<li><strong><code class="prettyprint">addition</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
-<li><strong><code class="prettyprint">commitHash</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
-<li><strong><code class="prettyprint">bytecodeHash</code></strong>  (string) A 32-byte hexadecimal value. Description pending.</li>
-<li><strong><code class="prettyprint">address</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
-<li><strong><code class="prettyprint">removed</code></strong>  (boolean) Whether the transaction this event was created from was removed from the Ethereum blockchain (due to an orphaned block) or never gotten to (due to a rejected transaction).</li>
-<li><strong><code class="prettyprint">transactionHash</code></strong>  (string) Hash of the transactions this log was created from, as a 32-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">transactionIndex</code></strong>  (number) Integer of the transaction&rsquo;s index position in the block.</li>
-<li><strong><code class="prettyprint">logIndex</code></strong>  (number) Integer of the log index position in the block.</li>
-<li><strong><code class="prettyprint">blockNumber</code></strong>  (number) Number of the block on the Ethereum blockchain where the event was logged.</li>
-<li><strong><code class="prettyprint">contractName</code></strong>  (string) Name of the Solidity contract in which the event is defined.</li>
-<li><strong><code class="prettyprint">eventName</code></strong>  (string) Name of the event type being logged.</li>
-</ul>
-
-<p><a name="BetterWorseOrders"></a></p>
-
-<h3 id="betterworseorders-object">BetterWorseOrders  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">betterOrderID</code></strong> (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">worseOrderID</code></strong> (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="ContractAddresses"></a></p>
-
-<h3 id="contractaddresses-object">ContractAddresses  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">version</code></strong> (string) Version of the contracts.</li>
-<li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 16-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
-</ul>
-
-<p><a name="Category"></a></p>
-
-<h3 id="category-object">Category  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">category</code></strong> (string) Name of a Category.</li>
-<li><strong><code class="prettyprint">popularity</code></strong> (number|string) Category popularity. (The exact method for calculating this value is still pending.)</li>
-</ul>
-
-<p><a name="CipherParams"></a></p>
-
-<h3 id="cipherparams-object">CipherParams  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">iv</code></strong> (string) Initialization vector used for this account, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="ConnectOptions"></a></p>
-
-<h3 id="connectoptions-object">ConnectOptions  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">ethereumNode</code></strong> (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).</li>
-<li><strong><code class="prettyprint">augurNode</code></strong> (string) &lt;optional&gt; Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
-</ul>
-
-<p><a name="EthereumNode"></a></p>
-
-<h3 id="ethereumnode-object">EthereumNode  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">http</code></strong> (string|null) HTTP address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">httpAddresses</code></strong> (Array.&lt;string&gt;|null) Array of HTTP Ethereum node addresses. (Can be used instead of <code class="prettyprint">http</code> to specify a list of HTTP addresses to iterate through until a connection is established.)</li>
-<li><strong><code class="prettyprint">ws</code></strong> (string|null) Websocket address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.&lt;string&gt;|null) Array of websocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of websocket addresses to iterate through until a connection is established.)</li>
-<li><strong><code class="prettyprint">ipc</code></strong> (string|null) IPC address of an Ethereum node.</li>
-<li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.&lt;string&gt;|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
-<li><strong><code class="prettyprint">networkID</code></strong> (string|null) Description pending.</li>
-</ul>
-
-<p><a name="ExtraInfo"></a></p>
-
-<h3 id="extrainfo-object">ExtraInfo  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Source that should be referenced when determining the Outcome of a Market.</li>
-<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;string&gt;|null) Keywords used to tag the Market (maximum of 2).</li>
-<li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
-</ul>
-
-<p><a name="Keystore"></a></p>
-
-<h3 id="keystore-object">Keystore  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">crypto</code></strong> (<a href="#KeystoreCrypto">KeystoreCrypto</a>) Parameters used to encrypt this account&rsquo;s private key.</li>
-<li><strong><code class="prettyprint">id</code></strong> (string) This account&rsquo;s UUID.</li>
-<li><strong><code class="prettyprint">version</code></strong> (number) Keystore version number (usually 3).</li>
-</ul>
-
-<p><a name="KeystoreCrypto"></a></p>
-
-<h3 id="keystorecrypto-object">KeystoreCrypto  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">cipher</code></strong> (string) The symmetric cipher used to encrypt this account&rsquo;s private key (usually aes-128-ctr).</li>
-<li><strong><code class="prettyprint">ciphertext</code></strong> (string) This account&rsquo;s encrypted private key, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">cipherparams</code></strong> (<a href="#CipherParams">CipherParams</a>) Object containing the initialization vector for this account.</li>
-<li><strong><code class="prettyprint">kdf</code></strong> (string) Key derivation function name (usually scrypt; pbkdf2 is also supported).</li>
-<li><strong><code class="prettyprint">kdfparams</code></strong> (<a href="#ScryptParams">ScryptParams</a>|<a href="#Pbkdf2Params">Pbkdf2Params</a>) Key derivation function parameters.</li>
-<li><strong><code class="prettyprint">mac</code></strong> (string) Message authentication code, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="MarketCreationCost"></a></p>
-
-<h3 id="marketcreationcost-object">MarketCreationCost  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
-<li><strong><code class="prettyprint">etherRequiredToCreateMarket</code></strong> (string) Sum of the Ether required to pay for Reporters&rsquo; gas costs and the validity bond, as a base-10 string.</li>
-</ul>
-
-<p><a name="MarketCreationCostBreakdown"></a></p>
-
-<h3 id="marketcreationcostbreakdown-object">MarketCreationCostBreakdown  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
-<li><strong><code class="prettyprint">targetReporterGasCosts</code></strong> (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">validityBond</code></strong> (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.</li>
-</ul>
-
-<p><a name="MarketCreatorFee"></a></p>
-
-<h3 id="marketcreatorfee-object">MarketCreatorFee  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">unclaimedFee</code></strong> (number|string) Fee available to be claimed from the Market, by the Market Creator, in attoETH.</li>
-</ul>
-
-<p><a name="MarketInfo"></a></p>
-
-<h3 id="marketinfo-object">MarketInfo  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">id</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
-<li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
-<li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
-<li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
-<li><strong><code class="prettyprint">cumulativeScale</code></strong> (string) Difference between maxPrice and minPrice.</li>
-<li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
-<li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
-<li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
-<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
-<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
-<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
-<li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
-<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
-<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">outstandingShares</code></strong> (number) Total shares in the Market. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
-<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
-<li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
-<li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
-<li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).</li>
-<li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Amount of ETH the designated reporter staked on the Outcome submitted in the designated report.</li>
-<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
-<li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
-<li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
-<li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
-</ul>
-
-<p><a name="MarketOrderBook"></a></p>
-
-<h3 id="marketorderbook-object">MarketOrderBook  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">1</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 1 of this market.</li>
-<li><strong><code class="prettyprint">2</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 2 of this market.</li>
-<li><strong><code class="prettyprint">3</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 3 of this market.</li>
-<li><strong><code class="prettyprint">4</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 4 of this market.</li>
-<li><strong><code class="prettyprint">5</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 5 of this market.</li>
-<li><strong><code class="prettyprint">6</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 6 of this market.</li>
-<li><strong><code class="prettyprint">7</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 7 of this market.</li>
-<li><strong><code class="prettyprint">8</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 8 of this market.</li>
-</ul>
-
-<p><a name="MarketPriceTimeSeries"></a></p>
-
-<h3 id="marketpricetimeseries-object">MarketPriceTimeSeries  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">Price</code></strong> (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.</li>
-</ul>
-
-<p><a name="MarketsContractAddressRow"></a></p>
-
-<h3 id="marketscontractaddressrow-object">MarketsContractAddressRow  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Unix time when the Market was created.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="Meta"></a></p>
-
-<h3 id="meta-object">Meta  (Object)</h3>
-
-<p>Authentication metadata for raw transactions.</p>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">signer</code></strong> (buffer|function) Private key buffer or a signing function provided by a hardware wallet, of the account initiating the transaction.</li>
-<li><strong><code class="prettyprint">accountType</code></strong> (string) Type of account that is signing the transaction (e.g. &ldquo;privateKey&rdquo;).</li>
-</ul>
-
-<p><a name="NoKeystoreAccount"></a></p>
-
-<h3 id="nokeystoreaccount-object">NoKeystoreAccount  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">privateKey</code></strong> (buffer) The private key for this account.</li>
-<li><strong><code class="prettyprint">derivedKey</code></strong> (buffer) The secret key (derived from the password) used to encrypt this account&rsquo;s private key.</li>
-</ul>
-
-<p><a name="Order"></a></p>
-
-<h3 id="order-object">Order  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li>*<em><code class="prettyprint">orderID</code> *</em> (string) ID of the order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token for which the order was placed, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the order transaction receipt.</li>
-<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the order transaction.</li>
-<li><strong><code class="prettyprint">owner</code></strong> (string) The order maker&rsquo;s Ethereum address, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the order transaction was created.</li>
-<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the order transaction.</li>
-<li><strong><code class="prettyprint">orderState</code></strong> (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
-<li><strong><code class="prettyprint">price</code></strong> (number) Rounded display price, as a base-10 number.</li>
-<li><strong><code class="prettyprint">amount</code></strong> (number) Rounded number of shares to trade, as a base-10 number.</li>
-<li><strong><code class="prettyprint">fullPrecisionPrice</code></strong> (string) Full-precision (un-rounded) display price, as a base-10 number.</li>
-<li><strong><code class="prettyprint">fullPrecisionAmount</code></strong> (number) Full-precision (un-rounded) number of shares to trade, as a base-10 number.</li>
-<li><strong><code class="prettyprint">tokensEscrowed</code></strong> (number) Number of the order maker&rsquo;s tokens held in escrow, as a base-10 number.</li>
-<li><strong><code class="prettyprint">sharesEscrowed</code></strong> (number) Number of the order maker&rsquo;s shares held in escrow, as a base-10 number.</li>
-</ul>
-
-<p><a name="ORDER_STATE"></a></p>
-
-<h3 id="order_state-object">ORDER_STATE  (Object)</h3>
-
-<p>Serves as an enum for the state of an order.</p>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">ALL</code></strong> (string) Order is open, closed, or cancelled. (If no order state is specified, this is the default value.)</li>
-<li><strong><code class="prettyprint">OPEN</code></strong> (string) Order is available to be filled.</li>
-<li><strong><code class="prettyprint">CLOSED</code></strong> (string) Order has been filled.</li>
-<li><strong><code class="prettyprint">CANCELED</code></strong> (string) Order has been canceled (although it may have been partially filled).</li>
-</ul>
-
-<p><a name="OutcomeInfo"></a></p>
-
-<h3 id="outcomeinfo-object">OutcomeInfo  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">id</code></strong> (number) Market Outcome ID</li>
-<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">price</code></strong> (number) Price of the Outcome.</li>
-<li><strong><code class="prettyprint">description</code></strong> (string|null) Description for the Outcome.</li>
-</ul>
-
-<p><a name="Pbkdf2Params"></a></p>
-
-<h3 id="pbkdf2params-object">Pbkdf2Params  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">dklen</code></strong> (number) Key length in bytes (usually 32).</li>
-<li><strong><code class="prettyprint">c</code></strong> (number) Number of PBKDF2 iterations used to derive the secret key.</li>
-<li><strong><code class="prettyprint">prf</code></strong> (string) Pseudorandom function used with PBKDF2 (usually hmac-sha256).</li>
-<li><strong><code class="prettyprint">salt</code></strong> (string) The dklen-byte salt used for this account, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="ProfitLoss"></a></p>
-
-<h3 id="profitloss-object">ProfitLoss  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">position</code></strong>  (string) Description pending.</li>
-<li><strong><code class="prettyprint">meanOpenPrice</code></strong>  (string) Description pending.</li>
-<li><strong><code class="prettyprint">realized</code></strong>  (string) Description pending.</li>
-<li><strong><code class="prettyprint">queued</code></strong>  (string) Description pending.</li>
-<li><strong><code class="prettyprint">unrealized</code></strong>  (string) Description pending.</li>
-</ul>
-
-<p><a name="Report"></a></p>
-
-<h3 id="report-object">Report  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the reporting transaction receipt.</li>
-<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the reporting transaction.</li>
-<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the reporting transaction.</li>
-<li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the Ethereum block containing the reporting transaction.</li>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Fee Window the Market is in currently.</li>
-<li><strong><code class="prettyprint">payoutNumerators</code></strong> (Array.&lt;number&gt;) Array representing the payout set.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Description the reporter has staked on the Outcome of their report.</li>
-<li><strong><code class="prettyprint">crowdsourcerID</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the Market is a Categorical Market.</li>
-<li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the Market is a Scalar Market.</li>
-<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market is <a href="#invalid-outcome">Invalid</a>.</li>
-<li><strong><code class="prettyprint">isSubmitted</code></strong> (boolean) Description pending.</li>
-</ul>
-
-<p><a name="REPORTING_STATE"></a></p>
-
-<h3 id="reporting_state-object">REPORTING_STATE  (Object)</h3>
-
-<p>Serves as an enum for the state of a stake token.</p>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">PRE_REPORTING</code></strong> (string) Market&rsquo;s end time has not yet come to pass.</li>
-<li><strong><code class="prettyprint">DESIGNATED_REPORTING</code></strong> (string) Market&rsquo;s end time has occurred, and it is pending a designated report.</li>
-<li><strong><code class="prettyprint">DESIGNATED_DISPUTE</code></strong> (string) Market&rsquo;s designated report has been submitted and is allowed to be disputed.</li>
-<li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the disignated report was disputed, or the designated reporter failed to submit a report, and the market is waiting for the next reporting phase to begin.</li>
-<li><strong><code class="prettyprint">FIRST_REPORTING</code></strong> (string) Market&rsquo;s designated report was disputed, and users can place stake on Outcomes.</li>
-<li><strong><code class="prettyprint">FIRST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed.</li>
-<li><strong><code class="prettyprint">LAST_REPORTING</code></strong> (string) Market&rsquo;s first report was disputed, and users can place stake on Outcomes.</li>
-<li><strong><code class="prettyprint">LAST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed to cause a fork.</li>
-<li><strong><code class="prettyprint">FORKING</code></strong> (string) Market&rsquo;s last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
-<li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An Outcome for the Market has been determined.</li>
-<li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
-<li><strong><code class="prettyprint">AWAITING_FINALIZATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
-</ul>
-
-<p><a name="ScryptParams"></a></p>
-
-<h3 id="scryptparams-object">ScryptParams  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">dklen</code></strong> (number) Key length in bytes (usually 32).</li>
-<li><strong><code class="prettyprint">n</code></strong> (number) Number of scrypt iterations used to derive the secret key (usually 262144).</li>
-<li><strong><code class="prettyprint">p</code></strong> (number) Parallelization factor, determines relative CPU cost (usually 1).</li>
-<li><strong><code class="prettyprint">r</code></strong> (number) Block size factor used for scrypt&rsquo;s hash, determines relative memory cost (usually 8).</li>
-<li><strong><code class="prettyprint">salt</code></strong> (string) The dklen-byte salt used for this account, as a hexadecimal string.</li>
-</ul>
-
-<p><a name="SingleOutcomeOrderBook"></a></p>
-
-<h3 id="singleoutcomeorderbook-object">SingleOutcomeOrderBook  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">buy</code></strong> (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Buy orders (bids) indexed by order ID.</li>
-<li><strong><code class="prettyprint">sell</code></strong> (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)  Sell orders (asks) indexed by order ID.</li>
-</ul>
-
-<p><a name="SingleOutcomeOrderBookSide"></a></p>
-
-<h3 id="singleoutcomeorderbookside-object">SingleOutcomeOrderBookSide  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">Buy</code></strong>|<strong><code class="prettyprint">Sell</code></strong> (<a href="#Order">Order</a>) bid or ask orders, indexed by order ID.</li>
-</ul>
-
-<p><a name="SingleOutcomePriceTimeSeries"></a></p>
-
-<h3 id="singleoutcomepricetimeseries-object">SingleOutcomePriceTimeSeries  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">Array</code></strong> (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>&gt;) of timestamped price points for this Outcome.</li>
-</ul>
-
-<p><a name="DISPUTE_TOKEN_STATE"></a></p>
-
-<h3 id="dispute_token_state-object">DISPUTE_TOKEN_STATE  (Object)</h3>
-
-<p>Serves as an enum for the state of a Dispute Token.</p>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">ALL</code></strong> (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)</li>
-<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Dispute Token is in a Market that has not been Finalized.</li>
-<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.</li>
-</ul>
-
-<p><a name="DisputeToken"></a></p>
-
-<h3 id="disputetoken-object">DisputeToken  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">disputeToken</code></strong> (string) Contract address of the Dispute Token, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the stake token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the stake token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market was determined to be invalid.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the stake token owner has staked, in ETH.</li>
-<li><strong><code class="prettyprint">winning</code></strong> (number|null) Description pending.</li>
-<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the stake token has been claimed by the owner.</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
-</ul>
-
-<p><a name="TimestampedPrice"></a></p>
-
-<h3 id="timestampedprice-object">TimestampedPrice  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">price</code></strong> (number) Display (non-normalized) price, as a base-10 number.</li>
-<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp for this price in seconds, as an integer.</li>
-</ul>
-
-<p><a name="UserTrade"></a></p>
-
-<h3 id="usertrade-object">UserTrade  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the trade transaction receipt.</li>
-<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the trade transaction.</li>
-<li><strong><code class="prettyprint">type</code></strong> (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
-<li><strong><code class="prettyprint">price</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">amount</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
-<li><strong><code class="prettyprint">marketCreatorFees</code></strong> (number) Amount of fees paid to Market creator, in ETH.</li>
-<li><strong><code class="prettyprint">reporterFees</code></strong> (number) Amount of fees paid to reporters, in ETH.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
-<li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">timestamp</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">tradeGroupID</code></strong> (number|null) Description pending.</li>
-</ul>
-
-<p><a name="UserTradePosition"></a></p>
-
-<h3 id="usertradeposition-object">UserTradePosition  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
-<li><strong><code class="prettyprint">numShares</code></strong> (number) Quantity of shares currently owned by the user.</li>
-<li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">averagePrice</code></strong> (number) Description pending.</li>
-</ul>
-
-<p><a name="WebSocket"></a></p>
-
-<h3 id="websocket-object">WebSocket  (Object)</h3>
-
-<ul>
-<li><strong><code class="prettyprint">binaryType</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">bufferedAmount</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">extensions</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">onclose</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onerror</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onmessage</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onopen</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">protocol</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">readyState</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">url</code></strong> (string) Description pending.</li>
-</ul>
-
-<p><a name="WsTransport"></a></p>
-
-<h3 id="wstransport-object">WsTransport  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) WebSocket address to connect to.</li>
-<li><strong><code class="prettyprint">timeout</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">messageHandler</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">workQueue</code></strong> (Array) Description pending.</li>
-<li><strong><code class="prettyprint">awaitingPump</code></strong> (boolean) Description pending.</li>
-<li><strong><code class="prettyprint">connected</code></strong> (boolean) Description pending.</li>
-<li><strong><code class="prettyprint">backoffMilliseconds</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">nextListenerToken</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">reconnectListeners</code></strong> (Object) Description pending.</li>
-<li><strong><code class="prettyprint">disconnectListeners</code></strong> (Object) Description pending.</li>
-<li><strong><code class="prettyprint">webSocketClient</code></strong> (<a href="#WebSocket">WebSocket</a>) WebSocket client object.</li>
-</ul>
-
           <h1 id="call-api">Call API</h1>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Call API Example</span>
 <span class="cm">/**
@@ -7491,7 +6893,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-iscontainerforfeetoken-p-callback">augur.api.Universe.isContainerForFeeToken(p, callback)</h3>
 
-<p>Returns whether the given <a href="#universe">Universe</a> is a container for a particular Fee Token. Every Fee Token belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Token address belongs to the Universe in question.</p>
+<p>Returns whether the given <a href="#universe">Universe</a> is a container for a particular <a href="#fee-token">Fee Token</a>. Every Fee Token belongs to a <a href="#universe">Universe</a>, and this method is used to see if a specific Fee Token address belongs to the Universe in question.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12174,6 +11576,606 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </tbody></table>
 
+          <h1 id="api-type-definitions">API Type Definitions</h1>
+
+<p>augur.js&rsquo; functions accept and return a variety of different objects, which are described below.</p>
+
+<!-- TODO: Add glossary links to type definitions -->
+
+<p><a name="Account"></a></p>
+
+<h3 id="account-object">Account  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">keystore</code></strong> (<a href="#Keystore">Keystore</a>) Keystore object containing this account&rsquo;s encryption parameters.</li>
+<li><strong><code class="prettyprint">privateKey</code></strong> (buffer) The private key for this account.</li>
+<li><strong><code class="prettyprint">derivedKey</code></strong> (buffer) The secret key (derived from the password) used to encrypt this account&rsquo;s private key.</li>
+</ul>
+
+<p><a name="AccountTransfer"></a></p>
+
+<h3 id="accounttransfer-object">AccountTransfer  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash returned by token transfer.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the transfer.</li>
+<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the transfer.</li>
+<li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the Ethereum block containing the transfer.</li>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the transfer was created.</li>
+<li><strong><code class="prettyprint">sender</code></strong> (string|null) Ethereum address of the token sender. If null, this indicates that new tokens were minted and sent to the user.</li>
+<li><strong><code class="prettyprint">recipient</code></strong> (string|null) Ethereum address of the token recipient. If null, this indicates that tokens were burned (i.e., destroyed).</li>
+<li><strong><code class="prettyprint">token</code></strong> (string) Contract address of the contract for the sent token, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">value</code></strong> (number) Quantity of tokens sent.</li>
+<li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).</li>
+</ul>
+
+<p><a name="AugurEventLog"></a></p>
+
+<h3 id="augureventlog-object">AugurEventLog  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">key</code></strong>  (string) A 32-byte hexadecimal value. Description pending.</li>
+<li><strong><code class="prettyprint">addition</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
+<li><strong><code class="prettyprint">commitHash</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
+<li><strong><code class="prettyprint">bytecodeHash</code></strong>  (string) A 32-byte hexadecimal value. Description pending.</li>
+<li><strong><code class="prettyprint">address</code></strong>  (string) A 20-byte hexadecimal value. Description pending.</li>
+<li><strong><code class="prettyprint">removed</code></strong>  (boolean) Whether the transaction this event was created from was removed from the Ethereum blockchain (due to an orphaned block) or never gotten to (due to a rejected transaction).</li>
+<li><strong><code class="prettyprint">transactionHash</code></strong>  (string) Hash of the transactions this log was created from, as a 32-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">transactionIndex</code></strong>  (number) Integer of the transaction&rsquo;s index position in the block.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong>  (number) Integer of the log index position in the block.</li>
+<li><strong><code class="prettyprint">blockNumber</code></strong>  (number) Number of the block on the Ethereum blockchain where the event was logged.</li>
+<li><strong><code class="prettyprint">contractName</code></strong>  (string) Name of the Solidity contract in which the event is defined.</li>
+<li><strong><code class="prettyprint">eventName</code></strong>  (string) Name of the event type being logged.</li>
+</ul>
+
+<p><a name="BetterWorseOrders"></a></p>
+
+<h3 id="betterworseorders-object">BetterWorseOrders  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">betterOrderID</code></strong> (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">worseOrderID</code></strong> (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="ContractAddresses"></a></p>
+
+<h3 id="contractaddresses-object">ContractAddresses  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">version</code></strong> (string) Version of the contracts.</li>
+<li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 16-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
+</ul>
+
+<p><a name="Category"></a></p>
+
+<h3 id="category-object">Category  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">category</code></strong> (string) Name of a Category.</li>
+<li><strong><code class="prettyprint">popularity</code></strong> (number|string) Category popularity. (The exact method for calculating this value is still pending.)</li>
+</ul>
+
+<p><a name="CipherParams"></a></p>
+
+<h3 id="cipherparams-object">CipherParams  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">iv</code></strong> (string) Initialization vector used for this account, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="ConnectOptions"></a></p>
+
+<h3 id="connectoptions-object">ConnectOptions  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">ethereumNode</code></strong> (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).</li>
+<li><strong><code class="prettyprint">augurNode</code></strong> (string) &lt;optional&gt; Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
+</ul>
+
+<p><a name="EthereumNode"></a></p>
+
+<h3 id="ethereumnode-object">EthereumNode  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">http</code></strong> (string|null) HTTP address of an Ethereum node.</li>
+<li><strong><code class="prettyprint">httpAddresses</code></strong> (Array.&lt;string&gt;|null) Array of HTTP Ethereum node addresses. (Can be used instead of <code class="prettyprint">http</code> to specify a list of HTTP addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">ws</code></strong> (string|null) Websocket address of an Ethereum node.</li>
+<li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.&lt;string&gt;|null) Array of websocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of websocket addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">ipc</code></strong> (string|null) IPC address of an Ethereum node.</li>
+<li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.&lt;string&gt;|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
+<li><strong><code class="prettyprint">networkID</code></strong> (string|null) Description pending.</li>
+</ul>
+
+<p><a name="ExtraInfo"></a></p>
+
+<h3 id="extrainfo-object">ExtraInfo  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Source that should be referenced when determining the Outcome of a Market.</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;string&gt;|null) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
+</ul>
+
+<p><a name="Keystore"></a></p>
+
+<h3 id="keystore-object">Keystore  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">crypto</code></strong> (<a href="#KeystoreCrypto">KeystoreCrypto</a>) Parameters used to encrypt this account&rsquo;s private key.</li>
+<li><strong><code class="prettyprint">id</code></strong> (string) This account&rsquo;s UUID.</li>
+<li><strong><code class="prettyprint">version</code></strong> (number) Keystore version number (usually 3).</li>
+</ul>
+
+<p><a name="KeystoreCrypto"></a></p>
+
+<h3 id="keystorecrypto-object">KeystoreCrypto  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">cipher</code></strong> (string) The symmetric cipher used to encrypt this account&rsquo;s private key (usually aes-128-ctr).</li>
+<li><strong><code class="prettyprint">ciphertext</code></strong> (string) This account&rsquo;s encrypted private key, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">cipherparams</code></strong> (<a href="#CipherParams">CipherParams</a>) Object containing the initialization vector for this account.</li>
+<li><strong><code class="prettyprint">kdf</code></strong> (string) Key derivation function name (usually scrypt; pbkdf2 is also supported).</li>
+<li><strong><code class="prettyprint">kdfparams</code></strong> (<a href="#ScryptParams">ScryptParams</a>|<a href="#Pbkdf2Params">Pbkdf2Params</a>) Key derivation function parameters.</li>
+<li><strong><code class="prettyprint">mac</code></strong> (string) Message authentication code, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="MarketCreationCost"></a></p>
+
+<h3 id="marketcreationcost-object">MarketCreationCost  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
+<li><strong><code class="prettyprint">etherRequiredToCreateMarket</code></strong> (string) Sum of the Ether required to pay for Reporters&rsquo; gas costs and the validity bond, as a base-10 string.</li>
+</ul>
+
+<p><a name="MarketCreationCostBreakdown"></a></p>
+
+<h3 id="marketcreationcostbreakdown-object">MarketCreationCostBreakdown  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
+<li><strong><code class="prettyprint">targetReporterGasCosts</code></strong> (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">validityBond</code></strong> (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.</li>
+</ul>
+
+<p><a name="MarketCreatorFee"></a></p>
+
+<h3 id="marketcreatorfee-object">MarketCreatorFee  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">unclaimedFee</code></strong> (number|string) Fee available to be claimed from the Market, by the Market Creator, in attoETH.</li>
+</ul>
+
+<p><a name="MarketInfo"></a></p>
+
+<h3 id="marketinfo-object">MarketInfo  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">id</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
+<li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">cumulativeScale</code></strong> (string) Difference between maxPrice and minPrice.</li>
+<li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
+<li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
+<li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
+<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
+<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
+<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
+<li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
+<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">outstandingShares</code></strong> (number) Total shares in the Market. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
+<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
+<li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
+<li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
+<li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).</li>
+<li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Amount of ETH the designated reporter staked on the Outcome submitted in the designated report.</li>
+<li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
+<li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
+<li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
+<li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
+</ul>
+
+<p><a name="MarketOrderBook"></a></p>
+
+<h3 id="marketorderbook-object">MarketOrderBook  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">1</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 1 of this market.</li>
+<li><strong><code class="prettyprint">2</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 2 of this market.</li>
+<li><strong><code class="prettyprint">3</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 3 of this market.</li>
+<li><strong><code class="prettyprint">4</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 4 of this market.</li>
+<li><strong><code class="prettyprint">5</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 5 of this market.</li>
+<li><strong><code class="prettyprint">6</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 6 of this market.</li>
+<li><strong><code class="prettyprint">7</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 7 of this market.</li>
+<li><strong><code class="prettyprint">8</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 8 of this market.</li>
+</ul>
+
+<p><a name="MarketPriceTimeSeries"></a></p>
+
+<h3 id="marketpricetimeseries-object">MarketPriceTimeSeries  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">Price</code></strong> (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.</li>
+</ul>
+
+<p><a name="MarketsContractAddressRow"></a></p>
+
+<h3 id="marketscontractaddressrow-object">MarketsContractAddressRow  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Unix time when the Market was created.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="Meta"></a></p>
+
+<h3 id="meta-object">Meta  (Object)</h3>
+
+<p>Authentication metadata for raw transactions.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">signer</code></strong> (buffer|function) Private key buffer or a signing function provided by a hardware wallet, of the account initiating the transaction.</li>
+<li><strong><code class="prettyprint">accountType</code></strong> (string) Type of account that is signing the transaction. Possible values include &ldquo;privateKey&rdquo;, &ldquo;ledger&rdquo;, and &ldquo;uPort&rdquo;.</li>
+</ul>
+
+<p><a name="NoKeystoreAccount"></a></p>
+
+<h3 id="nokeystoreaccount-object">NoKeystoreAccount  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">privateKey</code></strong> (buffer) The private key for this account.</li>
+<li><strong><code class="prettyprint">derivedKey</code></strong> (buffer) The secret key (derived from the password) used to encrypt this account&rsquo;s private key.</li>
+</ul>
+
+<p><a name="Order"></a></p>
+
+<h3 id="order-object">Order  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li>*<em><code class="prettyprint">orderID</code> *</em> (string) ID of the order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token for which the order was placed, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the order transaction receipt.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the order transaction.</li>
+<li><strong><code class="prettyprint">owner</code></strong> (string) The order maker&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the order transaction was created.</li>
+<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the order transaction.</li>
+<li><strong><code class="prettyprint">orderState</code></strong> (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
+<li><strong><code class="prettyprint">price</code></strong> (number) Rounded display price, as a base-10 number.</li>
+<li><strong><code class="prettyprint">amount</code></strong> (number) Rounded number of shares to trade, as a base-10 number.</li>
+<li><strong><code class="prettyprint">fullPrecisionPrice</code></strong> (string) Full-precision (un-rounded) display price, as a base-10 number.</li>
+<li><strong><code class="prettyprint">fullPrecisionAmount</code></strong> (number) Full-precision (un-rounded) number of shares to trade, as a base-10 number.</li>
+<li><strong><code class="prettyprint">tokensEscrowed</code></strong> (number) Number of the order maker&rsquo;s tokens held in escrow, as a base-10 number.</li>
+<li><strong><code class="prettyprint">sharesEscrowed</code></strong> (number) Number of the order maker&rsquo;s shares held in escrow, as a base-10 number.</li>
+</ul>
+
+<p><a name="ORDER_STATE"></a></p>
+
+<h3 id="order_state-object">ORDER_STATE  (Object)</h3>
+
+<p>Serves as an enum for the state of an order.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">ALL</code></strong> (string) Order is open, closed, or cancelled. (If no order state is specified, this is the default value.)</li>
+<li><strong><code class="prettyprint">OPEN</code></strong> (string) Order is available to be filled.</li>
+<li><strong><code class="prettyprint">CLOSED</code></strong> (string) Order has been filled.</li>
+<li><strong><code class="prettyprint">CANCELED</code></strong> (string) Order has been canceled (although it may have been partially filled).</li>
+</ul>
+
+<p><a name="OutcomeInfo"></a></p>
+
+<h3 id="outcomeinfo-object">OutcomeInfo  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">id</code></strong> (number) Market Outcome ID</li>
+<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">price</code></strong> (number) Price of the Outcome.</li>
+<li><strong><code class="prettyprint">description</code></strong> (string|null) Description for the Outcome.</li>
+</ul>
+
+<p><a name="Pbkdf2Params"></a></p>
+
+<h3 id="pbkdf2params-object">Pbkdf2Params  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">dklen</code></strong> (number) Key length in bytes (usually 32).</li>
+<li><strong><code class="prettyprint">c</code></strong> (number) Number of PBKDF2 iterations used to derive the secret key.</li>
+<li><strong><code class="prettyprint">prf</code></strong> (string) Pseudorandom function used with PBKDF2 (usually hmac-sha256).</li>
+<li><strong><code class="prettyprint">salt</code></strong> (string) The dklen-byte salt used for this account, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="ProfitLoss"></a></p>
+
+<h3 id="profitloss-object">ProfitLoss  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">position</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">meanOpenPrice</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">realized</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">queued</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">unrealized</code></strong>  (string) Description pending.</li>
+</ul>
+
+<p><a name="Report"></a></p>
+
+<h3 id="report-object">Report  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the reporting transaction receipt.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the reporting transaction.</li>
+<li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the reporting transaction.</li>
+<li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the Ethereum block containing the reporting transaction.</li>
+<li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">feeWindow</code></strong> (string) Fee Window the Market is in currently.</li>
+<li><strong><code class="prettyprint">payoutNumerators</code></strong> (Array.&lt;number&gt;) Array representing the payout set.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Description the reporter has staked on the Outcome of their report.</li>
+<li><strong><code class="prettyprint">crowdsourcerID</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the Market is a Categorical Market.</li>
+<li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the Market is a Scalar Market.</li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market is <a href="#invalid-outcome">Invalid</a>.</li>
+<li><strong><code class="prettyprint">isSubmitted</code></strong> (boolean) Description pending.</li>
+</ul>
+
+<p><a name="REPORTING_STATE"></a></p>
+
+<h3 id="reporting_state-object">REPORTING_STATE  (Object)</h3>
+
+<p>Serves as an enum for the state of a stake token.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">PRE_REPORTING</code></strong> (string) Market&rsquo;s end time has not yet come to pass.</li>
+<li><strong><code class="prettyprint">DESIGNATED_REPORTING</code></strong> (string) Market&rsquo;s end time has occurred, and it is pending a designated report.</li>
+<li><strong><code class="prettyprint">DESIGNATED_DISPUTE</code></strong> (string) Market&rsquo;s designated report has been submitted and is allowed to be disputed.</li>
+<li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the disignated report was disputed, or the designated reporter failed to submit a report, and the market is waiting for the next reporting phase to begin.</li>
+<li><strong><code class="prettyprint">FIRST_REPORTING</code></strong> (string) Market&rsquo;s designated report was disputed, and users can place stake on Outcomes.</li>
+<li><strong><code class="prettyprint">FIRST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed.</li>
+<li><strong><code class="prettyprint">LAST_REPORTING</code></strong> (string) Market&rsquo;s first report was disputed, and users can place stake on Outcomes.</li>
+<li><strong><code class="prettyprint">LAST_DISPUTE</code></strong> (string) Market&rsquo;s first report has been submitted and is allowed to be disputed to cause a fork.</li>
+<li><strong><code class="prettyprint">FORKING</code></strong> (string) Market&rsquo;s last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
+<li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An Outcome for the Market has been determined.</li>
+<li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
+<li><strong><code class="prettyprint">AWAITING_FINALIZATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
+</ul>
+
+<p><a name="ScryptParams"></a></p>
+
+<h3 id="scryptparams-object">ScryptParams  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">dklen</code></strong> (number) Key length in bytes (usually 32).</li>
+<li><strong><code class="prettyprint">n</code></strong> (number) Number of scrypt iterations used to derive the secret key (usually 262144).</li>
+<li><strong><code class="prettyprint">p</code></strong> (number) Parallelization factor, determines relative CPU cost (usually 1).</li>
+<li><strong><code class="prettyprint">r</code></strong> (number) Block size factor used for scrypt&rsquo;s hash, determines relative memory cost (usually 8).</li>
+<li><strong><code class="prettyprint">salt</code></strong> (string) The dklen-byte salt used for this account, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="SingleOutcomeOrderBook"></a></p>
+
+<h3 id="singleoutcomeorderbook-object">SingleOutcomeOrderBook  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">buy</code></strong> (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Buy orders (bids) indexed by order ID.</li>
+<li><strong><code class="prettyprint">sell</code></strong> (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)  Sell orders (asks) indexed by order ID.</li>
+</ul>
+
+<p><a name="SingleOutcomeOrderBookSide"></a></p>
+
+<h3 id="singleoutcomeorderbookside-object">SingleOutcomeOrderBookSide  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">Buy</code></strong>|<strong><code class="prettyprint">Sell</code></strong> (<a href="#Order">Order</a>) bid or ask orders, indexed by order ID.</li>
+</ul>
+
+<p><a name="SingleOutcomePriceTimeSeries"></a></p>
+
+<h3 id="singleoutcomepricetimeseries-object">SingleOutcomePriceTimeSeries  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">Array</code></strong> (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>&gt;) of timestamped price points for this Outcome.</li>
+</ul>
+
+<p><a name="DISPUTE_TOKEN_STATE"></a></p>
+
+<h3 id="dispute_token_state-object">DISPUTE_TOKEN_STATE  (Object)</h3>
+
+<p>Serves as an enum for the state of a Dispute Token.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">ALL</code></strong> (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)</li>
+<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Dispute Token is in a Market that has not been Finalized.</li>
+<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.</li>
+</ul>
+
+<p><a name="DisputeToken"></a></p>
+
+<h3 id="disputetoken-object">DisputeToken  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">disputeToken</code></strong> (string) Contract address of the Dispute Token, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the stake token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the stake token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market was determined to be invalid.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the stake token owner has staked, in ETH.</li>
+<li><strong><code class="prettyprint">winning</code></strong> (number|null) Description pending.</li>
+<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the stake token has been claimed by the owner.</li>
+<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
+</ul>
+
+<p><a name="TimestampedPrice"></a></p>
+
+<h3 id="timestampedprice-object">TimestampedPrice  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">price</code></strong> (number) Display (non-normalized) price, as a base-10 number.</li>
+<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp for this price in seconds, as an integer.</li>
+</ul>
+
+<p><a name="UserTrade"></a></p>
+
+<h3 id="usertrade-object">UserTrade  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the trade transaction receipt.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the trade transaction.</li>
+<li><strong><code class="prettyprint">type</code></strong> (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
+<li><strong><code class="prettyprint">price</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">amount</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
+<li><strong><code class="prettyprint">marketCreatorFees</code></strong> (number) Amount of fees paid to Market creator, in ETH.</li>
+<li><strong><code class="prettyprint">reporterFees</code></strong> (number) Amount of fees paid to reporters, in ETH.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
+<li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">timestamp</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">tradeGroupID</code></strong> (number|null) Description pending.</li>
+</ul>
+
+<p><a name="UserTradePosition"></a></p>
+
+<h3 id="usertradeposition-object">UserTradePosition  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
+<li><strong><code class="prettyprint">numShares</code></strong> (number) Quantity of shares currently owned by the user.</li>
+<li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (number) Description pending.</li>
+</ul>
+
+<p><a name="WebSocket"></a></p>
+
+<h3 id="websocket-object">WebSocket  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">binaryType</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">bufferedAmount</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">extensions</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">onclose</code></strong> (function) Description pending.</li>
+<li><strong><code class="prettyprint">onerror</code></strong> (function) Description pending.</li>
+<li><strong><code class="prettyprint">onmessage</code></strong> (function) Description pending.</li>
+<li><strong><code class="prettyprint">onopen</code></strong> (function) Description pending.</li>
+<li><strong><code class="prettyprint">protocol</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">readyState</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">url</code></strong> (string) Description pending.</li>
+</ul>
+
+<p><a name="WsTransport"></a></p>
+
+<h3 id="wstransport-object">WsTransport  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) WebSocket address to connect to.</li>
+<li><strong><code class="prettyprint">timeout</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">messageHandler</code></strong> (function) Description pending.</li>
+<li><strong><code class="prettyprint">workQueue</code></strong> (Array) Description pending.</li>
+<li><strong><code class="prettyprint">awaitingPump</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">connected</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">backoffMilliseconds</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">nextListenerToken</code></strong> (number) Description pending.</li>
+<li><strong><code class="prettyprint">reconnectListeners</code></strong> (Object) Description pending.</li>
+<li><strong><code class="prettyprint">disconnectListeners</code></strong> (Object) Description pending.</li>
+<li><strong><code class="prettyprint">webSocketClient</code></strong> (<a href="#WebSocket">WebSocket</a>) WebSocket client object.</li>
+</ul>
+
           <h1 id="api-constants">API Constants</h1>
 
 <p>augur.js contains a number of constants in the <code class="prettyprint">augur.constants</code> object, which are listed below.</p>
@@ -12755,11 +12757,9 @@ Goals:
 
 <p>End Time is the date and time that a <a href="#market">Market</a>&rsquo;s event will have come to pass and should be known. After this date and time has passed the Market will get <a href="#report">Reported</a> on and eventually <a href="#finalized-market">Finalized</a>.</p>
 
-<!-- TODO: Remove this section if it is not linked to anywhere else. -->
-
 <h2 id="fee-token">Fee Token</h2>
 
-<p>Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur&rsquo;s Solidity smart contracts to allow users to redeem <a href="#rep">REP</a> Staked either in a <a href="#first-public-report">First Public Report</a> or in a <a href="#crowdsourcer">Crowdsourcer</a>. When a <a href="#first-public-reporter">First Public Reporter</a> submits a First Public Report in a given <a href="#fee-window">Fee Window</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Similarly, when a user Stakes REP in a Crowdsourcer to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated that user to determine what proportion of the Fee Window&rsquo;s <a href="#reporting-fee">Reporting Fees</a> (in ETH) to distribute to them.</p>
+<p>Fee Tokens are not tokens that users interact with directly; however, they are used internally by Augur&rsquo;s Solidity smart contracts to allow users to redeem <a href="#rep">REP</a> Staked either in a <a href="#first-public-report">First Public Report</a> or in a <a href="#crowdsourcer">Crowdsourcer</a>. When a <a href="#first-public-reporter">First Public Reporter</a> submits a First Public Report in a given <a href="#fee-window">Fee Window</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked and associates those Fee Tokens with the Ethereum address of the First Public Reporter. Similarly, when a user Stakes REP in a Crowdsourcer to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a>, Augur creates an amount of Fee Tokens equal to the amount of REP they Staked and associates those Fee Tokens with the Ethereum address of that user. Once the Fee Window is over, and a user redeems their Staked REP, Augur uses the amount of Fee Tokens associated their Ethereum address to determine what proportion of the Fee Window&rsquo;s <a href="#reporting-fee">Reporting Fees</a> (in ETH) to distribute to them.</p>
 
 <h2 id="fee-window">Fee Window</h2>
 
