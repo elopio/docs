@@ -11,7 +11,7 @@ augur.accounts.getAccountTransferHistory({
   account: "0x0000000000000000000000000000000000000b0b",
   token: null,
   isSortDescending: false
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -180,7 +180,7 @@ augur.accounts.logout();
 ```
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
-Returns the token transfers made to or from a specific Ethereum address. 
+Returns the token transfers made to or from a specific Ethereum address.
 
 This function will fail if:
 
@@ -203,25 +203,9 @@ This function will fail if:
 
 * (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>) Array representing the account's transfer history.
 
-### augur.accounts.importAccount(p, callback)
-
-Description pending.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.password`**  (string) Password for the account being imported.
-    * **`p.address`**  (string) Ethereum address of the account being imported.
-    * **`p.keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
-* **`callback`** (function) Called after the account's private key has been successfully decrypted.
-
-#### **Returns:**
-
-*  (<a href="#Account">Account</a>) Logged-in account object.
-
 ### augur.accounts.login(p, callback)
 
-Logs into an account using a password 
+Logs into an account using a password.
 
 #### **Parameters:**
 
@@ -256,9 +240,9 @@ Assets Functions
 ----------------
 ```javascript
 augur.assets.sendEther({
-  etherToSend: "0.001", 
+  etherToSend: "0.001",
   from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-  to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+  to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
     signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -290,8 +274,8 @@ augur.assets.sendEther({
 
 augur.assets.sendReputation({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-  reputationToSend: "0.001", 
-  _to: "0x40485264986740c8fb3d11e814bd94cf86012d29", 
+  reputationToSend: "0.001",
+  _to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
     signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -356,7 +340,7 @@ Augur Node Functions
 --------------------
 ```javascript
 augur.augurNode.connect(
-  "ws://127.0.0.1:9001", 
+  "ws://127.0.0.1:9001",
   function(error, wsTransport) {
     console.log("Connected to Augur Node!");
     console.log("WebSocket transport:");
@@ -408,11 +392,11 @@ augur.augurNode.getContractAddresses(
 }
 
 augur.augurNode.submitRequest(
-  "getMarketsInCategory", 
+  "getMarketsInCategory",
   {
     universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
     category: "sports"
-  }, 
+  },
   function(error, result) {
     console.log(result);
   }
@@ -425,12 +409,12 @@ augur.augurNode.submitRequest(
 ]
 
 augur.augurNode.subscribeToEvent(
-  "TokensTransferred", 
+  "TokensTransferred",
   function(error, result) {
     console.log(error);
     console.log(result);
     console.log("Tokens transferred!");
-  }, 
+  },
   function(error, subscriptionId) {
     console.log("Subscribed to event! Subscription ID:", subscriptionId);
   }
@@ -440,7 +424,7 @@ augur.augurNode.subscribeToEvent(
 // example output after TokensTransferred event coming soon
 
 augur.augurNode.unsubcribeFromEvent(
-  "8cac9a4b-f5b8-4fb1-be50-5aa16dc99e67", 
+  "8cac9a4b-f5b8-4fb1-be50-5aa16dc99e67",
   function(error) {
     if (!error) {
       console.log("Unsubscribe successful!");
@@ -502,11 +486,11 @@ A connection to an Augur Node has not been established.
 
 * **`method`**  (string) Method name to call.
 * **`params`**  (Object) Parameters to pass into `method`.
-* **`callback`**  (function) Called once the Augur Node responds to the RPC request. 
+* **`callback`**  (function) Called once the Augur Node responds to the RPC request.
 
 #### **Returns:**
 
-* (Data type can vary based on the method being called.) Result from the RPC request. 
+* (Data type can vary based on the method being called.) Result from the RPC request.
 
 ### augur.augurNode.subscribeToEvent(eventName, subscriptionCallback, onComplete)
 
@@ -519,7 +503,7 @@ A connection to an Augur Node has not been established.
 #### **Parameters:**
 
 * **`eventName`**  (string) Type of event to listen for.
-* **`subscriptionCallback`**  (function) Called whenever the Augur Node detects a new occurrence of the specified event. 
+* **`subscriptionCallback`**  (function) Called whenever the Augur Node detects a new occurrence of the specified event.
 * **`onComplete`**  (function) Called after attempting to set up the subscription to listen on the Augur Node.
 
 #### **Returns:**
@@ -554,8 +538,8 @@ A connection to an Augur Node has not been established.
 Connect Function
 ----------------
 ```javascript
-augur.connect({ 
-  ethereumNode: {  
+augur.connect({
+  ethereumNode: {
     httpAddresses: [
       "http://127.0.0.1:8545", // local http address for Geth node
       "https://rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Ethereum Rinkeby test network
@@ -604,10 +588,10 @@ Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 Create Market Functions
 ----------------
 ```javascript
-var _extraInfo = { 
-  "resolutionSource": "http://www.nasdaq.com/symbol/msft", 
-  "tags": [ "Stocks", "Microsoft" ], 
-  "longDescription": "" 
+var _extraInfo = {
+  "resolutionSource": "http://www.nasdaq.com/symbol/msft",
+  "tags": [ "Stocks", "Microsoft" ],
+  "longDescription": ""
 };
 augur.createMarket.createBinaryMarket({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -647,11 +631,11 @@ augur.createMarket.createBinaryMarket({
   "gasFees": "0.022312465"
 }
 
-var _extraInfo = { 
-  "resolutionSource": "http://www.espn.com", 
-  "tags": ["college football", "football"], 
-  "outcomeNames": ["Georgia", "Florida"], 
-  "longDescription": "" 
+var _extraInfo = {
+  "resolutionSource": "http://www.espn.com",
+  "tags": ["college football", "football"],
+  "outcomeNames": ["Georgia", "Florida"],
+  "longDescription": ""
 };
 augur.createMarket.createCategoricalMarket({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -692,10 +676,10 @@ augur.createMarket.createCategoricalMarket({
   "gasFees": "0.022312465"
 }
 
-var _extraInfo = { 
-  "resolutionSource": "http://forecast.weather.gov", 
-  "tags": ["San Francisco", "weather"], 
-  "longDescription": "" 
+var _extraInfo = {
+  "resolutionSource": "http://forecast.weather.gov",
+  "tags": ["San Francisco", "weather"],
+  "longDescription": ""
 };
 augur.createMarket.createScalarMarket({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -739,8 +723,8 @@ augur.createMarket.createScalarMarket({
 }
 
 augur.createMarket.getMarketCreationCost({
-    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
-}, function (error, result) { 
+    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -750,8 +734,8 @@ augur.createMarket.getMarketCreationCost({
 }
 
 augur.createMarket.getMarketCreationCostBreakdown({
-    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831", 
-}, function (error, result) { 
+    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -763,11 +747,11 @@ augur.createMarket.getMarketCreationCostBreakdown({
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
-Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
+Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Universe in which to create a Binary Market.
     * **`p._endTime`**  (number) Binary Market expiration timestamp, in seconds.
     * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
@@ -783,17 +767,17 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
 
 ### augur.createMarket.createCategoricalMarket(p)
 
-Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
+Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Universe in which to create a Categorical Market.
     * **`p._endTime`**  (number) Categorical Market expiration timestamp, in seconds.
     * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
     * **`p._denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
-    * **`p._outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event. 
+    * **`p._outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event.
     * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`p._description`**  (string) Description of the Market, as a UTF8 string.
     * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
@@ -804,11 +788,11 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
 
 ### augur.createMarket.createScalarMarket(p)
 
-Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully. 
+Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Universe in which to create this market.
     * **`p._endTime`**  (number) Market expiration timestamp, in seconds.
     * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
@@ -833,7 +817,7 @@ Note: This function will send a transaction if needed to create the current [Fee
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) [Universe](#universe) on which to create this Market.
 * **`callback`** (function) Called after the Market creation cost has been looked up.
 
@@ -850,7 +834,7 @@ Note: This function will send a transaction if needed to create the current [Fee
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) [Universe](#universe) on which to create this Market.
 * **`callback`** (function) Called when all Market creation costs have been looked up.
 
@@ -866,7 +850,7 @@ Generates a set of JavaScript bindings for the Solidity ABIs passed in.
 
 #### **Parameters:**
 
-* **`functionsAbi`** (Object) Parameters object. 
+* **`functionsAbi`** (Object) Parameters object.
 
 #### **Returns:**
 
@@ -879,7 +863,7 @@ augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "popularity",
   isSortDescending: true
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -891,9 +875,9 @@ augur.markets.getCategories({
 ]
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.markets.getDisputableMarkets({ 
+augur.markets.getDisputableMarkets({
   feeWindow: "0x1000000000000000000000000000000000000000"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output: coming soon
@@ -904,7 +888,7 @@ augur.markets.getMarketPriceHistory({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -917,7 +901,7 @@ augur.markets.getMarketPriceHistory({
 
 augur.markets.getMarkets({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -932,7 +916,7 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "volume",
   isSortDescending: false,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -949,10 +933,10 @@ augur.markets.getMarketsAwaitingDesignatedReporting({
 
 augur.markets.getMarketsAwaitingReporting({
   universe: "0x000000000000000000000000000000000000000b"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
-// example output: 
+// example output:
 [
   "0x0000000000000000000000000000000000000012",
   "0x0000000000000000000000000000000000000013",
@@ -973,7 +957,7 @@ augur.markets.getMarketsClosingInDateRange({
   earliestClosingTime: 1506573450,
   latestClosingTime: 1506573470,
   limit: 10,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -984,7 +968,7 @@ augur.markets.getMarketsClosingInDateRange({
 augur.markets.getMarketsCreatedByUser({
   universe: "0x000000000000000000000000000000000000000b",
   creator: "0x000000000000000000000000000000000000d00d",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -998,7 +982,7 @@ augur.markets.getMarketsCreatedByUser({
 augur.markets.getMarketsInCategory({
   universe: "0x000000000000000000000000000000000000000b",
   category: "augur",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1014,7 +998,7 @@ augur.markets.getMarketsInfo({
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002",
   ],
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1161,7 +1145,7 @@ This function will fail if:
 * A connection to an [Augur Node](#augur-node) has not been established.
 
 #### **Parameters:**
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
@@ -1184,7 +1168,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.feeWindow`**  (string) Contract address of the Fee Window from which to retrieve the disputable Markets.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1207,7 +1191,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.marketID`**  (string) Market contract address for which to look up orders, as a hexadecimal string.
 * **`callback`** (function) Called after the price time-series has been received and parsed.
@@ -1226,7 +1210,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to get transfer history.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1237,7 +1221,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (Array.&lt;string>) Array of Market addresses in the Universe, as hexadecimal strings. 
+* (Array.&lt;string>) Array of Market addresses in the Universe, as hexadecimal strings.
 
 ### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)
 
@@ -1249,7 +1233,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve Markets, as a hexadecimal string.
     * **`p.designatedReporter`**  (string) &lt;optional> Address of a specific [Designated Reporter](#designated-reporter) by which to filter the results, as a hexadecimal string.
@@ -1261,7 +1245,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (Array.&lt;string>) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings. 
+* (Array.&lt;string>) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings.
 
 ### augur.markets.getMarketsAwaitingReporting(p, callback)
 
@@ -1273,7 +1257,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.
     * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window from which to retrieve the Markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
@@ -1298,7 +1282,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to get the Markets, as a hexadecimal string.
     * **`p.earliestClosingTime`**  (number) Earliest Market close timestamp at which to truncate Market results, in seconds.
@@ -1323,7 +1307,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a hexadecimal string.
     * **`p.creator`**  (string) Ethereum address of the [Market Creator](#market-creator), as a hexadecimal string.
@@ -1347,7 +1331,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a hexadecimal string.
     * **`p.category`**  (string) Name of the category from which to get the Markets.
@@ -1372,7 +1356,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.marketIDs`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
 * **`callback`** (function) Called after the Market info has been retrieved.
@@ -1387,7 +1371,7 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 16-byte hexadecimal values.
 * **`callback`** (function) Called after the Market information has been retrieved.
@@ -1399,14 +1383,14 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 Reporting Functions
 -------------
 ```javascript
-augur.reporting.getDisputeTokens({ 
+augur.reporting.getDisputeTokens({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
   disputeTokenState: "UNFINALIZED",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
-// example output: 
+// example output:
 {
   "0x0000000000000000001000000000000000000001": {
     disputeToken: "0x0000000000000000001000000000000000000001",
@@ -1428,10 +1412,10 @@ augur.reporting.getDisputeTokens({
 }
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.reporting.getFeeWindowsWithUnclaimedFees({ 
+augur.reporting.getFeeWindowsWithUnclaimedFees({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output: coming soon
@@ -1439,7 +1423,7 @@ augur.reporting.getFeeWindowsWithUnclaimedFees({
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1480,12 +1464,12 @@ augur.reporting.getReportingHistory({
   }
 }
 
-augur.reporting.getReportingSummary({ 
+augur.reporting.getReportingSummary({
   feeWindow: "0x1000000000000000000000000000000000000000"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
-// example output: 
+// example output:
 {
   "AWAITING_FINALIZATION": 1,
   "DESIGNATED_REPORTING": 8,
@@ -1495,7 +1479,7 @@ augur.reporting.getReportingSummary({
 
 augur.reporting.getStakeRequiredForDesignatedReporter({
     universe: "0x000000000000000000000000000000000000000b"
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1530,7 +1514,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Dispute Tokens, as a hexadecimal string.
     * **`p.account`**  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a hexadecimal string.
@@ -1552,7 +1536,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.
     * **`p.account`**  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a hexadecimal string.
@@ -1572,7 +1556,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting history, as a hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.
@@ -1600,14 +1584,14 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.feeWindow`**  (string) Contract address of the [Fee Window](#fee-window) for which to get the summary, as a hexadecimal string.
 * **`callback`** (function) Called after the reporting summary has been retrieved.
 
 #### **Returns:**
 
-* (Object) Summary of the number of Markets in each reporting phase, keyed by reporting phase. 
+* (Object) Summary of the number of Markets in each reporting phase, keyed by reporting phase.
 
 ### augur.reporting.getStakeRequiredForDesignatedReporter(p, callback)
 
@@ -1632,7 +1616,7 @@ augur.trading.calculateProfitLoss({
     amount: "1",
     price: "2",
     maker: false,
-  }], 
+  }],
   lastPrice: "2"
 });
 
@@ -1687,10 +1671,10 @@ augur.trading.getBetterWorseOrders({
   outcome: 0,
   orderType: "buy",
   price: 0.65,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
-// example output: 
+// example output:
 {
   betterOrderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
   worseOrderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
@@ -1703,7 +1687,7 @@ augur.trading.getOrders({
   orderType: "buy",
   creator: null,
   orderState: "OPEN",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1788,7 +1772,7 @@ augur.trading.getPositionInMarket({
   address: "0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3",
   market: "0x2221185d7f125b84ac4a1837a0688d2bb58e8491",
   tickSize: "0.0001",
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1804,7 +1788,7 @@ augur.trading.getUserTradingHistory({
       isSortDescending: null,
       limit: null,
       offset: null,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1836,7 +1820,7 @@ augur.trading.getUserTradingPositions({
   isSortDescending: null,
   limit: null,
   offset: null,
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -1968,7 +1952,7 @@ augur.trading.simulateTrade({
       },
     },
   },
-}, function (error, result) { 
+}, function (error, result) {
   console.log(result);
 });
 // example output:
@@ -2075,7 +2059,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.marketID`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a hexadecimal string.
     * **`p.outcome`**  (string) Market Outcome for which to find better/worse Orders.
@@ -2097,7 +2081,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a hexadecimal string. Either this parameter or the Universe must be specified.
@@ -2122,7 +2106,7 @@ Gets the number of [Shares](#share) held by a specific Ethereum address for each
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object. 
+* **`p`** (Object) Parameters object.
     * **`p.address`**  (string) Address for which to look up Share balances.
     * **`p.market`**  (string) Market for which to look up Share balances.
     * **`p.tickSize`**  (string) [Tick](#tick) size (interval) for this Market.
@@ -2143,7 +2127,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading history, as a hexadecimal string. Either this parameter or the [Market](#market) ID must be specified.
@@ -2170,7 +2154,7 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`p`** (Object) Parameters object.  
+* **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.
@@ -2242,7 +2226,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
     * **`p.marketOrderBook`**  (MarketOrderBook) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
     * **`p.shouldCollectReportingFees`**  (boolean) &lt;optional> False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).
- 
+
 #### **Returns:**
 
 * (SimulatedTrade) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.
