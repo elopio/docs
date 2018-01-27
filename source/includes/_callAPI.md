@@ -66,6 +66,32 @@ Augur keeps track of its [Genesis Universes](#genesis-universe) and all [Child U
 
 * (boolean) `true` if the specified Universe is in Augur's list of known Universe, or `false` otherwise.
 
+Controller Call API
+---------------
+```javascript
+// Controller Contract Call API Examples:
+augur.api.Controller.getTimestamp({
+}, function (error, timestamp) { 
+  console.log(timestamp); 
+});
+// example output:
+"1516744206"
+```
+Provides JavaScript bindings for the [Controller Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Controller.sol), which is used to manage whitelisting of contracts and and [halt](#developer-mode) the normal use of Augur’s contracts (e.g., if there is a vulnerability found in Augur). From a developer standpoint, it can be used to get Augur's internal timestamp.
+
+### augur.api.TimeControlled.getTimestamp(p, callback)
+
+Returns Augur's internal Unix timestamp.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Augur's internal Unix timestamp, as a stringified unsigned integer.
+
 Dispute Crowdsourcer Call API
 -------------------------
 ```javascript
@@ -1399,7 +1425,7 @@ Returns whether the ReportingParticipant contract `_shadyReportingParticipant` b
 
 ### augur.api.Market.isContainerForShareToken(p, callback)
 
-Returns whether the specified [Market](#market) is a container for the [Share Token](#share-token-call-api) Ethereum address `_shadyShareToken`. This function will return `1` if `_shadyShareToken` is a Share Token belonging to the [Market](#market), otherwise it will return `0`.
+Returns whether the given [Market](#market) is a container for the specified [Share Token](#share-token-call-api) Ethereum contract address.
 
 #### **Parameters:**
 
@@ -2054,40 +2080,13 @@ Returns the Outcome of the Market that the specified ShareToken is for.
 
 * (string) Returns the Outcome of the Market that the specified ShareToken is for, as a stringified unsigned integer.
 
-Time Controlled Call API
----------------
-```javascript
-// TimeControlled Contract Call API Examples:
-augur.api.TimeControlled.getTimestamp({
-}, function (error, timestamp) { 
-  console.log(timestamp); 
-});
-// example output:
-"1516744206"
-```
-Provides JavaScript bindings for the [Time Controlled Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol), which allows for the setting and updating of Augur's internal timestamp for the current time.
-
-### augur.api.TimeControlled.getTimestamp(p, callback)
-
-Returns Augur's internal Unix timestamp. This function can only be called if the contract is running on a network that is not the Ethereum public main network.
-
-This call will fail if:
-
-* The `TimeControlled` contract is on the Ethereum public main network.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (string) Augur's internal Unix timestamp, as a stringified unsigned integer.
-
 Universe Call API
 ---------------
 ```javascript
 // Universe Contract Call API Examples:
+
+// The Ethereum contract address of Augur's current default Universe 
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
 var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 
 augur.api.Universe.getChildUniverse({
@@ -2602,6 +2601,10 @@ Returns the Ethereum contract address of the [Winning Universe](#winning-univers
 ### augur.api.Universe.isContainerForFeeToken(p, callback)
 
 Returns whether the given [Universe](#universe) is a container for a particular [Fee Token](#fee-token). Every Fee Token belongs to a [Universe](#universe), and this method is used to see if a specific Fee Token address belongs to the Universe in question.
+
+This call will fail if:
+
+* The Universe is not a container for the Fee Window of the Fee Token.
 
 #### **Parameters:**
 

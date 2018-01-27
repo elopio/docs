@@ -13,7 +13,7 @@ var attotokens = "100000000000000000000"; // 1000.00 REP
 augur.api.ReputationToken.transfer({
   _to: transferTarget,
   _value: attotokens,
-  tx: { to: reputationTokenAddress},
+  tx: { to: reputationTokenAddress },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -152,7 +152,6 @@ Transaction failed: {
   message: 'polled network but could not confirm transaction'
 }
 ```
-
 <aside class="warning">While it is possible to use <code>augur.rpc.transact</code> directly, it is generally easier and less error-prone to use one of the named API functions documented in the following sections. Readers who want to use the Transaction API and aren't terribly curious about the augur.js/ethrpc plumbing under the hood should skip to the next section!</aside>
 
 #### augur.rpc.transact(payload, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed)
@@ -200,7 +199,21 @@ Augur Tx API
 ----------------------------
 ```javascript
 // Augur Transaction API Examples:
+
+// The Ethereum address of Augur's default Augur contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var augurAddress = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
+
 augur.api.Augur.createGenesisUniverse({
+  tx: { 
+    to: augurAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -246,10 +259,23 @@ Cancel Order Tx API
 ----------------------------
 ```javascript
 // Cancel Order Transaction API Examples:
-var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 
+// The Ethereum address of Augur's default CancelOrder contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var cancelOrderAddress = "0x389c0b3f0d51cfba9e4d214712a1142f5685814d";
+
+var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
 augur.api.CancelOrder.cancelOrder({
   _orderId: _orderId,
+  tx: { 
+    to: cancelOrderAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -295,12 +321,16 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Order was successfully canceled, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Order was successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Claim Trading Proceeds Tx API
 ------------------------------
 ```javascript
 // Claim Trading Proceeds Transaction API Examples:
+
+// The Ethereum address of Augur's default ClaimTradingProceeds contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var claimTradingProceedsAddress = "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 var _outcome = "1";
@@ -309,6 +339,15 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
   _market: _market,
   _outcome: _outcome,
   _numberOfShares, _numberOfShares,
+  tx: { 
+    to: claimTradingProceedsAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -337,6 +376,15 @@ var _shareHolder = "0x5678ff3e9ce1c0459b309fac6dd4e69229b91567";
 augur.api.ClaimTradingProceeds.claimTradingProceeds({
   _market: _market,
   _shareHolder: _shareHolder,
+  tx: { 
+    to: claimTradingProceedsAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -379,7 +427,7 @@ Calculates the amount of [attoETH](#atto-prefix) that `_numberOfShares` attoshar
 
 #### **Returns:**
 
-* (boolean) `1` if the trading proceeds were successfully canceled, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
@@ -401,18 +449,31 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the trading proceeds were successfully canceled, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Complete Sets Tx API
 -----------------------------
 ```javascript
 // Complete Sets Transaction API Examples:
-var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _amount = "50000000000000000000"; // 50.0
 
+// The Ethereum address of Augur's default CompleteSets contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var completeSetsAddress = "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce";
+
+var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _amount = "50000000000000000000"; // 50.0 attoshares
 augur.api.CompleteSets.publicBuyCompleteSets({
   _market: _market,
   _amount: _amount,
+  tx: { 
+    to: completeSetsAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -440,6 +501,15 @@ augur.api.CompleteSets.publicBuyCompleteSets({
 augur.api.CompleteSets.publicSellCompleteSets({
   _market: _market,
   _amount: _amount,
+  tx: { 
+    to: completeSetsAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -466,7 +536,6 @@ augur.api.CompleteSets.publicSellCompleteSets({
 ```
 Provides JavaScript bindings for the [CompleteSets Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol), which allows for buying and selling of [Complete Sets](#complete-set).
 
-<!-- TODO: Add links to events. -->
 ### augur.api.CompleteSets.publicBuyCompleteSets(p)
 
 Purchases `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) of [Market](#market) `_market`.
@@ -476,7 +545,7 @@ This transaction will fail if:
 * `msg.sender` doesn't have enough of `_market`'s denomination token to be able to afford `_amount` Shares in all Outcomes.
 * `_amount` is not a number between 1 and 2<sup>254</sup>.
 
-When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets) event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be `0` because no fees are paid for purchasing Shares, only selling/settling Shares.
+When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets) event, which will record to the Ethereum blockchain the `msg.sender`, `_market`, type (buy), `_amount` purchased, number of Outcomes in the `_market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be "0" because no fees are paid for purchasing Shares, only selling/settling Shares.
 
 #### **Parameters:**
 
@@ -489,9 +558,8 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `1` if the Complete Set was successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
-<!-- TODO: Add links to events. -->
 ### augur.api.CompleteSets.publicSellCompleteSets(p)
 
 Sell `_amount` worth of [Shares](#share) in all [Outcomes](#outcome) of [Market](#market) `_market`.
@@ -514,17 +582,24 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `1` if the Complete Set was successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Create Order Tx API
 --------------------------
 ```javascript
 // Create Order Transaction API Examples:
+
+// The Ethereum address of Augur's default CreateOrder contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var createOrderAddress = "0xdadc071ecc3b7e97b139d2ef692defdc398c8211";
+
 var _type = "1";
 var _attoshares = "10000000000000000000"; // 10 shares
 var _displayPrice = "0.5";
 var _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
 var _outcome = "1";
+// The _betterOrderId/_worseOrderId to use when creating an Order 
+// can be obtained by calling `augur.trading.getBetterWorseOrders`. 
 var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000001";
@@ -538,6 +613,15 @@ augur.api.CreateOrder.publicCreateOrder({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: createOrderAddress,
+    value: "100000000000000000", 
+    gas: augur.constants.CREATE_ORDER_GAS 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -599,10 +683,18 @@ Dispute Crowdsourcer Tx API
 ----------------------------
 ```javascript
 // Dispute Crowdsourcer Transaction API Examples:
-var disputeCrowdsourcer = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+var disputeCrowdsourcerAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.DisputeCrowdsourcer.fork({
-  disputeCrowdsourcer: disputeCrowdsourcer,
+  tx: { 
+    to: disputeCrowdsourcerAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -629,8 +721,16 @@ augur.api.DisputeCrowdsourcer.fork({
 
 var _redeemer = "0x55d6eaefcfaf7ea1e17c4768a554d57800699ae4";
 augur.api.DisputeCrowdsourcer.redeem({
-  disputeCrowdsourcer: disputeCrowdsourcer,
   _redeemer: _redeemer,
+  tx: { 
+    to: disputeCrowdsourcerAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -656,7 +756,15 @@ augur.api.DisputeCrowdsourcer.redeem({
 }
 
 augur.api.DisputeCrowdsourcer.withdrawInEmergency({
-  disputeCrowdsourcer: disputeCrowdsourcer,
+  tx: { 
+    to: disputeCrowdsourcerAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -703,7 +811,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the transaction successfully completed without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the transaction successfully completed without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.DisputeCrowdsourcer.redeem(p)
 
@@ -732,7 +840,7 @@ This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if
 
 #### **Returns:**
 
-* (boolean) `1` if `redeemer`'s Staked REP was redeemed without errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if `redeemer`'s Staked REP was redeemed without errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)
 
@@ -752,18 +860,26 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Fee Window Tx API
 -----------------
 ```javascript
 // Fee Window Transaction API Examples:
-var feeWindow = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
+var feeWindowAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 var _attotokens = 100;
 augur.api.FeeWindow.buy({
-  feeWindow: feeWindow,
   _attotokens: _attotokens,
+  tx: { 
+    to: feeWindowAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -790,8 +906,16 @@ augur.api.FeeWindow.buy({
 
 var _sender = "0x8886eaefcfaf7ea1e17c4768a554d57800699888";
 augur.api.FeeWindow.redeem({
-  feeWindow: feeWindow,
   _sender: _sender,
+  tx: { 
+    to: feeWindowAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -817,7 +941,15 @@ augur.api.FeeWindow.redeem({
 }
 
 augur.api.FeeWindow.withdrawInEmergency({
-  feeWindow: feeWindow,
+  tx: { 
+    to: feeWindowAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -867,7 +999,7 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 
 #### **Returns:**
 
-* (boolean) `1` if the Participation Tokens were successfully purchased, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.FeeWindow.redeem(p)
 
@@ -884,7 +1016,7 @@ Converts any [Participation Tokens](#participation-token) `_sender` has in the s
 
 #### **Returns:**
 
-* (boolean) `1` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `0` otherwise. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `1`, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `false` otherwise. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `true`, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.FeeWindow.withdrawInEmergency(p)
 
@@ -904,12 +1036,17 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Fill Order Tx API
 --------------------------
 ```javascript
 // Fill Order Transaction API Examples:
+
+// The Ethereum address of Augur's default FillOrder contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var fillOrderAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
+
 var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _amountFillerWants = "10000000000000000000"; // 10.0
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000002";
@@ -918,6 +1055,15 @@ augur.api.FillOrder.publicFillOrder({
   _orderId: _orderId,
   _amountFillerWants: _amountFillerWants,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: fillOrderAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -971,10 +1117,18 @@ Initial Reporter Tx API
 ----------------------
 ```javascript
 // Initial Reporter Transaction API Examples:
-var initialReporter = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var initialReporterAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 
 augur.api.InitialReporter.fork({
-  initialReporter: initialReporter,
+  tx: { 
+    to: initialReporterAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1000,7 +1154,15 @@ augur.api.InitialReporter.fork({
 }
 
 augur.api.InitialReporter.redeem({
-  initialReporter: initialReporter,
+  tx: { 
+    to: initialReporterAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1027,8 +1189,16 @@ augur.api.InitialReporter.redeem({
 
 var _newOwner = "0x9998ff3e9ce1c0459b309fac6dd4e69229b91777";
 augur.api.InitialReporter.transferOwnership({
-  initialReporter: initialReporter,
   _newOwner: _newOwner,
+  tx: { 
+    to: initialReporterAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1054,7 +1224,15 @@ augur.api.InitialReporter.transferOwnership({
 }
 
 augur.api.InitialReporter.withdrawInEmergency({
-  initialReporter: initialReporter,
+  tx: { 
+    to: initialReporterAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1101,7 +1279,7 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 #### **Returns:**
 
-* (boolean) `1` if the REP was successfully migrated to the new Child Universe without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully migrated to the new Child Universe without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.InitialReporter.redeem(p)
 
@@ -1117,7 +1295,7 @@ Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or 
 
 #### **Returns:**
 
-* (boolean) `1` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 ### augur.api.InitialReporter.transferOwnership(p)
 
@@ -1138,7 +1316,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the ownership of `initialReporter` was successfully transferred to `_newOwner`, or `0` otherwise.
+* (boolean) `true` if the ownership of `initialReporter` was successfully transferred to `_newOwner`, or `false` otherwise.
 
 ### augur.api.InitialReporter.withdrawInEmergency(p)
 
@@ -1158,16 +1336,24 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the REP was successfully withdrawn from the `initialReporter` contract without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully withdrawn from the `initialReporter` contract without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Mailbox Tx API
 ----------------------
 ```javascript
 // Mailbox Transaction API Examples:
-var mailbox = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var mailboxAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Mailbox.transferOwnership({
-  mailbox: mailbox,
+  tx: { 
+    to: mailboxAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1193,7 +1379,15 @@ augur.api.Mailbox.transferOwnership({
 }
 
 augur.api.Mailbox.withdrawEther({
-  mailbox: mailbox,
+  tx: { 
+    to: mailboxAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1218,10 +1412,18 @@ augur.api.Mailbox.withdrawEther({
   value: "0x0"
 }
 
-var _repToken = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var _repTokenAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.withdrawTokens({
-  mailbox: mailbox,
-  token: _repToken,
+  _token: _repTokenAddress,
+  tx: { 
+    to: mailboxAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1267,7 +1469,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if ownership of `mailbox` was successfully transferred to `_newOwner` without any errors, or `0` otherwise.
+* (boolean) `true` if ownership of `mailbox` was successfully transferred to `_newOwner` without any errors, or `false` otherwise.
 
 ### augur.api.Mailbox.withdrawEther(p)
 
@@ -1287,7 +1489,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Ether was successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
+* (boolean) `true` if the Ether was successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
 
 ### augur.api.Mailbox.withdrawTokens(p)
 
@@ -1308,22 +1510,30 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the tokens were successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
+* (boolean) `true` if the tokens were successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
 
 Market Tx API
 ----------------------
 ```javascript
 // Market Transaction API Examples:
-var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
+var marketAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 var _payoutNumerators = [ 0, 1000 ];
 var _invalid = false;
 var _amount = 100;
 augur.api.Market.contribute({
-  market: market,
   _payoutNumerators: _payoutNumerators,
   _invalid: _invalid,
   _amount: _amount,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1349,7 +1559,15 @@ augur.api.Market.contribute({
 }
 
 augur.api.Market.disavowCrowdsourcers({
-  market: market,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1377,9 +1595,17 @@ augur.api.Market.disavowCrowdsourcers({
 var _payoutNumerators = [ 0, 1000 ];
 var _invalid = false;
 augur.api.Market.doInitialReport({
-  market: market,
   _payoutNumerators: _payoutNumerators,
   _invalid: _invalid,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1405,7 +1631,15 @@ augur.api.Market.doInitialReport({
 }
 
 augur.api.Market.finalize({
-  market: market,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1431,7 +1665,15 @@ augur.api.Market.finalize({
 }
 
 augur.api.Market.finalizeFork({
-  market: market,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1457,7 +1699,15 @@ augur.api.Market.finalizeFork({
 }
 
 augur.api.Market.migrateThroughOneFork({
-  market: market,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1483,7 +1733,15 @@ augur.api.Market.migrateThroughOneFork({
 }
 
 augur.api.Market.withdrawInEmergency {
-  market: market,
+  tx: { 
+    to: marketAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -1536,7 +1794,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the transaction executed without any errors, or `0` otherwise.
+* (boolean) `true` if the transaction executed without any errors, or `false` otherwise.
 
 ### augur.api.Market.disavowCrowdsourcers(p)
 
@@ -1557,7 +1815,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `market's` Crowdsourcers were disavowed without any errors, or `0` otherwise.
+* (boolean) `true` if `market's` Crowdsourcers were disavowed without any errors, or `false` otherwise.
 
 ### augur.api.Market.doInitialReport(p)
 
@@ -1581,7 +1839,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Initial Report was submitted without any errors, or `0` otherwise.
+* (boolean) `true` if the Initial Report was submitted without any errors, or `false` otherwise.
 
 ### augur.api.Market.finalize(p)
 
@@ -1603,7 +1861,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `market` was Finalized without any errors, or `0` otherwise.
+* (boolean) `true` if `market` was Finalized without any errors, or `false` otherwise.
 
 ### augur.api.Market.finalizeFork(p)
 
@@ -1624,7 +1882,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Forked Market was Finalized without any errors, or `0` otherwise.
+* (boolean) `true` if the Forked Market was Finalized without any errors, or `false` otherwise.
 
 ### augur.api.Market.migrateThroughOneFork(p)
 
@@ -1644,7 +1902,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `market` was successfully migrated to the Winning Universe without any errors, or `0` otherwise.
+* (boolean) `true` if `market` was successfully migrated to the Winning Universe without any errors, or `false` otherwise.
 
 ### augur.api.Market.transferOwnership(p)
 
@@ -1665,7 +1923,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if ownership of `market` was transferred to `_newOwner` without any errors, or `0` otherwise.
+* (boolean) `true` if ownership of `market` was transferred to `_newOwner` without any errors, or `false` otherwise.
 
 ### augur.api.Market.withdrawInEmergency(p)
 
@@ -1685,23 +1943,27 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Reputation Tokens were withdrawn from `market` without any errors, or `0` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Reputation Tokens were withdrawn from `market` without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
 
 Reputation Token Tx API
 --------------------------------
 ```javascript
 // Reputation Token Transaction API Examples:
 
-// The ReputationToken contract address can be obtained 
-// by calling the function augur.api.Universe.getReputationToken
-var reputationToken = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
+// The Ethereum address of Augur's default ReputationToken contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var reputationTokenAddress = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
 var _spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
 var _attotokens = "100000000000000000000";
 
 augur.api.ReputationToken.approve({
   _spender: _spender,
   _value: _attotokens,
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1731,7 +1993,11 @@ augur.api.ReputationToken.approve({
 }
 
 augur.api.ReputationToken.migrateFromLegacyReputationToken({
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1764,7 +2030,11 @@ var _destination = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
   _destination: _destination,
   _attotokens: _attotokens,
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1796,7 +2066,11 @@ augur.api.ReputationToken.migrateOut({
 augur.api.ReputationToken.transfer({
   _to: _spender,
   _value: _attotokens,
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1829,7 +2103,11 @@ augur.api.ReputationToken.transferFrom({
   _from: "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3",
   _to: _spender,
   _value: _attotokens,
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1859,7 +2137,11 @@ augur.api.ReputationToken.transferFrom({
 }
 
 augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1868,11 +2150,15 @@ augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// example onSuccess output:
+true
 
 augur.api.ReputationToken.updateSiblingMigrationTotal({
-  _token: "0x72a3cec0b62fcb8c3120bc80bdb2b1351c8c2111",
-  tx: { to: reputationToken},
+  tx: { 
+    to: reputationTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1881,7 +2167,8 @@ augur.api.ReputationToken.updateSiblingMigrationTotal({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// example onSuccess output:
+true
 ```
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep).
 
@@ -1909,7 +2196,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_spender` is approved without any errors, or `0` otherwise.
+* (boolean) `true` if `_spender` is approved without any errors, or `false` otherwise.
 
 ### augur.api.ReputationToken.migrateFromLegacyReputationToken(p)
 
@@ -1927,7 +2214,7 @@ Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy 
 
 #### **Returns:**
 
-* (boolean) `1` if the Legacy REP was migrated to `reputationToken` without any errors, or `0` otherwise.
+* (boolean) `true` if the Legacy REP was migrated to `reputationToken` without any errors, or `false` otherwise.
 
 ### augur.api.ReputationToken.migrateOut(p)
 
@@ -1952,7 +2239,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the REP is migrated to `_destination` without any errors, or `0` otherwise.
+* (boolean) `true` if the REP is migrated to `_destination` without any errors, or `false` otherwise.
 
 ### augur.api.ReputationToken.transfer(p)
 
@@ -1976,7 +2263,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_value` REP are sent from the caller to `_to` without any errors, or `0` otherwise.
+* (boolean) `true` if `_value` REP are sent from the caller to `_to` without any errors, or `false` otherwise.
 
 ### augur.api.ReputationToken.transferFrom(p)
 
@@ -2002,7 +2289,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_value` REP is sent from `_from` to `_to` without any errors, or `0` otherwise.
+* (boolean) `true` if `_value` REP is sent from `_from` to `_to` without any errors, or `false` otherwise.
 
 ### augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)
 
@@ -2020,7 +2307,7 @@ Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for this Repu
 
 #### **Returns:**
 
-* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors, or `false` otherwise.
+* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors.
 
 ### augur.api.ReputationToken.updateSiblingMigrationTotal(p)
 
@@ -2044,21 +2331,32 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors, or `false` otherwise.
+* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors.
 
 Share Token Tx API
 ---------------------------
 ```javascript
 // Share Token Transaction API Examples:
-var shareToken = "0xa22c79a48f51df6d0863821bd1dd2c5d6f511bc5";
+
+// The Ethereum address of Augur's default ShareToken contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var shareTokenAddress = "0x925bee44fec28deb228d2251e1a9d32f7c73ebed";
+
 var _spender = "0x01f50356c280cd886dd058210937160c73700a4b";
 var _from = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 var _attotokens = "100000000000000000000";
-
 augur.api.ShareToken.approve({
-  shareToken: shareToken,
   _spender: _spender,
   _value: _attotokens,
+  tx: { 
+    to: shareTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2084,9 +2382,17 @@ augur.api.ShareToken.approve({
 }
 
 augur.api.ShareToken.transfer({
-  shareToken: shareToken,
   _to: _spender,
   _value: _attotokens,
+  tx: { 
+    to: shareTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2113,10 +2419,18 @@ augur.api.ShareToken.transfer({
 
 var _from = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
-  shareToken: shareToken,
   _from: _from,
   _to: _spender,
   _value: _attotokens,
+  tx: { 
+    to: shareTokenAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2165,7 +2479,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_spender` is approved without any errors, or `0` otherwise.
+* (boolean) `true` if `_spender` is approved without any errors, or `false` otherwise.
 
 ### augur.api.ShareToken.transfer(p)
 
@@ -2187,7 +2501,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_value` Shares are sent from the caller to `_to` without any errors, or `0` otherwise.
+* (boolean) `true` if `_value` Shares are sent from the caller to `_to` without any errors, or `false` otherwise.
 
 ### augur.api.ShareToken.transferFrom(p)
 
@@ -2211,76 +2525,17 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if `_value` Shares are sent from `_from` to `_to` without any errors, or `0` otherwise.
-
-Time Controlled Tx API
----------------------
-```javascript
-// Time Controlled Transaction API Examples:
-augur.api.TimeControlled.incrementTimestamp({
-  _amount: 60,
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-// example onSuccess output: coming soon
-
-augur.api.TimeControlled.setTimestamp({
-  _timestamp: 6000,
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-// example onSuccess output: coming soon
-```
-Provides JavaScript bindings for the [Time Controlled Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/TimeControlled.sol), which allows for the setting and updating of Augur's internal timestamp for the current time.
-
-### augur.api.TimeControlled.incrementTimestamp(p)
-
-Increments Augur's current timestamp by a specified number of seconds. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
-
-This transaction will fail if:
-
-* The caller of this function is not the owner of the TimeControlled contract.
-* The `TimeControlled` contract is on the Ethereum public main network.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p._amount`**  (number|string) Amount of seconds by which to increment Augur's timestamp, as an unsigned integer or stringified unsigned integer.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (boolean) `true` if the timestamp was incremented without any errors.
-
-### augur.api.TimeControlled.setTimestamp(p)
-
-Sets Augur's current timestamp to a new Unix timestamp. This function can only be called by the owner of the TimeControlled contract, and can only be called if the contract is running on a network that is not the Ethereum public main network.
-
-This transaction will fail if:
-
-* The caller of this function is not the owner of the TimeControlled contract.
-* The `TimeControlled` contract is on the Ethereum public main network.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p._timestamp`**  (number|string) Unix timestamp to set Augur's timestamp to, as an unsigned integer or stringified unsigned integer.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (boolean) `true` if the timestamp was set without any errors.
+* (boolean) `true` if `_value` Shares are sent from `_from` to `_to` without any errors, or `false` otherwise.
 
 Trade Tx API
 ---------------------
 ```javascript
 // Trade Transaction API Examples:
+
+// The Ethereum address of Augur's default Trade contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var tradeAddress = "0x0dec7fd04933b8673cef99b64978113065b03926";
+
 var _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
 var _outcome = "1";
 var _fxpAmount = "10000000000000000000"; // 10.0
@@ -2288,7 +2543,6 @@ var _price = "500000000000000000"; // 0.5
 var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000003";
-
 augur.api.Trade.publicBuy({
   _market: _market,
   _outcome: _outcome,
@@ -2297,6 +2551,15 @@ augur.api.Trade.publicBuy({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupID,
+  tx: { 
+    to: tradeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2329,6 +2592,15 @@ augur.api.Trade.publicSell({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: tradeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2362,6 +2634,15 @@ augur.api.Trade.publicTrade({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: tradeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2395,6 +2676,15 @@ augur.api.Trade.publicTakeBestOrder({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: tradeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2515,10 +2805,23 @@ Trading Escape Hatch Tx API
 ---------------------
 ```javascript
 // Trading Escape Hatch Transaction API Examples:
-var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
 
+// The Ethereum address of Augur's default TradingEscapeHatch contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var tradingEscapeHatch = "0x157a8998f5470a2be3917aab31d334109f56c30c";
+
+var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
 augur.api.TradingEscapeHatch.claimSharesInUpdate({
   _market: _market,
+  tx: { 
+    to: tradingEscapeHatch,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
@@ -2563,16 +2866,20 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `1` if the Shares were claimed without any errors, or false otherwise.
+* (boolean) `true` if the Shares were claimed without any errors, or false otherwise.
 
 Universe Tx API
 ---------------------
 ```javascript
 // Universe Transaction API Examples:
+
+// The Ethereum contract address of Augur's current default Universe 
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
 var universeAddress = "0x1f732847fbbcc46ffe859f28e916d993b2b08831";
 
-// To obtain the cost of creating a Market (in attoETH), call the function `augur.createMarket.getMarketCreationCost`, 
-// and multiply the `etherRequiredToCreateMarket` value that's returned by 10^18 .
+// The cost of creating a Market (in attoETH) can be obtained by calling
+// the function `augur.createMarket.getMarketCreationCost` and multiplying
+// the `etherRequiredToCreateMarket` value that's returned by 10^18 .
 var ethCostToCreateMarket = 25000000000000000; 
 // Use the Cash contract for the `denominationToken` when creating new Markets.
 var cashAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
@@ -2684,7 +2991,11 @@ var _parentInvalid = false;
 augur.api.Universe.createChildUniverse({
   _parentPayoutNumerators: _parentPayoutNumerators,
   _parentInvalid: _parentInvalid,
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2770,8 +3081,8 @@ onSuccess result: {
 augur.api.Universe.getInitialReportStakeSize({ 
   tx: { 
     to: universeAddress,
-    send: false,
-  },
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2784,7 +3095,10 @@ augur.api.Universe.getInitialReportStakeSize({
 "174840291341145834"
 
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2814,7 +3128,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheDesignatedReportStake({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2844,7 +3161,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheMarketCreationCost({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2874,7 +3194,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheReportingFeeDivisor({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2904,7 +3227,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheTargetReporterGasCosts({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2935,7 +3261,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCacheValidityBond({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2965,7 +3294,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCreateCurrentFeeWindow({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2997,7 +3329,10 @@ onSuccess result: {
 var _timestamp = 1401003133;
 augur.api.Universe.getOrCreateFeeWindowByTimestamp({
   _timestamp: _timestamp,
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -3027,7 +3362,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCreateFeeWindowForForkEndTime({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -3057,7 +3395,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCreateNextFeeWindow({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -3087,7 +3428,10 @@ onSuccess result: {
 }
 
 augur.api.Universe.getOrCreatePreviousFeeWindow({
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    send: false
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -3121,7 +3465,11 @@ var _feeWindows = [ ];
 augur.api.Universe.redeemStake({
   _reportingParticipants: _reportingParticipants,
   _feeWindows: _feeWindows,
-  tx: { to: universeAddress },
+  tx: { 
+    to: universeAddress,
+    value: "100000000000000000", 
+    gas: "100000000000000000" 
+  }, 
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -3510,4 +3858,4 @@ Calls the `redeem` function for all Ethereum contract addresses in the arrays `p
 
 #### **Returns:**
 
-* (boolean) `1` if the Staked REP/Ether is redeemed from the Dispute Crowdsourcers, Initial Reports, and Fee windows without any errors, or `0` otherwise.
+* (boolean) `true` if the Staked REP/Ether is redeemed from the Dispute Crowdsourcers, Initial Reports, and Fee windows without any errors, or `false` otherwise.

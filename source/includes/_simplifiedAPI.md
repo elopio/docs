@@ -480,7 +480,7 @@ Submits an RPC request to an [Augur Node](#augur-node).
 
 This function will fail if:
 
-A connection to an Augur Node has not been established.
+* A connection to an Augur Node has not been established.
 
 #### **Parameters:**
 
@@ -498,7 +498,7 @@ Listens to an [Augur Node](#augur-node) for when a specific [event](#event-types
 
 This function will fail if:
 
-A connection to an Augur Node has not been established.
+* A connection to an Augur Node has not been established.
 
 #### **Parameters:**
 
@@ -516,7 +516,7 @@ Stops the specified subscription from listening on an Augur Node.
 
 This function will fail if:
 
-A connection to an Augur Node has not been established.
+* A connection to an Augur Node has not been established.
 
 #### **Parameters:**
 
@@ -529,7 +529,7 @@ Stops the current subscriptions from listening on an Augur Node.
 
 This function will fail if:
 
-A connection to an Augur Node has not been established.
+* A connection to an Augur Node has not been established.
 
 #### **Parameters:**
 
@@ -1779,15 +1779,15 @@ augur.trading.getPositionInMarket({
 ["1", "0.5", "1", "0", "0", "1", "1.5"]
 
 augur.trading.getUserTradingHistory({
-      account: "0x000000000000000000000000000000000000d00d",
-      universe: null,
-      marketID: "0x0000000000000000000000000000000000000001",
-      outcome: 0,
-      orderType: null,
-      sortBy: null,
-      isSortDescending: null,
-      limit: null,
-      offset: null,
+  account: "0x000000000000000000000000000000000000d00d",
+  universe: null,
+  marketID: "0x0000000000000000000000000000000000000001",
+  outcome: 0,
+  orderType: null,
+  sortBy: null,
+  isSortDescending: null,
+  limit: null,
+  offset: null,
 }, function (error, result) {
   console.log(result);
 });
@@ -2202,7 +2202,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value on [0, 7].
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) Authentication metadata for raw transactions.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
     * **`p.onFailed`**  (function) Called if any part of the trade fails.
@@ -2245,9 +2245,9 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
-    * **`p._tradeGroupId`**  (string} &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
-    * **`p.doNotCreateOrders`**  (boolean} &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
-    * **`p.meta`**  (<a href="#Meta">Meta</a>} &lt;optional> Authentication metadata for raw transactions.
+    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
+    * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
     * **`p.onFailed`**  (function) Called if any part of the trade fails.
