@@ -331,7 +331,7 @@ A Reporter is a [REP](#rep) holder who Stakes [REP](#rep) on an [Outcome](#outco
 
 The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decentralized-oracle) system. When [Shares](#share) are [Settled](#settlement) (i.e., destroyed), before paying out to the Share holders, Augur will extract [Settlement Fees](#settlement-fees) in ETH. These Settlement Fees include the [Creator Fee](#creator-fee) and the Reporting Fee. 
 
-The Reporting Fee is a dynamic amount based on the price of [REP](#rep) and the value of the [Open Interest](#open-interest) across all of Augur's [Markets](#market). Augur sets the Reporting Fee so as to target a REP market cap that is 5 times the value of the Open Interest across all of Augur's markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.
+The Reporting Fee is a dynamic amount based on the price of [REP](#rep) and the value of the [Open Interest](#open-interest) across all of Augur's [Markets](#market). Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the Open Interest across all of Augur's markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.
 
 The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the Market being traded on, and is later used to pay REP holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 

@@ -2626,7 +2626,7 @@ augur.api.Trade.publicSell({
 }
 
 augur.api.Trade.publicTrade({
-  _direction: '1',
+  _direction: 1,
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
@@ -2668,7 +2668,7 @@ augur.api.Trade.publicTrade({
 }
 
 augur.api.Trade.publicTakeBestOrder({
-  _direction: '2',
+  _direction: 2,
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,

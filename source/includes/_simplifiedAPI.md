@@ -244,7 +244,7 @@ augur.assets.sendEther({
   from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
@@ -277,7 +277,7 @@ augur.assets.sendReputation({
   reputationToSend: "0.001",
   _to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
@@ -603,7 +603,7 @@ augur.createMarket.createBinaryMarket({
   _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
@@ -648,7 +648,7 @@ augur.createMarket.createCategoricalMarket({
   _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
@@ -694,7 +694,7 @@ augur.createMarket.createScalarMarket({
   _description: "High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
@@ -1636,7 +1636,7 @@ augur.trading.claimMarketsTradingProceeds({
   ],
   _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
@@ -1649,7 +1649,7 @@ augur.trading.claimTradingProceeds({
   _market: "0x0000000000000000000000000000000000000001",
   _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
@@ -1912,7 +1912,7 @@ augur.trading.placeTrade({
   _tradeGroupId: "0x1",
   doNotCreateOrders: false,
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
@@ -1972,12 +1972,12 @@ augur.trading.tradeUntilAmountIsZero({
   numTicks: "10000",
   tickSize: "0.0001",
   _direction: 1,
-  _market: "MARKET_ADDRESS",
+  _market: "0xc841ee153e45e74074eae9685e815d08dee965eb",
   _outcome: 2,
   _tradeGroupId: "0x1",
   doNotCreateOrders: true,
   meta: {
-    signer: [251, 62, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
