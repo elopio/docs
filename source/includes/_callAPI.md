@@ -30,7 +30,7 @@ The Call API of augur.js is made up of "getter" functions that retrieve informat
 
 All functions in the Call API accept two arguments: 
 
-1. `p`, a parameters object that can contain the Ethereum contract address to call, as well as any key/value pairs that match the input parameters for the contract method.
+1. `p`, a parameters object containing any key/value pairs matching the input parameters for the contract method, and (in some cases) a `tx` object with the Ethereum contract address to call. The `tx` object is described in more detail in the [Transaction API](#transaction-api) section. 
 2. A callback function. 
 
 The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Parameters Object>, <Callback Function>)`.

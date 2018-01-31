@@ -421,7 +421,6 @@ augur.augurNode.subscribeToEvent(
 );
 // example output:
 "Subscribed to event! Subscription ID: 8cac9a4b-f5b8-4fb1-be50-5aa16dc99e67"
-// example output after TokensTransferred event coming soon
 
 augur.augurNode.unsubcribeFromEvent(
   "8cac9a4b-f5b8-4fb1-be50-5aa16dc99e67",
