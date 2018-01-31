@@ -207,7 +207,6 @@ var augurAddress = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
 augur.api.Augur.createGenesisUniverse({
   tx: { 
     to: augurAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   },
   meta: {
@@ -250,7 +249,6 @@ augur.api.CancelOrder.cancelOrder({
   _orderId: _orderId,
   tx: { 
     to: cancelOrderAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   },
   meta: {
@@ -303,7 +301,6 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
   _numberOfShares, _numberOfShares,
   tx: { 
     to: claimTradingProceedsAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   },
   meta: {
@@ -321,7 +318,6 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
   _shareHolder: _shareHolder,
   tx: { 
     to: claimTradingProceedsAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   },
   meta: {
@@ -408,7 +404,6 @@ augur.api.CompleteSets.publicSellCompleteSets({
   _amount: _amount,
   tx: { 
     to: completeSetsAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   },
   meta: {
@@ -550,7 +545,6 @@ var disputeCrowdsourcerAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 augur.api.DisputeCrowdsourcer.fork({
   tx: { 
     to: disputeCrowdsourcerAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -567,7 +561,6 @@ augur.api.DisputeCrowdsourcer.redeem({
   _redeemer: _redeemer,
   tx: { 
     to: disputeCrowdsourcerAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -582,7 +575,6 @@ augur.api.DisputeCrowdsourcer.redeem({
 augur.api.DisputeCrowdsourcer.withdrawInEmergency({
   tx: { 
     to: disputeCrowdsourcerAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -678,7 +670,6 @@ augur.api.FeeWindow.buy({
   _attotokens: _attotokens,
   tx: { 
     to: feeWindowAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -695,7 +686,6 @@ augur.api.FeeWindow.redeem({
   _sender: _sender,
   tx: { 
     to: feeWindowAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -710,7 +700,6 @@ augur.api.FeeWindow.redeem({
 augur.api.FeeWindow.withdrawInEmergency({
   tx: { 
     to: feeWindowAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -851,7 +840,6 @@ var initialReporterAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 augur.api.InitialReporter.fork({
   tx: { 
     to: initialReporterAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -866,7 +854,6 @@ augur.api.InitialReporter.fork({
 augur.api.InitialReporter.redeem({
   tx: { 
     to: initialReporterAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -883,7 +870,6 @@ augur.api.InitialReporter.transferOwnership({
   _newOwner: _newOwner,
   tx: { 
     to: initialReporterAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -898,7 +884,6 @@ augur.api.InitialReporter.transferOwnership({
 augur.api.InitialReporter.withdrawInEmergency({
   tx: { 
     to: initialReporterAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1000,7 +985,6 @@ var mailboxAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.transferOwnership({
   tx: { 
     to: mailboxAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1015,7 +999,6 @@ augur.api.Mailbox.transferOwnership({
 augur.api.Mailbox.withdrawEther({
   tx: { 
     to: mailboxAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1032,7 +1015,6 @@ augur.api.Mailbox.withdrawTokens({
   _token: _repTokenAddress,
   tx: { 
     to: mailboxAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1123,7 +1105,6 @@ augur.api.Market.contribute({
   _amount: _amount,
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1138,7 +1119,6 @@ augur.api.Market.contribute({
 augur.api.Market.disavowCrowdsourcers({
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1157,7 +1137,6 @@ augur.api.Market.doInitialReport({
   _invalid: _invalid,
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1172,7 +1151,6 @@ augur.api.Market.doInitialReport({
 augur.api.Market.finalize({
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1187,7 +1165,6 @@ augur.api.Market.finalize({
 augur.api.Market.finalizeFork({
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1202,7 +1179,6 @@ augur.api.Market.finalizeFork({
 augur.api.Market.migrateThroughOneFork({
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1217,7 +1193,6 @@ augur.api.Market.migrateThroughOneFork({
 augur.api.Market.withdrawInEmergency {
   tx: { 
     to: marketAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1440,7 +1415,6 @@ augur.api.ReputationToken.approve({
 augur.api.ReputationToken.migrateFromLegacyReputationToken({
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1458,7 +1432,6 @@ augur.api.ReputationToken.migrateOut({
   _attotokens: _attotokens,
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1475,7 +1448,6 @@ augur.api.ReputationToken.transfer({
   _value: _attotokens,
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1493,7 +1465,6 @@ augur.api.ReputationToken.transferFrom({
   _value: _attotokens,
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1508,7 +1479,6 @@ augur.api.ReputationToken.transferFrom({
 augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1523,7 +1493,6 @@ augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
 augur.api.ReputationToken.updateSiblingMigrationTotal({
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1715,7 +1684,6 @@ augur.api.ShareToken.approve({
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1732,7 +1700,6 @@ augur.api.ShareToken.transfer({
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1751,7 +1718,6 @@ augur.api.ShareToken.transferFrom({
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1929,7 +1895,6 @@ augur.api.Trade.publicTakeBestOrder({
   _tradeGroupId: _tradeGroupId,
   tx: { 
     to: tradeAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -2167,7 +2132,6 @@ augur.api.Universe.createChildUniverse({
   _parentInvalid: _parentInvalid,
   tx: { 
     to: universeAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -2393,7 +2357,6 @@ augur.api.Universe.redeemStake({
   _feeWindows: _feeWindows,
   tx: { 
     to: universeAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
