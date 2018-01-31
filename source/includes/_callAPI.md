@@ -79,7 +79,7 @@ augur.api.Controller.getTimestamp({
 ```
 Provides JavaScript bindings for the [Controller Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Controller.sol), which is used to manage whitelisting of contracts and and [halt](#developer-mode) the normal use of Augur’s contracts (e.g., if there is a vulnerability found in Augur). From a developer standpoint, it can be used to get Augur's internal timestamp.
 
-### augur.api.TimeControlled.getTimestamp(p, callback)
+### augur.api.Controller.getTimestamp(p, callback)
 
 Returns Augur's internal Unix timestamp.
 
@@ -123,8 +123,8 @@ augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.DisputeCrowdsourcer.getPayoutNumerator({ 
+  _outcome: 0,
   tx: { to: disputeCrowdsourcer }, 
-  _outcome: 0 
 }, function (error, payoutNumerator) { 
   console.log(payoutNumerator); 
 });
@@ -225,9 +225,9 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -659,8 +659,8 @@ augur.api.InitialReporter.getPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.InitialReporter.getPayoutNumerator({ 
+  _outcome: 0,
   tx: { to: initialReporter }, 
-  _outcome: 0 
 }, function (error, payoutNumerator) { 
   console.log(payoutNumerator); 
 });
@@ -806,9 +806,9 @@ Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for t
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -897,9 +897,9 @@ Market Call API
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Market.derivePayoutDistributionHash({
-  tx: { to: market },
   _payoutNumerators: [ 0, 1000 ],
   _invalid: false,
+  tx: { to: market },
 }, function (error, payoutDistributionHash) { 
   console.log(payoutDistributionHash); 
 });
@@ -947,8 +947,8 @@ augur.api.Market.getEndTime({
 "1500388730";
 
 augur.api.Market.getFeeWindow({ 
-  tx: { to: market }, 
   _feeWindowId: 578,
+  tx: { to: market }, 
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
 });
@@ -1012,8 +1012,8 @@ augur.api.Market.getReputationToken({
 "0x23b17188ce3c491f6ab4427258d92452be5c8045"
 
 augur.api.Market.getShareToken({
+  _outcome: 1,
   tx: { to: market },
-  _outcome: 1
 }, function (error, shareToken) { 
   console.log(shareToken); 
 });
@@ -1021,8 +1021,8 @@ augur.api.Market.getShareToken({
 "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 
 augur.api.Market.getStakeInOutcome({ 
+  _payoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a",
   tx: { to: market }, 
-  _payoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a" 
 }, function (error, stakeInOutcome) { 
   console.log(stakeInOutcome); 
 });
@@ -1054,8 +1054,8 @@ augur.api.Market.getWinningPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.Market.getWinningPayoutNumerator({
+  _outcome: "0",
   tx: { to: market },
-  _outcome: "0"
 }, function (error, getWinningPayoutNumerator) { 
   console.log(getWinningPayoutNumerator); 
 });
@@ -1063,8 +1063,8 @@ augur.api.Market.getWinningPayoutNumerator({
 "1000"
 
 augur.api.Market.isContainerForReportingParticipant({
+  _shadyReportingParticipant: "0x18b17188ce3c491f6ab4427258d92452be5c8054",
   tx: { to: market },
-  _shadyReportingParticipant: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 }, function (error, isContainerForReportingParticipant) { 
   console.log(isContainerForReportingParticipant); 
 });
@@ -1072,8 +1072,8 @@ augur.api.Market.isContainerForReportingParticipant({
 true
 
 augur.api.Market.isContainerForShareToken({
+  _shadyShareToken: "0x18b17188ce3c491f6ab4427258d92452be5c8054",
   tx: { to: market },
-  _shadyShareToken: "0x18b17188ce3c491f6ab4427258d92452be5c8054"
 }, function (error, isContainerForShareToken) { 
   console.log(isContainerForShareToken); 
 });
@@ -1109,10 +1109,10 @@ This call will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
     * **`p._payoutNumerators`** (Array.&lt;uint256>) Payout Numerators from which to derive the Payout Distribution Hash.
     * **`p._invalid`** (boolean) Whether the Market is Invalid.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1321,9 +1321,9 @@ Returns the Ethereum contract address of the [Share Token](#share-token-call-api
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1337,9 +1337,9 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._payoutDistributionHash`** (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._payoutDistributionHash`** (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1398,9 +1398,9 @@ Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) i
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1414,9 +1414,9 @@ Returns whether the ReportingParticipant contract `_shadyReportingParticipant` b
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyReportingParticipant`** (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyReportingParticipant`** (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1430,9 +1430,9 @@ Returns whether the given [Market](#market) is a container for the specified [Sh
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyShareToken`** (string) ShareToken Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyShareToken`** (string) 
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1951,6 +1951,9 @@ Reputation Token Call API
 -------------------------
 ```javascript
 // Reputation Token Contract Call API Examples:
+
+// The Ethereum address of Augur's default ReputationToken contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
 var reputationToken = "0x13fa2334966b3cb6263ed56148323014c2ece753";
 
 augur.api.ReputationToken.getUniverse({ 
@@ -2028,6 +2031,9 @@ Share Token Call API
 --------------------
 ```javascript
 // Share Token Contract Call API Examples:
+
+// The Ethereum address of Augur's default ShareToken contract
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
 augur.api.ShareToken.getMarket({ 
@@ -2090,8 +2096,8 @@ Universe Call API
 var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 
 augur.api.Universe.getChildUniverse({
+  _parentPayoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a",
   tx: { to: universe },
-  _parentPayoutDistributionHash: "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 }, function (error, childUniverse) { 
   console.log(childUniverse); 
 });
@@ -2115,8 +2121,8 @@ augur.api.Universe.getDisputeRoundDurationInSeconds({
 "604800"
 
 augur.api.Universe.getFeeWindow({ 
-  tx: { to: universe }, 
   _feeWindowId: 578,
+  tx: { to: universe }, 
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
 });
@@ -2124,8 +2130,8 @@ augur.api.Universe.getFeeWindow({
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
 augur.api.Universe.getFeeWindowByTimestamp({ 
+  _timestamp: 1514500367,
   tx: { to: universe },
-  _timestamp: 1514500367
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
 });
@@ -2246,8 +2252,8 @@ augur.api.Universe.getWinningChildUniverse({
 "0x432561b2bdbcd1ae1995bdd6aff6776d6f4292f2"
 
 augur.api.Universe.isContainerForFeeToken({
+  _shadyFeeToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
   tx: { to: universe },
-  _shadyFeeToken: "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 }, function (error, isContainerForFeeToken) { 
   console.log(isContainerForFeeToken); 
 });
@@ -2255,8 +2261,8 @@ augur.api.Universe.isContainerForFeeToken({
 true
 
 augur.api.Universe.isContainerForFeeWindow({
+  _shadyFeeWindow: "0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e",
   tx: { to: universe },
-  _shadyFeeWindow: "0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"
 }, function (error, isContainerForFeeWindow) { 
   console.log(isContainerForFeeWindow); 
 });
@@ -2264,8 +2270,8 @@ augur.api.Universe.isContainerForFeeWindow({
 true
 
 augur.api.Universe.isContainerForMarket({
+  _shadyMarket: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42",
   tx: { to: universe },
-  _shadyMarket: "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"
 }, function (error, isContainerForMarket) { 
   console.log(isContainerForMarket); 
 });
@@ -2273,8 +2279,8 @@ augur.api.Universe.isContainerForMarket({
 false
 
 augur.api.Universe.isContainerForReportingParticipant({
+  _shadyReportingParticipant: "0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41",
   tx: { to: universe },
-  _shadyReportingParticipant: "0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41"
 }, function (error, isContainerForReportingParticipant) { 
   console.log(isContainerForReportingParticipant); 
 });
@@ -2282,8 +2288,8 @@ augur.api.Universe.isContainerForReportingParticipant({
 true
 
 augur.api.Universe.isContainerForShareToken({
+  _shadyShareToken: "0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61",
   tx: { to: universe },
-  _shadyShareToken: "0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61"
 }, function (error, isContainerForShareToken) { 
   console.log(isContainerForShareToken); 
 });
@@ -2299,8 +2305,8 @@ augur.api.Universe.isForking({
 false
 
 augur.api.Universe.isParentOf({
+  _shadyChild: "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c",
   tx: { to: universe },
-  _shadyChild: "0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"
 }, function (error, isParentOf) { 
   console.log(isParentOf); 
 });
@@ -2316,9 +2322,9 @@ Returns the Ethereum contract address of a [Universe's](#universe) [Child Univer
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._parentPayoutDistributionHash`** (string) Payout Distribution Hash for Final Outcome of the desired Child Universe, as a 32-byte hexadecimal string. 
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._parentPayoutDistributionHash`** (string) Payout Distribution Hash for Final Outcome of the desired Child Universe, as a 32-byte hexadecimal string. 
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2362,9 +2368,9 @@ Returns the Ethereum contract address of a given [Fee Window](#fee-window) in th
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._feeWindowId`** (number|string) Fee Window ID, as an unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._feeWindowId`** (number|string) Fee Window ID, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2378,9 +2384,9 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) running a
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2409,9 +2415,9 @@ Returns the [Fee Window](#fee-window) ID for the [Universe](#universe) at the sp
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2609,9 +2615,9 @@ This call will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyFeeToken`** (string) Ethereum contract address of the Fee Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyFeeToken`** (string) Ethereum contract address of the Fee Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2625,9 +2631,9 @@ Returns whether the given [Universe](#universe) is a container for a particular 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyFeeWindow`** (string) Ethereum contract address of the Fee Window for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyFeeWindow`** (string) Ethereum contract address of the Fee Window for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2641,9 +2647,9 @@ Returns whether the specific `universe` is a container for the [Market](#market)
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyMarket`** (string) Ethereum contract address of the Market for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyMarket`** (string) Ethereum contract address of the Market for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2657,9 +2663,9 @@ Returns whether the specified [Universe](#universe) is a container for a particu
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyReportingParticipant`** (string) Ethereum contract address of the Reporting Participant for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyReportingParticipant`** (string) Ethereum contract address of the Reporting Participant for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2673,9 +2679,9 @@ Returns whether the specific [Universe](#universe) is a container for a given Sh
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyShareToken`** (string) Ethereum contract address of the Share Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyShareToken`** (string) Ethereum contract address of the Share Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2704,9 +2710,9 @@ Returns whether the [Universe](#universe) is the [Parent Universe](#parent-unive
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._shadyChild`** (string) Ethereum contract address of the Universe for which to check if it is a Child Universe of the Universe, as a 16-byte hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
-    * **`p._shadyChild`** (string) Ethereum contract address of the Universe for which to check if it is a Child Universe of the Universe, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
