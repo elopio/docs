@@ -12,23 +12,23 @@ Description pending.
 
 ### augur.constants.CANCEL_ORDER_GAS (string)
 
-Amount of gas required to cancel an [Order](#order) on the [Order Book](#order-book).
+Gas limit used when canceling an [Order](#order) on the [Order Book](#order-book).
 
 ### augur.constants.CREATE_BINARY_MARKET_GAS (string)
 
-Amount of gas required to create a new [Binary Market](#binary-market), as a hexadecimal string.
+Gas limit used when creating a new [Binary Market](#binary-market), as a hexadecimal string.
 
 ### augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)
 
-Amount of gas required to create a new [Categorical Market](#categorical-market), as a hexadecimal string.
+Gas limit used when creating a new [Categorical Market](#categorical-market), as a hexadecimal string.
 
 ### augur.constants.CREATE_ORDER_GAS (string)
 
-Amount of gas required to create an [Order](#order).
+Gas limit used when creating an [Order](#order).
 
 ### augur.constants.CREATE_SCALAR_MARKET_GAS (string)
 
-Amount of gas required to create a new [Scalar Market](#scalar-market), as a hexadecimal string.
+Gas limit used when creating a new [Scalar Market](#scalar-market), as a hexadecimal string.
 
 ### augur.constants.DEFAULT_GASPRICE (number)
 
@@ -52,11 +52,11 @@ Description pending.
 
 ### augur.constants.GET_LOGS_DEFAULT_FROM_BLOCK (string)
 
-Description pending.
+Block number at which Augur Node will begin scanning for logged events emitted from Augur's smart contracts.
 
 ### augur.constants.GET_LOGS_DEFAULT_TO_BLOCK (string)
 
-Description pending.
+Block number up to which Augur Node will scan for logged events emitted from Augur's smart contracts.
 
 ### augur.constants.IVSIZE (number)
 

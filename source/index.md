@@ -33,7 +33,7 @@ Overview
 ========
 <aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur development team plans to have these docs fully updated prior to launching Augur. Please bear with us as we update this document and be advised that some of this information may be out-of-date or could change prior to launch. Thank you for your patience.</aside>
 
-[Augur](https://app.augur.net) is a decentralized prediction market platform that runs on Ethereum.
+Augur is a decentralized prediction market platform that runs on [Ethereum](https://www.ethereum.org). For a detailed, high-level explanation of how Augur works, please refer to the [Augur whitepaper](http://www.augur.net/whitepaper.pdf).
 
 The stable Augur application is built and hosted at [https://app.augur.net](https://app.augur.net). If you want to use or help test Augur, you do not need to download or install anything! Just go to [https://app.augur.net](https://app.augur.net) and start using it. (If you want to use our cutting-edge development client, this is maintained at [https://dev.augur.net](https://dev.augur.net) -- warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using [https://app.augur.net](https://app.augur.net) for a more stable experience.)
 

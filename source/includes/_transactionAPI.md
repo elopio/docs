@@ -218,25 +218,6 @@ augur.api.Augur.createGenesisUniverse({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320516,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xa031604c8ef75ab5b1d07f7358d594e1cb57c927a86be92459d78ae3415bb3b0",
-  input: "0x309d23e17ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f87000000000000000000000000000000000000000000000000000000000000000010000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a420000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xf61",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
 
@@ -280,25 +261,6 @@ augur.api.CancelOrder.cancelOrder({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320516,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xa031604c8ef75ab5b1d07f7358d594e1cb57c927a86be92459d78ae3415bb3b0",
-  input: "0x309d23e17ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f87000000000000000000000000000000000000000000000000000000000000000010000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a420000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xf61",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [CancelOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CancelOrder.sol), which allows for cancellation of [Orders](#order) on the [Order Book](#order-book).
 
@@ -352,25 +314,6 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320522,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0f6152b9a39055b34bc092d9e96e852e3137e3d42f4e78b1dc5848f8b2abf12f",
-  input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  nonce: "0xfc",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _shareHolder = "0x5678ff3e9ce1c0459b309fac6dd4e69229b91567";
 augur.api.ClaimTradingProceeds.claimTradingProceeds({
@@ -389,25 +332,6 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320523,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0f6152b9a39055b34bc092d9e96e852e3137e3d42f4e78b1dc5848f8b2abf12f",
-  input: "0x5fd65fba0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42",
-  nonce: "0xfc",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
 
@@ -478,25 +402,6 @@ augur.api.CompleteSets.publicBuyCompleteSets({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320523,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xc77149d6a3fef8755a20aa2100fc79c02ca7dd198d6f3c65aabe638883d8d017",
-  input: "0xfadc758a0000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
-  nonce: "0xfd",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.CompleteSets.publicSellCompleteSets({
   _market: _market,
@@ -514,25 +419,6 @@ augur.api.CompleteSets.publicSellCompleteSets({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320524,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x21121bf9a8d32969b5ce4d53b6021ad6b7b5e7c658e9d98d582c720c8abce220",
-  input: "0x04b586670000000000000000000000009368ff3e9ce1c0459b309fac6dd4e69229b91a42000000000000000000000000000000000000000000000002b5e3af16b1880000",
-  nonce: "0xfe",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [CompleteSets Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CompleteSets.sol), which allows for buying and selling of [Complete Sets](#complete-set).
 
@@ -593,29 +479,24 @@ Create Order Tx API
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
 var createOrderAddress = "0xdadc071ecc3b7e97b139d2ef692defdc398c8211";
 
-var _type = "1";
-var _attoshares = "10000000000000000000"; // 10 shares
-var _displayPrice = "0.5";
-var _market = "0xd3273eba07248020bf98a8b560ec1576a612102f";
-var _outcome = "1";
 // The _betterOrderId/_worseOrderId to use when creating an Order 
 // can be obtained by calling `augur.trading.getBetterWorseOrders`. 
-var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
-var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000001";
+// In the example below, `augur.trading.getBetterWorseOrders` returned
+var _betterOrderId = "0x12328a31378e925ea122ea73e8c81baaf5c731d408487f6884d2e4c81baa3456";
+var _worseOrderId = "0x91c28a31378e925ea122ea73e8c81baaf5c731d408487f6884d2e4c81baa39dd";
 
 augur.api.CreateOrder.publicCreateOrder({
-  _type: _type,
-  _attoshares: _attoshares,
-  _displayPrice: _displayPrice,
-  _market: _market,
-  _outcome: _outcome,
+  _type: "0x0",
+  _attoshares: "0x9184e72a000",
+  _displayPrice: "0x7d0",
+  _market: "0x800c094ac9bc324cafbb405ff85a93f28d75d4b0",
+  _outcome: "0x1",
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
-  _tradeGroupId: _tradeGroupId,
+  _tradeGroupId: "0x0000000000000000000000000000000000000000000000000000000000000001",
   tx: { 
     to: createOrderAddress,
-    value: "100000000000000000", 
+    value: "0x470de4df820000", 
     gas: augur.constants.CREATE_ORDER_GAS 
   },
   meta: {
@@ -626,25 +507,6 @@ augur.api.CreateOrder.publicCreateOrder({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320525,
-  callReturn: "0x5f80029d47ca806002b6b6bbbb0077124f8da9b69a885f7714907bd773bcf8a7",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xcf6729b0e27fffc81c4f5c824992a780daf1f41bf590c7f62f16777edbc2c08e",
-  input: "0x138dcef200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000000000000fffffff1000000000000000000000000d3273eba07248020bf98a8b560ec1576a612102f0000000000000000000000000000000000000000000000000000000000000001ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091ed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd5614260000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [CreateOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/CreateOrder.sol), which enables new [Orders](#order) to be created.
 
@@ -699,25 +561,6 @@ augur.api.DisputeCrowdsourcer.fork({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x89c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320486,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x0000000000000000000000000000000000000000000000000000000000000100",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _redeemer = "0x55d6eaefcfaf7ea1e17c4768a554d57800699ae4";
 augur.api.DisputeCrowdsourcer.redeem({
@@ -735,25 +578,6 @@ augur.api.DisputeCrowdsourcer.redeem({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0xaac8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320486,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x0000000000000000000000000000000000000000000000000000000000000100",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.DisputeCrowdsourcer.withdrawInEmergency({
   tx: { 
@@ -769,25 +593,6 @@ augur.api.DisputeCrowdsourcer.withdrawInEmergency({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0xbbc8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320486,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x0000000000000000000000000000000000000000000000000000000000000100",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
@@ -884,25 +689,6 @@ augur.api.FeeWindow.buy({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320486,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x0000000000000000000000000000000000000000000000000000000000000100",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _sender = "0x8886eaefcfaf7ea1e17c4768a554d57800699888";
 augur.api.FeeWindow.redeem({
@@ -920,25 +706,6 @@ augur.api.FeeWindow.redeem({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320487,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x00000001",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.FeeWindow.withdrawInEmergency({
   tx: { 
@@ -954,25 +721,6 @@ augur.api.FeeWindow.withdrawInEmergency({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x00000001",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
@@ -1068,25 +816,6 @@ augur.api.FillOrder.publicFillOrder({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320529,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x3efb4102dc3b9e1bb145ca21310233646a4eba24894b04f12ee4d390281301ac",
-  input: "0x49a2cba0ea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e60910000000000000000000000000000000000000000000000008ac7230489e800000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [FillOrder Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/FillOrder.sol), which allows for the [Filling](#fill-order) of [Orders](#order) on the [Order Book](#order-book).
 
@@ -1133,25 +862,6 @@ augur.api.InitialReporter.fork({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x7778f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2bfd",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.InitialReporter.redeem({
   tx: { 
@@ -1167,25 +877,6 @@ augur.api.InitialReporter.redeem({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x8768f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2abc",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _newOwner = "0x9998ff3e9ce1c0459b309fac6dd4e69229b91777";
 augur.api.InitialReporter.transferOwnership({
@@ -1203,25 +894,6 @@ augur.api.InitialReporter.transferOwnership({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x8768f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2abc",
-  blockNumber: 320489,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.InitialReporter.withdrawInEmergency({
   tx: { 
@@ -1237,25 +909,6 @@ augur.api.InitialReporter.withdrawInEmergency({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x1238f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2aaa",
-  blockNumber: 320490,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
@@ -1358,25 +1011,6 @@ augur.api.Mailbox.transferOwnership({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320488,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Mailbox.withdrawEther({
   tx: { 
@@ -1392,25 +1026,6 @@ augur.api.Mailbox.withdrawEther({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320489,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _repTokenAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 augur.api.Mailbox.withdrawTokens({
@@ -1428,25 +1043,6 @@ augur.api.Mailbox.withdrawTokens({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320489,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x6544da2190a54542e95473a6c9b18b7259480b8b48953eaa750d3e1379d8ccd6",
-  input: "0x4c92c4b38832d970d090b6403905de4ec2d1ae0adf4ca4972343c27fa86f7c61ea62e250",
-  nonce: "0x4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [Mailbox Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Mailbox.sol), which enables the functionality of the [Market Creator Mailbox](#market-creator-mailbox).
 
@@ -1538,25 +1134,6 @@ augur.api.Market.contribute({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320490,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
-  input: "0xf12afe02",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.disavowCrowdsourcers({
   tx: { 
@@ -1572,25 +1149,6 @@ augur.api.Market.disavowCrowdsourcers({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320491,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
-  input: "0xf12afe02",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _payoutNumerators = [ 0, 1000 ];
 var _invalid = false;
@@ -1610,25 +1168,6 @@ augur.api.Market.doInitialReport({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320492,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
-  input: "0xf12afe02",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.finalize({
   tx: { 
@@ -1644,25 +1183,6 @@ augur.api.Market.finalize({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320493,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
-  input: "0xf12afe02",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.finalizeFork({
   tx: { 
@@ -1678,25 +1198,6 @@ augur.api.Market.finalizeFork({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320494,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x0193add7b8dc3868944cb8b7748ab53cec5a2d9f5041f882b04b0bf0a31e1ff2",
-  input: "0xf12afe02",
-  nonce: "0x5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.migrateThroughOneFork({
   tx: { 
@@ -1712,25 +1213,6 @@ augur.api.Market.migrateThroughOneFork({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320496,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x32bf0849d589b6dd639791c7ea49579ea654a648c41b3a614878d77608ef1b07",
-  input: "0x069b559c",
-  nonce: "0x9",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Market.withdrawInEmergency {
   tx: { 
@@ -1746,25 +1228,6 @@ augur.api.Market.withdrawInEmergency {
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 };
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320499,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf5681056bab571e0ec73411896a3e8f7a7b610e43f148ea96cd06f66a2e8472a",
-  input: "0x00000001",
-  nonce: "0x3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
@@ -1952,16 +1415,17 @@ Reputation Token Tx API
 
 // The Ethereum address of Augur's default ReputationToken contract
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
-var reputationTokenAddress = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e";
-var _spender = "0xea674fdde714fd979de3edf0f56aa9716b898ec8";
-var _attotokens = "100000000000000000000";
+var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
+// Setting Augur.sol contract as the spender allows Augur to spend REP on 
+// behalf of the address calling `augur.api.ReputationToken.approve`.
+var _spender = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
+var _attotokens = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; 
 
 augur.api.ReputationToken.approve({
   _spender: _spender,
   _value: _attotokens,
   tx: { 
     to: reputationTokenAddress,
-    value: "100000000000000000", 
     gas: "6500000" 
   }, 
   meta: {
@@ -1972,25 +1436,6 @@ augur.api.ReputationToken.approve({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320512,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6",
-  input: "0x83b58638000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xf2",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.ReputationToken.migrateFromLegacyReputationToken({
   tx: { 
@@ -2006,25 +1451,6 @@ augur.api.ReputationToken.migrateFromLegacyReputationToken({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320513,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xf1eb499764e9422d51a37b3567bb2513c022d63524518d520a9d4eabad0f0238",
-  input: "0x3a15e7ca",
-  nonce: "0xf3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _destination = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
@@ -2043,25 +1469,6 @@ augur.api.ReputationToken.migrateOut({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320514,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0xeddcfa199671312d7dd90eba2895da3104801ab05220758c62bbc6ef059f6057",
-  input: "0x5ca7a72700000000000000000000000073295d3c0ca46113ca226222c81c79adabf9f3910000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab30000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xf4",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.ReputationToken.transfer({
   _to: _spender,
@@ -2079,25 +1486,6 @@ augur.api.ReputationToken.transfer({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320515,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x8f92137eff5e7824423ff6e79e15188b61d9dd9244fd2c436b020de6d8e721fe",
-  input: "0x86744558000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xf5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.ReputationToken.transferFrom({
   _from: "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3",
@@ -2116,25 +1504,6 @@ augur.api.ReputationToken.transferFrom({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320516,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x2c678df877e01d343a4e7701b92dddcecafc095fd1e4d90423838cd73eadb7d7",
-  input: "0x27f08b000000000000000000000000001a05071893b764109f0bbc5b75d78e3e38b69ab3000000000000000000000000ea674fdde714fd979de3edf0f56aa9716b898ec80000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xf6",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
   tx: { 
@@ -2150,8 +1519,6 @@ augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-true
 
 augur.api.ReputationToken.updateSiblingMigrationTotal({
   tx: { 
@@ -2167,8 +1534,6 @@ augur.api.ReputationToken.updateSiblingMigrationTotal({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-true
 ```
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep).
 
@@ -2361,25 +1726,6 @@ augur.api.ShareToken.approve({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320526,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x02730239e82d37ec032ecde79f27ae75d7cc59c277ab44c6eb5b67520ee487e9",
-  input: "0x83b5863800000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xff1",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.ShareToken.transfer({
   _to: _spender,
@@ -2397,25 +1743,6 @@ augur.api.ShareToken.transfer({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320527,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7dfbd9d87964814e0da2d874d8d7c2d886df6b852a46d69562018620d62fd773",
-  input: "0x8674455800000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xff2",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _from = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
@@ -2435,25 +1762,6 @@ augur.api.ShareToken.transferFrom({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320528,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x619a9d4a75f43cf5d5b8e81365f9859e60aa96554915e912cdf7ffd96f0d4d96",
-  input: "0x27f08b000000000000000000000000004b01721f0244e7c5b5f63c20942850e447f5a5ee00000000000000000000000001f50356c280cd886dd058210937160c73700a4b0000000000000000000000000000000000000000000000056bc75e2d63100000",
-  nonce: "0xff3",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
 
@@ -2564,25 +1872,6 @@ augur.api.Trade.publicBuy({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320530,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x027e3b312f5949388830a0f5c945cbfcbf4ec06edc3b342ef8d6e85f631a50c3",
-  input: "0x888b82010000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff5",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Trade.publicSell({
   _market: _market,
@@ -2605,25 +1894,6 @@ augur.api.Trade.publicSell({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320531,
-  callReturn: "1",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x1072dd3501dd0796f3b986bb45704798d198265ca5b75303488a8eb69c76bae5",
-  input: "0xf049066b0000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff6",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Trade.publicTrade({
   _direction: 1,
@@ -2647,25 +1917,6 @@ augur.api.Trade.publicTrade({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320532,
-  callReturn: "0xa754c0437ff499df19d163199dcb43a539cbd0a9670b976f0ac66f33a88b3ac6",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x2dc8b6f31e83e0e558863528130af2c66309f582ed02d96c7d7cfbe6a2c7179f",
-  input: "0x1ee6ba1000000000000000000000000000000000000000000000000000000000000000010000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff7",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Trade.publicTakeBestOrder({
   _direction: 2,
@@ -2689,25 +1940,6 @@ augur.api.Trade.publicTakeBestOrder({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320533,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x048db15000000000000000000000000000000000000000000000000000000000000000020000000000000000000000007e8e07364ccde43ba5159537404924e86ca53c9200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000008ac7230489e8000000000000000000000000000000000000000000000000000006f05b59d3b200000000000000000000000000000000000000000000000000000000000000000001",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [Trade Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Trade.sol), which allows for the buying and selling of [Shares](#share) of a particular [Outcome](#outcome) in a [Market](#market).
 
@@ -2826,25 +2058,6 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320540,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x3db124c7a0ae32094e0afdcd020d51fb930cdc3877066433b910e9257c3232eb"
-  s: "0x543251c0fb374e535c61c88b913816f791edba101517921e473384706ddd0256"
-  timestamp: 1501003200,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
 Provides JavaScript bindings for the [TradingEscapeHatch Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TradingEscapeHatch.sol), which allows funds to be withdrawn from Augur in the event that Augur needs to be [halted](#developer-mode) by the development team.
 
@@ -2913,26 +2126,6 @@ augur.api.Universe.createBinaryMarket({
   },
   onFailed: function (result) { console.log("onFailed result:", result); },
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
-  blockNumber:1362465,
-  callReturn: null,
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  gas: "0x5b8d80",
-  gasFees: "0.02179245429087362",
-  gasPrice: "0x1ce4eb7ee",
-  hash: "0xc0583954449b26e2036212929620674bb1e7bafb904c4fae551297dd036ee769",
-  input: "0x593...000",
-  nonce: "0x1e",
-  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
-  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
-  timestamp: 1512491243,
-  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-  transactionIndex: "0x1",
-  v: "0x2c",
-  value: "0x2386f2701c8d80"
-}
 
 var _extraInfo = {
   "resolutionSource": "http://www.espn.com",
@@ -2966,25 +2159,6 @@ augur.api.Universe.createCategoricalMarket({
   },
   onFailed: function (result) { console.log("onFailed result:", result); },
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
-  blockNumber:1362465,
-  callReturn: null,
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  gas: "0x632ea0",
-  gasFees: "0.021696129637146186",
-  gasPrice: "0x1ce4eb7ee",
-  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6",
-  input: "0x593...000",
-  nonce: "0x1e",
-  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
-  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
-  timestamp: 1512491243,
-  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-  v: "0x2c",
-  value: "0x2386f2701c8d80"
-}
 
 var _parentPayoutNumerators = [ 0, 1000 ];
 var _parentInvalid = false;
@@ -3004,25 +2178,6 @@ augur.api.Universe.createChildUniverse({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320559,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _extraInfo = {
   "resolutionSource": "http://forecast.weather.gov",
@@ -3058,25 +2213,6 @@ augur.api.Universe.createScalarMarket({
   onFailed: function (result) { console.log("onFailed result:", result); },
 
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x8125127e415c1a242046f8ebbb036ebdefaa013ec697d8691da43727cd311155",
-  blockNumber:1362465,
-  callReturn: null,
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  gas: "0x5b8d80",
-  gasFees: "0.021695431576204446",
-  gasPrice: "0x1ce4eb7ee",
-  hash: "0xb97f69a404805e81396a8fcc383b95edcb4a6fe6d17e0a33c994f05734a1cac6",
-  input: "0x593...000",
-  nonce: "0x1e",
-  r: "0x9b013bbb8fda1635b419ff001fd57f651f648a1b4041c08d6506a13ff9d9ca21"
-  s: "0x5b6358e1c1d71d233a659478b175dd3c51577889e17965546897275cb723ed39"
-  timestamp: 1512491243,
-  to: "0x6eabb9367012c0a84473e1e6d7a7ce39a54d77bb",
-  v: "0x2c",
-  value: "0x2386f2701c8d80"
-}
 
 augur.api.Universe.getInitialReportStakeSize({ 
   tx: { 
@@ -3107,25 +2243,6 @@ augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320554,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0x2fd618",
-  gasFees: "0.00102297557556486",
-  gasPrice: "0x5b793ccec",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x3db124c7a0ae32094e0afdcd020d51fb930cdc3877066433b910e9257c3232eb"
-  s: "0x543251c0fb374e535c61c88b913816f791edba101517921e473384706ddd0256"
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCacheDesignatedReportStake({
   tx: { 
@@ -3140,25 +2257,6 @@ augur.api.Universe.getOrCacheDesignatedReportStake({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320555,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCacheMarketCreationCost({
   tx: { 
@@ -3173,25 +2271,6 @@ augur.api.Universe.getOrCacheMarketCreationCost({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320556,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCacheReportingFeeDivisor({
   tx: { 
@@ -3206,25 +2285,6 @@ augur.api.Universe.getOrCacheReportingFeeDivisor({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320557,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCacheTargetReporterGasCosts({
   tx: { 
@@ -3239,26 +2299,6 @@ augur.api.Universe.getOrCacheTargetReporterGasCosts({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0xdc5e31404be698a6866fbe7d7cf435a2c6fab7deb3acf41d6c9bb981a2630fed",
-  blockNumber: 1330897,
-  callReturn: "6000000",
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  gas: "0x2fd618",
-  gasFees: "0.00081266",
-  gasPrice: "0x4a817c800",
-  hash: "0x1af308e9ea415f321f099b36bae21753bd5227812451694e75b3604aea87bf92",
-  input: "0x39d26051",
-  nonce: "0x0",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1512018567,
-  to: "0xfc6bba7d664e8cc242857f069e9fb1e7c25ecb44",
-  transactionIndex: "0x1",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCacheValidityBond({
   tx: { 
@@ -3273,25 +2313,6 @@ augur.api.Universe.getOrCacheValidityBond({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320558,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCreateCurrentFeeWindow({
   tx: { 
@@ -3306,25 +2327,6 @@ augur.api.Universe.getOrCreateCurrentFeeWindow({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320559,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _timestamp = 1401003133;
 augur.api.Universe.getOrCreateFeeWindowByTimestamp({
@@ -3341,25 +2343,6 @@ augur.api.Universe.getOrCreateFeeWindowByTimestamp({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320560,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCreateFeeWindowForForkEndTime({
   tx: { 
@@ -3374,25 +2357,6 @@ augur.api.Universe.getOrCreateFeeWindowForForkEndTime({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320561,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCreateNextFeeWindow({
   tx: { 
@@ -3407,25 +2371,6 @@ augur.api.Universe.getOrCreateNextFeeWindow({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320562,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 augur.api.Universe.getOrCreatePreviousFeeWindow({
   tx: { 
@@ -3440,25 +2385,6 @@ augur.api.Universe.getOrCreatePreviousFeeWindow({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320563,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 
 var _reportingParticipants = [ ];
 var _feeWindows = [ ];
@@ -3478,27 +2404,7 @@ augur.api.Universe.redeemStake({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-onSuccess result: {
-  blockHash: "0x38c8f12c226b8829ae493da94a730d6c149bf9a0578aac151f43028032ea2efb",
-  blockNumber: 320564,
-  callReturn: "0",
-  from: "0xa47eb7af47b8722c3100b49c256a94c742bb26b6",
-  gas: "0xb10d2",
-  gasFees: "0.005827878",
-  gasPrice: "0x430e23400",
-  hash: "0x7ab9bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1aefd1",
-  input: "0x3659bde926dfb9d1bbee93c07cbcf7d11ea4b995fa8f72d88d8322336d1ae7ac",
-  nonce: "0xff8",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1501003133,
-  to: "0xa7f3659c53820346176f7e0e350780df304db179",
-  v: "0x2c",
-  value: "0x0"
-}
 ```
-<!-- TODO: Add sections to create*Market functions explaining what conditions will cause transaction to fail; add calls to augur.createMarket.getMarketFromCreateMarketReceipt in market creation examples -->
 Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
 ### augur.api.Universe.createBinaryMarket(p)
