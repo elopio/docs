@@ -3415,7 +3415,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Controller.sol">Controller Solidity Contract</a>, which is used to manage whitelisting of contracts and and <a href="#developer-mode">halt</a> the normal use of Augur’s contracts (e.g., if there is a vulnerability found in Augur). From a developer standpoint, it can be used to get Augur&rsquo;s internal timestamp.</p>
 
-<h3 id="augur-api-timecontrolled-gettimestamp-p-callback">augur.api.TimeControlled.getTimestamp(p, callback)</h3>
+<h3 id="augur-api-controller-gettimestamp-p-callback">augur.api.Controller.getTimestamp(p, callback)</h3>
 
 <p>Returns Augur&rsquo;s internal Unix timestamp.</p>
 
@@ -3461,8 +3461,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> 
+  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">},</span> 
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -3596,12 +3596,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -4207,8 +4207,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> 
+  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">},</span> 
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4417,12 +4417,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -4563,9 +4563,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">],</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutDistributionHash</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4613,8 +4613,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"1500388730"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
   <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4678,8 +4678,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x23b17188ce3c491f6ab4427258d92452be5c8045"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getShareToken</span><span class="p">({</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">1</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">shareToken</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shareToken</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4687,8 +4687,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getStakeInOutcome</span><span class="p">({</span> 
+  <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
-  <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stakeInOutcome</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stakeInOutcome</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4720,8 +4720,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutNumerator</span><span class="p">({</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">getWinningPayoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getWinningPayoutNumerator</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4729,8 +4729,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"1000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForReportingParticipant</span><span class="p">({</span>
+  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingParticipant</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingParticipant</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4738,8 +4738,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">true</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForShareToken</span><span class="p">({</span>
+  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForShareToken</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -4780,13 +4780,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._payoutNumerators</code></strong> (Array.&lt;uint256&gt;) Payout Numerators from which to derive the Payout Distribution Hash.</li>
+<li><strong><code class="prettyprint">p._invalid</code></strong> (boolean) Whether the Market is Invalid.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._payoutNumerators</code></strong> (Array.&lt;uint256&gt;) Payout Numerators from which to derive the Payout Distribution Hash.</li>
-<li><strong><code class="prettyprint">p._invalid</code></strong> (boolean) Whether the Market is Invalid.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5132,12 +5132,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5158,12 +5158,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._payoutDistributionHash</code></strong> (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._payoutDistributionHash</code></strong> (string) Payout Distribution Hash for which to the the amount of attoREP Staked, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5259,12 +5259,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5285,12 +5285,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) ReportingParticipant Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5311,12 +5311,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) ShareToken Ethereum contract address for which to check if the Market is a container, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) </li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5989,6 +5989,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
+
+<span class="c1">// The Ethereum address of Augur's default ReputationToken contract</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> 
@@ -6094,6 +6097,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="share-token-call-api">Share Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
+
+<span class="c1">// The Ethereum address of Augur's default ShareToken contract</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> 
@@ -6174,8 +6180,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getChildUniverse</span><span class="p">({</span>
+  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">childUniverse</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childUniverse</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6199,8 +6205,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"604800"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> 
   <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6208,8 +6214,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowByTimestamp</span><span class="p">({</span> 
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6330,8 +6336,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x432561b2bdbcd1ae1995bdd6aff6776d6f4292f2"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForFeeToken</span><span class="p">({</span>
+  <span class="na">_shadyFeeToken</span><span class="p">:</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyFeeToken</span><span class="p">:</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForFeeToken</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForFeeToken</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6339,8 +6345,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">true</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForFeeWindow</span><span class="p">({</span>
+  <span class="na">_shadyFeeWindow</span><span class="p">:</span> <span class="s2">"0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyFeeWindow</span><span class="p">:</span> <span class="s2">"0x1233cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForFeeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForFeeWindow</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6348,8 +6354,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">true</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForMarket</span><span class="p">({</span>
+  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyMarket</span><span class="p">:</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForMarket</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForMarket</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6357,8 +6363,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">false</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForReportingParticipant</span><span class="p">({</span>
+  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x6788ff3e9ce1c0459b309fac6dd4e69229b91a41"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForReportingParticipant</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForReportingParticipant</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6366,8 +6372,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">true</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isContainerForShareToken</span><span class="p">({</span>
+  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyShareToken</span><span class="p">:</span> <span class="s2">"0x9328ff3e9ce1c0459b309fac6dd4e69229b91a61"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isContainerForShareToken</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isContainerForShareToken</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6383,8 +6389,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kc">false</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">isParentOf</span><span class="p">({</span>
+  <span class="na">_shadyChild</span><span class="p">:</span> <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_shadyChild</span><span class="p">:</span> <span class="s2">"0xb4e8c1f85c4382d64954aca187f9f386c8bb1a6c"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isParentOf</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isParentOf</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6403,12 +6409,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._parentPayoutDistributionHash</code></strong> (string) Payout Distribution Hash for Final Outcome of the desired Child Universe, as a 32-byte hexadecimal string. </li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._parentPayoutDistributionHash</code></strong> (string) Payout Distribution Hash for Final Outcome of the desired Child Universe, as a 32-byte hexadecimal string. </li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6479,12 +6485,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (number|string) Fee Window ID, as an unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (number|string) Fee Window ID, as an unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6505,12 +6511,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6556,12 +6562,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6888,12 +6894,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyFeeToken</code></strong> (string) Ethereum contract address of the Fee Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyFeeToken</code></strong> (string) Ethereum contract address of the Fee Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6914,12 +6920,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyFeeWindow</code></strong> (string) Ethereum contract address of the Fee Window for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyFeeWindow</code></strong> (string) Ethereum contract address of the Fee Window for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6940,12 +6946,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyMarket</code></strong> (string) Ethereum contract address of the Market for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyMarket</code></strong> (string) Ethereum contract address of the Market for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6966,12 +6972,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) Ethereum contract address of the Reporting Participant for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyReportingParticipant</code></strong> (string) Ethereum contract address of the Reporting Participant for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -6992,12 +6998,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) Ethereum contract address of the Share Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyShareToken</code></strong> (string) Ethereum contract address of the Share Token for which to check if it belongs to the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -7043,12 +7049,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._shadyChild</code></strong> (string) Ethereum contract address of the Universe for which to check if it is a Child Universe of the Universe, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.</li>
 </ul></li>
-<li><strong><code class="prettyprint">p._shadyChild</code></strong> (string) Ethereum contract address of the Universe for which to check if it is a Child Universe of the Universe, as a 16-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
