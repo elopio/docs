@@ -2348,8 +2348,6 @@ augur.api.Universe.getInitialReportStakeSize({
   onSuccess: function (result) { console.log("onSuccess result:", result); },
   onFailed: function (result) { console.log("onFailed result:", result); }
 });
-// example onSuccess output:
-"174840291341145834"
 
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   tx: { 

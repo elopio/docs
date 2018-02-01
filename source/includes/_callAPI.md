@@ -123,7 +123,7 @@ augur.api.DisputeCrowdsourcer.getPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.DisputeCrowdsourcer.getPayoutNumerator({ 
-  _outcome: 0,
+  _outcome: "0x0",
   tx: { to: disputeCrowdsourcer }, 
 }, function (error, payoutNumerator) { 
   console.log(payoutNumerator); 
@@ -225,7 +225,7 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) Outcome for which to get the Payout Numerator, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Dispute Crowdsourcer on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -659,7 +659,7 @@ augur.api.InitialReporter.getPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.InitialReporter.getPayoutNumerator({ 
-  _outcome: 0,
+  _outcome: "0x0",
   tx: { to: initialReporter }, 
 }, function (error, payoutNumerator) { 
   console.log(payoutNumerator); 
@@ -806,7 +806,7 @@ Returns the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for t
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._outcome`** (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) Outcome for which to get the Payout Numerator, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the InitialReporter contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -897,14 +897,14 @@ Market Call API
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Market.derivePayoutDistributionHash({
-  _payoutNumerators: [ 0, 1000 ],
+  _payoutNumerators: [ "0x0", "0x2710" ],
   _invalid: false,
   tx: { to: market },
 }, function (error, payoutDistributionHash) { 
   console.log(payoutDistributionHash); 
 });
 // example output:
-"1"
+"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.Market.designatedReporterShowed({ 
   tx: { to: market } 
@@ -947,7 +947,7 @@ augur.api.Market.getEndTime({
 "1500388730";
 
 augur.api.Market.getFeeWindow({ 
-  _feeWindowId: 578,
+  _feeWindowId: "0x242",
   tx: { to: market }, 
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
@@ -1012,7 +1012,7 @@ augur.api.Market.getReputationToken({
 "0x23b17188ce3c491f6ab4427258d92452be5c8045"
 
 augur.api.Market.getShareToken({
-  _outcome: 1,
+  _outcome: "0x1",
   tx: { to: market },
 }, function (error, shareToken) { 
   console.log(shareToken); 
@@ -1054,7 +1054,7 @@ augur.api.Market.getWinningPayoutDistributionHash({
 "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"
 
 augur.api.Market.getWinningPayoutNumerator({
-  _outcome: "0",
+  _outcome: "0x0",
   tx: { to: market },
 }, function (error, getWinningPayoutNumerator) { 
   console.log(getWinningPayoutNumerator); 
@@ -1109,7 +1109,7 @@ This call will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._payoutNumerators`** (Array.&lt;uint256>) Payout Numerators from which to derive the Payout Distribution Hash.
+    * **`p._payoutNumerators`** (Array.&lt;string>) Payout Numerators, as hexadecimal strings, from which to derive the Payout Distribution Hash.
     * **`p._invalid`** (boolean) Whether the Market is Invalid.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
@@ -1321,7 +1321,7 @@ Returns the Ethereum contract address of the [Share Token](#share-token-call-api
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._outcome`** (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) Outcome for which to get the Share Token Ethereum contract address, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1398,7 +1398,7 @@ Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) i
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._outcome`** (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) Outcome for which to get the winning Payout Numerator, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1477,9 +1477,9 @@ Orders Call API
 ```javascript
 // Orders Contract Call API Examples:
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
-var _type = "1";
+var _type = "0x1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _outcome = "1";
+var _outcome = "0x1";
 
 augur.api.Orders.getAmount({ 
   _orderId: _orderId 
@@ -1598,7 +1598,7 @@ augur.api.Orders.getWorstOrderId({
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
 
-var _price = "450000000000000000"; // 0.45
+var _price = "0x63eb89da4ed0000"; // 0.45
 augur.api.Orders.isBetterPrice({
   _type: _type,
   _price: _price,
@@ -1628,7 +1628,7 @@ Returns the amount of [Shares](#share) requested when a particular [Order](#orde
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._orderId`** (number|string) ID of the Order, as a 32-byte hexadecimal string.
+    * **`p._orderId`** (string) ID of the Order, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1642,9 +1642,9 @@ Returns the [Order](#order) ID of the best Order of a particular type (either [A
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a Bid Order, "2" for an Ask Order).
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a Bid Order, "0x2" for an Ask Order).
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number) [Outcome](#outcome) of the Market, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) [Outcome](#outcome) of the Market, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1673,7 +1673,7 @@ Returns the last price traded for a specific [Outcome](#outcome) in a given [Mar
 
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) Outcome of the Market, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1813,9 +1813,9 @@ Returns the [Order](#order) ID of the worst Order of a particular type (either [
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a Bid Order, "2" for an Ask Order). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a Bid Order, "0x2" for an Ask Order). 
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.
-    * **`p._outcome`** (number|string) [Outcome](#outcome) of the Market, as an unsigned integer or stringified unsigned integer.
+    * **`p._outcome`** (string) [Outcome](#outcome) of the Market, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1829,8 +1829,8 @@ Returns whether a given price is greater than the price of a particular [Order](
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (string) Price in [attoETH](#atto-prefix) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1845,8 +1845,8 @@ Returns whether a given price is less than the price of a particular [Order](#or
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (string) Price in [attoETH](#atto-prefix) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1859,10 +1859,10 @@ Orders Fetcher Call API
 ```javascript
 // Orders Fetcher Contract Call API Examples:
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
-var _type = "1";
+var _type = "0x1";
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-var _outcome = "1";
-var _price = "450000000000000000"; // 0.45
+var _outcome = "0x1";
+var _price = "0x63eb89da4ed0000"; // 0.45
 
 augur.api.OrdersFetcher.ascendOrderList({
   _type: _type,
@@ -1886,9 +1886,9 @@ augur.api.OrdersFetcher.findBoundingOrders({
   _type: _type,
   _price: _price,
   _bestOrderId: _orderId,
-  _worstOrderId: 0,
-  _betterOrderId: 0,
-  _worseOrderId: 0
+  _worstOrderId: "0x0",
+  _betterOrderId: "0x0",
+  _worseOrderId: "0x0"
 }, function (error, boundingOrders) { console.log(boundingOrders); });
 // example output:
 [ "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
@@ -1903,8 +1903,8 @@ Traverses the [Order Book](#order-book) in ascending order and returns an array 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.
     * **`p._lowestOrderId`** (string) Order ID expected to be a worse price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1919,8 +1919,8 @@ Traverses the [Order Book](#order-book) in descending order and returns an array
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.
     * **`p._highestOrderId`** (string) Order ID expected to be a better price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -1935,8 +1935,8 @@ Returns an array containing the [Order](#order) IDs from the [Order Book](#order
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (number|string) Type of Order, as an unsigned integer or stringified unsigned integer ("1" for a [Bid Order](#bid-order), "2" for an [Ask Order](#ask-order)). 
-    * **`p._price`** (number|string) Price to compare `p._orderId` to, as an unsigned integer or stringified unsigned integer.
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._bestOrderId`** (string) Best Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
     * **`p._worstOrderId`** (string) Worst Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID with a better price than `p._price`, as a 32-byte-hexadecimal string.
@@ -2121,7 +2121,7 @@ augur.api.Universe.getDisputeRoundDurationInSeconds({
 "604800"
 
 augur.api.Universe.getFeeWindow({ 
-  _feeWindowId: 578,
+  _feeWindowId: "0x242",
   tx: { to: universe }, 
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
@@ -2130,7 +2130,7 @@ augur.api.Universe.getFeeWindow({
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
 augur.api.Universe.getFeeWindowByTimestamp({ 
-  _timestamp: 1514500367,
+  _timestamp: "0x5a45710f",
   tx: { to: universe },
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
@@ -2147,8 +2147,8 @@ augur.api.Universe.getFeeWindowForForkEndTime({
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
 augur.api.Universe.getFeeWindowId({ 
+  _timestamp: "0x5a45710f",
   tx: { to: universe },
-  _timestamp: 1514500367
 }, function (error, feeWindowId) {
   console.log(feeWindowId); 
 });
@@ -2368,7 +2368,7 @@ Returns the Ethereum contract address of a given [Fee Window](#fee-window) in th
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._feeWindowId`** (number|string) Fee Window ID, as an unsigned integer.
+    * **`p._feeWindowId`** (string) Fee Window ID, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -2384,7 +2384,7 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) running a
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
+    * **`p._timestamp`** (string) Unix timestamp for which to get the corresponding Fee Window, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -2415,7 +2415,7 @@ Returns the [Fee Window](#fee-window) ID for the [Universe](#universe) at the sp
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._timestamp`** (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.
+    * **`p._timestamp`** (string) Unix timestamp for which to get the corresponding Fee Window, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 16-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
