@@ -26,7 +26,6 @@ augur.api.ReputationToken.transfer({
 {
   callReturn: '100000000000000000000',
   hash: '0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6'
-
 }
 // example onSuccess output:
 {
@@ -235,7 +234,7 @@ Allows the caller to create a new [Genesis Universe](#genesis-universe). Users m
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value.
 
 Cancel Order Tx API
 ----------------------------
@@ -287,7 +286,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Order was successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Order was successfully canceled, or `false` otherwise.
 
 Claim Trading Proceeds Tx API
 ------------------------------
@@ -357,7 +356,7 @@ Calculates the amount of [attoETH](#atto-prefix) that `_numberOfShares` attoshar
 
 #### **Returns:**
 
-* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise.
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
@@ -383,7 +382,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise.
 
 Complete Sets Tx API
 -----------------------------
@@ -458,7 +457,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise.
 
 ### augur.api.CompleteSets.publicSellCompleteSets(p)
 
@@ -486,7 +485,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise.
 
 Create Order Tx API
 --------------------------
@@ -562,7 +561,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (string) Order ID of the newly-created Order, as a 32-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (string) Order ID of the newly-created Order, as a 32-byte hexadecimal value.
 
 Dispute Crowdsourcer Tx API
 ----------------------------
@@ -639,7 +638,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the transaction successfully completed without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the transaction successfully completed without any errors, or `false` otherwise.
 
 ### augur.api.DisputeCrowdsourcer.redeem(p)
 
@@ -671,7 +670,7 @@ This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if
 
 #### **Returns:**
 
-* (boolean) `true` if `redeemer`'s Staked REP was redeemed without errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if `redeemer`'s Staked REP was redeemed without errors, or `false` otherwise.
 
 ### augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)
 
@@ -694,7 +693,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `false` otherwise.
 
 Fee Window Tx API
 -----------------
@@ -776,7 +775,7 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were successfully purchased, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were successfully purchased, or `false` otherwise.
 
 ### augur.api.FeeWindow.redeem(p)
 
@@ -796,7 +795,7 @@ Converts any [Participation Tokens](#participation-token) `_sender` has in the s
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `false` otherwise. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `true`, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `false` otherwise. If `_sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `true`, as long as no errors occured.
 
 ### augur.api.FeeWindow.withdrawInEmergency(p)
 
@@ -819,7 +818,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `false` otherwise.
 
 Fill Order Tx API
 --------------------------
@@ -971,7 +970,7 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully migrated to the new Child Universe without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully migrated to the new Child Universe without any errors, or `false` otherwise.
 
 ### augur.api.InitialReporter.redeem(p)
 
@@ -990,7 +989,7 @@ Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or 
 
 #### **Returns:**
 
-* (boolean) `true` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `false` otherwise.
 
 ### augur.api.InitialReporter.transferOwnership(p)
 
@@ -1037,7 +1036,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully withdrawn from the `initialReporter` contract without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the REP was successfully withdrawn from the `initialReporter` contract without any errors, or `false` otherwise.
 
 Mailbox Tx API
 ----------------------
@@ -1480,7 +1479,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Reputation Tokens were withdrawn from `market` without any errors, or `false` otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)
+* (boolean) `true` if the Reputation Tokens were withdrawn from `market` without any errors, or `false` otherwise.
 
 Reputation Token Tx API
 --------------------------------
