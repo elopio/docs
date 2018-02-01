@@ -3465,7 +3465,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> 
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcer</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> 
@@ -3600,7 +3600,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to get the Payout Numerator, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -4211,7 +4211,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">getPayoutNumerator</span><span class="p">({</span> 
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporter</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutNumerator</span><span class="p">);</span> 
@@ -4421,7 +4421,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to get the Payout Numerator, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -4567,14 +4567,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
-  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">],</span>
+  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">],</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">payoutDistributionHash</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">payoutDistributionHash</span><span class="p">);</span> 
 <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="s2">"1"</span>
+<span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">designatedReporterShowed</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
@@ -4617,7 +4617,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"1500388730"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
-  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="s2">"0x242"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
@@ -4682,7 +4682,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x23b17188ce3c491f6ab4427258d92452be5c8045"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getShareToken</span><span class="p">({</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">shareToken</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shareToken</span><span class="p">);</span> 
@@ -4724,7 +4724,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutNumerator</span><span class="p">({</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">getWinningPayoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getWinningPayoutNumerator</span><span class="p">);</span> 
@@ -4784,7 +4784,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._payoutNumerators</code></strong> (Array.&lt;uint256&gt;) Payout Numerators from which to derive the Payout Distribution Hash.</li>
+<li><strong><code class="prettyprint">p._payoutNumerators</code></strong> (Array.&lt;string&gt;) Payout Numerators, as hexadecimal strings, from which to derive the Payout Distribution Hash.</li>
 <li><strong><code class="prettyprint">p._invalid</code></strong> (boolean) Whether the Market is Invalid.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
@@ -5136,7 +5136,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the Share Token Ethereum contract address, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to get the Share Token Ethereum contract address, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -5263,7 +5263,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to get the winning Payout Numerator, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to get the winning Payout Numerator, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -5390,9 +5390,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="orders-call-api">Orders Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">getAmount</span><span class="p">({</span> 
   <span class="na">_orderId</span><span class="p">:</span> <span class="nx">_orderId</span> 
@@ -5511,7 +5511,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="s2">"0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"</span>
 
-<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
+<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"0x63eb89da4ed0000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Orders</span><span class="p">.</span><span class="nx">isBetterPrice</span><span class="p">({</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
@@ -5544,7 +5544,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._orderId</code></strong> (number|string) ID of the Order, as a 32-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of the Order, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5565,9 +5565,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a Bid Order, &ldquo;2&rdquo; for an Ask Order).</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a Bid Order, &ldquo;0x2&rdquo; for an Ask Order).</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the best Order ID, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number) <a href="#outcome">Outcome</a> of the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) <a href="#outcome">Outcome</a> of the Market, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5610,7 +5610,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of a Market, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome of the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5820,9 +5820,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a Bid Order, &ldquo;2&rdquo; for an Ask Order). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a Bid Order, &ldquo;0x2&rdquo; for an Ask Order). </li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) <a href="#outcome">Outcome</a> of the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) <a href="#outcome">Outcome</a> of the Market, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
 </ul>
@@ -5843,8 +5843,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Price in <a href="#atto-prefix">attoETH</a> to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5866,8 +5866,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Price in <a href="#atto-prefix">attoETH</a> to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5882,10 +5882,10 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h2 id="orders-fetcher-call-api">Orders Fetcher Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Fetcher Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_type</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"450000000000000000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
+<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"0x63eb89da4ed0000"</span><span class="p">;</span> <span class="c1">// 0.45</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">OrdersFetcher</span><span class="p">.</span><span class="nx">ascendOrderList</span><span class="p">({</span>
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
@@ -5909,9 +5909,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">_type</span><span class="p">:</span> <span class="nx">_type</span><span class="p">,</span>
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_bestOrderId</span><span class="p">:</span> <span class="nx">_orderId</span><span class="p">,</span>
-  <span class="na">_worstOrderId</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="na">_worstOrderId</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">boundingOrders</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">boundingOrders</span><span class="p">);</span> <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span> <span class="s2">"0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"</span><span class="p">,</span>
@@ -5929,8 +5929,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._lowestOrderId</code></strong> (string) Order ID expected to be a worse price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5952,8 +5952,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price in the Order Book for which to find a better Order ID and worse Order ID, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._highestOrderId</code></strong> (string) Order ID expected to be a better price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
@@ -5975,8 +5975,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
-<li><strong><code class="prettyprint">p._price</code></strong> (number|string) Price to compare <code class="prettyprint">p._orderId</code> to, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._bestOrderId</code></strong> (string) Best Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._worstOrderId</code></strong> (string) Worst Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID with a better price than <code class="prettyprint">p._price</code>, as a 32-byte-hexadecimal string.</li>
@@ -6209,7 +6209,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"604800"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
-  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="mi">578</span><span class="p">,</span>
+  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="s2">"0x242"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
@@ -6218,7 +6218,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowByTimestamp</span><span class="p">({</span> 
-  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span><span class="p">,</span>
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="s2">"0x5a45710f"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
@@ -6235,8 +6235,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowId</span><span class="p">({</span> 
+  <span class="na">_timestamp</span><span class="p">:</span> <span class="s2">"0x5a45710f"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
-  <span class="na">_timestamp</span><span class="p">:</span> <span class="mi">1514500367</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindowId</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindowId</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -6489,7 +6489,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (number|string) Fee Window ID, as an unsigned integer.</li>
+<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (string) Fee Window ID, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -6515,7 +6515,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (string) Unix timestamp for which to get the corresponding Fee Window, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -6566,7 +6566,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._timestamp</code></strong> (number|string) Unix timestamp for which to get the corresponding Fee Window, as an unsigned integer.</li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong> (string) Unix timestamp for which to get the corresponding Fee Window, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -9892,8 +9892,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="s2">"174840291341145834"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCacheDesignatedReportNoShowBond</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
