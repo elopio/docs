@@ -643,7 +643,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h2 id="numbers">Numbers</h2>
 
-<p>Before we move on, let&rsquo;s quickly talk about Numbers. There are three acceptable ways to pass numerical inputs to the Augur API:</p>
+<p><b>It is strongly recommended that all numerical input values be passed into Call API functions and Transaction API functions as hexadecimal strings.</b> This is because these API functions are direct bindings to the functions on Augur&rsquo;s smart contracts, and passing in very large numbers in decimal form can result in the functions on Augur&rsquo;s smart contracts failing.</p>
+
+<p>The Simplified API functions, however, automatically convert numerical input values to hexadecimal form before passing them into Augur&rsquo;s smart contracts.</p>
+
+<p>For the Simplified API, there are three acceptable ways to pass numerical inputs:</p>
 
 <ul>
 <li><p>primitive JS numbers (e.g., <code class="prettyprint">1010101</code>): ok for integers, but use strings for floating point numbers (see below)</p></li>
@@ -653,9 +657,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
-<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.  Do <b>not</b> send the Loch Ness monster 3.50 &times; 10<sup>18</sup> ETH.  (Probably don&rsquo;t even give him 3.50, but that&rsquo;s a debate for another time.)</aside>
+<aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.</aside>
 
-<h2 id="initial-market-loading">Initial market loading</h2>
+<h2 id="initial-market-loading">Initial Market Loading</h2>
 
 <p>To get a list of all <a href="#market">Markets</a>, first call <code class="prettyprint">augur.markets.getMarkets({ universe[, sortBy, isSortDescending, limit, offset] }[, callback])</code>. More detailed market info (including prices) for each market can then be loaded using <code class="prettyprint">augur.markets.getMarketsInfo({ marketIDs }[, callback])</code>. <code class="prettyprint">getMarketsInfo</code> does not return the <a href="#order-book">Open Orders</a> for the Market; to get the Open Orders, call <code class="prettyprint">augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])</code>.</p>
 
@@ -7069,16 +7073,30 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Transaction section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Transaction API example:</span>
-<span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"</span><span class="p">;</span> <span class="c1">// Ethereum contract address for the REP token</span>
-<span class="kd">var</span> <span class="nx">transferTarget</span> <span class="o">=</span> <span class="s2">"0xea674fdde714fd979de3edf0f56aa9716b898ec8"</span><span class="p">;</span> <span class="c1">// Ethereum address of the account to send REP tokens to</span>
-<span class="kd">var</span> <span class="nx">attotokens</span> <span class="o">=</span> <span class="s2">"100000000000000000000"</span><span class="p">;</span> <span class="c1">// 1000.00 REP</span>
+
+<span class="c1">// Approving the Augur.sol contract as a spender allows Augur to spend REP </span>
+<span class="c1">// on behalf of the address calling `augur.api.ReputationToken.approve`.</span>
+<span class="c1">// This must be done before calling many of the Transaction API functions,</span>
+<span class="c1">// such as `augur.api.CreateOrder.publicCreateOrder`.</span>
+
+<span class="c1">// The Ethereum contract addresses for Augur.sol and ReputationToken.sol </span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
+
+<span class="c1">// Amount of REP tokens to approve the Augur.sol contract to spend on this Ethereum account's behalf.</span>
+<span class="c1">// This example sets the amount to the maximum possible value.</span>
+<span class="kd">var</span> <span class="nx">_attoRepTokens</span> <span class="o">=</span> <span class="s2">"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">;</span> 
 
 <span class="c1">// The Augur API is organized by Contract and then Method like so:</span>
 <span class="c1">// augur.api.&lt;Contract&gt;.&lt;Method&gt;(&lt;argument object&gt;);</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
-  <span class="na">_to</span><span class="p">:</span> <span class="nx">transferTarget</span><span class="p">,</span>
-  <span class="na">_value</span><span class="p">:</span> <span class="nx">attotokens</span><span class="p">,</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span> <span class="p">},</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attoRepTokens</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
     <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
@@ -7087,30 +7105,30 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
+
 <span class="c1">// example onSent output:</span>
 <span class="p">{</span>
-  <span class="nl">callReturn</span><span class="p">:</span> <span class="s1">'100000000000000000000'</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s1">'0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6'</span>
-
+  <span class="nl">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s1">'0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4'</span>
 <span class="p">}</span>
 <span class="c1">// example onSuccess output:</span>
 <span class="p">{</span>
-  <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0xdc5e31404be698a6866fbe7d7cf435a2c6fab7deb3acf41d6c9bb981a2630fed"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1330897</span><span class="p">,</span>
-  <span class="na">callReturn</span><span class="p">:</span> <span class="s2">"100000000000000000000"</span><span class="p">,</span>
-  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
-  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x2fd618"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.00081266"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x4a817c800"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x39d26051"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c"</span><span class="p">,</span>
-  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1512018567</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xfc6bba7d664e8cc242857f069e9fb1e7c25ecb44"</span><span class="p">,</span>
+  <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0xa8533a3ae037ae30db81673a7275dd5f8eaadc52c0309f418070369cb58a1642"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1692844</span><span class="p">,</span>
+  <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">from</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.00018364"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x12a05f200"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x095ea7b3000000000000000000000000852684b374fe03ab77d06931f1b2831028fd58f5ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x87"</span><span class="p">,</span>
+  <span class="na">r</span><span class="p">:</span> <span class="s2">"0x804b2a14352d3fa9844c296eb8b9a6b8fed45ca5d56550d1eb558c6571abbaf4"</span><span class="p">,</span>
+  <span class="na">s</span><span class="p">:</span> <span class="s2">"0x3793c21fd315e14950b48a2200e8368ca0d25a2b6291eca9b5bb19753026859f"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1517462391</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
   <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
-  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
+  <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
 <span class="p">}</span>
 <span class="c1">// example onFailed output:</span>
@@ -7134,7 +7152,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="the-tx-object">The <code class="prettyprint">tx</code> Object</h3>
 
-<p>The <code class="prettyprint">tx</code> object must contain a <code class="prettyprint">to</code> property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A <code class="prettyprint">gas</code> property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The <code class="prettyprint">gas</code> property represents the gas limit to use when executing the transaction. For Transaction API functions that have the <code class="prettyprint">payable</code> modifier in Augur&rsquo;s Solidity smart contracts, a <code class="prettyprint">value</code> property must also be specified, which is the amount of <a href="#atto-prefix">attoETH</a> to send to the function. The other properties that can be specified in the <code class="prettyprint">tx</code> object are discussed in the <a href="#using-transact-directly">Using Transact Directly</a> section.</p>
+<p>The <code class="prettyprint">tx</code> object must contain a <code class="prettyprint">to</code> property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A <code class="prettyprint">gas</code> property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The <code class="prettyprint">gas</code> property represents the gas limit to use when executing the transaction. For Transaction API functions that have the <code class="prettyprint">payable</code> modifier in Augur&rsquo;s Solidity smart contracts, a <code class="prettyprint">value</code> property must also be specified, which is the amount of <a href="#atto-prefix">attoETH</a> to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the <code class="prettyprint">send</code> property as <code class="prettyprint">false</code>.</p>
+
+<p>The other properties that can be specified in the <code class="prettyprint">tx</code> object are discussed in the <a href="#using-transact-directly">Using Transact Directly</a> section.</p>
 
 <h3 id="the-meta-object">The <code class="prettyprint">meta</code> Object</h3>
 
@@ -7150,11 +7170,15 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h4 id="onsuccess-successresponse">onSuccess(successResponse)</h4>
 
-<p>Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero <code class="prettyprint">blockHash</code> value. <code class="prettyprint">successResponse</code> is structured the same way as <code class="prettyprint">eth_getTransactionByHash</code> responses (see code example for details), with the addition of a <code class="prettyprint">callReturn</code> field which contains the contract method&rsquo;s return value.</p>
+<p>Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero <code class="prettyprint">blockHash</code> value. <code class="prettyprint">successResponse</code> is structured the same way as <code class="prettyprint">eth_getTransactionByHash</code> responses (see code example for details), with the addition of a <code class="prettyprint">callReturn</code> field which contains the contract function&rsquo;s return value.</p>
 
 <h4 id="onfailed-failedresponse">onFailed(failedResponse)</h4>
 
 <p>Fires if the transaction is unsuccessful. <code class="prettyprint">failedResponse</code> has <code class="prettyprint">error</code> (error code) and <code class="prettyprint">message</code> (error description) fields, describing the way in which the transaction failed.</p>
+
+<h3 id="important-note-when-calling-transaction-functions">Important Note When Calling Transaction Functions</h3>
+
+<p>Developers will need to grant the Augur.sol contract approval to spend the ERC-20 tokens in its codebase (such as ReputationToken and ShareToken) before many of the Transaction API functions can be called. This can be done by calling the <code class="prettyprint">augur.api.ReputationToken.approve</code> and <code class="prettyprint">augur.api.ShareToken.approve</code> functions, as shown to the right. <b>Attempting to call many of Augur&rsquo;s Transaction API functions without doing this first will result in these transactions failing.</b></p>
 
 <h2 id="using-transact-directly">Using Transact Directly</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Example using `augur.rpc.transact` directly</span>
@@ -7188,14 +7212,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="nx">augur</span><span class="p">.</span><span class="nx">rpc</span><span class="p">.</span><span class="nx">transact</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span> <span class="nx">privateKeyOrSigner</span><span class="p">,</span> <span class="nx">accountType</span><span class="p">,</span> <span class="nx">onSent</span><span class="p">,</span> <span class="nx">onSuccess</span><span class="p">,</span> <span class="nx">onFailed</span><span class="p">);</span>
 <span class="c1">// example onSent output:</span>
 <span class="nx">Transaction</span> <span class="nx">sent</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">callReturn</span><span class="p">:</span> <span class="s2">"10000000006000000"</span><span class="p">,</span>
+  <span class="nl">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="nx">hash</span><span class="p">:</span> <span class="s2">"0x269011fe4ed9c7370f8e8237c525062988e8fcce485d93a1a6a419bb3a8e70d3"</span>
 <span class="p">}</span>
 <span class="c1">// example onSuccess output:</span>
 <span class="nx">Transaction</span> <span class="nx">successful</span><span class="p">:</span> <span class="p">{</span>
   <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0x5090c1a25a2accf4cb47a1d99f4fa4215146ac29402688ad3e554169af332e4c"</span><span class="p">,</span>
   <span class="nx">blockNumber</span><span class="p">:</span> <span class="mi">1348278</span><span class="p">,</span>
-  <span class="nx">callReturn</span><span class="p">:</span> <span class="s2">"10000000006000000"</span><span class="p">,</span>
+  <span class="nx">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="k">from</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
   <span class="nx">gas</span><span class="p">:</span> <span class="s2">"0x2fd618"</span><span class="p">,</span>
   <span class="nx">gasFees</span><span class="p">:</span> <span class="s2">"0.001882121837379"</span><span class="p">,</span>
@@ -7308,7 +7332,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value.</li>
 </ul>
 
 <h2 id="cancel-order-tx-api">Cancel Order Tx API</h2>
@@ -7370,7 +7394,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Order was successfully canceled, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Order was successfully canceled, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="claim-trading-proceeds-tx-api">Claim Trading Proceeds Tx API</h2>
@@ -7448,7 +7472,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the trading proceeds were successfully canceled, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the trading proceeds were successfully canceled, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-claimtradingproceeds-claimtradingproceeds-p">augur.api.ClaimTradingProceeds.claimTradingProceeds(p)</h3>
@@ -7486,7 +7510,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the trading proceeds were successfully canceled, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the trading proceeds were successfully canceled, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="complete-sets-tx-api">Complete Sets Tx API</h2>
@@ -7571,7 +7595,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Complete Set was successfully purchased, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Complete Set was successfully purchased, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-completesets-publicsellcompletesets-p">augur.api.CompleteSets.publicSellCompleteSets(p)</h3>
@@ -7611,7 +7635,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Complete Set was successfully purchased, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Complete Set was successfully purchased, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="create-order-tx-api">Create Order Tx API</h2>
@@ -7697,7 +7721,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(string) Order ID of the newly-created Order, as a 32-byte hexadecimal value. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(string) Order ID of the newly-created Order, as a 32-byte hexadecimal value.</li>
 </ul>
 
 <h2 id="dispute-crowdsourcer-tx-api">Dispute Crowdsourcer Tx API</h2>
@@ -7784,7 +7808,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the transaction successfully completed without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the transaction successfully completed without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-disputecrowdsourcer-redeem-p">augur.api.DisputeCrowdsourcer.redeem(p)</h3>
@@ -7826,7 +7850,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">redeemer</code>&rsquo;s Staked REP was redeemed without errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if <code class="prettyprint">redeemer</code>&rsquo;s Staked REP was redeemed without errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-disputecrowdsourcer-withdrawinemergency-p">augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)</h3>
@@ -7861,7 +7885,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="fee-window-tx-api">Fee Window Tx API</h2>
@@ -7953,7 +7977,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were successfully purchased, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were successfully purchased, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-redeem-p">augur.api.FeeWindow.redeem(p)</h3>
@@ -7983,7 +8007,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or <code class="prettyprint">false</code> otherwise. If <code class="prettyprint">_sender</code> does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return <code class="prettyprint">true</code>, as long as no errors occured. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or <code class="prettyprint">false</code> otherwise. If <code class="prettyprint">_sender</code> does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return <code class="prettyprint">true</code>, as long as no errors occured.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-withdrawinemergency-p">augur.api.FeeWindow.withdrawInEmergency(p)</h3>
@@ -8018,7 +8042,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="fill-order-tx-api">Fill Order Tx API</h2>
@@ -8190,7 +8214,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully migrated to the new Child Universe without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully migrated to the new Child Universe without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-redeem-p">augur.api.InitialReporter.redeem(p)</h3>
@@ -8219,7 +8243,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the <a href="#initial-reporter">Initial Reporter</a> without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the <a href="#initial-reporter">Initial Reporter</a> without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-initialreporter-transferownership-p">augur.api.InitialReporter.transferOwnership(p)</h3>
@@ -8290,7 +8314,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully withdrawn from the <code class="prettyprint">initialReporter</code> contract without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the REP was successfully withdrawn from the <code class="prettyprint">initialReporter</code> contract without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="mailbox-tx-api">Mailbox Tx API</h2>
@@ -8861,7 +8885,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Reputation Tokens were withdrawn from <code class="prettyprint">market</code> without any errors, or <code class="prettyprint">false</code> otherwise. (NOTE: The return value cannot be obtained reliably when calling externally.)</li>
+<li>(boolean) <code class="prettyprint">true</code> if the Reputation Tokens were withdrawn from <code class="prettyprint">market</code> without any errors, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h2 id="reputation-token-tx-api">Reputation Token Tx API</h2>
@@ -10235,7 +10259,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10264,7 +10289,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10293,7 +10319,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10322,7 +10349,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10351,7 +10379,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10380,7 +10409,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10409,7 +10439,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10438,7 +10469,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the current Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the current Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10468,7 +10500,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10497,7 +10530,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10526,7 +10560,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10555,7 +10590,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
