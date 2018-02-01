@@ -1002,7 +1002,7 @@ augur.markets.getMarketsInfo({
 });
 // example output:
 [
-  {
+  0: {
     id: "0x0000000000000000000000000000000000000001",
     universe: "0x000000000000000000000000000000000000000b",
     marketType: "categorical",
@@ -1018,6 +1018,7 @@ augur.markets.getMarketsInfo({
     reportingFeeRate: 0.02,
     marketCreatorFeeRate: 0.01,
     marketCreatorFeesCollected: 0,
+    initialReportSize: null,
     category: "test category",
     tags: ["test tag 1", "test tag 2"],
     volume: 0,
@@ -1076,7 +1077,7 @@ augur.markets.getMarketsInfo({
       name: "outcome 7",
     }],
   },
-  {
+  1: {
     id: "0x0000000000000000000000000000000000000002",
     universe: "0x000000000000000000000000000000000000000b",
     marketType: "binary",
@@ -1362,7 +1363,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>)
+* (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>) Array of MarketInfo objects.
 
 ### augur.markets.getUnclaimedMarketCreatorFees
 
@@ -1408,6 +1409,22 @@ augur.reporting.getDisputeTokens({
     claimed: false,
     reportingState: "FIRST_REPORTING",
   },
+}
+
+augur.reporting.getFeeWindowCurrent({
+  universe: "0x000000000000000000000000000000000000000b",
+}, function (error, result) {
+  console.log(result);
+});
+// example output:
+{
+  endBlockNumber: null,
+  endTime: 1511657473,
+  feeWindow: "0x2000000000000000000000000000000000000000",
+  feeWindowID: 457,
+  startBlockNumber: 1500001,
+  startTime: 1509065473,
+  universe: "0x000000000000000000000000000000000000000b",
 }
 
 // NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
@@ -1523,6 +1540,25 @@ This function will fail if:
 #### **Returns:**
 
 * (Array.&lt;<a href="#DisputeToken">DisputeToken</a>>) Dispute Token details, keyed by Dispute Token ID.
+
+### augur.reporting.getFeeWindowCurrent(p, callback)
+
+Returns information about the current [Fee Window](#fee-window).
+
+This function will fail if:
+
+* A connection to an [Augur Node](#augur-node) has not been established.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  **Properties:**
+    * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.
+* **`callback`** (function) Called after the Fee Windows have been retrieved.
+
+#### **Returns:**
+
+* (<a href="#FeeWindow">FeeWindow</a>) Object containing information about the current Fee Window.
 
 <!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
 ### augur.reporting.getFeeWindowsWithUnclaimedFees(p, callback)

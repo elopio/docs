@@ -101,6 +101,19 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`tags`** (Array.&lt;string>|null) Keywords used to tag the Market (maximum of 2).
 * **`longDescription`** (string|null) Additional information not included in description of the Market.
 
+<a name="FeeWindow"></a>
+### FeeWindow  (Object)
+
+#### **Properties:** 
+* **`feeWindow`** (string) Ethereum contract address of the Fee Window.
+* **`feeWindowID`** (number) Unique numerical ID of the Fee Window.
+* **`startBlockNumber`** (number) Block in which the Fee Window became active.
+* **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
+* **`startTime`** (number) Unix timestamp for when the Fee Window begins.
+* **`endBlockNumber`** (null|number) Block in which the Fee Window became inactive.
+* **`endTime`** (number) Unix timestamp for when the Fee Window begins.
+* **`fees`** (number|string) Amount of attoETH collected in Settlement Fees that has been added to the Reporting Fee Pool.
+
 <a name="Keystore"></a>
 ### Keystore  (Object)
 
@@ -161,6 +174,7 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
 * **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
 * **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
+* **`initialReportSize`** (number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
 * **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
@@ -172,7 +186,7 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`description`** (string) Description of the Market.
 * **`extraInfo`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).
 * **`designatedReporter`** (string) Ethereum address of the Market's designated report, as a hexadecimal string.
-* **`designatedReportStake`** (number) Amount of ETH the designated reporter staked on the Outcome submitted in the designated report.
+* **`designatedReportStake`** (number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
 * **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
 * **`numTicks`** (number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
 * **`consensus`** (number|null) Consensus Outcome for the Market.
