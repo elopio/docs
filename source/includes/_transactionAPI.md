@@ -4,16 +4,30 @@ Transaction API
 
 ```javascript
 // Transaction API example:
-var reputationTokenAddress = "0x2a73cec0b62fcb8c3120bc80bdb2b1351c8c2d1e"; // Ethereum contract address for the REP token
-var transferTarget = "0xea674fdde714fd979de3edf0f56aa9716b898ec8"; // Ethereum address of the account to send REP tokens to
-var attotokens = "100000000000000000000"; // 1000.00 REP
+
+// Approving the Augur.sol contract as a spender allows Augur to spend REP 
+// on behalf of the address calling `augur.api.ReputationToken.approve`.
+// This must be done before calling many of the Transaction API functions,
+// such as `augur.api.CreateOrder.publicCreateOrder`.
+
+// The Ethereum contract addresses for Augur.sol and ReputationToken.sol 
+// can be obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
+var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
+
+// Amount of REP tokens to approve the Augur.sol contract to spend on this Ethereum account's behalf.
+// This example sets the amount to the maximum possible value.
+var _attoRepTokens = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; 
 
 // The Augur API is organized by Contract and then Method like so:
 // augur.api.<Contract>.<Method>(<argument object>);
-augur.api.ReputationToken.transfer({
-  _to: transferTarget,
-  _value: attotokens,
-  tx: { to: reputationTokenAddress },
+augur.api.ReputationToken.approve({
+  _spender: _augurContractAddress,
+  _value: _attoRepTokens,
+  tx: { 
+    to: reputationTokenAddress,
+    gas: "0x632ea0" 
+  },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -22,29 +36,30 @@ augur.api.ReputationToken.transfer({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
+
 // example onSent output:
 {
-  callReturn: '100000000000000000000',
-  hash: '0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6'
+  callReturn: null,
+  hash: '0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4'
 }
 // example onSuccess output:
 {
-  blockHash: "0xdc5e31404be698a6866fbe7d7cf435a2c6fab7deb3acf41d6c9bb981a2630fed",
-  blockNumber: 1330897,
-  callReturn: "100000000000000000000",
-  from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  gas: "0x2fd618",
-  gasFees: "0.00081266",
-  gasPrice: "0x4a817c800",
-  hash: "0x915f8f0b13244b0dd9b7377b252d9245ef0fc109c82931a87410d1bdad671fe6",
-  input: "0x39d26051",
-  nonce: "0x0",
-  r: "0x706eb8aee04faf21fd6da949f946df5fa118da35a619560af9b81fc05054715c",
-  s: "0x60d3125aa3b1daabd37618fb80232037cdaef9c87a8d262826880f0e57fdb0d3",
-  timestamp: 1512018567,
-  to: "0xfc6bba7d664e8cc242857f069e9fb1e7c25ecb44",
+  blockHash: "0xa8533a3ae037ae30db81673a7275dd5f8eaadc52c0309f418070369cb58a1642",
+  blockNumber: 1692844,
+  callReturn: null,
+  from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  gas: "0x632ea0",
+  gasFees: "0.00018364",
+  gasPrice: "0x12a05f200",
+  hash: "0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4",
+  input: "0x095ea7b3000000000000000000000000852684b374fe03ab77d06931f1b2831028fd58f5ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  nonce: "0x87",
+  r: "0x804b2a14352d3fa9844c296eb8b9a6b8fed45ca5d56550d1eb558c6571abbaf4",
+  s: "0x3793c21fd315e14950b48a2200e8368ca0d25a2b6291eca9b5bb19753026859f",
+  timestamp: 1517462391,
+  to: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
   transactionIndex: "0x1",
-  v: "0x2c",
+  v: "0x2b",
   value: "0x0"
 }
 // example onFailed output:
@@ -66,7 +81,9 @@ All Transaction API methods accept a single object argument, containing the foll
 
 ### The `tx` Object
 
-The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. The other properties that can be specified in the `tx` object are discussed in the [Using Transact Directly](#using-transact-directly) section.
+The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the `send` property as `false`.
+
+The other properties that can be specified in the `tx` object are discussed in the [Using Transact Directly](#using-transact-directly) section.
 
 ### The `meta` Object
 
@@ -82,11 +99,15 @@ Fires when the initial `eth_sendTransaction` response is received.  If the trans
 
 #### onSuccess(successResponse)
 
-Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero `blockHash` value. `successResponse` is structured the same way as `eth_getTransactionByHash` responses (see code example for details), with the addition of a `callReturn` field which contains the contract method's return value.
+Fires when the transaction is successfully incorporated into a block and added to the blockchain, as indicated by a nonzero `blockHash` value. `successResponse` is structured the same way as `eth_getTransactionByHash` responses (see code example for details), with the addition of a `callReturn` field which contains the contract function's return value.
 
 #### onFailed(failedResponse)
 
 Fires if the transaction is unsuccessful. `failedResponse` has `error` (error code) and `message` (error description) fields, describing the way in which the transaction failed.
+
+### Important Note When Calling Transaction Functions
+
+Developers will need to grant the Augur.sol contract approval to spend the ERC-20 tokens in its codebase (such as ReputationToken and ShareToken) before many of the Transaction API functions can be called. This can be done by calling the `augur.api.ReputationToken.approve` and `augur.api.ShareToken.approve` functions, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
 
 Using Transact Directly
 -----------------------
@@ -122,14 +143,14 @@ var onFailed = function (failedResponse) { console.error("Transaction failed: ",
 augur.rpc.transact(tx, privateKeyOrSigner, accountType, onSent, onSuccess, onFailed);
 // example onSent output:
 Transaction sent: {
-  callReturn: "10000000006000000",
+  callReturn: null,
   hash: "0x269011fe4ed9c7370f8e8237c525062988e8fcce485d93a1a6a419bb3a8e70d3"
 }
 // example onSuccess output:
 Transaction successful: {
   blockHash: "0x5090c1a25a2accf4cb47a1d99f4fa4215146ac29402688ad3e554169af332e4c",
   blockNumber: 1348278,
-  callReturn: "10000000006000000",
+  callReturn: null,
   from: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   gas: "0x2fd618",
   gasFees: "0.001882121837379",
@@ -2638,7 +2659,8 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2657,7 +2679,8 @@ Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bon
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2676,7 +2699,8 @@ Gets the amount of Staked [REP](#rep) the [Designated Reporter](#designated-repo
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2695,7 +2719,8 @@ Gets the estimated amount of [attoETH](#atto-prefix) required to create a [Marke
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2714,7 +2739,8 @@ Gets the number by which the total payout amount for a [Market](#market) is divi
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2733,7 +2759,8 @@ Gets the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bon
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2752,7 +2779,8 @@ Gets the amount the [Market Creator](#market-creator) must pay for the [Validity
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2771,7 +2799,8 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that is curr
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the current Fee Window (which will not use any gas). When set to `true`, this function will create the current Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2791,7 +2820,8 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
     * **`p._timestamp`**  (number|string) Unix timestamp that falls within the desired Fee Window, as an unsigned integer or stringified unsigned integer.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2810,7 +2840,8 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2829,7 +2860,8 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
@@ -2848,7 +2880,8 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that was act
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.gas`** (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.gas`** (number|string) &lt;optional> Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
