@@ -7320,7 +7320,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7382,7 +7382,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7405,8 +7405,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">claimTradingProceedsAddress</span> <span class="o">=</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_numberOfShares</span> <span class="o">=</span> <span class="s2">"50000000000000000000"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_numberOfShares</span> <span class="o">=</span> <span class="s2">"0x2b5e3af16b1880000"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateProceeds</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
@@ -7454,13 +7454,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to calculate trading proceeds, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (number|string) Quantity of attoshares for which to calculate trading proceeds, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7498,7 +7498,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7521,13 +7521,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">completeSetsAddress</span> <span class="o">=</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="s2">"50000000000000000000"</span><span class="p">;</span> <span class="c1">// 50.0 attoshares</span>
+<span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="s2">"0x2b5e3af16b1880000"</span><span class="p">;</span> <span class="c1">// 50.0 shares</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CompleteSets</span><span class="p">.</span><span class="nx">publicBuyCompleteSets</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">completeSetsAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s2">"100000000000000000"</span><span class="p">,</span> 
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -7577,13 +7577,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to purchase of each Outcome, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to purchase of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to buy a <a href="#complete-set">Complete Set</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy a <a href="#complete-set">Complete Set</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7618,12 +7618,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (number|string) Number of Shares to sell of each Outcome, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to sell of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7696,11 +7696,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (number|string) Type of Order to create, as an unsigned integer or stringified unsigned integer (&ldquo;1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;2&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
-<li><strong><code class="prettyprint">p._attoshares</code></strong> (number|string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order to create, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._attoshares</code></strong> (string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._displayPrice</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Market in which to place the Order, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_betterOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for <code class="prettyprint">_worseOrderId</code> can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -7708,8 +7708,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to create the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7796,7 +7796,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7838,7 +7838,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7873,7 +7873,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7892,7 +7892,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">feeWindowAddress</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x64"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">buy</span><span class="p">({</span>
   <span class="na">_attotokens</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
@@ -7960,12 +7960,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._attotokens</code></strong> (number|string) Number of Participation Tokens to purchase, in <a href="#atto-prefix">attotokens</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._attotokens</code></strong> (string) Number of Participation Tokens to purchase, in <a href="#atto-prefix">attotokens</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -7995,7 +7995,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8030,7 +8030,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8053,7 +8053,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">fillOrderAddress</span> <span class="o">=</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_amountFillerWants</span> <span class="o">=</span> <span class="s2">"10000000000000000000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
+<span class="kd">var</span> <span class="nx">_amountFillerWants</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
 <span class="kd">var</span> <span class="nx">_tradeGroupId</span> <span class="o">=</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000002"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FillOrder</span><span class="p">.</span><span class="nx">publicFillOrder</span><span class="p">({</span>
@@ -8062,7 +8062,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">fillOrderAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s2">"100000000000000000"</span><span class="p">,</span> 
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -8094,14 +8094,14 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._orderID</code></strong> (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (number|string) Number of Shares to Fill, in attoshares, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to Fill, in attoshares, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupID</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to fill the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to fill the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8202,7 +8202,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8231,7 +8231,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8267,7 +8267,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8302,7 +8302,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8391,7 +8391,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8426,7 +8426,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8462,7 +8462,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8481,9 +8481,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Transaction API Examples:</span>
 <span class="kd">var</span> <span class="nx">marketAddress</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
+<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">];</span>
 <span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_amount</span> <span class="o">=</span> <span class="s2">"0x64"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">contribute</span><span class="p">({</span>
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
@@ -8515,8 +8515,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">_payoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
-<span class="kd">var</span> <span class="nx">_invalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">doInitialReport</span><span class="p">({</span>
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="nx">_payoutNumerators</span><span class="p">,</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="nx">_invalid</span><span class="p">,</span>
@@ -8619,7 +8617,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8655,7 +8653,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8694,7 +8692,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8731,7 +8729,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8767,7 +8765,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8802,7 +8800,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8838,7 +8836,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -8873,7 +8871,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9028,12 +9026,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoREP to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9062,7 +9060,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9095,12 +9093,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._destination</code></strong>  (string) Ethereum address of the destination <a href="#reputation-token">Reputation Token</a> contract to migrate REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._attotokens</code></strong>  (number|string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._attotokens</code></strong>  (string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9132,12 +9130,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9171,12 +9169,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p._from</code></strong>  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9205,7 +9203,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9242,7 +9240,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9266,7 +9264,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="kd">var</span> <span class="nx">_spender</span> <span class="o">=</span> <span class="s2">"0x01f50356c280cd886dd058210937160c73700a4b"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_from</span> <span class="o">=</span> <span class="s2">"0x1a05071893b764109f0bbc5b75d78e3e38b69ab3"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"100000000000000000000"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x56bc75e2d63100000"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
   <span class="na">_spender</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
@@ -9338,12 +9336,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoshares to allow <code class="prettyprint">_spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9375,12 +9373,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9414,12 +9412,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p._from</code></strong>  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._value</code></strong>  (number|string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9442,9 +9440,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">tradeAddress</span> <span class="o">=</span> <span class="s2">"0x0dec7fd04933b8673cef99b64978113065b03926"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_fxpAmount</span> <span class="o">=</span> <span class="s2">"10000000000000000000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
-<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"500000000000000000"</span><span class="p">;</span> <span class="c1">// 0.5</span>
+<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_fxpAmount</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
+<span class="kd">var</span> <span class="nx">_price</span> <span class="o">=</span> <span class="s2">"0x6f05b59d3b20000"</span><span class="p">;</span> <span class="c1">// 0.5</span>
 <span class="kd">var</span> <span class="nx">_betterOrderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_worseOrderId</span> <span class="o">=</span> <span class="s2">"0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_tradeGroupId</span> <span class="o">=</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000003"</span><span class="p">;</span>
@@ -9458,7 +9456,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupID</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s2">"100000000000000000"</span><span class="p">,</span> 
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -9480,7 +9478,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s2">"100000000000000000"</span><span class="p">,</span> 
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -9493,7 +9491,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTrade</span><span class="p">({</span>
-  <span class="na">_direction</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
@@ -9503,7 +9501,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="s2">"100000000000000000"</span><span class="p">,</span> 
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -9516,7 +9514,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTakeBestOrder</span><span class="p">({</span>
-  <span class="na">_direction</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x2"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
@@ -9541,7 +9539,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-trade-publicbuy-p">augur.api.Trade.publicBuy(p)</h3>
 
-<p>Buys <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Buys <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">_fxpAmount</code> of <a href="#atto-prefix">attoShares</a> at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9550,9 +9548,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy Shares, in attoETH, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -9560,8 +9558,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9578,7 +9576,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-trade-publicsell-p">augur.api.Trade.publicSell(p)</h3>
 
-<p>Sells <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">_fxpAmount</code> of Shares at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Sells <code class="prettyprint">_fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">_outcome</code> of <a href="#market">Market</a> <code class="prettyprint">market</code> at <code class="prettyprint">price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">_fxpAmount</code> of <a href="#atto-prefix">attoShares</a> at <code class="prettyprint">_price</code>. The parameters <code class="prettyprint">_betterOrderId</code> and <code class="prettyprint">worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">_price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9587,9 +9585,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to sell Shares, in attoETH, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, in <a href="#atto-prefix">attoshares</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -9597,8 +9595,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="#atto-prefix">attoShares</a> to sell, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9623,11 +9621,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. (&ldquo;1&rdquo; for buying or &ldquo;2&rdquo; for selling.)</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x1&rdquo; for buying or &ldquo;0x2&rdquo; for selling.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -9635,8 +9633,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, or number of <a href="#atto-prefix">attoShares</a> to sell, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, or number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9661,11 +9659,11 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (number|string) Direction of the trade, as an unsigned integer or stringified unsigned integer. (&ldquo;1&rdquo; for buying or &ldquo;2&rdquo; for selling.)</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x1&rdquo; for buying or &ldquo;0x2&rdquo; for selling.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (number|string) Outcome for which to place the Order, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (number|string) Amount of Shares to buy/sell, in <a href="#atto-prefix">attoshares</a>, as an unsigned integer or stringified unsigned integer</li>
-<li><strong><code class="prettyprint">p._price</code></strong>  (number|string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
@@ -9673,7 +9671,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9734,7 +9732,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -9759,7 +9757,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// The cost of creating a Market (in attoETH) can be obtained by calling</span>
 <span class="c1">// the function `augur.createMarket.getMarketCreationCost` and multiplying</span>
 <span class="c1">// the `etherRequiredToCreateMarket` value that's returned by 10^18 .</span>
-<span class="kd">var</span> <span class="nx">ethCostToCreateMarket</span> <span class="o">=</span> <span class="mi">25000000000000000</span><span class="p">;</span> 
+<span class="kd">var</span> <span class="nx">ethCostToCreateMarket</span> <span class="o">=</span> <span class="s2">"0x58d15e17628000"</span><span class="p">;</span> 
 <span class="c1">// Use the Cash contract for the `denominationToken` when creating new Markets.</span>
 <span class="kd">var</span> <span class="nx">cashAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
@@ -9768,8 +9766,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span>
 <span class="p">};</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createBinaryMarket</span><span class="p">({</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546329600</span><span class="p">,</span>
-  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5c2b1e00"</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
   <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
   <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
   <span class="na">_topic</span><span class="p">:</span> <span class="s2">"space"</span><span class="p">,</span>
@@ -9800,8 +9798,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createCategoricalMarket</span><span class="p">({</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1540875600</span><span class="p">,</span>
-  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5bd7e550"</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
   <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
   <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
   <span class="na">_outcomes</span><span class="p">:</span> <span class="p">[</span><span class="s2">"outcome1"</span><span class="p">,</span><span class="s2">"outcome2"</span><span class="p">],</span>
@@ -9826,7 +9824,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">_parentPayoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span> <span class="p">];</span>
+<span class="kd">var</span> <span class="nx">_parentPayoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">];</span>
 <span class="kd">var</span> <span class="nx">_parentInvalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createChildUniverse</span><span class="p">({</span>
   <span class="na">_parentPayoutNumerators</span><span class="p">:</span> <span class="nx">_parentPayoutNumerators</span><span class="p">,</span>
@@ -9850,13 +9848,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createScalarMarket</span><span class="p">({</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1530507600</span><span class="p">,</span>
-  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5b39b150"</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
   <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
   <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
-  <span class="na">_minPrice</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
-  <span class="na">_maxPrice</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
-  <span class="na">_numTicks</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="na">_minPrice</span><span class="p">:</span> <span class="s2">"-10"</span><span class="p">,</span>
+  <span class="na">_maxPrice</span><span class="p">:</span> <span class="s2">"0x78"</span><span class="p">,</span>
+  <span class="na">_numTicks</span><span class="p">:</span> <span class="s2">"0xa"</span><span class="p">,</span>
   <span class="na">_topic</span><span class="p">:</span> <span class="s2">"temperature"</span><span class="p">,</span>
   <span class="na">_description</span><span class="p">:</span> <span class="s2">"High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018"</span><span class="p">,</span>
   <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
@@ -10079,8 +10077,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
@@ -10096,8 +10094,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.<br></li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10124,8 +10122,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
 <li><strong><code class="prettyprint">p._outcomes</code></strong>  (Array.&lt;string&gt;) Array of names for all possible outcomes for the Market event.</li>
@@ -10143,8 +10141,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_CATEGORICAL_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_CATEGORICAL_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10182,7 +10180,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10207,13 +10205,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number|string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (number|string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in <a href="atto-prefix">attoETH</a>) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
-<li><strong><code class="prettyprint">p._minPrice</code></strong>  (number|string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._maxPrice</code></strong>  (number|string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
-<li><strong><code class="prettyprint">p._numTicks</code></strong>  (number|string) <a href="#number-of-ticks">Number of Ticks</a> for the Market, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._minPrice</code></strong>  (string) <a href="#minimum-display-price">Minimum Display Price</a> for the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._maxPrice</code></strong>  (string) <a href="#maximum-display-price">Maximum Display Price</a> for the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._numTicks</code></strong>  (string) <a href="#number-of-ticks">Number of Ticks</a> for the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
 <li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market event.</li>
 <li><strong><code class="prettyprint">p._extraInfo</code></strong>  (string) Stringified JSON object. (See the explanation above for more details.)
@@ -10227,8 +10225,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (number|string) Number of Wei required to create the Market, as an unsigned integer or stringified unsigned integer. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_SCALAR_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10258,7 +10256,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10288,7 +10286,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10318,7 +10316,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10348,7 +10346,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10378,7 +10376,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10408,7 +10406,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10438,7 +10436,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will return a cached value (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will re-calculate the value, cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10468,7 +10466,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the current Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the current Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10493,13 +10491,13 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._timestamp</code></strong>  (number|string) Unix timestamp that falls within the desired Fee Window, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p._timestamp</code></strong>  (string) Unix timestamp that falls within the desired Fee Window, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10529,7 +10527,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10559,7 +10557,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10589,7 +10587,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to <code class="prettyprint">true</code>, this function will create the Fee Window (if it doesn&rsquo;t exist yet), cache it, and return it (which will use gas).</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) &lt;optional&gt; Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -10620,7 +10618,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (number|string) Gas limit to use when submitting transaction, as an unsigned integer or stringified unsigned integer.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
