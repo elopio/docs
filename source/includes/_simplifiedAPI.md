@@ -2264,6 +2264,10 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
     * **`p.onFailed`**  (function) Called if any part of the trade fails.
 
+#### **Returns:**
+
+* Description pending.
+
 ### augur.trading.simulateTrade(p, callback)
 
 Determines the sequence of makes/takes that will be executed to [Fill](#fill-order) the specified [Order](#order), and returns the user's projected balances and fees paid after this sequence is completed. Note: This function automatically normalizes [Share](#share) prices, so "display prices" can be passed in directly for `minPrice`, `maxPrice`, and `price`.
@@ -2290,7 +2294,9 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
 
 ### augur.trading.tradeUntilAmountIsZero(p, callback)
 
-* Description pending.
+If `p.doNotCreateOrders` is set to `true`, this function will place trades until all [Orders](#order) equal to or better than the specified price limit are removed from the [Order Book](#order-book).
+
+If `p.doNotCreateOrders` is set to `false`, this function will place trades until the user's request has been fulfilled. This is done by attempting to trade until all Orders equal to or better than the specified limit price are removed from the Order Book and then creating a new Order with whatever amount is remaining in the user's request.
 
 #### **Parameters:**
 
@@ -2308,3 +2314,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called when the full trade completes successfully.
     * **`p.onFailed`**  (function) Called if any part of the trade fails.
+
+#### **Returns:**
+
+* Description pending.
