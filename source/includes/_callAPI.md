@@ -1493,8 +1493,8 @@ augur.api.Orders.getBestOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (error, bestOrderID) { 
-  console.log(bestOrderID); 
+}, function (error, bestOrderId) { 
+  console.log(bestOrderdD); 
 });
 // example output:
 "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"
@@ -1582,8 +1582,8 @@ augur.api.Orders.getVolume({
 
 augur.api.Orders.getWorseOrderId({ 
   _orderId: "0x4b538f4de2517f7d7bbb227161981c51c40bf725da9941b3dc02e6c14cafd1f1" 
-}, function (error, worseOrderID) { 
-  console.log(worseOrderID); 
+}, function (error, worseOrderId) { 
+  console.log(worseOrderId); 
 });
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"
@@ -1592,8 +1592,8 @@ augur.api.Orders.getWorstOrderId({
   _type: _type,
   _market: _market,
   _outcome: _outcome
-}, function (error, worstOrderID) { 
-  console.log(worstOrderID); 
+}, function (error, worstOrderId) { 
+  console.log(worstOrderId); 
 });
 // example output:
 "0x9a8d5523ed521813533d1f8469f5040fa1404fcf470b9da43bccfe38c80ad035"

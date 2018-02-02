@@ -66,7 +66,7 @@ A Designated Report occurs when a [Designated Reporter](#designated-reporter) [S
 
 ## Designated Report No-Show Bond
 
-[Market Creators](#market-creator) must put up a Designated Report No-Show Bond (or No-Show Bond, for brevity) when creating a new [Market](#market). The No-Show Bond is comprised of two parts: the [No-Show Gas Bond](#designated-report-no-show-gas-bond) and the [No-Show REP Bond](#designated-report-no-show-rep-bond). If the [Designated Reporter](#designated-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) then the No-Show Bond is returned to the Market Creator. Otherwise, the No-Show Bond is given to the [First Public Reporter](#first-public-reporter) to cover the [Stake](#stake-token) in their Reported [Outcome](#outcome), and potentially their gas cost for submitting the report (if the Outcome they staked on becomes the [Final Outcome](#final-outcome)).
+[Market Creators](#market-creator) must put up a Designated Report No-Show Bond (or No-Show Bond, for brevity) when creating a new [Market](#market). The No-Show Bond is comprised of two parts: the [No-Show Gas Bond](#designated-report-no-show-gas-bond) and the [No-Show REP Bond](#designated-report-no-show-rep-bond). If the [Designated Reporter](#designated-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase) then the No-Show Bond is returned to the Market Creator. Otherwise, the No-Show Bond is given to the [First Public Reporter](#first-public-reporter) to cover the Stake in their Reported [Outcome](#outcome), and potentially their gas cost for submitting the report (if the Outcome they staked on becomes the [Final Outcome](#final-outcome)).
 
 <!-- TODO: Add explanation for how the exact Designated Report No-Show Gas Bond is calculated. (Need to verify if formula is gas to report * avg gas price in last window * 2) -->
 ## Designated Report No-Show Gas Bond
@@ -173,7 +173,7 @@ The First Public Reporter is any user who [Stakes](#first-public-reporter-stake)
  
 ## First Public Reporter Stake
 
-When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and the [First Public Reporter](#first-public-reporter) submits a [Report](#report) instead, the [No-Show REP Bond](#designated-report-no-show-rep-bond) gets used to [Stake](#stake-token) on a [Tentative Outcome](#tentative-outcome). If that Tentative Outcome becomes the [Final Outcome](#final-outcome), the First Public Reporter will receive the No-Show REP Bond back.
+When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and the [First Public Reporter](#first-public-reporter) submits a [Report](#report) instead, the [No-Show REP Bond](#designated-report-no-show-rep-bond) gets used to Stake on a [Tentative Outcome](#tentative-outcome). If that Tentative Outcome becomes the [Final Outcome](#final-outcome), the First Public Reporter will receive the No-Show REP Bond back.
 
 ## Fork
 
@@ -370,10 +370,6 @@ Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Sett
 ## Share
 
 A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send ETH to the Market to complete an [Order](#order). Shares are [Settled](#settlement) (destroyed) when a Complete Set is sold back to the Market.
-
-## Stake Token
-
-A Stake Token is used to represent the amount of Staked [REP](#rep) a [Reporter](#reporter) has on an [Outcome](#outcome) for their [Report](#report). Stake Tokens have a 1:1 cost ratio to REP, so 100 [attoREP](#atto-prefix) would buy you 100 [attoStakeTokens](#atto-prefix).
 
 ## Tentative Outcome
 
