@@ -743,6 +743,15 @@ augur.createMarket.getMarketCreationCostBreakdown({
   designatedReportNoShowReputationBond: "0.174840291341145834",
   targetReporterGasCosts: "0.015"
 }
+
+augur.createMarket.getMarketFromCreateMarketReceipt(
+  "0xa50c02cf3de82139fc6f66a9c1726f59b93b4a94725bddbf9ecae0c38edc4f06", 
+  function (error, result) {
+    console.log(result);
+  }
+);
+// example output: 
+"0x5e05e281a4564077985debdb91159a825a6774d3"
 ```
 ### augur.createMarket.createBinaryMarket(p)
 
@@ -840,6 +849,19 @@ Note: This function will send a transaction if needed to create the current [Fee
 #### **Returns:**
 
 * (<a href="#MarketCreationCostBreakdown">MarketCreationCostBreakdown</a>) Cost breakdown for creating a new Market.
+
+### augur.createMarket.getMarketFromCreateMarketReceipt(transactionHash, callback)
+
+Uses a transaction hash to query an Augur Node for the address of the [Market](#market) created by that transaction.
+
+#### **Parameters:**
+
+* **`transactionHash`** (string) Hash returned in the receipt of the transaction that created the Market, as a 32-byte hexadecimal string.
+* **`callback`** (function) Called when all Market creation costs have been looked up.
+
+#### **Returns:**
+
+* (string) Ethereum contract address of the Market that was created in the transaction with the specified hash, as a 16-byte hexadecimal value.
 
 Generate Contracts API Function
 -------------------------------

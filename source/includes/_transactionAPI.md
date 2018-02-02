@@ -105,9 +105,15 @@ Fires when the transaction is successfully incorporated into a block and added t
 
 Fires if the transaction is unsuccessful. `failedResponse` has `error` (error code) and `message` (error description) fields, describing the way in which the transaction failed.
 
-### Important Note When Calling Transaction Functions
+### Approving Augur's ERC-20 Tokens
 
 Developers will need to grant the Augur.sol contract approval to spend the ERC-20 tokens in its codebase (such as ReputationToken and ShareToken) before many of the Transaction API functions can be called. This can be done by calling the `augur.api.ReputationToken.approve` and `augur.api.ShareToken.approve` functions, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
+
+### Transaction Return Values
+
+It is important to note that Ethereum nodes discard all transaction return values, which causes the `callReturn` property of the object passed into a transaction's `onSuccess` callback to always be `null`. As a result, there is no way to get a transaction's return value.
+
+There is, however, a workaround for this issue when calling functions that create [Markets](#market), such as `augur.api.Universe.createBinaryMarket`, `augur.api.Universe.createCategoricalMarket`, and `augur.api.Universe.createScalarMarket`. The function `augur.createMarket.getMarketFromCreateMarketReceipt` can be called in the `onSuccess` callback of these functions to retrieve the Ethereum contract address of the newly-created Market. `augur.createMarket.getMarketFromCreateMarketReceipt` does this by querying the Augur Node for the event log associated with the new Market's creation.
 
 Using Transact Directly
 -----------------------
@@ -255,7 +261,7 @@ Allows the caller to create a new [Genesis Universe](#genesis-universe). Users m
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly created Genesis Universe, as a 16-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Cancel Order Tx API
 ----------------------------
@@ -307,7 +313,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Order was successfully canceled, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Claim Trading Proceeds Tx API
 ------------------------------
@@ -377,7 +383,7 @@ Calculates the amount of [attoETH](#atto-prefix) that `p._numberOfShares` attosh
 
 #### **Returns:**
 
-* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
@@ -403,7 +409,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the trading proceeds were successfully canceled, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Complete Sets Tx API
 -----------------------------
@@ -478,7 +484,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.CompleteSets.publicSellCompleteSets(p)
 
@@ -506,7 +512,7 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 
 #### **Returns:**
 
-* (boolean) `true` if the Complete Set was successfully purchased, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Create Order Tx API
 --------------------------
@@ -582,7 +588,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (string) Order ID of the newly-created Order, as a 32-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Dispute Crowdsourcer Tx API
 ----------------------------
@@ -659,7 +665,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the transaction successfully completed without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.DisputeCrowdsourcer.redeem(p)
 
@@ -691,7 +697,7 @@ This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if
 
 #### **Returns:**
 
-* (boolean) `true` if `redeemer`'s Staked REP was redeemed without errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)
 
@@ -714,7 +720,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully withdrawn from the Dispute Crowdsourcer without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Fee Window Tx API
 -----------------
@@ -796,7 +802,7 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were successfully purchased, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.FeeWindow.redeem(p)
 
@@ -816,7 +822,7 @@ Converts any [Participation Tokens](#participation-token) `p._sender` has in the
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were withdrawn and converted to Reputation Tokens without any errors, or `false` otherwise. If `p._sender` does not have any Participation Tokens or Fee Tokens to be redeemed, this function will still return `true`, as long as no errors occured.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.FeeWindow.withdrawInEmergency(p)
 
@@ -839,7 +845,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Participation Tokens were successfully withdrawn from the Fee Window and converted to Reputation Tokens, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Fill Order Tx API
 --------------------------
@@ -900,7 +906,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (string) Fixed point amount remaining of the Order specified by `p._orderId` after being filled, as a stringified unsigned integer.  If the Order is completely filled, "0" will be returned.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Initial Reporter Tx API
 ----------------------
@@ -991,7 +997,7 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully migrated to the new Child Universe without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.InitialReporter.redeem(p)
 
@@ -1010,7 +1016,7 @@ Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or 
 
 #### **Returns:**
 
-* (boolean) `true` if the REP (and, in the case of First Public Reporters, Ether) was successfully sent to the address of the [Initial Reporter](#initial-reporter) without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.InitialReporter.transferOwnership(p)
 
@@ -1034,7 +1040,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the ownership of the Initial Reporter contract was successfully transferred to `p._newOwner`, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.InitialReporter.withdrawInEmergency(p)
 
@@ -1057,7 +1063,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the REP was successfully withdrawn from the InitialReporter contract without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Mailbox Tx API
 ----------------------
@@ -1136,7 +1142,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if ownership of the Mailbox was successfully transferred to `p._newOwner` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Mailbox.withdrawEther(p)
 
@@ -1159,7 +1165,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Ether was successfully withdrawn from `mailbox` to the owner's Ethereum address, or false otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Mailbox.withdrawTokens(p)
 
@@ -1183,7 +1189,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the tokens were successfully withdrawn from the Mailbox to the owner's Ethereum address, or false otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Market Tx API
 ----------------------
@@ -1328,7 +1334,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the transaction executed without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.disavowCrowdsourcers(p)
 
@@ -1352,7 +1358,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Market's Crowdsourcers were disavowed without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.doInitialReport(p)
 
@@ -1379,7 +1385,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Initial Report was submitted without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.finalize(p)
 
@@ -1404,7 +1410,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Market was Finalized without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.finalizeFork(p)
 
@@ -1428,7 +1434,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Forked Market was Finalized without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.migrateThroughOneFork(p)
 
@@ -1451,7 +1457,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Market was successfully migrated to the Winning Universe without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.transferOwnership(p)
 
@@ -1475,7 +1481,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if ownership of the Market was transferred to `p._newOwner` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Market.withdrawInEmergency(p)
 
@@ -1498,7 +1504,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Reputation Tokens were withdrawn from the Market without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Reputation Token Tx API
 --------------------------------
@@ -1648,7 +1654,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._spender` is approved without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.migrateFromLegacyReputationToken(p)
 
@@ -1667,7 +1673,7 @@ Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy 
 
 #### **Returns:**
 
-* (boolean) `true` if the Legacy REP was migrated to `reputationToken` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.migrateOut(p)
 
@@ -1693,7 +1699,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the REP is migrated to `p._destination` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.transfer(p)
 
@@ -1718,7 +1724,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._value` REP are sent from the caller to `p._to` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.transferFrom(p)
 
@@ -1745,7 +1751,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._value` REP is sent from `p._from` to `p._to` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.updateParentTotalTheoreticalSupply(p)
 
@@ -1764,7 +1770,7 @@ Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for this Repu
 
 #### **Returns:**
 
-* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ReputationToken.updateSiblingMigrationTotal(p)
 
@@ -1789,7 +1795,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the ReputationToken contract's Theoretical REP Supply was updated without any errors.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Share Token Tx API
 ---------------------------
@@ -1880,7 +1886,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._spender` is approved without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ShareToken.transfer(p)
 
@@ -1905,7 +1911,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._value` Shares are sent from the caller to `p._to` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ShareToken.transferFrom(p)
 
@@ -1932,7 +1938,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if `p._value` Shares are sent from `p._from` to `p._to` without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Trade Tx API
 ---------------------
@@ -2066,7 +2072,7 @@ Buys `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outcom
 
 #### **Returns:**
 
-* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Trade.publicSell(p)
 
@@ -2093,7 +2099,7 @@ Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outco
 
 #### **Returns:**
 
-* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be [Filled](#fill-order) completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Trade.publicTrade(p)
 
@@ -2121,7 +2127,7 @@ Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`;
 
 #### **Returns:**
 
-* (string) `0x0000000000000000000000000000000000000000000000000000000000000001` if the Order can be Filled completely, or if it cannot be Filled immediately, an Order will be created and the Order ID of that new Order will be returned, as a 32-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Trade.publicTakeBestOrder(p)
 
@@ -2148,7 +2154,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 
 #### **Returns:**
 
-* (string) Number of attoshares not Filled by the Order, as a stringified unsigned integer. This means the transaction will return "0" for a completely Filled Order, or a larger number if the Order could only be partially Filled.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Trading Escape Hatch Tx API
 ---------------------
@@ -2199,7 +2205,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (boolean) `true` if the Shares were claimed without any errors, or false otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 Universe Tx API
 ---------------------
@@ -2551,7 +2557,7 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly-created Binary Market, as a 16-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market. (See example code.)
 
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
@@ -2585,11 +2591,11 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly-created Categorical Market, as a 16-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market. (See example code.)
 
 ### augur.api.Universe.createChildUniverse(p)
 
-Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `p._parentPayoutNumerators` and `p._parentInvalid`. If the Child Universe has already been created, this transaction will return the Ethereum address of that child Universe. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
+Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `p._parentPayoutNumerators` and `p._parentInvalid`. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
 
 This transaction will fail if:
 
@@ -2611,7 +2617,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly-created Child Universe, as a 16-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.Universe.createScalarMarket(p)
 
@@ -2644,7 +2650,7 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `
 
 #### **Returns:**
 
-* (string) Ethereum address of the newly-created Scalar Market, as a 16-byte hexadecimal value.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market.
 
 ### augur.api.Universe.getInitialReportStakeSize(p, callback)
 
@@ -2655,7 +2661,7 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the [Initial Report](#initial-report) Stake size and will not use any gas. 
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2664,7 +2670,7 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 
 #### **Returns:**
 
-* (string) The size of the No-Show REP Bond or the size of the Stake placed on the Designated Report (whichever is greater), in [attoREP](#atto-prefix), as a stringified unsigned integer.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will be executed as a call and will return the Initial Report Stake size, in attoREP, as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheDesignatedReportNoShowBond(p)
 
@@ -2675,7 +2681,7 @@ Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bon
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2684,7 +2690,7 @@ Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bon
 
 #### **Returns:**
 
-* (string) No-Show REP Bond for Markets in the specified Universe, priced in [attoREP](#atto-prefix).
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the cached value for the No-Show REP Bond, in [attoREP](#atto-prefix), as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheDesignatedReportStake(p)
 
@@ -2695,7 +2701,7 @@ Gets the amount of Staked [REP](#rep) the [Designated Reporter](#designated-repo
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2704,7 +2710,7 @@ Gets the amount of Staked [REP](#rep) the [Designated Reporter](#designated-repo
 
 #### **Returns:**
 
-* (string) Amount of Staked REP the Designated Reporter must put up when submitting a Designated Report in the specified Universe, in [attoREP](#atto-prefix).
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the cached amount of REP the Designated Reporter must Stake when submitting a Designated Report, in [attoREP](#atto-prefix), as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheMarketCreationCost(p)
 
@@ -2715,7 +2721,7 @@ Gets the estimated amount of [attoETH](#atto-prefix) required to create a [Marke
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2724,7 +2730,7 @@ Gets the estimated amount of [attoETH](#atto-prefix) required to create a [Marke
 
 #### **Returns:**
 
-* (string) Estimated amount of [attoETH](#atto-prefix) required to create a Market in the specified Universe.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the estimated amount of [attoETH](#atto-prefix) required to create a Market, as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheReportingFeeDivisor(p)
 
@@ -2735,7 +2741,7 @@ Gets the number by which the total payout amount for a [Market](#market) is divi
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2744,7 +2750,7 @@ Gets the number by which the total payout amount for a [Market](#market) is divi
 
 #### **Returns:**
 
-* (string) Number by which the total payout amount for a Market is divided in order to calculate the Reporting Fee.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the number by which the total payout amount for a Market is divided in order to calculate the Reporting Fee, as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheTargetReporterGasCosts(p)
 
@@ -2755,7 +2761,7 @@ Gets the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bon
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2764,7 +2770,7 @@ Gets the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bon
 
 #### **Returns:**
 
-* (string) Designated Report No-Show Gas Bond, in [attoETH](#atto-prefix), that is paid to the First Public Reporter (in the event of a Designated Report no-show), or refunded to the Market Creator Mailbox (if the Designated Reporter does report).
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Designated Report No-Show Gas Bond, in [attoETH](#atto-prefix), that is paid to the First Public Reporter (in the event of a Designated Report no-show), or refunded to the Market Creator Mailbox (if the Designated Reporter does report). This value will be returned as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheValidityBond({p)
 
@@ -2775,7 +2781,7 @@ Gets the amount the [Market Creator](#market-creator) must pay for the [Validity
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will return a cached value (which will not use any gas). When set to `true`, this function will re-calculate the value, cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2784,7 +2790,7 @@ Gets the amount the [Market Creator](#market-creator) must pay for the [Validity
 
 #### **Returns:**
 
-* (string) Number of [attoETH](#atto-prefix) the Market Creator must pay for the Validity Bond when creating a Market.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the number of [attoETH](#atto-prefix) the Market Creator must pay for the Validity Bond when creating a Market, as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCreateCurrentFeeWindow(p)
 
@@ -2795,7 +2801,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that is curr
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the current Fee Window (which will not use any gas). When set to `true`, this function will create the current Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2804,7 +2810,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that is curr
 
 #### **Returns:**
 
-* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that is currently active in the specified Universe.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that is currently active in the specified Universe, as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)
 
@@ -2816,7 +2822,7 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
     * **`p._timestamp`**  (string) Unix timestamp that falls within the desired Fee Window, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2825,7 +2831,7 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
 
 #### **Returns:**
 
-* (string) Ethereum address, as a 16-byte hexadecimal string, of the active [Fee Window](#fee-window) at the specified Unix timestamp in the [Universe](#universe).
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window for the specified timestamp, as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)
 
@@ -2836,7 +2842,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2845,7 +2851,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at 
 
 #### **Returns:**
 
-* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window starting at the end of the current Fork in the Universe.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window starting at the end of the current Fork in the Universe, as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateNextFeeWindow(p)
 
@@ -2856,7 +2862,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2865,7 +2871,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be
 
 #### **Returns:**
 
-* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that will be active after the current Fee Window ends in the specified Universe.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that will be active after the current Fee Window ends in the specified Universe, as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreatePreviousFeeWindow(p)
 
@@ -2876,7 +2882,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that was act
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will attempt to return the cached Ethereum contract address for the Fee Window (which will not use any gas). When set to `true`, this function will create the Fee Window (if it doesn't exist yet), cache it, and return it (which will use gas).
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2885,7 +2891,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that was act
 
 #### **Returns:**
 
-* (string) Ethereum address, as a 16-byte hexadecimal string, of the Fee Window that was active just before the current Fee Window in the specified Universe.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that was active just before the current Fee Window in the specified Universe, as a 16-byte hexadecimal string.
 
 ### augur.api.Universe.redeemStake(p)
 
@@ -2906,4 +2912,4 @@ Calls the `redeem` function for all Ethereum contract addresses in the arrays `p
 
 #### **Returns:**
 
-* (boolean) `true` if the Staked REP/Ether is redeemed from the Dispute Crowdsourcers, Initial Reports, and Fee windows without any errors, or `false` otherwise.
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
