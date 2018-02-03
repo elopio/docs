@@ -1552,7 +1552,24 @@ augur.api.ReputationToken.migrateFromLegacyReputationToken({
 var _destination = "0x73295d3c0ca46113ca226222c81c79adabf9f391";
 augur.api.ReputationToken.migrateOut({
   _destination: _destination,
-  _attotokens: _attotokens,
+  _attotokens: "0xa",
+  tx: { 
+    to: reputationTokenAddress,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.ReputationToken.migrateOutByPayout({
+  _payoutNumerators: ["0x1", "0x270F"],
+  _invalid: false,
+  _attotokens: "0xa",
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
@@ -1689,6 +1706,33 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._destination`**  (string) Ethereum address of the destination [Reputation Token](#reputation-token) contract to migrate REP to, as a 16-byte hexadecimal value.
     * **`p._attotokens`**  (string) Number of REP to migrate, in [attoREP](#atto-prefix), as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.ReputationToken.migrateOutByPayout(p)
+
+Creates a [Child Universe](#child-universe) (if it does not already exist) for the ReputationToken contract's [Universe](#universe), where the [Forked Market](#forked-market) has the [Payout Set](#payout-set) `p._payoutNumerators`. If the Forked Market is deemed to have an [Invalid Outcome](#invalid-outcome), `p._invalid` should be set to `true`; otherwise, it should be set to `false`. Once the Child Universe exists, the function will migrate `p._attotokens` REP from the ReputationToken contract of the Parent Universe to the ReputationToken contract of the Child Universe.
+
+This transaction will fail if:
+
+* `p._attotokens` is not greater than 0.
+* The Universe the ReputationToken contract belongs to does not have a Forked Market.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._payoutNumerators`**  ((Array.&lt;string>) Payout Set of the Forked Market in the Child Universe.
+    * **`p._invalid`**  (boolean) Whether the Forked Market is deemed to have an Invalid Outomce in the Child Universe.
+    * **`p._attotokens`**  (string) Number of REP to migrate to the Child Universe's ReputationToken contract, in [attoREP](#atto-prefix), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
