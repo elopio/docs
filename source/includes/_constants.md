@@ -48,7 +48,7 @@ Description pending.
 
 ### augur.constants.ETERNAL_APPROVAL_VALUE (string)
 
-Used when calling the `approve` function for one of Augur's ERC-20 tokens, such as Cash or ReputationToken. It is equal to 2^256 - 1, which is the maximum amount tokens that can be approved for Augur to spend on behalf of a particular account.
+Used when calling the `approve` function for one of Augur's ERC-20 tokens, such as Cash, ReputationToken, or ShareToken. It is equal to 2^256 - 1, which is the maximum amount tokens that can be approved for Augur to spend on behalf of a particular account.
 
 ### augur.constants.GET_LOGS_DEFAULT_FROM_BLOCK (string)
 
