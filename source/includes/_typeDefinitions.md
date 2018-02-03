@@ -101,18 +101,18 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`tags`** (Array.&lt;string>|null) Keywords used to tag the Market (maximum of 2).
 * **`longDescription`** (string|null) Additional information not included in description of the Market.
 
-<a name="FeeWindow"></a>
-### FeeWindow  (Object)
+<a name="FeeWindowCurrent"></a>
+### FeeWindowCurrent  (Object)
 
 #### **Properties:** 
+* **`endBlockNumber`** (number|null) Block in which the Fee Window became inactive.
+* **`endTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`feeWindow`** (string) Ethereum contract address of the Fee Window.
 * **`feeWindowID`** (number) Unique numerical ID of the Fee Window.
 * **`startBlockNumber`** (number) Block in which the Fee Window became active.
-* **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
-* **`endBlockNumber`** (null|number) Block in which the Fee Window became inactive.
-* **`endTime`** (number) Unix timestamp for when the Fee Window begins.
-* **`fees`** (number|string) Amount of attoETH collected in Settlement Fees that has been added to the Reporting Fee Pool.
+* **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
+* **`totalStake`** (number) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
 
 <a name="Keystore"></a>
 ### Keystore  (Object)
@@ -316,6 +316,7 @@ Serves as an enum for the state of an order.
 ### REPORTING_STATE  (Object)
 
 Serves as an enum for the state of a stake token.
+
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
 * **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a designated report.

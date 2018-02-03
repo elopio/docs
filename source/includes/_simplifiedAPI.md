@@ -1435,6 +1435,7 @@ augur.reporting.getDisputeTokens({
 
 augur.reporting.getFeeWindowCurrent({
   universe: "0x000000000000000000000000000000000000000b",
+  reporter: "0x0000000000000000000000000000000000000b0b",
 }, function (error, result) {
   console.log(result);
 });
@@ -1446,6 +1447,7 @@ augur.reporting.getFeeWindowCurrent({
   feeWindowID: 457,
   startBlockNumber: 1500001,
   startTime: 1509065473,
+  totalStake: "26",
   universe: "0x000000000000000000000000000000000000000b",
 }
 
@@ -1565,7 +1567,7 @@ This function will fail if:
 
 ### augur.reporting.getFeeWindowCurrent(p, callback)
 
-Returns information about the current [Fee Window](#fee-window).
+Returns information about the current [Fee Window](#fee-window). If `p.reporter` is specified, this returned information will also include the total amount of [attoREP](#atto-prefix) the [Reporter](#reporter) has Staked in the current Fee Window (this includes attoREP Staked in [Initial Reports](#initial-report), as well as attoREP Staked in [Dispute Crowdsourcers](#crowdsourcers)).
 
 This function will fail if:
 
@@ -1576,6 +1578,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.
+    * **`p.reporter`**  (string) &lt;optional> Ethereum address of a [Reporter](#reporter) for which to return the amount of attoREP they have Staked in the current Fee Window.
 * **`callback`** (function) Called after the Fee Windows have been retrieved.
 
 #### **Returns:**
