@@ -2375,6 +2375,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getFeeWindowCurrent</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -2386,6 +2387,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
   <span class="nx">feeWindowID</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
   <span class="nx">startBlockNumber</span><span class="p">:</span> <span class="mi">1500001</span><span class="p">,</span>
   <span class="nx">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+  <span class="nx">totalStake</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
   <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -2521,7 +2523,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-reporting-getfeewindowcurrent-p-callback">augur.reporting.getFeeWindowCurrent(p, callback)</h3>
 
-<p>Returns information about the current <a href="#fee-window">Fee Window</a>.</p>
+<p>Returns information about the current <a href="#fee-window">Fee Window</a>. If <code class="prettyprint">p.reporter</code> is specified, this returned information will also include the total amount of <a href="#atto-prefix">attoREP</a> the <a href="#reporter">Reporter</a> has Staked in the current Fee Window (this includes attoREP Staked in <a href="#initial-report">Initial Reports</a>, as well as attoREP Staked in <a href="#crowdsourcers">Dispute Crowdsourcers</a>).</p>
 
 <p>This function will fail if:</p>
 
@@ -2537,6 +2539,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.reporter</code></strong>  (string) &lt;optional&gt; Ethereum address of a <a href="#reporter">Reporter</a> for which to return the amount of attoREP they have Staked in the current Fee Window.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Fee Windows have been retrieved.</li>
 </ul>
@@ -3347,6 +3350,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </ul></li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
 <h3 id="augur-trading-simulatetrade-p-callback">augur.trading.simulateTrade(p, callback)</h3>
 
 <p>Determines the sequence of makes/takes that will be executed to <a href="#fill-order">Fill</a> the specified <a href="#order">Order</a>, and returns the user&rsquo;s projected balances and fees paid after this sequence is completed. Note: This function automatically normalizes <a href="#share">Share</a> prices, so &ldquo;display prices&rdquo; can be passed in directly for <code class="prettyprint">minPrice</code>, <code class="prettyprint">maxPrice</code>, and <code class="prettyprint">price</code>.</p>
@@ -3380,9 +3389,9 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-trading-tradeuntilamountiszero-p-callback">augur.trading.tradeUntilAmountIsZero(p, callback)</h3>
 
-<ul>
-<li>Description pending.</li>
-</ul>
+<p>If <code class="prettyprint">p.doNotCreateOrders</code> is set to <code class="prettyprint">true</code>, this function will place trades until all <a href="#order">Orders</a> equal to or better than the specified price limit are removed from the <a href="#order-book">Order Book</a>.</p>
+
+<p>If <code class="prettyprint">p.doNotCreateOrders</code> is set to <code class="prettyprint">false</code>, this function will place trades until the user&rsquo;s request has been fulfilled. This is done by attempting to trade until all Orders equal to or better than the specified limit price are removed from the Order Book and then creating a new Order with whatever amount is remaining in the user&rsquo;s request.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -3404,6 +3413,12 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called when the full trade completes successfully.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if any part of the trade fails.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
 </ul>
 
           <h1 id="call-api">Call API</h1>
@@ -9007,7 +9022,24 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="kd">var</span> <span class="nx">_destination</span> <span class="o">=</span> <span class="s2">"0x73295d3c0ca46113ca226222c81c79adabf9f391"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">migrateOut</span><span class="p">({</span>
   <span class="na">_destination</span><span class="p">:</span> <span class="nx">_destination</span><span class="p">,</span>
-  <span class="na">_attotokens</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">_attotokens</span><span class="p">:</span> <span class="s2">"0xa"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">migrateOutByPayout</span><span class="p">({</span>
+  <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0x1"</span><span class="p">,</span> <span class="s2">"0x270F"</span><span class="p">],</span>
+  <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">_attotokens</span><span class="p">:</span> <span class="s2">"0xa"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -9171,6 +9203,45 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">p._destination</code></strong>  (string) Ethereum address of the destination <a href="#reputation-token">Reputation Token</a> contract to migrate REP to, as a 16-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._attotokens</code></strong>  (string) Number of REP to migrate, in <a href="#atto-prefix">attoREP</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-migrateoutbypayout-p">augur.api.ReputationToken.migrateOutByPayout(p)</h3>
+
+<p>Creates a <a href="#child-universe">Child Universe</a> (if it does not already exist) for the ReputationToken contract&rsquo;s <a href="#universe">Universe</a>, where the <a href="#forked-market">Forked Market</a> has the <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._payoutNumerators</code>. If the Forked Market is deemed to have an <a href="#invalid-outcome">Invalid Outcome</a>, <code class="prettyprint">p._invalid</code> should be set to <code class="prettyprint">true</code>; otherwise, it should be set to <code class="prettyprint">false</code>. Once the Child Universe exists, the function will migrate <code class="prettyprint">p._attotokens</code> REP from the ReputationToken contract of the Parent Universe to the ReputationToken contract of the Child Universe.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li><code class="prettyprint">p._attotokens</code> is not greater than 0.</li>
+<li>The Universe the ReputationToken contract belongs to does not have a Forked Market.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._payoutNumerators</code></strong>  ((Array.&lt;string&gt;) Payout Set of the Forked Market in the Child Universe.</li>
+<li><strong><code class="prettyprint">p._invalid</code></strong>  (boolean) Whether the Forked Market is deemed to have an Invalid Outomce in the Child Universe.</li>
+<li><strong><code class="prettyprint">p._attotokens</code></strong>  (string) Number of REP to migrate to the Child Universe&rsquo;s ReputationToken contract, in <a href="#atto-prefix">attoREP</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -11282,21 +11353,21 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
 </ul>
 
-<p><a name="FeeWindow"></a></p>
+<p><a name="FeeWindowCurrent"></a></p>
 
-<h3 id="feewindow-object">FeeWindow  (Object)</h3>
+<h3 id="feewindowcurrent-object">FeeWindowCurrent  (Object)</h3>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
+<li><strong><code class="prettyprint">endBlockNumber</code></strong> (number|null) Block in which the Fee Window became inactive.</li>
+<li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum contract address of the Fee Window.</li>
 <li><strong><code class="prettyprint">feeWindowID</code></strong> (number) Unique numerical ID of the Fee Window.</li>
 <li><strong><code class="prettyprint">startBlockNumber</code></strong> (number) Block in which the Fee Window became active.</li>
-<li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
-<li><strong><code class="prettyprint">endBlockNumber</code></strong> (null|number) Block in which the Fee Window became inactive.</li>
-<li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
-<li><strong><code class="prettyprint">fees</code></strong> (number|string) Amount of attoETH collected in Settlement Fees that has been added to the Reporting Fee Pool.</li>
+<li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
+<li><strong><code class="prettyprint">totalStake</code></strong> (number) &lt;optional&gt; If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)</li>
 </ul>
 
 <p><a name="Keystore"></a></p>
