@@ -755,7 +755,24 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
 <h2 id="accounts-functions">Accounts Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">getAccountTransferHistory</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">approveAugur</span><span class="p">(</span>
+  <span class="nx">address</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span> 
+  <span class="nx">auth</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="nx">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> 
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval failed due to error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span> 
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval was successful."</span><span class="p">);</span> 
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+<span class="c1">// example output:</span>
+<span class="s2">"Approval was successful."</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">getAccountTransferHistory</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
   <span class="na">token</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span>
@@ -837,28 +854,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
+  <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
+  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
+    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
+      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
       <span class="p">},</span>
-      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
+      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
+      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
+      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
+        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
       <span class="p">},</span>
-      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
+      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
     <span class="p">},</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
+    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
   <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+  <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span>
@@ -889,28 +906,28 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
+  <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
+  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
+    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
+      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
       <span class="p">},</span>
-      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
+      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
+      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
+      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
+        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
+        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
       <span class="p">},</span>
-      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
+      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
     <span class="p">},</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
+    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
   <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+  <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">loginWithMasterKey</span><span class="p">({</span>
@@ -919,13 +936,31 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">address</span><span class="p">:</span> <span class="s2">"0x0cad0e04f71c7f202d546ab71b047410bce3277c"</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">201</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">202</span><span class="p">,</span> <span class="mi">221</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">174</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">196</span><span class="p">]</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+  <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">201</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">202</span><span class="p">,</span> <span class="mi">221</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">174</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">196</span><span class="p">]</span>
+  <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
 <span class="c1">// This function does not accept parameters or a callback function, and does not return a value.</span>
 </code></pre></div>
+<h3 id="augur-accounts-approveaugur-address-auth-callback">augur.accounts.approveAugur(address, auth, callback)</h3>
+
+<p>Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. Many of Augur&rsquo;s transactions require Augur to be able to spend Cash on behalf of the account executing the transaction. However, the account must first approve Augur to spend that amount of Cash on its behalf. This function calls the function <code class="prettyprint">augur.api.Cash.approve</code> to approve Augur to spend up to <code class="prettyprint">augur.constants.ETERNAL_APPROVAL_VALUE</code> Cash on behalf of the account. <code class="prettyprint">augur.constants.ETERNAL_APPROVAL_VALUE</code> is equal to 2^256 - 1, or the maximum amount of Cash that can be approved. This value is used so that <code class="prettyprint">augur.api.Cash.approve</code> does not have to be called multiple times in order to execute multiple transactions.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) Ethereum address of the account making the approval.</li>
+<li><strong><code class="prettyprint">auth</code></strong> (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account has approved Augur to spend on its behalf.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Does not return a value.</li>
+</ul>
+
 <h3 id="augur-accounts-getaccounttransferhistory-p-callback">augur.accounts.getAccountTransferHistory(p, callback)</h3>
 
 <p>Returns the token transfers made to or from a specific Ethereum address.</p>
@@ -7160,27 +7195,30 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <aside class="notice">The Transaction section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Transaction API example:</span>
 
-<span class="c1">// Approving the Augur.sol contract as a spender allows Augur to spend REP </span>
-<span class="c1">// on behalf of the address calling `augur.api.ReputationToken.approve`.</span>
-<span class="c1">// This must be done before calling many of the Transaction API functions,</span>
-<span class="c1">// such as `augur.api.CreateOrder.publicCreateOrder`.</span>
+<span class="c1">// Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. </span>
+<span class="c1">// Many of Augur's transactions require the Augur.sol contract to be able </span>
+<span class="c1">// to spend Cash on behalf of the account executing the transaction. </span>
+<span class="c1">// However, the account must first approve Augur to spend that amount of </span>
+<span class="c1">// Cash on its behalf by calling `augur.api.Cash.approve`.</span>
 
-<span class="c1">// The Ethereum contract addresses for Augur.sol and ReputationToken.sol </span>
+<span class="c1">// The Ethereum contract addresses for Augur.sol and Cash.sol </span>
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
-<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cashContractAddress</span> <span class="o">=</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">;</span>
 
-<span class="c1">// Amount of REP tokens to approve the Augur.sol contract to spend on this Ethereum account's behalf.</span>
-<span class="c1">// This example sets the amount to the maximum possible value.</span>
-<span class="kd">var</span> <span class="nx">_attoRepTokens</span> <span class="o">=</span> <span class="s2">"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">;</span> 
+<span class="c1">// Amount of Cash (in attotokens) to approve the Augur.sol contract to </span>
+<span class="c1">// spend on this Ethereum account's behalf.</span>
+<span class="c1">// This example approves the maximum amount, which is </span>
+<span class="c1">// augur.constants.ETERNAL_APPROVAL_VALUE, or 2^256 - 1.</span>
+<span class="kd">var</span> <span class="nx">_attoCashTokens</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">ETERNAL_APPROVAL_VALUE</span><span class="p">;</span>
 
 <span class="c1">// The Augur API is organized by Contract and then Method like so:</span>
 <span class="c1">// augur.api.&lt;Contract&gt;.&lt;Method&gt;(&lt;argument object&gt;);</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
   <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
-  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attoRepTokens</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attoCashTokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
+    <span class="na">to</span><span class="p">:</span> <span class="nx">cashContractAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -7195,24 +7233,24 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <span class="c1">// example onSent output:</span>
 <span class="p">{</span>
   <span class="nl">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s1">'0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4'</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s1">'0x3cd4a2eb35cc0cd3449c252737255863e60aa521d757d615cefbf280b54313fb'</span>
 <span class="p">}</span>
 <span class="c1">// example onSuccess output:</span>
 <span class="p">{</span>
-  <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0xa8533a3ae037ae30db81673a7275dd5f8eaadc52c0309f418070369cb58a1642"</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1692844</span><span class="p">,</span>
+  <span class="nl">blockHash</span><span class="p">:</span> <span class="s2">"0xb1379380e458710f25fea54ae03358832076eadc17825edef482efca3c43a9de"</span><span class="p">,</span>
+  <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1707928</span><span class="p">,</span>
   <span class="na">callReturn</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">from</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
   <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.00018364"</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0x12a05f200"</span><span class="p">,</span>
-  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4"</span><span class="p">,</span>
-  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x095ea7b3000000000000000000000000852684b374fe03ab77d06931f1b2831028fd58f5ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">,</span>
-  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x87"</span><span class="p">,</span>
+  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0.000206912"</span><span class="p">,</span>
+  <span class="na">gasPrice</span><span class="p">:</span> <span class="s2">"0xee6b2800"</span><span class="p">,</span>
+  <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x3cd4a2eb35cc0cd3449c252737255863e60aa521d757d615cefbf280b54313fb"</span><span class="p">,</span>
+  <span class="na">input</span><span class="p">:</span> <span class="s2">"0x095ea7b300000000000000000000000067cbf60a24ab922af99e6f335c0ff2b084d5bdbeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">,</span>
+  <span class="na">nonce</span><span class="p">:</span> <span class="s2">"0x97"</span><span class="p">,</span>
   <span class="na">r</span><span class="p">:</span> <span class="s2">"0x804b2a14352d3fa9844c296eb8b9a6b8fed45ca5d56550d1eb558c6571abbaf4"</span><span class="p">,</span>
   <span class="na">s</span><span class="p">:</span> <span class="s2">"0x3793c21fd315e14950b48a2200e8368ca0d25a2b6291eca9b5bb19753026859f"</span><span class="p">,</span>
-  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1517462391</span><span class="p">,</span>
-  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+  <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1517688651</span><span class="p">,</span>
+  <span class="na">to</span><span class="p">:</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">,</span>
   <span class="na">transactionIndex</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">v</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
   <span class="na">value</span><span class="p">:</span> <span class="s2">"0x0"</span>
@@ -7264,7 +7302,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="approving-augur-39-s-erc-20-tokens">Approving Augur&rsquo;s ERC-20 Tokens</h3>
 
-<p>Developers will need to grant the Augur.sol contract approval to spend the ERC-20 tokens in its codebase (such as ReputationToken and ShareToken) before many of the Transaction API functions can be called. This can be done by calling the <code class="prettyprint">augur.api.ReputationToken.approve</code> and <code class="prettyprint">augur.api.ShareToken.approve</code> functions, as shown to the right. <b>Attempting to call many of Augur&rsquo;s Transaction API functions without doing this first will result in these transactions failing.</b></p>
+<p>Developers will need to grant the Augur.sol contract approval to spend Augur&rsquo;s ERC-20 tokens, such as Cash (which is a warpper for ETH), ReputationToken, and ShareToken, before many of the Transaction API functions can be called. This can be done by calling the <code class="prettyprint">augur.api.Cash.approve</code>, <code class="prettyprint">augur.api.ReputationToken.approve</code> and <code class="prettyprint">augur.api.ShareToken.approve</code> functions, as shown to the right. <b>Attempting to call many of Augur&rsquo;s Transaction API functions without doing this first will result in these transactions failing.</b></p>
 
 <h3 id="transaction-return-values">Transaction Return Values</h3>
 
@@ -7470,6 +7508,66 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <ul>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of the Order to cancel, as a 32-byte hexadecimal value. (To get the order ID for a specific order, call the function <code class="prettyprint">augur.api.Order.getOrderId</code>.)</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h2 id="cash-tx-api">Cash Tx API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Transaction API Examples:</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cashContractAddress</span> <span class="o">=</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">;</span>
+
+<span class="c1">// Amount of Cash (in attoCash) to approve the Augur.sol </span>
+<span class="c1">// contract to spend on this Ethereum account's behalf.</span>
+<span class="c1">// This example approves the maximum amount, which is </span>
+<span class="c1">// augur.constants.ETERNAL_APPROVAL_VALUE, or 2^256 - 1.</span>
+<span class="kd">var</span> <span class="nx">_attoCash</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">ETERNAL_APPROVAL_VALUE</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attoCash</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">cashContractAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash Solidity Contract</a>, which is used internally by Augur as an ERC-20 wrapper for ETH.</p>
+
+<h3 id="augur-api-cash-approve-p">augur.api.Cash.approve(p)</h3>
+
+<p>Many of the transaction functions in Augur&rsquo;s smart contracts will only work if the Augur.sol contract has been approved to spend Cash on behalf of the account executing the transaction. This function allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> Cash for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoCash</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoCash to allow <code class="prettyprint">p._spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -8874,7 +8972,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-market-migratethroughonefork-p">augur.api.Market.migrateThroughOneFork(p)</h3>
 
-<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="Designated Report No-Show Bond">No-Show Bond</a> to the winning Universe.</p>
+<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="Designated Report No-Show Bond">No-Show Bond</a> to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Unvierse.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9121,12 +9219,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h3 id="augur-api-reputationtoken-approve-p">augur.api.ReputationToken.approve(p)</h3>
 
 <p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoREP</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._value</code> has already been set to a number higher than 0.</li>
-</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9470,12 +9562,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <h3 id="augur-api-sharetoken-approve-p">augur.api.ShareToken.approve(p)</h3>
 
 <p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoshares</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li><code class="prettyprint">p._value</code> has already been set to a number higher than 0.</li>
-</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11878,7 +11964,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-constants-eternal_approval_value-string">augur.constants.ETERNAL_APPROVAL_VALUE (string)</h3>
 
-<p>Description pending.</p>
+<p>Used when calling the <code class="prettyprint">approve</code> function for one of Augur&rsquo;s ERC-20 tokens, such as Cash or ReputationToken. It is equal to 2^256 - 1, which is the maximum amount tokens that can be approved for Augur to spend on behalf of a particular account.</p>
 
 <h3 id="augur-constants-get_logs_default_from_block-string">augur.constants.GET_LOGS_DEFAULT_FROM_BLOCK (string)</h3>
 
