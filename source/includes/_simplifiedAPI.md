@@ -7,6 +7,23 @@ Simplified API
 Accounts Functions
 -----------------
 ```javascript
+augur.accounts.approveAugur(
+  address: "0x0000000000000000000000000000000000000b0b", 
+  auth: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  function (error, result) { 
+    if (error) { 
+      console.log("Approval failed due to error:", error); 
+    } else {
+      console.log("Approval was successful."); 
+    }
+  }
+);
+// example output:
+"Approval was successful."
+
 augur.accounts.getAccountTransferHistory({
   account: "0x0000000000000000000000000000000000000b0b",
   token: null,
@@ -178,6 +195,20 @@ augur.accounts.loginWithMasterKey({
 augur.accounts.logout();
 // This function does not accept parameters or a callback function, and does not return a value.
 ```
+### augur.accounts.approveAugur(address, auth, callback)
+
+Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. Many of Augur's transactions require Augur to be able to spend Cash on behalf of the account executing the transaction. However, the account must first approve Augur to spend that amount of Cash on its behalf. This function calls the function `augur.api.Cash.approve` to approve Augur to spend up to `augur.constants.ETERNAL_APPROVAL_VALUE` Cash on behalf of the account. `augur.constants.ETERNAL_APPROVAL_VALUE` is equal to 2^256 - 1, or the maximum amount of Cash that can be approved. This value is used so that `augur.api.Cash.approve` does not have to be called multiple times in order to execute multiple transactions.
+
+#### **Parameters:**
+
+* **`address`** (string) Ethereum address of the account making the approval.
+* **`auth`** (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+* **`callback`** (function) Called after the account has approved Augur to spend on its behalf.
+
+#### **Returns:**
+
+* Does not return a value.
+
 ### augur.accounts.getAccountTransferHistory(p, callback)
 
 Returns the token transfers made to or from a specific Ethereum address.

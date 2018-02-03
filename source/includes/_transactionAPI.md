@@ -5,27 +5,30 @@ Transaction API
 ```javascript
 // Transaction API example:
 
-// Approving the Augur.sol contract as a spender allows Augur to spend REP 
-// on behalf of the address calling `augur.api.ReputationToken.approve`.
-// This must be done before calling many of the Transaction API functions,
-// such as `augur.api.CreateOrder.publicCreateOrder`.
+// Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. 
+// Many of Augur's transactions require the Augur.sol contract to be able 
+// to spend Cash on behalf of the account executing the transaction. 
+// However, the account must first approve Augur to spend that amount of 
+// Cash on its behalf by calling `augur.api.Cash.approve`.
 
-// The Ethereum contract addresses for Augur.sol and ReputationToken.sol 
+// The Ethereum contract addresses for Augur.sol and Cash.sol 
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
-var _augurContractAddress = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
-var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+var cashContractAddress = "0xec28e64edbce62bde48a14b04f0b557b974a22a9";
 
-// Amount of REP tokens to approve the Augur.sol contract to spend on this Ethereum account's behalf.
-// This example sets the amount to the maximum possible value.
-var _attoRepTokens = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; 
+// Amount of Cash (in attotokens) to approve the Augur.sol contract to 
+// spend on this Ethereum account's behalf.
+// This example approves the maximum amount, which is 
+// augur.constants.ETERNAL_APPROVAL_VALUE, or 2^256 - 1.
+var _attoCashTokens = augur.constants.ETERNAL_APPROVAL_VALUE;
 
 // The Augur API is organized by Contract and then Method like so:
 // augur.api.<Contract>.<Method>(<argument object>);
-augur.api.ReputationToken.approve({
+augur.api.Cash.approve({
   _spender: _augurContractAddress,
-  _value: _attoRepTokens,
+  _value: _attoCashTokens,
   tx: { 
-    to: reputationTokenAddress,
+    to: cashContractAddress,
     gas: "0x632ea0" 
   },
   meta: {
@@ -40,24 +43,24 @@ augur.api.ReputationToken.approve({
 // example onSent output:
 {
   callReturn: null,
-  hash: '0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4'
+  hash: '0x3cd4a2eb35cc0cd3449c252737255863e60aa521d757d615cefbf280b54313fb'
 }
 // example onSuccess output:
 {
-  blockHash: "0xa8533a3ae037ae30db81673a7275dd5f8eaadc52c0309f418070369cb58a1642",
-  blockNumber: 1692844,
+  blockHash: "0xb1379380e458710f25fea54ae03358832076eadc17825edef482efca3c43a9de",
+  blockNumber: 1707928,
   callReturn: null,
   from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   gas: "0x632ea0",
-  gasFees: "0.00018364",
-  gasPrice: "0x12a05f200",
-  hash: "0x45f1ddfb45c13f479b03684b97fed28ab39bb0f4ad6efea2b1075744e6464df4",
-  input: "0x095ea7b3000000000000000000000000852684b374fe03ab77d06931f1b2831028fd58f5ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
-  nonce: "0x87",
+  gasFees: "0.000206912",
+  gasPrice: "0xee6b2800",
+  hash: "0x3cd4a2eb35cc0cd3449c252737255863e60aa521d757d615cefbf280b54313fb",
+  input: "0x095ea7b300000000000000000000000067cbf60a24ab922af99e6f335c0ff2b084d5bdbeffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  nonce: "0x97",
   r: "0x804b2a14352d3fa9844c296eb8b9a6b8fed45ca5d56550d1eb558c6571abbaf4",
   s: "0x3793c21fd315e14950b48a2200e8368ca0d25a2b6291eca9b5bb19753026859f",
-  timestamp: 1517462391,
-  to: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+  timestamp: 1517688651,
+  to: "0xec28e64edbce62bde48a14b04f0b557b974a22a9",
   transactionIndex: "0x1",
   v: "0x2b",
   value: "0x0"
@@ -107,7 +110,7 @@ Fires if the transaction is unsuccessful. `failedResponse` has `error` (error co
 
 ### Approving Augur's ERC-20 Tokens
 
-Developers will need to grant the Augur.sol contract approval to spend the ERC-20 tokens in its codebase (such as ReputationToken and ShareToken) before many of the Transaction API functions can be called. This can be done by calling the `augur.api.ReputationToken.approve` and `augur.api.ShareToken.approve` functions, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
+Developers will need to grant the Augur.sol contract approval to spend Augur's ERC-20 tokens, such as Cash (which is a warpper for ETH), ReputationToken, and ShareToken, before many of the Transaction API functions can be called. This can be done by calling the `augur.api.Cash.approve`, `augur.api.ReputationToken.approve` and `augur.api.ShareToken.approve` functions, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
 
 ### Transaction Return Values
 
@@ -303,6 +306,58 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.  
     * **`p._orderId`** (string) ID of the Order to cancel, as a 32-byte hexadecimal value. (To get the order ID for a specific order, call the function `augur.api.Order.getOrderId`.)
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+Cash Tx API
+----------------------------
+```javascript
+// Cash Transaction API Examples:
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+var cashContractAddress = "0xec28e64edbce62bde48a14b04f0b557b974a22a9";
+
+// Amount of Cash (in attoCash) to approve the Augur.sol 
+// contract to spend on this Ethereum account's behalf.
+// This example approves the maximum amount, which is 
+// augur.constants.ETERNAL_APPROVAL_VALUE, or 2^256 - 1.
+var _attoCash = augur.constants.ETERNAL_APPROVAL_VALUE;
+
+augur.api.Cash.approve({
+  _spender: _augurContractAddress,
+  _value: _attoCash,
+  tx: { 
+    to: cashContractAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+```
+Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
+
+### augur.api.Cash.approve(p)
+
+Many of the transaction functions in Augur's smart contracts will only work if the Augur.sol contract has been approved to spend Cash on behalf of the account executing the transaction. This function allows `p._spender` to spend up to `p._value` Cash for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoCash](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`p._value`**  (string) Number of attoCash to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1438,7 +1493,7 @@ This transaction will fail if:
 
 ### augur.api.Market.migrateThroughOneFork(p)
 
-Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show Bond](Designated Report No-Show Bond) to the winning Universe.
+Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show Bond](Designated Report No-Show Bond) to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Unvierse.
 
 This transaction will fail if:
 
@@ -1651,10 +1706,6 @@ The Reputation Token, or REP, is an ERC-20 token that implements all of the requ
 ### augur.api.ReputationToken.approve(p)
 
 Allows `p._spender` to spend up to `p._value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoREP](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
-
-This function will fail if:
-
-* `p._value` has already been set to a number higher than 0.
 
 #### **Parameters:**
 
@@ -1910,10 +1961,6 @@ The Share Token is an ERC-20 token that implements all of the required functions
 ### augur.api.ShareToken.approve(p)
 
 Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoshares](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
-
-This function will fail if:
-
-* `p._value` has already been set to a number higher than 0.
 
 #### **Parameters:**
 
