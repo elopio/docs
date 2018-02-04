@@ -177,7 +177,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p><code class="prettyprint">current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)</code></p>
 
-<p>The Reporting Fee will be updated once every 30 days, or once every <a href="#reporting-window">Reporting Window</a>. If updates where to occur too frequently, the market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn&rsquo;t yet accounted for by the fee system.</p>
+<p>The Reporting Fee will be updated once every 7 days, or once every <a href="#fee-window">Fee Window</a>. If updates where to occur too frequently, the Market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn&rsquo;t yet accounted for by the fee system.</p>
 
 <p>Settlement Fees are extracted anytime <a href="#settlement">Settlement</a> occurs and Shares are destroyed. This can happen for two reasons:</p>
 
@@ -358,72 +358,102 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <aside class="notice">The Reporting section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
-<p>Once the event underlying an Augur <a href="#market">Market</a> occurs, the <a href="#outcome">Outcome</a> needs to be determined in order for the Market to <a href="#finalized-market">Finalize</a> and begin <a href="#settlement">Settlement</a>. The Outcomes of events are reported by Augur’s <a href="#decentralized-oracle">Decentralized Oracle</a>, which consists of profit-motivated <a href="#reporter">Reporters</a> reporting on the Outcome of events. Anyone who owns <a href="#rep">REP</a> tokens may participate in the reporting and disputing of Outcomes. Reporters whose <a href="#report">Reports</a> concur with consensus are financially rewarded, while those whose Reports do not concur with consensus are financially penalized.</p>
+<p>Once a <a href="#market">Market</a>&rsquo;s underlying event  occurs, the <a href="#outcome">Outcome</a> must be determined in order for the Market to <a href="#finalized-market">Finalize</a> and begin <a href="#settlement">Settlement</a>. Outcomes are determined by Augur’s <a href="#decentralized-oracle">Decentralized Oracle</a>, which consists of profit-motivated <a href="#reporter">Reporters</a>, who simply report the actual, real-world Outcome of the event. Anyone who owns <a href="#rep">REP</a> may participate in the <a href="#report">Reporting</a> and <a href="#dispute">Disputing</a> of Outcomes. Reporters whose <a href="#report">Reports</a> are consistent with consensus are financially rewarded, while those whose Reports are not consistent with consensus are financially penalized.</p>
 
 <h2 id="fee-windows">Fee Windows</h2>
 
-<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. Any <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to a <a href="#reporting-fee-pool">Reporting Fee Fee Pool</a> for that Fee Window. At the end of the Fee Window, the Reporting Fee Pool is paid out to <a href="#rep">REP</a> holders who participated in that reporting process. <a href="#reporter">Reporters</a> receive rewards in proportion to the amount of REP they Staked during that Fee Window. Participation includes: Staking during an <a href="#initial-report">Initial Report</a>, <a href="#dispute">Disputing</a> a <a href="#tentative-outcome">Tentative Outcome</a>, or purchasing a <a href="#participation-token">Participation Token</a>.</p>
+<p>Augur’s reporting system runs on a cycle of consecutive 7-day long <a href="#fee-window">Fee Windows</a>. A <a href="#reporting-fee">Reporting Fees</a> collected by Augur during a given Fee Window are added to the <a href="#reporting-fee-pool">Reporting Fee Fee Pool</a> for that Fee Window. At the end of the Fee Window, the Reporting Fee Pool is paid out to <a href="#rep">REP</a> holders who participated in that reporting process. <a href="#reporter">Reporters</a> receive rewards in proportion to the amount of REP they Staked during that Fee Window. Participation includes: Staking during an <a href="#initial-report">Initial Report</a>, <a href="#dispute">Disputing</a> a <a href="#tentative-outcome">Tentative Outcome</a>, or purchasing <a href="#participation-token">Participation Tokens</a>.</p>
 
 <h2 id="participation-tokens">Participation Tokens</h2>
 
-<p>During any <a href="#fee-window">Fee Window</a>, <a href="#rep">REP</a> holders may purchase any number of <a href="#participation-token">Participation Tokens</a> for one <a href="#atto-prefix">attoREP</a> each. At the end of the Fee Window, they may redeem their Participation Tokens for one attoREP each, in addition to a proportional share of the Fee Window’s <a href="#reporting-fee-pool">Reporting Fee Pool</a>.</p>
+<p>During any <a href="#fee-window">Fee Window</a>, <a href="#rep">REP</a> holders may purchase any number of <a href="#participation-token">Participation Tokens</a> for one <a href="#atto-prefix">attoREP</a> each. At the end of the Fee Window, they may redeem their Participation Tokens for one attoREP each, in addition to a proportional share of the <a href="#fee-window">Fee Window’s</a> <a href="#reporting-fee-pool">Reporting Fee Pool</a>. If there were no actions (e.g., submitting a <a href="#report">Report</a> or <a href="#dispute">Disputing</a> a Report submitted by another user) needed of a <a href="#reporter">Reporter</a>, the Reporter may purchase Participation Tokens to indicate that they showed up for the Fee Window. Just like Staked REP, Participation Tokens may be redeemed by their owners for a pro rata portion of fees in this Fee Window.</p>
 
-<p>It is important that REP holders are ready to participate in <a href="#market">Market</a> resolution the event of a threatened <a href="#fork">Fork</a> of the <a href="#decentralized-oracle">Oracle</a>. The Participation Token provides an incentive for REP holders to monitor the platform at least once per week, and, thus, be ready to participate if the need arises. Even REP holders who don’t want to participate in the reporting process are incentivized to check in with Augur once per 7-day Fee Window in order to buy Participation Tokens and collect fees. This regular, active checking in means they will be familiar with how to use Augur, will be aware of Forks when they occur, and thus should be more ready to participate in Forks when they happen.</p>
+<p>It is important that REP holders are ready to participate in <a href="#market">Market</a> resolution the event of a <a href="#fork">Fork</a>. The Participation Token provides an incentive for REP holders to monitor the platform at least once per week, and, thus, be ready to participate if the need arises. Even REP holders who do not want to participate in the reporting process are incentivized to check in with Augur once per 7-day Fee Window in order to buy Participation Tokens and collect fees. This regular, active checking in will ensure that they will are familiar with how to use Augur, will be aware of Forks when they occur, and thus should be more ready to participate in Forks when they happen.</p>
 
-<h2 id="reporting-states">Reporting States</h2>
+<h2 id="market-state-progression">Market State Progression</h2>
 
-<p><a href="images/Detailed Reporting Diagram.png"><img src="images/Detailed Reporting Diagram.png"></a></p>
+<p>Augur <a href="#market">Markets</a> can be in seven different states after creation. The potential states, or “phases”, of an Augur Market are as follows:</p>
 
-<p>The Reporting Diagram above is a high level overview of <a href="#report">Reporting</a> implemented by Augur. There are two ways for a <a href="#market">Market</a> to attempt to <a href="#finalized-market">Finalize</a>: if the <a href="#tentative-outcome">Tentative Outcome</a> was not disputed during a <a href="#dispute-round">Dispute Round</a>, or (rarely) during a <a href="#fork">Fork</a>. Augur Markets have 6 potential states after creation. The potential states, or “phases”, of a Market are as follows:</p>
-
-<ol>
+<ul>
+<li>Pre-Reporting</li>
 <li>Designated Reporting</li>
 <li>Open Reporting</li>
 <li>Waiting for the Next Fee Window to Begin</li>
 <li>Dispute Round</li>
 <li>Fork</li>
 <li>Finalized</li>
-</ol>
+</ul>
+
+<p>The relationship between these states can be seen in the figure below:</p>
+
+<p><a href="images/Detailed Reporting Diagram.png"><img src="images/Detailed Reporting Diagram.png"></a></p>
+
+<h3 id="pre-reporting">Pre-Reporting</h3>
+
+<p>The Pre-Reporting or trading phase is the time period that begins after trading has begun in the <a href="#market">Market</a>, but before the Market’s event has come to pass. Generally, this is the most active trading period for any given Augur Market. Once the event end date has passed, the Market enters the <a href="#designated-reporting-phase">Designated Reporting Phase</a> (state a in the figure above).</p>
 
 <h3 id="designated-reporting">Designated Reporting</h3>
 
-<p>When creating a Market, the <a href="#market-creator">Market Creator</a> is required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (1), the Market’s Designated Reporter has at most three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (2).</p>
+<p>When creating a Market, <a href="#market-creator">Market Creators</a> are required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (state b in the figure above).</p>
 
-<p>If the Designated Reporter submits a Report on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on the Reported Outcome, which it will forfeit if the Market finalizes to any outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the Waiting for the Next Fee Window to Begin Phase (3), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+<p>If the Designated Reporter submits a <a href="#report">Report</a> on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the <a href="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (state c in the figure above), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <h3 id="open-reporting">Open Reporting</h3>
 
-<p>If the Designated Reporter fails to Report within the allotted 3 days, then the Market Creator forfeits the No-Show Bond, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, every Augur participant has the opportunity to report the Outcome of the Market. In the event that the Designated Reporter fails to report, we refer to the first participant who Reports the Outcome of a Market as the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
+<p>If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the <a href="#designated-report-no-show-bond">No-Show Bond</a>, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, anyone can report the Outcome of the Market. When the Designated Reporter fails to Report, the first Reporter who Reports on the Outcome of a Market is called the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
-<p>The Market’s First Public Reporter receives the No-Show Bond that was forfeited by the Market Creator when the Designated Reporter failed to Report. The <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> is given directly to the First Public Reporter to cover their gas costs. The <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> is given to the First Public Reporter in the form of Stake on their Reported Outcome.</p>
+<p>The Market’s First Public Reporter receives the forfeited No-Show Bond in the form of Stake on their chosen Outcome, so they may claim the <a href="#designated-report-no-show-gas-bond">No-Show REP Bond</a> only if their Reported Outcome agrees with the Market’s <a href="#final-outcome">Final Outcome</a>. They also receive the <a href="#designated-report-no-show-rep-bond">No-Show Gas Bond</a> after the Market has Finalized only if their Reported Outcome agrees with the Market’s Final Outcome.</p>
 
-<p>The First Public Reporter does not need to Stake any of their own <a href="#rep">REP</a> when Reporting the Outcome of the Market. Because the No-Show REP Bond is applied as Stake on the First Public Reporter’s chosen Outcome, they may claim the No-Show REP Bond only if their Reported Outcome ultimately agrees with consensus. In this way, any Market whose Designated Reporter fails to Report is expected to have its Outcome reported by someone very soon after entering the Open Reporting Phase.</p>
+<p>The First Public Reporter does not need to Stake any of their own <a href="#rep">REP</a> when Reporting the Outcome of the Market. In this way, any Market whose Designated Reporter fails to Report is expected to have its Outcome reported by someone very soon after entering the Open Reporting Phase.</p>
 
-<p>Once a <a href="#first-public-report">First Public Report</a> has been received, the Reported Outcome becomes the Market’s Tentative Outcome, and the Market enters the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (3).</p>
+<p>Once an <a href="#initial-report">Initial Report</a> has been received from the Initial Reporter (whether it was the Designated Reporter or First Public Reporter), the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>, and the Market enters the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (state c in the figure above).</p>
 
 <h3 id="waiting-for-the-next-fee-window-to-begin">Waiting for the Next Fee Window to Begin</h3>
 
-<p>Once the market receives its Initial Report &ndash; whether by the Designated Reporter or by a First Public Reporter from the community &ndash; the Market enters the Waiting for the Next Fee Window to Begin Phase. During this phase, Reporting for the Market is on hold until end of the current <a href="#fee-window">Fee Window</a>. Once the current Fee Window comes to an end, the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a> (4).</p>
+<p>Once the market receives its Initial Report it enters the Waiting for the Next Fee Window to Begin Phase (state c in the figure above). During this phase, Reporting for the Market is on hold until end of the current <a href="#fee-window">Fee Window</a>. Once the next Fee Window begins, the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>.</p>
 
 <h3 id="dispute-round">Dispute Round</h3>
 
-<p>The <a href="#dispute-round">Dispute Round</a> is a 7-day period, during which any REP holder has the opportunity to <a href="#dispute">Dispute</a> the Market’s Tentative Outcome. A Dispute consists of staking REP (referred to as <a href="#dispute-stake">Dispute Stake</a> in this context) on a some outcome other than the Market’s current Tentative Outcome. A Dispute is successful if the total amount of Dispute Stake on some outcome meets the <a href="#dispute-bond">Dispute Bond</a> size required for the current round.</p>
+<p>The <a href="#dispute-round">Dispute Round</a> (state d in the figure above) is a 7-day period, during which any REP holder has the opportunity to <a href="#dispute">Dispute</a> the Market’s Tentative Outcome. (At the beginning of a
+Dispute Round, a Market’s Tentative Outcome is the outcome that will become the Market’s Final Outcome if it is not successfully disputed by REP holders.) A Dispute consists of Staking REP (referred to as <a href="#dispute-stake">Dispute Stake</a> in this context) on an Outcome other than the Market’s current Tentative Outcome. A Dispute is successful if the total amount of Dispute Stake on some Outcome meets the <a href="#dispute-bond">Dispute Bond</a> size required for the current round. Details for how the Dispute Bond size is computed can be found in the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
 
-<p>The <a href="#dispute-bond">Dispute Bonds</a> need not be paid in their entirety by a single user. Augur allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking some REP on some Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.</p>
+<p>The <a href="#dispute-bond">Dispute Bonds</a> need not be paid in their entirety by a single user. The Augur platform allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking REP on some Outcome other than the Tentative Outcome. If any Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.</p>
 
-<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (5). If the size of the filled Dispute Bond is greater than the <a href="#fork-threshold">Fork Threshold</a>, then the market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than the <a href="#fork-threshold">Fork Threshold</a>, then the newly chosen Outcome becomes the market’s new Tentative Outcome, and the market undergoes another Dispute Round.</p>
+<p>In the case of a successful Dispute, the Market will either undergo another Dispute Round or it will enter the <a href="#fork-period">Fork Phase</a> (state e in the figure above). If the size of the filled Dispute Bond is greater than the <a href="#fork-threshold">Fork Threshold</a>, then the Market will enter the <a href="#fork-period">Fork Phase</a>. If the size of the filled Dispute bond is less than the Fork Threshold, then the newly chosen Outcome becomes the Market’s new Tentative Outcome, and the Market undergoes another Dispute Round.</p>
 
-<p>If no Dispute is successful during the 7-day Dispute Round, the Market enters the <a href="#finalized-phase">Finalized State</a> (6) with its Tentative Outcome accepted as the <a href="#final-outcome">Final Outcome</a>.</p>
+<p>All Dispute Stake is held in escrow during the Dispute Round. If a Dispute Bond is unsuccessful, then the dispute Stake is returned to its woners at the end of the Dispute Round. If no Dispute is successful during the 7-day Dispute Round, the Market enters the <a href="#finalized-phase">Finalized State</a> (state f in the figure above), and its Tentative Outcome is accepted as the <a href="#final-outcome">Final Outcome</a>. A Market&rsquo;s Final Outcome is the Tentative Outcome that passes through a dispute Round without being successfully Disputed, or is determined via a <a href="#fork">Fork</a>. Augur&rsquo;s contracts treat Final Outcomes as truth and pay out accordingly.</p>
 
-<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every Dispute Round. All successful Dispute Stake is applied to the Outcome it championed, and will remain there until the Market is Finalized (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the reward pool from the current Fee Window.</p>
+<p>All unsuccesful Dispute Stake is returned to the original owners at the end of every Dispute Round. All successful Dispute Stake is applied to the Outcome it championed, and remains there until the Market is Finalized (or until a Fork occurs in some other Augur Market). All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reporting-fee-pool">Reporting Fee Pool</a> from the current Fee Window.</p>
 
 <h3 id="fork">Fork</h3>
 
-<p>The Fork Phase is a special state that lasts up to 60 days and is intended to be an exceedingly rare occurrence. The outcome of a Fork cannot be Disputed. The Disputed Market that caused the Fork, referred to as the <a href="#forked-market">Forking Market</a>, enters the <a href="#finalized-phase">Finalized State</a> (6) at the end of the Fork Phase. For more information on the Forking process, refer to the <a href="#forking-details">Forking Details</a> section.</p>
+<p>The Fork Phase is a special state that lasts up to 60 days. Forking is the Market resolution method of last resort; it is a very disruptive process and is intended to be a rare occurrence. A Fork is caused when there is a Market with an Outcome with a successfully filled Dispute Bond of at least 2.5% of all REP. This Market is referred to as the <a href="#forked-market">Forking Market</a>.</p>
+
+<p>When a Fork is initiated, a 60-day Forking Period begins. Disputing for all other non-Finalized Markets is put on hold until the end of this Forking Period. The Forking Period is much longer than the usual Fee Window because the platform needs to provide ample time for REP holders and service providers (such as wallets and exchanges) to prepare. A Fork&rsquo;s Final Outcome cannot be Disputed.</p>
+
+<p>Every Augur Market and all REP tokens exist in some <a href="#universe">Universe</a>. REP tokens can be used to Report on Outcomes (and thus earn fees) only for Markets that exist in the same Universe as the REP tokens. When Augur first launches all Markets and all REP will exist together in a <a href="#genesis-universe">Gensis Universe</a>.</p>
+
+<p>When a Market Forks, new Universes are created. Forking creates a new <a href="#child-universe">Child Universe</a> for each possible Outcome of the Forking Market (including the <a href="#invalid-outcome">Invalid Outcome</a>). For example, a <a href="#binary-market">Binary Market</a> has 3 possible Outcomes: A, B, and Invalid. Thus a Binary Forking Market will create three new Child Universes: Universe A, Universe B, and Universe Invalid. Initially these newly created Universes are empty: they contain no Markets or REP tokens.</p>
+
+<p>When a Fork is initiated, the <a href="#parent-universe">Parent Universe</a> becomes permanently <a href="#locked-universe">Locked</a>. In a Locked Universe, no new Markets may be created. Users may continue trading Shares in Markets in Locked Universes, but no Reporting rewards are paid out there, and Markets in Locked Universes cannot be Finalized. In order for Markets or REP tokens in the Locked Universe to be useful, they must first be migrated to a Child Universe.</p>
+
+<p>Holders of REP tokens in the Parent Universe may migrate their tokens to a Child Universe of their choice. This choice should be considered carefully, because migration is one-way; it cannot be reversed. Tokens cannot be sent from one sibling Universe to another. Migration is a permanent commitment of REP tokens to a particular Market Outcome. REP tokens that migrate to different Child Universes ought to be considered entirely separate tokens, and exchanges ought to list them as such.</p>
+
+<p>When a Fork is initiated, all REP <a href="#dispute-stake">Staked</a> on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.</p>
+
+<p>Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the <a href="#winning-universe">Winning Universe</a>, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated only to the Winning Universe and, if they are un-Finalized and have received an Initial Report, are reset back to the Waiting for the Next Fee Window to Begin Phase. </p>
+
+<p>There is no time limit on migrating tokens from the Parent Universe to a Child Universe. Tokens may be migrated after the Forking Period, but they will not count towards the determination of the Winning Universe. To encourage greater participation during the Forking Period, all token holders who migrate their REP within 60 days of the start of a Fork will receive 5% additional REP in the Child Universe to which they migrated. This reward is paid for by minting new REP tokens. </p>
+
+<p>Reporters that have Staked REP on one of the Forking Market’s Outcomes cannot change their position during a Fork. REP that was Staked on an Outcome in the Parent Universe can be migrated only to the Child Universe that corresponds to that Outcome. For example, if a Reporter helped fulfill a successful Dispute Bond in favor of Outcome A during some previous Dispute Round, then the REP they have Staked on Outcome A can only be migrated to Universe A during a Fork.</p>
+
+<p>Sibling Universes are entirely disjoint. REP tokens that exist in one Universe cannot be used to Report on events or earn rewards from Markets in another Universe. Since users presumably will not want to create or trade on Markets in a Universe whose <a href="#decentralized-oracle">Oracle</a> is untrustworthy, REP that exists in a Universe that does not correspond to objective reality is unlikely to earn its owner any fees, and therefore should not hold any significant market value. </p>
+
+<p>Therefore, REP tokens migrated to a Universe which does not correspond to objective reality should hold no market value, regarless of whether or not the objectively false Universe ends up being the Winning Universe after a Fork.</p>
 
 <h3 id="finalized">Finalized</h3>
 
-<p>A Market enters the Finalized State anytime it passes through a 7-day Dispute Round without having its Tentative Outcome successfully Disputed. The Outcome of a Fork cannot be Disputed and is always considered final at the end of the Forking Phase. Once a Market is Finalized, traders can <a href="#settlement">Settle</a> their <a href="#position">Positions</a> directly with the Market. When a Market enters the Finalized State, we refer to its chosen Outcome as the Final Outcome.</p>
+<p>A Market enters the Finalized State (state f in the figure above) if it passes through a 7-day Dispute Round without having its Tentative Outcome successfully Disputed, or after completion of a Fork. The Outcome of a Fork cannot be Disputed and is always considered final at the end of the Forking Period. Once a Market is Finalized, traders can <a href="#settlement">Settle</a> their <a href="#position">Positions</a> directly with the Market. When a Market enters the Finalized State, we refer to its chosen Outcome as the Final Outcome.</p>
 
 <h2 id="designated-reporting-details">Designated Reporting Details</h2>
 
@@ -444,34 +474,6 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <p>Markets are placed into the next available Fee Window once the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> submits a <a href="#report">Report</a>. For example, if a Market&rsquo;s Designated Report is submitted at 12:00 AM EST on January 3rd, 2053 and a Fee Window was just started on January 1st 2053, the Market would move into the next Fee Window that would be starting on January 8th, 2053, or 7 days since the start of the January 1st Window.</p>
 
 <p>Any REP holder can participate in a Fee Window. In fact, in some cases, someone without any REP is able to successfully Report on Markets in the <a href="#open-reporting-phase">Open Reporting Phase</a>. This case only occurs when the Market&rsquo;s Designated Reporter fails to Report during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. In this situation, the first person to submit a Report can do so and Stake 0 REP on the Report. This is the true because the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> is added to the First Public Reporter&rsquo;s Stake, so in this case the Stake can be 0 as it will get the bond added to it. (The First Public Reporter must still pay the gas cost to submit the Report, but they will receive the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> once the Market <a href="#finalizes">Finalizes</a> if the <a href="#outcome">Outcome</a> they picked becomes the <a href="#final-outcome">Final Outcome</a>.) This creates a race to be the First Public Reporter so as to attempt to get free REP from reporting correctly and earning the No-Show REP Bond.</p>
-
-<h2 id="forking-details">Forking Details</h2>
-
-<p>The <a href="#market-resolution">Market Resolution</a> method of last resort is the <a href="#fork">Fork</a>. Forks are initiated when a <a href="#market">Market</a> has its <a href="#tentative-outcome">Tentative Outcome</a> successfully <a href="#dispute">Disputed</a> during a <a href="#dispute-round">Dispute Round</a> by filling a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>. We refer to such a Market as a <a href="#forked-market">Forking Market</a>. </p>
-
-<p>When a Fork is initiated, the usual 7-day <a href="#fee-window">Fee window</a> is interrupted, and the <a href="#fork-period">Forking Period</a> begins. </p>
-
-<p>Forking is a very disruptive process and is intended to be rare. They are disruptive because Augur needs to assume its <a href="#decentralized-oracle">Decentralized Oracle</a> is under attack if a Fork occurs. Since Augur assumes it&rsquo;s under attack, Disputing for all other non-<a href="#finalized-market">Finalized Markets</a> is put on hold until the Forking Period ends and those Markets are migrated to the <a href="#winning-universe">Winning Universe</a>. The Forking Period is much longer than the usual Fee Window so that there can be ample time for REP holders and exchanges to prepare for a Fork. The Forking process has final jurisdiction; a Fork’s outcome cannot be disputed.</p>
-
-<p>Every Augur Market exists in some Augur <a href="#universe">Universe</a>. When Augur first launches, there will be only one Universe — the <a href="#genesis-universe">Genesis Universe</a>. Users will be required to migrate their REP from the legacy REP contract into the Genesis Universe in order for their REP to be used with Augur. Importantly, REP can be used to Report on <a href="#outcome">Outcomes</a> (and thus earn fees) only if it exists in the same Universe as the Market on which it is reporting. When Augur first launches, all Markets and all REP will exist in the Genesis Universe.</p>
-
-<p>When a Market Forks, new Universes are created. Forking creates a new <a href="#child-universe">Child Universe</a> for each possible Outcome of the Forking Market (including the <a href="#invalid-outcome">Invalid Outcome</a>). A <a href="#binary-market">Binary Market</a>, for example, has 3 possible outcomes: A, B, and Invalid. Thus a Binary Forking Market will create 3 new Child Universes: Universe A, Universe B, and Universe Invalid. Initially, these newly created Universes are empty; they contain no markets or REP tokens.</p>
-
-<p>Once a Fork is initiated, the <a href="#parent-universe">Parent Universe</a> becomes permanently <a href="#locked-universe">Locked</a>. Markets are always tradable, no matter what state they are in or what Universe. However, while trading can still take place in the Parent Universe, no new Markets may be created, and no reporting rewards may be paid out there. In order for Markets or tokens in the Locked Universe to be useful, they must first be migrated to a Child Universe.</p>
-
-<p>Holders of REP tokens in the Parent Universe may migrate their tokens to a Child Universe of their choice. This choice should be considered carefully, because migration is one-way; it cannot be reversed. Tokens cannot be sent from one sibling Universe to another. Migration is a permanent commitment of REP tokens to a particular Market Outcome. REP tokens sent to different Child Universes ought to be considered entirely separate currencies, and exchanges ought to list them as such.</p>
-
-<p>When a Fork is initiated, all REP <a href="#dispute-stake">Staked</a> on all non-Forking Markets is unstaked so that it is free to be migrated to a Child Universe during the Forking Period.</p>
-
-<p>Whichever Child Universe receives the most migrated REP by the end of the Forking Period becomes the Winning Universe, and its corresponding Outcome becomes the Final Outcome of the Forking Market. Un-Finalized Markets in the Parent Universe may be migrated only to the Winning Universe and, if they are un-Finalized and have received an <a href="#initial-report">Initial Report</a>, are reset back to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. The Fork is then complete and the regular 7-day Fee Window cycle continues.</p>
-
-<p>There are a few important things to note about the Forking process:</p>
-
-<p>First, there is no time limit on migrating tokens from the Parent Universe to a Child Universe. Tokens may be migrated after the Forking Period; they simply will not count towards the determination of the Winning Universe. To encourage greater participation during the Forking Period, all token holders who migrate their REP within 60 days of the start of a Fork will receive 5% additional REP in the Child Universe to which they migrated. This reward is paid for via currency inflation. </p>
-
-<p>Second, <a href="#reporter">Reporters</a> that have Staked REP on one of the Forking Market’s Outcomes cannot change their position during a Fork. That is, REP that was Staked on an Outcome in the Parent Universe can be migrated only to the Child Universe that corresponds to that Outcome. For example, if a Reporter helped fulfill a successful Dispute Bond in favor of Outcome A during some previous Dispute Round, then the REP they have Staked on Outcome A can only be migrated to Universe A during a Fork.</p>
-
-<p>Third, sibling Universes are entirely disjoint. REP tokens that exist in one Universe cannot be used to Report on events or earn rewards from Markets in another Universe. Only REP belonging to a Universe is valid REP to use within that Universe. Migrating REP from the Parent Universe to a Child Universe can be thought of as a permanent conversion of Parent Universe REP into Child Universe REP. Since users presumably will not want to create or trade on Markets in a Universe whose Oracle is untrustworthy, REP that exists in a Universe that does not correspond to objective reality is unlikely to earn its owner any fees, and therefore should not hold any significant market value. Thus REP tokens migrated to a Universe which doesn’t correspond to objective reality are effectively “burned” in the sense that they should hold no market value, regardless of whether or not the objectively false Universe ends up being the Winning Universe after a Fork.</p>
 
           <h1 id="api-overview">API Overview</h1>
 
@@ -6552,7 +6554,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <h3 id="augur-api-universe-getcurrentfeewindow-p-callback">augur.api.Universe.getCurrentFeeWindow(p, callback)</h3>
 
-<p>Returns the Ethereum contract address of the current running <a href="#reporting-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window.</p>
+<p>Returns the Ethereum contract address of the current running <a href="#fee-window">Fee Window</a> of a <a href="#universe">Universe</a>. Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11813,18 +11815,18 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <ul>
 <li><strong><code class="prettyprint">disputeToken</code></strong> (string) Contract address of the Dispute Token, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the stake token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the stake token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the stake token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the Dispute Token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the Dispute Token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
+<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market was determined to be invalid.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the stake token owner has staked, in ETH.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the Dispute Token owner has staked, in ETH.</li>
 <li><strong><code class="prettyprint">winning</code></strong> (number|null) Description pending.</li>
-<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the stake token has been claimed by the owner.</li>
+<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the Dispute Token has been claimed by the owner.</li>
 <li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
 </ul>
 
@@ -11858,7 +11860,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">tradeGroupID</code></strong> (number|null) Description pending.</li>
+<li><strong><code class="prettyprint">tradeGroupID</code></strong> (number|null) ID logged with each trade transaction by Augur&rsquo;s UI so that trades can be grouped client-side.</li>
 </ul>
 
 <p><a name="UserTradePosition"></a></p>
@@ -12469,11 +12471,13 @@ Goals:
 
 <p>When a <a href="#market">Market</a> is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, users may <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on an <a href="#outome">Outcome</a> other than the <a href="#tentative-outcome">Tentative Outcome</a> if they believe the Tentative Outcome is incorrect. Doing so contributes to a Dispute Bond for that Outcome. Each Outcome other than the Tentative Outcome has its own Dispute Bond that can be filled. Dispute Bonds need not be paid in their entirety by a single user. Augur allows participants to <a href="#crowdsourcer">Crowdsource</a> the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can dispute that Outcome by Staking some REP on an Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully <a href="#challenge">Challenged</a>. For information about how Dispute Stake gets returned to users, refer to the <a href="#dispute-stake">Dispute Stake glossary entry</a>.</p>
 
-<p>By design, the Dispute Bond sizes for each <a href="#dispute-round">Dispute Round</a> are chosen such that anyone who successfully Challenges an Outcome in favor of the Market’s <a href="#final-outcome">Final Outcome</a> is rewarded with a 50% ROI on their Dispute Stake. The amount of REP required to fill a Dispute Bond is calculated as follows.</p>
+<p>The amount of REP required to fill a Dispute Bond is calculated as follows.</p>
 
-<p>Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outcomes at the beginning of Dispute Round <i>n</i>. Let &omega; be any Market Outcome other than the Market’s Tentative Outcome at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on outcome &omega; at the beginning of dispute <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new Outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;,<i>n</i>) and is given by:</p>
+<p>Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outcomes at the beginning of Dispute Round <i>n</i>. Let &omega; be any Market Outcome other than the Market’s Tentative Outcome at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on Outcome &omega; at the beginning of dispute <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new Outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;,<i>n</i>) and is given by:</p>
 
 <p><i>B</i>(&omega;,<i>n</i>)=2<i>A<sub>n</sub></i>-<i>3S</i>(&omega;,<i>n</i>)</p>
+
+<p>The Dispute Bond sizes are chosen this way to ensure a fix ROI of 50% for <a href="#reporter">Reporters</a> who successfully Dispute false outcomes.</p>
 
 <h2 id="dispute-round">Dispute Round</h2>
 
@@ -12693,19 +12697,7 @@ Goals:
 
 <p>The Reporting Fee is a dynamic amount based on the price of <a href="#rep">REP</a> and the value of the <a href="#open-interest">Open Interest</a> across all of Augur&rsquo;s <a href="#market">Markets</a>. Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the Open Interest across all of Augur&rsquo;s markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.</p>
 
-<p>The Reporting Fee is sent to the <a href="#reporting-window">Fee Window</a> that contains the Market being traded on, and is later used to pay REP holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
-
-<!-- TODO: Remove this section and links to it. -->
-
-<h2 id="reporting-phase">Reporting Phase</h2>
-
-<p>The Reporting Phase has been removed from Augur. Now there is just a series of up to 20 <a href="#dispute-round-phases">Dispute Round Phases</a>, followed by a potential <a href="#fork-period">Fork Phase</a>.</p>
-
-<!-- TODO: Remove this section and links to it. -->
-
-<h2 id="reporting-window">Reporting Window</h2>
-
-<p>The Reporting Window has now been removed in favor of the <a href="#fee-window">Fee Window</a>.</p>
+<p>The Reporting Fee is sent to the <a href="#fee-window">Fee Window</a> that contains the Market being traded on, and is later used to pay REP holders for Staking on the <a href="#outcome">Outcomes</a> of the Market other than the <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <h2 id="reporting-fee-pool">Reporting Fee Pool</h2>
 
