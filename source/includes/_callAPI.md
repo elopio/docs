@@ -2333,7 +2333,7 @@ Returns the Ethereum contract address of a [Universe's](#universe) [Child Univer
 
 ### augur.api.Universe.getCurrentFeeWindow(p, callback)
 
-Returns the Ethereum contract address of the current running [Fee Window](#reporting-window) of a [Universe](#universe). Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window.
+Returns the Ethereum contract address of the current running [Fee Window](#fee-window) of a [Universe](#universe). Every Universe has a Fee Window that runs for a duration of 7 days before immediately starting the next Window.
 
 #### **Parameters:**
 

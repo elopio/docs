@@ -29,7 +29,7 @@ The Augur contracts will track the open interest of all Markets passively as peo
 
 `current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)`
 
-The Reporting Fee will be updated once every 30 days, or once every [Reporting Window](#reporting-window). If updates where to occur too frequently, the market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn't yet accounted for by the fee system.
+The Reporting Fee will be updated once every 7 days, or once every [Fee Window](#fee-window). If updates where to occur too frequently, the Market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn't yet accounted for by the fee system.
 
 Settlement Fees are extracted anytime [Settlement](#settlement) occurs and Shares are destroyed. This can happen for two reasons:
 

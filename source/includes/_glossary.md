@@ -113,11 +113,13 @@ Disputing is synonymous with the act of [Challenging](#challenge) a [Tenative Ou
 
 When a [Market](#market) is in the [Dispute Round Phase](#dispute-round-phase), users may [Stake](#dispute-stake) [REP](#rep) on an [Outcome](#outome) other than the [Tentative Outcome](#tentative-outcome) if they believe the Tentative Outcome is incorrect. Doing so contributes to a Dispute Bond for that Outcome. Each Outcome other than the Tentative Outcome has its own Dispute Bond that can be filled. Dispute Bonds need not be paid in their entirety by a single user. Augur allows participants to [Crowdsource](#crowdsourcer) the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can dispute that Outcome by Staking some REP on an Outcome other than the Tentative Outcome. If, collectively, some Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully [Challenged](#challenge). For information about how Dispute Stake gets returned to users, refer to the [Dispute Stake glossary entry](#dispute-stake).
 
-By design, the Dispute Bond sizes for each [Dispute Round](#dispute-round) are chosen such that anyone who successfully Challenges an Outcome in favor of the Market’s [Final Outcome](#final-outcome) is rewarded with a 50% ROI on their Dispute Stake. The amount of REP required to fill a Dispute Bond is calculated as follows.
+The amount of REP required to fill a Dispute Bond is calculated as follows.
 
-Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outcomes at the beginning of Dispute Round <i>n</i>. Let &omega; be any Market Outcome other than the Market’s Tentative Outcome at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on outcome &omega; at the beginning of dispute <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new Outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;,<i>n</i>) and is given by:
+Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outcomes at the beginning of Dispute Round <i>n</i>. Let &omega; be any Market Outcome other than the Market’s Tentative Outcome at the beginning of this Dispute Round. Let <i>S</i>(&omega;, <i>n</i>) denote the total amount of Stake on Outcome &omega; at the beginning of dispute <i>n</i>. Then the size of the Dispute Bond needed to successfully Dispute the current Tentative Outcome in favor of the new Outcome &omega; during round <i>n</i> is denoted <i>B</i>(&omega;,<i>n</i>) and is given by:
 
 <i>B</i>(&omega;,<i>n</i>)=2<i>A<sub>n</sub></i>-<i>3S</i>(&omega;,<i>n</i>)
+
+The Dispute Bond sizes are chosen this way to ensure a fix ROI of 50% for [Reporters](#reporter) who successfully Dispute false outcomes.
 
 ## Dispute Round
 
@@ -333,17 +335,7 @@ The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decent
 
 The Reporting Fee is a dynamic amount based on the price of [REP](#rep) and the value of the [Open Interest](#open-interest) across all of Augur's [Markets](#market). Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the Open Interest across all of Augur's markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.
 
-The Reporting Fee is sent to the [Fee Window](#reporting-window) that contains the Market being traded on, and is later used to pay REP holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
-
-<!-- TODO: Remove this section and links to it. -->
-## Reporting Phase
-
-The Reporting Phase has been removed from Augur. Now there is just a series of up to 20 [Dispute Round Phases](#dispute-round-phases), followed by a potential [Fork Phase](#fork-period).
-
-<!-- TODO: Remove this section and links to it. -->
-## Reporting Window
-
-The Reporting Window has now been removed in favor of the [Fee Window](#fee-window).
+The Reporting Fee is sent to the [Fee Window](#fee-window) that contains the Market being traded on, and is later used to pay REP holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
 
 ## Reporting Fee Pool
 

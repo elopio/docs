@@ -376,18 +376,18 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
 * **`marketID`** (string) ID of the Market, as a hexadecimal string.
-* **`payout0`** (number|null) Payout numerator 0 of the stake token's payout set.
-* **`payout1`** (number|null) Payout numerator 1 of the stake token's payout set.
-* **`payout2`** (number|null) Payout numerator 2 of the stake token's payout set. Set to null for binary and scalar Markets.
-* **`payout3`** (number|null) Payout numerator 3 of the stake token's payout set. Set to null for binary and scalar Markets.
-* **`payout4`** (number|null) Payout numerator 4 of the stake token's payout set. Set to null for binary and scalar Markets.
-* **`payout5`** (number|null) Payout numerator 5 of the stake token's payout set. Set to null for binary and scalar Markets.
-* **`payout6`** (number|null) Payout numerator 6 of the stake token's payout set. Set to null for binary and scalar Markets.
-* **`payout7`** (number|null) Payout numerator 7 of the stake token's payout set. Set to null for binary and scalar Markets.
+* **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
+* **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
+* **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
+* **`payout3`** (number|null) Payout numerator 3 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
+* **`payout4`** (number|null) Payout numerator 4 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
+* **`payout5`** (number|null) Payout numerator 5 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
+* **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
+* **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
 * **`isInvalid`** (boolean) Whether the Market was determined to be invalid.
-* **`amountStaked`** (number) Amount the stake token owner has staked, in ETH.
+* **`amountStaked`** (number) Amount the Dispute Token owner has staked, in ETH.
 * **`winning`** (number|null) Description pending.
-* **`claimed`** (boolean) Whether the stake token has been claimed by the owner.
+* **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 
 <a name="TimestampedPrice"></a>
@@ -413,7 +413,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
 * **`timestamp`** (number) Description pending.
-* **`tradeGroupID`** (number|null) Description pending.
+* **`tradeGroupID`** (number|null) ID logged with each trade transaction by Augur's UI so that trades can be grouped client-side.
 
 <a name="UserTradePosition"></a>
 ### UserTradePosition  (Object)
