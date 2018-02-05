@@ -110,7 +110,7 @@ Fires if the transaction is unsuccessful. `failedResponse` has `error` (error co
 
 ### Approving Augur's ERC-20 Tokens
 
-Developers will need to grant the Augur.sol contract approval to spend Augur's ERC-20 tokens, such as Cash (which is a warpper for ETH), ReputationToken, and ShareToken, before many of the Transaction API functions can be called. This can be done by calling the `augur.api.Cash.approve`, `augur.api.ReputationToken.approve` and `augur.api.ShareToken.approve` functions, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
+Developers will need to grant the Augur.sol contract approval to spend [Cash](#cash) (which is an [ERC-20](https://en.wikipedia.org/wiki/ERC20) wrapper for ETH) before many of the Transaction API functions can be called. This can be done by calling the `augur.api.Cash.approve` function, as shown to the right. <b>Attempting to call many of Augur's Transaction API functions without doing this first will result in these transactions failing.</b>
 
 ### Transaction Return Values
 
