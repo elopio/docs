@@ -7304,7 +7304,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="approving-augur-39-s-erc-20-tokens">Approving Augur&rsquo;s ERC-20 Tokens</h3>
 
-<p>Developers will need to grant the Augur.sol contract approval to spend Augur&rsquo;s ERC-20 tokens, such as Cash (which is a warpper for ETH), ReputationToken, and ShareToken, before many of the Transaction API functions can be called. This can be done by calling the <code class="prettyprint">augur.api.Cash.approve</code>, <code class="prettyprint">augur.api.ReputationToken.approve</code> and <code class="prettyprint">augur.api.ShareToken.approve</code> functions, as shown to the right. <b>Attempting to call many of Augur&rsquo;s Transaction API functions without doing this first will result in these transactions failing.</b></p>
+<p>Developers will need to grant the Augur.sol contract approval to spend <a href="#cash">Cash</a> (which is an <a href="https://en.wikipedia.org/wiki/ERC20">ERC-20</a> wrapper for ETH) before many of the Transaction API functions can be called. This can be done by calling the <code class="prettyprint">augur.api.Cash.approve</code> function, as shown to the right. <b>Attempting to call many of Augur&rsquo;s Transaction API functions without doing this first will result in these transactions failing.</b></p>
 
 <h3 id="transaction-return-values">Transaction Return Values</h3>
 
@@ -11964,7 +11964,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-eternal_approval_value-string">augur.constants.ETERNAL_APPROVAL_VALUE (string)</h3>
 
-<p>Used when calling the <code class="prettyprint">approve</code> function for one of Augur&rsquo;s ERC-20 tokens, such as Cash, ReputationToken, or ShareToken. It is equal to 2^256 - 1, which is the maximum amount tokens that can be approved for Augur to spend on behalf of a particular account.</p>
+<p>Used when calling the <code class="prettyprint">approve</code> function for <a href="#cash">Cash</a>, which is an <a href="https://en.wikipedia.org/wiki/ERC20">ERC-20</a> wrapper for ETH that Augur uses internally. It is equal to 2^256 - 1, which is the maximum amount of Cash that can be approved for Augur to spend on behalf of a particular account.</p>
 
 <h3 id="augur-constants-get_logs_default_from_block-string">augur.constants.GET_LOGS_DEFAULT_FROM_BLOCK (string)</h3>
 
