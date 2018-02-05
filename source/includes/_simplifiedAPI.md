@@ -892,7 +892,7 @@ Uses a transaction hash to query an Augur Node for the address of the [Market](#
 
 #### **Returns:**
 
-* (string) Ethereum contract address of the Market that was created in the transaction with the specified hash, as a 16-byte hexadecimal value.
+* (string) Ethereum contract address of the Market that was created in the transaction with the specified hash, as a 20-byte hexadecimal value.
 
 Generate Contracts API Function
 -------------------------------
@@ -1426,7 +1426,7 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 
 * **`p`** (Object) Parameters object.
   **Properties:**
-    * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 16-byte hexadecimal values.
+    * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
 * **`callback`** (function) Called after the Market information has been retrieved.
 
 #### **Returns:**
@@ -2099,7 +2099,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 
 * **`p`** (Object) Parameters object.
     * **`p.markets`**  (Array.&lt;string>) Array of [Market](#market) addresses for which to claim proceeds.
-    * **`p._shareHolder`**  (string) User address that holds the shares, as a 16-byte hexadecimal string.
+    * **`p._shareHolder`**  (string) User address that holds the shares, as a 20-byte hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
@@ -2118,7 +2118,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) [Market](#market) address for which to claim proceeds.
-    * **`p._shareHolder`**  (string) User address that holds the shares, as a 16-byte hexadecimal string.
+    * **`p._shareHolder`**  (string) Ethereum address that holds the shares, as a 20-byte hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.

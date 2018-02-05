@@ -33,12 +33,10 @@ augur.js' functions accept and return a variety of different objects, which are 
 <a name="AugurEventLog"></a>
 ### AugurEventLog  (Object)
 
+Note: Other properties will be present in this object, depending on what event type it is. For a list of which values are logged for which events, refer to the [Event Types](#event-types) section.
+
 #### **Properties:** 
-* **`key`**  (string) A 32-byte hexadecimal value. Description pending.
-* **`addition`**  (string) A 20-byte hexadecimal value. Description pending.
-* **`commitHash`**  (string) A 20-byte hexadecimal value. Description pending.
-* **`bytecodeHash`**  (string) A 32-byte hexadecimal value. Description pending.
-* **`address`**  (string) A 20-byte hexadecimal value. Description pending.
+* **`address`**  (string) The 20-byte Ethereum contract address of the contract that emitted this event log.
 * **`removed`**  (boolean) Whether the transaction this event was created from was removed from the Ethereum blockchain (due to an orphaned block) or never gotten to (due to a rejected transaction).
 * **`transactionHash`**  (string) Hash of the transactions this log was created from, as a 32-byte hexadecimal value.
 * **`transactionIndex`**  (number) Integer of the transaction's index position in the block.
@@ -59,7 +57,7 @@ augur.js' functions accept and return a variety of different objects, which are 
 
 #### **Properties:** 
 * **`version`** (string) Version of the contracts.
-* **`addresses`** (Object) Object containing the 16-byte Ethereum contract addresses used by Augur, keyed by contract name.
+* **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
 
 <a name="Category"></a>
 ### Category  (Object)
@@ -319,13 +317,13 @@ Serves as an enum for the state of a stake token.
 
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
-* **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a designated report.
-* **`DESIGNATED_DISPUTE`** (string) Market's designated report has been submitted and is allowed to be disputed.
-* **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the disignated report was disputed, or the designated reporter failed to submit a report, and the market is waiting for the next reporting phase to begin.
-* **`FIRST_REPORTING`** (string) Market's designated report was disputed, and users can place stake on Outcomes.
-* **`FIRST_DISPUTE`** (string) Market's first report has been submitted and is allowed to be disputed.
-* **`LAST_REPORTING`** (string) Market's first report was disputed, and users can place stake on Outcomes.
-* **`LAST_DISPUTE`** (string) Market's first report has been submitted and is allowed to be disputed to cause a fork.
+* **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a Designated Report.
+* **`DESIGNATED_DISPUTE`** (string) Market's Designated Report has been submitted and is allowed to be Disputed.
+* **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.
+* **`FIRST_REPORTING`** (string) Market's Designated Report was Disputed, and users can place stake on Outcomes.
+* **`FIRST_DISPUTE`** (string) Market's First Report has been submitted and is allowed to be Disputed.
+* **`LAST_REPORTING`** (string) Market's First Report was disputed, and users can place stake on Outcomes.
+* **`LAST_DISPUTE`** (string) Market's First Report has been submitted and is allowed to be Disputed to cause a fork.
 * **`FORKING`** (string) Market's last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.
 * **`FINALIZED`** (string) An Outcome for the Market has been determined.
 * **`AWAITING_FORK_MIGRATION`** (string) Pending documentation. Possibly deprecated.

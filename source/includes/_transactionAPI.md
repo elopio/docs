@@ -84,7 +84,7 @@ All Transaction API methods accept a single object argument, containing the foll
 
 ### The `tx` Object
 
-The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 16-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the `send` property as `false`.
+The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 20-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the `send` property as `false`.
 
 The other properties that can be specified in the `tx` object are discussed in the [Using Transact Directly](#using-transact-directly) section.
 
@@ -255,7 +255,7 @@ Allows the caller to create a new [Genesis Universe](#genesis-universe). Users m
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -307,7 +307,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.  
     * **`p._orderId`** (string) ID of the Order to cancel, as a 32-byte hexadecimal value. (To get the order ID for a specific order, call the function `augur.api.Order.getOrderId`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -356,10 +356,10 @@ Many of the transaction functions in Augur's smart contracts will only work if t
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoCash to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -425,11 +425,11 @@ Calculates the amount of [attoETH](#atto-prefix) that `p._numberOfShares` attosh
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 16-byte hexadecimal value.
+    * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.
     * **`p._numberOfShares`** (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -452,10 +452,10 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 16-byte hexadecimal value.
-    * **`p._shareHolder`** (string) Ethereum address of the Share holder for which to claim trading proceeds, as a 16-byte hexadecimal value.
+    * **`p._market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 20-byte hexadecimal value.
+    * **`p._shareHolder`** (string) Ethereum address of the Share holder for which to claim trading proceeds, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -526,10 +526,10 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`** (string) Ethereum address of the Market in which to buy Complete Sets, as a 16-byte hexadecimal value.
+    * **`p._market`** (string) Ethereum address of the Market in which to buy Complete Sets, as a 20-byte hexadecimal value.
     * **`p._amount`** (string) Number of [attoShares](#atto-prefix) to purchase of each Outcome, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy a [Complete Set](#complete-set), as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -555,10 +555,10 @@ When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets)
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`** (string) Ethereum address of the Market in which to sell Complete Sets, as a 16-byte hexadecimal value.
+    * **`p._market`** (string) Ethereum address of the Market in which to sell Complete Sets, as a 20-byte hexadecimal value.
     * **`p._amount`** (string) Number of [attoShares](#atto-prefix) to sell of each Outcome, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -627,13 +627,13 @@ This transaction will fail if:
     * **`p._type`** (string) Type of Order to create, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)).
     * **`p._attoshares`** (string) Number of [attoshares](#atto-prefix) to buy or sell, as a hexadecimal string.
     * **`p._displayPrice`** (string) Desired price at which to purchase Shares, in [attoETH](#atto-prefix).
-    * **`p._market`** (string) Market in which to place the Order, as a 16-byte hexadecimal value.
+    * **`p._market`** (string) Market contract address in which to place the Order, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `p._betterOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. The Order ID for `p._worseOrderId` can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Order, as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -711,7 +711,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -741,9 +741,9 @@ This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._redeemer`** (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
+    * **`p._redeemer`** (string) Ethereum address to send redeemed REP/Ether to, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -766,7 +766,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -848,7 +848,7 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 * **`p`** (Object) Parameters object.
     * **`p._attotokens`** (string) Number of Participation Tokens to purchase, in [attotokens](#atto-prefix), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -861,14 +861,14 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 
 ### augur.api.FeeWindow.redeem(p)
 
-Converts any [Participation Tokens](#participation-token) `p._sender` has in the specified [Fee Window](#fee-window) to [Reputation Tokens](#rep), and gives the user any [Reporting Fees](#reporting-fee) he or she is owed in Ether. The parameter `p._sender` is the Ethereum address of the user redeeming the Participation Tokens, as a 16-byte hexadecimal string.
+Converts any [Participation Tokens](#participation-token) `p._sender` has in the specified [Fee Window](#fee-window) to [Reputation Tokens](#rep), and gives the user any [Reporting Fees](#reporting-fee) he or she is owed in Ether. The parameter `p._sender` is the Ethereum address of the user redeeming the Participation Tokens, as a 20-byte hexadecimal string.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._sender`** (string) Ethereum address to send redeemed REP/Ether to, as a 16-byte hexadecimal value.
+    * **`p._sender`** (string) Ethereum address to send redeemed REP/Ether to, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -891,7 +891,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -951,7 +951,7 @@ This transaction will fail if:
     * **`p._amountFillerWants`** (string) Number of [attoShares](#atto-prefix) to Fill, in attoshares, as a hexadecimal string.
     * **`p._tradeGroupID`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to fill the Order, as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -1043,7 +1043,7 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1062,7 +1062,7 @@ Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or 
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1084,9 +1084,9 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._newOwner`** (string) Ethereum address of the desired new owner for the InitialReporter, as a 16-byte hexadecimal value.
+    * **`p._newOwner`** (string) Ethereum address of the desired new owner for the InitialReporter, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1109,7 +1109,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1186,9 +1186,9 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._newOwner`** (string) Ethereum address of the desired new owner of the Mailbox, as a 16-byte hexadecimal value.
+    * **`p._newOwner`** (string) Ethereum address of the desired new owner of the Mailbox, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1211,7 +1211,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1233,9 +1233,9 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._token`** (string) Ethereum address of an [ERC20Basic](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol) token contract, as a 16-byte hexadecimal value.
+    * **`p._token`** (string) Ethereum address of an [ERC20Basic](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/ERC20Basic.sol) token contract, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1380,7 +1380,7 @@ This function will fail if:
     * **`p._invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
     * **`p._amount`**  (string) Amount to contribute to the Dispute Crowdsourcer, in [attoREP](#atto-prefix).
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1404,7 +1404,7 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1431,7 +1431,7 @@ This transaction will fail if:
     * **`p._payoutNumerators`**  (Array.&lt;number>|Array.&lt;string>) Array representing the Market's Payout Set.
     * **`p._invalid`**  (boolean) Whether the Outcome of the Market is Invalid.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1456,7 +1456,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1480,7 +1480,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1503,7 +1503,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1525,9 +1525,9 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._newOwner`**  (string) Ethereum address of the desired new owner of the Market, as a 16-byte hexadecimal value.
+    * **`p._newOwner`**  (string) Ethereum address of the desired new owner of the Market, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1550,7 +1550,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1710,10 +1710,10 @@ Allows `p._spender` to spend up to `p._value` [REP](#rep) for the `msg.sender` o
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoREP to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1732,7 +1732,7 @@ Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy 
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1755,10 +1755,10 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._destination`**  (string) Ethereum address of the destination [Reputation Token](#reputation-token) contract to migrate REP to, as a 16-byte hexadecimal value.
+    * **`p._destination`**  (string) Ethereum address of the destination [Reputation Token](#reputation-token) contract to migrate REP to, as a 20-byte hexadecimal value.
     * **`p._attotokens`**  (string) Number of REP to migrate, in [attoREP](#atto-prefix), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1785,7 +1785,7 @@ This transaction will fail if:
     * **`p._invalid`**  (boolean) Whether the Forked Market is deemed to have an Invalid Outomce in the Child Universe.
     * **`p._attotokens`**  (string) Number of REP to migrate to the Child Universe's ReputationToken contract, in [attoREP](#atto-prefix), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1807,10 +1807,10 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
+    * **`p._to`**  (string) Ethereum address to send REP to, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1833,11 +1833,11 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._from`**  (string) Ethereum address to send REP from, as a 16-byte hexadecimal value.
-    * **`p._to`**  (string) Ethereum address to send REP to, as a 16-byte hexadecimal value.
+    * **`p._from`**  (string) Ethereum address to send REP from, as a 20-byte hexadecimal value.
+    * **`p._to`**  (string) Ethereum address to send REP to, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoREP to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1856,7 +1856,7 @@ Gets the current [Theoretical REP Supply](#theoretical-rep-supply) for this Repu
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1881,7 +1881,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._token`**  (string) Ethereum contract address of a ReputationToken contract that has the same Parent Universe as the one this transaction is being called on.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1965,10 +1965,10 @@ Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.send
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 16-byte hexadecimal value.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoshares to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -1990,10 +1990,10 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
+    * **`p._to`**  (string) Ethereum address to send Shares to, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2016,11 +2016,11 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._from`**  (string) Ethereum address to send Shares from, as a 16-byte hexadecimal value.
-    * **`p._to`**  (string) Ethereum address to send Shares to, as a 16-byte hexadecimal value.
+    * **`p._from`**  (string) Ethereum address to send Shares from, as a 20-byte hexadecimal value.
+    * **`p._to`**  (string) Ethereum address to send Shares to, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2145,7 +2145,7 @@ Buys `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outcom
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`**  (string) Ethereum address of the Market in which to buy Shares, as a 16-byte hexadecimal value.
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy, as a hexadecimal string.
     * **`p._price`**  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.
@@ -2153,7 +2153,7 @@ Buys `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outcom
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy the desired amount of attoShares, as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2172,7 +2172,7 @@ Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outco
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 16-byte hexadecimal value.
+    * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
     * **`p._price`**  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.
@@ -2180,7 +2180,7 @@ Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outco
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoShares](#atto-prefix) to sell, as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2200,7 +2200,7 @@ Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`;
 
 * **`p`** (Object) Parameters object.
     * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x1" for buying or "0x2" for selling.)
-    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string.
     * **`p._price`**  (string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as a hexadecimal string.
@@ -2208,7 +2208,7 @@ Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`;
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy the desired amount of attoShares, or number of [attoShares](#atto-prefix) to sell, as a hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2228,7 +2228,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 
 * **`p`** (Object) Parameters object.
     * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x1" for buying or "0x2" for selling.)
-    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 16-byte hexadecimal value.
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string
     * **`p._price`**  (string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as a hexadecimal string.
@@ -2236,7 +2236,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2285,9 +2285,9 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._market`**  (string) Ethereum address of a Market to claim Shares from, as a 16-byte hexadecimal value.
+    * **`p._market`**  (string) Ethereum address of a Market to claim Shares from, as a 20-byte hexadecimal value.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2638,7 +2638,7 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
         * **`p._extraInfo.tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
         * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
     * **`p.tx`**  (Object) Transaction object.
-        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
+        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
         * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.    
@@ -2672,7 +2672,7 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
         * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
         * **`p._extraInfo.outcomeNames`**  (Array.&lt;string>) Names for possible Outcomes of the Market. (Only used when creating a [Categorical Market](#categorical-market).)
     * **`p.tx`**  (Object) Transaction object.
-        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
+        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
         * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_CATEGORICAL_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2699,7 +2699,7 @@ This transaction will fail if:
     * **`p._parentPayoutNumerators`**  (Array.&lt;number>) Payout Set of the Parent Universe's [Parent Universe's](#parent-universe) [Forked Market](#forked-market).
     * **`p._parentInvalid`**  (boolean) Whether the Parent Universe's Forked Market is [Invalid](#invalid-outcome).
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
@@ -2731,7 +2731,7 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `
         * **`p._extraInfo.tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
         * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
     * **`p.tx`**  (Object) Transaction object.
-        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 16-byte hexadecimal value.
+        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
         * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_SCALAR_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2751,7 +2751,7 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 
 * **`p`** (Object) Parameters object.  
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the [Initial Report](#initial-report) Stake size and will not use any gas. 
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2771,7 +2771,7 @@ Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bon
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2791,7 +2791,7 @@ Gets the amount of Staked [REP](#rep) the [Designated Reporter](#designated-repo
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2811,7 +2811,7 @@ Gets the estimated amount of [attoETH](#atto-prefix) required to create a [Marke
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2831,7 +2831,7 @@ Gets the number by which the total payout amount for a [Market](#market) is divi
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2851,7 +2851,7 @@ Gets the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bon
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2871,7 +2871,7 @@ Gets the amount the [Market Creator](#market-creator) must pay for the [Validity
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2891,7 +2891,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that is curr
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2901,7 +2901,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that is curr
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that is currently active in the specified Universe, as a 16-byte hexadecimal string.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that is currently active in the specified Universe, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateFeeWindowByTimestamp(p)
 
@@ -2912,7 +2912,7 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
 * **`p`** (Object) Parameters object.
     * **`p._timestamp`**  (string) Unix timestamp that falls within the desired Fee Window, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2922,7 +2922,7 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window for the specified timestamp, as a 16-byte hexadecimal string.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window for the specified timestamp, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)
 
@@ -2932,7 +2932,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at 
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2942,7 +2942,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at 
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window starting at the end of the current Fork in the Universe, as a 16-byte hexadecimal string.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window starting at the end of the current Fork in the Universe, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateNextFeeWindow(p)
 
@@ -2952,7 +2952,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2962,7 +2962,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that will be
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that will be active after the current Fee Window ends in the specified Universe, as a 16-byte hexadecimal string.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that will be active after the current Fee Window ends in the specified Universe, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreatePreviousFeeWindow(p)
 
@@ -2972,7 +2972,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that was act
 
 * **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
         * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2982,7 +2982,7 @@ Gets the Ethereum contract address of the [Fee Window](#fee-window) that was act
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that was active just before the current Fee Window in the specified Universe, as a 16-byte hexadecimal string.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window that was active just before the current Fee Window in the specified Universe, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.redeemStake(p)
 
@@ -2991,10 +2991,10 @@ Calls the `redeem` function for all Ethereum contract addresses in the arrays `p
 #### Parameters:
 
 * **`p`** (Object) Parameters object.
-    * **`p._reportingParticipants`**  (Array.&lt;string>) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 16-byte hexadecimal values.
-    * **`p._feeWindows`**  (Array.&lt;string>) Ethereum contract addresses of FeeWindows, as 16-byte hexadecimal values.
+    * **`p._reportingParticipants`**  (Array.&lt;string>) Ethereum contract addresses of DisputeCrowdsourcers and/or InitialReporters, as 20-byte hexadecimal values.
+    * **`p._feeWindows`**  (Array.&lt;string>) Ethereum contract addresses of FeeWindows, as 20-byte hexadecimal values.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 16-byte hexadecimal string.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
