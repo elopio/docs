@@ -84,7 +84,7 @@ All Transaction API methods accept a single object argument, containing the foll
 
 ### The `tx` Object
 
-The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 20-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the `send` property as `false`.
+The `tx` object must contain a `to` property, which is the Ethereum address of the contract containing the transaction function, as a 20-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A `gas` property can also be specified for Transaction API functions (though this should not be specified for Call API functions). The `gas` property represents the gas limit to use when executing the transaction. The `gasPrice` property represents the gas price (in attoETH, or wei) to use. For Transaction API functions that have the `payable` modifier in Augur's Solidity smart contracts, a `value` property must also be specified, which is the amount of [attoETH](#atto-prefix) to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the `send` property as `false`.
 
 The other properties that can be specified in the `tx` object are discussed in the [Using Transact Directly](#using-transact-directly) section.
 
@@ -196,6 +196,8 @@ Transactions can be broadcast to the Ethereum Network by calling `augur.rpc.tran
 
 **Optional:**
 
+- gas: `<gas limit (in attoETH, or wei) to use for transaction (defaults to "0x2fd618")> (hexstring)`
+- gasPrice: `<gas price (in attoETH, or wei) to use for transaction (default value varies)> (hexstring)`
 - send: `<true to sendTransaction, false to call (default)>`
 - from: `<sender's address> (hexstring; defaults to the coinbase account)`
 - returns: `<"int256" (default), "int", "number", "int256[]", "number[]", or "string">`
@@ -2427,7 +2429,6 @@ augur.api.Universe.createScalarMarket({
     // to retrieve new Market's address
   },
   onFailed: function (result) { console.log("onFailed result:", result); },
-
 });
 
 augur.api.Universe.getInitialReportStakeSize({ 
@@ -2863,7 +2864,7 @@ Gets the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bon
 
 * (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Designated Report No-Show Gas Bond, in [attoETH](#atto-prefix), that is paid to the First Public Reporter (in the event of a Designated Report no-show), or refunded to the Market Creator Mailbox (if the Designated Reporter does report). This value will be returned as a stringified unsigned integer.
 
-### augur.api.Universe.getOrCacheValidityBond({p)
+### augur.api.Universe.getOrCacheValidityBond(p)
 
 Gets the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond) when creating a [Market](#market). If the Validity Bond for the current [Fee Window](#fee-window) has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
 
