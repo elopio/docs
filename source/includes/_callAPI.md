@@ -1642,7 +1642,7 @@ Returns the [Order](#order) ID of the best Order of a particular type (either [A
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a Bid Order, "0x2" for an Ask Order).
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a Bid Order, "0x1" for an Ask Order).
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the best Order ID, as a 20-byte hexadecimal string.
     * **`p._outcome`** (string) [Outcome](#outcome) of the Market, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1813,7 +1813,7 @@ Returns the [Order](#order) ID of the worst Order of a particular type (either [
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a Bid Order, "0x2" for an Ask Order). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a Bid Order, "0x1" for an Ask Order). 
     * **`p._market`** (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 20-byte hexadecimal string.
     * **`p._outcome`** (string) [Outcome](#outcome) of the Market, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1829,7 +1829,7 @@ Returns whether a given price is greater than the price of a particular [Order](
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)). 
     * **`p._price`** (string) Price in [attoETH](#atto-prefix) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1845,7 +1845,7 @@ Returns whether a given price is less than the price of a particular [Order](#or
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)). 
     * **`p._price`** (string) Price in [attoETH](#atto-prefix) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._orderId`** (string) ID of Order to compare `p._price` to, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1903,7 +1903,7 @@ Traverses the [Order Book](#order-book) in ascending order and returns an array 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)). 
     * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.
     * **`p._lowestOrderId`** (string) Order ID expected to be a worse price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1919,7 +1919,7 @@ Traverses the [Order Book](#order-book) in descending order and returns an array
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)). 
     * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.
     * **`p._highestOrderId`** (string) Order ID expected to be a better price than `p._price`, as a 32-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1935,7 +1935,7 @@ Returns an array containing the [Order](#order) IDs from the [Order Book](#order
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)). 
+    * **`p._type`** (string) Type of Order, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)). 
     * **`p._price`** (string) Price (in [attoETH](#atto-prefix)) to compare `p._orderId` to, as a hexadecimal string.
     * **`p._bestOrderId`** (string) Best Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.
     * **`p._worstOrderId`** (string) Worst Order ID on the Order Book for `p._type`, as a 32-byte hexadecimal string.

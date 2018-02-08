@@ -2056,7 +2056,7 @@ augur.api.Trade.publicBuy({
   _price: _price,
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
-  _tradeGroupId: _tradeGroupID,
+  _tradeGroupId: _tradeGroupId,
   tx: { 
     to: tradeAddress,
     value: "0x16345785d8a0000", 
@@ -2094,7 +2094,7 @@ augur.api.Trade.publicSell({
 });
 
 augur.api.Trade.publicTrade({
-  _direction: "0x1",
+  _direction: "0x0",
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
@@ -2117,7 +2117,7 @@ augur.api.Trade.publicTrade({
 });
 
 augur.api.Trade.publicTakeBestOrder({
-  _direction: "0x2",
+  _direction: "0x1",
   _market: _market,
   _outcome: _outcome,
   _fxpAmount: _fxpAmount,
@@ -2196,12 +2196,12 @@ Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outco
 
 ### augur.api.Trade.publicTrade(p)
 
-Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `p._direction` must be either "0x1" for buying or "0x2" for selling. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the [Order](#order) is created without any errors.
+Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `p._direction` must be either "0x0" for long or "0x1" for short. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the [Order](#order) is created without any errors.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x1" for buying or "0x2" for selling.)
+    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x0" for long or "0x1" for short.)
     * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string.
@@ -2229,7 +2229,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x1" for buying or "0x2" for selling.)
+    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x0" for long or "0x1" for short.)
     * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
     * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string
