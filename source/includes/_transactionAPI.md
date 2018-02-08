@@ -387,7 +387,7 @@ var _numberOfShares = "0x2b5e3af16b1880000";
 augur.api.ClaimTradingProceeds.calculateProceeds({
   _market: _market,
   _outcome: _outcome,
-  _numberOfShares, _numberOfShares,
+  _numberOfShares: _numberOfShares,
   tx: { 
     to: claimTradingProceedsAddress,
     gas: "0x632ea0" 
@@ -422,7 +422,7 @@ Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](ht
 
 ### augur.api.ClaimTradingProceeds.calculateProceeds(p)
 
-Calculates the amount of [attoETH](#atto-prefix) that `p._numberOfShares` attoshares of `p._outcome` in `p._market` are worth. (NOTE: This calculation does not deduct [Reporting Fees](#reporting-fees.)
+Calculates the amount of [attoETH](#atto-prefix) that `p._numberOfShares` attoshares of `p._outcome` in `p._market` are worth. (NOTE: This calculation does not deduct [Reporting Fees](#reporting-fees).
 
 #### **Parameters:**
 
@@ -1132,6 +1132,7 @@ Mailbox Tx API
 var mailboxAddress = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 augur.api.Mailbox.transferOwnership({
+  _newOwner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   tx: { 
     to: mailboxAddress,
     gas: "0x632ea0" 
@@ -1571,11 +1572,9 @@ Reputation Token Tx API
 // The Ethereum address of Augur's default ReputationToken contract
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
 var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
-// Setting Augur.sol contract as the spender allows Augur to spend REP on 
-// behalf of the address calling `augur.api.ReputationToken.approve`.
+
 var _spender = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
 var _attotokens = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; 
-
 augur.api.ReputationToken.approve({
   _spender: _spender,
   _value: _attotokens,
