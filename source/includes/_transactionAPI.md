@@ -197,7 +197,7 @@ Transactions can be broadcast to the Ethereum Network by calling `augur.rpc.tran
 **Optional:**
 
 - gas: `<gas limit (in attoETH, or wei) to use for transaction (defaults to "0x2fd618")> (hexstring)`
-- gasPrice: `<gas price (in attoETH, or wei) to use for transaction (default value varies)> (hexstring)`
+- gasPrice: `<gas price (in attoETH, or wei) to use for transaction (default value varies). If transactions are taking a while, using 40-50 gwei as the gas price is recommended.> (hexstring)`
 - send: `<true to sendTransaction, false to call (default)>`
 - from: `<sender's address> (hexstring; defaults to the coinbase account)`
 - returns: `<"int256" (default), "int", "number", "int256[]", "number[]", or "string">`
@@ -588,13 +588,13 @@ var _worseOrderId = "0x91c28a31378e925ea122ea73e8c81baaf5c731d408487f6884d2e4c81
 
 augur.api.CreateOrder.publicCreateOrder({
   _type: "0x0",
-  _attoshares: "0x9184e72a000",
-  _displayPrice: "0x7d0",
-  _market: "0x800c094ac9bc324cafbb405ff85a93f28d75d4b0",
-  _outcome: "0x1",
+  _attoshares: "0x5af3107a4000",
+  _displayPrice: "0x64",
+  _market: "0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017",
+  _outcome: "0x0",
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
-  _tradeGroupId: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  _tradeGroupId: "0x0000000000000000000000000000000000000000000000000000000000000000",
   tx: { 
     to: createOrderAddress,
     value: "0x470de4df820000", 
@@ -617,7 +617,7 @@ Creates a new [Bid Order](#bid-order) or [Ask Order](#ask-order) on the [Order B
 
 This transaction will fail if:
 
-* `p._type` is not a valid value of 1 or 2.
+* `p._type` is not a valid value of 0 or 1.
 * `p._attoshares` is less than 0.
 * `p._market` is undefined.
 * `p._outcome` is less than 0 or greater than the total number of Outcomes for `p._market`.
@@ -626,7 +626,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._type`** (string) Type of Order to create, as a hexadecimal string ("0x1" for a [Bid Order](#bid-order), "0x2" for an [Ask Order](#ask-order)).
+    * **`p._type`** (string) Type of Order to create, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)).
     * **`p._attoshares`** (string) Number of [attoshares](#atto-prefix) to buy or sell, as a hexadecimal string.
     * **`p._displayPrice`** (string) Desired price at which to purchase Shares, in [attoETH](#atto-prefix).
     * **`p._market`** (string) Market contract address in which to place the Order, as a 20-byte hexadecimal value.
@@ -914,7 +914,7 @@ Fill Order Tx API
 var fillOrderAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 
 var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
-var _amountFillerWants = "0x8ac7230489e80000"; // 10.0
+var _amountFillerWants = "0x8ac7230489e80000"; // 10.0 shares
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000002";
 
 augur.api.FillOrder.publicFillOrder({
@@ -950,7 +950,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.    
     * **`p._orderID`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
-    * **`p._amountFillerWants`** (string) Number of [attoShares](#atto-prefix) to Fill, in attoshares, as a hexadecimal string.
+    * **`p._amountFillerWants`** (string) Number of [Shares](#share) to Fill, in attoshares, as a hexadecimal string.
     * **`p._tradeGroupID`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
@@ -2176,7 +2176,7 @@ Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outco
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
-    * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of Shares to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
     * **`p._price`**  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
