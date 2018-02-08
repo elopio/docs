@@ -608,6 +608,9 @@ Initial Reporter Call API
 -------------------------
 ```javascript
 // Initial Reporter Contract Call API Examples:
+
+// The Ethereum address of a Market's InitialReporter contract 
+// can be obtained by calling `augur.api.Market.getInitialReporter`.
 var initialReporter = "0xbcb6eaefcfaf7ea1e17c4768a554d57800699ed3";
 
 augur.api.InitialReporter.designatedReporterShowed({ 
@@ -922,6 +925,15 @@ augur.api.Market.designatedReporterWasCorrect({
 // example output:
 true
 
+augur.api.Market.getCrowdsourcer({ 
+  _payoutDistributionHash: "0x5580ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a",
+  tx: { to: market } 
+}, function (error, crowdsourcer) { 
+  console.log(crowdsourcer); 
+});
+// example output:
+"0xbbb0cc6b4e89303e451c9b852827b5791667face"
+
 augur.api.Market.getDenominationToken({ 
   tx: { to: market } 
 }, function (error, denominationToken) { 
@@ -971,6 +983,14 @@ augur.api.Market.getForkingMarket({
 // example output:
 "0x1230cc6b4e89303e451c9b852827b5791667f234"
 
+augur.api.Market.getInitialReporter({ 
+  tx: { to: market } 
+}, function (error, initialReporter) { 
+  console.log(initialReporter); 
+});
+// example output:
+"0xaad0cc6b4e89303e451c9b852827b5791667fddd"
+
 augur.api.Market.getMarketCreatorMailbox({ 
   tx: { to: market } 
 }, function (error, marketCreatorMailbox) { 
@@ -1002,6 +1022,15 @@ augur.api.Market.getNumTicks({
 });
 // example output:
 "1000"
+
+augur.api.Market.getReportingParticipant({ 
+  _index: "0x0",
+  tx: { to: market } 
+}, function (error, reportingParticipant) { 
+  console.log(reportingParticipant); 
+});
+// example output:
+"0xdda0cc6b4e89303e451c9b852827b5791667faaa"
 
 augur.api.Market.getReputationToken({ 
   tx: { to: market } 
@@ -1056,11 +1085,19 @@ augur.api.Market.getWinningPayoutDistributionHash({
 augur.api.Market.getWinningPayoutNumerator({
   _outcome: "0x0",
   tx: { to: market },
-}, function (error, getWinningPayoutNumerator) { 
-  console.log(getWinningPayoutNumerator); 
+}, function (error, winningPayoutNumerator) { 
+  console.log(winningPayoutNumerator); 
 });
 // example output:
 "1000"
+
+augur.api.Market.getWinningReportingParticipant({ 
+  tx: { to: market } 
+}, function (error, winningReportingParticipant) { 
+  console.log(winningReportingParticipant); 
+});
+// example output:
+"0xbbb0cc6b4e89303e451c9b852827b5791667face"
 
 augur.api.Market.isContainerForReportingParticipant({
   _shadyReportingParticipant: "0x18b17188ce3c491f6ab4427258d92452be5c8054",
@@ -1149,6 +1186,22 @@ Returns whether the [Payout Distribution Hash](#payout-distribution-hash) submit
 
 * (boolean) `true` if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the specified Market, or `false` otherwise.
 
+### augur.api.Market.getCrowdsourcer(p, callback)
+
+Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given [Payout Distribution Hash](#payout-distribution-hash).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+    * **`p._payoutDistributionHash`** (string) Payout Distribution Hash for the Outcome of the Dispute Crowdsourcer, as a 32-byte hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given Payout Distribution Hash, as a 20-byte hexadecimal string.
+
 ### augur.api.Market.getDenominationToken(p, callback)
 
 Returns the Ethereum contract address of the token used to denominate the specified [Market](#market). A Denomination Token is the [ERC-20 Token](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) used as the currency to trade on the [Outcome](#outcome) of a [Market](#market). Currently, this function will always return the address of a [Cash](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) contract; however, Augur will eventually support other types of Denomination Tokens.
@@ -1201,6 +1254,7 @@ Returns the Ethereum contract address of the [Market's](#market) [Fee Window](#f
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
+    * **`p._feeWindowId`** (string) ID of the Fee Window, as a hexadecimal string. 
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
@@ -1238,6 +1292,21 @@ Returns the Ethereum contract address of the [Forked Market](#forked-market) for
 #### **Returns:**
 
 * (string) Ethereum contract address of the Forked Market for the Universe in which the specified Market exists, as a 20-byte hexadecimal string.
+
+### augur.api.Market.getInitialReporter(p, callback)
+
+Returns the Ethereum address of the InitialReporter contract for a given [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the Market's InitialReporter contract, as a 20-byte hexadecimal string.
 
 ### augur.api.Market.getMarketCreatorMailbox(p, callback)
 
@@ -1298,6 +1367,24 @@ Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#mar
 #### **Returns:**
 
 * (string) Number of Ticks for the Market, as a stringified unsigned integer.
+
+### augur.api.Market.getReportingParticipant(p, callback)
+
+Within Augur's code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an [Initial Report](#initial-report) is submitted or a [Dispute Crowdsourcer](#crowdsourcer) fills its [Dispute Bond](#dispute-bond), the corresponding [Market](#market) pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the [Tentative Outcome](#tentative-outcome). The function `augur.api.Market.getReportingParticipant` returns the Ethereum address of the contract at a specific index in that array.
+
+Note: To get the address of the ReportingParticipant that is currently winning in a Market, call `augur.api.Market.getWinningReportingParticipant`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+    * **`p._index`** (string) Index of the ReportingParticipant in the Market's array of ReportingParticipant contracts, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of a ReportingParticipant contract for the Market, as a 20-byte hexadecimal string.
 
 ### augur.api.Market.getReputationToken(p, callback)
 
@@ -1406,6 +1493,21 @@ Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) i
 #### **Returns:**
 
 * (string) Winning Payout Numerator for an Outcome in the Market, as a stringified unsigned integer.
+
+### augur.api.Market.getWinningReportingParticipant(p, callback)
+
+Within Augur's code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an [Initial Report](#initial-report) is submitted or a [Dispute Crowdsourcer](#crowdsourcer) fills its [Dispute Bond](#dispute-bond), the corresponding [Market](#market) pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the [Tentative Outcome](#tentative-outcome). The function `augur.api.Market.getWinningReportingParticipant` returns the Ethereum address of the ReportingParticipant contract that corresponds to the Market's Tentative Outcome.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Ethereum address of the ReportingParticipant contract corresponding to the Market's Tentative Outcome, as a 20-byte hexadecimal string.
 
 ### augur.api.Market.isContainerForReportingParticipant(p, callback)
 

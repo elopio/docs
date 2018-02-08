@@ -969,6 +969,9 @@ Initial Reporter Tx API
 ----------------------
 ```javascript
 // Initial Reporter Transaction API Examples:
+
+// The Ethereum address of a Market's InitialReporter contract 
+// can be obtained by calling `augur.api.Market.getInitialReporter`.
 var initialReporterAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 
 augur.api.InitialReporter.fork({
