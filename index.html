@@ -5688,7 +5688,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a Bid Order, &ldquo;0x2&rdquo; for an Ask Order).</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a Bid Order, &ldquo;0x1&rdquo; for an Ask Order).</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the best Order ID, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) <a href="#outcome">Outcome</a> of the Market, as a hexadecimal string.</li>
 </ul></li>
@@ -5943,7 +5943,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a Bid Order, &ldquo;0x2&rdquo; for an Ask Order). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a Bid Order, &ldquo;0x1&rdquo; for an Ask Order). </li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum contract address of the Market for which to get the worst Order ID, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) <a href="#outcome">Outcome</a> of the Market, as a hexadecimal string.</li>
 </ul></li>
@@ -5966,7 +5966,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
 <li><strong><code class="prettyprint">p._price</code></strong> (string) Price in <a href="#atto-prefix">attoETH</a> to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
@@ -5989,7 +5989,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
 <li><strong><code class="prettyprint">p._price</code></strong> (string) Price in <a href="#atto-prefix">attoETH</a> to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._orderId</code></strong> (string) ID of Order to compare <code class="prettyprint">p._price</code> to, as a 32-byte hexadecimal string.</li>
 </ul></li>
@@ -6052,7 +6052,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
 <li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._lowestOrderId</code></strong> (string) Order ID expected to be a worse price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
@@ -6075,7 +6075,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
 <li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) in the Order Book for which to find a better Order ID and worse Order ID, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._highestOrderId</code></strong> (string) Order ID expected to be a better price than <code class="prettyprint">p._price</code>, as a 32-byte hexadecimal string.</li>
 </ul></li>
@@ -6098,7 +6098,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>). </li>
 <li><strong><code class="prettyprint">p._price</code></strong> (string) Price (in <a href="#atto-prefix">attoETH</a>) to compare <code class="prettyprint">p._orderId</code> to, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._bestOrderId</code></strong> (string) Best Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._worstOrderId</code></strong> (string) Worst Order ID on the Order Book for <code class="prettyprint">p._type</code>, as a 32-byte hexadecimal string.</li>
@@ -9691,7 +9691,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
-  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupID</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
@@ -9729,7 +9729,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTrade</span><span class="p">({</span>
-  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
@@ -9752,7 +9752,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTakeBestOrder</span><span class="p">({</span>
-  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x2"</span><span class="p">,</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
@@ -9851,7 +9851,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-trade-publictrade-p">augur.api.Trade.publicTrade(p)</h3>
 
-<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">p._direction</code> must be either &ldquo;0x1&rdquo; for buying or &ldquo;0x2&rdquo; for selling. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the <a href="#order">Order</a> is created without any errors.</p>
+<p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">p._direction</code> must be either &ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the <a href="#order">Order</a> is created without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9859,7 +9859,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x1&rdquo; for buying or &ldquo;0x2&rdquo; for selling.)</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string.</li>
@@ -9897,7 +9897,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x1&rdquo; for buying or &ldquo;0x2&rdquo; for selling.)</li>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string</li>
