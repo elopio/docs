@@ -7278,7 +7278,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="the-tx-object">The <code class="prettyprint">tx</code> Object</h3>
 
-<p>The <code class="prettyprint">tx</code> object must contain a <code class="prettyprint">to</code> property, which is the Ethereum address of the contract containing the transaction function, as a 20-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A <code class="prettyprint">gas</code> property must also be specified for Transaction API functions (though this should not be specified for Call API functions). The <code class="prettyprint">gas</code> property represents the gas limit to use when executing the transaction. For Transaction API functions that have the <code class="prettyprint">payable</code> modifier in Augur&rsquo;s Solidity smart contracts, a <code class="prettyprint">value</code> property must also be specified, which is the amount of <a href="#atto-prefix">attoETH</a> to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the <code class="prettyprint">send</code> property as <code class="prettyprint">false</code>.</p>
+<p>The <code class="prettyprint">tx</code> object must contain a <code class="prettyprint">to</code> property, which is the Ethereum address of the contract containing the transaction function, as a 20-byte hexadecimal string. This allows augur.js to know which contract to run the transaction on. A <code class="prettyprint">gas</code> property can also be specified for Transaction API functions (though this should not be specified for Call API functions). The <code class="prettyprint">gas</code> property represents the gas limit to use when executing the transaction. The <code class="prettyprint">gasPrice</code> property represents the gas price (in attoETH, or wei) to use. For Transaction API functions that have the <code class="prettyprint">payable</code> modifier in Augur&rsquo;s Solidity smart contracts, a <code class="prettyprint">value</code> property must also be specified, which is the amount of <a href="#atto-prefix">attoETH</a> to send to the function. Some of the Transaction API functions can either be made as a call (which will return a cached value and not use gas) or as a transaction (which will calculate the value and use gas to do so). By default, augur.js will call these functions as transactions, but they can be made as calls instead by specifying the <code class="prettyprint">send</code> property as <code class="prettyprint">false</code>.</p>
 
 <p>The other properties that can be specified in the <code class="prettyprint">tx</code> object are discussed in the <a href="#using-transact-directly">Using Transact Directly</a> section.</p>
 
@@ -7391,6 +7391,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><strong>Optional:</strong></p>
 
 <ul>
+<li>gas: <code class="prettyprint">&lt;gas limit (in attoETH, or wei) to use for transaction (defaults to &quot;0x2fd618&quot;)&gt; (hexstring)</code></li>
+<li>gasPrice: <code class="prettyprint">&lt;gas price (in attoETH, or wei) to use for transaction (default value varies). If transactions are taking a while, using 40-50 gwei as the gas price is recommended.&gt; (hexstring)</code></li>
 <li>send: <code class="prettyprint">&lt;true to sendTransaction, false to call (default)&gt;</code></li>
 <li>from: <code class="prettyprint">&lt;sender&#39;s address&gt; (hexstring; defaults to the coinbase account)</code></li>
 <li>returns: <code class="prettyprint">&lt;&quot;int256&quot; (default), &quot;int&quot;, &quot;number&quot;, &quot;int256[]&quot;, &quot;number[]&quot;, or &quot;string&quot;&gt;</code></li>
@@ -7845,13 +7847,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CreateOrder</span><span class="p">.</span><span class="nx">publicCreateOrder</span><span class="p">({</span>
   <span class="na">_type</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-  <span class="na">_attoshares</span><span class="p">:</span> <span class="s2">"0x9184e72a000"</span><span class="p">,</span>
-  <span class="na">_displayPrice</span><span class="p">:</span> <span class="s2">"0x7d0"</span><span class="p">,</span>
-  <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x800c094ac9bc324cafbb405ff85a93f28d75d4b0"</span><span class="p">,</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">_attoshares</span><span class="p">:</span> <span class="s2">"0x5af3107a4000"</span><span class="p">,</span>
+  <span class="na">_displayPrice</span><span class="p">:</span> <span class="s2">"0x64"</span><span class="p">,</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
-  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">createOrderAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="s2">"0x470de4df820000"</span><span class="p">,</span> 
@@ -7875,7 +7877,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>This transaction will fail if:</p>
 
 <ul>
-<li><code class="prettyprint">p._type</code> is not a valid value of 1 or 2.</li>
+<li><code class="prettyprint">p._type</code> is not a valid value of 0 or 1.</li>
 <li><code class="prettyprint">p._attoshares</code> is less than 0.</li>
 <li><code class="prettyprint">p._market</code> is undefined.</li>
 <li><code class="prettyprint">p._outcome</code> is less than 0 or greater than the total number of Outcomes for <code class="prettyprint">p._market</code>.</li>
@@ -7888,7 +7890,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order to create, as a hexadecimal string (&ldquo;0x1&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x2&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order to create, as a hexadecimal string (&ldquo;0x0&rdquo; for a <a href="#bid-order">Bid Order</a>, &ldquo;0x1&rdquo; for an <a href="#ask-order">Ask Order</a>).</li>
 <li><strong><code class="prettyprint">p._attoshares</code></strong> (string) Number of <a href="#atto-prefix">attoshares</a> to buy or sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._displayPrice</code></strong> (string) Desired price at which to purchase Shares, in <a href="#atto-prefix">attoETH</a>.</li>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Market contract address in which to place the Order, as a 20-byte hexadecimal value.</li>
@@ -8245,7 +8247,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">fillOrderAddress</span> <span class="o">=</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_amountFillerWants</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0</span>
+<span class="kd">var</span> <span class="nx">_amountFillerWants</span> <span class="o">=</span> <span class="s2">"0x8ac7230489e80000"</span><span class="p">;</span> <span class="c1">// 10.0 shares</span>
 <span class="kd">var</span> <span class="nx">_tradeGroupId</span> <span class="o">=</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000002"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FillOrder</span><span class="p">.</span><span class="nx">publicFillOrder</span><span class="p">({</span>
@@ -8286,7 +8288,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._orderID</code></strong> (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to Fill, in attoshares, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amountFillerWants</code></strong> (string) Number of <a href="#share">Shares</a> to Fill, in attoshares, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupID</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
@@ -9822,7 +9824,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, in <a href="#atto-prefix">attoshares</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of Shares to sell, in <a href="#atto-prefix">attoshares</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -10110,7 +10112,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="c1">// to retrieve new Market's address</span>
   <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getInitialReportStakeSize</span><span class="p">({</span> 
@@ -10657,7 +10658,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will return the Designated Report No-Show Gas Bond, in <a href="#atto-prefix">attoETH</a>, that is paid to the First Public Reporter (in the event of a Designated Report no-show), or refunded to the Market Creator Mailbox (if the Designated Reporter does report). This value will be returned as a stringified unsigned integer.</li>
 </ul>
 
-<h3 id="augur-api-universe-getorcachevaliditybond-p">augur.api.Universe.getOrCacheValidityBond({p)</h3>
+<h3 id="augur-api-universe-getorcachevaliditybond-p">augur.api.Universe.getOrCacheValidityBond(p)</h3>
 
 <p>Gets the amount the <a href="#market-creator">Market Creator</a> must pay for the <a href="#validity-bond">Validity Bond</a> when creating a <a href="#market">Market</a>. If the Validity Bond for the current <a href="#fee-window">Fee Window</a> has not already been cached in the Universe contract, this function will cache it. (This amount will be refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the Market is not invalid.)</p>
 
