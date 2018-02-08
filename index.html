@@ -4283,6 +4283,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="initial-reporter-call-api">Initial Reporter Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Initial Reporter Contract Call API Examples:</span>
+
+<span class="c1">// The Ethereum address of a Market's InitialReporter contract </span>
+<span class="c1">// can be obtained by calling `augur.api.Market.getInitialReporter`.</span>
 <span class="kd">var</span> <span class="nx">initialReporter</span> <span class="o">=</span> <span class="s2">"0xbcb6eaefcfaf7ea1e17c4768a554d57800699ed3"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">designatedReporterShowed</span><span class="p">({</span> 
@@ -4715,6 +4718,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="kc">true</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getCrowdsourcer</span><span class="p">({</span> 
+  <span class="na">_payoutDistributionHash</span><span class="p">:</span> <span class="s2">"0x5580ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">crowdsourcer</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">crowdsourcer</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xbbb0cc6b4e89303e451c9b852827b5791667face"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDenominationToken</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">denominationToken</span><span class="p">)</span> <span class="p">{</span> 
@@ -4764,6 +4776,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0x1230cc6b4e89303e451c9b852827b5791667f234"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getInitialReporter</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">initialReporter</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">initialReporter</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xaad0cc6b4e89303e451c9b852827b5791667fddd"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getMarketCreatorMailbox</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">marketCreatorMailbox</span><span class="p">)</span> <span class="p">{</span> 
@@ -4795,6 +4815,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReportingParticipant</span><span class="p">({</span> 
+  <span class="na">_index</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reportingParticipant</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reportingParticipant</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xdda0cc6b4e89303e451c9b852827b5791667faaa"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReputationToken</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
@@ -4849,11 +4878,19 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutNumerator</span><span class="p">({</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">getWinningPayoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getWinningPayoutNumerator</span><span class="p">);</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningPayoutNumerator</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">winningPayoutNumerator</span><span class="p">);</span> 
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"1000"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningReportingParticipant</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">winningReportingParticipant</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">winningReportingParticipant</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xbbb0cc6b4e89303e451c9b852827b5791667face"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">isContainerForReportingParticipant</span><span class="p">({</span>
   <span class="na">_shadyReportingParticipant</span><span class="p">:</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">,</span>
@@ -4974,6 +5011,32 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(boolean) <code class="prettyprint">true</code> if the Payout Distribution Hash submitted in the Designated Report is the same as the winning Payout Distribution Hash for the specified Market, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
+<h3 id="augur-api-market-getcrowdsourcer-p-callback">augur.api.Market.getCrowdsourcer(p, callback)</h3>
+
+<p>Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._payoutDistributionHash</code></strong> (string) Payout Distribution Hash for the Outcome of the Dispute Crowdsourcer, as a 32-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given Payout Distribution Hash, as a 20-byte hexadecimal string.</li>
+</ul>
+
 <h3 id="augur-api-market-getdenominationtoken-p-callback">augur.api.Market.getDenominationToken(p, callback)</h3>
 
 <p>Returns the Ethereum contract address of the token used to denominate the specified <a href="#market">Market</a>. A Denomination Token is the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token</a> used as the currency to trade on the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a>. Currently, this function will always return the address of a <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash</a> contract; however, Augur will eventually support other types of Denomination Tokens.</p>
@@ -5059,6 +5122,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
+<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (string) ID of the Fee Window, as a hexadecimal string. </li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -5122,6 +5186,31 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Ethereum contract address of the Forked Market for the Universe in which the specified Market exists, as a 20-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getinitialreporter-p-callback">augur.api.Market.getInitialReporter(p, callback)</h3>
+
+<p>Returns the Ethereum address of the InitialReporter contract for a given <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the Market&rsquo;s InitialReporter contract, as a 20-byte hexadecimal string.</li>
 </ul>
 
 <h3 id="augur-api-market-getmarketcreatormailbox-p-callback">augur.api.Market.getMarketCreatorMailbox(p, callback)</h3>
@@ -5222,6 +5311,34 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Number of Ticks for the Market, as a stringified unsigned integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getreportingparticipant-p-callback">augur.api.Market.getReportingParticipant(p, callback)</h3>
+
+<p>Within Augur&rsquo;s code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an <a href="#initial-report">Initial Report</a> is submitted or a <a href="#crowdsourcer">Dispute Crowdsourcer</a> fills its <a href="#dispute-bond">Dispute Bond</a>, the corresponding <a href="#market">Market</a> pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the <a href="#tentative-outcome">Tentative Outcome</a>. The function <code class="prettyprint">augur.api.Market.getReportingParticipant</code> returns the Ethereum address of the contract at a specific index in that array.</p>
+
+<p>Note: To get the address of the ReportingParticipant that is currently winning in a Market, call <code class="prettyprint">augur.api.Market.getWinningReportingParticipant</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._index</code></strong> (string) Index of the ReportingParticipant in the Market&rsquo;s array of ReportingParticipant contracts, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of a ReportingParticipant contract for the Market, as a 20-byte hexadecimal string.</li>
 </ul>
 
 <h3 id="augur-api-market-getreputationtoken-p-callback">augur.api.Market.getReputationToken(p, callback)</h3>
@@ -5400,6 +5517,31 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Winning Payout Numerator for an Outcome in the Market, as a stringified unsigned integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getwinningreportingparticipant-p-callback">augur.api.Market.getWinningReportingParticipant(p, callback)</h3>
+
+<p>Within Augur&rsquo;s code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an <a href="#initial-report">Initial Report</a> is submitted or a <a href="#crowdsourcer">Dispute Crowdsourcer</a> fills its <a href="#dispute-bond">Dispute Bond</a>, the corresponding <a href="#market">Market</a> pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the <a href="#tentative-outcome">Tentative Outcome</a>. The function <code class="prettyprint">augur.api.Market.getWinningReportingParticipant</code> returns the Ethereum address of the ReportingParticipant contract that corresponds to the Market&rsquo;s Tentative Outcome.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Ethereum address of the ReportingParticipant contract corresponding to the Market&rsquo;s Tentative Outcome, as a 20-byte hexadecimal string.</li>
 </ul>
 
 <h3 id="augur-api-market-iscontainerforreportingparticipant-p-callback">augur.api.Market.isContainerForReportingParticipant(p, callback)</h3>
@@ -7604,7 +7746,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateProceeds</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="nx">_numberOfShares</span><span class="p">,</span> <span class="nx">_numberOfShares</span><span class="p">,</span>
+  <span class="na">_numberOfShares</span><span class="p">:</span> <span class="nx">_numberOfShares</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">claimTradingProceedsAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -7639,7 +7781,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-claimtradingproceeds-calculateproceeds-p">augur.api.ClaimTradingProceeds.calculateProceeds(p)</h3>
 
-<p>Calculates the amount of <a href="#atto-prefix">attoETH</a> that <code class="prettyprint">p._numberOfShares</code> attoshares of <code class="prettyprint">p._outcome</code> in <code class="prettyprint">p._market</code> are worth. (NOTE: This calculation does not deduct <a href="#reporting-fees.">Reporting Fees</a></p>
+<p>Calculates the amount of <a href="#atto-prefix">attoETH</a> that <code class="prettyprint">p._numberOfShares</code> attoshares of <code class="prettyprint">p._outcome</code> in <code class="prettyprint">p._market</code> are worth. (NOTE: This calculation does not deduct <a href="#reporting-fees">Reporting Fees</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8312,6 +8454,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="initial-reporter-tx-api">Initial Reporter Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Initial Reporter Transaction API Examples:</span>
+
+<span class="c1">// The Ethereum address of a Market's InitialReporter contract </span>
+<span class="c1">// can be obtained by calling `augur.api.Market.getInitialReporter`.</span>
 <span class="kd">var</span> <span class="nx">initialReporterAddress</span> <span class="o">=</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">fork</span><span class="p">({</span>
@@ -8519,6 +8664,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">mailboxAddress</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Mailbox</span><span class="p">.</span><span class="nx">transferOwnership</span><span class="p">({</span>
+  <span class="na">_newOwner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">mailboxAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -9086,11 +9232,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// The Ethereum address of Augur's default ReputationToken contract</span>
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
-<span class="c1">// Setting Augur.sol contract as the spender allows Augur to spend REP on </span>
-<span class="c1">// behalf of the address calling `augur.api.ReputationToken.approve`.</span>
+
 <span class="kd">var</span> <span class="nx">_spender</span> <span class="o">=</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">;</span> 
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
   <span class="na">_spender</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
