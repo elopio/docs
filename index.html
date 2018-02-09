@@ -9740,11 +9740,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">shareTokenAddress</span> <span class="o">=</span> <span class="s2">"0x925bee44fec28deb228d2251e1a9d32f7c73ebed"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_spender</span> <span class="o">=</span> <span class="s2">"0x01f50356c280cd886dd058210937160c73700a4b"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_from</span> <span class="o">=</span> <span class="s2">"0x1a05071893b764109f0bbc5b75d78e3e38b69ab3"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x56bc75e2d63100000"</span><span class="p">;</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
-  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="s2">"0x01f50356c280cd886dd058210937160c73700a4b"</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
@@ -9760,7 +9759,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
-  <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
+  <span class="na">_to</span><span class="p">:</span> <span class="s2">"0x01f50356c280cd886dd058210937160c73700a4b"</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
@@ -9775,10 +9774,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">_from</span> <span class="o">=</span> <span class="s2">"0x4b01721f0244e7c5b5f63c20942850e447f5a5ee"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">({</span>
-  <span class="na">_from</span><span class="p">:</span> <span class="nx">_from</span><span class="p">,</span>
-  <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
+  <span class="na">_from</span><span class="p">:</span> <span class="s2">"0x4b01721f0244e7c5b5f63c20942850e447f5a5ee"</span><span class="p">,</span>
+  <span class="na">_to</span><span class="p">:</span> <span class="s2">"0xa1f50356c280cd886dd058210937160c73700a4b"</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
@@ -10013,6 +10011,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Buys <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">p._fxpAmount</code> of <a href="#atto-prefix">attoShares</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The value of the order (calculated as <code class="prettyprint">p._price</code> * <code class="prettyprint">p._fxpAmount</code>) is less than the minimum value for a Buy order, which is 10**14 attoETH.</li>
+</ul>
+
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -10048,7 +10052,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-trade-publicsell-p">augur.api.Trade.publicSell(p)</h3>
 
-<p>Sells <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">p._fxpAmount</code> of <a href="#atto-prefix">attoShares</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Sells <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to sell <code class="prettyprint">p._fxpAmount</code> of [attoShares]. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price with respect to <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The value of the Order (calculated as <code class="prettyprint">p._price</code> * (Market&rsquo;s number of Ticks - <code class="prettyprint">p._fxpAmount</code>)) is less than the minimum value for a Sell Order, which is 10**14 attoETH.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
