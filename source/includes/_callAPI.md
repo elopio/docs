@@ -66,6 +66,65 @@ Augur keeps track of its [Genesis Universes](#genesis-universe) and all [Child U
 
 * (boolean) `true` if the specified Universe is in Augur's list of known Universe, or `false` otherwise.
 
+
+Claim Trading Proceeds Call API
+---------------
+```javascript
+// Claim Trading Proceeds Call API Examples:
+var _market = "0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017";
+
+augur.api.ClaimTradingProceeds.calculateCreatorFee({
+  _market: _market,
+  _amount: "0xc3280e4b4b",
+}, function(error, creatorFee) {
+  console.log(creatorFee); 
+});
+// example output:
+"1"
+
+augur.api.ClaimTradingProceeds.calculateProceeds({
+  _market: _market,
+  _outcome: "0x0",
+  _numberOfShares: "0x2b5e3af16b1880000"
+}, function(error, proceeds) {
+  console.log(proceeds); 
+});
+// example output:
+"122"
+```
+Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
+
+### augur.api.ClaimTradingProceeds.calculateCreatorFee(p)
+
+Calculates the [Creator Fee](#creator-fee) that will be paid when settling a specific number of [Shares](#share) in a given [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._market`** (string) Ethereum address of the Market in which to calculate the Creator Fee, as a 20-byte hexadecimal value.
+    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Creator Fee, in attoETH, as a stringified unsigned integer.
+
+### augur.api.ClaimTradingProceeds.calculateProceeds(p)
+
+Calculates the amount of [attoETH](#atto-prefix) that a number of [Shares](#share) in a particular [Outcome](#outcome) of a given [Market](#market) are worth. (NOTE: This calculation does not deduct [Reporting Fees](#reporting-fees).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.
+    * **`p._outcome`** (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.
+    * **`p._numberOfShares`** (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Amount of attoETH that a number of Shares in a particular Outcome of a given Market are worth, as a stringified unsigned integer.
+
 Controller Call API
 ---------------
 ```javascript
@@ -1481,6 +1540,10 @@ Returns the winning [Payout Distribution Hash](#payout-distribution-hash) for a 
 ### augur.api.Market.getWinningPayoutNumerator(p, callback)
 
 Returns the winning [Payout Numerator](#payout-set) for an [Outcome](#outcome) in a particular [Market](#market).
+
+This call will fail if:
+
+* The specified Market is not [Finalized](#finalized-market).
 
 #### **Parameters:**
 

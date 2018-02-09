@@ -380,28 +380,10 @@ Claim Trading Proceeds Tx API
 // The Ethereum address of Augur's default ClaimTradingProceeds contract
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
 var claimTradingProceedsAddress = "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce";
+
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
-
-var _outcome = "0x1";
-var _numberOfShares = "0x2b5e3af16b1880000";
-augur.api.ClaimTradingProceeds.calculateProceeds({
-  _market: _market,
-  _outcome: _outcome,
-  _numberOfShares: _numberOfShares,
-  tx: { 
-    to: claimTradingProceedsAddress,
-    gas: "0x632ea0" 
-  },
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
 var _shareHolder = "0x5678ff3e9ce1c0459b309fac6dd4e69229b91567";
+
 augur.api.ClaimTradingProceeds.claimTradingProceeds({
   _market: _market,
   _shareHolder: _shareHolder,
@@ -419,28 +401,6 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 });
 ```
 Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
-
-### augur.api.ClaimTradingProceeds.calculateProceeds(p)
-
-Calculates the amount of [attoETH](#atto-prefix) that `p._numberOfShares` attoshares of `p._outcome` in `p._market` are worth. (NOTE: This calculation does not deduct [Reporting Fees](#reporting-fees).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.
-    * **`p._outcome`** (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.
-    * **`p._numberOfShares`** (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
@@ -1350,7 +1310,8 @@ augur.api.Market.migrateThroughOneFork({
   onFailed: function (result) { console.log(result); }
 });
 
-augur.api.Market.withdrawInEmergency {
+augur.api.Market.transferOwnership({
+  _newOwner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   tx: { 
     to: marketAddress,
     gas: "0x632ea0" 
@@ -1362,7 +1323,21 @@ augur.api.Market.withdrawInEmergency {
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
-};
+});
+
+augur.api.Market.withdrawInEmergency({
+  tx: { 
+    to: marketAddress,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
@@ -1576,11 +1551,9 @@ Reputation Token Tx API
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
 var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
 
-var _spender = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
-var _attotokens = "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"; 
 augur.api.ReputationToken.approve({
-  _spender: _spender,
-  _value: _attotokens,
+  _spender: "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+  _value: "0xff",
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
@@ -1643,8 +1616,8 @@ augur.api.ReputationToken.migrateOutByPayout({
 });
 
 augur.api.ReputationToken.transfer({
-  _to: _spender,
-  _value: _attotokens,
+  _to: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  _value: "0xff",
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
@@ -1660,8 +1633,8 @@ augur.api.ReputationToken.transfer({
 
 augur.api.ReputationToken.transferFrom({
   _from: "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3",
-  _to: _spender,
-  _value: _attotokens,
+  _to: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  _value: "0xff",
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
