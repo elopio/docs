@@ -3531,6 +3531,76 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(boolean) <code class="prettyprint">true</code> if the specified Universe is in Augur&rsquo;s list of known Universe, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
+<h2 id="claim-trading-proceeds-call-api">Claim Trading Proceeds Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Claim Trading Proceeds Call API Examples:</span>
+<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateCreatorFee</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="s2">"0xc3280e4b4b"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">creatorFee</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">creatorFee</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateProceeds</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="na">_numberOfShares</span><span class="p">:</span> <span class="s2">"0x2b5e3af16b1880000"</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">proceeds</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">proceeds</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"122"</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol">ClaimTradingProceeds Solidity Contract</a>, which allows profits earned from trading to be claimed.</p>
+
+<h3 id="augur-api-claimtradingproceeds-calculatecreatorfee-p-callback">augur.api.ClaimTradingProceeds.calculateCreatorFee(p, callback)</h3>
+
+<p>Calculates the <a href="#creator-fee">Creator Fee</a> that will be paid when settling a specific number of <a href="#share">Shares</a> in a given <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to calculate the Creator Fee, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of Shares, in attoshares, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Creator Fee, in attoETH, as a stringified unsigned integer.</li>
+</ul>
+
+<h3 id="augur-api-claimtradingproceeds-calculateproceeds-p-callback">augur.api.ClaimTradingProceeds.calculateProceeds(p, callback)</h3>
+
+<p>Calculates the amount of <a href="#atto-prefix">attoETH</a> that a number of <a href="#share">Shares</a> in a particular <a href="#outcome">Outcome</a> of a given <a href="#market">Market</a> are worth. (NOTE: This calculation does not deduct <a href="#reporting-fees">Reporting Fees</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Amount of attoETH that a number of Shares in a particular Outcome of a given Market are worth, as a stringified unsigned integer.</li>
+</ul>
+
 <h2 id="controller-call-api">Controller Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Controller Contract Call API Examples:</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Controller</span><span class="p">.</span><span class="nx">getTimestamp</span><span class="p">({</span>
@@ -5496,6 +5566,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-api-market-getwinningpayoutnumerator-p-callback">augur.api.Market.getWinningPayoutNumerator(p, callback)</h3>
 
 <p>Returns the winning <a href="#payout-set">Payout Numerator</a> for an <a href="#outcome">Outcome</a> in a particular <a href="#market">Market</a>.</p>
+
+<p>This call will fail if:</p>
+
+<ul>
+<li>The specified Market is not <a href="#finalized-market">Finalized</a>.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -7738,17 +7814,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="c1">// The Ethereum address of Augur's default ClaimTradingProceeds contract</span>
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
-<span class="kd">var</span> <span class="nx">claimTradingProceedsAddress</span> <span class="o">=</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">claimTradingProceedsAddress</span> <span class="o">=</span> <span class="s2">"0x53ebdf8b5babda8e59a217436266696efcd8d166"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_outcome</span> <span class="o">=</span> <span class="s2">"0x1"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_numberOfShares</span> <span class="o">=</span> <span class="s2">"0x2b5e3af16b1880000"</span><span class="p">;</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateProceeds</span><span class="p">({</span>
+<span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">calculateReportingFee</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
-  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
-  <span class="na">_numberOfShares</span><span class="p">:</span> <span class="nx">_numberOfShares</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="s2">"0xc3280e4b4b"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">claimTradingProceedsAddress</span><span class="p">,</span>
+    <span class="na">send</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
@@ -7759,6 +7834,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"83819064"</span>
 
 <span class="kd">var</span> <span class="nx">_shareHolder</span> <span class="o">=</span> <span class="s2">"0x5678ff3e9ce1c0459b309fac6dd4e69229b91567"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ClaimTradingProceeds</span><span class="p">.</span><span class="nx">claimTradingProceeds</span><span class="p">({</span>
@@ -7779,23 +7856,23 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol">ClaimTradingProceeds Solidity Contract</a>, which allows profits earned from trading to be claimed.</p>
 
-<h3 id="augur-api-claimtradingproceeds-calculateproceeds-p">augur.api.ClaimTradingProceeds.calculateProceeds(p)</h3>
+<h3 id="augur-api-claimtradingproceeds-calculatereportingfee-p">augur.api.ClaimTradingProceeds.calculateReportingFee(p)</h3>
 
-<p>Calculates the amount of <a href="#atto-prefix">attoETH</a> that <code class="prettyprint">p._numberOfShares</code> attoshares of <code class="prettyprint">p._outcome</code> in <code class="prettyprint">p._market</code> are worth. (NOTE: This calculation does not deduct <a href="#reporting-fees">Reporting Fees</a>.</p>
+<p>Calculates the <a href="#reporting-fee">Reporting Fee</a> that will be paid when settling a specific number of <a href="#share">Shares</a> in a given <a href="#market">Market</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._numberOfShares</code></strong> (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to claim trading proceeds, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of Shares, in attoshares, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">true</code>, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to <code class="prettyprint">false</code>, this function will be executed as a call, which will return the Reporting Fee amount and will not use any gas. </li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -7808,7 +7885,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+<li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will be executed as a call and will return the Reporting Fee amount, in attoETH, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-claimtradingproceeds-claimtradingproceeds-p">augur.api.ClaimTradingProceeds.claimTradingProceeds(p)</h3>
@@ -8913,7 +8990,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">withdrawInEmergency</span> <span class="p">{</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">transferOwnership</span><span class="p">({</span>
+  <span class="na">_newOwner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">marketAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -8925,7 +9003,21 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">};</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">withdrawInEmergency</span><span class="p">({</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">marketAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Solidity Contract</a>, which enables functionality for Augur&rsquo;s <a href="#market">Markets</a>.</p>
 
@@ -9233,11 +9325,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">_spender</span> <span class="o">=</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"</span><span class="p">;</span> 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
-  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
-  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="s2">"0xff"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -9300,8 +9390,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transfer</span><span class="p">({</span>
-  <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
-  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">_to</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="s2">"0xff"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -9317,8 +9407,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">transferFrom</span><span class="p">({</span>
   <span class="na">_from</span><span class="p">:</span> <span class="s2">"0x1a05071893b764109f0bbc5b75d78e3e38b69ab3"</span><span class="p">,</span>
-  <span class="na">_to</span><span class="p">:</span> <span class="nx">_spender</span><span class="p">,</span>
-  <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
+  <span class="na">_to</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="na">_value</span><span class="p">:</span> <span class="s2">"0xff"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
