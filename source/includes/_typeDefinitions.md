@@ -393,6 +393,7 @@ Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
 * **`price`** (number) Display (non-normalized) price, as a base-10 number.
+* **`amount`** (number) Display price, as a base-10 number.
 * **`timestamp`** (number) Unix timestamp for this price in seconds, as an integer.
 
 <a name="UserTrade"></a>
