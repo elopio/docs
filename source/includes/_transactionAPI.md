@@ -1919,11 +1919,10 @@ Share Token Tx API
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
 var shareTokenAddress = "0x925bee44fec28deb228d2251e1a9d32f7c73ebed";
 
-var _spender = "0x01f50356c280cd886dd058210937160c73700a4b";
-var _from = "0x1a05071893b764109f0bbc5b75d78e3e38b69ab3";
 var _attotokens = "0x56bc75e2d63100000";
+
 augur.api.ShareToken.approve({
-  _spender: _spender,
+  _spender: "0x01f50356c280cd886dd058210937160c73700a4b",
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
@@ -1939,7 +1938,7 @@ augur.api.ShareToken.approve({
 });
 
 augur.api.ShareToken.transfer({
-  _to: _spender,
+  _to: "0x01f50356c280cd886dd058210937160c73700a4b",
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
@@ -1954,10 +1953,9 @@ augur.api.ShareToken.transfer({
   onFailed: function (result) { console.log(result); }
 });
 
-var _from = "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee";
 augur.api.ShareToken.transferFrom({
-  _from: _from,
-  _to: _spender,
+  _from: "0x4b01721f0244e7c5b5f63c20942850e447f5a5ee",
+  _to: "0xa1f50356c280cd886dd058210937160c73700a4b",
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
