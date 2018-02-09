@@ -94,7 +94,7 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
 ```
 Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
 
-### augur.api.ClaimTradingProceeds.calculateCreatorFee(p)
+### augur.api.ClaimTradingProceeds.calculateCreatorFee(p, callback)
 
 Calculates the [Creator Fee](#creator-fee) that will be paid when settling a specific number of [Shares](#share) in a given [Market](#market).
 
@@ -109,7 +109,7 @@ Calculates the [Creator Fee](#creator-fee) that will be paid when settling a spe
 
 * (string) Creator Fee, in attoETH, as a stringified unsigned integer.
 
-### augur.api.ClaimTradingProceeds.calculateProceeds(p)
+### augur.api.ClaimTradingProceeds.calculateProceeds(p, callback)
 
 Calculates the amount of [attoETH](#atto-prefix) that a number of [Shares](#share) in a particular [Outcome](#outcome) of a given [Market](#market) are worth. (NOTE: This calculation does not deduct [Reporting Fees](#reporting-fees).
 
