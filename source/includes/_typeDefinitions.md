@@ -169,6 +169,7 @@ Note: Other properties will be present in this object, depending on what event t
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
 * **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
 * **`creationFee`** (number) Fee paid by the Market Creator to create the Market, in ETH.
+* **`settlementFee`** (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.
 * **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
 * **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
 * **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
@@ -187,6 +188,7 @@ Note: Other properties will be present in this object, depending on what event t
 * **`designatedReportStake`** (number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
 * **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
 * **`numTicks`** (number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
+* **`tickSize`** (number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.
 * **`consensus`** (number|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
