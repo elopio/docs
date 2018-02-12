@@ -3102,7 +3102,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
   <span class="na">shouldCollectReportingFees</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="na">marketOrderBook</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">singleOutcomeOrderBook</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">buy</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">BID_0</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
@@ -3498,7 +3498,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.price</code></strong>  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.shares</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.marketCreatorFeeRate</code></strong>  (string) The fee rate charged by the Market creator (e.g., pass in &ldquo;0.01&rdquo; if the fee is 1%), as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.marketOrderBook</code></strong>  (MarketOrderBook) The full <a href="#order-book">Order Book</a> (buy and sell) for this Market and Outcome.</li>
+<li><strong><code class="prettyprint">p.marketOrderBook</code></strong>  (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>) The full <a href="#order-book">Order Book</a> (buy and sell) for this Market and Outcome.</li>
 <li><strong><code class="prettyprint">p.shouldCollectReportingFees</code></strong>  (boolean) &lt;optional&gt; False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).</li>
 </ul></li>
 </ul>
@@ -11926,23 +11926,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">tickSize</code></strong> (number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.</li>
 <li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
 <li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
-</ul>
-
-<p><a name="MarketOrderBook"></a></p>
-
-<h3 id="marketorderbook-object">MarketOrderBook  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">1</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 1 of this market.</li>
-<li><strong><code class="prettyprint">2</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 2 of this market.</li>
-<li><strong><code class="prettyprint">3</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 3 of this market.</li>
-<li><strong><code class="prettyprint">4</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 4 of this market.</li>
-<li><strong><code class="prettyprint">5</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 5 of this market.</li>
-<li><strong><code class="prettyprint">6</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 6 of this market.</li>
-<li><strong><code class="prettyprint">7</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 7 of this market.</li>
-<li><strong><code class="prettyprint">8</code></strong> (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 8 of this market.</li>
 </ul>
 
 <p><a name="MarketPriceTimeSeries"></a></p>
