@@ -1411,6 +1411,12 @@ augur.reporting.finalizeMarket({
 });
 // example onSuccess output: coming soon
 
+var secondsInFeeWindow = 604800;
+var currentTimestamp = 1518648436;
+augur.reporting.getCurrentPeriodProgress(secondsInFeeWindow, currentTimestamp);
+// example output:
+99.27843915343915
+
 augur.reporting.getDisputeInfo({
   marketIDs: [
     "0x0000000000000000000000000000000000000211",
@@ -1605,6 +1611,19 @@ This transaction will fail if:
 #### **Returns:**
 
 * Description pending.
+
+### augur.reporting.getCurrentPeriodProgress(reportingPeriodDurationInSeconds, timestamp) 
+
+Returns the percentage of the current [Fee Window](#fee-window) that has elapsed.
+
+#### **Parameters:**
+
+* **`reportingPeriodDurationInSeconds`** (number) Number of seconds in a Fee Window.
+* **`timestamp`** (number) &lt;optional> Unix timestamp at which to check what percentage of the Fee Window has elapsed. (If not specified, the current Unix timestamp will be used.)
+
+#### **Returns:**
+
+* (number) Percentage of the current Fee Window that has elapsed.
 
 ### augur.reporting.getDisputeInfo(p, callback)
 
