@@ -2071,7 +2071,7 @@ augur.trading.simulateTrade({
   marketCreatorFeeRate: "0",
   reportingFeeRate: "0.01",
   shouldCollectReportingFees: 1,
-  marketOrderBook: {
+  singleOutcomeOrderBook: {
     buy: {
       BID_0: {
         amount: "2",
@@ -2373,7 +2373,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.price`**  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
     * **`p.shares`**  (string) Number of Shares to trade, as a base-10 string.
     * **`p.marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
-    * **`p.marketOrderBook`**  (MarketOrderBook) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
+    * **`p.marketOrderBook`**  (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
     * **`p.shouldCollectReportingFees`**  (boolean) &lt;optional> False if reporting fees are not collected; this is rare and only occurs in disowned Markets (default: true).
 
 #### **Returns:**

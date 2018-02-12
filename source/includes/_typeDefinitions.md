@@ -222,19 +222,6 @@ Serves as an enum for the state of a Dispute Token.
 * **`consensus`** (number|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
-<a name="MarketOrderBook"></a>
-### MarketOrderBook  (Object)
-
-#### **Properties:** 
-* **`1`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 1 of this market.
-* **`2`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 2 of this market.
-* **`3`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 3 of this market.
-* **`4`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 4 of this market.
-* **`5`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 5 of this market.
-* **`6`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 6 of this market.
-* **`7`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 7 of this market.
-* **`8`** (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>|undefined) 1 Full order book (buy and sell) for outcome 8 of this market.
-
 <a name="MarketPriceTimeSeries"></a>
 ### MarketPriceTimeSeries  (Object)
 
