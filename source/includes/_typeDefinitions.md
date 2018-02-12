@@ -79,6 +79,36 @@ Note: Other properties will be present in this object, depending on what event t
 * **`ethereumNode`** (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).
 * **`augurNode`** (string) &lt;optional> Websocket address of an [Augur Node](#augur-node).
 
+<a name="DISPUTE_TOKEN_STATE"></a>
+### DISPUTE_TOKEN_STATE  (Object)
+
+Serves as an enum for the state of a Dispute Token.
+
+#### **Properties:** 
+* **`ALL`** (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)
+* **`UNCLAIMED`** (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.
+* **`UNFINALIZED`** (string) Dispute Token is in a Market that has not been Finalized.
+
+<a name="DisputeToken"></a>
+### DisputeToken  (Object)
+
+#### **Properties:** 
+* **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
+* **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
+* **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout3`** (number|null) Payout numerator 3 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout4`** (number|null) Payout numerator 4 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout5`** (number|null) Payout numerator 5 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
+* **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
+* **`marketID`** (string) Ethereum address of the Market, as a hexadecimal string.
+* **`amountStaked`** (number) Amount the Dispute Token owner has staked, in ETH.
+* **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
+* **`winningToken`** (boolean|null) Description pending.
+* **`ReportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
+
 <a name="EthereumNode"></a>
 ### EthereumNode  (Object)
 
@@ -320,16 +350,13 @@ Serves as an enum for the state of a stake token.
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
 * **`DESIGNATED_REPORTING`** (string) Market's end time has occurred, and it is pending a Designated Report.
-* **`DESIGNATED_DISPUTE`** (string) Market's Designated Report has been submitted and is allowed to be Disputed.
-* **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.
-* **`FIRST_REPORTING`** (string) Market's Designated Report was Disputed, and users can place stake on Outcomes.
-* **`FIRST_DISPUTE`** (string) Market's First Report has been submitted and is allowed to be Disputed.
-* **`LAST_REPORTING`** (string) Market's First Report was disputed, and users can place stake on Outcomes.
-* **`LAST_DISPUTE`** (string) Market's First Report has been submitted and is allowed to be Disputed to cause a fork.
-* **`FORKING`** (string) Market's last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.
+* **`OPEN_REPORTING`** (string) The Designated Reporter failed to submit a Designated Report within the allotted time, causing the Market to enter the Open Reporting Phase.
+* **`CROWDSOURCING_DISPUTE`** (string) An Initial Report for the Market has been submitted, and the Market's Tentative Outcome is open to being Disputed.
+* **`AWAITING_NEXT_WINDOW`** (string) Either the Market had an Initial Report submitted in the current Fee Window, or one of the Market's Dispute Crowdsourcers received enough REP to Challenge the Market's Tentative Outcome. In either case, the Market is awaiting the next Fee Window in order to enter another Dispute Round.
 * **`FINALIZED`** (string) An Outcome for the Market has been determined.
-* **`AWAITING_FORK_MIGRATION`** (string) Pending documentation. Possibly deprecated.
-* **`AWAITING_FINALIZATION`** (string) Pending documentation. Possibly deprecated.
+* **`FORKING`** (string) The Dispute Crowdsourcer for one of the Market's Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.
+* **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.
+* **`AWAITING_FORK_MIGRATION`** (string) Market is waiting for another Market's Fork to be resolved. This means its Tentative Outcome has been reset to the Outcome submitted in the Initial Report, and all Stake in the Market's Dispute Crowdsourcers has been refunded to the users who Staked on them.
 
 <a name="ScryptParams"></a>
 ### ScryptParams  (Object)
@@ -360,35 +387,20 @@ Serves as an enum for the state of a stake token.
 #### **Properties:** 
 * **`Array`** (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>>) of timestamped price points for this Outcome.
 
-<a name="DISPUTE_TOKEN_STATE"></a>
-### DISPUTE_TOKEN_STATE  (Object)
-
-Serves as an enum for the state of a Dispute Token.
+<a name="StakeDetails"></a>
+### StakeDetails  (Object)
 
 #### **Properties:** 
-* **`ALL`** (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)
-* **`UNFINALIZED`** (string) Dispute Token is in a Market that has not been Finalized.
-* **`UNCLAIMED`** (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.
+* **`totalStaked`** (string) 
+* **`size`** (string) 
+* **`amountStaked`** (string) 
 
-<a name="DisputeToken"></a>
-### DisputeToken  (Object)
+<a name="StakeInfo"></a>
+### StakeInfo  (Object)
 
 #### **Properties:** 
-* **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
-* **`marketID`** (string) ID of the Market, as a hexadecimal string.
-* **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
-* **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
-* **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`payout3`** (number|null) Payout numerator 3 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`payout4`** (number|null) Payout numerator 4 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`payout5`** (number|null) Payout numerator 5 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. Set to null for binary and scalar Markets.
-* **`isInvalid`** (boolean) Whether the Market was determined to be invalid.
-* **`amountStaked`** (number) Amount the Dispute Token owner has staked, in ETH.
-* **`winning`** (number|null) Description pending.
-* **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
-* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
+* **`marketID`** (number) 
+* **`stake`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
 <a name="TimestampedPrice"></a>
 ### TimestampedPrice  (Object)
