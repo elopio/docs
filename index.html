@@ -757,7 +757,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
 <h2 id="accounts-functions">Accounts Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">approveAugur</span><span class="p">(</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Accounts Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">approveAugur</span><span class="p">(</span>
   <span class="nx">address</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span> 
   <span class="nx">auth</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
@@ -826,59 +828,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">importAccount</span><span class="p">({</span>
-  <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="na">password</span><span class="p">:</span> <span class="s2">"thisismysupersecurepassword"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">account</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">{</span>
-  <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-  <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span>
   <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
@@ -1044,8 +993,22 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Logs out the account that is currently logged in. This function does not accept parameters or a callback function, and does not return a value.</p>
 
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li>This function does not accept any input parameters.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>This function does not return a value.</li>
+</ul>
+
 <h2 id="assets-functions">Assets Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">sendEther</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Assets Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">sendEther</span><span class="p">({</span>
   <span class="na">etherToSend</span><span class="p">:</span> <span class="s2">"0.001"</span><span class="p">,</span>
   <span class="na">from</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
   <span class="na">to</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
@@ -1057,26 +1020,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xbb21d95d9370d88fd7a8259300476b1084cfcf54ae6c6684f77a60876107c980"</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599690</span><span class="p">,</span>
-  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
-  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0xcf08"</span><span class="p">,</span>
-  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x4a817c800"</span><span class="p">,</span>
-  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0xf6f476c21bb4084729d268eb1392ac9bfc1b543fb89862ad188e1c3f2db4f4b7"</span><span class="p">,</span>
-  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0x3af39c21"</span><span class="p">,</span>
-  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x16"</span><span class="p">,</span>
-  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x40485264986740c8fb3d11e814bd94cf86012d29"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0x38d7ea4c68000"</span><span class="p">,</span>
-  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
-  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0x5239d5ccf324ed41125e63ef6b49ba5f79a4f27678a9caad0f1c480f36faa026"</span><span class="p">,</span>
-  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x33184fe7ebaa3bdfc414c0147cb902d6a9d43033f3254996a3283cc990adb50f"</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516065072</span><span class="p">,</span>
-  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.00042544"</span>
-<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">sendReputation</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
@@ -1090,27 +1033,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xd4bbd077575d2006b19570d546a6f02a4ef45d4cb91d64286026431eda313fb8"</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599717</span><span class="p">,</span>
-  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
-  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0x2fd618"</span><span class="p">,</span>
-  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x4a817c800"</span><span class="p">,</span>
-  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde"</span><span class="p">,</span>
-  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0xa9059cbb00000000000000000000000040485264986740c8fb3d11e814bd94cf86012d2900000000000000000000000000000000000000000000000000038d7ea4c68000"</span><span class="p">,</span>
-  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x17"</span><span class="p">,</span>
-  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x2"</span><span class="p">,</span>
-  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2c"</span><span class="p">,</span>
-  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0xc2b1869475afa6e7b6ecc4965da765f71fee57cd8863c340e3ce02e0ee47ab37"</span><span class="p">,</span>
-  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x4b6baec6d873fa784d70ac9867005204febdf6d1d0274dbf6f774971e01daf7b"</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516065477</span><span class="p">,</span>
-  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.00146872"</span>
-<span class="p">}</span>
 </code></pre></div>
 <h3 id="augur-assets-sendether-p">augur.assets.sendEther(p)</h3>
 
@@ -1130,6 +1052,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the transaction fails.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
 <h3 id="augur-assets-sendreputation-p">augur.assets.sendReputation(p)</h3>
@@ -1152,8 +1080,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul></li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
 <h2 id="augur-node-functions">Augur Node Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Augur Node Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
   <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">wsTransport</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connected to Augur Node!"</span><span class="p">);</span>
@@ -1249,7 +1185,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="s2">"Unsubscribe successful!"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">unsubscribeFromAllEvents</span><span class="p">(</span>
-  <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Unsubscribed from all events!"</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">);</span>
@@ -1362,6 +1298,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">callback</code></strong>  (function) Called after attempting to stop the subscription from listening on the Augur Node.</li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>This function does not return a value.</li>
+</ul>
+
 <h3 id="augur-augurnode-unsubscribefromallevents-callback">augur.augurNode.unsubscribeFromAllEvents(callback)</h3>
 
 <p>Stops the current subscriptions from listening on an Augur Node.</p>
@@ -1378,8 +1320,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">callback</code></strong>  (function) Called after attempting to stop all subscriptions from listening on the Augur Node.</li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>This function does not return a value.</li>
+</ul>
+
 <h2 id="connect-function">Connect Function</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Connect Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span>
   <span class="na">ethereumNode</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
       <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local http address for Geth node</span>
@@ -1428,8 +1378,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Callback function.</li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Transport object containing information about the Augur Node and Ethereum node connections.</li>
+</ul>
+
 <h2 id="create-market-functions">Create Market Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Create Market Simplified API Examples:</span>
+
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
@@ -1620,6 +1578,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul></li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Object containing information about the Market creation transaction. The <code class="prettyprint">callReturn</code> property of this object contains the Ethereum address of the Market that was created.</li>
+</ul>
+
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
 <p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
@@ -1644,6 +1608,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createCategoricalMarket transaction fails.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Object containing information about the Market creation transaction. The <code class="prettyprint">callReturn</code> property of this object contains the Ethereum address of the Market that was created.</li>
 </ul>
 
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
@@ -1672,6 +1642,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Object containing information about the Market creation transaction. The <code class="prettyprint">callReturn</code> property of this object contains the Ethereum address of the Market that was created.</li>
 </ul>
 
 <h3 id="augur-createmarket-getmarketcreationcost-p-callback">augur.createMarket.getMarketCreationCost(p, callback)</h3>
@@ -1740,7 +1716,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
 <h2 id="generate-contracts-api-function">Generate Contracts API Function</h2>
-
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// No examples for Generate Contracts Simplified API</span>
+</code></pre></div>
 <h3 id="augur-generatecontractapi-functionsabi">augur.generateContractApi(functionsAbi)</h3>
 
 <p>Generates a set of JavaScript bindings for the Solidity ABIs passed in.</p>
@@ -1758,7 +1735,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
 <h2 id="markets-functions">Markets Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Markets Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
   <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">true</span>
@@ -2382,7 +2361,73 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
 <h2 id="reporting-functions">Reporting Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getDisputeTokens</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reporting Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">finalizeMarket</span><span class="p">({</span>
+  <span class="na">market</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output: coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getDisputeInfo</span><span class="p">({</span>
+  <span class="na">marketIDs</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+    <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="p">]</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccessOutput:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+    <span class="na">stakes</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
+          <span class="mi">0</span><span class="p">,</span>
+          <span class="mi">10000</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="na">totalStaked</span><span class="p">:</span> <span class="s2">"122"</span><span class="p">,</span>
+        <span class="na">size</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
+        <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="na">stakes</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
+          <span class="mi">0</span><span class="p">,</span>
+          <span class="mi">2</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="na">totalStaked</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
+        <span class="na">size</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
+        <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
+          <span class="mi">1</span><span class="p">,</span>
+          <span class="mi">1</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="na">totalStaked</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
+        <span class="na">size</span><span class="p">:</span> <span class="s2">"40000"</span><span class="p">,</span>
+        <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getDisputeTokens</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
   <span class="na">disputeTokenState</span><span class="p">:</span> <span class="s2">"UNFINALIZED"</span><span class="p">,</span>
@@ -2392,21 +2437,21 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">disputeToken</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
-    <span class="nx">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-    <span class="nx">payout0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">payout1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nx">payout2</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">payout3</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">payout4</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">payout5</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">payout6</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">payout7</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-    <span class="nx">winning</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">claimed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"FIRST_REPORTING"</span><span class="p">,</span>
+    <span class="na">disputeToken</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
+    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="na">payout0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">payout1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">payout2</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">payout3</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">payout4</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">payout5</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">payout6</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">payout7</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="na">winning</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">claimed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">reportingState</span><span class="p">:</span> <span class="s2">"FIRST_REPORTING"</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">}</span>
 
@@ -2419,13 +2464,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">endBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1511657473</span><span class="p">,</span>
-  <span class="nx">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
-  <span class="nx">feeWindowID</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
-  <span class="nx">startBlockNumber</span><span class="p">:</span> <span class="mi">1500001</span><span class="p">,</span>
-  <span class="nx">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
-  <span class="nx">totalStake</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
-  <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">endTime</span><span class="p">:</span> <span class="mi">1511657473</span><span class="p">,</span>
+  <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">feeWindowID</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
+  <span class="na">startBlockNumber</span><span class="p">:</span> <span class="mi">1500001</span><span class="p">,</span>
+  <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+  <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
@@ -2526,6 +2571,33 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the transaction fails.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
+<h3 id="augur-reporting-getdisputeinfo-p-callback">augur.reporting.getDisputeInfo(p, callback)</h3>
+
+<p>Returns information about the <a href="#dispute-stake">Dispute Stake</a> in a list of <a href="#market">Markets</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">p.marketIDs</code></strong>  (Array.&lt;string&gt;) Array of Market Ethereum contract addresses.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;<a href="#StakeInfo">StakeInfo</a>&gt;) Object containing information about the Dispute Stake in the list of Markets.</li>
 </ul>
 
 <h3 id="augur-reporting-getdisputetokens-p-callback">augur.reporting.getDisputeTokens(p, callback)</h3>
@@ -2705,7 +2777,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
 <h2 id="trading-functions">Trading Functions</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateProfitLoss</span><span class="p">({</span>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trading Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateProfitLoss</span><span class="p">({</span>
   <span class="na">trades</span><span class="p">:</span> <span class="p">[{</span>
     <span class="na">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
     <span class="na">amount</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
@@ -2714,7 +2788,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">}],</span>
   <span class="na">lastPrice</span><span class="p">:</span> <span class="s2">"2"</span>
 <span class="p">});</span>
-
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">position</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
@@ -2738,7 +2811,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-<span class="c1">// example output coming soon</span>
+<span class="c1">// example onSuccess output: coming soon</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">claimTradingProceeds</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -3121,6 +3194,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul></li>
 </ul>
 
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
+</ul>
+
 <h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
 
 <p>Attempts to collect trading profits in Ether from a user&rsquo;s outstanding <a href="#share">Shares</a> in a single <a href="#finalized-market">Finalized Market</a>.</p>
@@ -3145,6 +3224,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when any of the transactions fail.</li>
 </ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-trading-denormalizeprice-p">augur.trading.denormalizePrice(p)</h3>
@@ -7502,7 +7587,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="the-meta-object">The <code class="prettyprint">meta</code> Object</h3>
 
-<p>All Transaction API functions accept a <code class="prettyprint">meta</code> object as a parameter in order to sign the transaction. The <code class="prettyprint">meta</code> object contains a <code class="prettyprint">signer</code> property, which should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account that wishes to initiate the transaction. It also contains an <code class="prettyprint">accountType</code> property, which should be set to &ldquo;privateKey&rdquo;, &ldquo;ledger&rdquo;, or &ldquo;uPort&rdquo;. The Transaction API functions attempt to modify information on the blockchain, which requires the transaction to be signed. This parameter is not required when calling Transaction API functions while using MetaMask (which will pop up a separate window asking to confirm the transaction).</p>
+<p>All Transaction API functions accept a <code class="prettyprint">meta</code> object as a parameter in order to sign the transaction. The <code class="prettyprint">meta</code> object contains a <code class="prettyprint">signer</code> property, which should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account that wishes to initiate the transaction. (When logged in using an Airbitz account, the private key buffer can be obtained by outputting the value <code class="prettyprint">state.loginAccount.meta.signer</code>.) The <code class="prettyprint">meta</code> object also contains an <code class="prettyprint">accountType</code> property, which should be set to &ldquo;privateKey&rdquo;, &ldquo;ledger&rdquo;, or &ldquo;uPort&rdquo;. The Transaction API functions attempt to modify information on the blockchain, which requires the transaction to be signed. The <code class="prettyprint">meta</code> parameter is not required when calling Transaction API functions while using MetaMask (which will pop up a separate window asking to confirm the transaction).</p>
 
 <h3 id="callbacks">Callbacks</h3>
 
@@ -11656,6 +11741,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">augurNode</code></strong> (string) &lt;optional&gt; Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
 </ul>
 
+<p><a name="DISPUTE_TOKEN_STATE"></a></p>
+
+<h3 id="dispute_token_state-object">DISPUTE_TOKEN_STATE  (Object)</h3>
+
+<p>Serves as an enum for the state of a Dispute Token.</p>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">ALL</code></strong> (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)</li>
+<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.</li>
+<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Dispute Token is in a Market that has not been Finalized.</li>
+</ul>
+
+<p><a name="DisputeToken"></a></p>
+
+<h3 id="disputetoken-object">DisputeToken  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the Dispute Token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the Dispute Token&rsquo;s payout set.</li>
+<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Market was determined to be invalid.</li>
+<li><strong><code class="prettyprint">disputeToken</code></strong> (string) Contract address of the Dispute Token, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Ethereum address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the Dispute Token owner has staked, in ETH.</li>
+<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the Dispute Token has been claimed by the owner.</li>
+<li><strong><code class="prettyprint">winningToken</code></strong> (boolean|null) Description pending.</li>
+<li><strong><code class="prettyprint">ReportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
+</ul>
+
 <p><a name="EthereumNode"></a></p>
 
 <h3 id="ethereumnode-object">EthereumNode  (Object)</h3>
@@ -11781,6 +11904,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
 <li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
 <li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
+<li><strong><code class="prettyprint">settlementFee</code></strong> (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.</li>
 <li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
 <li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
 <li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
@@ -11799,6 +11923,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.</li>
 <li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
 <li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong> (number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.</li>
 <li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
 <li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
 </ul>
@@ -11978,16 +12103,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">PRE_REPORTING</code></strong> (string) Market&rsquo;s end time has not yet come to pass.</li>
 <li><strong><code class="prettyprint">DESIGNATED_REPORTING</code></strong> (string) Market&rsquo;s end time has occurred, and it is pending a Designated Report.</li>
-<li><strong><code class="prettyprint">DESIGNATED_DISPUTE</code></strong> (string) Market&rsquo;s Designated Report has been submitted and is allowed to be Disputed.</li>
-<li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.</li>
-<li><strong><code class="prettyprint">FIRST_REPORTING</code></strong> (string) Market&rsquo;s Designated Report was Disputed, and users can place stake on Outcomes.</li>
-<li><strong><code class="prettyprint">FIRST_DISPUTE</code></strong> (string) Market&rsquo;s First Report has been submitted and is allowed to be Disputed.</li>
-<li><strong><code class="prettyprint">LAST_REPORTING</code></strong> (string) Market&rsquo;s First Report was disputed, and users can place stake on Outcomes.</li>
-<li><strong><code class="prettyprint">LAST_DISPUTE</code></strong> (string) Market&rsquo;s First Report has been submitted and is allowed to be Disputed to cause a fork.</li>
-<li><strong><code class="prettyprint">FORKING</code></strong> (string) Market&rsquo;s last report was disputed, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
+<li><strong><code class="prettyprint">OPEN_REPORTING</code></strong> (string) The Designated Reporter failed to submit a Designated Report within the allotted time, causing the Market to enter the Open Reporting Phase.</li>
+<li><strong><code class="prettyprint">CROWDSOURCING_DISPUTE</code></strong> (string) An Initial Report for the Market has been submitted, and the Market&rsquo;s Tentative Outcome is open to being Disputed.</li>
+<li><strong><code class="prettyprint">AWAITING_NEXT_WINDOW</code></strong> (string) Either the Market had an Initial Report submitted in the current Fee Window, or one of the Market&rsquo;s Dispute Crowdsourcers received enough REP to Challenge the Market&rsquo;s Tentative Outcome. In either case, the Market is awaiting the next Fee Window in order to enter another Dispute Round.</li>
 <li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An Outcome for the Market has been determined.</li>
-<li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
-<li><strong><code class="prettyprint">AWAITING_FINALIZATION</code></strong> (string) Pending documentation. Possibly deprecated.</li>
+<li><strong><code class="prettyprint">FORKING</code></strong> (string) The Dispute Crowdsourcer for one of the Market&rsquo;s Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
+<li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.</li>
+<li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Market is waiting for another Market&rsquo;s Fork to be resolved. This means its Tentative Outcome has been reset to the Outcome submitted in the Initial Report, and all Stake in the Market&rsquo;s Dispute Crowdsourcers has been refunded to the users who Staked on them.</li>
 </ul>
 
 <p><a name="ScryptParams"></a></p>
@@ -12035,42 +12157,27 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">Array</code></strong> (Array.&lt;<a href="#TimestampedPrice">TimestampedPrice</a>&gt;) of timestamped price points for this Outcome.</li>
 </ul>
 
-<p><a name="DISPUTE_TOKEN_STATE"></a></p>
+<p><a name="StakeDetails"></a></p>
 
-<h3 id="dispute_token_state-object">DISPUTE_TOKEN_STATE  (Object)</h3>
-
-<p>Serves as an enum for the state of a Dispute Token.</p>
+<h3 id="stakedetails-object">StakeDetails  (Object)</h3>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">ALL</code></strong> (string) Dispute Token can be in any state. (If no Dispute Token state is specified, this is the default value.)</li>
-<li><strong><code class="prettyprint">UNFINALIZED</code></strong> (string) Dispute Token is in a Market that has not been Finalized.</li>
-<li><strong><code class="prettyprint">UNCLAIMED</code></strong> (string) Dispute Token is in a Finalized Market, was staked on the correct Outcome, and has not been claimed yet.</li>
+<li><strong><code class="prettyprint">totalStaked</code></strong> (string) </li>
+<li><strong><code class="prettyprint">size</code></strong> (string) </li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (string) </li>
 </ul>
 
-<p><a name="DisputeToken"></a></p>
+<p><a name="StakeInfo"></a></p>
 
-<h3 id="disputetoken-object">DisputeToken  (Object)</h3>
+<h3 id="stakeinfo-object">StakeInfo  (Object)</h3>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">disputeToken</code></strong> (string) Contract address of the Dispute Token, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">marketID</code></strong> (string) ID of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the Dispute Token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the Dispute Token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. Set to null for binary and scalar Markets.</li>
-<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market was determined to be invalid.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the Dispute Token owner has staked, in ETH.</li>
-<li><strong><code class="prettyprint">winning</code></strong> (number|null) Description pending.</li>
-<li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the Dispute Token has been claimed by the owner.</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.</li>
+<li><strong><code class="prettyprint">marketID</code></strong> (number) </li>
+<li><strong><code class="prettyprint">stake</code></strong> (Array.&lt;<a href="#StakeDetails">StakeDetails</a>&gt;) </li>
 </ul>
 
 <p><a name="TimestampedPrice"></a></p>
@@ -12081,6 +12188,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">price</code></strong> (number) Display (non-normalized) price, as a base-10 number.</li>
+<li><strong><code class="prettyprint">amount</code></strong> (number) Display price, as a base-10 number.</li>
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp for this price in seconds, as an integer.</li>
 </ul>
 
