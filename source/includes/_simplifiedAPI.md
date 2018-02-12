@@ -7,6 +7,8 @@ Simplified API
 Accounts Functions
 -----------------
 ```javascript
+// Accounts Simplified API Examples:
+
 augur.accounts.approveAugur(
   address: "0x0000000000000000000000000000000000000b0b", 
   auth: {
@@ -76,59 +78,6 @@ augur.accounts.getAccountTransferHistory({
     outcome: null,
   }
 ]
-
-augur.accounts.importAccount({
-  address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-  keystore: {
-    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  password: "thisismysupersecurepassword"
-}, function (error, account) {
-  console.log(account);
-});
-// example output:
-{
-  address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
-  keystore: {
-    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-}
 
 augur.accounts.login({
   keystore: {
@@ -267,9 +216,19 @@ Logs into an account with a user-supplied plaintext private key.
 
 Logs out the account that is currently logged in. This function does not accept parameters or a callback function, and does not return a value.
 
+#### **Parameters:**
+
+* This function does not accept any input parameters.
+
+#### **Returns:**
+
+* This function does not return a value.
+
 Assets Functions
 ----------------
 ```javascript
+// Assets Simplified API Examples:
+
 augur.assets.sendEther({
   etherToSend: "0.001",
   from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
@@ -282,26 +241,6 @@ augur.assets.sendEther({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output:
-{
-  "callReturn": null,
-  "blockHash": "0xbb21d95d9370d88fd7a8259300476b1084cfcf54ae6c6684f77a60876107c980",
-  "blockNumber": 1599690,
-  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-  "gas": "0xcf08",
-  "gasPrice": "0x4a817c800",
-  "hash": "0xf6f476c21bb4084729d268eb1392ac9bfc1b543fb89862ad188e1c3f2db4f4b7",
-  "input": "0x3af39c21",
-  "nonce": "0x16",
-  "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
-  "transactionIndex": "0x0",
-  "value": "0x38d7ea4c68000",
-  "v": "0x2b",
-  "r": "0x5239d5ccf324ed41125e63ef6b49ba5f79a4f27678a9caad0f1c480f36faa026",
-  "s": "0x33184fe7ebaa3bdfc414c0147cb902d6a9d43033f3254996a3283cc990adb50f",
-  "timestamp": 1516065072,
-  "gasFees": "0.00042544"
-}
 
 augur.assets.sendReputation({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -315,27 +254,6 @@ augur.assets.sendReputation({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-
-// example onSuccess output:
-{
-  "callReturn": null,
-  "blockHash": "0xd4bbd077575d2006b19570d546a6f02a4ef45d4cb91d64286026431eda313fb8",
-  "blockNumber": 1599717,
-  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-  "gas": "0x2fd618",
-  "gasPrice": "0x4a817c800",
-  "hash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
-  "input": "0xa9059cbb00000000000000000000000040485264986740c8fb3d11e814bd94cf86012d2900000000000000000000000000000000000000000000000000038d7ea4c68000",
-  "nonce": "0x17",
-  "to": "0x13fa2334966b3cb6263ed56148323014c2ece753",
-  "transactionIndex": "0x2",
-  "value": "0x0",
-  "v": "0x2c",
-  "r": "0xc2b1869475afa6e7b6ecc4965da765f71fee57cd8863c340e3ce02e0ee47ab37",
-  "s": "0x4b6baec6d873fa784d70ac9867005204febdf6d1d0274dbf6f774971e01daf7b",
-  "timestamp": 1516065477,
-  "gasFees": "0.00146872"
-}
 ```
 ### augur.assets.sendEther(p)
 
@@ -352,6 +270,10 @@ Sends Ether to a specified Ethereum address.
     * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
 ### augur.assets.sendReputation(p)
 
 Sends [REP](#rep) to a specified Ethereum address. This function will trigger a [`TokensTransferred`](#TokensTransferred) event if the REP is successfully sent.
@@ -367,9 +289,15 @@ Sends [REP](#rep) to a specified Ethereum address. This function will trigger a 
     * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
 Augur Node Functions
 --------------------
 ```javascript
+// Augur Node Simplified API Examples:
+
 augur.augurNode.connect(
   "ws://127.0.0.1:9001",
   function(error, wsTransport) {
@@ -466,7 +394,7 @@ augur.augurNode.unsubcribeFromEvent(
 "Unsubscribe successful!"
 
 augur.augurNode.unsubscribeFromAllEvents(
-  function(result) {
+  function() {
     console.log("Unsubscribed from all events!");
   }
 );
@@ -553,6 +481,10 @@ This function will fail if:
 * **`subscriptionId`**  (string) Subscription ID to stop listening.
 * **`callback`**  (function) Called after attempting to stop the subscription from listening on the Augur Node.
 
+#### **Returns:**
+
+* This function does not return a value.
+
 ### augur.augurNode.unsubscribeFromAllEvents(callback)
 
 Stops the current subscriptions from listening on an Augur Node.
@@ -565,9 +497,15 @@ This function will fail if:
 
 * **`callback`**  (function) Called after attempting to stop all subscriptions from listening on the Augur Node.
 
+#### **Returns:**
+
+* This function does not return a value.
+
 Connect Function
 ----------------
 ```javascript
+// Connect Simplified API Examples:
+
 augur.connect({
   ethereumNode: {
     httpAddresses: [
@@ -615,9 +553,15 @@ Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 * **`connectOptions`** ([ConnectOptions](#ConnectOptions)) Options used to connect to an Ethereum node and an Augur Node.
 * **`callback`** (function) &lt;optional> Callback function.
 
+#### **Returns:**
+
+* (Object) Transport object containing information about the Augur Node and Ethereum node connections.
+
 Create Market Functions
 ----------------
 ```javascript
+// Create Market Simplified API Examples:
+
 var _extraInfo = {
   "resolutionSource": "http://www.nasdaq.com/symbol/msft",
   "tags": [ "Stocks", "Microsoft" ],
@@ -804,6 +748,10 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`p.onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
 
+#### **Returns:**
+
+* (Object) Object containing information about the Market creation transaction. The `callReturn` property of this object contains the Ethereum address of the Market that was created.
+
 ### augur.createMarket.createCategoricalMarket(p)
 
 Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
@@ -824,6 +772,10 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`p.onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the createCategoricalMarket transaction fails.
+
+#### **Returns:**
+
+* (Object) Object containing information about the Market creation transaction. The `callReturn` property of this object contains the Ethereum address of the Market that was created.
 
 ### augur.createMarket.createScalarMarket(p)
 
@@ -847,6 +799,10 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`p.onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
+
+#### **Returns:**
+
+* (Object) Object containing information about the Market creation transaction. The `callReturn` property of this object contains the Ethereum address of the Market that was created.
 
 ### augur.createMarket.getMarketCreationCost(p, callback)
 
@@ -896,6 +852,9 @@ Uses a transaction hash to query an Augur Node for the address of the [Market](#
 
 Generate Contracts API Function
 -------------------------------
+```javascript
+// No examples for Generate Contracts Simplified API
+```
 ### augur.generateContractApi(functionsAbi)
 
 Generates a set of JavaScript bindings for the Solidity ABIs passed in.
@@ -911,6 +870,8 @@ Generates a set of JavaScript bindings for the Solidity ABIs passed in.
 Markets Functions
 ----------------
 ```javascript
+// Markets Simplified API Examples:
+
 augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
   sortBy: "popularity",
@@ -1436,6 +1397,72 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 Reporting Functions
 -------------
 ```javascript
+// Reporting Simplified API Examples:
+
+augur.reporting.finalizeMarket({
+  market: "0x0000000000000000000000000000000000000011",
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log(result); },
+  onFailed: function(result) { console.log(result); }
+});
+// example onSuccess output: coming soon
+
+augur.reporting.getDisputeInfo({
+  marketIDs: [
+    "0x0000000000000000000000000000000000000211",
+    "0x0000000000000000000000000000000000000011",
+  ]
+}, function (error, result) {
+  console.log(result);
+});
+// example onSuccessOutput:
+[
+  {
+    marketID: "0x0000000000000000000000000000000000000211",
+    stakes: [
+      {
+        isInvalid: false,
+        payout: [
+          0,
+          10000,
+        ],
+        totalStaked: "122",
+        size: "204",
+        amountStaked: "20",
+      },
+    ],
+  },
+  {
+    marketID: "0x0000000000000000000000000000000000000011",
+    stakes: [
+      {
+        isInvalid: false,
+        payout: [
+          0,
+          2,
+        ],
+        totalStaked: "20000",
+        size: "20000",
+        amountStaked: "20000",
+      },
+      {
+        isInvalid: true,
+        payout: [
+          1,
+          1,
+        ],
+        totalStaked: "20000",
+        size: "40000",
+        amountStaked: "20000",
+      },
+    ],
+  },
+]
+
 augur.reporting.getDisputeTokens({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
@@ -1575,6 +1602,24 @@ This transaction will fail if:
     * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
+#### **Returns:**
+
+* Description pending.
+
+### augur.reporting.getDisputeInfo(p, callback)
+
+Returns information about the [Dispute Stake](#dispute-stake) in a list of [Markets](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  **Properties:**
+    * **`p.marketIDs`**  (Array.&lt;string>) Array of Market Ethereum contract addresses.
+
+#### **Returns:**
+
+* (Array.&lt;<a href="#StakeInfo">StakeInfo</a>>) Object containing information about the Dispute Stake in the list of Markets.
+
 ### augur.reporting.getDisputeTokens(p, callback)
 
 Returns the Dispute Tokens owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
@@ -1701,6 +1746,8 @@ Returns the amount of [REP](#rep) a [Designated Reporter](#designated-reporter) 
 Trading Functions
 -----------------
 ```javascript
+// Trading Simplified API Examples:
+
 augur.trading.calculateProfitLoss({
   trades: [{
     type: "buy",
@@ -1710,7 +1757,6 @@ augur.trading.calculateProfitLoss({
   }],
   lastPrice: "2"
 });
-
 // example output:
 {
   position: "1",
@@ -1734,7 +1780,7 @@ augur.trading.claimMarketsTradingProceeds({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example output coming soon
+// example onSuccess output: coming soon
 
 augur.trading.claimTradingProceeds({
   _market: "0x0000000000000000000000000000000000000001",
@@ -2105,6 +2151,10 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when any of the transactions fail.
 
+#### **Returns:**
+
+* Description pending.
+
 ### augur.trading.claimTradingProceeds(p)
 
 Attempts to collect trading profits in Ether from a user's outstanding [Shares](#share) in a single [Finalized Market](#finalized-market).
@@ -2123,6 +2173,10 @@ This function will fail if:
     * **`p.onSent`**  (function) Called if/when each transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when any of the transactions fail.
+
+#### **Returns:**
+
+* Description pending.
 
 ### augur.trading.denormalizePrice(p)
 
