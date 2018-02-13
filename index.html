@@ -3599,7 +3599,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(SimulatedTrade) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.</li>
+<li>(<a href="#SimulatedTrade">SimulatedTrade</a>) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.</li>
 </ul>
 
 <h3 id="augur-trading-tradeuntilamountiszero-p-callback">augur.trading.tradeUntilAmountIsZero(p, callback)</h3>
@@ -12199,6 +12199,19 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (number) Parallelization factor, determines relative CPU cost (usually 1).</li>
 <li><strong><code class="prettyprint">r</code></strong> (number) Block size factor used for scrypt&rsquo;s hash, determines relative memory cost (usually 8).</li>
 <li><strong><code class="prettyprint">salt</code></strong> (string) The dklen-byte salt used for this account, as a hexadecimal string.</li>
+</ul>
+
+<p><a name="SimulatedTrade"></a></p>
+
+<h3 id="simulatedtrade-object">SimulatedTrade  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">settlementFees</code></strong> (string) Projected Settlement Fees paid on this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">gasFees</code></strong> (string) Projected gas fees paid on this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">sharesDepleted</code></strong> (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">otherSharesDepleted</code></strong> (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">tokensDepleted</code></strong> (string) Projected number of tokens spent on this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">shareBalances</code></strong> (Array.<string>}  Projected final balances after the trade is complete, as an array of base-10 strings.</li>
 </ul>
 
 <p><a name="SingleOutcomeOrderBook"></a></p>
