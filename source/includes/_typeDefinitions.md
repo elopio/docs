@@ -386,16 +386,18 @@ Serves as an enum for the state of a stake token.
 ### StakeDetails  (Object)
 
 #### **Properties:** 
-* **`totalStaked`** (string) 
-* **`size`** (string) 
-* **`amountStaked`** (string) 
+* **`isInvalid`** (boolean) Description pending.
+* **`payout`** (Array.<number>) Payout Set for the Dispute Crowdsourcer.
+* **`totalStaked`** (string) Description pending.
+* **`size`** (string) Description pending.
+* **`amountStaked`** (string) Description pending.
 
 <a name="StakeInfo"></a>
 ### StakeInfo  (Object)
 
 #### **Properties:** 
 * **`marketID`** (number) 
-* **`stake`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
+* **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
 <a name="TimestampedPrice"></a>
 ### TimestampedPrice  (Object)

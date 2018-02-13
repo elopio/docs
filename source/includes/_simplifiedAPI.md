@@ -908,6 +908,7 @@ augur.markets.getMarketPriceHistory({
 {
   0: [{
     price: 5.5,
+    amount: 0.2,
     timestamp: 1506474500,
   }],
 }
@@ -1304,6 +1305,8 @@ This function will fail if:
 
 ### augur.markets.getMarketsAwaitingReporting(p, callback)
 
+Note: This function is not finalized yet, and may be deprecated in favor of `augur.markets.getDisputableMarkets`.
+
 Returns the [Markets](#market) in a particular [Universe](#universe) or [Fee Window](#fee-window) that have not been [Finalized](#finalized-market). Either the Universe or Fee Window must be specified.
 
 This function will fail if:
@@ -1325,7 +1328,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (Array.&lt;string>) Array of market addresses awaiting a Designated Report, as hexadecimal strings.
+* (Array.&lt;string>) Array of Ethereum contract addresses for Markets awaiting a Designated Report, as hexadecimal strings.
 
 ### augur.markets.getMarketsClosingInDateRange(p, callback)
 
@@ -1699,7 +1702,7 @@ Returns information about the [Dispute Stake](#dispute-stake) in a list of [Mark
 
 #### **Returns:**
 
-* (Array.&lt;<a href="#StakeInfo">StakeInfo</a>>) Object containing information about the Dispute Stake in the list of Markets.
+* (Array.&lt;<a href="#StakeInfo">StakeInfo</a>>) Array of objects containing information about the Dispute Stake in the list of Markets.
 
 ### augur.reporting.getDisputeTokens(p, callback)
 
