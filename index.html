@@ -2001,6 +2001,18 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">}</span>
 <span class="p">]</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsUpcomingDesignatedReporting</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"volume"</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
+<span class="p">]</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getUnclaimedMarketCreatorFees</span><span class="p">({</span>
   <span class="na">marketIDs</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -2338,7 +2350,34 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;) Array of MarketInfo objects.</li>
 </ul>
 
-<h3 id="augur-markets-getunclaimedmarketcreatorfees">augur.markets.getUnclaimedMarketCreatorFees</h3>
+<h3 id="augur-markets-getmarketsupcomingdesignatedreporting-p-callback">augur.markets.getMarketsUpcomingDesignatedReporting(p, callback)</h3>
+
+<p>Returns an array of all <a href="#market">Markets</a> in the Pre-Reporting Phase. If <code class="prettyprint">p.designatedReporter</code> is specified, these results will only include Markets where the <a href="#designated-reporter">Designated Reporter</a> is <code class="prettyprint">p.designatedReporter</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Markets exist, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p.designatedReporter</code></strong> (string) &lt;optional&gt; Ethereum address of a specific Designated Reporter to filter the results by, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
+<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market information has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.<string>) Array of Market addresses in the Pre-Reporting Phase, as 20-byte hexadecimal values. If <code class="prettyprint">p.designatedReporter</code> is specified, these results will only include Markets where the Designated Reporter is <code class="prettyprint">p.designatedReporter</code>.</li>
+</ul>
+
+<h3 id="augur-markets-getunclaimedmarketcreatorfees-p-callback">augur.markets.getUnclaimedMarketCreatorFees(p, callback)</h3>
 
 <p>Returns the amount of unclaimed <a href="#creator-fee">Creator Fees</a> in a set of <a href="#market">Markets</a>. Fees are only available on <a href="#finalized-market">Finalized Markets</a>.</p>
 
@@ -2351,13 +2390,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.marketIDs</code></strong>  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market information has been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market Creator Fee information has been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Object) Market creator fees, in <a href="#atto-prefix">attoETH</a>, keyed by Market ID.</li>
+<li>(Object) Market Creator Fees, in <a href="#atto-prefix">attoETH</a>, keyed by Market ID.</li>
 </ul>
 
 <h2 id="reporting-functions">Reporting Functions</h2>
