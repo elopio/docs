@@ -2857,6 +2857,52 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0.4"</span>
 
+<span class="c1">// buying: 5 asks, 1 from user, 2 with price too high</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">filterByPriceAndUserSortByPrice</span><span class="p">({</span>
+  <span class="na">singleOutcomeOrderBookSide</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">BID_0</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.6"</span><span class="p">,</span>
+      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">BID_1</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">amount</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
+      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">BID_3</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">amount</span><span class="p">:</span> <span class="s2">"7"</span><span class="p">,</span>
+      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.8"</span><span class="p">,</span>
+      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x33458506efb60601cb3e0585e1afcf0a8f6ae67b"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">BID_4</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">amount</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
+      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">BID_5</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">amount</span><span class="p">:</span> <span class="s2">"42"</span><span class="p">,</span>
+      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.4"</span><span class="p">,</span>
+      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">price</span><span class="p">:</span> <span class="s2">"0.6"</span><span class="p">,</span>
+  <span class="na">userAddress</span><span class="p">:</span> <span class="s2">"0x33458506efb60601cb3e0585e1afcf0a8f6ae67b"</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+    <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
+    <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.6"</span><span class="p">,</span>
+    <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
   <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3275,6 +3321,30 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Price rescaled to [minPrice, maxPrice], as a base-10 string.</li>
+</ul>
+
+<h3 id="augur-trading-filterbypriceandusersortbyprice-p">augur.trading.filterByPriceAndUserSortByPrice(p)</h3>
+
+<p>Accepts a <a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a> object, and filters out all <a href="#order">Orders</a> where the owner is <code class="prettyprint">p.userAddress</code> or the price is below <code class="prettyprint">p.price</code> (for <a href="#bid-order">Bid Orders</a>) or above <code class="prettyprint">p.price</code> (for <a href="#ask-order">Ask Orders</a>). Returns the remaining Orders sorted by <code class="prettyprint">p.price</code>. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">p.singleOutcomeOrderBookSide</code></strong>  (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Bid Orders or Ask Orders for a particular <a href="#market">Market</a> and <a href="#outcome">Outcome</a>.</li>
+<li><strong><code class="prettyprint">p.orderType</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+<li><strong><code class="prettyprint">p.price</code></strong>  (string) Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.userAddress</code></strong>  (string) User&rsquo;s Ethereum address to filter from Orders, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;<a href="#Order">Order</a>&gt;) Array of filtered and sorted Orders.</li>
 </ul>
 
 <!-- Add links to section -->
@@ -12004,7 +12074,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li>*<em><code class="prettyprint">orderID</code> *</em> (string) ID of the order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token for which the order was placed, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the order transaction receipt.</li>
 <li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the order transaction.</li>
@@ -12150,7 +12219,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">Buy</code></strong>|<strong><code class="prettyprint">Sell</code></strong> (<a href="#Order">Order</a>) bid or ask orders, indexed by order ID.</li>
+<li>(<a href="#Order">Order</a>) Buy (bid) or sell (ask) orders, indexed by order ID.</li>
 </ul>
 
 <p><a name="SingleOutcomePriceTimeSeries"></a></p>
