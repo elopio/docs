@@ -354,6 +354,16 @@ Serves as an enum for the state of a stake token.
 * **`r`** (number) Block size factor used for scrypt's hash, determines relative memory cost (usually 8).
 * **`salt`** (string) The dklen-byte salt used for this account, as a hexadecimal string.
 
+<a name="SimulatedTrade"></a>
+### SimulatedTrade  (Object)
+
+* **`settlementFees`** (string) Projected Settlement Fees paid on this trade, as a base-10 string.
+* **`gasFees`** (string) Projected gas fees paid on this trade, as a base-10 string.
+* **`sharesDepleted`** (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.
+* **`otherSharesDepleted`** (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.
+* **`tokensDepleted`** (string) Projected number of tokens spent on this trade, as a base-10 string.
+* **`shareBalances`** (Array.<string>}  Projected final balances after the trade is complete, as an array of base-10 strings.
+
 <a name="SingleOutcomeOrderBook"></a>
 ### SingleOutcomeOrderBook  (Object)
 

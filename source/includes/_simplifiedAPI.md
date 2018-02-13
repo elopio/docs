@@ -2460,7 +2460,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
 
 #### **Returns:**
 
-* (SimulatedTrade) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.
+* ([SimulatedTrade](#SimulatedTrade)) Projected fees paid, shares and tokens spent, and final balances after the trade is complete.
 
 ### augur.trading.tradeUntilAmountIsZero(p, callback)
 
