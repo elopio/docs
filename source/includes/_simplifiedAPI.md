@@ -1822,6 +1822,52 @@ augur.trading.denormalizePrice({
 // example output:
 "0.4"
 
+// buying: 5 asks, 1 from user, 2 with price too high
+augur.trading.filterByPriceAndUserSortByPrice({
+  singleOutcomeOrderBookSide: {
+    BID_0: {
+      amount: "2",
+      fullPrecisionPrice: "0.6",
+      owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    },
+    BID_1: {
+      amount: "1",
+      fullPrecisionPrice: "0.5",
+      owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    },
+    BID_3: {
+      amount: "7",
+      fullPrecisionPrice: "0.8",
+      owner: "0x33458506efb60601cb3e0585e1afcf0a8f6ae67b",
+    },
+    BID_4: {
+      amount: "3",
+      fullPrecisionPrice: "0.7",
+      owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    },
+    BID_5: {
+      amount: "42",
+      fullPrecisionPrice: "0.4",
+      owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+    },
+  },
+  orderType: 1,
+  price: "0.6",
+  userAddress: "0x33458506efb60601cb3e0585e1afcf0a8f6ae67b",
+});
+// example output:
+[
+  {
+    amount: "3",
+    fullPrecisionPrice: "0.7",
+    owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  }, {
+    amount: "2",
+    fullPrecisionPrice: "0.6",
+    owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  }
+]
+
 augur.trading.getBetterWorseOrders({
   marketID: "0x0000000000000000000000000000000000000001",
   outcome: 0,
@@ -2211,6 +2257,23 @@ Rescales a price to its display range [minPrice, maxPrice]: displayPrice = norma
 #### **Returns:**
 
 * (string) Price rescaled to [minPrice, maxPrice], as a base-10 string.
+
+### augur.trading.filterByPriceAndUserSortByPrice(p)
+
+Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and filters out all [Orders](#order) where the owner is `p.userAddress` or the price is below `p.price` (for [Bid Orders](#bid-order)) or above `p.price` (for [Ask Orders](#ask-order)). Returns the remaining Orders sorted by `p.price`. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  **Properties:**
+    * **`p.singleOutcomeOrderBookSide`**  (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Bid Orders or Ask Orders for a particular [Market](#market) and [Outcome](#outcome).
+    * **`p.orderType`**  (number) Order type (0 for "buy", 1 for "sell").
+    * **`p.price`**  (string) Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
+    * **`p.userAddress`**  (string) User's Ethereum address to filter from Orders, as a 20-byte hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;<a href="#Order">Order</a>>) Array of filtered and sorted Orders.
 
 <!-- Add links to section -->
 ### augur.trading.getBetterWorseOrders(p, callback)

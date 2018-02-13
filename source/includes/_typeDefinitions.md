@@ -256,7 +256,6 @@ Authentication metadata for raw transactions.
 ### Order  (Object)
 
 #### **Properties:** 
-* **`orderID` ** (string) ID of the order, as a hexadecimal string.
 * **`shareToken`** (string) Contract address of the share token for which the order was placed, as a hexadecimal string.
 * **`transactionHash`** (string) Hash to look up the order transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the order transaction.
@@ -366,7 +365,7 @@ Serves as an enum for the state of a stake token.
 ### SingleOutcomeOrderBookSide  (Object)
 
 #### **Properties:** 
-* **`Buy`**|**`Sell`** (<a href="#Order">Order</a>) bid or ask orders, indexed by order ID.
+* (<a href="#Order">Order</a>) Buy (bid) or sell (ask) orders, indexed by order ID.
 
 <a name="SingleOutcomePriceTimeSeries"></a>
 ### SingleOutcomePriceTimeSeries  (Object)
