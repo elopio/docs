@@ -1773,6 +1773,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">{</span>
   <span class="mi">0</span><span class="p">:</span> <span class="p">[{</span>
     <span class="na">price</span><span class="p">:</span> <span class="mf">5.5</span><span class="p">,</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
   <span class="p">}],</span>
 <span class="p">}</span>
@@ -1784,10 +1785,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingDesignatedReporting</span><span class="p">({</span>
@@ -1845,16 +1856,25 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsCreatedByUser</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">creator</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
+  <span class="na">creator</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
-  <span class="p">{</span>
-    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506480015</span><span class="p">,</span>
-    <span class="na">marketID</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
-  <span class="p">}</span>
+  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInCategory</span><span class="p">({</span>
@@ -1865,10 +1885,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">({</span>
@@ -2188,6 +2218,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-markets-getmarketsawaitingreporting-p-callback">augur.markets.getMarketsAwaitingReporting(p, callback)</h3>
 
+<p>Note: This function is not finalized yet, and may be deprecated in favor of <code class="prettyprint">augur.markets.getDisputableMarkets</code>.</p>
+
 <p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#fee-window">Fee Window</a> that have not been <a href="#finalized-market">Finalized</a>. Either the Universe or Fee Window must be specified.</p>
 
 <p>This function will fail if:</p>
@@ -2217,7 +2249,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.&lt;string&gt;) Array of market addresses awaiting a Designated Report, as hexadecimal strings.</li>
+<li>(Array.&lt;string&gt;) Array of Ethereum contract addresses for Markets awaiting a Designated Report, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsclosingindaterange-p-callback">augur.markets.getMarketsClosingInDateRange(p, callback)</h3>
@@ -2582,6 +2614,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
   <span class="s2">"FIRST_REPORTING"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">"FINALIZED"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"PRE_REPORTING"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getStakeRequiredForDesignatedReporter</span><span class="p">({</span>
@@ -2659,7 +2692,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.&lt;<a href="#StakeInfo">StakeInfo</a>&gt;) Object containing information about the Dispute Stake in the list of Markets.</li>
+<li>(Array.&lt;<a href="#StakeInfo">StakeInfo</a>&gt;) Array of objects containing information about the Dispute Stake in the list of Markets.</li>
 </ul>
 
 <h3 id="augur-reporting-getdisputetokens-p-callback">augur.reporting.getDisputeTokens(p, callback)</h3>
@@ -12077,7 +12110,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">creationTime</code></strong> (number) Unix time when the Market was created.</li>
 <li><strong><code class="prettyprint">marketID</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
 </ul>
 
@@ -12291,9 +12323,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">totalStaked</code></strong> (string) </li>
-<li><strong><code class="prettyprint">size</code></strong> (string) </li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (string) </li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">payout</code></strong> (Array.<number>) Payout Set for the Dispute Crowdsourcer.</li>
+<li><strong><code class="prettyprint">totalStaked</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">size</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (string) Description pending.</li>
 </ul>
 
 <p><a name="StakeInfo"></a></p>
@@ -12304,7 +12338,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">marketID</code></strong> (number) </li>
-<li><strong><code class="prettyprint">stake</code></strong> (Array.&lt;<a href="#StakeDetails">StakeDetails</a>&gt;) </li>
+<li><strong><code class="prettyprint">stakes</code></strong> (Array.&lt;<a href="#StakeDetails">StakeDetails</a>&gt;) </li>
 </ul>
 
 <p><a name="TimestampedPrice"></a></p>
