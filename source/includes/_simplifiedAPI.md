@@ -1136,6 +1136,18 @@ augur.markets.getMarketsInfo({
   }
 ]
 
+augur.markets.getMarketsUpcomingDesignatedReporting({
+  universe: "0x000000000000000000000000000000000000000b",
+  sortBy: "volume",
+  isSortDescending: false,
+}, function(error, result) {
+  console.log(result);
+});
+// example output:
+[
+  "0x0000000000000000000000000000000000000222",
+]
+
 augur.markets.getUnclaimedMarketCreatorFees({
   marketIDs: [
     "0x0000000000000000000000000000000000000001",
@@ -1379,7 +1391,27 @@ This function will fail if:
 
 * (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>) Array of MarketInfo objects.
 
-### augur.markets.getUnclaimedMarketCreatorFees
+### augur.markets.getMarketsUpcomingDesignatedReporting(p, callback)
+
+Returns an array of all [Markets](#market) in the Pre-Reporting Phase. If `p.designatedReporter` is specified, these results will only include Markets where the [Designated Reporter](#designated-reporter) is `p.designatedReporter`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  **Properties:**
+    * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Markets exist, as a 20-byte hexadecimal value.
+    * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a specific Designated Reporter to filter the results by, as a 20-byte hexadecimal value.
+    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
+    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
+    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
+    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+* **`callback`** (function) Called after the Market information has been retrieved.
+
+#### **Returns:**
+
+* (Array.<string>) Array of Market addresses in the Pre-Reporting Phase, as 20-byte hexadecimal values. If `p.designatedReporter` is specified, these results will only include Markets where the Designated Reporter is `p.designatedReporter`.
+
+### augur.markets.getUnclaimedMarketCreatorFees(p, callback)
 
 Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Markets](#market). Fees are only available on [Finalized Markets](#finalized-market).
 
@@ -1388,11 +1420,11 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 * **`p`** (Object) Parameters object.
   **Properties:**
     * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
-* **`callback`** (function) Called after the Market information has been retrieved.
+* **`callback`** (function) Called after the Market Creator Fee information has been retrieved.
 
 #### **Returns:**
 
-* (Object) Market creator fees, in [attoETH](#atto-prefix), keyed by Market ID.
+* (Object) Market Creator Fees, in [attoETH](#atto-prefix), keyed by Market ID.
 
 Reporting Functions
 -------------
