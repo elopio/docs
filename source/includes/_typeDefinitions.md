@@ -232,7 +232,6 @@ Serves as an enum for the state of a Dispute Token.
 ### MarketsContractAddressRow  (Object)
 
 #### **Properties:** 
-* **`creationTime`** (number) Unix time when the Market was created.
 * **`marketID`** (string) Address of a Market, as a hexadecimal string.
 
 <a name="Meta"></a>
