@@ -82,7 +82,7 @@ Creator of Bid Order | Filler of Bid Order
 
 Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a long position for `outcome`. | **Sends:**: `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
+**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a long position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
 **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH | **Gains:** `num_shares` of all outcomes except for `outcome`. <br/>**Loses:** `open_short_position_cost` ETH.
 
 Creator of Bid Order | Filler of Bid Order
