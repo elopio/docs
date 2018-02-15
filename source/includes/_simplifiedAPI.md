@@ -1497,14 +1497,39 @@ augur.reporting.getDisputeInfo({
       {
         isInvalid: false,
         payout: [
+          10000,
+          0,
+        ],
+        totalStake: "0",
+        completedStake: "0",
+        size: "204",
+        currentStake: "0",
+        tentativeWinning: false,
+      },
+      {
+        isInvalid: false,
+        payout: [
           0,
           10000,
         ],
-        totalStaked: "122",
+        totalStake: "102",
+        completedStake: "102",
+        tentativeWinning: true,
+      },
+      {
+        isInvalid: true,
+        payout: [
+          5000,
+          5000,
+        ],
+        totalStake: "20",
+        completedStake: "0",
         size: "204",
-        amountStaked: "20",
+        currentStake: "20",
+        tentativeWinning: false,
       },
     ],
+    disputeRound: 0,
   },
   {
     marketID: "0x0000000000000000000000000000000000000011",
@@ -1515,9 +1540,11 @@ augur.reporting.getDisputeInfo({
           0,
           2,
         ],
-        totalStaked: "20000",
-        size: "20000",
-        amountStaked: "20000",
+        totalStake: "40102",
+        completedStake: "102",
+        size: "60000",
+        currentStake: "40000",
+        tentativeWinning: false,
       },
       {
         isInvalid: true,
@@ -1525,11 +1552,12 @@ augur.reporting.getDisputeInfo({
           1,
           1,
         ],
-        totalStaked: "20000",
-        size: "40000",
-        amountStaked: "20000",
+        totalStake: "20000",
+        completedStake: "20000",
+        tentativeWinning: true,
       },
     ],
+    disputeRound: 1,
   },
 ]
 
@@ -1555,9 +1583,10 @@ augur.reporting.getDisputeTokens({
     payout7: null,
     isInvalid: false,
     amountStaked: 17,
-    winning: null,
+    winningToken: null,
+    tentativeWinning: 0,
     claimed: false,
-    reportingState: "FIRST_REPORTING",
+    reportingState: "CROWDSOURCING_DISPUTE",
   },
 }
 
@@ -1639,11 +1668,10 @@ augur.reporting.getReportingSummary({
 });
 // example output:
 {
-  "AWAITING_FINALIZATION": 1,
+  "AWAITING_NEXT_WINDOW": 1,
   "DESIGNATED_REPORTING": 8,
-  "FIRST_REPORTING": 2,
+  "CROWDSOURCING_DISPUTE": 2,
   "FINALIZED": 1,
-  "PRE_REPORTING": 1,
 }
 
 augur.reporting.getStakeRequiredForDesignatedReporter({

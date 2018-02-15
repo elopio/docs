@@ -93,6 +93,8 @@ Serves as an enum for the state of a Dispute Token.
 ### DisputeToken  (Object)
 
 #### **Properties:** 
+* **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
+* **`marketID`** (string) Ethereum address of the Market, as a hexadecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
 * **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
@@ -102,12 +104,11 @@ Serves as an enum for the state of a Dispute Token.
 * **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
-* **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
-* **`marketID`** (string) Ethereum address of the Market, as a hexadecimal string.
 * **`amountStaked`** (number) Amount the Dispute Token owner has staked, in ETH.
-* **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
 * **`winningToken`** (boolean|null) Description pending.
-* **`ReportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
+* **`tentativeWinning`** (boolean) Description pending.
+* **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
+* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 
 <a name="EthereumNode"></a>
 ### EthereumNode  (Object)
@@ -389,14 +390,18 @@ Serves as an enum for the state of a stake token.
 * **`isInvalid`** (boolean) Description pending.
 * **`payout`** (Array.<number>) Payout Set for the Dispute Crowdsourcer.
 * **`totalStaked`** (string) Description pending.
-* **`size`** (string) Description pending.
-* **`amountStaked`** (string) Description pending.
+* **`completedStake`** (string) Description pending.
+* **`size`** (string|null) Description pending.
+* **`currentStake`** (string|null) Description pending.
+* **`initialReport`** (boolean) Description pending.
+* **`tentativeWinning`** (boolean) Description pending.
 
 <a name="StakeInfo"></a>
 ### StakeInfo  (Object)
 
 #### **Properties:** 
-* **`marketID`** (number) 
+* **`marketID`** (number) Ethereum contract address of the Market.
+* **`disputeRound`** (number|null) Description pending.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
 <a name="TimestampedPrice"></a>
