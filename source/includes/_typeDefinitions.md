@@ -57,6 +57,7 @@ Note: Other properties will be present in this object, depending on what event t
 
 #### **Properties:** 
 * **`version`** (string) Version of the contracts.
+* **`net_version`** (string) Network ID that Augur Node is connected to. 
 * **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
 
 <a name="Category"></a>

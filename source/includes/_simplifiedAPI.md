@@ -330,6 +330,7 @@ augur.augurNode.getContractAddresses(
 // example output:
 {
   "version": "4.7.0-47",
+  "net_version": "4",
   "addresses": {
     "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
     "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -430,7 +431,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (<a href="ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.
+* (<a href="#ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.
 
 ### augur.augurNode.submitRequest(method, params, callback)
 
