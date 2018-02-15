@@ -1489,7 +1489,7 @@ augur.reporting.getDisputeInfo({
 }, function (error, result) {
   console.log(result);
 });
-// example onSuccessOutput:
+// example output:
 [
   {
     marketID: "0x0000000000000000000000000000000000000211",
