@@ -2295,12 +2295,27 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
+
+augur.api.TradingEscapeHatch.getFrozenShareValueInMarket({
+  _market: _market,
+  tx: { 
+    to: tradingEscapeHatch,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
 ```
 Provides JavaScript bindings for the [TradingEscapeHatch Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TradingEscapeHatch.sol), which allows funds to be withdrawn from Augur in the event that Augur needs to be [halted](#developer-mode) by the development team.
 
 ### augur.api.TradingEscapeHatch.claimSharesInUpdate(p)
 
-If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on [Market](#market) `p._market` will cash out the caller's [Shares](#share) to Ether for that Market and return them to the caller's Ethereum address.
+If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on the specified [Market](#market) will cash out the caller's [Shares](#share) to the Market's denomination token and send the cashed-out funds to the caller's Ethereum address. (Currently, Augur only denominates Markets in [attoETH](#atto-prefix).)
 
 This transaction will fail if:
 
@@ -2321,6 +2336,31 @@ This transaction will fail if:
 #### **Returns:**
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.TradingEscapeHatch.getFrozenShareValueInMarket(p)
+
+If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on the specified [Market](#market) will return the value of the user's [Shares](#share) in that Market, in the Market's denomination token. (Currently, Augur only denominates Markets in [attoETH](#atto-prefix).)
+
+This transaction will fail if:
+
+* Augur is not in a halted state.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`**  (string) Ethereum address of a Market to claim Shares from, as a 20-byte hexadecimal value.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the value of the user's Shares in the Market, in that Market's denomination token.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the value of the user's Shares in the Market, in that Market's denomination token, as a stringified unsigned integer.
 
 Universe Tx API
 ---------------------
