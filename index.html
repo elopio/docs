@@ -1121,6 +1121,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"4.7.0-47"</span><span class="p">,</span>
+  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
   <span class="s2">"addresses"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"Controller"</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
     <span class="s2">"Universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
@@ -1230,7 +1231,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(<a href="ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.</li>
+<li>(<a href="#ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.</li>
 </ul>
 
 <h3 id="augur-augurnode-submitrequest-method-params-callback">augur.augurNode.submitRequest(method, params, callback)</h3>
@@ -11951,6 +11952,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">version</code></strong> (string) Version of the contracts.</li>
+<li><strong><code class="prettyprint">net_version</code></strong> (string) Network ID that Augur Node is connected to. </li>
 <li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
 </ul>
 
