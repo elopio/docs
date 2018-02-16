@@ -524,7 +524,7 @@ This transaction will fail if:
 * `msg.sender` doesn't have enough of `p._market`'s denomination token to be able to afford `p._amount` Shares in all Outcomes.
 * `p._amount` is not a number between 1 and 2<sup>254</sup>.
 
-When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets) event, which will record to the Ethereum blockchain the `msg.sender`, `p._market`, type (buy), `p._amount` purchased, number of Outcomes in the `p._market`, `marketCreatorFee`, and the `reportingFee`. During a buy, the `marketCreatorFee` and `reportingFee` will be "0" because no fees are paid for purchasing Shares, only selling/settling Shares.
+When successful, this transaction will trigger a [`CompleteSetsPurchased`](#CompleteSetsPurchased) event, which will record to the Ethereum blockchain `msg.sender`, `p._market`, the Universe in which `p._market` exists, and `p._amount` purchased.
 
 #### **Parameters:**
 
@@ -553,7 +553,7 @@ This transaction will fail if:
 * `msg.sender` doesn't own `p._amount` Shares of all Outcomes in `p._market`.
 * `p._amount` is not a number between 1 and 2<sup>254</sup>.
 
-When successful, this transaction will trigger a [`CompleteSets`](#CompleteSets) event, which will record to the Ethereum blockchain the `msg.sender`, `p._market`, type (sell), `p._amount` sold, number of Outcomes in the `p._market`, `marketCreatorFee` paid for selling the Shares, and the `reportingFee` paid for selling the Shares.
+When successful, this transaction will trigger a [`CompleteSetsSold`](#CompleteSetsSold) event, which will record to the Ethereum blockchain `msg.sender`, `p._market`, the Universe in which `p._market` exists, and `p._amount` sold.
 
 #### **Parameters:**
 
