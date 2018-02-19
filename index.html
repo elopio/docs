@@ -548,6 +548,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">augur.connect</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
+<p>The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique (<a href="https://geth.ethereum.org/">Geth&rsquo;s</a> Proof-of-Authority protocol) and Aura (<a href="https://www.parity.io/">Parity&rsquo;s</a> Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:</p>
+
+<p>Rinkeby Augur Node (WSS): wss://rinkeby.augur.nodes.augur.net
+Rinkeby Ethereum Node (HTTPS): https://rinkeby.ethereum.nodes.augur.net
+Rinkeby Ethereum Node (WSS): wss://websocket-rinkeby.ethereum.nodes.augur.net</p>
+
+<p>Clique Augur Node (WSS): wss://clique.augur.nodes.augur.net
+Clique Ethereum Node (HTTPS): https://clique.ethereum.nodes.augur.net</p>
+
+<p>Aura Augur Node (WSS): wss://aura.augur.nodes.augur.net
+Aura Ethereum Node (HTTPS): https://aura.ethereum.nodes.augur.net</p>
+
+<p>The statuses of these hosted nodes can be viewed at <a href="stats.augur.net">stats.augur.net</a>.</p>
+
 <p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
 
 <h2 id="accounts">Accounts</h2>
@@ -8260,7 +8274,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><code class="prettyprint">p._amount</code> is not a number between 1 and 2<sup>254</sup>.</li>
 </ul>
 
-<p>When successful, this transaction will trigger a <a href="#CompleteSets"><code class="prettyprint">CompleteSets</code></a> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">p._market</code>, type (buy), <code class="prettyprint">p._amount</code> purchased, number of Outcomes in the <code class="prettyprint">p._market</code>, <code class="prettyprint">marketCreatorFee</code>, and the <code class="prettyprint">reportingFee</code>. During a buy, the <code class="prettyprint">marketCreatorFee</code> and <code class="prettyprint">reportingFee</code> will be &ldquo;0&rdquo; because no fees are paid for purchasing Shares, only selling/settling Shares.</p>
+<p>When successful, this transaction will trigger a <a href="#CompleteSetsPurchased"><code class="prettyprint">CompleteSetsPurchased</code></a> event, which will record to the Ethereum blockchain <code class="prettyprint">msg.sender</code>, <code class="prettyprint">p._market</code>, the Universe in which <code class="prettyprint">p._market</code> exists, and <code class="prettyprint">p._amount</code> purchased.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8301,7 +8315,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><code class="prettyprint">p._amount</code> is not a number between 1 and 2<sup>254</sup>.</li>
 </ul>
 
-<p>When successful, this transaction will trigger a <a href="#CompleteSets"><code class="prettyprint">CompleteSets</code></a> event, which will record to the Ethereum blockchain the <code class="prettyprint">msg.sender</code>, <code class="prettyprint">p._market</code>, type (sell), <code class="prettyprint">p._amount</code> sold, number of Outcomes in the <code class="prettyprint">p._market</code>, <code class="prettyprint">marketCreatorFee</code> paid for selling the Shares, and the <code class="prettyprint">reportingFee</code> paid for selling the Shares.</p>
+<p>When successful, this transaction will trigger a <a href="#CompleteSetsSold"><code class="prettyprint">CompleteSetsSold</code></a> event, which will record to the Ethereum blockchain <code class="prettyprint">msg.sender</code>, <code class="prettyprint">p._market</code>, the Universe in which <code class="prettyprint">p._market</code> exists, and <code class="prettyprint">p._amount</code> sold.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11714,9 +11728,23 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="Burn"></a>Burn</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/VariableSupplyToken.sol">VariableSupplyToken</a></td>
-<td><code class="prettyprint">value</code> amount of <code class="prettyprint">target</code>&rsquo;s tokens have been burned (i.e., completely destroyed) .</td>
+<td><code class="prettyprint">value</code> amount of <code class="prettyprint">target</code>&rsquo;s tokens have been burned (i.e., completely destroyed).</td>
 <td>target</td>
 <td>value</td>
+</tr>
+<tr>
+<td><a name="CompleteSetsPurchased"></a>CompleteSetsPurchased</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The Ethereum address <code class="prettyprint">account</code> purchased <code class="prettyprint">numCompleteSets</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>universe, market, account</td>
+<td>numCompleteSets</td>
+</tr>
+<tr>
+<td><a name="CompleteSetsSold"></a>CompleteSetsSold</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The Ethereum address <code class="prettyprint">account</code> sold <code class="prettyprint">numCompleteSets</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>universe, market, account</td>
+<td>numCompleteSets</td>
 </tr>
 <tr>
 <td><a name="DisputeCrowdsourcerCompleted"></a>DisputeCrowdsourcerCompleted</td>
@@ -13206,7 +13234,51 @@ Goals:
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
-<p>The Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between <a href="#minimum-display-price">Minimum Price</a> and <a href="#maximum-display-price">Maximum Price</a> for a <a href="#market">Market</a>. It&rsquo;s also the amount of <a href="#atto-prefix">attoETH</a> required to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. When Shares are <a href="#settlement">Settled</a>, then each Complete Set will yield Number of Ticks <a href="#atto-prefix">attoETH</a>. The yield from the Complete Sets Settlement is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the <a href="#number-of-ticks">Number of Ticks</a> set for the Market.</p>
+<p>A <a href="#market">Market&rsquo;s</a> Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between the <a href="#minimum-display-price">Minimum Display Price</a> and <a href="#maximum-display-price">Maximum Display Price</a> for that Market. It is also the amount of <a href="#atto-prefix">attoETH</a> that must be escrowed with the Market contract to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. <strong>A Market&rsquo;s Number of Ticks must be a multiple of its number of valid <a href="#outcome">Outcomes</a>.</strong> This is because each Outcome in the <a href="#payout-set">Payout Set</a> of an <a href="#invalid-outcome">Invalid</a> Market is set to the Number of Ticks divided by the number of Outcomes (in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>).</p>
+
+<p>While it is possible for the <a href="#market-creator">Market Creator</a> to choose the Number of Ticks when creating the Market, this functionality is hidden from the user in the UI and default values are used. The default values are:</p>
+
+<table><thead>
+<tr>
+<th>Number of Outcomes</th>
+<th style="text-align: center">Number of Ticks</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2</td>
+<td style="text-align: center">10,000</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: center">10,002</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: center">10,000</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: center">10,000</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align: center">10,002</td>
+</tr>
+<tr>
+<td>7</td>
+<td style="text-align: center">10,003</td>
+</tr>
+<tr>
+<td>8</td>
+<td style="text-align: center">10,000</td>
+</tr>
+</tbody></table>
+
+<p>These values are chosen so that the prices per Share are more human-friendly. After Market <a href="#finalized-market">Finalization</a>, each winning Share can be Settled by sending it to the Market contract in exchange for an amount of attoETH equal to the Number of Ticks. In the event that the Market Finalizes as Invalid, each Share of the Market can be returned to the Market contract in exchange for an amount of attoETH equal to (Number of Ticks / Number of Outcomes).</p>
+
+<p>The <a href="#atto-prefix">attoETH</a> yielded when a Complete Set of Shares is Settled is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.</p>
+
+<p>For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to <code class="prettyprint">[-10, 30]</code> and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.</p>
 
 <h2 id="open-interest">Open Interest</h2>
 
@@ -13260,7 +13332,22 @@ Goals:
 
 <h2 id="payout-set">Payout Set</h2>
 
-<p>A Payout Set, sometimes referred to as &ldquo;Payout Numerators&rdquo; in Augur&rsquo;s smart contract functions, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, in a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+<p>A Payout Set, sometimes referred to as &ldquo;Payout Numerators&rdquo; in Augur&rsquo;s smart contract functions, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. </p>
+
+<p>For example, in a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+
+<p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. (This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.)</p>
+
+<p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a short position) and 1 (for a long position). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
+
+<ol>
+<li>Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.</li>
+<li>Scale the reported outcome to be between 0 and 1 by dividing by (maxPrice - minPrice): 75 / (100 - 0) = 0.75.</li>
+<li>Scale the reported Outcome to the Number of Ticks by multiplying by the Number of Ticks: 0.75 * 10000 = 7500.</li>
+<li>Calculate the other Outcome by subtracting the result from the Number of Ticks: 10000 - 7500 = 2500.</li>
+<li>Put them in an array where the zero index is the short position, and one index is the long position: <code class="prettyprint">[2500, 7500]</code>.
+Note: When calculating the Payout Set for a Scalar Market using integer-only math, the order of steps (2) and (3) should be switched (i.e., always multiply before dividing in integer math).</li>
+</ol>
 
 <h2 id="position">Position</h2>
 
