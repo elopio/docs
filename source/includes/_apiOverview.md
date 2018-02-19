@@ -71,6 +71,20 @@ Once augur.js has been installed, it will need to be connected to an Ethereum no
 
 To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
+The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique ([Geth's](https://geth.ethereum.org/) Proof-of-Authority protocol) and Aura ([Parity's](https://www.parity.io/) Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:
+
+Rinkeby Augur Node (WSS): wss://rinkeby.augur.nodes.augur.net
+Rinkeby Ethereum Node (HTTPS): https://rinkeby.ethereum.nodes.augur.net
+Rinkeby Ethereum Node (WSS): wss://websocket-rinkeby.ethereum.nodes.augur.net
+
+Clique Augur Node (WSS): wss://clique.augur.nodes.augur.net
+Clique Ethereum Node (HTTPS): https://clique.ethereum.nodes.augur.net
+
+Aura Augur Node (WSS): wss://aura.augur.nodes.augur.net
+Aura Ethereum Node (HTTPS): https://aura.ethereum.nodes.augur.net
+
+The statuses of these hosted nodes can be viewed at [stats.augur.net](stats.augur.net).
+
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
 Accounts
