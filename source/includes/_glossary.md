@@ -248,7 +248,25 @@ The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price
 
 ## Number of Ticks
 
-The Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between [Minimum Price](#minimum-display-price) and [Maximum Price](#maximum-display-price) for a [Market](#market). It's also the amount of [attoETH](#atto-prefix) required to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#share) for a Market. When Shares are [Settled](#settlement), then each Complete Set will yield Number of Ticks [attoETH](#atto-prefix). The yield from the Complete Sets Settlement is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the [Number of Ticks](#number-of-ticks) set for the Market.
+A [Market's](#market) Number of Ticks can be thought of as the number of possible prices, or [Ticks](#tick), between the [Minimum Display Price](#minimum-display-price) and [Maximum Display Price](#maximum-display-price) for that Market. It is also the amount of [attoETH](#atto-prefix) that must be escrowed with the Market contract to purchase a single [Complete Set](#complete-set) of indivisible [Shares](#share) for a Market. **A Market's Number of Ticks must be a multiple of its number of valid [Outcomes](#outcome).** This is because each Outcome in the [Payout Set](#payout-set) of an [Invalid](#invalid-outcome) Market is set to the Number of Ticks divided by the number of Outcomes (in order to ensure that the holders of each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement)).
+
+While it is possible for the [Market Creator](#market-creator) to choose the Number of Ticks when creating the Market, this functionality is hidden from the user in the UI and default values are used. The default values are:
+
+| Number of Outcomes | Number of Ticks |
+| ------------------ |:---------------:|
+| 2                  | 10,000          |
+| 3                  | 10,002          |
+| 4                  | 10,000          |
+| 5                  | 10,000          |
+| 6                  | 10,002          |
+| 7                  | 10,003          |
+| 8                  | 10,000          |
+
+These values are chosen so that the prices per Share are more human-friendly. After Market [Finalization](#finalized-market), each winning Share can be Settled by sending it to the Market contract in exchange for an amount of attoETH equal to the Number of Ticks. In the event that the Market Finalizes as Invalid, each Share of the Market can be returned to the Market contract in exchange for an amount of attoETH equal to (Number of Ticks / Number of Outcomes).
+
+The [attoETH](#atto-prefix) yielded when a Complete Set of Shares is Settled is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.
+
+For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to `[-10, 30]` and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.
 
 ## Open Interest
 
@@ -301,7 +319,20 @@ The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). W
 
 ## Payout Set
 
-A Payout Set, sometimes referred to as "Payout Numerators" in Augur's smart contract functions, is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. For example, in a [Binary Market](#binary-market) with 1000 [Ticks](#tick), a [Report](#report) that Stakes [REP](#rep) on Outcome `0` would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each [Share](#share) when [Finalized](#finalized-market). In the example above, the Payout Numerators are the values 1000 and 0, and only [Shares](#share) of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is `0`. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, and becomes a [Payout Distribution Hash](#payout-distribution-hash).
+A Payout Set, sometimes referred to as "Payout Numerators" in Augur's smart contract functions, is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. 
+
+For example, in a [Binary Market](#binary-market) with 1000 [Ticks](#tick), a [Report](#report) that Stakes [REP](#rep) on Outcome `0` would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each [Share](#share) when [Finalized](#finalized-market). In the example above, the Payout Numerators are the values 1000 and 0, and only [Shares](#share) of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is `0`. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a [Payout Distribution Hash](#payout-distribution-hash).
+
+The Payout Set for a [Categorical Market](#categorical-market) is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like `[0, 0, 8000, 0, 0, 0, 0, 0]`. The same Categorical Market with an [Invalid Outcome](#invalid-outcome) would have a Payout Set like `[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]`. (This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).)
+
+The Payout Set for a [Scalar Market](#scalar-market) is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a short position) and 1 (for a long position). Suppose that a Scalar Market exists with $0 as the [Minimum Display Price](#minimum-display-price), $100 as the [Maximum Display Price](#maximum-display-price), 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:
+
+1. Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.
+2. Scale the reported outcome to be between 0 and 1 by dividing by (maxPrice - minPrice): 75 / (100 - 0) = 0.75.
+3. Scale the reported Outcome to the Number of Ticks by multiplying by the Number of Ticks: 0.75 * 10000 = 7500.
+4. Calculate the other Outcome by subtracting the result from the Number of Ticks: 10000 - 7500 = 2500.
+5. Put them in an array where the zero index is the short position, and one index is the long position: `[2500, 7500]`.
+Note: When calculating the Payout Set for a Scalar Market using integer-only math, the order of steps (2) and (3) should be switched (i.e., always multiply before dividing in integer math).
 
 ## Position
 
