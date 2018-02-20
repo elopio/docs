@@ -105,7 +105,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
-* **`amountStaked`** (number) Amount the Dispute Token owner has staked, in ETH.
+* **`balance`** (number) Dispute Token balance the owner has staked, in ETH.
 * **`winningToken`** (boolean|null) Description pending.
 * **`tentativeWinning`** (boolean) Description pending.
 * **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
@@ -143,6 +143,16 @@ Serves as an enum for the state of a Dispute Token.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 * **`totalStake`** (number) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
+
+<a name="InitialReporter"></a>
+### InitialReporter  (Object)
+
+#### **Properties:** 
+* **`marketID`** (string) Ethereum contract address of the Market for which the Initial Report was submitted.
+* **`reporter`** (string) Ethereum address of the Reporter who submitted the Initial Report.
+* **`amountStaked`** (number) Amount of attoREP the Reporter Staked in the Initial Report.
+* **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
+* **`redeemed`** (number) Amount of attoREP the Reporter has redeemed from the InitialReporter contract.
 
 <a name="Keystore"></a>
 ### Keystore  (Object)
@@ -322,7 +332,7 @@ Serves as an enum for the state of an order.
 * **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
 * **`feeWindow`** (string) Fee Window the Market is in currently.
 * **`payoutNumerators`** (Array.&lt;number>) Array representing the payout set.
-* **`amountStaked`** (number) Description the reporter has staked on the Outcome of their report.
+* **`amountStaked`** (number) attoREP the Reporter has Staked on the Outcome of their Report.
 * **`crowdsourcerID`** (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.
 * **`isCategorical`** (boolean) Whether the Market is a Categorical Market.
 * **`isScalar`** (boolean) Whether the Market is a Scalar Market.
