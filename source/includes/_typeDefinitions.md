@@ -423,6 +423,15 @@ Serves as an enum for the state of a Market.
 * **`amount`** (number) Display price, as a base-10 number.
 * **`timestamp`** (number) Unix timestamp for this price in seconds, as an integer.
 
+<a name="UnclaimedFeeWindowInfo"></a>
+### UnclaimedFeeWindowInfo  (Object)
+
+#### **Properties:** 
+* **`startTime`** (number) Unix timestamp when the Fee Window begins.
+* **`endTime`** (number) Unix timestamp when the Fee Window ends.
+* **`balance`** (number) Balance the user has Staked in the Fee Window, in attoREP.
+* **`expectedFees`** (number) Expected Reporting Fees, in attoREP, that will be withdrawn when the user redeems their Stake in the Fee Window.
+
 <a name="UserTrade"></a>
 ### UserTrade  (Object)
 
