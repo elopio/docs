@@ -1597,14 +1597,42 @@ augur.reporting.getFeeWindowCurrent({
   universe: "0x000000000000000000000000000000000000000b",
 }
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.reporting.getFeeWindowsWithUnclaimedFees({
+augur.reporting.getFeeWindows({
   universe: "0x000000000000000000000000000000000000000b",
-  account: "0x0000000000000000000000000000000000000021"
+  account: "0x0000000000000000000000000000000000000021",
+  includeCurrent: true,
+  augur: {
+    contracts: {
+      addresses: {
+        1: {
+          Cash: "CASH",
+        },
+      },
+    },
+    rpc: {
+      getNetworkID: () => {
+        return 1;
+      },
+    },
+  },
 }, function (error, result) {
   console.log(result);
 });
-// example output: coming soon
+// example output:
+{
+  "0x1000000000000000000000000000000000000000": {
+    startTime: 1506473473,
+    endTime: 1509065473,
+    balance: 100,
+    expectedFees: 100 * 1000 / 300,
+  },
+  "0x2000000000000000000000000000000000000000": {
+    startTime: 1509065473,
+    endTime: 1511657473,
+    balance: 500,
+    expectedFees: 500 * 2000 / 1100,
+  },
+}
 
 augur.reporting.getInitialReporters({
   reporter: "0x0000000000000000000000000000000000000b0b",
@@ -1782,10 +1810,9 @@ This function will fail if:
 
 * (<a href="#FeeWindow">FeeWindow</a>) Object containing information about the current Fee Window.
 
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
-### augur.reporting.getFeeWindowsWithUnclaimedFees(p, callback)
+### augur.reporting.getFeeWindows(p, callback)
 
-This function has not been implemented yet. Returns the [Fee Windows](#fee-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee).
+Returns the [Fee Windows](#fee-window) where a specific user has unclaimed [Reporting Fees](#reporting-fee).
 
 This function will fail if:
 
@@ -1796,11 +1823,12 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.
+    * **`p.includeCurrent`**  (boolean) Whether to include the current Fee Window in the returned results.
 * **`callback`** (function) Called after the Fee Windows have been retrieved.
 
 #### **Returns:**
 
-* Description pending.
+* (Object) Object containing <a href="#UnclaimedFeeWindowInfo">UnclaimedFeeWindowInfo</a> objects, indexed by the Ethereum address of each FeeWindow contract.
 
 ### augur.reporting.getInitialReporters(p, callback)
 
