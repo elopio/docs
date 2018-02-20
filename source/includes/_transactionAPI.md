@@ -739,7 +739,7 @@ When `redeem` is called on Dispute Crowdsourcers of non-Forked Markets, this tra
 
 When `redeem` is called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that `p._redeemer` Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that `p._redeemer` is owed, to the [Child Universe](#child-universe) for the [Outcome](#outcome) of that Crowdsourcer.
 
-This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if the REP/Ether was redeemed without any errors.
+This transaction will trigger a [`DisputeCrowdsourcerRedeemed`](#DisputeCrowdsourcerRedeemed) event if the REP/Ether was redeemed without any errors.
 
 #### **Parameters:**
 
@@ -865,6 +865,8 @@ These Participation Tokens can be redeemed later once the Fee Window is no longe
 ### augur.api.FeeWindow.redeem(p)
 
 Converts any [Participation Tokens](#participation-token) `p._sender` has in the specified [Fee Window](#fee-window) to [Reputation Tokens](#rep), and gives the user any [Reporting Fees](#reporting-fee) he or she is owed in Ether. The parameter `p._sender` is the Ethereum address of the user redeeming the Participation Tokens, as a 20-byte hexadecimal string.
+
+This transaction will trigger a [`FeeWindowRedeemed`](#FeeWindowRedeemed) event if the REP/Ether was redeemed without any errors.
 
 #### **Parameters:**
 
@@ -1003,9 +1005,8 @@ augur.api.InitialReporter.redeem({
   onFailed: function (result) { console.log(result); }
 });
 
-var _newOwner = "0x9998ff3e9ce1c0459b309fac6dd4e69229b91777";
 augur.api.InitialReporter.transferOwnership({
-  _newOwner: _newOwner,
+  _newOwner: "0x9998ff3e9ce1c0459b309fac6dd4e69229b91777",
   tx: { 
     to: initialReporterAddress,
     gas: "0x632ea0" 
@@ -1062,7 +1063,9 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 
 ### augur.api.InitialReporter.redeem(p)
 
-Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) Staked on the [Outcome](#outcome) of the [Initial Report](#initial-report). If the First Public Reporter submitted the Initial Report, this function will also redeem the [No-Show Gas Bond](#no-show-gas-bond) in Ether. This transaction will trigger a [`WinningsRedeemed`](#WinningsRedeemed) event if the REP/Ether was redeemed without any errors.
+Redeems the [REP](#rep) that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) Staked on the [Outcome](#outcome) of the [Initial Report](#initial-report). If the First Public Reporter submitted the Initial Report, this function will also redeem the [No-Show Gas Bond](#no-show-gas-bond) in Ether. 
+
+This transaction will trigger an [`InitialReporterRedeemed`](#InitialReporterRedeemed) event if the REP/Ether was redeemed without any errors.
 
 #### **Parameters:**
 
@@ -1086,6 +1089,8 @@ Changes the owner of the Initial Reporter contract from the existing owner to `p
 This function will fail if:
 
 * `msg.sender` isn't the owner of the InitialReporter.
+
+This transaction will trigger an [`InitialReporterTransfered`](#InitialReporterTransfered) event if the REP/Ether was transferred without any errors.
 
 #### **Parameters:**
 
@@ -1386,7 +1391,7 @@ Provides JavaScript bindings for the [Market Solidity Contract](https://github.c
 
 Contributes `p._amount` [REP](#rep) to the [Dispute Crowdsourcer](#dispute-crowdsourcer) represented by [Payout Set](#payout-set) `p._payoutNumerators` and `p._invalid` in order to help [Challenge](#challenge) the [Market](#market)'s [Tentative Outcome](#tentative-outcome). If the amount of REP in the Dispute Crowdsourcer plus `p._amount` is greater than the total REP required to fill the [Dispute Bond](#dispute-bond), this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.
 
-This transaction will trigger a `DisputeCrowdsourcerContribution` event if it executes without any errors. It will also trigger a `DisputeCrowdsourcerCompleted` event if the Dispute Bond is successfullly filled, and it will trigger a [`UniverseForked`](#UniverseForked) event if enough REP has been [Staked](#dispute-stake) in the Dispute Crowdsourcer to cause the Market to [Fork](#fork).
+This transaction will trigger a [`DisputeCrowdsourcerContribution`](#DisputeCrowdsourcerContribution) event if it executes without any errors. It will also trigger a `DisputeCrowdsourcerCompleted` event if the Dispute Bond is successfullly filled, and it will trigger a [`UniverseForked`](#UniverseForked) event if enough REP has been [Staked](#dispute-stake) in the Dispute Crowdsourcer to cause the Market to [Fork](#fork).
 
 This function will fail if:
 
@@ -2775,7 +2780,7 @@ This transaction will fail if:
 
 ### augur.api.Universe.createScalarMarket(p)
 
-Creates a new [Scalar Market](#scalar-market). This transaction will trigger a `MarketCreated` event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+Creates a new [Scalar Market](#scalar-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 

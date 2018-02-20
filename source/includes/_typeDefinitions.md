@@ -332,7 +332,7 @@ Serves as an enum for the state of an order.
 <a name="REPORTING_STATE"></a>
 ### REPORTING_STATE  (Object)
 
-Serves as an enum for the state of a stake token.
+Serves as an enum for the state of a Market.
 
 #### **Properties:** 
 * **`PRE_REPORTING`** (string) Market's end time has not yet come to pass.
