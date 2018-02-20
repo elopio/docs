@@ -8531,7 +8531,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">p._redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">p._redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
 
-<p>This transaction will trigger a <a href="#WinningsRedeemed"><code class="prettyprint">WinningsRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
+<p>This transaction will trigger a <a href="#DisputeCrowdsourcerRedeemed"><code class="prettyprint">DisputeCrowdsourcerRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8689,6 +8689,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-api-feewindow-redeem-p">augur.api.FeeWindow.redeem(p)</h3>
 
 <p>Converts any <a href="#participation-token">Participation Tokens</a> <code class="prettyprint">p._sender</code> has in the specified <a href="#fee-window">Fee Window</a> to <a href="#rep">Reputation Tokens</a>, and gives the user any <a href="#reporting-fee">Reporting Fees</a> he or she is owed in Ether. The parameter <code class="prettyprint">p._sender</code> is the Ethereum address of the user redeeming the Participation Tokens, as a 20-byte hexadecimal string.</p>
+
+<p>This transaction will trigger a <a href="#FeeWindowRedeemed"><code class="prettyprint">FeeWindowRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8857,9 +8859,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">_newOwner</span> <span class="o">=</span> <span class="s2">"0x9998ff3e9ce1c0459b309fac6dd4e69229b91777"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">transferOwnership</span><span class="p">({</span>
-  <span class="na">_newOwner</span><span class="p">:</span> <span class="nx">_newOwner</span><span class="p">,</span>
+  <span class="na">_newOwner</span><span class="p">:</span> <span class="s2">"0x9998ff3e9ce1c0459b309fac6dd4e69229b91777"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporterAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -8928,7 +8929,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-redeem-p">augur.api.InitialReporter.redeem(p)</h3>
 
-<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether. This transaction will trigger a <a href="#WinningsRedeemed"><code class="prettyprint">WinningsRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
+<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether. </p>
+
+<p>This transaction will trigger an <a href="#InitialReporterRedeemed"><code class="prettyprint">InitialReporterRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8964,6 +8967,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the InitialReporter.</li>
 </ul>
+
+<p>This transaction will trigger an <a href="#InitialReporterTransfered"><code class="prettyprint">InitialReporterTransfered</code></a> event if the REP/Ether was transferred without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9318,7 +9323,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Contributes <code class="prettyprint">p._amount</code> <a href="#rep">REP</a> to the <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a> represented by <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._payoutNumerators</code> and <code class="prettyprint">p._invalid</code> in order to help <a href="#challenge">Challenge</a> the <a href="#market">Market</a>&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a>. If the amount of REP in the Dispute Crowdsourcer plus <code class="prettyprint">p._amount</code> is greater than the total REP required to fill the <a href="#dispute-bond">Dispute Bond</a>, this function will only contribute the remaining amount of REP required to fill the Dispute Bond on behalf of the caller.</p>
 
-<p>This transaction will trigger a <code class="prettyprint">DisputeCrowdsourcerContribution</code> event if it executes without any errors. It will also trigger a <code class="prettyprint">DisputeCrowdsourcerCompleted</code> event if the Dispute Bond is successfullly filled, and it will trigger a <a href="#UniverseForked"><code class="prettyprint">UniverseForked</code></a> event if enough REP has been <a href="#dispute-stake">Staked</a> in the Dispute Crowdsourcer to cause the Market to <a href="#fork">Fork</a>.</p>
+<p>This transaction will trigger a <a href="#DisputeCrowdsourcerContribution"><code class="prettyprint">DisputeCrowdsourcerContribution</code></a> event if it executes without any errors. It will also trigger a <code class="prettyprint">DisputeCrowdsourcerCompleted</code> event if the Dispute Bond is successfullly filled, and it will trigger a <a href="#UniverseForked"><code class="prettyprint">UniverseForked</code></a> event if enough REP has been <a href="#dispute-stake">Staked</a> in the Dispute Crowdsourcer to cause the Market to <a href="#fork">Fork</a>.</p>
 
 <p>This function will fail if:</p>
 
@@ -11023,7 +11028,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-universe-createscalarmarket-p">augur.api.Universe.createScalarMarket(p)</h3>
 
-<p>Creates a new <a href="#scalar-market">Scalar Market</a>. This transaction will trigger a <code class="prettyprint">MarketCreated</code> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+<p>Creates a new <a href="#scalar-market">Scalar Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -11768,11 +11773,46 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>disputeCrowdsourcer, payoutNumerators, size</td>
 </tr>
 <tr>
+<td><a name="DisputeCrowdsourcerRedeemed"></a>DisputeCrowdsourcerRedeemed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> redeemed <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> and received <code class="prettyprint">repReceived</code> additional REP, plus <code class="prettyprint">reportingFeesReceived</code> <a href="#atto-prefix">attoETH</a>, from <code class="prettyprint">disputeCrowdsourcer</code> (with <code class="prettyprint">payoutNumerators</code>) in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>universe, reporter, market</td>
+<td>disputeCrowdsourcer, amountRedeemed, repReceived, reportingFeesReceived, payoutNumerators</td>
+</tr>
+<tr>
 <td><a name="FeeWindowCreated"></a>FeeWindowCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td>The Ethereum contract address <code class="prettyprint">feeWindow</code> has created a new <a href="#fee-window">Fee Window</a> (with ID <code class="prettyprint">id</code> and running from <code class="prettyprint">startTime</code> to <code class="prettyprint">endTime</code>) in <code class="prettyprint">universe</code>.</td>
 <td>universe</td>
 <td>feeWindow, startTime, endTime, id</td>
+</tr>
+<tr>
+<td><a name="FeeWindowRedeemed"></a>FeeWindowRedeemed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> redeemed <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> and received <code class="prettyprint">reportingFeesReceived</code> <a href="#atto-prefix">attoETH</a> from <code class="prettyprint">feeWindow</code> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>universe, reporter, feeWindow</td>
+<td>amountRedeemed, reportingFeesReceived</td>
+</tr>
+<tr>
+<td><a name="InitialReporterRedeemed"></a>InitialReporterRedeemed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> redeemed <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> and received <code class="prettyprint">repReceived</code> additional REP, plus <code class="prettyprint">reportingFeesReceived</code> <a href="#atto-prefix">attoETH</a>, from <code class="prettyprint">market</code> of <code class="prettyprint">universe</code>.</td>
+<td>universe, reporter, market</td>
+<td>amountRedeemed, repReceived, reportingFeesReceived, payoutNumerators</td>
+</tr>
+<tr>
+<td><a name="InitialReportSubmitted"></a>InitialReportSubmitted</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td><code class="prettyprint">reporter</code> has submitted an <a href="#initial-report">Initial Report</a> for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> <a href="#rep">REP</a> staked on the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. If <code class="prettyprint">reporter</code> is the <a href="#designated-reporter">Designated Reporter</a> (as opposed to the <a href="#first-public-reporter">First Public Reporter</a>), <code class="prettyprint">isDesignatedReporter</code> is set to true.</td>
+<td>universe, reporter, market</td>
+<td>amountStaked, isDesignatedReporter, payoutNumerators</td>
+</tr>
+<tr>
+<td><a name="InitialReporterTransfered"></a>InitialReporterTransfered</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Ownership of an InitialReporter contract was transferred between Ethereum addresses <code class="prettyprint">from</code> and <code class="prettyprint">to</code> for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>.</td>
+<td>universe, market</td>
+<td>from, to</td>
 </tr>
 <tr>
 <td><a name="MarketCreated"></a>MarketCreated</td>
@@ -11782,16 +11822,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>description, extraInfo, market, outcomes, marketCreationFee, minPrice, maxPrice, marketType</td>
 </tr>
 <tr>
-<td><a name="InitialReportSubmitted"></a>InitialReportSubmitted</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">reporter</code> has submitted an Initial Report for the <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> with <code class="prettyprint">amountStaked</code> REP  staked on the Outcome <code class="prettyprint">payoutNumerators</code>. If <code class="prettyprint">reporter</code> is the Designated Reporter (as opposed to the First Public Reporter), <code class="prettyprint">isDesignatedReporter</code> is set to true.</td>
-<td>universe, reporter, market</td>
-<td>amountStaked, isDesignatedReporter, payoutNumerators</td>
-</tr>
-<tr>
 <td><a name="MarketFinalized"></a>MarketFinalized</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The Outcome of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> is now considered final.</td>
+<td>The <a href="#outcome">Outcome</a> of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> is now considered final.</td>
 <td>universe, market</td>
 <td></td>
 </tr>
@@ -11805,21 +11838,21 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="OrderCanceled"></a>OrderCanceled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">sender</code>&rsquo;s Order (with ID <code class="prettyprint">orderId</code> and type <code class="prettyprint">orderType</code>) for the Share Token at address <code class="prettyprint">shareToken</code> was canceled in <code class="prettyprint">universe</code>, and <code class="prettyprint">sender</code> was refunded either <code class="prettyprint">tokenRefund</code> in ETH or <code class="prettyprint">sharesRefund</code> Share Tokens.</td>
+<td><code class="prettyprint">sender</code>&rsquo;s <a href="#order">Order</a> (with ID <code class="prettyprint">orderId</code> and type <code class="prettyprint">orderType</code>) for the Share Token at address <code class="prettyprint">shareToken</code> was canceled in <code class="prettyprint">universe</code>, and <code class="prettyprint">sender</code> was refunded either <code class="prettyprint">tokenRefund</code> in <a href="#atto-prefix">attoETH</a> or <code class="prettyprint">sharesRefund</code> Share Tokens.</td>
 <td>universe, shareToken, sender</td>
 <td>orderId, orderType, tokenRefund, sharesRefund</td>
 </tr>
 <tr>
 <td><a name="OrderCreated"></a>OrderCreated</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">creator</code> placed an <code class="prettyprint">orderType</code> Order with <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for <code class="prettyprint">amount</code> of <code class="prettyprint">shareToken</code> at <code class="prettyprint">price</code> in the Trade Group <code class="prettyprint">tradeGroupId</code>. <code class="prettyprint">creator</code> put up either <code class="prettyprint">moneyEscrowed</code> or <code class="prettyprint">sharesEscrowed</code>.</td>
+<td><code class="prettyprint">creator</code> placed an <code class="prettyprint">orderType</code> <a href="#order">Order</a> with <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for <code class="prettyprint">amount</code> of <code class="prettyprint">shareToken</code> at <code class="prettyprint">price</code> in the Trade Group <code class="prettyprint">tradeGroupId</code>. <code class="prettyprint">creator</code> put up either <code class="prettyprint">moneyEscrowed</code> or <code class="prettyprint">sharesEscrowed</code>.</td>
 <td>creator, universe, shareToken</td>
 <td>orderType, amount, price, moneyEscrowed, sharesEscrowed, tradeGroupId, orderId</td>
 </tr>
 <tr>
 <td><a name="OrderFilled"></a>OrderFilled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Order <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The Order Creator escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in ETH, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in ETH. <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the Market Creator and Reporters.</td>
+<td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
 </tr>
@@ -11840,28 +11873,28 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="TokensBurned"></a>TokensBurned</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s <a href="#atto-prefix">attotokens</a> (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code>.</td>
+<td>Burned (i.e., completely destroyed) <code class="prettyprint">amount</code> of <code class="prettyprint">target</code>&rsquo;s <a href="#atto-prefix">attotokens</a> in <code class="prettyprint">market</code> (if applicable) of <code class="prettyprint">universe</code>. The destroyed tokens were of type <code class="prettyprint">tokenType</code>, whose contract address is <code class="prettyprint">token</code>. (Token types are as follows: ReputationToken = 0, ShareToken = 1, DisputeCrowdsourcer = 2, FeeWindow = 3, FeeToken = 4. FeeWindow tokens are <a href="#participation-token">Participation Tokens</a>. FeeTokens are only used internally for accounting purposes so that Stake holders can get Fees for every <a href="#fee-window">Fee Window</a> in which they have Stake.)</td>
 <td>universe, token, target</td>
-<td>amount</td>
+<td>amount, tokenType, market</td>
 </tr>
 <tr>
 <td><a name="TokensMinted"></a>TokensMinted</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>Created <code class="prettyprint">amount</code> brand new <a href="#atto-prefix">attotokens</a> (at address <code class="prettyprint">token</code>) in <code class="prettyprint">universe</code> for <code class="prettyprint">target</code>.</td>
+<td>Created <code class="prettyprint">amount</code> brand new <a href="#atto-prefix">attotokens</a> for <code class="prettyprint">target</code> in <code class="prettyprint">market</code> (if applicable) of <code class="prettyprint">universe</code> . The minted tokens are of type <code class="prettyprint">tokenType</code>, whose contract address is <code class="prettyprint">token</code>. (Token types are as follows: ReputationToken = 0, ShareToken = 1, DisputeCrowdsourcer = 2, FeeWindow = 3, FeeToken = 4. FeeWindow tokens are <a href="#participation-token">Participation Tokens</a>. FeeTokens are only used internally for accounting purposes so that Stake holders can get Fees for every <a href="#fee-window">Fee Window</a> in which they have Stake.)</td>
 <td>universe, token, target</td>
-<td>amount</td>
+<td>amount, tokenType, market</td>
 </tr>
 <tr>
 <td><a name="TokensTransferred"></a>TokensTransferred</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">value</code> amount of the token at address <code class="prettyprint">token</code> in <code class="prettyprint">universe</code> has been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>.</td>
+<td><code class="prettyprint">value</code> amount of the tokens in <code class="prettyprint">market</code> (if applicable) of <code class="prettyprint">universe</code> have been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>. The transferred tokens are of type <code class="prettyprint">tokenType</code>, whose contract address is <code class="prettyprint">token</code>. (Token types are as follows: ReputationToken = 0, ShareToken = 1, DisputeCrowdsourcer = 2, FeeWindow = 3, FeeToken = 4. FeeWindow tokens are <a href="#participation-token">Participation Tokens</a>. FeeTokens are only used internally for accounting purposes so that Stake holders can get Fees for every <a href="#fee-window">Fee Window</a> in which they have Stake.)</td>
 <td>universe, token, from</td>
-<td>to, value</td>
+<td>to, value, tokenType, market</td>
 </tr>
 <tr>
 <td><a name="TradingProceedsClaimed"></a>TradingProceedsClaimed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in Finalized Market <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>.</td>
+<td><code class="prettyprint">sender</code> has collected trading profits from the Share Token at address <code class="prettyprint">shareToken</code> in <a href="#finalized-market">Finalized Market</a> <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>. <code class="prettyprint">sender</code> had <code class="prettyprint">numShares</code> Share Tokens, <code class="prettyprint">numPayoutTokens</code> paid out, and a balance of <code class="prettyprint">finalTokenBalance</code>.</td>
 <td>universe, shareToken, sender</td>
 <td>market, numShares, numPayoutTokens, finalTokenBalance</td>
 </tr>
@@ -11892,13 +11925,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>The Ethereum contract address <code class="prettyprint">addition</code> was added to Augur&rsquo;s whitelisted contracts. (Many of the functions in Augur&rsquo;s Solidity smart contracts are only callable by contracts that have been whitelisted.)</td>
 <td>&nbsp;</td>
 <td>addition</td>
-</tr>
-<tr>
-<td><a name="WinningsRedeemed"></a>WinningsRedeemed</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The Ethereum contract address <code class="prettyprint">reportingParticipant</code> has allowed <code class="prettyprint">reporter</code> to redeem <code class="prettyprint">amountRedeemed</code> <a href="#rep">REP</a> in <code class="prettyprint">market</code> of <code class="prettyprint">universe</code> for the <a href="#outcome">Outcome</a> <code class="prettyprint">payoutNumerators</code>. <code class="prettyprint">reporter</code> also received <code class="prettyprint">reportingFeesReceived</code> in ETH.</td>
-<td>universe, reporter, market</td>
-<td>reportingParticipant, amountRedeemed, reportingFeesReceived, payoutNumerators</td>
 </tr>
 </tbody></table>
 
@@ -12353,7 +12379,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="reporting_state-object">REPORTING_STATE  (Object)</h3>
 
-<p>Serves as an enum for the state of a stake token.</p>
+<p>Serves as an enum for the state of a Market.</p>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
