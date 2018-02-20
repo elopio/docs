@@ -1601,20 +1601,6 @@ augur.reporting.getFeeWindows({
   universe: "0x000000000000000000000000000000000000000b",
   account: "0x0000000000000000000000000000000000000021",
   includeCurrent: true,
-  augur: {
-    contracts: {
-      addresses: {
-        1: {
-          Cash: "CASH",
-        },
-      },
-    },
-    rpc: {
-      getNetworkID: () => {
-        return 1;
-      },
-    },
-  },
 }, function (error, result) {
   console.log(result);
 });
