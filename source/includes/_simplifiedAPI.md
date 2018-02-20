@@ -1203,7 +1203,6 @@ This function will fail if:
 
 #### **Parameters:**
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort categories in descending order by sortBy field.
@@ -1226,7 +1225,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.feeWindow`**  (string) Contract address of the Fee Window from which to retrieve the disputable Markets.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort Markets in descending order by sortBy field.
@@ -1249,7 +1247,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.marketID`**  (string) Market contract address for which to look up orders, as a 20-byte hexadecimal string.
 * **`callback`** (function) Called after the price time-series has been received and parsed.
 
@@ -1268,7 +1265,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to get transfer history.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
@@ -1291,7 +1287,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string.
     * **`p.designatedReporter`**  (string) &lt;optional> Address of a specific [Designated Reporter](#designated-reporter) by which to filter the results, as a 20-byte hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1317,7 +1312,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.
     * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window from which to retrieve the Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
     * **`p.reportingState`**  (string) &lt;optional> Description pending.
@@ -1342,7 +1336,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the Universe from which to get the Markets, as a 20-byte hexadecimal string.
     * **`p.earliestClosingTime`**  (number) Earliest Market close timestamp at which to truncate Market results, in seconds.
     * **`p.latestClosingTime`**  (number) Latest Market close timestamp at which to truncate Market results, in seconds.
@@ -1367,7 +1360,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a 20-byte hexadecimal string.
     * **`p.creator`**  (string) Ethereum address of the [Market Creator](#market-creator), as a 20-byte hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1391,7 +1383,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a 20-byte hexadecimal string.
     * **`p.category`**  (string) Name of the category from which to get the Markets.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1416,7 +1407,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.marketIDs`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
 * **`callback`** (function) Called after the Market info has been retrieved.
 
@@ -1431,7 +1421,6 @@ Returns an array of all [Markets](#market) in the Pre-Reporting Phase. If `p.des
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Markets exist, as a 20-byte hexadecimal value.
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a specific Designated Reporter to filter the results by, as a 20-byte hexadecimal value.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
@@ -1451,7 +1440,6 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
 * **`callback`** (function) Called after the Market Creator Fee information has been retrieved.
 
@@ -1749,7 +1737,6 @@ Returns information about the [Dispute Stake](#dispute-stake) in a list of [Mark
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.marketIDs`**  (Array.&lt;string>) Array of Market Ethereum contract addresses.
 
 #### **Returns:**
@@ -1767,7 +1754,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
     * **`p.disputeTokenState`**  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
@@ -1788,7 +1774,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.
     * **`p.reporter`**  (string) &lt;optional> Ethereum address of a [Reporter](#reporter) for which to return the amount of attoREP they have Staked in the current Fee Window.
 * **`callback`** (function) Called after the Fee Windows have been retrieved.
@@ -1809,7 +1794,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.
 * **`callback`** (function) Called after the Fee Windows have been retrieved.
@@ -1825,13 +1809,12 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.reporter`**  (string) Ethereum address of a Reporter who has Staked REP in InitialReporter contracts, as a 20-byte hexadecimal string.
     * **`p.redeemed`**  (boolean) &lt;optional> If true, the returned results will include only InitialReporter contracts where the Reporter has redeemed Staked REP; if false, the returned results will include only InitialReporter contracts where the Reporter has not redeemed Staked REP. If not specified, the results will include all InitialReporters in which the Repoter has Staked REP.
 
 #### **Returns:**
 
-* An array of [InitialReporter](#InitialReporter) objects.
+* (Array.&lt;<a href="#InitialReporter">InitialReporter</a>>) Array of objects containing information about the InitialReporter contracts the Reporter has Staked REP in.
 
 ### augur.reporting.getReportingHistory(p, callback)
 
@@ -1844,7 +1827,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting history, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.
@@ -1872,7 +1854,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.feeWindow`**  (string) Contract address of the [Fee Window](#fee-window) for which to get the summary, as a 20-byte hexadecimal string.
 * **`callback`** (function) Called after the reporting summary has been retrieved.
 
@@ -2397,7 +2378,6 @@ Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.singleOutcomeOrderBookSide`**  (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Bid Orders or Ask Orders for a particular [Market](#market) and [Outcome](#outcome).
     * **`p.orderType`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p.price`**  (string) Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
@@ -2419,7 +2399,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.marketID`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.
     * **`p.outcome`**  (string) Market Outcome for which to find better/worse Orders.
     * **`p.orderType`**  (string) Desired type of Order. Valid values are "buy" and "sell".
@@ -2441,7 +2420,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketID must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
@@ -2487,7 +2465,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading history, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the [Market](#market) ID must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
@@ -2514,7 +2491,6 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-  **Properties:**
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.
     * **`p.marketID`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
