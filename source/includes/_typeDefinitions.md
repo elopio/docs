@@ -152,7 +152,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`reporter`** (string) Ethereum address of the Reporter who submitted the Initial Report.
 * **`amountStaked`** (number) Amount of attoREP the Reporter Staked in the Initial Report.
 * **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
-* **`redeemed`** (number) Amount of attoREP the Reporter has redeemed from the InitialReporter contract.
+* **`redeemed`** (boolean) Whether the Reporter has redeemed their REP from the InitialReporter contract.
 
 <a name="Keystore"></a>
 ### Keystore  (Object)
