@@ -942,8 +942,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the account for which to get transfer history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.token</code></strong>  (string) &lt;optional&gt; Contract address of the token contract by which to limit the history results, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the account for which to get transfer history, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.token</code></strong>  (string) &lt;optional&gt; Contract address of the token contract by which to limit the history results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort transfer history.</li>
@@ -971,7 +971,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.password</code></strong>  (string) Password for the account being imported.</li>
-<li><strong><code class="prettyprint">p.address</code></strong>  (string) Ethereum address for this account, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.address</code></strong>  (string) Ethereum address for this account, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.keystore</code></strong>  (<a href="#Keystore">Keystore</a>) Keystore object containing this account&rsquo;s encryption parameters.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account has been successfully generated.</li>
@@ -1059,8 +1059,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.etherToSend</code></strong>  (string) Amount of Ether to send, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.from</code></strong>  (string) Ethereum address of the sender, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.to</code></strong>  (string) Ethereum address of the recipient, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.from</code></strong>  (string) Ethereum address of the sender, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.to</code></strong>  (string) Ethereum address of the recipient, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
@@ -1086,7 +1086,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) The universe of Reputation to use.</li>
 <li><strong><code class="prettyprint">p.reputationToSend</code></strong>  (string) Amount of Reputation to send, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address of the recipient, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._to</code></strong>  (string) Ethereum address of the recipient, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
@@ -2089,7 +2089,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the categories.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort categories in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of categories to return.</li>
@@ -2155,7 +2155,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) Market contract address for which to look up orders, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) Market contract address for which to look up orders, as a 20-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the price time-series has been received and parsed.</li>
 </ul>
@@ -2215,8 +2215,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve Markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.designatedReporter</code></strong>  (string) &lt;optional&gt; Address of a specific <a href="#designated-reporter">Designated Reporter</a> by which to filter the results, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.designatedReporter</code></strong>  (string) &lt;optional&gt; Address of a specific <a href="#designated-reporter">Designated Reporter</a> by which to filter the results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
@@ -2250,8 +2250,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.</li>
-<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window from which to retrieve the Markets, as a hexadecimal string. If this parameter is not specified, a Universe must be specified instead.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.</li>
+<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window from which to retrieve the Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Universe must be specified instead.</li>
 <li><strong><code class="prettyprint">p.reportingState</code></strong>  (string) &lt;optional&gt; Description pending.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
@@ -2284,7 +2284,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to get the Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to get the Markets, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.earliestClosingTime</code></strong>  (number) Earliest Market close timestamp at which to truncate Market results, in seconds.</li>
 <li><strong><code class="prettyprint">p.latestClosingTime</code></strong>  (number) Latest Market close timestamp at which to truncate Market results, in seconds.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
@@ -2318,8 +2318,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.creator</code></strong>  (string) Ethereum address of the <a href="#market-creator">Market Creator</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.creator</code></strong>  (string) Ethereum address of the <a href="#market-creator">Market Creator</a>, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
@@ -2351,7 +2351,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.category</code></strong>  (string) Name of the category from which to get the Markets.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
@@ -2568,7 +2568,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">payout6</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">payout7</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+    <span class="na">balance</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
     <span class="na">winningToken</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">tentativeWinning</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">claimed</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -2602,6 +2602,29 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output: coming soon</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getInitialReporters</span><span class="p">({</span>
+  <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
+    <span class="na">initialReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000abe123"</span><span class="p">,</span>
+    <span class="na">redeemed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="na">marketID</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+    <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">amountStaked</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
+    <span class="na">initialReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000abe321"</span><span class="p">,</span>
+    <span class="na">redeemed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingHistory</span><span class="p">({</span>
   <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
@@ -2670,7 +2693,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <h3 id="augur-reporting-finalizemarket-p">augur.reporting.finalizeMarket(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> a <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
+<p><a href="#finalized-market">Finalizes</a> a <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -2755,8 +2778,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> in which to retrieve the Dispute Tokens, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.account</code></strong>  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> in which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.account</code></strong>  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.disputeTokenState</code></strong>  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional&gt; Token state by which to filter results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when reporting history has been received and parsed.</li>
@@ -2785,7 +2808,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.reporter</code></strong>  (string) &lt;optional&gt; Ethereum address of a <a href="#reporter">Reporter</a> for which to return the amount of attoREP they have Staked in the current Fee Window.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Fee Windows have been retrieved.</li>
@@ -2816,8 +2839,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Fee Windows have been retrieved.</li>
 </ul>
@@ -2826,6 +2849,28 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>Description pending.</li>
+</ul>
+
+<h3 id="augur-reporting-getinitialreporters-p-callback">augur.reporting.getInitialReporters(p, callback)</h3>
+
+<p>Returns a list of InitialReporter contracts that a given <a href="#reporter">Reporter</a> has Staked <a href="#rep">REP</a> in, along with how much <a href="#atto-prefix">attoREP</a> was Staked and how much has been redeemed.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+<strong>Properties:</strong>
+
+<ul>
+<li><strong><code class="prettyprint">p.reporter</code></strong>  (string) Ethereum address of a Reporter who has Staked REP in InitialReporter contracts, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.redeemed</code></strong>  (boolean) &lt;optional&gt; If true, the returned results will include only InitialReporter contracts where the Reporter has redeemed Staked REP; if false, the returned results will include only InitialReporter contracts where the Reporter has not redeemed Staked REP. If not specified, the results will include all InitialReporters in which the Repoter has Staked REP.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>An array of <a href="#InitialReporter">InitialReporter</a> objects.</li>
 </ul>
 
 <h3 id="augur-reporting-getreportinghistory-p-callback">augur.reporting.getReportingHistory(p, callback)</h3>
@@ -2845,10 +2890,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.reporter</code></strong>  (string) Ethereum address of the <a href="#reporter">Reporter</a> for which to retrieve reporting history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.</li>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.</li>
-<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window in which to look up the reporting history, as a hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">p.reporter</code></strong>  (string) Ethereum address of the <a href="#reporter">Reporter</a> for which to retrieve reporting history, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.</li>
+<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the reporting history.</li>
@@ -2882,7 +2927,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) Contract address of the <a href="#fee-window">Fee Window</a> for which to get the summary, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) Contract address of the <a href="#fee-window">Fee Window</a> for which to get the summary, as a 20-byte hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the reporting summary has been retrieved.</li>
 </ul>
@@ -3481,7 +3526,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) Contract address of the <a href="#market">Market</a> for which to retrieve the better/worse Orders, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) Contract address of the <a href="#market">Market</a> for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (string) Market Outcome for which to find better/worse Orders.</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (string) Desired type of Order. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">p.price</code></strong>  (number) Price point at which to find better/worse Orders.</li>
@@ -3512,10 +3557,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve orders, as a hexadecimal string. Either this parameter or the marketID must be specified.</li>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve Orders, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketID must be specified.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (number) &lt;optional&gt; Market Outcome to filter results by. Valid values are in the range [0,7].</li>
-<li><strong><code class="prettyprint">p.creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the Order creator, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the Order creator, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
@@ -3575,9 +3620,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading history, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading history, as a hexadecimal string. Either this parameter or the <a href="#market">Market</a> ID must be specified.</li>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading history, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading history, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the <a href="#market">Market</a> ID must be specified.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> being bought/sold.</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading history.</li>
@@ -3611,9 +3656,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Properties:</strong>
 
 <ul>
-<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading positions, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Market ID must be specified.</li>
-<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#market">Market</a> in which to look up the trading positions, as a hexadecimal string. Either this parameter or the Universe must be specified.</li>
+<li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.</li>
+<li><strong><code class="prettyprint">p.marketID</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#market">Market</a> in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> held for the Market.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading positions.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading positions in descending order by <code class="prettyprint">sortBy</code> field.</li>
@@ -3700,7 +3745,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (number)  <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
 <li><strong><code class="prettyprint">p.shareBalances</code></strong>  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.</li>
 <li><strong><code class="prettyprint">p.tokenBalance</code></strong>  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.userAddress</code></strong>  (string)  The user&rsquo;s Ethereum address, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.userAddress</code></strong>  (string)  The user&rsquo;s Ethereum address, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string)  This <a href="#market">Market&rsquo;s</a> minimum possible price, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string)  This Market&rsquo;s maximum possible price, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.price</code></strong>  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
@@ -8189,7 +8234,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><code class="prettyprint">p._market</code> has not been Finalized.</li>
-<li>The <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
+<li>The <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -9439,7 +9484,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-finalize-p">augur.api.Market.finalize(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9476,7 +9521,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-finalizefork-p">augur.api.Market.finalizeFork(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -11887,7 +11932,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="TokensTransferred"></a>TokensTransferred</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><code class="prettyprint">value</code> amount of the tokens in <code class="prettyprint">market</code> (if applicable) of <code class="prettyprint">universe</code> have been transfered between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>. The transferred tokens are of type <code class="prettyprint">tokenType</code>, whose contract address is <code class="prettyprint">token</code>. (Token types are as follows: ReputationToken = 0, ShareToken = 1, DisputeCrowdsourcer = 2, FeeWindow = 3, FeeToken = 4. FeeWindow tokens are <a href="#participation-token">Participation Tokens</a>. FeeTokens are only used internally for accounting purposes so that Stake holders can get Fees for every <a href="#fee-window">Fee Window</a> in which they have Stake.)</td>
+<td><code class="prettyprint">value</code> amount of the tokens in <code class="prettyprint">market</code> (if applicable) of <code class="prettyprint">universe</code> have been transferred between account <code class="prettyprint">from</code> and <code class="prettyprint">to</code>. The transferred tokens are of type <code class="prettyprint">tokenType</code>, whose contract address is <code class="prettyprint">token</code>. (Token types are as follows: ReputationToken = 0, ShareToken = 1, DisputeCrowdsourcer = 2, FeeWindow = 3, FeeToken = 4. FeeWindow tokens are <a href="#participation-token">Participation Tokens</a>. FeeTokens are only used internally for accounting purposes so that Stake holders can get Fees for every <a href="#fee-window">Fee Window</a> in which they have Stake.)</td>
 <td>universe, token, from</td>
 <td>to, value, tokenType, market</td>
 </tr>
@@ -12074,7 +12119,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
 <li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Market was determined to be invalid.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount the Dispute Token owner has staked, in ETH.</li>
+<li><strong><code class="prettyprint">balance</code></strong> (number) Dispute Token balance the owner has staked, in ETH.</li>
 <li><strong><code class="prettyprint">winningToken</code></strong> (boolean|null) Description pending.</li>
 <li><strong><code class="prettyprint">tentativeWinning</code></strong> (boolean) Description pending.</li>
 <li><strong><code class="prettyprint">claimed</code></strong> (boolean) Whether the Dispute Token has been claimed by the owner.</li>
@@ -12124,6 +12169,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 <li><strong><code class="prettyprint">totalStake</code></strong> (number) &lt;optional&gt; If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)</li>
+</ul>
+
+<p><a name="InitialReporter"></a></p>
+
+<h3 id="initialreporter-object">InitialReporter  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">marketID</code></strong> (string) Ethereum contract address of the Market for which the Initial Report was submitted.</li>
+<li><strong><code class="prettyprint">reporter</code></strong> (string) Ethereum address of the Reporter who submitted the Initial Report.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Amount of attoREP the Reporter Staked in the Initial Report.</li>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.</li>
+<li><strong><code class="prettyprint">redeemed</code></strong> (number) Amount of attoREP the Reporter has redeemed from the InitialReporter contract.</li>
 </ul>
 
 <p><a name="Keystore"></a></p>
@@ -12367,7 +12426,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">marketID</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Fee Window the Market is in currently.</li>
 <li><strong><code class="prettyprint">payoutNumerators</code></strong> (Array.&lt;number&gt;) Array representing the payout set.</li>
-<li><strong><code class="prettyprint">amountStaked</code></strong> (number) Description the reporter has staked on the Outcome of their report.</li>
+<li><strong><code class="prettyprint">amountStaked</code></strong> (number) attoREP the Reporter has Staked on the Outcome of their Report.</li>
 <li><strong><code class="prettyprint">crowdsourcerID</code></strong> (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the Market is a Categorical Market.</li>
 <li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the Market is a Scalar Market.</li>
@@ -12584,6 +12643,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-constants-cancel_order_gas-string">augur.constants.CANCEL_ORDER_GAS (string)</h3>
 
 <p>Gas limit used when canceling an <a href="#order">Order</a> on the <a href="#order-book">Order Book</a>.</p>
+
+<h3 id="augur-constants-contract_interval-object">augur.constants.CONTRACT_INTERVAL (Object)</h3>
+
+<p>Object that acts as an enum containing the following values: </p>
+
+<ul>
+<li>CLAIM_PROCEEDS_WAIT_TIME - Number of seconds that the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> lasts.</li>
+<li>DESIGNATED_REPORTING_DURATION_SECONDS - Maximum number of seconds the <a href="#designated-reporting-phase">Designated Reporting Phase</a> can last.</li>
+<li>DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a <a href="#dispute-round-phase">Dispute Round</a> can last.</li>
+<li>FORK_DURATION_SECONDS - Maximum number of seconds a <a href="#fork-period">Fork Period</a> can last.</li>
+</ul>
 
 <h3 id="augur-constants-create_binary_market_gas-string">augur.constants.CREATE_BINARY_MARKET_GAS (string)</h3>
 
@@ -13170,7 +13240,7 @@ Goals:
 
 <h2 id="finalized-market">Finalized Market</h2>
 
-<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#share">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market once the <a href="post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed.</p>
+<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#share">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed.</p>
 
 <h2 id="finalized-phase">Finalized Phase</h2>
 
