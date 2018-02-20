@@ -159,7 +159,7 @@ A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challe
 
 ## Finalized Market
 
-A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#share) holders to [Settle](#settlement) their Shares with the Market once the [Post-Finalization Waiting Period](post-finalization-waiting-period) has elapsed.
+A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#share) holders to [Settle](#settlement) their Shares with the Market once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed.
 
 ## Finalized Phase
 

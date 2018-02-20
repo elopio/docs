@@ -14,6 +14,15 @@ Description pending.
 
 Gas limit used when canceling an [Order](#order) on the [Order Book](#order-book).
 
+### augur.constants.CONTRACT_INTERVAL (Object)
+
+Object that acts as an enum containing the following values: 
+
+* CLAIM_PROCEEDS_WAIT_TIME - Number of seconds that the [Post-Finalization Waiting Period](#post-finalization-waiting-period) lasts.
+* DESIGNATED_REPORTING_DURATION_SECONDS - Maximum number of seconds the [Designated Reporting Phase](#designated-reporting-phase) can last.
+* DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a [Dispute Round](#dispute-round-phase) can last.
+* FORK_DURATION_SECONDS - Maximum number of seconds a [Fork Period](#fork-period) can last.
+
 ### augur.constants.CREATE_BINARY_MARKET_GAS (string)
 
 Gas limit used when creating a new [Binary Market](#binary-market), as a hexadecimal string.
