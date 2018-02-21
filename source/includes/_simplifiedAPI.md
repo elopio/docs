@@ -915,26 +915,15 @@ augur.markets.getMarketPriceHistory({
 }
 
 augur.markets.getMarkets({
-  universe: "0x000000000000000000000000000000000000000b"
+  universe: "0x000000000000000000000000000000000000000b",
+  reportingState: "DESIGNATED_REPORTING",
+  designatedReporter: "0x000000000000000000000000000000000000d00d",
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
-  "0x0000000000000000000000000000000000000012",
-  "0x0000000000000000000000000000000000000013",
-  "0x0000000000000000000000000000000000000014",
-  "0x0000000000000000000000000000000000000015",
-  "0x0000000000000000000000000000000000000016",
-  "0x0000000000000000000000000000000000000017",
-  "0x0000000000000000000000000000000000000018",
-  "0x0000000000000000000000000000000000000019",
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000002",
   "0x0000000000000000000000000000000000000003",
-  "0x0000000000000000000000000000000000000011",
-  "0x0000000000000000000000000000000000000211",
-  "0x0000000000000000000000000000000000000222",
 ]
 
 augur.markets.getMarketsAwaitingDesignatedReporting({
@@ -1266,6 +1255,11 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the Universe from which to get transfer history.
+    * **`p.creator`** (string) &lt;optional> Ethereum address of a [Market Creator](#market-creator) by which to filter the returned results, as a 20-byte hexadecimal string.
+    * **`p.category`** (string) &lt;optional> Market category by which to filter the returned results.
+    * **`p.reportingState`** (string) &lt;optional> [REPORTING_STATE](#REPORTING_STATE) by which to filter the returned results.
+    * **`p.feeWindow`** (string) &lt;optional> Ethereum address of a [Fee Window](#fee-window) by which to filter the returned results, as a 20-byte hexadecimal string.
+    * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
     * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
@@ -2547,9 +2541,9 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`p.tickSize`**  (string) The [Tick](#tick) size (interval) for this Market.
     * **`p._direction`**  (number) Order type (0 for "buy", 1 for "sell").
-    * **`p._market`**  (string) Market in which to trade, as a hex string.
-    * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value on [0, 7].
-    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hex string.
+    * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
+    * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
+    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
