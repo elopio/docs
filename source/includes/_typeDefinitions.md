@@ -4,15 +4,6 @@ API Type Definitions
 augur.js' functions accept and return a variety of different objects, which are described below.
 
 <!-- TODO: Add glossary links to type definitions -->
-<a name="Account"></a>
-### Account  (Object)
-
-#### **Properties:** 
-* **`address`** (string) This account's Ethereum address, as a hexadecimal string.
-* **`keystore`** (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
-* **`privateKey`** (buffer) The private key for this account.
-* **`derivedKey`** (buffer) The secret key (derived from the password) used to encrypt this account's private key.
-
 <a name="AccountTransfer"></a>
 ### AccountTransfer  (Object)
 
