@@ -1794,26 +1794,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarkets</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
+  <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingDesignatedReporting</span><span class="p">({</span>
@@ -2180,6 +2169,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to get transfer history.</li>
+<li><strong><code class="prettyprint">p.creator</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#market-creator">Market Creator</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.category</code></strong> (string) &lt;optional&gt; Market category by which to filter the returned results.</li>
+<li><strong><code class="prettyprint">p.reportingState</code></strong> (string) &lt;optional&gt; <a href="#REPORTING_STATE">REPORTING_STATE</a> by which to filter the returned results.</li>
+<li><strong><code class="prettyprint">p.feeWindow</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#fee-window">Fee Window</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.designatedReporter</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#designated-reporter">Designated Reporter</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
@@ -2582,14 +2576,28 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getFeeWindowsWithUnclaimedFees</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getFeeWindows</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span>
+  <span class="na">account</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000021"</span><span class="p">,</span>
+  <span class="na">includeCurrent</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
-<span class="c1">// example output: coming soon</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">startTime</span><span class="p">:</span> <span class="mi">1506473473</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+    <span class="na">balance</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">expectedFees</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">300</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1511657473</span><span class="p">,</span>
+    <span class="na">balance</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="na">expectedFees</span><span class="p">:</span> <span class="mi">500</span> <span class="o">*</span> <span class="mi">2000</span> <span class="o">/</span> <span class="mi">1100</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getInitialReporters</span><span class="p">({</span>
   <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
@@ -2805,11 +2813,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(<a href="#FeeWindow">FeeWindow</a>) Object containing information about the current Fee Window.</li>
 </ul>
 
-<!-- TODO: Verify description once function is completed. (Make sure it matches returned result.) Add JS example results -->
+<h3 id="augur-reporting-getfeewindows-p-callback">augur.reporting.getFeeWindows(p, callback)</h3>
 
-<h3 id="augur-reporting-getfeewindowswithunclaimedfees-p-callback">augur.reporting.getFeeWindowsWithUnclaimedFees(p, callback)</h3>
-
-<p>This function has not been implemented yet. Returns the <a href="#fee-window">Fee Windows</a> where a specific user has unclaimed <a href="#reporting-fee">Reporting Fees</a>.</p>
+<p>Returns the <a href="#fee-window">Fee Windows</a> where a specific user has unclaimed <a href="#reporting-fee">Reporting Fees</a>.</p>
 
 <p>This function will fail if:</p>
 
@@ -2825,6 +2831,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.includeCurrent</code></strong>  (boolean) Whether to include the current Fee Window in the returned results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Fee Windows have been retrieved.</li>
 </ul>
@@ -2832,7 +2839,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Description pending.</li>
+<li>(Object) Object containing <a href="#UnclaimedFeeWindowInfo">UnclaimedFeeWindowInfo</a> objects, indexed by the Ethereum address of each FeeWindow contract.</li>
 </ul>
 
 <h3 id="augur-reporting-getinitialreporters-p-callback">augur.reporting.getInitialReporters(p, callback)</h3>
@@ -3690,9 +3697,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
-<li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
-<li><strong><code class="prettyprint">p._outcome</code></strong>  (number) Outcome ID to trade, must be an integer value on [0, 7].</li>
-<li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hex string.</li>
+<li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong>  (number) Outcome ID to trade, must be an integer value in between 0 and 7.</li>
+<li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing Orders off the <a href="#order-book">Order Book</a>, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called when the first trading transaction is broadcast to the network.</li>
@@ -10416,6 +10423,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">p._direction</code> must be either &ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the <a href="#order">Order</a> is created without any errors.</p>
 
+<p>This transaction will fail if:</p>
+
+<p>The value of the Order (calculated as p._price * (Market’s number of Ticks - p._fxpAmount) for a sell Order and <code class="prettyprint">p._price</code> * <code class="prettyprint">p._fxpAmount</code> for a buy Order) is less than the minimum value for an Order, which is 10**14 attoETH.</p>
+
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -12527,6 +12538,19 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">price</code></strong> (number) Display (non-normalized) price, as a base-10 number.</li>
 <li><strong><code class="prettyprint">amount</code></strong> (number) Display price, as a base-10 number.</li>
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp for this price in seconds, as an integer.</li>
+</ul>
+
+<p><a name="UnclaimedFeeWindowInfo"></a></p>
+
+<h3 id="unclaimedfeewindowinfo-object">UnclaimedFeeWindowInfo  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp when the Fee Window begins.</li>
+<li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp when the Fee Window ends.</li>
+<li><strong><code class="prettyprint">balance</code></strong> (number) Balance the user has Staked in the Fee Window, in attoREP.</li>
+<li><strong><code class="prettyprint">expectedFees</code></strong> (number) Expected Reporting Fees, in attoREP, that will be withdrawn when the user redeems their Stake in the Fee Window.</li>
 </ul>
 
 <p><a name="UserTrade"></a></p>
