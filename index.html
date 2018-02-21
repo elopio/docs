@@ -843,58 +843,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">}</span>
 <span class="p">]</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">({</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="na">password</span><span class="p">:</span> <span class="s2">"thisismysupersecurepassword"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">account</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">{</span>
-  <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="na">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s2">"0xacad0e04f71c7f202d546ab71b047410bce3277c"</span><span class="p">,</span>
-    <span class="na">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="na">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="na">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="na">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="na">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="na">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="na">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="na">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="na">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="na">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="na">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">}</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">loginWithMasterKey</span><span class="p">({</span>
   <span class="na">privateKey</span><span class="p">:</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">});</span>
@@ -904,9 +852,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">201</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">202</span><span class="p">,</span> <span class="mi">221</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">208</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">174</span><span class="p">,</span> <span class="mi">197</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">196</span><span class="p">]</span>
   <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
-<span class="c1">// This function does not accept parameters or a callback function, and does not return a value.</span>
 </code></pre></div>
 <h3 id="augur-accounts-approveaugur-address-auth-callback">augur.accounts.approveAugur(address, auth, callback)</h3>
 
@@ -960,29 +905,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>&gt;) Array representing the account&rsquo;s transfer history.</li>
 </ul>
 
-<h3 id="augur-accounts-login-p-callback">augur.accounts.login(p, callback)</h3>
-
-<p>Logs into an account using a password.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.password</code></strong>  (string) Password for the account being imported.</li>
-<li><strong><code class="prettyprint">p.address</code></strong>  (string) Ethereum address for this account, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.keystore</code></strong>  (<a href="#Keystore">Keystore</a>) Keystore object containing this account&rsquo;s encryption parameters.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account has been successfully generated.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li> (<a href="#Account">Account</a>) Logged-in account object.</li>
-</ul>
-
 <h3 id="augur-accounts-loginwithmasterkey-p">augur.accounts.loginWithMasterKey(p)</h3>
 
 <p>Logs into an account with a user-supplied plaintext private key.</p>
@@ -1001,22 +923,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li> (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).</li>
-</ul>
-
-<h3 id="augur-accounts-logout">augur.accounts.logout()</h3>
-
-<p>Logs out the account that is currently logged in. This function does not accept parameters or a callback function, and does not return a value.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li>This function does not accept any input parameters.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>This function does not return a value.</li>
 </ul>
 
 <h2 id="assets-functions">Assets Functions</h2>
