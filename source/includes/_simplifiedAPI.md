@@ -79,58 +79,6 @@ augur.accounts.getAccountTransferHistory({
   }
 ]
 
-augur.accounts.login({
-  keystore: {
-    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  password: "thisismysupersecurepassword"
-}, function (error, account) {
-  console.log(account);
-});
-// example output:
-{
-  address: undefined,
-  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
-  keystore: {
-    address: "0xacad0e04f71c7f202d546ab71b047410bce3277c",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-}
-
 augur.accounts.loginWithMasterKey({
   privateKey: [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 });
@@ -140,9 +88,6 @@ augur.accounts.loginWithMasterKey({
   derivedKey: Uint8Array(32) [201, 255, 60, 63, 53, 230, 36, 85, 169, 202, 221, 48, 231, 73, 203, 250, 107, 208, 201, 39, 72, 68, 185, 10, 218, 102, 13, 174, 197, 154, 41, 196]
   privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 }
-
-augur.accounts.logout();
-// This function does not accept parameters or a callback function, and does not return a value.
 ```
 ### augur.accounts.approveAugur(address, auth, callback)
 
@@ -183,22 +128,6 @@ This function will fail if:
 
 * (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>) Array representing the account's transfer history.
 
-### augur.accounts.login(p, callback)
-
-Logs into an account using a password.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.password`**  (string) Password for the account being imported.
-    * **`p.address`**  (string) Ethereum address for this account, as a 20-byte hexadecimal string.
-    * **`p.keystore`**  (<a href="#Keystore">Keystore</a>) Keystore object containing this account's encryption parameters.
-* **`callback`** (function) Called after the account has been successfully generated.
-
-#### **Returns:**
-
-*  (<a href="#Account">Account</a>) Logged-in account object.
-
 ### augur.accounts.loginWithMasterKey(p)
 
 Logs into an account with a user-supplied plaintext private key.
@@ -211,18 +140,6 @@ Logs into an account with a user-supplied plaintext private key.
 #### **Returns:**
 
 *  (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).
-
-### augur.accounts.logout()
-
-Logs out the account that is currently logged in. This function does not accept parameters or a callback function, and does not return a value.
-
-#### **Parameters:**
-
-* This function does not accept any input parameters.
-
-#### **Returns:**
-
-* This function does not return a value.
 
 Assets Functions
 ----------------
