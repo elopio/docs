@@ -2225,6 +2225,10 @@ This transaction will fail if:
 
 Works similarly to `augur.api.Trade.publicBuy` and `augur.api.Trade.publicSell`; however a direction must be specified. The `p._direction` must be either "0x0" for long or "0x1" for short. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the [Order](#order) is created without any errors.
 
+This transaction will fail if:
+
+The value of the Order (calculated as p._price * (Market’s number of Ticks - p._fxpAmount) for a sell Order and `p._price` * `p._fxpAmount` for a buy Order) is less than the minimum value for an Order, which is 10**14 attoETH.
+
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
