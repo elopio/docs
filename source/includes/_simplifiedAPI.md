@@ -1536,22 +1536,26 @@ augur.reporting.getInitialReporters({
   console.log(result);
 });
 // example output:
-[
-  {
+{
+  "0x0000000000000000000000000000000000abe123": {
     marketId: "0x0000000000000000000000000000000000000011",
     reporter: "0x0000000000000000000000000000000000000b0b",
     amountStaked: 102,
     initialReporter: "0x0000000000000000000000000000000000abe123",
     redeemed: 0,
-  }, 
-  {
+    isDesignatedReporter: 0,
+    repBalance: 2000,
+  },
+  "0x0000000000000000000000000000000000abe321": {
     marketId: "0x0000000000000000000000000000000000000211",
     reporter: "0x0000000000000000000000000000000000000b0b",
     amountStaked: 102,
     initialReporter: "0x0000000000000000000000000000000000abe321",
     redeemed: 0,
-  }
-]
+    isDesignatedReporter: 1,
+    repBalance: 2000,
+  },
+}
 
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
@@ -1735,10 +1739,11 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 * **`p`** (Object) Parameters object.
     * **`p.reporter`**  (string) Ethereum address of a Reporter who has Staked REP in InitialReporter contracts, as a 20-byte hexadecimal string.
     * **`p.redeemed`**  (boolean) &lt;optional> If true, the returned results will include only InitialReporter contracts where the Reporter has redeemed Staked REP; if false, the returned results will include only InitialReporter contracts where the Reporter has not redeemed Staked REP. If not specified, the results will include all InitialReporters in which the Repoter has Staked REP.
+    * **`p.withRepBalance`**  (boolean) &lt;optional> Whether the InitialReporter contract has a balance greater than 0. If set to `true`, only InitialReporters with a balance greater than 0 will be returned.
 
 #### **Returns:**
 
-* (Array.&lt;<a href="#InitialReporter">InitialReporter</a>>) Array of objects containing information about the InitialReporter contracts the Reporter has Staked REP in.
+* (Object) Object containing <a href="#InitialReporter">InitialReporter</a> objects, keyed by the Ethereum contract address of the InitialReporter.
 
 ### augur.reporting.getReportingHistory(p, callback)
 

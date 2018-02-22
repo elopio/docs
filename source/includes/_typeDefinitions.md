@@ -138,6 +138,8 @@ Serves as an enum for the state of a Dispute Token.
 * **`amountStaked`** (number) Amount of attoREP the Reporter Staked in the Initial Report.
 * **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
 * **`redeemed`** (boolean) Whether the Reporter has redeemed their REP from the InitialReporter contract.
+* **`isDesignatedReporter`** (boolean) Whether `reporter` was the Designated Reporter (as opposed to the First Public Reporter).
+* **`repBalance`** (number) Amount of REP that the InitialReporter contract has as its balance.
 
 <a name="MarketCreationCost"></a>
 ### MarketCreationCost  (Object)
