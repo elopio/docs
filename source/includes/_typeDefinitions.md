@@ -33,6 +33,7 @@ Note: Other properties will be present in this object, depending on what event t
 * **`transactionIndex`**  (number) Integer of the transaction's index position in the block.
 * **`logIndex`**  (number) Integer of the log index position in the block.
 * **`blockNumber`**  (number) Number of the block on the Ethereum blockchain where the event was logged.
+* **`blockHash`** (string) Description pending.
 * **`contractName`**  (string) Name of the Solidity contract in which the event is defined.
 * **`eventName`**  (string) Name of the event type being logged.
 

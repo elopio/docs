@@ -16,7 +16,7 @@ Events Functions
 -----------
 ```javascript
 augur.events.getAllAugurLogs({
-  fromBlock: 1490000
+  fromBlock: 1703565
 }, function(error, allAugurLogs) {
   console.log(allAugurLogs); 
 });
@@ -33,6 +33,7 @@ augur.events.getAllAugurLogs({
     "transactionIndex": 0,
     "logIndex": 0,
     "blockNumber": 1541700,
+    "blockHash": "0x58d9203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba351887b",
     "contractName": "Augur",
     "eventName": "RegistryAddition"
   },
@@ -49,6 +50,7 @@ augur.events.getAllAugurLogs({
     "transactionIndex": 2,
     "logIndex": 1,
     "blockNumber": 1599717,
+    "blockHash": "0xd859203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba3518b78",
     "contractName": "Augur",
     "eventName": "TokensTransferred"
   }
@@ -153,6 +155,8 @@ augur.events.stopBlockListeners();
 ### augur.events.getAllAugurLogs(p, callback)
 
 Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by `blockNumber` and `logIndex`.
+
+Note: Depending on how many event logs there are to be retrieved, this function can take a long time to run.
 
 #### **Parameters:**
 
