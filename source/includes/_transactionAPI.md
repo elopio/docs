@@ -952,9 +952,9 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.    
-    * **`p._orderID`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
+    * **`p._orderId`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
     * **`p._amountFillerWants`** (string) Number of [Shares](#share) to Fill, in attoshares, as a hexadecimal string.
-    * **`p._tradeGroupID`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to fill the Order, as a hexadecimal string.

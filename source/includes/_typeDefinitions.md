@@ -19,7 +19,7 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`value`** (number) Quantity of tokens sent.
 * **`symbol`** (string|null) Token symbol (if any).
 * **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
-* **`marketID`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
+* **`marketId`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
 
 <a name="AugurEventLog"></a>
 ### AugurEventLog  (Object)
@@ -40,8 +40,8 @@ Note: Other properties will be present in this object, depending on what event t
 ### BetterWorseOrders  (Object)
 
 #### **Properties:** 
-* **`betterOrderID`** (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.
-* **`worseOrderID`** (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.
+* **`betterOrderId`** (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.
+* **`worseOrderId`** (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.
 
 <a name="ContractAddresses"></a>
 ### ContractAddresses  (Object)
@@ -57,12 +57,6 @@ Note: Other properties will be present in this object, depending on what event t
 #### **Properties:** 
 * **`category`** (string) Name of a Category.
 * **`popularity`** (number|string) Category popularity. (The exact method for calculating this value is still pending.)
-
-<a name="CipherParams"></a>
-### CipherParams  (Object)
-
-#### **Properties:** 
-* **`iv`** (string) Initialization vector used for this account, as a hexadecimal string.
 
 <a name="ConnectOptions"></a>
 ### ConnectOptions  (Object)
@@ -86,7 +80,7 @@ Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
 * **`disputeToken`** (string) Contract address of the Dispute Token, as a hexadecimal string.
-* **`marketID`** (string) Ethereum address of the Market, as a hexadecimal string.
+* **`marketId`** (string) Ethereum address of the Market, as a hexadecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
 * **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
@@ -112,7 +106,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`wsAddresses`** (Array.&lt;string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
 * **`ipc`** (string|null) IPC address of an Ethereum node.
 * **`ipcAddresses`** (Array.&lt;string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
-* **`networkID`** (string|null) Description pending.
+* **`networkId`** (string|null) Description pending.
 
 <a name="ExtraInfo"></a>
 ### ExtraInfo  (Object)
@@ -129,7 +123,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`endBlockNumber`** (number|null) Block in which the Fee Window became inactive.
 * **`endTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`feeWindow`** (string) Ethereum contract address of the Fee Window.
-* **`feeWindowID`** (number) Unique numerical ID of the Fee Window.
+* **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
 * **`startBlockNumber`** (number) Block in which the Fee Window became active.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
@@ -139,31 +133,11 @@ Serves as an enum for the state of a Dispute Token.
 ### InitialReporter  (Object)
 
 #### **Properties:** 
-* **`marketID`** (string) Ethereum contract address of the Market for which the Initial Report was submitted.
+* **`marketId`** (string) Ethereum contract address of the Market for which the Initial Report was submitted.
 * **`reporter`** (string) Ethereum address of the Reporter who submitted the Initial Report.
 * **`amountStaked`** (number) Amount of attoREP the Reporter Staked in the Initial Report.
 * **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
 * **`redeemed`** (boolean) Whether the Reporter has redeemed their REP from the InitialReporter contract.
-
-<a name="Keystore"></a>
-### Keystore  (Object)
-
-#### **Properties:** 
-* **`address`** (string) This account's Ethereum address, as a hexadecimal string.
-* **`crypto`** (<a href="#KeystoreCrypto">KeystoreCrypto</a>) Parameters used to encrypt this account's private key.
-* **`id`** (string) This account's UUID.
-* **`version`** (number) Keystore version number (usually 3).
-
-<a name="KeystoreCrypto"></a>
-### KeystoreCrypto  (Object)
-
-#### **Properties:** 
-* **`cipher`** (string) The symmetric cipher used to encrypt this account's private key (usually aes-128-ctr).
-* **`ciphertext`** (string) This account's encrypted private key, as a hexadecimal string.
-* **`cipherparams`** (<a href="#CipherParams">CipherParams</a>) Object containing the initialization vector for this account.
-* **`kdf`** (string) Key derivation function name (usually scrypt; pbkdf2 is also supported).
-* **`kdfparams`** (<a href="#ScryptParams">ScryptParams</a>|<a href="#Pbkdf2Params">Pbkdf2Params</a>) Key derivation function parameters.
-* **`mac`** (string) Message authentication code, as a hexadecimal string.
 
 <a name="MarketCreationCost"></a>
 ### MarketCreationCost  (Object)
@@ -179,13 +153,6 @@ Serves as an enum for the state of a Dispute Token.
 * **`designatedReportNoShowReputationBond`** (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.
 * **`targetReporterGasCosts`** (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.
 * **`validityBond`** (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.
-
-<a name="MarketCreatorFee"></a>
-### MarketCreatorFee  (Object)
-
-#### **Properties:** 
-* **`marketID`** (string) Address of a Market, as a hexadecimal string.
-* **`unclaimedFee`** (number|string) Fee available to be claimed from the Market, by the Market Creator, in attoETH.
 
 <a name="MarketInfo"></a>
 ### MarketInfo  (Object)
@@ -235,7 +202,7 @@ Serves as an enum for the state of a Dispute Token.
 ### MarketsContractAddressRow  (Object)
 
 #### **Properties:** 
-* **`marketID`** (string) Address of a Market, as a hexadecimal string.
+* **`marketId`** (string) Address of a Market, as a hexadecimal string.
 
 <a name="Meta"></a>
 ### Meta  (Object)
@@ -292,15 +259,6 @@ Serves as an enum for the state of an order.
 * **`price`** (number) Price of the Outcome.
 * **`description`** (string|null) Description for the Outcome.
 
-<a name="Pbkdf2Params"></a>
-### Pbkdf2Params  (Object)
-
-#### **Properties:** 
-* **`dklen`** (number) Key length in bytes (usually 32).
-* **`c`** (number) Number of PBKDF2 iterations used to derive the secret key.
-* **`prf`** (string) Pseudorandom function used with PBKDF2 (usually hmac-sha256).
-* **`salt`** (string) The dklen-byte salt used for this account, as a hexadecimal string.
-
 <a name="ProfitLoss"></a>
 ### ProfitLoss  (Object)
 
@@ -320,11 +278,11 @@ Serves as an enum for the state of an order.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the reporting transaction.
 * **`blockHash`** (string) Hash of the Ethereum block containing the reporting transaction.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.
-* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
+* **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`feeWindow`** (string) Fee Window the Market is in currently.
 * **`payoutNumerators`** (Array.&lt;number>) Array representing the payout set.
 * **`amountStaked`** (number) attoREP the Reporter has Staked on the Outcome of their Report.
-* **`crowdsourcerID`** (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.
+* **`crowdsourcerId`** (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.
 * **`isCategorical`** (boolean) Whether the Market is a Categorical Market.
 * **`isScalar`** (boolean) Whether the Market is a Scalar Market.
 * **`isInvalid`** (boolean) Whether the Market is [Invalid](#invalid-outcome).
@@ -345,16 +303,6 @@ Serves as an enum for the state of a Market.
 * **`FORKING`** (string) The Dispute Crowdsourcer for one of the Market's Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.
 * **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.
 * **`AWAITING_FORK_MIGRATION`** (string) Market is waiting for another Market's Fork to be resolved. This means its Tentative Outcome has been reset to the Outcome submitted in the Initial Report, and all Stake in the Market's Dispute Crowdsourcers has been refunded to the users who Staked on them.
-
-<a name="ScryptParams"></a>
-### ScryptParams  (Object)
-
-#### **Properties:** 
-* **`dklen`** (number) Key length in bytes (usually 32).
-* **`n`** (number) Number of scrypt iterations used to derive the secret key (usually 262144).
-* **`p`** (number) Parallelization factor, determines relative CPU cost (usually 1).
-* **`r`** (number) Block size factor used for scrypt's hash, determines relative memory cost (usually 8).
-* **`salt`** (string) The dklen-byte salt used for this account, as a hexadecimal string.
 
 <a name="SimulatedTrade"></a>
 ### SimulatedTrade  (Object)
@@ -402,7 +350,7 @@ Serves as an enum for the state of a Market.
 ### StakeInfo  (Object)
 
 #### **Properties:** 
-* **`marketID`** (number) Ethereum contract address of the Market.
+* **`marketId`** (number) Ethereum contract address of the Market.
 * **`disputeRound`** (number|null) Description pending.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
@@ -435,17 +383,17 @@ Serves as an enum for the state of a Market.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
 * **`marketCreatorFees`** (number) Amount of fees paid to Market creator, in ETH.
 * **`reporterFees`** (number) Amount of fees paid to reporters, in ETH.
-* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
+* **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
 * **`timestamp`** (number) Description pending.
-* **`tradeGroupID`** (number|null) ID logged with each trade transaction by Augur's UI so that trades can be grouped client-side.
+* **`tradeGroupId`** (number|null) ID logged with each trade transaction by Augur's UI so that trades can be grouped client-side.
 
 <a name="UserTradePosition"></a>
 ### UserTradePosition  (Object)
 
 #### **Properties:** 
-* **`marketID`** (string) Contract address of the Market, as a hexadecimal string.
+* **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (number) Quantity of shares currently owned by the user.
 * **`numSharesAdjustedForUserIntention`** (number) Description pending.

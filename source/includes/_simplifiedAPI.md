@@ -46,7 +46,7 @@ augur.accounts.getAccountTransferHistory({
     token: " 0x1000000000000000000000000000000000000000",
     value: 10,
     symbol: "shares",
-    marketID: " 0x0000000000000000000000000000000000000001",
+    marketId: " 0x0000000000000000000000000000000000000001",
     outcome: 0,
   },
   {
@@ -60,7 +60,7 @@ augur.accounts.getAccountTransferHistory({
     token: " 0x1000000000000000000000000000000000000000",
     value: 2,
     symbol: "shares",
-    marketID: " 0x0000000000000000000000000000000000000001",
+    marketId: " 0x0000000000000000000000000000000000000001",
     outcome: 0,
   },
   {
@@ -74,7 +74,7 @@ augur.accounts.getAccountTransferHistory({
     token: " 0x7a305d9b681fb164dc5ad628b5992177dc66aec8",
     value: 47,
     symbol: "REP",
-    marketID: null,
+    marketId: null,
     outcome: null,
   }
 ]
@@ -457,7 +457,7 @@ connected to ethereum
     coinbase: "0x40485264986740c8fb3d11e814bd94cf86012d29",
     contracts: { ... },
     gasPrice: 20000000000,
-    networkID: "4"
+    networkId: "4"
     rpc: { ... }
   }
 }
@@ -814,7 +814,7 @@ augur.markets.getDisputableMarkets({
 // example output: coming soon
 
 augur.markets.getMarketPriceHistory({
-  marketID: "0x0000000000000000000000000000000000000001",
+  marketId: "0x0000000000000000000000000000000000000001",
   sortBy: null,
   isSortDescending: null,
   limit: null,
@@ -944,7 +944,7 @@ augur.markets.getMarketsInCategory({
 ]
 
 augur.markets.getMarketsInfo({
-  marketIDs: [
+  marketIds: [
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002",
   ],
@@ -1086,7 +1086,7 @@ augur.markets.getMarketsUpcomingDesignatedReporting({
 ]
 
 augur.markets.getUnclaimedMarketCreatorFees({
-  marketIDs: [
+  marketIds: [
     "0x0000000000000000000000000000000000000001",
     "0x0000000000000000000000000000000000000002"
   ]
@@ -1153,7 +1153,7 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketID`**  (string) Market contract address for which to look up orders, as a 20-byte hexadecimal string.
+    * **`p.marketId`**  (string) Market contract address for which to look up orders, as a 20-byte hexadecimal string.
 * **`callback`** (function) Called after the price time-series has been received and parsed.
 
 #### **Returns:**
@@ -1306,7 +1306,6 @@ This function will fail if:
 
 * (Array.&lt;string>) Array of Market addresses in the specified category, as hexadecimal strings.
 
-<!-- TODO: Add link to augur.trading.getOrders -->
 ### augur.markets.getMarketsInfo(p, callback)
 
 Returns information about [Markets](#markets) that are stored on-contract. The returned result includes basic information about the Markets as well as information about each Market [Outcome](#outcome). It does not include Order Book information; however the function `augur.trading.getOrders` can be used to get information about [Orders](#order) for the specified Market.
@@ -1318,7 +1317,7 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketIDs`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
+    * **`p.marketIds`**  (Array.&lt;string>) Contract addresses of the Markets for which to get details, as hexadecimal strings.
 * **`callback`** (function) Called after the Market info has been retrieved.
 
 #### **Returns:**
@@ -1351,7 +1350,7 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketIDs`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
+    * **`p.marketIds`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
 * **`callback`** (function) Called after the Market Creator Fee information has been retrieved.
 
 #### **Returns:**
@@ -1382,7 +1381,7 @@ augur.reporting.getCurrentPeriodProgress(secondsInFeeWindow, currentTimestamp);
 99.27843915343915
 
 augur.reporting.getDisputeInfo({
-  marketIDs: [
+  marketIds: [
     "0x0000000000000000000000000000000000000211",
     "0x0000000000000000000000000000000000000011",
   ]
@@ -1392,7 +1391,7 @@ augur.reporting.getDisputeInfo({
 // example output:
 [
   {
-    marketID: "0x0000000000000000000000000000000000000211",
+    marketId: "0x0000000000000000000000000000000000000211",
     stakes: [
       {
         isInvalid: false,
@@ -1432,7 +1431,7 @@ augur.reporting.getDisputeInfo({
     disputeRound: 0,
   },
   {
-    marketID: "0x0000000000000000000000000000000000000011",
+    marketId: "0x0000000000000000000000000000000000000011",
     stakes: [
       {
         isInvalid: false,
@@ -1472,7 +1471,7 @@ augur.reporting.getDisputeTokens({
 {
   "0x0000000000000000001000000000000000000001": {
     disputeToken: "0x0000000000000000001000000000000000000001",
-    marketID: "0x0000000000000000000000000000000000000011",
+    marketId: "0x0000000000000000000000000000000000000011",
     payout0: 0,
     payout1: 2,
     payout2: null,
@@ -1501,7 +1500,7 @@ augur.reporting.getFeeWindowCurrent({
   endBlockNumber: null,
   endTime: 1511657473,
   feeWindow: "0x2000000000000000000000000000000000000000",
-  feeWindowID: 457,
+  feeWindowId: 457,
   startBlockNumber: 1500001,
   startTime: 1509065473,
   totalStake: "26",
@@ -1539,14 +1538,14 @@ augur.reporting.getInitialReporters({
 // example output:
 [
   {
-    marketID: "0x0000000000000000000000000000000000000011",
+    marketId: "0x0000000000000000000000000000000000000011",
     reporter: "0x0000000000000000000000000000000000000b0b",
     amountStaked: 102,
     initialReporter: "0x0000000000000000000000000000000000abe123",
     redeemed: 0,
   }, 
   {
-    marketID: "0x0000000000000000000000000000000000000211",
+    marketId: "0x0000000000000000000000000000000000000211",
     reporter: "0x0000000000000000000000000000000000000b0b",
     amountStaked: 102,
     initialReporter: "0x0000000000000000000000000000000000abe321",
@@ -1569,11 +1568,11 @@ augur.reporting.getReportingHistory({
       creationBlockNumber: 1400051,
       blockHash: "0x1400051",
       creationTime: 1506474500,
-      marketID: "0x0000000000000000000000000000000000000011",
+      marketId: "0x0000000000000000000000000000000000000011",
       feeWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [0, 2],
       amountStaked: 17,
-      crowdsourcerID: "0x0000000000000000001000000000000000000001",
+      crowdsourcerId: "0x0000000000000000001000000000000000000001",
       isCategorical: false,
       isScalar: false,
       isInvalid: false,
@@ -1585,11 +1584,11 @@ augur.reporting.getReportingHistory({
       creationBlockNumber: 1400052,
       blockHash: "0x1400052",
       creationTime: 1506474515,
-      marketID: "0x0000000000000000000000000000000000000019",
+      marketId: "0x0000000000000000000000000000000000000019",
       feeWindow: "0x1000000000000000000000000000000000000000",
       payoutNumerators: [1, 1],
       amountStaked: 229,
-      crowdsourcerID: "0x0000000000000000001000000000000000000003",
+      crowdsourcerId: "0x0000000000000000001000000000000000000003",
       isCategorical: false,
       isScalar: false,
       isInvalid: false,
@@ -1662,7 +1661,7 @@ Returns information about the [Dispute Stake](#dispute-stake) in a list of [Mark
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketIDs`**  (Array.&lt;string>) Array of Market Ethereum contract addresses.
+    * **`p.marketIds`**  (Array.&lt;string>) Array of Market Ethereum contract addresses.
 
 #### **Returns:**
 
@@ -1705,7 +1704,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (<a href="#FeeWindow">FeeWindow</a>) Object containing information about the current Fee Window.
+* (<a href="#FeeWindowCurrent">FeeWindowCurrent</a>) Object containing information about the current Fee Window.
 
 ### augur.reporting.getFeeWindows(p, callback)
 
@@ -1754,7 +1753,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting history, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Market ID, or the Fee Window must be specified.
-    * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.
+    * **`p.marketId`**  (string) &lt;optional> Contract address of the Market in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Fee Window must be specified.
     * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window in which to look up the reporting history, as a 20-byte hexadecimal string. Either this parameter, the Universe, or the Market ID must be specified.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
@@ -1907,7 +1906,7 @@ augur.trading.filterByPriceAndUserSortByPrice({
 ]
 
 augur.trading.getBetterWorseOrders({
-  marketID: "0x0000000000000000000000000000000000000001",
+  marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
   orderType: "buy",
   price: 0.65,
@@ -1916,12 +1915,12 @@ augur.trading.getBetterWorseOrders({
 });
 // example output:
 {
-  betterOrderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
-  worseOrderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
+  betterOrderId: "0x1000000000000000000000000000000000000000000000000000000000000000",
+  worseOrderId: "0x2000000000000000000000000000000000000000000000000000000000000000",
 }
 
 augur.trading.getOrders({
-  marketID: "0x0000000000000000000000000000000000000001",
+  marketId: "0x0000000000000000000000000000000000000001",
   universe: "0x000000000000000000000000000000000000000b",
   outcome: null,
   orderType: "buy",
@@ -1936,7 +1935,7 @@ augur.trading.getOrders({
     0: {
       buy: {
         "0x1000000000000000000000000000000000000000000000000000000000000000": {
-          orderID: "0x1000000000000000000000000000000000000000000000000000000000000000",
+          orderId: "0x1000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x1000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A00",
           logIndex: 0,
@@ -1952,7 +1951,7 @@ augur.trading.getOrders({
           sharesEscrowed: 0,
         },
         "0x2000000000000000000000000000000000000000000000000000000000000000": {
-          orderID: "0x2000000000000000000000000000000000000000000000000000000000000000",
+          orderId: "0x2000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x1000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A01",
           logIndex: 0,
@@ -1968,7 +1967,7 @@ augur.trading.getOrders({
           sharesEscrowed: 0,
         },
         "0x5000000000000000000000000000000000000000000000000000000000000000": {
-          orderID: "0x5000000000000000000000000000000000000000000000000000000000000000",
+          orderId: "0x5000000000000000000000000000000000000000000000000000000000000000",
           amount: 1,
           creationBlockNumber: 1400001,
           creationTime: 1506473500,
@@ -1988,7 +1987,7 @@ augur.trading.getOrders({
     1: {
       buy: {
         "0x3000000000000000000000000000000000000000000000000000000000000000": {
-          orderID: "0x3000000000000000000000000000000000000000000000000000000000000000",
+          orderId: "0x3000000000000000000000000000000000000000000000000000000000000000",
           shareToken: "0x2000000000000000000000000000000000000000",
           transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000A02",
           logIndex: 0,
@@ -2021,7 +2020,7 @@ augur.trading.getPositionInMarket({
 augur.trading.getUserTradingHistory({
   account: "0x000000000000000000000000000000000000d00d",
   universe: null,
-  marketID: "0x0000000000000000000000000000000000000001",
+  marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
   orderType: null,
   sortBy: null,
@@ -2043,18 +2042,18 @@ augur.trading.getUserTradingHistory({
     marketCreatorFees: 0,
     reporterFees: 0,
     settlementFees: "0",
-    marketID: "0x0000000000000000000000000000000000000001",
+    marketId: "0x0000000000000000000000000000000000000001",
     outcome: 0,
     shareToken: "0x1000000000000000000000000000000000000000",
     timestamp: 1506474500,
-    tradeGroupID: null,
+    tradeGroupId: null,
   }
 ]
 
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
   universe: "0x000000000000000000000000000000000000000b",
-  marketID: null,
+  marketId: null,
   outcome: null,
   sortBy: null,
   isSortDescending: null,
@@ -2066,7 +2065,7 @@ augur.trading.getUserTradingPositions({
 // example output:
 [
   {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 0,
     "numShares": 0.2,
     "numSharesAdjustedForUserIntention": 0.2,
@@ -2074,7 +2073,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 11,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 1,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2082,7 +2081,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 2,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2090,7 +2089,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 3,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2098,7 +2097,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 4,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2106,7 +2105,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 5,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2114,7 +2113,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 6,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2122,7 +2121,7 @@ augur.trading.getUserTradingPositions({
     "unrealizedProfitLoss": 0,
     "averagePrice": 0,
   }, {
-    "marketID": "0x0000000000000000000000000000000000000001",
+    "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 7,
     "numShares": 0,
     "numSharesAdjustedForUserIntention": 0,
@@ -2324,7 +2323,7 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketID`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.
+    * **`p.marketId`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.
     * **`p.outcome`**  (string) Market Outcome for which to find better/worse Orders.
     * **`p.orderType`**  (string) Desired type of Order. Valid values are "buy" and "sell".
     * **`p.price`**  (number) Price point at which to find better/worse Orders.
@@ -2345,8 +2344,8 @@ This function will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketID must be specified.
-    * **`p.marketID`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketId must be specified.
+    * **`p.marketId`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
     * **`p.creator`**  (string) &lt;optional> Ethereum address of the Order creator, as a 20-byte hexadecimal string.
     * **`p.orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
@@ -2392,7 +2391,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading history, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the [Market](#market) ID must be specified.
-    * **`p.marketID`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`p.marketId`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (string) [Outcome](#outcome) of the [Share](#share) being bought/sold.
     * **`p.orderType`**  (string) Type of trade. Valid values are "buy" and "sell".
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading history.
@@ -2418,7 +2417,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.
-    * **`p.marketID`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
+    * **`p.marketId`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (string) [Outcome](#outcome) of the [Share](#share) held for the Market.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading positions.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by `sortBy` field.

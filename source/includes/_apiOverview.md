@@ -47,7 +47,7 @@ var augurNode = "ws://127.0.0.1:9001"; // local websocket address for an Augur N
 augur.connect({ ethereumNode, augurNode }, function (vitals) { /* ... */ });
 // example vitals object:
 vitals = {
-  networkID: '9000',
+  networkId: '9000',
   blockNumber: '0xf69b5',
   coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
   gasPrice: 18000000000,
@@ -202,7 +202,7 @@ Floating-point (decimal) values should be passed to augur.js as strings (e.g., i
 
 Initial Market Loading
 ----------------------
-To get a list of all [Markets](#market), first call `augur.markets.getMarkets({ universe[, sortBy, isSortDescending, limit, offset] }[, callback])`. More detailed market info (including prices) for each market can then be loaded using `augur.markets.getMarketsInfo({ marketIDs }[, callback])`. `getMarketsInfo` does not return the [Open Orders](#order-book) for the Market; to get the Open Orders, call `augur.trading.getOrders({ [universe, marketID, outcome, orderType, creator, orderState, earliestCreationTime, latestCreationTime, sortBy, isSortDescending, limit, offset] }[, callback])`.
+To get a list of all [Markets](#market), first call `augur.markets.getMarkets`. More detailed market info (including prices) for each market can then be loaded using `augur.markets.getMarketsInfo`. `augur.markets.getMarketsInfo` does not return the [Open Orders](#order-book) for the Market; to get the Open Orders, call `augur.trading.getOrders`.
 
 Debugging Options
 ----------------------------
@@ -258,7 +258,7 @@ connected to ethereum
     coinbase: null,
     contracts: {...},
     gasPrice: 20000000000,
-    networkID: "4",
+    networkId: "4",
     rpc: {...}
   }
 }
