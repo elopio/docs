@@ -11421,7 +11421,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="events-functions">Events Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">getAllAugurLogs</span><span class="p">({</span>
-  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">1490000</span>
+  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">1703565</span>
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allAugurLogs</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allAugurLogs</span><span class="p">);</span> 
 <span class="p">});</span>
@@ -11438,6 +11438,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1541700</span><span class="p">,</span>
+    <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0x58d9203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba351887b"</span><span class="p">,</span>
     <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
     <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"RegistryAddition"</span>
   <span class="p">},</span>
@@ -11454,6 +11455,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1599717</span><span class="p">,</span>
+    <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xd859203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba3518b78"</span><span class="p">,</span>
     <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
     <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"TokensTransferred"</span>
   <span class="p">}</span>
@@ -11558,6 +11560,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-events-getallaugurlogs-p-callback">augur.events.getAllAugurLogs(p, callback)</h3>
 
 <p>Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by <code class="prettyprint">blockNumber</code> and <code class="prettyprint">logIndex</code>.</p>
+
+<p>Note: Depending on how many event logs there are to be retrieved, this function can take a long time to run.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11911,6 +11915,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">transactionIndex</code></strong>  (number) Integer of the transaction&rsquo;s index position in the block.</li>
 <li><strong><code class="prettyprint">logIndex</code></strong>  (number) Integer of the log index position in the block.</li>
 <li><strong><code class="prettyprint">blockNumber</code></strong>  (number) Number of the block on the Ethereum blockchain where the event was logged.</li>
+<li><strong><code class="prettyprint">blockHash</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">contractName</code></strong>  (string) Name of the Solidity contract in which the event is defined.</li>
 <li><strong><code class="prettyprint">eventName</code></strong>  (string) Name of the event type being logged.</li>
 </ul>
