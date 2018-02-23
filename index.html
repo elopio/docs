@@ -2666,7 +2666,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-reporting-getdisputetokens-p-callback">augur.reporting.getDisputeTokens(p, callback)</h3>
 
-<p>Returns the Dispute Tokens owned by a specific user that are either unclaimed or are in <a href="#market">Markets</a> that have not been <a href="#finalized-market">Finalized</a>.</p>
+<p>Returns the <a href="#dispute-token">Dispute Tokens</a> owned by a specific user that are either unclaimed or are in <a href="#market">Markets</a> that have not been <a href="#finalized-market">Finalized</a>.</p>
 
 <p>This function will fail if:</p>
 
@@ -8905,7 +8905,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><code class="prettyprint">msg.sender</code> isn&rsquo;t the owner of the InitialReporter.</li>
 </ul>
 
-<p>This transaction will trigger an <a href="#InitialReporterTransfered"><code class="prettyprint">InitialReporterTransfered</code></a> event if the REP/Ether was transferred without any errors.</p>
+<p>This transaction will trigger an <a href="#InitialReporterTransferred"><code class="prettyprint">InitialReporterTransferred</code></a> event if the REP/Ether was transferred without any errors.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -11753,7 +11753,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>amountStaked, isDesignatedReporter, payoutNumerators</td>
 </tr>
 <tr>
-<td><a name="InitialReporterTransfered"></a>InitialReporterTransfered</td>
+<td><a name="InitialReporterTransferred"></a>InitialReporterTransferred</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td>Ownership of an InitialReporter contract was transferred between Ethereum addresses <code class="prettyprint">from</code> and <code class="prettyprint">to</code> for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code>.</td>
 <td>universe, market</td>
@@ -13044,6 +13044,10 @@ Goals:
 <p>All unsuccesful Dispute Stake is returned to the original owners at the end of every <a href="#dispute-round">Dispute Round</a>. All successful Dispute Stake is applied to the <a href="#outcome">Outcome</a> it championed, and will remain there until the <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a> (or until a <a href="#fork">Fork</a> occurs in some other Augur Market). Once the Market is Finalized, all users who Staked on the Final Outcome during a Dispute Round will receive 1.5x the amount of REP they originally Staked. REP holders who staked on an Outcome other than the Final Outcome forfeit their REP. All Dispute Stake (whether successful or unsuccessful) will receive a portion of the <a href="#reporting-fee-pool">Reporting Fee Pool</a> from the current <a href="#fee-window">Fee Window</a> in ETH. (This ETH comes from trading and winning <a href="#share">Share</a> redemption: fees are collected in ETH whenever a <a href="#complete-set">Complete Set</a> is sold or winning Shares are redeemed and given to <a href="#fee-window">Fee Windows</a>.)</p>
 
 <p>By design, the Dispute Bond sizes for each Dispute Round are chosen such that anyone who successfully <a href="#challenge">Challenges</a> an Outcome in favor of the Market’s <a href="#final-outcome">Final Outcome</a> is rewarded with a 50% ROI on their Dispute Stake. For details on how the Dispute Bond is calculated, refer to the <a href="#dispute-bond">Dispute Bond glossary entry</a>.</p>
+
+<h2 id="dispute-token">Dispute Token</h2>
+
+<p>When a user Stakes <a href="#rep">REP</a> in a <a href="#crowdsourcer">Crowdsourcer</a>, that Crowdsourcer will allocate an equal amount of Dispute Tokens to that user. Then, when the Crowdsourcer&rsquo;s <a href="#market">Market</a> is <a href="#finalized-market">Finalized</a>, these Dispute Tokens are used by Augur&rsquo;s smart contracts to determine the payout that user should receive. Dispute Tokens are only used internally by Augur, and users do not interact with them directly; however, they are implemented as ERC-20 tokens, so they potentially can be traded between users. (For example, a user might want to sell their Dispute Tokens to another user at a discounted price if a Market is being Disputed for a long time and the user wishes to cash out their Dispute Tokens before the Market is Finalized.)</p>
 
 <h2 id="end-time">End Time</h2>
 
