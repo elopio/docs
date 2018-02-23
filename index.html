@@ -3251,7 +3251,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">settlementFees</span><span class="p">:</span> <span class="s2">"0.006"</span><span class="p">,</span>
+  <span class="nl">sharesFilled</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="na">settlementFees</span><span class="p">:</span> <span class="s2">"0.006"</span><span class="p">,</span>
   <span class="na">worstCaseFees</span><span class="p">:</span> <span class="s2">"0.009"</span><span class="p">,</span>
   <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">otherSharesDepleted</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
@@ -3608,6 +3609,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) Outcome ID to trade, must be an integer value in between 0 and 7.</li>
+<li><strong><code class="prettyprint">p.estimatedCost</code></strong> (string) &lt;optional&gt; Total cost (in ETH) of this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing Orders off the <a href="#order-book">Order Book</a>, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -3666,13 +3668,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._price</code></strong>  (string) Display (non-normalized) limit price for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="share">Shares</a> to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
 <li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The Tick size (interval) for this Market.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">p.estimatedCost</code></strong> (string) &lt;optional&gt; Total cost (in ETH) of this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing orders off the book, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -12287,6 +12290,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="simulatedtrade-object">SimulatedTrade  (Object)</h3>
 
 <ul>
+<li><strong><code class="prettyprint">sharesFilled</code></strong> (string) Number of Shares Filled by the trade.</li>
 <li><strong><code class="prettyprint">settlementFees</code></strong> (string) Projected Settlement Fees paid on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">gasFees</code></strong> (string) Projected gas fees paid on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">sharesDepleted</code></strong> (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.</li>
