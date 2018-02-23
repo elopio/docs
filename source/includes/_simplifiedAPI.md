@@ -2201,6 +2201,7 @@ augur.trading.simulateTrade({
 });
 // example output:
 {
+  sharesFilled: "2",
   settlementFees: "0.006",
   worstCaseFees: "0.009",
   gasFees: "0",
@@ -2464,6 +2465,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p._direction`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
+    * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2508,13 +2510,14 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._price`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
+    * **`p._price`**  (string) Normalized limit price for this trade, as a base-10 string.
     * **`p._fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
     * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
     * **`p.tickSize`**  (string) The Tick size (interval) for this Market.
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.

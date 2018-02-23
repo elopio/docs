@@ -310,6 +310,7 @@ Serves as an enum for the state of a Market.
 <a name="SimulatedTrade"></a>
 ### SimulatedTrade  (Object)
 
+* **`sharesFilled`** (string) Number of Shares Filled by the trade.
 * **`settlementFees`** (string) Projected Settlement Fees paid on this trade, as a base-10 string.
 * **`gasFees`** (string) Projected gas fees paid on this trade, as a base-10 string.
 * **`sharesDepleted`** (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.
