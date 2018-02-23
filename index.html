@@ -3642,7 +3642,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.userAddress</code></strong>  (string)  The user&rsquo;s Ethereum address, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string)  This <a href="#market">Market&rsquo;s</a> minimum possible price, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string)  This Market&rsquo;s maximum possible price, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.price</code></strong>  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.price</code></strong>  (string|null)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.shares</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.marketCreatorFeeRate</code></strong>  (string) The fee rate charged by the Market creator (e.g., pass in &ldquo;0.01&rdquo; if the fee is 1%), as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.marketOrderBook</code></strong>  (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>) The full <a href="#order-book">Order Book</a> (buy and sell) for this Market and Outcome.</li>
