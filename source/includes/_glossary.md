@@ -137,6 +137,10 @@ All unsuccesful Dispute Stake is returned to the original owners at the end of e
 
 By design, the Dispute Bond sizes for each Dispute Round are chosen such that anyone who successfully [Challenges](#challenge) an Outcome in favor of the Market’s [Final Outcome](#final-outcome) is rewarded with a 50% ROI on their Dispute Stake. For details on how the Dispute Bond is calculated, refer to the [Dispute Bond glossary entry](#dispute-bond).
 
+## Dispute Token
+
+When a user Stakes [REP](#rep) in a [Crowdsourcer](#crowdsourcer), that Crowdsourcer will allocate an equal amount of Dispute Tokens to that user. Then, when the Crowdsourcer's [Market](#market) is [Finalized](#finalized-market), these Dispute Tokens are used by Augur's smart contracts to determine the payout that user should receive. Dispute Tokens are only used internally by Augur, and users do not interact with them directly; however, they are implemented as ERC-20 tokens, so they potentially can be traded between users. (For example, a user might want to sell their Dispute Tokens to another user at a discounted price if a Market is being Disputed for a long time and the user wishes to cash out their Dispute Tokens before the Market is Finalized.)
+
 ## End Time
 
 End Time is the date and time that a [Market](#market)'s event will have come to pass and should be known. After this date and time has passed the Market will get [Reported](#report) on and eventually [Finalized](#finalized-market).

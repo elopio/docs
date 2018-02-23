@@ -1673,7 +1673,7 @@ Returns information about the [Dispute Stake](#dispute-stake) in a list of [Mark
 
 ### augur.reporting.getDisputeTokens(p, callback)
 
-Returns the Dispute Tokens owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
+Returns the [Dispute Tokens](#dispute-tokens) owned by a specific user that are either unclaimed or are in [Markets](#market) that have not been [Finalized](#finalized-market).
 
 This function will fail if:
 
