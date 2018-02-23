@@ -1090,7 +1090,7 @@ This function will fail if:
 
 * `msg.sender` isn't the owner of the InitialReporter.
 
-This transaction will trigger an [`InitialReporterTransfered`](#InitialReporterTransfered) event if the REP/Ether was transferred without any errors.
+This transaction will trigger an [`InitialReporterTransferred`](#InitialReporterTransferred) event if the REP/Ether was transferred without any errors.
 
 #### **Parameters:**
 
