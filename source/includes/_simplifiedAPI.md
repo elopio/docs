@@ -2491,7 +2491,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.userAddress`**  (string)  The user's Ethereum address, as a 20-byte hexadecimal string.
     * **`p.minPrice`**  (string)  This [Market's](#market) minimum possible price, as a base-10 string.
     * **`p.maxPrice`**  (string)  This Market's maximum possible price, as a base-10 string.
-    * **`p.price`**  (string)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
+    * **`p.price`**  (string|null)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
     * **`p.shares`**  (string) Number of Shares to trade, as a base-10 string.
     * **`p.marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
     * **`p.marketOrderBook`**  (<a href="#SingleOutcomeOrderBook">SingleOutcomeOrderBook</a>) The full [Order Book](#order-book) (buy and sell) for this Market and Outcome.
