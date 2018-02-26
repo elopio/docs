@@ -217,6 +217,10 @@ If the [Outcome](#outcome) of a [Market's](#market) event does not fit any of th
 
 Legacy [Reputation Tokens](#rep), or Legacy REP, are REP that exist in the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/legacy_reputation/LegacyRepToken.sol) and have not been migrated to the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), for a particular [Universe](#universe). Legacy REP must be migrated to the Reputation Token smart contract by calling the `augur.api.ReputationToken.migrateFromLegacyReputationToken` function before they can be used within Augur.
 
+## Long Position
+
+In Augur, opening a Long Position in the [Outcome](#outcome) of a [Market](#market) means purchasing [Shares](#share) in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the [Trading](#trading) section.
+
 ## Locked Universe
 
 A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur within it and no longer allows the creation of new [Markets](#markets). All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after [Finalizing](#finalized-market). [REP](#rep) holders within a Locked Universe are given a one-time and final option to migrate their REP to one of the new Universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.
@@ -347,10 +351,6 @@ A Position is the amount of [Shares](#share) that are owned (a long position) or
 
 Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds.
 
-## Tentative Outcome
-
-The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market makes it through the [Dispute Round Phase](#dispute-round-phase) without being Challenged, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
-
 ## REP
 
 REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur [Decentralized Oracle](#decentralized-oracle) system. REP is used to to pay the [No-Show REP Bond](#designated-report-no-show-rep-bond) when creating a Market, to Stake on an [Outcome](#outcome) in the [Designated Report](#designated-report) or [First Public Report](#first-public-report) of a [Market](#market), to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by Staking on a different Outcome when a Market is in the [Dispute Round Phase](#dispute-round-phase), and to purchase [Participation Tokens](#participation-tokens).
@@ -398,9 +398,19 @@ Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Sett
 
 A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send ETH to the Market to complete an [Order](#order). Shares are [Settled](#settlement) (destroyed) when a Complete Set is sold back to the Market.
 
+## Short Position
+
+Opening a Short Position, or shorting, is the selling of a security that is not owned by the seller. Shorting is done with the belief that a security's price will decrease in the future, allowing it to be bought back at a lower price to make a profit.
+
+In Augur, betting on the "No" [Outcome](#outcome) of a [Binary Market](#binary-market) is done by shorting the "Yes" Outcome. This effectively means the user is selling "Yes" [Shares](#share) they do not own, which are listed as negative quantities of Shares on the Portfolio:Positions view of Augur's user interface.
+
+Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a [Complete Set](#complete-set) is a Share of every Outcome in a Market. For example, suppose a user thinks the "Yes" Outcome of a Binary Market is unlikely to happen and expects the price of a "Yes" Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of "Yes" costs 0.55 ETH, a Short Position in 1 Share of the "Yes" Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.
+
+For more information on trading, please refer to the [Trading](#trading) section.
+
 ## Tentative Outcome
 
-A [Market's](#market) Tentative Outcome starts off as the [Outcome](#outcome) that is submitted by the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter). Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can [Stake](#dispute-stake) [REP](#rep) on other Outcomes if they believe the Tentative Outcome is incorrect. If the [Dispute Bond](#dispute-bond) for a particular Outcome gets filled in the current [Dispute Round](#dispute-round), that Outcome will become the new Tentative Outcome.
+The Tentative Outcome is the currently reported [Outcome](#outcome) for a [Market](#market) that has not been [Finalized](#finalized-market) yet. In other words, it's either the Outcome that the [Designated Reporter](#designated-reporter) or [First Public Reporter](#first-public-reporter) has Staked [REP](#rep) on, or it's the Outcome that had enough REP Staked on it in the last [Dispute Round](#dispute-round) to [Challenge](#challenge) the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a [Dispute Round](#dispute-round) without being Challenged, or if the Market passes through the [Fork Phase](#fork-period), then the Market will become [Finalized](#finalized-market), and the Tentative Outcome will become a [Final Outcome](#final-outcome).
 
 ## Theoretical REP Supply
 
