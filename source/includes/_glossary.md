@@ -219,7 +219,7 @@ Legacy [Reputation Tokens](#rep), or Legacy REP, are REP that exist in the [Lega
 
 ## Long Position
 
-In Augur, opening a Long Position in the [Outcome](#outcome) of a [Market](#market) means purchasing [Shares](#share) in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the [Trading](#trading) section.
+In Augur, opening a [Long Position](#long-position) in the [Outcome](#outcome) of a [Market](#market) means purchasing [Shares](#share) in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the [Trading](#trading) section.
 
 ## Locked Universe
 
@@ -333,18 +333,18 @@ For example, in a [Binary Market](#binary-market) with 1000 [Ticks](#tick), a [R
 
 The Payout Set for a [Categorical Market](#categorical-market) is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like `[0, 0, 8000, 0, 0, 0, 0, 0]`. The same Categorical Market with an [Invalid Outcome](#invalid-outcome) would have a Payout Set like `[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]`. (This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement).)
 
-The Payout Set for a [Scalar Market](#scalar-market) is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a short position) and 1 (for a long position). Suppose that a Scalar Market exists with $0 as the [Minimum Display Price](#minimum-display-price), $100 as the [Maximum Display Price](#maximum-display-price), 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:
+The Payout Set for a [Scalar Market](#scalar-market) is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a [Short Position](#short-position)) and 1 (for a [Long Position](#long-position)). Suppose that a Scalar Market exists with $0 as the [Minimum Display Price](#minimum-display-price), $100 as the [Maximum Display Price](#maximum-display-price), 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:
 
 1. Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.
 2. Scale the reported outcome to be between 0 and 1 by dividing by (maxPrice - minPrice): 75 / (100 - 0) = 0.75.
 3. Scale the reported Outcome to the Number of Ticks by multiplying by the Number of Ticks: 0.75 * 10000 = 7500.
 4. Calculate the other Outcome by subtracting the result from the Number of Ticks: 10000 - 7500 = 2500.
-5. Put them in an array where the zero index is the short position, and one index is the long position: `[2500, 7500]`.
+5. Put them in an array where the zero index is the Short Position, and one index is the Long Position: `[2500, 7500]`.
 Note: When calculating the Payout Set for a Scalar Market using integer-only math, the order of steps (2) and (3) should be switched (i.e., always multiply before dividing in integer math).
 
 ## Position
 
-A Position is the amount of [Shares](#share) that are owned (a long position) or borrowed and then sold (a short position) by an individual. A Position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a short position means a trader is buying Shares of an [Outcome](#outcome) they are short on, whereas closing a long position means they are selling the Shares they own.
+A Position is the amount of [Shares](#share) that are owned (a [Long Position](#long-position)) or borrowed and then sold (a [Short Position](#short-position)) by an individual. A Position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a Short Position means a trader is buying Shares of an [Outcome](#outcome) they are short on, whereas closing a Long Position means they are selling the Shares they own.
 
 <!-- TODO: Make sure this lines up with what's in the white paper. -->
 ## Post-Finalization Waiting Period

@@ -43,7 +43,7 @@ Calculating Trades
 
 In this section we break down all potential trade situations and their expected result. There are two types of [Orders](#order), [Bid Orders](#bid-order) (requesting to buy) and [Ask Orders](#ask-order) (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the [Order Book](#order-book) by [Order Creators](#order-creator) and contain four important details: The Creator of the Order, the price of the Order, The amount of [Shares](#share) or ETH escrowed, and the [Outcome](#outcome) we plan to trade on. The price can be any value between 0 and the [Number of Ticks](#number-of-ticks). The calculations below use `num_shares` as the number of Shares the Order is requesting, `price` as the price per Share for the Order, `outcome` for the Outcome our Order is trading on, `num_ticks` as the Number of Ticks, and `fee_rate` as the [Settlement Fees](#settlement-fees) extracted during the [Settlement](#settlement) of Shares.
 
-The Formulas for determining how much opening a Long or Short position costs are as follows:
+The Formulas for determining how much opening a [Long Position](#long-position) or [Short Position](#short-position) costs are as follows:
 
 **Cost of Opening a Long Position**(`open_long_position_cost`):
 
@@ -77,22 +77,22 @@ Below are some more examples of specific order situations and their results:
 
 Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow`<br/> **Intent:** close a short position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
+**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow`<br/> **Intent:** close a Short Position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a Short Position for `outcome`.
 **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`. | **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** <span style="white-space: nowrap;">`total_payout_closing_short`</span> ETH.
 
 Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a long position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a short position for `outcome`.
+**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a Long Position for `outcome`. | **Sends:** `open_short_position_cost` ETH.<br/> **Intent:** open a Short Position for `outcome`.
 **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH | **Gains:** `num_shares` of all outcomes except for `outcome`. <br/>**Loses:** `open_short_position_cost` ETH.
 
 Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a short position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/>**Intent:** close a long position for `outcome`.
+**Escrows:** `num_shares` of all outcomes except `outcome`<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a Short Position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/>**Intent:** close a Long Position for `outcome`.
 **Gains:** <span style="white-space: nowrap;">`total_payout_closing_short - short_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`. | **Gains:** <span style="white-space: nowrap;">`total_payout_closing_long - long_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in `outcome`.
 
 Creator of Bid Order | Filler of Bid Order
 --- | ---
-**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/>**Intent:** open a long position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/> **Intent:** close a long position for `outcome`.
+**Escrows:** `open_long_position_cost` ETH<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/>**Intent:** open a Long Position for `outcome`. | **Sends:** `num_shares` of `outcome`.<br/> **Intent:** close a Long Position for `outcome`.
 **Gains:** `num_shares` in `outcome`. <br/>**Loses:** `open_long_position_cost` ETH | **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` of `outcome`.
 
 
@@ -100,20 +100,20 @@ Creator of Bid Order | Filler of Bid Order
 
 Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/>**Intent:** open a long position for `outcome`.
+**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a Long Position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/>**Intent:** open a Long Position for `outcome`.
 **Gains:** `total_payout_closing_long` ETH. <br/>**Loses:** `num_shares` in `outcome` | **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH
 
 Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/> **Intent:** open a long position for `outcome`.
+**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a Short Position for `outcome`. | **Sends:** `open_long_position_cost` ETH.<br/> **Intent:** open a Long Position for `outcome`.
 **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** `open_short_position_cost` ETH | **Gains:** `num_shares` of `outcome`. <br/>**Loses:** `open_long_position_cost` ETH.
 
 Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a long position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`. <br/> **Intent:** close a short position for `outcome`.
+**Escrows:** `num_shares` of `outcome`.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** close a Long Position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`. <br/> **Intent:** close a Short Position for `outcome`.
 **Gains:** <span style="white-space: nowrap;">`total_payout_closing_long - long_position_fees`</span> ETH. <br/>**Loses:** `num_shares` of `outcome` | **Gains:** <span style="white-space: nowrap;">`total_payout_closing_short - short_position_fees`</span> ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`.
 
 Creator of Ask Order | Filler of Ask Order
 --- | ---
-**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a short position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`.<br/> **Intent:** close a short position for `outcome`.
+**Escrows:** `open_short_position_cost` ETH.<br/> **Order Details:** `price`, `creator`, `outcome`, `escrow` <br/> **Intent:** open a Short Position for `outcome`. | **Sends:** Shares in all outcomes except `outcome`.<br/> **Intent:** close a Short Position for `outcome`.
 **Gains:** `num_shares` in all outcomes except `outcome`. <br/>**Loses:** `open_short_position_cost` ETH. | **Gains:** `total_payout_closing_short` ETH. <br/>**Loses:** `num_shares` in all outcomes except `outcome`.
