@@ -400,7 +400,7 @@ Serves as an enum for the state of a Market.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (number) Quantity of shares currently owned by the user.
-* **`numSharesAdjustedForUserIntention`** (number) Description pending.
+* **`numSharesAdjusted`** (number) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.
 * **`realizedProfitLoss`** (number) Description pending.
 * **`unrealizedProfitLoss`** (number) Description pending.
 * **`averagePrice`** (number) Description pending.
