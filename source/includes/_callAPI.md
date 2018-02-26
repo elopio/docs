@@ -1737,7 +1737,7 @@ augur.api.Orders.getPrice({
 // example output:
 "500000000000000000"
 
-augur.api.Orders.getVolume({ 
+augur.api.Orders.getTotalEscrowed({ 
   _market: _market 
 }, function (error, volume) { 
   console.log(volume); 
@@ -1943,9 +1943,9 @@ Returns the price of a specified [Order](#order).
 
 * (string) Price of the Order, as a stringified unsigned integer.
 
-### augur.api.Orders.getVolume(p, callback)
+### augur.api.Orders.getTotalEscrowed(p, callback)
 
-Returns the volume of a specified [Market](#market).
+Returns the total amount of [attoETH](#atto-prefix) currently escrowed for open Orders in the specified [Market](#market).
 
 #### **Parameters:**
 
