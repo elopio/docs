@@ -9313,6 +9313,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li>There is not a Forked Market in the Market&rsquo;s Universe.</li>
 <li>The Market is a Forked Market.</li>
+<li>The Market is <a href="#finalized-market">Finalized</a>.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -9418,12 +9419,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-finalizefork-p">augur.api.Market.finalizeFork(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the <a href="#market">Market</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
-<li>The market is not a Forked Market.</li>
+<li>The Market is not a Forked Market.</li>
 <li>The <a href="#fork-threshold">Fork Threshold</a> has not been reached, and the <a href="#fork-period">Fork Period</a> is not over.</li>
 </ul>
 
@@ -9459,6 +9460,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>This transaction will fail if:</p>
 
 <ul>
+<li>The Market is <a href="#finalized-market">Finalized</a>.</li>
+<li>The <a href="#forked-market">Forked Market</a> is not Finalized.</li>
 <li>The Fork Period is not over (that is, there is no Winning Universe to migrate to).</li>
 </ul>
 
