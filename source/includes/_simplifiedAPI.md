@@ -9,20 +9,16 @@ Accounts Functions
 ```javascript
 // Accounts Simplified API Examples:
 
-augur.accounts.approveAugur(
+augur.accounts.approveAugur({
   address: "0x0000000000000000000000000000000000000b0b", 
-  auth: {
+  meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
   },
-  function (error, result) { 
-    if (error) { 
-      console.log("Approval failed due to error:", error); 
-    } else {
-      console.log("Approval was successful."); 
-    }
-  }
-);
+  onSent: function(result) { console.log(result); },
+  onSuccess: function(result) { console.log("Approval was successful."); },
+  onFailed: function(result) { console.log("Approval failed due to error:", result); }
+});
 // example output:
 "Approval was successful."
 
@@ -89,15 +85,18 @@ augur.accounts.loginWithMasterKey({
   privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
 }
 ```
-### augur.accounts.approveAugur(address, auth, callback)
+### augur.accounts.approveAugur(p)
 
 Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. Many of Augur's transactions require Augur to be able to spend Cash on behalf of the account executing the transaction. However, the account must first approve Augur to spend that amount of Cash on its behalf. This function calls the function `augur.api.Cash.approve` to approve Augur to spend up to `augur.constants.ETERNAL_APPROVAL_VALUE` Cash on behalf of the account. `augur.constants.ETERNAL_APPROVAL_VALUE` is equal to 2^256 - 1, or the maximum amount of Cash that can be approved. This value is used so that `augur.api.Cash.approve` does not have to be called multiple times in order to execute multiple transactions.
 
 #### **Parameters:**
 
-* **`address`** (string) Ethereum address of the account making the approval.
-* **`auth`** (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-* **`callback`** (function) Called after the account has approved Augur to spend on its behalf.
+* **`p`** (Object) Parameters object.
+  * **`p.address`** (string) Ethereum address of the account making the approval.
+  * **`p.meta`** (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+  * **`p.onSent`**  (function) Called if/when the transaction is broadcast to the network.
+  * **`p.onSuccess`**  (function) Called if/when the transaction is sealed and confirmed.
+  * **`p.onFailed`**  (function) Called if/when the transaction fails.
 
 #### **Returns:**
 
