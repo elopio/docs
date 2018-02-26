@@ -192,7 +192,7 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 
 <p>In this section we break down all potential trade situations and their expected result. There are two types of <a href="#order">Orders</a>, <a href="#bid-order">Bid Orders</a> (requesting to buy) and <a href="#ask-order">Ask Orders</a> (requesting to sell). In our examples below we will go over all the potential trade possibilities around Bid Orders and Ask Orders. Orders are placed on the <a href="#order-book">Order Book</a> by <a href="#order-creator">Order Creators</a> and contain four important details: The Creator of the Order, the price of the Order, The amount of <a href="#share">Shares</a> or ETH escrowed, and the <a href="#outcome">Outcome</a> we plan to trade on. The price can be any value between 0 and the <a href="#number-of-ticks">Number of Ticks</a>. The calculations below use <code class="prettyprint">num_shares</code> as the number of Shares the Order is requesting, <code class="prettyprint">price</code> as the price per Share for the Order, <code class="prettyprint">outcome</code> for the Outcome our Order is trading on, <code class="prettyprint">num_ticks</code> as the Number of Ticks, and <code class="prettyprint">fee_rate</code> as the <a href="#settlement-fees">Settlement Fees</a> extracted during the <a href="#settlement">Settlement</a> of Shares.</p>
 
-<p>The Formulas for determining how much opening a Long or Short position costs are as follows:</p>
+<p>The Formulas for determining how much opening a <a href="#long-position">Long Position</a> or <a href="#short-position">Short Position</a> costs are as follows:</p>
 
 <p><strong>Cost of Opening a Long Position</strong>(<code class="prettyprint">open_long_position_cost</code>):</p>
 
@@ -231,8 +231,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code><br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code><br/> <strong>Intent:</strong> close a Short Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a Short Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">total_payout_closing_short</code> ETH. <br/><strong>Loses:</strong> <code class="prettyprint">num_shares</code> in all outcomes except <code class="prettyprint">outcome</code>.</td>
@@ -247,8 +247,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a Long Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a Short Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>. <br/><strong>Loses:</strong> <code class="prettyprint">open_long_position_cost</code> ETH</td>
@@ -263,8 +263,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/><strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of all outcomes except <code class="prettyprint">outcome</code><br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a Short Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/><strong>Intent:</strong> close a Long Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <span style="white-space: nowrap;"><code class="prettyprint">total_payout_closing_short - short_position_fees</code></span> ETH. <br/><strong>Loses:</strong> <code class="prettyprint">num_shares</code> in all outcomes except <code class="prettyprint">outcome</code>.</td>
@@ -279,8 +279,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/><strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_long_position_cost</code> ETH<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/><strong>Intent:</strong> open a Long Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a Long Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">num_shares</code> in <code class="prettyprint">outcome</code>. <br/><strong>Loses:</strong> <code class="prettyprint">open_long_position_cost</code> ETH</td>
@@ -297,8 +297,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/><strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a Long Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/><strong>Intent:</strong> open a Long Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">total_payout_closing_long</code> ETH. <br/><strong>Loses:</strong> <code class="prettyprint">num_shares</code> in <code class="prettyprint">outcome</code></td>
@@ -313,8 +313,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a long position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a Short Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> <code class="prettyprint">open_long_position_cost</code> ETH.<br/> <strong>Intent:</strong> open a Long Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">num_shares</code> in all outcomes except <code class="prettyprint">outcome</code>. <br/><strong>Loses:</strong> <code class="prettyprint">open_short_position_cost</code> ETH</td>
@@ -329,8 +329,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a long position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>. <br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code>.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> close a Long Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>. <br/> <strong>Intent:</strong> close a Short Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <span style="white-space: nowrap;"><code class="prettyprint">total_payout_closing_long - long_position_fees</code></span> ETH. <br/><strong>Loses:</strong> <code class="prettyprint">num_shares</code> of <code class="prettyprint">outcome</code></td>
@@ -345,8 +345,8 @@ The <code>--ws</code> flag allows websocket connections, which are recommended f
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a short position for <code class="prettyprint">outcome</code>.</td>
-<td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a short position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Escrows:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.<br/> <strong>Order Details:</strong> <code class="prettyprint">price</code>, <code class="prettyprint">creator</code>, <code class="prettyprint">outcome</code>, <code class="prettyprint">escrow</code> <br/> <strong>Intent:</strong> open a Short Position for <code class="prettyprint">outcome</code>.</td>
+<td><strong>Sends:</strong> Shares in all outcomes except <code class="prettyprint">outcome</code>.<br/> <strong>Intent:</strong> close a Short Position for <code class="prettyprint">outcome</code>.</td>
 </tr>
 <tr>
 <td><strong>Gains:</strong> <code class="prettyprint">num_shares</code> in all outcomes except <code class="prettyprint">outcome</code>. <br/><strong>Loses:</strong> <code class="prettyprint">open_short_position_cost</code> ETH.</td>
@@ -13133,7 +13133,7 @@ Goals:
 
 <h2 id="long-position">Long Position</h2>
 
-<p>In Augur, opening a Long Position in the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> means purchasing <a href="#share">Shares</a> in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the <a href="#trading">Trading</a> section.</p>
+<p>In Augur, opening a <a href="#long-position">Long Position</a> in the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> means purchasing <a href="#share">Shares</a> in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the <a href="#trading">Trading</a> section.</p>
 
 <h2 id="locked-universe">Locked Universe</h2>
 
@@ -13275,20 +13275,20 @@ Goals:
 
 <p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. (This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.)</p>
 
-<p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a short position) and 1 (for a long position). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
+<p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a <a href="#short-position">Short Position</a>) and 1 (for a <a href="#long-position">Long Position</a>). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
 
 <ol>
 <li>Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.</li>
 <li>Scale the reported outcome to be between 0 and 1 by dividing by (maxPrice - minPrice): 75 / (100 - 0) = 0.75.</li>
 <li>Scale the reported Outcome to the Number of Ticks by multiplying by the Number of Ticks: 0.75 * 10000 = 7500.</li>
 <li>Calculate the other Outcome by subtracting the result from the Number of Ticks: 10000 - 7500 = 2500.</li>
-<li>Put them in an array where the zero index is the short position, and one index is the long position: <code class="prettyprint">[2500, 7500]</code>.
+<li>Put them in an array where the zero index is the Short Position, and one index is the Long Position: <code class="prettyprint">[2500, 7500]</code>.
 Note: When calculating the Payout Set for a Scalar Market using integer-only math, the order of steps (2) and (3) should be switched (i.e., always multiply before dividing in integer math).</li>
 </ol>
 
 <h2 id="position">Position</h2>
 
-<p>A Position is the amount of <a href="#share">Shares</a> that are owned (a long position) or borrowed and then sold (a short position) by an individual. A Position can be profitable or unprofitable, depending on <a href="#market">Market</a> movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a short position means a trader is buying Shares of an <a href="#outcome">Outcome</a> they are short on, whereas closing a long position means they are selling the Shares they own.</p>
+<p>A Position is the amount of <a href="#share">Shares</a> that are owned (a <a href="#long-position">Long Position</a>) or borrowed and then sold (a <a href="#short-position">Short Position</a>) by an individual. A Position can be profitable or unprofitable, depending on <a href="#market">Market</a> movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a Short Position means a trader is buying Shares of an <a href="#outcome">Outcome</a> they are short on, whereas closing a Long Position means they are selling the Shares they own.</p>
 
 <!-- TODO: Make sure this lines up with what's in the white paper. -->
 
