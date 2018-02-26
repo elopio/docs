@@ -1426,6 +1426,7 @@ This function will fail if:
 
 * There is not a Forked Market in the Market's Universe.
 * The Market is a Forked Market.
+* The Market is [Finalized](#finalized-market).
 
 #### **Parameters:**
 
@@ -1496,11 +1497,11 @@ This transaction will fail if:
 
 ### augur.api.Market.finalizeFork(p)
 
-[Finalizes](#finalized-market) the [Forked Market](#forked-market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market. Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
+[Finalizes](#finalized-market) the [Forked Market](#forked-market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the [Market](#market). Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
 
 This transaction will fail if:
 
-* The market is not a Forked Market.
+* The Market is not a Forked Market.
 * The [Fork Threshold](#fork-threshold) has not been reached, and the [Fork Period](#fork-period) is not over.
 
 #### **Parameters:**
@@ -1524,6 +1525,8 @@ Migrates the [Market](#market) into a winning [Child Universe](#child-universe) 
 
 This transaction will fail if:
 
+* The Market is [Finalized](#finalized-market).
+* The [Forked Market](#forked-market) is not Finalized.
 * The Fork Period is not over (that is, there is no Winning Universe to migrate to).
 
 #### **Parameters:**
