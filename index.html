@@ -773,20 +773,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="accounts-functions">Accounts Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Accounts Simplified API Examples:</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">approveAugur</span><span class="p">(</span>
-  <span class="nx">address</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span> 
-  <span class="nx">auth</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="nx">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">approveAugur</span><span class="p">({</span>
+  <span class="na">address</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
   <span class="p">},</span>
-  <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> 
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval failed due to error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span> 
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval was successful."</span><span class="p">);</span> 
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">);</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval was successful."</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Approval failed due to error:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"Approval was successful."</span>
 
@@ -853,16 +849,22 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="augur-accounts-approveaugur-address-auth-callback">augur.accounts.approveAugur(address, auth, callback)</h3>
+<h3 id="augur-accounts-approveaugur-p">augur.accounts.approveAugur(p)</h3>
 
 <p>Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. Many of Augur&rsquo;s transactions require Augur to be able to spend Cash on behalf of the account executing the transaction. However, the account must first approve Augur to spend that amount of Cash on its behalf. This function calls the function <code class="prettyprint">augur.api.Cash.approve</code> to approve Augur to spend up to <code class="prettyprint">augur.constants.ETERNAL_APPROVAL_VALUE</code> Cash on behalf of the account. <code class="prettyprint">augur.constants.ETERNAL_APPROVAL_VALUE</code> is equal to 2^256 - 1, or the maximum amount of Cash that can be approved. This value is used so that <code class="prettyprint">augur.api.Cash.approve</code> does not have to be called multiple times in order to execute multiple transactions.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) Ethereum address of the account making the approval.</li>
-<li><strong><code class="prettyprint">auth</code></strong> (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account has approved Augur to spend on its behalf.</li>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p.address</code></strong> (string) Ethereum address of the account making the approval.</li>
+<li><strong><code class="prettyprint">p.meta</code></strong> (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the transaction fails.</li>
+</ul></li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -13129,6 +13131,10 @@ Goals:
 
 <p>Legacy <a href="#rep">Reputation Tokens</a>, or Legacy REP, are REP that exist in the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/legacy_reputation/LegacyRepToken.sol">Legacy REP smart contract</a> and have not been migrated to the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">Reputation Token smart contract</a>, for a particular <a href="#universe">Universe</a>. Legacy REP must be migrated to the Reputation Token smart contract by calling the <code class="prettyprint">augur.api.ReputationToken.migrateFromLegacyReputationToken</code> function before they can be used within Augur.</p>
 
+<h2 id="long-position">Long Position</h2>
+
+<p>In Augur, opening a Long Position in the <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> means purchasing <a href="#share">Shares</a> in that Outcome. Opening a Long Position costs (price per Share * number of Shares). For more information on trading, please refer to the <a href="#trading">Trading</a> section.</p>
+
 <h2 id="locked-universe">Locked Universe</h2>
 
 <p>A Locked Universe is a <a href="#universe">Universe</a> that had a <a href="#fork">Fork</a> occur within it and no longer allows the creation of new <a href="#markets">Markets</a>. All Markets within a Locked Universe remain tradable, as Markets never stop being tradable, even after <a href="#finalized-market">Finalizing</a>. <a href="#rep">REP</a> holders within a Locked Universe are given a one-time and final option to migrate their REP to one of the new Universes created after a Fork locks a Market. There is no time constraint to how long a REP holder is allowed to wait to choose a Universe to migrate their REP to.</p>
@@ -13290,10 +13296,6 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.</p>
 
-<h2 id="tentative-outcome">Tentative Outcome</h2>
-
-<p>The Tentative Outcome is the currently reported <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> that has not been <a href="#finalized-market">Finalized</a> yet. In other words, it&rsquo;s either the Outcome that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> has Staked <a href="#rep">REP</a> on, or it&rsquo;s the Outcome that had enough REP Staked on it in the last <a href="#dispute-round">Dispute Round</a> to <a href="#challenge">Challenge</a> the previous Tentative Outcome and make it the new Tentative Outcome. If a Market makes it through the <a href="#dispute-round-phase">Dispute Round Phase</a> without being Challenged, or if the Market passes through the <a href="#fork-period">Fork Phase</a>, then the Market will become <a href="#finalized-market">Finalized</a>, and the Tentative Outcome will become a <a href="#final-outcome">Final Outcome</a>.</p>
-
 <h2 id="rep">REP</h2>
 
 <p>REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur <a href="#decentralized-oracle">Decentralized Oracle</a> system. REP is used to to pay the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> when creating a Market, to Stake on an <a href="#outcome">Outcome</a> in the <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a> of a <a href="#market">Market</a>, to <a href="#challenge">Challenge</a> a <a href="#tentative-outcome">Tentative Outcome</a> by Staking on a different Outcome when a Market is in the <a href="#dispute-round-phase">Dispute Round Phase</a>, and to purchase <a href="#participation-tokens">Participation Tokens</a>.</p>
@@ -13342,9 +13344,19 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>A Share is the ownership of a portion of a <a href="#market">Market&rsquo;s</a> <a href="#outcome">Outcome&rsquo;s</a> value. A <a href="#complete-set">Complete Set</a> of Shares are created when both the <a href="#order-creator">Creator</a> and <a href="#order-filler">Filler</a> of an <a href="#order">Order</a> send ETH to the Market to complete an <a href="#order">Order</a>. Shares are <a href="#settlement">Settled</a> (destroyed) when a Complete Set is sold back to the Market.</p>
 
+<h2 id="short-position">Short Position</h2>
+
+<p>Opening a Short Position, or shorting, is the selling of a security that is not owned by the seller. Shorting is done with the belief that a security&rsquo;s price will decrease in the future, allowing it to be bought back at a lower price to make a profit.</p>
+
+<p>In Augur, betting on the &ldquo;No&rdquo; <a href="#outcome">Outcome</a> of a <a href="#binary-market">Binary Market</a> is done by shorting the &ldquo;Yes&rdquo; Outcome. This effectively means the user is selling &ldquo;Yes&rdquo; <a href="#share">Shares</a> they do not own, which are listed as negative quantities of Shares on the Portfolio:Positions view of Augur&rsquo;s user interface.</p>
+
+<p>Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a <a href="#complete-set">Complete Set</a> is a Share of every Outcome in a Market. For example, suppose a user thinks the &ldquo;Yes&rdquo; Outcome of a Binary Market is unlikely to happen and expects the price of a &ldquo;Yes&rdquo; Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of &ldquo;Yes&rdquo; costs 0.55 ETH, a Short Position in 1 Share of the &ldquo;Yes&rdquo; Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.</p>
+
+<p>For more information on trading, please refer to the <a href="#trading">Trading</a> section.</p>
+
 <h2 id="tentative-outcome">Tentative Outcome</h2>
 
-<p>A <a href="#market">Market&rsquo;s</a> Tentative Outcome starts off as the <a href="#outcome">Outcome</a> that is submitted by the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a>. Once the Market enters the [Dispute Round Phase](#dispute-round-phase, other users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on other Outcomes if they believe the Tentative Outcome is incorrect. If the <a href="#dispute-bond">Dispute Bond</a> for a particular Outcome gets filled in the current <a href="#dispute-round">Dispute Round</a>, that Outcome will become the new Tentative Outcome.</p>
+<p>The Tentative Outcome is the currently reported <a href="#outcome">Outcome</a> for a <a href="#market">Market</a> that has not been <a href="#finalized-market">Finalized</a> yet. In other words, it&rsquo;s either the Outcome that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> has Staked <a href="#rep">REP</a> on, or it&rsquo;s the Outcome that had enough REP Staked on it in the last <a href="#dispute-round">Dispute Round</a> to <a href="#challenge">Challenge</a> the previous Tentative Outcome and make it the new Tentative Outcome. If a Market completes a <a href="#dispute-round">Dispute Round</a> without being Challenged, or if the Market passes through the <a href="#fork-period">Fork Phase</a>, then the Market will become <a href="#finalized-market">Finalized</a>, and the Tentative Outcome will become a <a href="#final-outcome">Final Outcome</a>.</p>
 
 <h2 id="theoretical-rep-supply">Theoretical REP Supply</h2>
 
