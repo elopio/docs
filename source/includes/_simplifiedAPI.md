@@ -1840,7 +1840,11 @@ augur.trading.claimMarketsTradingProceeds({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// example onSuccess output:
+[
+  "0x0000000000000000000000000000000000000001",
+  "0x0000000000000000000000000000000000000002",
+]
 
 augur.trading.claimTradingProceeds({
   _market: "0x0000000000000000000000000000000000000001",
@@ -1853,7 +1857,7 @@ augur.trading.claimTradingProceeds({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// This function does not return a value.
 
 augur.trading.denormalizePrice({
   minPrice: "0",
@@ -2378,7 +2382,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 
 #### **Returns:**
 
-* Description pending.
+* (Array.<string>) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.
 
 ### augur.trading.claimTradingProceeds(p)
 
@@ -2386,7 +2390,7 @@ Attempts to collect trading profits in Ether from a user's outstanding [Shares](
 
 This function will fail if:
 
-* `_market` is not Finalized.
+* `p._market` is not Finalized.
 * The [Post-Finalization Waiting Period](#post-finalization-waiting-period) has not passed.
 
 #### **Parameters:**
@@ -2401,7 +2405,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* Description pending.
+* This function does not return a value.
 
 ### augur.trading.denormalizePrice(p)
 
