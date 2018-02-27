@@ -2893,7 +2893,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-<span class="c1">// example onSuccess output: coming soon</span>
+<span class="c1">// example onSuccess output:</span>
+<span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+<span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">claimTradingProceeds</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -2906,7 +2910,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
-<span class="c1">// example onSuccess output: coming soon</span>
+<span class="c1">// This function does not return a value.</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">denormalizePrice</span><span class="p">({</span>
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
@@ -3444,7 +3448,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Description pending.</li>
+<li>(Array.<string>) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
@@ -3454,7 +3458,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>This function will fail if:</p>
 
 <ul>
-<li><code class="prettyprint">_market</code> is not Finalized.</li>
+<li><code class="prettyprint">p._market</code> is not Finalized.</li>
 <li>The <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
 </ul>
 
@@ -3476,7 +3480,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>Description pending.</li>
+<li>This function does not return a value.</li>
 </ul>
 
 <h3 id="augur-trading-denormalizeprice-p">augur.trading.denormalizePrice(p)</h3>
