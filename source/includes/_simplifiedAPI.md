@@ -2148,6 +2148,7 @@ augur.trading.placeTrade({
   limitPrice: "2",
   minPrice: "1",
   maxPrice: "3",
+  numTicks: "10000",
   tickSize: "0.0001",
   _direction: 0,
   _market: "MARKET_ADDRESS",
@@ -2460,6 +2461,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p.limitPrice`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
+    * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this market.
     * **`p.tickSize`**  (string) The [Tick](#tick) size (interval) for this Market.
     * **`p._direction`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
