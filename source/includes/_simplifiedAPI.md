@@ -2151,9 +2151,8 @@ augur.trading.placeTrade({
   numTicks: "10000",
   tickSize: "0.0001",
   _direction: 0,
-  _market: "MARKET_ADDRESS",
-  _outcome: 2,
-  _tradeGroupId: "0x1",
+  _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  _outcome: 0,
   doNotCreateOrders: false,
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
@@ -2163,7 +2162,7 @@ augur.trading.placeTrade({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// This function does not return a value, but it calls the function `augur.trading.tradeUntilAmountIsZero`, which logs information to the console as it places Orders. To see this output, refer to the JS sample code for `augur.trading.tradeUntilAmountIsZero`.
 
 augur.trading.simulateTrade({
   orderType: 0,
@@ -2216,11 +2215,10 @@ augur.trading.tradeUntilAmountIsZero({
   _fxpAmount: "10",
   numTicks: "10000",
   tickSize: "0.0001",
-  _direction: 1,
-  _market: "0xc841ee153e45e74074eae9685e815d08dee965eb",
-  _outcome: 2,
-  _tradeGroupId: "0x1",
-  doNotCreateOrders: true,
+  _direction: 0,
+  _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  _outcome: 0,
+  doNotCreateOrders: false,
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -2229,7 +2227,126 @@ augur.trading.tradeUntilAmountIsZero({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// This function does not return a value, but it does log information to the console as it places Orders:
+"tradeUntilAmountIsZero: "
+{
+  "_price": "0.5",
+  "_fxpAmount": "10",
+  "numTicks": "10000",
+  "tickSize": "0.0001",
+  "_direction": 0,
+  "_market": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  "_outcome": 0,
+  "doNotCreateOrders": false
+}
+"cost: 5 ETH"
+undefined
+{
+  "hash": "0x0aaf4bd7dc1a022c0530d41dc97e286108d505dc5e7ad81ae3d33e0bb2bded14",
+  "callReturn": null
+}
+"Order Created: "
+{
+  "marketId": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  "blockNumber": 15104,
+  "transactionHash": "0x0aaf4bd7dc1a022c0530d41dc97e286108d505dc5e7ad81ae3d33e0bb2bded14",
+  "logIndex": 2,
+  "outcome": 0,
+  "shareToken": "0xaa21ca0187d97dc3d4411e3fa5a7f34b81c85e74",
+  "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  "orderState": "OPEN",
+  "tradeGroupId": "0x0",
+  "orderType": "buy",
+  "price": "0.5",
+  "amount": "10",
+  "fullPrecisionPrice": "0.5",
+  "fullPrecisionAmount": "10",
+  "tokensEscrowed": "5",
+  "sharesEscrowed": "0",
+  "orderId": "0xd34bcfcdd831f54edb0b4f6982f03005fab01bf8ec1d8570bad2144f916e3d9"
+}
+"convertTradeLogToTransaction CreateOrder"
+{
+  "0x8092bdf939e23a0e926021ffce5a062d0f598d1f": {
+    "0": [
+      {
+        "marketId": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+        "blockNumber": 15104,
+        "transactionHash": "0x0aaf4bd7dc1a022c0530d41dc97e286108d505dc5e7ad81ae3d33e0bb2bded14",
+        "logIndex": 2,
+        "outcome": 0,
+        "shareToken": "0xaa21ca0187d97dc3d4411e3fa5a7f34b81c85e74",
+        "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+        "orderState": "OPEN",
+        "tradeGroupId": "0x0",
+        "orderType": "buy",
+        "price": "0.5",
+        "amount": "10",
+        "fullPrecisionPrice": "0.5",
+        "fullPrecisionAmount": "10",
+        "tokensEscrowed": "5",
+        "sharesEscrowed": "0",
+        "orderId": "0xd34bcfcdd831f54edb0b4f6982f03005fab01bf8ec1d8570bad2144f916e3d9"
+      }
+    ]
+  }
+}
+"constructTradingTransaction: CreateOrder"
+{
+  "marketId": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  "blockNumber": 15104,
+  "transactionHash": "0x0aaf4bd7dc1a022c0530d41dc97e286108d505dc5e7ad81ae3d33e0bb2bded14",
+  "logIndex": 2,
+  "outcome": 0,
+  "shareToken": "0xaa21ca0187d97dc3d4411e3fa5a7f34b81c85e74",
+  "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  "orderState": "OPEN",
+  "tradeGroupId": "0x0",
+  "orderType": "buy",
+  "price": "0.5",
+  "amount": "10",
+  "fullPrecisionPrice": "0.5",
+  "fullPrecisionAmount": "10",
+  "tokensEscrowed": "5",
+  "sharesEscrowed": "0",
+  "orderId": "0xd34bcfcdd831f54edb0b4f6982f03005fab01bf8ec1d8570bad2144f916e3d9"
+}
+"res:"
+{
+  "marketId": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  "blockNumber": 15104,
+  "transactionHash": "0x0aaf4bd7dc1a022c0530d41dc97e286108d505dc5e7ad81ae3d33e0bb2bded14",
+  "logIndex": 2,
+  "outcome": 0,
+  "shareToken": "0xaa21ca0187d97dc3d4411e3fa5a7f34b81c85e74",
+  "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  "orderState": "OPEN",
+  "tradeGroupId": "0x0",
+  "orderType": "buy",
+  "price": "0.5",
+  "amount": "10",
+  "fullPrecisionPrice": "0.5",
+  "fullPrecisionAmount": "10",
+  "tokensEscrowed": "5",
+  "sharesEscrowed": "0",
+  "orderId": "0xd34bcfcdd831f54edb0b4f6982f03005fab01bf8ec1d8570bad2144f916e3d9"
+}
+"starting amount:  10"
+"amount remaining: 0"
+"updated estimated cost: null"
+"tradeUntilAmountIsZero: "
+{
+  "_price": "0.5",
+  "_fxpAmount": "0",
+  "numTicks": "10000",
+  "tickSize": "0.0001",
+  "_direction": 0,
+  "_market": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  "_outcome": 0,
+  "doNotCreateOrders": false,
+  "estimatedCost": null
+}
+null
 ```
 ### augur.trading.calculateProfitLoss(p)
 
@@ -2467,7 +2584,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
     * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
-    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
+    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
@@ -2476,7 +2593,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
 
 #### **Returns:**
 
-* Description pending.
+* This function does not return a value.
 
 ### augur.trading.simulateTrade(p, callback)
 
@@ -2519,7 +2636,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
     * **`p._market`**  (string) Market in which to trade, as a hex string.
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
     * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
-    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
+    * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called when the first trading transaction is broadcast to the network.
@@ -2528,4 +2645,4 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 
 #### **Returns:**
 
-* Description pending.
+* This function does not return a value.
