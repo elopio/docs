@@ -1675,14 +1675,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="mi">500</span> <span class="p">},</span>
 <span class="p">]</span>
 
-<span class="c1">// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getDisputableMarkets</span><span class="p">({</span>
-  <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output: coming soon</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1998,39 +1990,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(Array.&lt;<a href="#Category">Category</a>&gt;) Array representing the categories in the specified Universe.</li>
-</ul>
-
-<!-- TODO: Add JS example results -->
-
-<h3 id="augur-markets-getdisputablemarkets-p-callback">augur.markets.getDisputableMarkets(p, callback)</h3>
-
-<p>This function has not been implemented yet. Returns the <a href="#markets">Markets</a> in a specific <a href="#fee-window">Fee Window</a> that are able to be <a href="#dispute">Disputed</a>, along with the value of the <a href="#dispute-bond">Dispute Bond</a> needed to Dispute each Market’s result.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li>A connection to an <a href="#augur-node">Augur Node</a> has not been established.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) Contract address of the Fee Window from which to retrieve the disputable Markets.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Description pending.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketpricehistory-p-callback">augur.markets.getMarketPriceHistory(p, callback)</h3>
@@ -8133,12 +8092,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">decreaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_subtractedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">cashContractAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">increaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_addedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">cashContractAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash Solidity Contract</a>, which is used internally by Augur as an ERC-20 wrapper for ETH.</p>
 
 <h3 id="augur-api-cash-approve-p">augur.api.Cash.approve(p)</h3>
 
-<p>Many of the transaction functions in Augur&rsquo;s smart contracts will only work if the Augur.sol contract has been approved to spend Cash on behalf of the account executing the transaction. This function allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> Cash for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoCash</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
+<p>Many of the transaction functions in Augur&rsquo;s smart contracts will only work if the Augur.sol contract has been approved to spend <a href="#cash">Cash</a> on behalf of the account executing the transaction. This function allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> Cash for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoCash</a> approved. The amount that <code class="prettyprint">p.spender</code> is approved to spend can be increased or decreased later by calling <code class="prettyprint">augur.api.Cash.increaseApproval</code> or <code class="prettyprint">augur.api.Cash.decreaseApproval</code>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -8148,6 +8139,68 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoCash to allow <code class="prettyprint">p._spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-cash-decreaseapproval-p">augur.api.Cash.decreaseApproval(p)</h3>
+
+<p>Decreases the amount of <a href="#cash">Cash</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._subtractedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoCash</a> by which to decrease the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-cash-increaseapproval-p">augur.api.Cash.increaseApproval(p)</h3>
+
+<p>Increases the amount of <a href="#cash">Cash</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._addedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoCash</a> by which to increase the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -9689,15 +9742,48 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="c1">// The Ethereum address of Augur's default ReputationToken contract</span>
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
-  <span class="na">_spender</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="s2">"0xff"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">decreaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_subtractedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">increaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_addedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">reputationTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
     <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
@@ -9822,7 +9908,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-reputationtoken-approve-p">augur.api.ReputationToken.approve(p)</h3>
 
-<p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoREP</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
+<p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#rep">REP</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoREP</a> approved. The amount that <code class="prettyprint">p.spender</code> is approved to spend can be increased or decreased later by calling <code class="prettyprint">augur.api.ReputationToken.increaseApproval</code> or <code class="prettyprint">augur.api.ReputationToken.decreaseApproval</code>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9832,6 +9918,68 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoREP to allow <code class="prettyprint">p._spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-decreaseapproval-p">augur.api.ReputationToken.decreaseApproval(p)</h3>
+
+<p>Decreases the amount of <a href="#rep">REP</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._subtractedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoREP</a> by which to decrease the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-reputationtoken-increaseapproval-p">augur.api.ReputationToken.increaseApproval(p)</h3>
+
+<p>Increases the amount of <a href="#rep">REP</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._addedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoREP</a> by which to increase the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10104,17 +10252,50 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="c1">// The Ethereum address of Augur's default ShareToken contract</span>
 <span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">shareTokenAddress</span> <span class="o">=</span> <span class="s2">"0x925bee44fec28deb228d2251e1a9d32f7c73ebed"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x56bc75e2d63100000"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
-  <span class="na">_spender</span><span class="p">:</span> <span class="s2">"0x01f50356c280cd886dd058210937160c73700a4b"</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
   <span class="na">_value</span><span class="p">:</span> <span class="nx">_attotokens</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
   <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">decreaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_subtractedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">increaseApproval</span><span class="p">({</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+  <span class="na">_addedValue</span><span class="p">:</span> <span class="s2">"0x3e8"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">shareTokenAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
     <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
@@ -10163,7 +10344,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-sharetoken-approve-p">augur.api.ShareToken.approve(p)</h3>
 
-<p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoshares</a> approved. The only way to change <code class="prettyprint">p._value</code> after it has been set is by first calling this transaction with <code class="prettyprint">p._value</code> set to 0 and then calling it again with <code class="prettyprint">p._value</code> set to the desired value.</p>
+<p>Allows <code class="prettyprint">p._spender</code> to spend up to <code class="prettyprint">p._value</code> <a href="#share">Shares</a> for the <code class="prettyprint">msg.sender</code> of this transaction. This transaction will trigger an <a href="#Approval"><code class="prettyprint">Approval</code></a> event, which will record the owner address (<code class="prettyprint">msg.sender</code>), <code class="prettyprint">p._spender</code>, and <code class="prettyprint">p._value</code> in <a href="#atto-prefix">attoshares</a> approved. The amount that <code class="prettyprint">p.spender</code> is approved to spend can be increased or decreased later by calling <code class="prettyprint">augur.api.ShareToken.increaseApproval</code> or <code class="prettyprint">augur.api.ShareToken.decreaseApproval</code>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -10173,6 +10354,68 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._value</code></strong>  (string) Number of attoshares to allow <code class="prettyprint">p._spender</code> to spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-sharetoken-decreaseapproval-p">augur.api.ShareToken.decreaseApproval(p)</h3>
+
+<p>Decreases the amount of <a href="#share">Shares</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._subtractedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> by which to decrease the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-sharetoken-increaseapproval-p">augur.api.ShareToken.increaseApproval(p)</h3>
+
+<p>Increases the amount of <a href="#share">Shares</a> <code class="prettyprint">p._spender</code> is approved to spend on behalf of <code class="prettyprint">msg.sender</code>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._addedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> by which to increase the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -13067,7 +13310,7 @@ Goals:
 
 <h2 id="cash">Cash</h2>
 
-<p>Cash is an ERC-20 token that is used within Augur&rsquo;s Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur&rsquo;s functionality. Users do not interact directly with Cash tokens.</p>
+<p>Cash is an ERC-20 token that is used within Augur&rsquo;s Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur&rsquo;s functionality. Users do not interact directly with Cash tokens in Augur.</p>
 
 <h2 id="categorical-market">Categorical Market</h2>
 
