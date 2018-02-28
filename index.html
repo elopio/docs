@@ -2606,7 +2606,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li>The <a href="#initial-report">Initial Report</a> has not been submitted.</li>
 <li>The <a href="#fee-window">Fee Window</a> has not ended.</li>
-<li>The Market passed in is a Forked Market.</li>
+<li>The Market passed in is a <a href="#forked-market">Forked Market</a>.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -5279,7 +5279,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"12378786123"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getTotalStake</span><span class="p">({</span> 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getParticipantStake</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">totalStake</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalStake</span><span class="p">);</span> 
@@ -5846,7 +5846,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.</li>
 </ul>
 
-<h3 id="augur-api-market-gettotalstake-p-callback">augur.api.Market.getTotalStake(p, callback)</h3>
+<h3 id="augur-api-market-getparticipantstake-p-callback">augur.api.Market.getParticipantStake(p, callback)</h3>
 
 <p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on all <a href="#outcome">Outcomes</a> of the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#dispute-crowdsourcer">Dispute Crowdsourcer</a>.</p>
 
