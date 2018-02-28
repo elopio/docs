@@ -30,7 +30,7 @@ A Binary Market is a [Market](#market) with only two [Outcomes](#outcome) (as we
 
 ## Cash
 
-Cash is an ERC-20 token that is used within Augur's Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur's functionality. Users do not interact directly with Cash tokens.
+Cash is an ERC-20 token that is used within Augur's Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur's functionality. Users do not interact directly with Cash tokens in Augur.
 
 ## Categorical Market
 

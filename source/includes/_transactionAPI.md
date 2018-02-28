@@ -348,18 +348,92 @@ augur.api.Cash.approve({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
+
+augur.api.Cash.decreaseApproval({
+  _spender: _augurContractAddress,
+  _subtractedValue: "0x3e8",
+  tx: { 
+    to: cashContractAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.Cash.increaseApproval({
+  _spender: _augurContractAddress,
+  _addedValue: "0x3e8",
+  tx: { 
+    to: cashContractAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
 ```
 Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
 
 ### augur.api.Cash.approve(p)
 
-Many of the transaction functions in Augur's smart contracts will only work if the Augur.sol contract has been approved to spend Cash on behalf of the account executing the transaction. This function allows `p._spender` to spend up to `p._value` Cash for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoCash](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
+Many of the transaction functions in Augur's smart contracts will only work if the Augur.sol contract has been approved to spend [Cash](#cash) on behalf of the account executing the transaction. This function allows `p._spender` to spend up to `p._value` Cash for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoCash](#atto-prefix) approved. The amount that `p.spender` is approved to spend can be increased or decreased later by calling `augur.api.Cash.increaseApproval` or `augur.api.Cash.decreaseApproval`.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoCash to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.Cash.decreaseApproval(p)
+
+Decreases the amount of [Cash](#cash) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._subtractedValue`**  (string) Number of [attoCash](#atto-prefix) by which to decrease the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.Cash.increaseApproval(p)
+
+Increases the amount of [Cash](#cash) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._addedValue`**  (string) Number of [attoCash](#atto-prefix) by which to increase the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1598,15 +1672,48 @@ Reputation Token Tx API
 
 // The Ethereum address of Augur's default ReputationToken contract
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
 
 augur.api.ReputationToken.approve({
-  _spender: "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+  _spender: _augurContractAddress,
   _value: "0xff",
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
   }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.ReputationToken.decreaseApproval({
+  _spender: _augurContractAddress,
+  _subtractedValue: "0x3e8",
+  tx: { 
+    to: reputationTokenAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.ReputationToken.increaseApproval({
+  _spender: _augurContractAddress,
+  _addedValue: "0x3e8",
+  tx: { 
+    to: reputationTokenAddress,
+    gas: "0x632ea0" 
+  },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1731,13 +1838,55 @@ The Reputation Token, or REP, is an ERC-20 token that implements all of the requ
 
 ### augur.api.ReputationToken.approve(p)
 
-Allows `p._spender` to spend up to `p._value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoREP](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
+Allows `p._spender` to spend up to `p._value` [REP](#rep) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoREP](#atto-prefix) approved. The amount that `p.spender` is approved to spend can be increased or decreased later by calling `augur.api.ReputationToken.increaseApproval` or `augur.api.ReputationToken.decreaseApproval`.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoREP to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.ReputationToken.decreaseApproval(p)
+
+Decreases the amount of [REP](#rep) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._subtractedValue`**  (string) Number of [attoREP](#atto-prefix) by which to decrease the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.ReputationToken.increaseApproval(p)
+
+Increases the amount of [REP](#rep) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._addedValue`**  (string) Number of [attoREP](#atto-prefix) by which to increase the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1925,17 +2074,50 @@ Share Token Tx API
 
 // The Ethereum address of Augur's default ShareToken contract
 // can be obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 var shareTokenAddress = "0x925bee44fec28deb228d2251e1a9d32f7c73ebed";
 
 var _attotokens = "0x56bc75e2d63100000";
 
 augur.api.ShareToken.approve({
-  _spender: "0x01f50356c280cd886dd058210937160c73700a4b",
+  _spender: _augurContractAddress,
   _value: _attotokens,
   tx: { 
     to: shareTokenAddress,
     gas: "0x632ea0" 
   }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.ShareToken.decreaseApproval({
+  _spender: _augurContractAddress,
+  _subtractedValue: "0x3e8",
+  tx: { 
+    to: shareTokenAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.ShareToken.increaseApproval({
+  _spender: _augurContractAddress,
+  _addedValue: "0x3e8",
+  tx: { 
+    to: shareTokenAddress,
+    gas: "0x632ea0" 
+  },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
     accountType: "privateKey"
@@ -1984,13 +2166,55 @@ The Share Token is an ERC-20 token that implements all of the required functions
 
 ### augur.api.ShareToken.approve(p)
 
-Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoshares](#atto-prefix) approved. The only way to change `p._value` after it has been set is by first calling this transaction with `p._value` set to 0 and then calling it again with `p._value` set to the desired value.
+Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoshares](#atto-prefix) approved. The amount that `p.spender` is approved to spend can be increased or decreased later by calling `augur.api.ShareToken.increaseApproval` or `augur.api.ShareToken.decreaseApproval`.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._value`**  (string) Number of attoshares to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.ShareToken.decreaseApproval(p)
+
+Decreases the amount of [Shares](#share) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._subtractedValue`**  (string) Number of [attoShares](#atto-prefix) by which to decrease the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.ShareToken.increaseApproval(p)
+
+Increases the amount of [Shares](#share) `p._spender` is approved to spend on behalf of `msg.sender`.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
+    * **`p._addedValue`**  (string) Number of [attoShares](#atto-prefix) by which to increase the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
