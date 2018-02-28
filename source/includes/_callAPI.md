@@ -1117,7 +1117,7 @@ augur.api.Market.getStakeInOutcome({
 // example output:
 "12378786123"
 
-augur.api.Market.getTotalStake({ 
+augur.api.Market.getParticipantStake({ 
   tx: { to: market } 
 }, function (error, totalStake) { 
   console.log(totalStake); 
@@ -1492,7 +1492,7 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 
 * (string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.
 
-### augur.api.Market.getTotalStake(p, callback)
+### augur.api.Market.getParticipantStake(p, callback)
 
 Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
 

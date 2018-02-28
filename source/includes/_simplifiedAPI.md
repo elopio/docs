@@ -1629,7 +1629,7 @@ This transaction will fail if:
 
 * The [Initial Report](#initial-report) has not been submitted.
 * The [Fee Window](#fee-window) has not ended.
-* The Market passed in is a Forked Market.
+* The Market passed in is a [Forked Market](#forked-market).
 
 #### **Parameters:**
 
