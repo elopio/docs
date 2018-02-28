@@ -343,6 +343,8 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`isInvalid`** (boolean) Description pending.
 * **`payout`** (Array.<number>) Payout Set for the Dispute Crowdsourcer.
+* **`accountStakeComplete`** (string|null) Description pending.
+* **`accountStakeIncomplete`** (string|null) Description pending.
 * **`totalStaked`** (string) Description pending.
 * **`completedStake`** (string) Description pending.
 * **`size`** (string|null) Description pending.

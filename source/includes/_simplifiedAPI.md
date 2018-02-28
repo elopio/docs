@@ -1352,7 +1352,8 @@ augur.reporting.getDisputeInfo({
   marketIds: [
     "0x0000000000000000000000000000000000000211",
     "0x0000000000000000000000000000000000000011",
-  ]
+  ],
+  account: "0x0000000000000000000000000000000000000021",
 }, function (error, result) {
   console.log(result);
 });
@@ -1367,6 +1368,8 @@ augur.reporting.getDisputeInfo({
           10000,
           0,
         ],
+        accountStakeComplete: "0",
+        accountStakeIncomplete: "0",
         totalStake: "0",
         completedStake: "0",
         size: "204",
@@ -1379,6 +1382,7 @@ augur.reporting.getDisputeInfo({
           0,
           10000,
         ],
+        accountStakeComplete: "0",
         totalStake: "102",
         completedStake: "102",
         tentativeWinning: true,
@@ -1389,6 +1393,8 @@ augur.reporting.getDisputeInfo({
           5000,
           5000,
         ],
+        accountStakeComplete: "0",
+        accountStakeIncomplete: "0",
         totalStake: "20",
         completedStake: "0",
         size: "204",
@@ -1407,6 +1413,8 @@ augur.reporting.getDisputeInfo({
           0,
           2,
         ],
+        accountStakeComplete: "0",
+        accountStakeIncomplete: "17",
         totalStake: "40102",
         completedStake: "102",
         size: "60000",
@@ -1419,6 +1427,7 @@ augur.reporting.getDisputeInfo({
           1,
           1,
         ],
+        accountStakeComplete: "500",
         totalStake: "20000",
         completedStake: "20000",
         tentativeWinning: true,
@@ -1633,7 +1642,8 @@ Returns information about the [Dispute Stake](#dispute-stake) in a list of [Mark
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketIds`**  (Array.&lt;string>) Array of Market Ethereum contract addresses.
+    * **`p.marketIds`**  (Array.&lt;string>) Array of Market Ethereum contract addresses, as 20-byte hexadecimal strings.
+    * **`p.account`**  (string) &lt;optional> Ethereum address (as a 20-byte hexadecimal string) of a user by which to filter the returned results.
 
 #### **Returns:**
 
