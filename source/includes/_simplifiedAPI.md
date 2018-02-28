@@ -804,14 +804,6 @@ augur.markets.getCategories({
   { category: "augur", popularity: 500 },
 ]
 
-// NOTE: This function has not be implemented yet, so the format of the returned data is still pending.
-augur.markets.getDisputableMarkets({
-  feeWindow: "0x1000000000000000000000000000000000000000"
-}, function (error, result) {
-  console.log(result);
-});
-// example output: coming soon
-
 augur.markets.getMarketPriceHistory({
   marketId: "0x0000000000000000000000000000000000000001",
   sortBy: null,
@@ -1117,29 +1109,6 @@ This function will fail if:
 
 #### **Returns:**
 * (Array.&lt;<a href="#Category">Category</a>>) Array representing the categories in the specified Universe.
-
-<!-- TODO: Add JS example results -->
-### augur.markets.getDisputableMarkets(p, callback)
-
-This function has not been implemented yet. Returns the [Markets](#markets) in a specific [Fee Window](#fee-window) that are able to be [Disputed](#dispute), along with the value of the [Dispute Bond](#dispute-bond) needed to Dispute each Market’s result.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.feeWindow`**  (string) Contract address of the Fee Window from which to retrieve the disputable Markets.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Markets have been retrieved.
-
-#### **Returns:**
-
-* Description pending.
 
 ### augur.markets.getMarketPriceHistory(p, callback)
 
