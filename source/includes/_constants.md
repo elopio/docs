@@ -43,6 +43,10 @@ Gas limit used when creating a new [Scalar Market](#scalar-market), as a hexadec
 
 Description pending.
 
+### augur.constants.DEFAULT_MAX_GAS (string)
+
+Default maximum gas limit, as a hexadecimal string.
+
 ### augur.constants.DEFAULT_NETWORK_ID (string)
 
 Description pending.
