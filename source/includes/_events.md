@@ -10,7 +10,7 @@ The augur.js Events API includes event listeners, which provide notifications of
 
 The function `augur.events.getAllAugurLogs` can be used to get an array of all Augur-related events that have been logged in the past.
 
-<aside class="success">Events are retrieved either via push notification (if connected via websocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
+<aside class="success">Events are retrieved either via push notification (if connected via WebSocket) or by polling the Ethereum node (if using HTTP RPC).  If polling, augur.js will check for new events every 6 seconds.</aside>
 
 Events Functions
 -----------

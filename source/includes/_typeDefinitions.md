@@ -104,7 +104,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`http`** (string|null) HTTP address of an Ethereum node.
 * **`httpAddresses`** (Array.&lt;string>|null) Array of HTTP Ethereum node addresses. (Can be used instead of `http` to specify a list of HTTP addresses to iterate through until a connection is established.)
 * **`ws`** (string|null) Websocket address of an Ethereum node.
-* **`wsAddresses`** (Array.&lt;string>|null) Array of websocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of websocket addresses to iterate through until a connection is established.)
+* **`wsAddresses`** (Array.&lt;string>|null) Array of WebSocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of WebSocket addresses to iterate through until a connection is established.)
 * **`ipc`** (string|null) IPC address of an Ethereum node.
 * **`ipcAddresses`** (Array.&lt;string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
 * **`networkId`** (string|null) Description pending.

@@ -426,15 +426,15 @@ Connect Function
 augur.connect({
   ethereumNode: {
     httpAddresses: [
-      "http://127.0.0.1:8545", // local http address for Geth node
-      "https://rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Ethereum Rinkeby test network
+      "http://127.0.0.1:8545", // local HTTP address for Geth node
+      "https://rinkeby.ethereum.nodes.augur.net" // hosted HTTP address for Geth node on the Ethereum Rinkeby test network
     ],
     wsAddresses: [
-      "ws://127.0.0.1:8546", // local websocket address for Geth node
-      "wss://ws9000.augur.net" // hosted websocket address for Geth node
+      "ws://127.0.0.1:8546", // local WebSocket address for Geth node
+      "wss://ws9000.augur.net" // hosted WebSocket address for Geth node
     ]
   },
-  augurNode: "ws://127.0.0.1:9001" // local websocket address for an Augur Node
+  augurNode: "ws://127.0.0.1:9001" // local WebSocket address for an Augur Node
 }, function (error, connectionInfo) {
   console.log(connectionInfo);
 });

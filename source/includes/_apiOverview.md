@@ -17,7 +17,7 @@ Instead of looking up information about Augur-related events directly on the Eth
 
 To alleviate this problem, the Simplified API executes queries by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
 
-To set up a local Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once a local Augur Node is running (or if the websocket address of a hosted node is known), a connection to it can be established by specifying the websocket address as shown by the JavaScript sample code in the [Getting Started with augur.js](#getting-started-with-augur-js) section.
+To set up a local Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once a local Augur Node is running (or if the WebSocket address of a hosted node is known), a connection to it can be established by specifying the WebSocket address as shown by the JavaScript sample code in the [Getting Started with augur.js](#getting-started-with-augur-js) section.
 
 <!-- TODO: add link to augur.connect function in Simplified API section once its complete. -->
 Getting Started with augur.js
@@ -29,18 +29,18 @@ var augur = new Augur();
 
 var ethereumNode = { 
   httpAddresses: [
-    "http://127.0.0.1:8545", // local http address for Geth node
+    "http://127.0.0.1:8545", // local HTTP address for Geth node
     "rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Rinkeby test network
   ],
   wsAddresses: [
-    "ws://127.0.0.1:8546", // local websocket address for Geth node
-    "wss://websocket-rinkeby.ethereum.nodes.augur.net" // hosted websocket address for Geth node on the Rinkeby test network
+    "ws://127.0.0.1:8546", // local WebSocket address for Geth node
+    "wss://websocket-rinkeby.ethereum.nodes.augur.net" // hosted WebSocket address for Geth node on the Rinkeby test network
   ]
   // ipc addresses can also be specified as:
   // ipcAddresses: [ ... ]
 };
-// To connect to a hosted Augur Node instead of a local Augur Node, substitute its websocket address below.
-var augurNode = "ws://127.0.0.1:9001"; // local websocket address for an Augur Node
+// To connect to a hosted Augur Node instead of a local Augur Node, substitute its WebSocket address below.
+var augurNode = "ws://127.0.0.1:9001"; // local WebSocket address for an Augur Node
 
 // Attempt to connect to a local Ethereum node
 // If that fails, fall back to the hosted Ethereum node
@@ -69,7 +69,9 @@ Alternatively, this can be done using [yarn](https://yarnpkg.com/en/package/augu
 
 Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur Node](#augur-node). These can be running locally or remotely (hosted). 
 
-To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, websocket, or IPC addresses specified as arrays. Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
+To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays. Once they have all either successfully connected or failed to connect, the first address for each connection type (HTTP, WS, IPC) that connected successfully will be chosen and used for that connection type.  The connection will be chosen automatically based on a preference of IPC > WS > HTTP.  
+
+Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
 The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique ([Geth's](https://geth.ethereum.org/) Proof-of-Authority protocol) and Aura ([Parity's](https://www.parity.io/) Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:
 
