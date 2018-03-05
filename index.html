@@ -11869,7 +11869,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">startBlockchainEventListeners</span><span class="p">(</span>
   <span class="p">{</span>
     <span class="na">Augur</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">TokensTransferred</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A new TokensTransferred event has occurred."</span><span class="p">);</span> <span class="p">}</span>
+      <span class="na">TokensTransferred</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A new TokensTransferred event has occurred:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span> 
   <span class="mi">1490000</span><span class="p">,</span> 
@@ -11880,7 +11880,26 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output: </span>
 <span class="s2">"Starting blockstream at block  1490000"</span>
 <span class="s2">"Setup is complete!"</span>
-<span class="c1">// example output after a TokensTransferred event occurs: coming soon</span>
+<span class="c1">// example output when a TokensTransferred event is detected: </span>
+<span class="s2">"A new TokensTransferred event has occurred:"</span>
+<span class="p">{</span>
+  <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x9c666216fe333c78aeb8aec56eb9ca17e6cd15c9"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"0x32714b2b26c8c96e7a4e63ee9523c71a03948683"</span><span class="p">,</span>
+  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
+  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0xcfdd3f6dded3cbc2ba2d341337914b62e4cfe1de"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1000000000000000"</span><span class="p">,</span>
+  <span class="s2">"tokenType"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"market"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x16300ddb8db4d1870f05036f339b444b7fbbc3a6"</span><span class="p">,</span>
+  <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0x18a0eb4da2bb1eb7632402754fa8b534052af6018199a09b2fa81aeaf858747f"</span><span class="p">,</span>
+  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">13765</span><span class="p">,</span>
+  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0x892774223a7473ddf387318be1351808ca71446b47538298cc9f37c85eb031c6"</span><span class="p">,</span>
+  <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
+  <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"TokensTransferred"</span>
+<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">startBlockListeners</span><span class="p">({</span>
   <span class="na">onAdded</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span> <span class="p">{</span>
