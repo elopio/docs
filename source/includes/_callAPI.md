@@ -1018,7 +1018,6 @@ augur.api.Market.getEndTime({
 "1500388730";
 
 augur.api.Market.getFeeWindow({ 
-  _feeWindowId: "0x242",
   tx: { to: market }, 
 }, function (error, feeWindow) { 
   console.log(feeWindow); 
@@ -1313,7 +1312,6 @@ Returns the Ethereum contract address of the [Market's](#market) [Fee Window](#f
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._feeWindowId`** (string) ID of the Fee Window, as a hexadecimal string. 
     * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
