@@ -435,7 +435,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>When a Market Forks, new Universes are created. Forking creates a new <a href="#child-universe">Child Universe</a> for each possible Outcome of the Forking Market (including the <a href="#invalid-outcome">Invalid Outcome</a>). For example, a <a href="#binary-market">Binary Market</a> has 3 possible Outcomes: A, B, and Invalid. Thus a Binary Forking Market will create three new Child Universes: Universe A, Universe B, and Universe Invalid. Initially these newly created Universes are empty: they contain no Markets or REP tokens.</p>
 
-<p>When a Fork is initiated, the <a href="#parent-universe">Parent Universe</a> becomes permanently <a href="#locked-universe">Locked</a>. In a Locked Universe, no new Markets may be created. Users may continue trading Shares in Markets in Locked Universes, but no Reporting rewards are paid out there, and Markets in Locked Universes cannot be Finalized. In order for Markets or REP tokens in the Locked Universe to be useful, they must first be migrated to a Child Universe.</p>
+<p>When a Fork is initiated, the <a href="#parent-universe">Parent Universe</a> becomes permanently <a href="#locked-universe">Locked</a>. In a Locked Universe, no new Markets may be created. Users may continue trading Shares in Markets in Locked Universes, and Markets in a Locked Universe may still receive their <a href="#initial-report">Initial Reports</a>. However, no Reporting rewards are paid out there, and Markets in Locked Universes cannot be Finalized. In order for Markets or REP tokens in the Locked Universe to be useful, they must first be migrated to a Child Universe.</p>
 
 <p>Holders of REP tokens in the Parent Universe may migrate their tokens to a Child Universe of their choice. This choice should be considered carefully, because migration is one-way; it cannot be reversed. Tokens cannot be sent from one sibling Universe to another. Migration is a permanent commitment of REP tokens to a particular Market Outcome. REP tokens that migrate to different Child Universes ought to be considered entirely separate tokens, and exchanges ought to list them as such.</p>
 
@@ -5151,7 +5151,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="s2">"1500388730"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
-  <span class="na">_feeWindowId</span><span class="p">:</span> <span class="s2">"0x242"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">},</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
@@ -5521,7 +5520,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p._feeWindowId</code></strong> (string) ID of the Fee Window, as a hexadecimal string. </li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
@@ -12188,13 +12186,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
 </tr>
 <tr>
-<td><a name="RegistryAddition"></a>RegistryAddition</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The Ethereum contract address <code class="prettyprint">addition</code> was added to Augur&rsquo;s registry, which is an array of all of the contracts Augur uses. Augur uses the contract name, as a 32-byte hexadecimal value called <code class="prettyprint">key</code>, for looking up the contract in Augur&rsquo;s registry. The 20-byte hexadecimal <code class="prettyprint">commitHash</code> is the commit hash used when the contracts are deployed. The 32-byte hexadecimal value <code class="prettyprint">bytecodeHash</code> is the hashed bytecode of the contracts that are deployed, and it is used to determine if a contract needs to be re-published when an incremental upddate is made to Augur.</td>
-<td>&nbsp;</td>
-<td>key, addition, commitHash, bytecodeHash</td>
-</tr>
-<tr>
 <td><a name="TimestampSet"></a>TimestampSet</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td>The timestamp used by Augur was set/updated to <code class="prettyprint">newTimestamp</code>. This event will be logged whenever <code class="prettyprint">TimeControlled.setTimestamp</code> or <code class="prettyprint">TimeControlled.incrementTimestamp</code> is called by the owner of the <a href="#time-controlled-tx-api">TimeControlled</a> contract.</td>
@@ -12249,13 +12240,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td>A <a href="#market">Market</a> in <code class="prettyprint">universe</code> has had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> with a <a href="#dispute-bond">Dispute Bond</a> greater than the <a href="#fork-threshold">Fork Threshold</a>, which has caused <code class="prettyprint">universe</code> to <a href="#fork">Fork</a>.</td>
 <td>universe</td>
 <td></td>
-</tr>
-<tr>
-<td><a name="WhitelistAddition"></a>WhitelistAddition</td>
-<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The Ethereum contract address <code class="prettyprint">addition</code> was added to Augur&rsquo;s whitelisted contracts. (Many of the functions in Augur&rsquo;s Solidity smart contracts are only callable by contracts that have been whitelisted.)</td>
-<td>&nbsp;</td>
-<td>addition</td>
 </tr>
 </tbody></table>
 
