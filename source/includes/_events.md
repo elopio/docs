@@ -80,7 +80,7 @@ augur.events.startAugurNodeEventListeners({
 augur.events.startBlockchainEventListeners(
   {
     Augur: {
-      TokensTransferred: function() { console.log("A new TokensTransferred event has occurred."); }
+      TokensTransferred: function(result) { console.log("A new TokensTransferred event has occurred:", result); }
     }
   }, 
   1490000, 
@@ -91,7 +91,26 @@ augur.events.startBlockchainEventListeners(
 // example output: 
 "Starting blockstream at block  1490000"
 "Setup is complete!"
-// example output after a TokensTransferred event occurs: coming soon
+// example output when a TokensTransferred event is detected: 
+"A new TokensTransferred event has occurred:"
+{
+  "universe": "0x9c666216fe333c78aeb8aec56eb9ca17e6cd15c9",
+  "token": "0x32714b2b26c8c96e7a4e63ee9523c71a03948683",
+  "from": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  "to": "0xcfdd3f6dded3cbc2ba2d341337914b62e4cfe1de",
+  "value": "1000000000000000",
+  "tokenType": "0",
+  "market": "0x0000000000000000000000000000000000000000",
+  "address": "0x16300ddb8db4d1870f05036f339b444b7fbbc3a6",
+  "removed": false,
+  "transactionHash": "0x18a0eb4da2bb1eb7632402754fa8b534052af6018199a09b2fa81aeaf858747f",
+  "transactionIndex": 0,
+  "logIndex": 1,
+  "blockNumber": 13765,
+  "blockHash": "0x892774223a7473ddf387318be1351808ca71446b47538298cc9f37c85eb031c6",
+  "contractName": "Augur",
+  "eventName": "TokensTransferred"
+}
 
 augur.events.startBlockListeners({
   onAdded: function(block) {
