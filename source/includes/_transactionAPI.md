@@ -463,15 +463,9 @@ augur.api.ClaimTradingProceeds.calculateReportingFee({
   tx: { 
     to: claimTradingProceedsAddress,
     send: false,
-    gas: "0x632ea0" 
-  },
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
+  }
+}, function (error, reportingFee) { 
+    console.log(reportingFee); 
 });
 // example output:
 "83819064"
@@ -2733,113 +2727,89 @@ augur.api.Universe.getInitialReportStakeSize({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, initialReportStakeSize) { 
+    console.log(initialReportStakeSize); 
 });
+// example output:
+"349680582682291667"
 
 augur.api.Universe.getOrCacheDesignatedReportNoShowBond({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, designatedReportNoShowBond) { 
+    console.log(designatedReportNoShowBond); 
 });
+// example output:
+"349680582682291667"
 
 augur.api.Universe.getOrCacheDesignatedReportStake({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, designatedReportStake) { 
+    console.log(designatedReportStake); 
 });
+// example output:
+"349680582682291667"
 
 augur.api.Universe.getOrCacheMarketCreationCost({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, marketCreationCost) { 
+    console.log(marketCreationCost); 
 });
+// example output:
+"19000000000000000"
 
 augur.api.Universe.getOrCacheReportingFeeDivisor({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, reportingFeeDivisor) { 
+    console.log(reportingFeeDivisor); 
 });
+// example output:
+"10000"
 
 augur.api.Universe.getOrCacheTargetReporterGasCosts({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, targetReporterGasCosts) { 
+    console.log(targetReporterGasCosts); 
 });
+// example output:
+"9000000000000000"
 
 augur.api.Universe.getOrCacheValidityBond({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, validityBond) { 
+    console.log(validityBond); 
 });
+// example output:
+"10000000000000000"
 
 augur.api.Universe.getOrCreateCurrentFeeWindow({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, currentFeeWindowAddress) { 
+    console.log(currentFeeWindowAddress); 
 });
+// example output:
+"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
 
 var _timestamp = 1401003133;
 augur.api.Universe.getOrCreateFeeWindowByTimestamp({
@@ -2847,57 +2817,45 @@ augur.api.Universe.getOrCreateFeeWindowByTimestamp({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, feeWindowAddress) { 
+    console.log(feeWindowAddress); 
 });
+// example output:
+"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
 
 augur.api.Universe.getOrCreateFeeWindowForForkEndTime({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, feeWindowAddress) { 
+    console.log(feeWindowAddress); 
 });
+// example output:
+"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
 
 augur.api.Universe.getOrCreateNextFeeWindow({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, feeWindowAddress) { 
+    console.log(feeWindowAddress); 
 });
+// example output:
+"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
 
 augur.api.Universe.getOrCreatePreviousFeeWindow({
   tx: { 
     to: universeAddress,
     send: false
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) { console.log("onSuccess result:", result); },
-  onFailed: function (result) { console.log("onFailed result:", result); }
+  }
+}, function (error, feeWindowAddress) { 
+    console.log(feeWindowAddress); 
 });
+// example output:
+"0x4844c13d539fe040ded440a9f9947f14b2b4c423"
 
 var _reportingParticipants = [ ];
 var _feeWindows = [ ];
