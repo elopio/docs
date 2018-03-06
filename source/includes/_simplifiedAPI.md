@@ -834,46 +834,6 @@ augur.markets.getMarkets({
   "0x0000000000000000000000000000000000000003",
 ]
 
-augur.markets.getMarketsAwaitingDesignatedReporting({
-  universe: "0x000000000000000000000000000000000000000b",
-  sortBy: "volume",
-  isSortDescending: false,
-}, function (error, result) {
-  console.log(result);
-});
-// example output:
-[
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000002",
-  "0x0000000000000000000000000000000000000003",
-  "0x0000000000000000000000000000000000000012",
-  "0x0000000000000000000000000000000000000014",
-  "0x0000000000000000000000000000000000000015",
-  "0x0000000000000000000000000000000000000016",
-  "0x0000000000000000000000000000000000000017",
-]
-
-augur.markets.getMarketsAwaitingReporting({
-  universe: "0x000000000000000000000000000000000000000b"
-}, function (error, result) {
-  console.log(result);
-});
-// example output:
-[
-  "0x0000000000000000000000000000000000000012",
-  "0x0000000000000000000000000000000000000013",
-  "0x0000000000000000000000000000000000000014",
-  "0x0000000000000000000000000000000000000015",
-  "0x0000000000000000000000000000000000000016",
-  "0x0000000000000000000000000000000000000017",
-  "0x0000000000000000000000000000000000000018",
-  "0x0000000000000000000000000000000000000019",
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000002",
-  "0x0000000000000000000000000000000000000003",
-  "0x0000000000000000000000000000000000000011"
-]
-
 augur.markets.getMarketsClosingInDateRange({
   universe: "0x000000000000000000000000000000000000000b",
   earliestClosingTime: 1506573450,
@@ -1064,18 +1024,6 @@ augur.markets.getMarketsInfo({
   }
 ]
 
-augur.markets.getMarketsUpcomingDesignatedReporting({
-  universe: "0x000000000000000000000000000000000000000b",
-  sortBy: "volume",
-  isSortDescending: false,
-}, function(error, result) {
-  console.log(result);
-});
-// example output:
-[
-  "0x0000000000000000000000000000000000000222",
-]
-
 augur.markets.getUnclaimedMarketCreatorFees({
   marketIds: [
     "0x0000000000000000000000000000000000000001",
@@ -1154,55 +1102,6 @@ This function will fail if:
 #### **Returns:**
 
 * (Array.&lt;string>) Array of Market addresses in the Universe, as hexadecimal strings.
-
-### augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)
-
-Returns the [Markets](#market) in a specific [Universe](#universe) that are waiting for a [Designated Report](#designated-report) to be submitted.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string.
-    * **`p.designatedReporter`**  (string) &lt;optional> Address of a specific [Designated Reporter](#designated-reporter) by which to filter the results, as a 20-byte hexadecimal string.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Markets have been retrieved.
-
-#### **Returns:**
-
-* (Array.&lt;string>) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings.
-
-### augur.markets.getMarketsAwaitingReporting(p, callback)
-
-Note: This function is not finalized yet, and may be deprecated in favor of `augur.markets.getDisputableMarkets`.
-
-Returns the [Markets](#market) in a particular [Universe](#universe) or [Fee Window](#fee-window) that have not been [Finalized](#finalized-market). Either the Universe or Fee Window must be specified.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.
-    * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window from which to retrieve the Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Universe must be specified instead.
-    * **`p.reportingState`**  (string) &lt;optional> Description pending.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Markets have been retrieved.
-
-#### **Returns:**
-
-* (Array.&lt;string>) Array of Ethereum contract addresses for Markets awaiting a Designated Report, as hexadecimal strings.
 
 ### augur.markets.getMarketsClosingInDateRange(p, callback)
 
@@ -1291,25 +1190,6 @@ This function will fail if:
 #### **Returns:**
 
 * (Array.&lt;<a href="#MarketInfo">MarketInfo</a>>) Array of MarketInfo objects.
-
-### augur.markets.getMarketsUpcomingDesignatedReporting(p, callback)
-
-Returns an array of all [Markets](#market) in the Pre-Reporting Phase. If `p.designatedReporter` is specified, these results will only include Markets where the [Designated Reporter](#designated-reporter) is `p.designatedReporter`.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Markets exist, as a 20-byte hexadecimal value.
-    * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a specific Designated Reporter to filter the results by, as a 20-byte hexadecimal value.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Market information has been retrieved.
-
-#### **Returns:**
-
-* (Array.<string>) Array of Market addresses in the Pre-Reporting Phase, as 20-byte hexadecimal values. If `p.designatedReporter` is specified, these results will only include Markets where the Designated Reporter is `p.designatedReporter`.
 
 ### augur.markets.getUnclaimedMarketCreatorFees(p, callback)
 
