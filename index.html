@@ -1707,46 +1707,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingDesignatedReporting</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"volume"</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
-<span class="p">]</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsAwaitingReporting</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000011"</span>
-<span class="p">]</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsClosingInDateRange</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
   <span class="na">earliestClosingTime</span><span class="p">:</span> <span class="mi">1506573450</span><span class="p">,</span>
@@ -1937,18 +1897,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">}</span>
 <span class="p">]</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsUpcomingDesignatedReporting</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"volume"</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
-<span class="p">]</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getUnclaimedMarketCreatorFees</span><span class="p">({</span>
   <span class="na">marketIds</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -2055,73 +2003,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(Array.&lt;string&gt;) Array of Market addresses in the Universe, as hexadecimal strings.</li>
-</ul>
-
-<h3 id="augur-markets-getmarketsawaitingdesignatedreporting-p-callback">augur.markets.getMarketsAwaitingDesignatedReporting(p, callback)</h3>
-
-<p>Returns the <a href="#market">Markets</a> in a specific <a href="#universe">Universe</a> that are waiting for a <a href="#designated-report">Designated Report</a> to be submitted.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li>A connection to an <a href="#augur-node">Augur Node</a> has not been established.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.designatedReporter</code></strong>  (string) &lt;optional&gt; Address of a specific <a href="#designated-reporter">Designated Reporter</a> by which to filter the results, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Array.&lt;string&gt;) Array of Market contract addresses awaiting a Designated Report, as hexadecimal strings.</li>
-</ul>
-
-<h3 id="augur-markets-getmarketsawaitingreporting-p-callback">augur.markets.getMarketsAwaitingReporting(p, callback)</h3>
-
-<p>Note: This function is not finalized yet, and may be deprecated in favor of <code class="prettyprint">augur.markets.getDisputableMarkets</code>.</p>
-
-<p>Returns the <a href="#market">Markets</a> in a particular <a href="#universe">Universe</a> or <a href="#fee-window">Fee Window</a> that have not been <a href="#finalized-market">Finalized</a>. Either the Universe or Fee Window must be specified.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li>A connection to an <a href="#augur-node">Augur Node</a> has not been established.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Fee Window must be specified instead.</li>
-<li><strong><code class="prettyprint">p.feeWindow</code></strong>  (string) &lt;optional&gt; Contract address of the Fee Window from which to retrieve the Markets, as a 20-byte hexadecimal string. If this parameter is not specified, a Universe must be specified instead.</li>
-<li><strong><code class="prettyprint">p.reportingState</code></strong>  (string) &lt;optional&gt; Description pending.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Array.&lt;string&gt;) Array of Ethereum contract addresses for Markets awaiting a Designated Report, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsclosingindaterange-p-callback">augur.markets.getMarketsClosingInDateRange(p, callback)</h3>
@@ -2246,32 +2127,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(Array.&lt;<a href="#MarketInfo">MarketInfo</a>&gt;) Array of MarketInfo objects.</li>
-</ul>
-
-<h3 id="augur-markets-getmarketsupcomingdesignatedreporting-p-callback">augur.markets.getMarketsUpcomingDesignatedReporting(p, callback)</h3>
-
-<p>Returns an array of all <a href="#market">Markets</a> in the Pre-Reporting Phase. If <code class="prettyprint">p.designatedReporter</code> is specified, these results will only include Markets where the <a href="#designated-reporter">Designated Reporter</a> is <code class="prettyprint">p.designatedReporter</code>.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Markets exist, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.designatedReporter</code></strong> (string) &lt;optional&gt; Ethereum address of a specific Designated Reporter to filter the results by, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market information has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Array.<string>) Array of Market addresses in the Pre-Reporting Phase, as 20-byte hexadecimal values. If <code class="prettyprint">p.designatedReporter</code> is specified, these results will only include Markets where the Designated Reporter is <code class="prettyprint">p.designatedReporter</code>.</li>
 </ul>
 
 <h3 id="augur-markets-getunclaimedmarketcreatorfees-p-callback">augur.markets.getUnclaimedMarketCreatorFees(p, callback)</h3>
