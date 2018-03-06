@@ -249,3 +249,89 @@ Above are the main points, but additional structural and styling conventions of 
 For a full review of all conventions, reference:
 
 - `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur/blob/master/.stylelintrc).
+
+
+Testing
+------
+
+#### Libraries in use
+
+| Library Name                                                  | Purpose                                 |  
+| -------                                                       | -------                                 |
+| [Mocha](https://mochajs.org/)                                 | Test runner                             |
+| [Chai](http://chaijs.com/)                                    | Assertion Library                       |
+| [Sinon](http://sinonjs.org/releases/v2.0.0/)                  | Spies, Stubs and more!                  |
+| [Rewire](https://github.com/speedskater/babel-plugin-rewire)  | Mocking                                 | 
+| [Enzyme](http://airbnb.io/enzyme/)                            | A testing utility for React Components  |
+
+#### Filename
+Should have either "-test" or ".test" suffix preceding the file extension. Placed either in the same directory as the file under test or deeply nested in the test/ directory.
+
+Given file:
+```
+src/modules/subfolder/my-fancy-thing.js
+```
+
+The associated test files can be named any of the following:
+```
+src/modules/subfolder/my-fancy-thing.test.js
+src/modules/subfolder/my-fancy-thing-test.js
+
+test/modules/subfolder/my-fancy-thing-test.js
+```
+
+#### Format for a given with test file
+```
+//  These must be explicitly imported
+import { describe, it } from 'mocha'
+import { assert } from 'chai'
+
+import { spy } from 'sinon'
+
+// Top level describe statement with filename or component under test
+describe('MyFancyComponent', () => {
+  // Can be nested. Often denoting preconditions/context for the nested set of tests.
+  describe('some sub-context', () => {
+    // If variables are to be shared across test cases declare them here.
+    let someVariable
+
+    // Runs before ALL test cases in this block (including those within nested blocks)
+    before(() => {
+      
+    })
+
+    // Runs before each test in this block (including those within nested blocks)
+    beforeEach(() => {
+      someVariable = sinon.spy()
+      __RewireAPI__.__Rewire__('NamedDep', someVariable)
+    })
+
+    it('should.....', () => {
+
+    })
+
+    // Runs after each test in this block (including those within nested blocks)
+    afterEach(() => {
+      // Be sure to reset the dependency between tests or after test suite.
+      __Rewire__.__ResetDependency__('NamedDep')
+    })
+
+    // Runs after ALL test cases in this block (including those within nested blocks)
+    after(() => {
+
+    })
+  })
+})
+```
+
+##### Notes
+* Tests are organized using the [BDD interface](https://mochajs.org/#bdd)
+* Test assertions use the [Chai Assertion](http://chaijs.com/api/assert/) style
+
+
+#### Mocking, Stubing, Spies, further magic.....
+* Rewire provides mocking for unit dependencies.
+* Sinon verifies behavior via stub, spies, etc.
+
+#### Testing UI components
+@TODO
