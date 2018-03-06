@@ -1340,7 +1340,7 @@ augur.reporting.finalizeMarket({
   onSuccess: function(result) { console.log(result); },
   onFailed: function(result) { console.log(result); }
 });
-// example onSuccess output: coming soon
+// This function does not return a value.
 
 var secondsInFeeWindow = 604800;
 var currentTimestamp = 1518648436;
@@ -1620,7 +1620,7 @@ This transaction will fail if:
 
 #### **Returns:**
 
-* Description pending.
+* This function does not return a value.
 
 ### augur.reporting.getCurrentPeriodProgress(reportingPeriodDurationInSeconds, timestamp) 
 
