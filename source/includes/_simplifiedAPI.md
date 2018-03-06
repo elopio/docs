@@ -1663,7 +1663,7 @@ This function will fail if:
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
     * **`p.disputeTokenState`**  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
-* **`callback`** (function) Called when reporting history has been received and parsed.
+* **`callback`** (function) Called after the Dispute Tokens have been retrieved.
 
 #### **Returns:**
 
