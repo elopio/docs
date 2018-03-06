@@ -1718,6 +1718,7 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
     * **`p.reporter`**  (string) Ethereum address of a Reporter who has Staked REP in InitialReporter contracts, as a 20-byte hexadecimal string.
     * **`p.redeemed`**  (boolean) &lt;optional> If true, the returned results will include only InitialReporter contracts where the Reporter has redeemed Staked REP; if false, the returned results will include only InitialReporter contracts where the Reporter has not redeemed Staked REP. If not specified, the results will include all InitialReporters in which the Repoter has Staked REP.
     * **`p.withRepBalance`**  (boolean) &lt;optional> Whether the InitialReporter contract has a balance greater than 0. If set to `true`, only InitialReporters with a balance greater than 0 will be returned.
+* **`callback`** (function) Called after the InitialReporters have been retrieved.
 
 #### **Returns:**
 
