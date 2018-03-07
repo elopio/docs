@@ -2199,6 +2199,8 @@ Returns the amount of [attoREP](#atto-prefix) that a given Ethereum contract is 
 * **`p`** (Object) Parameters object.  
     * **`p._owner`** (string) Ethereum address of the owner of the [REP](#rep), as a 20-byte hexadecimal value.
     * **`p._spender`** (string) Ethereum address of the contract allowed to spend on behalf of `p._owner`, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)
+    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+        * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -2212,7 +2214,7 @@ Returns the Ethereum contract address of the [Universe](#universe) in which the 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2227,7 +2229,7 @@ Returns total amount of [REP](#rep) that has been migrated into the current Repu
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2242,7 +2244,7 @@ Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this Rep
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
