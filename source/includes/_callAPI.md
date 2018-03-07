@@ -66,6 +66,40 @@ Augur keeps track of its [Genesis Universes](#genesis-universe) and all [Child U
 
 * (boolean) `true` if the specified Universe is in Augur's list of known Universe, or `false` otherwise.
 
+Cash Proceeds Call API
+---------------
+```javascript
+// Cash Call API Examples:
+
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+
+augur.api.Cash.allowance({
+  _owner: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  _spender: _augurContractAddress,
+}, function(error, allowance) {
+  console.log(allowance); 
+});
+// example output:
+"115792089237316195423570985008687907853269984665640564039457584007913129639935"
+```
+Provides JavaScript bindings for the [Cash Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol), which is used internally by Augur as an ERC-20 wrapper for ETH.
+
+### augur.api.Cash.allowance(p, callback)
+
+Returns the amount of [attoCash](#atto-prefix) that a given Ethereum contract is allowed to spend on behalf of a particular user.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._owner`** (string) Ethereum address of the owner of the [Cash](#cash), as a 20-byte hexadecimal value.
+    * **`p._spender`** (string) Ethereum address of the contract allowed to spend on behalf of `p._owner`, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+(string) Amount of attoCash the contract is allowed to spend on behalf of the specified user.
 
 Claim Trading Proceeds Call API
 ---------------
@@ -2115,9 +2149,19 @@ Reputation Token Call API
 ```javascript
 // Reputation Token Contract Call API Examples:
 
-// The Ethereum address of Augur's default ReputationToken contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum address for Augur.sol and Augur's default ReputationToken 
+// contract can be obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 var reputationToken = "0x13fa2334966b3cb6263ed56148323014c2ece753";
+
+augur.api.ReputationToken.allowance({
+  _owner: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  _spender: _augurContractAddress,
+}, function(error, allowance) {
+  console.log(allowance); 
+});
+// example output:
+"115792089237316195423570985008687907853269984665640564039457584007913129639935"
 
 augur.api.ReputationToken.getUniverse({ 
   tx: { to: reputationToken } 
@@ -2144,6 +2188,21 @@ augur.api.ReputationToken.getTotalTheoreticalSupply({
 Provides JavaScript bindings for the [ReputationToken Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol), which handles the approval, migration, and transfering of [Reputation Tokens](#rep). 
 
 The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions.
+
+### augur.api.ReputationToken.allowance(p, callback)
+
+Returns the amount of [attoREP](#atto-prefix) that a given Ethereum contract is allowed to spend on behalf of a particular user.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._owner`** (string) Ethereum address of the owner of the [REP](#rep), as a 20-byte hexadecimal value.
+    * **`p._spender`** (string) Ethereum address of the contract allowed to spend on behalf of `p._owner`, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+(string) Amount of attoREP the contract is allowed to spend on behalf of the specified user.
 
 ### augur.api.ReputationToken.getUniverse(p, callback)
 
@@ -2195,9 +2254,20 @@ Share Token Call API
 ```javascript
 // Share Token Contract Call API Examples:
 
-// The Ethereum address of Augur's default ShareToken contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum address for Augur.sol and Augur's default ShareToken 
+// contract can be obtained by calling `augur.augurNode.getContractAddresses`.
+var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
+
+augur.api.ShareToken.allowance({
+  _owner: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  _spender: _augurContractAddress,
+}, function(error, allowance) {
+  console.log(allowance); 
+});
+// example output:
+"115792089237316195423570985008687907853269984665640564039457584007913129639935"
+
 
 augur.api.ShareToken.getMarket({ 
   tx: { to: shareToken } 
@@ -2218,6 +2288,21 @@ augur.api.ShareToken.getOutcome({
 Provides JavaScript bindings for the [ShareToken Solidity Code](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol), which handles the approval and transferring of [Shares](#share) in Augur. 
 
 The Share Token is an ERC-20 token that implements all of the required functions listed in the [ERC-20 Token Standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). It does not, however, implement the optional functions. Within Augur, it represents [Shares](#share) in [Market](#market) [Outcomes](#outcome).
+
+### augur.api.ShareToken.allowance(p, callback)
+
+Returns the amount of [attoShares](#atto-prefix) that a given Ethereum contract is allowed to spend on behalf of a particular user.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._owner`** (string) Ethereum address of the owner of the [Shares](#share), as a 20-byte hexadecimal value.
+    * **`p._spender`** (string) Ethereum address of the contract allowed to spend on behalf of `p._owner`, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+(string) Amount of attoShares the contract is allowed to spend on behalf of the specified user.
 
 ### augur.api.ShareToken.getMarket(p, callback)
 
