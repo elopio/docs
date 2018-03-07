@@ -92,8 +92,8 @@ Serves as an enum for the state of a Dispute Token.
 * **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
 * **`balance`** (number) Dispute Token balance the owner has staked, in ETH.
-* **`winningToken`** (boolean|null) Description pending.
-* **`tentativeWinning`** (boolean) Description pending.
+* **`winningToken`** (boolean|null) Index of the Payout Numerator that was determined to be the Market's Final Outcome.
+* **`tentativeWinning`** (boolean) Index of the Payout Numerator that is tentatively the winning Outcome.
 * **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>) Reporting state of the Market.
 
