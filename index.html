@@ -3716,6 +3716,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(boolean) <code class="prettyprint">true</code> if the specified Universe is in Augur&rsquo;s list of known Universe, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
+<h2 id="cash-proceeds-call-api">Cash Proceeds Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Call API Examples:</span>
+
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
+  <span class="na">_owner</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allowance</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allowance</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"115792089237316195423570985008687907853269984665640564039457584007913129639935"</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">Cash Solidity Contract</a>, which is used internally by Augur as an ERC-20 wrapper for ETH.</p>
+
+<h3 id="augur-api-cash-allowance-p-callback">augur.api.Cash.allowance(p, callback)</h3>
+
+<p>Returns the amount of <a href="#atto-prefix">attoCash</a> that a given Ethereum contract is allowed to spend on behalf of a particular user.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._owner</code></strong> (string) Ethereum address of the owner of the <a href="#cash">Cash</a>, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._spender</code></strong> (string) Ethereum address of the contract allowed to spend on behalf of <code class="prettyprint">p._owner</code>, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(string) Amount of attoCash the contract is allowed to spend on behalf of the specified user.</p>
+
 <h2 id="claim-trading-proceeds-call-api">Claim Trading Proceeds Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Claim Trading Proceeds Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">;</span>
@@ -6518,9 +6556,19 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
 
-<span class="c1">// The Ethereum address of Augur's default ReputationToken contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum address for Augur.sol and Augur's default ReputationToken </span>
+<span class="c1">// contract can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
+  <span class="na">_owner</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allowance</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allowance</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"115792089237316195423570985008687907853269984665640564039457584007913129639935"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">reputationToken</span> <span class="p">}</span> 
@@ -6547,6 +6595,26 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol">ReputationToken Solidity Contract</a>, which handles the approval, migration, and transfering of <a href="#rep">Reputation Tokens</a>. </p>
 
 <p>The Reputation Token, or REP, is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions.</p>
+
+<h3 id="augur-api-reputationtoken-allowance-p-callback">augur.api.ReputationToken.allowance(p, callback)</h3>
+
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> that a given Ethereum contract is allowed to spend on behalf of a particular user.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._owner</code></strong> (string) Ethereum address of the owner of the <a href="#rep">REP</a>, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._spender</code></strong> (string) Ethereum address of the contract allowed to spend on behalf of <code class="prettyprint">p._owner</code>, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(string) Amount of attoREP the contract is allowed to spend on behalf of the specified user.</p>
 
 <h3 id="augur-api-reputationtoken-getuniverse-p-callback">augur.api.ReputationToken.getUniverse(p, callback)</h3>
 
@@ -6626,9 +6694,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="share-token-call-api">Share Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
 
-<span class="c1">// The Ethereum address of Augur's default ShareToken contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum address for Augur.sol and Augur's default ShareToken </span>
+<span class="c1">// contract can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
+  <span class="na">_owner</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
+  <span class="na">_spender</span><span class="p">:</span> <span class="nx">_augurContractAddress</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allowance</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allowance</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"115792089237316195423570985008687907853269984665640564039457584007913129639935"</span>
+
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">getMarket</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">shareToken</span> <span class="p">}</span> 
@@ -6649,6 +6728,26 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ShareToken.sol">ShareToken Solidity Code</a>, which handles the approval and transferring of <a href="#share">Shares</a> in Augur. </p>
 
 <p>The Share Token is an ERC-20 token that implements all of the required functions listed in the <a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md">ERC-20 Token Standard</a>. It does not, however, implement the optional functions. Within Augur, it represents <a href="#share">Shares</a> in <a href="#market">Market</a> <a href="#outcome">Outcomes</a>.</p>
+
+<h3 id="augur-api-sharetoken-allowance-p-callback">augur.api.ShareToken.allowance(p, callback)</h3>
+
+<p>Returns the amount of <a href="#atto-prefix">attoShares</a> that a given Ethereum contract is allowed to spend on behalf of a particular user.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._owner</code></strong> (string) Ethereum address of the owner of the <a href="#share">Shares</a>, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._spender</code></strong> (string) Ethereum address of the contract allowed to spend on behalf of <code class="prettyprint">p._owner</code>, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(string) Amount of attoShares the contract is allowed to spend on behalf of the specified user.</p>
 
 <h3 id="augur-api-sharetoken-getmarket-p-callback">augur.api.ShareToken.getMarket(p, callback)</h3>
 
