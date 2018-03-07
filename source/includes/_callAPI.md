@@ -2157,6 +2157,7 @@ var reputationToken = "0x13fa2334966b3cb6263ed56148323014c2ece753";
 augur.api.ReputationToken.allowance({
   _owner: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
   _spender: _augurContractAddress,
+  tx: { to: reputationToken } 
 }, function(error, allowance) {
   console.log(allowance); 
 });
@@ -2267,7 +2268,6 @@ augur.api.ShareToken.allowance({
 });
 // example output:
 "115792089237316195423570985008687907853269984665640564039457584007913129639935"
-
 
 augur.api.ShareToken.getMarket({ 
   tx: { to: shareToken } 
