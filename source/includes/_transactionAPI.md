@@ -324,7 +324,12 @@ Cash Tx API
 ----------------------------
 ```javascript
 // Cash Transaction API Examples:
+
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+// The Ethereum address of Augur's Cash contract can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var cashContractAddress = "0xec28e64edbce62bde48a14b04f0b557b974a22a9";
 
 // Amount of Cash (in attoCash) to approve the Augur.sol 
@@ -720,6 +725,9 @@ Dispute Crowdsourcer Tx API
 ----------------------------
 ```javascript
 // Dispute Crowdsourcer Transaction API Examples:
+
+// Dispute Crowdsourcer contract addresses for a Market can be 
+// obtained by calling `augur.api.Market.getCrowdsourcer`.
 var disputeCrowdsourcerAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.DisputeCrowdsourcer.fork({
@@ -852,6 +860,9 @@ Fee Window Tx API
 -----------------
 ```javascript
 // Fee Window Transaction API Examples:
+
+// Fee Window contract addresses can be obtained using a variety of Call API functions, 
+// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.
 var feeWindowAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 var _attotokens = "0x64";
@@ -1664,9 +1675,11 @@ Reputation Token Tx API
 ```javascript
 // Reputation Token Transaction API Examples:
 
-// The Ethereum address of Augur's default ReputationToken contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+// The Ethereum contract address for a Universe's Reputation Token 
+// can be obtained by calling `augur.api.Universe.getReputationToken`.
 var reputationTokenAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
 
 augur.api.ReputationToken.approve({
@@ -2066,9 +2079,11 @@ Share Token Tx API
 ```javascript
 // Share Token Transaction API Examples:
 
-// The Ethereum address of Augur's default ShareToken contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+// Share Token contract addresses for a Market can be 
+// obtained by calling `augur.api.Market.getShareToken`.
 var shareTokenAddress = "0x925bee44fec28deb228d2251e1a9d32f7c73ebed";
 
 var _attotokens = "0x56bc75e2d63100000";

@@ -66,7 +66,7 @@ Augur keeps track of its [Genesis Universes](#genesis-universe) and all [Child U
 
 * (boolean) `true` if the specified Universe is in Augur's list of known Universe, or `false` otherwise.
 
-Cash Proceeds Call API
+Cash Call API
 ---------------
 ```javascript
 // Cash Call API Examples:
@@ -189,6 +189,9 @@ Dispute Crowdsourcer Call API
 -------------------------
 ```javascript
 // Dispute Crowdsourcer Contract Call API Examples:
+
+// Dispute Crowdsourcer contract addresses for a Market can be 
+// obtained by calling `augur.api.Market.getCrowdsourcer`.
 var disputeCrowdsourcer = "0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5";
 
 augur.api.DisputeCrowdsourcer.getFeeWindow({ 
@@ -412,7 +415,7 @@ Fee Window Call API
 // Fee Window Contract Call API Examples:
 
 // Fee Window contract addresses can be obtained using a variety of Call API functions, 
-// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`
+// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.
 var feeWindow = "0x37a809f8139e5637fd94c7d34912cb15c6496111";
 
 augur.api.FeeWindow.getAvgReportingGasPrice({ 
@@ -2149,9 +2152,11 @@ Reputation Token Call API
 ```javascript
 // Reputation Token Contract Call API Examples:
 
-// The Ethereum address for Augur.sol and Augur's default ReputationToken 
-// contract can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+// The Ethereum contract address for a Universe's Reputation Token 
+// can be obtained by calling `augur.api.Universe.getReputationToken`.
 var reputationToken = "0x13fa2334966b3cb6263ed56148323014c2ece753";
 
 augur.api.ReputationToken.allowance({
@@ -2199,7 +2204,7 @@ Returns the amount of [attoREP](#atto-prefix) that a given Ethereum contract is 
 * **`p`** (Object) Parameters object.  
     * **`p._owner`** (string) Ethereum address of the owner of the [REP](#rep), as a 20-byte hexadecimal value.
     * **`p._spender`** (string) Ethereum address of the contract allowed to spend on behalf of `p._owner`, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)
-    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2214,7 +2219,7 @@ Returns the Ethereum contract address of the [Universe](#universe) in which the 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2229,7 +2234,7 @@ Returns total amount of [REP](#rep) that has been migrated into the current Repu
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2244,7 +2249,7 @@ Returns the total [Theoretical REP Supply](#theoretical-rep-supply) for this Rep
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made. (Normally, the `tx` parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because `augur.api.ReputationToken` is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
         * **`p.tx.to`** (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
@@ -2257,9 +2262,11 @@ Share Token Call API
 ```javascript
 // Share Token Contract Call API Examples:
 
-// The Ethereum address for Augur.sol and Augur's default ShareToken 
-// contract can be obtained by calling `augur.augurNode.getContractAddresses`.
+// The Ethereum contract address for Augur.sol can be 
+// obtained by calling `augur.augurNode.getContractAddresses`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
+// Share Token contract addresses for a Market can be 
+// obtained by calling `augur.api.Market.getShareToken`.
 var shareToken = "0x18b17188ce3c491f6ab4427258d92452be5c8054";
 
 augur.api.ShareToken.allowance({
