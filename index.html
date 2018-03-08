@@ -3716,7 +3716,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(boolean) <code class="prettyprint">true</code> if the specified Universe is in Augur&rsquo;s list of known Universe, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
-<h2 id="cash-proceeds-call-api">Cash Proceeds Call API</h2>
+<h2 id="cash-call-api">Cash Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Call API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
@@ -3854,6 +3854,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="dispute-crowdsourcer-call-api">Dispute Crowdsourcer Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Contract Call API Examples:</span>
+
+<span class="c1">// Dispute Crowdsourcer contract addresses for a Market can be </span>
+<span class="c1">// obtained by calling `augur.api.Market.getCrowdsourcer`.</span>
 <span class="kd">var</span> <span class="nx">disputeCrowdsourcer</span> <span class="o">=</span> <span class="s2">"0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
@@ -4167,7 +4170,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Contract Call API Examples:</span>
 
 <span class="c1">// Fee Window contract addresses can be obtained using a variety of Call API functions, </span>
-<span class="c1">// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`</span>
+<span class="c1">// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.</span>
 <span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0x37a809f8139e5637fd94c7d34912cb15c6496111"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> 
@@ -6556,9 +6559,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
 
-<span class="c1">// The Ethereum address for Augur.sol and Augur's default ReputationToken </span>
-<span class="c1">// contract can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="c1">// The Ethereum contract address for a Universe's Reputation Token </span>
+<span class="c1">// can be obtained by calling `augur.api.Universe.getReputationToken`.</span>
 <span class="kd">var</span> <span class="nx">reputationToken</span> <span class="o">=</span> <span class="s2">"0x13fa2334966b3cb6263ed56148323014c2ece753"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
@@ -6609,7 +6614,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._owner</code></strong> (string) Ethereum address of the owner of the <a href="#rep">REP</a>, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._spender</code></strong> (string) Ethereum address of the contract allowed to spend on behalf of <code class="prettyprint">p._owner</code>, as a 20-byte hexadecimal string. (This should be the address of the Augur.sol contract.)</li>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made. (Normally, the <code class="prettyprint">tx</code> parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because <code class="prettyprint">augur.api.ReputationToken</code> is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.</li>
@@ -6632,7 +6637,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made. (Normally, the <code class="prettyprint">tx</code> parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because <code class="prettyprint">augur.api.ReputationToken</code> is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.</li>
@@ -6657,7 +6662,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made. (Normally, the <code class="prettyprint">tx</code> parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because <code class="prettyprint">augur.api.ReputationToken</code> is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.</li>
@@ -6682,7 +6687,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
 
 <ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made. (Normally, the <code class="prettyprint">tx</code> parameter is not required for Call API functions, but it is required for Reputation Token Call API functions because <code class="prettyprint">augur.api.ReputationToken</code> is not set to a specific contract address by default. This is due to the fact that there can be multiple Reputation Token contracts if a fork occurs.)
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the ReputationToken contract on which to call this function, as a 20-byte hexadecimal string.</li>
@@ -6700,9 +6705,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="share-token-call-api">Share Token Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
 
-<span class="c1">// The Ethereum address for Augur.sol and Augur's default ShareToken </span>
-<span class="c1">// contract can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="c1">// Share Token contract addresses for a Market can be </span>
+<span class="c1">// obtained by calling `augur.api.Market.getShareToken`.</span>
 <span class="kd">var</span> <span class="nx">shareToken</span> <span class="o">=</span> <span class="s2">"0x18b17188ce3c491f6ab4427258d92452be5c8054"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ShareToken</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
@@ -8038,7 +8045,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="cash-tx-api">Cash Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Transaction API Examples:</span>
+
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="c1">// The Ethereum address of Augur's Cash contract can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">cashContractAddress</span> <span class="o">=</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">;</span>
 
 <span class="c1">// Amount of Cash (in attoCash) to approve the Augur.sol </span>
@@ -8514,6 +8526,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="dispute-crowdsourcer-tx-api">Dispute Crowdsourcer Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Transaction API Examples:</span>
+
+<span class="c1">// Dispute Crowdsourcer contract addresses for a Market can be </span>
+<span class="c1">// obtained by calling `augur.api.Market.getCrowdsourcer`.</span>
 <span class="kd">var</span> <span class="nx">disputeCrowdsourcerAddress</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">fork</span><span class="p">({</span>
@@ -8678,6 +8693,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="fee-window-tx-api">Fee Window Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fee Window Transaction API Examples:</span>
+
+<span class="c1">// Fee Window contract addresses can be obtained using a variety of Call API functions, </span>
+<span class="c1">// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.</span>
 <span class="kd">var</span> <span class="nx">feeWindowAddress</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x64"</span><span class="p">;</span>
@@ -9704,9 +9722,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="reputation-token-tx-api">Reputation Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Transaction API Examples:</span>
 
-<span class="c1">// The Ethereum address of Augur's default ReputationToken contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="c1">// The Ethereum contract address for a Universe's Reputation Token </span>
+<span class="c1">// can be obtained by calling `augur.api.Universe.getReputationToken`.</span>
 <span class="kd">var</span> <span class="nx">reputationTokenAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">ReputationToken</span><span class="p">.</span><span class="nx">approve</span><span class="p">({</span>
@@ -10214,9 +10234,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h2 id="share-token-tx-api">Share Token Tx API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Transaction API Examples:</span>
 
-<span class="c1">// The Ethereum address of Augur's default ShareToken contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// The Ethereum contract address for Augur.sol can be </span>
+<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
+<span class="c1">// Share Token contract addresses for a Market can be </span>
+<span class="c1">// obtained by calling `augur.api.Market.getShareToken`.</span>
 <span class="kd">var</span> <span class="nx">shareTokenAddress</span> <span class="o">=</span> <span class="s2">"0x925bee44fec28deb228d2251e1a9d32f7c73ebed"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_attotokens</span> <span class="o">=</span> <span class="s2">"0x56bc75e2d63100000"</span><span class="p">;</span>
