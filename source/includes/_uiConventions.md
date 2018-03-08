@@ -280,7 +280,7 @@ src/modules/subfolder/my-fancy-thing-test.js
 test/modules/subfolder/my-fancy-thing-test.js
 ```
 
-#### Format for a given with test file
+#### General Format for a test file
 ```
 //  These must be explicitly imported
 import { describe, it } from 'mocha'
