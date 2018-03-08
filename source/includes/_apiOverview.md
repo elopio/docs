@@ -85,7 +85,7 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **Aura Augur Node (WSS):** wss://aura.augur.nodes.augur.net <br />
 **Aura Ethereum Node (HTTPS):** https://aura.ethereum.nodes.augur.net <br />
 
-The statuses of these hosted nodes can be viewed at [stats.augur.net](stats.augur.net).
+The statuses of these hosted nodes can be viewed at [http://stats.augur.net](http://stats.augur.net).
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
