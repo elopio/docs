@@ -165,34 +165,34 @@ Serves as an enum for the state of a Dispute Token.
 * **`universe`** (string) Address of a Universe, as a hexadecimal string.
 * **`marketType`** (string) Type of Market ("binary", "categorical", or "scalar").
 * **`numOutcomes`** (number) Total possible Outcomes for the Market.
-* **`minPrice`** (number) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
-* **`maxPrice`** (number) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
-* **`cumulativeScale`** (string) Difference between maxPrice and minPrice.
+* **`minPrice`** (string|number) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
+* **`maxPrice`** (string|number) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
+* **`cumulativeScale`** (string|number) Difference between maxPrice and minPrice.
 * **`author`** (string) Ethereum address of the creator of the Market, as a hexadecimal string.
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
 * **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
-* **`creationFee`** (number) Fee paid by the Market Creator to create the Market, in ETH.
+* **`creationFee`** (string|number) Fee paid by the Market Creator to create the Market, in ETH.
 * **`settlementFee`** (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.
-* **`reportingFeeRate`** (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
-* **`marketCreatorFeeRate`** (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
-* **`marketCreatorFeesCollected`** (number|null) Amount of fees the Market creator collected from the Market, in ETH.
-* **`initialReportSize`** (number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
+* **`reportingFeeRate`** (string|number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
+* **`marketCreatorFeeRate`** (string|number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
+* **`marketCreatorFeesCollected`** (string|number|null) Amount of fees the Market creator collected from the Market, in ETH.
+* **`initialReportSize`** (string|number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
-* **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
-* **`outstandingShares`** (number) Total shares in the Market. (Method for calculating this is pending.)
-* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
+* **`volume`** (string|number) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`outstandingShares`** (string|number) Total shares in the Market. (Method for calculating this is pending.)
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endDate`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationTime`** (number|null) Timestamp when the Market was finalized (if any), in seconds.
+* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
 * **`description`** (string) Description of the Market.
 * **`extraInfo`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).
 * **`designatedReporter`** (string) Ethereum address of the Market's designated report, as a hexadecimal string.
-* **`designatedReportStake`** (number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
+* **`designatedReportStake`** (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
 * **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
-* **`numTicks`** (number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
-* **`tickSize`** (number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.
-* **`consensus`** (number|null) Consensus Outcome for the Market.
+* **`numTicks`** (string|number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
+* **`tickSize`** (string|number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.
+* **`consensus`** (<a href="#NormalizedPayout">NormalizedPayout</a>|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
 <a name="MarketPriceTimeSeries"></a>
@@ -223,6 +223,13 @@ Authentication metadata for raw transactions.
 * **`address`** (string) This account's Ethereum address, as a hexadecimal string.
 * **`privateKey`** (buffer) The private key for this account.
 * **`derivedKey`** (buffer) The secret key (derived from the password) used to encrypt this account's private key.
+
+<a name="NormalizedPayout"></a>
+### NormalizedPayout  (Object)
+
+#### **Properties:** 
+* **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
+* **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
 
 <a name="Order"></a>
 ### Order  (Object)
@@ -341,22 +348,21 @@ Serves as an enum for the state of a Market.
 ### StakeDetails  (Object)
 
 #### **Properties:** 
-* **`isInvalid`** (boolean) Description pending.
-* **`payout`** (Array.<number>) Payout Set for the Dispute Crowdsourcer.
+* **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
+* **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
 * **`accountStakeComplete`** (string|null) Description pending.
 * **`accountStakeIncomplete`** (string|null) Description pending.
 * **`totalStaked`** (string) Description pending.
 * **`completedStake`** (string) Description pending.
 * **`size`** (string|null) Description pending.
 * **`currentStake`** (string|null) Description pending.
-* **`initialReport`** (boolean) Description pending.
 * **`tentativeWinning`** (boolean) Description pending.
 
 <a name="StakeInfo"></a>
 ### StakeInfo  (Object)
 
 #### **Properties:** 
-* **`marketId`** (number) Ethereum contract address of the Market.
+* **`marketId`** (string) Ethereum contract address of the Market.
 * **`disputeRound`** (number|null) Description pending.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
