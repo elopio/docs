@@ -562,7 +562,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><strong>Aura Augur Node (WSS):</strong> wss://aura.augur.nodes.augur.net <br />
 <strong>Aura Ethereum Node (HTTPS):</strong> https://aura.ethereum.nodes.augur.net <br /></p>
 
-<p>The statuses of these hosted nodes can be viewed at <a href="stats.augur.net">stats.augur.net</a>.</p>
+<p>The statuses of these hosted nodes can be viewed at <a href="http://stats.augur.net">http://stats.augur.net</a>.</p>
 
 <p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
 
@@ -12428,34 +12428,34 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
 <li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
-<li><strong><code class="prettyprint">minPrice</code></strong> (number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
-<li><strong><code class="prettyprint">maxPrice</code></strong> (number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
-<li><strong><code class="prettyprint">cumulativeScale</code></strong> (string) Difference between maxPrice and minPrice.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong> (string|number) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong> (string|number) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">cumulativeScale</code></strong> (string|number) Difference between maxPrice and minPrice.</li>
 <li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
 <li><strong><code class="prettyprint">creationBlock</code></strong> (number) Number of the Ethereum block containing the Market creation.</li>
-<li><strong><code class="prettyprint">creationFee</code></strong> (number) Fee paid by the Market Creator to create the Market, in ETH.</li>
+<li><strong><code class="prettyprint">creationFee</code></strong> (string|number) Fee paid by the Market Creator to create the Market, in ETH.</li>
 <li><strong><code class="prettyprint">settlementFee</code></strong> (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.</li>
-<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
-<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
-<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
-<li><strong><code class="prettyprint">initialReportSize</code></strong> (number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).</li>
+<li><strong><code class="prettyprint">reportingFeeRate</code></strong> (string|number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.</li>
+<li><strong><code class="prettyprint">marketCreatorFeeRate</code></strong> (string|number) Percentage rate of ETH paid to the Market creator whenever shares are settled.</li>
+<li><strong><code class="prettyprint">marketCreatorFeesCollected</code></strong> (string|number|null) Amount of fees the Market creator collected from the Market, in ETH.</li>
+<li><strong><code class="prettyprint">initialReportSize</code></strong> (string|number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).</li>
 <li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
 <li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
-<li><strong><code class="prettyprint">volume</code></strong> (number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">outstandingShares</code></strong> (number) Total shares in the Market. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
+<li><strong><code class="prettyprint">volume</code></strong> (string|number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">outstandingShares</code></strong> (string|number) Total shares in the Market. (Method for calculating this is pending.)</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
 <li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
+<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
 <li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).</li>
 <li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">designatedReportStake</code></strong> (number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.</li>
+<li><strong><code class="prettyprint">designatedReportStake</code></strong> (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.</li>
 <li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
-<li><strong><code class="prettyprint">numTicks</code></strong> (number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
-<li><strong><code class="prettyprint">tickSize</code></strong> (number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.</li>
-<li><strong><code class="prettyprint">consensus</code></strong> (number|null) Consensus Outcome for the Market.</li>
+<li><strong><code class="prettyprint">numTicks</code></strong> (string|number) Number of possible prices, or ticks, between a Market&rsquo;s minimum price and maximum price.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong> (string|number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.</li>
+<li><strong><code class="prettyprint">consensus</code></strong> (<a href="#NormalizedPayout">NormalizedPayout</a>|null) Consensus Outcome for the Market.</li>
 <li><strong><code class="prettyprint">outcomes</code></strong> (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>&gt;) Array of OutcomeInfo objects.</li>
 </ul>
 
@@ -12502,6 +12502,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">address</code></strong> (string) This account&rsquo;s Ethereum address, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">privateKey</code></strong> (buffer) The private key for this account.</li>
 <li><strong><code class="prettyprint">derivedKey</code></strong> (buffer) The secret key (derived from the password) used to encrypt this account&rsquo;s private key.</li>
+</ul>
+
+<p><a name="NormalizedPayout"></a></p>
+
+<h3 id="normalizedpayout-object">NormalizedPayout  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Outcome is Invalid.</li>
+<li><strong><code class="prettyprint">payout</code></strong> (Array.&lt;number|string&gt;) Payout Set for the Dispute Crowdsourcer.</li>
 </ul>
 
 <p><a name="Order"></a></p>
@@ -12663,15 +12674,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Description pending.</li>
-<li><strong><code class="prettyprint">payout</code></strong> (Array.<number>) Payout Set for the Dispute Crowdsourcer.</li>
+<li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Outcome is Invalid.</li>
+<li><strong><code class="prettyprint">payout</code></strong> (Array.&lt;number|string&gt;) Payout Set for the Dispute Crowdsourcer.</li>
 <li><strong><code class="prettyprint">accountStakeComplete</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">accountStakeIncomplete</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">totalStaked</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">completedStake</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">size</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">currentStake</code></strong> (string|null) Description pending.</li>
-<li><strong><code class="prettyprint">initialReport</code></strong> (boolean) Description pending.</li>
 <li><strong><code class="prettyprint">tentativeWinning</code></strong> (boolean) Description pending.</li>
 </ul>
 
@@ -12682,7 +12692,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">marketId</code></strong> (number) Ethereum contract address of the Market.</li>
+<li><strong><code class="prettyprint">marketId</code></strong> (string) Ethereum contract address of the Market.</li>
 <li><strong><code class="prettyprint">disputeRound</code></strong> (number|null) Description pending.</li>
 <li><strong><code class="prettyprint">stakes</code></strong> (Array.&lt;<a href="#StakeDetails">StakeDetails</a>&gt;) </li>
 </ul>
