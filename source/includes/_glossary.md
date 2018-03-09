@@ -402,7 +402,7 @@ A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outc
 
 Opening a Short Position, or shorting, is the selling of a security that is not owned by the seller. Shorting is done with the belief that a security's price will decrease in the future, allowing it to be bought back at a lower price to make a profit.
 
-In Augur, betting on the "No" [Outcome](#outcome) of a [Binary Market](#binary-market) is done by shorting the "Yes" Outcome. This effectively means the user is selling "Yes" [Shares](#share) they do not own, which are listed as negative quantities of Shares on the Portfolio:Positions view of Augur's user interface.
+In Augur, betting on the "No" [Outcome](#outcome) of a [Binary Market](#binary-market) is done by shorting the "Yes" Outcome. This effectively means the user is selling "Yes" [Shares](#share) they do not own. For [Binary Markets](#binary-market) and [Scalar Markets](#scalar-market), these are listed as negative quantities of Shares on the Portfolio:Positions view of Augur's user interface.
 
 Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a [Complete Set](#complete-set) is a Share of every Outcome in a Market. For example, suppose a user thinks the "Yes" Outcome of a Binary Market is unlikely to happen and expects the price of a "Yes" Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of "Yes" costs 0.55 ETH, a Short Position in 1 Share of the "Yes" Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.
 
