@@ -74,16 +74,6 @@ augur.accounts.getAccountTransferHistory({
     outcome: null,
   }
 ]
-
-augur.accounts.loginWithMasterKey({
-  privateKey: [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-});
-// example output:
-{
-  address: "0x0cad0e04f71c7f202d546ab71b047410bce3277c"
-  derivedKey: Uint8Array(32) [201, 255, 60, 63, 53, 230, 36, 85, 169, 202, 221, 48, 231, 73, 203, 250, 107, 208, 201, 39, 72, 68, 185, 10, 218, 102, 13, 174, 197, 154, 41, 196]
-  privateKey: Uint8Array(32) [154, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-}
 ```
 ### augur.accounts.approveAugur(p)
 
@@ -126,19 +116,6 @@ This function will fail if:
 #### **Returns:**
 
 * (Array.&lt;<a href="#AccountTransfer">AccountTransfer</a>>) Array representing the account's transfer history.
-
-### augur.accounts.loginWithMasterKey(p)
-
-Logs into an account with a user-supplied plaintext private key.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.privateKey`** (buffer|string) The private key for this account, as a Buffer or a hexadecimal string.
-
-#### **Returns:**
-
-*  (<a href="#NoKeystoreAccount">NoKeystoreAccount</a>) Logged-in account object (note: does not have a keystore property).
 
 Assets Functions
 ----------------

@@ -71,18 +71,6 @@ Block number at which Augur Node will begin scanning for logged events emitted f
 
 Block number up to which Augur Node will scan for logged events emitted from Augur's smart contracts.
 
-### augur.constants.IVSIZE (number)
-
-Description pending.
-
-### augur.constants.KDF (string)
-
-Description pending.
-
-### augur.constants.KEYSIZE (number)
-
-Description pending.
-
 ### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
 
 Description pending.
@@ -102,10 +90,6 @@ Description pending.
 ### augur.constants.REPORTING_STATE (Object)
 
 Contains the constants used to represent each of the [Reporting](report) states a [Market](#market) can be in.
-
-### augur.constants.ROUNDS (number)
-
-Description pending.
 
 ### augur.constants.STAKE_TOKEN_STATE (Object)
 
