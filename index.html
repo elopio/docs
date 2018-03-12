@@ -2676,6 +2676,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="nx">unrealized</span><span class="p">:</span> <span class="s2">"0"</span>
 <span class="p">}</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateTradeCost</span><span class="p">({</span>
+  <span class="na">price</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="na">amount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+  <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+  <span class="na">orderType</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="p">{</span>
+  <span class="nl">cost</span><span class="p">:</span> <span class="s2">"0x1158e460913d00000"</span><span class="p">,</span>
+  <span class="nx">amountNumTicksRepresentation</span><span class="p">:</span> <span class="s2">"0x38d7ea4c68000"</span><span class="p">,</span>
+  <span class="nx">priceNumTicksRepresentation</span><span class="p">:</span> <span class="s2">"0x4e20"</span>
+<span class="p">}</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">claimMarketsTradingProceeds</span><span class="p">({</span>
   <span class="na">markets</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -2762,6 +2776,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">generateTradeGroupId</span><span class="p">();</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0x80e8bdd8c5a8178a4ad29b31722f22c768135dff2709437c7a5ebd0a0ec475f1"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getBetterWorseOrders</span><span class="p">({</span>
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -3223,6 +3241,30 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(<a href="#ProfitLoss">ProfitLoss</a>) Realized and unrealized P/L.</li>
 </ul>
 
+<h3 id="augur-trading-calculatetradecost-p">augur.trading.calculateTradeCost(p)</h3>
+
+<p>Returns the cost for placing a specific trade.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p.price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.amount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The <a href="#number-of-ticks">Number of Ticks</a> for this <a href="#market">Market</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.orderType</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(<a href="#TradeCost">TradeCost</a>) Object containing information about the cost of placing the trade specified by the parameters in <code class="prettyprint">p</code>.</li>
+</ul>
+
 <h3 id="augur-trading-claimmarketstradingproceeds-p">augur.trading.claimMarketsTradingProceeds(p)</h3>
 
 <p>Similar to the function <code class="prettyprint">augur.trading.claimTradingProceeds</code>, but attempts to collect trading profits in Ether from a user&rsquo;s outstanding <a href="#share">Shares</a> in multiple <a href="#finalized-market">Finalized Markets</a> instead of a single Finalized Market.</p>
@@ -3323,6 +3365,26 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(Array.&lt;<a href="#Order">Order</a>&gt;) Array of filtered and sorted Orders.</li>
+</ul>
+
+<h3 id="augur-trading-generatetradegroupid-tradegroupidnumbytes">augur.trading.generateTradeGroupId(tradeGroupIdNumBytes)</h3>
+
+<p>Returns a randomly-generated trade group ID. (Trade group IDs are used by Augur&rsquo;s UI to group orders.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">tradeGroupIdNumBytes</code></strong> (number) &lt;optional&gt; Number of bytes the returned trade group ID should be. (Defaults to <code class="prettyprint">augur.constants.TRADE_GROUP_ID_NUM_BYTES</code>.)</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Randomly-generated trade group ID. </li>
 </ul>
 
 <!-- Add links to section -->
@@ -12679,6 +12741,18 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp for this price in seconds, as an integer.</li>
 </ul>
 
+<p><a name="TradeCost"></a></p>
+
+<h3 id="tradecost-object">TradeCost  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">cost</code></strong> Wei (attoEther) value needed for this trade, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">amountNumTicksRepresentation</code></strong> Number of shares to trade in on-chain (numTicks) representation, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">priceNumTicksRepresentation</code></strong> Limit price in on-chain (numTicks) representation, as a hexadecimal string.</li>
+</ul>
+
 <p><a name="UnclaimedFeeWindowInfo"></a></p>
 
 <h3 id="unclaimedfeewindowinfo-object">UnclaimedFeeWindowInfo  (Object)</h3>
@@ -12869,6 +12943,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-constants-trade_gas-string">augur.constants.TRADE_GAS (string)</h3>
 
 <p>Description pending.</p>
+
+<h2 id="augur-constants-trade_group_id_num_bytes-number">augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)</h2>
+
+<p>Number of bytes that comprise a trade group ID. (Trade group IDs are used by Augur&rsquo;s UI to uniquely identify a trade.)</p>
 
 <h3 id="augur-constants-zero-bignumber">augur.constants.ZERO (BigNumber)</h3>
 
