@@ -1071,6 +1071,7 @@ augur.api.InitialReporter.fork({
 });
 
 augur.api.InitialReporter.redeem({
+  "": initialReporterAddress, // This parameter's key must be the empty string, and its value can be any address-length string.
   tx: { 
     to: initialReporterAddress,
     gas: "0x632ea0" 
@@ -1149,6 +1150,7 @@ This transaction will trigger an [`InitialReporterRedeemed`](#InitialReporterRed
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
+    * **`p[""]` (string) The `redeem` function in `InitialReporter.sol` requires an unnamed parameter to be passed in so that it can fulfill an interface. When calling `augur.api.InitialReporter.redeem`, this parameter should be passed using the empty string as the key. Since this function does not actually use this parameter, it's value can be any address-length string. (Please refer to example code for this function.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
