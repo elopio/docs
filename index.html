@@ -8978,6 +8978,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">redeem</span><span class="p">({</span>
+  <span class="s2">""</span><span class="p">:</span> <span class="nx">initialReporterAddress</span><span class="p">,</span> <span class="c1">// This parameter's key must be the empty string, and its value can be any address-length string.</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporterAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -9071,6 +9072,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
+<li>**<code class="prettyprint">p[&quot;&quot;]</code> (string) The <code class="prettyprint">redeem</code> function in <code class="prettyprint">InitialReporter.sol</code> requires an unnamed parameter to be passed in so that it can fulfill an interface. When calling <code class="prettyprint">augur.api.InitialReporter.redeem</code>, this parameter should be passed using the empty string as the key. Since this function does not actually use this parameter, it&rsquo;s value can be any address-length string. (Please refer to example code for this function.)</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
