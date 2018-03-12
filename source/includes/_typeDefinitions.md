@@ -407,7 +407,7 @@ Serves as an enum for the state of a Market.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
 * **`timestamp`** (number) Description pending.
-* **`tradeGroupId`** (number|null) ID logged with each trade transaction by Augur's UI so that trades can be grouped client-side.
+* **`tradeGroupId`** (number|null) ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
 
 <a name="UserTradePosition"></a>
 ### UserTradePosition  (Object)
