@@ -374,6 +374,14 @@ Serves as an enum for the state of a Market.
 * **`amount`** (number) Display price, as a base-10 number.
 * **`timestamp`** (number) Unix timestamp for this price in seconds, as an integer.
 
+<a name="TradeCost"></a>
+### TradeCost  (Object)
+
+#### **Properties:** 
+* **`cost`** Wei (attoEther) value needed for this trade, as a hexadecimal string.
+* **`amountNumTicksRepresentation`** Number of shares to trade in on-chain (numTicks) representation, as a hexadecimal string.
+* **`priceNumTicksRepresentation`** Limit price in on-chain (numTicks) representation, as a hexadecimal string.
+
 <a name="UnclaimedFeeWindowInfo"></a>
 ### UnclaimedFeeWindowInfo  (Object)
 

@@ -1663,6 +1663,20 @@ augur.trading.calculateProfitLoss({
   unrealized: "0"
 }
 
+augur.trading.calculateTradeCost({
+  price: "2",
+  amount: "10",
+  numTicks: "10000",
+  tickSize: "0.0001",
+  orderType: 0,
+});
+// example output:
+{
+  cost: "0x1158e460913d00000",
+  amountNumTicksRepresentation: "0x38d7ea4c68000",
+  priceNumTicksRepresentation: "0x4e20"
+}
+
 augur.trading.claimMarketsTradingProceeds({
   markets: [
     "0x0000000000000000000000000000000000000001",
@@ -2202,6 +2216,23 @@ Calculates realized and unrealized profit/loss for trades in a single [Outcome](
 #### **Returns:**
 
 * (<a href="#ProfitLoss">ProfitLoss</a>) Realized and unrealized P/L.
+
+### augur.trading.calculateTradeCost(p)
+
+Returns the cost for placing a specific trade.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.price`**  (string) Normalized limit price for this trade, as a base-10 string.
+    * **`p.amount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
+    * **`p.numTicks`**  (string) The [Number of Ticks](#number-of-ticks) for this [Market](#market), as a base-10 string.
+    * **`p.tickSize`**  (string) The [Tick](#tick) size (interval) for this Market, as a base-10 string.
+    * **`p.orderType`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
+
+#### **Returns:**
+
+* (<a href="#TradeCost">TradeCost</a>) Object containing information about the cost of placing the trade specified by the parameters in `p`.
 
 ### augur.trading.claimMarketsTradingProceeds(p)
 
