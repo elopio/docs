@@ -1764,6 +1764,10 @@ augur.trading.filterByPriceAndUserSortByPrice({
   }
 ]
 
+augur.trading.generateTradeGroupId();
+// example output:
+"0x80e8bdd8c5a8178a4ad29b31722f22c768135dff2709437c7a5ebd0a0ec475f1"
+
 augur.trading.getBetterWorseOrders({
   marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
@@ -2305,6 +2309,19 @@ Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and 
 #### **Returns:**
 
 * (Array.&lt;<a href="#Order">Order</a>>) Array of filtered and sorted Orders.
+
+### augur.trading.generateTradeGroupId(tradeGroupIdNumBytes)
+
+Returns a randomly-generated trade group ID. (Trade group IDs are used by Augur's UI to group orders.)
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+  * **`tradeGroupIdNumBytes`** (number) &lt;optional> Number of bytes the returned trade group ID should be. (Defaults to `augur.constants.TRADE_GROUP_ID_NUM_BYTES`.)
+
+#### **Returns:**
+
+* (string) Randomly-generated trade group ID. 
 
 <!-- Add links to section -->
 ### augur.trading.getBetterWorseOrders(p, callback)
