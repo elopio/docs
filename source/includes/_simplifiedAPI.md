@@ -2541,3 +2541,108 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 #### **Returns:**
 
 * This function does not return a value.
+
+Trading Functions
+-----------------
+```javascript
+// Utils Simplified API Examples:
+
+// Note: The examples below are executed in Node.js and require the BigNumber library (https://github.com/MikeMcl/bignumber.js/).
+var BigNumber = require("bigNumber.js");
+
+var bigNumber = new BigNumber("300000000000000000000000000000000000000000000000000");
+console.log(augur.utils.convertBigNumberToHexString(bigNumber));
+// example output:
+"0xcd44b141ecb73397784c0f9ef9202c000000000000"
+
+var displayAmount = new BigNumber("10");
+var tickSize = new BigNumber("0.0001");
+console.log(augur.utils.convertDisplayAmountToOnChainAmount(displayAmount, tickSize));
+// example output:
+*BigNumber* { s: 1, e: 15, c: [10] }
+
+var displayPrice = new BigNumber("10");
+var minDisplayPrice = new BigNumber("0");
+var tickSize = new BigNumber("0.0001");
+console.log(augur.utils.convertDisplayPriceToOnChainPrice(displayPrice, minDisplayPrice, tickSize));
+// example output:
+*BigNumber* { s: 1, e: 5, c: [100000] }
+
+var onChainAmount = new BigNumber("1000000000000000");
+var tickSize = new BigNumber("0.0001");
+console.log(augur.utils.convertOnChainAmountToDisplayAmount(onChainAmount, tickSize));
+// example output:
+*BigNumber* { s: 1, e: 1, c: [10] }
+
+var onChainPrice = new BigNumber("100000");
+var minDisplayPrice = new BigNumber("0");
+var tickSize = new BigNumber("0.0001");
+console.log(augur.utils.convertOnChainPriceToDisplayPrice(onChainPrice, minDisplayPrice, tickSize));
+// example output:
+*BigNumber* { s: 1, e: 1, c: [10] }
+```
+### augur.utils.convertBigNumberToHexString
+
+Returns a hexadecimal string that is equivalent to `bigNumber`. 
+
+#### **Parameters:**
+
+* **`bigNumber`**  (BigNumber) 
+
+#### **Returns:**
+
+(string) A hexadecimal string that is equivalent to `bigNumber`.
+
+### augur.utils.convertDisplayAmountToOnChainAmount
+
+Converts a given number of [Shares](#share) (as it is displayed by Augur's UI) to the equivalent number of Shares as it is stored on the Ethereum blockchain.
+
+#### **Parameters:**
+
+* **`displayAmount`**  (BigNumber) Number of Shares displayed in Augur's UI.
+* **`tickSize`**  (BigNumber) [Tick](#tick) size.
+
+#### **Returns:**
+
+(BigNumber) Equivalent number of Shares as it is stored on the Ethereum blockchain.
+
+### augur.utils.convertDisplayPriceToOnChainPrice
+
+Converts a [Maximum Display Price](#maximum-display-price) (as displayed by Augur's UI) to the equivalent price as it is stored on the Ethereum blockchain.
+
+#### **Parameters:**
+
+* **`displayPrice`** (BigNumber) Maximum Display Price for a Market, as it is displayed in Augur's UI.
+* **`minDisplayPrice`** (BigNumber) [Minimum Display Price](#minimum-display-price) for a Market.
+* **`tickSize`** (BigNumber) [Tick](#tick) size.
+
+#### **Returns:**
+
+(BigNumber) Equivalent price as it is stored on the Ethereum blockchain.
+
+### augur.utils.convertOnChainAmountToDisplayAmount
+
+Converts a given number of Shares (as it is stored on the Ethereum blockchain) to the equivalent number of Shares as it is displayed in Augur's UI.
+
+#### **Parameters:**
+
+* **`onChainAmount`** (BigNumber) Number of Shares as it is stored on the Ethereum blockchain.
+* **`tickSize`** (BigNumber) [Tick](#tick) size.
+
+#### **Returns:**
+
+(BigNumber) Equivalent number of Shares as it is displayed in Augur's UI.
+
+### augur.utils.convertOnChainPriceToDisplayPrice
+
+Converts a [Maximum Display Price](#maximum-display-price) (as it is stored on the Ethereum blockchain) to the equivalent price as it is displayed in Augur's UI.
+
+#### **Parameters:**
+
+* **`onChainPrice`** (BigNumber) Maximum Display Price for a Market, as it is stored on the Ethereum blockchain.
+* **`minDisplayPrice`** (BigNumber) [Minimum Display Price](#minimum-display-price) for a Market.
+* **`tickSize`** (BigNumber) [Tick](#tick) size.
+
+#### **Returns:**
+
+(BigNumber) Equivalent price as it is displayed in Augur's UI.
