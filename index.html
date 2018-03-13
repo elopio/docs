@@ -2686,9 +2686,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">cost</span><span class="p">:</span> <span class="s2">"0x1158e460913d00000"</span><span class="p">,</span>
-  <span class="nx">amountNumTicksRepresentation</span><span class="p">:</span> <span class="s2">"0x38d7ea4c68000"</span><span class="p">,</span>
-  <span class="nx">priceNumTicksRepresentation</span><span class="p">:</span> <span class="s2">"0x4e20"</span>
+  <span class="s2">"cost"</span><span class="p">:</span> <span class="s2">"20000000000000000000"</span><span class="p">,</span>
+  <span class="s2">"onChainAmount"</span><span class="p">:</span> <span class="s2">"10000000000000000"</span><span class="p">,</span>
+  <span class="s2">"onChainPrice"</span><span class="p">:</span> <span class="s2">"2000"</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">claimMarketsTradingProceeds</span><span class="p">({</span>
@@ -3106,7 +3106,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
   <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
   <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="s2">"tickSize"</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"maxPrice"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3212,7 +3213,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
   <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="s2">"tickSize"</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"maxPrice"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3678,6 +3680,119 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li>This function does not return a value.</li>
 </ul>
+
+<h2 id="trading-functions">Trading Functions</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Utils Simplified API Examples:</span>
+
+<span class="c1">// Note: The examples below are executed in Node.js and require the BigNumber library (https://github.com/MikeMcl/bignumber.js/).</span>
+<span class="kd">var</span> <span class="nx">BigNumber</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"bigNumber.js"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">bigNumber</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"300000000000000000000000000000000000000000000000000"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">convertBigNumberToHexString</span><span class="p">(</span><span class="nx">bigNumber</span><span class="p">));</span>
+<span class="c1">// example output:</span>
+<span class="s2">"0xcd44b141ecb73397784c0f9ef9202c000000000000"</span>
+
+<span class="kd">var</span> <span class="nx">displayAmount</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"10"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">tickSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0.0001"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">convertDisplayAmountToOnChainAmount</span><span class="p">(</span><span class="nx">displayAmount</span><span class="p">,</span> <span class="nx">tickSize</span><span class="p">));</span>
+<span class="c1">// example output:</span>
+<span class="o">*</span><span class="nx">BigNumber</span><span class="o">*</span> <span class="p">{</span> <span class="na">s</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">e</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">displayPrice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"10"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">minDisplayPrice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">tickSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0.0001"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">convertDisplayPriceToOnChainPrice</span><span class="p">(</span><span class="nx">displayPrice</span><span class="p">,</span> <span class="nx">minDisplayPrice</span><span class="p">,</span> <span class="nx">tickSize</span><span class="p">));</span>
+<span class="c1">// example output:</span>
+<span class="o">*</span><span class="nx">BigNumber</span><span class="o">*</span> <span class="p">{</span> <span class="na">s</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">e</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="p">[</span><span class="mi">100000</span><span class="p">]</span> <span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">onChainAmount</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"1000000000000000"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">tickSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0.0001"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">convertOnChainAmountToDisplayAmount</span><span class="p">(</span><span class="nx">onChainAmount</span><span class="p">,</span> <span class="nx">tickSize</span><span class="p">));</span>
+<span class="c1">// example output:</span>
+<span class="o">*</span><span class="nx">BigNumber</span><span class="o">*</span> <span class="p">{</span> <span class="na">s</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">e</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">onChainPrice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"100000"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">minDisplayPrice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">tickSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BigNumber</span><span class="p">(</span><span class="s2">"0.0001"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">augur</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">convertOnChainPriceToDisplayPrice</span><span class="p">(</span><span class="nx">onChainPrice</span><span class="p">,</span> <span class="nx">minDisplayPrice</span><span class="p">,</span> <span class="nx">tickSize</span><span class="p">));</span>
+<span class="c1">// example output:</span>
+<span class="o">*</span><span class="nx">BigNumber</span><span class="o">*</span> <span class="p">{</span> <span class="na">s</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">e</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">c</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="p">}</span>
+</code></pre></div>
+<h3 id="augur-utils-convertbignumbertohexstring">augur.utils.convertBigNumberToHexString</h3>
+
+<p>Returns a hexadecimal string that is equivalent to <code class="prettyprint">bigNumber</code>. </p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">bigNumber</code></strong>  (BigNumber) </li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(string) A hexadecimal string that is equivalent to <code class="prettyprint">bigNumber</code>.</p>
+
+<h3 id="augur-utils-convertdisplayamounttoonchainamount">augur.utils.convertDisplayAmountToOnChainAmount</h3>
+
+<p>Converts a given number of <a href="#share">Shares</a> (as it is displayed by Augur&rsquo;s UI) to the equivalent number of Shares as it is stored on the Ethereum blockchain.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">displayAmount</code></strong>  (BigNumber) Number of Shares displayed in Augur&rsquo;s UI.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong>  (BigNumber) <a href="#tick">Tick</a> size.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(BigNumber) Equivalent number of Shares as it is stored on the Ethereum blockchain.</p>
+
+<h3 id="augur-utils-convertdisplaypricetoonchainprice">augur.utils.convertDisplayPriceToOnChainPrice</h3>
+
+<p>Converts a <a href="#maximum-display-price">Maximum Display Price</a> (as displayed by Augur&rsquo;s UI) to the equivalent price as it is stored on the Ethereum blockchain.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">displayPrice</code></strong> (BigNumber) Maximum Display Price for a Market, as it is displayed in Augur&rsquo;s UI.</li>
+<li><strong><code class="prettyprint">minDisplayPrice</code></strong> (BigNumber) <a href="#minimum-display-price">Minimum Display Price</a> for a Market.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong> (BigNumber) <a href="#tick">Tick</a> size.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(BigNumber) Equivalent price as it is stored on the Ethereum blockchain.</p>
+
+<h3 id="augur-utils-convertonchainamounttodisplayamount">augur.utils.convertOnChainAmountToDisplayAmount</h3>
+
+<p>Converts a given number of Shares (as it is stored on the Ethereum blockchain) to the equivalent number of Shares as it is displayed in Augur&rsquo;s UI.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">onChainAmount</code></strong> (BigNumber) Number of Shares as it is stored on the Ethereum blockchain.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong> (BigNumber) <a href="#tick">Tick</a> size.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(BigNumber) Equivalent number of Shares as it is displayed in Augur&rsquo;s UI.</p>
+
+<h3 id="augur-utils-convertonchainpricetodisplayprice">augur.utils.convertOnChainPriceToDisplayPrice</h3>
+
+<p>Converts a <a href="#maximum-display-price">Maximum Display Price</a> (as it is stored on the Ethereum blockchain) to the equivalent price as it is displayed in Augur&rsquo;s UI.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">onChainPrice</code></strong> (BigNumber) Maximum Display Price for a Market, as it is stored on the Ethereum blockchain.</li>
+<li><strong><code class="prettyprint">minDisplayPrice</code></strong> (BigNumber) <a href="#minimum-display-price">Minimum Display Price</a> for a Market.</li>
+<li><strong><code class="prettyprint">tickSize</code></strong> (BigNumber) <a href="#tick">Tick</a> size.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(BigNumber) Equivalent price as it is displayed in Augur&rsquo;s UI.</p>
 
           <h1 id="call-api">Call API</h1>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Call API Example</span>
@@ -12954,7 +13069,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Description pending.</p>
 
-<h2 id="augur-constants-trade_group_id_num_bytes-number">augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)</h2>
+<h3 id="augur-constants-trade_group_id_num_bytes-number">augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)</h3>
 
 <p>Number of bytes that comprise a trade group ID. (Trade group IDs are used by Augur&rsquo;s UI to uniquely identify a trade.)</p>
 
