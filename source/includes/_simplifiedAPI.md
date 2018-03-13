@@ -2542,7 +2542,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 
 * This function does not return a value.
 
-Trading Functions
+Utils Functions
 -----------------
 ```javascript
 // Utils Simplified API Examples:
@@ -2559,27 +2559,27 @@ var displayAmount = new BigNumber("10");
 var tickSize = new BigNumber("0.0001");
 console.log(augur.utils.convertDisplayAmountToOnChainAmount(displayAmount, tickSize));
 // example output:
-*BigNumber* { s: 1, e: 15, c: [10] }
+BigNumber { s: 1, e: 15, c: [10] }
 
 var displayPrice = new BigNumber("10");
 var minDisplayPrice = new BigNumber("0");
 var tickSize = new BigNumber("0.0001");
 console.log(augur.utils.convertDisplayPriceToOnChainPrice(displayPrice, minDisplayPrice, tickSize));
 // example output:
-*BigNumber* { s: 1, e: 5, c: [100000] }
+BigNumber { s: 1, e: 5, c: [100000] }
 
 var onChainAmount = new BigNumber("1000000000000000");
 var tickSize = new BigNumber("0.0001");
 console.log(augur.utils.convertOnChainAmountToDisplayAmount(onChainAmount, tickSize));
 // example output:
-*BigNumber* { s: 1, e: 1, c: [10] }
+BigNumber { s: 1, e: 1, c: [10] }
 
 var onChainPrice = new BigNumber("100000");
 var minDisplayPrice = new BigNumber("0");
 var tickSize = new BigNumber("0.0001");
 console.log(augur.utils.convertOnChainPriceToDisplayPrice(onChainPrice, minDisplayPrice, tickSize));
 // example output:
-*BigNumber* { s: 1, e: 1, c: [10] }
+BigNumber { s: 1, e: 1, c: [10] }
 ```
 ### augur.utils.convertBigNumberToHexString
 
