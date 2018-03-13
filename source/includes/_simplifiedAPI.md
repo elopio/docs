@@ -1673,9 +1673,9 @@ augur.trading.calculateTradeCost({
 });
 // example output:
 {
-  cost: "0x1158e460913d00000",
-  amountNumTicksRepresentation: "0x38d7ea4c68000",
-  priceNumTicksRepresentation: "0x4e20"
+  "cost": "20000000000000000000",
+  "onChainAmount": "10000000000000000",
+  "onChainPrice": "2000"
 }
 
 augur.trading.claimMarketsTradingProceeds({
@@ -2093,7 +2093,8 @@ augur.trading.tradeUntilAmountIsZero({
   "_price": "0.5",
   "_fxpAmount": "10",
   "numTicks": "10000",
-  "tickSize": "0.0001",
+  "minPrice": "0",
+  "maxPrice": "1",
   "_direction": 0,
   "_market": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   "_outcome": 0,
@@ -2199,7 +2200,8 @@ undefined
   "_price": "0.5",
   "_fxpAmount": "0",
   "numTicks": "10000",
-  "tickSize": "0.0001",
+  "minPrice": "0",
+  "maxPrice": "1",
   "_direction": 0,
   "_market": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   "_outcome": 0,
