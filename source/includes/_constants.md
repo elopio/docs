@@ -103,7 +103,7 @@ Description pending.
 
 Description pending.
 
-## augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)
+### augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)
 
 Number of bytes that comprise a trade group ID. (Trade group IDs are used by Augur's UI to uniquely identify a trade.)
 
