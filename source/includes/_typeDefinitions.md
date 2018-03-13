@@ -378,9 +378,9 @@ Serves as an enum for the state of a Market.
 ### TradeCost  (Object)
 
 #### **Properties:** 
-* **`cost`** Wei (attoEther) value needed for this trade, as a hexadecimal string.
-* **`amountNumTicksRepresentation`** Number of shares to trade in on-chain (numTicks) representation, as a hexadecimal string.
-* **`priceNumTicksRepresentation`** Limit price in on-chain (numTicks) representation, as a hexadecimal string.
+* **`cost`** (BigNumber) Wei (attoEther) value needed for this trade.
+* **`onChainAmount`** (BigNumber) On-chain number of Shares for this trade.
+* **`onChainPrice`** (BigNumber) On-chain price for this trade.
 
 <a name="UnclaimedFeeWindowInfo"></a>
 ### UnclaimedFeeWindowInfo  (Object)

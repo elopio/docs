@@ -1664,10 +1664,11 @@ augur.trading.calculateProfitLoss({
 }
 
 augur.trading.calculateTradeCost({
-  price: "2",
-  amount: "10",
+  displayPrice: "2",
+  displayAmount: "10",
   numTicks: "10000",
-  tickSize: "0.0001",
+  maxDisplayPrice: "10",
+  minDisplayPrice: "0",
   orderType: 0,
 });
 // example output:
@@ -2008,7 +2009,6 @@ augur.trading.placeTrade({
   minPrice: "1",
   maxPrice: "3",
   numTicks: "10000",
-  tickSize: "0.0001",
   _direction: 0,
   _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   _outcome: 0,
@@ -2073,7 +2073,8 @@ augur.trading.tradeUntilAmountIsZero({
   _price: "0.5",
   _fxpAmount: "10",
   numTicks: "10000",
-  tickSize: "0.0001",
+  minPrice: "0",
+  maxPrice: "1",
   _direction: 0,
   _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   _outcome: 0,
@@ -2230,10 +2231,11 @@ Returns the cost for placing a specific trade.
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.price`**  (string) Normalized limit price for this trade, as a base-10 string.
-    * **`p.amount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
-    * **`p.numTicks`**  (string) The [Number of Ticks](#number-of-ticks) for this [Market](#market), as a base-10 string.
-    * **`p.tickSize`**  (string) The [Tick](#tick) size (interval) for this Market, as a base-10 string.
+    * **`p.displayPrice`**  (string) Normalized limit price for this trade, as a base-10 string.
+    * **`p.displayAmount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
+    * **`p.numTicks`**  (string) The [Number of Ticks](#number-of-ticks) for this [Market](#market).
+    * **`p.maxDisplayPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
+    * **`p.minDisplayPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
     * **`p.orderType`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
 
 #### **Returns:**
@@ -2470,7 +2472,6 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this market.
-    * **`p.tickSize`**  (string) The [Tick](#tick) size (interval) for this Market.
     * **`p._direction`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
@@ -2522,10 +2523,11 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
     * **`p._price`**  (string) Normalized limit price for this trade, as a base-10 string.
     * **`p._fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
     * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
-    * **`p.tickSize`**  (string) The Tick size (interval) for this Market.
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
+    * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
     * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).

@@ -39,13 +39,17 @@ Gas limit used when creating an [Order](#order).
 
 Gas limit used when creating a new [Scalar Market](#scalar-market), as a hexadecimal string.
 
+### augur.constants.DEFAULT_CONNECTION_TIMEOUT (number)
+
+Default connection timeout Augur uses when connecting to an Ethereum node, in milliseconds.
+
 ### augur.constants.DEFAULT_GASPRICE (number)
 
-Description pending.
+Default gas price Augur uses when making transactions.
 
 ### augur.constants.DEFAULT_MAX_GAS (string)
 
-Default maximum gas limit, as a hexadecimal string.
+Default maximum gas limit Augur uses when making transactions, as a hexadecimal string.
 
 ### augur.constants.DEFAULT_NETWORK_ID (string)
 
