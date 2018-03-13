@@ -2677,10 +2677,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">calculateTradeCost</span><span class="p">({</span>
-  <span class="na">price</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
-  <span class="na">amount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="na">displayPrice</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+  <span class="na">displayAmount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
   <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+  <span class="na">maxDisplayPrice</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="na">minDisplayPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
@@ -3021,7 +3022,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
   <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3086,7 +3086,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">_price</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
   <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+  <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3253,10 +3254,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.amount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The <a href="#number-of-ticks">Number of Ticks</a> for this <a href="#market">Market</a>, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.displayPrice</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.displayAmount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The <a href="#number-of-ticks">Number of Ticks</a> for this <a href="#market">Market</a>.</li>
+<li><strong><code class="prettyprint">p.maxDisplayPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.minDisplayPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 </ul></li>
 </ul>
@@ -3591,7 +3593,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this market.</li>
-<li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The <a href="#tick">Tick</a> size (interval) for this Market.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) Outcome ID to trade, must be an integer value in between 0 and 7.</li>
@@ -3657,10 +3658,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="share">Shares</a> to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
-<li><strong><code class="prettyprint">p.tickSize</code></strong>  (string) The Tick size (interval) for this Market.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">p.minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> for this Market, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.estimatedCost</code></strong> (string) &lt;optional&gt; Total cost (in ETH) of this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur&rsquo;s UI to group trades client-side.)</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing orders off the book, not create new ones (default: false).</li>
@@ -12752,9 +12754,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">cost</code></strong> Wei (attoEther) value needed for this trade, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">amountNumTicksRepresentation</code></strong> Number of shares to trade in on-chain (numTicks) representation, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">priceNumTicksRepresentation</code></strong> Limit price in on-chain (numTicks) representation, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">cost</code></strong> (BigNumber) Wei (attoEther) value needed for this trade.</li>
+<li><strong><code class="prettyprint">onChainAmount</code></strong> (BigNumber) On-chain number of Shares for this trade.</li>
+<li><strong><code class="prettyprint">onChainPrice</code></strong> (BigNumber) On-chain price for this trade.</li>
 </ul>
 
 <p><a name="UnclaimedFeeWindowInfo"></a></p>
@@ -12888,13 +12890,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Gas limit used when creating a new <a href="#scalar-market">Scalar Market</a>, as a hexadecimal string.</p>
 
+<h3 id="augur-constants-default_connection_timeout-number">augur.constants.DEFAULT_CONNECTION_TIMEOUT (number)</h3>
+
+<p>Default connection timeout Augur uses when connecting to an Ethereum node, in milliseconds.</p>
+
 <h3 id="augur-constants-default_gasprice-number">augur.constants.DEFAULT_GASPRICE (number)</h3>
 
-<p>Description pending.</p>
+<p>Default gas price Augur uses when making transactions.</p>
 
 <h3 id="augur-constants-default_max_gas-string">augur.constants.DEFAULT_MAX_GAS (string)</h3>
 
-<p>Default maximum gas limit, as a hexadecimal string.</p>
+<p>Default maximum gas limit Augur uses when making transactions, as a hexadecimal string.</p>
 
 <h3 id="augur-constants-default_network_id-string">augur.constants.DEFAULT_NETWORK_ID (string)</h3>
 
