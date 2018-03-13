@@ -2170,7 +2170,7 @@ undefined
   "sharesEscrowed": "0",
   "orderId": "0xd34bcfcdd831f54edb0b4f6982f03005fab01bf8ec1d8570bad2144f916e3d9"
 }
-"res:"
+"trade successful:"
 {
   "marketId": "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   "blockNumber": 15104,
@@ -2205,6 +2205,8 @@ undefined
   "doNotCreateOrders": false,
   "estimatedCost": null
 }
+"cost: 0 ETH"
+"tradeUntilAmountIsZero complete: only dust remaining"
 null
 ```
 ### augur.trading.calculateProfitLoss(p)
