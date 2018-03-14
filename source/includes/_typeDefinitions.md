@@ -348,14 +348,13 @@ Serves as an enum for the state of a Market.
 ### StakeDetails  (Object)
 
 #### **Properties:** 
-* **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
 * **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
-* **`accountStakeComplete`** (string|null) Description pending.
-* **`accountStakeIncomplete`** (string|null) Description pending.
-* **`totalStaked`** (string) Description pending.
-* **`completedStake`** (string) Description pending.
+* **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
 * **`size`** (string|null) Description pending.
-* **`currentStake`** (string|null) Description pending.
+* **`stakeCurrent`** (string|null) Description pending.
+* **`accountStakeCurrent`** (string|null) Description pending.
+* **`accountStakeCompleted`** (string|null) Description pending.
+* **`stakeCompleted`** (string) Description pending.
 * **`tentativeWinning`** (boolean) Description pending.
 
 <a name="StakeInfo"></a>
