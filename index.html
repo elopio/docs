@@ -10731,7 +10731,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTakeBestOrder</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicFillBestOrder</span><span class="p">({</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
@@ -10883,7 +10883,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
-<h3 id="augur-api-trade-publictakebestorder-p">augur.api.Trade.publicTakeBestOrder(p)</h3>
+<h3 id="augur-api-trade-publicfillbestorder-p">augur.api.Trade.publicFillBestOrder(p)</h3>
 
 <p>Works similarly to <code class="prettyprint">augur.api.Trade.publicTrade</code>, except it does not create an <a href="#order">Order</a> if the request can&rsquo;t be <a href="#fill-order">Filled</a>. Instead, it will take the best Order available on the <a href="#order-book">Order Book</a>.</p>
 
