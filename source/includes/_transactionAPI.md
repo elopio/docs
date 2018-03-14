@@ -2373,7 +2373,7 @@ augur.api.Trade.publicTrade({
   onFailed: function (result) { console.log(result); }
 });
 
-augur.api.Trade.publicTakeBestOrder({
+augur.api.Trade.publicFillBestOrder({
   _direction: "0x1",
   _market: _market,
   _outcome: _outcome,
@@ -2491,7 +2491,7 @@ The value of the Order (calculated as p._price * (Market’s number of Ticks - p
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
-### augur.api.Trade.publicTakeBestOrder(p)
+### augur.api.Trade.publicFillBestOrder(p)
 
 Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [Order](#order) if the request can't be [Filled](#fill-order). Instead, it will take the best Order available on the [Order Book](#order-book).
 
