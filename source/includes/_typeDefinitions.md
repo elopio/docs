@@ -350,10 +350,13 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
 * **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
-* **`size`** (string|null) Description pending.
+* **`bondSizeCurrent`** (string|null) Description pending.
+* **`bondSizeTotal`** (string|null) Description pending.
 * **`stakeCurrent`** (string|null) Description pending.
-* **`accountStakeCurrent`** (string|null) Description pending.
+* **`stakeRemaining`** (string|null) Description pending.
 * **`accountStakeCompleted`** (string|null) Description pending.
+* **`accountStakeCurrent`** (string|null) Description pending.
+* **`accountStakeTotal`** (string|null) Description pending.
 * **`stakeCompleted`** (string) Description pending.
 * **`tentativeWinning`** (boolean) Description pending.
 
@@ -363,6 +366,8 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`marketId`** (string) Ethereum contract address of the Market.
 * **`disputeRound`** (number|null) Description pending.
+* **`stakeCompletedTotal`** (string) Sum of all currently completed Stake, including Stake from the Initial Report.
+* **`bondSizeOfNewStake`** (string) Description pending.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
 <a name="TimestampedPrice"></a>

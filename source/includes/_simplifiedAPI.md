@@ -1218,6 +1218,8 @@ augur.reporting.getDisputeInfo({
 [
   {
     marketId: "0x0000000000000000000000000000000000000211",
+    stakeCompletedTotal: "102",
+    bondSizeOfNewStake: "204",
     stakes: [
       {
         payout: [
@@ -1225,9 +1227,12 @@ augur.reporting.getDisputeInfo({
           0,
         ],
         isInvalid: false,
-        size: "204",
+        bondSizeCurrent: "204",
         stakeCurrent: "0",
         accountStakeCurrent: "0",
+        accountStakeTotal: "0",
+        stakeRemaining: "204",
+        bondSizeTotal: "204",
         accountStakeCompleted: "0",
         stakeCompleted: "0",
         tentativeWinning: false,
@@ -1244,15 +1249,17 @@ augur.reporting.getDisputeInfo({
         tentativeWinning: true,
       },
       {
-        isInvalid: true,
         payout: [
           5000,
           5000,
         ],
         isInvalid: true,
-        size: "204",
+        bondSizeCurrent: "204",
         stakeCurrent: "20",
         accountStakeCurrent: "0",
+        accountStakeTotal: "0",
+        stakeRemaining: "184",
+        bondSizeTotal: "204",
         accountStakeCompleted: "0",
         stakeCompleted: "0",
         tentativeWinning: false,
@@ -1262,35 +1269,38 @@ augur.reporting.getDisputeInfo({
   },
   {
     marketId: "0x0000000000000000000000000000000000000011",
+    stakeCompletedTotal: "30000",
+    bondSizeOfNewStake: "60000",
     stakes: [
       {
-        isInvalid: false,
         payout: [
           0,
           2,
         ],
         isInvalid: false,
-        size: "60000",
-        stakeCurrent: "40000",
-        accountStakeCurrent: "17",
+        bondSizeCurrent: "30000",
+        stakeCurrent: "30000",
+        accountStakeCurrent: "0",
+        accountStakeTotal: "0",
+        stakeRemaining: "0",
+        bondSizeTotal: "40000",
         accountStakeCompleted: "0",
-        stakeCompleted: "102",
+        stakeCompleted: "10000",
         tentativeWinning: false,
       },
       {
-        isInvalid: true,
         payout: [
           1,
           1,
         ],
         isInvalid: true,
-        accountStakeCompleted: "500",
+        accountStakeCompleted: "517",
         stakeCurrent: "0",
         stakeCompleted: "20000",
         tentativeWinning: true,
       },
     ],
-    disputeRound: 1,
+    disputeRound: 2,
   },
 ]
 
@@ -1352,13 +1362,13 @@ augur.reporting.getFeeWindows({
 {
   "0x1000000000000000000000000000000000000000": {
     startTime: 1506473473,
-    endTime: 1509065473,
+    endTime: 1506473515,
     balance: 100,
     expectedFees: 100 * 1000 / 300,
   },
   "0x2000000000000000000000000000000000000000": {
     startTime: 1509065473,
-    endTime: 1511657473,
+    endTime: 1506473515,
     balance: 500,
     expectedFees: 500 * 2000 / 1100,
   },
