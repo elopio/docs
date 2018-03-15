@@ -2154,6 +2154,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">[</span>
   <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+    <span class="na">stakeCompletedTotal</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+    <span class="na">bondSizeOfNewStake</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
     <span class="na">stakes</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
@@ -2161,9 +2163,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
           <span class="mi">0</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="na">size</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
+        <span class="na">bondSizeCurrent</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">accountStakeTotal</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">stakeRemaining</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
+        <span class="na">bondSizeTotal</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
         <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -2180,15 +2185,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
           <span class="mi">5000</span><span class="p">,</span>
           <span class="mi">5000</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">size</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
+        <span class="na">bondSizeCurrent</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
         <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">accountStakeTotal</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">stakeRemaining</span><span class="p">:</span> <span class="s2">"184"</span><span class="p">,</span>
+        <span class="na">bondSizeTotal</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
         <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -2198,35 +2205,38 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="na">stakeCompletedTotal</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
+    <span class="na">bondSizeOfNewStake</span><span class="p">:</span> <span class="s2">"60000"</span><span class="p">,</span>
     <span class="na">stakes</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
           <span class="mi">0</span><span class="p">,</span>
           <span class="mi">2</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="na">size</span><span class="p">:</span> <span class="s2">"60000"</span><span class="p">,</span>
-        <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"40000"</span><span class="p">,</span>
-        <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"17"</span><span class="p">,</span>
+        <span class="na">bondSizeCurrent</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
+        <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
+        <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">accountStakeTotal</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">stakeRemaining</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">bondSizeTotal</span><span class="p">:</span> <span class="s2">"40000"</span><span class="p">,</span>
         <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-        <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+        <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
           <span class="mi">1</span><span class="p">,</span>
           <span class="mi">1</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"500"</span><span class="p">,</span>
+        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"517"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="p">},</span>
     <span class="p">],</span>
-    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">]</span>
 
@@ -2288,13 +2298,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">{</span>
   <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">startTime</span><span class="p">:</span> <span class="mi">1506473473</span><span class="p">,</span>
-    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1506473515</span><span class="p">,</span>
     <span class="na">balance</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="na">expectedFees</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">300</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
-    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1511657473</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1506473515</span><span class="p">,</span>
     <span class="na">balance</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
     <span class="na">expectedFees</span><span class="p">:</span> <span class="mi">500</span> <span class="o">*</span> <span class="mi">2000</span> <span class="o">/</span> <span class="mi">1100</span><span class="p">,</span>
   <span class="p">},</span>
@@ -12829,10 +12839,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">payout</code></strong> (Array.&lt;number|string&gt;) Payout Set for the Dispute Crowdsourcer.</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Outcome is Invalid.</li>
-<li><strong><code class="prettyprint">size</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">bondSizeCurrent</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">bondSizeTotal</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">stakeCurrent</code></strong> (string|null) Description pending.</li>
-<li><strong><code class="prettyprint">accountStakeCurrent</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">stakeRemaining</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">accountStakeCompleted</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">accountStakeCurrent</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">accountStakeTotal</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">stakeCompleted</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">tentativeWinning</code></strong> (boolean) Description pending.</li>
 </ul>
@@ -12846,6 +12859,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Ethereum contract address of the Market.</li>
 <li><strong><code class="prettyprint">disputeRound</code></strong> (number|null) Description pending.</li>
+<li><strong><code class="prettyprint">stakeCompletedTotal</code></strong> (string) Sum of all currently completed Stake, including Stake from the Initial Report.</li>
+<li><strong><code class="prettyprint">bondSizeOfNewStake</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">stakes</code></strong> (Array.&lt;<a href="#StakeDetails">StakeDetails</a>&gt;) </li>
 </ul>
 
