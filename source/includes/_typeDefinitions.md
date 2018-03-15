@@ -352,7 +352,7 @@ Serves as an enum for the state of a Market.
 * **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
 * **`bondSizeCurrent`** (string|null) Description pending.
 * **`bondSizeTotal`** (string|null) Description pending.
-* **`stakeCurrent`** (string|null) Description pending.
+* **`stakeCurrent`** (string|null) Description pending. Is set to null if `tentativeWinning` is `true`.
 * **`stakeRemaining`** (string|null) Description pending.
 * **`accountStakeCompleted`** (string|null) Description pending.
 * **`accountStakeCurrent`** (string|null) Description pending.
