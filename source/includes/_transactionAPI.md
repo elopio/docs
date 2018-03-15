@@ -2875,7 +2875,7 @@ augur.api.Universe.getOrCreatePreviousFeeWindow({
 "0x4844c13d539fe040ded440a9f9947f14b2b4c423"
 
 var _reportingParticipants = [ "0xd1b8f991589174315015a7a000638891ab3cd52a" ];
-var _feeWindows = [ ];
+var _feeWindows = [ "0x59d919af0c79c2fdbb7af29627642bddbfcd2178" ];
 augur.api.Universe.redeemStake({
   _reportingParticipants: _reportingParticipants,
   _feeWindows: _feeWindows,
