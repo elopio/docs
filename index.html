@@ -11306,8 +11306,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0x4844c13d539fe040ded440a9f9947f14b2b4c423"</span>
 
-<span class="kd">var</span> <span class="nx">_reportingParticipants</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
-<span class="kd">var</span> <span class="nx">_feeWindows</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
+<span class="kd">var</span> <span class="nx">_reportingParticipants</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0xd1b8f991589174315015a7a000638891ab3cd52a"</span> <span class="p">];</span>
+<span class="kd">var</span> <span class="nx">_feeWindows</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0x59d919af0c79c2fdbb7af29627642bddbfcd2178"</span> <span class="p">];</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">redeemStake</span><span class="p">({</span>
   <span class="na">_reportingParticipants</span><span class="p">:</span> <span class="nx">_reportingParticipants</span><span class="p">,</span>
   <span class="na">_feeWindows</span><span class="p">:</span> <span class="nx">_feeWindows</span><span class="p">,</span>
@@ -12407,7 +12407,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">transactionIndex</code></strong>  (number) Integer of the transaction&rsquo;s index position in the block.</li>
 <li><strong><code class="prettyprint">logIndex</code></strong>  (number) Integer of the log index position in the block.</li>
 <li><strong><code class="prettyprint">blockNumber</code></strong>  (number) Number of the block on the Ethereum blockchain where the event was logged.</li>
-<li><strong><code class="prettyprint">blockHash</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">blockHash</code></strong> (string) Hash of the block on the Ethereum blockchain where the event was logged, as a 32-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">contractName</code></strong>  (string) Name of the Solidity contract in which the event is defined.</li>
 <li><strong><code class="prettyprint">eventName</code></strong>  (string) Name of the event type being logged.</li>
 </ul>
@@ -12509,7 +12509,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">wsAddresses</code></strong> (Array.&lt;string&gt;|null) Array of WebSocket Ethereum node addresses. (Can be used instead of <code class="prettyprint">ws</code> to specify a list of WebSocket addresses to iterate through until a connection is established.)</li>
 <li><strong><code class="prettyprint">ipc</code></strong> (string|null) IPC address of an Ethereum node.</li>
 <li><strong><code class="prettyprint">ipcAddresses</code></strong> (Array.&lt;string&gt;|null) Array of IPC Ethereum node addresses. (Can be used instead of <code class="prettyprint">ipc</code> to specify a list of IPC addresses to iterate through until a connection is established.)</li>
-<li><strong><code class="prettyprint">networkId</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">networkId</code></strong> (string|null) Network ID of the current Ethereum node connection. For example, 1 for the Ethereum public main network, 3 for Ropsten (public cross-client Ethereum test network), 4 for Rinkeby (public Geth PoA test network), 42 for Kovan (public Parity PoA test network), etc.</li>
 </ul>
 
 <p><a name="ExtraInfo"></a></p>
@@ -12841,7 +12841,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Outcome is Invalid.</li>
 <li><strong><code class="prettyprint">bondSizeCurrent</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">bondSizeTotal</code></strong> (string|null) Description pending.</li>
-<li><strong><code class="prettyprint">stakeCurrent</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">stakeCurrent</code></strong> (string|null) Description pending. Is set to null if <code class="prettyprint">tentativeWinning</code> is <code class="prettyprint">true</code>.</li>
 <li><strong><code class="prettyprint">stakeRemaining</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">accountStakeCompleted</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">accountStakeCurrent</code></strong> (string|null) Description pending.</li>
@@ -12944,16 +12944,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="websocket-object">WebSocket  (Object)</h3>
 
 <ul>
-<li><strong><code class="prettyprint">binaryType</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">bufferedAmount</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">extensions</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">onclose</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onerror</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onmessage</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">onopen</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">protocol</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">readyState</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">url</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">binaryType</code></strong> (string) String indicating the type of binary data being transmitted by the connection. This should be either &ldquo;blob&rdquo; if DOM Blob objects are being used or &ldquo;arraybuffer&rdquo; if ArrayBuffer objects are being used.</li>
+<li><strong><code class="prettyprint">bufferedAmount</code></strong> (number) Number of bytes of data that have been queued using calls to send() but not yet transmitted to the network. This value resets to zero once all queued data has been sent. This value does not reset to zero when the connection is closed; if send() continues to be called, this will continue to climb.</li>
+<li><strong><code class="prettyprint">extensions</code></strong> (string) Extensions selected by the server. This is currently only the empty string or a list of extensions as negotiated by the connection.</li>
+<li><strong><code class="prettyprint">onclose</code></strong> (function) Event listener to be called when the WebSocket connection&rsquo;s readyState changes to CLOSED. The listener receives a CloseEvent named &ldquo;close&rdquo;.</li>
+<li><strong><code class="prettyprint">onerror</code></strong> (function) Event listener to be called when an error occurs. This is a simple event named &ldquo;error&rdquo;.</li>
+<li><strong><code class="prettyprint">onmessage</code></strong> (function) Event listener to be called when a message is received from the server. The listener receives a MessageEvent named &ldquo;message&rdquo;.</li>
+<li><strong><code class="prettyprint">onopen</code></strong> (function) Event listener to be called when the WebSocket connection&rsquo;s readyState changes to OPEN; this indicates that the connection is ready to send and receive data. The event is a simple one with the name &ldquo;open&rdquo;.</li>
+<li><strong><code class="prettyprint">protocol</code></strong> (string) String indicating the name of the sub-protocol the server selected; this will be one of the strings specified in the protocols parameter when creating the WebSocket object.</li>
+<li><strong><code class="prettyprint">readyState</code></strong> (number) Current state of the connection (0 for CONNECTING, 1 for OPEN, 2 for CLOSING, 3 for CLOSED).</li>
+<li><strong><code class="prettyprint">url</code></strong> (string) URL as resolved by the constructor. This is always an absolute URL.</li>
 </ul>
 
 <p><a name="WsTransport"></a></p>
@@ -12963,12 +12963,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) WebSocket address to connect to.</li>
+<li><strong><code class="prettyprint">address</code></strong> (string) Address to which the WebSocket should connect.</li>
 <li><strong><code class="prettyprint">timeout</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">messageHandler</code></strong> (function) Description pending.</li>
 <li><strong><code class="prettyprint">workQueue</code></strong> (Array) Description pending.</li>
 <li><strong><code class="prettyprint">awaitingPump</code></strong> (boolean) Description pending.</li>
-<li><strong><code class="prettyprint">connected</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">connected</code></strong> (boolean) Whether the WebSocket has a connection to <code class="prettyprint">address</code>.</li>
 <li><strong><code class="prettyprint">backoffMilliseconds</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">nextListenerToken</code></strong> (number) Description pending.</li>
 <li><strong><code class="prettyprint">reconnectListeners</code></strong> (Object) Description pending.</li>
