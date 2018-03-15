@@ -2874,7 +2874,7 @@ augur.api.Universe.getOrCreatePreviousFeeWindow({
 // example output:
 "0x4844c13d539fe040ded440a9f9947f14b2b4c423"
 
-var _reportingParticipants = [ ];
+var _reportingParticipants = [ "0xd1b8f991589174315015a7a000638891ab3cd52a" ];
 var _feeWindows = [ ];
 augur.api.Universe.redeemStake({
   _reportingParticipants: _reportingParticipants,
