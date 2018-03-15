@@ -33,7 +33,7 @@ Note: Other properties will be present in this object, depending on what event t
 * **`transactionIndex`**  (number) Integer of the transaction's index position in the block.
 * **`logIndex`**  (number) Integer of the log index position in the block.
 * **`blockNumber`**  (number) Number of the block on the Ethereum blockchain where the event was logged.
-* **`blockHash`** (string) Description pending.
+* **`blockHash`** (string) Hash of the block on the Ethereum blockchain where the event was logged, as a 32-byte hexadecimal value.
 * **`contractName`**  (string) Name of the Solidity contract in which the event is defined.
 * **`eventName`**  (string) Name of the event type being logged.
 
@@ -107,7 +107,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`wsAddresses`** (Array.&lt;string>|null) Array of WebSocket Ethereum node addresses. (Can be used instead of `ws` to specify a list of WebSocket addresses to iterate through until a connection is established.)
 * **`ipc`** (string|null) IPC address of an Ethereum node.
 * **`ipcAddresses`** (Array.&lt;string>|null) Array of IPC Ethereum node addresses. (Can be used instead of `ipc` to specify a list of IPC addresses to iterate through until a connection is established.)
-* **`networkId`** (string|null) Description pending.
+* **`networkId`** (string|null) Network ID of the current Ethereum node connection. For example, 1 for the Ethereum public main network, 3 for Ropsten (public cross-client Ethereum test network), 4 for Rinkeby (public Geth PoA test network), 42 for Kovan (public Parity PoA test network), etc.
 
 <a name="ExtraInfo"></a>
 ### ExtraInfo  (Object)
@@ -428,27 +428,27 @@ Serves as an enum for the state of a Market.
 <a name="WebSocket"></a>
 ### WebSocket  (Object)
 
-* **`binaryType`** (string) Description pending.
-* **`bufferedAmount`** (number) Description pending.
-* **`extensions`** (string) Description pending.
-* **`onclose`** (function) Description pending.
-* **`onerror`** (function) Description pending.
-* **`onmessage`** (function) Description pending.
-* **`onopen`** (function) Description pending.
-* **`protocol`** (string) Description pending.
-* **`readyState`** (number) Description pending.
-* **`url`** (string) Description pending.
+* **`binaryType`** (string) String indicating the type of binary data being transmitted by the connection. This should be either "blob" if DOM Blob objects are being used or "arraybuffer" if ArrayBuffer objects are being used.
+* **`bufferedAmount`** (number) Number of bytes of data that have been queued using calls to send() but not yet transmitted to the network. This value resets to zero once all queued data has been sent. This value does not reset to zero when the connection is closed; if send() continues to be called, this will continue to climb.
+* **`extensions`** (string) Extensions selected by the server. This is currently only the empty string or a list of extensions as negotiated by the connection.
+* **`onclose`** (function) Event listener to be called when the WebSocket connection's readyState changes to CLOSED. The listener receives a CloseEvent named "close".
+* **`onerror`** (function) Event listener to be called when an error occurs. This is a simple event named "error".
+* **`onmessage`** (function) Event listener to be called when a message is received from the server. The listener receives a MessageEvent named "message".
+* **`onopen`** (function) Event listener to be called when the WebSocket connection's readyState changes to OPEN; this indicates that the connection is ready to send and receive data. The event is a simple one with the name "open".
+* **`protocol`** (string) String indicating the name of the sub-protocol the server selected; this will be one of the strings specified in the protocols parameter when creating the WebSocket object.
+* **`readyState`** (number) Current state of the connection (0 for CONNECTING, 1 for OPEN, 2 for CLOSING, 3 for CLOSED).
+* **`url`** (string) URL as resolved by the constructor. This is always an absolute URL.
 
 <a name="WsTransport"></a>
 ### WsTransport  (Object)
 
 #### **Properties:** 
-* **`address`** (string) WebSocket address to connect to.
+* **`address`** (string) Address to which the WebSocket should connect.
 * **`timeout`** (number) Description pending.
 * **`messageHandler`** (function) Description pending.
 * **`workQueue`** (Array) Description pending.
 * **`awaitingPump`** (boolean) Description pending.
-* **`connected`** (boolean) Description pending.
+* **`connected`** (boolean) Whether the WebSocket has a connection to `address`.
 * **`backoffMilliseconds`** (number) Description pending.
 * **`nextListenerToken`** (number) Description pending.
 * **`reconnectListeners`** (Object) Description pending.
