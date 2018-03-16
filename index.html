@@ -1773,7 +1773,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
-    <span class="nx">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
@@ -1847,7 +1848,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a binary test market created by b0b."</span><span class="p">,</span>
-    <span class="nx">extraInfo</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
@@ -12612,7 +12614,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
 <li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
-<li><strong><code class="prettyprint">extraInfo</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for categorical Markets).</li>
+<li><strong><code class="prettyprint">details</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).</li>
+<li><strong><code class="prettyprint">scalarDenomination</code></strong> (string|null) Description pending.</li>
 <li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">designatedReportStake</code></strong> (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.</li>
 <li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
