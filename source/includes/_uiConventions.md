@@ -250,6 +250,12 @@ For a full review of all conventions, reference:
 
 - `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur/blob/master/.stylelintrc).
 
+#### Fixing linting errors
+
+To fix many of the low-hanging-fruit linting errors, run:
+
+`npm run lint --fix`
+
 #### CSS Units
 
 When deciding whether to use `rem` or `em`, it is helpful to ask, "In relation to what element should this size be derived?"
