@@ -249,3 +249,9 @@ Above are the main points, but additional structural and styling conventions of 
 For a full review of all conventions, reference:
 
 - `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur/blob/master/.stylelintrc).
+
+#### CSS Units
+
+When deciding whether to use `rem` or `em`, it is helpful to ask, "In relation to what element should this size be derived?"
+
+If it is local to that element or it’s siblings, then it’s most likely `em`. If it doesn’t matter or is relative to the view/general layout, then it’s most likely `rem`. It’s highly contextual as to when/how to apply, but if a component’s layout can scale based on root font size, then `rem` is fine. However, if the layout needs to scale in relation to itself or its peers, it is probably better leverage `em`.
