@@ -13178,6 +13178,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
           <h1 id="ui-conventions">UI Conventions</h1>
 
+<h2 id="numbers">Numbers</h2>
+
+<p>Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the <a href="https://github.com/MikeMcl/bignumber.js">BigNumber</a> data type.</p>
+
+<h2 id="dates">Dates</h2>
+
+<p>In general, the current timestamp should only ever be obtained using the value <code class="prettyprint">blockchain.currentAugurTimestamp</code> (as opposed to calling the JavaScript function <code class="prettyprint">Date.now</code>). This value can be obtained using the selectors <code class="prettyprint">getCurrentTimestampInSeconds</code> (which returns the timestamp of the latest block on the Ethereum blockchain) or <code class="prettyprint">getCurrentTimestamp</code> (which returns the same timestamp, in milliseconds).</p>
+
 <h2 id="modules">Modules</h2>
 <div class="highlight"><pre class="highlight javascript"><code>  <span class="c1">// Modules Conventions</span>
   <span class="c1">// Import Conventions</span>
@@ -13421,7 +13429,13 @@ For a full review of all conventions, reference:</p>
 <li><code class="prettyprint">.stylelintrc</code> - Less linting rules can be found <a href="https://github.com/AugurProject/augur/blob/master/.stylelintrc">here</a>.</li>
 </ul>
 
-<h4 id="fixing-linting-errors">Fixing linting errors</h4>
+<h4 id="running-tests">Running Tests</h4>
+
+<p>To execute a specific UI test, run:</p>
+
+<p><code class="prettyprint">npm run test &lt;path_to_test&gt;</code></p>
+
+<h4 id="fixing-linting-errors">Fixing Linting Errors</h4>
 
 <p>To fix many of the low-hanging-fruit linting errors, run:</p>
 
