@@ -250,7 +250,13 @@ For a full review of all conventions, reference:
 
 - `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur/blob/master/.stylelintrc).
 
-#### Fixing linting errors
+#### Running Tests
+
+To execute a specific UI test, run:
+
+`npm run test <path_to_test>`
+
+#### Fixing Linting Errors
 
 To fix many of the low-hanging-fruit linting errors, run:
 
