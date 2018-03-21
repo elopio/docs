@@ -1,6 +1,14 @@
 UI Conventions
 ====================
 
+Numbers
+-------
+Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the BigNumber data type: https://github.com/MikeMcl/bignumber.js
+
+Dates
+----- 
+In general, the current timestamp should only ever be obtained using the value `blockchain.currentAugurTimestamp` (as opposed to calling the JavaScript function `Date.now`). This value can be obtained using the selectors `getCurrentTimestampInSeconds` (which returns the timestamp of the latest block on the Ethereum blockchain) or `getCurrentTimestamp` (which returns the same timestamp, in milliseconds).
+
 Modules
 -------
 ```javascript
@@ -242,7 +250,6 @@ Things to remember about Component Less styling include:
 - Avoid the use of `!important` unless absolutely necessary.
 - All external borders (parent level components within a view) should be the normal border color. All internal borders should be either muted or light (depending on the application).
 - When utilizing `CSSTransitionGroup`, styling of this wrapper should be housed within the rendered child's stylesheet
-
 
 #### Detailed Style Conventions
 Above are the main points, but additional structural and styling conventions of the stylesheets themselves are enforced through linting.
