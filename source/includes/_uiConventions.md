@@ -3,7 +3,7 @@ UI Conventions
 
 Numbers
 -------
-Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the BigNumber data type: https://github.com/MikeMcl/bignumber.js
+Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the [BigNumber](https://github.com/MikeMcl/bignumber.js) data type.
 
 Dates
 ----- 
