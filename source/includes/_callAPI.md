@@ -125,6 +125,15 @@ augur.api.ClaimTradingProceeds.calculateProceeds({
 });
 // example output:
 "122"
+
+augur.api.ClaimTradingProceeds.calculateReportingFee({
+  _market: _market,
+  _amount: "0xc3280e4b4b",
+}, function (error, reportingFee) { 
+    console.log(reportingFee); 
+});
+// example output:
+"83819064"
 ```
 Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
 
@@ -158,6 +167,21 @@ Calculates the amount of [attoETH](#atto-prefix) that a number of [Shares](#shar
 #### **Returns:**
 
 * (string) Amount of attoETH that a number of Shares in a particular Outcome of a given Market are worth, as a stringified unsigned integer.
+
+### augur.api.ClaimTradingProceeds.calculateReportingFee(p)
+
+Calculates the [Reporting Fee](#reporting-fee) that will be paid when settling a specific number of [Shares](#share) in a given [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 20-byte hexadecimal value.
+    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) The Reporting Fee amount, in attoETH, as a stringified unsigned integer.
 
 Controller Call API
 ---------------
@@ -2452,6 +2476,14 @@ augur.api.Universe.getOpenInterestInAttoEth({
 // example output:
 "42250000000000000000"
 
+augur.api.Universe.getOrCacheReportingFeeDivisor({
+  tx: { to: universe } 
+}, function (error, reportingFeeDivisor) { 
+    console.log(reportingFeeDivisor); 
+});
+// example output:
+"10000"
+
 augur.api.Universe.getParentPayoutDistributionHash({ 
   tx: { to: universe } 
 }, function (error, universeParentPayoutDistributionHash) { 
@@ -2755,6 +2787,21 @@ Returns the total value of all [Complete Sets](#complete-sets) that exist across
 #### **Returns:**
 
 * (string) Total value of all Complete Sets that exist across all Markets the specified Universe, priced in [attoETH](#atto-prefix), as a stringified unsigned integer.
+
+### augur.api.Universe.getOrCacheReportingFeeDivisor(p, callback)
+
+Gets the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee).
+
+#### Parameters:
+
+* **`p`** (Object) Parameters object.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Number by which the total payout amount for a Market is divided in order to calculate the Reporting Fee, as a stringified unsigned integer.
 
 ### augur.api.Universe.getParentPayoutDistributionHash(p, callback)
 

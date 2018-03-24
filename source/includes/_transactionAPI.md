@@ -462,19 +462,6 @@ var claimTradingProceedsAddress = "0x53ebdf8b5babda8e59a217436266696efcd8d166";
 
 var _market = "0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017";
 
-augur.api.ClaimTradingProceeds.calculateReportingFee({
-  _market: _market,
-  _amount: "0xc3280e4b4b",
-  tx: { 
-    to: claimTradingProceedsAddress,
-    send: false,
-  }
-}, function (error, reportingFee) { 
-    console.log(reportingFee); 
-});
-// example output:
-"83819064"
-
 var _shareHolder = "0x5678ff3e9ce1c0459b309fac6dd4e69229b91567";
 augur.api.ClaimTradingProceeds.claimTradingProceeds({
   _market: _market,
@@ -493,28 +480,6 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
 });
 ```
 Provides JavaScript bindings for the [ClaimTradingProceeds Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/ClaimTradingProceeds.sol), which allows profits earned from trading to be claimed.
-
-### augur.api.ClaimTradingProceeds.calculateReportingFee(p)
-
-Calculates the [Reporting Fee](#reporting-fee) that will be paid when settling a specific number of [Shares](#share) in a given [Market](#market).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p._market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 20-byte hexadecimal value.
-    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the Reporting Fee amount and will not use any gas. 
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will be executed as a call and will return the Reporting Fee amount, in attoETH, as a stringified unsigned integer.
 
 ### augur.api.ClaimTradingProceeds.claimTradingProceeds(p)
 
@@ -2860,17 +2825,6 @@ augur.api.Universe.getOrCacheMarketCreationCost({
 // example output:
 "19000000000000000"
 
-augur.api.Universe.getOrCacheReportingFeeDivisor({
-  tx: { 
-    to: universeAddress,
-    send: false
-  }
-}, function (error, reportingFeeDivisor) { 
-    console.log(reportingFeeDivisor); 
-});
-// example output:
-"10000"
-
 augur.api.Universe.getOrCacheTargetReporterGasCosts({
   tx: { 
     to: universeAddress,
@@ -3172,26 +3126,6 @@ Gets the estimated amount of [attoETH](#atto-prefix) required to create a [Marke
 #### **Returns:**
 
 * (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the estimated amount of [attoETH](#atto-prefix) required to create a Market, as a stringified unsigned integer.
-
-### augur.api.Universe.getOrCacheReportingFeeDivisor(p)
-
-Gets the number by which the total payout amount for a [Market](#market) is divided in order to calculate the [Reporting Fee](#reporting-fee). If this value for the current [Fee Window](#fee-window) has not already been cached in the Universe contract, this function will cache it.
-
-#### Parameters:
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
-        * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the number by which the total payout amount for a Market is divided in order to calculate the Reporting Fee, as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheTargetReporterGasCosts(p)
 
