@@ -636,7 +636,7 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`p._designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
     * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`p._description`**  (string) Description of the Market, as a UTF8 string.
-    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event. Alternatively, the properties within `p.extraInfo` can simply be written as regular properties of `p`. For example, `p._extraInfo.longDescription` can be passed in as just `p.longDescription`.
+    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
@@ -661,7 +661,7 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
     * **`p._outcomes`**  (Array.&lt;string>) Array of names for all possible outcomes for the Market event.
     * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`p._description`**  (string) Description of the Market, as a UTF8 string.
-    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event. Alternatively, the properties within `p.extraInfo` can simply be written as regular properties of `p`. For example, `p._extraInfo.longDescription` can be passed in as just `p.longDescription`.
+    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the createCategoricalMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createCategoricalMarket transaction is sealed and confirmed.
@@ -688,7 +688,7 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
     * **`p._description`**  (string) Description of the Market, as a UTF8 string.
     * **`p.tickSize`**  (string) &lt;optional> The [Tick](#tick) size for this Market, as a base-10 string.
-    * **`p._extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event. Alternatively, the properties within `p.extraInfo` can simply be written as regular properties of `p`. For example, `p._extraInfo.longDescription` can be passed in as just `p.longDescription`.
+    * **`p._extraInfo`**  (ExtraInfo) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
