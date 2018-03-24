@@ -23,37 +23,23 @@ augur.events.getAllAugurLogs({
 // example output:
 [
   {
-    "key": "0x4175677572000000000000000000000000000000000000000000000000000000",
-    "addition": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "commitHash": "0x28562806a46f89eaf53726c288f5294fa9c34827",
-    "bytecodeHash": "0x1e649bc7bb83f3f7bba3440afadec07fe666377f4c56f34557a050dedc4d76d0",
-    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "removed": false,
-    "transactionHash": "0x6d18853ed20b8bc7b344a89b9fb1eafa0d46fcf80ad5bb3965a856446c24bfe2",
-    "transactionIndex": 0,
-    "logIndex": 0,
-    "blockNumber": 1541700,
-    "blockHash": "0x58d9203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba351887b",
-    "contractName": "Augur",
-    "eventName": "RegistryAddition"
-  },
-  ...
-  {
-    "universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    "token": "0x13fa2334966b3cb6263ed56148323014c2ece753",
-    "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-    "to": "0x40485264986740c8fb3d11e814bd94cf86012d29",
-    "value": "0.001",
-    "address": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "removed": false,
-    "transactionHash": "0x39618f9552bad2ee24ac48fa1b634ffbe1c33a157793cd458ae2cbe68c988cde",
-    "transactionIndex": 2,
-    "logIndex": 1,
-    "blockNumber": 1599717,
-    "blockHash": "0xd859203d97bdfe8c41605b9041d52fad3c4bd5c8324cafc8109cd4fba3518b78",
-    "contractName": "Augur",
-    "eventName": "TokensTransferred"
+    [0: {
+      "target": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+      "value": "100000000000000000000000",
+      "address": "0x6e968fe21894a35ba59ee8ec6f60ea0ddc3a59e5",
+      "removed": false,
+      "transactionHash": "0x78d918bce994b637bac7e80711b8d46bb2aea066bac26bdaf01afc0d93d6e309",
+      "transactionIndex": 0,
+      "logIndex": 0,
+      "blockNumber": 23,
+      "blockHash": "0x803c4f62e4ee742cc2f120de4c55a2ed1528b65521afcc4d7a8d5d7693c46688",
+      "contractName": "LegacyReputationToken",
+      "eventName": "Mint"
+      },
+      ...
+    ]
   }
+  ...
 ]
 
 augur.events.startAugurNodeEventListeners({
