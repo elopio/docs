@@ -744,6 +744,20 @@ augur.api.DisputeCrowdsourcer.fork({
   onFailed: function (result) { console.log(result); }
 });
 
+augur.api.DisputeCrowdsourcer.forkAndRedeem({
+  tx: { 
+    to: disputeCrowdsourcerAddress,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
 var _redeemer = "0x55d6eaefcfaf7ea1e17c4768a554d57800699ae4";
 augur.api.DisputeCrowdsourcer.redeem({
   _redeemer: _redeemer,
@@ -780,7 +794,30 @@ Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](htt
 
 Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Dispute Crowdsourcer](#dispute-crowdsourcer) and migrates the [REP](#rep) in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)).
 
-Once this function has been called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed.
+Once this function has been called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed. Alternatively, the convenience function `augur.api.DisputeCrowdsourcer.forkAndRedeem` can be called instead of calling both of these functions.
+
+This transaction will fail if:
+
+* The DisputeCrowdsourcer belongs to a Market that is not Forked.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.DisputeCrowdsourcer.forkAndRedeem(p)
+
+This is a convenience function that calls the `DisputeCrowdsourcer.fork` function and then immediately calls the `DisputeCrowdsourcer.redeem` function. 
 
 This transaction will fail if:
 
@@ -1070,6 +1107,20 @@ augur.api.InitialReporter.fork({
   onFailed: function (result) { console.log(result); }
 });
 
+augur.api.InitialReporter.forkAndRedeem({
+  tx: { 
+    to: initialReporterAddress,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
 augur.api.InitialReporter.redeem({
   "": initialReporterAddress, // This parameter's key must be the empty string, and its value can be any address-length string.
   tx: { 
@@ -1119,6 +1170,31 @@ Provides JavaScript bindings for the [InitialReporter Solidity Contract](https:/
 ### augur.api.InitialReporter.fork(p)
 
 Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe.
+
+This transaction will fail if:
+
+* The InitialReporter does not belong to a [Forked Market](#forked-market).
+
+This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function `augur.api.InitialReporter.forkAndRedeem` can be called instead of calling both of these functions.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.InitialReporter.forkAndRedeem(p)
+
+This is a convenience function that calls the `InitialReporter.fork` function and then immediately calls the `InitialReporter.redeem` function. 
 
 This transaction will fail if:
 
