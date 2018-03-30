@@ -57,7 +57,7 @@ Note: Other properties will be present in this object, depending on what event t
 
 #### **Properties:** 
 * **`category`** (string) Name of a Category.
-* **`popularity`** (number|string) Category popularity. (The exact method for calculating this value is still pending.)
+* **`popularity`** (string) Category popularity. (The exact method for calculating this value is still pending.)
 
 <a name="ConnectOptions"></a>
 ### ConnectOptions  (Object)
