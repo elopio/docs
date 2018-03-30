@@ -2992,7 +2992,7 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
 
 ### augur.api.Universe.createChildUniverse(p)
 
-Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Distribution Hash](#payoutDistributionHash) `p._parentPayoutDistributionHash`, [Payout Set](#payout-set) `p._parentPayoutNumerators`, and `p._parentInvalid`. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
+Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Distribution Hash](#payout-distribution-hash) `p._parentPayoutDistributionHash`, [Payout Set](#payout-set) `p._parentPayoutNumerators`, and `p._parentInvalid`. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
 
 This transaction will fail if:
 
