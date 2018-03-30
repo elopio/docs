@@ -3002,7 +3002,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._parentPayoutDistributionHash`** (string) Payout Distribution Hash of the [Parent Universe's](#parent-universe) [Forked Market](#forked-market).
+    * **`p._parentPayoutDistributionHash`** (string) Payout Distribution Hash of the [Parent Universe's](#parent-universe) [Forked Market](#forked-market), as a 32-byte hexadecimal string.
     * **`p._parentPayoutNumerators`**  (Array.&lt;number>) Payout Set of the Parent Universe's Parent Universe's Forked Market.
     * **`p._parentInvalid`**  (boolean) Whether the Parent Universe's Forked Market is [Invalid](#invalid-outcome).
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
