@@ -11287,9 +11287,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
 <span class="p">});</span>
 
+<span class="kd">var</span> <span class="nx">_parentPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_parentPayoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">];</span>
 <span class="kd">var</span> <span class="nx">_parentInvalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createChildUniverse</span><span class="p">({</span>
+  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="nx">_parentPayoutDistributionHash</span><span class="p">,</span>
   <span class="na">_parentPayoutNumerators</span><span class="p">:</span> <span class="nx">_parentPayoutNumerators</span><span class="p">,</span>
   <span class="na">_parentInvalid</span><span class="p">:</span> <span class="nx">_parentInvalid</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
@@ -11574,7 +11576,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-universe-createchilduniverse-p">augur.api.Universe.createChildUniverse(p)</h3>
 
-<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._parentPayoutNumerators</code> and <code class="prettyprint">p._parentInvalid</code>. This transaction will trigger a <a href="#UniverseCreated"><code class="prettyprint">UniverseCreated</code></a> event if the Child Universe has not been created yet.</p>
+<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-distribution-hash">Payout Distribution Hash</a> <code class="prettyprint">p._parentPayoutDistributionHash</code>, <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._parentPayoutNumerators</code>, and <code class="prettyprint">p._parentInvalid</code>. This transaction will trigger a <a href="#UniverseCreated"><code class="prettyprint">UniverseCreated</code></a> event if the Child Universe has not been created yet.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -11589,7 +11591,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._parentPayoutNumerators</code></strong>  (Array.&lt;number&gt;) Payout Set of the Parent Universe&rsquo;s <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>.</li>
+<li><strong><code class="prettyprint">p._parentPayoutDistributionHash</code></strong> (string) Payout Distribution Hash of the <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>.</li>
+<li><strong><code class="prettyprint">p._parentPayoutNumerators</code></strong>  (Array.&lt;number&gt;) Payout Set of the Parent Universe&rsquo;s Parent Universe&rsquo;s Forked Market.</li>
 <li><strong><code class="prettyprint">p._parentInvalid</code></strong>  (boolean) Whether the Parent Universe&rsquo;s Forked Market is <a href="#invalid-outcome">Invalid</a>.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
