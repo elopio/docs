@@ -2268,7 +2268,6 @@ undefined
 }
 {"cost":"0","onChainAmount":"0","onChainPrice":"5000"}
 "cost: 0 wei 0 eth"
-"tradeUntilAmountIsZero complete: only dust remaining"
 null
 ```
 ### augur.trading.calculateProfitLoss(p)
