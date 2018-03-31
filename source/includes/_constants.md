@@ -23,6 +23,10 @@ Object that acts as an enum containing the following values:
 * DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a [Dispute Round](#dispute-round-phase) can last.
 * FORK_DURATION_SECONDS - Maximum number of seconds a [Fork Period](#fork-period) can last.
 
+### augur.constants.CONTRACT_TYPE (Object)
+
+Object that acts as an enum for different types of smart contracts.
+
 ### augur.constants.CREATE_BINARY_MARKET_GAS (string)
 
 Gas limit used when creating a new [Binary Market](#binary-market), as a hexadecimal string.

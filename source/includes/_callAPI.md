@@ -2134,7 +2134,7 @@ Traverses the [Order Book](#order-book) in ascending order and returns an array 
 
 #### **Returns:**
 
-* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+* (Array.&lt;string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
 
 ### augur.api.OrdersFetcher.descendOrderList(p, callback)
 
@@ -2150,7 +2150,7 @@ Traverses the [Order Book](#order-book) in descending order and returns an array
 
 #### **Returns:**
 
-* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+* (Array.&lt;string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
 
 ### augur.api.OrdersFetcher.findBoundingOrders(p, callback)
 
@@ -2169,7 +2169,7 @@ Returns an array containing the [Order](#order) IDs from the [Order Book](#order
 
 #### **Returns:**
 
-* (Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+* (Array.&lt;string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
 
 Reputation Token Call API
 -------------------------

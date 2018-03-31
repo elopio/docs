@@ -1177,7 +1177,7 @@ Returns the amount of unclaimed [Creator Fees](#creator-fee) in a set of [Market
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.marketIds`**  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
+    * **`p.marketIds`**  (Array.&lt;string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.
 * **`callback`** (function) Called after the Market Creator Fee information has been retrieved.
 
 #### **Returns:**
@@ -1188,6 +1188,43 @@ Reporting Functions
 -------------
 ```javascript
 // Reporting Simplified API Examples:
+
+augur.reporting.claimReportingFees({
+  redeemer: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
+  redeemableContracts: [
+    {
+      address: "0xb9109e49bf49f886e546d560d515ca53db83f62f",
+      type: augur.constants.CONTRACT_TYPE.INITIAL_REPORTER,
+    },
+    {
+      address: "0xaaa09e49bf49f886e546d560d515ca53db83f62f",
+      type: augur.constants.CONTRACT_TYPE.DISPUTE_CROWDSOURCER,
+    },
+    {
+      address: "0x161c723cac007e4283cee4ba11b15277e46eec53",
+      type: augur.constants.CONTRACT_TYPE.FEE_WINDOW,
+    },
+  ], 
+  estimateGas: false,
+}, function (error, result) { 
+  console.log(error);
+  console.log(result); 
+});
+// example output:
+null
+{
+  "redeemedFeeWindows": [
+    "0x161c723cac007e4283cee4ba11b15277e46eec53"
+  ],
+  "redeemedDisputeCrowdsourcers": [
+    "0xaaa09e49bf49f886e546d560d515ca53db83f62f"
+  ],
+  "redeemedInitialReporters": [
+    "0xb9109e49bf49f886e546d560d515ca53db83f62f"
+  ],
+  "failedTransactions": [
+  ]
+}
 
 augur.reporting.finalizeMarket({
   market: "0x0000000000000000000000000000000000000011",
@@ -1468,6 +1505,21 @@ augur.reporting.getStakeRequiredForDesignatedReporter({
 // example output:
 "1.2345"
 ```
+### augur.reporting.claimReportingFees(p, callback)
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
+    * **`p.redeemableContracts`**  (Array.&lt;<a href="#RedeemableContract">RedeemableContract</a>>) Array of objects containing contract address and contract type pairs.
+    * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+* **`callback`** (function)  Called after all transactions have been attempted.
+
+#### **Returns:**
+
+* (<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which fees were successfully claimed or a breakdown of gas estimates.
+
 ### augur.reporting.finalizeMarket(p)
 
 [Finalizes](#finalized-market) a [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
@@ -2318,7 +2370,7 @@ Similar to the function `augur.trading.claimTradingProceeds`, but attempts to co
 
 #### **Returns:**
 
-* (Array.<string>) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.
+* (Array.&lt;string>) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.
 
 ### augur.trading.claimTradingProceeds(p)
 

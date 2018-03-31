@@ -44,6 +44,15 @@ Note: Other properties will be present in this object, depending on what event t
 * **`betterOrderId`** (string|null) ID of the order with the next best price over the specified order ID, as a hexadecimal string.
 * **`worseOrderId`** (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.
 
+<a name="ClaimReportingFeesInfo"></a>
+### ClaimReportingFeesInfo  (Object)
+
+* **`redeemedFeeWindows`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Fee Windows, as hexadecimal strings. Not set if `p.estimateGas` is true.
+* **`redeemedDisputeCrowdsourcers`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Dispute Crowdsourcers, as hexadecimal strings.  Not set if `p.estimateGas` is true.
+* **`redeemedInitialReporters`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Initial Reporters, as hexadecimal strings.  Not set if `p.estimateGas` is true.
+* **`gasEstimates`** (<a href="#GasEstimateInfo">GasEstimateInfo</a>|null) Object containing a breakdown of gas estimates for all reporting fee redemption transactions. Not set if `p.estimateGas` is false.
+* **`failedTransactions`** (Array.&lt;<a href="#FailedTransaction">FailedTransaction</a>>) Array of FailedTransaction objects containing error information about each failed transaction.
+
 <a name="ContractAddresses"></a>
 ### ContractAddresses  (Object)
 
@@ -117,6 +126,12 @@ Serves as an enum for the state of a Dispute Token.
 * **`tags`** (Array.&lt;string>|null) Keywords used to tag the Market (maximum of 2).
 * **`longDescription`** (string|null) Additional information not included in description of the Market.
 
+<a name="FailedTransaction"></a>
+### FailedTransaction  (Object)
+
+* **`address`** (string) Ethereum address of contract that returned a transaction error.
+* **`error`** (RPCError|Error) Error that occurred when attempting to make a transaction to the contract.
+
 <a name="FeeWindowCurrent"></a>
 ### FeeWindowCurrent  (Object)
 
@@ -129,6 +144,22 @@ Serves as an enum for the state of a Dispute Token.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 * **`totalStake`** (number) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
+
+<a name="GasEstimateInfo"></a>
+### GasEstimateInfo  (Object)
+
+* **`disputeCrowdsourcers`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all DisputeCrowdsourcers.
+* **`initialReporters`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all InitialReporters.
+* **`feeWindows`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all FeeWindows.
+* **`totals`** (<a href="#GasEstimateTotals">GasEstimateTotals</a>) Object containing total gas estimates for each type of contract.
+
+<a name="GasEstimateTotals"></a>
+### GasEstimateTotals  (Object)
+
+* **`disputeCrowdsourcers`** (BigNumber) Total gas estimate for redeeming all DisputeCrowdsourcer reporting fees.
+* **`initialReporters`** (BigNumber) Total gas estimate for redeeming all InitialReporter reporting fees.
+* **`feeWindows`** (BigNumber) Total gas estimate for redeeming all FeeWindow reporting fees.
+* **`all`** (BigNumber) Sum of all gas estimates.
 
 <a name="InitialReporter"></a>
 ### InitialReporter  (Object)
@@ -280,6 +311,12 @@ Serves as an enum for the state of an order.
   * **`queued`**  (string) Description pending.
   * **`unrealized`**  (string) Description pending.
 
+<a name="RedeemableContract"></a>
+### RedeemableContract  (Object)
+
+* **`address`** (string) Ethereum contract address of a FeeWindow, DisputeCrowdsourcer, or InitialReporter from which to redeem fees.
+* **`type`** (number) Type of smart contract from which to redeem reporting fees. Can be specified using the enum `augur.constants.CONTRACT_TYPE`.
+
 <a name="Report"></a>
 ### Report  (Object)
 
@@ -324,7 +361,7 @@ Serves as an enum for the state of a Market.
 * **`sharesDepleted`** (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.
 * **`otherSharesDepleted`** (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.
 * **`tokensDepleted`** (string) Projected number of tokens spent on this trade, as a base-10 string.
-* **`shareBalances`** (Array.<string>}  Projected final balances after the trade is complete, as an array of base-10 strings.
+* **`shareBalances`** (Array.&lt;string>}  Projected final balances after the trade is complete, as an array of base-10 strings.
 
 <a name="SingleOutcomeOrderBook"></a>
 ### SingleOutcomeOrderBook  (Object)
