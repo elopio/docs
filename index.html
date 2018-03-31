@@ -2111,7 +2111,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.marketIds</code></strong>  (Array.<string>) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.</li>
+<li><strong><code class="prettyprint">p.marketIds</code></strong>  (Array.&lt;string&gt;) Contract addresses of the Markets for which to get unclaimed Creator Fees, as 20-byte hexadecimal values.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Market Creator Fee information has been retrieved.</li>
 </ul>
@@ -2124,6 +2124,43 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="reporting-functions">Reporting Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reporting Simplified API Examples:</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">claimReportingFees</span><span class="p">({</span>
+  <span class="na">redeemer</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
+  <span class="na">redeemableContracts</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">address</span><span class="p">:</span> <span class="s2">"0xb9109e49bf49f886e546d560d515ca53db83f62f"</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CONTRACT_TYPE</span><span class="p">.</span><span class="nx">INITIAL_REPORTER</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">address</span><span class="p">:</span> <span class="s2">"0xaaa09e49bf49f886e546d560d515ca53db83f62f"</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CONTRACT_TYPE</span><span class="p">.</span><span class="nx">DISPUTE_CROWDSOURCER</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="na">address</span><span class="p">:</span> <span class="s2">"0x161c723cac007e4283cee4ba11b15277e46eec53"</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CONTRACT_TYPE</span><span class="p">.</span><span class="nx">FEE_WINDOW</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">],</span> 
+  <span class="na">estimateGas</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="kc">null</span>
+<span class="p">{</span>
+  <span class="s2">"redeemedFeeWindows"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0x161c723cac007e4283cee4ba11b15277e46eec53"</span>
+  <span class="p">],</span>
+  <span class="s2">"redeemedDisputeCrowdsourcers"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0xaaa09e49bf49f886e546d560d515ca53db83f62f"</span>
+  <span class="p">],</span>
+  <span class="s2">"redeemedInitialReporters"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"0xb9109e49bf49f886e546d560d515ca53db83f62f"</span>
+  <span class="p">],</span>
+  <span class="s2">"failedTransactions"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">finalizeMarket</span><span class="p">({</span>
   <span class="na">market</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
@@ -2404,6 +2441,28 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"1.2345"</span>
 </code></pre></div>
+<h3 id="augur-reporting-claimreportingfees-p-callback">augur.reporting.claimReportingFees(p, callback)</h3>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p.redeemer</code></strong>  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.redeemableContracts</code></strong>  (Array.&lt;<a href="#RedeemableContract">RedeemableContract</a>&gt;) Array of objects containing contract address and contract type pairs.</li>
+<li><strong><code class="prettyprint">p.estimateGas</code></strong>  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.</li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function)  Called after all transactions have been attempted.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which fees were successfully claimed or a breakdown of gas estimates.</li>
+</ul>
+
 <h3 id="augur-reporting-finalizemarket-p">augur.reporting.finalizeMarket(p)</h3>
 
 <p><a href="#finalized-market">Finalizes</a> a <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
@@ -3351,7 +3410,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.<string>) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.</li>
+<li>(Array.&lt;string&gt;) Array of Market addresses from which trading proceeds were attempted to be claimed, as 20-byte hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-trading-claimtradingproceeds-p">augur.trading.claimTradingProceeds(p)</h3>
@@ -6744,7 +6803,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+<li>(Array.&lt;string&gt;) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
 </ul>
 
 <h3 id="augur-api-ordersfetcher-descendorderlist-p-callback">augur.api.OrdersFetcher.descendOrderList(p, callback)</h3>
@@ -6767,7 +6826,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+<li>(Array.&lt;string&gt;) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
 </ul>
 
 <h3 id="augur-api-ordersfetcher-findboundingorders-p-callback">augur.api.OrdersFetcher.findBoundingOrders(p, callback)</h3>
@@ -6793,7 +6852,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Array.<string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+<li>(Array.&lt;string&gt;) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
 </ul>
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
@@ -12545,6 +12604,18 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">worseOrderId</code></strong> (string|null) ID of the order with the next worse price over the specified order ID, as a hexadecimal string.</li>
 </ul>
 
+<p><a name="ClaimReportingFeesInfo"></a></p>
+
+<h3 id="claimreportingfeesinfo-object">ClaimReportingFeesInfo  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">redeemedFeeWindows</code></strong> (Array.&lt;string&gt;|null) Ethereum contract addresses of all successfully redeemed Fee Windows, as hexadecimal strings. Not set if <code class="prettyprint">p.estimateGas</code> is true.</li>
+<li><strong><code class="prettyprint">redeemedDisputeCrowdsourcers</code></strong> (Array.&lt;string&gt;|null) Ethereum contract addresses of all successfully redeemed Dispute Crowdsourcers, as hexadecimal strings.  Not set if <code class="prettyprint">p.estimateGas</code> is true.</li>
+<li><strong><code class="prettyprint">redeemedInitialReporters</code></strong> (Array.&lt;string&gt;|null) Ethereum contract addresses of all successfully redeemed Initial Reporters, as hexadecimal strings.  Not set if <code class="prettyprint">p.estimateGas</code> is true.</li>
+<li><strong><code class="prettyprint">gasEstimates</code></strong> (<a href="#GasEstimateInfo">GasEstimateInfo</a>|null) Object containing a breakdown of gas estimates for all reporting fee redemption transactions. Not set if <code class="prettyprint">p.estimateGas</code> is false.</li>
+<li><strong><code class="prettyprint">failedTransactions</code></strong> (Array.&lt;<a href="#FailedTransaction">FailedTransaction</a>&gt;) Array of FailedTransaction objects containing error information about each failed transaction.</li>
+</ul>
+
 <p><a name="ContractAddresses"></a></p>
 
 <h3 id="contractaddresses-object">ContractAddresses  (Object)</h3>
@@ -12646,6 +12717,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
 </ul>
 
+<p><a name="FailedTransaction"></a></p>
+
+<h3 id="failedtransaction-object">FailedTransaction  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) Ethereum address of contract that returned a transaction error.</li>
+<li><strong><code class="prettyprint">error</code></strong> (RPCError|Error) Error that occurred when attempting to make a transaction to the contract.</li>
+</ul>
+
 <p><a name="FeeWindowCurrent"></a></p>
 
 <h3 id="feewindowcurrent-object">FeeWindowCurrent  (Object)</h3>
@@ -12661,6 +12741,28 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 <li><strong><code class="prettyprint">totalStake</code></strong> (number) &lt;optional&gt; If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)</li>
+</ul>
+
+<p><a name="GasEstimateInfo"></a></p>
+
+<h3 id="gasestimateinfo-object">GasEstimateInfo  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">disputeCrowdsourcers</code></strong> (Array.&lt;Object&gt;) Array of objects containing contract address/gas estimate pairs for all DisputeCrowdsourcers.</li>
+<li><strong><code class="prettyprint">initialReporters</code></strong> (Array.&lt;Object&gt;) Array of objects containing contract address/gas estimate pairs for all InitialReporters.</li>
+<li><strong><code class="prettyprint">feeWindows</code></strong> (Array.&lt;Object&gt;) Array of objects containing contract address/gas estimate pairs for all FeeWindows.</li>
+<li><strong><code class="prettyprint">totals</code></strong> (<a href="#GasEstimateTotals">GasEstimateTotals</a>) Object containing total gas estimates for each type of contract.</li>
+</ul>
+
+<p><a name="GasEstimateTotals"></a></p>
+
+<h3 id="gasestimatetotals-object">GasEstimateTotals  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">disputeCrowdsourcers</code></strong> (BigNumber) Total gas estimate for redeeming all DisputeCrowdsourcer reporting fees.</li>
+<li><strong><code class="prettyprint">initialReporters</code></strong> (BigNumber) Total gas estimate for redeeming all InitialReporter reporting fees.</li>
+<li><strong><code class="prettyprint">feeWindows</code></strong> (BigNumber) Total gas estimate for redeeming all FeeWindow reporting fees.</li>
+<li><strong><code class="prettyprint">all</code></strong> (BigNumber) Sum of all gas estimates.</li>
 </ul>
 
 <p><a name="InitialReporter"></a></p>
@@ -12865,6 +12967,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">unrealized</code></strong>  (string) Description pending.</li>
 </ul>
 
+<p><a name="RedeemableContract"></a></p>
+
+<h3 id="redeemablecontract-object">RedeemableContract  (Object)</h3>
+
+<ul>
+<li><strong><code class="prettyprint">address</code></strong> (string) Ethereum contract address of a FeeWindow, DisputeCrowdsourcer, or InitialReporter from which to redeem fees.</li>
+<li><strong><code class="prettyprint">type</code></strong> (number) Type of smart contract from which to redeem reporting fees. Can be specified using the enum <code class="prettyprint">augur.constants.CONTRACT_TYPE</code>.</li>
+</ul>
+
 <p><a name="Report"></a></p>
 
 <h3 id="report-object">Report  (Object)</h3>
@@ -12919,7 +13030,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">sharesDepleted</code></strong> (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">otherSharesDepleted</code></strong> (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">tokensDepleted</code></strong> (string) Projected number of tokens spent on this trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">shareBalances</code></strong> (Array.<string>}  Projected final balances after the trade is complete, as an array of base-10 strings.</li>
+<li><strong><code class="prettyprint">shareBalances</code></strong> (Array.&lt;string&gt;}  Projected final balances after the trade is complete, as an array of base-10 strings.</li>
 </ul>
 
 <p><a name="SingleOutcomeOrderBook"></a></p>
@@ -13125,6 +13236,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a <a href="#dispute-round-phase">Dispute Round</a> can last.</li>
 <li>FORK_DURATION_SECONDS - Maximum number of seconds a <a href="#fork-period">Fork Period</a> can last.</li>
 </ul>
+
+<h3 id="augur-constants-contract_type-object">augur.constants.CONTRACT_TYPE (Object)</h3>
+
+<p>Object that acts as an enum for different types of smart contracts.</p>
 
 <h3 id="augur-constants-create_binary_market_gas-string">augur.constants.CREATE_BINARY_MARKET_GAS (string)</h3>
 
