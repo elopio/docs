@@ -229,11 +229,6 @@ A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur with
 
 A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#share) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
-<!-- TODO: Remove this section and links to it. -->
-## Market Awaiting Finalization
-
-Market Awaiting Finalization occurs when a [Market](#market) has been [Reported](#report) on and has a [Tentative Outcome](#tentative-outcome), but has not gotten past the [Dispute Round Phase](#dispute-round-phase) or [Fork Phase](#fork-phase). If a Market is in the Dispute Round Phase and does not have its Tentative Outcome [Challenged](#challenge) for 7 days, or if it has gotten past the Fork Phase, it becomes a [Finalized Market](#finalized-market) with a [Final Outcome](final-outcome).
-
 ## Market Creator
 
 A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can set the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#share) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., [Binary](#binary-market), [Categorical](#categorical-market), or [Scalar](#scalar-market)), the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
@@ -292,10 +287,9 @@ Open Reporting occurs if a [Market's](#market) [Designated Reporter](#designated
 
 In the event that a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](#designated-report), the Market moves to the Open Reporting Phase. When this happens, any user can submit a [First Public Report](#first-public-report) by [Staking](#first-public-reporter-stake) [REP](#rep) on an [Outcome](#outcome).
 
-<!-- TODO: Confirm that an Order still consists of the listed parts. -->
 ## Order
 
-An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#share) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the order was created during, the amount of currency or Shares escrowed in the order by the Order Creator for their half of the trade.
+An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#share) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the Order was created during, the amount of currency or Shares escrowed in the Order by the Order Creator for their half of the trade.
 
 ## Order Book
 
@@ -323,7 +317,7 @@ At any time during a [Fee Window](#fee-window), users can purchase Participation
 
 ## Payout Distribution Hash
 
-The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). When a [Market](#market) is [Awaiting Finalization](#market-awaiting-finalization), it is said to have a tentative Payout Distribution Hash. Once the Market is Finalized, this tentative hash becomes the winning Payout Distribution Hash. Payout Distribution Hashes of [Forked Markets](#forked-market) are used as identifiers for [Child Universes](#child-universe) and [Parent Universes](#parent-universe).
+The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). When a [Market](#market)'s event has occurred, but the Market has not been Finalized yet, it is said to have a tentative Payout Distribution Hash. Once the Market is Finalized, this tentative hash becomes the winning Payout Distribution Hash. Payout Distribution Hashes of [Forked Markets](#forked-market) are used as identifiers for [Child Universes](#child-universe) and [Parent Universes](#parent-universe).
 
 ## Payout Set
 
@@ -370,11 +364,11 @@ The Reporting Fee is used to help pay for Augur's [Decentralized Oracle](#decent
 
 The Reporting Fee is a dynamic amount based on the price of [REP](#rep) and the value of the [Open Interest](#open-interest) across all of Augur's [Markets](#market). Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the Open Interest across all of Augur's markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.
 
-The Reporting Fee is sent to the [Fee Window](#fee-window) that contains the Market being traded on, and is later used to pay REP holders for Staking on the [Outcomes](#outcome) of the Market other than the [Tentative Outcome](#tentative-outcome).
+The Reporting Fee is sent to the [Fee Window](#fee-window) that contains the Market being traded on, and is later used to pay REP holders for engaging in [Reporting](#report).
 
 ## Reporting Fee Pool
 
-Any [Settlement Fees](#settlement-fees) (in ETH) collected during a [Fee Window](#fee-window) get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of [REP](#rep) they [Staked](#dispute-stake) during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Open Reporting](#open-reporting), [Challenging](#challenge) an [Outcome](#outcome, or simply purchasing [Participation Tokens](#participation-token) directly.
+Any [Settlement Fees](#settlement-fees) (in ETH) collected during a [Fee Window](#fee-window) get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of [REP](#rep) they [Staked](#dispute-stake) during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Open Reporting](#open-reporting), [Challenging](#challenge) an [Outcome](#outcome), or simply purchasing [Participation Tokens](#participation-token) directly.
 
 ## Scalar Market
 
