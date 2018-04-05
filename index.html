@@ -13417,9 +13417,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the <a href="https://github.com/MikeMcl/bignumber.js">BigNumber</a> data type.</p>
 
-<h2 id="dates">Dates</h2>
+<h2 id="dates-timestamps">Dates/Timestamps</h2>
 
-<p>In general, the current timestamp should only ever be obtained using the value <code class="prettyprint">blockchain.currentAugurTimestamp</code> (as opposed to calling the JavaScript function <code class="prettyprint">Date.now</code>). This value can be obtained using the selectors <code class="prettyprint">getCurrentTimestampInSeconds</code> (which returns the timestamp of the latest block on the Ethereum blockchain) or <code class="prettyprint">getCurrentTimestamp</code> (which returns the same timestamp, in milliseconds).</p>
+<p>In general, the current timestamp should only ever be obtained using the value <code class="prettyprint">blockchain.currentAugurTimestamp</code> (as opposed to calling the JavaScript function <code class="prettyprint">Date.now</code>). This value can be obtained using the selectors <code class="prettyprint">getCurrentTimestampInSeconds</code> (which returns the timestamp of the latest block on the Ethereum blockchain) or <code class="prettyprint">getCurrentTimestamp</code> (which returns the same timestamp, in milliseconds). This means that <code class="prettyprint">Date.now()</code> should not be used, and <code class="prettyprint">moment()</code> and <code class="prettyprint">new Date()</code> should not be used for getting the current timestamp.</p>
 
 <h2 id="modules">Modules</h2>
 <div class="highlight"><pre class="highlight javascript"><code>  <span class="c1">// Modules Conventions</span>
@@ -14137,9 +14137,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not <a href="#invalid-outcome">Invalid</a>.</p>
 
-<p>The Validity Bond is a dynamic amount based on the percentage of Markets in Augur that are being <a href="#finalized-market">Finalized</a> as Invalid. Augur targets having 1% of its Markets Finalized as Invalid. This means that this amount will go up if the percentage of Markets that Finalized as Invalid in the last Fee Window is greater than 1% and will go down if that percentage is lower than 1%.</p>
-
-<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the Validity Bond will be set at 0.01 ETH. Then, if more than 1% of the Finalized Markets in the previous Fee Window were Invalid, the Validity Bond will be increased. If less than 1% of the Finalized Markets in the previous Fee window were Invalid, then the Validity Bond will be decreased (but will never be lower than 0.01 ETH). In particular, we let ν be the proportion of Finalized Markets in the previous Fee Window that were Invalid, and b<sub>v</sub> be the amount of the Validity Bond from the previous Fee Window. Then the Validity Bond for the current window is max &#123;1/100, b<sub>v</sub>f(ν)&#125;.</p>
+<p>The Validity Bond is a dynamic amount based on the percentage of Markets in Augur that are being <a href="#finalized-market">Finalized</a> as Invalid. Augur targets having 1% of its Markets Finalized as Invalid. During the very first <a href="#fee-window">Fee Window</a> after launch, the Validity Bond will be set at 0.01 ETH. Then, if more than 1% of the Finalized Markets in the previous Fee Window were Invalid, the Validity Bond will be increased. If less than 1% of the Finalized Markets in the previous Fee window were Invalid, then the Validity Bond will be decreased (but will never be lower than 0.01 ETH). In particular, we let ν be the proportion of Finalized Markets in the previous Fee Window that were Invalid, and b<sub>v</sub> be the amount of the Validity Bond from the previous Fee Window. Then the Validity Bond for the current window is max &#123;1/100, b<sub>v</sub>f(ν)&#125;.</p>
 
 <h2 id="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</h2>
 
