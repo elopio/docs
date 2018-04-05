@@ -5,9 +5,9 @@ Numbers
 -------
 Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the [BigNumber](https://github.com/MikeMcl/bignumber.js) data type.
 
-Dates
+Dates/Timestamps
 ----- 
-In general, the current timestamp should only ever be obtained using the value `blockchain.currentAugurTimestamp` (as opposed to calling the JavaScript function `Date.now`). This value can be obtained using the selectors `getCurrentTimestampInSeconds` (which returns the timestamp of the latest block on the Ethereum blockchain) or `getCurrentTimestamp` (which returns the same timestamp, in milliseconds).
+In general, the current timestamp should only ever be obtained using the value `blockchain.currentAugurTimestamp` (as opposed to calling the JavaScript function `Date.now`). This value can be obtained using the selectors `getCurrentTimestampInSeconds` (which returns the timestamp of the latest block on the Ethereum blockchain) or `getCurrentTimestamp` (which returns the same timestamp, in milliseconds). This means that `Date.now()` should not be used, and `moment()` and `new Date()` should not be used for getting the current timestamp.
 
 Modules
 -------
