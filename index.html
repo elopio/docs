@@ -13754,31 +13754,27 @@ Goals:
 
 <p><a href="#market-creator">Market Creators</a> must put up a Designated Report No-Show Bond (or No-Show Bond, for brevity) when creating a new <a href="#market">Market</a>. The No-Show Bond is comprised of two parts: the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> and the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>. If the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> then the No-Show Bond is returned to the Market Creator. Otherwise, the No-Show Bond is given to the <a href="#first-public-reporter">First Public Reporter</a> to cover the Stake in their Reported <a href="#outcome">Outcome</a>, and potentially their gas cost for submitting the report (if the Outcome they staked on becomes the <a href="#final-outcome">Final Outcome</a>).</p>
 
-<!-- TODO: Add explanation for how the exact Designated Report No-Show Gas Bond is calculated. (Need to verify if formula is gas to report * avg gas price in last window * 2) -->
-
 <h2 id="designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</h2>
 
 <p>The Designated Report No-Show Gas Bond (or No-Show Gas Bond for brevity) is paid for using ETH by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. This Bond is completely refunded to the Market Creator as soon as the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Reporting Phase and a <a href="#first-public-reporter">First Public Reporter</a> submitting a Report instead. When a First Public Reporter submits a <a href="#first-public-report">First Public Report</a>, they are required to pay the gas cost. However, if the <a href="#outcome">Outcome</a> of the First Public Report becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter will receive the No-Show Gas Bond when the Market is <a href="#finalized-market">Finalized</a>.</p>
 
-<!-- TODO: Add explanation for how the exact Designated Report No-Show REP Bond is calculated (https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol#L331). -->
+<p>The No-Show Gas Bond is set at twice the average gas cost for <a href="#report">Reporting</a> during the previous <a href="#fee-window">Fee Window</a>.</p>
 
 <h2 id="designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</h2>
 
 <p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
 
-<p>The No-Show REP Bond is not a static value.  It rises as more Designated Reporters fail to Report within the Designated Reporting Phase and falls as more of them do Report within the Designated Reporting Phase. It is calculated differently than the <a href="#designated-reporter-stake">Designated Reporter Stake</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise the <a href="#fork-threshold">Fork Threshold</a> to cause a <a href="#fork">Fork</a>.</p>
+<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show REP Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show REP Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show REP Bond from the previous Fee Window. Then the amount of the No-Show REP Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
 
 <h2 id="designated-reporter">Designated Reporter</h2>
 
 <p>A Designated Reporter is a single Ethereum address designated to submit the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. The Designated Reporter is set by the <a href="#market-creator">Market Creator</a> during Market creation. All Markets must have a Designated Reporter.</p>
 
-<!-- TODO: Add explanation for how the exact Designated Reporter Stake is calculated. -->
-
 <h2 id="designated-reporter-stake">Designated Reporter Stake</h2>
 
 <p>When a <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a>, they must put up an amount of REP on an <a href="#outcome">Outcome</a> that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>.</p>
 
-<p>The Designated Reporter Stake is not a static value. It rises as more Designated Reporters Report incorrectly and falls as more of them report correctly. It is calculated differently than the <a href="#designated-reporter-no-show-rep-bond">No-Show REP Bond</a>; however, their minimum values (0.175 REP) are the same to guarantee that a maximum of 20 7-day <a href="#dispute-round">Dispute Rounds</a> are required in order to raise the <a href="#fork-threshold">Fork Threshold</a> to cause a <a href="#fork">Fork</a>.</p>
+<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the amount of the Designated Reporter Stake will be set at 0.35 <a href="#rep">REP</a>. The amount of the Designated Reporter Stake is dynamically adjusted according to how many <a href="#designated-report">Designated Reports</a> were incorrect (failed to concur with the <a href="#market">Market&rsquo;s</a> <a href="#final-outcome">Final Outcome</a>) during the previous Fee Window. In particular, we let δ be the proportion of Designated Reports that were incorrect during the previous Fee Window, and we let b<sub>d</sub> be the amount of the Designated Reporter Stake during the previous Fee Window, then the amount of the Designated Reporter Stake for the current Fee Window is max &#123;0.35, b<sub>d</sub>f(δ)&#125;.</p>
 
 <h2 id="designated-reporting">Designated Reporting</h2>
 
@@ -14057,8 +14053,6 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>A Position is the amount of <a href="#share">Shares</a> that are owned (a <a href="#long-position">Long Position</a>) or borrowed and then sold (a <a href="#short-position">Short Position</a>) by an individual. A Position can be profitable or unprofitable, depending on <a href="#market">Market</a> movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a Short Position means a trader is buying Shares of an <a href="#outcome">Outcome</a> they are short on, whereas closing a Long Position means they are selling the Shares they own.</p>
 
-<!-- TODO: Make sure this lines up with what's in the white paper. -->
-
 <h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
 
 <p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.</p>
@@ -14075,13 +14069,11 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>A Reporter is a <a href="#rep">REP</a> holder who Stakes <a href="#rep">REP</a> on an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> that has an <a href="#end-time">End Time</a> that has passed. Reporters can include the <a href="#designated-reporter">Designated Reporter</a>, <a href="#first-public-reporter">First Public Reporter</a>, or users who <a href="#">Challenge</a> a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> REP on an Outcome other than the Tentative Outcome.</p>
 
-<!-- TODO: Add better explanation on how Reporting Fee is calculated. (Actual code for this is in Universe:getOrCacheReportingFeeDivisor) -->
-
 <h2 id="reporting-fee">Reporting Fee</h2>
 
 <p>The Reporting Fee is used to help pay for Augur&rsquo;s <a href="#decentralized-oracle">Decentralized Oracle</a> system. When <a href="#share">Shares</a> are <a href="#settlement">Settled</a> (i.e., destroyed), before paying out to the Share holders, Augur will extract <a href="#settlement-fees">Settlement Fees</a> in ETH. These Settlement Fees include the <a href="#creator-fee">Creator Fee</a> and the Reporting Fee. </p>
 
-<p>The Reporting Fee is a dynamic amount based on the price of <a href="#rep">REP</a> and the value of the <a href="#open-interest">Open Interest</a> across all of Augur&rsquo;s <a href="#market">Markets</a>. Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the Open Interest across all of Augur&rsquo;s markets. This means the Reporting Fee will go up if the market cap of REP is not sufficiently high and will go down if it is higher than this target.</p>
+<p>The Reporting Fee is a dynamic amount based on the price of <a href="#rep">REP</a> and the value of the <a href="#open-interest">Open Interest</a> across all of Augur&rsquo;s <a href="#market">Markets</a>. Augur sets the Reporting Fee so as to target a REP market cap that is 7.5 times the value of the <a href="#open-interest">Open Interest</a> across all of Augur&rsquo;s markets. This means the <a href="#reporting-fee">Reporting Fee</a> will go up if the market cap of REP is not sufficiently high (but will never be higher than 33.3%) and will go down if it is higher than this target.</p>
 
 <p>The Reporting Fee is sent to the <a href="#fee-window">Fee Window</a> that contains the Market being traded on, and is later used to pay REP holders for engaging in <a href="#report">Reporting</a>.</p>
 
@@ -14141,13 +14133,13 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>All <a href="#market">Markets</a> created on Augur belong to a Universe. Augur has only one Universe at launch (the [Genesis Universe]), but more can be created in the rare event of a <a href="#fork">Fork</a>. The Universe in which a Fork occurs will become a <a href="#locked-universe">Locked Universe</a> and new <a href="#child-universes">Child Universes</a> will be created, one for each <a href="#outcome">Outcome</a> of the <a href="#forked-market">Forked Market</a>. Once a <a href="#fork-period">Fork Phase</a> begins, <a href="#rep">REP</a> holders can choose to migrate their REP to one of the new Child Universes. They don&rsquo;t have to migrate, but Locked Universes do not allow the creation of new Markets, and therefore there will be no Markets to <a href="#report">Report</a> on in the future and no <a href="#reporting-fees">Fees</a> to earn. All Child Universes can continue to operate after the <a href="#fork-period">Fork Phase</a> ends.</p>
 
-<!-- TODO: Add better desription on how the Validity Bond amount is calculated. -->
-
 <h2 id="validity-bond">Validity Bond</h2>
 
 <p>The Validity Bond is paid by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. The bond is paid in ETH and is refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the <a href="#market">Market</a> is not <a href="#invalid-outcome">Invalid</a>.</p>
 
 <p>The Validity Bond is a dynamic amount based on the percentage of Markets in Augur that are being <a href="#finalized-market">Finalized</a> as Invalid. Augur targets having 1% of its Markets Finalized as Invalid. This means that this amount will go up if the percentage of Markets that Finalized as Invalid in the last Fee Window is greater than 1% and will go down if that percentage is lower than 1%.</p>
+
+<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the Validity Bond will be set at 0.01 ETH. Then, if more than 1% of the Finalized Markets in the previous Fee Window were Invalid, the Validity Bond will be increased. If less than 1% of the Finalized Markets in the previous Fee window were Invalid, then the Validity Bond will be decreased (but will never be lower than 0.01 ETH). In particular, we let ν be the proportion of Finalized Markets in the previous Fee Window that were Invalid, and b<sub>v</sub> be the amount of the Validity Bond from the previous Fee Window. Then the Validity Bond for the current window is max &#123;1/100, b<sub>v</sub>f(ν)&#125;.</p>
 
 <h2 id="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</h2>
 
