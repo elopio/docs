@@ -173,7 +173,7 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <p>Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the <a href="#rep">REP</a> price. This Market will act just like a regular Market and it will go through the <a href="#dispute-round">Dispute Rounds</a> process in order to be <a href="#market-resolution">Resolved</a>. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.</p>
 
-<p>The Augur contracts will track the open interest of all Markets passively as people interact with Augur, which allows Augur to always have access to the open interest numbers. Once the open interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:</p>
+<p>The Augur contracts will track the <a href="#open-interest">Open Interest</a> of all Markets passively as people interact with Augur, which allows Augur to always have access to the Open Interest numbers. Once the Open Interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:</p>
 
 <p><code class="prettyprint">current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)</code></p>
 
@@ -13984,7 +13984,7 @@ Goals:
 
 <h2 id="open-interest">Open Interest</h2>
 
-<p>Open Interest is the number of <a href="#complete-set">Complete Sets</a> that exist in a <a href="#market">Market</a>.</p>
+<p>Open Interest is the value of all of the <a href="#complete-set">Complete Sets</a> that exist in a <a href="#market">Market</a>, normalized to the denomination token for all of the Markets (which is currently ETH).</p>
 
 <h2 id="open-order">Open Order</h2>
 
@@ -14000,7 +14000,7 @@ Goals:
 
 <h2 id="order">Order</h2>
 
-<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#share">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#order-creator">Creator</a> of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the <a href="#market">Market</a> the Order is trading on, the <a href="#outcome">Outcome</a> the Order is concerned with buying or selling, the Order Creator&rsquo;s address, the price per share, the amount of shares to trade, what block number the Order was created during, the amount of currency or Shares escrowed in the Order by the Order Creator for their half of the trade.</p>
+<p>An Order can be thought of as the recorded interest of a user to execute a trade of some amount of <a href="#share">Shares</a> at a defined price point. Orders come in two types, <a href="#bid-order">Bid Orders</a> and <a href="#ask-order">Ask Orders</a>, which indicate an attempt to buy or sell respectively. The <a href="#order-creator">Creator</a> of the Order will also need to escrow currency or Shares in order to provide their part of the trade. The information stored in an Order is as follows: the type of Order, the <a href="#market">Market</a> the Order is trading on, the <a href="#outcome">Outcome</a> the Order is concerned with buying or selling, the Order Creator&rsquo;s address, the price per share, the amount of shares to trade, what block number the Order was created during, the amount of currency or Shares escrowed in the Order by the Order Creator for their part of the trade.</p>
 
 <h2 id="order-book">Order Book</h2>
 
@@ -14012,7 +14012,7 @@ Goals:
 
 <h2 id="order-filler">Order Filler</h2>
 
-<p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#share">Shares</a> to fill the Open Order and complete their half of the trade described in the <a href="#order">Order</a>.</p>
+<p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#share">Shares</a> to fill the Open Order and complete their part of the trade described in the <a href="#order">Order</a>.</p>
 
 <h2 id="outcome">Outcome</h2>
 
