@@ -272,7 +272,7 @@ For Scalar Markets, the Number of Ticks is determined implicitly by the range an
 
 ## Open Interest
 
-Open Interest is the number of [Complete Sets](#complete-set) that exist in a [Market](#market).
+Open Interest is the value of all of the [Complete Sets](#complete-set) that exist in a [Market](#market), normalized to the denomination token for all of the Markets (which is currently ETH).
 
 ## Open Order
 
@@ -288,7 +288,7 @@ In the event that a [Market's](#market) [Designated Reporter](#designated-report
 
 ## Order
 
-An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#share) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their half of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the Order was created during, the amount of currency or Shares escrowed in the Order by the Order Creator for their half of the trade.
+An Order can be thought of as the recorded interest of a user to execute a trade of some amount of [Shares](#share) at a defined price point. Orders come in two types, [Bid Orders](#bid-order) and [Ask Orders](#ask-order), which indicate an attempt to buy or sell respectively. The [Creator](#order-creator) of the Order will also need to escrow currency or Shares in order to provide their part of the trade. The information stored in an Order is as follows: the type of Order, the [Market](#market) the Order is trading on, the [Outcome](#outcome) the Order is concerned with buying or selling, the Order Creator's address, the price per share, the amount of shares to trade, what block number the Order was created during, the amount of currency or Shares escrowed in the Order by the Order Creator for their part of the trade.
 
 ## Order Book
 
@@ -300,7 +300,7 @@ An Order Creator is the person who places an [Order](#order) on the [Order Book]
 
 ## Order Filler
 
-An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Order Fillers send currency or [Shares](#share) to fill the Open Order and complete their half of the trade described in the [Order](#order).
+An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Order Fillers send currency or [Shares](#share) to fill the Open Order and complete their part of the trade described in the [Order](#order).
 
 ## Outcome
 

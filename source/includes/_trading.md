@@ -25,7 +25,7 @@ Augur also extracts Fees to help support the [Reporting System](#reporting) know
 
 Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the [REP](#rep) price. This Market will act just like a regular Market and it will go through the [Dispute Rounds](#dispute-round) process in order to be [Resolved](#market-resolution). Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.
 
-The Augur contracts will track the open interest of all Markets passively as people interact with Augur, which allows Augur to always have access to the open interest numbers. Once the open interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:
+The Augur contracts will track the [Open Interest](#open-interest) of all Markets passively as people interact with Augur, which allows Augur to always have access to the Open Interest numbers. Once the Open Interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:
 
 `current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)`
 
