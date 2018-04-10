@@ -213,7 +213,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`volume`** (string|number) Trading volume for this Outcome. (Method for calculating this is pending.)
 * **`outstandingShares`** (string|number) Total shares in the Market. (Method for calculating this is pending.)
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
-* **`endDate`** (number) Timestamp when the Market event ends, in seconds.
+* **`endTime`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationTime`** (number|null) Timestamp when the Market was finalized (if any), in seconds.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
 * **`description`** (string) Description of the Market.

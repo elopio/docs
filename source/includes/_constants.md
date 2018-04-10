@@ -57,7 +57,7 @@ Default maximum gas limit Augur uses when making transactions, as a hexadecimal 
 
 ### augur.constants.DEFAULT_NETWORK_ID (string)
 
-Description pending.
+Default Ethereum network to connect to.
 
 ### augur.constants.DEFAULT_NUM_TICKS (Object)
 
