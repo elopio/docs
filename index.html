@@ -175,7 +175,7 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <p>The Augur contracts will track the <a href="#open-interest">Open Interest</a> of all Markets passively as people interact with Augur, which allows Augur to always have access to the Open Interest numbers. Once the Open Interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:</p>
 
-<p><code class="prettyprint">current_reporting_fee * (augur_open_interest * 5 / rep_market_cap)</code></p>
+<p><code class="prettyprint">current_reporting_fee * (augur_open_interest * 7.5 / rep_market_cap)</code></p>
 
 <p>The Reporting Fee will be updated once every 7 days, or once every <a href="#fee-window">Fee Window</a>. If updates where to occur too frequently, the Market will not have time to adjust to the new fees. If we update too infrequently, then we are at risk of the security model becoming invalid due to a sudden growth in Augur that isn&rsquo;t yet accounted for by the fee system.</p>
 
@@ -1770,7 +1770,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
     <span class="nx">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+    <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
     <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1845,7 +1845,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">outstandingShares</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
     <span class="nx">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="nx">endDate</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
+    <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a binary test market created by b0b."</span><span class="p">,</span>
     <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -12832,7 +12832,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">volume</code></strong> (string|number) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
 <li><strong><code class="prettyprint">outstandingShares</code></strong> (string|number) Total shares in the Market. (Method for calculating this is pending.)</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">endDate</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
+<li><strong><code class="prettyprint">endTime</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
 <li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
 <li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
@@ -13271,7 +13271,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-default_network_id-string">augur.constants.DEFAULT_NETWORK_ID (string)</h3>
 
-<p>Description pending.</p>
+<p>Default Ethereum network to connect to.</p>
 
 <h3 id="augur-constants-default_num_ticks-object">augur.constants.DEFAULT_NUM_TICKS (Object)</h3>
 
