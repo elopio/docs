@@ -1440,6 +1440,31 @@ augur.reporting.getInitialReporters({
   },
 }
 
+augur.reporting.getReportingFees({
+  universe: "0x000000000000000000000000000000000000000b",
+  reporter: "0x0000000000000000000000000000000000000b0b",
+}, function (error, result) {
+  console.log(result);
+});
+// example output:
+{
+  total: {
+    "unclaimedEth": "107.87878787878787879",
+    "unclaimedRepStaked": "2",
+    "unclaimedRepEarned": "3",
+    "claimedEth": "4",
+    "claimedRepStaked": "5",
+    "claimedRepEarned": "6",
+  },
+  crowdsourcers: [],
+  feeWindows: [
+    "0x1000000000000000000000000000000000000000",
+    "0x3000000000000000000000000000000000000000",
+    "0x2000000000000000000000000000000000000000",
+  ],
+  initialReporters: [],
+}
+
 augur.reporting.getReportingHistory({
   reporter: "0x0000000000000000000000000000000000000021",
   universe: "0x000000000000000000000000000000000000000b",
@@ -1644,6 +1669,21 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 #### **Returns:**
 
 * (Object) Object containing <a href="#InitialReporter">InitialReporter</a> objects, keyed by the Ethereum contract address of the InitialReporter.
+
+### augur.reporting.getReportingFees(p, callback)
+
+Returns information about the clamed and unclaimed ETH and REP a user has in a specific [Universe](#universe) or [Fee Window](#fee-window).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting fees, as a 20-byte hexadecimal string.
+    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the reporting fees, as a 20-byte hexadecimal string. Either this parameter or the Fee Window must be specified.
+    * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window in which to look up the reporting fees, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
+
+#### **Returns:**
+
+* (<a href="#FeeDetails">FeeDetails</a>) information about the clamed and unclaimed ETH and REP a user has in a specific Universe or Fee Window.
 
 ### augur.reporting.getReportingHistory(p, callback)
 

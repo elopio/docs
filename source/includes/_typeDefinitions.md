@@ -132,6 +132,27 @@ Serves as an enum for the state of a Dispute Token.
 * **`address`** (string) Ethereum address of contract that returned a transaction error.
 * **`error`** (RPCError|Error) Error that occurred when attempting to make a transaction to the contract.
 
+<a name="FeeDetails"></a>
+### FeeDetails  (Object)
+
+#### **Properties:** 
+* **`total`** (Object) Object containing information about claimed and unclaimed ETH and REP.
+* **`feeWindows`** (Array.<string>) Array of FeeWindow contract addresses with unclaimed ETH/REP.
+* **`crowdsourcers`** (Array.<string>) Array of DisputeCrowdsourcer contract addresses with unclaimed ETH/REP.
+* **`initialReporters`** (Array.<string>) Array of InitialReporter contract addresses with unclaimed ETH/REP.
+
+<a name="FeeDetailsTotal"></a>
+### FeeDetailsTotal  (Object)
+
+* **`unclaimedEth`** (Object) Description pending.
+* **`unclaimedRepStaked`** (string) Description pending.
+* **`unclaimedRepEarned`** (string) Description pending.
+* **`claimedEth`** (string) Description pending.
+* **`claimedRepStaked`** (string) Description pending.
+* **`claimedRepEarned`** (string) Description pending.
+
+#### **Properties:** 
+
 <a name="FeeWindowCurrent"></a>
 ### FeeWindowCurrent  (Object)
 
