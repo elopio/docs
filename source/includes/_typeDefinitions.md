@@ -136,15 +136,15 @@ Serves as an enum for the state of a Dispute Token.
 ### FeeDetails  (Object)
 
 #### **Properties:** 
-* **`total`** (Object) Object containing information about claimed and unclaimed ETH and REP.
-* **`feeWindows`** (Array.<string>) Array of FeeWindow contract addresses with unclaimed ETH/REP.
-* **`crowdsourcers`** (Array.<string>) Array of DisputeCrowdsourcer contract addresses with unclaimed ETH/REP.
-* **`initialReporters`** (Array.<string>) Array of InitialReporter contract addresses with unclaimed ETH/REP.
+* **`total`** (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about claimed and unclaimed ETH and REP.
+* **`feeWindows`** (Array.&lt;string>) Array of FeeWindow contract addresses with unclaimed ETH/REP.
+* **`crowdsourcers`** (Array.&lt;string>) Array of DisputeCrowdsourcer contract addresses with unclaimed ETH/REP.
+* **`initialReporters`** (Array.&lt;string>) Array of InitialReporter contract addresses with unclaimed ETH/REP.
 
 <a name="FeeDetailsTotal"></a>
 ### FeeDetailsTotal  (Object)
 
-* **`unclaimedEth`** (Object) Description pending.
+* **`unclaimedEth`** (string) Description pending.
 * **`unclaimedRepStaked`** (string) Description pending.
 * **`unclaimedRepEarned`** (string) Description pending.
 * **`claimedEth`** (string) Description pending.
