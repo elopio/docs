@@ -1534,8 +1534,8 @@ Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsou
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
     * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
-    * **`p.onFailed`**  (function) Called if/when all transactions have been attempted and at least one transaction has failed.
-
+    * **`p.onFailed`**  (function) Called if/when all transactions have been attempted and at least one transaction has failed. Error message shows which transactions succeeded and which ones failed.
+    
 #### **Returns:**
 
 * (<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.

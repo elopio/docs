@@ -47,6 +47,7 @@ Note: Other properties will be present in this object, depending on what event t
 <a name="ClaimReportingFeesInfo"></a>
 ### ClaimReportingFeesInfo  (Object)
 
+#### **Properties:** 
 * **`redeemedFeeWindows`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Fee Windows, as hexadecimal strings. Not set if `p.estimateGas` is true.
 * **`redeemedDisputeCrowdsourcers`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Dispute Crowdsourcers, as hexadecimal strings.  Not set if `p.estimateGas` is true.
 * **`redeemedInitialReporters`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Initial Reporters, as hexadecimal strings.  Not set if `p.estimateGas` is true.
@@ -125,12 +126,6 @@ Serves as an enum for the state of a Dispute Token.
 * **`tags`** (Array.&lt;string>|null) Keywords used to tag the Market (maximum of 2).
 * **`longDescription`** (string|null) Additional information not included in description of the Market.
 
-<a name="FailedTransaction"></a>
-### FailedTransaction  (Object)
-
-* **`address`** (string) Ethereum address of contract that returned a transaction error.
-* **`error`** (RPCError|Error) Error that occurred when attempting to make a transaction to the contract.
-
 <a name="FeeDetails"></a>
 ### FeeDetails  (Object)
 
@@ -143,14 +138,13 @@ Serves as an enum for the state of a Dispute Token.
 <a name="FeeDetailsTotal"></a>
 ### FeeDetailsTotal  (Object)
 
+#### **Properties:** 
 * **`unclaimedEth`** (string) Description pending.
 * **`unclaimedRepStaked`** (string) Description pending.
 * **`unclaimedRepEarned`** (string) Description pending.
 * **`claimedEth`** (string) Description pending.
 * **`claimedRepStaked`** (string) Description pending.
 * **`claimedRepEarned`** (string) Description pending.
-
-#### **Properties:** 
 
 <a name="FeeWindowCurrent"></a>
 ### FeeWindowCurrent  (Object)
@@ -168,6 +162,7 @@ Serves as an enum for the state of a Dispute Token.
 <a name="GasEstimateInfo"></a>
 ### GasEstimateInfo  (Object)
 
+#### **Properties:** 
 * **`disputeCrowdsourcers`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all DisputeCrowdsourcers.
 * **`initialReporters`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all InitialReporters.
 * **`feeWindows`** (Array.&lt;Object>) Array of objects containing contract address/gas estimate pairs for all FeeWindows.
@@ -176,6 +171,7 @@ Serves as an enum for the state of a Dispute Token.
 <a name="GasEstimateTotals"></a>
 ### GasEstimateTotals  (Object)
 
+#### **Properties:** 
 * **`disputeCrowdsourcers`** (BigNumber) Total gas estimate for redeeming all DisputeCrowdsourcer reporting fees.
 * **`initialReporters`** (BigNumber) Total gas estimate for redeeming all InitialReporter reporting fees.
 * **`feeWindows`** (BigNumber) Total gas estimate for redeeming all FeeWindow reporting fees.
@@ -369,6 +365,7 @@ Serves as an enum for the state of a Market.
 <a name="SimulatedTrade"></a>
 ### SimulatedTrade  (Object)
 
+#### **Properties:** 
 * **`sharesFilled`** (string) Number of Shares Filled by the trade.
 * **`settlementFees`** (string) Projected Settlement Fees paid on this trade, as a base-10 string.
 * **`gasFees`** (string) Projected gas fees paid on this trade, as a base-10 string.
@@ -480,6 +477,7 @@ Serves as an enum for the state of a Market.
 <a name="WebSocket"></a>
 ### WebSocket  (Object)
 
+#### **Properties:** 
 * **`binaryType`** (string) String indicating the type of binary data being transmitted by the connection. This should be either "blob" if DOM Blob objects are being used or "arraybuffer" if ArrayBuffer objects are being used.
 * **`bufferedAmount`** (number) Number of bytes of data that have been queued using calls to send() but not yet transmitted to the network. This value resets to zero once all queued data has been sent. This value does not reset to zero when the connection is closed; if send() continues to be called, this will continue to climb.
 * **`extensions`** (string) Extensions selected by the server. This is currently only the empty string or a list of extensions as negotiated by the connection.
