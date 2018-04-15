@@ -51,7 +51,6 @@ Note: Other properties will be present in this object, depending on what event t
 * **`redeemedDisputeCrowdsourcers`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Dispute Crowdsourcers, as hexadecimal strings.  Not set if `p.estimateGas` is true.
 * **`redeemedInitialReporters`** (Array.&lt;string>|null) Ethereum contract addresses of all successfully redeemed Initial Reporters, as hexadecimal strings.  Not set if `p.estimateGas` is true.
 * **`gasEstimates`** (<a href="#GasEstimateInfo">GasEstimateInfo</a>|null) Object containing a breakdown of gas estimates for all reporting fee redemption transactions. Not set if `p.estimateGas` is false.
-* **`failedTransactions`** (Array.&lt;<a href="#FailedTransaction">FailedTransaction</a>>) Array of FailedTransaction objects containing error information about each failed transaction.
 
 <a name="ContractAddresses"></a>
 ### ContractAddresses  (Object)
@@ -331,12 +330,6 @@ Serves as an enum for the state of an order.
   * **`realized`**  (string) Description pending.
   * **`queued`**  (string) Description pending.
   * **`unrealized`**  (string) Description pending.
-
-<a name="RedeemableContract"></a>
-### RedeemableContract  (Object)
-
-* **`address`** (string) Ethereum contract address of a FeeWindow, DisputeCrowdsourcer, or InitialReporter from which to redeem fees.
-* **`type`** (number) Type of smart contract from which to redeem reporting fees. Can be specified using the enum `augur.constants.CONTRACT_TYPE`.
 
 <a name="Report"></a>
 ### Report  (Object)

@@ -1191,39 +1191,28 @@ Reporting Functions
 
 augur.reporting.claimReportingFees({
   redeemer: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  redeemableContracts: [
-    {
-      address: "0xb9109e49bf49f886e546d560d515ca53db83f62f",
-      type: augur.constants.CONTRACT_TYPE.INITIAL_REPORTER,
-    },
-    {
-      address: "0xaaa09e49bf49f886e546d560d515ca53db83f62f",
-      type: augur.constants.CONTRACT_TYPE.DISPUTE_CROWDSOURCER,
-    },
-    {
-      address: "0x161c723cac007e4283cee4ba11b15277e46eec53",
-      type: augur.constants.CONTRACT_TYPE.FEE_WINDOW,
-    },
-  ], 
+  crowdsourcers: [],
+  feeWindows: [
+    "0x161c723cac007e4283cee4ba11b15277e46eec53"
+  ],
+  initialReporters: [
+    "0xb9109e49bf49f886e546d560d515ca53db83f62f",
+  ],
   estimateGas: false,
-}, function (error, result) { 
-  console.log(error);
-  console.log(result); 
+  onSent(result) { console.log(result); },
+  onSuccess(result) { console.log(result); },
+  onFailed(errors) { console.log(errors); },
 });
 // example output:
-null
 {
   "redeemedFeeWindows": [
     "0x161c723cac007e4283cee4ba11b15277e46eec53"
   ],
   "redeemedDisputeCrowdsourcers": [
-    "0xaaa09e49bf49f886e546d560d515ca53db83f62f"
   ],
   "redeemedInitialReporters": [
     "0xb9109e49bf49f886e546d560d515ca53db83f62f"
   ],
-  "failedTransactions": [
-  ]
 }
 
 augur.reporting.finalizeMarket({
@@ -1530,20 +1519,26 @@ augur.reporting.getStakeRequiredForDesignatedReporter({
 // example output:
 "1.2345"
 ```
-### augur.reporting.claimReportingFees(p, callback)
+### augur.reporting.claimReportingFees(p)
+
+Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsourcer, FeeWindow, and InitialReporter contract addresses, or returns a gas estimate for claiming all fees from specified contracts.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
-    * **`p.redeemableContracts`**  (Array.&lt;<a href="#RedeemableContract">RedeemableContract</a>>) Array of objects containing contract address and contract type pairs.
+    * **`p.crowdsourcers`**  (Array.&lt;string</a>>) Array of DisputeCrowdsourcer contract addresses which to claim reporting fees.
+    * **`p.feeWindows`**  (Array.&lt;string</a>>) Array of FeeWindow contract addresses which to claim reporting fees.
+    * **`p.initialReporters`**  (Array.&lt;string</a>>) Array of InitialReporter contract addresses which to claim reporting fees.
     * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-* **`callback`** (function)  Called after all transactions have been attempted.
+    * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
+    * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
+    * **`p.onFailed`**  (function) Called if/when all transactions have been attempted and at least one transaction has failed.
 
 #### **Returns:**
 
-* (<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which fees were successfully claimed or a breakdown of gas estimates.
+* (<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
 
 ### augur.reporting.finalizeMarket(p)
 
