@@ -2473,7 +2473,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when all transactions are sealed and confirmed.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when all transactions have been attempted and at least one transaction has failed.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when all transactions have been attempted and at least one transaction has failed. Error message shows which transactions succeeded and which ones failed.</li>
 </ul></li>
 </ul>
 
@@ -12650,6 +12650,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="claimreportingfeesinfo-object">ClaimReportingFeesInfo  (Object)</h3>
 
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
 <ul>
 <li><strong><code class="prettyprint">redeemedFeeWindows</code></strong> (Array.&lt;string&gt;|null) Ethereum contract addresses of all successfully redeemed Fee Windows, as hexadecimal strings. Not set if <code class="prettyprint">p.estimateGas</code> is true.</li>
 <li><strong><code class="prettyprint">redeemedDisputeCrowdsourcers</code></strong> (Array.&lt;string&gt;|null) Ethereum contract addresses of all successfully redeemed Dispute Crowdsourcers, as hexadecimal strings.  Not set if <code class="prettyprint">p.estimateGas</code> is true.</li>
@@ -12758,15 +12760,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">longDescription</code></strong> (string|null) Additional information not included in description of the Market.</li>
 </ul>
 
-<p><a name="FailedTransaction"></a></p>
-
-<h3 id="failedtransaction-object">FailedTransaction  (Object)</h3>
-
-<ul>
-<li><strong><code class="prettyprint">address</code></strong> (string) Ethereum address of contract that returned a transaction error.</li>
-<li><strong><code class="prettyprint">error</code></strong> (RPCError|Error) Error that occurred when attempting to make a transaction to the contract.</li>
-</ul>
-
 <p><a name="FeeDetails"></a></p>
 
 <h3 id="feedetails-object">FeeDetails  (Object)</h3>
@@ -12784,6 +12777,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="feedetailstotal-object">FeeDetailsTotal  (Object)</h3>
 
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
 <ul>
 <li><strong><code class="prettyprint">unclaimedEth</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">unclaimedRepStaked</code></strong> (string) Description pending.</li>
@@ -12792,8 +12787,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">claimedRepStaked</code></strong> (string) Description pending.</li>
 <li><strong><code class="prettyprint">claimedRepEarned</code></strong> (string) Description pending.</li>
 </ul>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <p><a name="FeeWindowCurrent"></a></p>
 
@@ -12816,6 +12809,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="gasestimateinfo-object">GasEstimateInfo  (Object)</h3>
 
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
 <ul>
 <li><strong><code class="prettyprint">disputeCrowdsourcers</code></strong> (Array.&lt;Object&gt;) Array of objects containing contract address/gas estimate pairs for all DisputeCrowdsourcers.</li>
 <li><strong><code class="prettyprint">initialReporters</code></strong> (Array.&lt;Object&gt;) Array of objects containing contract address/gas estimate pairs for all InitialReporters.</li>
@@ -12826,6 +12821,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><a name="GasEstimateTotals"></a></p>
 
 <h3 id="gasestimatetotals-object">GasEstimateTotals  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
 <li><strong><code class="prettyprint">disputeCrowdsourcers</code></strong> (BigNumber) Total gas estimate for redeeming all DisputeCrowdsourcer reporting fees.</li>
@@ -13083,6 +13080,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="simulatedtrade-object">SimulatedTrade  (Object)</h3>
 
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
 <ul>
 <li><strong><code class="prettyprint">sharesFilled</code></strong> (string) Number of Shares Filled by the trade.</li>
 <li><strong><code class="prettyprint">settlementFees</code></strong> (string) Projected Settlement Fees paid on this trade, as a base-10 string.</li>
@@ -13236,6 +13235,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><a name="WebSocket"></a></p>
 
 <h3 id="websocket-object">WebSocket  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
 <li><strong><code class="prettyprint">binaryType</code></strong> (string) String indicating the type of binary data being transmitted by the connection. This should be either &ldquo;blob&rdquo; if DOM Blob objects are being used or &ldquo;arraybuffer&rdquo; if ArrayBuffer objects are being used.</li>
