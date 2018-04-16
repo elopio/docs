@@ -61,7 +61,7 @@ Default Ethereum network to connect to.
 
 ### augur.constants.DEFAULT_NUM_TICKS (Object)
 
-Description pending.
+Object containing the default number of [Ticks](#tick) used when creating a new [Categorical Market](#categorical-market), keyed by number of [Outcomes](#outcome) the [Market](#market) has.
 
 ### augur.constants.DEFAULT_SCALAR_TICK_SIZE (string)
 
@@ -85,7 +85,7 @@ Description pending.
 
 ### augur.constants.ORDER_STATE (Object)
 
-Contains the constants used to represent each of the states an [Order](#order) can be in.
+Object that acts as an enum containing the constants used to represent each of the states an [Order](#order) can be in.
 
 ### augur.constants.PARALLEL_LIMIT (number)
 
@@ -97,15 +97,15 @@ Description pending.
 
 ### augur.constants.REPORTING_STATE (Object)
 
-Contains the constants used to represent each of the [Reporting](report) states a [Market](#market) can be in.
+Object that acts as an enum containing the constants used to represent each of the [Reporting](report) states a [Market](#market) can be in.
 
 ### augur.constants.STAKE_TOKEN_STATE (Object)
 
-Description pending.
+Object that acts as an enum for all of the possible states for a Stake Token (typically referred to as a [Dispute Token](#dispute-token)).
 
 ### augur.constants.TRADE_GAS (string)
 
-Description pending.
+Gas limit used when calling `augur.trading.tradeUntilAmountIsZero`.
 
 ### augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)
 

@@ -234,7 +234,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
 * **`description`** (string) Description of the Market.
 * **`details`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).
-* **`scalarDenomination`** (string|null) Description pending.
+* **`scalarDenomination`** (string|null) Denomination used for the numerical range of a Scalar Market (e.g., dollars, degrees Fahrenheit, parts-per-billion).
 * **`designatedReporter`** (string) Ethereum address of the Market's designated report, as a hexadecimal string.
 * **`designatedReportStake`** (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
 * **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
