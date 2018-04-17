@@ -12932,7 +12932,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
 <li><strong><code class="prettyprint">details</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).</li>
-<li><strong><code class="prettyprint">scalarDenomination</code></strong> (string|null) Description pending.</li>
+<li><strong><code class="prettyprint">scalarDenomination</code></strong> (string|null) Denomination used for the numerical range of a Scalar Market (e.g., dollars, degrees Fahrenheit, parts-per-billion).</li>
 <li><strong><code class="prettyprint">designatedReporter</code></strong> (string) Ethereum address of the Market&rsquo;s designated report, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">designatedReportStake</code></strong> (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.</li>
 <li><strong><code class="prettyprint">resolutionSource</code></strong> (string|null) Reference source used to determine the Outcome of the Market event.</li>
@@ -13365,7 +13365,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-default_num_ticks-object">augur.constants.DEFAULT_NUM_TICKS (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object containing the default number of <a href="#tick">Ticks</a> used when creating a new <a href="#categorical-market">Categorical Market</a>, keyed by number of <a href="#outcome">Outcomes</a> the <a href="#market">Market</a> has.</p>
 
 <h3 id="augur-constants-default_scalar_tick_size-string">augur.constants.DEFAULT_SCALAR_TICK_SIZE (string)</h3>
 
@@ -13389,7 +13389,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-order_state-object">augur.constants.ORDER_STATE (Object)</h3>
 
-<p>Contains the constants used to represent each of the states an <a href="#order">Order</a> can be in.</p>
+<p>Object that acts as an enum containing the constants used to represent each of the states an <a href="#order">Order</a> can be in.</p>
 
 <h3 id="augur-constants-parallel_limit-number">augur.constants.PARALLEL_LIMIT (number)</h3>
 
@@ -13401,15 +13401,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-reporting_state-object">augur.constants.REPORTING_STATE (Object)</h3>
 
-<p>Contains the constants used to represent each of the <a href="report">Reporting</a> states a <a href="#market">Market</a> can be in.</p>
+<p>Object that acts as an enum containing the constants used to represent each of the <a href="report">Reporting</a> states a <a href="#market">Market</a> can be in.</p>
 
 <h3 id="augur-constants-stake_token_state-object">augur.constants.STAKE_TOKEN_STATE (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object that acts as an enum for all of the possible states for a Stake Token (typically referred to as a <a href="#dispute-token">Dispute Token</a>).</p>
 
 <h3 id="augur-constants-trade_gas-string">augur.constants.TRADE_GAS (string)</h3>
 
-<p>Description pending.</p>
+<p>Gas limit used when calling <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code>.</p>
 
 <h3 id="augur-constants-trade_group_id_num_bytes-number">augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)</h3>
 
