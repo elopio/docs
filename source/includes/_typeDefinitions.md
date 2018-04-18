@@ -139,12 +139,12 @@ Serves as an enum for the state of a Dispute Token.
 ### FeeDetailsTotal  (Object)
 
 #### **Properties:** 
-* **`unclaimedEth`** (string) Description pending.
-* **`unclaimedRepStaked`** (string) Description pending.
-* **`unclaimedRepEarned`** (string) Description pending.
-* **`claimedEth`** (string) Description pending.
-* **`claimedRepStaked`** (string) Description pending.
-* **`claimedRepEarned`** (string) Description pending.
+* **`unclaimedEth`** (string) Amount of unclaimed Reporting Fee attoETH a reporter has in a given Universe or Fee Window.
+* **`unclaimedRepStaked`** (string) Amount of unclaimed attoREP a reporter has staked in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
+* **`unclaimedRepEarned`** (string) Amount of unclaimed attoREP a reporter has earned as Reporting Fees by staking REP in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
+* **`claimedEth`** (string) Amount of Reporting Fee attoETH a reporter has claimed in a given Universe or Fee Window.
+* **`claimedRepStaked`** (string) Amount of claimed attoREP a reporter has staked in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
+* **`claimedRepEarned`** (string) Amount of claimed attoREP a reporter has earned as Reporting Fees by staking REP in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
 
 <a name="FeeWindowCurrent"></a>
 ### FeeWindowCurrent  (Object)
@@ -321,11 +321,11 @@ Serves as an enum for the state of an order.
 ### ProfitLoss  (Object)
 
 #### **Properties:**
-  * **`position`**  (string) Description pending.
-  * **`meanOpenPrice`**  (string) Description pending.
-  * **`realized`**  (string) Description pending.
+  * **`position`**  (string) Net trading position, where the quantity is the number of attoshares. An overall "sell" position is negative, and an overall "buy" position is positive.
+  * **`meanOpenPrice`**  (string) Mean price of trades at time of buy-in, in attoETH.
+  * **`realized`**  (string) Amount of realized profits or losses from all trades, in attoETH.
   * **`queued`**  (string) Description pending.
-  * **`unrealized`**  (string) Description pending.
+  * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).
 
 <a name="Report"></a>
 ### Report  (Object)
@@ -399,24 +399,24 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
 * **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
-* **`bondSizeCurrent`** (string|null) Description pending.
-* **`bondSizeTotal`** (string|null) Description pending.
-* **`stakeCurrent`** (string|null) Description pending. Is set to null if `tentativeWinning` is `true`.
-* **`stakeRemaining`** (string|null) Description pending.
-* **`accountStakeCompleted`** (string|null) Description pending.
-* **`accountStakeCurrent`** (string|null) Description pending.
-* **`accountStakeTotal`** (string|null) Description pending.
-* **`stakeCompleted`** (string) Description pending.
-* **`tentativeWinning`** (boolean) Description pending.
+* **`bondSizeCurrent`** (string|null) Amount of attoREP needed to successfully Dispute the Tentative Outcome of this Market. Is null if `tentativeWinning` is true.
+* **`bondSizeTotal`** (string|null) Description pending. Is null if `tentativeWinning` is true.
+* **`stakeCurrent`** (string|null) Amount of attoREP Staked on this Outcome for the current Dispute Round. Is null if `tentativeWinning` is true.
+* **`stakeRemaining`** (string|null) Amount of attoREP that this Outcome must receive in order to become the Tentative Outcome for the Market. Is null if `tentativeWinning` is true.
+* **`accountStakeCompleted`** (string|null) Amount of attoREP the specified `account` has Staked in this Outcome during the current Dispute Round. Is null if `tentativeWinning` is true.
+* **`accountStakeCurrent`** (string|null) Amount of attoREP the specified `account` has Staked in this Outcome during the current Dispute Round. Is null if `tentativeWinning` is true.
+* **`accountStakeTotal`** (string|null) Amount of attoREP the specified `account` has Staked on this Outcome. Is null if `tentativeWinning` is true.
+* **`stakeCompleted`** (string) Amount of attoREP Staked in this Outcome to cause it to become the Tentative Outcome (either after the First Public Report or after a Dispute Round ended).
+* **`tentativeWinning`** (boolean) Whether this Outcome is the Tenative Outcome for the Market.
 
 <a name="StakeInfo"></a>
 ### StakeInfo  (Object)
 
 #### **Properties:** 
 * **`marketId`** (string) Ethereum contract address of the Market.
-* **`disputeRound`** (number|null) Description pending.
-* **`stakeCompletedTotal`** (string) Sum of all currently completed Stake, including Stake from the Initial Report.
-* **`bondSizeOfNewStake`** (string) Description pending.
+* **`disputeRound`** (number|null) Dispute round the Market is currently in. (This will be 0 until someone contributes to a Crowdsourcer.) 
+* **`stakeCompletedTotal`** (string) Total attoREP that has been Staked in Crowdsourcers and in the First Public Report.
+* **`bondSizeOfNewStake`** (string) Amount of attoREP needed to Dispute the Tentative Outcome of the Market.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
 
 <a name="TimestampedPrice"></a>
@@ -451,15 +451,15 @@ Serves as an enum for the state of a Market.
 * **`transactionHash`** (string) Hash to look up the trade transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the trade transaction.
 * **`type`** (string) Type of trade. Valid values are "buy" and "sell".
-* **`price`** (number) Description pending.
-* **`amount`** (number) Description pending.
+* **`price`** (number) Price paid for trade, in attoETH.
+* **`amount`** (number) Amount of attoShares that were bought/sold.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
 * **`marketCreatorFees`** (number) Amount of fees paid to Market creator, in ETH.
-* **`reporterFees`** (number) Amount of fees paid to reporters, in ETH.
+* **`reporterFees`** (number) Amount of fees paid to reporters, in attoETH.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
-* **`timestamp`** (number) Description pending.
+* **`timestamp`** (number) Unix timestamp when the trade was placed.
 * **`tradeGroupId`** (number|null) ID logged with each trade transaction (can be used to group trades client-side), as a hexadecimal string.
 
 <a name="UserTradePosition"></a>
