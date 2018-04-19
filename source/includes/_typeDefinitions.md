@@ -344,7 +344,7 @@ Serves as an enum for the state of an order.
 * **`isCategorical`** (boolean) Whether the Market is a Categorical Market.
 * **`isScalar`** (boolean) Whether the Market is a Scalar Market.
 * **`isInvalid`** (boolean) Whether the Market is [Invalid](#invalid-outcome).
-* **`isSubmitted`** (boolean) Description pending.
+* **`isSubmitted`** (boolean) Whether the Report has been submitted. (This property is vestigial and is always set to true.)
 
 <a name="REPORTING_STATE"></a>
 ### REPORTING_STATE  (Object)
@@ -494,13 +494,13 @@ Serves as an enum for the state of a Market.
 
 #### **Properties:** 
 * **`address`** (string) Address to which the WebSocket should connect.
-* **`timeout`** (number) Description pending.
-* **`messageHandler`** (function) Description pending.
-* **`workQueue`** (Array) Description pending.
-* **`awaitingPump`** (boolean) Description pending.
+* **`timeout`** (number) Number of milliseconds to wait before timing out.
+* **`messageHandler`** (function) Function used to dispatch RPC responses.
+* **`workQueue`** (Array) Queue of RPC payloads to send.
+* **`awaitingPump`** (boolean) Whether `workQueue` is waiting to be pumped.
 * **`connected`** (boolean) Whether the WebSocket has a connection to `address`.
-* **`backoffMilliseconds`** (number) Description pending.
-* **`nextListenerToken`** (number) Description pending.
-* **`reconnectListeners`** (Object) Description pending.
-* **`disconnectListeners`** (Object) Description pending.
+* **`backoffMilliseconds`** (number) Milliseconds to wait before attempting to reconnect (uses exponential backoff).
+* **`nextListenerToken`** (number) Counter used to uniquely identify reconnect listeners and disconnect listeners.
+* **`reconnectListeners`** (Object) Event listeners for reconnecting.
+* **`disconnectListeners`** (Object) Event listeners for disconnecting.
 * **`webSocketClient`** (<a href="#WebSocket">WebSocket</a>) WebSocket client object.
