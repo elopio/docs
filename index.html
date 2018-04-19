@@ -13082,7 +13082,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">isCategorical</code></strong> (boolean) Whether the Market is a Categorical Market.</li>
 <li><strong><code class="prettyprint">isScalar</code></strong> (boolean) Whether the Market is a Scalar Market.</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean) Whether the Market is <a href="#invalid-outcome">Invalid</a>.</li>
-<li><strong><code class="prettyprint">isSubmitted</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">isSubmitted</code></strong> (boolean) Whether the Report has been submitted. (This property is vestigial and is always set to true.)</li>
 </ul>
 
 <p><a name="REPORTING_STATE"></a></p>
@@ -13288,15 +13288,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">address</code></strong> (string) Address to which the WebSocket should connect.</li>
-<li><strong><code class="prettyprint">timeout</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">messageHandler</code></strong> (function) Description pending.</li>
-<li><strong><code class="prettyprint">workQueue</code></strong> (Array) Description pending.</li>
-<li><strong><code class="prettyprint">awaitingPump</code></strong> (boolean) Description pending.</li>
+<li><strong><code class="prettyprint">timeout</code></strong> (number) Number of milliseconds to wait before timing out.</li>
+<li><strong><code class="prettyprint">messageHandler</code></strong> (function) Function used to dispatch RPC responses.</li>
+<li><strong><code class="prettyprint">workQueue</code></strong> (Array) Queue of RPC payloads to send.</li>
+<li><strong><code class="prettyprint">awaitingPump</code></strong> (boolean) Whether <code class="prettyprint">workQueue</code> is waiting to be pumped.</li>
 <li><strong><code class="prettyprint">connected</code></strong> (boolean) Whether the WebSocket has a connection to <code class="prettyprint">address</code>.</li>
-<li><strong><code class="prettyprint">backoffMilliseconds</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">nextListenerToken</code></strong> (number) Description pending.</li>
-<li><strong><code class="prettyprint">reconnectListeners</code></strong> (Object) Description pending.</li>
-<li><strong><code class="prettyprint">disconnectListeners</code></strong> (Object) Description pending.</li>
+<li><strong><code class="prettyprint">backoffMilliseconds</code></strong> (number) Milliseconds to wait before attempting to reconnect (uses exponential backoff).</li>
+<li><strong><code class="prettyprint">nextListenerToken</code></strong> (number) Counter used to uniquely identify reconnect listeners and disconnect listeners.</li>
+<li><strong><code class="prettyprint">reconnectListeners</code></strong> (Object) Event listeners for reconnecting.</li>
+<li><strong><code class="prettyprint">disconnectListeners</code></strong> (Object) Event listeners for disconnecting.</li>
 <li><strong><code class="prettyprint">webSocketClient</code></strong> (<a href="#WebSocket">WebSocket</a>) WebSocket client object.</li>
 </ul>
 
@@ -13306,7 +13306,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-augur_upload_block_number-string">augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER (string)</h3>
 
-<p>Description pending.</p>
+<p>Ethereum block number from which to start looking up event logs.</p>
 
 <h3 id="augur-constants-blocks_per_chunk-number">augur.constants.BLOCKS_PER_CHUNK (number)</h3>
 
@@ -13385,7 +13385,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-minimum_trade_size-bignumber">augur.constants.MINIMUM_TRADE_SIZE (BigNumber)</h3>
 
-<p>Description pending.</p>
+<p>Minimum number of attoShares that can be bought/sold in a trade.</p>
 
 <h3 id="augur-constants-order_state-object">augur.constants.ORDER_STATE (Object)</h3>
 
@@ -13397,7 +13397,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-precision-object">augur.constants.PRECISION (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object that acts as an enum for different types of precision using BigNumbers.</p>
 
 <h3 id="augur-constants-reporting_state-object">augur.constants.REPORTING_STATE (Object)</h3>
 
