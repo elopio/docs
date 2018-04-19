@@ -4,7 +4,7 @@ augur.js contains a number of constants in the `augur.constants` object, which a
 
 ### augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER (string)
 
-Description pending.
+Ethereum block number from which to start looking up event logs.
 
 ### augur.constants.BLOCKS_PER_CHUNK (number)
 
@@ -81,7 +81,7 @@ Block number up to which Augur Node will scan for logged events emitted from Aug
 
 ### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
 
-Description pending.
+Minimum number of attoShares that can be bought/sold in a trade.
 
 ### augur.constants.ORDER_STATE (Object)
 
@@ -93,7 +93,7 @@ Maximum number of transactions to auto-submit in parallel.
 
 ### augur.constants.PRECISION (Object)
 
-Description pending.
+Object that acts as an enum for different types of precision using BigNumbers.
 
 ### augur.constants.REPORTING_STATE (Object)
 
