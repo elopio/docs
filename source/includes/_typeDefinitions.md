@@ -324,7 +324,7 @@ Serves as an enum for the state of an order.
   * **`position`**  (string) Net trading position, where the quantity is the number of attoshares. An overall "sell" position is negative, and an overall "buy" position is positive.
   * **`meanOpenPrice`**  (string) Mean price of trades at time of buy-in, in attoETH.
   * **`realized`**  (string) Amount of realized profits or losses from all trades, in attoETH.
-  * **`queued`**  (string) Description pending.
+  * **`queued`**  (string) Expected profit or loss of the current set of pending trades, in attoETH.
   * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).
 
 <a name="Report"></a>

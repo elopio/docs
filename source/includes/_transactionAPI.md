@@ -1577,7 +1577,7 @@ This function will fail if:
 
 ### augur.api.Market.disavowCrowdsourcers(p)
 
-"Disavows" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of a Market, meaning the Market's [Tentative Outcome](#tentative-outcome) are reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers are redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. This transaction may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork).
+"Disavows" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of a Market, meaning the Market's [Tentative Outcome](#tentative-outcome) is reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers are redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. This transaction may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork).
 
 This function will fail if:
 
@@ -1678,7 +1678,7 @@ This transaction will fail if:
 
 ### augur.api.Market.migrateThroughOneFork(p)
 
-Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show Bond](Designated Report No-Show Bond) to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Unvierse.
+Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show Bond](Designated Report No-Show Bond) to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Universe.
 
 This transaction will fail if:
 
