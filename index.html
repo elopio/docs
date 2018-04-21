@@ -9411,8 +9411,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>The InitialReporter does not belong to a <a href="#forked-market">Forked Market</a>.</li>
 </ul>
 
-<p>This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once it has been called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market.</p>
-
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -9876,7 +9874,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-disavowcrowdsourcers-p">augur.api.Market.disavowCrowdsourcers(p)</h3>
 
-<p>&ldquo;Disavows&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of a Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> are reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers are redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. This transaction may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>.</p>
+<p>&ldquo;Disavows&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of a Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers are redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. This transaction may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>.</p>
 
 <p>This function will fail if:</p>
 
@@ -10025,7 +10023,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-migratethroughonefork-p">augur.api.Market.migrateThroughOneFork(p)</h3>
 
-<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="Designated Report No-Show Bond">No-Show Bond</a> to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Unvierse.</p>
+<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="Designated Report No-Show Bond">No-Show Bond</a> to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Chlid Universe.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -13058,7 +13056,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">position</code></strong>  (string) Net trading position, where the quantity is the number of attoshares. An overall &ldquo;sell&rdquo; position is negative, and an overall &ldquo;buy&rdquo; position is positive.</li>
 <li><strong><code class="prettyprint">meanOpenPrice</code></strong>  (string) Mean price of trades at time of buy-in, in attoETH.</li>
 <li><strong><code class="prettyprint">realized</code></strong>  (string) Amount of realized profits or losses from all trades, in attoETH.</li>
-<li><strong><code class="prettyprint">queued</code></strong>  (string) Description pending.</li>
+<li><strong><code class="prettyprint">queued</code></strong>  (string) Expected profit or loss of the current set of pending trades, in attoETH.</li>
 <li><strong><code class="prettyprint">unrealized</code></strong>  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).</li>
 </ul>
 
