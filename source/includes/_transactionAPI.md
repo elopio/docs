@@ -1200,8 +1200,6 @@ This transaction will fail if:
 
 * The InitialReporter does not belong to a [Forked Market](#forked-market).
 
-This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market.
-
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
