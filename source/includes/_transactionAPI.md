@@ -1681,8 +1681,7 @@ Migrates the [Market](#market) into a winning [Child Universe](#child-universe) 
 This transaction will fail if:
 
 * The Market is [Finalized](#finalized-market).
-* The [Forked Market](#forked-market) is not Finalized.
-* The Fork Period is not over (that is, there is no Winning Universe to migrate to).
+* The [Forked Market](#forked-market) is not Finalized (i.e., the Fork Period is not over, so there is no Winning Universe to migrate to).
 
 #### **Parameters:**
 
