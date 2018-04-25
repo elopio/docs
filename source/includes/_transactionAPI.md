@@ -796,6 +796,8 @@ Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outc
 
 Once this function has been called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed. Alternatively, the convenience function `augur.api.DisputeCrowdsourcer.forkAndRedeem` can be called instead of calling both of these functions.
 
+This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the DisputeCrowdsourcer was forked without any errors.
+
 This transaction will fail if:
 
 * The DisputeCrowdsourcer belongs to a Market that is not Forked.
@@ -1170,6 +1172,8 @@ Provides JavaScript bindings for the [InitialReporter Solidity Contract](https:/
 ### augur.api.InitialReporter.fork(p)
 
 Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe.
+
+This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the InitialReporter was forked without any errors.
 
 This transaction will fail if:
 
@@ -1576,6 +1580,8 @@ This function will fail if:
 ### augur.api.Market.disavowCrowdsourcers(p)
 
 "Disavows" all [Dispute Crowdsourcers](#dispute-crowdsourcer) of a Market, meaning the Market's [Tentative Outcome](#tentative-outcome) is reset back to the [Outcome](#outcome) of the [Initial Report](#initial-report), and all [REP](#rep) [Staked](#dispute-stake) in the Crowdsourcers are redeemable by users who contributed to them using the function `augur.api.DisputeCrowdsourcer.redeem`. This transaction may only be called on non-[Forked Markets](#forked-market) in the event that another [Market](#market) in the same [Universe](#universe) [Forks](#fork).
+
+This transaction will trigger a [MarketParticipantsDisavowed](#MarketParticipantsDisavowed) event if the Market's InitialReporter and DisputeCrowdsourcers were disavowed without any errors.
 
 This function will fail if:
 
