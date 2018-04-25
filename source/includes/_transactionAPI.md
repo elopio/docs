@@ -825,6 +825,8 @@ This transaction will fail if:
 
 * The DisputeCrowdsourcer belongs to a Market that is not Forked.
 
+This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the DisputeCrowdsourcer was forked without any errors.
+
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
@@ -1178,13 +1180,13 @@ Provides JavaScript bindings for the [InitialReporter Solidity Contract](https:/
 
 Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe.
 
+This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function `augur.api.InitialReporter.forkAndRedeem` can be called instead of calling both of these functions.
+
 This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the InitialReporter was forked without any errors.
 
 This transaction will fail if:
 
 * The InitialReporter does not belong to a [Forked Market](#forked-market).
-
-This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function `augur.api.InitialReporter.forkAndRedeem` can be called instead of calling both of these functions.
 
 #### **Parameters:**
 
@@ -1204,6 +1206,8 @@ This transaction can be called at any time after the [Fork](#fork) has begun (in
 ### augur.api.InitialReporter.forkAndRedeem(p)
 
 This is a convenience function that calls the `InitialReporter.fork` function and then immediately calls the `InitialReporter.redeem` function. 
+
+This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the InitialReporter was forked without any errors.
 
 This transaction will fail if:
 
