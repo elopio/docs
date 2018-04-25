@@ -498,14 +498,6 @@ augur.api.FeeWindow.isActive({
 // example output:
 true
 
-augur.api.FeeWindow.isForkingMarketFinalized({ 
-  tx: { to: feeWindow } 
-}, function (error, isForkingMarketFinalized) { 
-  console.log(isForkingMarketFinalized); 
-});
-// example output:
-true
-
 augur.api.FeeWindow.isOver({ 
   tx: { to: feeWindow } 
 }, function (error, isOver) { 
@@ -665,25 +657,6 @@ Returns whether the specified [Fee Window](#fee-window) is currently active. Fee
 #### **Returns:**
 
 * `true` if the specified Fee Window is active, or `false` otherwise.
-
-### augur.api.FeeWindow.isForkingMarketFinalized(p, callback)
-
-Returns whether the [Forked Market](#forked-market) in this [Fee Window's](#fee-window) [Universe](#universe) has been [Finalized](#finalized-market).
-
-This call will fail if:
-
-* The Fee Window does not contain a Forked Market.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 20-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (boolean) `true` if the Fee Window contains a Forked Market that is Finalized, or `false` if it contains a Forked Market that is not Finalized.
 
 ### augur.api.FeeWindow.isOver(p, callback)
 
@@ -2395,14 +2368,6 @@ augur.api.Universe.getFeeWindowByTimestamp({
 // example output:
 "0x1f90cc6b4e89303e451c9b852827b5791667f570"
 
-augur.api.Universe.getFeeWindowForForkEndTime({ 
-  tx: { to: universe } 
-}, function (error, feeWindow) { 
-  console.log(feeWindow); 
-});
-// example output:
-"0x1f90cc6b4e89303e451c9b852827b5791667f570"
-
 augur.api.Universe.getFeeWindowId({ 
   _timestamp: "0x5a45710f",
   tx: { to: universe },
@@ -2649,21 +2614,6 @@ Returns the Ethereum contract address of the [Fee Window](#fee-window) running a
 #### **Returns:**
 
 * (string) Ethereum contract address of the Fee Window running in the Universe at the specified timestamp, as a 20-byte hexadecimal string. If a Fee Window with the specified timestamp does not exist, the address "0x0000000000000000000000000000000000000000" will be returned.
-
-### augur.api.Universe.getFeeWindowForForkEndTime(p, callback)
-
-Returns the Ethereum contract address of the [Fee Window](#fee-window) of the specified [Universe](#universe) once the current [Fork](#fork) ends.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Universe contract on which to call this function, as a 20-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (string) Ethereum contract address of the Fee Window of the specified Universe once the current Fork ends, as a 20-byte hexadecimal string. If no Market in the Universe has Forked, or if the Fee Window contract does not exist yet, the address "0x0000000000000000000000000000000000000000" will be returned.
 
 ### augur.api.Universe.getFeeWindowId(p, callback)
 

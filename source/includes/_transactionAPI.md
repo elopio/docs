@@ -2922,17 +2922,6 @@ augur.api.Universe.getOrCreateFeeWindowByTimestamp({
 // example output:
 "0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
 
-augur.api.Universe.getOrCreateFeeWindowForForkEndTime({
-  tx: { 
-    to: universeAddress,
-    send: false
-  }
-}, function (error, feeWindowAddress) { 
-    console.log(feeWindowAddress); 
-});
-// example output:
-"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"
-
 augur.api.Universe.getOrCreateNextFeeWindow({
   tx: { 
     to: universeAddress,
@@ -3279,26 +3268,6 @@ Gets the Ethereum contract address of the active [Fee Window](#fee-window) at th
 #### **Returns:**
 
 * (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window for the specified timestamp, as a 20-byte hexadecimal string.
-
-### augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)
-
-Gets the Ethereum contract address of the [Fee Window](#fee-window) starting at the end of the current [Fork](#fork) in the [Universe](#universe). If the contract address for the Fee Window does not already exist, this function will create it.
-
-#### Parameters:
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `false`, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to `true`, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be [obtainable](#transaction-return-values).)
-        * **`p.tx.gas`** (string) &lt;optional> Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if `p.tx.send` is `false`.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the Ethereum contract address of the Fee Window starting at the end of the current Fork in the Universe, as a 20-byte hexadecimal string.
 
 ### augur.api.Universe.getOrCreateNextFeeWindow(p)
 
