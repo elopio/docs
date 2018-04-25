@@ -8877,6 +8877,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>The DisputeCrowdsourcer belongs to a Market that is not Forked.</li>
 </ul>
 
+<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the DisputeCrowdsourcer was forked without any errors.</p>
+
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -9304,6 +9306,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe.</p>
 
+<p>This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once it has been called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function <code class="prettyprint">augur.api.InitialReporter.forkAndRedeem</code> can be called instead of calling both of these functions.</p>
+
 <p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
 
 <p>This transaction will fail if:</p>
@@ -9311,8 +9315,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li>The InitialReporter does not belong to a <a href="#forked-market">Forked Market</a>.</li>
 </ul>
-
-<p>This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once it has been called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function <code class="prettyprint">augur.api.InitialReporter.forkAndRedeem</code> can be called instead of calling both of these functions.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9342,6 +9344,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-api-initialreporter-forkandredeem-p">augur.api.InitialReporter.forkAndRedeem(p)</h3>
 
 <p>This is a convenience function that calls the <code class="prettyprint">InitialReporter.fork</code> function and then immediately calls the <code class="prettyprint">InitialReporter.redeem</code> function. </p>
+
+<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -12430,7 +12434,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="MarketParticipantsDisavowed"></a>MarketParticipantsDisavowed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The DisputeCrowdsourcers and InitialReporter belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
+<td>The DisputeCrowdsourcers belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
 <td>universe, market</td>
 <td></td>
 </tr>
@@ -12465,7 +12469,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="ReportingParticipantDisavowed"></a>ReportingParticipantDisavowed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td>The <code class="prettyprint">reportingParticipant</code> (can be either a DisputeCrowdsourcer or an InitialReporter) belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
+<td>The <code class="prettyprint">reportingParticipant</code> (can be either a DisputeCrowdsourcer or an InitialReporter) belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has had its <code class="prettyprint">fork</code> (or <code class="prettyprint">forkAndRedeem</code>) function called on it.</td>
 <td>universe, market</td>
 <td>reportingParticipant</td>
 </tr>
