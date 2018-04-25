@@ -1369,11 +1369,9 @@ augur.reporting.getFeeWindowCurrent({
 });
 // example output:
 {
-  endBlockNumber: null,
-  endTime: 1511657473,
+  endTime: 1509670273,
   feeWindow: "0x2000000000000000000000000000000000000000",
   feeWindowId: 457,
-  startBlockNumber: 1500001,
   startTime: 1509065473,
   totalStake: "26",
   universe: "0x000000000000000000000000000000000000000b",
@@ -1449,6 +1447,7 @@ augur.reporting.getReportingFees({
   feeWindows: [
     "0x1000000000000000000000000000000000000000",
     "0x3000000000000000000000000000000000000000",
+    "0x2100000000000000000000000000000000000000",
     "0x2000000000000000000000000000000000000000",
   ],
   initialReporters: [],

@@ -150,11 +150,9 @@ Serves as an enum for the state of a Dispute Token.
 ### FeeWindowCurrent  (Object)
 
 #### **Properties:** 
-* **`endBlockNumber`** (number|null) Block in which the Fee Window became inactive.
 * **`endTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`feeWindow`** (string) Ethereum contract address of the Fee Window.
 * **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
-* **`startBlockNumber`** (number) Block in which the Fee Window became active.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 * **`totalStake`** (number) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
