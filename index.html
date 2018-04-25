@@ -2305,11 +2305,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">endBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">endTime</span><span class="p">:</span> <span class="mi">1511657473</span><span class="p">,</span>
+  <span class="nl">endTime</span><span class="p">:</span> <span class="mi">1509670273</span><span class="p">,</span>
   <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="na">feeWindowId</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
-  <span class="na">startBlockNumber</span><span class="p">:</span> <span class="mi">1500001</span><span class="p">,</span>
   <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
   <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
@@ -2385,6 +2383,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">feeWindows</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="s2">"0x3000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="s2">"0x2100000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="p">],</span>
   <span class="na">initialReporters</span><span class="p">:</span> <span class="p">[],</span>
@@ -4563,14 +4562,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="kc">true</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isForkingMarketFinalized</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isForkingMarketFinalized</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isForkingMarketFinalized</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="kc">true</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">isOver</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isOver</span><span class="p">)</span> <span class="p">{</span> 
@@ -4829,37 +4820,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><code class="prettyprint">true</code> if the specified Fee Window is active, or <code class="prettyprint">false</code> otherwise.</li>
-</ul>
-
-<h3 id="augur-api-feewindow-isforkingmarketfinalized-p-callback">augur.api.FeeWindow.isForkingMarketFinalized(p, callback)</h3>
-
-<p>Returns whether the <a href="#forked-market">Forked Market</a> in this <a href="#fee-window">Fee Window&rsquo;s</a> <a href="#universe">Universe</a> has been <a href="#finalized-market">Finalized</a>.</p>
-
-<p>This call will fail if:</p>
-
-<ul>
-<li>The Fee Window does not contain a Forked Market.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 20-byte hexadecimal string.</li>
-</ul></li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(boolean) <code class="prettyprint">true</code> if the Fee Window contains a Forked Market that is Finalized, or <code class="prettyprint">false</code> if it contains a Forked Market that is not Finalized.</li>
 </ul>
 
 <h3 id="augur-api-feewindow-isover-p-callback">augur.api.FeeWindow.isOver(p, callback)</h3>
@@ -7171,14 +7131,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowForForkEndTime</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"0x1f90cc6b4e89303e451c9b852827b5791667f570"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindowId</span><span class="p">({</span> 
   <span class="na">_timestamp</span><span class="p">:</span> <span class="s2">"0x5a45710f"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span>
@@ -7474,31 +7426,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Ethereum contract address of the Fee Window running in the Universe at the specified timestamp, as a 20-byte hexadecimal string. If a Fee Window with the specified timestamp does not exist, the address &ldquo;0x0000000000000000000000000000000000000000&rdquo; will be returned.</li>
-</ul>
-
-<h3 id="augur-api-universe-getfeewindowforforkendtime-p-callback">augur.api.Universe.getFeeWindowForForkEndTime(p, callback)</h3>
-
-<p>Returns the Ethereum contract address of the <a href="#fee-window">Fee Window</a> of the specified <a href="#universe">Universe</a> once the current <a href="#fork">Fork</a> ends.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 20-byte hexadecimal string.</li>
-</ul></li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(string) Ethereum contract address of the Fee Window of the specified Universe once the current Fork ends, as a 20-byte hexadecimal string. If no Market in the Universe has Forked, or if the Fee Window contract does not exist yet, the address &ldquo;0x0000000000000000000000000000000000000000&rdquo; will be returned.</li>
 </ul>
 
 <h3 id="augur-api-universe-getfeewindowid-p-callback">augur.api.Universe.getFeeWindowId(p, callback)</h3>
@@ -8907,6 +8834,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Once this function has been called, <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code> may be called by users who <a href="#dispute-stake">Staked</a> on the Dispute Crowdsourcer&rsquo;s Outcome to redeem their Staked REP and collect any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that they are owed. Alternatively, the convenience function <code class="prettyprint">augur.api.DisputeCrowdsourcer.forkAndRedeem</code> can be called instead of calling both of these functions.</p>
 
+<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the DisputeCrowdsourcer was forked without any errors.</p>
+
 <p>This transaction will fail if:</p>
 
 <ul>
@@ -8981,13 +8910,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>If the Dispute Crowdsourcer&rsquo;s <a href="#market">Market</a> has been <a href="#finalized">Finalized</a>, and the Dispute Crowdsourcer did not fill its <a href="#dispute-bond">Dispute Bond</a>, the user will receive Reporting Fees for the Fee Window (but not the REP they originally Staked).</p>
 
-<p>If a Fork has occurred, all non-Forked Markets will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. All non-<a href="#forked-market">Forked Markets</a> will need to have <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called before the <code class="prettyprint">redeem</code> transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on them before the <code class="prettyprint">redeem</code> transaction can be called.</p>
+<p>If a Fork has occurred, all non-<a href="#forked-market">Forked Markets</a> will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. All non-<a href="#forked-market">Forked Markets</a> will need to have <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called before the <code class="prettyprint">redeem</code> transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on them before the <code class="prettyprint">redeem</code> transaction can be called.</p>
 
-<p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">p._redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">p._redeemer</code> is owed, to the Universe containing the Forked Market.</p>
+<p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">p._redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">p._redeemer</code> is owed, to the <a href="#universe">Universe</a> containing the Forked Market.</p>
 
 <p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of a Forked Market, it will redeem any REP that <code class="prettyprint">p._redeemer</code> Staked on that Crowdsourcer, as well as any Reporting Fees (in Ether) that <code class="prettyprint">p._redeemer</code> is owed, to the <a href="#child-universe">Child Universe</a> for the <a href="#outcome">Outcome</a> of that Crowdsourcer.</p>
 
 <p>This transaction will trigger a <a href="#DisputeCrowdsourcerRedeemed"><code class="prettyprint">DisputeCrowdsourcerRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
+
+<p>This transaction will fail if:</p>
+
+<ul>
+<li>The DisputeCrowdsourcer belongs to a non-Forked Market in the same Universe as the Forked Market, and that non-Forked Market has not had <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called on it.</li>
+<li>The DisputeCrowdsourcer belongs to the Forked Market and has not had <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on it.</li>
+</ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9367,6 +9303,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-api-initialreporter-fork-p">augur.api.InitialReporter.fork(p)</h3>
 
 <p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe.</p>
+
+<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9875,6 +9813,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-api-market-disavowcrowdsourcers-p">augur.api.Market.disavowCrowdsourcers(p)</h3>
 
 <p>&ldquo;Disavows&rdquo; all <a href="#dispute-crowdsourcer">Dispute Crowdsourcers</a> of a Market, meaning the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> is reset back to the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>, and all <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> in the Crowdsourcers are redeemable by users who contributed to them using the function <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code>. This transaction may only be called on non-<a href="#forked-market">Forked Markets</a> in the event that another <a href="#market">Market</a> in the same <a href="#universe">Universe</a> <a href="#fork">Forks</a>.</p>
+
+<p>This transaction will trigger a <a href="#MarketParticipantsDisavowed">MarketParticipantsDisavowed</a> event if the Market&rsquo;s InitialReporter and DisputeCrowdsourcers were disavowed without any errors.</p>
 
 <p>This function will fail if:</p>
 
@@ -11521,17 +11461,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCreateFeeWindowForForkEndTime</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
-    <span class="na">send</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindowAddress</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindowAddress</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"0x90b2a6a6c5a0e7b572cc3745328a74abbfed31d0"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCreateNextFeeWindow</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
@@ -12020,36 +11949,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will return the Ethereum contract address of the Fee Window for the specified timestamp, as a 20-byte hexadecimal string.</li>
 </ul>
 
-<h3 id="augur-api-universe-getorcreatefeewindowforforkendtime-p">augur.api.Universe.getOrCreateFeeWindowForForkEndTime(p)</h3>
-
-<p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> starting at the end of the current <a href="#fork">Fork</a> in the <a href="#universe">Universe</a>. If the contract address for the Fee Window does not already exist, this function will create it.</p>
-
-<h4 id="parameters">Parameters:</h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to <code class="prettyprint">true</code>, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be <a href="#transaction-return-values">obtainable</a>.)</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will return the Ethereum contract address of the Fee Window starting at the end of the current Fork in the Universe, as a 20-byte hexadecimal string.</li>
-</ul>
-
 <h3 id="augur-api-universe-getorcreatenextfeewindow-p">augur.api.Universe.getOrCreateNextFeeWindow(p)</h3>
 
 <p>Gets the Ethereum contract address of the <a href="#fee-window">Fee Window</a> that will be active after the current Fee Window ends in the specified <a href="#universe">Universe</a>. If the contract address for the Fee Window does not exist yet, this function will create it.</p>
@@ -12529,6 +12428,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td></td>
 </tr>
 <tr>
+<td><a name="MarketParticipantsDisavowed"></a>MarketParticipantsDisavowed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The DisputeCrowdsourcers and InitialReporter belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
+<td>universe, market</td>
+<td></td>
+</tr>
+<tr>
 <td><a name="Mint"></a>Mint</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/VariableSupplyToken.sol">VariableSupplyToken</a></td>
 <td><code class="prettyprint">value</code> amount of brand new tokens were created for <code class="prettyprint">target</code>.</td>
@@ -12555,6 +12461,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
+</tr>
+<tr>
+<td><a name="ReportingParticipantDisavowed"></a>ReportingParticipantDisavowed</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>The <code class="prettyprint">reportingParticipant</code> (can be either a DisputeCrowdsourcer or an InitialReporter) belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
+<td>universe, market</td>
+<td>reportingParticipant</td>
 </tr>
 <tr>
 <td><a name="TimestampSet"></a>TimestampSet</td>
@@ -12821,11 +12734,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">endBlockNumber</code></strong> (number|null) Block in which the Fee Window became inactive.</li>
 <li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum contract address of the Fee Window.</li>
 <li><strong><code class="prettyprint">feeWindowId</code></strong> (number) Unique numerical ID of the Fee Window.</li>
-<li><strong><code class="prettyprint">startBlockNumber</code></strong> (number) Block in which the Fee Window became active.</li>
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 <li><strong><code class="prettyprint">totalStake</code></strong> (number) &lt;optional&gt; If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)</li>
