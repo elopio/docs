@@ -42,7 +42,7 @@ Augur has its own dedicated [Stack Exchange](https://augur.stackexchange.com), w
 Getting Started
 ---------------
 
-If you would like to help develop Augur, you'll need to build the client from source. To do this, first install [Node.js](https://nodejs.org/), and [Git](https://git-scm.com/downloads).
+If you would like to help develop Augur, you'll need to build the client from source. To do this, first install version 8 of [Node.js](https://nodejs.org/) (note that the version number is important), and [Git](https://git-scm.com/downloads).
 
 Next, clone the [Augur GitHub repository](https://github.com/AugurProject/augur) by opening a terminal window and typing:
 
@@ -60,7 +60,7 @@ If you plan on submitting a pull request to the Augur Project, please be sure to
 
 Using NPM
 ---------
-[Node.js](https://nodejs.org/) comes with a built in package manager called `npm`. `npm` is used to install dependencies for Augur, build the Augur project from source code, run [tests](#tests), and start a web server to host Augur, among other things. To install Augur's dependencies using `npm`, run the following command:
+[Node.js](https://nodejs.org/) comes with a built in package manager called `npm`. (Again, please note that version 8 of Node.js is required for Augur.) `npm` is used to install dependencies for Augur, build the Augur project from source code, run [tests](#tests), and start a web server to host Augur, among other things. To install Augur's dependencies using `npm`, run the following command:
 
 `$ npm install`
 
