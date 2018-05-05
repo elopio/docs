@@ -209,7 +209,7 @@ Start listening for blocks being added/removed from the Ethereum blockchain.
 
 ### augur.events.stopAugurNodeEventListeners(callback)
 
-Removes all active listeners for events emitted by Augur-Node.
+Removes all active listeners for events emitted by Augur Node.
 
 #### **Parameters:**
 
