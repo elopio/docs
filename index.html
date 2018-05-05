@@ -59,7 +59,7 @@
 
 <h2 id="getting-started">Getting Started</h2>
 
-<p>If you would like to help develop Augur, you&rsquo;ll need to build the client from source. To do this, first install <a href="https://nodejs.org/">Node.js</a>, and <a href="https://git-scm.com/downloads">Git</a>.</p>
+<p>If you would like to help develop Augur, you&rsquo;ll need to build the client from source. To do this, first install version 8 of <a href="https://nodejs.org/">Node.js</a> (note that the version number is important), and <a href="https://git-scm.com/downloads">Git</a>.</p>
 
 <p>Next, clone the <a href="https://github.com/AugurProject/augur">Augur GitHub repository</a> by opening a terminal window and typing:</p>
 
@@ -77,7 +77,7 @@
 
 <h2 id="using-npm">Using NPM</h2>
 
-<p><a href="https://nodejs.org/">Node.js</a> comes with a built in package manager called <code class="prettyprint">npm</code>. <code class="prettyprint">npm</code> is used to install dependencies for Augur, build the Augur project from source code, run <a href="#tests">tests</a>, and start a web server to host Augur, among other things. To install Augur&rsquo;s dependencies using <code class="prettyprint">npm</code>, run the following command:</p>
+<p><a href="https://nodejs.org/">Node.js</a> comes with a built in package manager called <code class="prettyprint">npm</code>. (Again, please note that version 8 of Node.js is required for Augur.) <code class="prettyprint">npm</code> is used to install dependencies for Augur, build the Augur project from source code, run <a href="#tests">tests</a>, and start a web server to host Augur, among other things. To install Augur&rsquo;s dependencies using <code class="prettyprint">npm</code>, run the following command:</p>
 
 <p><code class="prettyprint">$ npm install</code></p>
 
@@ -12271,7 +12271,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-events-stopaugurnodeeventlisteners-callback">augur.events.stopAugurNodeEventListeners(callback)</h3>
 
-<p>Removes all active listeners for events emitted by augur-node.</p>
+<p>Removes all active listeners for events emitted by Augur-Node.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -13015,6 +13015,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">FORKING</code></strong> (string) The Dispute Crowdsourcer for one of the Market&rsquo;s Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
 <li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.</li>
 <li><strong><code class="prettyprint">AWAITING_FORK_MIGRATION</code></strong> (string) Market is waiting for another Market&rsquo;s Fork to be resolved. This means its Tentative Outcome has been reset to the Outcome submitted in the Initial Report, and all Stake in the Market&rsquo;s Dispute Crowdsourcers has been refunded to the users who Staked on them.</li>
+<li><strong><code class="prettyprint">AWAITING_NEXT_WINDOW</code></strong> (string) The Market has been Finalized, but the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not elapsed.</li>
 </ul>
 
 <p><a name="SimulatedTrade"></a></p>
