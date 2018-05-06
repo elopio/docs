@@ -42,6 +42,8 @@ augur.events.getAllAugurLogs({
   ...
 ]
 
+// No example for `augur.events.hashEventAbi`
+
 augur.events.startAugurNodeEventListeners({
   TokensTransferred: function(error, result){
     console.log("A new TokensTransferred event has occurred: ", result); 
@@ -174,6 +176,18 @@ Note: Depending on how many event logs there are to be retrieved, this function 
 
 * (Array.&lt;[AugurEventLog](#AugurEventLog)>) Array of AugurEventLog objects found on the Ethereum blockchain, sorted by `blockNumber` and `logIndex`.
 
+### augur.events.hashEventAbi(eventAbi)
+
+Generates a set of JavaScript bindings for the Solidity ABI passed in.
+
+#### **Parameters:**
+
+* **`eventAbi`** (Object) Parameters object.
+
+#### **Returns:**
+
+(string) 32-byte hexadecimal hash of the `eventAbi`.
+
 ### augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)
 
 Begins listening for events emitted by an [Augur Node](#augur-node).
@@ -254,7 +268,7 @@ Label                     | Contract                                            
 <a name="MarketCreated"></a>MarketCreated             | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | `marketCreator` has created a `marketType` `market` with `outcomes` and `topic` in `universe` for a price of `marketCreationFee` and a price range of `minPrice` to `maxPrice`. Additional information about `market` can be found in `description` and `extraInfo`. | topic, universe, marketCreator | description, extraInfo, market, outcomes, marketCreationFee, minPrice, maxPrice, marketType
 <a name="MarketFinalized"></a>MarketFinalized           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | The [Outcome](#outcome) of `market` in `universe` is now considered final. | universe, market |  
 <a name="MarketMigrated"></a>MarketMigrated           | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | `market` was migrated from `originalUniverse` to `newUniverse`. | market, originalUniverse, newUniverse |  
-<a name="MarketMailboxTransferred"></a>MarketMailboxTransferred  | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Ownership of market creator `mailbox` for `market` in `universe` was transferred from `from` address to `to` address. | universe, market, mailbox | from, to
+<a name="MarketMailboxTransferred"></a>MarketMailboxTransferred  | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Ownership of Market Creator Mailbox `mailbox` for `market` in `universe` was transferred from `from` address to `to` address. | universe, market, mailbox | from, to
 <a name="MarketParticipantsDisavowed"></a>MarketParticipantsDisavowed   | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | The DisputeCrowdsourcers belonging to `market` in `universe` has been disavowed. | universe, market | 
 <a name="MarketTransferred"></a>MarketTransferred  | [Augur](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol) | Ownership of `market` in `universe` was transferred from `from` address to `to` address. | universe, market | from, to
 <a name="Mint"></a>Mint                      | [VariableSupplyToken](https://github.com/AugurProject/augur-core/blob/master/source/contracts/libraries/token/VariableSupplyToken.sol) | `value` amount of brand new tokens were created for `target`. | target | value
