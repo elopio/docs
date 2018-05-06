@@ -9539,7 +9539,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-mailbox-transferownership-p">augur.api.Mailbox.transferOwnership(p)</h3>
 
-<p>Changes the current owner of <a href="#market-creator-mailbox">Market Creator Mailbox</a> to  <code class="prettyprint">p._newOwner</code>.</p>
+<p>Changes the current owner of <a href="#market-creator-mailbox">Market Creator Mailbox</a> to  <code class="prettyprint">p._newOwner</code>. This transaction will trigger a <a href="#MarketMailboxTransferred"><code class="prettyprint">MarketMailboxTransferred</code></a> event, which will record the Market Creator Mailbox, the <a href="#market">Market</a> &amp; <a href="#universe">Universe</a> it belongs to, as well as the old owner&rsquo;s address and the new owner&rsquo;s address.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -10003,7 +10003,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-transferownership-p">augur.api.Market.transferOwnership(p)</h3>
 
-<p>Changes the owner of the <a href="#market">Market</a> from the current owner to <code class="prettyprint">p._newOwner</code>.</p>
+<p>Changes the owner of the <a href="#market">Market</a> from the current owner to <code class="prettyprint">p._newOwner</code>. This transaction will trigger a <a href="#MarketTransferred"><code class="prettyprint">MarketTransferred</code></a> event, which will record the <a href="#market">Market</a> and <a href="#universe">Universe</a> it belongs to, as well as the old owner&rsquo;s address and the new owner&rsquo;s address.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -12086,6 +12086,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">...</span>
 <span class="p">]</span>
 
+<span class="c1">// No example for `augur.events.hashEventAbi`</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">startAugurNodeEventListeners</span><span class="p">({</span>
   <span class="na">TokensTransferred</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A new TokensTransferred event has occurred: "</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> 
@@ -12225,6 +12227,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(Array.&lt;<a href="#AugurEventLog">AugurEventLog</a>&gt;) Array of AugurEventLog objects found on the Ethereum blockchain, sorted by <code class="prettyprint">blockNumber</code> and <code class="prettyprint">logIndex</code>.</li>
 </ul>
 
+<h3 id="augur-events-hasheventabi-eventabi">augur.events.hashEventAbi(eventAbi)</h3>
+
+<p>Generates a set of JavaScript bindings for the Solidity ABI passed in.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">eventAbi</code></strong> (Object) Parameters object.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<p>(string) 32-byte hexadecimal hash of the <code class="prettyprint">eventAbi</code>.</p>
+
 <h3 id="augur-events-startaugurnodeeventlisteners-eventcallbacks-onsetupcomplete">augur.events.startAugurNodeEventListeners(eventCallbacks, onSetupComplete)</h3>
 
 <p>Begins listening for events emitted by an <a href="#augur-node">Augur Node</a>.</p>
@@ -12271,7 +12287,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-events-stopaugurnodeeventlisteners-callback">augur.events.stopAugurNodeEventListeners(callback)</h3>
 
-<p>Removes all active listeners for events emitted by Augur-Node.</p>
+<p>Removes all active listeners for events emitted by Augur Node.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12432,11 +12448,25 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <td></td>
 </tr>
 <tr>
+<td><a name="MarketMailboxTransferred"></a>MarketMailboxTransferred</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Ownership of Market Creator Mailbox <code class="prettyprint">mailbox</code> for <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> was transferred from <code class="prettyprint">from</code> address to <code class="prettyprint">to</code> address.</td>
+<td>universe, market, mailbox</td>
+<td>from, to</td>
+</tr>
+<tr>
 <td><a name="MarketParticipantsDisavowed"></a>MarketParticipantsDisavowed</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
 <td>The DisputeCrowdsourcers belonging to <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> has been disavowed.</td>
 <td>universe, market</td>
 <td></td>
+</tr>
+<tr>
+<td><a name="MarketTransferred"></a>MarketTransferred</td>
+<td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
+<td>Ownership of <code class="prettyprint">market</code> in <code class="prettyprint">universe</code> was transferred from <code class="prettyprint">from</code> address to <code class="prettyprint">to</code> address.</td>
+<td>universe, market</td>
+<td>from, to</td>
 </tr>
 <tr>
 <td><a name="Mint"></a>Mint</td>
