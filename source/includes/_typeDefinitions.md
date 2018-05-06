@@ -220,7 +220,9 @@ Serves as an enum for the state of a Dispute Token.
 * **`settlementFee`** (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.
 * **`reportingFeeRate`** (string|number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
 * **`marketCreatorFeeRate`** (string|number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
-* **`marketCreatorFeesCollected`** (string|number|null) Amount of fees the Market creator collected from the Market, in ETH.
+* **`marketCreatorFeesBalance`** (BigNumber|null) Amount of claimable fees the Market creator has not collected from the Market, in ETH.
+* **`marketCreatorMailbox`** (string) Ethereum address of the Market Creator, as a hexadecimal string.
+* **`marketCreatorMailboxOwner`** (string) Ethereum address of the Market Creator Mailbox, as a hexadecimal string.
 * **`initialReportSize`** (string|number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
