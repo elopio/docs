@@ -1357,7 +1357,7 @@ Provides JavaScript bindings for the [Mailbox Solidity Contract](https://github.
 
 ### augur.api.Mailbox.transferOwnership(p)
 
-Changes the current owner of [Market Creator Mailbox](#market-creator-mailbox) to  `p._newOwner`.
+Changes the current owner of [Market Creator Mailbox](#market-creator-mailbox) to  `p._newOwner`. This transaction will trigger a [`MarketMailboxTransferred`](#MarketMailboxTransferred) event, which will record the Market Creator Mailbox, the [Market](#market) & [Universe](#universe) it belongs to, as well as the old owner's address and the new owner's address.
 
 This transaction will fail if:
 
@@ -1715,7 +1715,7 @@ This transaction will fail if:
 
 ### augur.api.Market.transferOwnership(p)
 
-Changes the owner of the [Market](#market) from the current owner to `p._newOwner`.
+Changes the owner of the [Market](#market) from the current owner to `p._newOwner`. This transaction will trigger a [`MarketTransferred`](#MarketTransferred) event, which will record the [Market](#market) and [Universe](#universe) it belongs to, as well as the old owner's address and the new owner's address.
 
 This transaction will fail if:
 
