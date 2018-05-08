@@ -132,7 +132,7 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`total`** (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about the Markets in which a specific user has unclaimed ETH/REP.
 * **`feeWindows`** (Array.&lt;string>) Array of FeeWindow contract addresses with unclaimed REP, as hexadecimal strings.
-* **`forkedMarket`** (<a href="#ForkedMarket">ForkedMarket</a>) ForkedMarket object containing information about the Forked Market in which the user has unclaimed ETH/REP.
+* **`forkedMarket`** (<a href="#ForkedMarket">ForkedMarket</a>|null) ForkedMarket object containing information about the Forked Market in which the user has unclaimed ETH/REP.
 * **`nonforkedMarkets`** (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array of NonforkedMarket objects containing unclaimed ETH/REP.
 
 <a name="FeeDetailsTotal"></a>
@@ -161,17 +161,17 @@ Serves as an enum for the state of a Dispute Token.
 * **`address`** (string) Ethereum contract address of the Forked Market, as a hexadecimal string.
 * **`universeAddress`** (string) Ethereum contract address of Universe to which the Forked Market belongs, as a hexadecimal string.
 * **`isFinalized`** (boolean) Whether the Forked Market has been Finalized (i.e., the function Market.finalize` has been called on it successfully).
-* **`crowdsourcers`** (Array.&lt;<a href="#ForkedMarketCrowdsourcer">ForkedMarketCrowdsourcer</a>>) Array of objects containing information about the Forked Market's DisputeCrowdsourcers.
-* **`initialReporter`** (<a href="#ForkedMarketInitialReporter">ForkedMarketInitialReporter</a>) Object containing information about the Forked Market's InitialReporter.
+* **`crowdsourcers`** (Array.&lt;<a href="#CrowdsourcerState">CrowdsourcerState</a>>) Array of objects containing information about the Forked Market's DisputeCrowdsourcers.
+* **`initialReporter`** (<a href="#InitialReporterState">InitialReporterState</a>|null) Object containing information about the Forked Market's InitialReporter.
 
-<a name="ForkedMarketCrowdsourcer"></a>
-### ForkedMarketCrowdsourcer  (Object)
+<a name="CrowdsourcerState"></a>
+### CrowdsourcerState  (Object)
 
 * **`address`** (string) Ethereum contract address of a DisputeCrowdsourcer belonging to a Forked Market, as a hexadecimal string.
 * **`isForked`** (boolean) Whether the DisputeCrowdsourcer has been forked (i.e., has had its `DisputeCrowdsourcer.fork` function called successfully).
 
-<a name="ForkedMarketInitialReporter"></a>
-### ForkedMarketInitialReporter  (Object)
+<a name="InitialReporterState"></a>
+### InitialReporterState  (Object)
 
 * **`address`** (string) Ethereum contract address of the InitialReporter belonging to a Forked Market, as a hexadecimal string.
 * **`isForked`** (boolean) Whether the InitialReporter has been forked (i.e., has had its `InitialReporter.fork` function called successfully).
@@ -303,7 +303,7 @@ Authentication metadata for raw transactions.
 * **`isMigrated`** (boolean) Whether the non-Forked Market has been migrated to the Child Universe of its original Universe (i.e., its `Market.isMigrated` function has been called successfully).
 * **`isFinalized`** (boolean) Whether the non-Forked Market has been Finalized (i.e., its `Market.finalize` function has been called successfully).
 * **`crowdsourcers`** (Array.&lt;string>) Array of Ethereum contract addresses of the non-Forked Market's DisputeCrowdsourcers, as hexadecimal strings.
-* **`initialReporterAddress`** (string) Ethereum contract address of the non-Forked Market's InitialReporter, as a hexadecimal string.
+* **`initialReporterAddress`** (string|null) Ethereum contract address of the non-Forked Market's InitialReporter, as a hexadecimal string.
 
 <a name="NormalizedPayout"></a>
 ### NormalizedPayout  (Object)

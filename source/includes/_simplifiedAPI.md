@@ -1458,7 +1458,7 @@ augur.reporting.getReportingFees({
     "0x2100000000000000000000000000000000000000",
     "0x2000000000000000000000000000000000000000",
   ],
-  forkedMarket: {},
+  forkedMarket: null,
   nonforkedMarkets: [
     {
       "address": "0x0000000000000000000000000000000000000019",
