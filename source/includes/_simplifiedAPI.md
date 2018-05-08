@@ -1448,20 +1448,28 @@ augur.reporting.getReportingFees({
 {
   total: {
     "unclaimedEth": "107.87878787878787879",
-    "unclaimedRepStaked": "2",
-    "unclaimedRepEarned": "3",
-    "claimedEth": "4",
-    "claimedRepStaked": "5",
-    "claimedRepEarned": "6",
+    "unclaimedRepEarned": "114.5",
+    "unclaimedRepStaked": "229",
+    "lostRep": "0",
   },
-  crowdsourcers: [],
   feeWindows: [
     "0x1000000000000000000000000000000000000000",
     "0x3000000000000000000000000000000000000000",
     "0x2100000000000000000000000000000000000000",
     "0x2000000000000000000000000000000000000000",
   ],
-  initialReporters: [],
+  forkedMarket: {},
+  nonforkedMarkets: [
+    {
+      "address": "0x0000000000000000000000000000000000000019",
+      "crowdsourcers": ["0x0000000000000000001000000000000000000003"],
+      "crowdsourcersAreDisavowed": false,
+      "initialReporterAddress": "0x0000000000000000000000000000000000abe111",
+      "isFinalized": true,
+      "isMigrated": true,
+      "universeAddress": "0x000000000000000000000000000000000000000b",
+    },
+  ],
 }
 
 augur.reporting.getReportingHistory({
@@ -1677,7 +1685,7 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 
 ### augur.reporting.getReportingFees(p, callback)
 
-Returns information about the clamed and unclaimed ETH and REP a user has in a specific [Universe](#universe) or [Fee Window](#fee-window).
+Returns information about the unclaimed ETH and REP a user has in a specific [Universe](#universe) or [Fee Window](#fee-window) (as well as the [Forked Market](#forked-market) in the [Parent Universe](#parent-universe), if applicable).
 
 #### **Parameters:**
 
@@ -1688,7 +1696,7 @@ Returns information about the clamed and unclaimed ETH and REP a user has in a s
 
 #### **Returns:**
 
-* (<a href="#FeeDetails">FeeDetails</a>) information about the clamed and unclaimed ETH and REP a user has in a specific Universe or Fee Window.
+* (<a href="#FeeDetails">FeeDetails</a>) information about the unclaimed ETH and REP a user has in a specific Universe or Fee Window (as well as the Forked Market in the Parent Universe, if applicable).
 
 ### augur.reporting.getReportingHistory(p, callback)
 
