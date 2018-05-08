@@ -2394,7 +2394,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="s2">"0x2100000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="p">],</span>
-  <span class="na">forkedMarket</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="na">forkedMarket</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">nonforkedMarkets</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
@@ -12761,7 +12761,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">total</code></strong> (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about the Markets in which a specific user has unclaimed ETH/REP.</li>
 <li><strong><code class="prettyprint">feeWindows</code></strong> (Array.&lt;string&gt;) Array of FeeWindow contract addresses with unclaimed REP, as hexadecimal strings.</li>
-<li><strong><code class="prettyprint">forkedMarket</code></strong> (<a href="#ForkedMarket">ForkedMarket</a>) ForkedMarket object containing information about the Forked Market in which the user has unclaimed ETH/REP.</li>
+<li><strong><code class="prettyprint">forkedMarket</code></strong> (<a href="#ForkedMarket">ForkedMarket</a>|null) ForkedMarket object containing information about the Forked Market in which the user has unclaimed ETH/REP.</li>
 <li><strong><code class="prettyprint">nonforkedMarkets</code></strong> (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>&gt;) Array of NonforkedMarket objects containing unclaimed ETH/REP.</li>
 </ul>
 
@@ -12801,22 +12801,22 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">address</code></strong> (string) Ethereum contract address of the Forked Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">universeAddress</code></strong> (string) Ethereum contract address of Universe to which the Forked Market belongs, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">isFinalized</code></strong> (boolean) Whether the Forked Market has been Finalized (i.e., the function Market.finalize` has been called on it successfully).</li>
-<li><strong><code class="prettyprint">crowdsourcers</code></strong> (Array.&lt;<a href="#ForkedMarketCrowdsourcer">ForkedMarketCrowdsourcer</a>&gt;) Array of objects containing information about the Forked Market&rsquo;s DisputeCrowdsourcers.</li>
-<li><strong><code class="prettyprint">initialReporter</code></strong> (<a href="#ForkedMarketInitialReporter">ForkedMarketInitialReporter</a>) Object containing information about the Forked Market&rsquo;s InitialReporter.</li>
+<li><strong><code class="prettyprint">crowdsourcers</code></strong> (Array.&lt;<a href="#CrowdsourcerState">CrowdsourcerState</a>&gt;) Array of objects containing information about the Forked Market&rsquo;s DisputeCrowdsourcers.</li>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (<a href="#InitialReporterState">InitialReporterState</a>|null) Object containing information about the Forked Market&rsquo;s InitialReporter.</li>
 </ul>
 
-<p><a name="ForkedMarketCrowdsourcer"></a></p>
+<p><a name="CrowdsourcerState"></a></p>
 
-<h3 id="forkedmarketcrowdsourcer-object">ForkedMarketCrowdsourcer  (Object)</h3>
+<h3 id="crowdsourcerstate-object">CrowdsourcerState  (Object)</h3>
 
 <ul>
 <li><strong><code class="prettyprint">address</code></strong> (string) Ethereum contract address of a DisputeCrowdsourcer belonging to a Forked Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">isForked</code></strong> (boolean) Whether the DisputeCrowdsourcer has been forked (i.e., has had its <code class="prettyprint">DisputeCrowdsourcer.fork</code> function called successfully).</li>
 </ul>
 
-<p><a name="ForkedMarketInitialReporter"></a></p>
+<p><a name="InitialReporterState"></a></p>
 
-<h3 id="forkedmarketinitialreporter-object">ForkedMarketInitialReporter  (Object)</h3>
+<h3 id="initialreporterstate-object">InitialReporterState  (Object)</h3>
 
 <ul>
 <li><strong><code class="prettyprint">address</code></strong> (string) Ethereum contract address of the InitialReporter belonging to a Forked Market, as a hexadecimal string.</li>
@@ -12992,7 +12992,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">isMigrated</code></strong> (boolean) Whether the non-Forked Market has been migrated to the Child Universe of its original Universe (i.e., its <code class="prettyprint">Market.isMigrated</code> function has been called successfully).</li>
 <li><strong><code class="prettyprint">isFinalized</code></strong> (boolean) Whether the non-Forked Market has been Finalized (i.e., its <code class="prettyprint">Market.finalize</code> function has been called successfully).</li>
 <li><strong><code class="prettyprint">crowdsourcers</code></strong> (Array.&lt;string&gt;) Array of Ethereum contract addresses of the non-Forked Market&rsquo;s DisputeCrowdsourcers, as hexadecimal strings.</li>
-<li><strong><code class="prettyprint">initialReporterAddress</code></strong> (string) Ethereum contract address of the non-Forked Market&rsquo;s InitialReporter, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">initialReporterAddress</code></strong> (string|null) Ethereum contract address of the non-Forked Market&rsquo;s InitialReporter, as a hexadecimal string.</li>
 </ul>
 
 <p><a name="NormalizedPayout"></a></p>
