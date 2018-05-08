@@ -158,8 +158,8 @@ Serves as an enum for the state of a Dispute Token.
 <a name="ForkedMarket"></a>
 ### ForkedMarket  (Object)
 
-* **`address`** (string) Ethereum contract address of the Forked Market, as a hexadecimal string.
-* **`universeAddress`** (string) Ethereum contract address of Universe to which the Forked Market belongs, as a hexadecimal string.
+* **`marketId`** (string) Ethereum contract address of the Forked Market, as a hexadecimal string.
+* **`universe`** (string) Ethereum contract address of Universe to which the Forked Market belongs, as a hexadecimal string.
 * **`isFinalized`** (boolean) Whether the Forked Market has been Finalized (i.e., the function Market.finalize` has been called on it successfully).
 * **`crowdsourcers`** (Array.&lt;<a href="#CrowdsourcerState">CrowdsourcerState</a>>) Array of objects containing information about the Forked Market's DisputeCrowdsourcers.
 * **`initialReporter`** (<a href="#InitialReporterState">InitialReporterState</a>|null) Object containing information about the Forked Market's InitialReporter.
@@ -167,13 +167,13 @@ Serves as an enum for the state of a Dispute Token.
 <a name="CrowdsourcerState"></a>
 ### CrowdsourcerState  (Object)
 
-* **`address`** (string) Ethereum contract address of a DisputeCrowdsourcer belonging to a Forked Market, as a hexadecimal string.
+* **`crowdsourcerId`** (string) Ethereum contract address of a DisputeCrowdsourcer belonging to a Forked Market, as a hexadecimal string.
 * **`isForked`** (boolean) Whether the DisputeCrowdsourcer has been forked (i.e., has had its `DisputeCrowdsourcer.fork` function called successfully).
 
 <a name="InitialReporterState"></a>
 ### InitialReporterState  (Object)
 
-* **`address`** (string) Ethereum contract address of the InitialReporter belonging to a Forked Market, as a hexadecimal string.
+* **`initialReporterId`** (string) Ethereum contract address of the InitialReporter belonging to a Forked Market, as a hexadecimal string.
 * **`isForked`** (boolean) Whether the InitialReporter has been forked (i.e., has had its `InitialReporter.fork` function called successfully).
 
 <a name="GasEstimateInfo"></a>
@@ -297,13 +297,13 @@ Authentication metadata for raw transactions.
 <a name="NonforkedMarket"></a>
 ### NonforkedMarket  (Object)
 
-* **`address`** (string) Ethereum contract address of the non-Forked Market, as a hexadecimal string.
-* **`universeAddress`** (string) Ethereum contract address of Universe to which the non-Forked Market belongs, as a hexadecimal string.
+* **`marketId`** (string) Ethereum contract address of the non-Forked Market, as a hexadecimal string.
+* **`universe`** (string) Ethereum contract address of Universe to which the non-Forked Market belongs, as a hexadecimal string.
 * **`crowdsourcersAreDisavowed`** (boolean) Whether the non-Forked Market's DisputeCrowdsourcers have been disavowed (i.e., its `Market.disavowCrowdsourcers` function has been called successfully).
 * **`isMigrated`** (boolean) Whether the non-Forked Market has been migrated to the Child Universe of its original Universe (i.e., its `Market.isMigrated` function has been called successfully).
 * **`isFinalized`** (boolean) Whether the non-Forked Market has been Finalized (i.e., its `Market.finalize` function has been called successfully).
 * **`crowdsourcers`** (Array.&lt;string>) Array of Ethereum contract addresses of the non-Forked Market's DisputeCrowdsourcers, as hexadecimal strings.
-* **`initialReporterAddress`** (string|null) Ethereum contract address of the non-Forked Market's InitialReporter, as a hexadecimal string.
+* **`initialReporter`** (string|null) Ethereum contract address of the non-Forked Market's InitialReporter, as a hexadecimal string.
 
 <a name="NormalizedPayout"></a>
 ### NormalizedPayout  (Object)

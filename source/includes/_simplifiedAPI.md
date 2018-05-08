@@ -1461,13 +1461,13 @@ augur.reporting.getReportingFees({
   forkedMarket: null,
   nonforkedMarkets: [
     {
-      "address": "0x0000000000000000000000000000000000000019",
+      "marketId": "0x0000000000000000000000000000000000000019",
       "crowdsourcers": ["0x0000000000000000001000000000000000000003"],
       "crowdsourcersAreDisavowed": false,
-      "initialReporterAddress": "0x0000000000000000000000000000000000abe111",
+      "initialReporter": "0x0000000000000000000000000000000000abe111",
       "isFinalized": true,
       "isMigrated": true,
-      "universeAddress": "0x000000000000000000000000000000000000000b",
+      "universe": "0x000000000000000000000000000000000000000b",
     },
   ],
 }
