@@ -1545,9 +1545,9 @@ Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsou
 
 * **`p`** (Object) Parameters object.
     * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
-    * **`p.crowdsourcers`**  (Array.&lt;string</a>>) Array of DisputeCrowdsourcer contract addresses which to claim reporting fees.
     * **`p.feeWindows`**  (Array.&lt;string</a>>) Array of FeeWindow contract addresses which to claim reporting fees.
-    * **`p.initialReporters`**  (Array.&lt;string</a>>) Array of InitialReporter contract addresses which to claim reporting fees.
+    * **`p.forkedMarket`**  (<a href="#ForkedMarket">ForkedMarket</a>|null) Object containing information about the Forked Market in which the user has unclaimed fees in the Parent Universe(if there is one).
+    * **`p.nonforkedMarkets`**  (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array containing objects with information about the non-Forked Markets in which the user has unclaimed fees.
     * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
