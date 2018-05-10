@@ -341,7 +341,7 @@ A Position is the amount of [Shares](#share) that are owned (a [Long Position](#
 
 ## Post-Finalization Waiting Period
 
-Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds. When the Augur development team is confident that Augur is secure, this waiting period is removed.
+Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds. When the Augur development team is confident that Augur is secure, this waiting period will be removed.
 
 ## REP
 
