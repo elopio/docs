@@ -44,20 +44,35 @@ var augurNode = "ws://127.0.0.1:9001"; // local WebSocket address for an Augur N
 
 // Attempt to connect to a local Ethereum node
 // If that fails, fall back to the hosted Ethereum node
-augur.connect({ ethereumNode, augurNode }, function (vitals) { /* ... */ });
-// example vitals object:
-vitals = {
-  networkId: '9000',
-  blockNumber: '0xf69b5',
-  coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-  gasPrice: 18000000000,
-  api: {
-    events: { ... },
-    functions: { ... },
-  },
-  contracts: { ... },
-  rpc: { ... },
-};
+augur.connect({ ethereumNode, augurNode }, function (err, connectionInfo) { /* ... */ });
+// example connectionInfo object:
+{
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: {
+    contracts: {
+      Controller: "0xb1772d9e581e5a245ff429cca3e06c57d567c58c",
+      Universe: "0xaa88b74da9e08d44c996f037ce13cb2711053cea",
+      Augur: "0xdddc5d40979660308e8017d048b04782f17af4af",
+      LegacyReputationToken: "0x59c98505653f68e8cc2a0ac1e84380a0393fd04e",
+      CancelOrder: "0x4c0f599bdd8f9eac10cdfd152c3110ea9b803088",
+      Cash: "0x5754d0bcb36b7f30999199031d1f323c4079d58d",
+      ClaimTradingProceeds: "0xe408a58ff3eb050f39728fc45644f64e8e379e3d",
+      CompleteSets: "0xb51a3aab3d5009f21cd9b47ae856aa780460b78c",
+      CreateOrder: "0x19ef3d62d49e95e1b92c1fe12986a24a42c4f3c3",
+      FillOrder: "0x57972b23e4e97cf33b456d292411308b1053d835",
+      Order: "0x86416fd9eb6ca7797f799ccc2e08a4da4083ac17",
+      Orders: "0x452cbdba8559a9b0199bb15105a42fc7ae373983",
+      OrdersFetcher: "0xc9d0126e1aa921056af5981016904690ad73c0d3",
+      ShareToken: "0x5c8b3117b65af65405980f3700542c03709a6436",
+      Trade: "0x8d0677ee9f5330fd65db56da6c31711fd6810434",
+      TradingEscapeHatch: "0x867d606553c3fc24b35e3b02d228dc1647786f88"
+    },
+    abi: {
+      events: { /* ... */ },
+      functions: { /* ... */ }
+    },
+  }
+}
 ```
 The easiest way to install augur.js is using [npm](https://www.npmjs.com/package/augur.js):
 
@@ -67,9 +82,9 @@ Alternatively, this can be done using [yarn](https://yarnpkg.com/en/package/augu
 
 `$ yarn add augur.js`
 
-Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur Node](#augur-node). These can be running locally or remotely (hosted). 
+Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur node](#augur-node). These can be running locally or remotely (hosted). 
 
-To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays. Once they have all either successfully connected or failed to connect, the first address for each connection type (HTTP, WS, IPC) that connected successfully will be chosen and used for that connection type.  The connection will be chosen automatically based on a preference of IPC > WS > HTTP.  
+To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC > WS > HTTP.  Note: if there is a global `web3` object present, such as that injected by MetaMask, that global `web3` will be automatically used in preference to any other connections available.  So, if you're using MetaMask, make sure it's connected to the right network!
 
 Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
