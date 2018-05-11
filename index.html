@@ -521,20 +521,35 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="c1">// Attempt to connect to a local Ethereum node</span>
 <span class="c1">// If that fails, fall back to the hosted Ethereum node</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span> <span class="nx">ethereumNode</span><span class="p">,</span> <span class="nx">augurNode</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">vitals</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="c1">// example vitals object:</span>
-<span class="nx">vitals</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">networkId</span><span class="p">:</span> <span class="s1">'9000'</span><span class="p">,</span>
-  <span class="na">blockNumber</span><span class="p">:</span> <span class="s1">'0xf69b5'</span><span class="p">,</span>
-  <span class="na">coinbase</span><span class="p">:</span> <span class="s1">'0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b'</span><span class="p">,</span>
-  <span class="na">gasPrice</span><span class="p">:</span> <span class="mi">18000000000</span><span class="p">,</span>
-  <span class="na">api</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">events</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-    <span class="na">functions</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="p">},</span>
-  <span class="na">contracts</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="na">rpc</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">connect</span><span class="p">({</span> <span class="nx">ethereumNode</span><span class="p">,</span> <span class="nx">augurNode</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">connectionInfo</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// example connectionInfo object:</span>
+<span class="p">{</span>
+  <span class="nl">augurNode</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
+  <span class="nx">ethereumNode</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">contracts</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">Controller</span><span class="p">:</span> <span class="s2">"0xb1772d9e581e5a245ff429cca3e06c57d567c58c"</span><span class="p">,</span>
+      <span class="nx">Universe</span><span class="p">:</span> <span class="s2">"0xaa88b74da9e08d44c996f037ce13cb2711053cea"</span><span class="p">,</span>
+      <span class="nx">Augur</span><span class="p">:</span> <span class="s2">"0xdddc5d40979660308e8017d048b04782f17af4af"</span><span class="p">,</span>
+      <span class="nx">LegacyReputationToken</span><span class="p">:</span> <span class="s2">"0x59c98505653f68e8cc2a0ac1e84380a0393fd04e"</span><span class="p">,</span>
+      <span class="nx">CancelOrder</span><span class="p">:</span> <span class="s2">"0x4c0f599bdd8f9eac10cdfd152c3110ea9b803088"</span><span class="p">,</span>
+      <span class="nx">Cash</span><span class="p">:</span> <span class="s2">"0x5754d0bcb36b7f30999199031d1f323c4079d58d"</span><span class="p">,</span>
+      <span class="nx">ClaimTradingProceeds</span><span class="p">:</span> <span class="s2">"0xe408a58ff3eb050f39728fc45644f64e8e379e3d"</span><span class="p">,</span>
+      <span class="nx">CompleteSets</span><span class="p">:</span> <span class="s2">"0xb51a3aab3d5009f21cd9b47ae856aa780460b78c"</span><span class="p">,</span>
+      <span class="nx">CreateOrder</span><span class="p">:</span> <span class="s2">"0x19ef3d62d49e95e1b92c1fe12986a24a42c4f3c3"</span><span class="p">,</span>
+      <span class="nx">FillOrder</span><span class="p">:</span> <span class="s2">"0x57972b23e4e97cf33b456d292411308b1053d835"</span><span class="p">,</span>
+      <span class="nx">Order</span><span class="p">:</span> <span class="s2">"0x86416fd9eb6ca7797f799ccc2e08a4da4083ac17"</span><span class="p">,</span>
+      <span class="nx">Orders</span><span class="p">:</span> <span class="s2">"0x452cbdba8559a9b0199bb15105a42fc7ae373983"</span><span class="p">,</span>
+      <span class="nx">OrdersFetcher</span><span class="p">:</span> <span class="s2">"0xc9d0126e1aa921056af5981016904690ad73c0d3"</span><span class="p">,</span>
+      <span class="nx">ShareToken</span><span class="p">:</span> <span class="s2">"0x5c8b3117b65af65405980f3700542c03709a6436"</span><span class="p">,</span>
+      <span class="nx">Trade</span><span class="p">:</span> <span class="s2">"0x8d0677ee9f5330fd65db56da6c31711fd6810434"</span><span class="p">,</span>
+      <span class="nx">TradingEscapeHatch</span><span class="p">:</span> <span class="s2">"0x867d606553c3fc24b35e3b02d228dc1647786f88"</span>
+    <span class="p">},</span>
+    <span class="nx">abi</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nl">events</span><span class="p">:</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span>
+      <span class="nx">functions</span><span class="p">:</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>The easiest way to install augur.js is using <a href="https://www.npmjs.com/package/augur.js">npm</a>:</p>
 
@@ -544,9 +559,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p><code class="prettyprint">$ yarn add augur.js</code></p>
 
-<p>Once augur.js has been installed, it will need to be connected to an Ethereum node and an <a href="#augur-node">Augur Node</a>. These can be running locally or remotely (hosted). </p>
+<p>Once augur.js has been installed, it will need to be connected to an Ethereum node and an <a href="#augur-node">Augur node</a>. These can be running locally or remotely (hosted). </p>
 
-<p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">augur.connect</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays. Once they have all either successfully connected or failed to connect, the first address for each connection type (HTTP, WS, IPC) that connected successfully will be chosen and used for that connection type.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  </p>
+<p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">augur.connect</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  Note: if there is a global <code class="prettyprint">web3</code> object present, such as that injected by MetaMask, that global <code class="prettyprint">web3</code> will be automatically used in preference to any other connections available.  So, if you&rsquo;re using MetaMask, make sure it&rsquo;s connected to the right network!</p>
 
 <p>Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
@@ -565,99 +580,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>The statuses of these hosted nodes can be viewed at <a href="http://stats.augur.net">http://stats.augur.net</a>.</p>
 
 <p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
-
-<h2 id="accounts">Accounts</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="cm">/**
- * Create an account using the augur.accounts.register method.
- */</span>
-<span class="kd">var</span> <span class="nx">newAccount</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">registerParameters</span> <span class="o">=</span> <span class="p">{</span> <span class="na">password</span><span class="p">:</span> <span class="s2">"thisismysupersecurepassword"</span> <span class="p">};</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">registerParameters</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
-  <span class="nx">newAccount</span> <span class="o">=</span> <span class="nx">account</span><span class="p">;</span>
-<span class="p">});</span>
-
-<span class="c1">// output</span>
-<span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
-<span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
-    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="cm">/**
- * Log into an account using the augur.accounts.login method.
- */</span>
-<span class="kd">var</span> <span class="nx">loginParameters</span> <span class="o">=</span> <span class="p">{</span> <span class="na">keystore</span><span class="p">:</span> <span class="nx">newAccount</span><span class="p">.</span><span class="nx">keystore</span><span class="p">,</span> <span class="na">password</span><span class="p">:</span> <span class="nx">registerParameters</span><span class="p">.</span><span class="nx">password</span> <span class="p">};</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">accounts</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">loginParameters</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">account</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Account:"</span><span class="p">,</span> <span class="nx">account</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// output</span>
-<span class="nl">Error</span><span class="p">:</span> <span class="kc">null</span>
-<span class="nx">Account</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nl">address</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
-  <span class="nx">derivedKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">121</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">236</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">229</span><span class="p">,</span> <span class="mi">159</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">242</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">246</span><span class="p">],</span>
-  <span class="nx">keystore</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">address</span><span class="p">:</span> <span class="s2">"0xb1baa74babc22bad068e3055846fb76becad7da2"</span><span class="p">,</span>
-    <span class="nx">crypto</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nl">cipher</span><span class="p">:</span> <span class="s2">"aes-128-ctr"</span><span class="p">,</span>
-      <span class="nx">cipherparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">iv</span><span class="p">:</span> <span class="s2">"1be316027cc38223635f54dced8fefb4"</span>
-      <span class="p">},</span>
-      <span class="nx">ciphertext</span><span class="p">:</span> <span class="s2">"30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e"</span><span class="p">,</span>
-      <span class="nx">kdf</span><span class="p">:</span> <span class="s2">"pbkdf2"</span><span class="p">,</span>
-      <span class="nx">kdfparams</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">c</span><span class="p">:</span> <span class="mi">65536</span><span class="p">,</span>
-        <span class="nx">dklen</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-        <span class="nx">prf</span><span class="p">:</span> <span class="s2">"hmac-sha256"</span><span class="p">,</span>
-        <span class="nx">salt</span><span class="p">:</span> <span class="s2">"2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"</span>
-      <span class="p">},</span>
-      <span class="nx">mac</span><span class="p">:</span> <span class="s2">"70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"</span>
-    <span class="p">},</span>
-    <span class="nx">id</span><span class="p">:</span> <span class="s2">"3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca"</span><span class="p">,</span>
-    <span class="nx">version</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="nx">privateKey</span><span class="p">:</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">[</span><span class="mi">145</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">214</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">139</span><span class="p">,</span> <span class="mi">203</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">209</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">144</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">146</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">169</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1">// augur.js does not store any account data. augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.</span>
-</code></pre></div>
-<p>augur.js includes a trustless account management system. The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.</p>
-
-<p>To use the account system, the user specifies a password. Everything else is done automatically for the user. The only requirement for the password is that it be at least 6 characters long.</p>
-
-<p>A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by augur.js. The account object will be returned to the callback provided or simply returned if no callback is provided.</p>
-
-<p>The Augur UI will handle your account information for you, but if you are using augur.js on its own you will need to manage the account yourself. augur.js doesn&rsquo;t sign any transactions for you if you aren&rsquo;t using the Augur UI.</p>
-
-<p>If you want to use the augur.js API directly, you will need to sign any transaction that will modify information on the blockchain (non-call transactions). All transactions take a <code class="prettyprint">_signer</code> parameter which should be set to the sending account&rsquo;s <code class="prettyprint">privateKey</code> Buffer or a function that will sign a transaction (hardware wallet).</p>
-
-<aside class="notice">Since the user&rsquo;s account key is an ordinary Ethereum private key, the user&rsquo;s key (and therefore their funds and Reputation) can be used with any Ethereum node. Therefore, although the accounts system is managed using an ordinary web server, since the user&rsquo;s funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
 
 <h2 id="numbers">Numbers</h2>
 
@@ -14154,7 +14076,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
 
-<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds.</p>
+<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds. When the Augur development team is confident that Augur is secure, this waiting period will be removed.</p>
 
 <h2 id="rep">REP</h2>
 
