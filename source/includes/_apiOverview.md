@@ -44,20 +44,35 @@ var augurNode = "ws://127.0.0.1:9001"; // local WebSocket address for an Augur N
 
 // Attempt to connect to a local Ethereum node
 // If that fails, fall back to the hosted Ethereum node
-augur.connect({ ethereumNode, augurNode }, function (vitals) { /* ... */ });
-// example vitals object:
-vitals = {
-  networkId: '9000',
-  blockNumber: '0xf69b5',
-  coinbase: '0x05ae1d0ca6206c6168b42efcd1fbe0ed144e821b',
-  gasPrice: 18000000000,
-  api: {
-    events: { ... },
-    functions: { ... },
-  },
-  contracts: { ... },
-  rpc: { ... },
-};
+augur.connect({ ethereumNode, augurNode }, function (err, connectionInfo) { /* ... */ });
+// example connectionInfo object:
+{
+  augurNode: "ws://127.0.0.1:9001",
+  ethereumNode: {
+    contracts: {
+      Controller: "0xb1772d9e581e5a245ff429cca3e06c57d567c58c",
+      Universe: "0xaa88b74da9e08d44c996f037ce13cb2711053cea",
+      Augur: "0xdddc5d40979660308e8017d048b04782f17af4af",
+      LegacyReputationToken: "0x59c98505653f68e8cc2a0ac1e84380a0393fd04e",
+      CancelOrder: "0x4c0f599bdd8f9eac10cdfd152c3110ea9b803088",
+      Cash: "0x5754d0bcb36b7f30999199031d1f323c4079d58d",
+      ClaimTradingProceeds: "0xe408a58ff3eb050f39728fc45644f64e8e379e3d",
+      CompleteSets: "0xb51a3aab3d5009f21cd9b47ae856aa780460b78c",
+      CreateOrder: "0x19ef3d62d49e95e1b92c1fe12986a24a42c4f3c3",
+      FillOrder: "0x57972b23e4e97cf33b456d292411308b1053d835",
+      Order: "0x86416fd9eb6ca7797f799ccc2e08a4da4083ac17",
+      Orders: "0x452cbdba8559a9b0199bb15105a42fc7ae373983",
+      OrdersFetcher: "0xc9d0126e1aa921056af5981016904690ad73c0d3",
+      ShareToken: "0x5c8b3117b65af65405980f3700542c03709a6436",
+      Trade: "0x8d0677ee9f5330fd65db56da6c31711fd6810434",
+      TradingEscapeHatch: "0x867d606553c3fc24b35e3b02d228dc1647786f88"
+    },
+    abi: {
+      events: { /* ... */ },
+      functions: { /* ... */ }
+    },
+  }
+}
 ```
 The easiest way to install augur.js is using [npm](https://www.npmjs.com/package/augur.js):
 
@@ -67,9 +82,9 @@ Alternatively, this can be done using [yarn](https://yarnpkg.com/en/package/augu
 
 `$ yarn add augur.js`
 
-Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur Node](#augur-node). These can be running locally or remotely (hosted). 
+Once augur.js has been installed, it will need to be connected to an Ethereum node and an [Augur node](#augur-node). These can be running locally or remotely (hosted). 
 
-To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays. Once they have all either successfully connected or failed to connect, the first address for each connection type (HTTP, WS, IPC) that connected successfully will be chosen and used for that connection type.  The connection will be chosen automatically based on a preference of IPC > WS > HTTP.  
+To connect to the desired Ethereum node and Augur node, call the function `augur.connect` as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the `ethereumNode` argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC > WS > HTTP.  Note: if there is a global `web3` object present, such as that injected by MetaMask, that global `web3` will be automatically used in preference to any other connections available.  So, if you're using MetaMask, make sure it's connected to the right network!
 
 Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
@@ -88,101 +103,6 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 The statuses of these hosted nodes can be viewed at [http://stats.augur.net](http://stats.augur.net).
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
-
-Accounts
---------
-```javascript
-/**
- * Create an account using the augur.accounts.register method.
- */
-var newAccount;
-var registerParameters = { password: "thisismysupersecurepassword" };
-
-augur.accounts.register(registerParameters, function (error, account) {
-  console.log("Error:", error);
-  console.log("Account:", account);
-  newAccount = account;
-});
-
-// output
-Error: null
-Account: {
-  address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
-  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
-  keystore: {
-    address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-}
-
-/**
- * Log into an account using the augur.accounts.login method.
- */
-var loginParameters = { keystore: newAccount.keystore, password: registerParameters.password };
-
-augur.accounts.login(loginParameters, function (error, account) {
-  console.log("Error:", error);
-  console.log("Account:", account);
-});
-
-// output
-Error: null
-Account: {
-  address: undefined,
-  derivedKey: Uint8Array(32) [121, 199, 100, 210, 236, 254, 150, 229, 159, 182, 49, 89, 198, 158, 135, 200, 242, 108, 111, 245, 143, 135, 3, 216, 223, 48, 95, 214, 7, 112, 106, 246],
-  keystore: {
-    address: "0xb1baa74babc22bad068e3055846fb76becad7da2",
-    crypto: {
-      cipher: "aes-128-ctr",
-      cipherparams: {
-        iv: "1be316027cc38223635f54dced8fefb4"
-      },
-      ciphertext: "30722b1b8f84752813e67489a17e89fafcb768fcbdcee03e2aea220bc3e0173e",
-      kdf: "pbkdf2",
-      kdfparams: {
-        c: 65536,
-        dklen: 32,
-        prf: "hmac-sha256",
-        salt: "2d5e265588356263153d729f2b7151ffca65dba768b25ede61eb6475eff7cf01"
-      },
-      mac: "70bbd8c0324aba45404a8d67ae8af6ad0888654cb8e401a599f7f6b165261c59"
-    },
-    id: "3dd23c7f-74ab-4ce0-a3b1-30918e4f6cca",
-    version: 3
-  },
-  privateKey: Uint8Array(32) [145, 195, 95, 10, 39, 106, 79, 107, 240, 160, 184, 204, 214, 23, 139, 203, 213, 38, 245, 16, 225, 209, 165, 144, 201, 130, 146, 88, 46, 20, 169, 10]
-}
-
-// augur.js does not store any account data. augur.js simply returns the important information. You can use the privateKey Buffer returned to sign your transactions.
-```
-augur.js includes a trustless account management system. The purpose of the accounts system is to allow people to use Augur without needing to run an Ethereum node themselves, as running a full Ethereum node can be resource-intensive.
-
-To use the account system, the user specifies a password. Everything else is done automatically for the user. The only requirement for the password is that it be at least 6 characters long.
-
-A private key (+ derived public key and address) is automatically generated for the user.  A secret key derived from the password using PBKDF2, along with a random 128-bit initialization vector, is used to encrypt the private key (using AES-256). Nothing is stored by augur.js. The account object will be returned to the callback provided or simply returned if no callback is provided.
-
-The Augur UI will handle your account information for you, but if you are using augur.js on its own you will need to manage the account yourself. augur.js doesn't sign any transactions for you if you aren't using the Augur UI.
-
-If you want to use the augur.js API directly, you will need to sign any transaction that will modify information on the blockchain (non-call transactions). All transactions take a `_signer` parameter which should be set to the sending account's `privateKey` Buffer or a function that will sign a transaction (hardware wallet).
-
-<aside class="notice">Since the user's account key is an ordinary Ethereum private key, the user's key (and therefore their funds and Reputation) can be used with any Ethereum node. Therefore, although the accounts system is managed using an ordinary web server, since the user's funds are neither tied to nor controlled by our server, the accounts are still decentralized in the ways that (in our opinion) matter.</aside>
 
 Numbers
 -------
