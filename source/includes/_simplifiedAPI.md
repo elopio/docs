@@ -1412,6 +1412,7 @@ augur.reporting.getFeeWindows({
 }
 
 augur.reporting.getInitialReporters({
+  universe: "0x000000000000000000000000000000000000000b",
   reporter: "0x0000000000000000000000000000000000000b0b",
 }, function (error, result) {
   console.log(result);
@@ -1676,6 +1677,7 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 
 * **`p`** (Object) Parameters object.
     * **`p.reporter`**  (string) Ethereum address of a Reporter who has Staked REP in InitialReporter contracts, as a 20-byte hexadecimal string.
+    * **`p.universe`**  (string) Ethereum address of the [Universe](#universe) in which the desired [Initial Reporters](#initial-reporter) exist.
     * **`p.redeemed`**  (boolean) &lt;optional> If true, the returned results will include only InitialReporter contracts where the Reporter has redeemed Staked REP; if false, the returned results will include only InitialReporter contracts where the Reporter has not redeemed Staked REP. If not specified, the results will include all InitialReporters in which the Repoter has Staked REP.
     * **`p.withRepBalance`**  (boolean) &lt;optional> Whether the InitialReporter contract has a balance greater than 0. If set to `true`, only InitialReporters with a balance greater than 0 will be returned.
 * **`callback`** (function) Called after the InitialReporters have been retrieved.
