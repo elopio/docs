@@ -1523,10 +1523,11 @@ augur.reporting.getReportingSummary({
 });
 // example output:
 {
-  "AWAITING_NEXT_WINDOW": 1,
+  "AWAITING_FINALIZATION": 1,
   "DESIGNATED_REPORTING": 8,
   "CROWDSOURCING_DISPUTE": 2,
   "FINALIZED": 1,
+  "PRE_REPORTING": 1,
 }
 
 augur.reporting.getStakeRequiredForDesignatedReporter({
