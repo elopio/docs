@@ -132,7 +132,7 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`total`** (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about the Markets in which a specific user has unclaimed ETH/REP.
 * **`feeWindows`** (Array.&lt;string>) Array of FeeWindow contract addresses with unclaimed REP, as hexadecimal strings.
-* **`forkedMarket`** (<a href="#ForkedMarket">ForkedMarket</a>|null) ForkedMarket object containing information about the Forked Market in which the user has unclaimed ETH/REP.
+* **`forkedMarket`** (<a href="#ForkedMarket">ForkedMarket</a>|null) ForkedMarket object containing information about the Forked Market (if one exists in the specified universe.)
 * **`nonforkedMarkets`** (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array of NonforkedMarket objects containing unclaimed ETH/REP.
 
 <a name="FeeDetailsTotal"></a>
