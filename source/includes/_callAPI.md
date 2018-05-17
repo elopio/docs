@@ -271,7 +271,7 @@ Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](htt
 
 ### augur.api.DisputeCrowdsourcer.getFeeWindow(p, callback)
 
-Gets the [Fee Window](#fee-window) to which a [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs.
+Gets the [Fee Window](#fee-window) to which a [Dispute Crowdsourcer](#crowdsourcer) belongs.
 
 #### **Parameters:**
 
@@ -286,7 +286,7 @@ Gets the [Fee Window](#fee-window) to which a [Dispute Crowdsourcer](#dispute-cr
 
 ### augur.api.DisputeCrowdsourcer.getMarket(p, callback)
 
-Gets the [Market](#market) to which a [Dispute Crowdsourcer](#dispute-crowdsourcer) belongs.
+Gets the [Market](#market) to which a [Dispute Crowdsourcer](#crowdsourcer) belongs.
 
 #### **Parameters:**
 
@@ -301,7 +301,7 @@ Gets the [Market](#market) to which a [Dispute Crowdsourcer](#dispute-crowdsourc
 
 ### augur.api.DisputeCrowdsourcer.getPayoutDistributionHash(p, callback)
 
-Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Crowdsourcer](#crowdsourcer).
 
 #### **Parameters:**
 
@@ -316,7 +316,7 @@ Gets the [Payout Distribution Hash](#payout-distribution-hash) for a [Dispute Cr
 
 ### augur.api.DisputeCrowdsourcer.getPayoutNumerator(p, callback)
 
-Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [Dispute Crowdsourcer](#crowdsourcer).
 
 #### **Parameters:**
 
@@ -332,7 +332,7 @@ Gets the [Payout Numerator](#payout-set) of a given [Outcome](#outcome) for a [D
 
 ### augur.api.DisputeCrowdsourcer.getReputationToken(p, callback)
 
-Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer](#dispute-crowdsourcer) is denominated.
+Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer](#crowdsourcer) is denominated.
 
 #### **Parameters:**
 
@@ -362,7 +362,7 @@ Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispu
 
 ### augur.api.DisputeCrowdsourcer.getStake(p, callback)
 
-Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake) on a [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake) on a [Dispute Crowdsourcer](#crowdsourcer).
 
 #### **Parameters:**
 
@@ -377,7 +377,7 @@ Gets the amount of [attoREP](#atto-prefix) that has been [Staked](#dispute-stake
 
 ### augur.api.DisputeCrowdsourcer.isDisavowed(p, callback)
 
-Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavowed". A disavowed Dispute Crowdsourcer is one from which [Staked](#dispute-stake) [REP](#rep) and/or [Reporting Fees](#reporting-fee) can be redeemed (by calling `augur.api.DisputeCrowdsourcer.redeem`) and whose [Market](#market) has not necessarily been [Finalized](#finalized-market). A Dispute Crowdsourcer can become disavowed if any of the following occurs:
+Returns whether a [Dispute Crowdsourcer](#crowdsourcer) has been "disavowed". A disavowed Dispute Crowdsourcer is one from which [Staked](#dispute-stake) [REP](#rep) and/or [Reporting Fees](#reporting-fee) can be redeemed (by calling `augur.api.DisputeCrowdsourcer.redeem`) and whose [Market](#market) has not necessarily been [Finalized](#finalized-market). A Dispute Crowdsourcer can become disavowed if any of the following occurs:
 
 1. Another Dispute Crowdsourcer belonging to the same Market and in the same [Fee Window](fee-window) successfully fills its [Dispute Bond](#dispute-bond).
 2. A Market other than the Dispute Crowdsourcer's Market causes a [Fork](#fork), and `augur.api.Market.disavowCrowdsourcers` is called on the Dispute Crowdsourcer's Market.
@@ -396,7 +396,7 @@ Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) has been "disavo
 
 ### augur.api.DisputeCrowdsourcer.isInvalid(p, callback)
 
-Returns whether a [Dispute Crowdsourcer](#dispute-crowdsourcer) represents the [Invalid Outcome](#invalid-outcome) for its [Market](#market).
+Returns whether a [Dispute Crowdsourcer](#crowdsourcer) represents the [Invalid Outcome](#invalid-outcome) for its [Market](#market).
 
 #### **Parameters:**
 
@@ -1502,7 +1502,7 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 
 ### augur.api.Market.getParticipantStake(p, callback)
 
-Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#dispute-crowdsourcer).
+Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#crowdsourcer).
 
 #### **Parameters:**
 

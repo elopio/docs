@@ -16,7 +16,7 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`sender`** (string|null) Ethereum address of the token sender. If null, this indicates that new tokens were minted and sent to the user.
 * **`recipient`** (string|null) Ethereum address of the token recipient. If null, this indicates that tokens were burned (i.e., destroyed).
 * **`token`** (string) Contract address of the contract for the sent token, as a hexadecimal string.
-* **`value`** (number) Quantity of tokens sent.
+* **`value`** (string) Quantity of tokens sent.
 * **`symbol`** (string|null) Token symbol (if any).
 * **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
 * **`marketId`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
@@ -100,7 +100,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
 * **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
-* **`balance`** (number) Dispute Token balance the owner has staked, in ETH.
+* **`balance`** (string) Dispute Token balance the owner has staked, in ETH.
 * **`winningToken`** (boolean|null) Index of the Payout Numerator that was determined to be the Market's Final Outcome.
 * **`tentativeWinning`** (boolean) Index of the Payout Numerator that is tentatively the winning Outcome.
 * **`claimed`** (boolean) Whether the Dispute Token has been claimed by the owner.
@@ -153,7 +153,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
-* **`totalStake`** (number) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
+* **`totalStake`** (string) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
 
 <a name="ForkedMarket"></a>
 ### ForkedMarket  (Object)
@@ -200,11 +200,11 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`marketId`** (string) Ethereum contract address of the Market for which the Initial Report was submitted.
 * **`reporter`** (string) Ethereum address of the Reporter who submitted the Initial Report.
-* **`amountStaked`** (number) Amount of attoREP the Reporter Staked in the Initial Report.
+* **`amountStaked`** (string) Amount of attoREP the Reporter Staked in the Initial Report.
 * **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
 * **`redeemed`** (boolean) Whether the Reporter has redeemed their REP from the InitialReporter contract.
 * **`isDesignatedReporter`** (boolean) Whether `reporter` was the Designated Reporter (as opposed to the First Public Reporter).
-* **`repBalance`** (number) Amount of REP that the InitialReporter contract has as its balance.
+* **`repBalance`** (string) Amount of REP that the InitialReporter contract has as its balance.
 
 <a name="MarketCreationCost"></a>
 ### MarketCreationCost  (Object)
@@ -229,24 +229,24 @@ Serves as an enum for the state of a Dispute Token.
 * **`universe`** (string) Address of a Universe, as a hexadecimal string.
 * **`marketType`** (string) Type of Market ("binary", "categorical", or "scalar").
 * **`numOutcomes`** (number) Total possible Outcomes for the Market.
-* **`minPrice`** (string|number) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
-* **`maxPrice`** (string|number) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
-* **`cumulativeScale`** (string|number) Difference between maxPrice and minPrice.
+* **`minPrice`** (string) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
+* **`maxPrice`** (string) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
+* **`cumulativeScale`** (string) Difference between maxPrice and minPrice.
 * **`author`** (string) Ethereum address of the creator of the Market, as a hexadecimal string.
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
 * **`creationBlock`** (number) Number of the Ethereum block containing the Market creation.
-* **`creationFee`** (string|number) Fee paid by the Market Creator to create the Market, in ETH.
+* **`creationFee`** (string) Fee paid by the Market Creator to create the Market, in ETH.
 * **`settlementFee`** (string) Fee extracted when a Complete Set is Settled. It is the combination of the Creator Fee and the Reporting Fee.
-* **`reportingFeeRate`** (string|number) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
-* **`marketCreatorFeeRate`** (string|number) Percentage rate of ETH paid to the Market creator whenever shares are settled.
-* **`marketCreatorFeesBalance`** (BigNumber|null) Amount of claimable fees the Market creator has not collected from the Market, in ETH.
+* **`reportingFeeRate`** (string) Percentage rate of ETH sent to the Fee Window containing the Market whenever shares are settled. Reporting Fees are later used to pay REP holders for Reporting on the Outcome of Markets.
+* **`marketCreatorFeeRate`** (string) Percentage rate of ETH paid to the Market creator whenever shares are settled.
+* **`marketCreatorFeesBalance`** (string) Amount of claimable fees the Market creator has not collected from the Market, in ETH.
 * **`marketCreatorMailbox`** (string) Ethereum address of the Market Creator, as a hexadecimal string.
 * **`marketCreatorMailboxOwner`** (string) Ethereum address of the Market Creator Mailbox, as a hexadecimal string.
-* **`initialReportSize`** (string|number|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
+* **`initialReportSize`** (string|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
-* **`volume`** (string|number) Trading volume for this Outcome. (Method for calculating this is pending.)
-* **`outstandingShares`** (string|number) Total shares in the Market. (Method for calculating this is pending.)
+* **`volume`** (string) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`outstandingShares`** (string) Total shares in the Market. (Method for calculating this is pending.)
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endTime`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationBlockNumber`** (number|null) Ethereum block number in which the Market was Finalized.
@@ -258,10 +258,10 @@ Serves as an enum for the state of a Dispute Token.
 * **`details`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).
 * **`scalarDenomination`** (string|null) Denomination used for the numerical range of a Scalar Market (e.g., dollars, degrees Fahrenheit, parts-per-billion).
 * **`designatedReporter`** (string) Ethereum address of the Market's designated report, as a hexadecimal string.
-* **`designatedReportStake`** (string|number) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
+* **`designatedReportStake`** (string) Size of the Designated Reporter Stake, in attoETH, that the Designated Reporter must pay to submit the Designated Report for this Market.
 * **`resolutionSource`** (string|null) Reference source used to determine the Outcome of the Market event.
-* **`numTicks`** (string|number) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
-* **`tickSize`** (string|number) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.
+* **`numTicks`** (string) Number of possible prices, or ticks, between a Market's minimum price and maximum price.
+* **`tickSize`** (string) Smallest recognized amount by which a price of a security or future may fluctuate in the Market.
 * **`consensus`** (<a href="#NormalizedPayout">NormalizedPayout</a>|null) Consensus Outcome for the Market.
 * **`outcomes`** (Array.&lt;<a href="#OutcomeInfo">OutcomeInfo</a>>) Array of OutcomeInfo objects.
 
@@ -323,12 +323,12 @@ Authentication metadata for raw transactions.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the order transaction was created.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the order transaction.
 * **`orderState`** (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
-* **`price`** (number) Rounded display price, as a base-10 number.
-* **`amount`** (number) Rounded number of shares to trade, as a base-10 number.
+* **`price`** (string) Rounded display price, as a base-10 number.
+* **`amount`** (string) Rounded number of shares to trade, as a base-10 number.
 * **`fullPrecisionPrice`** (string) Full-precision (un-rounded) display price, as a base-10 number.
-* **`fullPrecisionAmount`** (number) Full-precision (un-rounded) number of shares to trade, as a base-10 number.
-* **`tokensEscrowed`** (number) Number of the order maker's tokens held in escrow, as a base-10 number.
-* **`sharesEscrowed`** (number) Number of the order maker's shares held in escrow, as a base-10 number.
+* **`fullPrecisionAmount`** (string) Full-precision (un-rounded) number of shares to trade, as a base-10 number.
+* **`tokensEscrowed`** (string) Number of the order maker's tokens held in escrow, as a base-10 number.
+* **`sharesEscrowed`** (string) Number of the order maker's shares held in escrow, as a base-10 number.
 
 <a name="ORDER_STATE"></a>
 ### ORDER_STATE  (Object)
@@ -346,8 +346,8 @@ Serves as an enum for the state of an order.
 
 #### **Properties:** 
 * **`id`** (number) Market Outcome ID
-* **`volume`** (number) Trading volume for this Outcome. (Method for calculating this is pending.)
-* **`price`** (number) Price of the Outcome.
+* **`volume`** (string) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`price`** (string) Price of the Outcome.
 * **`description`** (string|null) Description for the Outcome.
 
 <a name="ProfitLoss"></a>
@@ -371,8 +371,8 @@ Serves as an enum for the state of an order.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the reporting transaction was created.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`feeWindow`** (string) Fee Window the Market is in currently.
-* **`payoutNumerators`** (Array.&lt;number>) Array representing the payout set.
-* **`amountStaked`** (number) attoREP the Reporter has Staked on the Outcome of their Report.
+* **`payoutNumerators`** (Array.&lt;string>) Array representing the payout set.
+* **`amountStaked`** (string) attoREP the Reporter has Staked on the Outcome of their Report.
 * **`crowdsourcerId`** (string) Ethereum contract address of the Dispute Crowdsourcer, as a hexadecimal string.
 * **`isCategorical`** (boolean) Whether the Market is a Categorical Market.
 * **`isScalar`** (boolean) Whether the Market is a Scalar Market.
@@ -457,17 +457,17 @@ Serves as an enum for the state of a Market.
 ### TimestampedPrice  (Object)
 
 #### **Properties:** 
-* **`price`** (number) Display (non-normalized) price, as a base-10 number.
-* **`amount`** (number) Display price, as a base-10 number.
+* **`price`** (string) Display (non-normalized) price, as a base-10 number.
+* **`amount`** (string) Display price, as a base-10 number.
 * **`timestamp`** (number) Unix timestamp for this price in seconds, as an integer.
 
 <a name="TradeCost"></a>
 ### TradeCost  (Object)
 
 #### **Properties:** 
-* **`cost`** (BigNumber) Wei (attoEther) value needed for this trade.
-* **`onChainAmount`** (BigNumber) On-chain number of Shares for this trade.
-* **`onChainPrice`** (BigNumber) On-chain price for this trade.
+* **`cost`** (string) Wei (attoEther) value needed for this trade.
+* **`onChainAmount`** (string) On-chain number of Shares for this trade.
+* **`onChainPrice`** (string) On-chain price for this trade.
 
 <a name="UnclaimedFeeWindowInfo"></a>
 ### UnclaimedFeeWindowInfo  (Object)
@@ -475,8 +475,8 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`startTime`** (number) Unix timestamp when the Fee Window begins.
 * **`endTime`** (number) Unix timestamp when the Fee Window ends.
-* **`balance`** (number) Balance the user has Staked in the Fee Window, in attoREP.
-* **`expectedFees`** (number) Expected Reporting Fees, in attoREP, that will be withdrawn when the user redeems their Stake in the Fee Window.
+* **`balance`** (string) Balance the user has Staked in the Fee Window, in attoREP.
+* **`expectedFees`** (string) Expected Reporting Fees, in attoREP, that will be withdrawn when the user redeems their Stake in the Fee Window.
 
 <a name="UserTrade"></a>
 ### UserTrade  (Object)
@@ -485,11 +485,11 @@ Serves as an enum for the state of a Market.
 * **`transactionHash`** (string) Hash to look up the trade transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the trade transaction.
 * **`type`** (string) Type of trade. Valid values are "buy" and "sell".
-* **`price`** (number) Price paid for trade, in attoETH.
-* **`amount`** (number) Amount of attoShares that were bought/sold.
+* **`price`** (string) Price paid for trade, in attoETH.
+* **`amount`** (string) Amount of attoShares that were bought/sold.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
-* **`marketCreatorFees`** (number) Amount of fees paid to Market creator, in ETH.
-* **`reporterFees`** (number) Amount of fees paid to reporters, in attoETH.
+* **`marketCreatorFees`** (string) Amount of fees paid to Market creator, in ETH.
+* **`reporterFees`** (string) Amount of fees paid to reporters, in attoETH.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
@@ -502,11 +502,11 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
-* **`numShares`** (number) Quantity of shares currently owned by the user.
-* **`numSharesAdjusted`** (number) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.
-* **`realizedProfitLoss`** (number) Description pending.
-* **`unrealizedProfitLoss`** (number) Description pending.
-* **`averagePrice`** (number) Description pending.
+* **`numShares`** (string) Quantity of shares currently owned by the user.
+* **`numSharesAdjusted`** (string) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.
+* **`realizedProfitLoss`** (string) Description pending.
+* **`unrealizedProfitLoss`** (string) Description pending.
+* **`averagePrice`** (string) Description pending.
 
 <a name="WebSocket"></a>
 ### WebSocket  (Object)
