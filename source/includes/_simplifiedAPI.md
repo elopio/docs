@@ -1448,45 +1448,44 @@ augur.reporting.getReportingFees({
 // example output:
 {
   total: {
-    "unclaimedEth": "107.87878787878787879",
-    "unclaimedRepEarned": "114.5",
-    "unclaimedRepStaked": "229",
+    "unclaimedEth": "200",
+    "unclaimedRepEarned": "114",
+    "unclaimedRepStaked": "289",
+    "unclaimedForkEth": "200",
+    "unclaimedForkRepStaked": "331",
     "lostRep": "0",
   },
   feeWindows: [
     "0x1000000000000000000000000000000000000000",
-    "0x2000000000000000000000000000000000000000",
-    "0x2100000000000000000000000000000000000000",
-    "0x3000000000000000000000000000000000000000",
   ],
   forkedMarket: {
     crowdsourcers: [
       {
-        crowdsourcerId: " 0x0000000000000000001000000000000000000006",
-        isForked: false,
+        crowdsourcerId: "0x0000000000000000001000000000000000000006",
+        needsFork: true,
       },
       {
-        crowdsourcerId: " 0x0000000000000000001000000000000000000007",
-        isForked: true,
+        crowdsourcerId: "0x0000000000000000001000000000000000000007",
+        needsFork: false,
       },
     ],
     initialReporter: {
-      initialReporterId: " 0x0000000000000000000000000000000000abe222",
-      isForked: false,
+      initialReporterId: "0x0000000000000000000000000000000000abe222",
+      needsFork: true,
     },
-    isFinalized: true,
-    marketId: " 0x00000000000000000000000000000000000000f1",
-    universe: " 0x000000000000000000000000000000000000000b",
+    isFinalized: 1,
+    marketId: "0x00000000000000000000000000000000000000f1",
+    universe: "0x000000000000000000000000000000000000000b",
   },
   nonforkedMarkets: [
     {
-      "marketId": " 0x0000000000000000000000000000000000000019",
-      "crowdsourcers": [" 0x0000000000000000001000000000000000000003"],
+      "marketId": "0x0000000000000000000000000000000000000019",
+      "crowdsourcers": ["0x0000000000000000001000000000000000000003"],
       "crowdsourcersAreDisavowed": false,
-      "initialReporter": " 0x0000000000000000000000000000000000abe111",
+      "initialReporter": "0x0000000000000000000000000000000000abe111",
       "isFinalized": true,
       "isMigrated": true,
-      "universe": " 0x000000000000000000000000000000000000000b",
+      "universe": "0x000000000000000000000000000000000000000b",
     },
   ],
 }
@@ -1566,7 +1565,7 @@ Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsou
 * **`p`** (Object) Parameters object.
     * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
     * **`p.feeWindows`**  (Array.&lt;string</a>>) Array of FeeWindow contract addresses which to claim reporting fees.
-    * **`p.forkedMarket`**  (<a href="#ForkedMarket">ForkedMarket</a>|null) Object containing information about the Forked Market in which the user has unclaimed fees in the Parent Universe(if there is one).
+    * **`p.forkedMarket`**  (<a href="#ForkedMarket">ForkedMarket</a>|null) Object containing information about the Forked Market in which the user has unclaimed fees in the current universe (if there is one).
     * **`p.nonforkedMarkets`**  (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array containing objects with information about the non-Forked Markets in which the user has unclaimed fees.
     * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -1706,18 +1705,17 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 
 ### augur.reporting.getReportingFees(p, callback)
 
-Returns information about the unclaimed ETH and REP a user has in a specific [Universe](#universe) or [Fee Window](#fee-window) (as well as the [Forked Market](#forked-market) in the [Parent Universe](#parent-universe), if applicable).
+Returns information about the unclaimed ETH and REP a user has in a specific [Universe](#universe).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting fees, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the reporting fees, as a 20-byte hexadecimal string. Either this parameter or the Fee Window must be specified.
-    * **`p.feeWindow`**  (string) &lt;optional> Contract address of the Fee Window in which to look up the reporting fees, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
 
 #### **Returns:**
 
-* (<a href="#FeeDetails">FeeDetails</a>) information about the unclaimed ETH and REP a user has in a specific Universe or Fee Window (as well as the Forked Market in the Parent Universe, if applicable).
+* (<a href="#FeeDetails">FeeDetails</a>) information about the unclaimed ETH and REP a user has in a specific Universe.
 
 ### augur.reporting.getReportingHistory(p, callback)
 

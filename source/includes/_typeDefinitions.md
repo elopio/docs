@@ -75,6 +75,12 @@ Note: Other properties will be present in this object, depending on what event t
 * **`ethereumNode`** (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).
 * **`augurNode`** (string) &lt;optional> Websocket address of an [Augur Node](#augur-node).
 
+<a name="CrowdsourcerState"></a>
+### CrowdsourcerState  (Object)
+
+* **`crowdsourcerId`** (string) Ethereum contract address of a DisputeCrowdsourcer contract belonging to a Forked Market, as a hexadecimal string.
+* **`needsFork`** (boolean) Whether the DisputeCrowdsourcer contract needs to have its `DisputeCrowdsourcer.fork` function called before calling `DisputeCrowdsourcer.redeem`.
+
 <a name="DISPUTE_TOKEN_STATE"></a>
 ### DISPUTE_TOKEN_STATE  (Object)
 
@@ -130,7 +136,7 @@ Serves as an enum for the state of a Dispute Token.
 ### FeeDetails  (Object)
 
 #### **Properties:** 
-* **`total`** (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about the Markets in which a specific user has unclaimed ETH/REP.
+* **`total`** (<a href="#FeeDetailsTotal">FeeDetailsTotal</a>) Object containing information about the unclaimed ETH/REP and lost REP a specific user has in the specified universe.
 * **`feeWindows`** (Array.&lt;string>) Array of FeeWindow contract addresses with unclaimed REP, as hexadecimal strings.
 * **`forkedMarket`** (<a href="#ForkedMarket">ForkedMarket</a>|null) ForkedMarket object containing information about the Forked Market (if one exists in the specified universe).
 * **`nonforkedMarkets`** (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array of NonforkedMarket objects containing unclaimed ETH/REP.
@@ -139,10 +145,12 @@ Serves as an enum for the state of a Dispute Token.
 ### FeeDetailsTotal  (Object)
 
 #### **Properties:** 
-* **`unclaimedEth`** (string) Amount of unclaimed Reporting Fee attoETH a reporter has in a given Universe or Fee Window.
-* **`unclaimedRepStaked`** (string) Amount of unclaimed attoREP a reporter has staked in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
-* **`unclaimedRepEarned`** (string) Amount of unclaimed attoREP a reporter has earned as Reporting Fees by staking REP in a given Universe or Fee Window (either in First Public Reports or Crowdsourcers).
-* **`lostRep`** (string) Description pending.
+* **`lostRep`** (string) AttoREP lost in losing Initial Reports/Crowdsourcers of Markets containing unclaimed ETH/REP.
+* **`unclaimedEth`** (string) Unclaimed attoETH fees from buying Participation Tokens and staking in Initial Reports/Dispute Crowdsourcers (even if the Outcome is not the Winning Outcome) of the specified Universe.
+* **`unclaimedForkEth`** (string) Unclaimed attoETH fees for staking in Initial Report/Dispute Crowdsourcers of the Forked Market (even if the Outcome is not the Winning Outcome).
+* **`unclaimedForkRepStaked`** (string) Unclaimed attoREP staked in the Initial Report/Dispute Crowsourcers of the Forked Market (where the Outcome is the Winning Outcome).
+* **`unclaimedRepStaked`** (string) Unclaimed attoREP used to buy Participation Tokens or to stake in the Initial Report/Dispute Crowsourcers of the specified universe (where the Outcome is the Winning Outcome).
+* **`unclaimedRepEarned`** (string) Unclaimed attoREP used to buy Participation Rokens or to stake in the Initial Report/Dispute Crowdsourcers of the specified universe (where the Outcome is Winning Outcome).
 
 <a name="FeeWindowCurrent"></a>
 ### FeeWindowCurrent  (Object)
@@ -160,21 +168,9 @@ Serves as an enum for the state of a Dispute Token.
 
 * **`marketId`** (string) Ethereum contract address of the Forked Market, as a hexadecimal string.
 * **`universe`** (string) Ethereum contract address of Universe to which the Forked Market belongs, as a hexadecimal string.
-* **`isFinalized`** (boolean) Whether the Forked Market has been Finalized (i.e., the function Market.finalize` has been called on it successfully).
-* **`crowdsourcers`** (Array.&lt;<a href="#CrowdsourcerState">CrowdsourcerState</a>>) Array of objects containing information about the Forked Market's DisputeCrowdsourcers.
-* **`initialReporter`** (<a href="#InitialReporterState">InitialReporterState</a>|null) Object containing information about the Forked Market's InitialReporter.
-
-<a name="CrowdsourcerState"></a>
-### CrowdsourcerState  (Object)
-
-* **`crowdsourcerId`** (string) Ethereum contract address of a DisputeCrowdsourcer belonging to a Forked Market, as a hexadecimal string.
-* **`isForked`** (boolean) Whether the DisputeCrowdsourcer has been forked (i.e., has had its `DisputeCrowdsourcer.fork` function called successfully).
-
-<a name="InitialReporterState"></a>
-### InitialReporterState  (Object)
-
-* **`initialReporterId`** (string) Ethereum contract address of the InitialReporter belonging to a Forked Market, as a hexadecimal string.
-* **`isForked`** (boolean) Whether the InitialReporter has been forked (i.e., has had its `InitialReporter.fork` function called successfully).
+* **`isFinalized`** (boolean) Whether the Forked Market has been Finalized (i.e., the function `Market.finalize` has been called on it successfully).
+* **`crowdsourcers`** (Array.&lt;<a href="#CrowdsourcerState">CrowdsourcerState</a>>) Array of objects containing information about the Forked Market's DisputeCrowdsourcer contracts.
+* **`initialReporter`** (<a href="#InitialReporterState">InitialReporterState</a>|null) Object containing information about the Forked Market's InitialReporter contract.
 
 <a name="GasEstimateInfo"></a>
 ### GasEstimateInfo  (Object)
@@ -205,6 +201,12 @@ Serves as an enum for the state of a Dispute Token.
 * **`redeemed`** (boolean) Whether the Reporter has redeemed their REP from the InitialReporter contract.
 * **`isDesignatedReporter`** (boolean) Whether `reporter` was the Designated Reporter (as opposed to the First Public Reporter).
 * **`repBalance`** (string) Amount of REP that the InitialReporter contract has as its balance.
+
+<a name="InitialReporterState"></a>
+### InitialReporterState  (Object)
+
+* **`initialReporterId`** (string) Ethereum contract address of the InitialReporter contract belonging to a Forked Market, as a hexadecimal string.
+* **`isForked`** (boolean) Whether the InitialReporter contract needs to have its `InitialReporter.fork` function called before calling `InitialReporter.redeem`.
 
 <a name="MarketCreationCost"></a>
 ### MarketCreationCost  (Object)
