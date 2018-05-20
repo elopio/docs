@@ -3248,6 +3248,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">placeTrade</span><span class="p">({</span>
   <span class="na">amount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="na">sharesProvided</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">limitPrice</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
@@ -3309,12 +3310,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">otherSharesDepleted</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
   <span class="na">sharesDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">tokensDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">shareBalances</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">],</span>
+  <span class="na">shareBalances</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">],</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">tradeUntilAmountIsZero</span><span class="p">({</span>
   <span class="na">_price</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
   <span class="na">_fxpAmount</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="na">sharesProvided</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
@@ -3534,6 +3536,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.displayPrice</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.displayAmount</code></strong>  (string) Number of <a href="#share">Shares</a> to trade, as a base-10 string.</li>
+<li>*<em><code class="prettyprint">p.sharesProvided</code></em> (string) &lt;optional&gt; Number of shares already owned and provided for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The <a href="#number-of-ticks">Number of Ticks</a> for this <a href="#market">Market</a>.</li>
 <li><strong><code class="prettyprint">p.maxDisplayPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.minDisplayPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> for this Market, as a base-10 string.</li>
@@ -3867,6 +3870,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.amount</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.sharesProvided</code></strong>  (string) Number of shares already owned and provided for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.limitPrice</code></strong>  (string) Display (non-normalized) limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> (non-normalized) for this Market, as a base-10 string.</li>
@@ -3874,7 +3878,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) Outcome ID to trade, must be an integer value in between 0 and 7.</li>
-<li><strong><code class="prettyprint">p.estimatedCost</code></strong> (string) &lt;optional&gt; Total cost (in ETH) of this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur&rsquo;s UI to group trades client-side.)</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing Orders off the <a href="#order-book">Order Book</a>, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -3935,6 +3938,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="share">Shares</a> to trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.sharesProvided</code></strong>  (string) Number of shares already owned and provided for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
