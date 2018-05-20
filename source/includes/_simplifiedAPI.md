@@ -2259,6 +2259,7 @@ augur.trading.normalizePrice({
 
 augur.trading.placeTrade({
   amount: "10",
+  sharesProvided: "0",
   limitPrice: "2",
   minPrice: "1",
   maxPrice: "3",
@@ -2326,6 +2327,7 @@ augur.trading.simulateTrade({
 augur.trading.tradeUntilAmountIsZero({
   _price: "0.5",
   _fxpAmount: "10",
+  sharesProvided: "0",
   numTicks: "10000",
   minPrice: "0",
   maxPrice: "1",
@@ -2535,6 +2537,7 @@ Returns the cost for placing a specific trade.
 * **`p`** (Object) Parameters object.
     * **`p.displayPrice`**  (string) Normalized limit price for this trade, as a base-10 string.
     * **`p.displayAmount`**  (string) Number of [Shares](#share) to trade, as a base-10 string.
+    * **`p.sharesProvided`* (string) &lt;optional> Number of shares already owned and provided for this trade, as a base-10 string.
     * **`p.numTicks`**  (string) The [Number of Ticks](#number-of-ticks) for this [Market](#market).
     * **`p.maxDisplayPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
     * **`p.minDisplayPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
@@ -2770,6 +2773,7 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
 
 * **`p`** (Object) Parameters object.
     * **`p.amount`**  (string) Number of Shares to trade, as a base-10 string.
+    * **`p.sharesProvided`**  (string) Number of shares already owned and provided for this trade, as a base-10 string.
     * **`p.limitPrice`**  (string) Display (non-normalized) limit price for this trade, as a base-10 string.
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) (non-normalized) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) (non-normalized) for this Market, as a base-10 string.
@@ -2777,7 +2781,6 @@ Rescales a price to lie on [0, 1]: normalizedPrice = (price - minPrice) / (maxPr
     * **`p._direction`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Ethereum contract address of the Market in which to trade, as a 20-byte hexadecimal string
     * **`p._outcome`**  (number) Outcome ID to trade, must be an integer value in between 0 and 7.
-    * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing Orders off the [Order Book](#order-book), not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
@@ -2824,6 +2827,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 * **`p`** (Object) Parameters object.
     * **`p._price`**  (string) Normalized limit price for this trade, as a base-10 string.
     * **`p._fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
+    * **`p.sharesProvided`**  (string) Number of shares already owned and provided for this trade, as a base-10 string.
     * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
