@@ -1961,6 +1961,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.creator</code></strong>  (string) Ethereum address of the <a href="#market-creator">Market Creator</a>, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) Earliest market creation time (in Unix time) by which to filter results.</li>
+<li><strong><code class="prettyprint">p.lateswtCreationTime</code></strong>  (number) Latest market creation time (in Unix time) by which to filter results.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
@@ -2285,7 +2287,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="na">feeWindowId</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
   <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
-  <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
+  <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"132"</span><span class="p">,</span>
+  <span class="na">participantContributions</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="na">participationTokens</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -2320,8 +2324,25 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
+  <span class="s2">"0x0000000000000000000000000000000000abe111"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
+    <span class="na">initialReporter</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000abe111"</span><span class="p">,</span>
+    <span class="na">isDesignatedReporter</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
+    <span class="na">redeemed</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">repBalance</span><span class="p">:</span> <span class="s2">"4000000"</span><span class="p">,</span>
+    <span class="na">reporter</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000E00"</span><span class="p">,</span>
+  <span class="p">},</span>
   <span class="s2">"0x0000000000000000000000000000000000abe123"</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000E00"</span><span class="p">,</span>
     <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
     <span class="na">initialReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000abe123"</span><span class="p">,</span>
@@ -2331,6 +2352,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">},</span>
   <span class="s2">"0x0000000000000000000000000000000000abe321"</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
+    <span class="na">blockNumber</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000E00"</span><span class="p">,</span>
     <span class="na">reporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
     <span class="na">initialReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000abe321"</span><span class="p">,</span>
@@ -3109,7 +3134,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000C00"</span><span class="p">,</span>
     <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="na">type</span><span class="p">:</span> <span class="s2">"sell"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
     <span class="na">price</span><span class="p">:</span> <span class="s2">"5.5"</span><span class="p">,</span>
     <span class="na">amount</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
     <span class="na">maker</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -12577,9 +12602,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="OrderFilled"></a>OrderFilled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
+<td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">amountFilled</code> attoShares were filled, and <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
 <td>universe, shareToken</td>
-<td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, tradeGroupId</td>
+<td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, amountFilled, tradeGroupId</td>
 </tr>
 <tr>
 <td><a name="ReportingParticipantDisavowed"></a>ReportingParticipantDisavowed</td>
@@ -12913,7 +12938,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">feeWindowId</code></strong> (number) Unique numerical ID of the Fee Window.</li>
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
-<li><strong><code class="prettyprint">totalStake</code></strong> (string) &lt;optional&gt; If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)</li>
+<li><strong><code class="prettyprint">totalStake</code></strong> (string) If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) <code class="prettyprint">participantContributions</code> and <code class="prettyprint">participantTokens</code> should add up to <code class="prettyprint">totalStake</code>.</li>
+<li><strong><code class="prettyprint">participantContributions</code></strong> (string) Amount of attoREP the user staked in InitialReporter/DisputeCrowdsourcer contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantTokens</code></strong> (string) Amount of attoREP the user has in Participation Tokens in the current Fee Window.</li>
 </ul>
 
 <p><a name="GasEstimateInfo"></a></p>
@@ -13016,6 +13043,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Ethereum contract address of the Market for which the Initial Report was submitted.</li>
+<li><strong><code class="prettyprint">blockNumber</code></strong> (number) Block number where the Initial Report took place.</li>
+<li><strong><code class="prettyprint">logIndex</code></strong> (number) Log index where the Initial Report took place.</li>
+<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp when the Initial Report took place.</li>
+<li><strong><code class="prettyprint">transactionHash</code></strong> (string) Transaction hash of the Initial Report.</li>
 <li><strong><code class="prettyprint">reporter</code></strong> (string) Ethereum address of the Reporter who submitted the Initial Report.</li>
 <li><strong><code class="prettyprint">amountStaked</code></strong> (string) Amount of attoREP the Reporter Staked in the Initial Report.</li>
 <li><strong><code class="prettyprint">initialReporter</code></strong> (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.</li>
