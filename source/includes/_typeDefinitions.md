@@ -192,7 +192,9 @@ Serves as an enum for the state of a Dispute Token.
 * **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
-* **`totalStake`** (string) &lt;optional> If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.)
+* **`totalStake`** (string) If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) `participantContributions` and `participantTokens` should add up to `totalStake`.
+* **`participantContributions`** (string) Amount of attoREP the user staked in InitialReporter/DisputeCrowdsourcer contracts in the current Fee Window.
+* **`participantTokens`** (string) Amount of attoREP the user has in Participation Tokens in the current Fee Window.
 
 <a name="GasEstimateInfo"></a>
 ### GasEstimateInfo  (Object)
