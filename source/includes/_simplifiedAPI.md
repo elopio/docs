@@ -1462,6 +1462,19 @@ augur.reporting.getInitialReporters({
 });
 // example output:
 {
+  "0x0000000000000000000000000000000000abe111": {
+    amountStaked: "102",
+    blockNumber: 1400100,
+    initialReporter: " 0x0000000000000000000000000000000000abe111",
+    isDesignatedReporter: 1,
+    logIndex: 0,
+    marketId: " 0x0000000000000000000000000000000000000019",
+    redeemed: 0,
+    repBalance: "4000000",
+    reporter: " 0x0000000000000000000000000000000000000b0b",
+    timestamp: 1506480000,
+    transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000E00",
+  },
   "0x0000000000000000000000000000000000abe123": {
     marketId: "0x0000000000000000000000000000000000000011",
     blockNumber: 1400100,
@@ -2128,7 +2141,7 @@ augur.trading.getUserTradingHistory({
   {
     transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000C00",
     logIndex: 0,
-    type: "sell",
+    type: "buy",
     price: "5.5",
     amount: "0.2",
     maker: false,
