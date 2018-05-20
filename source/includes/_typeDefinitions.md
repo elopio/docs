@@ -265,6 +265,10 @@ Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
 * **`marketId`** (string) Ethereum contract address of the Market for which the Initial Report was submitted.
+* **`blockNumber`** (number) Block number where the Initial Report took place.
+* **`logIndex`** (number) Log index where the Initial Report took place.
+* **`timestamp`** (number) Unix timestamp when the Initial Report took place.
+* **`transactionHash`** (string) Transaction hash of the Initial Report.
 * **`reporter`** (string) Ethereum address of the Reporter who submitted the Initial Report.
 * **`amountStaked`** (string) Amount of attoREP the Reporter Staked in the Initial Report.
 * **`initialReporter`** (string) Ethereum address of the InitialReporter contract to which the Initial Report was submitted.
