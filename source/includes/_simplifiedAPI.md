@@ -2321,7 +2321,7 @@ augur.trading.simulateTrade({
   otherSharesDepleted: "3",
   sharesDepleted: "0",
   tokensDepleted: "0",
-  shareBalances: ["0", "4"],
+  shareBalances: ["0", "2"],
 }
 
 augur.trading.tradeUntilAmountIsZero({
