@@ -61,10 +61,10 @@ Note: Other properties will be present in this object, depending on what event t
 ### ClaimReportingFeesForkedMarketGasEstimates  (Object)
 
 #### **Properties:** 
-* **`crowdsourcerForkAndRedeem`** (Array.&lt;GasEstimateInfo>) Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.forkAndRedeem` call.
-* **`initialReporterForkAndRedeem`** (Array.&lt;GasEstimateInfo>)  Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.forkAndRedeem` call.
-* **`crowdsourcerRedeem`** (Array.&lt;GasEstimateInfo>)  Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.redeem` call.
-* **`initialReporterRedeem`** (Array.&lt;GasEstimateInfo>)  Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.redeem` call.
+* **`crowdsourcerForkAndRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>) Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.forkAndRedeem` call.
+* **`initialReporterForkAndRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>)  Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.forkAndRedeem` call.
+* **`crowdsourcerRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>)  Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.redeem` call.
+* **`initialReporterRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>)  Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.redeem` call.
 * **`totals`** (<a href="#GasEstimatesForkedMarketTotals">GasEstimatesForkedMarketTotals</a>) Object containing gas estimate sums for each type of function call.
 
 <a name="ClaimReportingFeesForkedMarketResponse"></a>
@@ -75,13 +75,23 @@ Note: Other properties will be present in this object, depending on what event t
 * **`failedTransactions`** (<a href="#FailedTransactionsForkedMarket">FailedTransactionsForkedMarket</a>|null) Object containing arrays of contract addresses whose transactions failed. Not set if `p.estimateGas` is true.
 * **`gasEstimates`** (<a href="#ClaimReportingFeesForkedMarketGasEstimates">ClaimReportingFeesForkedMarketGasEstimates</a>|null) Object containing a breakdown of gas estimates for all reporting fee claim transactions. Not set if `p.estimateGas` is false.
 
-<a name="ClaimReportingFeesNonforkedMarketInfo"></a>
-### ClaimReportingFeesNonforkedMarketInfo  (Object)
+<a name="ClaimReportingFeesNonforkedMarketsGasEstimates"></a>
+### ClaimReportingFeesNonforkedMarketsGasEstimates  (Object)
 
 #### **Properties:** 
-* **`successfulTransactions`** (<a href="#SuccessfulTransactionsNonforkedMarket">SuccessfulTransactionsNonforkedMarket</a>|null) Object containing arrays of which transactions succeeded. Not set if `p.estimateGas` is true.
+* **`disavowCrowdsourcers`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>) Array of GasEstimateInfo objects containing gas estimates for each `Market.disavowCrowdsourcers` call.
+* **`feeWindowRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>) Array of GasEstimateInfo objects containing gas estimates for each `FeeWindow.redeem` call.
+* **`crowdsourcerRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>) Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.redeem` call.
+* **`initialReporterRedeem`** (Array.&lt;<a href="#GasEstimateInfo">GasEstimateInfo</a>>) Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.redeem` call.
+* **`totals`** (<a href="#GasEstimatesNonforkedMarketsTotals">GasEstimatesNonforkedMarketsTotals</a>) Object containing gas estimate sums for each type of function call.
+
+<a name="ClaimReportingFeesNonforkedMarketsResponse"></a>
+### ClaimReportingFeesNonforkedMarketsResponse  (Object)
+
+#### **Properties:** 
+* **`successfulTransactions`** (<a href="#SuccessfulTransactionsNonforkedMarkets">SuccessfulTransactionsNonforkedMarkets</a>|null) Object containing arrays of which transactions succeeded. Not set if `p.estimateGas` is true.
 * **`failedTransactions`** (<a href="#FailedTransactionsNonforkedMarkets">FailedTransactionsNonforkedMarkets</a>|null) Object containing arrays of which transactions failed. Not set if `p.estimateGas` is true.
-* **`gasEstimates`** (<a href="#GasEstimatesNonforkedMarkets">GasEstimatesNonforkedMarkets</a>|null) Object containing a breakdown of gas estimates for all reporting fee redemption transactions. Not set if `p.estimateGas` is false.
+* **`gasEstimates`** (<a href="#ClaimReportingFeesNonforkedMarketsGasEstimates">ClaimReportingFeesNonforkedMarketsGasEstimates</a>|null) Object containing a breakdown of gas estimates for all reporting fee redemption transactions. Not set if `p.estimateGas` is false.
 
 <a name="ConnectOptions"></a>
 ### ConnectOptions  (Object)
@@ -200,16 +210,6 @@ Serves as an enum for the state of a Dispute Token.
 * **`crowdsourcerRedeem`** (string) Sum of gas estimates for all `DisputeCrowdsourcer.forkAndRedeem` calls.
 * **`initialReporterRedeem`** (string) Sum of gas estimates for all `InitialReporter.forkAndRedeem` calls.
 * **`all`** (string) Sum of all gas estimates for all calls.
-
-<a name="GasEstimatesNonforkedMarkets"></a>
-### GasEstimatesNonforkedMarkets  (Object)
-
-#### **Properties:** 
-* **`disavowCrowdsourcers`** (Array.&lt;GasEstimateInfo>) Array of GasEstimateInfo objects containing gas estimates for each `Market.disavowCrowdsourcers` call.
-* **`feeWindowRedeem`** (Array.&lt;GasEstimateInfo>) Array of GasEstimateInfo objects containing gas estimates for each `FeeWindow.redeem` call.
-* **`crowdsourcerRedeem`** (Array.&lt;GasEstimateInfo>) Array of GasEstimateInfo objects containing gas estimates for each `DisputeCrowdsourcer.redeem` call.
-* **`initialReporterRedeem`** (Array.&lt;GasEstimateInfo>) Array of GasEstimateInfo objects containing gas estimates for each `InitialReporter.redeem` call.
-* **`totals`** (<a href="GasEstimatesNonforkedMarketsTotals">GasEstimatesNonforkedMarketsTotals</a>) Object containing gas estimate sums for each type of function call.
 
 <a name="GasEstimatesNonforkedMarketsTotals"></a>
 ### GasEstimatesNonforkedMarketsTotals  (Object)

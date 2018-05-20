@@ -1660,7 +1660,7 @@ The claiming process works as follows:
     
 #### **Returns:**
 
-* (<a href="#ClaimReportingFeesNonforkedInfo">ClaimReportingFeesNonforkedInfo</a>|<a href="#GasEstimatesNonforkedMarkets">GasEstimatesNonforkedMarkets</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
+* (<a href="#ClaimReportingFeesNonforkedMarketsResponse">ClaimReportingFeesNonforkedMarketsResponse</a>|<a href="#ClaimReportingFeesNonforkedMarketsGasEstimates">ClaimReportingFeesNonforkedMarketsGasEstimates</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
 
 ### augur.reporting.finalizeMarket(p)
 
