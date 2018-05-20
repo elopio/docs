@@ -730,20 +730,6 @@ Dispute Crowdsourcer Tx API
 // obtained by calling `augur.api.Market.getCrowdsourcer`.
 var disputeCrowdsourcerAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
-augur.api.DisputeCrowdsourcer.fork({
-  tx: { 
-    to: disputeCrowdsourcerAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
 augur.api.DisputeCrowdsourcer.forkAndRedeem({
   tx: { 
     to: disputeCrowdsourcerAddress,
@@ -790,36 +776,11 @@ augur.api.DisputeCrowdsourcer.withdrawInEmergency({
 ```
 Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
-### augur.api.DisputeCrowdsourcer.fork(p)
-
-Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Dispute Crowdsourcer](#crowdsourcer) and migrates the [REP](#rep) in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)).
-
-Once this function has been called, `augur.api.DisputeCrowdsourcer.redeem` may be called by users who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome to redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed. Alternatively, the convenience function `augur.api.DisputeCrowdsourcer.forkAndRedeem` can be called instead of calling both of these functions.
-
-This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the DisputeCrowdsourcer was forked without any errors.
-
-This transaction will fail if:
-
-* The DisputeCrowdsourcer belongs to a Market that is not Forked.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
 ### augur.api.DisputeCrowdsourcer.forkAndRedeem(p)
 
-This is a convenience function that calls the `DisputeCrowdsourcer.fork` function and then immediately calls the `DisputeCrowdsourcer.redeem` function. 
+Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Dispute Crowdsourcer](#crowdsourcer) and migrates the [REP](#rep) in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a [Forked Market](#forked-market), and it can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). When called by a user who [Staked](#dispute-stake) on the Dispute Crowdsourcer's Outcome, it will redeem their Staked REP and collect any [Reporting Fees](#reporting-fee) (in Ether) that they are owed.
+
+This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the DisputeCrowdsourcer was forked without any errors.
 
 This transaction will fail if:
 
@@ -850,7 +811,7 @@ If the Dispute Crowdsourcer's [Market](#market) has been [Finalized](#finalized)
 
 If the Dispute Crowdsourcer's [Market](#market) has been [Finalized](#finalized), and the Dispute Crowdsourcer did not fill its [Dispute Bond](#dispute-bond), the user will receive Reporting Fees for the Fee Window (but not the REP they originally Staked).
 
-If a Fork has occurred, all non-[Forked Markets](#forked-market) will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). All non-[Forked Markets](#forked-market) will need to have `augur.api.Market.disavowCrowdsourcers` called before the `redeem` transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have `augur.api.DisputeCrowdsourcer.fork` called on them before the `redeem` transaction can be called.
+If a Fork has occurred, all non-[Forked Markets](#forked-market) will have their [Tentative Outcome](#tentative-outcome) reset to the Outcome submitted in the [Initial Report](#initial-report) and be put back in the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). All non-[Forked Markets](#forked-market) will need to have `augur.api.Market.disavowCrowdsourcers` called before the `redeem` transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have `augur.api.DisputeCrowdsourcer.forkAndRedeem` called on them.
 
 When `redeem` is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any [REP](#rep) that `p._redeemer` [Staked](#dispute-stake) on that Crowdsourcer, as well as any [Reporting Fees](#reporting-fee) (in Ether) that `p._redeemer` is owed, to the [Universe](#universe) containing the Forked Market.
 
@@ -861,7 +822,7 @@ This transaction will trigger a [`DisputeCrowdsourcerRedeemed`](#DisputeCrowdsou
 This transaction will fail if:
 
 * The DisputeCrowdsourcer belongs to a non-Forked Market in the same Universe as the Forked Market, and that non-Forked Market has not had `augur.api.Market.disavowCrowdsourcers` called on it.
-* The DisputeCrowdsourcer belongs to the Forked Market and has not had `augur.api.DisputeCrowdsourcer.fork` called on it.
+* The DisputeCrowdsourcer belongs to the Forked Market and has not had `augur.api.DisputeCrowdsourcer.forkAndRedeem` called on it.
 
 #### **Parameters:**
 
@@ -1102,20 +1063,6 @@ Initial Reporter Tx API
 // can be obtained by calling `augur.api.Market.getInitialReporter`.
 var initialReporterAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 
-augur.api.InitialReporter.fork({
-  tx: { 
-    to: initialReporterAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
 augur.api.InitialReporter.forkAndRedeem({
   tx: { 
     to: initialReporterAddress,
@@ -1176,36 +1123,9 @@ augur.api.InitialReporter.withdrawInEmergency({
 ```
 Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
-### augur.api.InitialReporter.fork(p)
-
-Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe.
-
-This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). Once it has been called, `augur.api.InitialReporter.redeem` may be called to transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function `augur.api.InitialReporter.forkAndRedeem` can be called instead of calling both of these functions.
-
-This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the InitialReporter was forked without any errors.
-
-This transaction will fail if:
-
-* The InitialReporter does not belong to a [Forked Market](#forked-market).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
 ### augur.api.InitialReporter.forkAndRedeem(p)
 
-This is a convenience function that calls the `InitialReporter.fork` function and then immediately calls the `InitialReporter.redeem` function. 
+Causes a [Child Universe](#child-universe) to be created for the [Outcome](#outcome) of the [Initial Report](#initial-report) and migrates the [REP](#rep) [Staked](#dispute-stake) by the [Initial Reporter](#initial-reporter) to the Child Universe. This transaction can be called at any time after the [Fork](#fork) has begun (including after the [Market](#market) has been [Finalized](#finalized-market)). When called by a user who who submitted the Initial Report, it will also transfer the REP Staked on the Initial Report's Outcome (and the [No-Show Gas Bond](#no-show-gas-bond), in Ether, if applicable) to the Initial Reporter of the Forked Market. 
 
 This transaction will trigger a [ReportingParticipantDisavowed](#ReportingParticipantDisavowed) event if the InitialReporter was forked without any errors.
 
