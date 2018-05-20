@@ -1200,30 +1200,73 @@ Reporting Functions
 ```javascript
 // Reporting Simplified API Examples:
 
-augur.reporting.claimReportingFees({
+augur.reporting.claimReportingFeesForkedMarket({
   redeemer: "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  crowdsourcers: [],
-  feeWindows: [
-    "0x161c723cac007e4283cee4ba11b15277e46eec53"
-  ],
-  initialReporters: [
-    "0xb9109e49bf49f886e546d560d515ca53db83f62f",
-  ],
+  forkedMarket: {
+    crowdsourcers: [
+      {
+        crowdsourcerId: "0xfc2355a7e5a7adb23b51f54027e624bfe0e23001",
+        needsFork: true,
+      },
+      {
+        crowdsourcerId: "0xfc2355a7e5a7adb23b51f54027e624bfe0e23002",
+        needsFork: false,
+      },
+    ],
+
+    initialReporter: {
+      initialReporterId: "0xfd2355a7e5a7adb23b51f54027e624bfe0e23001",
+      needsFork: false,
+    },
+  },
   estimateGas: false,
+  onSent(result) { },
+  onSuccess(result) { console.log(result); },
+  onFailed(errors) { console.log(errors); },
+});
+// example output:
+{
+  successfulTransactions: {
+    crowdsourcerForkAndRedeem: [ 
+      "0xfc2355a7e5a7adb23b51f54027e624bfe0e23001",
+    ],
+    initialReporterForkAndRedeem: [],
+    crowdsourcerRedeem: [ 
+      "0xfc2355a7e5a7adb23b51f54027e624bfe0e23002",
+    ],
+    initialReporterRedeem: [
+      "0xfd2355a7e5a7adb23b51f54027e624bfe0e23001",
+    ],
+  }
+}
+
+augur.reporting.claimReportingFeesNonforkedMarkets({
+  "redeemer": "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Eb",
+  "feeWindows": [],
+  "nonforkedMarkets": [
+    {
+      "marketId": "0xbeb2f42f5f495c0581893117eb210e5e9666170e",
+      "crowdsourcersAreDisavowed": false,
+      "isFinalized": true,
+      "crowdsourcers": [],
+      "initialReporter": "0x072e9db2836dc569f6173a8d56a25dfd4cbacc1c"
+    }
+  ],
+  "estimateGas": true,
   onSent(result) { console.log(result); },
   onSuccess(result) { console.log(result); },
   onFailed(errors) { console.log(errors); },
 });
 // example output:
 {
-  "redeemedFeeWindows": [
-    "0x161c723cac007e4283cee4ba11b15277e46eec53"
-  ],
-  "redeemedDisputeCrowdsourcers": [
-  ],
-  "redeemedInitialReporters": [
-    "0xb9109e49bf49f886e546d560d515ca53db83f62f"
-  ],
+  "successfulTransactions": {
+    "disavowCrowdsourcers": [],
+    "feeWindowRedeem": [],
+    "crowdsourcerRedeem": [],
+    "initialReporterRedeem": [
+      "0x072e9db2836dc569f6173a8d56a25dfd4cbacc1c"
+    ]
+  }
 }
 
 augur.reporting.finalizeMarket({
@@ -1448,10 +1491,10 @@ augur.reporting.getReportingFees({
 // example output:
 {
   total: {
-    "unclaimedEth": "200",
-    "unclaimedRepEarned": "114",
-    "unclaimedRepStaked": "289",
-    "unclaimedForkEth": "200",
+    "unclaimedEth": "1200",
+    "unclaimedRepEarned": "0",
+    "unclaimedRepStaked": "391",
+    "unclaimedForkEth": "0",
     "unclaimedForkRepStaked": "331",
     "lostRep": "0",
   },
@@ -1556,17 +1599,23 @@ augur.reporting.getStakeRequiredForDesignatedReporter({
 // example output:
 "1.2345"
 ```
-### augur.reporting.claimReportingFees(p)
+### augur.reporting.claimReportingFeesForkedMarket(p)
 
-Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsourcer, FeeWindow, and InitialReporter contract addresses, or returns a gas estimate for claiming all fees from specified contracts.
+Claims unclaimed [Reporting Fees](#reporting-fee) a user has in any InitialReporter/DisputeCrowdsourcer contracts of a specified [Forked Market](#forked-market), or returns a gas estimate for claiming these fees if `p.estimateGas` is true.
+
+The claiming process works as follows:
+
+* For each InitialReporter/DisputeCrowdsourcer contract of the Forked Market in which the user has unclaimed fees:
+    * If `DisputeCrowdsourcer.fork`/`InitialReporter.fork` has not been called:
+        * Call `DisputeCrowdsourcer.forkAndRedeem`/`InitialReporter.forkAndRedeem`
+    * Else:
+        * Call `DisputeCrowdsourcer.redeem`/`InitialReporter.redeem`
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
-    * **`p.feeWindows`**  (Array.&lt;string</a>>) Array of FeeWindow contract addresses which to claim reporting fees.
-    * **`p.forkedMarket`**  (<a href="#ForkedMarket">ForkedMarket</a>|null) Object containing information about the Forked Market in which the user has unclaimed fees in the current universe (if there is one).
-    * **`p.nonforkedMarkets`**  (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array containing objects with information about the non-Forked Markets in which the user has unclaimed fees.
+    * **`p.forkedMarket`**  (<a href="#ClaimReportingFeesForkedMarket">ClaimReportingFeesForkedMarket</a>) Object containing information about the Forked Market in which the user has unclaimed fees in the current universe .
     * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
@@ -1575,7 +1624,43 @@ Claims unclaimed [Reporting Fees](#reporting-fee) from specified DisputeCrowdsou
     
 #### **Returns:**
 
-* (<a href="#ClaimReportingFeesInfo">ClaimReportingFeesInfo</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
+* (<a href="#ClaimReportingFeesForkedMarketResponse">ClaimReportingFeesForkedMarketResponse</a>|<a href="#ClaimReportingFeesForkedMarketGasEstimates">ClaimReportingFeesForkedMarketGasEstimates</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
+
+### augur.reporting.claimReportingFeesNonforkedMarkets(p)
+
+Claims unclaimed [Reporting Fees](#reporting-fee) a user has in the InitialReporter/DisputeCrowdsourcer contracts the specified non-[Forked Markets](#forked-market) or [Participation Tokens](#participation-token) of specified [Fee Windows](#fee-window). Alternatively, it can return gas estimates for claiming these fees if `p.estimateGas` is true.
+
+The claiming process works as follows:
+
+* If a Forked Market exists in the current [Universe](#universe):
+    * For all non-Forked Markets in current Universe where the user has unclaimed fees in InitialReporter/DisputeCrowdsourcer contracts:
+        * If the non-Forked Market is not [Finalized](#finalized-market) and has not had its [Crowdsourcers](#crowdsourcer) disavowed:
+            * Call `Market.disavowCrowdsourcers`
+
+* Once the above has been completed:
+    * Call `FeeWindow.redeem` on all Fee Windows in the current Universe where the user has unclaimed Participation Tokens
+    * For InitialReporter/DisputeCrowdsourcer contracts of non-Forked Markets:
+        * Call `DisputeCrowdsourcer.redeem`
+        * For InitialReporter contracts of non-Forked Markets:
+            * If a Forked Market exists in the current Universe:
+                * If the InitialReporter contract belongs to a Finalized Market, call `InitialReporter.redeem`
+            * Else call `InitialReporter.redeem`
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
+    * **`p.feeWindows`** (Array.&lt;string>) Array of Fee Window Ethereum contract addresses, as hexadecimal strings.
+    * **`p.nonforkedMarkets`** (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array of NonforkedMarket objects.
+    * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
+    * **`p.onSuccess`**  (function) Called if/when all transactions are sealed and confirmed.
+    * **`p.onFailed`**  (function) Called if/when all transactions have been attempted and at least one transaction has failed. Error message shows which transactions succeeded and which ones failed.
+    
+#### **Returns:**
+
+* (<a href="#ClaimReportingFeesNonforkedInfo">ClaimReportingFeesNonforkedInfo</a>|<a href="#GasEstimatesNonforkedMarkets">GasEstimatesNonforkedMarkets</a>)  Object containing information about which contracts successfully had fees claimed from them, or a breakdown of gas estimates.
 
 ### augur.reporting.finalizeMarket(p)
 
@@ -1705,17 +1790,17 @@ Returns a list of InitialReporter contracts that a given [Reporter](#reporter) h
 
 ### augur.reporting.getReportingFees(p, callback)
 
-Returns information about the unclaimed ETH and REP a user has in a specific [Universe](#universe).
+Returns information about the unclaimed ETH and [REP](#rep) [Reporting Fees](#reporting-fee) a user has in a specific [Universe](#universe).
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve reporting fees, as a 20-byte hexadecimal string.
-    * **`p.universe`**  (string) &lt;optional> Contract address of the Universe in which to look up the reporting fees, as a 20-byte hexadecimal string. Either this parameter or the Fee Window must be specified.
+    * **`p.reporter`**  (string) Ethereum address of the [Reporter](#reporter) for which to retrieve Reporting Fees, as a 20-byte hexadecimal string.
+    * **`p.universe`**  (string) Contract address of the Universe in which to look up the Reporting Fees, as a 20-byte hexadecimal string.
 
 #### **Returns:**
 
-* (<a href="#FeeDetails">FeeDetails</a>) information about the unclaimed ETH and REP a user has in a specific Universe.
+* (<a href="#GetReportingFeesInfo">GetReportingFeesInfo</a>) information about the unclaimed ETH and REP Reporting Fees a user has in a specific Universe.
 
 ### augur.reporting.getReportingHistory(p, callback)
 
