@@ -431,6 +431,13 @@ Serves as an enum for the state of an order.
 ### Report  (Object)
 
 #### **Properties:** 
+* **`initialReporter`** (<a href="#ReportingParticipant">ReportingParticipant</a>) ReportingParticipant object containing information about the Market's Initial Reporter.
+* **`crowdsourcers`** (Array.&lt;<a href="#ReportingParticipant">ReportingParticipant</a>>) Array of Crowdsourcers, as ReportingParticipant objects.
+
+<a name="ReportingParticipant"></a>
+### ReportingParticipant  (Object)
+
+#### **Properties:** 
 * **`transactionHash`** (string) Hash to look up the reporting transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the reporting transaction.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the reporting transaction.

@@ -1566,40 +1566,48 @@ augur.reporting.getReportingHistory({
 });
 // example output:
 {
-  "0x000000000000000000000000000000000000000b": {
-    "0x0000000000000000000000000000000000000011": [{
-      transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D00",
-      logIndex: 0,
-      creationBlockNumber: 1400051,
-      blockHash: "0x1400051",
-      creationTime: 1506474500,
-      marketId: "0x0000000000000000000000000000000000000011",
-      feeWindow: "0x1000000000000000000000000000000000000000",
-      payoutNumerators: ["0", "2"],
-      amountStaked: "17",
-      crowdsourcerId: "0x0000000000000000001000000000000000000001",
-      isCategorical: false,
-      isScalar: false,
-      isInvalid: false,
-      isSubmitted: true,
-    }],
-    "0x0000000000000000000000000000000000000019": [{
-      transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D03",
-      logIndex: 0,
-      creationBlockNumber: 1400052,
-      blockHash: "0x1400052",
-      creationTime: 1506474515,
-      marketId: "0x0000000000000000000000000000000000000019",
-      feeWindow: "0x1000000000000000000000000000000000000000",
-      payoutNumerators: ["1", "1"],
-      amountStaked: "229",
-      crowdsourcerId: "0x0000000000000000001000000000000000000003",
-      isCategorical: false,
-      isScalar: false,
-      isInvalid: false,
-      isSubmitted: true,
-    }],
-  }
+  "0x0000000000000000000000000000000000000011": {
+    initialReporter: null,
+    crowdsourcers: [
+      {
+        transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D00",
+        logIndex: 0,
+        creationBlockNumber: 1400051,
+        blockHash: "0x1400051",
+        creationTime: 1506474500,
+        marketId: "0x0000000000000000000000000000000000000011",
+        feeWindow: "0x1000000000000000000000000000000000000000",
+        payoutNumerators: ["0", "2"],
+        amountStaked: "17",
+        crowdsourcerId: "0x0000000000000000001000000000000000000001",
+        isCategorical: false,
+        isScalar: false,
+        isInvalid: false,
+        isSubmitted: true,
+      },
+    ],
+  },
+  "0x0000000000000000000000000000000000000019": {
+    initialReporter: null,
+    crowdsourcers: [
+      {
+        transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000D03",
+        logIndex: 0,
+        creationBlockNumber: 1400052,
+        blockHash: "0x1400052",
+        creationTime: 1506474515,
+        marketId: "0x0000000000000000000000000000000000000019",
+        feeWindow: "0x1000000000000000000000000000000000000000",
+        payoutNumerators: ["10000", "0", "0", "0", "0"],
+        amountStaked: "229",
+        crowdsourcerId: "0x0000000000000000001000000000000000000003",
+        isCategorical: false,
+        isScalar: false,
+        isInvalid: false,
+        isSubmitted: true,
+      },
+    ],
+  },
 }
 
 augur.reporting.getReportingSummary({
