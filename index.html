@@ -2424,40 +2424,48 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000D00"</span><span class="p">,</span>
-      <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400051</span><span class="p">,</span>
-      <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400051"</span><span class="p">,</span>
-      <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
-      <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-      <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-      <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">],</span>
-      <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"17"</span><span class="p">,</span>
-      <span class="na">crowdsourcerId</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
-      <span class="na">isCategorical</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isScalar</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isSubmitted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">}],</span>
-    <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000D03"</span><span class="p">,</span>
-      <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400052</span><span class="p">,</span>
-      <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400052"</span><span class="p">,</span>
-      <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506474515</span><span class="p">,</span>
-      <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
-      <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-      <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">],</span>
-      <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"229"</span><span class="p">,</span>
-      <span class="na">crowdsourcerId</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000003"</span><span class="p">,</span>
-      <span class="na">isCategorical</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isScalar</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="na">isSubmitted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="p">}],</span>
-  <span class="p">}</span>
+  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">initialReporter</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">crowdsourcers</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000D00"</span><span class="p">,</span>
+        <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400051</span><span class="p">,</span>
+        <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400051"</span><span class="p">,</span>
+        <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
+        <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+        <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+        <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">],</span>
+        <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"17"</span><span class="p">,</span>
+        <span class="na">crowdsourcerId</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000001"</span><span class="p">,</span>
+        <span class="na">isCategorical</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isScalar</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isSubmitted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">initialReporter</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">crowdsourcers</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000D03"</span><span class="p">,</span>
+        <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="na">creationBlockNumber</span><span class="p">:</span> <span class="mi">1400052</span><span class="p">,</span>
+        <span class="na">blockHash</span><span class="p">:</span> <span class="s2">"0x1400052"</span><span class="p">,</span>
+        <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506474515</span><span class="p">,</span>
+        <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
+        <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+        <span class="na">payoutNumerators</span><span class="p">:</span> <span class="p">[</span><span class="s2">"10000"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">,</span> <span class="s2">"0"</span><span class="p">],</span>
+        <span class="na">amountStaked</span><span class="p">:</span> <span class="s2">"229"</span><span class="p">,</span>
+        <span class="na">crowdsourcerId</span><span class="p">:</span> <span class="s2">"0x0000000000000000001000000000000000000003"</span><span class="p">,</span>
+        <span class="na">isCategorical</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isScalar</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">isSubmitted</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">reporting</span><span class="p">.</span><span class="nx">getReportingSummary</span><span class="p">({</span>
@@ -13258,6 +13266,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><a name="Report"></a></p>
 
 <h3 id="report-object">Report  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">initialReporter</code></strong> (<a href="#ReportingParticipant">ReportingParticipant</a>) ReportingParticipant object containing information about the Market&rsquo;s Initial Reporter.</li>
+<li><strong><code class="prettyprint">crowdsourcers</code></strong> (Array.&lt;<a href="#ReportingParticipant">ReportingParticipant</a>&gt;) Array of Crowdsourcers, as ReportingParticipant objects.</li>
+</ul>
+
+<p><a name="ReportingParticipant"></a></p>
+
+<h3 id="reportingparticipant-object">ReportingParticipant  (Object)</h3>
 
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
