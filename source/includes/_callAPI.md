@@ -42,6 +42,14 @@ While technically optional, the Augur development team **strongly recommends** u
 Augur Call API
 ---------------------------
 ```javascript
+augur.api.Augur.isKnownCrowdsourcer({ 
+  _universe: "0x3336eaefcfaf7ea1e17c4768a554d57800699555"
+}, function (error, isKnownCrowdsourcer) { 
+  console.log(isKnownCrowdsourcer); 
+});
+// example output:
+true
+
 augur.api.Augur.isKnownUniverse({ 
   _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
 }, function (error, isKnownUniverse) { 
@@ -51,6 +59,20 @@ augur.api.Augur.isKnownUniverse({
 true
 ```
 Provides JavaScript bindings for the [Augur Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol), which handles [Universe](#universe) creation and event logging.
+
+### augur.api.Augur.isKnownCrowdsourcer(p, callback)
+
+Augur keeps track of its [Crowdsourcers](#crowdsourcer) internally. This function returns whether the specified Crowdsourcer is a contract address that is known to Augur.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  * **`p._crowdsourcer`** (string) Crowdsourcer contract address, as a 20-byte hexadecimal value.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the specified Crowdsourcer is in Augur's list of known Crowdsoucers, or `false` otherwise.
 
 ### augur.api.Augur.isKnownUniverse(p, callback)
 
