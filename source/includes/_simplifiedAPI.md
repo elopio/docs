@@ -1130,6 +1130,8 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a 20-byte hexadecimal string.
     * **`p.creator`**  (string) Ethereum address of the [Market Creator](#market-creator), as a 20-byte hexadecimal string.
+    * **`p.earliestCreationTime`**  (number) Earliest market creation time (in Unix time) by which to filter results.
+    * **`p.lateswtCreationTime`**  (number) Latest market creation time (in Unix time) by which to filter results.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
     * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
