@@ -4112,7 +4112,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 <h2 id="augur-call-api">Augur Call API</h2>
-<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
+<div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownCrowdsourcer</span><span class="p">({</span> 
+  <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x3336eaefcfaf7ea1e17c4768a554d57800699555"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownCrowdsourcer</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownCrowdsourcer</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="kc">true</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
   <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownUniverse</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownUniverse</span><span class="p">);</span> 
@@ -4121,6 +4129,27 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kc">true</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur Solidity Contract</a>, which handles <a href="#universe">Universe</a> creation and event logging.</p>
+
+<h3 id="augur-api-augur-isknowncrowdsourcer-p-callback">augur.api.Augur.isKnownCrowdsourcer(p, callback)</h3>
+
+<p>Augur keeps track of its <a href="#crowdsourcer">Crowdsourcers</a> internally. This function returns whether the specified Crowdsourcer is a contract address that is known to Augur.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._crowdsourcer</code></strong> (string) Crowdsourcer contract address, as a 20-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the specified Crowdsourcer is in Augur&rsquo;s list of known Crowdsoucers, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
 
 <h3 id="augur-api-augur-isknownuniverse-p-callback">augur.api.Augur.isKnownUniverse(p, callback)</h3>
 
