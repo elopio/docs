@@ -24,8 +24,6 @@ augur.api.Market.getNumberOfOutcomes({
 var outcomes = augur.api.Market.getNumberOfOutcomes(error, params);
 // outcomes = 2
 ```
-<aside class="notice">The Call API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 The Call API of augur.js is made up of "getter" functions that retrieve information from Augur's Solidity smart contracts using Ethereum's `eth_call` RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular "gets" than the [Simplified API](#simplified-api) allows, and its functions are mapped directly to the public functions of Augur's Solidity smart contracts. 
 
 All functions in the Call API accept two arguments: 

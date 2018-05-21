@@ -1,7 +1,5 @@
 Events API
 ===========
-<aside class="notice">The Events section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 There are a variety of "events" that are emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an [Initial Report](#initial-report), [Finalizing](#finalized-market) a [Market](#market), [Filling](#fill-order) an [Open Order](#open-order), etc. For a full list, please refer to the [Event Types](#event-types) section.
 
 <aside class="notice">The Events API described here should not be confused with the (unrelated) concept of "events" that <a href="#reporter">Reporters</a> <a href="#report">Report</a> on. These concepts are sufficiently different that the context should always make clear which kind of "event" is being discussed. However, if this documentation is ever ambiguous about this, feel free to drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, <a href="https://www.reddit.com/r/augur">Reddit</a>, or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>

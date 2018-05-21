@@ -1,8 +1,6 @@
 
 Reporting
 =========
-<aside class="notice">The Reporting section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 Once a [Market](#market)'s underlying event  occurs, the [Outcome](#outcome) must be determined in order for the Market to [Finalize](#finalized-market) and begin [Settlement](#settlement). Outcomes are determined by Augur’s [Decentralized Oracle](#decentralized-oracle), which consists of profit-motivated [Reporters](#reporter), who simply report the actual, real-world Outcome of the event. Anyone who owns [REP](#rep) may participate in the [Reporting](#report) and [Disputing](#dispute) of Outcomes. Reporters whose [Reports](#report) are consistent with consensus are financially rewarded, while those whose Reports are not consistent with consensus are financially penalized.
 
 Fee Windows

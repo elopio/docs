@@ -1,7 +1,5 @@
 Errors
 ======
-<aside class="notice">The Error section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 ```json
 {
     "error": 412,

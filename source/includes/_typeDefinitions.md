@@ -3,7 +3,6 @@ API Type Definitions
 
 augur.js' functions accept and return a variety of different objects, which are described below.
 
-<!-- TODO: Add glossary links to type definitions -->
 <a name="AccountTransfer"></a>
 ### AccountTransfer  (Object)
 

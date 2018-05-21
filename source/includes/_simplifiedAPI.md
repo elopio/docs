@@ -1,7 +1,5 @@
 Simplified API
 ===========
-<aside class="notice">The Simplified API section is still under construction and may be missing some information. Don't worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
 Accounts Functions
@@ -714,7 +712,6 @@ Note: This function will send a transaction if needed to create the current [Fee
 
 * (<a href="#MarketCreationCost">MarketCreationCost</a>) Costs of creating a new Market.
 
-<!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 ### augur.createMarket.getMarketCreationCostBreakdown(p, callback)
 
 Similar to `augur.createMarket.getMarketCreationCost`, but provides more detail about the ether costs required to create a new [Market](#market). These Ether costs are broken down by the gas cost paid to the [First Public Reporter](#first-public-reporter) and the cost of the [Validity Bond](#validity-bond).
@@ -2698,7 +2695,6 @@ Gets the number of [Shares](#share) held by a specific Ethereum address for each
 
 * (Array.&lt;string>) Number of Shares for each Outcome of this Market.
 
-<!-- TODO: rename `maker` to `creator` in returned result in JS example -->
 ### augur.trading.getUserTradingHistory(p, callback)
 
 Returns information about the trades a specific user has made.
