@@ -19,11 +19,9 @@ For more information on how to trade using the Augur API, check the [trade](#tra
 Settlement Fees Explained
 -------------------------
 
-Creating a Market costs a small amount of `ETH`. Without some incentive people won't create Markets as they get nothing in return for the `ETH` they spent to create it. Augur solves this problem by allowing [Market Creators](#market-creator) to set a [Creator Fee](#creator-fee) for their Market. The Creator Fee must be between `0` and `50` percent. Once a Market is created the Creator Fee cannot be raised, only lowered.
+Creating a Market costs a small amount of `ETH`. Without some incentive people won't create Markets as they get nothing in return for the `ETH` they spent to create it. Augur solves this problem by allowing [Market Creators](#market-creator) to set a [Creator Fee](#creator-fee) for their Market. The Creator Fee must be between `0` and `50` percent, and cannot be changed once a Market is created. In addition to the Market Creator Fee, Market Creators can profit via spread by providing liquidity to the Markets they create.
 
-Augur also extracts Fees to help support the [Reporting System](#reporting) known as the [Reporting Fee](#reporting-fee). [Settlement Fees](#settlement-fees) refer to both the Creator Fee and the Reporting Fee combined. The Reporting Fee isn't set by the Market Creator, like the Creator Fee, but is instead set by an automated Augur Market.
-
-Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the [REP](#rep) price. This Market will act just like a regular Market and it will go through the [Dispute Rounds](#dispute-round) process in order to be [Resolved](#market-resolution). Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.
+Augur also extracts Fees to help support the [Reporting System](#reporting) known as the [Reporting Fee](#reporting-fee). [Settlement Fees](#settlement-fees) refer to both the Creator Fee and the Reporting Fee combined. Unlike the Creator Fee, the Reporting Fee isn't set by the Market Creator. Instead, it is set by an off-Augur price feed. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.
 
 The Augur contracts will track the [Open Interest](#open-interest) of all Markets passively as people interact with Augur, which allows Augur to always have access to the Open Interest numbers. Once the Open Interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:
 
