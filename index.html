@@ -167,11 +167,9 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <h2 id="settlement-fees-explained">Settlement Fees Explained</h2>
 
-<p>Creating a Market costs a small amount of <code class="prettyprint">ETH</code>. Without some incentive people won&rsquo;t create Markets as they get nothing in return for the <code class="prettyprint">ETH</code> they spent to create it. Augur solves this problem by allowing <a href="#market-creator">Market Creators</a> to set a <a href="#creator-fee">Creator Fee</a> for their Market. The Creator Fee must be between <code class="prettyprint">0</code> and <code class="prettyprint">50</code> percent. Once a Market is created the Creator Fee cannot be raised, only lowered.</p>
+<p>Creating a Market costs a small amount of <code class="prettyprint">ETH</code>. Without some incentive people won&rsquo;t create Markets as they get nothing in return for the <code class="prettyprint">ETH</code> they spent to create it. Augur solves this problem by allowing <a href="#market-creator">Market Creators</a> to set a <a href="#creator-fee">Creator Fee</a> for their Market. The Creator Fee must be between <code class="prettyprint">0</code> and <code class="prettyprint">50</code> percent, and cannot be changed once a Market is created. In addition to the Market Creator Fee, Market Creators can profit via spread by providing liquidity to the Markets they create.</p>
 
-<p>Augur also extracts Fees to help support the <a href="#reporting">Reporting System</a> known as the <a href="#reporting-fee">Reporting Fee</a>. <a href="#settlement-fees">Settlement Fees</a> refer to both the Creator Fee and the Reporting Fee combined. The Reporting Fee isn&rsquo;t set by the Market Creator, like the Creator Fee, but is instead set by an automated Augur Market.</p>
-
-<p>Augur will automatically create a Market once every Thirty (30) days to use as a data feed for the <a href="#rep">REP</a> price. This Market will act just like a regular Market and it will go through the <a href="#dispute-round">Dispute Rounds</a> process in order to be <a href="#market-resolution">Resolved</a>. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.</p>
+<p>Augur also extracts Fees to help support the <a href="#reporting">Reporting System</a> known as the <a href="#reporting-fee">Reporting Fee</a>. <a href="#settlement-fees">Settlement Fees</a> refer to both the Creator Fee and the Reporting Fee combined. Unlike the Creator Fee, the Reporting Fee isn&rsquo;t set by the Market Creator. Instead, it is set by an off-Augur price feed. Once the REP price is known, Augur can calculate the REP Market cap and the appropriate Reporting Fee to ensure the security of the Reporting System.</p>
 
 <p>The Augur contracts will track the <a href="#open-interest">Open Interest</a> of all Markets passively as people interact with Augur, which allows Augur to always have access to the Open Interest numbers. Once the Open Interest and REP market caps are known Augur can then determine wether the Reporting Fee is too high or too low. Augur then calculates the new Reporter Fee using the following formula:</p>
 
@@ -1620,17 +1618,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
@@ -1643,18 +1641,18 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
+  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
+  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
   <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
 <span class="p">]</span>
@@ -8919,20 +8917,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// obtained by calling `augur.api.Market.getCrowdsourcer`.</span>
 <span class="kd">var</span> <span class="nx">disputeCrowdsourcerAddress</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">fork</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcerAddress</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
-  <span class="p">},</span> 
-  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
-  <span class="p">},</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">});</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">forkAndRedeem</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">disputeCrowdsourcerAddress</span><span class="p">,</span>
@@ -8979,48 +8963,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol">DisputeCrowdsourcer Solidity Contract</a>, which allows users to <a href="#dispute-stake">Stake</a> and redeem <a href="#rep">REP</a> on <a href="#outcome">Outcomes</a> other than a <a href="#market">Market&rsquo;s</a> <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
-<h3 id="augur-api-disputecrowdsourcer-fork-p">augur.api.DisputeCrowdsourcer.fork(p)</h3>
-
-<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#crowdsourcer">Dispute Crowdsourcer</a> and migrates the <a href="#rep">REP</a> in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a <a href="#forked-market">Forked Market</a>, and it can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>).</p>
-
-<p>Once this function has been called, <code class="prettyprint">augur.api.DisputeCrowdsourcer.redeem</code> may be called by users who <a href="#dispute-stake">Staked</a> on the Dispute Crowdsourcer&rsquo;s Outcome to redeem their Staked REP and collect any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that they are owed. Alternatively, the convenience function <code class="prettyprint">augur.api.DisputeCrowdsourcer.forkAndRedeem</code> can be called instead of calling both of these functions.</p>
-
-<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the DisputeCrowdsourcer was forked without any errors.</p>
-
-<p>This transaction will fail if:</p>
-
-<ul>
-<li>The DisputeCrowdsourcer belongs to a Market that is not Forked.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
-</ul>
-
 <h3 id="augur-api-disputecrowdsourcer-forkandredeem-p">augur.api.DisputeCrowdsourcer.forkAndRedeem(p)</h3>
 
-<p>This is a convenience function that calls the <code class="prettyprint">DisputeCrowdsourcer.fork</code> function and then immediately calls the <code class="prettyprint">DisputeCrowdsourcer.redeem</code> function. </p>
+<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#crowdsourcer">Dispute Crowdsourcer</a> and migrates the <a href="#rep">REP</a> in the Crowdsourcer to the Child Universe. This function can be called only on the Crowdsourcers of a <a href="#forked-market">Forked Market</a>, and it can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). When called by a user who <a href="#dispute-stake">Staked</a> on the Dispute Crowdsourcer&rsquo;s Outcome, it will redeem their Staked REP and collect any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that they are owed.</p>
+
+<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the DisputeCrowdsourcer was forked without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -9063,7 +9010,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>If the Dispute Crowdsourcer&rsquo;s <a href="#market">Market</a> has been <a href="#finalized">Finalized</a>, and the Dispute Crowdsourcer did not fill its <a href="#dispute-bond">Dispute Bond</a>, the user will receive Reporting Fees for the Fee Window (but not the REP they originally Staked).</p>
 
-<p>If a Fork has occurred, all non-<a href="#forked-market">Forked Markets</a> will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. All non-<a href="#forked-market">Forked Markets</a> will need to have <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called before the <code class="prettyprint">redeem</code> transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on them before the <code class="prettyprint">redeem</code> transaction can be called.</p>
+<p>If a Fork has occurred, all non-<a href="#forked-market">Forked Markets</a> will have their <a href="#tentative-outcome">Tentative Outcome</a> reset to the Outcome submitted in the <a href="#initial-report">Initial Report</a> and be put back in the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. All non-<a href="#forked-market">Forked Markets</a> will need to have <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called before the <code class="prettyprint">redeem</code> transaction can be called on any of their Dispute Crowdsourcers. Furthermore, all Dispute Crowdsourcers of the Forked Market will need to have <code class="prettyprint">augur.api.DisputeCrowdsourcer.forkAndRedeem</code> called on them.</p>
 
 <p>When <code class="prettyprint">redeem</code> is called on Dispute Crowdsourcers of non-Forked Markets, this transaction will redeem any <a href="#rep">REP</a> that <code class="prettyprint">p._redeemer</code> <a href="#dispute-stake">Staked</a> on that Crowdsourcer, as well as any <a href="#reporting-fee">Reporting Fees</a> (in Ether) that <code class="prettyprint">p._redeemer</code> is owed, to the <a href="#universe">Universe</a> containing the Forked Market.</p>
 
@@ -9075,7 +9022,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>The DisputeCrowdsourcer belongs to a non-Forked Market in the same Universe as the Forked Market, and that non-Forked Market has not had <code class="prettyprint">augur.api.Market.disavowCrowdsourcers</code> called on it.</li>
-<li>The DisputeCrowdsourcer belongs to the Forked Market and has not had <code class="prettyprint">augur.api.DisputeCrowdsourcer.fork</code> called on it.</li>
+<li>The DisputeCrowdsourcer belongs to the Forked Market and has not had <code class="prettyprint">augur.api.DisputeCrowdsourcer.forkAndRedeem</code> called on it.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -9379,20 +9326,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// can be obtained by calling `augur.api.Market.getInitialReporter`.</span>
 <span class="kd">var</span> <span class="nx">initialReporterAddress</span> <span class="o">=</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">fork</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporterAddress</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
-  <span class="p">},</span> 
-  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
-  <span class="p">},</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">});</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">InitialReporter</span><span class="p">.</span><span class="nx">forkAndRedeem</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">initialReporterAddress</span><span class="p">,</span>
@@ -9453,48 +9386,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol">InitialReporter Solidity Contract</a>, which enables functionality related to <a href="#initial-report">Initial Reports</a>.</p>
 
-<h3 id="augur-api-initialreporter-fork-p">augur.api.InitialReporter.fork(p)</h3>
-
-<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe.</p>
-
-<p>This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). Once it has been called, <code class="prettyprint">augur.api.InitialReporter.redeem</code> may be called to transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market. Alternatively, the convenience function <code class="prettyprint">augur.api.InitialReporter.forkAndRedeem</code> can be called instead of calling both of these functions.</p>
-
-<p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
-
-<p>This transaction will fail if:</p>
-
-<ul>
-<li>The InitialReporter does not belong to a <a href="#forked-market">Forked Market</a>.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
-</ul>
-
 <h3 id="augur-api-initialreporter-forkandredeem-p">augur.api.InitialReporter.forkAndRedeem(p)</h3>
 
-<p>This is a convenience function that calls the <code class="prettyprint">InitialReporter.fork</code> function and then immediately calls the <code class="prettyprint">InitialReporter.redeem</code> function. </p>
+<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe. This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). When called by a user who who submitted the Initial Report, it will also transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market. </p>
 
 <p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
 
