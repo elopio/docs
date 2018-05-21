@@ -8,7 +8,7 @@ Ethereum block number from which to start looking up event logs.
 
 ### augur.constants.BLOCKS_PER_CHUNK (number)
 
-Description pending.
+Number of block to read from the blockchain at a time. Used by `augur.events.getAllAugurLogs`.
 
 ### augur.constants.CANCEL_ORDER_GAS (string)
 
