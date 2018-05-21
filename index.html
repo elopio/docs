@@ -49,8 +49,6 @@
       <div class="content">
         <h1 id="overview">Overview</h1>
 
-<aside class="notice"><b>Please Note:</b> These docs are currently being updated as we approach the launch of Augur. The Augur development team plans to have these docs fully updated prior to launching Augur. Please bear with us as we update this document and be advised that some of this information may be out-of-date or could change prior to launch. Thank you for your patience.</aside>
-
 <p>Augur is a decentralized prediction market platform that runs on <a href="https://www.ethereum.org">Ethereum</a>. For a detailed, high-level explanation of how Augur works, please refer to the <a href="http://www.augur.net/whitepaper.pdf">Augur whitepaper</a>.</p>
 
 <p>The stable Augur application is built and hosted at <a href="https://app.augur.net">https://app.augur.net</a>. If you want to use or help test Augur, you do not need to download or install anything! Just go to <a href="https://app.augur.net">https://app.augur.net</a> and start using it. (If you want to use our cutting-edge development client, this is maintained at <a href="https://dev.augur.net">https://dev.augur.net</a> &ndash; warning, we push changes to augur-dev.firebaseapp.com pretty rapidly, so it can be a bit buggy! We suggest simply using <a href="https://app.augur.net">https://app.augur.net</a> for a more stable experience.)</p>
@@ -123,8 +121,6 @@
 
           <h1 id="architecture">Architecture</h1>
 
-<aside class="notice">The Architecture section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <p>Augur is designed to work with a locally-running Ethereum node; however, if one is not available, Augur can be configured to use a hosted Ethereum node instead. A hosted Ethereum node is one that is hosted on a public server by the Augur development team. The sections below explain a bit about each setup and provide a diagram of what&rsquo;s going on under the hood.</p>
 
 <h2 id="local-ethereum-node">Local Ethereum Node</h2>
@@ -148,8 +144,6 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'"></p>
 
           <h1 id="trading">Trading</h1>
-
-<aside class="notice">The Trading section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 <p>Augur allows anyone to create an openly tradable <a href="#market">Market</a> about any upcoming event. Augur maintains an <a href="#order-book">Order Book</a> for each of the Markets created. Any trader can place or take an <a href="#order">Order</a> on the Market&rsquo;s Order Book. When placing an trade, that trade request will be <a href="#fill-order">Filled</a> immediately if there is an Order on the Order Book that will fulfill it. If there is no matching Order, or if the trade request can only be partially Filled, the remainder of what wasn&rsquo;t filled of the trade will be placed on the Order Book as an Order. Order <a href="#order-creator">Creators</a> may cancel their Order to remove it from the Order Book. Orders are executed on a &ldquo;first come, first served&rdquo; basis.</p>
 
@@ -354,8 +348,6 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
           <h1 id="reporting">Reporting</h1>
 
-<aside class="notice">The Reporting section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <p>Once a <a href="#market">Market</a>&rsquo;s underlying event  occurs, the <a href="#outcome">Outcome</a> must be determined in order for the Market to <a href="#finalized-market">Finalize</a> and begin <a href="#settlement">Settlement</a>. Outcomes are determined by Augur’s <a href="#decentralized-oracle">Decentralized Oracle</a>, which consists of profit-motivated <a href="#reporter">Reporters</a>, who simply report the actual, real-world Outcome of the event. Anyone who owns <a href="#rep">REP</a> may participate in the <a href="#report">Reporting</a> and <a href="#dispute">Disputing</a> of Outcomes. Reporters whose <a href="#report">Reports</a> are consistent with consensus are financially rewarded, while those whose Reports are not consistent with consensus are financially penalized.</p>
 
 <h2 id="fee-windows">Fee Windows</h2>
@@ -475,15 +467,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
           <h1 id="api-overview">API Overview</h1>
 
-<aside class="notice">The API Overview section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <p><a href="https://github.com/AugurProject/augur.js">augur.js</a> is a JavaScript SDK that is the developer-facing component of Augur&rsquo;s <a href="#architecture">middleware</a>. It can be used to query for information about Augur&rsquo;s <a href="#market">Markets</a> and interact with Augur&rsquo;s <a href="https://github.com/AugurProject/augur-core">smart contracts</a>, and it is the recommended way to interact with Augur from a custom application. </p>
 
 <p>The documentation for augur.js is divided into four sections: the <a href="#simplified-api">Simplified API</a>, the <a href="#call-api">Call API</a>, the <a href="#transaction-api">Transaction API</a>, and the <a href="#events-api">Events API</a>. The Simplified API provides general information about Markets within Augur, and many of its functions require a connection to an <a href="#augur-node">Augur Node</a>. The Call and Transaction APIs provide direct mappings to Augur&rsquo;s smart contract functions via the <code class="prettyprint">augur.api</code> object. The Call API uses <code class="prettyprint">eth_call</code> to make &ldquo;get&rdquo; requests for information stored on the blockchain. The Transaction API uses <code class="prettyprint">eth_sendTransaction</code> to make &ldquo;set&rdquo; requests to the blockchain in order to modify the blockchain&rsquo;s information in some way, like creating a new <a href="#order">Order</a> on the <a href="#order-book">Order Book</a>. The Events API enables listening for certain logged events and searching for them. The Call, Transaction, and Events APIs do not require a connection to an Augur Node. Each of these four components of augur.js is covered in greater detail in their respective sections below.</p>
 
 <p>This API Overview section explains how to add augur.js to a custom application and how to connect it to an Ethereum node and an Augur Node. It also covers how augur.js&rsquo; account management works, how numbers should be used in augur.js, how to load and create Markets, and debugging options.</p>
-
-<!-- TODO: Consider moving this to the Architecture section. -->
 
 <h2 id="augur-node">Augur Node</h2>
 
@@ -494,8 +482,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p>To alleviate this problem, the Simplified API executes queries by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.</p>
 
 <p>To set up a local Augur Node, follow the instructions described in the <a href="https://github.com/AugurProject/augur-node#augur-node">Augur Node GitHub repository</a>. Once a local Augur Node is running (or if the WebSocket address of a hosted node is known), a connection to it can be established by specifying the WebSocket address as shown by the JavaScript sample code in the <a href="#getting-started-with-augur-js">Getting Started with augur.js</a> section.</p>
-
-<!-- TODO: add link to augur.connect function in Simplified API section once its complete. -->
 
 <h2 id="getting-started-with-augur-js">Getting Started with augur.js</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// After installing, just require augur.js to use it.</span>
@@ -559,7 +545,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Once augur.js has been installed, it will need to be connected to an Ethereum node and an <a href="#augur-node">Augur node</a>. These can be running locally or remotely (hosted). </p>
 
-<p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">augur.connect</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  Note: if there is a global <code class="prettyprint">web3</code> object present, such as that injected by MetaMask, that global <code class="prettyprint">web3</code> will be automatically used in preference to any other connections available.  So, if you&rsquo;re using MetaMask, make sure it&rsquo;s connected to the right network!</p>
+<p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">[augur.connect](#connect-function)</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  Note: if there is a global <code class="prettyprint">web3</code> object present, such as that injected by MetaMask, that global <code class="prettyprint">web3</code> will be automatically used in preference to any other connections available.  So, if you&rsquo;re using MetaMask, make sure it&rsquo;s connected to the right network!</p>
 
 <p>Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
@@ -687,8 +673,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
           <h1 id="simplified-api">Simplified API</h1>
-
-<aside class="notice">The Simplified API section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 <aside class="warning">The Simplified API provides an easy way to make transactions and query for information within Augur. This API is simplified in the sense that single requests to this API can be used to fetch a large amount of data, without the need for complicated RPC batch queries. However, many of the functions in this API require a connection to an <a href="#augur-node">Augur Node</a>, which has been indicated in their descriptions. Please read the <a href="#augur-node">Augur Node</a> section before using these functions.</aside>
 
@@ -1487,8 +1471,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li>(<a href="#MarketCreationCost">MarketCreationCost</a>) Costs of creating a new Market.</li>
 </ul>
-
-<!-- TODO: Add link to augur.createMarket.getMarketCreationCost -->
 
 <h3 id="augur-createmarket-getmarketcreationcostbreakdown-p-callback">augur.createMarket.getMarketCreationCostBreakdown(p, callback)</h3>
 
@@ -3762,8 +3744,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(Array.&lt;string&gt;) Number of Shares for each Outcome of this Market.</li>
 </ul>
 
-<!-- TODO: rename `maker` to `creator` in returned result in JS example -->
-
 <h3 id="augur-trading-getusertradinghistory-p-callback">augur.trading.getUserTradingHistory(p, callback)</h3>
 
 <p>Returns information about the trades a specific user has made.</p>
@@ -4096,8 +4076,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">outcomes</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
 <span class="c1">// outcomes = 2</span>
 </code></pre></div>
-<aside class="notice">The Call API section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <p>The Call API of augur.js is made up of &ldquo;getter&rdquo; functions that retrieve information from Augur&rsquo;s Solidity smart contracts using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows, and its functions are mapped directly to the public functions of Augur&rsquo;s Solidity smart contracts. </p>
 
 <p>All functions in the Call API accept two arguments: </p>
@@ -8091,8 +8069,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
           <h1 id="transaction-api">Transaction API</h1>
-
-<aside class="notice">The Transaction section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Transaction API example:</span>
 
 <span class="c1">// Internally, Augur uses an ERC-20 token called Cash as a wrapper for ETH. </span>
@@ -12091,8 +12067,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
           <h1 id="events-api">Events API</h1>
 
-<aside class="notice">The Events section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
-
 <p>There are a variety of &ldquo;events&rdquo; that are emitted by the Augur contracts.  Each event is triggered by a user doing something on Augur, such as submitting an <a href="#initial-report">Initial Report</a>, <a href="#finalized-market">Finalizing</a> a <a href="#market">Market</a>, <a href="#fill-order">Filling</a> an <a href="#open-order">Open Order</a>, etc. For a full list, please refer to the <a href="#event-types">Event Types</a> section.</p>
 
 <aside class="notice">The Events API described here should not be confused with the (unrelated) concept of &ldquo;events&rdquo; that <a href="#reporter">Reporters</a> <a href="#report">Report</a> on. These concepts are sufficiently different that the context should always make clear which kind of &ldquo;event&rdquo; is being discussed. However, if this documentation is ever ambiguous about this, feel free to drop us a note at <a href="mailto:hugs@augur.net">hugs@augur.net</a>, <a href="https://www.reddit.com/r/augur">Reddit</a>, or <a href="https://twitter.com/AugurProject">Twitter</a>!</aside>
@@ -12609,8 +12583,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
           <h1 id="api-type-definitions">API Type Definitions</h1>
 
 <p>augur.js&rsquo; functions accept and return a variety of different objects, which are described below.</p>
-
-<!-- TODO: Add glossary links to type definitions -->
 
 <p><a name="AccountTransfer"></a></p>
 
@@ -13476,7 +13448,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-blocks_per_chunk-number">augur.constants.BLOCKS_PER_CHUNK (number)</h3>
 
-<p>Description pending.</p>
+<p>Number of block to read from the blockchain at a time. Used by <code class="prettyprint">augur.events.getAllAugurLogs</code>.</p>
 
 <h3 id="augur-constants-cancel_order_gas-string">augur.constants.CANCEL_ORDER_GAS (string)</h3>
 
@@ -13939,8 +13911,6 @@ For a full review of all conventions, reference:</p>
 <p>If it is local to that element or it’s siblings, then it’s most likely <code class="prettyprint">em</code>. If it doesn’t matter or is relative to the view/general layout, then it’s most likely <code class="prettyprint">rem</code>. It’s highly contextual as to when/how to apply, but if a component’s layout can scale based on root font size, then <code class="prettyprint">rem</code> is fine. However, if the layout needs to scale in relation to itself or its peers, it is probably better leverage <code class="prettyprint">em</code>.</p>
 
           <h1 id="glossary">Glossary</h1>
-
-<aside class="notice">The Glossary section is still under construction and may be missing some information. Don&rsquo;t worry! We plan to update the entire documentation prior to Augur launching. Thank you for your patience as we make these updates.</aside>
 
 <!--
 this section will include subsections for all terms used and descriptions of what they are and what they do. This is to avoid repeating them same information over and over again in function descriptions in the API section. This section should be easy to navigate and easy to link to specific concepts. To that end, each concept should have its own subsection.
