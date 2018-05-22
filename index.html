@@ -12644,7 +12644,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">category</code></strong> (string) Name of a Category.</li>
-<li><strong><code class="prettyprint">popularity</code></strong> (string) Category popularity. (The exact method for calculating this value is still pending.)</li>
+<li><strong><code class="prettyprint">popularity</code></strong> (string) Category popularity.</li>
 </ul>
 
 <p><a name="ClaimReportingFeesForkedMarket"></a></p>
@@ -13021,8 +13021,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">initialReportSize</code></strong> (string|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).</li>
 <li><strong><code class="prettyprint">category</code></strong> (string) Name of the category the Market is in.</li>
 <li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
-<li><strong><code class="prettyprint">volume</code></strong> (string) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
-<li><strong><code class="prettyprint">outstandingShares</code></strong> (string) Total shares in the Market. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">volume</code></strong> (string) Trading volume for this Outcome.</li>
+<li><strong><code class="prettyprint">outstandingShares</code></strong> (string) Total shares in the Market.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">endTime</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
 <li><strong><code class="prettyprint">finalizationBlockNumber</code></strong> (number|null) Ethereum block number in which the Market was Finalized.</li>
@@ -13143,7 +13143,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">id</code></strong> (number) Market Outcome ID</li>
-<li><strong><code class="prettyprint">volume</code></strong> (string) Trading volume for this Outcome. (Method for calculating this is pending.)</li>
+<li><strong><code class="prettyprint">volume</code></strong> (string) Trading volume for this Outcome.</li>
 <li><strong><code class="prettyprint">price</code></strong> (string) Price of the Outcome.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string|null) Description for the Outcome.</li>
 </ul>
@@ -13273,8 +13273,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">payout</code></strong> (Array.&lt;number|string&gt;) Payout Set for the Dispute Crowdsourcer.</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Outcome is Invalid.</li>
-<li><strong><code class="prettyprint">bondSizeCurrent</code></strong> (string|null) Amount of attoREP needed to successfully Dispute the Tentative Outcome of this Market. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
-<li><strong><code class="prettyprint">bondSizeTotal</code></strong> (string|null) Description pending. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
+<li><strong><code class="prettyprint">bondSizeCurrent</code></strong> (string|null) Amount of attoREP needed to successfully Dispute the Tentative Outcome of this Market in the current Fee Window. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
+<li><strong><code class="prettyprint">bondSizeTotal</code></strong> (string|null) Total attoREP required to make this Outcome become the Tentative Outcome. (That is, the sum of <code class="prettyprint">bondSizeCurrent</code> and <code class="prettyprint">stakeCompleted</code>.) Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
 <li><strong><code class="prettyprint">stakeCurrent</code></strong> (string|null) Amount of attoREP Staked on this Outcome for the current Dispute Round. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
 <li><strong><code class="prettyprint">stakeRemaining</code></strong> (string|null) Amount of attoREP that this Outcome must receive in order to become the Tentative Outcome for the Market. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
 <li><strong><code class="prettyprint">accountStakeCompleted</code></strong> (string|null) Amount of attoREP the specified <code class="prettyprint">account</code> has Staked in this Outcome during the current Dispute Round. Is null if <code class="prettyprint">tentativeWinning</code> is true.</li>
@@ -13394,9 +13394,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
 <li><strong><code class="prettyprint">numShares</code></strong> (string) Quantity of shares currently owned by the user.</li>
 <li><strong><code class="prettyprint">numSharesAdjusted</code></strong> (string) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.</li>
-<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (string) Description pending.</li>
-<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Description pending.</li>
+<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (string) AttoETH profit or loss the user took upon closing this position.</li>
+<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.</li>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price in attoETH paid to acquire this position.</li>
 </ul>
 
 <p><a name="WebSocket"></a></p>
