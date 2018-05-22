@@ -1529,10 +1529,6 @@ augur.reporting.getReportingFees({
         crowdsourcerId: "0x0000000000000000001000000000000000000006",
         needsFork: true,
       },
-      {
-        crowdsourcerId: "0x0000000000000000001000000000000000000007",
-        needsFork: false,
-      },
     ],
     initialReporter: {
       initialReporterId: "0x0000000000000000000000000000000000abe222",
