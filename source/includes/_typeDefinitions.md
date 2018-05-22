@@ -48,7 +48,7 @@ Note: Other properties will be present in this object, depending on what event t
 
 #### **Properties:** 
 * **`category`** (string) Name of a Category.
-* **`popularity`** (string) Category popularity. (The exact method for calculating this value is still pending.)
+* **`popularity`** (string) Category popularity.
 
 <a name="ClaimReportingFeesForkedMarket"></a>
 ### ClaimReportingFeesForkedMarket  (Object)
@@ -322,8 +322,8 @@ Serves as an enum for the state of a Dispute Token.
 * **`initialReportSize`** (string|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
-* **`volume`** (string) Trading volume for this Outcome. (Method for calculating this is pending.)
-* **`outstandingShares`** (string) Total shares in the Market. (Method for calculating this is pending.)
+* **`volume`** (string) Trading volume for this Outcome.
+* **`outstandingShares`** (string) Total shares in the Market.
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endTime`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationBlockNumber`** (number|null) Ethereum block number in which the Market was Finalized.
@@ -412,7 +412,7 @@ Serves as an enum for the state of an order.
 
 #### **Properties:** 
 * **`id`** (number) Market Outcome ID
-* **`volume`** (string) Trading volume for this Outcome. (Method for calculating this is pending.)
+* **`volume`** (string) Trading volume for this Outcome.
 * **`price`** (string) Price of the Outcome.
 * **`description`** (string|null) Description for the Outcome.
 
@@ -506,8 +506,8 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`payout`** (Array.&lt;number|string>) Payout Set for the Dispute Crowdsourcer.
 * **`isInvalid`** (boolean|number) Whether the Outcome is Invalid.
-* **`bondSizeCurrent`** (string|null) Amount of attoREP needed to successfully Dispute the Tentative Outcome of this Market. Is null if `tentativeWinning` is true.
-* **`bondSizeTotal`** (string|null) Description pending. Is null if `tentativeWinning` is true.
+* **`bondSizeCurrent`** (string|null) Amount of attoREP needed to successfully Dispute the Tentative Outcome of this Market in the current Fee Window. Is null if `tentativeWinning` is true.
+* **`bondSizeTotal`** (string|null) Total attoREP required to make this Outcome become the Tentative Outcome. (That is, the sum of `bondSizeCurrent` and `stakeCompleted`.) Is null if `tentativeWinning` is true.
 * **`stakeCurrent`** (string|null) Amount of attoREP Staked on this Outcome for the current Dispute Round. Is null if `tentativeWinning` is true.
 * **`stakeRemaining`** (string|null) Amount of attoREP that this Outcome must receive in order to become the Tentative Outcome for the Market. Is null if `tentativeWinning` is true.
 * **`accountStakeCompleted`** (string|null) Amount of attoREP the specified `account` has Staked in this Outcome during the current Dispute Round. Is null if `tentativeWinning` is true.
@@ -596,9 +596,9 @@ Serves as an enum for the state of a Market.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (string) Quantity of shares currently owned by the user.
 * **`numSharesAdjusted`** (string) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.
-* **`realizedProfitLoss`** (string) Description pending.
-* **`unrealizedProfitLoss`** (string) Description pending.
-* **`averagePrice`** (string) Description pending.
+* **`realizedProfitLoss`** (string) AttoETH profit or loss the user took upon closing this position.
+* **`unrealizedProfitLoss`** (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.
+* **`averagePrice`** (string) Average price in attoETH paid to acquire this position.
 
 <a name="WebSocket"></a>
 ### WebSocket  (Object)
