@@ -1154,6 +1154,14 @@ augur.api.Market.getParticipantStake({
 // example output:
 "161278368761238475"
 
+augur.api.Market.getReporterGasCostsFeeAttoeth(
+  tx: { to: market } 
+}, function (error, reporterGasCostsFeeAttoeth) { 
+  console.log(reporterGasCostsFeeAttoeth); 
+});
+// example output:
+"17246000000000000"
+
 augur.api.Market.getUniverse({ 
   tx: { to: market } 
 }, function (error, universe) { 
@@ -1161,6 +1169,14 @@ augur.api.Market.getUniverse({
 });
 // example output:
 "0x0920d1513057572be46580b7ef75d1d01a99a3e5"
+
+augur.api.Market.getValidityBondAttoeth(
+  tx: { to: market } 
+}, function (error, validityBondAttoeth) { 
+  console.log(validityBondAttoeth); 
+});
+// example output:
+"13570000000000000"
 
 augur.api.Market.getWinningPayoutDistributionHash({ 
   tx: { to: market } 
@@ -1455,6 +1471,36 @@ Returns the [Number of Ticks](#number-of-ticks) set for a specific [Market](#mar
 
 * (string) Number of Ticks for the Market, as a stringified unsigned integer.
 
+### augur.api.Market.getParticipantStake(p, callback)
+
+Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#crowdsourcer).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Total attoREP Staked on the Market, as a stringified unsigned integer.
+
+### augur.api.Market.getReporterGasCostsFeeAttoeth(p, callback)
+
+Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [Initial Reporter](#initial-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does show up. The [Market](#market) must be specified in `tx`. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Designated Report No-Show Gas Bond, in attoETH.
+
 ### augur.api.Market.getReportingParticipant(p, callback)
 
 Within Augur's code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an [Initial Report](#initial-report) is submitted or a [Dispute Crowdsourcer](#crowdsourcer) fills its [Dispute Bond](#dispute-bond), the corresponding [Market](#market) pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the [Tentative Outcome](#tentative-outcome). The function `augur.api.Market.getReportingParticipant` returns the Ethereum address of the contract at a specific index in that array.
@@ -1520,21 +1566,6 @@ Returns the amount of [attoREP](#atto-prefix) that has been Staked on the [Outco
 
 * (string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.
 
-### augur.api.Market.getParticipantStake(p, callback)
-
-Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#outcome) of the specified [Market](#market). This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful [Dispute Crowdsourcer](#crowdsourcer).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (string) Total attoREP Staked on the Market, as a stringified unsigned integer.
-
 ### augur.api.Market.getUniverse(p, callback)
 
 Returns the Etherem address of the [Universe](#universe) in which the specified Market exists. All [Markets](#market) are created in a specific Universe, and new Universes are created if a [Fork](#fork) occurs.
@@ -1549,6 +1580,21 @@ Returns the Etherem address of the [Universe](#universe) in which the specified 
 #### **Returns:**
 
 * (string) Etherem address of the Universe in which the Market exists, as a 20-byte hexadecimal string.
+
+### augur.api.Market.getValidityBondAttoeth(p, callback)
+
+Returns the amount the [Market Creator](#market-creator) must pay for the [Validity Bond](#validity-bond), denominated in [AttoETH](#atto-prefix), when creating a [Market](#market). (This amount will be refunded to the Market Creator if the [Final Outcome](#final-outcome) of the Market is not invalid.)
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p.tx`** (Object) Object containing details about how this function call should be made.
+        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Amount the Market Creator must pay for the Validity Bond, denominated in attoETH.
 
 ### augur.api.Market.getWinningPayoutDistributionHash(p, callback)
 
