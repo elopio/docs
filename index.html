@@ -5547,6 +5547,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"161278368761238475"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReporterGasCostsFeeAttoeth</span><span class="p">(</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reporterGasCostsFeeAttoeth</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reporterGasCostsFeeAttoeth</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"17246000000000000"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> 
@@ -5554,6 +5562,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getValidityBondAttoeth</span><span class="p">(</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">validityBondAttoeth</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">validityBondAttoeth</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"13570000000000000"</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getWinningPayoutDistributionHash</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
@@ -6000,6 +6016,56 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(string) Number of Ticks for the Market, as a stringified unsigned integer.</li>
 </ul>
 
+<h3 id="augur-api-market-getparticipantstake-p-callback">augur.api.Market.getParticipantStake(p, callback)</h3>
+
+<p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on all <a href="#outcome">Outcomes</a> of the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#crowdsourcer">Dispute Crowdsourcer</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Total attoREP Staked on the Market, as a stringified unsigned integer.</li>
+</ul>
+
+<h3 id="augur-api-market-getreportergascostsfeeattoeth-p-callback">augur.api.Market.getReporterGasCostsFeeAttoeth(p, callback)</h3>
+
+<p>Returns the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#initial-reporter">Initial Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator-mailbox">Market Creator Mailbox</a> if the <a href="#designated-reporter">Designated Reporter</a> does show up. The <a href="#market">Market</a> must be specified in <code class="prettyprint">tx</code>. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Designated Report No-Show Gas Bond, in attoETH.</li>
+</ul>
+
 <h3 id="augur-api-market-getreportingparticipant-p-callback">augur.api.Market.getReportingParticipant(p, callback)</h3>
 
 <p>Within Augur&rsquo;s code, the InitialReporter class and DisputeCrowdsourcer class are child classes of a class called ReportingParticipant. When an <a href="#initial-report">Initial Report</a> is submitted or a <a href="#crowdsourcer">Dispute Crowdsourcer</a> fills its <a href="#dispute-bond">Dispute Bond</a>, the corresponding <a href="#market">Market</a> pushes that InitialReporter contract or DisputeCrowdsourcer contract to an array that keeps track of all contracts that have ever been the <a href="#tentative-outcome">Tentative Outcome</a>. The function <code class="prettyprint">augur.api.Market.getReportingParticipant</code> returns the Ethereum address of the contract at a specific index in that array.</p>
@@ -6105,31 +6171,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(string) Amount of attoREP Staked on the Outcome with the specified Payout Distribution Hash in the Market, as a stringified unsigned integer.</li>
 </ul>
 
-<h3 id="augur-api-market-getparticipantstake-p-callback">augur.api.Market.getParticipantStake(p, callback)</h3>
-
-<p>Returns the total amount of <a href="#atto-prefix">attoREP</a> Staked on all <a href="#outcome">Outcomes</a> of the specified <a href="#market">Market</a>. This amount is combined total of attoREP Staked on the Initial Report and attoREP Staked on every successful <a href="#crowdsourcer">Dispute Crowdsourcer</a>.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
-</ul></li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(string) Total attoREP Staked on the Market, as a stringified unsigned integer.</li>
-</ul>
-
 <h3 id="augur-api-market-getuniverse-p-callback">augur.api.Market.getUniverse(p, callback)</h3>
 
 <p>Returns the Etherem address of the <a href="#universe">Universe</a> in which the specified Market exists. All <a href="#market">Markets</a> are created in a specific Universe, and new Universes are created if a <a href="#fork">Fork</a> occurs.</p>
@@ -6153,6 +6194,31 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Etherem address of the Universe in which the Market exists, as a 20-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getvaliditybondattoeth-p-callback">augur.api.Market.getValidityBondAttoeth(p, callback)</h3>
+
+<p>Returns the amount the <a href="#market-creator">Market Creator</a> must pay for the <a href="#validity-bond">Validity Bond</a>, denominated in <a href="#atto-prefix">AttoETH</a>, when creating a <a href="#market">Market</a>. (This amount will be refunded to the Market Creator if the <a href="#final-outcome">Final Outcome</a> of the Market is not invalid.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Amount the Market Creator must pay for the Validity Bond, denominated in attoETH.</li>
 </ul>
 
 <h3 id="augur-api-market-getwinningpayoutdistributionhash-p-callback">augur.api.Market.getWinningPayoutDistributionHash(p, callback)</h3>
@@ -14377,7 +14443,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>Most of our day-to-day conversation happens on <a href="https://discordapp.com/">Discord</a>. (We also have an IRC gateway in #augur on Freenode that is connected to our Discord chat!) Our Discord conversations are open. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. We love to hear feedback from people who are as excited as we are about Augur!</p>
 
-      </div>
+      </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="javascript">Code</a>
