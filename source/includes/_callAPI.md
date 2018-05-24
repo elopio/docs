@@ -988,6 +988,15 @@ Market Call API
 // Market Contract Call API Examples:
 var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
+augur.api.Market.deriveMarketCreatorFeeAmount({
+  _amount: "0xc3280e4b4b",
+  tx: { to: market }
+}, function (error, isInvalid) { 
+  console.log(isInvalid); 
+});
+// example output:
+"1"
+
 augur.api.Market.derivePayoutDistributionHash({
   _payoutNumerators: [ "0x0", "0x2710" ],
   _invalid: false,
@@ -1238,6 +1247,20 @@ augur.api.Market.isInvalid({
 true
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
+
+### augur.api.Market.deriveMarketCreatorFeeAmount(p, callback)
+
+Calculates the [Creator Fee](#creator-fee) that will be paid when settling a specific number of [Shares](#share) in a given [Market](#market).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (string) Creator Fee, in attoETH, as a stringified unsigned integer.
 
 ### augur.api.Market.derivePayoutDistributionHash(p, callback)
 
