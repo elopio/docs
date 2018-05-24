@@ -2312,6 +2312,7 @@ var _price = "0x6f05b59d3b20000"; // 0.5
 var _betterOrderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
 var _worseOrderId = "0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426";
 var _tradeGroupId = "0x0000000000000000000000000000000000000000000000000000000000000003";
+var _loopLimit = "0x2";
 augur.api.Trade.publicBuy({
   _market: _market,
   _outcome: _outcome,
@@ -2334,6 +2335,29 @@ augur.api.Trade.publicBuy({
   onFailed: function (result) { console.log(result); }
 });
 
+augur.api.Trade.publicBuyWithLimit({
+  _market: _market,
+  _outcome: _outcome,
+  _fxpAmount: _fxpAmount,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
+  tx: { 
+    to: tradeAddress,
+    value: "0x16345785d8a0000", 
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
 augur.api.Trade.publicSell({
   _market: _market,
   _outcome: _outcome,
@@ -2342,6 +2366,29 @@ augur.api.Trade.publicSell({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: tradeAddress,
+    value: "0x16345785d8a0000", 
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.Trade.publicSellWithLimit({
+  _market: _market,
+  _outcome: _outcome,
+  _fxpAmount: _fxpAmount,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
   tx: { 
     to: tradeAddress,
     value: "0x16345785d8a0000", 
@@ -2379,6 +2426,30 @@ augur.api.Trade.publicTrade({
   onFailed: function (result) { console.log(result); }
 });
 
+augur.api.Trade.publicTradeWithLimit({
+  _direction: "0x0",
+  _market: _market,
+  _outcome: _outcome,
+  _fxpAmount: _fxpAmount,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
+  tx: { 
+    to: tradeAddress,
+    value: "0x16345785d8a0000", 
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
 augur.api.Trade.publicFillBestOrder({
   _direction: "0x1",
   _market: _market,
@@ -2388,6 +2459,29 @@ augur.api.Trade.publicFillBestOrder({
   _betterOrderId: _betterOrderId,
   _worseOrderId: _worseOrderId,
   _tradeGroupId: _tradeGroupId,
+  tx: { 
+    to: tradeAddress,
+    gas: "0x632ea0" 
+  }, 
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.Trade.publicFillBestOrderWithLimit({
+  _direction: "0x1",
+  _market: _market,
+  _outcome: _outcome,
+  _fxpAmount: _fxpAmount,
+  _price: _price,
+  _betterOrderId: _betterOrderId,
+  _worseOrderId: _worseOrderId,
+  _tradeGroupId: _tradeGroupId,
+  _loopLimit: _loopLimit,
   tx: { 
     to: tradeAddress,
     gas: "0x632ea0" 
@@ -2434,6 +2528,34 @@ This transaction will fail if:
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
+### augur.api.Trade.publicBuyWithLimit(p)
+
+Works like `augur.api.Trade.publicBuy`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicBuy` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicBuyWithLimit` could be used instead.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.
+    * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy, as a hexadecimal string.
+    * **`p._price`**  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.
+    * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._tradeGroupId`** (string) ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p._loopLimit`** (string) Maximum number of Fill Order operations to make.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy the desired amount of attoShares, as a hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
 ### augur.api.Trade.publicSell(p)
 
 Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outcome` of [Market](#market) `p._market` at `p._price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `p._fxpAmount` of [attoShares]. The parameters `p._betterOrderId` and `p._worseOrderId` are the Orders with the next best/next worse price with respect to `p._price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the Order is created without any errors.
@@ -2452,6 +2574,34 @@ This transaction will fail if:
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.value`**  (string) Number of [attoShares](#atto-prefix) to sell, as a hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.Trade.publicSellWithLimit(p)
+
+Works like `augur.api.Trade.publicSell`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicSell` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicSellWithLimit` could be used instead.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.
+    * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of Shares to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
+    * **`p._price`**  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.
+    * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p._loopLimit`** (string) Maximum number of Fill Order operations to make.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.value`**  (string) Number of [attoShares](#atto-prefix) to sell, as a hexadecimal string.
@@ -2497,6 +2647,35 @@ The value of the Order (calculated as p._price * (Market’s number of Ticks - p
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
+### augur.api.Trade.publicTradeWithLimit(p)
+
+Works like `augur.api.Trade.publicTrade`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicTrade` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicTradeWithLimit` could be used instead.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x0" for long or "0x1" for short.)
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
+    * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string.
+    * **`p._price`**  (string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as a hexadecimal string.
+    * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p._loopLimit`** (string) Maximum number of Fill Order operations to make.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy the desired amount of attoShares, or number of [attoShares](#atto-prefix) to sell, as a hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
 ### augur.api.Trade.publicFillBestOrder(p)
 
 Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [Order](#order) if the request can't be [Filled](#fill-order). Instead, it will take the best Order available on the [Order Book](#order-book).
@@ -2512,6 +2691,34 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.Trade.publicFillBestOrderWithLimit(p)
+
+Works like `augur.api.Trade.publicFillBestOrder`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicFillBestOrder` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicFillBestOrderWithLimit` could be used instead.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._direction`** (string) Direction of the trade, as a hexadecimal string. ("0x0" for long or "0x1" for short.)
+    * **`p._market`**  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.
+    * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of [attoShares](#atto-prefix) to buy/sell, as a hexadecimal string
+    * **`p._price`**  (string) Price at which to buy/sell Shares, in [attoETH](#atto-prefix), as a hexadecimal string.
+    * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
+    * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
+    * **`p._loopLimit`** (string) Maximum number of Fill Order operations to make.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
