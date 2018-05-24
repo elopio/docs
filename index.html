@@ -5381,6 +5381,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Market Contract Call API Examples:</span>
 <span class="kd">var</span> <span class="nx">market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">deriveMarketCreatorFeeAmount</span><span class="p">({</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="s2">"0xc3280e4b4b"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isInvalid</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isInvalid</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">"1"</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">derivePayoutDistributionHash</span><span class="p">({</span>
   <span class="na">_payoutNumerators</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">],</span>
   <span class="na">_invalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -5631,6 +5640,27 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kc">true</span>
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol">Market Solidity Contract</a>, which enables functionality for Augur&rsquo;s <a href="#market">Markets</a>.</p>
+
+<h3 id="augur-api-market-derivemarketcreatorfeeamount-p-callback">augur.api.Market.deriveMarketCreatorFeeAmount(p, callback)</h3>
+
+<p>Calculates the <a href="#creator-fee">Creator Fee</a> that will be paid when settling a specific number of <a href="#share">Shares</a> in a given <a href="#market">Market</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of Shares, in attoshares, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Creator Fee, in attoETH, as a stringified unsigned integer.</li>
+</ul>
 
 <h3 id="augur-api-market-derivepayoutdistributionhash-p-callback">augur.api.Market.derivePayoutDistributionHash(p, callback)</h3>
 
@@ -10947,6 +10977,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">_betterOrderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_worseOrderId</span> <span class="o">=</span> <span class="s2">"0xed42c0fab97ee6fbde7c47dc62dc3ad09e8d3af53517245c77c659f7cd561426"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_tradeGroupId</span> <span class="o">=</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000003"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">_loopLimit</span> <span class="o">=</span> <span class="s2">"0x2"</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicBuy</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
@@ -10969,6 +11000,29 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicBuyWithLimit</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
+  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
+  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
+  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">_loopLimit</span><span class="p">:</span> <span class="nx">_loopLimit</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicSell</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
@@ -10977,6 +11031,29 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicSellWithLimit</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
+  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
+  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
+  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">_loopLimit</span><span class="p">:</span> <span class="nx">_loopLimit</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
@@ -11014,6 +11091,30 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicTradeWithLimit</span><span class="p">({</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
+  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
+  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
+  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">_loopLimit</span><span class="p">:</span> <span class="nx">_loopLimit</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span> 
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicFillBestOrder</span><span class="p">({</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
@@ -11023,6 +11124,29 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
   <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
   <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span> 
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Trade</span><span class="p">.</span><span class="nx">publicFillBestOrderWithLimit</span><span class="p">({</span>
+  <span class="na">_direction</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="nx">_outcome</span><span class="p">,</span>
+  <span class="na">_fxpAmount</span><span class="p">:</span> <span class="nx">_fxpAmount</span><span class="p">,</span>
+  <span class="na">_price</span><span class="p">:</span> <span class="nx">_price</span><span class="p">,</span>
+  <span class="na">_betterOrderId</span><span class="p">:</span> <span class="nx">_betterOrderId</span><span class="p">,</span>
+  <span class="na">_worseOrderId</span><span class="p">:</span> <span class="nx">_worseOrderId</span><span class="p">,</span>
+  <span class="na">_tradeGroupId</span><span class="p">:</span> <span class="nx">_tradeGroupId</span><span class="p">,</span>
+  <span class="na">_loopLimit</span><span class="p">:</span> <span class="nx">_loopLimit</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">tradeAddress</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
@@ -11061,6 +11185,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-trade-publicbuywithlimit-p">augur.api.Trade.publicBuyWithLimit(p)</h3>
+
+<p>Works like <code class="prettyprint">augur.api.Trade.publicBuy</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicBuy</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicBuyWithLimit</code> could be used instead.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._loopLimit</code></strong> (string) Maximum number of Fill Order operations to make.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -11124,6 +11286,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
+<h3 id="augur-api-trade-publicsellwithlimit-p">augur.api.Trade.publicSellWithLimit(p)</h3>
+
+<p>Works like <code class="prettyprint">augur.api.Trade.publicSell</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicSell</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicSellWithLimit</code> could be used instead.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of Shares to sell, in <a href="#atto-prefix">attoshares</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._loopLimit</code></strong> (string) Maximum number of Fill Order operations to make.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
 <h3 id="augur-api-trade-publictrade-p">augur.api.Trade.publicTrade(p)</h3>
 
 <p>Works similarly to <code class="prettyprint">augur.api.Trade.publicBuy</code> and <code class="prettyprint">augur.api.Trade.publicSell</code>; however a direction must be specified. The <code class="prettyprint">p._direction</code> must be either &ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the <a href="#order">Order</a> is created without any errors.</p>
@@ -11166,6 +11366,45 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
+<h3 id="augur-api-trade-publictradewithlimit-p">augur.api.Trade.publicTradeWithLimit(p)</h3>
+
+<p>Works like <code class="prettyprint">augur.api.Trade.publicTrade</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicTrade</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicTradeWithLimit</code> could be used instead.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
+<li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._loopLimit</code></strong> (string) Maximum number of Fill Order operations to make.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, or number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
 <h3 id="augur-api-trade-publicfillbestorder-p">augur.api.Trade.publicFillBestOrder(p)</h3>
 
 <p>Works similarly to <code class="prettyprint">augur.api.Trade.publicTrade</code>, except it does not create an <a href="#order">Order</a> if the request can&rsquo;t be <a href="#fill-order">Filled</a>. Instead, it will take the best Order available on the <a href="#order-book">Order Book</a>.</p>
@@ -11184,6 +11423,44 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-trade-publicfillbestorderwithlimit-p">augur.api.Trade.publicFillBestOrderWithLimit(p)</h3>
+
+<p>Works like <code class="prettyprint">augur.api.Trade.publicFillBestOrder</code>, but uses the parameter <code class="prettyprint">_loopLimit</code> to determine how many <a href="#fill-order">Fill Order</a> operations to perform. The function <code class="prettyprint">augur.api.Trade.publicFillBestOrder</code> will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur&rsquo;s launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, <code class="prettyprint">augur.api.Trade.publicFillBestOrderWithLimit</code> could be used instead.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
+<li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
+<li><strong><code class="prettyprint">p._tradeGroupId</code></strong> (string) &lt;optional&gt; ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be <code class="prettyprint">undefined</code>.)</li>
+<li><strong><code class="prettyprint">p._loopLimit</code></strong> (string) Maximum number of Fill Order operations to make.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -14184,7 +14461,7 @@ Goals:
 
 <h2 id="invalid-outcome">Invalid Outcome</h2>
 
-<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event does not fit any of the Outcomes set for that Market, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#categorical-market">Categorical Market</a> with 500 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [125, 125, 125, 125]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
+<p>If the <a href="#outcome">Outcome</a> of a <a href="#market">Market&rsquo;s</a> event does not fit any of the Outcomes set for that Market, or if the Market&rsquo;s question is worded in a way that is vague or does not have a clear answer, <a href="#reporters">Reporters</a> can <a href="#report">Report</a> its <a href="#tentative-outcome">Tentative Outcome</a> as Invalid. Additionally, if the Market is in a <a href="#dispute-round">Dispute Round</a>, users can <a href="#dispute-stake">Stake</a> <a href="#rep">REP</a> on Invalid as the Tentative Outcome, or if the Market has <a href="#fork">Forked</a>, users can migrate their REP to the <a href="#child-universe">Child Universe</a> where the Outcome is Invalid. If the Market&rsquo;s <a href="#final-outcome">Final Outcome</a> becomes Invalid, its <a href="#payout-set">Payout Set</a> will be the <a href="#number-of-ticks">Number of Ticks</a> divided evenly among each Outcome. For example, in a <a href="#categorical-market">Categorical Market</a> with 10,000 <a href="#tick">Ticks</a> and 4 potential Outcomes, the Payout Set would be [2500, 2500, 2500, 2500]. This is done to ensure that the holders for each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.</p>
 
 <h2 id="legacy-rep">Legacy REP</h2>
 
@@ -14224,51 +14501,13 @@ Goals:
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
-<p>A <a href="#market">Market&rsquo;s</a> Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between the <a href="#minimum-display-price">Minimum Display Price</a> and <a href="#maximum-display-price">Maximum Display Price</a> for that Market. It is also the amount of <a href="#atto-prefix">attoETH</a> that must be escrowed with the Market contract to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. <strong>A Market&rsquo;s Number of Ticks must be a multiple of its number of valid <a href="#outcome">Outcomes</a>.</strong> This is because each Outcome in the <a href="#payout-set">Payout Set</a> of an <a href="#invalid-outcome">Invalid</a> Market is set to the Number of Ticks divided by the number of Outcomes (in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>).</p>
+<p>A <a href="#market">Market&rsquo;s</a> Number of Ticks can be thought of as the number of possible prices, or <a href="#tick">Ticks</a>, between the <a href="#minimum-display-price">Minimum Display Price</a> and <a href="#maximum-display-price">Maximum Display Price</a> for that Market. It is also the amount of <a href="#atto-prefix">attoETH</a> that must be escrowed with the Market contract to purchase a single <a href="#complete-set">Complete Set</a> of indivisible <a href="#share">Shares</a> for a Market. Each Outcome in the <a href="#payout-set">Payout Set</a> of an <a href="#invalid-outcome">Invalid</a> Market is set to the Number of Ticks divided by the number of Outcomes (in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>). </p>
 
-<p>While it is possible for the <a href="#market-creator">Market Creator</a> to choose the Number of Ticks when creating the Market, this functionality is hidden from the user in the UI and default values are used. The default values are:</p>
-
-<table><thead>
-<tr>
-<th>Number of Outcomes</th>
-<th style="text-align: center">Number of Ticks</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>2</td>
-<td style="text-align: center">10,000</td>
-</tr>
-<tr>
-<td>3</td>
-<td style="text-align: center">10,002</td>
-</tr>
-<tr>
-<td>4</td>
-<td style="text-align: center">10,000</td>
-</tr>
-<tr>
-<td>5</td>
-<td style="text-align: center">10,000</td>
-</tr>
-<tr>
-<td>6</td>
-<td style="text-align: center">10,002</td>
-</tr>
-<tr>
-<td>7</td>
-<td style="text-align: center">10,003</td>
-</tr>
-<tr>
-<td>8</td>
-<td style="text-align: center">10,000</td>
-</tr>
-</tbody></table>
-
-<p>These values are chosen so that the prices per Share are more human-friendly. After Market <a href="#finalized-market">Finalization</a>, each winning Share can be Settled by sending it to the Market contract in exchange for an amount of attoETH equal to the Number of Ticks. In the event that the Market Finalizes as Invalid, each Share of the Market can be returned to the Market contract in exchange for an amount of attoETH equal to (Number of Ticks / Number of Outcomes).</p>
+<p>After Market <a href="#finalized-market">Finalization</a>, each winning Share can be Settled by sending it to the Market contract in exchange for an amount of attoETH equal to the Number of Ticks. In the event that the Market Finalizes as Invalid, each Share of the Market can be returned to the Market contract in exchange for an amount of attoETH equal to (Number of Ticks / Number of Outcomes). In cases where (Number of Ticks / Number of Outcomes) does not equal a whole number, the remainder will be subtracted equally from each Outcome and left on the Market contract as &ldquo;dust&rdquo; ETH. For example, if a 3-Outcome Market with no Creator Fee resolves to Invalid, the Payout Set would be [3333, 3333, 3333].</p>
 
 <p>The <a href="#atto-prefix">attoETH</a> yielded when a Complete Set of Shares is Settled is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.</p>
 
-<p>For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to <code class="prettyprint">[-10, 30]</code> and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.</p>
+<p>For Binary and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to <code class="prettyprint">[-10, 30]</code> and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.</p>
 
 <h2 id="open-interest">Open Interest</h2>
 
@@ -14324,7 +14563,7 @@ Goals:
 
 <p>For example, in a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
 
-<p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. (This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>.)</p>
+<p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>. (In cases where Number of Ticks / Outcomes is not a whole number, the remainder will be deducted from each Outcome in the Payout Set and left on the Market contract as &ldquo;dust&rdquo; ETH. For example, a 3-Outcome Market with no Creator Fee that resolves to Invalid will have a Payout Set of [3333, 3333, 3333].)</p>
 
 <p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a <a href="#short-position">Short Position</a>) and 1 (for a <a href="#long-position">Long Position</a>). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
 
@@ -14443,7 +14682,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>Most of our day-to-day conversation happens on <a href="https://discordapp.com/">Discord</a>. (We also have an IRC gateway in #augur on Freenode that is connected to our Discord chat!) Our Discord conversations are open. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. We love to hear feedback from people who are as excited as we are about Augur!</p>
 
-      </div>
+      </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="javascript">Code</a>
