@@ -255,7 +255,7 @@ After Market [Finalization](#finalized-market), each winning Share can be Settle
 
 The [attoETH](#atto-prefix) yielded when a Complete Set of Shares is Settled is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.
 
-For Binary and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to `[-10, 30]` and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.
+For Binary and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator, and must be evenly divisible by 2. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to `[-10, 30]` and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.
 
 ## Open Interest
 
