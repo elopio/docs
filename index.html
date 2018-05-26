@@ -2938,8 +2938,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"0.4"</span>
 
-<span class="c1">// buying: 5 asks, 1 from user, 2 with price too high</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">filterByPriceAndUserSortByPrice</span><span class="p">({</span>
+<span class="c1">// selling: 5 bids, 1 from user, 2 with price too low</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">filterAndSortByPrice</span><span class="p">({</span>
   <span class="na">singleOutcomeOrderBookSide</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">BID_0</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
@@ -2950,11 +2950,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
       <span class="na">amount</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
       <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
       <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="na">BID_3</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">amount</span><span class="p">:</span> <span class="s2">"7"</span><span class="p">,</span>
-      <span class="na">fullPrecisionPrice</span><span class="p">:</span> <span class="s2">"0.8"</span><span class="p">,</span>
-      <span class="na">owner</span><span class="p">:</span> <span class="s2">"0x33458506efb60601cb3e0585e1afcf0a8f6ae67b"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="na">BID_4</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">amount</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
@@ -2969,7 +2964,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">},</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="na">price</span><span class="p">:</span> <span class="s2">"0.6"</span><span class="p">,</span>
-  <span class="na">userAddress</span><span class="p">:</span> <span class="s2">"0x33458506efb60601cb3e0585e1afcf0a8f6ae67b"</span><span class="p">,</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
@@ -3249,9 +3243,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">shares</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
   <span class="na">shareBalances</span><span class="p">:</span> <span class="p">[</span><span class="s2">"0"</span><span class="p">,</span> <span class="s2">"5"</span><span class="p">],</span>
   <span class="na">tokenBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="na">userAddress</span><span class="p">:</span> <span class="s2">"0x111327d07fc17907b4db788e5adf2ed424addff6"</span><span class="p">,</span>
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
   <span class="na">price</span><span class="p">:</span> <span class="s2">"0.7"</span><span class="p">,</span>
   <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
@@ -3282,7 +3276,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="nl">sharesFilled</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
   <span class="na">settlementFees</span><span class="p">:</span> <span class="s2">"0.006"</span><span class="p">,</span>
   <span class="na">worstCaseFees</span><span class="p">:</span> <span class="s2">"0.009"</span><span class="p">,</span>
-  <span class="na">gasFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">otherSharesDepleted</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
   <span class="na">sharesDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">tokensDepleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
@@ -3605,9 +3598,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>(string) Price rescaled to [minPrice, maxPrice], as a base-10 string.</li>
 </ul>
 
-<h3 id="augur-trading-filterbypriceandusersortbyprice-p">augur.trading.filterByPriceAndUserSortByPrice(p)</h3>
+<h3 id="augur-trading-filterandsortbyprice-p">augur.trading.filterAndSortByPrice(p)</h3>
 
-<p>Accepts a <a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a> object, and filters out all <a href="#order">Orders</a> where the owner is <code class="prettyprint">p.userAddress</code> or the price is below <code class="prettyprint">p.price</code> (for <a href="#bid-order">Bid Orders</a>) or above <code class="prettyprint">p.price</code> (for <a href="#ask-order">Ask Orders</a>). Returns the remaining Orders sorted by <code class="prettyprint">p.price</code>. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.</p>
+<p>Accepts a <a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a> object, and filters out all <a href="#order">Orders</a> where the price is below <code class="prettyprint">p.price</code> (for <a href="#bid-order">Bid Orders</a>) or above <code class="prettyprint">p.price</code> (for <a href="#ask-order">Ask Orders</a>). Returns the remaining Orders sorted by <code class="prettyprint">p.price</code>. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -3618,7 +3611,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.singleOutcomeOrderBookSide</code></strong>  (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Bid Orders or Ask Orders for a particular <a href="#market">Market</a> and <a href="#outcome">Outcome</a>.</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p.price</code></strong>  (string) Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.userAddress</code></strong>  (string) User&rsquo;s Ethereum address to filter from Orders, as a 20-byte hexadecimal string.</li>
 </ul></li>
 </ul>
 
@@ -3881,9 +3873,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (number)  <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
 <li><strong><code class="prettyprint">p.shareBalances</code></strong>  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.</li>
 <li><strong><code class="prettyprint">p.tokenBalance</code></strong>  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.userAddress</code></strong>  (string)  The user&rsquo;s Ethereum address, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string)  This <a href="#market">Market&rsquo;s</a> minimum possible price, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string)  This Market&rsquo;s maximum possible price, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.numTicks</code></strong>  (string)  The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
 <li><strong><code class="prettyprint">p.price</code></strong>  (string|null)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.shares</code></strong>  (string) Number of Shares to trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.marketCreatorFeeRate</code></strong>  (string) The fee rate charged by the Market creator (e.g., pass in &ldquo;0.01&rdquo; if the fee is 1%), as a base-10 string.</li>
@@ -3919,7 +3911,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> for this Market, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.estimatedCost</code></strong> (string) &lt;optional&gt; Total cost (in ETH) of this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur&rsquo;s UI to group trades client-side.)</li>
 <li><strong><code class="prettyprint">p.doNotCreateOrders</code></strong>  (boolean) &lt;optional&gt; If set to true, this trade will only take existing orders off the book, not create new ones (default: false).</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -13565,11 +13556,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">sharesFilled</code></strong> (string) Number of Shares Filled by the trade.</li>
 <li><strong><code class="prettyprint">settlementFees</code></strong> (string) Projected Settlement Fees paid on this trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">gasFees</code></strong> (string) Projected gas fees paid on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">sharesDepleted</code></strong> (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">otherSharesDepleted</code></strong> (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">tokensDepleted</code></strong> (string) Projected number of tokens spent on this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">shareBalances</code></strong> (Array.&lt;string&gt;}  Projected final balances after the trade is complete, as an array of base-10 strings.</li>
+<li><strong><code class="prettyprint">worstCaseFees</code></strong> (string) Maximum amount of Settlement Fees to be paid, as a base-10 string.</li>
 </ul>
 
 <p><a name="SingleOutcomeOrderBook"></a></p>
