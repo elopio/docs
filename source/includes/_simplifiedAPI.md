@@ -1966,8 +1966,8 @@ augur.trading.denormalizePrice({
 // example output:
 "0.4"
 
-// buying: 5 asks, 1 from user, 2 with price too high
-augur.trading.filterByPriceAndUserSortByPrice({
+// selling: 5 bids, 1 from user, 2 with price too low
+augur.trading.filterAndSortByPrice({
   singleOutcomeOrderBookSide: {
     BID_0: {
       amount: "2",
@@ -1978,11 +1978,6 @@ augur.trading.filterByPriceAndUserSortByPrice({
       amount: "1",
       fullPrecisionPrice: "0.5",
       owner: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-    },
-    BID_3: {
-      amount: "7",
-      fullPrecisionPrice: "0.8",
-      owner: "0x33458506efb60601cb3e0585e1afcf0a8f6ae67b",
     },
     BID_4: {
       amount: "3",
@@ -1997,7 +1992,6 @@ augur.trading.filterByPriceAndUserSortByPrice({
   },
   orderType: 1,
   price: "0.6",
-  userAddress: "0x33458506efb60601cb3e0585e1afcf0a8f6ae67b",
 });
 // example output:
 [
@@ -2277,7 +2271,6 @@ augur.trading.simulateTrade({
   shares: "3",
   shareBalances: ["0", "5"],
   tokenBalance: "0",
-  userAddress: "0x111327d07fc17907b4db788e5adf2ed424addff6",
   minPrice: "0",
   maxPrice: "1",
   price: "0.7",
@@ -2596,9 +2589,9 @@ Rescales a price to its display range [minPrice, maxPrice]: displayPrice = norma
 
 * (string) Price rescaled to [minPrice, maxPrice], as a base-10 string.
 
-### augur.trading.filterByPriceAndUserSortByPrice(p)
+### augur.trading.filterAndSortByPrice(p)
 
-Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and filters out all [Orders](#order) where the owner is `p.userAddress` or the price is below `p.price` (for [Bid Orders](#bid-order)) or above `p.price` (for [Ask Orders](#ask-order)). Returns the remaining Orders sorted by `p.price`. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.
+Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and filters out all [Orders](#order) where the price is below `p.price` (for [Bid Orders](#bid-order)) or above `p.price` (for [Ask Orders](#ask-order)). Returns the remaining Orders sorted by `p.price`. Bid Orders are sorted descendingly, Ask Orders are sorted ascendingly.
 
 #### **Parameters:**
 
@@ -2606,7 +2599,6 @@ Accepts a [SingleOutcomeOrderBookSide](#SingleOutcomeOrderBookSide) object, and 
     * **`p.singleOutcomeOrderBookSide`**  (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Bid Orders or Ask Orders for a particular [Market](#market) and [Outcome](#outcome).
     * **`p.orderType`**  (number) Order type (0 for "buy", 1 for "sell").
     * **`p.price`**  (string) Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
-    * **`p.userAddress`**  (string) User's Ethereum address to filter from Orders, as a 20-byte hexadecimal string.
 
 #### **Returns:**
 
@@ -2795,7 +2787,6 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.outcome`**  (number)  [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
     * **`p.shareBalances`**  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.
     * **`p.tokenBalance`**  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.
-    * **`p.userAddress`**  (string)  The user's Ethereum address, as a 20-byte hexadecimal string.
     * **`p.minPrice`**  (string)  This [Market's](#market) minimum possible price, as a base-10 string.
     * **`p.maxPrice`**  (string)  This Market's maximum possible price, as a base-10 string.
     * **`p.price`**  (string|null)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
