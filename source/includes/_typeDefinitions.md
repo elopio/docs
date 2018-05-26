@@ -475,11 +475,11 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`sharesFilled`** (string) Number of Shares Filled by the trade.
 * **`settlementFees`** (string) Projected Settlement Fees paid on this trade, as a base-10 string.
-* **`gasFees`** (string) Projected gas fees paid on this trade, as a base-10 string.
 * **`sharesDepleted`** (string)  Projected number of Shares of the traded Outcome spent on this trade, as a base-10 string.
 * **`otherSharesDepleted`** (string) Projected number of Shares of the other (non-traded) Outcomes spent on this trade, as a base-10 string.
 * **`tokensDepleted`** (string) Projected number of tokens spent on this trade, as a base-10 string.
 * **`shareBalances`** (Array.&lt;string>}  Projected final balances after the trade is complete, as an array of base-10 strings.
+* **`worstCaseFees`** (string) Maximum amount of Settlement Fees to be paid, as a base-10 string.
 
 <a name="SingleOutcomeOrderBook"></a>
 ### SingleOutcomeOrderBook  (Object)

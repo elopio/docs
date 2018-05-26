@@ -2273,6 +2273,7 @@ augur.trading.simulateTrade({
   tokenBalance: "0",
   minPrice: "0",
   maxPrice: "1",
+  numTicks: "10000",
   price: "0.7",
   marketCreatorFeeRate: "0",
   reportingFeeRate: "0.01",
@@ -2303,7 +2304,6 @@ augur.trading.simulateTrade({
   sharesFilled: "2",
   settlementFees: "0.006",
   worstCaseFees: "0.009",
-  gasFees: "0",
   otherSharesDepleted: "3",
   sharesDepleted: "0",
   tokensDepleted: "0",
@@ -2789,6 +2789,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
     * **`p.tokenBalance`**  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.
     * **`p.minPrice`**  (string)  This [Market's](#market) minimum possible price, as a base-10 string.
     * **`p.maxPrice`**  (string)  This Market's maximum possible price, as a base-10 string.
+    * **`p.numTicks`**  (string)  The number of [Ticks](#tick) for this [Market](#market).
     * **`p.price`**  (string|null)  Limit price for this Order (i.e. the worst price the user will accept), as a base-10 string.
     * **`p.shares`**  (string) Number of Shares to trade, as a base-10 string.
     * **`p.marketCreatorFeeRate`**  (string) The fee rate charged by the Market creator (e.g., pass in "0.01" if the fee is 1%), as a base-10 string.
@@ -2817,7 +2818,6 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
-    * **`p.estimatedCost`** (string) &lt;optional> Total cost (in ETH) of this trade, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
     * **`p.doNotCreateOrders`**  (boolean) &lt;optional> If set to true, this trade will only take existing orders off the book, not create new ones (default: false).
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
