@@ -4087,6 +4087,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="kc">true</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownShareToken</span><span class="p">({</span> 
+  <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x1116eaefcfaf7ea1e17c4768a554d57800699444"</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownShareToken</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isKnownShareToken</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="kc">true</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownUniverse</span><span class="p">({</span> 
   <span class="na">_universe</span><span class="p">:</span> <span class="s2">"0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">isKnownUniverse</span><span class="p">)</span> <span class="p">{</span> 
@@ -4116,6 +4124,27 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(boolean) <code class="prettyprint">true</code> if the specified Crowdsourcer is in Augur&rsquo;s list of known Crowdsoucers, or <code class="prettyprint">false</code> otherwise.</li>
+</ul>
+
+<h3 id="augur-api-augur-isknownsharetoken-p-callback">augur.api.Augur.isKnownShareToken(p, callback)</h3>
+
+<p>Augur keeps track of its Share Tokens, or <a href="#shares">Shares</a>, internally. This function returns whether the specified Share Token is a contract address that is known to Augur.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p._token</code></strong> (string) Share Token contract address, as a 20-byte hexadecimal value.</li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if the specified Share Token is in Augur&rsquo;s list of known Share Tokens, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-augur-isknownuniverse-p-callback">augur.api.Augur.isKnownUniverse(p, callback)</h3>
@@ -13854,6 +13883,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-constants-minimum_trade_size-bignumber">augur.constants.MINIMUM_TRADE_SIZE (BigNumber)</h3>
 
 <p>Minimum number of attoShares that can be bought/sold in a trade.</p>
+
+<h3 id="augur-constants-one-bignumber">augur.constants.ONE (BigNumber)</h3>
+
+<p>A BigNumber with the value of 1.</p>
 
 <h3 id="augur-constants-order_state-object">augur.constants.ORDER_STATE (Object)</h3>
 
