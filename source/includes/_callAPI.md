@@ -48,6 +48,14 @@ augur.api.Augur.isKnownCrowdsourcer({
 // example output:
 true
 
+augur.api.Augur.isKnownShareToken({ 
+  _universe: "0x1116eaefcfaf7ea1e17c4768a554d57800699444"
+}, function (error, isKnownShareToken) { 
+  console.log(isKnownShareToken); 
+});
+// example output:
+true
+
 augur.api.Augur.isKnownUniverse({ 
   _universe: "0x22d6eaefcfaf7ea1e17c4768a554d57800699ecc"
 }, function (error, isKnownUniverse) { 
@@ -71,6 +79,20 @@ Augur keeps track of its [Crowdsourcers](#crowdsourcer) internally. This functio
 #### **Returns:**
 
 * (boolean) `true` if the specified Crowdsourcer is in Augur's list of known Crowdsoucers, or `false` otherwise.
+
+### augur.api.Augur.isKnownShareToken(p, callback)
+
+Augur keeps track of its Share Tokens, or [Shares](#shares), internally. This function returns whether the specified Share Token is a contract address that is known to Augur.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.  
+  * **`p._token`** (string) Share Token contract address, as a 20-byte hexadecimal value.
+* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
+
+#### **Returns:**
+
+* (boolean) `true` if the specified Share Token is in Augur's list of known Share Tokens, or `false` otherwise.
 
 ### augur.api.Augur.isKnownUniverse(p, callback)
 

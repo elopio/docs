@@ -83,6 +83,10 @@ Block number up to which Augur Node will scan for logged events emitted from Aug
 
 Minimum number of attoShares that can be bought/sold in a trade.
 
+### augur.constants.ONE (BigNumber)
+
+A BigNumber with the value of 1.
+
 ### augur.constants.ORDER_STATE (Object)
 
 Object that acts as an enum containing the constants used to represent each of the states an [Order](#order) can be in.
