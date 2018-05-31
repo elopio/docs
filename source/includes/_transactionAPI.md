@@ -369,8 +369,24 @@ augur.api.Cash.decreaseApproval({
 });
 
 augur.api.Cash.increaseApproval({
-  _spender: _augurContractAddress,
+  _spender: "",
   _addedValue: "0x3e8",
+  tx: { 
+    to: cashContractAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.Cash.withdrawEtherToIfPossible({
+  _to: "0x555e64edbce62bde48a14b04f0b557b974a25555",
+  _amount: "0x3e8",
   tx: { 
     to: cashContractAddress,
     gas: "0x632ea0" 
@@ -437,6 +453,27 @@ Increases the amount of [Cash](#cash) `p._spender` is approved to spend on behal
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
     * **`p._addedValue`**  (string) Number of [attoCash](#atto-prefix) by which to increase the amount `p._spender` may spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.Cash.withdrawEtherToIfPossible(p)
+
+Withdraws a certain amount of the user's [Cash](#cash) to a particular address as ETH (as long as the user has the amount of Cash specified).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._to`**  (string) Ethereum address to transfer attoETH to, as a 20-byte hexadecimal value.
+    * **`p._amount`**  (string) Amount of [attoETH](#atto-prefix) to transfer, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
