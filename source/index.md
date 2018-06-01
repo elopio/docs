@@ -40,6 +40,8 @@ Augur has its own dedicated [Stack Exchange](https://augur.stackexchange.com), w
 Getting Started
 ---------------
 
+To use Augur, follow the instructions for installing the [Augur App](https://github.com/AugurProject/augur-app).
+
 If you would like to help develop Augur, you'll need to build the client from source. To do this, first install version 8 of [Node.js](https://nodejs.org/) (note that the version number is important), and [Git](https://git-scm.com/downloads).
 
 Next, clone the [Augur GitHub repository](https://github.com/AugurProject/augur) by opening a terminal window and typing:
