@@ -395,6 +395,9 @@ Authentication metadata for raw transactions.
 * **`fullPrecisionAmount`** (string) Full-precision (un-rounded) number of shares to trade, as a base-10 number.
 * **`tokensEscrowed`** (string) Number of the order maker's tokens held in escrow, as a base-10 number.
 * **`sharesEscrowed`** (string) Number of the order maker's shares held in escrow, as a base-10 number.
+* **`canceledBlockNumber`** (number|null) Block number in which the order cancellation took place (if any).
+* **`canceledTransactionHash`** (string|null) Transaction hash in which the order cancellation took place (if any).
+* **`canceledTime`** (number|null) Unix timestamp when the order was cancelled (if any).
 
 <a name="ORDER_STATE"></a>
 ### ORDER_STATE  (Object)
