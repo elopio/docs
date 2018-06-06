@@ -27,9 +27,9 @@ Object that acts as an enum containing the following values:
 
 Object that acts as an enum for different types of smart contracts.
 
-### augur.constants.CREATE_BINARY_MARKET_GAS (string)
+### augur.constants.CREATE_YES_NO_MARKET_GAS (string)
 
-Gas limit used when creating a new [Binary Market](#binary-market), as a hexadecimal string.
+Gas limit used when creating a new [Yes/No Market](#yes-no-market), as a hexadecimal string.
 
 ### augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)
 

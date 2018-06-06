@@ -114,7 +114,7 @@ Developers will need to grant the Augur.sol contract approval to spend [Cash](#c
 
 It is important to note that Ethereum nodes discard all transaction return values, which causes the `callReturn` property of the object passed into a transaction's `onSuccess` callback to always be `null`. As a result, there is no way to get a transaction's return value.
 
-There is, however, a workaround for this issue when calling functions that create [Markets](#market), such as `augur.api.Universe.createBinaryMarket`, `augur.api.Universe.createCategoricalMarket`, and `augur.api.Universe.createScalarMarket`. The function `augur.createMarket.getMarketFromCreateMarketReceipt` can be called in the `onSuccess` callback of these functions to retrieve the Ethereum contract address of the newly-created Market. `augur.createMarket.getMarketFromCreateMarketReceipt` does this by querying the Augur Node for the event log associated with the new Market's creation.
+There is, however, a workaround for this issue when calling functions that create [Markets](#market), such as `augur.api.Universe.createYesNoMarket`, `augur.api.Universe.createCategoricalMarket`, and `augur.api.Universe.createScalarMarket`. The function `augur.createMarket.getMarketFromCreateMarketReceipt` can be called in the `onSuccess` callback of these functions to retrieve the Ethereum contract address of the newly-created Market. `augur.createMarket.getMarketFromCreateMarketReceipt` does this by querying the Augur Node for the event log associated with the new Market's creation.
 
 Using Transact Directly
 -----------------------
@@ -2879,7 +2879,7 @@ var _extraInfo = {
   "tags": [ "SpaceX", "spaceflight" ],
   "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."
 };
-augur.api.Universe.createBinaryMarket({
+augur.api.Universe.createYesNoMarket({
   _endTime: "0x5c2b1e00",
   _feePerEthInWei: "0x123456",
   _denominationToken: cashAddress,
@@ -2890,7 +2890,7 @@ augur.api.Universe.createBinaryMarket({
   tx: {
     to: universeAddress,
     value: ethCostToCreateMarket,
-    gas: augur.constants.CREATE_BINARY_MARKET_GAS
+    gas: augur.constants.CREATE_YES_NO_MARKET_GAS
   },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
@@ -3135,9 +3135,9 @@ augur.api.Universe.redeemStake({
 ```
 Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
-### augur.api.Universe.createBinaryMarket(p)
+### augur.api.Universe.createYesNoMarket(p)
 
-Creates a new [Binary Market](#binary-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+Creates a new [Yes/No Market](#yes-no-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
 #### Parameters:
 
@@ -3155,7 +3155,7 @@ Creates a new [Binary Market](#binary-market). This transaction will trigger a [
     * **`p.tx`**  (Object) Transaction object.
         * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
         * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-        * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_BINARY_MARKET_GAS`.
+        * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_YES_NO_MARKET_GAS`.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.    
     * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
     * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.

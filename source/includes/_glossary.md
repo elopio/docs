@@ -23,9 +23,9 @@ Atto- is a unit prefix in the metric system denoting a factor of 10^−18, or 0.
 
 A Bid Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to buy [Shares](#share) of one or more [Outcomes](#outcome). This is the opposite of an [Ask Order](#ask-order).
 
-## Binary Market
+## Yes/No Market
 
-A Binary Market is a [Market](#market) with only two [Outcomes](#outcome) (as well as [Invalid](#invalid-outcome), which is always a possible Outcome). Binary Markets are for yes-or-no questions; if more potential Outcomes are needed, a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market should be used.
+A Yes/No Market is a [Market](#market) with only two [Outcomes](#outcome) (as well as [Invalid](#invalid-outcome), which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market should be used.
 
 ## Cash
 
@@ -33,7 +33,7 @@ Cash is an ERC-20 token that is used within Augur's Solidity smart contracts and
 
 ## Categorical Market
 
-A Categorical Market is a [Market](#market) with more than 2 potential [Outcomes](#outcome), but no more than 8. As with all Markets, [Invalid](#invalid-outcome) is also a potential Outcome, but it does not count toward the 8-Outcome maximum. Categorical Markets are best for multiple choice questions, such as "Which team will win Tournament X?" or "What color tie will the U.S. President wear at the next presidential press conference?". If a Market is based around a simple yes-or-no question, it is better to use a [Binary Market](#binary-market). For a Market about what a particular stock price will be on a given date, a [Scalar Market](#scalar-market) should be used, as 8 potential outcomes would not be sufficient.
+A Categorical Market is a [Market](#market) with more than 2 potential [Outcomes](#outcome), but no more than 8. As with all Markets, [Invalid](#invalid-outcome) is also a potential Outcome, but it does not count toward the 8-Outcome maximum. Categorical Markets are best for multiple choice questions, such as "Which team will win Tournament X?" or "What color tie will the U.S. President wear at the next presidential press conference?". If a Market is based around a simple yes-or-no question, it is better to use a [Yes/No Market](#yes-no-market). For a Market about what a particular stock price will be on a given date, a [Scalar Market](#scalar-market) should be used, as 8 potential outcomes would not be sufficient.
 
 ## Challenge
 
@@ -225,11 +225,11 @@ A Locked Universe is a [Universe](#universe) that had a [Fork](#fork) occur with
 
 ## Market
 
-A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#share) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Binary](#binary-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
+A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the [Outcome](#outcome) of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed [Order Book](#order-book), which will allow users to buy and sell [Shares](#share) of different Outcomes of the Market. The [Market Creator](#market-creator) can set the [Creator Fee](#creator-fee) for the Market, which, once set, cannot be changed, and will determine their cut of all Shares [Settled](#settlement) on the Market. The Market Creator also needs to specify a [Max Price](#maximum-display-price) and a [Min Price](#minimum-display-price) as well as the [Number of Ticks](#number-of-ticks) for the Market. There are three different Market types supported by Augur: [Yes/No](#yes-no-market), [Categorical](#categorical-market), and [Scalar](#scalar-market).
 
 ## Market Creator
 
-A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can set the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#share) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., [Binary](#binary-market), [Categorical](#categorical-market), or [Scalar](#scalar-market)), the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
+A Market Creator is a user who created a [Market](#market). They are charged a small fee to make a new Market but can set the [Creator Fee](#creator-fee) for [Settlement](#settlement) of [Shares](#share) on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of [Settlement Fees](#settlement-fees) for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., [Yes/No](#yes-no-market), [Categorical](#categorical-market), or [Scalar](#scalar-market)), the number of [Outcomes](#outcome), [End Time](#end-time), and a [Topic](#topic).
 
 ## Market Creator Mailbox
 
@@ -241,11 +241,11 @@ Market Resolution is the process of [Finalizing](#finalized-market) a [Market](#
 
 ## Maximum Display Price
 
-The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price allowed for a [Share](#share) on a [Market](#market). For [Binary](#binary-market) or [Categorical](#categorical-market) Markets this value is always 1, as in 1 ETH. [Scalar](#scalar-market) Markets' Maximum Display Price would be the top end of the range set by the [Market Creator](#market-creator).
+The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price allowed for a [Share](#share) on a [Market](#market). For [Yes/No](#yes-no-market) or [Categorical](#categorical-market) Markets this value is always 1, as in 1 ETH. [Scalar](#scalar-market) Markets' Maximum Display Price would be the top end of the range set by the [Market Creator](#market-creator).
 
 ## Minimum Display Price
 
-The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price allowed for a [Share](#share) on a [Market](#market). For [Binary](#binary-market) or [Categorical](#categorical-market) Markets this value is always 0, as in 0 ETH. [Scalar](#scalar-market) Markets' Minimum Display Price would be the bottom end of the range set by the [Market Creator](#market-creator).
+The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price allowed for a [Share](#share) on a [Market](#market). For [Yes/No](#yes-no-market) or [Categorical](#categorical-market) Markets this value is always 0, as in 0 ETH. [Scalar](#scalar-market) Markets' Minimum Display Price would be the bottom end of the range set by the [Market Creator](#market-creator).
 
 ## Number of Ticks
 
@@ -255,7 +255,7 @@ After Market [Finalization](#finalized-market), each winning Share can be Settle
 
 The [attoETH](#atto-prefix) yielded when a Complete Set of Shares is Settled is what [Settlement Fees](#settlement-fees) are extracted from prior to paying out traders for their closed [Positions](#position). Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.
 
-For Binary and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator, and must be evenly divisible by 2. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to `[-10, 30]` and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.
+For Yes/No and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator, and must be evenly divisible by 2. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to `[-10, 30]` and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.
 
 ## Open Interest
 
@@ -309,11 +309,11 @@ The Payout Distribution Hash is a SHA-3 hash of the [Payout Set](#payout-set). W
 
 A Payout Set, sometimes referred to as "Payout Numerators" in Augur's smart contract functions, is an array with a length equal to the number of [Outcomes](#outcome) for a [Market](#market). Each value in the array is required to be 0 or a positive number that does not exceed the [Number of Ticks](#number-of-ticks) for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. 
 
-For example, in a [Binary Market](#binary-market) with 1000 [Ticks](#tick), a [Report](#report) that Stakes [REP](#rep) on Outcome `0` would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each [Share](#share) when [Finalized](#finalized-market). In the example above, the Payout Numerators are the values 1000 and 0, and only [Shares](#share) of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is `0`. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a [Payout Distribution Hash](#payout-distribution-hash).
+For example, in a [Yes/No Market](#yes-no-market) with 1000 [Ticks](#tick), a [Report](#report) that Stakes [REP](#rep) on Outcome `0` would submit a Payout Set that looks like `[1000, 0]`. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each [Share](#share) when [Finalized](#finalized-market). In the example above, the Payout Numerators are the values 1000 and 0, and only [Shares](#share) of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is `0`. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a [Payout Distribution Hash](#payout-distribution-hash).
 
-The Payout Set for a [Categorical Market](#categorical-market) is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like `[0, 0, 8000, 0, 0, 0, 0, 0]`. The same Categorical Market with an [Invalid Outcome](#invalid-outcome) would have a Payout Set like `[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]`. This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement). (In cases where Number of Ticks / Outcomes is not a whole number, the remainder will be deducted from each Outcome in the Payout Set and left on the Market contract as "dust" ETH. For example, a 3-Outcome Market with no Creator Fee that resolves to Invalid will have a Payout Set of [3333, 3333, 3333].)
+The Payout Set for a [Categorical Market](#categorical-market) is similar to that of a Yes/No Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like `[0, 0, 8000, 0, 0, 0, 0, 0]`. The same Categorical Market with an [Invalid Outcome](#invalid-outcome) would have a Payout Set like `[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]`. This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of [Share](#share) in the Market receive the same payout during [Settlement](#settlement). (In cases where Number of Ticks / Outcomes is not a whole number, the remainder will be deducted from each Outcome in the Payout Set and left on the Market contract as "dust" ETH. For example, a 3-Outcome Market with no Creator Fee that resolves to Invalid will have a Payout Set of [3333, 3333, 3333].)
 
-The Payout Set for a [Scalar Market](#scalar-market) is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a [Short Position](#short-position)) and 1 (for a [Long Position](#long-position)). Suppose that a Scalar Market exists with $0 as the [Minimum Display Price](#minimum-display-price), $100 as the [Maximum Display Price](#maximum-display-price), 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:
+The Payout Set for a [Scalar Market](#scalar-market) is determined differently than for Yes/No Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a [Short Position](#short-position)) and 1 (for a [Long Position](#long-position)). Suppose that a Scalar Market exists with $0 as the [Minimum Display Price](#minimum-display-price), $100 as the [Maximum Display Price](#maximum-display-price), 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:
 
 1. Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.
 2. Scale the reported outcome to be between 0 and 1 by dividing by (maxPrice - minPrice): 75 / (100 - 0) = 0.75.
@@ -356,7 +356,7 @@ Any [Settlement Fees](#settlement-fees) (in ETH) collected during a [Fee Window]
 
 ## Scalar Market
 
-A Scalar Market is a [Market](#market) with a wide range of potential [Outcomes](#outcome). An example of a Scalar Market would be "According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?". In this example Market, the [minDisplayPrice](#minimum-display-price) might be set to $0 and the [maxDisplayPrice](#maximum-display-price) to $500. This would allow the Market to [Settle](#settlement) on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a [Binary](#binary-market) or [Categorical](#categorical-market) Market.
+A Scalar Market is a [Market](#market) with a wide range of potential [Outcomes](#outcome). An example of a Scalar Market would be "According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?". In this example Market, the [minDisplayPrice](#minimum-display-price) might be set to $0 and the [maxDisplayPrice](#maximum-display-price) to $500. This would allow the Market to [Settle](#settlement) on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a [Yes/No](#yes-no-market) or [Categorical](#categorical-market) Market.
 
 ## Settlement
 
@@ -380,9 +380,9 @@ A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outc
 
 Opening a Short Position, or shorting, is the selling of a security that is not owned by the seller. Shorting is done with the belief that a security's price will decrease in the future, allowing it to be bought back at a lower price to make a profit.
 
-In Augur, betting on the "No" [Outcome](#outcome) of a [Binary Market](#binary-market) is done by shorting the "Yes" Outcome. This effectively means the user is selling "Yes" [Shares](#share) they do not own. For [Binary Markets](#binary-market) and [Scalar Markets](#scalar-market), these are listed as negative quantities of Shares on the Portfolio:Positions view of Augur's user interface.
+In Augur, betting on the "No" [Outcome](#outcome) of a [Yes/No Market](#yes-no-market) is done by shorting the "Yes" Outcome. This effectively means the user is selling "Yes" [Shares](#share) they do not own. For [Yes/No Markets](#yes-no-market) and [Scalar Markets](#scalar-market), these are listed as negative quantities of Shares on the Portfolio:Positions view of Augur's user interface.
 
-Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a [Complete Set](#complete-set) is a Share of every Outcome in a Market. For example, suppose a user thinks the "Yes" Outcome of a Binary Market is unlikely to happen and expects the price of a "Yes" Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of "Yes" costs 0.55 ETH, a Short Position in 1 Share of the "Yes" Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.
+Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a [Complete Set](#complete-set) is a Share of every Outcome in a Market. For example, suppose a user thinks the "Yes" Outcome of a Yes/No Market is unlikely to happen and expects the price of a "Yes" Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of "Yes" costs 0.55 ETH, a Short Position in 1 Share of the "Yes" Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.
 
 For more information on trading, please refer to the [Trading](#trading) section.
 

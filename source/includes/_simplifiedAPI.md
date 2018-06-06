@@ -459,7 +459,7 @@ var _extraInfo = {
   "tags": [ "Stocks", "Microsoft" ],
   "longDescription": ""
 };
-augur.createMarket.createBinaryMarket({
+augur.createMarket.createYesNoMarket({
   universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
   _endTime: 1546300799,
   _feePerEthInWei: 1193046,
@@ -620,15 +620,15 @@ augur.createMarket.getMarketFromCreateMarketReceipt(
 // example output: 
 "0x5e05e281a4564077985debdb91159a825a6774d3"
 ```
-### augur.createMarket.createBinaryMarket(p)
+### augur.createMarket.createYesNoMarket(p)
 
-Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Universe in which to create a Binary Market.
-    * **`p._endTime`**  (number) Binary Market expiration timestamp, in seconds.
+    * **`p.universe`**  (string) Universe in which to create a Yes/No Market.
+    * **`p._endTime`**  (number) Yes/No Market expiration timestamp, in seconds.
     * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
     * **`p._denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
     * **`p._designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
@@ -636,9 +636,9 @@ Creates a [Binary Market](#binary-market) in a specified [Universe](#universe). 
     * **`p._description`**  (string) Description of the Market, as a UTF8 string.
     * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.
-    * **`p.onSuccess`**  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.
-    * **`p.onFailed`**  (function) Called if/when the createBinaryMarket transaction fails.
+    * **`p.onSent`**  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.
+    * **`p.onSuccess`**  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.
+    * **`p.onFailed`**  (function) Called if/when the createYesNoMarket transaction fails.
 
 #### **Returns:**
 
@@ -962,7 +962,7 @@ augur.markets.getMarketsInfo({
   1: {
     id: "0x0000000000000000000000000000000000000002",
     universe: "0x000000000000000000000000000000000000000b",
-    marketType: "binary",
+    marketType: "yesNo",
     numOutcomes: 2,
     minPrice: "0",
     maxPrice: "1",
@@ -989,7 +989,7 @@ augur.markets.getMarketsInfo({
     endTime: 1506573480,
     finalizationBlockNumber: null,
     finalizationTime: null,
-    description: "This is a binary test market created by b0b.",
+    description: "This is a yesNo test market created by b0b.",
     scalarDenomination: null,
     details: null,
     designatedReporter: "0x0000000000000000000000000000000000000b0b",

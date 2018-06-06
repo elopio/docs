@@ -131,12 +131,12 @@ Serves as an enum for the state of a Dispute Token.
 * **`marketId`** (string) Ethereum address of the Market, as a hexadecimal string.
 * **`payout0`** (number|null) Payout numerator 0 of the Dispute Token's payout set.
 * **`payout1`** (number|null) Payout numerator 1 of the Dispute Token's payout set.
-* **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
-* **`payout3`** (number|null) Payout numerator 3 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
-* **`payout4`** (number|null) Payout numerator 4 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
-* **`payout5`** (number|null) Payout numerator 5 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
-* **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
-* **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Binary and Scalar Markets.)
+* **`payout2`** (number|null) Payout numerator 2 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
+* **`payout3`** (number|null) Payout numerator 3 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
+* **`payout4`** (number|null) Payout numerator 4 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
+* **`payout5`** (number|null) Payout numerator 5 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
+* **`payout6`** (number|null) Payout numerator 6 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
+* **`payout7`** (number|null) Payout numerator 7 of the Dispute Token's payout set. (Set to null for Yes/No and Scalar Markets.)
 * **`isInvalid`** (boolean|number) Whether the Market was determined to be invalid.
 * **`balance`** (string) Dispute Token balance the owner has staked, in ETH.
 * **`winningToken`** (boolean|null) Index of the Payout Numerator that was determined to be the Market's Final Outcome.
@@ -304,10 +304,10 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`id`** (string) Address of a Market, as a hexadecimal string.
 * **`universe`** (string) Address of a Universe, as a hexadecimal string.
-* **`marketType`** (string) Type of Market ("binary", "categorical", or "scalar").
+* **`marketType`** (string) Type of Market ("yesNo", "categorical", or "scalar").
 * **`numOutcomes`** (number) Total possible Outcomes for the Market.
-* **`minPrice`** (string) Minimum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
-* **`maxPrice`** (string) Maximum price allowed for a share on a Market, in ETH. For binary & categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
+* **`minPrice`** (string) Minimum price allowed for a share on a Market, in ETH. For Yes/No & Categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.
+* **`maxPrice`** (string) Maximum price allowed for a share on a Market, in ETH. For Yes/No & Categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.
 * **`cumulativeScale`** (string) Difference between maxPrice and minPrice.
 * **`author`** (string) Ethereum address of the creator of the Market, as a hexadecimal string.
 * **`creationTime`** (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.
@@ -598,7 +598,7 @@ Serves as an enum for the state of a Market.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (string) Quantity of shares currently owned by the user.
-* **`numSharesAdjusted`** (string) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.
+* **`numSharesAdjusted`** (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.
 * **`realizedProfitLoss`** (string) AttoETH profit or loss the user took upon closing this position.
 * **`unrealizedProfitLoss`** (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.
 * **`averagePrice`** (string) Average price in attoETH paid to acquire this position.

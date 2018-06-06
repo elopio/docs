@@ -6,7 +6,7 @@ The Augur UI offers users the best prices first when displaying the Order Book o
 
 Trading Example
 ---------------
-Let's use an example [Binary Market](#binary-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#share) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus gas used to send the transaction.
+Let's use an example [Yes/No Market](#yes-no-market) trading on the "super big event" coming up. For this example, we want to go long on `Outcome A`. We would submit a trade request to buy `100` [Shares](#share) of `Outcome A` with a limit price of `0.5 ETH`, which will cost `50.0 ETH` plus gas used to send the transaction.
 
 If there are Orders on the Order Book that match our request for `100` Shares of `Outcome A` at a price of `0.5 ETH`, or cheaper, then Augur will fill those Orders. We will now own `100` Shares of `Outcome A` and we will have lost `50.0 ETH` plus gas cost.
 
