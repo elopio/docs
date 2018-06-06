@@ -2874,36 +2874,6 @@ var universeAddress = "0x1f732847fbbcc46ffe859f28e916d993b2b08831";
 var ethCostToCreateMarket = "0x58d15e17628000"; 
 // Use the Cash contract for `p._denominationToken` when creating new Markets.
 var cashAddress = "0xd2ee83a8a2a904181ccfddd8292f178614062aa0";
-var _extraInfo = {
-  "resolutionSource": "http://www.spacex.com",
-  "tags": [ "SpaceX", "spaceflight" ],
-  "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."
-};
-augur.api.Universe.createYesNoMarket({
-  _endTime: "0x5c2b1e00",
-  _feePerEthInWei: "0x123456",
-  _denominationToken: cashAddress,
-  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
-  _topic: "space",
-  _description: "Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?",
-  _extraInfo: JSON.stringify(_extraInfo),
-  tx: {
-    to: universeAddress,
-    value: ethCostToCreateMarket,
-    gas: augur.constants.CREATE_YES_NO_MARKET_GAS
-  },
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log("onSent result:", result); },
-  onSuccess: function (result) {
-    console.log("onSuccess result:", result);
-    // Call the function `augur.createMarket.getMarketFromCreateMarketReceipt` 
-    // to retrieve new Market's address
-  },
-  onFailed: function (result) { console.log("onFailed result:", result); },
-});
 
 var _extraInfo = {
   "resolutionSource": "http://www.espn.com",
@@ -2978,6 +2948,37 @@ augur.api.Universe.createScalarMarket({
     to: universeAddress,
     value: ethCostToCreateMarket,
     gas: augur.constants.CREATE_SCALAR_MARKET_GAS
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log("onSent result:", result); },
+  onSuccess: function (result) {
+    console.log("onSuccess result:", result);
+    // Call the function `augur.createMarket.getMarketFromCreateMarketReceipt` 
+    // to retrieve new Market's address
+  },
+  onFailed: function (result) { console.log("onFailed result:", result); },
+});
+
+var _extraInfo = {
+  "resolutionSource": "http://www.spacex.com",
+  "tags": [ "SpaceX", "spaceflight" ],
+  "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."
+};
+augur.api.Universe.createYesNoMarket({
+  _endTime: "0x5c2b1e00",
+  _feePerEthInWei: "0x123456",
+  _denominationToken: cashAddress,
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "space",
+  _description: "Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?",
+  _extraInfo: JSON.stringify(_extraInfo),
+  tx: {
+    to: universeAddress,
+    value: ethCostToCreateMarket,
+    gas: augur.constants.CREATE_YES_NO_MARKET_GAS
   },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
@@ -3135,36 +3136,6 @@ augur.api.Universe.redeemStake({
 ```
 Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
-### augur.api.Universe.createYesNoMarket(p)
-
-Creates a new [Yes/No Market](#yes-no-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
-
-#### Parameters:
-
-* **`p`** (Object) Parameters object.
-    * **`p._endTime`**  (string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as a hexadecimal string.
-    * **`p._feePerEthInWei`**  (string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as a hexadecimal string.
-    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
-    * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
-    * **`p._topic`**  (string) Market [Topic](#topic).
-    * **`p._description`**  (string) Description of the Market event.
-    * **`p._extraInfo`**  (string) Stringified JSON object containing the following keys:
-        * **`p._extraInfo.resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
-        * **`p._extraInfo.tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
-        * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
-    * **`p.tx`**  (Object) Transaction object.
-        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
-        * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
-        * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_YES_NO_MARKET_GAS`.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.    
-    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market. (See example code.)
-
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
 ### augur.api.Universe.createCategoricalMarket(p)
@@ -3258,6 +3229,36 @@ Creates a new [Scalar Market](#scalar-market). This transaction will trigger a [
 #### **Returns:**
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market.
+
+### augur.api.Universe.createYesNoMarket(p)
+
+Creates a new [Yes/No Market](#yes-no-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+
+#### Parameters:
+
+* **`p`** (Object) Parameters object.
+    * **`p._endTime`**  (string) Unix timestamp for the [End Time](#end-time) of the [Market](#market), as a hexadecimal string.
+    * **`p._feePerEthInWei`**  (string) [Creator Fee](#creator-fee) (in Wei) that is collected for every 1 Ether worth of [Shares](#share) [Settled](#settlement), as a hexadecimal string.
+    * **`p._denominationToken`**  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the [Cash](#cash) [contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol) in Augur's smart contracts), but Augur is expected to support other tokens in the future.
+    * **`p._designatedReporterAddress`**  (string) Ethereum address of the [Designated Reporter](#designated-reporter).
+    * **`p._topic`**  (string) Market [Topic](#topic).
+    * **`p._description`**  (string) Description of the Market event.
+    * **`p._extraInfo`**  (string) Stringified JSON object containing the following keys:
+        * **`p._extraInfo.resolutionSource`**  (string) Source that should be referenced when determining the [Outcome](#outcome) of a Market.
+        * **`p._extraInfo.tags`**  (Array.&lt;string>) Keywords used to tag the Market (maximum of 2).
+        * **`p._extraInfo.longDescription`**  (string) Additional information not included in `p._description`.
+    * **`p.tx`**  (Object) Transaction object.
+        * **`p.tx.to`**  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.
+        * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to create the Market, as a hexadecimal string. This can be obtained by calling `augur.createMarket.getMarketCreationCost` and multiplying the `etherRequiredToCreateMarket` value that's returned by 10<sup>18</sup>.
+        * **`p.tx.gas`**  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant `augur.constants.CREATE_YES_NO_MARKET_GAS`.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.    
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, `augur.createMarket.getMarketFromCreateMarketReceipt` can be called from within the `onSuccess` callback to retrieve the Ethereum address of the newly-created Market. (See example code.)
 
 ### augur.api.Universe.getInitialReportStakeSize(p, callback)
 

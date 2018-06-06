@@ -23,10 +23,6 @@ Atto- is a unit prefix in the metric system denoting a factor of 10^−18, or 0.
 
 A Bid Order is an [Order](#order) indicating the desire of the [Order Creator](#order-creator) to buy [Shares](#share) of one or more [Outcomes](#outcome). This is the opposite of an [Ask Order](#ask-order).
 
-## Yes/No Market
-
-A Yes/No Market is a [Market](#market) with only two [Outcomes](#outcome) (as well as [Invalid](#invalid-outcome), which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market should be used.
-
 ## Cash
 
 Cash is an ERC-20 token that is used within Augur's Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur's functionality. Users do not interact directly with Cash tokens in Augur.
@@ -419,3 +415,7 @@ Once a [Designated Report](#designated-report) or [First Public Report](#first-p
 ## Winning Universe
 
 When a [Fork](#fork) occurs, the [Child Universe](#child-universe) that has the most [REP](#rep) migrated to it by the end of the [Fork Phase](#fork-period) is the Winning Universe for that particular Fork.
+
+## Yes/No Market
+
+A Yes/No Market is a [Market](#market) with only two [Outcomes](#outcome) (as well as [Invalid](#invalid-outcome), which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a [Categorical](#categorical-market) or [Scalar](#scalar-market) Market should be used.

@@ -453,50 +453,6 @@ Create Market Functions
 ----------------
 ```javascript
 // Create Market Simplified API Examples:
-
-var _extraInfo = {
-  "resolutionSource": "http://www.nasdaq.com/symbol/msft",
-  "tags": [ "Stocks", "Microsoft" ],
-  "longDescription": ""
-};
-augur.createMarket.createYesNoMarket({
-  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-  _endTime: 1546300799,
-  _feePerEthInWei: 1193046,
-  _denominationToken: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
-  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
-  _topic: "stocks",
-  _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
-  _extraInfo: JSON.stringify(_extraInfo),
-  meta: {
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-// example onSuccess output:
-{
-  "callReturn": "0xc841ee153e45e74074eae9685e815d08dee965eb",
-  "blockHash": "0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df",
-  "blockNumber": 1657080,
-  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
-  "gas": "0x5b8d80",
-  "gasPrice": "0x1a13b8600",
-  "hash": "0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2",
-  "input": "0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000",
-  "nonce": "0x43",
-  "to": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-  "transactionIndex": "0x0",
-  "value": "0xa8c0ff92d4c000",
-  "v": "0x2b",
-  "r": "0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de",
-  "s": "0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9",
-  "timestamp": 1516925924,
-  "gasFees": "0.022312465"
-}
-
 var _extraInfo = {
   "resolutionSource": "http://www.espn.com",
   "tags": ["college football", "football"],
@@ -588,6 +544,49 @@ augur.createMarket.createScalarMarket({
   "gasFees": "0.0618542"
 }
 
+var _extraInfo = {
+  "resolutionSource": "http://www.nasdaq.com/symbol/msft",
+  "tags": [ "Stocks", "Microsoft" ],
+  "longDescription": ""
+};
+augur.createMarket.createYesNoMarket({
+  universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  _endTime: 1546300799,
+  _feePerEthInWei: 1193046,
+  _denominationToken: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+  _designatedReporterAddress: "0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a",
+  _topic: "stocks",
+  _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
+  _extraInfo: JSON.stringify(_extraInfo),
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+// example onSuccess output:
+{
+  "callReturn": "0xc841ee153e45e74074eae9685e815d08dee965eb",
+  "blockHash": "0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df",
+  "blockNumber": 1657080,
+  "from": "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
+  "gas": "0x5b8d80",
+  "gasPrice": "0x1a13b8600",
+  "hash": "0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2",
+  "input": "0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000",
+  "nonce": "0x43",
+  "to": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+  "transactionIndex": "0x0",
+  "value": "0xa8c0ff92d4c000",
+  "v": "0x2b",
+  "r": "0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de",
+  "s": "0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9",
+  "timestamp": 1516925924,
+  "gasFees": "0.022312465"
+}
+
 augur.createMarket.getMarketCreationCost({
     universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
 }, function (error, result) {
@@ -620,30 +619,6 @@ augur.createMarket.getMarketFromCreateMarketReceipt(
 // example output: 
 "0x5e05e281a4564077985debdb91159a825a6774d3"
 ```
-### augur.createMarket.createYesNoMarket(p)
-
-Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Universe in which to create a Yes/No Market.
-    * **`p._endTime`**  (number) Yes/No Market expiration timestamp, in seconds.
-    * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
-    * **`p._denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
-    * **`p._designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
-    * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
-    * **`p._description`**  (string) Description of the Market, as a UTF8 string.
-    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.
-    * **`p.onSuccess`**  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.
-    * **`p.onFailed`**  (function) Called if/when the createYesNoMarket transaction fails.
-
-#### **Returns:**
-
-* (Object) Object containing information about the Market creation transaction. The `callReturn` property of this object contains the Ethereum address of the Market that was created.
-
 ### augur.createMarket.createCategoricalMarket(p)
 
 Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
@@ -691,6 +666,30 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
     * **`p.onSent`**  (function) Called if/when the createScalarMarket transaction is broadcast to the network.
     * **`p.onSuccess`**  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.
     * **`p.onFailed`**  (function) Called if/when the createScalarMarket transaction fails.
+
+#### **Returns:**
+
+* (Object) Object containing information about the Market creation transaction. The `callReturn` property of this object contains the Ethereum address of the Market that was created.
+
+### augur.createMarket.createYesNoMarket(p)
+
+Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p.universe`**  (string) Universe in which to create a Yes/No Market.
+    * **`p._endTime`**  (number) Yes/No Market expiration timestamp, in seconds.
+    * **`p._feePerEthInWei`**  (string) &lt;optional> Amount of wei per ether settled that goes to the [Market Creator](#market-creator), as a base-10 string.
+    * **`p._denominationToken`**  (string) Ethereum address of the token used as this Market's currency.
+    * **`p._designatedReporterAddress`**  (string) Ethereum address of this Market's [Designated Reporter](#designated-reporter).
+    * **`p._topic`**  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.
+    * **`p._description`**  (string) Description of the Market, as a UTF8 string.
+    * **`p._extraInfo`**  ([ExtraInfo](#ExtraInfo)) &lt;optional> Extra info which will be converted to JSON and logged to the chain in the `MarketCreated` event.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.
+    * **`p.onSuccess`**  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.
+    * **`p.onFailed`**  (function) Called if/when the createYesNoMarket transaction fails.
 
 #### **Returns:**
 
