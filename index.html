@@ -1185,50 +1185,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="create-market-functions">Create Market Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Create Market Simplified API Examples:</span>
-
-<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span>
-  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span>
-  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
-<span class="p">};</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546300799</span><span class="p">,</span>
-  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
-  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
-  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
-  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"stocks"</span><span class="p">,</span>
-  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will Microsoft stock (MSFT) be below $50 at any point during 2018?"</span><span class="p">,</span>
-  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
-  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
-  <span class="p">},</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">});</span>
-<span class="c1">// example onSuccess output:</span>
-<span class="p">{</span>
-  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="s2">"0xc841ee153e45e74074eae9685e815d08dee965eb"</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df"</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1657080</span><span class="p">,</span>
-  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
-  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0x5b8d80"</span><span class="p">,</span>
-  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x1a13b8600"</span><span class="p">,</span>
-  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2"</span><span class="p">,</span>
-  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x43"</span><span class="p">,</span>
-  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
-  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0xa8c0ff92d4c000"</span><span class="p">,</span>
-  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
-  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de"</span><span class="p">,</span>
-  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9"</span><span class="p">,</span>
-  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516925924</span><span class="p">,</span>
-  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.022312465"</span>
-<span class="p">}</span>
-
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.espn.com"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"college football"</span><span class="p">,</span> <span class="s2">"football"</span><span class="p">],</span>
@@ -1320,6 +1276,49 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.0618542"</span>
 <span class="p">}</span>
 
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span>
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span>
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546300799</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"stocks"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will Microsoft stock (MSFT) be below $50 at any point during 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// example onSuccess output:</span>
+<span class="p">{</span>
+  <span class="s2">"callReturn"</span><span class="p">:</span> <span class="s2">"0xc841ee153e45e74074eae9685e815d08dee965eb"</span><span class="p">,</span>
+  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xf5aab811242a73fe433995fdf2212548385b81acef4d6e5634faec74014f39df"</span><span class="p">,</span>
+  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">1657080</span><span class="p">,</span>
+  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac"</span><span class="p">,</span>
+  <span class="s2">"gas"</span><span class="p">:</span> <span class="s2">"0x5b8d80"</span><span class="p">,</span>
+  <span class="s2">"gasPrice"</span><span class="p">:</span> <span class="s2">"0x1a13b8600"</span><span class="p">,</span>
+  <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0xb55fa7c2e9d43fc9d11badb33f1d571539859059bdd7447594748733b112f7d2"</span><span class="p">,</span>
+  <span class="s2">"input"</span><span class="p">:</span> <span class="s2">"0x59381d2e000000000000000000000000000000000000000000000000000000005c2aad7f0000000000000000000000000000000000000000000000000000000000123456000000000000000000000000d2ee83a8a2a904181ccfddd8292f178614062aa00000000000000000000000008fa56abe36d8dc76cf85fecb6a3026733e0a12ac73746f636b73000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e00000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000004d57696c6c2074686520446f77204a6f6e657320496e647573747269616c2041766572616765206578636565642032372c30303020617420616e7920706f696e7420647572696e6720323031383f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000085227b5c227265736f6c7574696f6e536f757263655c223a5c2268747470733a2f2f7777772e6d61726b657477617463682e636f6d2f696e76657374696e672f696e6465782f646a69615c222c5c22746167735c223a5b5c2253746f636b735c222c5c22444a49415c225d2c5c226c6f6e674465736372697074696f6e5c223a5c225c227d22000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="s2">"nonce"</span><span class="p">:</span> <span class="s2">"0x43"</span><span class="p">,</span>
+  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="s2">"0x0"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"0xa8c0ff92d4c000"</span><span class="p">,</span>
+  <span class="s2">"v"</span><span class="p">:</span> <span class="s2">"0x2b"</span><span class="p">,</span>
+  <span class="s2">"r"</span><span class="p">:</span> <span class="s2">"0x256cedf5b3ef2f49f6eef99d10ca53ba0484da0e9cbf4434bb3042f90fb376de"</span><span class="p">,</span>
+  <span class="s2">"s"</span><span class="p">:</span> <span class="s2">"0x4161413a76a41468272e85ea7af8362393ea886f743b9882f42bea39fc6ec0b9"</span><span class="p">,</span>
+  <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1516925924</span><span class="p">,</span>
+  <span class="s2">"gasFees"</span><span class="p">:</span> <span class="s2">"0.022312465"</span>
+<span class="p">}</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">getMarketCreationCost</span><span class="p">({</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
@@ -1352,37 +1351,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output: </span>
 <span class="s2">"0x5e05e281a4564077985debdb91159a825a6774d3"</span>
 </code></pre></div>
-<h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
-
-<p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Universe in which to create a Yes/No Market.</li>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number) Yes/No Market expiration timestamp, in seconds.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
-<li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
-<li><strong><code class="prettyprint">p._topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
-<li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
-<li><strong><code class="prettyprint">p._extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createYesNoMarket transaction fails.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Object) Object containing information about the Market creation transaction. The <code class="prettyprint">callReturn</code> property of this object contains the Ethereum address of the Market that was created.</li>
-</ul>
-
 <h3 id="augur-createmarket-createcategoricalmarket-p">augur.createMarket.createCategoricalMarket(p)</h3>
 
 <p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
@@ -1440,6 +1408,37 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the createScalarMarket transaction is broadcast to the network.</li>
 <li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createScalarMarket transaction is sealed and confirmed.</li>
 <li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createScalarMarket transaction fails.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Object) Object containing information about the Market creation transaction. The <code class="prettyprint">callReturn</code> property of this object contains the Ethereum address of the Market that was created.</li>
+</ul>
+
+<h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
+
+<p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Universe in which to create a Yes/No Market.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (number) Yes/No Market expiration timestamp, in seconds.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
+<li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
+<li><strong><code class="prettyprint">p._topic</code></strong>  (string) The topic (category) to which this Market belongs, as a UTF8 string. Note: This string is limited to 32-characters.</li>
+<li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
+<li><strong><code class="prettyprint">p._extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createYesNoMarket transaction fails.</li>
 </ul></li>
 </ul>
 
@@ -11644,36 +11643,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">ethCostToCreateMarket</span> <span class="o">=</span> <span class="s2">"0x58d15e17628000"</span><span class="p">;</span> 
 <span class="c1">// Use the Cash contract for `p._denominationToken` when creating new Markets.</span>
 <span class="kd">var</span> <span class="nx">cashAddress</span> <span class="o">=</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.spacex.com"</span><span class="p">,</span>
-  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"SpaceX"</span><span class="p">,</span> <span class="s2">"spaceflight"</span> <span class="p">],</span>
-  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span>
-<span class="p">};</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
-  <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5c2b1e00"</span><span class="p">,</span>
-  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
-  <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
-  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
-  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"space"</span><span class="p">,</span>
-  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?"</span><span class="p">,</span>
-  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
-    <span class="na">value</span><span class="p">:</span> <span class="nx">ethCostToCreateMarket</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_YES_NO_MARKET_GAS</span>
-  <span class="p">},</span>
-  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
-    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
-  <span class="p">},</span>
-  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
-    <span class="c1">// Call the function `augur.createMarket.getMarketFromCreateMarketReceipt` </span>
-    <span class="c1">// to retrieve new Market's address</span>
-  <span class="p">},</span>
-  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
-<span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.espn.com"</span><span class="p">,</span>
@@ -11748,6 +11717,37 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="nx">ethCostToCreateMarket</span><span class="p">,</span>
     <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_SCALAR_MARKET_GAS</span>
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSent result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onSuccess result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span>
+    <span class="c1">// Call the function `augur.createMarket.getMarketFromCreateMarketReceipt` </span>
+    <span class="c1">// to retrieve new Market's address</span>
+  <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.spacex.com"</span><span class="p">,</span>
+  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"SpaceX"</span><span class="p">,</span> <span class="s2">"spaceflight"</span> <span class="p">],</span>
+  <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span>
+<span class="p">};</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
+  <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5c2b1e00"</span><span class="p">,</span>
+  <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
+  <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
+  <span class="na">_designatedReporterAddress</span><span class="p">:</span> <span class="s2">"0x01114f4bda09ed6c6715cf0baf606b5bce1dc96a"</span><span class="p">,</span>
+  <span class="na">_topic</span><span class="p">:</span> <span class="s2">"space"</span><span class="p">,</span>
+  <span class="na">_description</span><span class="p">:</span> <span class="s2">"Will SpaceX successfully complete a manned flight to the International Space Station by the end of 2018?"</span><span class="p">,</span>
+  <span class="na">_extraInfo</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">_extraInfo</span><span class="p">),</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="nx">ethCostToCreateMarket</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_YES_NO_MARKET_GAS</span>
   <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
@@ -11905,49 +11905,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="#market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-createyesnomarket-p">augur.api.Universe.createYesNoMarket(p)</h3>
-
-<p>Creates a new <a href="#yes-no-market">Yes/No Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
-
-<h4 id="parameters">Parameters:</h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
-<li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
-<li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
-<li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market event.</li>
-<li><strong><code class="prettyprint">p._extraInfo</code></strong>  (string) Stringified JSON object containing the following keys:
-
-<ul>
-<li><strong><code class="prettyprint">p._extraInfo.resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
-<li><strong><code class="prettyprint">p._extraInfo.tags</code></strong>  (Array.&lt;string&gt;) Keywords used to tag the Market (maximum of 2).</li>
-<li><strong><code class="prettyprint">p._extraInfo.longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">p._description</code>.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.tx</code></strong>  (Object) Transaction object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_YES_NO_MARKET_GAS</code>.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.<br></li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> can be called from within the <code class="prettyprint">onSuccess</code> callback to retrieve the Ethereum address of the newly-created Market. (See example code.)</li>
-</ul>
-
 <!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
 <h3 id="augur-api-universe-createcategoricalmarket-p">augur.api.Universe.createCategoricalMarket(p)</h3>
@@ -12078,6 +12035,49 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> can be called from within the <code class="prettyprint">onSuccess</code> callback to retrieve the Ethereum address of the newly-created Market.</li>
+</ul>
+
+<h3 id="augur-api-universe-createyesnomarket-p">augur.api.Universe.createYesNoMarket(p)</h3>
+
+<p>Creates a new <a href="#yes-no-market">Yes/No Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<h4 id="parameters">Parameters:</h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (string) Unix timestamp for the <a href="#end-time">End Time</a> of the <a href="#market">Market</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) <a href="#creator-fee">Creator Fee</a> (in Wei) that is collected for every 1 Ether worth of <a href="#share">Shares</a> <a href="#settlement">Settled</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token the Market is denominated in. Currently, Markets are only denominated in Ether (i.e., the <a href="#cash">Cash</a> <a href="#https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Cash.sol">contract</a> in Augur&rsquo;s smart contracts), but Augur is expected to support other tokens in the future.</li>
+<li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of the <a href="#designated-reporter">Designated Reporter</a>.</li>
+<li><strong><code class="prettyprint">p._topic</code></strong>  (string) Market <a href="#topic">Topic</a>.</li>
+<li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market event.</li>
+<li><strong><code class="prettyprint">p._extraInfo</code></strong>  (string) Stringified JSON object containing the following keys:
+
+<ul>
+<li><strong><code class="prettyprint">p._extraInfo.resolutionSource</code></strong>  (string) Source that should be referenced when determining the <a href="#outcome">Outcome</a> of a Market.</li>
+<li><strong><code class="prettyprint">p._extraInfo.tags</code></strong>  (Array.&lt;string&gt;) Keywords used to tag the Market (maximum of 2).</li>
+<li><strong><code class="prettyprint">p._extraInfo.longDescription</code></strong>  (string) Additional information not included in <code class="prettyprint">p._description</code>.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.tx</code></strong>  (Object) Transaction object.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_YES_NO_MARKET_GAS</code>.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.<br></li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> can be called from within the <code class="prettyprint">onSuccess</code> callback to retrieve the Ethereum address of the newly-created Market. (See example code.)</li>
 </ul>
 
 <h3 id="augur-api-universe-getinitialreportstakesize-p-callback">augur.api.Universe.getInitialReportStakeSize(p, callback)</h3>
@@ -14320,10 +14320,6 @@ Goals:
 
 <p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to buy <a href="#share">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
 
-<h2 id="yes-no-market">Yes/No Market</h2>
-
-<p>A Yes/No Market is a <a href="#market">Market</a> with only two <a href="#outcome">Outcomes</a> (as well as <a href="#invalid-outcome">Invalid</a>, which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a <a href="#categorical-market">Categorical</a> or <a href="#scalar-market">Scalar</a> Market should be used.</p>
-
 <h2 id="cash">Cash</h2>
 
 <p>Cash is an ERC-20 token that is used within Augur&rsquo;s Solidity smart contracts and acts as a wrapper for ETH to facilitate some of Augur&rsquo;s functionality. Users do not interact directly with Cash tokens in Augur.</p>
@@ -14718,6 +14714,10 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 <h2 id="winning-universe">Winning Universe</h2>
 
 <p>When a <a href="#fork">Fork</a> occurs, the <a href="#child-universe">Child Universe</a> that has the most <a href="#rep">REP</a> migrated to it by the end of the <a href="#fork-period">Fork Phase</a> is the Winning Universe for that particular Fork.</p>
+
+<h2 id="yes-no-market">Yes/No Market</h2>
+
+<p>A Yes/No Market is a <a href="#market">Market</a> with only two <a href="#outcome">Outcomes</a> (as well as <a href="#invalid-outcome">Invalid</a>, which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a <a href="#categorical-market">Categorical</a> or <a href="#scalar-market">Scalar</a> Market should be used.</p>
 
           <h1 id="contributing">Contributing</h1>
 
