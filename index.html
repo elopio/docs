@@ -151,7 +151,7 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <h2 id="trading-example">Trading Example</h2>
 
-<p>Let&rsquo;s use an example <a href="#binary-market">Binary Market</a> trading on the &ldquo;super big event&rdquo; coming up. For this example, we want to go long on <code class="prettyprint">Outcome A</code>. We would submit a trade request to buy <code class="prettyprint">100</code> <a href="#share">Shares</a> of <code class="prettyprint">Outcome A</code> with a limit price of <code class="prettyprint">0.5 ETH</code>, which will cost <code class="prettyprint">50.0 ETH</code> plus gas used to send the transaction.</p>
+<p>Let&rsquo;s use an example <a href="#yes-no-market">Yes/No Market</a> trading on the &ldquo;super big event&rdquo; coming up. For this example, we want to go long on <code class="prettyprint">Outcome A</code>. We would submit a trade request to buy <code class="prettyprint">100</code> <a href="#share">Shares</a> of <code class="prettyprint">Outcome A</code> with a limit price of <code class="prettyprint">0.5 ETH</code>, which will cost <code class="prettyprint">50.0 ETH</code> plus gas used to send the transaction.</p>
 
 <p>If there are Orders on the Order Book that match our request for <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> at a price of <code class="prettyprint">0.5 ETH</code>, or cheaper, then Augur will fill those Orders. We will now own <code class="prettyprint">100</code> Shares of <code class="prettyprint">Outcome A</code> and we will have lost <code class="prettyprint">50.0 ETH</code> plus gas cost.</p>
 
@@ -423,7 +423,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Every Augur Market and all REP tokens exist in some <a href="#universe">Universe</a>. REP tokens can be used to Report on Outcomes (and thus earn fees) only for Markets that exist in the same Universe as the REP tokens. When Augur first launches all Markets and all REP will exist together in a <a href="#genesis-universe">Gensis Universe</a>.</p>
 
-<p>When a Market Forks, new Universes are created. Forking creates a new <a href="#child-universe">Child Universe</a> for each possible Outcome of the Forking Market (including the <a href="#invalid-outcome">Invalid Outcome</a>). For example, a <a href="#binary-market">Binary Market</a> has 3 possible Outcomes: A, B, and Invalid. Thus a Binary Forking Market will create three new Child Universes: Universe A, Universe B, and Universe Invalid. Initially these newly created Universes are empty: they contain no Markets or REP tokens.</p>
+<p>When a Market Forks, new Universes are created. Forking creates a new <a href="#child-universe">Child Universe</a> for each possible Outcome of the Forking Market (including the <a href="#invalid-outcome">Invalid Outcome</a>). For example, a <a href="#yes-no-market">Yes/No Market</a> has 3 possible Outcomes: A, B, and Invalid. Thus a Yes/No Forking Market will create three new Child Universes: Universe A, Universe B, and Universe Invalid. Initially these newly created Universes are empty: they contain no Markets or REP tokens.</p>
 
 <p>When a Fork is initiated, the <a href="#parent-universe">Parent Universe</a> becomes permanently <a href="#locked-universe">Locked</a>. In a Locked Universe, no new Markets may be created. Users may continue trading Shares in Markets in Locked Universes, and Markets in a Locked Universe may still receive their <a href="#initial-report">Initial Reports</a>. However, no Reporting rewards are paid out there, and Markets in Locked Universes cannot be Finalized. In order for Markets or REP tokens in the Locked Universe to be useful, they must first be migrated to a Child Universe.</p>
 
@@ -1191,7 +1191,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createBinaryMarket</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
   <span class="na">_endTime</span><span class="p">:</span> <span class="mi">1546300799</span><span class="p">,</span>
   <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="mi">1193046</span><span class="p">,</span>
@@ -1352,9 +1352,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output: </span>
 <span class="s2">"0x5e05e281a4564077985debdb91159a825a6774d3"</span>
 </code></pre></div>
-<h3 id="augur-createmarket-createbinarymarket-p">augur.createMarket.createBinaryMarket(p)</h3>
+<h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
 
-<p>Creates a <a href="#binary-market">Binary Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+<p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1362,8 +1362,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Universe in which to create a Binary Market.</li>
-<li><strong><code class="prettyprint">p._endTime</code></strong>  (number) Binary Market expiration timestamp, in seconds.</li>
+<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Universe in which to create a Yes/No Market.</li>
+<li><strong><code class="prettyprint">p._endTime</code></strong>  (number) Yes/No Market expiration timestamp, in seconds.</li>
 <li><strong><code class="prettyprint">p._feePerEthInWei</code></strong>  (string) &lt;optional&gt; Amount of wei per ether settled that goes to the <a href="#market-creator">Market Creator</a>, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._denominationToken</code></strong>  (string) Ethereum address of the token used as this Market&rsquo;s currency.</li>
 <li><strong><code class="prettyprint">p._designatedReporterAddress</code></strong>  (string) Ethereum address of this Market&rsquo;s <a href="#designated-reporter">Designated Reporter</a>.</li>
@@ -1371,9 +1371,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._description</code></strong>  (string) Description of the Market, as a UTF8 string.</li>
 <li><strong><code class="prettyprint">p._extraInfo</code></strong>  (<a href="#ExtraInfo">ExtraInfo</a>) &lt;optional&gt; Extra info which will be converted to JSON and logged to the chain in the <code class="prettyprint">MarketCreated</code> event.</li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the createBinaryMarket transaction is broadcast to the network.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createBinaryMarket transaction is sealed and confirmed.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createBinaryMarket transaction fails.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) Called if/when the createYesNoMarket transaction is broadcast to the network.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) Called if/when the createYesNoMarket transaction is sealed and confirmed.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) Called if/when the createYesNoMarket transaction fails.</li>
 </ul></li>
 </ul>
 
@@ -1733,7 +1733,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
     <span class="nl">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
     <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="nx">marketType</span><span class="p">:</span> <span class="s2">"binary"</span><span class="p">,</span>
+    <span class="nx">marketType</span><span class="p">:</span> <span class="s2">"yesNo"</span><span class="p">,</span>
     <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="nx">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="nx">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
@@ -1760,7 +1760,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
     <span class="nx">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a binary test market created by b0b."</span><span class="p">,</span>
+    <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a yesNo test market created by b0b."</span><span class="p">,</span>
     <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
@@ -8267,7 +8267,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>It is important to note that Ethereum nodes discard all transaction return values, which causes the <code class="prettyprint">callReturn</code> property of the object passed into a transaction&rsquo;s <code class="prettyprint">onSuccess</code> callback to always be <code class="prettyprint">null</code>. As a result, there is no way to get a transaction&rsquo;s return value.</p>
 
-<p>There is, however, a workaround for this issue when calling functions that create <a href="#market">Markets</a>, such as <code class="prettyprint">augur.api.Universe.createBinaryMarket</code>, <code class="prettyprint">augur.api.Universe.createCategoricalMarket</code>, and <code class="prettyprint">augur.api.Universe.createScalarMarket</code>. The function <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> can be called in the <code class="prettyprint">onSuccess</code> callback of these functions to retrieve the Ethereum contract address of the newly-created Market. <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> does this by querying the Augur Node for the event log associated with the new Market&rsquo;s creation.</p>
+<p>There is, however, a workaround for this issue when calling functions that create <a href="#market">Markets</a>, such as <code class="prettyprint">augur.api.Universe.createYesNoMarket</code>, <code class="prettyprint">augur.api.Universe.createCategoricalMarket</code>, and <code class="prettyprint">augur.api.Universe.createScalarMarket</code>. The function <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> can be called in the <code class="prettyprint">onSuccess</code> callback of these functions to retrieve the Ethereum contract address of the newly-created Market. <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code> does this by querying the Augur Node for the event log associated with the new Market&rsquo;s creation.</p>
 
 <h2 id="using-transact-directly">Using Transact Directly</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Example using `augur.rpc.transact` directly</span>
@@ -11649,7 +11649,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"SpaceX"</span><span class="p">,</span> <span class="s2">"spaceflight"</span> <span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span>
 <span class="p">};</span>
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createBinaryMarket</span><span class="p">({</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createYesNoMarket</span><span class="p">({</span>
   <span class="na">_endTime</span><span class="p">:</span> <span class="s2">"0x5c2b1e00"</span><span class="p">,</span>
   <span class="na">_feePerEthInWei</span><span class="p">:</span> <span class="s2">"0x123456"</span><span class="p">,</span>
   <span class="na">_denominationToken</span><span class="p">:</span> <span class="nx">cashAddress</span><span class="p">,</span>
@@ -11660,7 +11660,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
     <span class="na">value</span><span class="p">:</span> <span class="nx">ethCostToCreateMarket</span><span class="p">,</span>
-    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_BINARY_MARKET_GAS</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">constants</span><span class="p">.</span><span class="nx">CREATE_YES_NO_MARKET_GAS</span>
   <span class="p">},</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
@@ -11905,9 +11905,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="#market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
-<h3 id="augur-api-universe-createbinarymarket-p">augur.api.Universe.createBinaryMarket(p)</h3>
+<h3 id="augur-api-universe-createyesnomarket-p">augur.api.Universe.createYesNoMarket(p)</h3>
 
-<p>Creates a new <a href="#binary-market">Binary Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+<p>Creates a new <a href="#yes-no-market">Yes/No Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -11933,7 +11933,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong>  (string) Ethereum address of the Universe contract to run the transaction on, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to create the Market, as a hexadecimal string. This can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketCreationCost</code> and multiplying the <code class="prettyprint">etherRequiredToCreateMarket</code> value that&rsquo;s returned by 10<sup>18</sup>.</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_BINARY_MARKET_GAS</code>.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong>  (string) Gas limit to use when submitting this transaction, as a hexadecimal string. This can be obtained from the constant <code class="prettyprint">augur.constants.CREATE_YES_NO_MARKET_GAS</code>.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.<br></li>
 <li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
@@ -13142,12 +13142,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Ethereum address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">payout0</code></strong> (number|null) Payout numerator 0 of the Dispute Token&rsquo;s payout set.</li>
 <li><strong><code class="prettyprint">payout1</code></strong> (number|null) Payout numerator 1 of the Dispute Token&rsquo;s payout set.</li>
-<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
-<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
-<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
-<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
-<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
-<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. (Set to null for Binary and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout2</code></strong> (number|null) Payout numerator 2 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout3</code></strong> (number|null) Payout numerator 3 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout4</code></strong> (number|null) Payout numerator 4 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout5</code></strong> (number|null) Payout numerator 5 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout6</code></strong> (number|null) Payout numerator 6 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
+<li><strong><code class="prettyprint">payout7</code></strong> (number|null) Payout numerator 7 of the Dispute Token&rsquo;s payout set. (Set to null for Yes/No and Scalar Markets.)</li>
 <li><strong><code class="prettyprint">isInvalid</code></strong> (boolean|number) Whether the Market was determined to be invalid.</li>
 <li><strong><code class="prettyprint">balance</code></strong> (string) Dispute Token balance the owner has staked, in ETH.</li>
 <li><strong><code class="prettyprint">winningToken</code></strong> (boolean|null) Index of the Payout Numerator that was determined to be the Market&rsquo;s Final Outcome.</li>
@@ -13380,10 +13380,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">id</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Address of a Universe, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;binary&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
+<li><strong><code class="prettyprint">marketType</code></strong> (string) Type of Market (&ldquo;yesNo&rdquo;, &ldquo;categorical&rdquo;, or &ldquo;scalar&rdquo;).</li>
 <li><strong><code class="prettyprint">numOutcomes</code></strong> (number) Total possible Outcomes for the Market.</li>
-<li><strong><code class="prettyprint">minPrice</code></strong> (string) Minimum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
-<li><strong><code class="prettyprint">maxPrice</code></strong> (string) Maximum price allowed for a share on a Market, in ETH. For binary &amp; categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">minPrice</code></strong> (string) Minimum price allowed for a share on a Market, in ETH. For Yes/No &amp; Categorical Markets, this is 0 ETH. For Scalar Markets, this is the bottom end of the range set by the Market creator.</li>
+<li><strong><code class="prettyprint">maxPrice</code></strong> (string) Maximum price allowed for a share on a Market, in ETH. For Yes/No &amp; Categorical Markets, this is 1 ETH. For Scalar Markets, this is the top end of the range set by the Market creator.</li>
 <li><strong><code class="prettyprint">cumulativeScale</code></strong> (string) Difference between maxPrice and minPrice.</li>
 <li><strong><code class="prettyprint">author</code></strong> (string) Ethereum address of the creator of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp when the Ethereum block containing the Market creation was created, in seconds.</li>
@@ -13773,7 +13773,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
 <li><strong><code class="prettyprint">numShares</code></strong> (string) Quantity of shares currently owned by the user.</li>
-<li><strong><code class="prettyprint">numSharesAdjusted</code></strong> (string) Similar to numShares, but Short Positions are shown as negative for Binary and Scalar Markets.</li>
+<li><strong><code class="prettyprint">numSharesAdjusted</code></strong> (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.</li>
 <li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (string) AttoETH profit or loss the user took upon closing this position.</li>
 <li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.</li>
 <li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price in attoETH paid to acquire this position.</li>
@@ -13849,9 +13849,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Object that acts as an enum for different types of smart contracts.</p>
 
-<h3 id="augur-constants-create_binary_market_gas-string">augur.constants.CREATE_BINARY_MARKET_GAS (string)</h3>
+<h3 id="augur-constants-create_yes_no_market_gas-string">augur.constants.CREATE_YES_NO_MARKET_GAS (string)</h3>
 
-<p>Gas limit used when creating a new <a href="#binary-market">Binary Market</a>, as a hexadecimal string.</p>
+<p>Gas limit used when creating a new <a href="#yes-no-market">Yes/No Market</a>, as a hexadecimal string.</p>
 
 <h3 id="augur-constants-create_categorical_market_gas-string">augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)</h3>
 
@@ -14320,9 +14320,9 @@ Goals:
 
 <p>A Bid Order is an <a href="#order">Order</a> indicating the desire of the <a href="#order-creator">Order Creator</a> to buy <a href="#share">Shares</a> of one or more <a href="#outcome">Outcomes</a>. This is the opposite of an <a href="#ask-order">Ask Order</a>.</p>
 
-<h2 id="binary-market">Binary Market</h2>
+<h2 id="yes-no-market">Yes/No Market</h2>
 
-<p>A Binary Market is a <a href="#market">Market</a> with only two <a href="#outcome">Outcomes</a> (as well as <a href="#invalid-outcome">Invalid</a>, which is always a possible Outcome). Binary Markets are for yes-or-no questions; if more potential Outcomes are needed, a <a href="#categorical-market">Categorical</a> or <a href="#scalar-market">Scalar</a> Market should be used.</p>
+<p>A Yes/No Market is a <a href="#market">Market</a> with only two <a href="#outcome">Outcomes</a> (as well as <a href="#invalid-outcome">Invalid</a>, which is always a possible Outcome). Yes/No Markets are for yes-or-no questions; if more potential Outcomes are needed, a <a href="#categorical-market">Categorical</a> or <a href="#scalar-market">Scalar</a> Market should be used.</p>
 
 <h2 id="cash">Cash</h2>
 
@@ -14330,7 +14330,7 @@ Goals:
 
 <h2 id="categorical-market">Categorical Market</h2>
 
-<p>A Categorical Market is a <a href="#market">Market</a> with more than 2 potential <a href="#outcome">Outcomes</a>, but no more than 8. As with all Markets, <a href="#invalid-outcome">Invalid</a> is also a potential Outcome, but it does not count toward the 8-Outcome maximum. Categorical Markets are best for multiple choice questions, such as &ldquo;Which team will win Tournament X?&rdquo; or &ldquo;What color tie will the U.S. President wear at the next presidential press conference?&rdquo;. If a Market is based around a simple yes-or-no question, it is better to use a <a href="#binary-market">Binary Market</a>. For a Market about what a particular stock price will be on a given date, a <a href="#scalar-market">Scalar Market</a> should be used, as 8 potential outcomes would not be sufficient.</p>
+<p>A Categorical Market is a <a href="#market">Market</a> with more than 2 potential <a href="#outcome">Outcomes</a>, but no more than 8. As with all Markets, <a href="#invalid-outcome">Invalid</a> is also a potential Outcome, but it does not count toward the 8-Outcome maximum. Categorical Markets are best for multiple choice questions, such as &ldquo;Which team will win Tournament X?&rdquo; or &ldquo;What color tie will the U.S. President wear at the next presidential press conference?&rdquo;. If a Market is based around a simple yes-or-no question, it is better to use a <a href="#yes-no-market">Yes/No Market</a>. For a Market about what a particular stock price will be on a given date, a <a href="#scalar-market">Scalar Market</a> should be used, as 8 potential outcomes would not be sufficient.</p>
 
 <h2 id="challenge">Challenge</h2>
 
@@ -14522,11 +14522,11 @@ Goals:
 
 <h2 id="market">Market</h2>
 
-<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#share">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#number-of-ticks">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
+<p>A Market is created by users of Augur for a small fee. They are used to describe an upcoming event that people would presumably be interested in wagering on. They should also provide information on how to verify the <a href="#outcome">Outcome</a> of the event, the more specific the better. Each Market created on the Augur network will have an automatically managed <a href="#order-book">Order Book</a>, which will allow users to buy and sell <a href="#share">Shares</a> of different Outcomes of the Market. The <a href="#market-creator">Market Creator</a> can set the <a href="#creator-fee">Creator Fee</a> for the Market, which, once set, cannot be changed, and will determine their cut of all Shares <a href="#settlement">Settled</a> on the Market. The Market Creator also needs to specify a <a href="#maximum-display-price">Max Price</a> and a <a href="#minimum-display-price">Min Price</a> as well as the <a href="#number-of-ticks">Number of Ticks</a> for the Market. There are three different Market types supported by Augur: <a href="#yes-no-market">Yes/No</a>, <a href="#categorical-market">Categorical</a>, and <a href="#scalar-market">Scalar</a>.</p>
 
 <h2 id="market-creator">Market Creator</h2>
 
-<p>A Market Creator is a user who created a <a href="#market">Market</a>. They are charged a small fee to make a new Market but can set the <a href="#creator-fee">Creator Fee</a> for <a href="#settlement">Settlement</a> of <a href="#share">Shares</a> on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of <a href="#settlement-fees">Settlement Fees</a> for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., <a href="#binary-market">Binary</a>, <a href="#categorical-market">Categorical</a>, or <a href="#scalar-market">Scalar</a>), the number of <a href="#outcome">Outcomes</a>, <a href="#end-time">End Time</a>, and a <a href="#topic">Topic</a>.</p>
+<p>A Market Creator is a user who created a <a href="#market">Market</a>. They are charged a small fee to make a new Market but can set the <a href="#creator-fee">Creator Fee</a> for <a href="#settlement">Settlement</a> of <a href="#share">Shares</a> on that Market. Market Creators are incentivized to create popular Markets so as to generate the most amount of <a href="#settlement-fees">Settlement Fees</a> for themselves. Other information a Market requires is the actual question being posed, the type of Market (i.e., <a href="#yes-no-market">Yes/No</a>, <a href="#categorical-market">Categorical</a>, or <a href="#scalar-market">Scalar</a>), the number of <a href="#outcome">Outcomes</a>, <a href="#end-time">End Time</a>, and a <a href="#topic">Topic</a>.</p>
 
 <h2 id="market-creator-mailbox">Market Creator Mailbox</h2>
 
@@ -14538,11 +14538,11 @@ Goals:
 
 <h2 id="maximum-display-price">Maximum Display Price</h2>
 
-<p>The Maximum Display Price (often seen as <code class="prettyprint">maxDisplayPrice</code>) is the maximum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#binary-market">Binary</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 1, as in 1 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Maximum Display Price would be the top end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
+<p>The Maximum Display Price (often seen as <code class="prettyprint">maxDisplayPrice</code>) is the maximum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#yes-no-market">Yes/No</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 1, as in 1 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Maximum Display Price would be the top end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
 
 <h2 id="minimum-display-price">Minimum Display Price</h2>
 
-<p>The Minimum Display Price (often seen as <code class="prettyprint">minDisplayPrice</code>) is the minimum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#binary-market">Binary</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 0, as in 0 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Minimum Display Price would be the bottom end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
+<p>The Minimum Display Price (often seen as <code class="prettyprint">minDisplayPrice</code>) is the minimum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#yes-no-market">Yes/No</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 0, as in 0 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Minimum Display Price would be the bottom end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
@@ -14552,7 +14552,7 @@ Goals:
 
 <p>The <a href="#atto-prefix">attoETH</a> yielded when a Complete Set of Shares is Settled is what <a href="#settlement-fees">Settlement Fees</a> are extracted from prior to paying out traders for their closed <a href="#position">Positions</a>. Settlement Fees are paid proportionally so that the trader set to receive more payout will have to pay more Fees. The price of an Order can be set to anywhere between 0 and the Number of Ticks set for the Market.</p>
 
-<p>For Binary and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator, and must be evenly divisible by 2. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to <code class="prettyprint">[-10, 30]</code> and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.</p>
+<p>For Yes/No and Categorical Markets, the Number of Ticks is always set to 10,000. For Scalar Markets, the Number of Ticks is determined implicitly by the range and precision set by the Market Creator, and must be evenly divisible by 2. In particular, the Number of Ticks equals (rangeMax - rangeMin) / precision. For example, if the Market Creator sets the range of Outcomes to <code class="prettyprint">[-10, 30]</code> and the precision to 0.01, then the Number of Ticks equals (30-(-10)) / 0.01, or 4,000.</p>
 
 <h2 id="open-interest">Open Interest</h2>
 
@@ -14606,11 +14606,11 @@ Goals:
 
 <p>A Payout Set, sometimes referred to as &ldquo;Payout Numerators&rdquo; in Augur&rsquo;s smart contract functions, is an array with a length equal to the number of <a href="#outcome">Outcomes</a> for a <a href="#market">Market</a>. Each value in the array is required to be 0 or a positive number that does not exceed the <a href="#number-of-ticks">Number of Ticks</a> for the Market. Further, the total sum of all the values contained within the Payout Set array should be equal to the Number of Ticks for the Market. </p>
 
-<p>For example, in a <a href="#binary-market">Binary Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+<p>For example, in a <a href="#yes-no-market">Yes/No Market</a> with 1000 <a href="#tick">Ticks</a>, a <a href="#report">Report</a> that Stakes <a href="#rep">REP</a> on Outcome <code class="prettyprint">0</code> would submit a Payout Set that looks like <code class="prettyprint">[1000, 0]</code>. Payout Sets are a breakdown of the Payout Distribution, or how Markets should pay out for each <a href="#share">Share</a> when <a href="#finalized-market">Finalized</a>. In the example above, the Payout Numerators are the values 1000 and 0, and only <a href="#share">Shares</a> of Outcome 0 (index 0 of the array) will pay out on the Finalized Market because the Payout Numerator for Outcome 1 is <code class="prettyprint">0</code>. Valid Payout Sets are hashed using the SHA-3 hashing algorithm, which is a <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
 
-<p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Binary Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>. (In cases where Number of Ticks / Outcomes is not a whole number, the remainder will be deducted from each Outcome in the Payout Set and left on the Market contract as &ldquo;dust&rdquo; ETH. For example, a 3-Outcome Market with no Creator Fee that resolves to Invalid will have a Payout Set of [3333, 3333, 3333].)</p>
+<p>The Payout Set for a <a href="#categorical-market">Categorical Market</a> is similar to that of a Yes/No Market, except that Categorical Markets can have up to 8 Outcomes, so an example Payout Set for a Categorical Market with 8,000 Ticks might look like <code class="prettyprint">[0, 0, 8000, 0, 0, 0, 0, 0]</code>. The same Categorical Market with an <a href="#invalid-outcome">Invalid Outcome</a> would have a Payout Set like <code class="prettyprint">[1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]</code>. This is because each Outcome in the Payout Set of an Invalid Market is set to the Number of Ticks divided by the number of Outcomes, in order to ensure that the holders of each type of <a href="#share">Share</a> in the Market receive the same payout during <a href="#settlement">Settlement</a>. (In cases where Number of Ticks / Outcomes is not a whole number, the remainder will be deducted from each Outcome in the Payout Set and left on the Market contract as &ldquo;dust&rdquo; ETH. For example, a 3-Outcome Market with no Creator Fee that resolves to Invalid will have a Payout Set of [3333, 3333, 3333].)</p>
 
-<p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Binary Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a <a href="#short-position">Short Position</a>) and 1 (for a <a href="#long-position">Long Position</a>). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
+<p>The Payout Set for a <a href="#scalar-market">Scalar Market</a> is determined differently than for Yes/No Markets and Categorical Markets. Scalar Markets have just 2 possible Outcomes: 0 (for a <a href="#short-position">Short Position</a>) and 1 (for a <a href="#long-position">Long Position</a>). Suppose that a Scalar Market exists with $0 as the <a href="#minimum-display-price">Minimum Display Price</a>, $100 as the <a href="#maximum-display-price">Maximum Display Price</a>, 10,000 as the Number of Ticks, and $75 as the reported Outcome. The Payout Set for this Market would be determined as follows:</p>
 
 <ol>
 <li>Normalize the reported Outcome to the Minimum Display Price by subtracting the Minimum Display Price from the reported Outcome: 75 - 0 = 75.</li>
@@ -14655,7 +14655,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="scalar-market">Scalar Market</h2>
 
-<p>A Scalar Market is a <a href="#market">Market</a> with a wide range of potential <a href="#outcome">Outcomes</a>. An example of a Scalar Market would be &ldquo;According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?&rdquo;. In this example Market, the <a href="#minimum-display-price">minDisplayPrice</a> might be set to $0 and the <a href="#maximum-display-price">maxDisplayPrice</a> to $500. This would allow the Market to <a href="#settlement">Settle</a> on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a <a href="#binary-market">Binary</a> or <a href="#categorical-market">Categorical</a> Market.</p>
+<p>A Scalar Market is a <a href="#market">Market</a> with a wide range of potential <a href="#outcome">Outcomes</a>. An example of a Scalar Market would be &ldquo;According to finance.yahoo.com, what will be the price of MSFT on January 3rd, 2062 at exactly 1:00pm?&rdquo;. In this example Market, the <a href="#minimum-display-price">minDisplayPrice</a> might be set to $0 and the <a href="#maximum-display-price">maxDisplayPrice</a> to $500. This would allow the Market to <a href="#settlement">Settle</a> on any number between the two. Sometimes, a range of potential Outcomes is not needed, and a small number of choices will suffice. In these cases, it is better to use a <a href="#yes-no-market">Yes/No</a> or <a href="#categorical-market">Categorical</a> Market.</p>
 
 <h2 id="settlement">Settlement</h2>
 
@@ -14679,9 +14679,9 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>Opening a Short Position, or shorting, is the selling of a security that is not owned by the seller. Shorting is done with the belief that a security&rsquo;s price will decrease in the future, allowing it to be bought back at a lower price to make a profit.</p>
 
-<p>In Augur, betting on the &ldquo;No&rdquo; <a href="#outcome">Outcome</a> of a <a href="#binary-market">Binary Market</a> is done by shorting the &ldquo;Yes&rdquo; Outcome. This effectively means the user is selling &ldquo;Yes&rdquo; <a href="#share">Shares</a> they do not own. For <a href="#binary-market">Binary Markets</a> and <a href="#scalar-market">Scalar Markets</a>, these are listed as negative quantities of Shares on the Portfolio:Positions view of Augur&rsquo;s user interface.</p>
+<p>In Augur, betting on the &ldquo;No&rdquo; <a href="#outcome">Outcome</a> of a <a href="#yes-no-market">Yes/No Market</a> is done by shorting the &ldquo;Yes&rdquo; Outcome. This effectively means the user is selling &ldquo;Yes&rdquo; <a href="#share">Shares</a> they do not own. For <a href="#yes-no-market">Yes/No Markets</a> and <a href="#scalar-market">Scalar Markets</a>, these are listed as negative quantities of Shares on the Portfolio:Positions view of Augur&rsquo;s user interface.</p>
 
-<p>Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a <a href="#complete-set">Complete Set</a> is a Share of every Outcome in a Market. For example, suppose a user thinks the &ldquo;Yes&rdquo; Outcome of a Binary Market is unlikely to happen and expects the price of a &ldquo;Yes&rdquo; Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of &ldquo;Yes&rdquo; costs 0.55 ETH, a Short Position in 1 Share of the &ldquo;Yes&rdquo; Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.</p>
+<p>Opening a Short Position costs ((cost of a Complete Set - price per Share) * number of Shares), where a <a href="#complete-set">Complete Set</a> is a Share of every Outcome in a Market. For example, suppose a user thinks the &ldquo;Yes&rdquo; Outcome of a Yes/No Market is unlikely to happen and expects the price of a &ldquo;Yes&rdquo; Share in this Market to decrease in the future. If a Complete Set in this Market costs 1 ETH, and one Share of &ldquo;Yes&rdquo; costs 0.55 ETH, a Short Position in 1 Share of the &ldquo;Yes&rdquo; Outcome can be opened for (1 - 0.55) 1 = 0.45 ETH.</p>
 
 <p>For more information on trading, please refer to the <a href="#trading">Trading</a> section.</p>
 
