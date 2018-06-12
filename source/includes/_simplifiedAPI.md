@@ -2702,6 +2702,7 @@ This function will fail if:
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading history in descending order by `sortBy` field.
     * **`p.limit`**  (string) &lt;optional> Maximum number of trading history reports to return.
     * **`p.offset`**  (string) &lt;optional> Number of trading history reports to truncate from the beginning of the results.
+    * **`p.ignoreSelfTrades`**  (boolean) &lt;optional> Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.
 * **`callback`** (function) Called when trading history has been received and parsed.
 
 #### **Returns:**
