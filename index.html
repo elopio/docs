@@ -920,6 +920,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">{</span>
   <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"4.7.0-47"</span><span class="p">,</span>
   <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+  <span class="s2">"isSyncFinished"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"addresses"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"Controller"</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
     <span class="s2">"Universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
@@ -3095,7 +3097,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> 
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -3111,12 +3113,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000C00"</span><span class="p">,</span>
     <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">orderId</span><span class="p">:</span> <span class="s2">"0x1100000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="na">type</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
     <span class="na">price</span><span class="p">:</span> <span class="s2">"5.5"</span><span class="p">,</span>
     <span class="na">amount</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
     <span class="na">maker</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="na">marketCreatorFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="na">reporterFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">selfFilled</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="na">settlementFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -13104,8 +13108,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">version</code></strong> (string) Version of the contracts.</li>
+<li><strong><code class="prettyprint">version</code></strong> (string) Version of the Augur smart contracts.</li>
 <li><strong><code class="prettyprint">net_version</code></strong> (string) Network ID that Augur Node is connected to. </li>
+<li><strong><code class="prettyprint">netId</code></strong> (number) Network ID that Augur Node is connected to. (This is the same ID as <code class="prettyprint">net_version</code>.)</li>
+<li><strong><code class="prettyprint">isSyncFinished</code></strong> (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.</li>
 <li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
 </ul>
 
@@ -13751,12 +13757,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">transactionHash</code></strong> (string) Hash to look up the trade transaction receipt.</li>
 <li><strong><code class="prettyprint">logIndex</code></strong> (number) Number of the log index position in the Ethereum block containing the trade transaction.</li>
+<li><strong><code class="prettyprint">orderId</code></strong> (string) Unique ID for the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">type</code></strong> (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">price</code></strong> (string) Price paid for trade, in attoETH.</li>
 <li><strong><code class="prettyprint">amount</code></strong> (string) Amount of attoShares that were bought/sold.</li>
 <li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
 <li><strong><code class="prettyprint">marketCreatorFees</code></strong> (string) Amount of fees paid to Market creator, in ETH.</li>
 <li><strong><code class="prettyprint">reporterFees</code></strong> (string) Amount of fees paid to reporters, in attoETH.</li>
+<li>**<code class="prettyprint">selfFilled</code> (boolean) Whether the user filled his/her own Order.</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
