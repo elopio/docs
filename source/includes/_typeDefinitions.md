@@ -103,8 +103,10 @@ Note: Other properties will be present in this object, depending on what event t
 ### ContractAddresses  (Object)
 
 #### **Properties:** 
-* **`version`** (string) Version of the contracts.
+* **`version`** (string) Version of the Augur smart contracts.
 * **`net_version`** (string) Network ID that Augur Node is connected to. 
+* **`netId`** (number) Network ID that Augur Node is connected to. (This is the same ID as `net_version`.)
+* **`isSyncFinished`** (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.
 * **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
 
 <a name="CrowdsourcerState"></a>
@@ -579,12 +581,14 @@ Serves as an enum for the state of a Market.
 #### **Properties:** 
 * **`transactionHash`** (string) Hash to look up the trade transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the trade transaction.
+* **`orderId`** (string) Unique ID for the Order, as a hexadecimal string.
 * **`type`** (string) Type of trade. Valid values are "buy" and "sell".
 * **`price`** (string) Price paid for trade, in attoETH.
 * **`amount`** (string) Amount of attoShares that were bought/sold.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
 * **`marketCreatorFees`** (string) Amount of fees paid to Market creator, in ETH.
 * **`reporterFees`** (string) Amount of fees paid to reporters, in attoETH.
+* **`selfFilled` (boolean) Whether the user filled his/her own Order.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.

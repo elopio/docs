@@ -222,6 +222,8 @@ augur.augurNode.getContractAddresses(
 {
   "version": "4.7.0-47",
   "net_version": "4",
+  "netId": "4",
+  "isSyncFinished": true,
   "addresses": {
     "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
     "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -2123,7 +2125,7 @@ augur.trading.getPositionInMarket({
 
 augur.trading.getUserTradingHistory({
   account: "0x000000000000000000000000000000000000d00d",
-  universe: null,
+  universe: null, 
   marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
   orderType: null,
@@ -2139,12 +2141,14 @@ augur.trading.getUserTradingHistory({
   {
     transactionHash: "0x0000000000000000000000000000000000000000000000000000000000000C00",
     logIndex: 0,
+    orderId: "0x1100000000000000000000000000000000000000000000000000000000000000",
     type: "buy",
     price: "5.5",
     amount: "0.2",
     maker: false,
     marketCreatorFees: "0",
     reporterFees: "0",
+    selfFilled: false,
     settlementFees: "0",
     marketId: "0x0000000000000000000000000000000000000001",
     outcome: 0,
