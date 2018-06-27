@@ -762,7 +762,7 @@ Dispute Crowdsourcer Tx API
 // Dispute Crowdsourcer Transaction API Examples:
 
 // Dispute Crowdsourcer contract addresses for a Market can be 
-// obtained by calling `augur.api.Market.getCrowdsourcer`.
+// obtained by calling `augur.api.Market.derivePayoutDistributionHash`, followed by `augur.api.Market.getCrowdsourcer`.
 var disputeCrowdsourcerAddress = "0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4";
 
 augur.api.DisputeCrowdsourcer.forkAndRedeem({
