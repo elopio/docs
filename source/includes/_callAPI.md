@@ -211,7 +211,9 @@ Dispute Crowdsourcer Call API
 // Dispute Crowdsourcer Contract Call API Examples:
 
 // Dispute Crowdsourcer contract addresses for a Market can be 
-// obtained by calling `augur.api.Market.derivePayoutDistributionHash`, followed by `augur.api.Market.getCrowdsourcer`.
+// obtained by calling `augur.api.Market.getReportingParticipant` 
+// or `augur.api.Market.derivePayoutDistributionHash`, followed 
+// by `augur.api.Market.getCrowdsourcer`.
 var disputeCrowdsourcer = "0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5";
 
 augur.api.DisputeCrowdsourcer.getFeeWindow({ 
