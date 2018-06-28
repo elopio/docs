@@ -1317,7 +1317,9 @@ Returns whether the [Payout Distribution Hash](#payout-distribution-hash) submit
 
 ### augur.api.Market.getCrowdsourcer(p, callback)
 
-Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given [Payout Distribution Hash](#payout-distribution-hash).
+Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given [Payout Distribution Hash](#payout-distribution-hash). 
+
+Note: Calling this function only works for retrieving a DisputeCrowdsourcer if the [Dispute Round](#dispute-round) has not been completed yet.
 
 #### **Parameters:**
 
