@@ -2910,11 +2910,9 @@ augur.api.Universe.createCategoricalMarket({
   onFailed: function (result) { console.log("onFailed result:", result); },
 });
 
-var _parentPayoutDistributionHash = "0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a";
 var _parentPayoutNumerators = [ "0x0", "0x2710" ];
 var _parentInvalid = false;
 augur.api.Universe.createChildUniverse({
-  _parentPayoutDistributionHash: _parentPayoutDistributionHash,
   _parentPayoutNumerators: _parentPayoutNumerators,
   _parentInvalid: _parentInvalid,
   tx: { 
@@ -3174,7 +3172,7 @@ Creates a new [Categorical Market](#categorical-market). This transaction will t
 
 ### augur.api.Universe.createChildUniverse(p)
 
-Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Distribution Hash](#payout-distribution-hash) `p._parentPayoutDistributionHash`, [Payout Set](#payout-set) `p._parentPayoutNumerators`, and `p._parentInvalid`. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
+Creates a new [Child Universe](#child-universe) (if it does not already exist) with the given [Payout Set](#payout-set) `p._parentPayoutNumerators` and `p._parentInvalid`. This transaction will trigger a [`UniverseCreated`](#UniverseCreated) event if the Child Universe has not been created yet.
 
 This transaction will fail if:
 
@@ -3184,7 +3182,6 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._parentPayoutDistributionHash`** (string) Payout Distribution Hash of the [Parent Universe's](#parent-universe) [Forked Market](#forked-market), as a 32-byte hexadecimal string.
     * **`p._parentPayoutNumerators`**  (Array.&lt;number>) Payout Set of the Parent Universe's Parent Universe's Forked Market.
     * **`p._parentInvalid`**  (boolean) Whether the Parent Universe's Forked Market is [Invalid](#invalid-outcome).
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
