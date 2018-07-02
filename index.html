@@ -714,6 +714,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">symbol</span><span class="p">:</span> <span class="s2">"shares"</span><span class="p">,</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">isInternalTransfer</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000d3adb33f"</span><span class="p">,</span>
@@ -728,6 +729,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">symbol</span><span class="p">:</span> <span class="s2">"shares"</span><span class="p">,</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">" 0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">isInternalTransfer</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000deadb33f"</span><span class="p">,</span>
@@ -742,6 +744,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">symbol</span><span class="p">:</span> <span class="s2">"REP"</span><span class="p">,</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">isInternalTransfer</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -787,6 +790,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the account for which to get transfer history, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.token</code></strong>  (string) &lt;optional&gt; Contract address of the token contract by which to limit the history results, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">isInternalTransfer</code></strong> (boolean) &lt;optional&gt; When set to <code class="prettyprint">true</code>, only trade/order transfers will be returned; otherwise, all transfers for the account are returned. (This is not perfectly accurate, as it is possible for a trade and a non-trade/order-related transfer to appear in the same transaction. This can occur if done via a smart contract, which performs a standard transfer and a trade in the same transaction.) Defaults to <code class="prettyprint">false</code>.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort transfer history.</li>
@@ -1565,7 +1569,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">price</span><span class="p">:</span> <span class="s2">"5.5"</span><span class="p">,</span>
     <span class="na">amount</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
-  <span class="p">}],</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="s2">"4.2"</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1509065474</span><span class="p">,</span>
+  <span class="p">],</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarkets</span><span class="p">({</span>
@@ -3101,7 +3109,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"price"</span><span class="p">,</span>
   <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -3127,6 +3135,23 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="na">shareToken</span><span class="p">:</span> <span class="s2">"0x0100000000000000000000000000000000000000"</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1506474500</span><span class="p">,</span>
     <span class="na">tradeGroupId</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">amount</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+    <span class="na">logIndex</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">maker</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">marketCreatorFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">orderId</span><span class="p">:</span> <span class="s2">"0x1990000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">price</span><span class="p">:</span> <span class="s2">"4.2"</span><span class="p">,</span>
+    <span class="na">reporterFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">selfFilled</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">settlementFees</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">shareToken</span><span class="p">:</span> <span class="s2">"0x0100000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1509065474</span><span class="p">,</span>
+    <span class="na">tradeGroupId</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">transactionHash</span><span class="p">:</span> <span class="s2">"0x00000000000000000000000000000000000000000000000000000000d3adb33f"</span><span class="p">,</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s2">"sell"</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
 
@@ -4283,7 +4308,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Contract Call API Examples:</span>
 
 <span class="c1">// Dispute Crowdsourcer contract addresses for a Market can be </span>
-<span class="c1">// obtained by calling `augur.api.Market.getCrowdsourcer`.</span>
+<span class="c1">// obtained by calling `augur.api.Market.getReportingParticipant` </span>
+<span class="c1">// or `augur.api.Market.derivePayoutDistributionHash`, followed </span>
+<span class="c1">// by `augur.api.Market.getCrowdsourcer`.</span>
 <span class="kd">var</span> <span class="nx">disputeCrowdsourcer</span> <span class="o">=</span> <span class="s2">"0xafa6eaefcfaf7ea1e17c4768a554d57800699ec5"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
@@ -5742,7 +5769,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-getcrowdsourcer-p-callback">augur.api.Market.getCrowdsourcer(p, callback)</h3>
 
-<p>Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given <a href="#payout-distribution-hash">Payout Distribution Hash</a>.</p>
+<p>Returns the Ethereum address for the DisputeCrowdsourcer contract that corresponds to the given <a href="#payout-distribution-hash">Payout Distribution Hash</a>. </p>
+
+<p>Note: Calling this function only works for retrieving a DisputeCrowdsourcer if the <a href="#dispute-round">Dispute Round</a> has not been completed yet.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -9024,7 +9053,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Dispute Crowdsourcer Transaction API Examples:</span>
 
 <span class="c1">// Dispute Crowdsourcer contract addresses for a Market can be </span>
-<span class="c1">// obtained by calling `augur.api.Market.getCrowdsourcer`.</span>
+<span class="c1">// obtained by calling `augur.api.Market.getReportingParticipant` </span>
+<span class="c1">// or `augur.api.Market.derivePayoutDistributionHash`, followed </span>
+<span class="c1">// by `augur.api.Market.getCrowdsourcer`.</span>
 <span class="kd">var</span> <span class="nx">disputeCrowdsourcerAddress</span> <span class="o">=</span> <span class="s2">"0xe5d6eaefcfaf7ea1e17c4768a554d57800699ea4"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">DisputeCrowdsourcer</span><span class="p">.</span><span class="nx">forkAndRedeem</span><span class="p">({</span>
@@ -11682,11 +11713,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onFailed result:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
 <span class="p">});</span>
 
-<span class="kd">var</span> <span class="nx">_parentPayoutDistributionHash</span> <span class="o">=</span> <span class="s2">"0x4480ed40f94e2cb2ca244eb862df2d350300904a96039eb53cba0e34b8ace90a"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">_parentPayoutNumerators</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">"0x0"</span><span class="p">,</span> <span class="s2">"0x2710"</span> <span class="p">];</span>
 <span class="kd">var</span> <span class="nx">_parentInvalid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">createChildUniverse</span><span class="p">({</span>
-  <span class="na">_parentPayoutDistributionHash</span><span class="p">:</span> <span class="nx">_parentPayoutDistributionHash</span><span class="p">,</span>
   <span class="na">_parentPayoutNumerators</span><span class="p">:</span> <span class="nx">_parentPayoutNumerators</span><span class="p">,</span>
   <span class="na">_parentInvalid</span><span class="p">:</span> <span class="nx">_parentInvalid</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
@@ -11959,7 +11988,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-universe-createchilduniverse-p">augur.api.Universe.createChildUniverse(p)</h3>
 
-<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-distribution-hash">Payout Distribution Hash</a> <code class="prettyprint">p._parentPayoutDistributionHash</code>, <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._parentPayoutNumerators</code>, and <code class="prettyprint">p._parentInvalid</code>. This transaction will trigger a <a href="#UniverseCreated"><code class="prettyprint">UniverseCreated</code></a> event if the Child Universe has not been created yet.</p>
+<p>Creates a new <a href="#child-universe">Child Universe</a> (if it does not already exist) with the given <a href="#payout-set">Payout Set</a> <code class="prettyprint">p._parentPayoutNumerators</code> and <code class="prettyprint">p._parentInvalid</code>. This transaction will trigger a <a href="#UniverseCreated"><code class="prettyprint">UniverseCreated</code></a> event if the Child Universe has not been created yet.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -11974,7 +12003,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
 
 <ul>
-<li><strong><code class="prettyprint">p._parentPayoutDistributionHash</code></strong> (string) Payout Distribution Hash of the <a href="#parent-universe">Parent Universe&rsquo;s</a> <a href="#forked-market">Forked Market</a>, as a 32-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._parentPayoutNumerators</code></strong>  (Array.&lt;number&gt;) Payout Set of the Parent Universe&rsquo;s Parent Universe&rsquo;s Forked Market.</li>
 <li><strong><code class="prettyprint">p._parentInvalid</code></strong>  (boolean) Whether the Parent Universe&rsquo;s Forked Market is <a href="#invalid-outcome">Invalid</a>.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
@@ -12983,8 +13011,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">token</code></strong> (string) Contract address of the contract for the sent token, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">value</code></strong> (string) Quantity of tokens sent.</li>
 <li><strong><code class="prettyprint">symbol</code></strong> (string|null) Token symbol (if any).</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number|null) Market Outcome with which the token is associated (if any).</li>
+<li><strong><code class="prettyprint">isInternalTransfer</code></strong> (boolean) Whether the transfer was a trade/order transaction.</li>
 </ul>
 
 <p><a name="AugurEventLog"></a></p>
@@ -13909,6 +13938,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-constants-get_logs_default_to_block-string">augur.constants.GET_LOGS_DEFAULT_TO_BLOCK (string)</h3>
 
 <p>Block number up to which Augur Node will scan for logged events emitted from Augur&rsquo;s smart contracts.</p>
+
+<h3 id="augur-constants-max_log_bytes_per_block-number">augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)</h3>
+
+<p>Used to calculate how large a WebSocket frame to allow. This is a theoretical limit based on a block being completely filled with Transfer transactions.</p>
+
+<h3 id="augur-constants-max_websocket_frame_size-number">augur.constants.MAX_WEBSOCKET_FRAME_SIZE (number)</h3>
+
+<p>Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 1GB (in the most extreme case) but prevents errors from being thrown.</p>
 
 <h3 id="augur-constants-minimum_trade_size-bignumber">augur.constants.MINIMUM_TRADE_SIZE (BigNumber)</h3>
 
