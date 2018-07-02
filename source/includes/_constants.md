@@ -79,6 +79,14 @@ Block number at which Augur Node will begin scanning for logged events emitted f
 
 Block number up to which Augur Node will scan for logged events emitted from Augur's smart contracts.
 
+### augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)
+
+Used to calculate how large a WebSocket frame to allow. This is a theoretical limit based on a block being completely filled with Transfer transactions.
+
+### augur.constants.MAX_WEBSOCKET_FRAME_SIZE (number)
+
+Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 1GB (in the most extreme case) but prevents errors from being thrown.
+
 ### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
 
 Minimum number of attoShares that can be bought/sold in a trade.

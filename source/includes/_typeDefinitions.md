@@ -17,8 +17,9 @@ augur.js' functions accept and return a variety of different objects, which are 
 * **`token`** (string) Contract address of the contract for the sent token, as a hexadecimal string.
 * **`value`** (string) Quantity of tokens sent.
 * **`symbol`** (string|null) Token symbol (if any).
-* **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
 * **`marketId`** (string|null) Contract address of the Market in which the tranfer took place, as a hexadecimal string (if any).
+* **`outcome`** (number|null) Market Outcome with which the token is associated (if any).
+* **`isInternalTransfer`** (boolean) Whether the transfer was a trade/order transaction.
 
 <a name="AugurEventLog"></a>
 ### AugurEventLog  (Object)

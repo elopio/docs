@@ -42,6 +42,7 @@ augur.accounts.getAccountTransferHistory({
     symbol: "shares",
     marketId: " 0x0000000000000000000000000000000000000001",
     outcome: 0,
+    isInternalTransfer: 0,
   },
   {
     transactionHash: "0x00000000000000000000000000000000000000000000000000000000d3adb33f",
@@ -56,6 +57,7 @@ augur.accounts.getAccountTransferHistory({
     symbol: "shares",
     marketId: " 0x0000000000000000000000000000000000000001",
     outcome: 0,
+    isInternalTransfer: 1,
   },
   {
     transactionHash: "0x00000000000000000000000000000000000000000000000000000000deadb33f",
@@ -70,6 +72,7 @@ augur.accounts.getAccountTransferHistory({
     symbol: "REP",
     marketId: null,
     outcome: null,
+    isInternalTransfer: 0,
   }
 ]
 ```
@@ -103,6 +106,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.account`**  (string) Ethereum address of the account for which to get transfer history, as a 20-byte hexadecimal string.
     * **`p.token`**  (string) &lt;optional> Contract address of the token contract by which to limit the history results, as a 20-byte hexadecimal string.
+    * **`isInternalTransfer`** (boolean) &lt;optional> When set to `true`, only trade/order transfers will be returned; otherwise, all transfers for the account are returned. (This is not perfectly accurate, as it is possible for a trade and a non-trade/order-related transfer to appear in the same transaction. This can occur if done via a smart contract, which performs a standard transfer and a trade in the same transaction.) Defaults to `false`.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort transfer history.
@@ -794,7 +798,11 @@ augur.markets.getMarketPriceHistory({
     price: "5.5",
     amount: "0.2",
     timestamp: 1506474500,
-  }],
+  }, {
+    amount: "2",
+    price: "4.2",
+    timestamp: 1509065474,
+  ],
 }
 
 augur.markets.getMarkets({
@@ -2129,7 +2137,7 @@ augur.trading.getUserTradingHistory({
   marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
   orderType: null,
-  sortBy: null,
+  sortBy: "price",
   isSortDescending: null,
   limit: null,
   offset: null,
@@ -2155,6 +2163,23 @@ augur.trading.getUserTradingHistory({
     shareToken: "0x0100000000000000000000000000000000000000",
     timestamp: 1506474500,
     tradeGroupId: null,
+  }, {
+    amount: "2",
+    logIndex: 0,
+    maker: false,
+    marketCreatorFees: "0",
+    marketId: "0x0000000000000000000000000000000000000001",
+    orderId: "0x1990000000000000000000000000000000000000000000000000000000000000",
+    outcome: 0,
+    price: "4.2",
+    reporterFees: "0",
+    selfFilled: false,
+    settlementFees: "0",
+    shareToken: "0x0100000000000000000000000000000000000000",
+    timestamp: 1509065474,
+    tradeGroupId: null,
+    transactionHash: "0x00000000000000000000000000000000000000000000000000000000d3adb33f",
+    type: "sell",
   }
 ]
 
