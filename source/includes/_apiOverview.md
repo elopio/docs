@@ -26,11 +26,11 @@ var augur = new Augur();
 var ethereumNode = { 
   httpAddresses: [
     "http://127.0.0.1:8545", // local HTTP address for Geth node
-    "rinkeby.ethereum.nodes.augur.net" // hosted http address for Geth node on the Rinkeby test network
+    "https://rinkeby.augur.net/ethereum-http" // hosted http address for Geth node on the Rinkeby test network
   ],
   wsAddresses: [
     "ws://127.0.0.1:8546", // local WebSocket address for Geth node
-    "wss://websocket-rinkeby.ethereum.nodes.augur.net" // hosted WebSocket address for Geth node on the Rinkeby test network
+    "wss://rinkeby.augur.net/ethereum-ws" // hosted WebSocket address for Geth node on the Rinkeby test network
   ]
   // ipc addresses can also be specified as:
   // ipcAddresses: [ ... ]
@@ -86,9 +86,9 @@ Similarly, augur.js will attempt to use the `augurNode` parameter to connect to 
 
 The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique ([Geth's](https://geth.ethereum.org/) Proof-of-Authority protocol) and Aura ([Parity's](https://www.parity.io/) Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:
 
-**dev.augur.net Augur Node (WSS):** ws://127.0.0.1:9001 <br />
-**dev.augur.net Ethereum Node (HTTPS):** http://127.0.0.1:8545 <br />
-**dev.augur.net Ethereum Node (WSS):** ws://127.0.0.1:8546 <br />
+**dev.augur.net Augur Node (WSS):** https://dev.augur.net/augur-node <br />
+**dev.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
+**dev.augur.net Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
 
 **Kovan Augur Node (WSS):** wss://kovan.augur.net/augur-node <br />
 **Kovan Ethereum Node (HTTPS):** https://kovan.augur.net/ethereum-http <br />
