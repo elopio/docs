@@ -491,11 +491,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="kd">var</span> <span class="nx">ethereumNode</span> <span class="o">=</span> <span class="p">{</span> 
   <span class="na">httpAddresses</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"http://127.0.0.1:8545"</span><span class="p">,</span> <span class="c1">// local HTTP address for Geth node</span>
-    <span class="s2">"rinkeby.ethereum.nodes.augur.net"</span> <span class="c1">// hosted http address for Geth node on the Rinkeby test network</span>
+    <span class="s2">"https://rinkeby.augur.net/ethereum-http"</span> <span class="c1">// hosted http address for Geth node on the Rinkeby test network</span>
   <span class="p">],</span>
   <span class="na">wsAddresses</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"ws://127.0.0.1:8546"</span><span class="p">,</span> <span class="c1">// local WebSocket address for Geth node</span>
-    <span class="s2">"wss://websocket-rinkeby.ethereum.nodes.augur.net"</span> <span class="c1">// hosted WebSocket address for Geth node on the Rinkeby test network</span>
+    <span class="s2">"wss://rinkeby.augur.net/ethereum-ws"</span> <span class="c1">// hosted WebSocket address for Geth node on the Rinkeby test network</span>
   <span class="p">]</span>
   <span class="c1">// ipc addresses can also be specified as:</span>
   <span class="c1">// ipcAddresses: [ ... ]</span>
@@ -551,9 +551,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique (<a href="https://geth.ethereum.org/">Geth&rsquo;s</a> Proof-of-Authority protocol) and Aura (<a href="https://www.parity.io/">Parity&rsquo;s</a> Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:</p>
 
-<p><strong>dev.augur.net Augur Node (WSS):</strong> ws://127.0.0.1:9001 <br />
-<strong>dev.augur.net Ethereum Node (HTTPS):</strong> http://127.0.0.1:8545 <br />
-<strong>dev.augur.net Ethereum Node (WSS):</strong> ws://127.0.0.1:8546 <br /></p>
+<p><strong>dev.augur.net Augur Node (WSS):</strong> https://dev.augur.net/augur-node <br />
+<strong>dev.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
+<strong>dev.augur.net Ethereum Node (WSS):</strong> wss://rinkeby.augur.net/ethereum-ws <br /></p>
 
 <p><strong>Kovan Augur Node (WSS):</strong> wss://kovan.augur.net/augur-node <br />
 <strong>Kovan Ethereum Node (HTTPS):</strong> https://kovan.augur.net/ethereum-http <br />
