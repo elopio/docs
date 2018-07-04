@@ -86,9 +86,29 @@ Similarly, augur.js will attempt to use the `augurNode` parameter to connect to 
 
 The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique ([Geth's](https://geth.ethereum.org/) Proof-of-Authority protocol) and Aura ([Parity's](https://www.parity.io/) Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:
 
-**Rinkeby Augur Node (WSS):** wss://rinkeby.augur.nodes.augur.net <br />
-**Rinkeby Ethereum Node (HTTPS):** https://rinkeby.ethereum.nodes.augur.net <br />
-**Rinkeby Ethereum Node (WSS):** wss://websocket-rinkeby.ethereum.nodes.augur.net <br />
+**dev.augur.net Augur Node (WSS):**  <br />
+**dev.augur.net Ethereum Node (HTTPS):** https://dev.augur.net/augur-node <br />
+**dev.augur.net Ethereum Node (WSS):**  <br />
+
+**Kovan Augur Node (WSS):** wss://kovan.augur.net/augur-node <br />
+**Kovan Ethereum Node (HTTPS):** https://kovan.augur.net/ethereum-http <br />
+**Kovan Ethereum Node (WSS):** wss://kovan.augur.net/ethereum-ws <br />
+
+**Rinkeby Augur Node (WSS):** wss://rinkeby.augur.net/augur-node <br />
+**Rinkeby Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
+**Rinkeby Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
+
+**Ropsten Augur Node (WSS):** wss://ropsten.augur.net/augur-node <br />
+**Ropsten Ethereum Node (HTTPS):** https://ropsten.ethereum.nodes.augur.net <br />
+**Ropsten Ethereum Node (WSS):** wss://ropsten.augur.net/ethereum-ws <br />
+
+**srt.augur.net Augur Node (WSS):** wss://srt.augur.net/augur-node <br />
+**srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
+**srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
+
+**stable.augur.net Augur Node (WSS):** wss://stable.augur.net/augur-node <br />
+**stable.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
+**stable.augur.net Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
 
 **Clique Augur Node (WSS):** wss://clique.augur.nodes.augur.net <br />
 **Clique Ethereum Node (HTTPS):** https://clique.ethereum.nodes.augur.net <br />
