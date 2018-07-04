@@ -90,7 +90,7 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **dev.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
 **dev.augur.net Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
 
-**Kovan Augur Node (WSS):** wss://kovan.augur.net/augur-node <br />
+**Kovan Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 **Kovan Ethereum Node (HTTPS):** https://kovan.augur.net/ethereum-http <br />
 **Kovan Ethereum Node (WSS):** wss://kovan.augur.net/ethereum-ws <br />
 
@@ -98,25 +98,17 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **Rinkeby Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
 **Rinkeby Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
 
-**Ropsten Augur Node (WSS):** wss://ropsten.augur.net/augur-node <br />
+**Ropsten Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 **Ropsten Ethereum Node (HTTPS):** https://ropsten.ethereum.nodes.augur.net <br />
 **Ropsten Ethereum Node (WSS):** wss://ropsten.augur.net/ethereum-ws <br />
 
-**srt.augur.net Augur Node (WSS):** wss://srt.augur.net/augur-node <br />
+**srt.augur.net Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 **srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
 
 **stable.augur.net Augur Node (WSS):** wss://stable.augur.net/augur-node <br />
 **stable.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
 **stable.augur.net Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
-
-**Clique Augur Node (WSS):** wss://clique.augur.nodes.augur.net <br />
-**Clique Ethereum Node (HTTPS):** https://clique.ethereum.nodes.augur.net <br />
-
-**Aura Augur Node (WSS):** wss://aura.augur.nodes.augur.net <br />
-**Aura Ethereum Node (HTTPS):** https://aura.ethereum.nodes.augur.net <br />
-
-The statuses of these hosted nodes can be viewed at [http://stats.augur.net](http://stats.augur.net).
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
