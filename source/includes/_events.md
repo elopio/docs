@@ -18,6 +18,22 @@ augur.events.getAllAugurLogs({
 }, function(error, allAugurLogs) {
   console.log(allAugurLogs); 
 });
+
+augur.events.getAllAugurLogs({
+  fromBlock: 2580310
+}, function(error, batchedAugurLogs) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(batchedAugurLogs); 
+  }
+}, function(error) {
+  if (error) {
+    console.log(error); 
+  } else {
+    console.log("Finished retrieving logs");
+  }
+});
 // example output:
 [
   {
@@ -157,18 +173,19 @@ augur.events.stopBlockListeners();
 // example output:
 "true"
 ```
-### augur.events.getAllAugurLogs(p, callback)
+### augur.events.getAllAugurLogs(p, batchCallback, finalCallback)
 
-Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by `blockNumber` and `logIndex`.
+Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by `blockNumber` and `logIndex`. These logs get returned in groups, or batches.
 
-Note: Depending on how many event logs there are to be retrieved, this function can take a long time to run.
+Note: Depending on how many event logs there are to be retrieved, this function can take a long time to complete.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p.fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`). (Note: While this parameter is optional, specifying a `fromBlock` is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)
     * **`p.toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
-* **`callback`** (function) Called when all data has been received and parsed.
+* **`batchCallback`** (function) Called when a batch of logs has been received and parsed.
+* **`finalCallback`** (function) Called when all logs have been received and parsed.
 
 #### **Returns:**
 
