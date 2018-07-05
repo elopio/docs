@@ -589,7 +589,7 @@ Serves as an enum for the state of a Market.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
 * **`marketCreatorFees`** (string) Amount of fees paid to Market creator, in ETH.
 * **`reporterFees`** (string) Amount of fees paid to reporters, in attoETH.
-* **`selfFilled` (boolean) Whether the user filled his/her own Order.
+* **`selfFilled`** (boolean) Whether the user filled his/her own Order.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome being bought/sold.
 * **`shareToken`** (string) Contract address of the share token that was bought or sold, as a hexadecimal string.
