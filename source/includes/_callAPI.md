@@ -440,14 +440,6 @@ Fee Window Call API
 // including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.
 var feeWindow = "0x37a809f8139e5637fd94c7d34912cb15c6496111";
 
-augur.api.FeeWindow.getAvgReportingGasPrice({ 
-  tx: { to: feeWindow } 
-}, function (error, avgReportingGasPrice) { 
-  console.log(avgReportingGasPrice); 
-});
-// example output:
-"12500000000"
-
 augur.api.FeeWindow.getEndTime({ 
   tx: { to: feeWindow } 
 }, function (error, endTime) { 
@@ -530,21 +522,6 @@ false
 ```
 Provides JavaScript bindings for the [FeeWindow Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol), which allows for the buying and redeeming of [Participation Tokens](#participation-token).
 
-### augur.api.FeeWindow.getAvgReportingGasPrice(p, callback)
-
-Returns the average amount of gas spent to submit either a [Designated Report](#designated-report) or [First Public Report](#first-public-report) in the specified [Fee Window](#fee-window).
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Fee Window on which to call this function, as a 20-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (string) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as a stringified unsigned integer.
-
 ### augur.api.FeeWindow.getEndTime(p, callback)
 
 Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will end. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active.
@@ -562,7 +539,7 @@ Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will e
 
 ### augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)
 
-Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window), in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) and [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window), in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
 
 #### **Parameters:**
 
@@ -1165,14 +1142,6 @@ augur.api.Market.getParticipantStake({
 // example output:
 "161278368761238475"
 
-augur.api.Market.getReporterGasCostsFeeAttoeth(
-  tx: { to: market } 
-}, function (error, reporterGasCostsFeeAttoeth) { 
-  console.log(reporterGasCostsFeeAttoeth); 
-});
-// example output:
-"17246000000000000"
-
 augur.api.Market.getUniverse({ 
   tx: { to: market } 
 }, function (error, universe) { 
@@ -1512,21 +1481,6 @@ Returns the total amount of [attoREP](#atto-prefix) Staked on all [Outcomes](#ou
 #### **Returns:**
 
 * (string) Total attoREP Staked on the Market, as a stringified unsigned integer.
-
-### augur.api.Market.getReporterGasCostsFeeAttoeth(p, callback)
-
-Returns the [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond) in [AttoETH](#atto-prefix) that is paid to the [Initial Reporter](#initial-reporter) in the event of a [Designated Report](#designated-report) no-show, or refunded to the [Market Creator Mailbox](#market-creator-mailbox) if the [Designated Reporter](#designated-reporter) does show up. The [Market](#market) must be specified in `tx`. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.  
-    * **`p.tx`** (Object) Object containing details about how this function call should be made.
-        * **`p.tx.to`** (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.
-* **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
-
-#### **Returns:**
-
-* (string) Designated Report No-Show Gas Bond, in attoETH.
 
 ### augur.api.Market.getReportingParticipant(p, callback)
 
