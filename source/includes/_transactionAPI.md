@@ -88,7 +88,7 @@ The other properties that can be specified in the `tx` object are discussed in t
 
 ### The `meta` Object
 
-All Transaction API functions accept a `meta` object as a parameter in order to sign the transaction. The `meta` object contains a `signer` property, which should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account that wishes to initiate the transaction. (When logged in using an Edge account, the private key buffer can be obtained by outputting the value `state.loginAccount.meta.signer`.) The `meta` object also contains an `accountType` property, which should be set to "privateKey", "ledger", or "trezor". The Transaction API functions attempt to modify information on the blockchain, which requires the transaction to be signed. The `meta` parameter is not required when calling Transaction API functions while using MetaMask (which will pop up a separate window asking to confirm the transaction).
+All Transaction API functions accept a `meta` object as a parameter in order to sign the transaction. The `meta` object contains a `signer` property, which should be set to the private key buffer or a signing function, provided by a hardware wallet, of the account that wishes to initiate the transaction. (When logged in using an Edge account, the private key buffer can be obtained by outputting the value `state.loginAccount.meta.signer`.) The `meta` object also contains an `accountType` property, which should be set to "privateKey", "ledger", "trezor", "edge", or "unlockedEthereumNode". The Transaction API functions attempt to modify information on the blockchain, which requires the transaction to be signed. The `meta` parameter is not required when calling Transaction API functions while using MetaMask (which will pop up a separate window asking to confirm the transaction).
 
 ### Callbacks
 
@@ -134,7 +134,7 @@ var tx = {
 // privateKeyorSigner is either the privateKey buffer of the account trying to send the transaction or a function to sign a transaction (generally from a hardware wallet). This example uses the Buffer returned from the `augur.accounts.login` function.
 var privateKeyOrSigner = [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25];
 
-// accountType is a string set to "privateKey", "ledger", or "trezor".
+// accountType is a string set to "privateKey", "ledger", "trezor", "edge", or "unlockedEthereumNode".
 var accountType = "privateKey";
 
 // onSent callback fires when the initial eth_sendTransaction response is received
@@ -204,7 +204,7 @@ The `signature` and `params` fields are required if the transaction function bei
 
 The `privateKeyOrSigner` is required when attempting to execute a transaction that will modify the blockchain (`eth_sendTransaction`). If the function is simply getting information (`eth_call`) `privateKeyOrSigner` can be null. Otherwise, `privateKeyOrSigner` should be the Private Key Buffer for the logged-in account or a function to sign transactions provided by a hardware wallet.
 
-The `accountType` is a string that can be "privateKey", "trezor", or "ledger", depending on the type of account that is sending the transaction.
+The `accountType` is a string that can be "privateKey", "ledger", "trezor", "edge", or "unlockedEthereumNode", depending on the type of account that is sending the transaction.
 
 **Under the hood, `augur.rpc.transact` carries out the following sequence:**
 

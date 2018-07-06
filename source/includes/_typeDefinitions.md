@@ -364,7 +364,7 @@ Authentication metadata for raw transactions.
 
 #### **Properties:** 
 * **`signer`** (buffer|function) Private key buffer or a signing function provided by a hardware wallet, of the account initiating the transaction.
-* **`accountType`** (string) Type of account that is signing the transaction. Possible values include "privateKey", "ledger", and "trezor".
+* **`accountType`** (string) Type of account that is signing the transaction. Possible values include "privateKey", "ledger", "trezor", "edge", and "unlockedEthereumNode".
 
 <a name="NoKeystoreAccount"></a>
 ### NoKeystoreAccount  (Object)
