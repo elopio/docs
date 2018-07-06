@@ -384,15 +384,15 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <h2 id="designated-reporting-state">Designated Reporting State</h2>
 
-<p>When creating a Market, <a href="#market-creator">Market Creators</a> are required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#designated-report-no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (state b in the figure above).</p>
+<p>When creating a Market, <a href="#market-creator">Market Creators</a> are required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>. During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the No-Show REP Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (state b in the figure above).</p>
 
-<p>If the Designated Reporter submits a <a href="#report">Report</a> on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the <a href="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (state c in the figure above), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+<p>If the Designated Reporter submits a <a href="#report">Report</a> on time, then the No-Show REP Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the <a href="waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (state c in the figure above), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <h2 id="open-reporting-state">Open Reporting State</h2>
 
-<p>If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the <a href="#designated-report-no-show-bond">No-Show Bond</a>, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, anyone can report the Outcome of the Market. When the Designated Reporter fails to Report, the first Reporter who Reports on the Outcome of a Market is called the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
+<p>If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, anyone can report the Outcome of the Market. When the Designated Reporter fails to Report, the first Reporter who Reports on the Outcome of a Market is called the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
-<p>The Market’s First Public Reporter receives the forfeited No-Show Bond in the form of Stake on their chosen Outcome, so they may claim the <a href="#designated-report-no-show-gas-bond">No-Show REP Bond</a> only if their Reported Outcome agrees with the Market’s <a href="#final-outcome">Final Outcome</a>. They also receive the <a href="#designated-report-no-show-rep-bond">No-Show Gas Bond</a> after the Market has Finalized only if their Reported Outcome agrees with the Market’s Final Outcome.</p>
+<p>The Market’s First Public Reporter receives the forfeited <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> in the form of Stake on their chosen Outcome, so they may claim the No-Show REP Bond only if their Reported Outcome agrees with the Market’s <a href="#final-outcome">Final Outcome</a>.</p>
 
 <p>The First Public Reporter does not need to Stake any of their own <a href="#rep">REP</a> when Reporting the Outcome of the Market. In this way, any Market whose Designated Reporter fails to Report is expected to have its Outcome reported by someone very soon after entering the Open Reporting Phase.</p>
 
@@ -451,9 +451,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>The <a href="#designated-reporting-phase">Designated Reporting Phase</a> lasts a maximum of three (3) days and ends immediately when the Designated Reporter submits their Report and the <a href="#tentative-outcome">Tentative Outcome</a> is set for the Market.</p>
 
-<p>If the Designated Reporter fails to Report within the Designated Reporting Phase, the Market Creator forfeits the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> and the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a>, and the Market is moved into the <a href="#open-reporting-phase">Open Reporting Phase</a>. These <a href="#designated-report-no-show-bond">No-Show Bonds</a> are then used to help pay for the gas costs and add to the <a href="#rep">REP</a> <a href="#first-public-reporter-stake">Staked</a> by the <a href="#first-public-reporter">First Public Reporter</a>.</p>
+<p>If the Designated Reporter fails to Report within the Designated Reporting Phase, the Market Creator forfeits the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>, and the Market is moved into the <a href="#open-reporting-phase">Open Reporting Phase</a>. The No-Show REP Bond is then used to add to the <a href="#rep">REP</a> <a href="#first-public-reporter-stake">Staked</a> by the <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
-<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond and the No-Show Gas Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than the <a href="#fork-threshold">Fork Threshold</a> Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
+<p>If the Designated Reporter does successfully Report within the Designated Reporting Phase, the No-Show REP Bond is refunded to the Market Creator immediately and the Market enters the <a href="#dispute-round-phase">Dispute Round Phase</a>, which lasts for seven (7) days. During this 7-day period, any <a href="#rep">REP</a> holder can <a href="#dispute-stake">Stake</a> REP on an outcome other than the <a href="#tentative-outcome">Tentative Outcome</a> and receive a proportionate amount of Participation Tokens in return. The <a href="#participation-token">Participation Tokens</a> allow the holder to collect fees at the end of the current <a href="#fee-window">Fee Window</a>. The Staked REP goes toward filling the Dispute Bond for the Outcome on which it was Staked. If that outcome gets enough REP Staked on it to fill the Dispute Bond size, that Outcome becomes the new Tentative Outcome, and the Market returns to the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (or <a href="#fork">Forks</a> if the Outcome gets more than the <a href="#fork-threshold">Fork Threshold</a> Staked on it). If the Market is left unchallenged for the duration of the Dispute Round Phase, then the Market&rsquo;s Tentative Outcome becomes the <a href="#final-outcome">Final Outcome</a> and the Market is considered <a href="#finalized-market">Finalized</a>, allowing the Settlement of Shares.</p>
 
 <h2 id="fee-window-details">Fee Window Details</h2>
 
@@ -463,7 +463,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Markets are placed into the next available Fee Window once the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> submits a <a href="#report">Report</a>. For example, if a Market&rsquo;s Designated Report is submitted at 12:00 AM EST on January 3rd, 2053 and a Fee Window was just started on January 1st 2053, the Market would move into the next Fee Window that would be starting on January 8th, 2053, or 7 days since the start of the January 1st Window.</p>
 
-<p>Any REP holder can participate in a Fee Window. In fact, in some cases, someone without any REP is able to successfully Report on Markets in the <a href="#open-reporting-phase">Open Reporting Phase</a>. This case only occurs when the Market&rsquo;s Designated Reporter fails to Report during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. In this situation, the first person to submit a Report can do so and Stake 0 REP on the Report. This is the true because the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> is added to the First Public Reporter&rsquo;s Stake, so in this case the Stake can be 0 as it will get the bond added to it. (The First Public Reporter must still pay the gas cost to submit the Report, but they will receive the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> once the Market <a href="#finalizes">Finalizes</a> if the <a href="#outcome">Outcome</a> they picked becomes the <a href="#final-outcome">Final Outcome</a>.) This creates a race to be the First Public Reporter so as to attempt to get free REP from reporting correctly and earning the No-Show REP Bond.</p>
+<p>Any REP holder can participate in a Fee Window. In fact, in some cases, someone without any REP is able to successfully Report on Markets in the <a href="#open-reporting-phase">Open Reporting Phase</a>. This case only occurs when the Market&rsquo;s Designated Reporter fails to Report during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. In this situation, the first person to submit a Report can do so and Stake 0 REP on the Report. This is the true because the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> is added to the First Public Reporter&rsquo;s Stake, so in this case the Stake can be 0 as it will get the bond added to it. (The First Public Reporter must still pay the gas cost to submit the Report.) This creates a race to be the First Public Reporter so as to attempt to get free REP from reporting correctly and earning the No-Show REP Bond.</p>
 
           <h1 id="api-overview">API Overview</h1>
 
@@ -4639,14 +4639,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// including `augur.api.Universe.getCurrentFeeWindow` and `augur.api.Universe.getFeeWindowByTimestamp`.</span>
 <span class="kd">var</span> <span class="nx">feeWindow</span> <span class="o">=</span> <span class="s2">"0x37a809f8139e5637fd94c7d34912cb15c6496111"</span><span class="p">;</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getAvgReportingGasPrice</span><span class="p">({</span> 
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">avgReportingGasPrice</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">avgReportingGasPrice</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"12500000000"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">FeeWindow</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">feeWindow</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> 
@@ -4729,31 +4721,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/FeeWindow.sol">FeeWindow Solidity Contract</a>, which allows for the buying and redeeming of <a href="#participation-token">Participation Tokens</a>.</p>
 
-<h3 id="augur-api-feewindow-getavgreportinggasprice-p-callback">augur.api.FeeWindow.getAvgReportingGasPrice(p, callback)</h3>
-
-<p>Returns the average amount of gas spent to submit either a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a> in the specified <a href="#fee-window">Fee Window</a>.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Fee Window on which to call this function, as a 20-byte hexadecimal string.</li>
-</ul></li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(string) Average amount of gas spent to submit a Designated Report or First Public Report in the specified Fee Window, as a stringified unsigned integer.</li>
-</ul>
-
 <h3 id="augur-api-feewindow-getendtime-p-callback">augur.api.FeeWindow.getEndTime(p, callback)</h3>
 
 <p>Returns a Unix timestamp for when the specified <a href="#fee-window">Fee Window</a> will end. A Fee Window is considered active for a total of 7 days, then ends, and is no longer considered to be active.</p>
@@ -4781,7 +4748,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-feewindow-getnumdesignatedreportnoshows-p-callback">augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)</h3>
 
-<p>Returns the number of <a href="#market">Markets</a> belonging to the specified <a href="#fee-window">Fee Window</a>, in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-public-reporter">First Public Reporter</a> because these Markets have yet to receive a <a href="#report">Report</a>. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
+<p>Returns the number of <a href="#market">Markets</a> belonging to the specified <a href="#fee-window">Fee Window</a>, in which the <a href="#designated-reporter">Designated Reporter</a> failed to <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. These Markets will have a <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> up for grabs for the <a href="#first-public-reporter">First Public Reporter</a> because these Markets have yet to receive a <a href="#report">Report</a>. This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> was <a href="#challenge">Challenged</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -5590,14 +5557,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"161278368761238475"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getReporterGasCostsFeeAttoeth</span><span class="p">(</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">reporterGasCostsFeeAttoeth</span><span class="p">)</span> <span class="p">{</span> 
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">reporterGasCostsFeeAttoeth</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"17246000000000000"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getUniverse</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">universe</span><span class="p">)</span> <span class="p">{</span> 
@@ -6105,31 +6064,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(string) Total attoREP Staked on the Market, as a stringified unsigned integer.</li>
-</ul>
-
-<h3 id="augur-api-market-getreportergascostsfeeattoeth-p-callback">augur.api.Market.getReporterGasCostsFeeAttoeth(p, callback)</h3>
-
-<p>Returns the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> in <a href="#atto-prefix">AttoETH</a> that is paid to the <a href="#initial-reporter">Initial Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator-mailbox">Market Creator Mailbox</a> if the <a href="#designated-reporter">Designated Reporter</a> does show up. The <a href="#market">Market</a> must be specified in <code class="prettyprint">tx</code>. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed.</p>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
-</ul></li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(string) Designated Report No-Show Gas Bond, in attoETH.</li>
 </ul>
 
 <h3 id="augur-api-market-getreportingparticipant-p-callback">augur.api.Market.getReportingParticipant(p, callback)</h3>
@@ -9637,7 +9571,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-forkandredeem-p">augur.api.InitialReporter.forkAndRedeem(p)</h3>
 
-<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe. This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). When called by a user who who submitted the Initial Report, it will also transfer the REP Staked on the Initial Report&rsquo;s Outcome (and the <a href="#no-show-gas-bond">No-Show Gas Bond</a>, in Ether, if applicable) to the Initial Reporter of the Forked Market. </p>
+<p>Causes a <a href="#child-universe">Child Universe</a> to be created for the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a> and migrates the <a href="#rep">REP</a> <a href="#dispute-stake">Staked</a> by the <a href="#initial-reporter">Initial Reporter</a> to the Child Universe. This transaction can be called at any time after the <a href="#fork">Fork</a> has begun (including after the <a href="#market">Market</a> has been <a href="#finalized-market">Finalized</a>). When called by a user who who submitted the Initial Report, it will also transfer the REP Staked on the Initial Report&rsquo;s Outcome to the Initial Reporter of the Forked Market. </p>
 
 <p>This transaction will trigger a <a href="#ReportingParticipantDisavowed">ReportingParticipantDisavowed</a> event if the InitialReporter was forked without any errors.</p>
 
@@ -9674,7 +9608,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-redeem-p">augur.api.InitialReporter.redeem(p)</h3>
 
-<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>. If the First Public Reporter submitted the Initial Report, this function will also redeem the <a href="#no-show-gas-bond">No-Show Gas Bond</a> in Ether. </p>
+<p>Redeems the <a href="#rep">REP</a> that the <a href="#designated-reporter">Designated Reporter</a> or <a href="#first-public-reporter">First Public Reporter</a> Staked on the <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>.</p>
 
 <p>This transaction will trigger an <a href="#InitialReporterRedeemed"><code class="prettyprint">InitialReporterRedeemed</code></a> event if the REP/Ether was redeemed without any errors.</p>
 
@@ -9744,7 +9678,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-withdrawinemergency-p">augur.api.InitialReporter.withdrawInEmergency(p)</h3>
 
-<p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, <a href="#initial-reporter">Initial Reporters</a> can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Initial Report</a> <a href="#outcome">Outcome</a>, as well as the <a href="no-show-gas-bond">No-Show Gas Bond</a> (in cases where the <a href="#first-public-reporter">First Public Reporter</a> submitted the Initial Report instead of the <a href="#designated-reporter">Designated Reporter</a>).</p>
+<p>If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a <a href="#developer-mode">halted</a> state until the issue is resolved. In such instances, most regularly-used functions in Augur&rsquo;s backend will become unuseable until the system is returned to its normal state. When this happens, <a href="#initial-reporter">Initial Reporters</a> can call the <code class="prettyprint">withdrawInEmergency</code> function to withdraw the <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> on the <a href="#dispute-crowdsourcer">Initial Report</a> <a href="#outcome">Outcome</a> (in cases where the <a href="#first-public-reporter">First Public Reporter</a> submitted the Initial Report instead of the <a href="#designated-reporter">Designated Reporter</a>).</p>
 
 <p>This transaction will fail if:</p>
 
@@ -10261,7 +10195,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-market-migratethroughonefork-p">augur.api.Market.migrateThroughOneFork(p)</h3>
 
-<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="#designated-report-no-show-bond">No-Show Bond</a> to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Child Universe.</p>
+<p>Migrates the <a href="#market">Market</a> into a winning <a href="#child-universe">Child Universe</a> from a <a href="#fork">Forked</a> <a href="#parent-universe">Parent Universe</a>. When a Fork occurs, there is a <a href="#fork-period">Fork Period</a>, wherein <a href="#rep">REP</a> holders migrate their REP to the <a href="#universe">Universe</a> they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the <a href="#winning-universe">Winning Universe</a>. Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it&rsquo;s been decided. This function also migrates the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a> to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Child Universe.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -11959,17 +11893,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"10000"</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCacheTargetReporterGasCosts</span><span class="p">({</span>
-  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
-    <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
-    <span class="na">send</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">targetReporterGasCosts</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">targetReporterGasCosts</span><span class="p">);</span> 
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="s2">"9000000000000000"</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getOrCacheValidityBond</span><span class="p">({</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
     <span class="na">to</span><span class="p">:</span> <span class="nx">universeAddress</span><span class="p">,</span>
@@ -12047,7 +11970,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </code></pre></div>
 <p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol">Universe Solidity Contract</a>, which allows for the creation of <a href="#market">Markets</a> and provides functions for obtaining information about a given <a href="#universe">Universe</a>.</p>
 
-<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond), [Designated Report No-Show Gas Bond](#designated-report-no-show-gas-bond), & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
+<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond) & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
 <h3 id="augur-api-universe-createcategoricalmarket-p">augur.api.Universe.createCategoricalMarket(p)</h3>
 
@@ -12313,7 +12236,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-universe-getorcachemarketcreationcost-p">augur.api.Universe.getOrCacheMarketCreationCost(p)</h3>
 
-<p>Gets the estimated amount of <a href="#atto-prefix">attoETH</a> required to create a <a href="#market">Market</a> in the specified <a href="#universe">Universe</a>. The amount returned by this function is equivalent to the sum returned by the transactions <code class="prettyprint">augur.api.Universe.getOrCacheValidityBond</code> and <code class="prettyprint">augur.api.Universe.getOrCacheTargetReporterGasCosts</code>. If the values of the <a href="#validity-bond">Validity Bond</a> and the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> for the current <a href="#fee-window">Fee Window</a> have not already been cached in the Universe contract, this function will cache them.</p>
+<p>Gets the estimated amount of <a href="#atto-prefix">attoETH</a> required to create a <a href="#market">Market</a> in the specified <a href="#universe">Universe</a>. The amount returned by this function is equivalent to the value returned by the transaction <code class="prettyprint">augur.api.Universe.getOrCacheValidityBond</code>. If the value of the <a href="#validity-bond">Validity Bond</a> for the current <a href="#fee-window">Fee Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
 
 <h4 id="parameters">Parameters:</h4>
 
@@ -12369,36 +12292,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will return the number by which the total payout amount for a Market is divided in order to calculate the Reporting Fee, as a stringified unsigned integer.</li>
-</ul>
-
-<h3 id="augur-api-universe-getorcachetargetreportergascosts-p">augur.api.Universe.getOrCacheTargetReporterGasCosts(p)</h3>
-
-<p>Gets the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> that is paid to the <a href="#first-public-reporter">First Public Reporter</a> in the event of a <a href="#designated-report">Designated Report</a> no-show, or refunded to the <a href="#market-creator-mailbox">Market Creator Mailbox</a> if the <a href="#designated-reporter">Designated Reporter</a> does report. The amount returned by this function will typically be well above the actual cost to create a Market, just to ensure the Market creation will succeed. If the Designated Report No-Show Gas Bond for the current <a href="#fee-window">Fee Window</a> has not already been cached in the Universe contract, this function will cache it.</p>
-
-<h4 id="parameters">Parameters:</h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
-
-<ul>
-<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.send</code></strong> (boolean) &lt;optional&gt; Whether this function should be executed as a transaction. When set to <code class="prettyprint">false</code>, this function will be executed as a call, which will simply return the last value that was cached (and will not use any gas). When set to <code class="prettyprint">true</code>, this function will be executed as a transaction, which will use gas to re-calculate the value and cache it. (However, the return value will not be <a href="#transaction-return-values">obtainable</a>.)</li>
-<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) &lt;optional&gt; Gas limit to use when submitting this transaction, as a hexadecimal string. This does not need to be set if <code class="prettyprint">p.tx.send</code> is <code class="prettyprint">false</code>.</li>
-</ul></li>
-<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
-<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
-<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
-<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
-</ul></li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values. However, if <code class="prettyprint">p.tx.send</code> is set to <code class="prettyprint">false</code>, this function will return the Designated Report No-Show Gas Bond, in <a href="#atto-prefix">attoETH</a>, that is paid to the First Public Reporter (in the event of a Designated Report no-show), or refunded to the Market Creator Mailbox (if the Designated Reporter does report). This value will be returned as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-universe-getorcachevaliditybond-p">augur.api.Universe.getOrCacheValidityBond(p)</h3>
@@ -14527,19 +14420,9 @@ Goals:
 
 <p>A Designated Report occurs when a <a href="#designated-reporter">Designated Reporter</a> <a href="#designated-reporter-stake">Stakes</a> <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a>. This Outcome then becomes the <a href="#tentative-outcome">Tentative Outcome</a> for the Market, and the Market changes to the <a href="#waiting-for-the-next-fee Window to Begin Phase">Waiting for the Next Fee Window to Begin Phase</a>. </p>
 
-<h2 id="designated-report-no-show-bond">Designated Report No-Show Bond</h2>
-
-<p><a href="#market-creator">Market Creators</a> must put up a Designated Report No-Show Bond (or No-Show Bond, for brevity) when creating a new <a href="#market">Market</a>. The No-Show Bond is comprised of two parts: the <a href="#designated-report-no-show-gas-bond">No-Show Gas Bond</a> and the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>. If the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a> then the No-Show Bond is returned to the Market Creator. Otherwise, the No-Show Bond is given to the <a href="#first-public-reporter">First Public Reporter</a> to cover the Stake in their Reported <a href="#outcome">Outcome</a>, and potentially their gas cost for submitting the report (if the Outcome they staked on becomes the <a href="#final-outcome">Final Outcome</a>).</p>
-
-<h2 id="designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</h2>
-
-<p>The Designated Report No-Show Gas Bond (or No-Show Gas Bond for brevity) is paid for using ETH by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. This Bond is completely refunded to the Market Creator as soon as the <a href="#designated-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. This Bond is used in the event of a Designated Reporter failing to submit a Report during the Designated Reporting Phase and a <a href="#first-public-reporter">First Public Reporter</a> submitting a Report instead. When a First Public Reporter submits a <a href="#first-public-report">First Public Report</a>, they are required to pay the gas cost. However, if the <a href="#outcome">Outcome</a> of the First Public Report becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter will receive the No-Show Gas Bond when the Market is <a href="#finalized-market">Finalized</a>.</p>
-
-<p>The No-Show Gas Bond is set at twice the average gas cost for <a href="#report">Reporting</a> during the previous <a href="#fee-window">Fee Window</a>.</p>
-
 <h2 id="designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</h2>
 
-<p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report, but they will receive the Designated Report No-Show Gas Bond when the Market Finalizes, provided that the <a href="#outcome">Outcome</a> they reported becomes the Final Outcome.)</p>
+<p>The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)</p>
 
 <p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show REP Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show REP Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show REP Bond from the previous Fee Window. Then the amount of the No-Show REP Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
 
@@ -14559,7 +14442,7 @@ Goals:
 
 <h2 id="designated-reporting-phase">Designated Reporting Phase</h2>
 
-<p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#designated-report-no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the First Public Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market.</p>
+<p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>.</p>
 
 <h2 id="developer-mode">Developer Mode</h2>
 
@@ -14633,7 +14516,7 @@ Goals:
 
 <h2 id="first-public-report">First Public Report</h2>
 
-<p>When a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="designated-report">Designated Report</a>, the Market moves to the <a href="#open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#no-show-rep-bond">No-Show REP Bond</a> put up by the <a href="#market-creator">Market Creator</a> can be used by any user to <a href="#first-public-reporter-stake">Stake</a> <a href="#rep">REP</a> on a <a href="#tentative-outcome">Tentative Outcome</a>. This Report is called the <a href="#first-public-report">First Public Report</a>. The <a href="#first-public-reporter">First Public Reporter</a> must pay the gas cost of submitting the First Public Reporter, but they can collect the <a href="#no-show-gas-bond">No-Show Gas Bond</a> put up by the Market Creator if the <a href="#outcome">Outcome</a> they chose becomes the <a href="#final-outcome">Final Outcome</a> for the Market.</p>
+<p>When a <a href="#market">Market&rsquo;s</a> <a href="#designated-reporter">Designated Reporter</a> fails to submit a <a href="designated-report">Designated Report</a>, the Market moves to the <a href="#open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#no-show-rep-bond">No-Show REP Bond</a> put up by the <a href="#market-creator">Market Creator</a> can be used by any user to <a href="#first-public-reporter-stake">Stake</a> <a href="#rep">REP</a> on a <a href="#tentative-outcome">Tentative Outcome</a>. This Report is called the <a href="#first-public-report">First Public Report</a>. The <a href="#first-public-reporter">First Public Reporter</a> must pay the gas cost of submitting the First Public Reporter.</p>
 
 <h2 id="first-public-reporter">First Public Reporter</h2>
 
@@ -14665,7 +14548,7 @@ Goals:
 
 <h2 id="initial-report">Initial Report</h2>
 
-<p>The Initial Report is simply the first <a href="#report">Report</a> placed on a <a href="#market">Market</a>. The Initial Report often will come from the <a href="#designed-reporter">Designated Reporter</a> for the Market, which would immediately refund the <a href="#designated-report-no-show-gas-bond">Designated Report No-Show Gas Bond</a> and <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> to the <a href="#market-creator">Market Creator</a>. However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#designated-report-no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>, and the <a href="Designated Report No-Show Gas Bond">No-Show Gas Bond</a> goes to the First Public Reporter if the Tentative Outcome they Reported becomes the <a href="#final-outcome">Final Outcome</a> of the Market. This provides an incentive to submit the First Public Report, since the First Public Reporter stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual <a href="#final-outcome">Final Outcome</a>.</p>
+<p>The Initial Report is simply the first <a href="#report">Report</a> placed on a <a href="#market">Market</a>. The Initial Report often will come from the <a href="#designed-reporter">Designated Reporter</a> for the Market, which would immediately refund the <a href="#designated-report-no-show-rep-bond">Designated Report No-Show REP Bond</a> to the <a href="#market-creator">Market Creator</a>. However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show REP Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>. This provides an incentive to submit the First Public Report, since the First Public Reporter stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual <a href="#final-outcome">Final Outcome</a>.</p>
 
 <h2 id="initial-reporter">Initial Reporter</h2>
 
@@ -14697,7 +14580,7 @@ Goals:
 
 <h2 id="market-creator-mailbox">Market Creator Mailbox</h2>
 
-<p>A Market Creator Mailbox is an address that belongs to the <a href="#market-creator">Creator</a> of a <a href="#market">Market</a>. All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as <a href="#validity-bond">Validity Bonds</a>, <a href="#designated-report-no-show-gas-bond">No-Show Gas Bonds</a>, and <a href="#designated-report-no-show-rep-bond">No-Show REP Bonds</a>) are also sent to the Market Creator Mailbox.</p>
+<p>A Market Creator Mailbox is an address that belongs to the <a href="#market-creator">Creator</a> of a <a href="#market">Market</a>. All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as <a href="#validity-bond">Validity Bonds</a> and <a href="#designated-report-no-show-rep-bond">No-Show REP Bond</a>) are also sent to the Market Creator Mailbox.</p>
 
 <h2 id="market-resolution">Market Resolution</h2>
 
