@@ -555,7 +555,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>dev.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
 <strong>dev.augur.net Ethereum Node (WSS):</strong> wss://rinkeby.augur.net/ethereum-ws <br /></p>
 
-<p><strong>Kovan Augur Node (WSS):</strong> wss://kovan.augur.net/augur-node <br />
+<p><strong>Kovan Augur Node (WSS):</strong> Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 <strong>Kovan Ethereum Node (HTTPS):</strong> https://kovan.augur.net/ethereum-http <br />
 <strong>Kovan Ethereum Node (WSS):</strong> wss://kovan.augur.net/ethereum-ws <br /></p>
 
@@ -563,25 +563,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>Rinkeby Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
 <strong>Rinkeby Ethereum Node (WSS):</strong> wss://rinkeby.augur.net/ethereum-ws <br /></p>
 
-<p><strong>Ropsten Augur Node (WSS):</strong> wss://ropsten.augur.net/augur-node <br />
+<p><strong>Ropsten Augur Node (WSS):</strong> Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 <strong>Ropsten Ethereum Node (HTTPS):</strong> https://ropsten.ethereum.nodes.augur.net <br />
 <strong>Ropsten Ethereum Node (WSS):</strong> wss://ropsten.augur.net/ethereum-ws <br /></p>
 
-<p><strong>srt.augur.net Augur Node (WSS):</strong> wss://srt.augur.net/augur-node <br />
+<p><strong>srt.augur.net Augur Node (WSS):</strong> Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 <strong>srt.augur.net Ethereum Node (HTTPS):</strong> https://srt.augur.net/ethereum-http <br />
 <strong>srt.augur.net Ethereum Node (WSS):</strong> wss://srt.augur.net/ethereum-ws <br /></p>
 
 <p><strong>stable.augur.net Augur Node (WSS):</strong> wss://stable.augur.net/augur-node <br />
 <strong>stable.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
 <strong>stable.augur.net Ethereum Node (WSS):</strong> wss://rinkeby.augur.net/ethereum-ws <br /></p>
-
-<p><strong>Clique Augur Node (WSS):</strong> wss://clique.augur.nodes.augur.net <br />
-<strong>Clique Ethereum Node (HTTPS):</strong> https://clique.ethereum.nodes.augur.net <br /></p>
-
-<p><strong>Aura Augur Node (WSS):</strong> wss://aura.augur.nodes.augur.net <br />
-<strong>Aura Ethereum Node (HTTPS):</strong> https://aura.ethereum.nodes.augur.net <br /></p>
-
-<p>The statuses of these hosted nodes can be viewed at <a href="http://stats.augur.net">http://stats.augur.net</a>.</p>
 
 <p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
 
@@ -8884,7 +8876,40 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">});</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CompleteSets</span><span class="p">.</span><span class="nx">publicBuyCompleteSetsWithCash</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">completeSetsAddress</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s2">"0x16345785d8a0000"</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CompleteSets</span><span class="p">.</span><span class="nx">publicSellCompleteSets</span><span class="p">({</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
+  <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
+    <span class="na">to</span><span class="p">:</span> <span class="nx">completeSetsAddress</span><span class="p">,</span>
+    <span class="na">gas</span><span class="p">:</span> <span class="s2">"0x632ea0"</span> 
+  <span class="p">},</span>
+  <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+    <span class="na">accountType</span><span class="p">:</span> <span class="s2">"privateKey"</span>
+  <span class="p">},</span>
+  <span class="na">onSent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onSuccess</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">},</span>
+  <span class="na">onFailed</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">CompleteSets</span><span class="p">.</span><span class="nx">publicSellCompleteSetsWithCash</span><span class="p">({</span>
   <span class="na">_market</span><span class="p">:</span> <span class="nx">_market</span><span class="p">,</span>
   <span class="na">_amount</span><span class="p">:</span> <span class="nx">_amount</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> 
@@ -8943,6 +8968,38 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
 </ul>
 
+<h3 id="augur-api-completesets-publicbuycompletesetswithcash-p">augur.api.CompleteSets.publicBuyCompleteSetsWithCash(p)</h3>
+
+<p>This function is not fully implemented yet, but is a intended to be a point-of-contact that would work similarly to <code class="prettyprint">augur.api.CompleteSets.publicBuyCompleteSets</code> and allow for a <a href="https://0xproject.com/">0x</a>-style trading system.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to purchase of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy a <a href="#complete-set">Complete Set</a>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
 <h3 id="augur-api-completesets-publicsellcompletesets-p">augur.api.CompleteSets.publicSellCompleteSets(p)</h3>
 
 <p>Sell <code class="prettyprint">p._amount</code> worth of <a href="#share">Shares</a> in all <a href="#outcome">Outcomes</a> of <a href="#market">Market</a> <code class="prettyprint">p._market</code>.</p>
@@ -8955,6 +9012,37 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ul>
 
 <p>When successful, this transaction will trigger a <a href="#CompleteSetsSold"><code class="prettyprint">CompleteSetsSold</code></a> event, which will record to the Ethereum blockchain <code class="prettyprint">msg.sender</code>, <code class="prettyprint">p._market</code>, the Universe in which <code class="prettyprint">p._market</code> exists, and <code class="prettyprint">p._amount</code> sold.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
+
+<ul>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 20-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to sell of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
+</ul></li>
+<li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
+<li><strong><code class="prettyprint">p.onSent</code></strong>  (function) &lt;optional&gt; Callback function that executes once the transaction has been sent.</li>
+<li><strong><code class="prettyprint">p.onSuccess</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction returned successfully.</li>
+<li><strong><code class="prettyprint">p.onFailed</code></strong>  (function) &lt;optional&gt; Callback function that executes if the transaction failed.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>Return value cannot be obtained because Ethereum nodes <a href="#transaction-return-values">discard</a> transaction return values.</li>
+</ul>
+
+<h3 id="augur-api-completesets-publicsellcompletesetswithcash-p">augur.api.CompleteSets.publicSellCompleteSetsWithCash(p)</h3>
+
+<p>This function is not fully implemented yet, but is a intended to be a point-of-contact that would work similarly to <code class="prettyprint">augur.api.CompleteSets.publicSellCompleteSets</code> and allow for a <a href="https://0xproject.com/">0x</a>-style trading system.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12513,6 +12601,22 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allAugurLogs</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allAugurLogs</span><span class="p">);</span> 
 <span class="p">});</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">getAllAugurLogs</span><span class="p">({</span>
+  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">2580310</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">batchedAugurLogs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">batchedAugurLogs</span><span class="p">);</span> 
+  <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> 
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Finished retrieving logs"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
   <span class="p">{</span>
@@ -12652,11 +12756,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="s2">"true"</span>
 </code></pre></div>
-<h3 id="augur-events-getallaugurlogs-p-callback">augur.events.getAllAugurLogs(p, callback)</h3>
+<h3 id="augur-events-getallaugurlogs-p-batchcallback-finalcallback">augur.events.getAllAugurLogs(p, batchCallback, finalCallback)</h3>
 
-<p>Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by <code class="prettyprint">blockNumber</code> and <code class="prettyprint">logIndex</code>.</p>
+<p>Returns all Augur event logs on the Ethereum blockchain within a certain block range, sorted by <code class="prettyprint">blockNumber</code> and <code class="prettyprint">logIndex</code>. These logs get returned in groups, or batches.</p>
 
-<p>Note: Depending on how many event logs there are to be retrieved, this function can take a long time to run.</p>
+<p>Note: Depending on how many event logs there are to be retrieved, this function can take a long time to complete.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12667,7 +12771,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.fromBlock</code></strong>  (number) &lt;optional&gt; Block number to start looking up logs (default: <code class="prettyprint">augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER</code>). (Note: While this parameter is optional, specifying a <code class="prettyprint">fromBlock</code> is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)</li>
 <li><strong><code class="prettyprint">p.toBlock</code></strong>  (number) &lt;optional&gt; Block number where the log lookup should stop (default: current block number).</li>
 </ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called when all data has been received and parsed.</li>
+<li><strong><code class="prettyprint">batchCallback</code></strong> (function) Called when a batch of logs has been received and parsed.</li>
+<li><strong><code class="prettyprint">finalCallback</code></strong> (function) Called when all logs have been received and parsed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
@@ -13813,7 +13918,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
 <li><strong><code class="prettyprint">marketCreatorFees</code></strong> (string) Amount of fees paid to Market creator, in ETH.</li>
 <li><strong><code class="prettyprint">reporterFees</code></strong> (string) Amount of fees paid to reporters, in attoETH.</li>
-<li>**<code class="prettyprint">selfFilled</code> (boolean) Whether the user filled his/her own Order.</li>
+<li><strong><code class="prettyprint">selfFilled</code></strong> (boolean) Whether the user filled his/her own Order.</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome being bought/sold.</li>
 <li><strong><code class="prettyprint">shareToken</code></strong> (string) Contract address of the share token that was bought or sold, as a hexadecimal string.</li>
