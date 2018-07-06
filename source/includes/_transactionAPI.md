@@ -605,7 +605,40 @@ augur.api.CompleteSets.publicBuyCompleteSets({
   onFailed: function (result) { console.log(result); }
 });
 
+augur.api.CompleteSets.publicBuyCompleteSetsWithCash({
+  _market: _market,
+  _amount: _amount,
+  tx: { 
+    to: completeSetsAddress,
+    value: "0x16345785d8a0000",
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
 augur.api.CompleteSets.publicSellCompleteSets({
+  _market: _market,
+  _amount: _amount,
+  tx: { 
+    to: completeSetsAddress,
+    gas: "0x632ea0" 
+  },
+  meta: {
+    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
+    accountType: "privateKey"
+  },
+  onSent: function (result) { console.log(result); },
+  onSuccess: function (result) { console.log(result); },
+  onFailed: function (result) { console.log(result); }
+});
+
+augur.api.CompleteSets.publicSellCompleteSetsWithCash({
   _market: _market,
   _amount: _amount,
   tx: { 
@@ -652,6 +685,28 @@ When successful, this transaction will trigger a [`CompleteSetsPurchased`](#Comp
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
+### augur.api.CompleteSets.publicBuyCompleteSetsWithCash(p)
+
+This function is not fully implemented yet, but is a intended to be a point-of-contact that would work similarly to `augur.api.CompleteSets.publicBuyCompleteSets` and allow for a [0x](https://0xproject.com/)-style trading system.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`** (string) Ethereum address of the Market in which to buy Complete Sets, as a 20-byte hexadecimal value.
+    * **`p._amount`** (string) Number of [attoShares](#atto-prefix) to purchase of each Outcome, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.value`**  (string) Number of [attoETH](atto-prefix) required to buy a [Complete Set](#complete-set), as a hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
 ### augur.api.CompleteSets.publicSellCompleteSets(p)
 
 Sell `p._amount` worth of [Shares](#share) in all [Outcomes](#outcome) of [Market](#market) `p._market`.
@@ -662,6 +717,27 @@ This transaction will fail if:
 * `p._amount` is not a number between 1 and 2<sup>254</sup>.
 
 When successful, this transaction will trigger a [`CompleteSetsSold`](#CompleteSetsSold) event, which will record to the Ethereum blockchain `msg.sender`, `p._market`, the Universe in which `p._market` exists, and `p._amount` sold.
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object.
+    * **`p._market`** (string) Ethereum address of the Market in which to sell Complete Sets, as a 20-byte hexadecimal value.
+    * **`p._amount`** (string) Number of [attoShares](#atto-prefix) to sell of each Outcome, as a hexadecimal string.
+    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
+        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
+        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
+    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
+    * **`p.onSent`**  (function) &lt;optional> Callback function that executes once the transaction has been sent.
+    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
+    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
+
+#### **Returns:**
+
+* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
+
+### augur.api.CompleteSets.publicSellCompleteSetsWithCash(p)
+
+This function is not fully implemented yet, but is a intended to be a point-of-contact that would work similarly to `augur.api.CompleteSets.publicSellCompleteSets` and allow for a [0x](https://0xproject.com/)-style trading system.
 
 #### **Parameters:**
 
