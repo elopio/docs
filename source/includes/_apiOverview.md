@@ -84,7 +84,7 @@ To connect to the desired Ethereum node and Augur node, call the function `[augu
 
 Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
-The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique ([Geth's](https://geth.ethereum.org/) Proof-of-Authority protocol) and Aura ([Parity's](https://www.parity.io/) Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:
+The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. The addresses for these hosted nodes are as follows:
 
 **dev.augur.net Augur Node (WSS):** https://dev.augur.net/augur-node <br />
 **dev.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
@@ -106,9 +106,9 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
 
-**stable.augur.net Augur Node (WSS):** wss://stable.augur.net/augur-node <br />
-**stable.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
-**stable.augur.net Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
+
+**Main network Ethereum Node (HTTPS):** https://mainnet.infura.io/augur <br />
+**Main network Ethereum Node (WSS):** wss://mainnet.infura.io/ws <br />
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
