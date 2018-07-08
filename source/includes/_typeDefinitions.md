@@ -419,7 +419,7 @@ Serves as an enum for the state of an order.
 #### **Properties:** 
 * **`id`** (number) Market Outcome ID
 * **`volume`** (string) Trading volume for this Outcome.
-* **`price`** (string) Last price at which the outcome was traded. If no trades have taken place in the Market, this value is set to the Market midpoint.
+* **`price`** (string) Last price at which the outcome was traded. If no trades have taken place in the Market, this value is set to the Market midpoint. If there is no volume on this Outcome, but there is volume on another Outcome in the Market, `price` is set to 0 for Yes/No Markets and Categorical Markets.
 * **`description`** (string|null) Description for the Outcome.
 
 <a name="ProfitLoss"></a>
