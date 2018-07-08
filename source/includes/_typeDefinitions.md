@@ -326,7 +326,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
 * **`volume`** (string) Trading volume for this Outcome.
-* **`outstandingShares`** (string) Total shares in the Market.
+* **`outstandingShares`** (string) Number of Complete Sets in the Market.
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endTime`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationBlockNumber`** (number|null) Ethereum block number in which the Market was Finalized.
