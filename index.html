@@ -51,7 +51,7 @@
 
 <p>Augur is a decentralized prediction market platform that runs on <a href="https://www.ethereum.org">Ethereum</a>. For a detailed, high-level explanation of how Augur works, please refer to the <a href="http://www.augur.net/whitepaper.pdf">Augur whitepaper</a>.</p>
 
-<p>The stable Augur application is built and hosted at <a href="https://stable.augur.net">https://stable.augur.net</a>. If you want to use or help test Augur, please install the <a href="https://github.com/AugurProject/augur-app">Augur App</a>.  (If you want to use our cutting-edge development client, this is maintained at <a href="https://dev.augur.net">https://dev.augur.net</a>. However, be warned &ndash; we push changes here pretty rapidly, so it can be a bit buggy! We suggest simply using <a href="https://stable.augur.net">https://stable.augur.net</a> for a more stable experience.)</p>
+<p>If you want to use or help test Augur, please install the <a href="https://github.com/AugurProject/augur-app">Augur App</a>.  If you want to use our cutting-edge development client, this is maintained at <a href="https://dev.augur.net">https://dev.augur.net</a>. However, be warned &ndash; we push changes here pretty rapidly, so it can be a bit buggy!</p>
 
 <p>Augur has its own dedicated <a href="https://augur.stackexchange.com">Stack Exchange</a>, which allows anyone to ask questions about Augur and get answers to those questions. It&rsquo;s a great resource to find the answers for questions you might have that aren&rsquo;t answered directly in these documents. Additionally, you can chat with us on <a href="https://discordapp.com">Discord</a>. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. Most questions are best asked in the <code class="prettyprint">#dev</code> or <code class="prettyprint">#general</code> channels.</p>
 
@@ -549,7 +549,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
-<p>The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. They host Augur Nodes and Ethereum nodes on private chains using Clique (<a href="https://geth.ethereum.org/">Geth&rsquo;s</a> Proof-of-Authority protocol) and Aura (<a href="https://www.parity.io/">Parity&rsquo;s</a> Proof-of-Authority protocol). The addresses for these hosted nodes are as follows:</p>
+<p>The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. The addresses for these hosted nodes are as follows:</p>
 
 <p><strong>dev.augur.net Augur Node (WSS):</strong> https://dev.augur.net/augur-node <br />
 <strong>dev.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
@@ -571,9 +571,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <strong>srt.augur.net Ethereum Node (HTTPS):</strong> https://srt.augur.net/ethereum-http <br />
 <strong>srt.augur.net Ethereum Node (WSS):</strong> wss://srt.augur.net/ethereum-ws <br /></p>
 
-<p><strong>stable.augur.net Augur Node (WSS):</strong> wss://stable.augur.net/augur-node <br />
-<strong>stable.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
-<strong>stable.augur.net Ethereum Node (WSS):</strong> wss://rinkeby.augur.net/ethereum-ws <br /></p>
+<p><strong>Main network Ethereum Node (HTTPS):</strong> https://mainnet.infura.io/augur <br />
+<strong>Main network Ethereum Node (WSS):</strong> wss://mainnet.infura.io/ws <br /></p>
 
 <p>In the example on the right, the first connection that will be tried is <code class="prettyprint">http://127.0.0.1:8545</code>, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (<code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>) as another attempt to make after the local Geth node. If a connection is successfully established, then the <code class="prettyprint">vitals</code> object will be returned; otherwise an error message will be returned.</p>
 
