@@ -602,7 +602,7 @@ Serves as an enum for the state of a Market.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
 * **`outcome`** (number) Outcome of the shares the user owns.
 * **`numShares`** (string) Quantity of shares currently owned by the user.
-* **`numSharesAdjusted`** (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.
+* **`numSharesAdjustedForUserIntention`** (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.
 * **`realizedProfitLoss`** (string) AttoETH profit or loss the user took upon closing this position.
 * **`unrealizedProfitLoss`** (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.
 * **`averagePrice`** (string) Average price in attoETH paid to acquire this position.
