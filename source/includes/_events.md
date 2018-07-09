@@ -184,6 +184,7 @@ Note: Depending on how many event logs there are to be retrieved, this function 
 * **`p`** (Object) Parameters object.
     * **`p.fromBlock`**  (number) &lt;optional> Block number to start looking up logs (default: `augur.constants.AUGUR_UPLOAD_BLOCK_NUMBER`). (Note: While this parameter is optional, specifying a `fromBlock` is recommended, since this function will take much longer to run if it has to scan every block in the Ethereum blockchain.)
     * **`p.toBlock`**  (number) &lt;optional> Block number where the log lookup should stop (default: current block number).
+    * **`p.blocksPerChunk`** (number) &lt;optional> Number of blocks per getLogs RPC request (default: `augur.constants.BLOCKS_PER_CHUNK`).
 * **`batchCallback`** (function) Called when a batch of logs has been received and parsed.
 * **`finalCallback`** (function) Called when all logs have been received and parsed.
 
