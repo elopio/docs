@@ -106,7 +106,6 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
 
-
 **Main network Ethereum Node (HTTPS):** https://mainnet.infura.io/augur <br />
 **Main network Ethereum Node (WSS):** wss://mainnet.infura.io/ws <br />
 
