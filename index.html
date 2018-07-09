@@ -1354,9 +1354,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="nl">validityBond</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
-  <span class="na">designatedReportNoShowReputationBond</span><span class="p">:</span> <span class="s2">"0.174840291341145834"</span><span class="p">,</span>
-  <span class="na">targetReporterGasCosts</span><span class="p">:</span> <span class="s2">"0.015"</span>
+  <span class="nl">designatedReportNoShowReputationBond</span><span class="p">:</span> <span class="s2">"0.174840291341145834"</span><span class="p">,</span>
+  <span class="na">validityBond</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">createMarket</span><span class="p">.</span><span class="nx">getMarketFromCreateMarketReceipt</span><span class="p">(</span>
@@ -13420,7 +13419,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">designatedReportNoShowReputationBond</code></strong> (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.</li>
-<li><strong><code class="prettyprint">targetReporterGasCosts</code></strong> (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">validityBond</code></strong> (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.</li>
 </ul>
 
