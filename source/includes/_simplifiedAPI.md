@@ -611,9 +611,8 @@ augur.createMarket.getMarketCreationCostBreakdown({
 });
 // example output:
 {
-  validityBond: "0.01",
   designatedReportNoShowReputationBond: "0.174840291341145834",
-  targetReporterGasCosts: "0.015"
+  validityBond: "0.01",
 }
 
 augur.createMarket.getMarketFromCreateMarketReceipt(

@@ -298,7 +298,6 @@ Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
 * **`designatedReportNoShowReputationBond`** (string) Amount of Reputation required to incentivize the designated reporter to show up and report, as a base-10 string.
-* **`targetReporterGasCosts`** (string) Amount of Ether required to pay for the gas to Report on this Market, as a base-10 string.
 * **`validityBond`** (string) Amount of Ether to be held on-contract and repaid when the Market is resolved with a non-Invalid Outcome, as a base-10 string.
 
 <a name="MarketInfo"></a>
