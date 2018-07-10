@@ -107,7 +107,7 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
 
 **Main network Ethereum Node (HTTPS):** https://mainnet.infura.io/augur <br />
-**Main network Ethereum Node (WSS):** wss://mainnet.infura.io/ws <br />
+#**Main network Ethereum Node (WSS):** wss://mainnet.infura.io/ws <br />
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
