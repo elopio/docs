@@ -1724,7 +1724,7 @@ This transaction will fail if:
 
 ### augur.api.Market.migrateThroughOneFork(p)
 
-Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show REP Bond](#designated-report-no-show-rep-bond) to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Child Universe.
+Migrates the [Market](#market) into a winning [Child Universe](#child-universe) from a [Forked](#fork) [Parent Universe](#parent-universe). When a Fork occurs, there is a [Fork Period](#fork-period), wherein [REP](#rep) holders migrate their REP to the [Universe](#universe) they want to continue in. Once the Fork Period ends, the Child Universe with the most REP migrated to it is declared the [Winning Universe](#winning-universe). Calling this function attempts to move the Market from a Parent Universe to the Winning Universe after it's been decided. This function also migrates the [No-Show Bond](#no-show-bond) to the winning Universe and migrates REP staked in the InitialReporter contract to the ReputationToken contract associated with the Child Universe.
 
 This transaction will fail if:
 
@@ -3201,7 +3201,7 @@ augur.api.Universe.redeemStake({
 ```
 Provides JavaScript bindings for the [Universe Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Universe.sol), which allows for the creation of [Markets](#market) and provides functions for obtaining information about a given [Universe](#universe).
 
-<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond) & [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
+<!-- #### Notes: Transaction will fail if: the sender does not have enough ETH/REP to pay for the [Validity Bond](#validity-bond) & [No-Show Bond](#no-show-bond), `p._endTime` has already passed, `p._feesPerEthInWei` is less than 0 or greater than/equal to 0.5 ETH (5 * 10^18), `p._designatedReporterAddress` is the null address (0x0000000000000000000000000000000000000000), the length of `p._description` is not greater than 0 bytes, `value` in the `tx` object is not enough to cover the Market's Validity Bond and the estimated gas cost for the target amount of reporters to report. -->
 
 ### augur.api.Universe.createCategoricalMarket(p)
 
@@ -3326,7 +3326,7 @@ Creates a new [Yes/No Market](#yes-no-market). This transaction will trigger a [
 
 ### augur.api.Universe.getInitialReportStakeSize(p, callback)
 
-Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size of the Stake placed on the [Designated Report](#designated-report) (whichever is greater).
+Returns either the size of the [No-Show Bond](#no-show-rep-bond) or the size of the Stake placed on the [Designated Report](#designated-report) (whichever is greater).
 
 #### **Parameters:**
 
@@ -3346,7 +3346,7 @@ Returns either the size of the [No-Show REP Bond](#no-show-rep-bond) or the size
 
 ### augur.api.Universe.getOrCacheDesignatedReportNoShowBond(p)
 
-Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) for [Markets](#market) in the specified [Universe](#universe). If the value of the Designated Report No-Show REP Bond for the current [Fee Window](#fee-window) has not already been cached in the Universe contract, this function will cache it.
+Gets the [No-Show Bond](#no-show-bond) for [Markets](#market) in the specified [Universe](#universe). If the value of the No-Show Bond for the current [Fee Window](#fee-window) has not already been cached in the Universe contract, this function will cache it.
 
 #### Parameters:
 
@@ -3362,7 +3362,7 @@ Gets the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bon
 
 #### **Returns:**
 
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the cached value for the No-Show REP Bond, in [attoREP](#atto-prefix), as a stringified unsigned integer.
+* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the cached value for the No-Show Bond, in [attoREP](#atto-prefix), as a stringified unsigned integer.
 
 ### augur.api.Universe.getOrCacheDesignatedReportStake(p)
 

@@ -59,11 +59,11 @@ The heart of Augur is its Decentralized Oracle, which allows users and smart con
 
 A Designated Report occurs when a [Designated Reporter](#designated-reporter) [Stakes](#designated-reporter-stake) [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market). This Outcome then becomes the [Tentative Outcome](#tentative-outcome) for the Market, and the Market changes to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee Window to Begin Phase). 
 
-## Designated Report No-Show REP Bond
+## No-Show Bond
 
-The Designated Report No-Show REP Bond (or No-Show REP Bond for brevity) is paid for using [REP](#rep) by the [Market Creator](#market-creator) during [Market](#market) creation. If the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show REP Bond is applied as Stake on the [Tentative Outcome](#tentative-outcome) Reported by the [First Public Reporter](#first-public-reporter). If the Tentative Outcome selected by the First Public Reporter becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show REP Bond. If the Tentative Outcome selected by the First Public Reporter is [Disputed](#disputed) and then still becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show REP Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the [First Public Report](#first-public-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)
+The No-Show Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during [Market](#market) creation. If the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the [Tentative Outcome](#tentative-outcome) Reported by the [First Public Reporter](#first-public-reporter). If the Tentative Outcome selected by the First Public Reporter becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is [Disputed](#disputed) and then still becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the [First Public Report](#first-public-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)
 
-During the very first [Fee Window](#fee-window) after launch, the No-Show REP Bond will be set at 0.35 REP. As with the [Validity Bond](#validity-bond), the No-Show REP Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show REP Bond from the previous Fee Window. Then the amount of the No-Show REP Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.
+During the very first [Fee Window](#fee-window) after launch, the No-Show Bond will be set at 0.35 REP. As with the [Validity Bond](#validity-bond), the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.
 
 ## Designated Reporter
 
@@ -71,7 +71,7 @@ A Designated Reporter is a single Ethereum address designated to submit the [Ten
 
 ## Designated Reporter Stake
 
-When a [Designated Reporter](#designated-reporter) submits a [Report](#report), they must put up an amount of REP on an [Outcome](#outcome) that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the [No-Show REP Bond](#designated-report-no-show-rep-bond).
+When a [Designated Reporter](#designated-reporter) submits a [Report](#report), they must put up an amount of REP on an [Outcome](#outcome) that is equal to the Designated Reporter Stake. Note that this amount is calculated differently than the [No-Show Bond](#no-show-bond).
 
 During the very first [Fee Window](#fee-window) after launch, the amount of the Designated Reporter Stake will be set at 0.35 [REP](#rep). The amount of the Designated Reporter Stake is dynamically adjusted according to how many [Designated Reports](#designated-report) were incorrect (failed to concur with the [Market's](#market) [Final Outcome](#final-outcome)) during the previous Fee Window. In particular, we let δ be the proportion of Designated Reports that were incorrect during the previous Fee Window, and we let b<sub>d</sub> be the amount of the Designated Reporter Stake during the previous Fee Window, then the amount of the Designated Reporter Stake for the current Fee Window is max &#123;0.35, b<sub>d</sub>f(δ)&#125;.
 
@@ -81,7 +81,7 @@ Designated Reporting is the first and fastest way that a [Market](#market) can b
 
 ## Designated Reporting Phase
 
-The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show REP Bond](#designated-report-no-show-rep-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report).
+The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report).
 
 ## Developer Mode
 
@@ -155,7 +155,7 @@ This is the last phase a [Market](#market) can be in, and it occurs once the Mar
 
 ## First Public Report
 
-When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), the Market moves to the [Open Reporting Phase](#open-reporting-phase). When this happens, the [No-Show REP Bond](#no-show-rep-bond) put up by the [Market Creator](#market-creator) can be used by any user to [Stake](#first-public-reporter-stake) [REP](#rep) on a [Tentative Outcome](#tentative-outcome). This Report is called the [First Public Report](#first-public-report). The [First Public Reporter](#first-public-reporter) must pay the gas cost of submitting the First Public Reporter.
+When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), the Market moves to the [Open Reporting Phase](#open-reporting-phase). When this happens, the [No-Show Bond](#no-show-rep-bond) put up by the [Market Creator](#market-creator) can be used by any user to [Stake](#first-public-reporter-stake) [REP](#rep) on a [Tentative Outcome](#tentative-outcome). This Report is called the [First Public Report](#first-public-report). The [First Public Reporter](#first-public-reporter) must pay the gas cost of submitting the First Public Reporter.
 
 ## First Public Reporter
 
@@ -163,7 +163,7 @@ The First Public Reporter is any user who [Stakes](#first-public-reporter-stake)
  
 ## First Public Reporter Stake
 
-When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and the [First Public Reporter](#first-public-reporter) submits a [Report](#report) instead, the [No-Show REP Bond](#designated-report-no-show-rep-bond) gets used to Stake on a [Tentative Outcome](#tentative-outcome). If that Tentative Outcome becomes the [Final Outcome](#final-outcome), the First Public Reporter will receive the No-Show REP Bond back.
+When a [Market's](#market) [Designated Reporter](#designated-reporter) fails to submit a [Designated Report](designated-report), and the [First Public Reporter](#first-public-reporter) submits a [Report](#report) instead, the [No-Show Bond](#no-show-bond) gets used to Stake on a [Tentative Outcome](#tentative-outcome). If that Tentative Outcome becomes the [Final Outcome](#final-outcome), the First Public Reporter will receive the No-Show Bond back.
 
 ## Fork
 
@@ -187,7 +187,7 @@ A Genesis Universe is a [Universe](#universe) that does not have a [Parent Unive
 
 ## Initial Report
 
-The Initial Report is simply the first [Report](#report) placed on a [Market](#market). The Initial Report often will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) to the [Market Creator](#market-creator). However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show REP Bond](#designated-report-no-show-rep-bond). Instead, the [No-Show REP Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report). This provides an incentive to submit the First Public Report, since the First Public Reporter stands to gain the Designated Report No-Show REP Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
+The Initial Report is simply the first [Report](#report) placed on a [Market](#market). The Initial Report often will come from the [Designated Reporter](#designed-reporter) for the Market, which would immediately refund the [No-Show Bond](#no-show-bond) to the [Market Creator](#market-creator). However, if the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report). This provides an incentive to submit the First Public Report, since the First Public Reporter stands to gain the No-Show Bond in REP if they Stake on the eventual [Final Outcome](#final-outcome).
 
 ## Initial Reporter
 
@@ -219,7 +219,7 @@ A Market Creator is a user who created a [Market](#market). They are charged a s
 
 ## Market Creator Mailbox
 
-A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as [Validity Bonds](#validity-bond) and [No-Show REP Bond](#designated-report-no-show-rep-bond)) are also sent to the Market Creator Mailbox.
+A Market Creator Mailbox is an address that belongs to the [Creator](#market-creator) of a [Market](#market). All of the fees that a Market Creator can collect (whether as ETH or as tokens) get sent to this address, where the Creator can then withdraw them. Funds that are potentially refunded to the Market creator (such as [Validity Bonds](#validity-bond) and [No-Show Bond](#no-show-bond)) are also sent to the Market Creator Mailbox.
 
 ## Market Resolution
 
@@ -318,7 +318,7 @@ Once a [Market](#market) has [Finalized](#finalized-market), users must wait thr
 
 ## REP
 
-REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur [Decentralized Oracle](#decentralized-oracle) system. REP is used to to pay the [No-Show REP Bond](#designated-report-no-show-rep-bond) when creating a Market, to Stake on an [Outcome](#outcome) in the [Designated Report](#designated-report) or [First Public Report](#first-public-report) of a [Market](#market), to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by Staking on a different Outcome when a Market is in the [Dispute Round Phase](#dispute-round-phase), and to purchase [Participation Tokens](#participation-tokens).
+REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency used by the Augur [Decentralized Oracle](#decentralized-oracle) system. REP is used to to pay the [No-Show Bond](#no-show-bond) when creating a Market, to Stake on an [Outcome](#outcome) in the [Designated Report](#designated-report) or [First Public Report](#first-public-report) of a [Market](#market), to [Challenge](#challenge) a [Tentative Outcome](#tentative-outcome) by Staking on a different Outcome when a Market is in the [Dispute Round Phase](#dispute-round-phase), and to purchase [Participation Tokens](#participation-tokens).
 
 ## Report
 

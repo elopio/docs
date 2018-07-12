@@ -321,7 +321,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`marketCreatorFeesBalance`** (string) Amount of claimable fees the Market creator has not collected from the Market, in ETH.
 * **`marketCreatorMailbox`** (string) Ethereum address of the Market Creator, as a hexadecimal string.
 * **`marketCreatorMailboxOwner`** (string) Ethereum address of the Market Creator Mailbox, as a hexadecimal string.
-* **`initialReportSize`** (string|null) Size of the Designated Report No-Show REP Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
+* **`initialReportSize`** (string|null) Size of the No-Show Bond (if the Initial Report was submitted by a First Public Reporter instead of the Designated Reporter).
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
 * **`volume`** (string) Trading volume for this Outcome.

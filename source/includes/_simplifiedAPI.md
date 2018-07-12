@@ -702,7 +702,7 @@ Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). 
 
 ### augur.createMarket.getMarketCreationCost(p, callback)
 
-Retrieves the [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) amount and total Ether required to create a new [Market](#market).
+Retrieves the [No-Show Bond](#no-show-bond) amount and total Ether required to create a new [Market](#market).
 
 Note: This function will send a transaction if needed to create the current [Fee Window](#fee-window).
 

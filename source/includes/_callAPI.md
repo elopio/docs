@@ -539,7 +539,7 @@ Returns a Unix timestamp for when the specified [Fee Window](#fee-window) will e
 
 ### augur.api.FeeWindow.getNumDesignatedReportNoShows(p, callback)
 
-Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window), in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [Designated Report No-Show REP Bond](#designated-report-no-show-rep-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
+Returns the number of [Markets](#market) belonging to the specified [Fee Window](#fee-window), in which the [Designated Reporter](#designated-reporter) failed to [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase). These Markets will have a [No-Show Bond](#no-show-bond) up for grabs for the [First Public Reporter](#first-public-reporter) because these Markets have yet to receive a [Report](#report). This only includes Markets where Designated Reporters failed to Report, and does not include Markets where the Designated Reporter's [Tentative Outcome](#tentative-outcome) was [Challenged](#challenge).
 
 #### **Parameters:**
 
