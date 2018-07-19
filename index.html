@@ -926,17 +926,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"webSocketClient"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">getContractAddresses</span><span class="p">(</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">getSyncData</span><span class="p">(</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">);</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"4.7.0-47"</span><span class="p">,</span>
-  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
-  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
-  <span class="s2">"isSyncFinished"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"addresses"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"Controller"</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
     <span class="s2">"Universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
@@ -955,6 +951,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="s2">"Trade"</span><span class="p">:</span> <span class="s2">"0x0dec7fd04933b8673cef99b64978113065b03926"</span><span class="p">,</span>
     <span class="s2">"TradingEscapeHatch"</span><span class="p">:</span> <span class="s2">"0x157a8998f5470a2be3917aab31d334109f56c30c"</span>
   <span class="p">}</span>
+  <span class="s2">"highestBlock"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">hash</span><span class="p">:</span> <span class="s2">"0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58"</span><span class="p">,</span>
+    <span class="nx">number</span><span class="p">:</span> <span class="mi">10019</span><span class="p">,</span>
+    <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1531977999</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="s2">"isSyncFinished"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"lastProcessedBlock"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab"</span><span class="p">,</span>
+    <span class="nx">number</span><span class="p">:</span> <span class="mi">10013</span><span class="p">,</span>
+    <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1530856121</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"22346"</span><span class="p">,</span>
+  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"22346"</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"5.0.0-17"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">submitRequest</span><span class="p">(</span>
@@ -1029,7 +1039,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-augurnode-getcontractaddresses-callback">augur.augurNode.getContractAddresses(callback)</h3>
 
-<p>Returns the version and contract address set from an <a href="#augur-node">Augur Node</a>.</p>
+<p>This function has been deprecated in favor of <code class="prettyprint">augur.augurNode.getSyncData</code>.</p>
+
+<h3 id="augur-augurnode-getsyncdata-callback">augur.augurNode.getSyncData(callback)</h3>
+
+<p>Returns the version and contract address set from an <a href="#augur-node">Augur Node</a>. Also returns information about the highest blockchain block and the last processed blockchain block.</p>
 
 <p>This function will fail if:</p>
 
@@ -1040,13 +1054,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">callback</code></strong>  (function) Called after the version and contract addresses have been retrieved.</li>
+<li><strong><code class="prettyprint">callback</code></strong>  (function) Called after the Augur Node information has been retrieved.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(<a href="#ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.</li>
+<li>(<a href="#SyncData">SyncData</a>) An object containing the information from Augur Node.</li>
 </ul>
 
 <h3 id="augur-augurnode-submitrequest-method-params-callback">augur.augurNode.submitRequest(method, params, callback)</h3>
@@ -3330,6 +3344,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">_direction</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">doNotCreateOrders</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="na">meta</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">signer</span><span class="p">:</span> <span class="p">[</span><span class="mi">252</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">233</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">243</span><span class="p">,</span> <span class="mi">247</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">239</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">212</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">234</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">217</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
@@ -3350,6 +3365,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 <span class="p">{</span><span class="s2">"cost"</span><span class="p">:</span><span class="s2">"5000000000000000000"</span><span class="p">,</span><span class="s2">"onChainAmount"</span><span class="p">:</span><span class="s2">"1000000000000000"</span><span class="p">,</span><span class="s2">"onChainPrice"</span><span class="p">:</span><span class="s2">"5000"</span><span class="p">}</span>
@@ -3503,6 +3519,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"estimatedCost"</span><span class="p">:</span> <span class="kc">null</span>
 <span class="p">}</span>
@@ -3948,6 +3965,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong>  (number) <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">p.numOutcomes</code></strong>  (number) The number of outcomes in the market, must be an integer value on [2, 8].</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string) The <a href="#minimum-display-price">Minimum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.maxPrice</code></strong>  (string) The <a href="#maximum-display-price">Maximum Display Price</a> for this Market, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._tradeGroupId</code></strong>  (string) &lt;optional&gt; ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur&rsquo;s UI to group trades client-side.)</li>
@@ -4173,7 +4191,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Call API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Cash</span><span class="p">.</span><span class="nx">allowance</span><span class="p">({</span>
@@ -7008,7 +7026,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Contract Call API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="c1">// The Ethereum contract address for a Universe's Reputation Token </span>
 <span class="c1">// can be obtained by calling `augur.api.Universe.getReputationToken`.</span>
@@ -7154,7 +7172,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Contract Call API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="c1">// Share Token contract addresses for a Market can be </span>
 <span class="c1">// obtained by calling `augur.api.Market.getShareToken`.</span>
@@ -7263,7 +7281,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Contract Call API Examples:</span>
 
 <span class="c1">// The Ethereum contract address of Augur's current default Universe </span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">universe</span> <span class="o">=</span> <span class="s2">"0x0920d1513057572be46580b7ef75d1d01a99a3e5"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getChildUniverse</span><span class="p">({</span>
@@ -8129,7 +8147,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// Cash on its behalf by calling `augur.api.Cash.approve`.</span>
 
 <span class="c1">// The Ethereum contract addresses for Augur.sol and Cash.sol </span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">cashContractAddress</span> <span class="o">=</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">;</span>
 
@@ -8346,7 +8364,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Augur Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default Augur contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">augurAddress</span> <span class="o">=</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">;</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">createGenesisUniverse</span><span class="p">({</span>
@@ -8398,7 +8416,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cancel Order Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default CancelOrder contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">cancelOrderAddress</span> <span class="o">=</span> <span class="s2">"0x389c0b3f0d51cfba9e4d214712a1142f5685814d"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870"</span><span class="p">;</span>
@@ -8460,10 +8478,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Cash Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="c1">// The Ethereum address of Augur's Cash contract can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">cashContractAddress</span> <span class="o">=</span> <span class="s2">"0xec28e64edbce62bde48a14b04f0b557b974a22a9"</span><span class="p">;</span>
 
 <span class="c1">// Amount of Cash (in attoCash) to approve the Augur.sol </span>
@@ -8666,7 +8684,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Claim Trading Proceeds Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default ClaimTradingProceeds contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">claimTradingProceedsAddress</span> <span class="o">=</span> <span class="s2">"0x53ebdf8b5babda8e59a217436266696efcd8d166"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017"</span><span class="p">;</span>
@@ -8777,7 +8795,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Complete Sets Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default CompleteSets contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">completeSetsAddress</span> <span class="o">=</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42"</span><span class="p">;</span>
@@ -8998,7 +9016,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Create Order Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default CreateOrder contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">createOrderAddress</span> <span class="o">=</span> <span class="s2">"0xdadc071ecc3b7e97b139d2ef692defdc398c8211"</span><span class="p">;</span>
 
 <span class="c1">// The _betterOrderId/_worseOrderId to use when creating an Order </span>
@@ -9424,7 +9442,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Fill Order Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default FillOrder contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">fillOrderAddress</span> <span class="o">=</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_orderId</span> <span class="o">=</span> <span class="s2">"0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091"</span><span class="p">;</span>
@@ -10293,7 +10311,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Reputation Token Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="c1">// The Ethereum contract address for a Universe's Reputation Token </span>
 <span class="c1">// can be obtained by calling `augur.api.Universe.getReputationToken`.</span>
@@ -10805,7 +10823,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Share Token Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum contract address for Augur.sol can be </span>
-<span class="c1">// obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">_augurContractAddress</span> <span class="o">=</span> <span class="s2">"0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe"</span><span class="p">;</span>
 <span class="c1">// Share Token contract addresses for a Market can be </span>
 <span class="c1">// obtained by calling `augur.api.Market.getShareToken`.</span>
@@ -11071,7 +11089,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trade Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default Trade contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">tradeAddress</span> <span class="o">=</span> <span class="s2">"0x0dec7fd04933b8673cef99b64978113065b03926"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x7e8e07364ccde43ba5159537404924e86ca53c92"</span><span class="p">;</span>
@@ -11588,7 +11606,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Trading Escape Hatch Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum address of Augur's default TradingEscapeHatch contract</span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">tradingEscapeHatch</span> <span class="o">=</span> <span class="s2">"0x157a8998f5470a2be3917aab31d334109f56c30c"</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">_market</span> <span class="o">=</span> <span class="s2">"0x465407364ccde43ba5159537404924e86ca53aaa"</span><span class="p">;</span>
@@ -11701,7 +11719,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Universe Transaction API Examples:</span>
 
 <span class="c1">// The Ethereum contract address of Augur's current default Universe </span>
-<span class="c1">// can be obtained by calling `augur.augurNode.getContractAddresses`.</span>
+<span class="c1">// can be obtained by calling `augur.augurNode.getSyncData`.</span>
 <span class="kd">var</span> <span class="nx">universeAddress</span> <span class="o">=</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">;</span>
 
 <span class="c1">// The cost of creating a Market (in attoETH) can be obtained by calling</span>
@@ -13138,20 +13156,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">augurNode</code></strong> (string) &lt;optional&gt; Websocket address of an <a href="#augur-node">Augur Node</a>.</li>
 </ul>
 
-<p><a name="ContractAddresses"></a></p>
-
-<h3 id="contractaddresses-object">ContractAddresses  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">version</code></strong> (string) Version of the Augur smart contracts.</li>
-<li><strong><code class="prettyprint">net_version</code></strong> (string) Network ID that Augur Node is connected to. </li>
-<li><strong><code class="prettyprint">netId</code></strong> (number) Network ID that Augur Node is connected to. (This is the same ID as <code class="prettyprint">net_version</code>.)</li>
-<li><strong><code class="prettyprint">isSyncFinished</code></strong> (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.</li>
-<li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
-</ul>
-
 <p><a name="CrowdsourcerState"></a></p>
 
 <h3 id="crowdsourcerstate-object">CrowdsourcerState  (Object)</h3>
@@ -13747,6 +13751,34 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">initialReporterRedeem</code></strong> (Array.&lt;string&gt;) Array of InitialReporter contract addresses that had successful calls to <code class="prettyprint">InitialReporter.redeem</code>.</li>
 </ul>
 
+<p><a name="SyncData"></a></p>
+
+<h3 id="syncdata-object">SyncData  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
+<li><strong><code class="prettyprint">highestBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.</li>
+<li><strong><code class="prettyprint">isSyncFinished</code></strong> (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.</li>
+<li><strong><code class="prettyprint">lastProcessedBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.</li>
+<li><strong><code class="prettyprint">netId</code></strong> (string) Network ID that Augur Node is connected to. (This is the same ID as <code class="prettyprint">net_version</code>.)</li>
+<li><strong><code class="prettyprint">net_version</code></strong> (string) Network ID that Augur Node is connected to. </li>
+<li><strong><code class="prettyprint">version</code></strong> (string) Version of the Augur smart contracts.</li>
+</ul>
+
+<p><a name="SyncDataBlock"></a></p>
+
+<h3 id="syncdatablock-object">SyncDataBlock  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">hash</code></strong> (string) Block hash of the block on the Ethereum blockchain, as a 32-byte hexadecimal value.</li>
+<li><strong><code class="prettyprint">number</code></strong> (number) Block number.</li>
+<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp when the block was created.</li>
+</ul>
+
 <p><a name="TimestampedPrice"></a></p>
 
 <h3 id="timestampedprice-object">TimestampedPrice  (Object)</h3>
@@ -13894,22 +13926,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Object that acts as an enum for different types of smart contracts.</p>
 
-<h3 id="augur-constants-create_yes_no_market_gas-string">augur.constants.CREATE_YES_NO_MARKET_GAS (string)</h3>
-
-<p>Gas limit used when creating a new <a href="#yes-no-market">Yes/No Market</a>, as a hexadecimal string.</p>
-
-<h3 id="augur-constants-create_categorical_market_gas-string">augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)</h3>
-
-<p>Gas limit used when creating a new <a href="#categorical-market">Categorical Market</a>, as a hexadecimal string.</p>
-
-<h3 id="augur-constants-create_order_gas-string">augur.constants.CREATE_ORDER_GAS (string)</h3>
-
-<p>Gas limit used when creating an <a href="#order">Order</a>.</p>
-
-<h3 id="augur-constants-create_scalar_market_gas-string">augur.constants.CREATE_SCALAR_MARKET_GAS (string)</h3>
-
-<p>Gas limit used when creating a new <a href="#scalar-market">Scalar Market</a>, as a hexadecimal string.</p>
-
 <h3 id="augur-constants-default_connection_timeout-number">augur.constants.DEFAULT_CONNECTION_TIMEOUT (number)</h3>
 
 <p>Default connection timeout Augur uses when connecting to an Ethereum node, in milliseconds.</p>
@@ -13946,6 +13962,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Block number up to which Augur Node will scan for logged events emitted from Augur&rsquo;s smart contracts.</p>
 
+<h3 id="augur-constants-max_gas_limit_for_trade">augur.constants.MAX_GAS_LIMIT_FOR_TRADE</h3>
+
+<p>Maximum gas limit used when calling <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code>.</p>
+
+<h3 id="augur-constants-max_fills_per_tx-bignumber">augur.constants.MAX_FILLS_PER_TX (BigNumber)</h3>
+
+<p>Description pending.</p>
+
 <h3 id="augur-constants-max_log_bytes_per_block-number">augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)</h3>
 
 <p>Used to calculate how large a WebSocket frame to allow. This is a theoretical limit based on a block being completely filled with Transfer transactions.</p>
@@ -13958,6 +13982,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Minimum number of attoShares that can be bought/sold in a trade.</p>
 
+<h3 id="augur-constants-minimum_trade_value-bignumber">augur.constants.MINIMUM_TRADE_VALUE (BigNumber)</h3>
+
+<p>Description pending.</p>
+
 <h3 id="augur-constants-one-bignumber">augur.constants.ONE (BigNumber)</h3>
 
 <p>A BigNumber with the value of 1.</p>
@@ -13969,6 +13997,14 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h3 id="augur-constants-parallel_limit-number">augur.constants.PARALLEL_LIMIT (number)</h3>
 
 <p>Maximum number of transactions to auto-submit in parallel.</p>
+
+<h3 id="augur-constants-place_order_no_shares-object">augur.constants.PLACE_ORDER_NO_SHARES (Object)</h3>
+
+<p>Description pending.</p>
+
+<h3 id="augur-constants-place_order_with_shares-object">augur.constants.PLACE_ORDER_WITH_SHARES (Object)</h3>
+
+<p>Description pending.</p>
 
 <h3 id="augur-constants-precision-object">augur.constants.PRECISION (Object)</h3>
 
@@ -13986,9 +14022,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Gas limit used when calling <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code>.</p>
 
+<h3 id="augur-constants-trade_gas_buffer-bignumber">augur.constants.TRADE_GAS_BUFFER (BigNumber)</h3>
+
+<p>Buffer used by <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code> when estimating gas for filling orders. This is used to account for the fluctuation in the cost of fills.</p>
+
 <h3 id="augur-constants-trade_group_id_num_bytes-number">augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)</h3>
 
 <p>Number of bytes that comprise a trade group ID. (Trade group IDs are used by Augur&rsquo;s UI to uniquely identify a trade.)</p>
+
+<h3 id="augur-constants-worst_case_fill-object">augur.constants.WORST_CASE_FILL (Object)</h3>
+
+<p>Description pending.</p>
 
 <h3 id="augur-constants-zero-bignumber">augur.constants.ZERO (BigNumber)</h3>
 
