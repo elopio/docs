@@ -11,7 +11,6 @@ var market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
 
 // augur.api.<Contract Name>.<Contract Method>(<Params Object>, <Callback Function>);
 
-// Asynchronous call -- STRONGLY RECOMMENDED.
 augur.api.Market.getNumberOfOutcomes({ 
   tx: { to: market } 
 }, function (error, numberOfOutcomes) {
