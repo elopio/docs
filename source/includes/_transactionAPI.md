@@ -10,7 +10,7 @@ Transaction API
 // Cash on its behalf by calling `augur.api.Cash.approve`.
 
 // The Ethereum contract addresses for Augur.sol and Cash.sol 
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 var cashContractAddress = "0xec28e64edbce62bde48a14b04f0b557b974a22a9";
 
@@ -228,7 +228,7 @@ Augur Tx API
 // Augur Transaction API Examples:
 
 // The Ethereum address of Augur's default Augur contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var augurAddress = "0x852684b374fe03ab77d06931f1b2831028fd58f5";
 
 augur.api.Augur.createGenesisUniverse({
@@ -272,7 +272,7 @@ Cancel Order Tx API
 // Cancel Order Transaction API Examples:
 
 // The Ethereum address of Augur's default CancelOrder contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var cancelOrderAddress = "0x389c0b3f0d51cfba9e4d214712a1142f5685814d";
 
 var _orderId = "0x7ca90ca9118db456d87e3d743b97782a857200b55039f7ffe8de94e5d920f870";
@@ -324,10 +324,10 @@ Cash Tx API
 // Cash Transaction API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 // The Ethereum address of Augur's Cash contract can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var cashContractAddress = "0xec28e64edbce62bde48a14b04f0b557b974a22a9";
 
 // Amount of Cash (in attoCash) to approve the Augur.sol 
@@ -492,7 +492,7 @@ Claim Trading Proceeds Tx API
 // Claim Trading Proceeds Transaction API Examples:
 
 // The Ethereum address of Augur's default ClaimTradingProceeds contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var claimTradingProceedsAddress = "0x53ebdf8b5babda8e59a217436266696efcd8d166";
 
 var _market = "0xc4ba20cbafe3a3655a2f2e4df4ac7f942a722017";
@@ -583,7 +583,7 @@ Complete Sets Tx API
 // Complete Sets Transaction API Examples:
 
 // The Ethereum address of Augur's default CompleteSets contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var completeSetsAddress = "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce";
 
 var _market = "0x9368ff3e9ce1c0459b309fac6dd4e69229b91a42";
@@ -762,7 +762,7 @@ Create Order Tx API
 // Create Order Transaction API Examples:
 
 // The Ethereum address of Augur's default CreateOrder contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var createOrderAddress = "0xdadc071ecc3b7e97b139d2ef692defdc398c8211";
 
 // The _betterOrderId/_worseOrderId to use when creating an Order 
@@ -1112,7 +1112,7 @@ Fill Order Tx API
 // Fill Order Transaction API Examples:
 
 // The Ethereum address of Augur's default FillOrder contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var fillOrderAddress = "0x0c77f6af7b3b5fed8ca980414a97c62da283098a";
 
 var _orderId = "0xea2c7476e61f5e2625e57df17fcce74741d3c2004ac657675f686a23d06e6091";
@@ -1799,7 +1799,7 @@ Reputation Token Tx API
 // Reputation Token Transaction API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 // The Ethereum contract address for a Universe's Reputation Token 
 // can be obtained by calling `augur.api.Universe.getReputationToken`.
@@ -2203,7 +2203,7 @@ Share Token Tx API
 // Share Token Transaction API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 // Share Token contract addresses for a Market can be 
 // obtained by calling `augur.api.Market.getShareToken`.
@@ -2417,7 +2417,7 @@ Trade Tx API
 // Trade Transaction API Examples:
 
 // The Ethereum address of Augur's default Trade contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var tradeAddress = "0x0dec7fd04933b8673cef99b64978113065b03926";
 
 var _market = "0x7e8e07364ccde43ba5159537404924e86ca53c92";
@@ -2852,7 +2852,7 @@ Trading Escape Hatch Tx API
 // Trading Escape Hatch Transaction API Examples:
 
 // The Ethereum address of Augur's default TradingEscapeHatch contract
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var tradingEscapeHatch = "0x157a8998f5470a2be3917aab31d334109f56c30c";
 
 var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
@@ -2943,7 +2943,7 @@ Universe Tx API
 // Universe Transaction API Examples:
 
 // The Ethereum contract address of Augur's current default Universe 
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var universeAddress = "0x1f732847fbbcc46ffe859f28e916d993b2b08831";
 
 // The cost of creating a Market (in attoETH) can be obtained by calling

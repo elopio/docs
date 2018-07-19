@@ -27,22 +27,6 @@ Object that acts as an enum containing the following values:
 
 Object that acts as an enum for different types of smart contracts.
 
-### augur.constants.CREATE_YES_NO_MARKET_GAS (string)
-
-Gas limit used when creating a new [Yes/No Market](#yes-no-market), as a hexadecimal string.
-
-### augur.constants.CREATE_CATEGORICAL_MARKET_GAS (string)
-
-Gas limit used when creating a new [Categorical Market](#categorical-market), as a hexadecimal string.
-
-### augur.constants.CREATE_ORDER_GAS (string)
-
-Gas limit used when creating an [Order](#order).
-
-### augur.constants.CREATE_SCALAR_MARKET_GAS (string)
-
-Gas limit used when creating a new [Scalar Market](#scalar-market), as a hexadecimal string.
-
 ### augur.constants.DEFAULT_CONNECTION_TIMEOUT (number)
 
 Default connection timeout Augur uses when connecting to an Ethereum node, in milliseconds.
@@ -79,6 +63,14 @@ Block number at which Augur Node will begin scanning for logged events emitted f
 
 Block number up to which Augur Node will scan for logged events emitted from Augur's smart contracts.
 
+### augur.constants.MAX_GAS_LIMIT_FOR_TRADE
+
+Maximum gas limit used when calling `augur.trading.tradeUntilAmountIsZero`.
+
+### augur.constants.MAX_FILLS_PER_TX (BigNumber)
+
+Description pending.
+
 ### augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)
 
 Used to calculate how large a WebSocket frame to allow. This is a theoretical limit based on a block being completely filled with Transfer transactions.
@@ -91,6 +83,10 @@ Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket 
 
 Minimum number of attoShares that can be bought/sold in a trade.
 
+### augur.constants.MINIMUM_TRADE_VALUE (BigNumber)
+
+Description pending.
+
 ### augur.constants.ONE (BigNumber)
 
 A BigNumber with the value of 1.
@@ -102,6 +98,14 @@ Object that acts as an enum containing the constants used to represent each of t
 ### augur.constants.PARALLEL_LIMIT (number)
 
 Maximum number of transactions to auto-submit in parallel.
+
+### augur.constants.PLACE_ORDER_NO_SHARES (Object)
+
+Description pending.
+
+### augur.constants.PLACE_ORDER_WITH_SHARES (Object)
+
+Description pending.
 
 ### augur.constants.PRECISION (Object)
 
@@ -119,9 +123,17 @@ Object that acts as an enum for all of the possible states for a Stake Token (ty
 
 Gas limit used when calling `augur.trading.tradeUntilAmountIsZero`.
 
+### augur.constants.TRADE_GAS_BUFFER (BigNumber)
+
+Buffer used by `augur.trading.tradeUntilAmountIsZero` when estimating gas for filling orders. This is used to account for the fluctuation in the cost of fills.
+
 ### augur.constants.TRADE_GROUP_ID_NUM_BYTES (number)
 
 Number of bytes that comprise a trade group ID. (Trade group IDs are used by Augur's UI to uniquely identify a trade.)
+
+### augur.constants.WORST_CASE_FILL (Object)
+
+Description pending.
 
 ### augur.constants.ZERO (BigNumber)
 

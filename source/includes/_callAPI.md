@@ -83,7 +83,7 @@ Cash Call API
 // Cash Call API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 
 augur.api.Cash.allowance({
@@ -2164,7 +2164,7 @@ Reputation Token Call API
 // Reputation Token Contract Call API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 // The Ethereum contract address for a Universe's Reputation Token 
 // can be obtained by calling `augur.api.Universe.getReputationToken`.
@@ -2274,7 +2274,7 @@ Share Token Call API
 // Share Token Contract Call API Examples:
 
 // The Ethereum contract address for Augur.sol can be 
-// obtained by calling `augur.augurNode.getContractAddresses`.
+// obtained by calling `augur.augurNode.getSyncData`.
 var _augurContractAddress = "0x67cbf60a24ab922af99e6f335c0ff2b084d5bdbe";
 // Share Token contract addresses for a Market can be 
 // obtained by calling `augur.api.Market.getShareToken`.
@@ -2360,7 +2360,7 @@ Universe Call API
 // Universe Contract Call API Examples:
 
 // The Ethereum contract address of Augur's current default Universe 
-// can be obtained by calling `augur.augurNode.getContractAddresses`.
+// can be obtained by calling `augur.augurNode.getSyncData`.
 var universe = "0x0920d1513057572be46580b7ef75d1d01a99a3e5";
 
 augur.api.Universe.getChildUniverse({

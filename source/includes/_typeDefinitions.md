@@ -100,16 +100,6 @@ Note: Other properties will be present in this object, depending on what event t
 * **`ethereumNode`** (<a href="#EthereumNode">EthereumNode</a>) Object containing information on how to connect to a desired Ethereum node, either locally or remotely (hosted).
 * **`augurNode`** (string) &lt;optional> Websocket address of an [Augur Node](#augur-node).
 
-<a name="ContractAddresses"></a>
-### ContractAddresses  (Object)
-
-#### **Properties:** 
-* **`version`** (string) Version of the Augur smart contracts.
-* **`net_version`** (string) Network ID that Augur Node is connected to. 
-* **`netId`** (number) Network ID that Augur Node is connected to. (This is the same ID as `net_version`.)
-* **`isSyncFinished`** (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.
-* **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
-
 <a name="CrowdsourcerState"></a>
 ### CrowdsourcerState  (Object)
 
@@ -549,6 +539,26 @@ Serves as an enum for the state of a Market.
 * **`feeWindowRedeem`** (Array.&lt;string>) Array of FeeWindow contract addresses that had successful calls to `FeeWindow.redeem`.
 * **`crowdsourcerRedeem`** (Array.&lt;string>) Array of DisputeCrowdsourcer contract addresses that had successful calls to `DisputeCrowdsourcer.redeem`.
 * **`initialReporterRedeem`** (Array.&lt;string>) Array of InitialReporter contract addresses that had successful calls to `InitialReporter.redeem`.
+
+<a name="SyncData"></a>
+### SyncData  (Object)
+
+#### **Properties:** 
+* **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
+* **`highestBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.
+* **`isSyncFinished`** (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.
+* **`lastProcessedBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.
+* **`netId`** (string) Network ID that Augur Node is connected to. (This is the same ID as `net_version`.)
+* **`net_version`** (string) Network ID that Augur Node is connected to. 
+* **`version`** (string) Version of the Augur smart contracts.
+
+<a name="SyncDataBlock"></a>
+### SyncDataBlock  (Object)
+
+#### **Properties:** 
+* **`hash`** (string) Block hash of the block on the Ethereum blockchain, as a 32-byte hexadecimal value.
+* **`number`** (number) Block number.
+* **`timestamp`** (number) Unix timestamp when the block was created.
 
 <a name="TimestampedPrice"></a>
 ### TimestampedPrice  (Object)

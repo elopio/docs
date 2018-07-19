@@ -217,17 +217,13 @@ augur.augurNode.connect(
   "webSocketClient": { ... }
 }
 
-augur.augurNode.getContractAddresses(
+augur.augurNode.getSyncData(
   function(error, result) {
     console.log(result);
   }
 );
 // example output:
 {
-  "version": "4.7.0-47",
-  "net_version": "4",
-  "netId": "4",
-  "isSyncFinished": true,
   "addresses": {
     "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
     "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
@@ -246,6 +242,20 @@ augur.augurNode.getContractAddresses(
     "Trade": "0x0dec7fd04933b8673cef99b64978113065b03926",
     "TradingEscapeHatch": "0x157a8998f5470a2be3917aab31d334109f56c30c"
   }
+  "highestBlock": {
+    hash: "0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58",
+    number: 10019,
+    timestamp: 1531977999,
+  },
+  "isSyncFinished": true,
+  "lastProcessedBlock": {
+    "hash": "0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab",
+    number: 10013,
+    timestamp: 1530856121,
+  },
+  "netId": "22346",
+  "net_version": "22346",
+  "version": "5.0.0-17",
 }
 
 augur.augurNode.submitRequest(
@@ -316,7 +326,11 @@ Establishes a connection to an [Augur Node](#augur-node).
 
 ### augur.augurNode.getContractAddresses(callback)
 
-Returns the version and contract address set from an [Augur Node](#augur-node).
+This function has been deprecated in favor of `augur.augurNode.getSyncData`.
+
+### augur.augurNode.getSyncData(callback)
+
+Returns the version and contract address set from an [Augur Node](#augur-node). Also returns information about the highest blockchain block and the last processed blockchain block.
 
 This function will fail if:
 
@@ -324,11 +338,11 @@ This function will fail if:
 
 #### **Parameters:**
 
-* **`callback`**  (function) Called after the version and contract addresses have been retrieved.
+* **`callback`**  (function) Called after the Augur Node information has been retrieved.
 
 #### **Returns:**
 
-* (<a href="#ContractAddresses">ContractAddresses</a>) An object containing the version and contract addresses.
+* (<a href="#SyncData">SyncData</a>) An object containing the information from Augur Node.
 
 ### augur.augurNode.submitRequest(method, params, callback)
 
@@ -2347,6 +2361,7 @@ augur.trading.tradeUntilAmountIsZero({
   _direction: 0,
   _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
   _outcome: 0,
+  numOutcomes: 2,
   doNotCreateOrders: false,
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
@@ -2367,6 +2382,7 @@ augur.trading.tradeUntilAmountIsZero({
   "_direction": 0,
   "_market": "0x524925edb7a29cc35d886968253cb5e209655cf4",
   "_outcome": 0,
+  "numOutcomes": 2,
   "doNotCreateOrders": false
 }
 {"cost":"5000000000000000000","onChainAmount":"1000000000000000","onChainPrice":"5000"}
@@ -2520,6 +2536,7 @@ undefined
   "_direction": 0,
   "_market": "0x524925edb7a29cc35d886968253cb5e209655cf4",
   "_outcome": 0,
+  "numOutcomes": 2,
   "doNotCreateOrders": false,
   "estimatedCost": null
 }
@@ -2844,6 +2861,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
     * **`p._outcome`**  (number) [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`p.numOutcomes`**  (number) The number of outcomes in the market, must be an integer value on [2, 8].
     * **`p.minPrice`**  (string) The [Minimum Display Price](#minimum-display-price) for this Market, as a base-10 string.
     * **`p.maxPrice`**  (string) The [Maximum Display Price](#maximum-display-price) for this Market, as a base-10 string.
     * **`p._tradeGroupId`**  (string) &lt;optional> ID logged with each trade transaction, as a hexadecimal string. (This is generally just used by Augur's UI to group trades client-side.)
