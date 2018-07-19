@@ -19,10 +19,6 @@ augur.api.Market.getNumberOfOutcomes({
   console.log(numberOfOutcomes);
 });
 // console prints 2
-
-// Synchronous call -- Possible, but not recommended.
-var outcomes = augur.api.Market.getNumberOfOutcomes(error, params);
-// outcomes = 2
 ```
 The Call API of augur.js is made up of "getter" functions that retrieve information from Augur's Solidity smart contracts using Ethereum's `eth_call` RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular "gets" than the [Simplified API](#simplified-api) allows, and its functions are mapped directly to the public functions of Augur's Solidity smart contracts. 
 
@@ -32,10 +28,6 @@ All functions in the Call API accept two arguments:
 2. A callback function. 
 
 The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Parameters Object>, <Callback Function>)`.
-
-While technically optional, the Augur development team **strongly recommends** using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.
-
-<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 Augur Call API
 ---------------------------
