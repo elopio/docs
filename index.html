@@ -4097,10 +4097,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">numberOfOutcomes</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// console prints 2</span>
-
-<span class="c1">// Synchronous call -- Possible, but not recommended.</span>
-<span class="kd">var</span> <span class="nx">outcomes</span> <span class="o">=</span> <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getNumberOfOutcomes</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
-<span class="c1">// outcomes = 2</span>
 </code></pre></div>
 <p>The Call API of augur.js is made up of &ldquo;getter&rdquo; functions that retrieve information from Augur&rsquo;s Solidity smart contracts using Ethereum&rsquo;s <code class="prettyprint">eth_call</code> RPC; however, these functions do not write any information to the Ethereum blockchain. The Call API is intended for more granular &ldquo;gets&rdquo; than the <a href="#simplified-api">Simplified API</a> allows, and its functions are mapped directly to the public functions of Augur&rsquo;s Solidity smart contracts. </p>
 
@@ -4112,10 +4108,6 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 </ol>
 
 <p>The Call API functions are part of the <code class="prettyprint">augur.api</code> object and follow a pattern of <code class="prettyprint">augur.api.&lt;Contract Name&gt;.&lt;Contract Function&gt;(&lt;Parameters Object&gt;, &lt;Callback Function&gt;)</code>.</p>
-
-<p>While technically optional, the Augur development team <strong>strongly recommends</strong> using a callback. Without it, the calls will be synchronous, which can lock up the web browser until they complete.</p>
-
-<aside class="warning">Synchronous HTTP RPC is generally not recommended, especially if augur.js is running within a browser. Synchronous RPC requests block the main JavaScript thread, which essentially freezes the browser!</aside>
 
 <h2 id="augur-call-api">Augur Call API</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Augur</span><span class="p">.</span><span class="nx">isKnownCrowdsourcer</span><span class="p">({</span> 
