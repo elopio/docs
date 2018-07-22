@@ -360,7 +360,7 @@ Gets the [Reputation Token](#reputation-token) in which a [Dispute Crowdsourcer]
 
 ### augur.api.DisputeCrowdsourcer.getSize(p, callback)
 
-Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispute-stake) on a [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of its [Market](#market).
+Gets the total amount of [attoREP](#atto-prefix) that must to be [Staked](#dispute-stake) on a [Dispute Crowdsourcer's](#crowdsourcer) [Outcome](#outcome) in order to [Challenge](#challenge) the [Tentative Outcome](#tentative-outcome) of its [Market](#market).
 
 #### **Parameters:**
 
