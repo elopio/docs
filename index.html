@@ -131,7 +131,7 @@
 
 <aside class="notice">To use sendTransaction RPC commands (or any other command that requires Ether or is actually sent to the Ethereum network) the Ethereum node will need to unlocked. The easiest way to do this using Geth is to start it using the <code>--unlock</code> option:
 
-<code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins "http://localhost:8080"</code>
+<code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins '127.0.0.1' </code>
 
 The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
@@ -4535,7 +4535,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-disputecrowdsourcer-getsize-p-callback">augur.api.DisputeCrowdsourcer.getSize(p, callback)</h3>
 
-<p>Gets the total amount of <a href="#atto-prefix">attoREP</a> that must to be <a href="#dispute-stake">Staked</a> on a <a href="#dispute-crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#outcome">Outcome</a> in order to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of its <a href="#market">Market</a>.</p>
+<p>Gets the total amount of <a href="#atto-prefix">attoREP</a> that must to be <a href="#dispute-stake">Staked</a> on a <a href="#crowdsourcer">Dispute Crowdsourcer&rsquo;s</a> <a href="#outcome">Outcome</a> in order to <a href="#challenge">Challenge</a> the <a href="#tentative-outcome">Tentative Outcome</a> of its <a href="#market">Market</a>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12497,22 +12497,12 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h2 id="events-functions">Events Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">getAllAugurLogs</span><span class="p">({</span>
-  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">1703565</span>
-<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">allAugurLogs</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">allAugurLogs</span><span class="p">);</span> 
-<span class="p">});</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">getAllAugurLogs</span><span class="p">({</span>
-  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">2580310</span>
-<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">batchedAugurLogs</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">batchedAugurLogs</span><span class="p">);</span> 
-  <span class="p">}</span>
+  <span class="na">fromBlock</span><span class="p">:</span> <span class="mi">2580310</span><span class="p">,</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">batchedAugurLogs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">batchedAugurLogs</span><span class="p">);</span>
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> 
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Finished retrieving logs"</span><span class="p">);</span>
   <span class="p">}</span>
@@ -14718,11 +14708,11 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="report">Report</h2>
 
-<p>A Report, or Reporting, is the Staking of <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a> that&rsquo;s passed its <a href="#end-time">End Time</a>. Reporting as a term can be used to describe the act of submitting a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a>, or <a href="#">Challenging</a> a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> REP on an Outcome other than the Tentative Outcome.</p>
+<p>A Report, or Reporting, is the Staking of <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a> that&rsquo;s passed its <a href="#end-time">End Time</a>. Reporting as a term can be used to describe the act of submitting a <a href="#designated-report">Designated Report</a> or <a href="#first-public-report">First Public Report</a>, or <a href="#challenge">Challenging</a> a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> REP on an Outcome other than the Tentative Outcome.</p>
 
 <h2 id="reporter">Reporter</h2>
 
-<p>A Reporter is a <a href="#rep">REP</a> holder who Stakes <a href="#rep">REP</a> on an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> that has an <a href="#end-time">End Time</a> that has passed. Reporters can include the <a href="#designated-reporter">Designated Reporter</a>, <a href="#first-public-reporter">First Public Reporter</a>, or users who <a href="#">Challenge</a> a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> REP on an Outcome other than the Tentative Outcome.</p>
+<p>A Reporter is a <a href="#rep">REP</a> holder who Stakes <a href="#rep">REP</a> on an <a href="#outcome">Outcome</a> of a <a href="#market">Market</a> that has an <a href="#end-time">End Time</a> that has passed. Reporters can include the <a href="#designated-reporter">Designated Reporter</a>, <a href="#first-public-reporter">First Public Reporter</a>, or users who <a href="#challenge">Challenge</a> a Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a> by <a href="#dispute-stake">Staking</a> REP on an Outcome other than the Tentative Outcome.</p>
 
 <h2 id="reporting-fee">Reporting Fee</h2>
 
