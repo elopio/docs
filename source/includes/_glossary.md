@@ -322,11 +322,11 @@ REP, also known as Reputation, Reputation Tokens, or REP Tokens, is the currency
 
 ## Report
 
-A Report, or Reporting, is the Staking of [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market) that's passed its [End Time](#end-time). Reporting as a term can be used to describe the act of submitting a [Designated Report](#designated-report) or [First Public Report](#first-public-report), or [Challenging]() a Market's [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) REP on an Outcome other than the Tentative Outcome.
+A Report, or Reporting, is the Staking of [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market) that's passed its [End Time](#end-time). Reporting as a term can be used to describe the act of submitting a [Designated Report](#designated-report) or [First Public Report](#first-public-report), or [Challenging](#challenge) a Market's [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) REP on an Outcome other than the Tentative Outcome.
 
 ## Reporter
 
-A Reporter is a [REP](#rep) holder who Stakes [REP](#rep) on an [Outcome](#outcome) of a [Market](#market) that has an [End Time](#end-time) that has passed. Reporters can include the [Designated Reporter](#designated-reporter), [First Public Reporter](#first-public-reporter), or users who [Challenge]() a Market's [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) REP on an Outcome other than the Tentative Outcome.
+A Reporter is a [REP](#rep) holder who Stakes [REP](#rep) on an [Outcome](#outcome) of a [Market](#market) that has an [End Time](#end-time) that has passed. Reporters can include the [Designated Reporter](#designated-reporter), [First Public Reporter](#first-public-reporter), or users who [Challenge](#challenge) a Market's [Tentative Outcome](#tentative-outcome) by [Staking](#dispute-stake) REP on an Outcome other than the Tentative Outcome.
 
 ## Reporting Fee
 

@@ -10,7 +10,7 @@ Running a local Ethereum node, such as [Geth](https://github.com/ethereum/go-eth
 
 <aside class="notice">To use sendTransaction RPC commands (or any other command that requires Ether or is actually sent to the Ethereum network) the Ethereum node will need to unlocked. The easiest way to do this using Geth is to start it using the <code>--unlock</code> option:
 
-<code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins "http://localhost:8080"</code>
+<code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins '127.0.0.1' </code>
 
 The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host's address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
