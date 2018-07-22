@@ -14,22 +14,12 @@ Events Functions
 -----------
 ```javascript
 augur.events.getAllAugurLogs({
-  fromBlock: 1703565
-}, function(error, allAugurLogs) {
-  console.log(allAugurLogs); 
-});
-
-augur.events.getAllAugurLogs({
-  fromBlock: 2580310
-}, function(error, batchedAugurLogs) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(batchedAugurLogs); 
-  }
+  fromBlock: 2580310,
+}, function(batchedAugurLogs) {
+  console.log(batchedAugurLogs);
 }, function(error) {
   if (error) {
-    console.log(error); 
+    console.log(error);
   } else {
     console.log("Finished retrieving logs");
   }
