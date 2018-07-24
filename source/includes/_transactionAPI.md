@@ -806,7 +806,7 @@ This transaction will fail if:
 * `p._attoshares` is less than 0.
 * `p._market` is undefined.
 * `p._outcome` is less than 0 or greater than the total number of Outcomes for `p._market`.
-* `p._displayPrice` is below the `p._market`'s minimum `p._displayPrice` or above the `market`'s maximum `p._displayPrice`.
+* `p._displayPrice` is below the `p._market`'s [Minimum Display Price](#minimum-display-price) or above the `market`'s [Maximum Display Price](#maximum-display-price).
 
 #### **Parameters:**
 
