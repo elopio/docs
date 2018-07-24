@@ -338,7 +338,7 @@ The Reporting Fee is sent to the [Fee Window](#fee-window) that contains the Mar
 
 ## Reporting Fee Pool
 
-Any [Settlement Fees](#settlement-fees) (in ETH) collected during a [Fee Window](#fee-window) get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of [REP](#rep) they [Staked](#dispute-stake) during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Open Reporting](#open-reporting), [Challenging](#challenge) an [Outcome](#outcome), or simply purchasing [Participation Tokens](#participation-token) directly.
+Any [Reporting Fees](#reporting-fee) (in ETH) collected during a [Fee Window](#fee-window) get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of [REP](#rep) they [Staked](#dispute-stake) during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes [Designated](#designated-reporting) or [Open Reporting](#open-reporting), [Challenging](#challenge) an [Outcome](#outcome), or simply purchasing [Participation Tokens](#participation-token) directly.
 
 ## Scalar Market
 
