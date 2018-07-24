@@ -783,7 +783,6 @@ augur.api.CreateOrder.publicCreateOrder({
   tx: { 
     to: createOrderAddress,
     value: "0x470de4df820000", 
-    gas: augur.constants.CREATE_ORDER_GAS 
   },
   meta: {
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
