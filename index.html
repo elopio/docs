@@ -9061,7 +9061,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><code class="prettyprint">p._attoshares</code> is less than 0.</li>
 <li><code class="prettyprint">p._market</code> is undefined.</li>
 <li><code class="prettyprint">p._outcome</code> is less than 0 or greater than the total number of Outcomes for <code class="prettyprint">p._market</code>.</li>
-<li><code class="prettyprint">p._displayPrice</code> is below the <code class="prettyprint">p._market</code>&rsquo;s minimum <code class="prettyprint">p._displayPrice</code> or above the <code class="prettyprint">market</code>&rsquo;s maximum <code class="prettyprint">p._displayPrice</code>.</li>
+<li><code class="prettyprint">p._displayPrice</code> is below the <code class="prettyprint">p._market</code>&rsquo;s <a href="#minimum-display-price">Minimum Display Price</a> or above the <code class="prettyprint">market</code>&rsquo;s <a href="#maximum-display-price">Maximum Display Price</a>.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -14724,7 +14724,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <h2 id="reporting-fee-pool">Reporting Fee Pool</h2>
 
-<p>Any <a href="#settlement-fees">Settlement Fees</a> (in ETH) collected during a <a href="#fee-window">Fee Window</a> get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#challenge">Challenging</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
+<p>Any <a href="#reporting-fee">Reporting Fees</a> (in ETH) collected during a <a href="#fee-window">Fee Window</a> get added to a Reporting Fee Pool. At the end of the Fee Window, the Reporting Fee Pool is paid out to users in proportion to the number of <a href="#rep">REP</a> they <a href="#dispute-stake">Staked</a> during that Fee Window. In this way, all users who participate during a Fee Window will receive a portion of the Settlement Fees collected during that Window. Participation includes <a href="#designated-reporting">Designated</a> or <a href="#open-reporting">Open Reporting</a>, <a href="#challenge">Challenging</a> an <a href="#outcome">Outcome</a>, or simply purchasing <a href="#participation-token">Participation Tokens</a> directly.</p>
 
 <h2 id="scalar-market">Scalar Market</h2>
 
