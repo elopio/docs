@@ -2644,7 +2644,7 @@ This transaction will fail if:
 
 ### augur.api.Trade.publicBuyWithLimit(p)
 
-Works like `augur.api.Trade.publicBuy`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicBuy` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicBuyWithLimit` could be used instead.
+Works like `augur.api.Trade.publicBuy`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicBuy` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicBuyWithLimit` could be used instead.
 
 #### **Parameters:**
 
@@ -2703,7 +2703,7 @@ This transaction will fail if:
 
 ### augur.api.Trade.publicSellWithLimit(p)
 
-Works like `augur.api.Trade.publicSell`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicSell` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicSellWithLimit` could be used instead.
+Works like `augur.api.Trade.publicSell`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicSell` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicSellWithLimit` could be used instead.
 
 #### **Parameters:**
 
@@ -2763,7 +2763,7 @@ The value of the Order (calculated as p._price * (Market’s number of Ticks - p
 
 ### augur.api.Trade.publicTradeWithLimit(p)
 
-Works like `augur.api.Trade.publicTrade`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicTrade` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicTradeWithLimit` could be used instead.
+Works like `augur.api.Trade.publicTrade`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicTrade` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicTradeWithLimit` could be used instead.
 
 #### **Parameters:**
 
@@ -2819,7 +2819,7 @@ Works similarly to `augur.api.Trade.publicTrade`, except it does not create an [
 
 ### augur.api.Trade.publicFillBestOrderWithLimit(p)
 
-Works like `augur.api.Trade.publicFillBestOrder`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicFillBestOrder` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas price drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicFillBestOrderWithLimit` could be used instead.
+Works like `augur.api.Trade.publicFillBestOrder`, but uses the parameter `_loopLimit` to determine how many [Fill Order](#fill-order) operations to perform. The function `augur.api.Trade.publicFillBestOrder` will do as many Fill Order operations as the amount of gas passed to it will permit, based on a hard-coded value for how much gas is needed to Fill an Order. If the gas cost drops significantly from where it is at Augur's launch, the Trade contract would require far more gas than is actually needed. Therefore, in such a scenario, `augur.api.Trade.publicFillBestOrderWithLimit` could be used instead.
 
 #### **Parameters:**
 
