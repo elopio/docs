@@ -5313,7 +5313,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-getsize-p-callback">augur.api.InitialReporter.getSize(p, callback)</h3>
 
-<p>Returns the amount of <a href="#atto-prefix">attoREP</a> Staked on the <a href="#report">Reported</a> <a href="#outcome">Outcome</a> of the <a href="#initial-report">Initial Report</a>.</p>
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> required to be Staked on an <a href="#outcome">Outcome</a> in order to submit the <a href="#initial-report">Initial Report</a>. For Initial Reports, this value will always be the same as the value returned by <code class="prettyprint">augur.api.InitialReporter.getStake</code>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -5338,7 +5338,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-initialreporter-getstake-p-callback">augur.api.InitialReporter.getStake(p, callback)</h3>
 
-<p>Returns the amount of <a href="#atto-prefix">attoREP</a> <a href="#dispute-stake">Staked</a> on the <a href="#initial-report">Initial Report</a> for the <a href="#market">Market</a> of the specified InitialReporter contract.</p>
+<p>Returns the amount of <a href="#atto-prefix">attoREP</a> <a href="#dispute-stake">Staked</a> on the <a href="#report">Reported</a> <a href="#outcome">Outcome</a> of the specified InitialReporter contract. For <a href="#initial-report">Initial Reports</a>, this value will always be the same as the value returned by <code class="prettyprint">augur.api.InitialReporter.getSize</code>.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
