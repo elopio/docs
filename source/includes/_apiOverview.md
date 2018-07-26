@@ -99,7 +99,7 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **Rinkeby Ethereum Node (WSS):** wss://rinkeby.augur.net/ethereum-ws <br />
 
 **Ropsten Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
-**Ropsten Ethereum Node (HTTPS):** https://ropsten.ethereum.nodes.augur.net <br />
+**Ropsten Ethereum Node (HTTPS):** https://ropsten.augur.net/ethereum-http <br />
 **Ropsten Ethereum Node (WSS):** wss://ropsten.augur.net/ethereum-ws <br />
 
 **srt.augur.net Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
