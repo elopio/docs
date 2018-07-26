@@ -909,7 +909,7 @@ Returns the [Reputation Token (REP)](#rep) Ethereum contract address used by the
 
 ### augur.api.InitialReporter.getSize(p, callback)
 
-Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) [Outcome](#outcome) of the [Initial Report](#initial-report).
+Returns the amount of [attoREP](#atto-prefix) required to be Staked on an [Outcome](#outcome) in order to submit the [Report](#report). For [Initial Reports](#initial-report), this value will always be the same as the value returned by `augur.api.InitialReporter.getStake`.
 
 #### **Parameters:**
 
@@ -924,7 +924,7 @@ Returns the amount of [attoREP](#atto-prefix) Staked on the [Reported](#report) 
 
 ### augur.api.InitialReporter.getStake(p, callback)
 
-Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [Initial Report](#initial-report) for the [Market](#market) of the specified InitialReporter contract.
+Returns the amount of [attoREP](#atto-prefix) [Staked](#dispute-stake) on the [Reported](#report) [Outcome](#outcome) of the specified InitialReporter contract. For [Initial Reports](#initial-report), this value will always be the same as the value returned by `augur.api.InitialReporter.getSize`.
 
 #### **Parameters:**
 
