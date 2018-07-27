@@ -14072,21 +14072,29 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p><code class="prettyprint">yarn docker:spin-up</code></p>
 
-<p>After that, the integration tests can be started by running:</p>
+<p>Then, in a seperate terminal window, start up the Augur UI with the <code class="prettyprint">--auto-login</code> option by running:</p>
 
-<p><code class="prettyprint">$ npm run integration --auto-login</code></p>
+<p><code class="prettyprint">npm run dev --auto-login</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">yarn dev --auto-login</code></p>
+
+<p>After that, the integration tests can be started in another termial window by running:</p>
+
+<p><code class="prettyprint">$ npm run integration</code></p>
 
 <p>to run all tests. To run a specific integration test, such as <code class="prettyprint">create-market.test.ts</code>, execute the command:</p>
 
-<p><code class="prettyprint">$ npm run integration create-market.test.ts --auto-login</code></p>
+<p><code class="prettyprint">$ npm run integration create-market.test.ts</code></p>
 
 <p>To do this in yarn, it&rsquo;s:</p>
 
-<p><code class="prettyprint">$ yarn integration --auto-login</code></p>
+<p><code class="prettyprint">$ yarn integration</code></p>
 
 <p>and </p>
 
-<p><code class="prettyprint">$ yarn integration create-market.test.ts --auto-login</code></p>
+<p><code class="prettyprint">$ yarn integration create-market.test.ts</code></p>
 
 <p>The augur-ui repository also follows a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using <code class="prettyprint">npm</code>, you would run the following command:</p>
 
