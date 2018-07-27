@@ -16,9 +16,9 @@ Once you have Mocha installed, you can run a specific test case like so:
 
 Augur and augur.js both contain their own sets of unit tests and augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.
 
-Running Tests In augur-ui
--------------------------
-[augur-ui](https://github.com/AugurProject/augur-ui) has a suite of unit tests that can be run using `npm` or `yarn`. To run these tests, first make sure you have installed the dependencies by using the following command:
+Running Tests In Augur
+----------------------
+[Augur](https://github.com/AugurProject/augur) has a suite of unit tests that can be run using `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for Augur first by using the following command:
 
 `$ npm install`
 
@@ -26,39 +26,15 @@ or if you are using `yarn`:
 
 `$ yarn`
 
-Once you have installed the dependencies for augur-ui, you can run the following command using `npm` to run the unit tests:
+Once you have installed the dependencies for Augur, you can run the following command using `npm` to run the unit tests:
 
 `$ npm test`
 
-or, if you prefer to use `yarn`, the command becomes:
+of if you prefer to use `yarn`, the command becomes:
 
 `$ yarn test`
 
-Additionally, the augur-ui code has a series of integration tests. Before running these, the dependencies must be installed (as described above), and a local Ethereum node and [Augur Node](#augur-node) must be running. To quickly start up a Geth Ethereum node and Augur Node using Docker, run the following command:
-
-`npm run docker:spin-up`
-
-or 
-
-`yarn docker:spin-up`
-
-After that, the integration tests can be started by running:
-
-`$ npm run integration --auto-login`
-
-to run all tests. To run a specific integration test, such as `create-market.test.ts`, execute the command:
-
-`$ npm run integration create-market.test.ts --auto-login`
-
-To do this in yarn, it's:
-
-`$ yarn integration --auto-login`
-
-and 
-
-`$ yarn integration create-market.test.ts --auto-login`
-
-The augur-ui repository also follows a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using `npm`, you would run the following command:
+The Augur repository is also following a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using `npm`, you would run the following command:
 
 `$ npm run lint`
 
@@ -68,7 +44,7 @@ and to issue the same command with `yarn`, you would enter this:
 
 <aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur team will not accept a pull request that doesn't include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
 
-Running Tests in augur.js
+Running Tests In augur.js
 -------------------------
 [augur.js](https://github.com/AugurProject/augur.js) includes both Unit tests and integration tests that can be run with `npm` or `yarn`. In order to run tests, makes sure you have installed the dependencies for augur.js first by using the following command:
 
