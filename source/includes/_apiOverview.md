@@ -84,7 +84,7 @@ To connect to the desired Ethereum node and Augur node, call the function [`augu
 
 Similarly, augur.js will attempt to use the `augurNode` parameter to connect to an Augur Node. However, `augurNode` may only be specified as a single-address string, not as an object containing an array of addresses.
 
-The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. The addresses for these hosted nodes are as follows:
+The Augur development team hosts Augur Nodes and Ethereum nodes on the Ethereum test networks. The addresses for these hosted nodes are as follows:
 
 **dev.augur.net Augur Node (WSS):** https://dev.augur.net/augur-node <br />
 **dev.augur.net Ethereum Node (HTTPS):** https://rinkeby.augur.net/ethereum-http <br />
@@ -105,6 +105,8 @@ The Augur development team hosts an Augur Node and Ethereum node on the Ethereum
 **srt.augur.net Augur Node (WSS):** Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 **srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
+
+A main network Augur Node and main network Ethereum nodes can be connected to at the following endpoints:
 
 **Main network Augur Node (WWS):** wss://augur.gethstar.com <br />
 **Main network Ethereum Node (HTTPS):** https://megageth.com/ or https://gethstar.com/ <br />
