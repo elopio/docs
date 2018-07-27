@@ -42,21 +42,29 @@ or
 
 `yarn docker:spin-up`
 
-After that, the integration tests can be started by running:
+Then, in a seperate terminal window, start up the Augur UI with the `--auto-login` option by running:
 
-`$ npm run integration --auto-login`
+`npm run dev --auto-login`
+
+or 
+
+`yarn dev --auto-login`
+
+After that, the integration tests can be started in another termial window by running:
+
+`$ npm run integration`
 
 to run all tests. To run a specific integration test, such as `create-market.test.ts`, execute the command:
 
-`$ npm run integration create-market.test.ts --auto-login`
+`$ npm run integration create-market.test.ts`
 
 To do this in yarn, it's:
 
-`$ yarn integration --auto-login`
+`$ yarn integration`
 
 and 
 
-`$ yarn integration create-market.test.ts --auto-login`
+`$ yarn integration create-market.test.ts`
 
 The augur-ui repository also follows a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using `npm`, you would run the following command:
 
