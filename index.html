@@ -14048,9 +14048,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Augur and augur.js both contain their own sets of unit tests and augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.</p>
 
-<h2 id="running-tests-in-augur">Running Tests In Augur</h2>
+<h2 id="running-tests-in-augur-ui">Running Tests In augur-ui</h2>
 
-<p><a href="https://github.com/AugurProject/augur">Augur</a> has a suite of unit tests that can be run using <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. In order to run tests, makes sure you have installed the dependencies for Augur first by using the following command:</p>
+<p><a href="https://github.com/AugurProject/augur-ui">augur-ui</a> has a suite of unit tests that can be run using <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. To run these tests, first make sure you have installed the dependencies by using the following command:</p>
 
 <p><code class="prettyprint">$ npm install</code></p>
 
@@ -14058,15 +14058,39 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p><code class="prettyprint">$ yarn</code></p>
 
-<p>Once you have installed the dependencies for Augur, you can run the following command using <code class="prettyprint">npm</code> to run the unit tests:</p>
+<p>Once you have installed the dependencies for augur-ui, you can run the following command using <code class="prettyprint">npm</code> to run the unit tests:</p>
 
 <p><code class="prettyprint">$ npm test</code></p>
 
-<p>of if you prefer to use <code class="prettyprint">yarn</code>, the command becomes:</p>
+<p>or, if you prefer to use <code class="prettyprint">yarn</code>, the command becomes:</p>
 
 <p><code class="prettyprint">$ yarn test</code></p>
 
-<p>The Augur repository is also following a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using <code class="prettyprint">npm</code>, you would run the following command:</p>
+<p>Additionally, the augur-ui code has a series of integration tests. Before running these, the dependencies must be installed (as described above), and a local Ethereum node and <a href="#augur-node">Augur Node</a> must be running. To quickly start up a Geth Ethereum node and Augur Node using Docker, run the following command:</p>
+
+<p><code class="prettyprint">npm run docker:spin-up</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">yarn docker:spin-up</code></p>
+
+<p>After that, the integration tests can be started by running:</p>
+
+<p><code class="prettyprint">$ npm run integration --auto-login</code></p>
+
+<p>to run all tests. To run a specific integration test, such as <code class="prettyprint">create-market.test.ts</code>, execute the command:</p>
+
+<p><code class="prettyprint">$ npm run integration create-market.test.ts --auto-login</code></p>
+
+<p>To do this in yarn, it&rsquo;s:</p>
+
+<p><code class="prettyprint">$ yarn integration --auto-login</code></p>
+
+<p>and </p>
+
+<p><code class="prettyprint">$ yarn integration create-market.test.ts --auto-login</code></p>
+
+<p>The augur-ui repository also follows a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using <code class="prettyprint">npm</code>, you would run the following command:</p>
 
 <p><code class="prettyprint">$ npm run lint</code></p>
 
@@ -14076,7 +14100,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur team will not accept a pull request that doesn&rsquo;t include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
 
-<h2 id="running-tests-in-augur-js">Running Tests In augur.js</h2>
+<h2 id="running-tests-in-augur-js">Running Tests in augur.js</h2>
 
 <p><a href="https://github.com/AugurProject/augur.js">augur.js</a> includes both Unit tests and integration tests that can be run with <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. In order to run tests, makes sure you have installed the dependencies for augur.js first by using the following command:</p>
 
