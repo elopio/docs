@@ -545,11 +545,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Once augur.js has been installed, it will need to be connected to an Ethereum node and an <a href="#augur-node">Augur node</a>. These can be running locally or remotely (hosted). </p>
 
-<p>To connect to the desired Ethereum node and Augur node, call the function <code class="prettyprint">[augur.connect](#connect-function)</code> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  Note: if there is a global <code class="prettyprint">web3</code> object present, such as that injected by MetaMask, that global <code class="prettyprint">web3</code> will be automatically used in preference to any other connections available.  So, if you&rsquo;re using MetaMask, make sure it&rsquo;s connected to the right network!</p>
+<p>To connect to the desired Ethereum node and Augur node, call the function <a href="#connect-function"><code class="prettyprint">augur.connect</code></a> as shown to the right. Upon doing so, augur.js will iterate through the list of addresses provided in the <code class="prettyprint">ethereumNode</code> argument and attempt to connect to each one until a successful connection is established or all attempts have failed. The Ethereum node may have multiple HTTP, WebSocket, or IPC addresses specified as arrays.  The connection will be chosen automatically based on a preference of IPC &gt; WS &gt; HTTP.  Note: if there is a global <code class="prettyprint">web3</code> object present, such as that injected by MetaMask, that global <code class="prettyprint">web3</code> will be automatically used in preference to any other connections available.  So, if you&rsquo;re using MetaMask, make sure it&rsquo;s connected to the right network!</p>
 
 <p>Similarly, augur.js will attempt to use the <code class="prettyprint">augurNode</code> parameter to connect to an Augur Node. However, <code class="prettyprint">augurNode</code> may only be specified as a single-address string, not as an object containing an array of addresses.</p>
 
-<p>The Augur development team hosts an Augur Node and Ethereum node on the Ethereum test network, Rinkeby. The addresses for these hosted nodes are as follows:</p>
+<p>The Augur development team hosts Augur Nodes and Ethereum nodes on the Ethereum test networks. The addresses for these hosted nodes are as follows:</p>
 
 <p><strong>dev.augur.net Augur Node (WSS):</strong> https://dev.augur.net/augur-node <br />
 <strong>dev.augur.net Ethereum Node (HTTPS):</strong> https://rinkeby.augur.net/ethereum-http <br />
@@ -570,6 +570,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <p><strong>srt.augur.net Augur Node (WSS):</strong> Must connect to a locally-running augur-node (e.g., ws://127.0.0.1:9001) <br />
 <strong>srt.augur.net Ethereum Node (HTTPS):</strong> https://srt.augur.net/ethereum-http <br />
 <strong>srt.augur.net Ethereum Node (WSS):</strong> wss://srt.augur.net/ethereum-ws <br /></p>
+
+<p>A main network Augur Node and main network Ethereum nodes can be connected to at the following endpoints:</p>
 
 <p><strong>Main network Augur Node (WWS):</strong> wss://augur.gethstar.com <br />
 <strong>Main network Ethereum Node (HTTPS):</strong> https://megageth.com/ or https://gethstar.com/ <br />
@@ -14046,9 +14048,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p>Augur and augur.js both contain their own sets of unit tests and augur.js has a an integration test suite as well. The following sections will provide more details about the differences between the two.</p>
 
-<h2 id="running-tests-in-augur">Running Tests In Augur</h2>
+<h2 id="running-tests-in-augur-ui">Running Tests In augur-ui</h2>
 
-<p><a href="https://github.com/AugurProject/augur">Augur</a> has a suite of unit tests that can be run using <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. In order to run tests, makes sure you have installed the dependencies for Augur first by using the following command:</p>
+<p><a href="https://github.com/AugurProject/augur-ui">augur-ui</a> has a suite of unit tests that can be run using <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. To run these tests, first make sure you have installed the dependencies by using the following command:</p>
 
 <p><code class="prettyprint">$ npm install</code></p>
 
@@ -14056,15 +14058,39 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <p><code class="prettyprint">$ yarn</code></p>
 
-<p>Once you have installed the dependencies for Augur, you can run the following command using <code class="prettyprint">npm</code> to run the unit tests:</p>
+<p>Once you have installed the dependencies for augur-ui, you can run the following command using <code class="prettyprint">npm</code> to run the unit tests:</p>
 
 <p><code class="prettyprint">$ npm test</code></p>
 
-<p>of if you prefer to use <code class="prettyprint">yarn</code>, the command becomes:</p>
+<p>or, if you prefer to use <code class="prettyprint">yarn</code>, the command becomes:</p>
 
 <p><code class="prettyprint">$ yarn test</code></p>
 
-<p>The Augur repository is also following a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using <code class="prettyprint">npm</code>, you would run the following command:</p>
+<p>Additionally, the augur-ui code has a series of integration tests. Before running these, the dependencies must be installed (as described above), and a local Ethereum node and <a href="#augur-node">Augur Node</a> must be running. To quickly start up a Geth Ethereum node and Augur Node using Docker, run the following command:</p>
+
+<p><code class="prettyprint">npm run docker:spin-up</code></p>
+
+<p>or </p>
+
+<p><code class="prettyprint">yarn docker:spin-up</code></p>
+
+<p>After that, the integration tests can be started by running:</p>
+
+<p><code class="prettyprint">$ npm run integration --auto-login</code></p>
+
+<p>to run all tests. To run a specific integration test, such as <code class="prettyprint">create-market.test.ts</code>, execute the command:</p>
+
+<p><code class="prettyprint">$ npm run integration create-market.test.ts --auto-login</code></p>
+
+<p>To do this in yarn, it&rsquo;s:</p>
+
+<p><code class="prettyprint">$ yarn integration --auto-login</code></p>
+
+<p>and </p>
+
+<p><code class="prettyprint">$ yarn integration create-market.test.ts --auto-login</code></p>
+
+<p>The augur-ui repository also follows a set of standard coding rules. In order to check if your code is following the standards, you can run a linting command. To lint the Augur repository using <code class="prettyprint">npm</code>, you would run the following command:</p>
 
 <p><code class="prettyprint">$ npm run lint</code></p>
 
@@ -14074,7 +14100,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <aside class="notice">All pull requests made to the Augur project must be properly linted first and any new functionality added must include tests or updated tests. The Augur team will not accept a pull request that doesn&rsquo;t include updated tests or breaks the linting standards we have for the Augur codebase.</aside>
 
-<h2 id="running-tests-in-augur-js">Running Tests In augur.js</h2>
+<h2 id="running-tests-in-augur-js">Running Tests in augur.js</h2>
 
 <p><a href="https://github.com/AugurProject/augur.js">augur.js</a> includes both Unit tests and integration tests that can be run with <code class="prettyprint">npm</code> or <code class="prettyprint">yarn</code>. In order to run tests, makes sure you have installed the dependencies for augur.js first by using the following command:</p>
 
