@@ -537,7 +537,7 @@ Calculates the [Reporting Fee](#reporting-fee) that will be paid when settling a
 
 * **`p`** (Object) Parameters object.
     * **`p._market`** (string) Ethereum address of the Market in which to claim trading proceeds, as a 20-byte hexadecimal value.
-    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+    * **`p._amount`** (string) Number of [Share Units](#share-unit), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the Reporting Fee amount and will not use any gas. 
@@ -811,7 +811,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._type`** (string) Type of Order to create, as a hexadecimal string ("0x0" for a [Bid Order](#bid-order), "0x1" for an [Ask Order](#ask-order)).
-    * **`p._attoshares`** (string) Number of [attoshares](#atto-prefix) to buy or sell, as a hexadecimal string.
+    * **`p._attoshares`** (string) Number of [Share Units](#share-unit) to buy or sell, as a hexadecimal string.
     * **`p._displayPrice`** (string) Desired price at which to purchase Shares, in [attoETH](#atto-prefix).
     * **`p._market`** (string) Market contract address in which to place the Order, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
@@ -1140,7 +1140,7 @@ Provides JavaScript bindings for the [FillOrder Solidity Contract](https://githu
 
 ### augur.api.FillOrder.publicFillOrder(p)
 
-Attempts to Fill `p._amountFillerWants` [attoshares](#atto-prefix) for [Order](#order) `p._orderId`. If `p._amountFillerWants` is enough to [Fill](#fill-order) the Order completely, the Order will be removed from the [Order Book](#order-book). Otherwise, it will be adjusted to only include the remaining amount after Filling the `p._amountFillerWants` value that the [Filler](#order-filler) requests. This transaction will trigger an [`OrderFilled`](#OrderFilled) event if the Order is Filled without any errors.
+Attempts to Fill `p._amountFillerWants` [Share Units](#share-unit) for [Order](#order) `p._orderId`. If `p._amountFillerWants` is enough to [Fill](#fill-order) the Order completely, the Order will be removed from the [Order Book](#order-book). Otherwise, it will be adjusted to only include the remaining amount after Filling the `p._amountFillerWants` value that the [Filler](#order-filler) requests. This transaction will trigger an [`OrderFilled`](#OrderFilled) event if the Order is Filled without any errors.
 
 This transaction will fail if:
 
@@ -1151,7 +1151,7 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.    
     * **`p._orderId`** (string) Ethereum address of an Order on the Order Book, as a 32-byte hexadecimal value.
-    * **`p._amountFillerWants`** (string) Number of [Shares](#share) to Fill, in attoshares, as a hexadecimal string.
+    * **`p._amountFillerWants`** (string) Number of [Shares](#share) to Fill, as a hexadecimal string.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
@@ -2297,13 +2297,13 @@ The Share Token is an ERC-20 token that implements all of the required functions
 
 ### augur.api.ShareToken.approve(p)
 
-Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value` in [attoshares](#atto-prefix) approved. The amount that `p.spender` is approved to spend can be increased or decreased later by calling `augur.api.ShareToken.increaseApproval` or `augur.api.ShareToken.decreaseApproval`.
+Allows `p._spender` to spend up to `p._value` [Shares](#share) for the `msg.sender` of this transaction. This transaction will trigger an [`Approval`](#Approval) event, which will record the owner address (`msg.sender`), `p._spender`, and `p._value`, in [Share Units](#share-unit), approved. The amount that `p.spender` is approved to spend can be increased or decreased later by calling `augur.api.ShareToken.increaseApproval` or `augur.api.ShareToken.decreaseApproval`.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p._spender`**  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.
-    * **`p._value`**  (string) Number of attoshares to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
+    * **`p._value`**  (string) Number of [Share Units](#share-unit) to allow `p._spender` to spend on behalf of `msg.sender`, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -2360,17 +2360,17 @@ Increases the amount of [Shares](#share) `p._spender` is approved to spend on be
 
 ### augur.api.ShareToken.transfer(p)
 
-Sends `p._value` worth of [attoshares](#atto-prefix) to the Ethereum address `p._to`. If this transaction transfers without any errors, it will trigger a [`Transfer`](#Transfer) event, which will record the from address (`msg.sender`), `p._to` address, and `p._value` amount transferred.
+Sends `p._value` worth of [Share Units](#share-unit) to the Ethereum address `p._to`. If this transaction transfers without any errors, it will trigger a [`Transfer`](#Transfer) event, which will record the from address (`msg.sender`), `p._to` address, and `p._value` amount transferred.
 
 This transaction will fail if:
 
-* `msg.sender` does not have enough Shares to be able to transfer `p._value` attoshares to the `p._to` address.
+* `msg.sender` does not have enough Share Units to be able to transfer `p._value` Share Units to the `p._to` address.
 
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
     * **`p._to`**  (string) Ethereum address to send Shares to, as a 20-byte hexadecimal value.
-    * **`p._value`**  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
+    * **`p._value`**  (string) Number of Share Units to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -2385,11 +2385,11 @@ This transaction will fail if:
 
 ### augur.api.ShareToken.transferFrom(p)
 
-Sends `p._value` worth of [attoshares](#atto-prefix) from the Ethereum addres `p._from` to the Ethereum address `p._to`. If this transaction transfers without any errors, it will trigger a [`Transfer`](#Transfer) event, which will record the `p._from` address, `p._to` address, and `p._value` (in attoshares) amount transferred.
+Sends `p._value` worth of [Share Units](#share-unit) from the Ethereum addres `p._from` to the Ethereum address `p._to`. If this transaction transfers without any errors, it will trigger a [`Transfer`](#Transfer) event, which will record the `p._from` address, `p._to` address, and `p._value` (in Share Units) amount transferred.
 
 This transaction will fail if:
 
-* `p._from` does not have enough Shares to be able to transfer `p._value` attoshares to the `p._to` address.
+* `p._from` does not have enough Shares to be able to transfer `p._value` Share Units to the `p._to` address.
 * `msg.sender` does not have the approval (see `augur.api.ShareToken.approve`) to spend at least `p._value` worth of Share Tokens for the `p._from` address.
 
 #### **Parameters:**
@@ -2397,7 +2397,7 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._from`**  (string) Ethereum address to send Shares from, as a 20-byte hexadecimal value.
     * **`p._to`**  (string) Ethereum address to send Shares to, as a 20-byte hexadecimal value.
-    * **`p._value`**  (string) Number of attoshares to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
+    * **`p._value`**  (string) Number of Share Units to send, between 1 and 2<sup>254</sup>, as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -2672,7 +2672,7 @@ Works like `augur.api.Trade.publicBuy`, but uses the parameter `_loopLimit` to d
 
 ### augur.api.Trade.publicSell(p)
 
-Sells `p._fxpAmount` number of [Shares](#share) in [Outcome](#outcome) `p._outcome` of [Market](#market) `p._market` at `p._price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `p._fxpAmount` of [attoShares]. The parameters `p._betterOrderId` and `p._worseOrderId` are the Orders with the next best/next worse price with respect to `p._price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the Order is created without any errors.
+Sells `p._fxpAmount` number of [Share Units](#share-unit) in [Outcome](#outcome) `p._outcome` of [Market](#market) `p._market` at `p._price` [attoETH](#atto-prefix) per Share. This transaction takes [Orders](#order) off the [Order Book](#order-book) that can be [Filled](#fill-order) with this request, otherwise it creates a new Order to sell `p._fxpAmount` of Share Units. The parameters `p._betterOrderId` and `p._worseOrderId` are the Orders with the next best/next worse price with respect to `p._price`, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling `augur.trading.getBetterWorseOrders`. This transaction will trigger an [`OrderCreated`](#OrderCreated) event if the Order is created without any errors.
 
 This transaction will fail if:
 
@@ -2683,8 +2683,8 @@ This transaction will fail if:
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
-    * **`p._fxpAmount`**  (string) Number of Shares to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
-    * **`p._price`**  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of Share Units to sell, as a hexadecimal string.
+    * **`p._price`**  (string) Price at which to sell Share Units, in attoETH, as a hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)
@@ -2710,8 +2710,8 @@ Works like `augur.api.Trade.publicSell`, but uses the parameter `_loopLimit` to 
 * **`p`** (Object) Parameters object.
     * **`p._market`**  (string) Ethereum address of the Market in which to sell Shares, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to place the Order, as a hexadecimal string.
-    * **`p._fxpAmount`**  (string) Number of Shares to sell, in [attoshares](#atto-prefix), as a hexadecimal string.
-    * **`p._price`**  (string) Price at which to sell Shares, in attoETH, as a hexadecimal string.
+    * **`p._fxpAmount`**  (string) Number of Shares Units to sell, as a hexadecimal string.
+    * **`p._price`**  (string) Price at which to sell Share Units, in attoETH, as a hexadecimal string.
     * **`p._betterOrderId`** (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._worseOrderId`** (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling `augur.trading.getBetterWorseOrders`.
     * **`p._tradeGroupId`** (string) &lt;optional> ID used by the Augur UI to group transactions, as a 32-byte hexadecimal value. (Can be `undefined`.)

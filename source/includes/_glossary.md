@@ -17,7 +17,7 @@ An Ask Order is an [Order](#order) indicating the desire of the [Order Creator](
 
 ## Atto- (Prefix)
 
-Atto- is a unit prefix in the metric system denoting a factor of 10^−18, or 0.000000000000000001.  This prefix is used for a number of terms in Augur, including attoETH, attoREP, attoshares, attotoken, etc.
+Atto- is a unit prefix in the metric system denoting a factor of 10^−18, or 0.000000000000000001.  This prefix is used for a number of terms in Augur, including attoETH, attoREP, attotoken, etc.
 
 ## Bid Order
 
@@ -361,6 +361,10 @@ Settlement Fees are fees extracted when a [Complete Set](#complete-set) is [Sett
 ## Share
 
 A Share is the ownership of a portion of a [Market's](#market) [Outcome's](#outcome) value. A [Complete Set](#complete-set) of Shares are created when both the [Creator](#order-creator) and [Filler](#order-filler) of an [Order](#order) send ETH to the Market to complete an [Order](#order). Shares are [Settled](#settlement) (destroyed) when a Complete Set is sold back to the Market.
+
+## Share Unit
+
+Used interchangably with `Share`. This is the smallest, indivisible unit of Shares that can be bought/sold in a [Market's](#market) [Outcome's](#outcome) value.
 
 ## Short Position
 

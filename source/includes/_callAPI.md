@@ -147,7 +147,7 @@ Calculates the [Creator Fee](#creator-fee) that will be paid when settling a spe
 
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum address of the Market in which to calculate the Creator Fee, as a 20-byte hexadecimal value.
-    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+    * **`p._amount`** (string) Number of [Share Units](#share-unit, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -163,7 +163,7 @@ Calculates the amount of [attoETH](#atto-prefix) that a number of [Shares](#shar
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum address of the Market in which to calculate trading proceeds, as a 20-byte hexadecimal value.
     * **`p._outcome`** (string) Outcome for which to calculate trading proceeds, as a hexadecimal string.
-    * **`p._numberOfShares`** (string) Quantity of attoshares for which to calculate trading proceeds, as a hexadecimal string.
+    * **`p._numberOfShares`** (string) Quantity of [Share Units](#share-unit) for which to calculate trading proceeds, as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
@@ -1217,7 +1217,7 @@ Calculates the [Creator Fee](#creator-fee) that will be paid when settling a spe
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.  
-    * **`p._amount`** (string) Number of Shares, in attoshares, as a hexadecimal string.
+    * **`p._amount`** (string) Number of [Share Units](#share-unit), as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
