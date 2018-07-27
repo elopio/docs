@@ -106,11 +106,7 @@ The Augur development team hosts Augur Nodes and Ethereum nodes on the Ethereum 
 **srt.augur.net Ethereum Node (HTTPS):** https://srt.augur.net/ethereum-http <br />
 **srt.augur.net Ethereum Node (WSS):** wss://srt.augur.net/ethereum-ws <br />
 
-A main network Augur Node and main network Ethereum nodes can be connected to at the following endpoints:
-
-**Main network Augur Node (WWS):** wss://augur.gethstar.com <br />
-**Main network Ethereum Node (HTTPS):** https://megageth.com/ or https://gethstar.com/ <br />
-**Main network Ethereum Node (WSS):** wss://megageth.com/ws or wss://gethstar.com/ws <br />
+The Augur development team does not host any Augur Nodes or Ethereum nodes for the Ethereum main network. However, a list of these nodes that are hosted by trusted community members can be found at https://predictions.global/augur-public-ethereum-nodes.
 
 In the example on the right, the first connection that will be tried is `http://127.0.0.1:8545`, which is a local Ethereum node being run using the Geth client. If a connection to the local Geth node cannot be established, the next provided address will be tried. In this case, we have provided a single hosted node on the Ethereum Rinkeby test network (`rinkeby.ethereum.nodes.augur.net`) as another attempt to make after the local Geth node. If a connection is successfully established, then the `vitals` object will be returned; otherwise an error message will be returned.
 
