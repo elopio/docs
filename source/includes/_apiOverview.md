@@ -14,6 +14,8 @@ Instead of looking up information about Augur-related events directly on the Eth
 
 To alleviate this problem, the Simplified API executes queries by submitting an RPC request to an Augur Node that is either running locally or remotely (hosted). The Augur Node then runs the request against its database and returns the result. This allows queries to be run on Augur much more quickly than would otherwise be possible.
 
+It should be noted that batch RPC calls are not supported yet on incoming requests to Augur Node, and therefore batch RPC calls currently are not supported by augur.js.
+
 To set up a local Augur Node, follow the instructions described in the [Augur Node GitHub repository](https://github.com/AugurProject/augur-node#augur-node). Once a local Augur Node is running (or if the WebSocket address of a hosted node is known), a connection to it can be established by specifying the WebSocket address as shown by the JavaScript sample code in the [Getting Started with augur.js](#getting-started-with-augur-js) section.
 
 Getting Started with augur.js
