@@ -3343,7 +3343,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="na">_direction</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x8092bdf939e23a0e926021ffce5a062d0f598d1f"</span><span class="p">,</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
   <span class="na">_outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">doNotCreateOrders</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -3358,18 +3358,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// This function does not return a value, but it does log information to the console as it places Orders:</span>
 <span class="s2">"tradeUntilAmountIsZero: "</span>
 <span class="p">{</span>
-  <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-  <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"maxPrice"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+  <span class="s2">"sharesProvided"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="p">{</span><span class="s2">"cost"</span><span class="p">:</span><span class="s2">"5000000000000000000"</span><span class="p">,</span><span class="s2">"onChainAmount"</span><span class="p">:</span><span class="s2">"1000000000000000"</span><span class="p">,</span><span class="s2">"onChainPrice"</span><span class="p">:</span><span class="s2">"5000"</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">"cost"</span><span class="p">:</span><span class="s2">"5000000000000000000"</span><span class="p">,</span><span class="s2">"onChainAmount"</span><span class="p">:</span><span class="s2">"1000000000000000"</span><span class="p">,</span><span class="s2">"onChainSharesProvided"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainPrice"</span><span class="p">:</span><span class="s2">"5000"</span><span class="p">}</span>
+<span class="s2">"gasLimit:  3448179  numTradesPerTx:  3"</span>
 <span class="s2">"cost: 5000000000000000000 wei 5 eth"</span>
 <span class="kc">undefined</span>
 <span class="s2">"estimated gas cost: 6175000000000000 wei 0.006175 eth"</span>
@@ -3377,155 +3379,27 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
   <span class="s2">"callReturn"</span><span class="p">:</span> <span class="s2">"0x4bbc239211b4e207eb9a05a071b3a5bb96b5b5573b29d26c18e2c31ffc70d105"</span>
 <span class="p">}</span>
-<span class="s2">"TokensTransferred: "</span>
-<span class="p">{</span>
-  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"5000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"</span><span class="p">,</span>
-  <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">18336</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d"</span><span class="p">,</span>
-  <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Cash"</span><span class="p">,</span>
-  <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"Transfer"</span><span class="p">,</span>
-  <span class="s2">"sender"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"recipient"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"</span>
-<span class="p">}</span>
-<span class="s2">"convertLogToTransaction Transfer"</span>
-<span class="p">{</span>
-  <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"to"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"5000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"</span><span class="p">,</span>
-  <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">18336</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d"</span><span class="p">,</span>
-  <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Cash"</span><span class="p">,</span>
-  <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"Transfer"</span><span class="p">,</span>
-  <span class="s2">"sender"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"recipient"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"</span>
-<span class="p">}</span>
-<span class="s2">"Order Created: "</span>
-<span class="p">{</span>
-  <span class="s2">"orderType"</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
-  <span class="s2">"amount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-  <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"moneyEscrowed"</span><span class="p">:</span> <span class="s2">"5000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"sharesEscrowed"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="s2">"tradeGroupId"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"orderId"</span><span class="p">:</span> <span class="s2">"0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d"</span><span class="p">,</span>
-  <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x04252fa3b79b7626ffc87144dafeed0838eecd59"</span><span class="p">,</span>
-  <span class="s2">"shareToken"</span><span class="p">:</span> <span class="s2">"0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea"</span><span class="p">,</span>
-  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3"</span><span class="p">,</span>
-  <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">18336</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d"</span><span class="p">,</span>
-  <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
-  <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"OrderCreated"</span><span class="p">,</span>
-  <span class="s2">"marketId"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"orderCreator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"orderState"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
-  <span class="s2">"fullPrecisionPrice"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"fullPrecisionAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-  <span class="s2">"tokensEscrowed"</span><span class="p">:</span> <span class="s2">"5"</span>
-<span class="p">}</span>
-<span class="s2">"convertTradeLogToTransaction CreateOrder"</span>
-<span class="p">{</span>
-  <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"0"</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="s2">"orderType"</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
-        <span class="s2">"amount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-        <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-        <span class="s2">"creator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-        <span class="s2">"moneyEscrowed"</span><span class="p">:</span> <span class="s2">"5000000000000000000"</span><span class="p">,</span>
-        <span class="s2">"sharesEscrowed"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-        <span class="s2">"tradeGroupId"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
-        <span class="s2">"orderId"</span><span class="p">:</span> <span class="s2">"0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d"</span><span class="p">,</span>
-        <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x04252fa3b79b7626ffc87144dafeed0838eecd59"</span><span class="p">,</span>
-        <span class="s2">"shareToken"</span><span class="p">:</span> <span class="s2">"0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea"</span><span class="p">,</span>
-        <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3"</span><span class="p">,</span>
-        <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
-        <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">18336</span><span class="p">,</span>
-        <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d"</span><span class="p">,</span>
-        <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
-        <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"OrderCreated"</span><span class="p">,</span>
-        <span class="s2">"marketId"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-        <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">"orderCreator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-        <span class="s2">"orderState"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
-        <span class="s2">"fullPrecisionPrice"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-        <span class="s2">"fullPrecisionAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-        <span class="s2">"tokensEscrowed"</span><span class="p">:</span> <span class="s2">"5"</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="s2">"constructTradingTransaction: CreateOrder "</span>
-<span class="p">{</span>
-  <span class="s2">"orderType"</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
-  <span class="s2">"amount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-  <span class="s2">"price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"moneyEscrowed"</span><span class="p">:</span> <span class="s2">"5000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"sharesEscrowed"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="s2">"tradeGroupId"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000000000000000000000000000000"</span><span class="p">,</span>
-  <span class="s2">"orderId"</span><span class="p">:</span> <span class="s2">"0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d"</span><span class="p">,</span>
-  <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x04252fa3b79b7626ffc87144dafeed0838eecd59"</span><span class="p">,</span>
-  <span class="s2">"shareToken"</span><span class="p">:</span> <span class="s2">"0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea"</span><span class="p">,</span>
-  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3"</span><span class="p">,</span>
-  <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08"</span><span class="p">,</span>
-  <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">18336</span><span class="p">,</span>
-  <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d"</span><span class="p">,</span>
-  <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
-  <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"OrderCreated"</span><span class="p">,</span>
-  <span class="s2">"marketId"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
-  <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"orderCreator"</span><span class="p">:</span> <span class="s2">"0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb"</span><span class="p">,</span>
-  <span class="s2">"orderState"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
-  <span class="s2">"fullPrecisionPrice"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"fullPrecisionAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-  <span class="s2">"tokensEscrowed"</span><span class="p">:</span> <span class="s2">"5"</span>
-<span class="p">}</span>
 <span class="s2">"getTradeAmountRemaining initial amount remaining: 1000000000000000 ocs 10 shares"</span>
 <span class="s2">"starting amount:  1000000000000000 ocs 10 shares"</span>
 <span class="s2">"remaining amount: 0 ocs 0 shares"</span>
-<span class="s2">"actual cost:      5000000000000000000 wei 5 eth"</span>
 <span class="s2">"tradeUntilAmountIsZero: "</span>
 <span class="p">{</span>
-  <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
-  <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"maxPrice"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"numTicks"</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+  <span class="s2">"sharesProvided"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="s2">"_direction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"_fxpAmount"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
   <span class="s2">"_market"</span><span class="p">:</span> <span class="s2">"0x524925edb7a29cc35d886968253cb5e209655cf4"</span><span class="p">,</span>
   <span class="s2">"_outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"numOutcomes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"doNotCreateOrders"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"estimatedCost"</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="s2">"_price"</span><span class="p">:</span> <span class="s2">"0.5"</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="p">{</span><span class="s2">"cost"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainAmount"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainPrice"</span><span class="p">:</span><span class="s2">"5000"</span><span class="p">}</span>
+<span class="p">{</span><span class="s2">"cost"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainAmount"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainSharesProvided"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="s2">"onChainPrice"</span><span class="p">:</span><span class="s2">"5000"</span><span class="p">}</span>
+<span class="s2">"gasLimit:  3448179  numTradesPerTx:  3"</span>
 <span class="s2">"cost: 0 wei 0 eth"</span>
+<span class="s2">"tradeUntilAmountIsZero complete: only dust remaining"</span>
 <span class="kc">null</span>
 </code></pre></div>
 <h3 id="augur-trading-calculateprofitloss-p">augur.trading.calculateProfitLoss(p)</h3>
@@ -3961,7 +3835,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Normalized limit price for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="share">Shares</a> to trade, as a base-10 string.</li>
-<li><strong><code class="prettyprint">p.sharesProvided</code></strong>  (string) Number of shares already owned and provided for this trade, as a base-10 string.</li>
+<li><strong><code class="prettyprint">p.sharesProvided</code></strong>  (string) Number of Shares already owned and provided for this trade, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.numTicks</code></strong>  (string) The number of <a href="#tick">Ticks</a> for this <a href="#market">Market</a>.</li>
 <li><strong><code class="prettyprint">p._direction</code></strong>  (number) <a href="#order">Order</a> type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Market in which to trade, as a hex string.</li>
