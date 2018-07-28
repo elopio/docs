@@ -2359,7 +2359,7 @@ augur.trading.tradeUntilAmountIsZero({
   minPrice: "0",
   maxPrice: "1",
   _direction: 0,
-  _market: "0x8092bdf939e23a0e926021ffce5a062d0f598d1f",
+  _market: "0x524925edb7a29cc35d886968253cb5e209655cf4",
   _outcome: 0,
   numOutcomes: 2,
   doNotCreateOrders: false,
@@ -2374,18 +2374,20 @@ augur.trading.tradeUntilAmountIsZero({
 // This function does not return a value, but it does log information to the console as it places Orders:
 "tradeUntilAmountIsZero: "
 {
-  "_price": "0.5",
-  "_fxpAmount": "10",
-  "numTicks": "10000",
-  "minPrice": "0",
+  "doNotCreateOrders": false,
   "maxPrice": "1",
+  "minPrice": "0",
+  "numOutcomes": 2,
+  "numTicks": "10000",
+  "sharesProvided": "0",
   "_direction": 0,
+  "_fxpAmount": "10",
   "_market": "0x524925edb7a29cc35d886968253cb5e209655cf4",
   "_outcome": 0,
-  "numOutcomes": 2,
-  "doNotCreateOrders": false
+  "_price": "0.5",
 }
-{"cost":"5000000000000000000","onChainAmount":"1000000000000000","onChainPrice":"5000"}
+{"cost":"5000000000000000000","onChainAmount":"1000000000000000","onChainSharesProvided":"0","onChainPrice":"5000"}
+"gasLimit:  3448179  numTradesPerTx:  3"
 "cost: 5000000000000000000 wei 5 eth"
 undefined
 "estimated gas cost: 6175000000000000 wei 0.006175 eth"
@@ -2393,155 +2395,27 @@ undefined
   "hash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
   "callReturn": "0x4bbc239211b4e207eb9a05a071b3a5bb96b5b5573b29d26c18e2c31ffc70d105"
 }
-"TokensTransferred: "
-{
-  "from": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "to": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "value": "5000000000000000000",
-  "address": "0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5",
-  "removed": false,
-  "transactionHash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
-  "transactionIndex": 0,
-  "logIndex": 1,
-  "blockNumber": 18336,
-  "blockHash": "0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d",
-  "contractName": "Cash",
-  "eventName": "Transfer",
-  "sender": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "recipient": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "token": "0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"
-}
-"convertLogToTransaction Transfer"
-{
-  "from": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "to": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "value": "5000000000000000000",
-  "address": "0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5",
-  "removed": false,
-  "transactionHash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
-  "transactionIndex": 0,
-  "logIndex": 1,
-  "blockNumber": 18336,
-  "blockHash": "0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d",
-  "contractName": "Cash",
-  "eventName": "Transfer",
-  "sender": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "recipient": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "token": "0xd3a7c274e3e7b1990a9c23bec98adc2b7c448ac5"
-}
-"Order Created: "
-{
-  "orderType": "buy",
-  "amount": "10",
-  "price": "0.5",
-  "creator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "moneyEscrowed": "5000000000000000000",
-  "sharesEscrowed": "0",
-  "tradeGroupId": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "orderId": "0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d",
-  "universe": "0x04252fa3b79b7626ffc87144dafeed0838eecd59",
-  "shareToken": "0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea",
-  "address": "0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3",
-  "removed": false,
-  "transactionHash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
-  "transactionIndex": 0,
-  "logIndex": 2,
-  "blockNumber": 18336,
-  "blockHash": "0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d",
-  "contractName": "Augur",
-  "eventName": "OrderCreated",
-  "marketId": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "outcome": 0,
-  "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "orderState": "OPEN",
-  "fullPrecisionPrice": "0.5",
-  "fullPrecisionAmount": "10",
-  "tokensEscrowed": "5"
-}
-"convertTradeLogToTransaction CreateOrder"
-{
-  "0x524925edb7a29cc35d886968253cb5e209655cf4": {
-    "0": [
-      {
-        "orderType": "buy",
-        "amount": "10",
-        "price": "0.5",
-        "creator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-        "moneyEscrowed": "5000000000000000000",
-        "sharesEscrowed": "0",
-        "tradeGroupId": "0x0000000000000000000000000000000000000000000000000000000000000000",
-        "orderId": "0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d",
-        "universe": "0x04252fa3b79b7626ffc87144dafeed0838eecd59",
-        "shareToken": "0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea",
-        "address": "0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3",
-        "removed": false,
-        "transactionHash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
-        "transactionIndex": 0,
-        "logIndex": 2,
-        "blockNumber": 18336,
-        "blockHash": "0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d",
-        "contractName": "Augur",
-        "eventName": "OrderCreated",
-        "marketId": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-        "outcome": 0,
-        "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-        "orderState": "OPEN",
-        "fullPrecisionPrice": "0.5",
-        "fullPrecisionAmount": "10",
-        "tokensEscrowed": "5"
-      }
-    ]
-  }
-}
-"constructTradingTransaction: CreateOrder "
-{
-  "orderType": "buy",
-  "amount": "10",
-  "price": "0.5",
-  "creator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "moneyEscrowed": "5000000000000000000",
-  "sharesEscrowed": "0",
-  "tradeGroupId": "0x0000000000000000000000000000000000000000000000000000000000000000",
-  "orderId": "0xe7505184c6ab0bab27793dc2804fb066465541e282c135232fa2ef7e964e2e7d",
-  "universe": "0x04252fa3b79b7626ffc87144dafeed0838eecd59",
-  "shareToken": "0x9315db4f8e425fa0ba47ae5fce58bbe9e9b18fea",
-  "address": "0x25ff5dc79a7c4e34254ff0f4a19d69e491201dd3",
-  "removed": false,
-  "transactionHash": "0xb134d37fb8a72957cb26267170ce4ca294e1e3d239622416529b7b795330ca08",
-  "transactionIndex": 0,
-  "logIndex": 2,
-  "blockNumber": 18336,
-  "blockHash": "0xb79a66c248ae8888f49773569ac19bd97ebb565222e4e37e5f903e5a82d9c97d",
-  "contractName": "Augur",
-  "eventName": "OrderCreated",
-  "marketId": "0x524925edb7a29cc35d886968253cb5e209655cf4",
-  "outcome": 0,
-  "orderCreator": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "orderState": "OPEN",
-  "fullPrecisionPrice": "0.5",
-  "fullPrecisionAmount": "10",
-  "tokensEscrowed": "5"
-}
 "getTradeAmountRemaining initial amount remaining: 1000000000000000 ocs 10 shares"
 "starting amount:  1000000000000000 ocs 10 shares"
 "remaining amount: 0 ocs 0 shares"
-"actual cost:      5000000000000000000 wei 5 eth"
 "tradeUntilAmountIsZero: "
 {
-  "_price": "0.5",
-  "_fxpAmount": "0",
-  "numTicks": "10000",
-  "minPrice": "0",
+  "doNotCreateOrders": false,
   "maxPrice": "1",
+  "minPrice": "0",
+  "numOutcomes": 2,
+  "numTicks": "10000",
+  "sharesProvided": "0",
   "_direction": 0,
+  "_fxpAmount": "10",
   "_market": "0x524925edb7a29cc35d886968253cb5e209655cf4",
   "_outcome": 0,
-  "numOutcomes": 2,
-  "doNotCreateOrders": false,
-  "estimatedCost": null
+  "_price": "0.5",
 }
-{"cost":"0","onChainAmount":"0","onChainPrice":"5000"}
+{"cost":"0","onChainAmount":"0","onChainSharesProvided":"0","onChainPrice":"5000"}
+"gasLimit:  3448179  numTradesPerTx:  3"
 "cost: 0 wei 0 eth"
+"tradeUntilAmountIsZero complete: only dust remaining"
 null
 ```
 ### augur.trading.calculateProfitLoss(p)
@@ -2856,7 +2730,7 @@ If `p.doNotCreateOrders` is set to `false`, this function will place trades unti
 * **`p`** (Object) Parameters object.
     * **`p._price`**  (string) Normalized limit price for this trade, as a base-10 string.
     * **`p._fxpAmount`**  (string) Number of [Shares](share) to trade, as a base-10 string.
-    * **`p.sharesProvided`**  (string) Number of shares already owned and provided for this trade, as a base-10 string.
+    * **`p.sharesProvided`**  (string) Number of Shares already owned and provided for this trade, as a base-10 string.
     * **`p.numTicks`**  (string) The number of [Ticks](#tick) for this [Market](#market).
     * **`p._direction`**  (number) [Order](#order) type (0 for "buy", 1 for "sell").
     * **`p._market`**  (string) Market in which to trade, as a hex string.
