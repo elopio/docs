@@ -201,7 +201,7 @@ Begins listening for events emitted by an [Augur Node](#augur-node).
 #### **Parameters:**
 
 * **`eventCallbacks`** (Object.&lt;function()>) Callbacks to fire when events are received, keyed by event name.
-* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up, or if a callback in `eventCallbacks` is not an actual function.
+* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up, or if `eventCallbacks` is improperly formatted.
 
 ### augur.events.startBlockchainEventListeners(eventCallbacks, startingBlockNumber, onSetupComplete)
 
