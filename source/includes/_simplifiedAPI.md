@@ -807,14 +807,16 @@ augur.markets.getMarketPriceHistory({
 });
 // example output:
 {
-  0: [{
-    price: "5.5",
-    amount: "0.2",
-    timestamp: 1506474500,
-  }, {
-    amount: "2",
-    price: "4.2",
-    timestamp: 1509065474,
+  0: [
+    {
+      price: "5.5",
+      amount: "0.2",
+      timestamp: 1506474500,
+    }, {
+      amount: "2",
+      price: "4.2",
+      timestamp: 1509065474,
+    },
   ],
 }
 
