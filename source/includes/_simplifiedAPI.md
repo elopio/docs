@@ -2719,7 +2719,7 @@ This function will fail if:
 
 #### **Returns:**
 
-* (Array.&lt;<a href="#SingleSideOrderBook">SingleSideOrderBook</a>>) Object containing Orders on one side of the Order Book (buy or sell) for the specified Market/Universe and Outcome.
+* (Object) Object containing a <a href="#SingleSideOrderBook">SingleSideOrderBook</a> object for one side of the Order Book (buy or sell), keyed by Universe/Market and Outcome.
 
 ### augur.trading.getPositionInMarket(p, callback)
 
