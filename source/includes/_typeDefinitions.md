@@ -374,6 +374,7 @@ Authentication metadata for raw transactions.
 ### Order  (Object)
 
 #### **Properties:** 
+* **`orderId`** (string) ID of the order, as a 32-byte hexadecimal string.
 * **`shareToken`** (string) Contract address of the share token for which the order was placed, as a hexadecimal string.
 * **`transactionHash`** (string) Hash to look up the order transaction receipt.
 * **`logIndex`** (number) Number of the log index position in the Ethereum block containing the order transaction.
@@ -382,9 +383,11 @@ Authentication metadata for raw transactions.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the order transaction.
 * **`orderState`** (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
 * **`price`** (string) Rounded display price, as a base-10 number.
-* **`amount`** (string) Rounded number of shares to trade, as a base-10 number.
+* **`amount`** (string) Current rounded number of shares to trade, as a base-10 number.
+* **`originalAmount`** (string) Original rounded number of shares to trade, as a base-10 number.
 * **`fullPrecisionPrice`** (string) Full-precision (un-rounded) display price, as a base-10 number.
-* **`fullPrecisionAmount`** (string) Full-precision (un-rounded) number of shares to trade, as a base-10 number.
+* **`fullPrecisionAmount`** (string) Current full-precision (un-rounded) number of shares to trade, as a base-10 number.
+* **`originalFullPrecisionAmount`** (string)  Original full-precision (un-rounded) number of shares to trade, as a base-10 number.
 * **`tokensEscrowed`** (string) Number of the order maker's tokens held in escrow, as a base-10 number.
 * **`sharesEscrowed`** (string) Number of the order maker's shares held in escrow, as a base-10 number.
 * **`canceledBlockNumber`** (number|null) Block number in which the order cancellation took place (if any).
@@ -415,11 +418,11 @@ Serves as an enum for the state of an order.
 ### ProfitLoss  (Object)
 
 #### **Properties:**
-  * **`position`**  (string) Net trading position, where the quantity is the number of [Share Units](#share-unit). An overall "sell" position is negative, and an overall "buy" position is positive.
+  * **`position`**  (string) Net trading position, where the quantity is the number of attoshares. An overall "sell" position is negative, and an overall "buy" position is positive.
   * **`meanOpenPrice`**  (string) Mean price of trades at time of buy-in, in attoETH.
   * **`realized`**  (string) Amount of realized profits or losses from all trades, in attoETH.
   * **`queued`**  (string) Expected profit or loss of the current set of pending trades, in attoETH.
-  * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as Share Units held * (last trade price - price on buy-in).
+  * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).
 
 <a name="Report"></a>
 ### Report  (Object)
@@ -476,18 +479,12 @@ Serves as an enum for the state of a Market.
 * **`shareBalances`** (Array.&lt;string>}  Projected final balances after the trade is complete, as an array of base-10 strings.
 * **`worstCaseFees`** (string) Maximum amount of Settlement Fees to be paid, as a base-10 string.
 
-<a name="SingleOutcomeOrderBook"></a>
-### SingleOutcomeOrderBook  (Object)
+<a name="SingleSideOrderBook"></a>
+### SingleSideOrderBook  (Object)
 
 #### **Properties:** 
- * **`buy`** (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>) Buy orders (bids) indexed by order ID.
- * **`sell`** (<a href="#SingleOutcomeOrderBookSide">SingleOutcomeOrderBookSide</a>)  Sell orders (asks) indexed by order ID.
-
-<a name="SingleOutcomeOrderBookSide"></a>
-### SingleOutcomeOrderBookSide  (Object)
-
-#### **Properties:** 
-* (<a href="#Order">Order</a>) Buy (bid) or sell (ask) orders, indexed by order ID.
+ * **`buy`** (Object|null) Buy (bid) Order objects, keyed by Order ID.
+ * **`sell`** (Object|null)  Sell (ask) Order objects, keyed by Order ID.
 
 <a name="SingleOutcomePriceTimeSeries"></a>
 ### SingleOutcomePriceTimeSeries  (Object)
