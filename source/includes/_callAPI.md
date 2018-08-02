@@ -147,7 +147,7 @@ Calculates the [Creator Fee](#creator-fee) that will be paid when settling a spe
 
 * **`p`** (Object) Parameters object.  
     * **`p._market`** (string) Ethereum address of the Market in which to calculate the Creator Fee, as a 20-byte hexadecimal value.
-    * **`p._amount`** (string) Number of [Share Units](#share-unit, as a hexadecimal string.
+    * **`p._amount`** (string) Number of [Share Units](#share-unit), as a hexadecimal string.
 * **`callback`** (function) &lt;optional> Called after the function's result has been retrieved.
 
 #### **Returns:**
