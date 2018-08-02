@@ -7220,7 +7220,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-sharetoken-allowance-p-callback">augur.api.ShareToken.allowance(p, callback)</h3>
 
-<p>Returns the amount of <a href="#atto-prefix">attoShares</a> that a given Ethereum contract is allowed to spend on behalf of a particular user.</p>
+<p>Returns the amount of <a href="#share-unit">Share Units</a> that a given Ethereum contract is allowed to spend on behalf of a particular user.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -7236,7 +7236,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
-<p>(string) Amount of attoShares the contract is allowed to spend on behalf of the specified user.</p>
+<p>(string) Amount of Share Units the contract is allowed to spend on behalf of the specified user.</p>
 
 <h3 id="augur-api-sharetoken-getmarket-p-callback">augur.api.ShareToken.getMarket(p, callback)</h3>
 
@@ -8899,7 +8899,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to purchase of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#share-unit">Share Units</a> to purchase of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -8931,7 +8931,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to buy Complete Sets, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to purchase of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#share-unit">Share Units</a> to purchase of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -8972,7 +8972,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to sell of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#share-unit">Share Units</a> to sell of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -9003,7 +9003,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market in which to sell Complete Sets, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#atto-prefix">attoShares</a> to sell of each Outcome, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._amount</code></strong> (string) Number of <a href="#share-unit">Share Units</a> to sell of each Outcome, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10968,7 +10968,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._subtractedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> by which to decrease the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._subtractedValue</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> by which to decrease the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -10999,7 +10999,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p._spender</code></strong>  (string) Ethereum address of the desired spender, as a 20-byte hexadecimal value.</li>
-<li><strong><code class="prettyprint">p._addedValue</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> by which to increase the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._addedValue</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> by which to increase the amount <code class="prettyprint">p._spender</code> may spend on behalf of <code class="prettyprint">msg.sender</code>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this transaction should be made.
 
 <ul>
@@ -11296,7 +11296,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-trade-publicbuy-p">augur.api.Trade.publicBuy(p)</h3>
 
-<p>Buys <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">p._fxpAmount</code> of <a href="#atto-prefix">attoShares</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
+<p>Buys <code class="prettyprint">p._fxpAmount</code> number of <a href="#share">Shares</a> in <a href="#outcome">Outcome</a> <code class="prettyprint">p._outcome</code> of <a href="#market">Market</a> <code class="prettyprint">p._market</code> at <code class="prettyprint">p._price</code> <a href="#atto-prefix">attoETH</a> per Share. This transaction takes <a href="#order">Orders</a> off the <a href="#order-book">Order Book</a> that can be <a href="#fill-order">Filled</a> with this request, otherwise it creates a new Order to buy <code class="prettyprint">p._fxpAmount</code> of <a href="#share-unit">Share Units</a> at <code class="prettyprint">p._price</code>. The parameters <code class="prettyprint">p._betterOrderId</code> and <code class="prettyprint">p._worseOrderId</code> are the Orders with the next best/next worse price after <code class="prettyprint">p._price</code>, and they are used to optimize the process of sorting the new Order on the Order Book. Their IDs can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>. This transaction will trigger an <a href="#OrderCreated"><code class="prettyprint">OrderCreated</code></a> event if the Order is created without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -11312,7 +11312,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11321,7 +11321,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of Share Units, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11349,7 +11349,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy Shares, in attoETH, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11359,7 +11359,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of Share Units, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11402,7 +11402,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11440,7 +11440,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11473,7 +11473,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11482,7 +11482,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, or number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of Share Units, or number of Share Units to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11511,7 +11511,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11521,7 +11521,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of attoShares, or number of <a href="#atto-prefix">attoShares</a> to sell, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.tx.value</code></strong>  (string) Number of <a href="atto-prefix">attoETH</a> required to buy the desired amount of Share Units, or number of Share Units to sell, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.tx.gas</code></strong> (string) Gas limit to use when submitting this transaction, as a hexadecimal string.</li>
 </ul></li>
 <li><strong><code class="prettyprint">p.meta</code></strong>  (<a href="#Meta">Meta</a>) &lt;optional&gt; Authentication metadata for raw transactions.</li>
@@ -11550,7 +11550,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -11587,7 +11587,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p._direction</code></strong> (string) Direction of the trade, as a hexadecimal string. (&ldquo;0x0&rdquo; for long or &ldquo;0x1&rdquo; for short.)</li>
 <li><strong><code class="prettyprint">p._market</code></strong>  (string) Ethereum address of the Market in which to buy/sell Shares, as a 20-byte hexadecimal value.</li>
 <li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome for which to place the Order, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#atto-prefix">attoShares</a> to buy/sell, as a hexadecimal string</li>
+<li><strong><code class="prettyprint">p._fxpAmount</code></strong>  (string) Number of <a href="#share-unit">Share Units</a> to buy/sell, as a hexadecimal string</li>
 <li><strong><code class="prettyprint">p._price</code></strong>  (string) Price at which to buy/sell Shares, in <a href="#atto-prefix">attoETH</a>, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">p._betterOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-best price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
 <li><strong><code class="prettyprint">p._worseOrderId</code></strong> (string) Order ID of an existing Order on the Order Book with the next-worse price with respect to the Order this transaction is intending to create, as a 32-byte hexadecimal value. Can be obtained by calling <code class="prettyprint">augur.trading.getBetterWorseOrders</code>.</li>
@@ -12947,7 +12947,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <tr>
 <td><a name="OrderFilled"></a>OrderFilled</td>
 <td><a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/Augur.sol">Augur</a></td>
-<td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">amountFilled</code> attoShares were filled, and <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
+<td><a href="#order">Order</a> <code class="prettyprint">orderId</code> in <code class="prettyprint">universe</code> for Share Token at address <code class="prettyprint">shareToken</code> was filled by <code class="prettyprint">filler</code> in Trade Group <code class="prettyprint">tradeGroupId</code>. The <a href="#order-creator">Order Creator</a> escrowed <code class="prettyprint">numCreatorShares</code> or <code class="prettyprint">numCreatorTokens</code> in <a href="#atto-prefix">attoETH</a>, and <code class="prettyprint">filler</code> put up <code class="prettyprint">numFillerShares</code> or <code class="prettyprint">numFillerTokens</code> in attoETH. <code class="prettyprint">amountFilled</code> Share Units were filled, and <code class="prettyprint">marketCreatorFees</code> and <code class="prettyprint">reporterFees</code> (denominated in attoETH) were spent to pay the <a href="#market-creator">Market Creator</a> and <a href="#reporter">Reporters</a>.</td>
 <td>universe, shareToken</td>
 <td>filler, orderId, numCreatorShares, numCreatorTokens, numFillerShares, numFillerTokens, marketCreatorFees, reporterFees, amountFilled, tradeGroupId</td>
 </tr>
@@ -13585,11 +13585,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">position</code></strong>  (string) Net trading position, where the quantity is the number of attoshares. An overall &ldquo;sell&rdquo; position is negative, and an overall &ldquo;buy&rdquo; position is positive.</li>
+<li><strong><code class="prettyprint">position</code></strong>  (string) Net trading position, where the quantity is the number of Share Units. An overall &ldquo;sell&rdquo; position is negative, and an overall &ldquo;buy&rdquo; position is positive.</li>
 <li><strong><code class="prettyprint">meanOpenPrice</code></strong>  (string) Mean price of trades at time of buy-in, in attoETH.</li>
 <li><strong><code class="prettyprint">realized</code></strong>  (string) Amount of realized profits or losses from all trades, in attoETH.</li>
 <li><strong><code class="prettyprint">queued</code></strong>  (string) Expected profit or loss of the current set of pending trades, in attoETH.</li>
-<li><strong><code class="prettyprint">unrealized</code></strong>  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).</li>
+<li><strong><code class="prettyprint">unrealized</code></strong>  (string) Unrealized profit/loss in attoETH, calculated as Share Units held * (last trade price - price on buy-in).</li>
 </ul>
 
 <p><a name="Report"></a></p>
@@ -13821,7 +13821,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">orderId</code></strong> (string) Unique ID for the Order, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">type</code></strong> (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">price</code></strong> (string) Price paid for trade, in attoETH.</li>
-<li><strong><code class="prettyprint">amount</code></strong> (string) Amount of attoShares that were bought/sold.</li>
+<li><strong><code class="prettyprint">amount</code></strong> (string) Amount of Share Units that were bought/sold.</li>
 <li><strong><code class="prettyprint">maker</code></strong> (boolean) Whether the specified user is the order maker (as opposed to filler).</li>
 <li><strong><code class="prettyprint">marketCreatorFees</code></strong> (string) Amount of fees paid to Market creator, in ETH.</li>
 <li><strong><code class="prettyprint">reporterFees</code></strong> (string) Amount of fees paid to reporters, in attoETH.</li>
@@ -13973,7 +13973,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-minimum_trade_size-bignumber">augur.constants.MINIMUM_TRADE_SIZE (BigNumber)</h3>
 
-<p>Minimum number of attoShares that can be bought/sold in a trade.</p>
+<p>Minimum number of Share Units that can be bought/sold in a trade.</p>
 
 <h3 id="augur-constants-minimum_trade_value-bignumber">augur.constants.MINIMUM_TRADE_VALUE (BigNumber)</h3>
 
