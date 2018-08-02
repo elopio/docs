@@ -2311,7 +2311,7 @@ The Share Token is an ERC-20 token that implements all of the required functions
 
 ### augur.api.ShareToken.allowance(p, callback)
 
-Returns the amount of [attoShares](#atto-prefix) that a given Ethereum contract is allowed to spend on behalf of a particular user.
+Returns the amount of [Share Units](#share-unit) that a given Ethereum contract is allowed to spend on behalf of a particular user.
 
 #### **Parameters:**
 
@@ -2322,7 +2322,7 @@ Returns the amount of [attoShares](#atto-prefix) that a given Ethereum contract 
 
 #### **Returns:**
 
-(string) Amount of attoShares the contract is allowed to spend on behalf of the specified user.
+(string) Amount of Share Units the contract is allowed to spend on behalf of the specified user.
 
 ### augur.api.ShareToken.getMarket(p, callback)
 

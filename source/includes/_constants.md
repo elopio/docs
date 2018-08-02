@@ -81,7 +81,7 @@ Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket 
 
 ### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
 
-Minimum number of attoShares that can be bought/sold in a trade.
+Minimum number of Share Units that can be bought/sold in a trade.
 
 ### augur.constants.MINIMUM_TRADE_VALUE (BigNumber)
 

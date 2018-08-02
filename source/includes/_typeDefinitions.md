@@ -418,11 +418,11 @@ Serves as an enum for the state of an order.
 ### ProfitLoss  (Object)
 
 #### **Properties:**
-  * **`position`**  (string) Net trading position, where the quantity is the number of attoshares. An overall "sell" position is negative, and an overall "buy" position is positive.
+  * **`position`**  (string) Net trading position, where the quantity is the number of Share Units. An overall "sell" position is negative, and an overall "buy" position is positive.
   * **`meanOpenPrice`**  (string) Mean price of trades at time of buy-in, in attoETH.
   * **`realized`**  (string) Amount of realized profits or losses from all trades, in attoETH.
   * **`queued`**  (string) Expected profit or loss of the current set of pending trades, in attoETH.
-  * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as attoshares held * (last trade price - price on buy-in).
+  * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as Share Units held * (last trade price - price on buy-in).
 
 <a name="Report"></a>
 ### Report  (Object)
@@ -591,7 +591,7 @@ Serves as an enum for the state of a Market.
 * **`orderId`** (string) Unique ID for the Order, as a hexadecimal string.
 * **`type`** (string) Type of trade. Valid values are "buy" and "sell".
 * **`price`** (string) Price paid for trade, in attoETH.
-* **`amount`** (string) Amount of attoShares that were bought/sold.
+* **`amount`** (string) Amount of Share Units that were bought/sold.
 * **`maker`** (boolean) Whether the specified user is the order maker (as opposed to filler).
 * **`marketCreatorFees`** (string) Amount of fees paid to Market creator, in ETH.
 * **`reporterFees`** (string) Amount of fees paid to reporters, in attoETH.
