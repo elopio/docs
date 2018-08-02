@@ -8,7 +8,7 @@ Ethereum block number from which to start looking up event logs.
 
 ### augur.constants.BLOCKS_PER_CHUNK (number)
 
-Number of block to read from the blockchain at a time. Used by `augur.events.getAllAugurLogs`.
+Number of block to read from the blockchain at a time. Set to 1/4 day's worth (i.e., seconds * minutes * hours / 4 / blocks_per_second, or 60 * 60 * 24 / 4 / 15). Used by `augur.events.getAllAugurLogs`.
 
 ### augur.constants.CANCEL_ORDER_GAS (string)
 
@@ -77,7 +77,7 @@ Used to calculate how large a WebSocket frame to allow. This is a theoretical li
 
 ### augur.constants.MAX_WEBSOCKET_FRAME_SIZE (number)
 
-Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 1GB (in the most extreme case) but prevents errors from being thrown.
+Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 0.25GB (in the most extreme case) but prevents errors from being thrown.
 
 ### augur.constants.MINIMUM_TRADE_SIZE (BigNumber)
 
