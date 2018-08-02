@@ -1715,6 +1715,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
     <span class="nx">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506578</span><span class="p">,</span>
+    <span class="nx">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573370</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
     <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -1796,6 +1798,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
     <span class="nx">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506579</span><span class="p">,</span>
+    <span class="nx">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573380</span><span class="p">,</span>
     <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a yesNo test market created by b0b."</span><span class="p">,</span>
     <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -13447,13 +13451,15 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">tags</code></strong> (Array.&lt;(string|null)&gt;) Names with which the Market has been tagged.</li>
 <li><strong><code class="prettyprint">volume</code></strong> (string) Trading volume for this Outcome.</li>
 <li><strong><code class="prettyprint">outstandingShares</code></strong> (string) Number of Complete Sets in the Market.</li>
+<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
+<li><strong><code class="prettyprint">forking</code></strong> (boolean|number) Whether the Market has Forked.</li>
+<li><strong><code class="prettyprint">needsMigration</code></strong> (boolean|number) Whether the Market needs to be migrated to its Universe&rsquo;s Child Universe (i.e., the Market is not Finalized, and the Forked Market in its Universe is Finalized).</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">endTime</code></strong> (number) Timestamp when the Market event ends, in seconds.</li>
 <li><strong><code class="prettyprint">finalizationBlockNumber</code></strong> (number|null) Ethereum block number in which the Market was Finalized.</li>
 <li><strong><code class="prettyprint">finalizationTime</code></strong> (number|null) Timestamp when the Market was finalized (if any), in seconds.</li>
-<li><strong><code class="prettyprint">reportingState</code></strong> (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.</li>
-<li><strong><code class="prettyprint">forking</code></strong> (boolean|number) Whether the Market has Forked.</li>
-<li><strong><code class="prettyprint">needsMigration</code></strong> (boolean|number) Whether the Market needs to be migrated to its Universe&rsquo;s Child Universe (i.e., the Market is not Finalized, and the Forked Market in its Universe is Finalized).</li>
+<li><strong><code class="prettyprint">lastTradeBlockNumber</code></strong> (number|null) Ethereum block number in which the last trade occurred for this Market.</li>
+<li><strong><code class="prettyprint">lastTradeTime</code></strong> (number|null) Unix timestamp when the last trade occurred in this Market.</li>
 <li><strong><code class="prettyprint">description</code></strong> (string) Description of the Market.</li>
 <li><strong><code class="prettyprint">details</code></strong> (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).</li>
 <li><strong><code class="prettyprint">scalarDenomination</code></strong> (string|null) Denomination used for the numerical range of a Scalar Market (e.g., dollars, degrees Fahrenheit, parts-per-billion).</li>
