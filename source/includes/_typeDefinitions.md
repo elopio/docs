@@ -75,6 +75,16 @@ Note: Other properties will be present in this object, depending on what event t
 * **`failedTransactions`** (<a href="#FailedTransactionsForkedMarket">FailedTransactionsForkedMarket</a>|null) Object containing arrays of contract addresses whose transactions failed. Not set if `p.estimateGas` is true.
 * **`gasEstimates`** (<a href="#ClaimReportingFeesForkedMarketGasEstimates">ClaimReportingFeesForkedMarketGasEstimates</a>|null) Object containing a breakdown of gas estimates for all reporting fee claim transactions. Not set if `p.estimateGas` is false.
 
+<a name="ClaimReportingFeesNonforkedMarket"></a>
+### ClaimReportingFeesNonforkedMarket  (Object)
+
+* **`marketId`** (string) Ethereum contract address of the non-Forked Market, as a hexadecimal string.
+* **`crowdsourcersAreDisavowed`** (boolean) Whether the non-Forked Market's DisputeCrowdsourcers have been disavowed (i.e., its `Market.disavowCrowdsourcers` function has been called successfully).
+* **`isMigrated`** (boolean) Whether the non-Forked Market has been migrated to the Child Universe of its original Universe (i.e., its `Market.migrateThroughOneFork` function has been called successfully).
+* **`isFinalized`** (boolean) Whether the non-Forked Market has been Finalized (i.e., its `Market.finalize` function has been called successfully).
+* **`crowdsourcers`** (Array.&lt;string>) Array of Ethereum contract addresses of the non-Forked Market's Crowdsourcers in which a specified user has unclaimed Reporting Fees, as hexadecimal strings.
+* **`initialReporter`** (string|null) Ethereum contract address of the non-Forked Market's InitialReporter in which a specified user has unclaimed Reporting Fees, as a hexadecimal string.
+
 <a name="ClaimReportingFeesNonforkedMarketsGasEstimates"></a>
 ### ClaimReportingFeesNonforkedMarketsGasEstimates  (Object)
 

@@ -1705,7 +1705,7 @@ The claiming process works as follows:
 * **`p`** (Object) Parameters object.
     * **`p.redeemer`**  (string) Ethereum address attempting to redeem reporting fees, as a hexadecimal string.
     * **`p.feeWindows`** (Array.&lt;string>) Array of Fee Window Ethereum contract addresses, as hexadecimal strings.
-    * **`p.nonforkedMarkets`** (Array.&lt;<a href="#NonforkedMarket">NonforkedMarket</a>>) Array of NonforkedMarket objects.
+    * **`p.nonforkedMarkets`** (Array.&lt;<a href="#ClaimReportingFeesNonforkedMarket">ClaimReportingFeesNonforkedMarket</a>>) Array of ClaimReportingFeesNonforkedMarket objects.
     * **`p.estimateGas`**  (boolean) Whether to return gas estimates for the transactions instead of actually making the transactions.
     * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
     * **`p.onSent`**  (function) Called if/when the transactions are broadcast to the network. (Currently used as a placeholder and not actually used by this function.)
