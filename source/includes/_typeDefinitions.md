@@ -316,13 +316,15 @@ Serves as an enum for the state of a Dispute Token.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
 * **`volume`** (string) Trading volume for this Outcome.
 * **`outstandingShares`** (string) Number of Complete Sets in the Market.
+* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
+* **`forking`** (boolean|number) Whether the Market has Forked.
+* **`needsMigration`** (boolean|number) Whether the Market needs to be migrated to its Universe's Child Universe (i.e., the Market is not Finalized, and the Forked Market in its Universe is Finalized).
 * **`feeWindow`** (string) Contract address of the Fee Window the Market is in, as a hexadecimal string.
 * **`endTime`** (number) Timestamp when the Market event ends, in seconds.
 * **`finalizationBlockNumber`** (number|null) Ethereum block number in which the Market was Finalized.
 * **`finalizationTime`** (number|null) Timestamp when the Market was finalized (if any), in seconds.
-* **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
-* **`forking`** (boolean|number) Whether the Market has Forked.
-* **`needsMigration`** (boolean|number) Whether the Market needs to be migrated to its Universe's Child Universe (i.e., the Market is not Finalized, and the Forked Market in its Universe is Finalized).
+* **`lastTradeBlockNumber`** (number|null) Ethereum block number in which the last trade occurred for this Market.
+* **`lastTradeTime`** (number|null) Unix timestamp when the last trade occurred in this Market.
 * **`description`** (string) Description of the Market.
 * **`details`** (string|null) Stringified JSON object containing resolutionSource, tags, longDescription, and outcomeNames (for Categorical Markets).
 * **`scalarDenomination`** (string|null) Denomination used for the numerical range of a Scalar Market (e.g., dollars, degrees Fahrenheit, parts-per-billion).
