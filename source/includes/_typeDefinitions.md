@@ -420,11 +420,11 @@ Serves as an enum for the state of an order.
 ### ProfitLoss  (Object)
 
 #### **Properties:**
-  * **`position`**  (string) Net trading position, where the quantity is the number of Share Units. An overall "sell" position is negative, and an overall "buy" position is positive.
   * **`meanOpenPrice`**  (string) Mean price of trades at time of buy-in, in attoETH.
+  * **`position`**  (string) Net trading position, where the quantity is the number of Share Units. An overall "sell" position is negative, and an overall "buy" position is positive.
   * **`realized`**  (string) Amount of realized profits or losses from all trades, in attoETH.
-  * **`queued`**  (string) Expected profit or loss of the current set of pending trades, in attoETH.
   * **`unrealized`**  (string) Unrealized profit/loss in attoETH, calculated as Share Units held * (last trade price - price on buy-in).
+  * **`total`**  (string) Sum of realized and unrealized profit/loss.
 
 <a name="Report"></a>
 ### Report  (Object)
