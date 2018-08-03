@@ -1106,6 +1106,7 @@ This function will fail if:
     * **`p.universe`**  (string) Contract address of the Universe from which to get transfer history.
     * **`p.creator`** (string) &lt;optional> Ethereum address of a [Market Creator](#market-creator) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.category`** (string) &lt;optional> Market category by which to filter the returned results.
+    * **`p.search`** (string) &lt;optional> Query string used to determine which Markets are returned by `augur.markets.getMarkets`. This string is used to search across Market IDs, questions, categories, tags, resolution sources, and scalar donominations.
     * **`p.reportingState`** (string) &lt;optional> [REPORTING_STATE](#REPORTING_STATE) by which to filter the returned results.
     * **`p.feeWindow`** (string) &lt;optional> Ethereum address of a [Fee Window](#fee-window) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
@@ -2228,7 +2229,7 @@ augur.trading.getUserTradingPositions({
   {
     "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 0,
-    "numShares": "60",
+    "numShares": "1.8",
     "numSharesAdjustedForUserIntention": "-1.8",
     "realizedProfitLoss": "-0.26",
     "unrealizedProfitLoss": "0",
