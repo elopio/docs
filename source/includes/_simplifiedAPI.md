@@ -263,7 +263,7 @@ augur.augurNode.submitRequest(
   "getMarketsInCategory",
   {
     universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    category: "sports"
+    category: "SPORTS"
   },
   function(error, result) {
     console.log(result);
@@ -871,7 +871,7 @@ augur.markets.getMarketsCreatedByUser({
 
 augur.markets.getMarketsInCategory({
   universe: "0x000000000000000000000000000000000000000b",
-  category: "augur",
+  category: "AUGUR",
 }, function (error, result) {
   console.log(result);
 });
@@ -922,7 +922,7 @@ augur.markets.getMarketsInfo({
     marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
     marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
     initialReportSize: null,
-    category: "test category",
+    category: "TEST CATEGORY",
     tags: ["test tag 1", "test tag 2"],
     volume: "0",
     outstandingShares: "0",
@@ -1005,7 +1005,7 @@ augur.markets.getMarketsInfo({
     marketCreatorMailbox: "0xbbb0000000000000000000000000000000000002",
     marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
     initialReportSize: null,
-    category: "test category",
+    category: "TEST CATEGORY",
     tags: ["test tag 1", "test tag 2"],
     volume: "0",
     outstandingShares: "0",
