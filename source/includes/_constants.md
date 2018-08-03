@@ -69,7 +69,7 @@ Maximum gas limit used when calling `augur.trading.tradeUntilAmountIsZero`.
 
 ### augur.constants.MAX_FILLS_PER_TX (BigNumber)
 
-Description pending.
+Maximum number of Orders that `augur.trading.tradeUntilAmountIsZero` will attempt to fill in a single transaction.
 
 ### augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)
 
@@ -101,11 +101,11 @@ Maximum number of transactions to auto-submit in parallel.
 
 ### augur.constants.PLACE_ORDER_NO_SHARES (Object)
 
-Description pending.
+Object containing the gas cost for placing an Order that does not escrow shares, keyed by the number of Outcomes for the Market. Used by `augur.trading.tradeUntilAmountIsZero`.
 
 ### augur.constants.PLACE_ORDER_WITH_SHARES (Object)
 
-Description pending.
+Object containing the gas cost for placing an Order that escrows shares, keyed by the number of Outcomes for the Market. Used by `augur.trading.tradeUntilAmountIsZero`.
 
 ### augur.constants.PRECISION (Object)
 
@@ -133,7 +133,7 @@ Number of bytes that comprise a trade group ID. (Trade group IDs are used by Aug
 
 ### augur.constants.WORST_CASE_FILL (Object)
 
-Description pending.
+Object containing constants used by `augur.trading.tradeUntilAmountIsZero` to calculate the gas limit for placing trades, keyed by the number of Outcomes of the Market.
 
 ### augur.constants.ZERO (BigNumber)
 
