@@ -516,6 +516,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
       <span class="nl">Controller</span><span class="p">:</span> <span class="s2">"0xb1772d9e581e5a245ff429cca3e06c57d567c58c"</span><span class="p">,</span>
       <span class="nx">Universe</span><span class="p">:</span> <span class="s2">"0xaa88b74da9e08d44c996f037ce13cb2711053cea"</span><span class="p">,</span>
       <span class="nx">Augur</span><span class="p">:</span> <span class="s2">"0xdddc5d40979660308e8017d048b04782f17af4af"</span><span class="p">,</span>
+      <span class="nx">OrdersFinder</span><span class="p">:</span> <span class="s2">"0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df"</span><span class="p">,</span>
       <span class="nx">LegacyReputationToken</span><span class="p">:</span> <span class="s2">"0x59c98505653f68e8cc2a0ac1e84380a0393fd04e"</span><span class="p">,</span>
       <span class="nx">CancelOrder</span><span class="p">:</span> <span class="s2">"0x4c0f599bdd8f9eac10cdfd152c3110ea9b803088"</span><span class="p">,</span>
       <span class="nx">Cash</span><span class="p">:</span> <span class="s2">"0x5754d0bcb36b7f30999199031d1f323c4079d58d"</span><span class="p">,</span>
@@ -938,6 +939,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="s2">"Controller"</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
     <span class="s2">"Universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
     <span class="s2">"Augur"</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+    <span class="s2">"OrdersFinder"</span><span class="p">:</span> <span class="s2">"0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df"</span><span class="p">,</span>
     <span class="s2">"LegacyReputationToken"</span><span class="p">:</span> <span class="s2">"0x097c198dcc997086d1555ad9ae6f52375cfb58d0"</span><span class="p">,</span>
     <span class="s2">"CancelOrder"</span><span class="p">:</span> <span class="s2">"0x389c0b3f0d51cfba9e4d214712a1142f5685814d"</span><span class="p">,</span>
     <span class="s2">"Cash"</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
@@ -963,8 +965,8 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">number</span><span class="p">:</span> <span class="mi">10013</span><span class="p">,</span>
     <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1530856121</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"22346"</span><span class="p">,</span>
-  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"22346"</span><span class="p">,</span>
+  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
   <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"5.0.0-17"</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -972,7 +974,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="s2">"getMarketsInCategory"</span><span class="p">,</span>
   <span class="p">{</span>
     <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
-    <span class="na">category</span><span class="p">:</span> <span class="s2">"sports"</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"SPORTS"</span>
   <span class="p">},</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
@@ -1573,10 +1575,10 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"finance"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"12345"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"politics"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"5000"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"ethereum"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"1000"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"500"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"FINANCE"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"12345"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"POLITICS"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"5000"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"ETHEREUM"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"1000"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"AUGUR"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"500"</span> <span class="p">},</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
@@ -1653,7 +1655,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInCategory</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">category</span><span class="p">:</span> <span class="s2">"augur"</span><span class="p">,</span>
+  <span class="na">category</span><span class="p">:</span> <span class="s2">"AUGUR"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -1704,7 +1706,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="nx">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="nx">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">category</span><span class="p">:</span> <span class="s2">"test category"</span><span class="p">,</span>
+    <span class="nx">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
     <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
     <span class="nx">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="nx">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
@@ -1787,7 +1789,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
     <span class="nx">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000002"</span><span class="p">,</span>
     <span class="nx">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="nx">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">category</span><span class="p">:</span> <span class="s2">"test category"</span><span class="p">,</span>
+    <span class="nx">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
     <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
     <span class="nx">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
     <span class="nx">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
@@ -1913,6 +1915,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to get transfer history.</li>
 <li><strong><code class="prettyprint">p.creator</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#market-creator">Market Creator</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.category</code></strong> (string) &lt;optional&gt; Market category by which to filter the returned results.</li>
+<li><strong><code class="prettyprint">p.search</code></strong> (string) &lt;optional&gt; Query string used to determine which Markets are returned by <code class="prettyprint">augur.markets.getMarkets</code>. This string is used to search across Market IDs, questions, categories, tags, resolution sources, and scalar donominations.</li>
 <li><strong><code class="prettyprint">p.reportingState</code></strong> (string) &lt;optional&gt; <a href="#REPORTING_STATE">REPORTING_STATE</a> by which to filter the returned results.</li>
 <li><strong><code class="prettyprint">p.feeWindow</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#fee-window">Fee Window</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.designatedReporter</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#designated-reporter">Designated Reporter</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
@@ -2492,7 +2495,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="s2">"AWAITING_FINALIZATION"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
   <span class="s2">"CROWDSOURCING_DISPUTE"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">"FINALIZED"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"PRE_REPORTING"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -3211,11 +3214,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="p">{</span>
     <span class="s2">"marketId"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"numShares"</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
-    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="s2">"0.2"</span><span class="p">,</span>
-    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
-    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"numShares"</span><span class="p">:</span> <span class="s2">"1.8"</span><span class="p">,</span>
+    <span class="s2">"numSharesAdjustedForUserIntention"</span><span class="p">:</span> <span class="s2">"-1.8"</span><span class="p">,</span>
+    <span class="s2">"realizedProfitLoss"</span><span class="p">:</span> <span class="s2">"-0.26"</span><span class="p">,</span>
+    <span class="s2">"unrealizedProfitLoss"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"averagePrice"</span><span class="p">:</span> <span class="s2">"4.2"</span><span class="p">,</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="s2">"marketId"</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
     <span class="s2">"outcome"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -13772,9 +13775,9 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">addresses</code></strong> (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.</li>
-<li><strong><code class="prettyprint">highestBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.</li>
+<li><strong><code class="prettyprint">highestBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) The most recently added block on the Ethereum blockchain.</li>
 <li><strong><code class="prettyprint">isSyncFinished</code></strong> (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.</li>
-<li><strong><code class="prettyprint">lastProcessedBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.</li>
+<li><strong><code class="prettyprint">lastProcessedBlock</code></strong> (<a href="#SyncDataBlock">SyncDataBlock</a>) The most recent block on the Ethereum blockchain that has been processed by Augur Node and stored in its database.</li>
 <li><strong><code class="prettyprint">netId</code></strong> (string) Network ID that Augur Node is connected to. (This is the same ID as <code class="prettyprint">net_version</code>.)</li>
 <li><strong><code class="prettyprint">net_version</code></strong> (string) Network ID that Augur Node is connected to. </li>
 <li><strong><code class="prettyprint">version</code></strong> (string) Version of the Augur smart contracts.</li>
@@ -13981,7 +13984,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-max_fills_per_tx-bignumber">augur.constants.MAX_FILLS_PER_TX (BigNumber)</h3>
 
-<p>Description pending.</p>
+<p>Maximum number of Orders that <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code> will attempt to fill in a single transaction.</p>
 
 <h3 id="augur-constants-max_log_bytes_per_block-number">augur.constants.MAX_LOG_BYTES_PER_BLOCK (number)</h3>
 
@@ -14013,11 +14016,11 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-place_order_no_shares-object">augur.constants.PLACE_ORDER_NO_SHARES (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object containing the gas cost for placing an Order that does not escrow shares, keyed by the number of Outcomes for the Market. Used by <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code>.</p>
 
 <h3 id="augur-constants-place_order_with_shares-object">augur.constants.PLACE_ORDER_WITH_SHARES (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object containing the gas cost for placing an Order that escrows shares, keyed by the number of Outcomes for the Market. Used by <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code>.</p>
 
 <h3 id="augur-constants-precision-object">augur.constants.PRECISION (Object)</h3>
 
@@ -14045,7 +14048,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-worst_case_fill-object">augur.constants.WORST_CASE_FILL (Object)</h3>
 
-<p>Description pending.</p>
+<p>Object containing constants used by <code class="prettyprint">augur.trading.tradeUntilAmountIsZero</code> to calculate the gas limit for placing trades, keyed by the number of Outcomes of the Market.</p>
 
 <h3 id="augur-constants-zero-bignumber">augur.constants.ZERO (BigNumber)</h3>
 
