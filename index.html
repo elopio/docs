@@ -3769,6 +3769,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort orders in descending order by sortBy field.</li>
 <li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of orders to return.</li>
 <li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of orders to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">p.orphaned</code></strong>  (boolean) &lt;optional&gt; When set to <code class="prettyprint">true</code>, this parameter causes the function to return only <a href="#orphaned-orders">Orphaned Orders</a>; otherwise, the function returns non-Orphaned Orders. Defaults to false.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when the requested orders for this Market/Universe have been received and parsed.</li>
 </ul>
@@ -13917,7 +13918,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-blocks_per_chunk-number">augur.constants.BLOCKS_PER_CHUNK (number)</h3>
 
-<p>Number of block to read from the blockchain at a time. Used by <code class="prettyprint">augur.events.getAllAugurLogs</code>.</p>
+<p>Number of block to read from the blockchain at a time. Set to &frac14; day&rsquo;s worth (i.e., seconds * minutes * hours / 4 / blocks_per_second, or 60 * 60 * 24 / 4 / 15). Used by <code class="prettyprint">augur.events.getAllAugurLogs</code>.</p>
 
 <h3 id="augur-constants-cancel_order_gas-string">augur.constants.CANCEL_ORDER_GAS (string)</h3>
 
@@ -13988,7 +13989,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-constants-max_websocket_frame_size-number">augur.constants.MAX_WEBSOCKET_FRAME_SIZE (number)</h3>
 
-<p>Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 1GB (in the most extreme case) but prevents errors from being thrown.</p>
+<p>Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket frame size. Comes out to under 0.25GB (in the most extreme case) but prevents errors from being thrown.</p>
 
 <h3 id="augur-constants-minimum_trade_size-bignumber">augur.constants.MINIMUM_TRADE_SIZE (BigNumber)</h3>
 
@@ -14712,6 +14713,16 @@ Goals:
 <h2 id="order-filler">Order Filler</h2>
 
 <p>An Order Filler either partially or fully <a href="#fill-order">Fills</a> an <a href="#open-order">Open Order</a> on the <a href="#order-book">Order Book</a>. Order Fillers send currency or <a href="#share">Shares</a> to fill the Open Order and complete their part of the trade described in the <a href="#order">Order</a>.</p>
+
+<h2 id="orphaned-order">Orphaned Order</h2>
+
+<p><a href="#order">Orders</a> in Augur can sometimes become &ldquo;orphaned&rdquo;, meaning they do not get displayed in the <a href="#order-book">Order Book</a>, and do not get filled like non-Orphaned Orders when calling most of Augur&rsquo;s API functions. This is an unintended behavior in Augur that can occur under the following scenario:</p>
+
+<p>Suppose one side of a Market&rsquo;s Order Book is empty, and two Orders for the same price are created on that side of the Order Book. At this point, neither of these Orders has been orphaned, but that side of the Order Book is now in a state where Orders potentially can become orphaned. Any subsequent Orders created for that price on that side of the Order Book will cause all such Orders to become orphaned, except the oldest and newest.</p>
+
+<p>Creating an Order with a worse price on that side of the Order Book while still in that state will cause the previous Order with the same price to become orphaned. However, that side of the Order Book will no longer be in a state where Orders can be orphaned. Similarly, creating an Order with a better price on that side of the Order Book while still in that state will have the same effect, but without causing any other Orders to become orphaned.</p>
+
+<p>Since Orphaned Orders are not displayed in Augur&rsquo;s UI, the only way to fill one is by doing so directly using the Order&rsquo;s ID and an API function such as <code class="prettyprint">augur.api.FillOrder.publicFillOrder</code>. However, the Augur UI does alert the user when they have created an Orphaned Order, and allows them to cancel it.</p>
 
 <h2 id="outcome">Outcome</h2>
 
