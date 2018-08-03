@@ -254,8 +254,8 @@ augur.augurNode.getSyncData(
     number: 10013,
     timestamp: 1530856121,
   },
-  "netId": "22346",
-  "net_version": "22346",
+  "netId": "102",
+  "net_version": "102",
   "version": "5.0.0-17",
 }
 
