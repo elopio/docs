@@ -283,7 +283,7 @@ Suppose one side of a Market's Order Book is empty, and two Orders for the same 
 
 Creating an Order with a worse price on that side of the Order Book while still in that state will cause the previous Order with the same price to become orphaned. However, that side of the Order Book will no longer be in a state where Orders can be orphaned. Similarly, creating an Order with a better price on that side of the Order Book while still in that state will have the same effect, but without causing any other Orders to become orphaned.
 
-Since Orphaned Orders are not displayed in Augur's UI, the only way to fill one is by doing so directly using the Order's ID and an API function such as `augur.api.FillOrder.publicFillOrder`. However, the Augur UI does alert the user when they have created an Orphaned Order, and allows them to cancel it.
+Since Orphaned Orders are not displayed in Augur's UI, the only way to fill one is by doing so directly using the Order's ID and an API function such as `augur.api.FillOrder.publicFillOrder`. The Augur UI will alert the user when they have created an Orphaned Order and allow them to cancel it.
 
 ## Outcome
 
