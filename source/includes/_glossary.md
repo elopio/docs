@@ -275,6 +275,16 @@ An Order Creator is the person who places an [Order](#order) on the [Order Book]
 
 An Order Filler either partially or fully [Fills](#fill-order) an [Open Order](#open-order) on the [Order Book](#order-book). Order Fillers send currency or [Shares](#share) to fill the Open Order and complete their part of the trade described in the [Order](#order).
 
+## Orphaned Order
+
+[Orders](#order) in Augur can sometimes become "orphaned", meaning they do not get displayed in the [Order Book](#order-book), and do not get filled like non-Orphaned Orders when calling most of Augur's API functions. This is an unintended behavior in Augur that can occur under the following scenario:
+
+Suppose one side of a Market's Order Book is empty, and two Orders for the same price are created on that side of the Order Book. At this point, neither of these Orders has been orphaned, but that side of the Order Book is now in a state where Orders potentially can become orphaned. Any subsequent Orders created for that price on that side of the Order Book will cause all such Orders to become orphaned, except the oldest and newest.
+
+Creating an Order with a worse price on that side of the Order Book while still in that state will cause the previous Order with the same price to become orphaned. However, that side of the Order Book will no longer be in a state where Orders can be orphaned. Similarly, creating an Order with a better price on that side of the Order Book while still in that state will have the same effect, but without causing any other Orders to become orphaned.
+
+Since Orphaned Orders are not displayed in Augur's UI, the only way to fill one is by doing so directly using the Order's ID and an API function such as `augur.api.FillOrder.publicFillOrder`. However, the Augur UI does alert the user when they have created an Orphaned Order, and allows them to cancel it.
+
 ## Outcome
 
 An outcome is a potential result of a [Market](#market)'s future event. For example, a Market with a question of "Will it rain anywhere in New York City on November 1st, 2032 as reported by www.weather.com?" would have three potential Outcomes: Yes, No, and [Invalid](#invalid-outcome). Invalid would be an option if the world blew up before November 1st, 2032 and there was no New York City or www.weather.com to verify the Market's Outcome. More realistically, this can happen for Markets that have too vague of a question. A good example of a vague Market that would most likely be resolved as Invalid would be "Does God exist?", as no one has a definitive answer.

@@ -2719,6 +2719,7 @@ This function will fail if:
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort orders in descending order by sortBy field.
     * **`p.limit`**  (string) &lt;optional> Maximum number of orders to return.
     * **`p.offset`**  (string) &lt;optional> Number of orders to truncate from the beginning of the results.
+    * **`p.orphaned`**  (boolean) &lt;optional> When set to `true`, this parameter causes the function to return only [Orphaned Orders](#orphaned-orders); otherwise, the function returns non-Orphaned Orders. Defaults to false.
 * **`callback`** (function) Called when the requested orders for this Market/Universe have been received and parsed.
 
 #### **Returns:**
