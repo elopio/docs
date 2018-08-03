@@ -228,6 +228,7 @@ augur.augurNode.getSyncData(
     "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
     "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
     "Augur": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    "OrdersFinder": "0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df",
     "LegacyReputationToken": "0x097c198dcc997086d1555ad9ae6f52375cfb58d0",
     "CancelOrder": "0x389c0b3f0d51cfba9e4d214712a1142f5685814d",
     "Cash": "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
