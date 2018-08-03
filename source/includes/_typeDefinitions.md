@@ -554,9 +554,9 @@ Serves as an enum for the state of a Market.
 
 #### **Properties:** 
 * **`addresses`** (Object) Object containing the 20-byte Ethereum contract addresses used by Augur, keyed by contract name.
-* **`highestBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.
+* **`highestBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) The most recently added block on the Ethereum blockchain.
 * **`isSyncFinished`** (boolean) Whether Augur Node has finished synching with the Augur logs on the Ethereum blockchain.
-* **`lastProcessedBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) Description pending.
+* **`lastProcessedBlock`** (<a href="#SyncDataBlock">SyncDataBlock</a>) The most recent block on the Ethereum blockchain that has been processed by Augur Node and stored in its database.
 * **`netId`** (string) Network ID that Augur Node is connected to. (This is the same ID as `net_version`.)
 * **`net_version`** (string) Network ID that Augur Node is connected to. 
 * **`version`** (string) Version of the Augur smart contracts.
