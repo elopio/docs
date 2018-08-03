@@ -1640,7 +1640,7 @@ augur.reporting.getReportingSummary({
 // example output:
 {
   "AWAITING_FINALIZATION": 1,
-  "DESIGNATED_REPORTING": 8,
+  "DESIGNATED_REPORTING": 9,
   "CROWDSOURCING_DISPUTE": 2,
   "FINALIZED": 1,
   "PRE_REPORTING": 1,
@@ -2228,11 +2228,11 @@ augur.trading.getUserTradingPositions({
   {
     "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 0,
-    "numShares": "0.2",
-    "numSharesAdjustedForUserIntention": "0.2",
-    "realizedProfitLoss": "0",
-    "unrealizedProfitLoss": "11",
-    "averagePrice": "0",
+    "numShares": "60",
+    "numSharesAdjustedForUserIntention": "-1.8",
+    "realizedProfitLoss": "-0.26",
+    "unrealizedProfitLoss": "0",
+    "averagePrice": "4.2",
   }, {
     "marketId": "0x0000000000000000000000000000000000000001",
     "outcome": 1,
