@@ -14722,7 +14722,7 @@ Goals:
 
 <p>Creating an Order with a worse price on that side of the Order Book while still in that state will cause the previous Order with the same price to become orphaned. However, that side of the Order Book will no longer be in a state where Orders can be orphaned. Similarly, creating an Order with a better price on that side of the Order Book while still in that state will have the same effect, but without causing any other Orders to become orphaned.</p>
 
-<p>Since Orphaned Orders are not displayed in Augur&rsquo;s UI, the only way to fill one is by doing so directly using the Order&rsquo;s ID and an API function such as <code class="prettyprint">augur.api.FillOrder.publicFillOrder</code>. However, the Augur UI does alert the user when they have created an Orphaned Order, and allows them to cancel it.</p>
+<p>Since Orphaned Orders are not displayed in Augur&rsquo;s UI, the only way to fill one is by doing so directly using the Order&rsquo;s ID and an API function such as <code class="prettyprint">augur.api.FillOrder.publicFillOrder</code>. The Augur UI will alert the user when they have created an Orphaned Order and allow them to cancel it.</p>
 
 <h2 id="outcome">Outcome</h2>
 
