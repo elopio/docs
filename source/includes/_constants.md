@@ -83,10 +83,6 @@ Uses augur.constants.MAX_LOG_BYTES_PER_BLOCK to calculate the maximum WebSocket 
 
 Minimum number of Share Units that can be bought/sold in a trade.
 
-### augur.constants.MINIMUM_TRADE_VALUE (BigNumber)
-
-Description pending.
-
 ### augur.constants.ONE (BigNumber)
 
 A BigNumber with the value of 1.
