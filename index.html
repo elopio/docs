@@ -3765,7 +3765,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">p.marketId</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (number) &lt;optional&gt; Market Outcome to filter results by. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">p.creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the Order creator, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
+<li><strong><code class="prettyprint">p.orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the orders.</li>
@@ -13559,7 +13559,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">owner</code></strong> (string) The order maker&rsquo;s Ethereum address, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">creationTime</code></strong> (number) Timestamp, in seconds, when the Ethereum block containing the order transaction was created.</li>
 <li><strong><code class="prettyprint">creationBlockNumber</code></strong> (number) Number of the Ethereum block containing the order transaction.</li>
-<li><strong><code class="prettyprint">orderState</code></strong> (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELLED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
+<li><strong><code class="prettyprint">orderState</code></strong> (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
 <li><strong><code class="prettyprint">price</code></strong> (string) Rounded display price, as a base-10 number.</li>
 <li><strong><code class="prettyprint">amount</code></strong> (string) Current rounded number of shares to trade, as a base-10 number.</li>
 <li><strong><code class="prettyprint">originalAmount</code></strong> (string) Original rounded number of shares to trade, as a base-10 number.</li>
@@ -13570,7 +13570,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">sharesEscrowed</code></strong> (string) Number of the order maker&rsquo;s shares held in escrow, as a base-10 number.</li>
 <li><strong><code class="prettyprint">canceledBlockNumber</code></strong> (number|null) Block number in which the order cancellation took place (if any).</li>
 <li><strong><code class="prettyprint">canceledTransactionHash</code></strong> (string|null) Transaction hash in which the order cancellation took place (if any).</li>
-<li><strong><code class="prettyprint">canceledTime</code></strong> (number|null) Unix timestamp when the order was cancelled (if any).</li>
+<li><strong><code class="prettyprint">canceledTime</code></strong> (number|null) Unix timestamp when the order was canceled (if any).</li>
 </ul>
 
 <p><a name="ORDER_STATE"></a></p>
@@ -13582,7 +13582,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
-<li><strong><code class="prettyprint">ALL</code></strong> (string) Order is open, closed, or cancelled. (If no order state is specified, this is the default value.)</li>
+<li><strong><code class="prettyprint">ALL</code></strong> (string) Order is open, closed, or canceled. (If no order state is specified, this is the default value.)</li>
 <li><strong><code class="prettyprint">OPEN</code></strong> (string) Order is available to be filled.</li>
 <li><strong><code class="prettyprint">CLOSED</code></strong> (string) Order has been filled.</li>
 <li><strong><code class="prettyprint">CANCELED</code></strong> (string) Order has been canceled (although it may have been partially filled).</li>
