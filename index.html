@@ -59,7 +59,7 @@
 
 <p>If you would like to help develop Augur, you&rsquo;ll need to build the client from source. To do this, first install version 8 of <a href="https://nodejs.org/">Node.js</a> (note that the version number is important), and <a href="https://git-scm.com/downloads">Git</a>.</p>
 
-<p>Next, clone the <a href="https://github.com/AugurProject/augur">Augur GitHub repository</a> by opening a terminal window and typing:</p>
+<p>Next, clone the <a href="https://github.com/AugurProject/augur-ui">Augur UI GitHub repository</a> by opening a terminal window and typing:</p>
 
 <p><code class="prettyprint">$ git clone https://github.com/AugurProject/augur.git</code></p>
 
@@ -133,7 +133,7 @@
 
 <code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins '127.0.0.1' </code>
 
-The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur">Augur client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
+The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur-ui">Augur UI client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
 <p><strong>Note to Geth users:</strong> Since Geth&rsquo;s RPC server uses regular (unencrypted) HTTP, the Augur app must also use regular HTTP to communicate with a local Geth node.</p>
 
@@ -14052,7 +14052,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
           <h1 id="tests">Tests</h1>
 
-<p>The <a href="https://github.com/AugurProject/augur">Augur</a> repository, and the middleware <a href="https://github.com/AugurProject/augur.js">augur.js</a> repository both contain tests. Tests are run using <a href="http://mochajs.org/">Mocha</a>. Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.</p>
+<p>The <a href="https://github.com/AugurProject/augur-ui">Augur UI</a> repository, and the middleware <a href="https://github.com/AugurProject/augur.js">augur.js</a> repository both contain tests. Tests are run using <a href="http://mochajs.org/">Mocha</a>. Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.</p>
 
 <p>To globally install Mocha using <code class="prettyprint">npm</code> you would run the following command:</p>
 
@@ -14228,7 +14228,7 @@ If the export is a function, it should be anonymous.</p>
   <span class="nt">&lt;/section&gt;</span>
 <span class="nt">&lt;/main&gt;</span>
 </code></pre></div>
-<p>There is only one <code class="prettyprint">main</code> tag, which is currently employed in the <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx">app.jsx</a> component, to contain all view content. All top-level components (i.e. - views) should be contained within a <code class="prettyprint">section</code> tag. Though valid, <code class="prettyprint">section</code> should only be used for view level components. All <code class="prettyprint">section</code> tags should have an accompanying <code class="prettyprint">id</code> attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an <code class="prettyprint">article</code> tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (<em>Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.</em>)</p>
+<p>There is only one <code class="prettyprint">main</code> tag, which is currently employed in the <a href="https://github.com/AugurProject/augur-ui/blob/master/src/modules/app/components/app/app.jsx">app.jsx</a> component, to contain all view content. All top-level components (i.e. - views) should be contained within a <code class="prettyprint">section</code> tag. Though valid, <code class="prettyprint">section</code> should only be used for view level components. All <code class="prettyprint">section</code> tags should have an accompanying <code class="prettyprint">id</code> attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an <code class="prettyprint">article</code> tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (<em>Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.</em>)</p>
 <div class="highlight"><pre class="highlight jsx"><code><span class="c1">// React Conventions:</span>
 <span class="c1">// required propTypes should come first.</span>
 <span class="kr">static</span> <span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
@@ -14305,8 +14305,8 @@ If the export is a function, it should be anonymous.</p>
 For a full review of the breadth of the conventions employed, reference:</p>
 
 <ul>
-<li><code class="prettyprint">.eslintrc</code> - JS linting rules are found <a href="https://github.com/AugurProject/augur/blob/master/.eslintrc">here</a>.</li>
-<li><code class="prettyprint">.editorconfig</code> - Editor focused rules to keep coding styles consistent. Can be found <a href="https://github.com/AugurProject/augur/blob/master/.editorconfig">here</a>.</li>
+<li><code class="prettyprint">.eslintrc</code> - JS linting rules are found <a href="https://github.com/AugurProject/augur-ui/blob/master/.eslintrc">here</a>.</li>
+<li><code class="prettyprint">.editorconfig</code> - Editor focused rules to keep coding styles consistent. Can be found <a href="https://github.com/AugurProject/augur-ui/blob/master/.editorconfig">here</a>.</li>
 <li>Optional and primarily for convenience, but the linting enforces many of these conventions</li>
 </ul>
 
@@ -14386,11 +14386,11 @@ For a full review of the breadth of the conventions employed, reference:</p>
     <span class="nl">min-width</span><span class="p">:</span> <span class="m">22em</span><span class="p">;</span>
   <span class="p">}</span>
 </code></pre></div>
-<p>Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less">typography</a> and <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less">borders</a> are employed. Some notable mixins include:
-- <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/animations.less">animations</a>,
-- <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less">borders</a>,
-- <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/colors.less">colors</a>, and
-- <a href="https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less">typography</a>.</p>
+<p>Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_typography.less">typography</a> and <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_borders.less">borders</a> are employed. Some notable mixins include:
+- <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_animations.less">animations</a>,
+- <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_borders.less">borders</a>,
+- <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_colors.less">colors</a>, and
+- <a href="https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_typography.less">typography</a>.</p>
 
 <h4 id="component-style-conventions">Component Style Conventions</h4>
 
@@ -14414,7 +14414,7 @@ For a full review of the breadth of the conventions employed, reference:</p>
 For a full review of all conventions, reference:</p>
 
 <ul>
-<li><code class="prettyprint">.stylelintrc</code> - Less linting rules can be found <a href="https://github.com/AugurProject/augur/blob/master/.stylelintrc">here</a>.</li>
+<li><code class="prettyprint">.stylelintrc</code> - Less linting rules can be found <a href="https://github.com/AugurProject/augur-ui/blob/master/.stylelintrc">here</a>.</li>
 </ul>
 
 <h4 id="running-tests">Running Tests</h4>
