@@ -393,7 +393,7 @@ Authentication metadata for raw transactions.
 * **`owner`** (string) The order maker's Ethereum address, as a hexadecimal string.
 * **`creationTime`** (number) Timestamp, in seconds, when the Ethereum block containing the order transaction was created.
 * **`creationBlockNumber`** (number) Number of the Ethereum block containing the order transaction.
-* **`orderState`** (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
+* **`orderState`** (<a href="#ORDER_STATE">ORDER_STATE</a>) State of orders by which to filter results. Valid values are "ALL", "CANCELED", "CLOSED", & "OPEN".
 * **`price`** (string) Rounded display price, as a base-10 number.
 * **`amount`** (string) Current rounded number of shares to trade, as a base-10 number.
 * **`originalAmount`** (string) Original rounded number of shares to trade, as a base-10 number.
@@ -404,7 +404,7 @@ Authentication metadata for raw transactions.
 * **`sharesEscrowed`** (string) Number of the order maker's shares held in escrow, as a base-10 number.
 * **`canceledBlockNumber`** (number|null) Block number in which the order cancellation took place (if any).
 * **`canceledTransactionHash`** (string|null) Transaction hash in which the order cancellation took place (if any).
-* **`canceledTime`** (number|null) Unix timestamp when the order was cancelled (if any).
+* **`canceledTime`** (number|null) Unix timestamp when the order was canceled (if any).
 
 <a name="ORDER_STATE"></a>
 ### ORDER_STATE  (Object)
@@ -412,7 +412,7 @@ Authentication metadata for raw transactions.
 Serves as an enum for the state of an order.
 
 #### **Properties:** 
-* **`ALL`** (string) Order is open, closed, or cancelled. (If no order state is specified, this is the default value.)
+* **`ALL`** (string) Order is open, closed, or canceled. (If no order state is specified, this is the default value.)
 * **`OPEN`** (string) Order is available to be filled.
 * **`CLOSED`** (string) Order has been filled.
 * **`CANCELED`** (string) Order has been canceled (although it may have been partially filled).

@@ -2714,7 +2714,7 @@ This function will fail if:
     * **`p.marketId`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
     * **`p.creator`**  (string) &lt;optional> Ethereum address of the Order creator, as a 20-byte hexadecimal string.
-    * **`p.orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELLED", "CLOSED", & "OPEN".
+    * **`p.orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELED", "CLOSED", & "OPEN".
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the orders.
