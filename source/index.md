@@ -42,7 +42,7 @@ Getting Started
 
 If you would like to help develop Augur, you'll need to build the client from source. To do this, first install version 8 of [Node.js](https://nodejs.org/) (note that the version number is important), and [Git](https://git-scm.com/downloads).
 
-Next, clone the [Augur GitHub repository](https://github.com/AugurProject/augur) by opening a terminal window and typing:
+Next, clone the [Augur UI GitHub repository](https://github.com/AugurProject/augur-ui) by opening a terminal window and typing:
 
 `$ git clone https://github.com/AugurProject/augur.git`
 

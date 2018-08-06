@@ -66,7 +66,7 @@ To help ensure this, the following conventions have been employed:
 </main>
 ```
 
-There is only one `main` tag, which is currently employed in the [app.jsx](https://github.com/AugurProject/augur/blob/master/src/modules/app/components/app.jsx) component, to contain all view content. All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
+There is only one `main` tag, which is currently employed in the [app.jsx](https://github.com/AugurProject/augur-ui/blob/master/src/modules/app/components/app/app.jsx) component, to contain all view content. All top-level components (i.e. - views) should be contained within a `section` tag. Though valid, `section` should only be used for view level components. All `section` tags should have an accompanying `id` attribute (excluding unique semantic tags (main, header, footer, etc.)). All reusable components should be contained within an `article` tag unless this use would be semantically incorrect; in which case, use whatever tag is appropriate. All components should be standard HTML5 elements with their default behaviors intact. (*Note: Due to some implementation constraints, there may be a reason to deviate from this, but it should be dialoged over prior to implementation.*)
 
 ```jsx
 // React Conventions:
@@ -144,8 +144,8 @@ Null component states (ex: 'no markets', 'no tags', etc.) should always be shown
 Not all conventions are detailed above, but rather just the main points.
 For a full review of the breadth of the conventions employed, reference:
 
-- `.eslintrc` - JS linting rules are found [here](https://github.com/AugurProject/augur/blob/master/.eslintrc).
-- `.editorconfig` - Editor focused rules to keep coding styles consistent. Can be found [here](https://github.com/AugurProject/augur/blob/master/.editorconfig).
+- `.eslintrc` - JS linting rules are found [here](https://github.com/AugurProject/augur-ui/blob/master/.eslintrc).
+- `.editorconfig` - Editor focused rules to keep coding styles consistent. Can be found [here](https://github.com/AugurProject/augur-ui/blob/master/.editorconfig).
 - Optional and primarily for convenience, but the linting enforces many of these conventions
 
 Styles
@@ -231,11 +231,11 @@ Following are some of the conventions that have been employed:
   }
 ```
 
-Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less) and [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less) are employed. Some notable mixins include:
-- [animations](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/animations.less),
-- [borders](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/borders.less),
-- [colors](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/colors.less), and
-- [typography](https://github.com/AugurProject/augur/blob/master/src/modules/app/less/typography.less).
+Use mixins where provided. If an identical style is to be applied to multiple elements, that declaration block should probably be abstracted to a mixin. Comments should be employed for mixins to help inform the utilization. This can be seen in the way (not exhaustive) [typography](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_typography.less) and [borders](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_borders.less) are employed. Some notable mixins include:
+- [animations](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_animations.less),
+- [borders](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_borders.less),
+- [colors](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_colors.less), and
+- [typography](https://github.com/AugurProject/augur-ui/blob/master/src/assets/styles/_typography.less).
 
 #### Component Style Conventions
 
@@ -255,7 +255,7 @@ Things to remember about Component Less styling include:
 Above are the main points, but additional structural and styling conventions of the stylesheets themselves are enforced through linting.
 For a full review of all conventions, reference:
 
-- `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur/blob/master/.stylelintrc).
+- `.stylelintrc` - Less linting rules can be found [here](https://github.com/AugurProject/augur-ui/blob/master/.stylelintrc).
 
 #### Running Tests
 
