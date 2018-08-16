@@ -2049,12 +2049,12 @@ Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy 
 
 ### augur.api.ReputationToken.migrateOut(p)
 
-This transaction migrates `p._attotokens` of `msg.sender`'s [REP](#rep) from contract address `reputationToken` to `p._destination` contract address in the case of a [Fork](#fork).
+This transaction migrates `p._attotokens` of `msg.sender`'s [REP](#rep) from contract address `p.tx.to` to `p._destination` contract address in the case of a [Fork](#fork).
 
 This transaction will fail if:
 
 * `p._attotokens` is not greater than 0.
-* `p._destination`'s [Universe](#universe) is not a [Child Universe](#child-universe) of `reputationToken`'s Universe.
+* `p._destination`'s [Universe](#universe) is not a [Child Universe](#child-universe) of `p.tx.to`'s Universe.
 
 #### **Parameters:**
 
