@@ -10638,13 +10638,13 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-api-reputationtoken-migrateout-p">augur.api.ReputationToken.migrateOut(p)</h3>
 
-<p>This transaction migrates <code class="prettyprint">p._attotokens</code> of <code class="prettyprint">msg.sender</code>&rsquo;s <a href="#rep">REP</a> from contract address <code class="prettyprint">reputationToken</code> to <code class="prettyprint">p._destination</code> contract address in the case of a <a href="#fork">Fork</a>.</p>
+<p>This transaction migrates <code class="prettyprint">p._attotokens</code> of <code class="prettyprint">msg.sender</code>&rsquo;s <a href="#rep">REP</a> from contract address <code class="prettyprint">p.tx.to</code> to <code class="prettyprint">p._destination</code> contract address in the case of a <a href="#fork">Fork</a>.</p>
 
 <p>This transaction will fail if:</p>
 
 <ul>
 <li><code class="prettyprint">p._attotokens</code> is not greater than 0.</li>
-<li><code class="prettyprint">p._destination</code>&rsquo;s <a href="#universe">Universe</a> is not a <a href="#child-universe">Child Universe</a> of <code class="prettyprint">reputationToken</code>&rsquo;s Universe.</li>
+<li><code class="prettyprint">p._destination</code>&rsquo;s <a href="#universe">Universe</a> is not a <a href="#child-universe">Child Universe</a> of <code class="prettyprint">p.tx.to</code>&rsquo;s Universe.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
