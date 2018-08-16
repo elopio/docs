@@ -2085,7 +2085,7 @@ This transaction will fail if:
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
-    * **`p._payoutNumerators`**  ((Array.&lt;string>) Payout Set of the Forked Market in the Child Universe.
+    * **`p._payoutNumerators`**  (Array.&lt;string>) Payout Set of the Forked Market in the Child Universe.
     * **`p._invalid`**  (boolean) Whether the Forked Market is deemed to have an Invalid Outomce in the Child Universe.
     * **`p._attotokens`**  (string) Number of REP to migrate to the Child Universe's ReputationToken contract, in [attoREP](#atto-prefix), as a hexadecimal string.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
