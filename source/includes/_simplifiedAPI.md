@@ -925,6 +925,7 @@ augur.markets.getMarketsInfo({
     category: "TEST CATEGORY",
     tags: ["test tag 1", "test tag 2"],
     volume: "0",
+    openInterest: "0",
     outstandingShares: "0",
     reportingState: "DESIGNATED_REPORTING",
     forking: 0,

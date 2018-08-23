@@ -325,6 +325,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`category`** (string) Name of the category the Market is in.
 * **`tags`** (Array.&lt;(string|null)>) Names with which the Market has been tagged.
 * **`volume`** (string) Trading volume for this Outcome.
+* **`openInterest`** (string) Open interest for the Market.
 * **`outstandingShares`** (string) Number of Complete Sets in the Market.
 * **`reportingState`** (<a href="#REPORTING_STATE">REPORTING_STATE</a>|null) Reporting state name.
 * **`forking`** (boolean|number) Whether the Market has Forked.
