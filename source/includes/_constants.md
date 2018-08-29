@@ -8,7 +8,7 @@ Ethereum block number from which to start looking up event logs.
 
 ### augur.constants.BLOCKS_PER_CHUNK (number)
 
-Number of block to read from the blockchain at a time. Set to 1/4 day's worth (i.e., seconds * minutes * hours / 4 / blocks_per_second, or 60 * 60 * 24 / 4 / 15). Used by `augur.events.getAllAugurLogs`.
+Number of block to read from the blockchain at a time. Set to 1/4 day's worth (i.e., seconds * minutes * hours / blocks_per_second / 4, or 60 * 60 * 24 / 15 / 4). Used by `augur.events.getAllAugurLogs`.
 
 ### augur.constants.CANCEL_ORDER_GAS (string)
 
@@ -114,6 +114,10 @@ Object that acts as an enum containing the constants used to represent each of t
 ### augur.constants.STAKE_TOKEN_STATE (Object)
 
 Object that acts as an enum for all of the possible states for a Stake Token (typically referred to as a [Dispute Token](#dispute-token)).
+
+### augur.constants.SUBSCRIPTION_EVENT_NAMES (Object)
+
+Object that acts as an enum for all of the events emitted by Augur Node.
 
 ### augur.constants.TRADE_GAS (string)
 
