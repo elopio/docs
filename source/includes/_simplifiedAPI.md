@@ -1038,7 +1038,7 @@ augur.markets.getMarketsInfo({
       volume: "1000",
       price: "0.5",
       description: "outcome 1",
-    }]
+    }],
   }
 ]
 
