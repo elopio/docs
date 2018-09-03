@@ -44,11 +44,11 @@ If you would like to help develop Augur, you'll need to build the client from so
 
 Next, clone the [Augur UI GitHub repository](https://github.com/AugurProject/augur-ui) by opening a terminal window and typing:
 
-`$ git clone https://github.com/AugurProject/augur.git`
+`$ git clone https://github.com/AugurProject/augur-ui.git`
 
-Navigate to the newly created `augur` folder by running:
+Navigate to the newly created `augur-ui` folder by running:
 
-`$ cd augur`
+`$ cd augur-ui`
 
 Once this has been done, Augur's dependencies will need to be installed. This can be done using `npm` or `yarn`. Both methods are detailed in the next sections.
 
