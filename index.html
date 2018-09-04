@@ -2879,7 +2879,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-reporting-getreportingsummary-p-callback">augur.reporting.getReportingSummary(p, callback)</h3>
 
-<p>Returns the number of <a href="#market">Markets</a> in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been <a href="#report">Reported</a> on and is in a <a href="#dispute-round-phase">Dispute Round Phase</a>), “FORKING” (for the Market that has <a href="#fork">Forked</a>), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a <a href="#forked-market">Forked Market</a> to resolve), and “FINALIZED”.</p>
+<p>Returns the number of <a href="#market">Markets</a> in various reporting phases. For a list of all reporting state descriptions, refer to the <a href="#REPORTING_STATE">REPORTING_STATE</a> type definition.</p>
 
 <p>This function will fail if:</p>
 
