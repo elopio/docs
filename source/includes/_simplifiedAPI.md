@@ -1889,7 +1889,7 @@ This function will fail if:
 
 ### augur.reporting.getReportingSummary(p, callback)
 
-Returns the number of [Markets](#market) in various reporting phases, including “DESIGNATED_REPORTING”, “FIRST_REPORTING”, “LAST_REPORTING”, “AWAITING_FINALIZATION” (when a Market has been [Reported](#report) on and is in a [Dispute Round Phase](#dispute-round-phase)), “FORKING” (for the Market that has [Forked](#fork)), “AWAITING_FORK_MIGRATION” (for Markets that are waiting for a [Forked Market](#forked-market) to resolve), and “FINALIZED”.
+Returns the number of [Markets](#market) in various reporting phases. For a list of all reporting state descriptions, refer to the [REPORTING_STATE](#REPORTING_STATE) type definition.
 
 This function will fail if:
 
