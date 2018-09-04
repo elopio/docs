@@ -2051,7 +2051,7 @@ Returns whether a given price is greater than the price of a particular [Order](
 
 ### augur.api.Orders.isWorsePrice(p, callback)
 
-Returns whether a given price is less than the price of a particular [Order](#order) (for Bid Orders), or whether the price is greater than the price of the Order (for Ask Orders).
+Returns whether a given price is less than/equal to the price of a particular [Order](#order) (for Bid Orders), or whether the price is greater than/equal to the price of the Order (for Ask Orders).
 
 #### **Parameters:**
 
