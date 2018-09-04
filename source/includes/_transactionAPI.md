@@ -249,7 +249,7 @@ Provides JavaScript bindings for the [Augur Solidity Contract](https://github.co
 
 ### augur.api.Augur.createGenesisUniverse(p)
 
-Allows the caller to create a new [Genesis Universe](#genesis-universe). Users may wish to create a new Genesis Universe if, for example, they would like to create a separate [Universe](#universe) to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate their [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol) of the new Genesis Universe using the function `augur.api.ReputationToken.migrateBalancesFromLegacyRep`.
+Allows the caller to create a new [Genesis Universe](#genesis-universe). Users may wish to create a new Genesis Universe if, for example, they would like to create a separate [Universe](#universe) to compete with an existing Universe. Whenever a new Genesis Universe is created, it does not initially contain any [Markets](#market) or [REP](#rep) supply. In order to add a supply of REP, users must migrate their [Legacy REP](#legacy-rep) from the [Legacy REP smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) into the [Reputation Token smart contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/ReputationToken.sol) of the new Genesis Universe using the function `augur.api.ReputationToken.migrateFromLegacyReputationToken`.
 
 #### **Parameters:**
 
@@ -1852,7 +1852,7 @@ augur.api.ReputationToken.increaseApproval({
   onFailed: function (result) { console.log(result); }
 });
 
-augur.api.ReputationToken.migrateBalancesFromLegacyRep({
+augur.api.ReputationToken.migrateFromLegacyReputationToken({
   tx: { 
     to: reputationTokenAddress,
     gas: "0x632ea0" 
@@ -2028,7 +2028,7 @@ Increases the amount of [REP](#rep) `p._spender` is approved to spend on behalf 
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
-### augur.api.ReputationToken.migrateBalancesFromLegacyRep(p)
+### augur.api.ReputationToken.migrateFromLegacyReputationToken(p)
 
 Migrates [Legacy REP](#legacy-rep) tokens owned by `msg.sender` from the Legacy REP contract to the `reputationToken` provided. This transaction will add whatever `msg.sender`'s balance was for the [Legacy REP contract](#https://github.com/AugurProject/augur-core/blob/master/source/contracts/LegacyReputationToken.sol) to the `reputationToken` contract.
 
