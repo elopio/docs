@@ -1456,11 +1456,16 @@ augur.reporting.getFeeWindowCurrent({
 {
   endTime: 1509670273,
   feeWindow: "0x2000000000000000000000000000000000000000",
+  feeToken: "0x1230000000000000000000000000000000000000",
   feeWindowId: 457,
   startTime: 1509065473,
   totalStake: "132",
   participantContributions: "102",
+  participantContributionsCrowdsourcer: "0",
+  participantContributionsInitialReport: "102",
   participationTokens: "30",
+  feeWindowEthFees: "2000",
+  feeWindowRepStaked: "1100",
   universe: "0x000000000000000000000000000000000000000b",
 }
 

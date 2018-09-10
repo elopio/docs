@@ -191,12 +191,17 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`endTime`** (number) Unix timestamp for when the Fee Window begins.
 * **`feeWindow`** (string) Ethereum contract address of the Fee Window.
+* **`feeToken`** (string) Ethereum address of the Fee Token for the current Fee Window.
 * **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
 * **`startTime`** (number) Unix timestamp for when the Fee Window begins.
-* **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 * **`totalStake`** (string) If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) `participantContributions` and `participantTokens` should add up to `totalStake`.
-* **`participantContributions`** (string) Amount of attoREP the user staked in InitialReporter/DisputeCrowdsourcer contracts in the current Fee Window.
-* **`participantTokens`** (string) Amount of attoREP the user has in Participation Tokens in the current Fee Window.
+* **`participantContributions`** (string) Total amount of attoREP staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window.
+* **`participantContributionsCrowdsourcer`** (string) Amount of attoREP staked in DisputeCrowdsourcer contracts in the current Fee Window.
+* **`participantContributionsInitialReport`** (string) Amount of attoREP staked in InitialReporter contracts in the current Fee Window.
+* **`participantTokens`** (string) Amount of attoREP that has been put into Fee Tokens in the current Fee Window.
+* **`feeWindowEthFees`** (string) Amount of Reporting Fees the current Fee Window contains in its Reporting Fee Pool, in attoETH.
+* **`feeWindowRepStaked`** (string) Amount of REP staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.
+* **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 
 <a name="GasEstimateInfo"></a>
 ### GasEstimateInfo  (Object)
