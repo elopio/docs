@@ -2105,7 +2105,7 @@ augur.api.OrdersFetcher.findBoundingOrders({
 [ "0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0",
   "0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e" ]
 ```
-Provides JavaScript bindings for the [Orders Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol), which handles functionality related retrieving [Orders](#order) from the [Order Book](#order-book).
+Provides JavaScript bindings for the [OrdersFetcher Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol), which handles functionality related retrieving [Orders](#order) from the [Order Book](#order-book).
 
 ### augur.api.OrdersFetcher.ascendOrderList(p, callback)
 
@@ -2157,6 +2157,151 @@ Returns an array containing the [Order](#order) IDs from the [Order Book](#order
 #### **Returns:**
 
 * (Array.&lt;string>) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.
+
+Orders Finder Call API
+-----------------------
+```javascript
+// Orders Finder Contract Call API Examples:
+
+// All OrdersFinder functions can be called like the example below, but return different array lengths.
+var ordersFinder = "0xf28fc4b34a7c4534dd3e40e0ad5df6f2cb69aec0";
+augur.api.OrdersFinder.getExistingOrders5({ 
+  _type: "0x1",
+  _market: "0xd8e090ac1282fd54d4f7ff5474f6e363cf30049e",
+  _outcome: "0x1",
+  tx: { to: ordersFinder } 
+}, function (error, feeWindow) { 
+  console.log(feeWindow); 
+});
+[
+  "0xfa76427aaada4f319a831f6b2579557ee30579dac997cbe6d7737b438a788a2b",
+  "0xf77843d1520fe797874779a2447cd8727a3ff985975cbe2e0f660e6aa27fff8f",
+  "0x38e6d59a9d4953dbdda92de3561c044b86640236ed8398666155a031bfd77e69",
+  "0x1673d59a9d497384dda92de3561c044b86640236ed8398666155a031bfd89263",
+  "0x8245959a9d4953dbdda92de3561c044b86640236ed8398666155a031bfd09837"
+]
+```
+Provides JavaScript bindings for the [OrdersFinder Solidity Contract](https://github.com/AugurProject/augur-core/blob/e7a5221be4dab7fc81c37c978919bc6ebad10266/source/contracts/external/OrdersFinder.sol), which retrieves [Orders](#order) from the [Order Book](#order-book).
+
+### augur.api.OrdersFinder.getExistingOrders5(p, callback)
+
+Returns the 5 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 5 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders10(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 10 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 10 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders20(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 20 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 20 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders50(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 50 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 50 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders100(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 100 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 100 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders200(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 200 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 200 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders500(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 500 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 500 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
+
+### augur.api.OrdersFinder.getExistingOrders1000(p, callback)
+
+Similar to `augur.api.OrdersFinder.getExistingOrders5`, but returns the 1000 best [Orders](#order) on the [Order Book](#order-book) for a particular [Market](#market), based on Order Type and [Outcome](#outcome).
+
+#### **Parameters:**
+
+* **`p`** (Object) Parameters object. 
+  * **`p._type`** (string) Type of Order, as a hexadecimal string (“0x0” for a [Bid Order](#bid-order), “0x1” for an [Ask Order](#ask-order)).
+  * **`p._market`** (string) Ethereum address of the Market for which to get Orders from the Order Book.
+  * **`p._outcome`** (string) Outcome of the Market, as a hexadecimal string.
+
+#### **Returns:**
+
+* (Array.&lt;string>) Array of the 1000 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.
 
 Reputation Token Call API
 -------------------------
