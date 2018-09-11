@@ -2331,11 +2331,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">{</span>
   <span class="nl">endTime</span><span class="p">:</span> <span class="mi">1509670273</span><span class="p">,</span>
   <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">feeToken</span><span class="p">:</span> <span class="s2">"0x1230000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="na">feeWindowId</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
   <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
   <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"132"</span><span class="p">,</span>
   <span class="na">participantContributions</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="na">participantContributionsCrowdsourcer</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="na">participantContributionsInitialReport</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
   <span class="na">participationTokens</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
+  <span class="na">feeWindowEthFees</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
+  <span class="na">feeWindowRepStaked</span><span class="p">:</span> <span class="s2">"1100"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -6990,7 +6995,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="p">[</span> <span class="s2">"0x4a8d07c2c9cd996484c04b7077d1fc4aeaeb8aa4750d7f26f2a896c4393fb6b0"</span><span class="p">,</span>
   <span class="s2">"0x09502d4c2765d61a8e47fd4ada696966f3bc3bce6b780ecedded035e616c272e"</span> <span class="p">]</span>
 </code></pre></div>
-<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/Orders.sol">Orders Solidity Contract</a>, which handles functionality related retrieving <a href="#order">Orders</a> from the <a href="#order-book">Order Book</a>.</p>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/OrdersFetcher.sol">OrdersFetcher Solidity Contract</a>, which handles functionality related retrieving <a href="#order">Orders</a> from the <a href="#order-book">Order Book</a>.</p>
 
 <h3 id="augur-api-ordersfetcher-ascendorderlist-p-callback">augur.api.OrdersFetcher.ascendOrderList(p, callback)</h3>
 
@@ -7062,6 +7067,205 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li>(Array.&lt;string&gt;) Array containing the better Order ID and worse Order ID, respectively, for the specified price and Order type.</li>
+</ul>
+
+<h2 id="orders-finder-call-api">Orders Finder Call API</h2>
+<div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Orders Finder Contract Call API Examples:</span>
+
+<span class="c1">// All OrdersFinder functions can be called like the example below, but return different array lengths.</span>
+<span class="kd">var</span> <span class="nx">ordersFinder</span> <span class="o">=</span> <span class="s2">"0xf28fc4b34a7c4534dd3e40e0ad5df6f2cb69aec0"</span><span class="p">;</span>
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">OrdersFinder</span><span class="p">.</span><span class="nx">getExistingOrders5</span><span class="p">({</span> 
+  <span class="na">_type</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">_market</span><span class="p">:</span> <span class="s2">"0xd8e090ac1282fd54d4f7ff5474f6e363cf30049e"</span><span class="p">,</span>
+  <span class="na">_outcome</span><span class="p">:</span> <span class="s2">"0x1"</span><span class="p">,</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">ordersFinder</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">feeWindow</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">feeWindow</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="p">[</span>
+  <span class="s2">"0xfa76427aaada4f319a831f6b2579557ee30579dac997cbe6d7737b438a788a2b"</span><span class="p">,</span>
+  <span class="s2">"0xf77843d1520fe797874779a2447cd8727a3ff985975cbe2e0f660e6aa27fff8f"</span><span class="p">,</span>
+  <span class="s2">"0x38e6d59a9d4953dbdda92de3561c044b86640236ed8398666155a031bfd77e69"</span><span class="p">,</span>
+  <span class="s2">"0x1673d59a9d497384dda92de3561c044b86640236ed8398666155a031bfd89263"</span><span class="p">,</span>
+  <span class="s2">"0x8245959a9d4953dbdda92de3561c044b86640236ed8398666155a031bfd09837"</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Provides JavaScript bindings for the <a href="https://github.com/AugurProject/augur-core/blob/e7a5221be4dab7fc81c37c978919bc6ebad10266/source/contracts/external/OrdersFinder.sol">OrdersFinder Solidity Contract</a>, which retrieves <a href="#order">Orders</a> from the <a href="#order-book">Order Book</a>.</p>
+
+<h3 id="augur-api-ordersfinder-getexistingorders5-p-callback">augur.api.OrdersFinder.getExistingOrders5(p, callback)</h3>
+
+<p>Returns the 5 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 5 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders10-p-callback">augur.api.OrdersFinder.getExistingOrders10(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 10 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 10 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders20-p-callback">augur.api.OrdersFinder.getExistingOrders20(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 20 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 20 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders50-p-callback">augur.api.OrdersFinder.getExistingOrders50(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 50 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 50 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders100-p-callback">augur.api.OrdersFinder.getExistingOrders100(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 100 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 100 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders200-p-callback">augur.api.OrdersFinder.getExistingOrders200(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 200 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 200 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders500-p-callback">augur.api.OrdersFinder.getExistingOrders500(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 500 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 500 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
+</ul>
+
+<h3 id="augur-api-ordersfinder-getexistingorders1000-p-callback">augur.api.OrdersFinder.getExistingOrders1000(p, callback)</h3>
+
+<p>Similar to <code class="prettyprint">augur.api.OrdersFinder.getExistingOrders5</code>, but returns the 1000 best <a href="#order">Orders</a> on the <a href="#order-book">Order Book</a> for a particular <a href="#market">Market</a>, based on Order Type and <a href="#outcome">Outcome</a>.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object. 
+
+<ul>
+<li><strong><code class="prettyprint">p._type</code></strong> (string) Type of Order, as a hexadecimal string (“0x0” for a <a href="#bid-order">Bid Order</a>, “0x1” for an <a href="#ask-order">Ask Order</a>).</li>
+<li><strong><code class="prettyprint">p._market</code></strong> (string) Ethereum address of the Market for which to get Orders from the Order Book.</li>
+<li><strong><code class="prettyprint">p._outcome</code></strong> (string) Outcome of the Market, as a hexadecimal string.</li>
+</ul></li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(Array.&lt;string&gt;) Array of the 1000 best Order IDs for the specified Market, Order Type, and Outcome, as 32-byte hexadecimal strings.</li>
 </ul>
 
 <h2 id="reputation-token-call-api">Reputation Token Call API</h2>
@@ -13311,12 +13515,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum contract address of the Fee Window.</li>
+<li><strong><code class="prettyprint">feeToken</code></strong> (string) Ethereum address of the Fee Token for the current Fee Window.</li>
 <li><strong><code class="prettyprint">feeWindowId</code></strong> (number) Unique numerical ID of the Fee Window.</li>
 <li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
-<li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 <li><strong><code class="prettyprint">totalStake</code></strong> (string) If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) <code class="prettyprint">participantContributions</code> and <code class="prettyprint">participantTokens</code> should add up to <code class="prettyprint">totalStake</code>.</li>
-<li><strong><code class="prettyprint">participantContributions</code></strong> (string) Amount of attoREP the user staked in InitialReporter/DisputeCrowdsourcer contracts in the current Fee Window.</li>
-<li><strong><code class="prettyprint">participantTokens</code></strong> (string) Amount of attoREP the user has in Participation Tokens in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantContributions</code></strong> (string) Total amount of attoREP staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantContributionsCrowdsourcer</code></strong> (string) Amount of attoREP staked in DisputeCrowdsourcer contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantContributionsInitialReport</code></strong> (string) Amount of attoREP staked in InitialReporter contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantTokens</code></strong> (string) Amount of attoREP that has been put into Fee Tokens in the current Fee Window.</li>
+<li><strong><code class="prettyprint">feeWindowEthFees</code></strong> (string) Amount of Reporting Fees the current Fee Window contains in its Reporting Fee Pool, in attoETH.</li>
+<li><strong><code class="prettyprint">feeWindowRepStaked</code></strong> (string) Amount of REP staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 </ul>
 
 <p><a name="GasEstimateInfo"></a></p>
