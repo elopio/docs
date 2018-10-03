@@ -8,7 +8,7 @@ Ethereum block number from which to start looking up event logs.
 
 ### augur.constants.BLOCKS_PER_CHUNK (number)
 
-Number of block to read from the blockchain at a time. Set to 1/4 day's worth (i.e., seconds * minutes * hours / blocks_per_second / 4, or 60 * 60 * 24 / 15 / 4). Used by `augur.events.getAllAugurLogs`.
+Number of block to read from the blockchain at a time. Set to 1/8 day's worth (i.e., seconds * minutes * hours / blocks_per_second / 8, or 60 * 60 * 24 / 15 / 8). Used by `augur.events.getAllAugurLogs`.
 
 ### augur.constants.CANCEL_ORDER_GAS (string)
 
