@@ -2167,7 +2167,7 @@ augur.trading.getPositionInMarket({
 // example output:
 ["1", "0.5", "1", "0", "0", "1", "1.5"]
 
-augur.trading.getTradingHistory({
+augur.trading.getUserTradingHistory({
   account: "0x000000000000000000000000000000000000d00d",
   universe: null, 
   marketId: "0x0000000000000000000000000000000000000001",
@@ -2751,7 +2751,7 @@ Gets the number of [Shares](#share) held by a specific Ethereum address for each
 
 * (Array.&lt;string>) Number of Shares for each Outcome of this Market.
 
-### augur.trading.getTradingHistory(p, callback)
+### augur.trading.getUserTradingHistory(p, callback)
 
 Returns information about the trades a specific user has made.
 
