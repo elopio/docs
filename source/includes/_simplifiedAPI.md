@@ -777,6 +777,28 @@ Generates a set of JavaScript bindings for the Solidity ABIs passed in.
 
 * (Array) Two-dimensional array of contracts APIs, keyed by contract name and function name.
 
+Get Gas Price Function
+----------------
+```javascript
+// Get Gas Price Simplified API Example:
+augur.getGasPrice(function (result) {
+  console.log(result);
+});
+// example output:
+1000000000
+```
+### augur.getGasPrice()
+
+Returns the current gas price.
+
+#### **Parameters:**
+
+* **`callback`** (function) Called when gas price is retrieved.
+
+#### **Returns:**
+
+* (Number) Current gas price.
+
 Markets Functions
 ----------------
 ```javascript
