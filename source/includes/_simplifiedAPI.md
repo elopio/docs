@@ -781,19 +781,17 @@ Get Gas Price Function
 ----------------
 ```javascript
 // Get Gas Price Simplified API Example:
-augur.getGasPrice(function (result) {
-  console.log(result);
-});
+augur.getGasPrice();
 // example output:
 1000000000
 ```
-### augur.getGasPrice()
+### augur.getGasPrice(newGasPriceFunction)
 
 Returns the current gas price.
 
 #### **Parameters:**
 
-* **`callback`** (function) Called when gas price is retrieved.
+* **`newGasPriceFunction`** (function) &lt;optional> JavaScript function to be used to retrieve the current gas price. If one is not specified, [ethrpc's](https://github.com/ethereumjs/ethrpc) `getGasPrice` function will be called by default.
 
 #### **Returns:**
 
