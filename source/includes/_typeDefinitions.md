@@ -294,6 +294,13 @@ Serves as an enum for the state of a Dispute Token.
 * **`initialReporterId`** (string) Ethereum contract address of the InitialReporter contract belonging to a Forked Market, as a hexadecimal string.
 * **`needsFork`** (boolean) Whether the InitialReporter contract needs to have its `InitialReporter.fork` function called before calling `InitialReporter.redeem`.
 
+<a name="MarketCreatorFee"></a>
+### MarketCreatorFee  (Object)
+
+#### **Properties:** 
+* **`marketId`** (string) Ethereum contract address of the Market, as a hexadecimal string.
+* **`unclaimedFee`** (string) Unclaimed Creator Fee for the Market, in attoETH.
+
 <a name="MarketCreationCost"></a>
 ### MarketCreationCost  (Object)
 
