@@ -1880,10 +1880,16 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
-<span class="p">{</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">:</span> <span class="mi">0</span>
-<span class="p">}</span>
+<span class="p">[</span>
+  <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="nx">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="nx">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
 <h3 id="augur-markets-getcategories-p-callback">augur.markets.getCategories(p, callback)</h3>
 
@@ -2124,7 +2130,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <h4 id="strong-strong"><strong>Returns:</strong></h4>
 
 <ul>
-<li>(Object) Market Creator Fees, in <a href="#atto-prefix">attoETH</a>, keyed by Market ID.</li>
+<li>(Array.&lt;<a href="#MarketCreatorFee">MarketCreatorFee&gt;</a>&gt;) Array of MarketCreatorFee objects.</li>
 </ul>
 
 <h2 id="reporting-functions">Reporting Functions</h2>
@@ -2277,7 +2283,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="p">},</span>
     <span class="p">],</span>
-    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
@@ -2312,7 +2318,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
       <span class="p">},</span>
     <span class="p">],</span>
-    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">disputeRound</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">]</span>
 
@@ -2354,17 +2360,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <span class="c1">// example output:</span>
 <span class="p">{</span>
   <span class="nl">endTime</span><span class="p">:</span> <span class="mi">1509670273</span><span class="p">,</span>
-  <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
   <span class="na">feeToken</span><span class="p">:</span> <span class="s2">"0x1230000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x2000000000000000000000000000000000000000"</span><span class="p">,</span>
+  <span class="na">feeWindowEthFees</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
+  <span class="na">feeWindowFeeTokens</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
   <span class="na">feeWindowId</span><span class="p">:</span> <span class="mi">457</span><span class="p">,</span>
-  <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
-  <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"132"</span><span class="p">,</span>
+  <span class="na">feeWindowParticipationTokens</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span>
+  <span class="na">feeWindowRepStaked</span><span class="p">:</span> <span class="s2">"1100"</span><span class="p">,</span>
   <span class="na">participantContributions</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
   <span class="na">participantContributionsCrowdsourcer</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="na">participantContributionsInitialReport</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="na">participantParticipationTokens</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
   <span class="na">participationTokens</span><span class="p">:</span> <span class="s2">"30"</span><span class="p">,</span>
-  <span class="na">feeWindowEthFees</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
-  <span class="na">feeWindowRepStaked</span><span class="p">:</span> <span class="s2">"1100"</span><span class="p">,</span>
+  <span class="na">startTime</span><span class="p">:</span> <span class="mi">1509065473</span><span class="p">,</span>
+  <span class="na">totalStake</span><span class="p">:</span> <span class="s2">"132"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
 <span class="p">}</span>
 
@@ -2772,7 +2781,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <h3 id="augur-reporting-getfeewindowcurrent-p-callback">augur.reporting.getFeeWindowCurrent(p, callback)</h3>
 
-<p>Returns information about the current <a href="#fee-window">Fee Window</a>. If <code class="prettyprint">p.reporter</code> is specified, this returned information will also include the total amount of <a href="#atto-prefix">attoREP</a> the <a href="#reporter">Reporter</a> has Staked in the current Fee Window (this includes attoREP Staked in <a href="#initial-report">Initial Reports</a>, as well as attoREP Staked in <a href="#crowdsourcers">Dispute Crowdsourcers</a>).</p>
+<p>Returns information about the current <a href="#fee-window">Fee Window</a>. If <code class="prettyprint">p.reporter</code> is specified, this returned information will also include the total amount of <a href="#atto-prefix">attoREP</a> the <a href="#reporter">Reporter</a> has Staked in the current Fee Window (this includes attoREP Staked in <a href="#initial-report">Initial Reports</a>, as well as attoREP Staked in <a href="#crowdsourcers">Dispute Crowdsourcers</a>) and the amount of <a href="#participation-token">Participation Tokens</a> the Reporter has purchased in the current Fee Window.</p>
 
 <p>This function will fail if:</p>
 
@@ -13538,17 +13547,20 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 
 <ul>
 <li><strong><code class="prettyprint">endTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
+<li><strong><code class="prettyprint">feeToken</code></strong> (string) Ethereum address of the <a href="#fee-token">Fee Token</a> for the current Fee Window.</li>
 <li><strong><code class="prettyprint">feeWindow</code></strong> (string) Ethereum contract address of the Fee Window.</li>
-<li><strong><code class="prettyprint">feeToken</code></strong> (string) Ethereum address of the Fee Token for the current Fee Window.</li>
-<li><strong><code class="prettyprint">feeWindowId</code></strong> (number) Unique numerical ID of the Fee Window.</li>
-<li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
-<li><strong><code class="prettyprint">totalStake</code></strong> (string) If a <code class="prettyprint">reporter</code> was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) <code class="prettyprint">participantContributions</code> and <code class="prettyprint">participantTokens</code> should add up to <code class="prettyprint">totalStake</code>.</li>
-<li><strong><code class="prettyprint">participantContributions</code></strong> (string) Total amount of attoREP staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window.</li>
-<li><strong><code class="prettyprint">participantContributionsCrowdsourcer</code></strong> (string) Amount of attoREP staked in DisputeCrowdsourcer contracts in the current Fee Window.</li>
-<li><strong><code class="prettyprint">participantContributionsInitialReport</code></strong> (string) Amount of attoREP staked in InitialReporter contracts in the current Fee Window.</li>
-<li><strong><code class="prettyprint">participantTokens</code></strong> (string) Amount of attoREP that has been put into Fee Tokens in the current Fee Window.</li>
 <li><strong><code class="prettyprint">feeWindowEthFees</code></strong> (string) Amount of Reporting Fees the current Fee Window contains in its Reporting Fee Pool, in attoETH.</li>
-<li><strong><code class="prettyprint">feeWindowRepStaked</code></strong> (string) Amount of REP staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">feeWindowFeeTokens</code></strong> (string) Number of Fee Tokens Staked in the current Fee Window.</li>
+<li><strong><code class="prettyprint">feeWindowId</code></strong> (number) Unique numerical ID of the Fee Window.</li>
+<li><strong><code class="prettyprint">feeWindowParticipationTokens</code></strong> (string) Number of <a href="#participation-token">Participation Tokens</a> purchased by users in the current Fee Window.</li>
+<li><strong><code class="prettyprint">feeWindowRepStaked</code></strong> (string) Amount of REP Staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.</li>
+<li><strong><code class="prettyprint">participantContributions</code></strong> (string) &lt;optional&gt; Total amount of attoREP <code class="prettyprint">reporter</code> Staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window. Returned if <code class="prettyprint">reporter</code> was specified.</li>
+<li><strong><code class="prettyprint">participantContributionsCrowdsourcer</code></strong> (string) &lt;optional&gt; Amount of attoREP <code class="prettyprint">reporter</code> Staked in DisputeCrowdsourcer contracts in the current Fee Window. Returned if <code class="prettyprint">reporter</code> was specified.</li>
+<li><strong><code class="prettyprint">participantContributionsInitialReport</code></strong> (string) &lt;optional&gt; Amount of attoREP <code class="prettyprint">reporter</code> Staked in InitialReporter contracts in the current Fee Window. Returned if <code class="prettyprint">reporter</code> was specified.</li>
+<li><strong><code class="prettyprint">participationTokens</code></strong> (string) &lt;optional&gt; Amount of attoREP that <code class="prettyprint">reporter</code> has put into Fee Tokens in the current Fee Window. This number is the same as <code class="prettyprint">participantParticipationTokens</code>, but exists for legacy reasons. Returned if <code class="prettyprint">reporter</code> was specified.</li>
+<li><strong><code class="prettyprint">participantParticipationTokens</code></strong> (string) &lt;optional&gt; Amount of attoREP that <code class="prettyprint">reporter</code> has put into Fee Tokens in the current Fee Window. Returned if <code class="prettyprint">reporter</code> was specified.</li>
+<li><strong><code class="prettyprint">startTime</code></strong> (number) Unix timestamp for when the Fee Window begins.</li>
+<li><strong><code class="prettyprint">totalStake</code></strong> (string) &lt;optional&gt; The total amount of attoREP <code class="prettyprint">reporter</code> has Staked in the current Fee Window will be returned as <code class="prettyprint">totalStake</code>. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) <code class="prettyprint">participantContributions</code> and <code class="prettyprint">participantTokens</code> should add up to <code class="prettyprint">totalStake</code>. Returned if <code class="prettyprint">reporter</code> was specified.</li>
 <li><strong><code class="prettyprint">universe</code></strong> (string) Ethereum contract address of the Universe to which the Fee Window belongs.</li>
 </ul>
 
@@ -13639,7 +13651,7 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <li><strong><code class="prettyprint">lostRep</code></strong> (string) AttoREP lost in losing Initial Reports/Crowdsourcers for Markets containing unclaimed ETH/REP.</li>
 <li><strong><code class="prettyprint">unclaimedEth</code></strong> (string) Unclaimed attoETH fees from buying Participation Tokens or staking in Initial Reports/Crowdsourcers (even if the Outcome is not the Winning Outcome) of the specified Universe.</li>
 <li><strong><code class="prettyprint">unclaimedForkEth</code></strong> (string) Unclaimed attoETH fees for staking in the Initial Report/Crowdsourcers of the Forked Market (even if the Outcome is not the Winning Outcome) of the specified Universe.</li>
-<li><strong><code class="prettyprint">unclaimedForkRepStaked</code></strong> (string) Unclaimed attoREP staked in the Initial Report/Crowsourcers of the Forked Market (where the Outcome is the Winning Outcome) of the specified Universe.</li>
+<li><strong><code class="prettyprint">unclaimedForkRepStaked</code></strong> (string) Unclaimed attoREP Staked in the Initial Report/Crowsourcers of the Forked Market (where the Outcome is the Winning Outcome) of the specified Universe.</li>
 <li><strong><code class="prettyprint">unclaimedRepStaked</code></strong> (string) Unclaimed attoREP used to buy Participation Tokens or to stake in the Initial Report/Crowsourcers of the specified universe (where the Outcome is the Winning Outcome) of the specified Universe.</li>
 <li><strong><code class="prettyprint">unclaimedRepEarned</code></strong> (string) Unclaimed attoREP used to stake in the Initial Report/Crowdsourcers of the specified universe (where the Outcome is Winning Outcome) of the specified Universe.</li>
 </ul>
@@ -13671,6 +13683,17 @@ Dispute Round, a Market’s Tentative Outcome is the outcome that will become th
 <ul>
 <li><strong><code class="prettyprint">initialReporterId</code></strong> (string) Ethereum contract address of the InitialReporter contract belonging to a Forked Market, as a hexadecimal string.</li>
 <li><strong><code class="prettyprint">needsFork</code></strong> (boolean) Whether the InitialReporter contract needs to have its <code class="prettyprint">InitialReporter.fork</code> function called before calling <code class="prettyprint">InitialReporter.redeem</code>.</li>
+</ul>
+
+<p><a name="MarketCreatorFee"></a></p>
+
+<h3 id="marketcreatorfee-object">MarketCreatorFee  (Object)</h3>
+
+<h4 id="strong-strong"><strong>Properties:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">marketId</code></strong> (string) Ethereum contract address of the Market, as a hexadecimal string.</li>
+<li><strong><code class="prettyprint">unclaimedFee</code></strong> (string) Unclaimed Creator Fee for the Market, in attoETH.</li>
 </ul>
 
 <p><a name="MarketCreationCost"></a></p>
