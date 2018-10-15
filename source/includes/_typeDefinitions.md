@@ -531,7 +531,7 @@ Serves as an enum for the state of a Market.
 
 #### **Properties:** 
 * **`marketId`** (string) Ethereum contract address of the Market.
-* **`disputeRound`** (number|null) Dispute round the Market is currently in. (This will be 0 until someone contributes to a Crowdsourcer.) 
+* **`disputeRound`** (number|null) Dispute round the Market is currently in. (This will be 1 until someone contributes to a Crowdsourcer.) 
 * **`stakeCompletedTotal`** (string) Total attoREP that has been Staked in Crowdsourcers and in the First Public Report.
 * **`bondSizeOfNewStake`** (string) Amount of attoREP needed to Dispute the Tentative Outcome of the Market.
 * **`stakes`** (Array.&lt;<a href="#StakeDetails">StakeDetails</a>>) 
