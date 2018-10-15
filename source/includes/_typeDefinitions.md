@@ -190,17 +190,20 @@ Serves as an enum for the state of a Dispute Token.
 
 #### **Properties:** 
 * **`endTime`** (number) Unix timestamp for when the Fee Window begins.
+* **`feeToken`** (string) Ethereum address of the [Fee Token](#fee-token) for the current Fee Window.
 * **`feeWindow`** (string) Ethereum contract address of the Fee Window.
-* **`feeToken`** (string) Ethereum address of the Fee Token for the current Fee Window.
-* **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
-* **`startTime`** (number) Unix timestamp for when the Fee Window begins.
-* **`totalStake`** (string) If a `reporter` was specified, the total amount of attoREP they have Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) `participantContributions` and `participantTokens` should add up to `totalStake`.
-* **`participantContributions`** (string) Total amount of attoREP staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window.
-* **`participantContributionsCrowdsourcer`** (string) Amount of attoREP staked in DisputeCrowdsourcer contracts in the current Fee Window.
-* **`participantContributionsInitialReport`** (string) Amount of attoREP staked in InitialReporter contracts in the current Fee Window.
-* **`participantTokens`** (string) Amount of attoREP that has been put into Fee Tokens in the current Fee Window.
 * **`feeWindowEthFees`** (string) Amount of Reporting Fees the current Fee Window contains in its Reporting Fee Pool, in attoETH.
-* **`feeWindowRepStaked`** (string) Amount of REP staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.
+* **`feeWindowFeeTokens`** (string) Number of Fee Tokens Staked in the current Fee Window.
+* **`feeWindowId`** (number) Unique numerical ID of the Fee Window.
+* **`feeWindowParticipationTokens`** (string) Number of [Participation Tokens](#participation-token) purchased by users in the current Fee Window.
+* **`feeWindowRepStaked`** (string) Amount of REP Staked in all DisputeCrowdsourcer and InitialReporter contracts in the current Fee Window.
+* **`participantContributions`** (string) &lt;optional> Total amount of attoREP `reporter` Staked in InitialReporter and DisputeCrowdsourcer contracts in the current Fee Window. Returned if `reporter` was specified.
+* **`participantContributionsCrowdsourcer`** (string) &lt;optional> Amount of attoREP `reporter` Staked in DisputeCrowdsourcer contracts in the current Fee Window. Returned if `reporter` was specified.
+* **`participantContributionsInitialReport`** (string) &lt;optional> Amount of attoREP `reporter` Staked in InitialReporter contracts in the current Fee Window. Returned if `reporter` was specified.
+* **`participationTokens`** (string) &lt;optional> Amount of attoREP that `reporter` has put into Fee Tokens in the current Fee Window. This number is the same as `participantParticipationTokens`, but exists for legacy reasons. Returned if `reporter` was specified.
+* **`participantParticipationTokens`** (string) &lt;optional> Amount of attoREP that `reporter` has put into Fee Tokens in the current Fee Window. Returned if `reporter` was specified.
+* **`startTime`** (number) Unix timestamp for when the Fee Window begins.
+* **`totalStake`** (string) &lt;optional> The total amount of attoREP `reporter` has Staked in the current Fee Window will be returned as `totalStake`. (This amount includes attoREP Staked on Initial Reports as well as on Dispute Crowdsourcers.) `participantContributions` and `participantTokens` should add up to `totalStake`. Returned if `reporter` was specified.
 * **`universe`** (string) Ethereum contract address of the Universe to which the Fee Window belongs.
 
 <a name="GasEstimateInfo"></a>
@@ -265,7 +268,7 @@ Serves as an enum for the state of a Dispute Token.
 * **`lostRep`** (string) AttoREP lost in losing Initial Reports/Crowdsourcers for Markets containing unclaimed ETH/REP.
 * **`unclaimedEth`** (string) Unclaimed attoETH fees from buying Participation Tokens or staking in Initial Reports/Crowdsourcers (even if the Outcome is not the Winning Outcome) of the specified Universe.
 * **`unclaimedForkEth`** (string) Unclaimed attoETH fees for staking in the Initial Report/Crowdsourcers of the Forked Market (even if the Outcome is not the Winning Outcome) of the specified Universe.
-* **`unclaimedForkRepStaked`** (string) Unclaimed attoREP staked in the Initial Report/Crowsourcers of the Forked Market (where the Outcome is the Winning Outcome) of the specified Universe.
+* **`unclaimedForkRepStaked`** (string) Unclaimed attoREP Staked in the Initial Report/Crowsourcers of the Forked Market (where the Outcome is the Winning Outcome) of the specified Universe.
 * **`unclaimedRepStaked`** (string) Unclaimed attoREP used to buy Participation Tokens or to stake in the Initial Report/Crowsourcers of the specified universe (where the Outcome is the Winning Outcome) of the specified Universe.
 * **`unclaimedRepEarned`** (string) Unclaimed attoREP used to stake in the Initial Report/Crowdsourcers of the specified universe (where the Outcome is Winning Outcome) of the specified Universe.
 

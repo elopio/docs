@@ -1400,7 +1400,7 @@ augur.reporting.getDisputeInfo({
         tentativeWinning: false,
       },
     ],
-    disputeRound: 0,
+    disputeRound: 1,
   },
   {
     marketId: "0x0000000000000000000000000000000000000011",
@@ -1435,7 +1435,7 @@ augur.reporting.getDisputeInfo({
         tentativeWinning: true,
       },
     ],
-    disputeRound: 2,
+    disputeRound: 3,
   },
 ]
 
@@ -1477,17 +1477,20 @@ augur.reporting.getFeeWindowCurrent({
 // example output:
 {
   endTime: 1509670273,
-  feeWindow: "0x2000000000000000000000000000000000000000",
   feeToken: "0x1230000000000000000000000000000000000000",
+  feeWindow: "0x2000000000000000000000000000000000000000",
+  feeWindowEthFees: "2000",
+  feeWindowFeeTokens: "100",
   feeWindowId: 457,
-  startTime: 1509065473,
-  totalStake: "132",
+  feeWindowParticipationTokens: "1000",
+  feeWindowRepStaked: "1100",
   participantContributions: "102",
   participantContributionsCrowdsourcer: "0",
   participantContributionsInitialReport: "102",
+  participantParticipationTokens: "30",
   participationTokens: "30",
-  feeWindowEthFees: "2000",
-  feeWindowRepStaked: "1100",
+  startTime: 1509065473,
+  totalStake: "132",
   universe: "0x000000000000000000000000000000000000000b",
 }
 
@@ -1819,7 +1822,7 @@ This function will fail if:
 
 ### augur.reporting.getFeeWindowCurrent(p, callback)
 
-Returns information about the current [Fee Window](#fee-window). If `p.reporter` is specified, this returned information will also include the total amount of [attoREP](#atto-prefix) the [Reporter](#reporter) has Staked in the current Fee Window (this includes attoREP Staked in [Initial Reports](#initial-report), as well as attoREP Staked in [Dispute Crowdsourcers](#crowdsourcers)).
+Returns information about the current [Fee Window](#fee-window). If `p.reporter` is specified, this returned information will also include the total amount of [attoREP](#atto-prefix) the [Reporter](#reporter) has Staked in the current Fee Window (this includes attoREP Staked in [Initial Reports](#initial-report), as well as attoREP Staked in [Dispute Crowdsourcers](#crowdsourcers)) and the amount of [Participation Tokens](#participation-token) the Reporter has purchased in the current Fee Window.
 
 This function will fail if:
 
