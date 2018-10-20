@@ -37,7 +37,7 @@ Designated Reporting State
 --------------------------
 When creating a Market, [Market Creators](#market-creator) are required to choose a [Designated Reporter](#designated-reporter) and post a [No-Show Bond](#no-show-bond). During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to three days to Report on the [Outcome](#outcome) of the event. If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the No-Show Bond, and the Market automatically enters the [Open Reporting Phase](#open-reporting-phase) (state b in the figure above).
 
-If the Designated Reporter submits a [Report](#report) on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the [Designated Reporter Stake](#designated-reporter-stake) on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the [Waiting for the Next Fee Window to Begin Phase](waiting-for-the-next-fee-window-to-begin-phase) (state c in the figure above), and the Reported Outcome becomes the Market’s [Tentative Outcome](#tentative-outcome).
+If the Designated Reporter submits a [Report](#report) on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the [Designated Reporter Stake](#designated-reporter-stake) on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase) (state c in the figure above), and the Reported Outcome becomes the Market’s [Tentative Outcome](#tentative-outcome).
 
 Open Reporting State
 --------------------
@@ -72,7 +72,7 @@ The Fork Phase is a special state that lasts up to 60 days. Forking is the Marke
 
 When a Fork is initiated, a 60-day Forking Period begins. Disputing for all other non-Finalized Markets is put on hold until the end of this Forking Period. The Forking Period is much longer than the usual Fee Window because the platform needs to provide ample time for REP holders and service providers (such as wallets and exchanges) to prepare. A Fork's Final Outcome cannot be Disputed.
 
-Every Augur Market and all REP tokens exist in some [Universe](#universe). REP tokens can be used to Report on Outcomes (and thus earn fees) only for Markets that exist in the same Universe as the REP tokens. When Augur first launches all Markets and all REP will exist together in a [Gensis Universe](#genesis-universe).
+Every Augur Market and all REP tokens exist in some [Universe](#universe). REP tokens can be used to Report on Outcomes (and thus earn fees) only for Markets that exist in the same Universe as the REP tokens. When Augur first launches all Markets and all REP will exist together in a [Genesis Universe](#genesis-universe).
 
 When a Market Forks, new Universes are created. Forking creates a new [Child Universe](#child-universe) for each possible Outcome of the Forking Market (including the [Invalid Outcome](#invalid-outcome)). For example, a [Yes/No Market](#yes-no-market) has 3 possible Outcomes: A, B, and Invalid. Thus a Yes/No Forking Market will create three new Child Universes: Universe A, Universe B, and Universe Invalid. Initially these newly created Universes are empty: they contain no Markets or REP tokens.
 
@@ -90,7 +90,7 @@ Reporters that have Staked REP on one of the Forking Market’s Outcomes cannot 
 
 Sibling Universes are entirely disjoint. REP tokens that exist in one Universe cannot be used to Report on events or earn rewards from Markets in another Universe. Since users presumably will not want to create or trade on Markets in a Universe whose [Oracle](#decentralized-oracle) is untrustworthy, REP that exists in a Universe that does not correspond to objective reality is unlikely to earn its owner any fees, and therefore should not hold any significant market value. 
 
-Therefore, REP tokens migrated to a Universe which does not correspond to objective reality should hold no market value, regarless of whether or not the objectively false Universe ends up being the Winning Universe after a Fork.
+Therefore, REP tokens migrated to a Universe which does not correspond to objective reality should hold no market value, regardless of whether or not the objectively false Universe ends up being the Winning Universe after a Fork.
 
 Finalized State
 ---------------
