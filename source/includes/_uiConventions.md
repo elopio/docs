@@ -5,6 +5,17 @@ Numbers
 -------
 Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the [BigNumber](https://github.com/MikeMcl/bignumber.js) data type.
 
+When outputting decimal numbers to the UI, the following rules should be adhered to:
+
+1. By default, 4 decimal places should be shown.
+2. Scientific notation should never be shown.
+3. If the number can be rounded to a number that's visible in the 4 decimal places, it should be (e.g., 0.000998 should be rounded to 0.0010).
+4. If a number, when rounded, results in nothing being shown in the first 4 decimals, it should be displayed to the first two significant digits. Anything smaller than 0.00005 should be treated this way. Significant digits include all non-zero digits, and any zeroes that are between two non-zero digits. For example:
+   * 0.00000101 should be displayed as 0.0000010.
+   * 0.000034052400 should be displayed as 0.000034.
+   * 0.00000021034 should be displayed as 0.00000021.
+5. At most, only 8 decimals should ever be displayed. Any number not containing significant digits in the first 8 decimals should just be displayed as 0.0000.
+
 Dates/Timestamps
 ----- 
 In general, the current timestamp should only ever be obtained using the value `blockchain.currentAugurTimestamp` (as opposed to calling the JavaScript function `Date.now`). This value can be obtained using the selectors `getCurrentTimestampInSeconds` (which returns the timestamp of the latest block on the Ethereum blockchain) or `getCurrentTimestamp` (which returns the same timestamp, in milliseconds). This means that `Date.now()` should not be used, and `moment()` and `new Date()` should not be used for getting the current timestamp.
