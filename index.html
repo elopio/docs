@@ -14461,6 +14461,22 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Mathematical operations, such as addition, multiplication, greater-than/less-than comparisions, etc., should only ever be performed within the UI using the <a href="https://github.com/MikeMcl/bignumber.js">BigNumber</a> data type.</p>
 
+<p>When outputting decimal numbers to the UI, the following rules should be adhered to:</p>
+
+<ol>
+<li>By default, 4 decimal places should be shown.</li>
+<li>Scientific notation should never be shown.</li>
+<li>If the number can be rounded to a number that&rsquo;s visible in the 4 decimal places, it should be (e.g., 0.000998 should be rounded to 0.0010).</li>
+<li>If a number, when rounded, results in nothing being shown in the first 4 decimals, it should be displayed to the first two significant digits. Anything smaller than 0.00005 should be treated this way. Significant digits include all non-zero digits, and any zeroes that are between two non-zero digits. For example:
+
+<ul>
+<li>0.00000101 should be displayed as 0.0000010.</li>
+<li>0.000034052400 should be displayed as 0.000034.</li>
+<li>0.00000021034 should be displayed as 0.00000021.</li>
+</ul></li>
+<li>At most, only 8 decimals should ever be displayed. Any number not containing significant digits in the first 8 decimals should just be displayed as 0.0000.</li>
+</ol>
+
 <h2 id="dates-timestamps">Dates/Timestamps</h2>
 
 <p>In general, the current timestamp should only ever be obtained using the value <code class="prettyprint">blockchain.currentAugurTimestamp</code> (as opposed to calling the JavaScript function <code class="prettyprint">Date.now</code>). This value can be obtained using the selectors <code class="prettyprint">getCurrentTimestampInSeconds</code> (which returns the timestamp of the latest block on the Ethereum blockchain) or <code class="prettyprint">getCurrentTimestamp</code> (which returns the same timestamp, in milliseconds). This means that <code class="prettyprint">Date.now()</code> should not be used, and <code class="prettyprint">moment()</code> and <code class="prettyprint">new Date()</code> should not be used for getting the current timestamp.</p>
