@@ -10,8 +10,9 @@ Accounts Functions
 augur.accounts.approveAugur({
   address: "0x0000000000000000000000000000000000000b0b", 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log("Approval was successful."); },
@@ -129,8 +130,9 @@ augur.assets.sendEther({
   from: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -142,8 +144,9 @@ augur.assets.sendReputation({
   reputationToSend: "0.001",
   _to: "0x40485264986740c8fb3d11e814bd94cf86012d29",
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -491,8 +494,9 @@ augur.createMarket.createCategoricalMarket({
   _description: "Who will win the University of Georgia vs. University of Florida football game in 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -537,8 +541,9 @@ augur.createMarket.createScalarMarket({
   _description: "High temperature (in degrees Fahrenheit) in San Francisco, California, on July 1, 2018",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -580,8 +585,9 @@ augur.createMarket.createYesNoMarket({
   _description: "Will Microsoft stock (MSFT) be below $50 at any point during 2018?",
   _extraInfo: JSON.stringify(_extraInfo),
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1332,8 +1338,9 @@ augur.reporting.claimReportingFeesNonforkedMarkets({
 augur.reporting.finalizeMarket({
   market: "0x0000000000000000000000000000000000000011",
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -2001,8 +2008,9 @@ augur.trading.claimMarketsTradingProceeds({
   ],
   _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -2018,8 +2026,9 @@ augur.trading.claimTradingProceeds({
   _market: "0x0000000000000000000000000000000000000001",
   _shareHolder: "0x8fa56abe36d8dc76cf85fecb6a3026733e0a12ac",
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -2352,8 +2361,9 @@ augur.trading.placeTrade({
   _outcome: 0,
   doNotCreateOrders: false,
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },
@@ -2419,8 +2429,9 @@ augur.trading.tradeUntilAmountIsZero({
   numOutcomes: 2,
   doNotCreateOrders: false,
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function(result) { console.log(result); },
   onSuccess: function(result) { console.log(result); },

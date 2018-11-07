@@ -30,8 +30,9 @@ augur.api.Cash.approve({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -237,8 +238,9 @@ augur.api.Augur.createGenesisUniverse({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -283,8 +285,9 @@ augur.api.CancelOrder.cancelOrder({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -344,8 +347,9 @@ augur.api.Cash.approve({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -360,8 +364,9 @@ augur.api.Cash.decreaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -376,8 +381,9 @@ augur.api.Cash.increaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -392,8 +398,9 @@ augur.api.Cash.withdrawEtherToIfPossible({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -519,8 +526,9 @@ augur.api.ClaimTradingProceeds.claimTradingProceeds({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -597,8 +605,9 @@ augur.api.CompleteSets.publicBuyCompleteSets({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -614,8 +623,9 @@ augur.api.CompleteSets.publicBuyCompleteSetsWithCash({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -630,8 +640,9 @@ augur.api.CompleteSets.publicSellCompleteSets({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -646,8 +657,9 @@ augur.api.CompleteSets.publicSellCompleteSetsWithCash({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -785,8 +797,9 @@ augur.api.CreateOrder.publicCreateOrder({
     value: "0x470de4df820000", 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -848,8 +861,9 @@ augur.api.DisputeCrowdsourcer.forkAndRedeem({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -864,8 +878,9 @@ augur.api.DisputeCrowdsourcer.redeem({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -878,8 +893,9 @@ augur.api.DisputeCrowdsourcer.withdrawInEmergency({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -992,8 +1008,9 @@ augur.api.FeeWindow.buy({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1008,8 +1025,9 @@ augur.api.FeeWindow.redeem({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1022,8 +1040,9 @@ augur.api.FeeWindow.withdrawInEmergency({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1128,8 +1147,9 @@ augur.api.FillOrder.publicFillOrder({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1181,8 +1201,9 @@ augur.api.InitialReporter.forkAndRedeem({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1196,8 +1217,9 @@ augur.api.InitialReporter.redeem({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1211,8 +1233,9 @@ augur.api.InitialReporter.transferOwnership({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1225,8 +1248,9 @@ augur.api.InitialReporter.withdrawInEmergency({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1347,8 +1371,9 @@ augur.api.Mailbox.transferOwnership({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1361,8 +1386,9 @@ augur.api.Mailbox.withdrawEther({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1377,8 +1403,9 @@ augur.api.Mailbox.withdrawTokens({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1476,8 +1503,9 @@ augur.api.Market.contribute({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1490,8 +1518,9 @@ augur.api.Market.disavowCrowdsourcers({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1506,8 +1535,9 @@ augur.api.Market.doInitialReport({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1520,8 +1550,9 @@ augur.api.Market.finalize({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1534,8 +1565,9 @@ augur.api.Market.finalizeFork({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1548,8 +1580,9 @@ augur.api.Market.migrateThroughOneFork({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1563,8 +1596,9 @@ augur.api.Market.transferOwnership({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1577,8 +1611,9 @@ augur.api.Market.withdrawInEmergency({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1812,8 +1847,9 @@ augur.api.ReputationToken.approve({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1828,8 +1864,9 @@ augur.api.ReputationToken.decreaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1844,8 +1881,9 @@ augur.api.ReputationToken.increaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1858,8 +1896,9 @@ augur.api.ReputationToken.migrateFromLegacyReputationToken({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1875,8 +1914,9 @@ augur.api.ReputationToken.migrateOut({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1892,8 +1932,9 @@ augur.api.ReputationToken.migrateOutByPayout({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1908,8 +1949,9 @@ augur.api.ReputationToken.transfer({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1925,8 +1967,9 @@ augur.api.ReputationToken.transferFrom({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1939,8 +1982,9 @@ augur.api.ReputationToken.updateParentTotalTheoreticalSupply({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -1953,8 +1997,9 @@ augur.api.ReputationToken.updateSiblingMigrationTotal({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2218,8 +2263,9 @@ augur.api.ShareToken.approve({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2234,8 +2280,9 @@ augur.api.ShareToken.decreaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2250,8 +2297,9 @@ augur.api.ShareToken.increaseApproval({
     gas: "0x632ea0" 
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2266,8 +2314,9 @@ augur.api.ShareToken.transfer({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2283,8 +2332,9 @@ augur.api.ShareToken.transferFrom({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2441,8 +2491,9 @@ augur.api.Trade.publicBuy({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2464,8 +2515,9 @@ augur.api.Trade.publicBuyWithLimit({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2486,8 +2538,9 @@ augur.api.Trade.publicSell({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2509,8 +2562,9 @@ augur.api.Trade.publicSellWithLimit({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2532,8 +2586,9 @@ augur.api.Trade.publicTrade({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2556,8 +2611,9 @@ augur.api.Trade.publicTradeWithLimit({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2578,8 +2634,9 @@ augur.api.Trade.publicFillBestOrder({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2601,8 +2658,9 @@ augur.api.Trade.publicFillBestOrderWithLimit({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2862,8 +2920,9 @@ augur.api.TradingEscapeHatch.claimSharesInUpdate({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2877,8 +2936,9 @@ augur.api.TradingEscapeHatch.getFrozenShareValueInMarket({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log(result); },
   onSuccess: function (result) { console.log(result); },
@@ -2973,8 +3033,9 @@ augur.api.Universe.createCategoricalMarket({
     gas: augur.constants.CREATE_CATEGORICAL_MARKET_GAS
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log("onSent result:", result); },
   onSuccess: function (result) {
@@ -2995,8 +3056,9 @@ augur.api.Universe.createChildUniverse({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log("onSent result:", result); },
   onSuccess: function (result) { console.log("onSuccess result:", result); },
@@ -3025,8 +3087,9 @@ augur.api.Universe.createScalarMarket({
     gas: augur.constants.CREATE_SCALAR_MARKET_GAS
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log("onSent result:", result); },
   onSuccess: function (result) {
@@ -3056,8 +3119,9 @@ augur.api.Universe.createYesNoMarket({
     gas: augur.constants.CREATE_YES_NO_MARKET_GAS
   },
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log("onSent result:", result); },
   onSuccess: function (result) {
@@ -3190,8 +3254,9 @@ augur.api.Universe.redeemStake({
     gas: "0x632ea0" 
   }, 
   meta: {
+    accountType: "privateKey",
+    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
     signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-    accountType: "privateKey"
   },
   onSent: function (result) { console.log("onSent result:", result); },
   onSuccess: function (result) { console.log("onSuccess result:", result); },
