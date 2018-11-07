@@ -56,7 +56,7 @@ Once the market receives its Initial Report it enters the Waiting for the Next F
 Dispute Round State
 -------------------
 The [Dispute Round](#dispute-round) (state d in the figure above) is a 7-day period, during which any REP holder has the opportunity to [Dispute](#dispute) the Market’s Tentative Outcome. (At the beginning of a
-Dispute Round, a Market’s Tentative Outcome is the outcome that will become the Market’s Final Outcome if it is not successfully disputed by REP holders.) A Dispute consists of Staking REP (referred to as [Dispute Stake](#dispute-stake) in this context) on an Outcome other than the Market’s current Tentative Outcome. A Dispute is successful if the total amount of Dispute Stake on some Outcome meets the [Dispute Bond](#dispute-bond) size required for the current round. Details for how the Dispute Bond size is computed can be found in the [Dispute Bond glossary entry](#dispute-bond).
+Dispute Round, a Market’s Tentative Outcome is the outcome that will become the Market’s Final Outcome if it is not successfully disputed by REP holders.) A Dispute consists of Staking REP (referred to as [Dispute Stake](#dispute-stake) in this context) on an Outcome other than the Market’s current Tentative Outcome. A Dispute is successful if the total amount of Dispute Stake on some Outcome meets the [Dispute Bond](#dispute-bond) size required for the current round. The Dispute Bond sizes are chosen in such a way to ensure a fixed ROI of 50% for Reporters who successfully dispute false Outcomes. Details for how the Dispute Bond size is computed can be found in the [Dispute Bond glossary entry](#dispute-bond).
 
 The [Dispute Bonds](#dispute-bond) need not be paid in their entirety by a single user. The Augur platform allows participants to crowdsource the Dispute Bonds. Any user who sees an incorrect Tentative Outcome can Dispute that Outcome by Staking REP on some Outcome other than the Tentative Outcome. If any Outcome (other than the Tentative Outcome) receives enough Dispute Stake to fill its Dispute Bond, the current Tentative Outcome will be successfully Disputed.
 
@@ -90,7 +90,13 @@ Reporters that have Staked REP on one of the Forking Market’s Outcomes cannot 
 
 Sibling Universes are entirely disjoint. REP tokens that exist in one Universe cannot be used to Report on events or earn rewards from Markets in another Universe. Since users presumably will not want to create or trade on Markets in a Universe whose [Oracle](#decentralized-oracle) is untrustworthy, REP that exists in a Universe that does not correspond to objective reality is unlikely to earn its owner any fees, and therefore should not hold any significant market value. 
 
-Therefore, REP tokens migrated to a Universe which does not correspond to objective reality should hold no market value, regardless of whether or not the objectively false Universe ends up being the Winning Universe after a Fork.
+Therefore, REP tokens migrated to a Universe which does not correspond to objective reality should hold no market value, regardless of whether or not the objectively
+false Universe ends up being the Winning Universe after a Fork. 
+
+Recall from the section on the [Dispute Round State](#dispute-round-state) that any Stake successfully disputing an Outcome in favor of the Market’s Final Outcome will receive a 50% ROI on their Dispute Stake. 
+
+In the event of a Fork, any REP Staked on any of the Market’s false Outcomes
+should lose all economic value, while any REP Staked on the Market’s true Outcome is rewarded with 50% more REP (via newly minted REP) in the Child Universe that corresponds to the Market’s true Outcome (regardless of the Outcome of the Fork). Therefore, if pushed to a Fork, REP holders who Dispute false Outcomes in favor of true Outcomes will always come out ahead, while REP holders who Staked on false Outcomes will see their REP lose all economic value.
 
 Finalized State
 ---------------
