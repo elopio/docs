@@ -845,14 +845,15 @@ augur.markets.getMarketPriceHistory({
 
 augur.markets.getMarkets({
   universe: "0x000000000000000000000000000000000000000b",
-  reportingState: "DESIGNATED_REPORTING",
-  designatedReporter: "0x000000000000000000000000000000000000d00d",
+  search: "category: Ethereum OR tags: ETH"
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
-  "0x0000000000000000000000000000000000000003",
+  "0x98c189f9254b5729eb870688f812b83ebd116798",
+  "0xa47f967c4806d34859ec93013be5ebc4d68f3a64",
+  "0xfa26157e03f05ca681997e63db25af1a95239243",
 ]
 
 augur.markets.getMarketsClosingInDateRange({
@@ -1136,7 +1137,7 @@ This function will fail if:
     * **`p.universe`**  (string) Contract address of the Universe from which to get transfer history.
     * **`p.creator`** (string) &lt;optional> Ethereum address of a [Market Creator](#market-creator) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.category`** (string) &lt;optional> Market category by which to filter the returned results.
-    * **`p.search`** (string) &lt;optional> Query string used to determine which Markets are returned by `augur.markets.getMarkets`. This string is used to search across Market IDs, questions, categories, tags, resolution sources, and scalar donominations.
+    * **`p.search`** (string) &lt;optional> Query string used to determine which Markets are returned by `augur.markets.getMarkets`. By default, a full-text search will be performed on this string. However, it is also possible to search across specific market properties, by specifying `marketId`, `category`, `tags`, `shortDescription`, `longDescription`, `resolutionSource`, an `scalarDenomination`. For example, to search within market categories, `p.search` can be set to "category: ETH". More complex queries can be formed using "AND" and "OR". For example, setting `p.search` to "category: Ethereum OR tags ETH" will search for all markets with the category "Ethereum" or the tag "ETH". 
     * **`p.reportingState`** (string) &lt;optional> [REPORTING_STATE](#REPORTING_STATE) by which to filter the returned results.
     * **`p.feeWindow`** (string) &lt;optional> Ethereum address of a [Fee Window](#fee-window) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
