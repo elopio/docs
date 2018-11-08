@@ -964,6 +964,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="s2">"workQueue"</span><span class="p">:</span> <span class="p">[],</span>
 <span class="p">}</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+<span class="c1">// This function does not return a value.</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">getSyncData</span><span class="p">(</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
@@ -1074,6 +1077,22 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(<a href="#WsTransport">WsTransport</a>) WebSocket transfer object containing information about the WebSocket connection to the Augur Node.</li>
+</ul>
+
+<h3 id="augur-augurnode-disconnect">augur.augurNode.disconnect()</h3>
+
+<p>Disconnects augur.js from the <a href="#augur-node">Augur Node</a> it is currently connected to. (To disconnect from the Ethereum node it is currently connected to, use <code class="prettyprint">augur.disconnect</code>.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li>This function does not accept any parameters.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>This function does not return a value.</li>
 </ul>
 
 <h3 id="augur-augurnode-getcontractaddresses-callback">augur.augurNode.getContractAddresses(callback)</h3>
@@ -1235,6 +1254,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
     <span class="nx">rpc</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
+
+<span class="nx">augur</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+<span class="c1">// This function does not return a value.</span>
 </code></pre></div>
 <h3 id="augur-connect-connectoptions-callback">augur.connect(connectOptions, callback)</h3>
 
@@ -1251,6 +1273,22 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(Object) Transport object containing information about the Augur Node and Ethereum node connections.</li>
+</ul>
+
+<h3 id="augur-disconnect">augur.disconnect()</h3>
+
+<p>Disconnects augur.js from the Ethereum node it is currently connected to. (To disconnect from the <a href="#augur-node">Augur Node</a> it is currently connected to, use <code class="prettyprint">augur.augurNode.disconnect</code>.)</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li>This function does not accept any parameters.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>This function does not return a value.</li>
 </ul>
 
 <h2 id="create-market-functions">Create Market Functions</h2>
