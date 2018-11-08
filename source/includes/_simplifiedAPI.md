@@ -269,10 +269,10 @@ augur.augurNode.getSyncData(
 }
 
 augur.augurNode.submitRequest(
-  "getMarketsInCategory",
+  "getMarkets",
   {
-    universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    category: "SPORTS"
+    universe: "0x02149d40d255fceac54a3ee3899807b0539bad60",
+    search: "category: Ethereum OR tags: ETH"
   },
   function(error, result) {
     console.log(result);
@@ -280,9 +280,9 @@ augur.augurNode.submitRequest(
 );
 // example output:
 [
-  "0x55132e5b02c94bef39983f31392091c626a4b8f0",
-  "0x5e44a67cfef54f6e5af5c9aa762204e85cf1c319",
-  "0xbf8efd9b940cddeb6eb31f28dae47245cd6ee6a1"
+  "0x98c189f9254b5729eb870688f812b83ebd116798",
+  "0xa47f967c4806d34859ec93013be5ebc4d68f3a64",
+  "0xfa26157e03f05ca681997e63db25af1a95239243"
 ]
 
 augur.augurNode.subscribeToEvent(
@@ -881,53 +881,6 @@ augur.markets.getMarketsClosingInDateRange({
   "0x0000000000000000000000000000000000000001",
 ]
 
-augur.markets.getMarketsCreatedByUser({
-  universe: "0x000000000000000000000000000000000000000b",
-  creator: "0x0000000000000000000000000000000000000b0b",
-}, function (error, result) {
-  console.log(result);
-});
-// example output:
-[
-  "0x0000000000000000000000000000000000000016",
-  "0x0000000000000000000000000000000000000012",
-  "0x0000000000000000000000000000000000000013",
-  "0x0000000000000000000000000000000000000014",
-  "0x0000000000000000000000000000000000000015",
-  "0x0000000000000000000000000000000000000017",
-  "0x0000000000000000000000000000000000000018",
-  "0x0000000000000000000000000000000000000019",
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000011",
-  "0x0000000000000000000000000000000000000002",
-  "0x0000000000000000000000000000000000000211",
-  "0x0000000000000000000000000000000000000222",
-]
-
-augur.markets.getMarketsInCategory({
-  universe: "0x000000000000000000000000000000000000000b",
-  category: "AUGUR",
-}, function (error, result) {
-  console.log(result);
-});
-// example output:
-[
-  "0x0000000000000000000000000000000000000015",
-  "0x0000000000000000000000000000000000000012",
-  "0x0000000000000000000000000000000000000013",
-  "0x0000000000000000000000000000000000000014",
-  "0x0000000000000000000000000000000000000016",
-  "0x0000000000000000000000000000000000000017",
-  "0x0000000000000000000000000000000000000018",
-  "0x0000000000000000000000000000000000000019",
-  "0x0000000000000000000000000000000000000001",
-  "0x0000000000000000000000000000000000000003",
-  "0x0000000000000000000000000000000000000011",
-  "0x0000000000000000000000000000000000000002",
-  "0x0000000000000000000000000000000000000211",
-  "0x0000000000000000000000000000000000000222",
-]
-
 augur.markets.getMarketsInfo({
   marketIds: [
     "0x0000000000000000000000000000000000000001",
@@ -1186,54 +1139,6 @@ This function will fail if:
 #### **Returns:**
 
 * (Array.&lt;string>) Array of closing Market addresses, as hexadecimal strings.
-
-### augur.markets.getMarketsCreatedByUser(p, callback)
-
-Returns the [Markets](#market) created by a specific user, as well as the total amount of fees earned so far by that user.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a 20-byte hexadecimal string.
-    * **`p.creator`**  (string) Ethereum address of the [Market Creator](#market-creator), as a 20-byte hexadecimal string.
-    * **`p.earliestCreationTime`**  (number) Earliest market creation time (in Unix time) by which to filter results.
-    * **`p.lateswtCreationTime`**  (number) Latest market creation time (in Unix time) by which to filter results.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Markets have been retrieved.
-
-#### **Returns:**
-
-* (Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>>) Array of [MarketsContractAddressRows](#MarketsContractAddressRow), as hexadecimal strings.
-
-### augur.markets.getMarketsInCategory(p, callback)
-
-Returns the [Markets](#market) within a specific category.
-
-This function will fail if:
-
-* A connection to an [Augur Node](#augur-node) has not been established.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.universe`**  (string) Contract address of the [Universe](#universe) from which to get the Markets, as a 20-byte hexadecimal string.
-    * **`p.category`**  (string) Name of the category from which to get the Markets.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
-* **`callback`** (function) Called after the Markets have been retrieved.
-
-#### **Returns:**
-
-* (Array.&lt;string>) Array of Market addresses in the specified category, as hexadecimal strings.
 
 ### augur.markets.getMarketsInfo(p, callback)
 

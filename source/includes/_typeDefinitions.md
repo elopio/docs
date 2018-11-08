@@ -368,12 +368,6 @@ Serves as an enum for the state of a Dispute Token.
 #### **Properties:** 
 * **`Price`** (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.
 
-<a name="MarketsContractAddressRow"></a>
-### MarketsContractAddressRow  (Object)
-
-#### **Properties:** 
-* **`marketId`** (string) Address of a Market, as a hexadecimal string.
-
 <a name="Meta"></a>
 ### Meta  (Object)
 
