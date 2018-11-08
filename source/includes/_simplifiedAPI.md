@@ -226,6 +226,9 @@ augur.augurNode.connect(
   "workQueue": [],
 }
 
+augur.augurNode.disconnect();
+// This function does not return a value.
+
 augur.augurNode.getSyncData(
   function(error, result) {
     console.log(result);
@@ -333,6 +336,18 @@ Establishes a connection to an [Augur Node](#augur-node).
 #### **Returns:**
 
 * (<a href="#WsTransport">WsTransport</a>) WebSocket transfer object containing information about the WebSocket connection to the Augur Node.
+
+### augur.augurNode.disconnect()
+
+Disconnects augur.js from the [Augur Node](#augur-node) it is currently connected to. (To disconnect from the Ethereum node it is currently connected to, use `augur.disconnect`.)
+
+#### **Parameters:**
+
+* This function does not accept any parameters.
+
+#### **Returns:**
+
+* This function does not return a value.
 
 ### augur.augurNode.getContractAddresses(callback)
 
@@ -465,6 +480,9 @@ connected to ethereum
     rpc: { ... }
   }
 }
+
+augur.disconnect();
+// This function does not return a value.
 ```
 ### augur.connect(connectOptions, callback)
 
@@ -478,6 +496,18 @@ Connects augur.js to an Ethereum node and an [Augur Node](#augur-node).
 #### **Returns:**
 
 * (Object) Transport object containing information about the Augur Node and Ethereum node connections.
+
+### augur.disconnect()
+
+Disconnects augur.js from the Ethereum node it is currently connected to. (To disconnect from the [Augur Node](#augur-node) it is currently connected to, use `augur.augurNode.disconnect`.)
+
+#### **Parameters:**
+
+* This function does not accept any parameters.
+
+#### **Returns:**
+
+* This function does not return a value.
 
 Create Market Functions
 ----------------
