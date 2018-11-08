@@ -199,9 +199,13 @@ Augur Node Functions
 augur.augurNode.connect(
   "ws://127.0.0.1:9001",
   function(error, wsTransport) {
-    console.log("Connected to Augur Node!");
-    console.log("WebSocket transport:");
-    console.log(wsTransport);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Connected to Augur Node!");
+      console.log("WebSocket transport:");
+      console.log(wsTransport);
+    }
   }
 );
 // example output:
@@ -209,15 +213,17 @@ augur.augurNode.connect(
 "WebSocket transport:"
 {
   "address": "ws://127.0.0.1:9001",
-  "timeout": 100,
-  "workQueue": [],
   "awaitingPump": false,
-  "connected": true,
   "backoffMilliseconds": 1,
+  "connected": true,
+  "disconnectListeners": { ... },
+  "maxRetries": 0,
+  "messageHandler": ƒ dispatchJsonRpcResponse(err, jsonRpcResponse),
   "nextListenerToken": 1,
   "reconnectListeners": { ... },
-  "disconnectListeners": { ... },
+  "timeout": 100,
   "webSocketClient": { ... }
+  "workQueue": [],
 }
 
 augur.augurNode.getSyncData(
