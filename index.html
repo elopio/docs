@@ -937,9 +937,13 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span>
   <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">wsTransport</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connected to Augur Node!"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"WebSocket transport:"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">wsTransport</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connected to Augur Node!"</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"WebSocket transport:"</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">wsTransport</span><span class="p">);</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">);</span>
 <span class="c1">// example output:</span>
@@ -947,15 +951,17 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="s2">"WebSocket transport:"</span>
 <span class="p">{</span>
   <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
-  <span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"workQueue"</span><span class="p">:</span> <span class="p">[],</span>
   <span class="s2">"awaitingPump"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"connected"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"backoffMilliseconds"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"connected"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"disconnectListeners"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="s2">"maxRetries"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"messageHandler"</span><span class="p">:</span> <span class="err">ƒ</span> <span class="nx">dispatchJsonRpcResponse</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">jsonRpcResponse</span><span class="p">),</span>
   <span class="s2">"nextListenerToken"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"reconnectListeners"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="s2">"disconnectListeners"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
   <span class="s2">"webSocketClient"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+  <span class="s2">"workQueue"</span><span class="p">:</span> <span class="p">[],</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">getSyncData</span><span class="p">(</span>
@@ -985,15 +991,15 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
     <span class="s2">"TradingEscapeHatch"</span><span class="p">:</span> <span class="s2">"0x157a8998f5470a2be3917aab31d334109f56c30c"</span>
   <span class="p">}</span>
   <span class="s2">"highestBlock"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">hash</span><span class="p">:</span> <span class="s2">"0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58"</span><span class="p">,</span>
-    <span class="nx">number</span><span class="p">:</span> <span class="mi">10019</span><span class="p">,</span>
-    <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1531977999</span><span class="p">,</span>
+    <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58"</span><span class="p">,</span>
+    <span class="na">number</span><span class="p">:</span> <span class="mi">10019</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1531977999</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="s2">"isSyncFinished"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"lastProcessedBlock"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab"</span><span class="p">,</span>
-    <span class="nx">number</span><span class="p">:</span> <span class="mi">10013</span><span class="p">,</span>
-    <span class="nx">timestamp</span><span class="p">:</span> <span class="mi">1530856121</span><span class="p">,</span>
+    <span class="na">number</span><span class="p">:</span> <span class="mi">10013</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1530856121</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
   <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
@@ -1001,10 +1007,10 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">submitRequest</span><span class="p">(</span>
-  <span class="s2">"getMarketsInCategory"</span><span class="p">,</span>
+  <span class="s2">"getMarkets"</span><span class="p">,</span>
   <span class="p">{</span>
-    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
-    <span class="na">category</span><span class="p">:</span> <span class="s2">"SPORTS"</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x02149d40d255fceac54a3ee3899807b0539bad60"</span><span class="p">,</span>
+    <span class="na">search</span><span class="p">:</span> <span class="s2">"category: Ethereum OR tags: ETH"</span>
   <span class="p">},</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
@@ -1012,9 +1018,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">);</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
-  <span class="s2">"0x55132e5b02c94bef39983f31392091c626a4b8f0"</span><span class="p">,</span>
-  <span class="s2">"0x5e44a67cfef54f6e5af5c9aa762204e85cf1c319"</span><span class="p">,</span>
-  <span class="s2">"0xbf8efd9b940cddeb6eb31f28dae47245cd6ee6a1"</span>
+  <span class="s2">"0x98c189f9254b5729eb870688f812b83ebd116798"</span><span class="p">,</span>
+  <span class="s2">"0xa47f967c4806d34859ec93013be5ebc4d68f3a64"</span><span class="p">,</span>
+  <span class="s2">"0xfa26157e03f05ca681997e63db25af1a95239243"</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">subscribeToEvent</span><span class="p">(</span>
@@ -1688,53 +1694,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsCreatedByUser</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">creator</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
-<span class="p">]</span>
-
-<span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInCategory</span><span class="p">({</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">category</span><span class="p">:</span> <span class="s2">"AUGUR"</span><span class="p">,</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="c1">// example output:</span>
-<span class="p">[</span>
-  <span class="s2">"0x0000000000000000000000000000000000000015"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000012"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000013"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000014"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000016"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000017"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000018"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000019"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000003"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000211"</span><span class="p">,</span>
-  <span class="s2">"0x0000000000000000000000000000000000000222"</span><span class="p">,</span>
-<span class="p">]</span>
-
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketsInfo</span><span class="p">({</span>
   <span class="na">marketIds</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
@@ -2030,72 +1989,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(Array.&lt;string&gt;) Array of closing Market addresses, as hexadecimal strings.</li>
-</ul>
-
-<h3 id="augur-markets-getmarketscreatedbyuser-p-callback">augur.markets.getMarketsCreatedByUser(p, callback)</h3>
-
-<p>Returns the <a href="#market">Markets</a> created by a specific user, as well as the total amount of fees earned so far by that user.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li>A connection to an <a href="#augur-node">Augur Node</a> has not been established.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.creator</code></strong>  (string) Ethereum address of the <a href="#market-creator">Market Creator</a>, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) Earliest market creation time (in Unix time) by which to filter results.</li>
-<li><strong><code class="prettyprint">p.lateswtCreationTime</code></strong>  (number) Latest market creation time (in Unix time) by which to filter results.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Array.&lt;<a href="#MarketsContractAddressRow">MarketsContractAddressRow</a>&gt;) Array of <a href="#MarketsContractAddressRow">MarketsContractAddressRows</a>, as hexadecimal strings.</li>
-</ul>
-
-<h3 id="augur-markets-getmarketsincategory-p-callback">augur.markets.getMarketsInCategory(p, callback)</h3>
-
-<p>Returns the <a href="#market">Markets</a> within a specific category.</p>
-
-<p>This function will fail if:</p>
-
-<ul>
-<li>A connection to an <a href="#augur-node">Augur Node</a> has not been established.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Parameters:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.
-
-<ul>
-<li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> from which to get the Markets, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.category</code></strong>  (string) Name of the category from which to get the Markets.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
-</ul></li>
-<li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
-</ul>
-
-<h4 id="strong-strong"><strong>Returns:</strong></h4>
-
-<ul>
-<li>(Array.&lt;string&gt;) Array of Market addresses in the specified category, as hexadecimal strings.</li>
 </ul>
 
 <h3 id="augur-markets-getmarketsinfo-p-callback">augur.markets.getMarketsInfo(p, callback)</h3>
@@ -13860,16 +13753,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">Price</code></strong> (<a href="#SingleOutcomePriceTimeSeries">SingleOutcomePriceTimeSeries</a>) time-series for a single Outcome, keyed by Outcome ID.</li>
-</ul>
-
-<p><a name="MarketsContractAddressRow"></a></p>
-
-<h3 id="marketscontractaddressrow-object">MarketsContractAddressRow  (Object)</h3>
-
-<h4 id="strong-strong"><strong>Properties:</strong></h4>
-
-<ul>
-<li><strong><code class="prettyprint">marketId</code></strong> (string) Address of a Market, as a hexadecimal string.</li>
 </ul>
 
 <p><a name="Meta"></a></p>
