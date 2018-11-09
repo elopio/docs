@@ -9,7 +9,7 @@
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       <script src="javascripts/all.js" type="text/javascript"></script>
 
       <script>
@@ -39,7 +39,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href="https://augur.net">Augur</a></li>
-            <li><a href="https://app.augur.net">App</a></li>
+            <li><a href="https://dev.augur.net">App</a></li>
             <li><a href="https://github.com/AugurProject">Github</a></li>
             <li><a href="https://twitter.com/AugurProject">Twitter</a></li>
         </ul>
@@ -49,11 +49,11 @@
       <div class="content">
         <h1 id="overview">Overview</h1>
 
-<p>Augur is a decentralized prediction market platform that runs on <a href="https://www.ethereum.org">Ethereum</a>. For a detailed, high-level explanation of how Augur works, please refer to the <a href="http://www.augur.net/whitepaper.pdf">Augur whitepaper</a>.</p>
+<p>Augur is a decentralized prediction market platform that runs on <a href="https://www.ethereum.org">Ethereum</a>. For a detailed, high-level explanation of how Augur works, please refer to the <a href="https://www.augur.net/whitepaper.pdf">Augur whitepaper</a>.</p>
 
 <p>If you want to use or help test Augur, please install the <a href="https://github.com/AugurProject/augur-app">Augur App</a>.  If you want to use our cutting-edge development client, this is maintained at <a href="https://dev.augur.net">https://dev.augur.net</a>. However, be warned &ndash; we push changes here pretty rapidly, so it can be a bit buggy!</p>
 
-<p>Augur has its own dedicated <a href="https://augur.stackexchange.com">Stack Exchange</a>, which allows anyone to ask questions about Augur and get answers to those questions. It&rsquo;s a great resource to find the answers for questions you might have that aren&rsquo;t answered directly in these documents. Additionally, you can chat with us on <a href="https://discordapp.com">Discord</a>. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. Most questions are best asked in the <code class="prettyprint">#dev</code> or <code class="prettyprint">#general</code> channels.</p>
+<p>Augur has its own dedicated <a href="https://augur.stackexchange.com">Stack Exchange</a>, which allows anyone to ask questions about Augur and get answers to those questions. It&rsquo;s a great resource to find the answers for questions you might have that aren&rsquo;t answered directly in these documents. Additionally, you can chat with us on <a href="https://discordapp.com">Discord</a>. If you&rsquo;d like to join the conversation, just go to <a href="https://invite.augur.net">invite.augur.net</a> and sign up. Most questions are best asked in the <code class="prettyprint">#dev</code> or <code class="prettyprint">#general</code> channels.</p>
 
 <h2 id="getting-started">Getting Started</h2>
 
@@ -125,7 +125,7 @@
 
 <h2 id="local-ethereum-node">Local Ethereum Node</h2>
 
-<p>Running a local Ethereum node, such as <a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">Geth</a>, while using Augur provides the best performance and overall experience. This is because Augur sends RPC requests to a hosted Ethereum node takes more time than sending them to a local node. To use a local Ethereum node with Augur, either download and run the Augur app locally, or simply visit <a href="https://app.augur.net">https://app.augur.net</a>, which is configured to automatically talk to a local node, if present.</p>
+<p>Running a local Ethereum node, such as <a href="https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum">Geth</a>, while using Augur provides the best performance and overall experience. This is because Augur sends RPC requests to a hosted Ethereum node takes more time than sending them to a local node. To use a local Ethereum node with Augur, either download and run the Augur app locally, or simply visit <a href="https://dev.augur.net">https://dev.augur.net</a>, which is configured to automatically talk to a local node, if present.</p>
 
 <p><img src="images/architecture_local.svg" onerror="this.src='images/architecture_local.png'"></p>
 
@@ -133,13 +133,13 @@
 
 <code class="block">geth --unlock 0 --testnet --rpc --ws --rpccorsdomain "http://localhost:8080" --wsorigins '127.0.0.1' </code>
 
-The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur-ui">Augur UI client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>http://app.augur.net</code>, then you would use <code>http://app.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
+The <code>--ws</code> flag allows WebSocket connections, which are recommended for speed.  The <code>--rpccorsdomain</code> and <code>--wsorigins</code> flags specify what domains are allowed to send RPC requests to your Geth node. Here <code>http://localhost:8080</code> is whitelisted; this is the default address where the <a href="https://github.com/AugurProject/augur-ui">Augur UI client</a> is served, if you build Augur locally. To use your local Ethereum node with a remote (hosted) Augur client, you will need to set <code>--rpccorsdomain</code> and/or <code>--wsorigins</code> to your host&rsquo;s address; for example, if the remote host is at <code>https://dev.augur.net</code>, then you would use <code>https://dev.augur.net</code> for <code>--rpccorsdomain</code> and <code>--wsorigins</code>.</aside>
 
 <p><strong>Note to Geth users:</strong> Since Geth&rsquo;s RPC server uses regular (unencrypted) HTTP, the Augur app must also use regular HTTP to communicate with a local Geth node.</p>
 
 <h2 id="hosted-ethereum-node">Hosted Ethereum Node</h2>
 
-<p>Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public Ethereum node on the Rinkeby test network (while in beta) at <code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>, which is used automatically by <a href="https://app.augur.net">https://app.augur.net</a> (and by <a href="http://local.augur.net">local.augur.net</a> if a local Ethereum node is not detected).</p>
+<p>Since many users may not wish to go to the trouble of running a full Ethereum node solely to use Augur, the Augur development team maintains a public Ethereum node on the Rinkeby test network at <code class="prettyprint">rinkeby.ethereum.nodes.augur.net</code>, which is used automatically by <a href="https://dev.augur.net">https://dev.augur.net</a>.</p>
 
 <p><img src="images/architecture_hosted.svg" onerror="this.src='images/architecture_hosted.png'"></p>
 
@@ -619,7 +619,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><p>hexadecimal strings (e.g., <code class="prettyprint">&quot;0xf69b5&quot;</code>)</p></li>
 </ul>
 
-<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
+<p>Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of <code class="prettyprint">0.07</code>, use <code class="prettyprint">&quot;0.07&quot;</code>), for reasons described in <a href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">enormous detail</a> elsewhere.</p>
 
 <aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.</aside>
 
@@ -1294,7 +1294,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h2 id="create-market-functions">Create Market Functions</h2>
 <div class="highlight"><pre class="highlight javascript"><code><span class="c1">// Create Market Simplified API Examples:</span>
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.espn.com"</span><span class="p">,</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"https://www.espn.com"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"college football"</span><span class="p">,</span> <span class="s2">"football"</span><span class="p">],</span>
   <span class="s2">"outcomeNames"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Georgia"</span><span class="p">,</span> <span class="s2">"Florida"</span><span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
@@ -1340,7 +1340,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://forecast.weather.gov"</span><span class="p">,</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"https://forecast.weather.gov"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"weather"</span><span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
@@ -1387,7 +1387,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.nasdaq.com/symbol/msft"</span><span class="p">,</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"https://www.nasdaq.com/symbol/msft"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"Stocks"</span><span class="p">,</span> <span class="s2">"Microsoft"</span> <span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
@@ -1780,7 +1780,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
     <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
     <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-    <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
+    <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"https://www.trusted-third-party.com"</span><span class="p">,</span>
     <span class="nx">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
     <span class="nx">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
     <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -12070,7 +12070,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://forecast.weather.gov"</span><span class="p">,</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"https://forecast.weather.gov"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"San Francisco"</span><span class="p">,</span> <span class="s2">"weather"</span><span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">};</span>
@@ -12105,7 +12105,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">_extraInfo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"http://www.spacex.com"</span><span class="p">,</span>
+  <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">"https://www.spacex.com"</span><span class="p">,</span>
   <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span> <span class="s2">"SpaceX"</span><span class="p">,</span> <span class="s2">"spaceflight"</span> <span class="p">],</span>
   <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">"SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."</span>
 <span class="p">};</span>
@@ -14341,7 +14341,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
           <h1 id="tests">Tests</h1>
 
-<p>The <a href="https://github.com/AugurProject/augur-ui">Augur UI</a> repository, and the middleware <a href="https://github.com/AugurProject/augur.js">augur.js</a> repository both contain tests. Tests are run using <a href="http://mochajs.org/">Mocha</a>. Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.</p>
+<p>The <a href="https://github.com/AugurProject/augur-ui">Augur UI</a> repository, and the middleware <a href="https://github.com/AugurProject/augur.js">augur.js</a> repository both contain tests. Tests are run using <a href="https://mochajs.org/">Mocha</a>. Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.</p>
 
 <p>To globally install Mocha using <code class="prettyprint">npm</code> you would run the following command:</p>
 
@@ -15175,7 +15175,7 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 
 <p>Before you submit a pull request to the Augur Project, you should make sure you have linted your code so that it fits the Augur Project standards and you have updated/added unit tests for your changes. You can find more details about testing and linting in the <a href="#tests">tests</a> section of these documents.</p>
 
-<p>Most of our day-to-day conversation happens on <a href="https://discordapp.com/">Discord</a>. (We also have an IRC gateway in #augur on Freenode that is connected to our Discord chat!) Our Discord conversations are open. If you&rsquo;d like to join the conversation, just go to <a href="http://invite.augur.net">invite.augur.net</a> and sign up. We love to hear feedback from people who are as excited as we are about Augur!</p>
+<p>Most of our day-to-day conversation happens on <a href="https://discordapp.com/">Discord</a>. (We also have an IRC gateway in #augur on Freenode that is connected to our Discord chat!) Our Discord conversations are open. If you&rsquo;d like to join the conversation, just go to <a href="https://invite.augur.net">invite.augur.net</a> and sign up. We love to hear feedback from people who are as excited as we are about Augur!</p>
 
       </div>
       <div class="dark-box">
