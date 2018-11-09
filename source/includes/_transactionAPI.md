@@ -3066,7 +3066,7 @@ augur.api.Universe.createChildUniverse({
 });
 
 var _extraInfo = {
-  "resolutionSource": "http://forecast.weather.gov",
+  "resolutionSource": "https://forecast.weather.gov",
   "tags": ["San Francisco", "weather"],
   "longDescription": ""
 };
@@ -3101,7 +3101,7 @@ augur.api.Universe.createScalarMarket({
 });
 
 var _extraInfo = {
-  "resolutionSource": "http://www.spacex.com",
+  "resolutionSource": "https://www.spacex.com",
   "tags": [ "SpaceX", "spaceflight" ],
   "longDescription": "SpaceX hit a big milestone on Friday with NASA confirming on Friday that the Elon Musk-led space cargo business will launch astronauts to the International Space Station by 2017."
 };

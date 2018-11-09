@@ -146,7 +146,7 @@ For the Simplified API, there are three acceptable ways to pass numerical inputs
 
 - hexadecimal strings (e.g., `"0xf69b5"`)
 
-Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of `0.07`, use `"0.07"`), for reasons described in [enormous detail](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) elsewhere.
+Floating-point (decimal) values should be passed to augur.js as strings (e.g., instead of `0.07`, use `"0.07"`), for reasons described in [enormous detail](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html) elsewhere.
 
 <aside class="notice"><b>All numerical parameters passed to augur.js must be either base 10 (decimal) or base 16 (hexadecimal).</b> Do <b>not</b> use the base 10<sup>18</sup> fixed-point representation that Augur uses internally for decimals!  augur.js handles all fixed-point conversions for you.</aside>
 

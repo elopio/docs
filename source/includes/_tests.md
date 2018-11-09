@@ -1,6 +1,6 @@
 Tests
 =====
-The [Augur UI](https://github.com/AugurProject/augur-ui) repository, and the middleware [augur.js](https://github.com/AugurProject/augur.js) repository both contain tests. Tests are run using [Mocha](http://mochajs.org/). Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.
+The [Augur UI](https://github.com/AugurProject/augur-ui) repository, and the middleware [augur.js](https://github.com/AugurProject/augur.js) repository both contain tests. Tests are run using [Mocha](https://mochajs.org/). Mocha does not need to be installed globally to run the test suites, but if you would like to run specific tests explicitly then it is helpful to globally install Mocha.
 
 To globally install Mocha using `npm` you would run the following command:
 

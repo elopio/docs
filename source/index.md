@@ -6,7 +6,7 @@ language_tabs:
 
 toc_footers:
   - <a href="https://augur.net">Augur</a>
-  - <a href="https://app.augur.net">App</a>
+  - <a href="https://dev.augur.net">App</a>
   - <a href="https://github.com/AugurProject">Github</a>
   - <a href="https://twitter.com/AugurProject">Twitter</a>
 
@@ -31,11 +31,11 @@ search: true
 ---
 Overview
 ========
-Augur is a decentralized prediction market platform that runs on [Ethereum](https://www.ethereum.org). For a detailed, high-level explanation of how Augur works, please refer to the [Augur whitepaper](http://www.augur.net/whitepaper.pdf).
+Augur is a decentralized prediction market platform that runs on [Ethereum](https://www.ethereum.org). For a detailed, high-level explanation of how Augur works, please refer to the [Augur whitepaper](https://www.augur.net/whitepaper.pdf).
 
 If you want to use or help test Augur, please install the [Augur App](https://github.com/AugurProject/augur-app).  If you want to use our cutting-edge development client, this is maintained at [https://dev.augur.net](https://dev.augur.net). However, be warned -- we push changes here pretty rapidly, so it can be a bit buggy!
 
-Augur has its own dedicated [Stack Exchange](https://augur.stackexchange.com), which allows anyone to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. Additionally, you can chat with us on [Discord](https://discordapp.com). If you'd like to join the conversation, just go to [invite.augur.net](http://invite.augur.net) and sign up. Most questions are best asked in the `#dev` or `#general` channels.
+Augur has its own dedicated [Stack Exchange](https://augur.stackexchange.com), which allows anyone to ask questions about Augur and get answers to those questions. It's a great resource to find the answers for questions you might have that aren't answered directly in these documents. Additionally, you can chat with us on [Discord](https://discordapp.com). If you'd like to join the conversation, just go to [invite.augur.net](https://invite.augur.net) and sign up. Most questions are best asked in the `#dev` or `#general` channels.
 
 Getting Started
 ---------------

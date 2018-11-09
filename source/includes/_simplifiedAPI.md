@@ -514,7 +514,7 @@ Create Market Functions
 ```javascript
 // Create Market Simplified API Examples:
 var _extraInfo = {
-  "resolutionSource": "http://www.espn.com",
+  "resolutionSource": "https://www.espn.com",
   "tags": ["college football", "football"],
   "outcomeNames": ["Georgia", "Florida"],
   "longDescription": ""
@@ -560,7 +560,7 @@ augur.createMarket.createCategoricalMarket({
 }
 
 var _extraInfo = {
-  "resolutionSource": "http://forecast.weather.gov",
+  "resolutionSource": "https://forecast.weather.gov",
   "tags": ["San Francisco", "weather"],
   "longDescription": ""
 };
@@ -607,7 +607,7 @@ augur.createMarket.createScalarMarket({
 }
 
 var _extraInfo = {
-  "resolutionSource": "http://www.nasdaq.com/symbol/msft",
+  "resolutionSource": "https://www.nasdaq.com/symbol/msft",
   "tags": [ "Stocks", "Microsoft" ],
   "longDescription": ""
 };
@@ -959,7 +959,7 @@ augur.markets.getMarketsInfo({
     details: null,
     designatedReporter: "0x0000000000000000000000000000000000000b0b",
     designatedReportStake: "10",
-    resolutionSource: "http://www.trusted-third-party.com",
+    resolutionSource: "https://www.trusted-third-party.com",
     numTicks: "10000",
     tickSize: "0.0001",
     consensus: null,

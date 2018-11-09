@@ -1,6 +1,6 @@
 Augur JavaScript API documentation
 ==================================
-This repository is for the documentation files at http://docs.augur.net. If you would like to submit a PR for these docs, the Markdown files to edit are in https://github.com/AugurProject/docs/tree/master/source/includes.
+This repository is for the documentation files at https://docs.augur.net. If you would like to submit a PR for these docs, the Markdown files to edit are in https://github.com/AugurProject/docs/tree/master/source/includes.
 
 To view your changes locally before creating a PR, open a terminal and run:
 ```
