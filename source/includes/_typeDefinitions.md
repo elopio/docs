@@ -50,6 +50,7 @@ Note: Other properties will be present in this object, depending on what event t
 #### **Properties:** 
 * **`category`** (string) Name of a Category.
 * **`popularity`** (string) Category popularity.
+* **`tags`** (Object) Object containing tags as keys and their corresponding counts within the category as values.
 
 <a name="ClaimReportingFeesForkedMarket"></a>
 ### ClaimReportingFeesForkedMarket  (Object)

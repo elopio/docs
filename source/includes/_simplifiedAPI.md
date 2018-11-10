@@ -848,17 +848,29 @@ Markets Functions
 
 augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
-  sortBy: "popularity",
-  isSortDescending: true
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
-  { category: "FINANCE", popularity: "12345" },
-  { category: "POLITICS", popularity: "5000" },
-  { category: "ETHEREUM", popularity: "1000" },
-  { category: "AUGUR", popularity: "500" },
+  { category: "FINANCE", popularity: "12345", tags: {} },
+  { category: "POLITICS", popularity: "5000", tags: {} },
+  { category: "ETHEREUM", popularity: "1000", tags: {} },
+  { category: "AUGUR", popularity: "500", tags: {} },
+  {
+    category: "TEST CATEGORY",
+    popularity: "0",
+    tags: {
+      AUGUR: 2,
+      ETHEREUM: 1,
+      FINANCE: 2,
+      POLITICS: 1,
+      TAGGED IT: 5,
+      TAGGING IT: 5,
+      TEST TAG 1: 7,
+      TEST TAG 2: 7,
+    },
+  },
 ]
 
 augur.markets.getMarketPriceHistory({
@@ -1091,10 +1103,6 @@ This function will fail if:
 #### **Parameters:**
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort categories in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of categories to return.
-    * **`p.offset`**  (string) &lt;optional> Number of categories to truncate from the beginning of the results.
 * **`callback`** (function) Called after the categories have been retrieved.
 
 #### **Returns:**
