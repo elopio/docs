@@ -1669,17 +1669,29 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"FINANCE"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"12345"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"POLITICS"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"5000"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"ETHEREUM"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"1000"</span> <span class="p">},</span>
-  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"AUGUR"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"500"</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"FINANCE"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"12345"</span><span class="p">,</span> <span class="na">tags</span><span class="p">:</span> <span class="p">{}</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"POLITICS"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"5000"</span><span class="p">,</span> <span class="na">tags</span><span class="p">:</span> <span class="p">{}</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"ETHEREUM"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"1000"</span><span class="p">,</span> <span class="na">tags</span><span class="p">:</span> <span class="p">{}</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="na">category</span><span class="p">:</span> <span class="s2">"AUGUR"</span><span class="p">,</span> <span class="na">popularity</span><span class="p">:</span> <span class="s2">"500"</span><span class="p">,</span> <span class="na">tags</span><span class="p">:</span> <span class="p">{}</span> <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
+    <span class="na">popularity</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">tags</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">AUGUR</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">ETHEREUM</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="na">FINANCE</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="na">POLITICS</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nx">TAGGED</span> <span class="na">IT</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nx">TAGGING</span> <span class="na">IT</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="nx">TEST</span> <span class="nx">TAG</span> <span class="mi">1</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="nx">TEST</span> <span class="nx">TAG</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
@@ -1743,48 +1755,48 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="c1">// example output:</span>
 <span class="p">[</span>
   <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="nx">marketType</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="nx">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="nx">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
-    <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
-    <span class="nx">creationFee</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-    <span class="nx">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
-    <span class="nx">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
-    <span class="nx">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
-    <span class="nx">marketCreatorFeesBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="nx">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">openInterest</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
-    <span class="nx">forking</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">needsMigration</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
-    <span class="nx">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506578</span><span class="p">,</span>
-    <span class="nx">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573370</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
-    <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-    <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"https://www.trusted-third-party.com"</span><span class="p">,</span>
-    <span class="nx">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-    <span class="nx">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">outcomes</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+    <span class="na">marketType</span><span class="p">:</span> <span class="s2">"categorical"</span><span class="p">,</span>
+    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506473474</span><span class="p">,</span>
+    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400000</span><span class="p">,</span>
+    <span class="na">creationFee</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+    <span class="na">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
+    <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
+    <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
+    <span class="na">marketCreatorFeesBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
+    <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
+    <span class="na">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">openInterest</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
+    <span class="na">forking</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">needsMigration</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1506573470</span><span class="p">,</span>
+    <span class="na">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506578</span><span class="p">,</span>
+    <span class="na">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573370</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a categorical test market created by b0b."</span><span class="p">,</span>
+    <span class="na">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">designatedReportStake</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+    <span class="na">resolutionSource</span><span class="p">:</span> <span class="s2">"https://www.trusted-third-party.com"</span><span class="p">,</span>
+    <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+    <span class="na">tickSize</span><span class="p">:</span> <span class="s2">"0.0001"</span><span class="p">,</span>
+    <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="na">volume</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
       <span class="na">price</span><span class="p">:</span> <span class="s2">"0.125"</span><span class="p">,</span>
@@ -1827,47 +1839,47 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
     <span class="p">}],</span>
   <span class="p">},</span>
   <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-    <span class="nx">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-    <span class="nx">marketType</span><span class="p">:</span> <span class="s2">"yesNo"</span><span class="p">,</span>
-    <span class="nx">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nx">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="nx">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="nx">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">creationTime</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
-    <span class="nx">creationBlock</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
-    <span class="nx">creationFee</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
-    <span class="nx">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
-    <span class="nx">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
-    <span class="nx">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
-    <span class="nx">marketCreatorFeesBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000002"</span><span class="p">,</span>
-    <span class="nx">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
-    <span class="nx">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
-    <span class="nx">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">openInterest</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="nx">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
-    <span class="nx">forking</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">needsMigration</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
-    <span class="nx">endTime</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
-    <span class="nx">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506579</span><span class="p">,</span>
-    <span class="nx">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573380</span><span class="p">,</span>
-    <span class="nx">description</span><span class="p">:</span> <span class="s2">"This is a yesNo test market created by b0b."</span><span class="p">,</span>
-    <span class="nx">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
-    <span class="nx">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="nx">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
-    <span class="nx">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
-    <span class="nx">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">outcomes</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+    <span class="na">marketType</span><span class="p">:</span> <span class="s2">"yesNo"</span><span class="p">,</span>
+    <span class="na">numOutcomes</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">minPrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">maxPrice</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">cumulativeScale</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="na">author</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">creationTime</span><span class="p">:</span> <span class="mi">1506480000</span><span class="p">,</span>
+    <span class="na">creationBlock</span><span class="p">:</span> <span class="mi">1400100</span><span class="p">,</span>
+    <span class="na">creationFee</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+    <span class="na">settlementFee</span><span class="p">:</span> <span class="s2">"0.03"</span><span class="p">,</span>
+    <span class="na">reportingFeeRate</span><span class="p">:</span> <span class="s2">"0.02"</span><span class="p">,</span>
+    <span class="na">marketCreatorFeeRate</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
+    <span class="na">marketCreatorFeesBalance</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">marketCreatorMailbox</span><span class="p">:</span> <span class="s2">"0xbbb0000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="na">marketCreatorMailboxOwner</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">initialReportSize</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">category</span><span class="p">:</span> <span class="s2">"TEST CATEGORY"</span><span class="p">,</span>
+    <span class="na">tags</span><span class="p">:</span> <span class="p">[</span><span class="s2">"test tag 1"</span><span class="p">,</span> <span class="s2">"test tag 2"</span><span class="p">],</span>
+    <span class="na">volume</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">openInterest</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">outstandingShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">reportingState</span><span class="p">:</span> <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">,</span>
+    <span class="na">forking</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">needsMigration</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">feeWindow</span><span class="p">:</span> <span class="s2">"0x1000000000000000000000000000000000000000"</span><span class="p">,</span>
+    <span class="na">endTime</span><span class="p">:</span> <span class="mi">1506573480</span><span class="p">,</span>
+    <span class="na">finalizationBlockNumber</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">finalizationTime</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">lastTradeBlockNumber</span><span class="p">:</span> <span class="mi">1506579</span><span class="p">,</span>
+    <span class="na">lastTradeTime</span><span class="p">:</span> <span class="mi">1506573380</span><span class="p">,</span>
+    <span class="na">description</span><span class="p">:</span> <span class="s2">"This is a yesNo test market created by b0b."</span><span class="p">,</span>
+    <span class="na">scalarDenomination</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">details</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">designatedReporter</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000b0b"</span><span class="p">,</span>
+    <span class="na">designatedReportStake</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">resolutionSource</span><span class="p">:</span> <span class="s2">"http://www.trusted-third-party.com"</span><span class="p">,</span>
+    <span class="na">numTicks</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+    <span class="na">consensus</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">outcomes</span><span class="p">:</span> <span class="p">[{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="na">volume</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
       <span class="na">price</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
@@ -1892,12 +1904,12 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="c1">// example output:</span>
 <span class="p">[</span>
   <span class="mi">0</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="nx">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="p">},</span>
   <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
-    <span class="nx">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000002"</span><span class="p">,</span>
+    <span class="na">unclaimedFee</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -1918,10 +1930,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the categories.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort categories in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of categories to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of categories to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the categories have been retrieved.</li>
 </ul>
@@ -13364,6 +13372,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">category</code></strong> (string) Name of a Category.</li>
 <li><strong><code class="prettyprint">popularity</code></strong> (string) Category popularity.</li>
+<li><strong><code class="prettyprint">tags</code></strong> (Object) Object containing tags as keys and their corresponding counts within the category as values.</li>
 </ul>
 
 <p><a name="ClaimReportingFeesForkedMarket"></a></p>
