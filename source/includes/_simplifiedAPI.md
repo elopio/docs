@@ -112,8 +112,8 @@ This function will fail if:
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort transfer history.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort transfers in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of transfers to return.
-    * **`p.offset`**  (string) &lt;optional> Number of transfers to truncate from the beginning of the history results.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of transfers to return.
+    * **`p.offset`**  (number) &lt;optional> Number of transfers to truncate from the beginning of the history results.
 * **`callback`** (function) Called after the account transfer history has been retrieved.
 
 #### **Returns:**
@@ -848,6 +848,8 @@ Markets Functions
 
 augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
+  sortBy: "popularity",
+  isSortDescending: true,
 }, function (error, result) {
   console.log(result);
 });
@@ -875,10 +877,6 @@ augur.markets.getCategories({
 
 augur.markets.getMarketPriceHistory({
   marketId: "0x0000000000000000000000000000000000000001",
-  sortBy: null,
-  isSortDescending: null,
-  limit: null,
-  offset: null,
 }, function (error, result) {
   console.log(result);
 });
@@ -1103,6 +1101,10 @@ This function will fail if:
 #### **Parameters:**
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.
+    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
+    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort categories in descending order by sortBy field.
+    * **`p.limit`**  (string) &lt;optional> Maximum number of categories to return.
+    * **`p.offset`**  (string) &lt;optional> Number of categories to truncate from the beginning of the results.
 * **`callback`** (function) Called after the categories have been retrieved.
 
 #### **Returns:**
@@ -1146,8 +1148,8 @@ This function will fail if:
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of Markets to return.
+    * **`p.offset`**  (number) &lt;optional> Number of Markets to truncate from the beginning of the results.
 * **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
@@ -1170,8 +1172,8 @@ This function will fail if:
     * **`p.latestClosingTime`**  (number) Latest Market close timestamp at which to truncate Market results, in seconds.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of Markets to return.
-    * **`p.offset`**  (string) &lt;optional> Number of Markets to truncate from the beginning of the results.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of Markets to return.
+    * **`p.offset`**  (number) &lt;optional> Number of Markets to truncate from the beginning of the results.
 * **`callback`** (function) Called after the Markets have been retrieved.
 
 #### **Returns:**
@@ -1776,7 +1778,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the [Universe](#universe) in which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.
-    * **`p.disputeTokenState`**  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
+    * **`p.stakeTokenState`**  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional> Token state by which to filter results.
 * **`callback`** (function) Called after the Dispute Tokens have been retrieved.
 
 #### **Returns:**
@@ -1815,7 +1817,7 @@ This function will fail if:
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.
     * **`p.account`**  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.
-    * **`p.includeCurrent`**  (boolean) Whether to include the current Fee Window in the returned results.
+    * **`p.includeCurrent`**  (boolean) &lt;optional> Whether to include the current Fee Window in the returned results.
 * **`callback`** (function) Called after the Fee Windows have been retrieved.
 
 #### **Returns:**
@@ -1872,8 +1874,8 @@ This function will fail if:
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the reporting history.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the reporting history in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of reporting history reports to return.
-    * **`p.offset`**  (string) &lt;optional> Number of reporting history reports to truncate from the beginning of the results.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of reporting history reports to return.
+    * **`p.offset`**  (number) &lt;optional> Number of reporting history reports to truncate from the beginning of the results.
 * **`callback`** (function) Called when reporting history has been received and parsed.
 
 #### **Returns:**
@@ -2054,9 +2056,7 @@ augur.trading.getBetterWorseOrders({
 augur.trading.getOrders({
   marketId: "0x0000000000000000000000000000000000000001",
   universe: "0x000000000000000000000000000000000000000b",
-  outcome: null,
   orderType: "buy",
-  creator: null,
   orderState: "OPEN",
 }, function (error, result) {
   console.log(result);
@@ -2159,14 +2159,9 @@ augur.trading.getPositionInMarket({
 
 augur.trading.getUserTradingHistory({
   account: "0x000000000000000000000000000000000000d00d",
-  universe: null, 
   marketId: "0x0000000000000000000000000000000000000001",
   outcome: 0,
-  orderType: null,
   sortBy: "price",
-  isSortDescending: null,
-  limit: null,
-  offset: null,
 }, function (error, result) {
   console.log(result);
 });
@@ -2212,12 +2207,6 @@ augur.trading.getUserTradingHistory({
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
   universe: "0x000000000000000000000000000000000000000b",
-  marketId: null,
-  outcome: null,
-  sortBy: null,
-  isSortDescending: null,
-  limit: null,
-  offset: null,
 }, function (error, result) {
   console.log(result);
 });
@@ -2689,9 +2678,9 @@ This function will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p.marketId`**  (string) Contract address of the [Market](#market) for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.
-    * **`p.outcome`**  (string) Market Outcome for which to find better/worse Orders.
+    * **`p.outcome`**  (number) Market Outcome for which to find better/worse Orders. Valid values are in the range [0,7].
     * **`p.orderType`**  (string) Desired type of Order. Valid values are "buy" and "sell".
-    * **`p.price`**  (number) Price point at which to find better/worse Orders.
+    * **`p.price`**  (string) Price point at which to find better/worse Orders.
 * **`callback`** (function) Called when better/worse Orders have been retrieved.
 
 #### **Returns:**
@@ -2712,15 +2701,16 @@ This function will fail if:
     * **`p.universe`**  (string) &lt;optional> Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketId must be specified.
     * **`p.marketId`**  (string) &lt;optional> Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
     * **`p.outcome`**  (number) &lt;optional> Market Outcome to filter results by. Valid values are in the range [0,7].
+    * **`p.orderType`**  (string) &lt;optional> Type of trade. Valid values are "buy" and "sell".
     * **`p.creator`**  (string) &lt;optional> Ethereum address of the Order creator, as a 20-byte hexadecimal string.
     * **`p.orderState`**  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional> State of orders by which to filter results. Valid values are "ALL", "CANCELED", "CLOSED", & "OPEN".
+    * **`p.orphaned`**  (boolean) &lt;optional> When set to `true`, this parameter causes the function to return only [Orphaned Orders](#orphaned-orders); otherwise, the function returns non-Orphaned Orders. Defaults to false.
     * **`p.earliestCreationTime`**  (number) &lt;optional> Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.latestCreationTime`**  (number) &lt;optional> Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the orders.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort orders in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of orders to return.
-    * **`p.offset`**  (string) &lt;optional> Number of orders to truncate from the beginning of the results.
-    * **`p.orphaned`**  (boolean) &lt;optional> When set to `true`, this parameter causes the function to return only [Orphaned Orders](#orphaned-orders); otherwise, the function returns non-Orphaned Orders. Defaults to false.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of orders to return.
+    * **`p.offset`**  (number) &lt;optional> Number of orders to truncate from the beginning of the results.
 * **`callback`** (function) Called when the requested orders for this Market/Universe have been received and parsed.
 
 #### **Returns:**
@@ -2757,13 +2747,13 @@ This function will fail if:
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading history, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the [Market](#market) ID must be specified.
     * **`p.marketId`**  (string) &lt;optional> Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
-    * **`p.outcome`**  (string) [Outcome](#outcome) of the [Share](#share) being bought/sold.
+    * **`p.outcome`**  (number) [Outcome](#outcome) of the [Share](#share) being bought/sold. Valid values are in the range [0,7].
     * **`p.orderType`**  (string) Type of trade. Valid values are "buy" and "sell".
+    * **`p.ignoreSelfTrades`**  (boolean) &lt;optional> Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading history.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading history in descending order by `sortBy` field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of trading history reports to return.
-    * **`p.offset`**  (string) &lt;optional> Number of trading history reports to truncate from the beginning of the results.
-    * **`p.ignoreSelfTrades`**  (boolean) &lt;optional> Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of trading history reports to return.
+    * **`p.offset`**  (number) &lt;optional> Number of trading history reports to truncate from the beginning of the results.
 * **`callback`** (function) Called when trading history has been received and parsed.
 
 #### **Returns:**
@@ -2784,11 +2774,11 @@ This function will fail if:
     * **`p.account`**  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.
     * **`p.universe`**  (string) &lt;optional> Contract address of the [Universe](#universe) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.
     * **`p.marketId`**  (string) &lt;optional> Contract address of the [Market](#market) in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.
-    * **`p.outcome`**  (string) [Outcome](#outcome) of the [Share](#share) held for the Market.
+    * **`p.outcome`**  (number) [Outcome](#outcome) of the [Share](#share) held for the Market. Valid values are in the range [0,7].
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the trading positions.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the trading positions in descending order by `sortBy` field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of trading positions reports to return.
-    * **`p.offset`**  (string) &lt;optional> Number of trading positions reports to truncate from the beginning of the results.
+    * **`p.limit`**  (number) &lt;optional> Maximum number of trading positions reports to return.
+    * **`p.offset`**  (number) &lt;optional> Number of trading positions reports to truncate from the beginning of the results.
 * **`callback`** (function) Called when the trading positions have been received and parsed.
 
 #### **Returns:**
@@ -2845,7 +2835,7 @@ Determines the sequence of makes/takes that will be executed to [Fill](#fill-ord
 
 * **`p`** (Object) Trade simulation parameters.
     * **`p.orderType`**  (number) Order type (0 for "buy", 1 for "sell").
-    * **`p.outcome`**  (number)  [Outcome](#outcome) ID to trade, must be an integer value on [0, 7].
+    * **`p.outcome`**  (number)  [Outcome](#outcome) ID to trade. Valid values are in the range [0,7].
     * **`p.shareBalances`**  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.
     * **`p.tokenBalance`**  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.
     * **`p.minPrice`**  (string)  This [Market's](#market) minimum possible price, as a base-10 string.
