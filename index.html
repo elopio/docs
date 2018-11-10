@@ -836,8 +836,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort transfer history.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort transfers in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of transfers to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of transfers to truncate from the beginning of the history results.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of transfers to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of transfers to truncate from the beginning of the history results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the account transfer history has been retrieved.</li>
 </ul>
@@ -1669,6 +1669,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
+  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -1696,10 +1698,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getMarketPriceHistory</span><span class="p">({</span>
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -1930,6 +1928,10 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.</li>
+<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the categories.</li>
+<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort categories in descending order by sortBy field.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of categories to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of categories to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the categories have been retrieved.</li>
 </ul>
@@ -1992,8 +1994,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.designatedReporter</code></strong> (string) &lt;optional&gt; Ethereum address of a <a href="#designated-reporter">Designated Reporter</a> by which to filter the returned results, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
@@ -2025,8 +2027,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.latestClosingTime</code></strong>  (number) Latest Market close timestamp at which to truncate Market results, in seconds.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the Markets.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the Markets in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of Markets to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of Markets to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of Markets to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Markets have been retrieved.</li>
 </ul>
@@ -2721,7 +2723,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the <a href="#universe">Universe</a> in which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Contract address of the account for which to retrieve the Dispute Tokens, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.disputeTokenState</code></strong>  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional&gt; Token state by which to filter results.</li>
+<li><strong><code class="prettyprint">p.stakeTokenState</code></strong>  (<a href="#DISPUTE_TOKEN_STATE">DISPUTE_TOKEN_STATE</a>) &lt;optional&gt; Token state by which to filter results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Dispute Tokens have been retrieved.</li>
 </ul>
@@ -2778,7 +2780,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Ethereum contract address of the Universe in which the Fee Windows exist, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user who has unclaimed Reporting Fees, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.includeCurrent</code></strong>  (boolean) Whether to include the current Fee Window in the returned results.</li>
+<li><strong><code class="prettyprint">p.includeCurrent</code></strong>  (boolean) &lt;optional&gt; Whether to include the current Fee Window in the returned results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the Fee Windows have been retrieved.</li>
 </ul>
@@ -2858,8 +2860,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate history results. (This timestamp is when the block on the Ethereum blockchain containing the report submission was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the reporting history.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the reporting history in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of reporting history reports to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of reporting history reports to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of reporting history reports to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of reporting history reports to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when reporting history has been received and parsed.</li>
 </ul>
@@ -3058,9 +3060,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getOrders</span><span class="p">({</span>
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">orderType</span><span class="p">:</span> <span class="s2">"buy"</span><span class="p">,</span>
-  <span class="na">creator</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">orderState</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
@@ -3163,14 +3163,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingHistory</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> 
   <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
   <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="na">orderType</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"price"</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -3216,12 +3211,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingPositions</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">marketId</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">outcome</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">limit</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="na">offset</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -3750,9 +3739,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">p.marketId</code></strong>  (string) Contract address of the <a href="#market">Market</a> for which to retrieve the better/worse Orders, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.outcome</code></strong>  (string) Market Outcome for which to find better/worse Orders.</li>
+<li><strong><code class="prettyprint">p.outcome</code></strong>  (number) Market Outcome for which to find better/worse Orders. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (string) Desired type of Order. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
-<li><strong><code class="prettyprint">p.price</code></strong>  (number) Price point at which to find better/worse Orders.</li>
+<li><strong><code class="prettyprint">p.price</code></strong>  (string) Price point at which to find better/worse Orders.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when better/worse Orders have been retrieved.</li>
 </ul>
@@ -3782,15 +3771,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the Universe from which to retrieve orders, as a 20-byte hexadecimal string. Either this parameter or the marketId must be specified.</li>
 <li><strong><code class="prettyprint">p.marketId</code></strong>  (string) &lt;optional&gt; Contract address of the Market from which to retrieve Orders, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
 <li><strong><code class="prettyprint">p.outcome</code></strong>  (number) &lt;optional&gt; Market Outcome to filter results by. Valid values are in the range [0,7].</li>
+<li><strong><code class="prettyprint">p.orderType</code></strong>  (string) &lt;optional&gt; Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
 <li><strong><code class="prettyprint">p.creator</code></strong>  (string) &lt;optional&gt; Ethereum address of the Order creator, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.orderState</code></strong>  (<a href="#ORDER_STATE">ORDER_STATE</a>) &lt;optional&gt; State of orders by which to filter results. Valid values are &ldquo;ALL&rdquo;, &ldquo;CANCELED&rdquo;, &ldquo;CLOSED&rdquo;, &amp; &ldquo;OPEN&rdquo;.</li>
+<li><strong><code class="prettyprint">p.orphaned</code></strong>  (boolean) &lt;optional&gt; When set to <code class="prettyprint">true</code>, this parameter causes the function to return only <a href="#orphaned-orders">Orphaned Orders</a>; otherwise, the function returns non-Orphaned Orders. Defaults to false.</li>
 <li><strong><code class="prettyprint">p.earliestCreationTime</code></strong>  (number) &lt;optional&gt; Earliest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.latestCreationTime</code></strong>  (number) &lt;optional&gt; Latest timestamp, in seconds, at which to truncate order results. (This timestamp is when the block on the Ethereum blockchain containing the transfer was created.)</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the orders.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort orders in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of orders to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of orders to truncate from the beginning of the results.</li>
-<li><strong><code class="prettyprint">p.orphaned</code></strong>  (boolean) &lt;optional&gt; When set to <code class="prettyprint">true</code>, this parameter causes the function to return only <a href="#orphaned-orders">Orphaned Orders</a>; otherwise, the function returns non-Orphaned Orders. Defaults to false.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of orders to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of orders to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when the requested orders for this Market/Universe have been received and parsed.</li>
 </ul>
@@ -3843,13 +3833,13 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading history, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the <a href="#market">Market</a> ID must be specified.</li>
 <li><strong><code class="prettyprint">p.marketId</code></strong>  (string) &lt;optional&gt; Contract address of the Market in which to look up the trading history, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
-<li><strong><code class="prettyprint">p.outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> being bought/sold.</li>
+<li><strong><code class="prettyprint">p.outcome</code></strong>  (number) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> being bought/sold. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (string) Type of trade. Valid values are &ldquo;buy&rdquo; and &ldquo;sell&rdquo;.</li>
+<li><strong><code class="prettyprint">p.ignoreSelfTrades</code></strong>  (boolean) &lt;optional&gt; Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading history.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading history in descending order by <code class="prettyprint">sortBy</code> field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of trading history reports to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of trading history reports to truncate from the beginning of the results.</li>
-<li><strong><code class="prettyprint">p.ignoreSelfTrades</code></strong>  (boolean) &lt;optional&gt; Whether to ignore trades a user made with himself/herself when retrieving results. Defaults to false.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of trading history reports to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of trading history reports to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when trading history has been received and parsed.</li>
 </ul>
@@ -3879,11 +3869,11 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">p.account</code></strong>  (string) Ethereum address of the user for which to retrieve trading positions, as a 20-byte hexadecimal string.</li>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#universe">Universe</a> in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Market ID must be specified.</li>
 <li><strong><code class="prettyprint">p.marketId</code></strong>  (string) &lt;optional&gt; Contract address of the <a href="#market">Market</a> in which to look up the trading positions, as a 20-byte hexadecimal string. Either this parameter or the Universe must be specified.</li>
-<li><strong><code class="prettyprint">p.outcome</code></strong>  (string) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> held for the Market.</li>
+<li><strong><code class="prettyprint">p.outcome</code></strong>  (number) <a href="#outcome">Outcome</a> of the <a href="#share">Share</a> held for the Market. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the trading positions.</li>
 <li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort the trading positions in descending order by <code class="prettyprint">sortBy</code> field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of trading positions reports to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of trading positions reports to truncate from the beginning of the results.</li>
+<li><strong><code class="prettyprint">p.limit</code></strong>  (number) &lt;optional&gt; Maximum number of trading positions reports to return.</li>
+<li><strong><code class="prettyprint">p.offset</code></strong>  (number) &lt;optional&gt; Number of trading positions reports to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called when the trading positions have been received and parsed.</li>
 </ul>
@@ -3963,7 +3953,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">p.orderType</code></strong>  (number) Order type (0 for &ldquo;buy&rdquo;, 1 for &ldquo;sell&rdquo;).</li>
-<li><strong><code class="prettyprint">p.outcome</code></strong>  (number)  <a href="#outcome">Outcome</a> ID to trade, must be an integer value on [0, 7].</li>
+<li><strong><code class="prettyprint">p.outcome</code></strong>  (number)  <a href="#outcome">Outcome</a> ID to trade. Valid values are in the range [0,7].</li>
 <li><strong><code class="prettyprint">p.shareBalances</code></strong>  (string[])  Number of Shares the user owns of each Outcome in ascending order, as an array of base-10 strings.</li>
 <li><strong><code class="prettyprint">p.tokenBalance</code></strong>  (string)  Number of tokens (e.g., wrapped Ether) the user owns, as a base-10 string.</li>
 <li><strong><code class="prettyprint">p.minPrice</code></strong>  (string)  This <a href="#market">Market&rsquo;s</a> minimum possible price, as a base-10 string.</li>
