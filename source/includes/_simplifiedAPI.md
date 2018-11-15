@@ -848,8 +848,6 @@ Markets Functions
 
 augur.markets.getCategories({
   universe: "0x000000000000000000000000000000000000000b",
-  sortBy: "popularity",
-  isSortDescending: true,
 }, function (error, result) {
   console.log(result);
 });
@@ -1101,10 +1099,6 @@ This function will fail if:
 #### **Parameters:**
 * **`p`** (Object) Parameters object.
     * **`p.universe`**  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.
-    * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the categories.
-    * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort categories in descending order by sortBy field.
-    * **`p.limit`**  (string) &lt;optional> Maximum number of categories to return.
-    * **`p.offset`**  (string) &lt;optional> Number of categories to truncate from the beginning of the results.
 * **`callback`** (function) Called after the categories have been retrieved.
 
 #### **Returns:**
@@ -1343,7 +1337,7 @@ augur.reporting.getDisputeInfo({
           "10000",
         ],
         isInvalid: false,
-        accountStakeCompleted: "0",
+        accountStakeCompleted: "102",
         stakeCurrent: "0",
         stakeCompleted: "102",
         tentativeWinning: true,
@@ -1369,8 +1363,8 @@ augur.reporting.getDisputeInfo({
   },
   {
     marketId: "0x0000000000000000000000000000000000000011",
-    stakeCompletedTotal: "30000",
-    bondSizeOfNewStake: "60000",
+    stakeCompletedTotal: "30102",
+    bondSizeOfNewStake: "60204",
     stakes: [
       {
         payout: [
@@ -1380,12 +1374,12 @@ augur.reporting.getDisputeInfo({
         isInvalid: false,
         bondSizeCurrent: "30000",
         stakeCurrent: "30000",
-        accountStakeCurrent: "0",
-        accountStakeTotal: "17",
+        accountStakeCurrent: "102",
+        accountStakeTotal: "204",
         stakeRemaining: "0",
-        bondSizeTotal: "40000",
-        accountStakeCompleted: "17",
-        stakeCompleted: "10000",
+        bondSizeTotal: "40102",
+        accountStakeCompleted: "102",
+        stakeCompleted: "10102",
         tentativeWinning: false,
       },
       {
@@ -1394,7 +1388,7 @@ augur.reporting.getDisputeInfo({
           "1",
         ],
         isInvalid: true,
-        accountStakeCompleted: "500",
+        accountStakeCompleted: "0",
         stakeCurrent: "0",
         stakeCompleted: "20000",
         tentativeWinning: true,
