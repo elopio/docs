@@ -1669,8 +1669,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">markets</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">({</span>
   <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
-  <span class="na">sortBy</span><span class="p">:</span> <span class="s2">"popularity"</span><span class="p">,</span>
-  <span class="na">isSortDescending</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
@@ -1928,10 +1926,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><strong><code class="prettyprint">p.universe</code></strong>  (string) Contract address of the Universe from which to retrieve the categories, as a 20-byte hexadecimal string.</li>
-<li><strong><code class="prettyprint">p.sortBy</code></strong>  (string) &lt;optional&gt; Field name by which to sort the categories.</li>
-<li><strong><code class="prettyprint">p.isSortDescending</code></strong>  (boolean) &lt;optional&gt; Whether to sort categories in descending order by sortBy field.</li>
-<li><strong><code class="prettyprint">p.limit</code></strong>  (string) &lt;optional&gt; Maximum number of categories to return.</li>
-<li><strong><code class="prettyprint">p.offset</code></strong>  (string) &lt;optional&gt; Number of categories to truncate from the beginning of the results.</li>
 </ul></li>
 <li><strong><code class="prettyprint">callback</code></strong> (function) Called after the categories have been retrieved.</li>
 </ul>
@@ -2216,7 +2210,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
           <span class="s2">"10000"</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -2242,8 +2236,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000011"</span><span class="p">,</span>
-    <span class="na">stakeCompletedTotal</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
-    <span class="na">bondSizeOfNewStake</span><span class="p">:</span> <span class="s2">"60000"</span><span class="p">,</span>
+    <span class="na">stakeCompletedTotal</span><span class="p">:</span> <span class="s2">"30102"</span><span class="p">,</span>
+    <span class="na">bondSizeOfNewStake</span><span class="p">:</span> <span class="s2">"60204"</span><span class="p">,</span>
     <span class="na">stakes</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="na">payout</span><span class="p">:</span> <span class="p">[</span>
@@ -2253,12 +2247,12 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="na">bondSizeCurrent</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"30000"</span><span class="p">,</span>
-        <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-        <span class="na">accountStakeTotal</span><span class="p">:</span> <span class="s2">"17"</span><span class="p">,</span>
+        <span class="na">accountStakeCurrent</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+        <span class="na">accountStakeTotal</span><span class="p">:</span> <span class="s2">"204"</span><span class="p">,</span>
         <span class="na">stakeRemaining</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-        <span class="na">bondSizeTotal</span><span class="p">:</span> <span class="s2">"40000"</span><span class="p">,</span>
-        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"17"</span><span class="p">,</span>
-        <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"10000"</span><span class="p">,</span>
+        <span class="na">bondSizeTotal</span><span class="p">:</span> <span class="s2">"40102"</span><span class="p">,</span>
+        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+        <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"10102"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="p">},</span>
       <span class="p">{</span>
@@ -2267,7 +2261,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
           <span class="s2">"1"</span><span class="p">,</span>
         <span class="p">],</span>
         <span class="na">isInvalid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"500"</span><span class="p">,</span>
+        <span class="na">accountStakeCompleted</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCurrent</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
         <span class="na">stakeCompleted</span><span class="p">:</span> <span class="s2">"20000"</span><span class="p">,</span>
         <span class="na">tentativeWinning</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
