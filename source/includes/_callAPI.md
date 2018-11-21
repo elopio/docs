@@ -28,6 +28,8 @@ All functions in the Call API accept two arguments:
 
 The Call API functions are part of the `augur.api` object and follow a pattern of `augur.api.<Contract Name>.<Contract Function>(<Parameters Object>, <Callback Function>)`.
 
+<aside class="notice">Augur's Call API has been updated to return promises. Passing in a callback still works the same as before; however, now the underlying promise is returned directly to the caller.</aside>
+
 Augur Call API
 ---------------------------
 ```javascript

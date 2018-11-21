@@ -71,38 +71,26 @@ augur.events.startAugurNodeEventListeners({
 
 augur.events.startBlockchainEventListeners(
   {
-    Augur: {
-      TokensTransferred: function(result) { console.log("A new TokensTransferred event has occurred:", result); }
-    }
+    Augur: ["TokensTransferred"],
   }, 
   1490000, 
-  function() {
-    console.log("Setup is complete!");
+  function(blockHash, logsAdded) {
+    console.log("Logs added");
+    console.log("Block hash:", blockHash);
+    console.log("Logs:", logsAdded);
+  },
+  function(blockHash, logsRemoved) {
+    console.log("Logs removed");
+    console.log("Block hash: ", blockHash);
+    console.log("Logs", logsRemoved);
   }
-); 
+);
 // example output: 
 "Starting blockstream at block  1490000"
-"Setup is complete!"
 // example output when a TokensTransferred event is detected: 
-"A new TokensTransferred event has occurred:"
-{
-  "universe": "0x9c666216fe333c78aeb8aec56eb9ca17e6cd15c9",
-  "token": "0x32714b2b26c8c96e7a4e63ee9523c71a03948683",
-  "from": "0x913da4198e6be1d5f5e4a40d0667f70c0b5430eb",
-  "to": "0xcfdd3f6dded3cbc2ba2d341337914b62e4cfe1de",
-  "value": "1000000000000000",
-  "tokenType": "0",
-  "market": "0x0000000000000000000000000000000000000000",
-  "address": "0x16300ddb8db4d1870f05036f339b444b7fbbc3a6",
-  "removed": false,
-  "transactionHash": "0x18a0eb4da2bb1eb7632402754fa8b534052af6018199a09b2fa81aeaf858747f",
-  "transactionIndex": 0,
-  "logIndex": 1,
-  "blockNumber": 13765,
-  "blockHash": "0x892774223a7473ddf387318be1351808ca71446b47538298cc9f37c85eb031c6",
-  "contractName": "Augur",
-  "eventName": "TokensTransferred"
-}
+Logs added
+Block hash:  0xb621a48a77aca6667346d2e7009b80b369c8d76f9064d1696512e1dc46c087bc
+Logs: []
 
 augur.events.startBlockListeners({
   onAdded: function(block) {
@@ -209,9 +197,10 @@ Begins listening for events emitted by the Ethereum blockchain.
 
 #### **Parameters:**
 
-* **`eventCallbacks`** (Object.&lt;function()>) &lt;optional> Callbacks to fire when events are received, keyed by contract name and event name.
-* **`startingBlockNumber`** (number) &lt;optional> Block number at which to start listening for blockchain events.
-* **`onSetupComplete`** (function) &lt;optional> Called when all listeners are successfully set up.
+* **`eventsToSubscribe`** (Object.&lt;function()>) &lt;optional> List of interested contract events. Object of arrays. {ContractName: ["Event1", "Event2"]}
+* **`startingBlockNumber`** (number) &lt;optional> Block height to start blockstream at.
+* **`logsAddedListener`** (function) &lt;optional> Callback which accepts array of logs added. Always gets one block worth of logs. Called after block added.
+* **`logsRemovedListener`** (function) &lt;optional> Callback which accepts array of logs removed. Always gets one block worth of logs. Called before block removed.
 
 ### augur.events.startBlockListeners()
 
