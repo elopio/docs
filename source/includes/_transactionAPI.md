@@ -117,7 +117,7 @@ It is important to note that Ethereum nodes discard all transaction return value
 
 There is, however, a workaround for this issue when calling functions that create [Markets](#market), such as `augur.api.Universe.createYesNoMarket`, `augur.api.Universe.createCategoricalMarket`, and `augur.api.Universe.createScalarMarket`. The function `augur.createMarket.getMarketFromCreateMarketReceipt` can be called in the `onSuccess` callback of these functions to retrieve the Ethereum contract address of the newly-created Market. `augur.createMarket.getMarketFromCreateMarketReceipt` does this by querying the Augur Node for the event log associated with the new Market's creation.
 
-<aside class="notice">Augur's Transaction API has been updated to return promises. Passing in callbacks still works the same as before; however, now the underlying promise is returned directly to the caller for `onSuccess` and `onFailed`. (`onSent` is still a callback.)
+<aside class="notice">Augur's Transaction API has been updated to return promises. Passing in callbacks still works the same as before; however, now the underlying promise is returned directly to the caller for `onSuccess` and `onFailed`. (`onSent` is still a callback.)</aside>
 
 Using Transact Directly
 -----------------------
