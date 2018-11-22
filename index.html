@@ -16,6 +16,17 @@
         $(function() {
           setupLanguages(["javascript"]);
         });
+
+        var latestAugurVersion = 2;
+        var currentAugurVersion = 2;
+
+        function toggleVersion(selectedAugurVersion) {
+          if (selectedAugurVersion.toString() === latestAugurVersion.toString()) {
+            window.location.href = "http://" + window.location.host;
+          } else {
+            window.location.href = "http://" + window.location.host + "/version" + selectedAugurVersion;
+          }
+        }
       </script>
   </head>
 
@@ -31,6 +42,14 @@
         <div class="lang-selector">
               <a href="#" data-language-name="javascript">Code</a>
         </div>
+      <!-- Uncomment when v2 documentation is ready
+      <div id="version-selector" style="color: #FFF; padding: 10px 0px 0px 15px;">
+        Augur Version: 
+        <select id="version" onchange="toggleVersion(this.options[this.selectedIndex].value);" style="color: #000;">
+        <option>1</option><option selected="selected">2</option>
+        </select>
+      </div>
+      -->
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
