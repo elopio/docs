@@ -37,6 +37,23 @@ under the License.
         $(function() {
           setupLanguages(<%= language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>);
         });
+
+        <% 
+          latestAugurVersion = 2 
+          hrefArray = request.path.split("/")
+          hrefArray = hrefArray[0].split("version")
+          currentAugurVersion = hrefArray.length > 1 ? hrefArray[1] : latestAugurVersion
+        %>
+        var latestAugurVersion = <%= latestAugurVersion %>;
+        var currentAugurVersion = <%= currentAugurVersion %>;
+
+        function toggleVersion(selectedAugurVersion) {
+          if (selectedAugurVersion.toString() === latestAugurVersion.toString()) {
+            window.location.href = "http://" + window.location.host;
+          } else {
+            window.location.href = "http://" + window.location.host + "/version" + selectedAugurVersion;
+          }
+        }
       </script>
     <% end %>
   </head>
@@ -61,6 +78,26 @@ under the License.
           <% end %>
         </div>
       <% end %>
+      <!-- Uncomment when v2 documentation is ready
+      <div id="version-selector" style="color: #FFF; padding: 10px 0px 0px 15px;">
+        Augur Version: 
+        <select id="version" onchange="toggleVersion(this.options[this.selectedIndex].value);" style="color: #000;">
+        <%= 
+        augurVersion = 1
+        output = ""
+        while augurVersion <= latestAugurVersion do
+          output += "<option"
+          if augurVersion == currentAugurVersion
+            output += " selected=\"selected\""
+          end
+          output += ">#{augurVersion}</option>"
+          augurVersion = augurVersion + 1
+        end
+        "#{output}"
+        %>
+        </select>
+      </div>
+      -->
       <% if current_page.data.search %>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
