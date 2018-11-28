@@ -73,7 +73,7 @@ augur.events.startBlockchainEventListeners(
   {
     Augur: ["TokensTransferred"],
   }, 
-  1490000, 
+  3414977, 
   function(blockHash, logsAdded) {
     console.log("Logs added");
     console.log("Block hash:", blockHash);
@@ -86,11 +86,37 @@ augur.events.startBlockchainEventListeners(
   }
 );
 // example output: 
-"Starting blockstream at block  1490000"
+"Starting blockstream at block  3414977"
 // example output when a TokensTransferred event is detected: 
 Logs added
-Block hash:  0xb621a48a77aca6667346d2e7009b80b369c8d76f9064d1696512e1dc46c087bc
-Logs: []
+Block hash:  0xe192a15519d000c76956bde5178c5ab4172af151de1f4893453b65b6bc706521
+Logs: [
+  {
+    "topic": "SPORTS",
+    "description": "Will the Golden State Warriors win the 2019 NBA Championship?",
+    "extraInfo": {
+      "longDescription": "",
+      "resolutionSource": "",
+      "tags": []
+    },
+    "universe": "0x02149d40d255fceac54a3ee3899807b0539bad60",
+    "market": "0x54776758502ea895b588ceb1312267d688307445",
+    "marketCreator": "0xc789597aa0f2c986a5b7313abacd5c37c8d00a56",
+    "marketCreationFee": "0.01",
+    "minPrice": "0",
+    "maxPrice": "1",
+    "marketType": "0",
+    "address": "0x990b2d2af7e87cd015a607c3a95d7622c9bbede1",
+    "removed": false,
+    "transactionHash": "0x533f031c7ac6c344664ef4f1b64d0d2d1bfd59a5edf474434362d8229ebd14dd",
+    "transactionIndex": 6,
+    "logIndex": 18,
+    "blockNumber": 3414977,
+    "blockHash": "0xe192a15519d000c76956bde5178c5ab4172af151de1f4893453b65b6bc706521",
+    "contractName": "Augur",
+    "eventName": "MarketCreated"
+  }
+]
 
 augur.events.startBlockListeners({
   onAdded: function(block) {
