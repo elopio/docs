@@ -12863,24 +12863,46 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
   <span class="p">{</span>
     <span class="na">Augur</span><span class="p">:</span> <span class="p">[</span><span class="s2">"TokensTransferred"</span><span class="p">],</span>
   <span class="p">},</span> 
-  <span class="mi">1490000</span><span class="p">,</span> 
+  <span class="mi">3414977</span><span class="p">,</span> 
   <span class="kd">function</span><span class="p">(</span><span class="nx">blockHash</span><span class="p">,</span> <span class="nx">logsAdded</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Logs added"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Block hash:"</span><span class="p">,</span> <span class="nx">blockHash</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Logs:"</span><span class="p">,</span> <span class="nx">logsAdded</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">logsAdded</span><span class="p">);</span>
   <span class="p">},</span>
   <span class="kd">function</span><span class="p">(</span><span class="nx">blockHash</span><span class="p">,</span> <span class="nx">logsRemoved</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Logs removed"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Block hash: "</span><span class="p">,</span> <span class="nx">blockHash</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Logs"</span><span class="p">,</span> <span class="nx">logsRemoved</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">logsRemoved</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">);</span>
 <span class="c1">// example output: </span>
-<span class="s2">"Starting blockstream at block  1490000"</span>
-<span class="c1">// example output when a TokensTransferred event is detected: </span>
-<span class="nx">Logs</span> <span class="nx">added</span>
-<span class="nx">Block</span> <span class="na">hash</span><span class="p">:</span>  <span class="mh">0xb621a48a77aca6667346d2e7009b80b369c8d76f9064d1696512e1dc46c087bc</span>
-<span class="na">Logs</span><span class="p">:</span> <span class="p">[]</span>
+<span class="s2">"Starting blockstream at block  3414977"</span>
+<span class="s2">"Logs added"</span>
+<span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"SPORTS"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Will the Golden State Warriors win the 2019 NBA Championship?"</span><span class="p">,</span>
+    <span class="s2">"extraInfo"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"longDescription"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"resolutionSource"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">},</span>
+    <span class="s2">"universe"</span><span class="p">:</span> <span class="s2">"0x02149d40d255fceac54a3ee3899807b0539bad60"</span><span class="p">,</span>
+    <span class="s2">"market"</span><span class="p">:</span> <span class="s2">"0x54776758502ea895b588ceb1312267d688307445"</span><span class="p">,</span>
+    <span class="s2">"marketCreator"</span><span class="p">:</span> <span class="s2">"0xc789597aa0f2c986a5b7313abacd5c37c8d00a56"</span><span class="p">,</span>
+    <span class="s2">"marketCreationFee"</span><span class="p">:</span> <span class="s2">"0.01"</span><span class="p">,</span>
+    <span class="s2">"minPrice"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"maxPrice"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"marketType"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"0x990b2d2af7e87cd015a607c3a95d7622c9bbede1"</span><span class="p">,</span>
+    <span class="s2">"removed"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"transactionHash"</span><span class="p">:</span> <span class="s2">"0x533f031c7ac6c344664ef4f1b64d0d2d1bfd59a5edf474434362d8229ebd14dd"</span><span class="p">,</span>
+    <span class="s2">"transactionIndex"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"logIndex"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="s2">"blockNumber"</span><span class="p">:</span> <span class="mi">3414977</span><span class="p">,</span>
+    <span class="s2">"blockHash"</span><span class="p">:</span> <span class="s2">"0xe192a15519d000c76956bde5178c5ab4172af151de1f4893453b65b6bc706521"</span><span class="p">,</span>
+    <span class="s2">"contractName"</span><span class="p">:</span> <span class="s2">"Augur"</span><span class="p">,</span>
+    <span class="s2">"eventName"</span><span class="p">:</span> <span class="s2">"MarketCreated"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">startBlockListeners</span><span class="p">({</span>
   <span class="na">onAdded</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span> <span class="p">{</span>
