@@ -76,21 +76,17 @@ augur.events.startBlockchainEventListeners(
   3414977, 
   function(blockHash, logsAdded) {
     console.log("Logs added");
-    console.log("Block hash:", blockHash);
-    console.log("Logs:", logsAdded);
+    console.log(logsAdded);
   },
   function(blockHash, logsRemoved) {
     console.log("Logs removed");
-    console.log("Block hash: ", blockHash);
-    console.log("Logs", logsRemoved);
+    console.log(logsRemoved);
   }
 );
 // example output: 
 "Starting blockstream at block  3414977"
-// example output when a TokensTransferred event is detected: 
-Logs added
-Block hash:  0xe192a15519d000c76956bde5178c5ab4172af151de1f4893453b65b6bc706521
-Logs: [
+"Logs added"
+[
   {
     "topic": "SPORTS",
     "description": "Will the Golden State Warriors win the 2019 NBA Championship?",
