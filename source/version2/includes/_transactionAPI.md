@@ -1606,21 +1606,6 @@ augur.api.Market.transferOwnership({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-
-augur.api.Market.withdrawInEmergency({
-  tx: { 
-    to: marketAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
 ```
 Provides JavaScript bindings for the [Market Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/Market.sol), which enables functionality for Augur's [Markets](#market).
 
@@ -1794,29 +1779,6 @@ This transaction will fail if:
 
 * **`p`** (Object) Parameters object.
     * **`p._newOwner`**  (string) Ethereum address of the desired new owner of the Market, as a 20-byte hexadecimal value.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-### augur.api.Market.withdrawInEmergency(p)
-
-If a critical bug or vulnerability is found in Augur, the development team can put it the system into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Reputation Tokens from a particular Market.
-
-This transaction will fail if:
-
-* Augur is not currently in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
