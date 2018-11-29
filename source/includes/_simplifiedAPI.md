@@ -941,9 +941,9 @@ augur.markets.getMarketsInfo({
     creationTime: 1506473474,
     creationBlock: 1400000,
     creationFee: "10",
-    settlementFee: "0.03",
+    settlementFee: "0.04",
     reportingFeeRate: "0.02",
-    marketCreatorFeeRate: "0.01",
+    marketCreatorFeeRate: "0.02",
     marketCreatorFeesBalance: "0",
     marketCreatorMailbox: "0xbbb0000000000000000000000000000000000001",
     marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
@@ -1025,9 +1025,9 @@ augur.markets.getMarketsInfo({
     creationTime: 1506480000,
     creationBlock: 1400100,
     creationFee: "10",
-    settlementFee: "0.03",
+    settlementFee: "0.04",
     reportingFeeRate: "0.02",
-    marketCreatorFeeRate: "0.01",
+    marketCreatorFeeRate: "0.02",
     marketCreatorFeesBalance: "0",
     marketCreatorMailbox: "0xbbb0000000000000000000000000000000000002",
     marketCreatorMailboxOwner: "0x0000000000000000000000000000000000000b0b",
@@ -1140,6 +1140,7 @@ This function will fail if:
     * **`p.reportingState`** (string) &lt;optional> [REPORTING_STATE](#REPORTING_STATE) by which to filter the returned results.
     * **`p.feeWindow`** (string) &lt;optional> Ethereum address of a [Fee Window](#fee-window) by which to filter the returned results, as a 20-byte hexadecimal string.
     * **`p.designatedReporter`** (string) &lt;optional> Ethereum address of a [Designated Reporter](#designated-reporter) by which to filter the returned results, as a 20-byte hexadecimal string.
+    * **`p.maxFee`** (number) &lt;optional> Maximum trading [Settlement Fee](#settlement-fees) by which to filter the returned results, as a decimal number. (For example, if the desired maximum Settlement Fee is 1.0201%, `maxFee` should be set to 0.010201.)
     * **`p.sortBy`**  (string) &lt;optional> Field name by which to sort the Markets.
     * **`p.isSortDescending`**  (boolean) &lt;optional> Whether to sort the Markets in descending order by sortBy field.
     * **`p.limit`**  (number) &lt;optional> Maximum number of Markets to return.
