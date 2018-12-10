@@ -212,18 +212,18 @@ augur.augurNode.connect(
 "Connected to Augur Node!"
 "WebSocket transport:"
 {
-  "address": "ws://127.0.0.1:9001",
-  "awaitingPump": false,
-  "backoffMilliseconds": 1,
-  "connected": true,
-  "disconnectListeners": { ... },
-  "maxRetries": 0,
-  "messageHandler": ƒ dispatchJsonRpcResponse(err, jsonRpcResponse),
-  "nextListenerToken": 1,
-  "reconnectListeners": { ... },
-  "timeout": 100,
-  "webSocketClient": { ... }
-  "workQueue": [],
+  address: "ws://127.0.0.1:9001",
+  awaitingPump: false,
+  backoffMilliseconds: 1,
+  connected: true,
+  disconnectListeners: { ... },
+  maxRetries: 0,
+  messageHandler: ƒ dispatchJsonRpcResponse(err, jsonRpcResponse),
+  nextListenerToken: 1,
+  reconnectListeners: { ... },
+  timeout: 100,
+  webSocketClient: { ... }
+  workQueue: [],
 }
 
 augur.augurNode.disconnect();
@@ -236,39 +236,40 @@ augur.augurNode.getSyncData(
 );
 // example output:
 {
-  "addresses": {
-    "Controller": "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
-    "Universe": "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
-    "Augur": "0x852684b374fe03ab77d06931f1b2831028fd58f5",
-    "OrdersFinder": "0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df",
-    "LegacyReputationToken": "0x097c198dcc997086d1555ad9ae6f52375cfb58d0",
-    "CancelOrder": "0x389c0b3f0d51cfba9e4d214712a1142f5685814d",
-    "Cash": "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
-    "ClaimTradingProceeds": "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce",
-    "CompleteSets": "0xbf749b00e42751dba8e0872e66d3ba854f6c2632",
-    "CreateOrder": "0xdadc071ecc3b7e97b139d2ef692defdc398c8211",
-    "FillOrder": "0x0c77f6af7b3b5fed8ca980414a97c62da283098a",
-    "Order": "0x4811d582f64e68e657bec21834012af38ef093bc",
-    "Orders": "0x1ba5cf0ce546bf7d7943c4d4fb21ea59f6bb0eee",
-    "OrdersFetcher": "0xb9f2cf78542de87ba7542d92e2937d0eedec5feb",
-    "ShareToken": "0x925bee44fec28deb228d2251e1a9d32f7c73ebed",
-    "Trade": "0x0dec7fd04933b8673cef99b64978113065b03926",
-    "TradingEscapeHatch": "0x157a8998f5470a2be3917aab31d334109f56c30c"
-  }
-  "highestBlock": {
+  addresses: {
+    Controller: "0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085",
+    Universe: "0x1f732847fbbcc46ffe859f28e916d993b2b08831",
+    Augur: "0x852684b374fe03ab77d06931f1b2831028fd58f5",
+    OrdersFinder: "0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df",
+    LegacyReputationToken: "0x097c198dcc997086d1555ad9ae6f52375cfb58d0",
+    CancelOrder: "0x389c0b3f0d51cfba9e4d214712a1142f5685814d",
+    Cash: "0xd2ee83a8a2a904181ccfddd8292f178614062aa0",
+    ClaimTradingProceeds: "0x8aa774927fb928ee1df0d0d3f94c8217658e0bce",
+    CompleteSets: "0xbf749b00e42751dba8e0872e66d3ba854f6c2632",
+    CreateOrder: "0xdadc071ecc3b7e97b139d2ef692defdc398c8211",
+    FillOrder: "0x0c77f6af7b3b5fed8ca980414a97c62da283098a",
+    Order: "0x4811d582f64e68e657bec21834012af38ef093bc",
+    Orders: "0x1ba5cf0ce546bf7d7943c4d4fb21ea59f6bb0eee",
+    OrdersFetcher: "0xb9f2cf78542de87ba7542d92e2937d0eedec5feb",
+    ShareToken: "0x925bee44fec28deb228d2251e1a9d32f7c73ebed",
+    Trade: "0x0dec7fd04933b8673cef99b64978113065b03926",
+    TradingEscapeHatch: "0x157a8998f5470a2be3917aab31d334109f56c30c"
+  },
+  augurNodeVersion: "7.1.5",
+  highestBlock: {
     hash: "0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58",
     number: 10019,
     timestamp: 1531977999,
   },
-  "isSyncFinished": true,
-  "lastProcessedBlock": {
-    "hash": "0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab",
+  isSyncFinished: true,
+  lastProcessedBlock: {
+    hash: "0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab",
     number: 10013,
     timestamp: 1530856121,
   },
-  "netId": "102",
-  "net_version": "102",
-  "version": "5.0.0-17",
+  netId: "102",
+  net_version: "102",
+  version: "6.1.4",
 }
 
 augur.augurNode.submitRequest(
