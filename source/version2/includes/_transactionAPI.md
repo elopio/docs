@@ -888,21 +888,6 @@ augur.api.DisputeCrowdsourcer.redeem({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-
-augur.api.DisputeCrowdsourcer.withdrawInEmergency({
-  tx: { 
-    to: disputeCrowdsourcerAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
 ```
 Provides JavaScript bindings for the [DisputeCrowdsourcer Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/DisputeCrowdsourcer.sol), which allows users to [Stake](#dispute-stake) and redeem [REP](#rep) on [Outcomes](#outcome) other than a [Market's](#market) [Tentative Outcome](#tentative-outcome).
 
@@ -970,29 +955,6 @@ This transaction will fail if:
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
 
-### augur.api.DisputeCrowdsourcer.withdrawInEmergency(p)
-
-If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Dispute Crowdsourcer's](#dispute-crowdsourcer) [Outcome](#outcome). Calling this function will not redeem any [Reporting Fees](#reporting-fee) because the total amount of Reporting Fees is not known until the end of the [Fee Window](#fee-window).
-
-This transaction will fail if:
-
-* Augur is not currently in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
 Fee Window Tx API
 -----------------
 ```javascript
@@ -1022,21 +984,6 @@ augur.api.FeeWindow.buy({
 var _sender = "0x8886eaefcfaf7ea1e17c4768a554d57800699888";
 augur.api.FeeWindow.redeem({
   _sender: _sender,
-  tx: { 
-    to: feeWindowAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
-augur.api.FeeWindow.withdrawInEmergency({
   tx: { 
     to: feeWindowAddress,
     gas: "0x632ea0" 
@@ -1091,29 +1038,6 @@ This transaction will trigger a [`FeeWindowRedeemed`](#FeeWindowRedeemed) event 
 
 * **`p`** (Object) Parameters object.
     * **`p._sender`** (string) Ethereum address to send redeemed REP/Ether to, as a 20-byte hexadecimal value.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-### augur.api.FeeWindow.withdrawInEmergency(p)
-
-If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, users can call the `withdrawInEmergency` function to withdraw their Participation Tokens and convert them into Reputation Tokens.
-
-This transaction will fail if:
-
-* Augur is not currently in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -1243,21 +1167,6 @@ augur.api.InitialReporter.transferOwnership({
   onSuccess: function (result) { console.log(result); },
   onFailed: function (result) { console.log(result); }
 });
-
-augur.api.InitialReporter.withdrawInEmergency({
-  tx: { 
-    to: initialReporterAddress,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
 ```
 Provides JavaScript bindings for the [InitialReporter Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/reporting/InitialReporter.sol), which enables functionality related to [Initial Reports](#initial-report).
 
@@ -1322,29 +1231,6 @@ This transaction will trigger an [`InitialReporterTransferred`](#InitialReporter
 
 * **`p`** (Object) Parameters object.
     * **`p._newOwner`** (string) Ethereum address of the desired new owner for the InitialReporter, as a 20-byte hexadecimal value.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-### augur.api.InitialReporter.withdrawInEmergency(p)
-
-If a critical bug or vulnerability is found in Augur, the Augur development team can put Augur into a [halted](#developer-mode) state until the issue is resolved. In such instances, most regularly-used functions in Augur's backend will become unuseable until the system is returned to its normal state. When this happens, [Initial Reporters](#initial-reporter) can call the `withdrawInEmergency` function to withdraw the [REP](#rep) they [Staked](#dispute-stake) on the [Initial Report](#dispute-crowdsourcer) [Outcome](#outcome) (in cases where the [First Public Reporter](#first-public-reporter) submitted the Initial Report instead of the [Designated Reporter](#designated-reporter)).
-
-This transaction will fail if:
-
-* Augur is not currently in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
     * **`p.tx`** (Object) Object containing details about how this transaction should be made.
         * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
         * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
@@ -2866,99 +2752,6 @@ Works like `augur.api.Trade.publicFillBestOrder`, but uses the parameter `_loopL
 #### **Returns:**
 
 * Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-Trading Escape Hatch Tx API
----------------------
-```javascript
-// Trading Escape Hatch Transaction API Examples:
-
-// The Ethereum address of Augur's default TradingEscapeHatch contract
-// can be obtained by calling `augur.augurNode.getSyncData`.
-var tradingEscapeHatch = "0x157a8998f5470a2be3917aab31d334109f56c30c";
-
-var _market = "0x465407364ccde43ba5159537404924e86ca53aaa";
-augur.api.TradingEscapeHatch.claimSharesInUpdate({
-  _market: _market,
-  tx: { 
-    to: tradingEscapeHatch,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-
-augur.api.TradingEscapeHatch.getFrozenShareValueInMarket({
-  _market: _market,
-  tx: { 
-    to: tradingEscapeHatch,
-    gas: "0x632ea0" 
-  }, 
-  meta: {
-    accountType: "privateKey",
-    address: "0x913dA4198E6bE1D5f5E4a40D0667f70C0B5430Ec",
-    signer: [252, 111, 32, 94, 233, 213, 105, 71, 89, 162, 243, 247, 56, 81, 213, 103, 239, 75, 212, 240, 234, 95, 8, 201, 217, 55, 225, 0, 85, 109, 158, 25],
-  },
-  onSent: function (result) { console.log(result); },
-  onSuccess: function (result) { console.log(result); },
-  onFailed: function (result) { console.log(result); }
-});
-```
-Provides JavaScript bindings for the [TradingEscapeHatch Solidity Contract](https://github.com/AugurProject/augur-core/blob/master/source/contracts/trading/TradingEscapeHatch.sol), which allows funds to be withdrawn from Augur in the event that Augur needs to be [halted](#developer-mode) by the development team.
-
-### augur.api.TradingEscapeHatch.claimSharesInUpdate(p)
-
-If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on the specified [Market](#market) will cash out the caller's [Shares](#share) to the Market's denomination token and send the cashed-out funds to the caller's Ethereum address. (Currently, Augur only denominates Markets in [attoETH](#atto-prefix).)
-
-This transaction will fail if:
-
-* Augur is not in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p._market`**  (string) Ethereum address of a Market to claim Shares from, as a 20-byte hexadecimal value.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* Return value cannot be obtained because Ethereum nodes [discard](#transaction-return-values) transaction return values.
-
-### augur.api.TradingEscapeHatch.getFrozenShareValueInMarket(p)
-
-If Augur needs to be [halted](#developer-mode) by the development team (for example, if a vulnerability is discovered), calling this function on the specified [Market](#market) will return the value of the user's [Shares](#share) in that Market, in the Market's denomination token. (Currently, Augur only denominates Markets in [attoETH](#atto-prefix).)
-
-This transaction will fail if:
-
-* Augur is not in a halted state.
-
-#### **Parameters:**
-
-* **`p`** (Object) Parameters object.
-    * **`p._market`**  (string) Ethereum address of a Market to claim Shares from, as a 20-byte hexadecimal value.
-    * **`p.tx`** (Object) Object containing details about how this transaction should be made.
-        * **`p.tx.to`** (string) Ethereum contract address on which to call this function, as a 20-byte hexadecimal string.
-        * **`p.tx.send`** (boolean) &lt;optional> Whether this function should be executed as a transaction. When set to `true`, this function will be executed as a transaction, which will calculate the value (and thus uses gas). When set to `false`, this function will be executed as a call, which will return the value of the user's Shares in the Market, in that Market's denomination token.
-        * **`p.tx.gas`** (string) Gas limit to use when submitting this transaction, as a hexadecimal string.
-    * **`p.meta`**  (<a href="#Meta">Meta</a>) &lt;optional> Authentication metadata for raw transactions.
-    * **`p.onSent`**  (function) Callback function that executes once the transaction has been sent.
-    * **`p.onSuccess`**  (function) &lt;optional> Callback function that executes if the transaction returned successfully.
-    * **`p.onFailed`**  (function) &lt;optional> Callback function that executes if the transaction failed.
-
-#### **Returns:**
-
-* (null|string) Return value cannot be obtained when executed as a transaction because Ethereum nodes [discard](#transaction-return-values) transaction return values. However, if `p.tx.send` is set to `false`, this function will return the value of the user's Shares in the Market, in that Market's denomination token, as a stringified unsigned integer.
 
 Universe Tx API
 ---------------------
