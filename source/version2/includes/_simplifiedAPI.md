@@ -686,6 +686,8 @@ augur.createMarket.getMarketFromCreateMarketReceipt(
 
 Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
+NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
+
 #### **Parameters:**
 
 * **`p`** (Object) Parameters object.
@@ -710,6 +712,8 @@ Creates a [Categorical Market](#categorical-market) in a specified [Universe](#u
 ### augur.createMarket.createScalarMarket(p)
 
 Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### **Parameters:**
 
@@ -737,6 +741,8 @@ Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). 
 ### augur.createMarket.createYesNoMarket(p)
 
 Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### **Parameters:**
 
