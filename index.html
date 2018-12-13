@@ -969,18 +969,18 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="s2">"Connected to Augur Node!"</span>
 <span class="s2">"WebSocket transport:"</span>
 <span class="p">{</span>
-  <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
-  <span class="s2">"awaitingPump"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"backoffMilliseconds"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"connected"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"disconnectListeners"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="s2">"maxRetries"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"messageHandler"</span><span class="p">:</span> <span class="err">ƒ</span> <span class="nx">dispatchJsonRpcResponse</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">jsonRpcResponse</span><span class="p">),</span>
-  <span class="s2">"nextListenerToken"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"reconnectListeners"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
-  <span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"webSocketClient"</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
-  <span class="s2">"workQueue"</span><span class="p">:</span> <span class="p">[],</span>
+  <span class="na">address</span><span class="p">:</span> <span class="s2">"ws://127.0.0.1:9001"</span><span class="p">,</span>
+  <span class="na">awaitingPump</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="na">backoffMilliseconds</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">connected</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">disconnectListeners</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="na">maxRetries</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">messageHandler</span><span class="p">:</span> <span class="err">ƒ</span> <span class="nx">dispatchJsonRpcResponse</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">jsonRpcResponse</span><span class="p">),</span>
+  <span class="na">nextListenerToken</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">reconnectListeners</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="na">timeout</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="na">webSocketClient</span><span class="p">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+  <span class="nl">workQueue</span><span class="p">:</span> <span class="p">[],</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
@@ -993,39 +993,40 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">);</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="s2">"addresses"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"Controller"</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
-    <span class="s2">"Universe"</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
-    <span class="s2">"Augur"</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
-    <span class="s2">"OrdersFinder"</span><span class="p">:</span> <span class="s2">"0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df"</span><span class="p">,</span>
-    <span class="s2">"LegacyReputationToken"</span><span class="p">:</span> <span class="s2">"0x097c198dcc997086d1555ad9ae6f52375cfb58d0"</span><span class="p">,</span>
-    <span class="s2">"CancelOrder"</span><span class="p">:</span> <span class="s2">"0x389c0b3f0d51cfba9e4d214712a1142f5685814d"</span><span class="p">,</span>
-    <span class="s2">"Cash"</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
-    <span class="s2">"ClaimTradingProceeds"</span><span class="p">:</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">,</span>
-    <span class="s2">"CompleteSets"</span><span class="p">:</span> <span class="s2">"0xbf749b00e42751dba8e0872e66d3ba854f6c2632"</span><span class="p">,</span>
-    <span class="s2">"CreateOrder"</span><span class="p">:</span> <span class="s2">"0xdadc071ecc3b7e97b139d2ef692defdc398c8211"</span><span class="p">,</span>
-    <span class="s2">"FillOrder"</span><span class="p">:</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">,</span>
-    <span class="s2">"Order"</span><span class="p">:</span> <span class="s2">"0x4811d582f64e68e657bec21834012af38ef093bc"</span><span class="p">,</span>
-    <span class="s2">"Orders"</span><span class="p">:</span> <span class="s2">"0x1ba5cf0ce546bf7d7943c4d4fb21ea59f6bb0eee"</span><span class="p">,</span>
-    <span class="s2">"OrdersFetcher"</span><span class="p">:</span> <span class="s2">"0xb9f2cf78542de87ba7542d92e2937d0eedec5feb"</span><span class="p">,</span>
-    <span class="s2">"ShareToken"</span><span class="p">:</span> <span class="s2">"0x925bee44fec28deb228d2251e1a9d32f7c73ebed"</span><span class="p">,</span>
-    <span class="s2">"Trade"</span><span class="p">:</span> <span class="s2">"0x0dec7fd04933b8673cef99b64978113065b03926"</span><span class="p">,</span>
-    <span class="s2">"TradingEscapeHatch"</span><span class="p">:</span> <span class="s2">"0x157a8998f5470a2be3917aab31d334109f56c30c"</span>
-  <span class="p">}</span>
-  <span class="s2">"highestBlock"</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">addresses</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">Controller</span><span class="p">:</span> <span class="s2">"0x392be0a9d1ab1bde2931c2ddf1d722f9e13b6085"</span><span class="p">,</span>
+    <span class="na">Universe</span><span class="p">:</span> <span class="s2">"0x1f732847fbbcc46ffe859f28e916d993b2b08831"</span><span class="p">,</span>
+    <span class="na">Augur</span><span class="p">:</span> <span class="s2">"0x852684b374fe03ab77d06931f1b2831028fd58f5"</span><span class="p">,</span>
+    <span class="na">OrdersFinder</span><span class="p">:</span> <span class="s2">"0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df"</span><span class="p">,</span>
+    <span class="na">LegacyReputationToken</span><span class="p">:</span> <span class="s2">"0x097c198dcc997086d1555ad9ae6f52375cfb58d0"</span><span class="p">,</span>
+    <span class="na">CancelOrder</span><span class="p">:</span> <span class="s2">"0x389c0b3f0d51cfba9e4d214712a1142f5685814d"</span><span class="p">,</span>
+    <span class="na">Cash</span><span class="p">:</span> <span class="s2">"0xd2ee83a8a2a904181ccfddd8292f178614062aa0"</span><span class="p">,</span>
+    <span class="na">ClaimTradingProceeds</span><span class="p">:</span> <span class="s2">"0x8aa774927fb928ee1df0d0d3f94c8217658e0bce"</span><span class="p">,</span>
+    <span class="na">CompleteSets</span><span class="p">:</span> <span class="s2">"0xbf749b00e42751dba8e0872e66d3ba854f6c2632"</span><span class="p">,</span>
+    <span class="na">CreateOrder</span><span class="p">:</span> <span class="s2">"0xdadc071ecc3b7e97b139d2ef692defdc398c8211"</span><span class="p">,</span>
+    <span class="na">FillOrder</span><span class="p">:</span> <span class="s2">"0x0c77f6af7b3b5fed8ca980414a97c62da283098a"</span><span class="p">,</span>
+    <span class="na">Order</span><span class="p">:</span> <span class="s2">"0x4811d582f64e68e657bec21834012af38ef093bc"</span><span class="p">,</span>
+    <span class="na">Orders</span><span class="p">:</span> <span class="s2">"0x1ba5cf0ce546bf7d7943c4d4fb21ea59f6bb0eee"</span><span class="p">,</span>
+    <span class="na">OrdersFetcher</span><span class="p">:</span> <span class="s2">"0xb9f2cf78542de87ba7542d92e2937d0eedec5feb"</span><span class="p">,</span>
+    <span class="na">ShareToken</span><span class="p">:</span> <span class="s2">"0x925bee44fec28deb228d2251e1a9d32f7c73ebed"</span><span class="p">,</span>
+    <span class="na">Trade</span><span class="p">:</span> <span class="s2">"0x0dec7fd04933b8673cef99b64978113065b03926"</span><span class="p">,</span>
+    <span class="na">TradingEscapeHatch</span><span class="p">:</span> <span class="s2">"0x157a8998f5470a2be3917aab31d334109f56c30c"</span>
+  <span class="p">},</span>
+  <span class="na">augurNodeVersion</span><span class="p">:</span> <span class="s2">"7.1.5"</span><span class="p">,</span>
+  <span class="na">highestBlock</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x9c1a28be182d755a053f4efe35f04558a318ea6ea925f827a7de8a30d5d23f58"</span><span class="p">,</span>
     <span class="na">number</span><span class="p">:</span> <span class="mi">10019</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1531977999</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="s2">"isSyncFinished"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"lastProcessedBlock"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab"</span><span class="p">,</span>
+  <span class="na">isSyncFinished</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">lastProcessedBlock</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">hash</span><span class="p">:</span> <span class="s2">"0x2dd3a600f9678a8a57b320e00b483502feb0d75977c10f0ec02ba86d6c455dab"</span><span class="p">,</span>
     <span class="na">number</span><span class="p">:</span> <span class="mi">10013</span><span class="p">,</span>
     <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1530856121</span><span class="p">,</span>
   <span class="p">},</span>
-  <span class="s2">"netId"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
-  <span class="s2">"net_version"</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
-  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"5.0.0-17"</span><span class="p">,</span>
+  <span class="na">netId</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="na">net_version</span><span class="p">:</span> <span class="s2">"102"</span><span class="p">,</span>
+  <span class="na">version</span><span class="p">:</span> <span class="s2">"6.1.4"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">augurNode</span><span class="p">.</span><span class="nx">submitRequest</span><span class="p">(</span>
@@ -1484,6 +1485,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a <a href="#categorical-market">Categorical Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
 
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
+
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
 <ul>
@@ -1515,6 +1518,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createscalarmarket-p">augur.createMarket.createScalarMarket(p)</h3>
 
 <p>Creates a <a href="#scalar-market">Scalar Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -1549,6 +1554,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-createmarket-createyesnomarket-p">augur.createMarket.createYesNoMarket(p)</h3>
 
 <p>Creates a <a href="#yes-no-market">Yes/No Market</a> in a specified <a href="#universe">Universe</a>. This function will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event and <a href="#TokensTransferred"><code class="prettyprint">TokensTransferred</code></a> event if the <a href="#market">Market</a> is created successfully.</p>
+
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it.</p>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
 
@@ -12291,6 +12298,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a new <a href="#categorical-market">Categorical Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
+
 <h4 id="parameters">Parameters:</h4>
 
 <ul>
@@ -12374,6 +12383,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <p>Creates a new <a href="#scalar-market">Scalar Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
 
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
+
 <h4 id="parameters">Parameters:</h4>
 
 <ul>
@@ -12419,6 +12430,8 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h3 id="augur-api-universe-createyesnomarket-p">augur.api.Universe.createYesNoMarket(p)</h3>
 
 <p>Creates a new <a href="#yes-no-market">Yes/No Market</a>. This transaction will trigger a <a href="#MarketCreated"><code class="prettyprint">MarketCreated</code></a> event if the <a href="#market">Market</a> is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling <code class="prettyprint">augur.createMarket.getMarketFromCreateMarketReceipt</code>.</p>
+
+<p>NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling <code class="prettyprint">eth_estimateGas</code>, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. </p>
 
 <h4 id="parameters">Parameters:</h4>
 
