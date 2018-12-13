@@ -51,7 +51,6 @@ augur.connect({ ethereumNode, augurNode }, function (err, connectionInfo) { /* .
       Controller: "0xb1772d9e581e5a245ff429cca3e06c57d567c58c",
       Universe: "0xaa88b74da9e08d44c996f037ce13cb2711053cea",
       Augur: "0xdddc5d40979660308e8017d048b04782f17af4af",
-      OrdersFinder: "0x01f2aba090b5fa26a64ea9e5afd32f6aab6ba3df",
       LegacyReputationToken: "0x59c98505653f68e8cc2a0ac1e84380a0393fd04e",
       CancelOrder: "0x4c0f599bdd8f9eac10cdfd152c3110ea9b803088",
       Cash: "0x5754d0bcb36b7f30999199031d1f323c4079d58d",
@@ -64,7 +63,6 @@ augur.connect({ ethereumNode, augurNode }, function (err, connectionInfo) { /* .
       OrdersFetcher: "0xc9d0126e1aa921056af5981016904690ad73c0d3",
       ShareToken: "0x5c8b3117b65af65405980f3700542c03709a6436",
       Trade: "0x8d0677ee9f5330fd65db56da6c31711fd6810434",
-      TradingEscapeHatch: "0x867d606553c3fc24b35e3b02d228dc1647786f88"
     },
     abi: {
       events: { /* ... */ },

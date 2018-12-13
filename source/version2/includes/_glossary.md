@@ -83,12 +83,6 @@ Designated Reporting is the first and fastest way that a [Market](#market) can b
 
 The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report).
 
-## Developer Mode
-
-During Augur's early stages, its Solidity smart contracts will allow for some special "developer mode" functionality. This functionality has been added as a security precaution in case an attacker attempts to compromise Augur's [Decentralized Oracle](#decentralized-oracle) system. If a security exploit is found, the Augur development team can halt Augur, which will stop all normal functionality, such as trading, reporting, and disputing, and allow users to withdraw their REP and ETH from any Market.
-
-Eventually, once Augur has been thoroughly tested and the Augur development team is confident that it is secure, this functionality will be removed so that it is not available to anyone (including the Augur development team).
-
 ## Dispute
 
 Disputing is synonymous with the act of [Challenging](#challenge) a [Tenative Outcome](#tentative-outcome).
