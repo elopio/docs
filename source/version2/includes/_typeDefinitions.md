@@ -485,7 +485,6 @@ Serves as an enum for the state of a Market.
 * **`OPEN_REPORTING`** (string) The Designated Reporter failed to submit a Designated Report within the allotted time, causing the Market to enter the Open Reporting Phase.
 * **`CROWDSOURCING_DISPUTE`** (string) An Initial Report for the Market has been submitted, and the Market's Tentative Outcome is open to being Disputed.
 * **`AWAITING_NEXT_WINDOW`** (string) Either the Market had an Initial Report submitted in the current Fee Window, or one of the Market's Dispute Crowdsourcers received enough REP to Challenge the Market's Tentative Outcome. In either case, the Market is awaiting the next Fee Window in order to enter another Dispute Round.
-* **`AWAITING_FINALIZATION`** (string) The Market has been Finalized, but the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has not elapsed.
 * **`FINALIZED`** (string) An Outcome for the Market has been determined.
 * **`FORKING`** (string) The Dispute Crowdsourcer for one of the Market's Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.
 * **`AWAITING_NO_REPORT_MIGRATION`** (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.

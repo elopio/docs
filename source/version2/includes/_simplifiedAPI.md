@@ -1637,7 +1637,6 @@ augur.reporting.getReportingSummary({
 });
 // example output:
 {
-  "AWAITING_FINALIZATION": 1,
   "DESIGNATED_REPORTING": 9,
   "CROWDSOURCING_DISPUTE": 2,
   "FINALIZED": 1,
@@ -1717,7 +1716,7 @@ The claiming process works as follows:
 
 ### augur.reporting.finalizeMarket(p)
 
-[Finalizes](#finalized-market) a [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
+[Finalizes](#finalized-market) a [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Once the Market has been Finalized, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
 
 This transaction will fail if:
 
@@ -2606,7 +2605,6 @@ Attempts to collect trading profits in Ether from a user's outstanding [Shares](
 This function will fail if:
 
 * `p._market` is not Finalized.
-* The [Post-Finalization Waiting Period](#post-finalization-waiting-period) has not passed.
 
 #### **Parameters:**
 

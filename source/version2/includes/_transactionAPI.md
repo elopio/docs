@@ -568,7 +568,6 @@ Collects trading profits from outstanding [Shares](#share) in [Finalized Market]
 This transaction will fail if:
 
 * `p._market` has not been Finalized.
-* The [Post-Finalization Waiting Period](#post-finalization-waiting-period) has not passed.
 
 #### **Parameters:**
 
@@ -1503,8 +1502,9 @@ This transaction will trigger a [`DisputeCrowdsourcerContribution`](#DisputeCrow
 
 This function will fail if:
 
-* The Market is in a [Fee Window](#fee-window) that is not active.
-* The [Market's](#market) [Universe](#universe) has a [Forked Market](#forked-market).
+* No [Initial Report](#initial-report) has been submitted on the Market.
+* The Market's [Fee Window](#fee-window) has ended.
+* The Market's [Universe](#universe) has a [Forked Market](#forked-market).
 * The [Outcome](#outcome) specified by `p._payoutNumerators` and `p._invalid` is already the Tentative Outcome of the Market.
 * `p._invalid` is true and the Numerators in `p._payoutNumerators` are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the [Invalid Outcome glossary entry](#invalid-outcome).)
 
@@ -1582,7 +1582,7 @@ This transaction will fail if:
 
 ### augur.api.Market.finalize(p)
 
-[Finalizes](#finalized-market) the [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
+[Finalizes](#finalized-market) the [Market](#market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the Market, redistributes [REP](#rep) Staked on non-winning [Outcomes](#outcome) to REP holders who Staked on the winning Outcome, and distributes the [Validity Bond](#validity-bond) based on whether the Market resolved as [Invalid](#invalid-outcome). Once the Market has been Finalized, users can [Settle](#settlement) their [Shares](#share). This transaction will trigger a [`MarketFinalized`](#MarketFinalized) event if the Market Finalized without any errors.
 
 This transaction will fail if:
 
@@ -1607,7 +1607,7 @@ This transaction will fail if:
 
 ### augur.api.Market.finalizeFork(p)
 
-[Finalizes](#finalized-market) the [Forked Market](#forked-market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the [Market](#market). Then, once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed, users can [Settle](#settlement) their [Shares](#share).
+[Finalizes](#finalized-market) the [Forked Market](#forked-market), meaning it sets the winning [Payout Distribution Hash](#payout-distribution-hash) for the [Market](#market). Once the Market has been Finalized, users can [Settle](#settlement) their [Shares](#share).
 
 This transaction will fail if:
 

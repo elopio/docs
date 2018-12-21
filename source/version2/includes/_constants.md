@@ -18,7 +18,6 @@ Gas limit used when canceling an [Order](#order) on the [Order Book](#order-book
 
 Object that acts as an enum containing the following values: 
 
-* CLAIM_PROCEEDS_WAIT_TIME - Number of seconds that the [Post-Finalization Waiting Period](#post-finalization-waiting-period) lasts.
 * DESIGNATED_REPORTING_DURATION_SECONDS - Maximum number of seconds the [Designated Reporting Phase](#designated-reporting-phase) can last.
 * DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a [Dispute Round](#dispute-round-phase) can last.
 * FORK_DURATION_SECONDS - Maximum number of seconds a [Fork Period](#fork-period) can last.

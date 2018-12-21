@@ -77,11 +77,11 @@ During the very first [Fee Window](#fee-window) after launch, the amount of the 
 
 ## Designated Reporting
 
-Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One Ethereum address will be responsible for submitting a [Tentative Outcome](#tentative-outcome) for the Market and will have 3 days to do so after a Market's [End Time](#end-time), known as the [Designated Reporting Phase](#designated-reporting-phase).
+Designated Reporting is the first and fastest way that a [Market](#market) can be [Reported](#report) on. One Ethereum address will be responsible for submitting a [Tentative Outcome](#tentative-outcome) for the Market and will have 24 hours to do so after a Market's [End Time](#end-time), known as the [Designated Reporting Phase](#designated-reporting-phase).
 
 ## Designated Reporting Phase
 
-The Designated Reporting Phase lasts up to three (3) days and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report).
+The Designated Reporting Phase lasts up to 24 hours and begins immediately following the [End Time](#end-time) of a [Market](#market). During this time, the [Designated Reporter](#designated-reporter) is expected to [Report](#report) a [Tentative Outcome](#tentative-outcome) for the Market. When the Designated Reporter submits a Report, the Market will enter the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee-window-to-begin-phase). If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the [Open Reporting Phase](open-reporting-phase). When this happens, the [Market Creator](#market-creator) does not get refunded the [No-Show Bond](#no-show-bond). Instead, the [No-Show Bond](designated-report-no-show-REP-bond) goes toward covering the [Stake](#first-public-reporter-stake) of the [First Public Reporter](#first-public-reporter) when they submit the [First Public Report](#first-public-report).
 
 ## Dispute
 
@@ -141,7 +141,7 @@ A Final Outcome is a [Tentative Outcome](#tentative-outcome) that is not [Challe
 
 ## Finalized Market
 
-A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#share) holders to [Settle](#settlement) their Shares with the Market once the [Post-Finalization Waiting Period](#post-finalization-waiting-period) has elapsed.
+A Finalized Market is a [Market](#market) that has not had its [Tentative Outcome](#tentative-outcome) [Challenged](#challenge) through a [Dispute Round Phase](#dispute-round-phase), or has gone through the [Fork Phase](#fork-period). Its [Tentative Outcome](#tentative-outcome) is now considered final, and the Market will allow [Share](#share) holders to [Settle](#settlement) their Shares with the Market.
 
 ## Finalized Phase
 
@@ -315,10 +315,6 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 ## Position
 
 A Position is the amount of [Shares](#share) that are owned (a [Long Position](#long-position)) or borrowed and then sold (a [Short Position](#short-position)) by an individual. A Position can be profitable or unprofitable, depending on [Market](#market) movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a Short Position means a trader is buying Shares of an [Outcome](#outcome) they are short on, whereas closing a Long Position means they are selling the Shares they own.
-
-## Post-Finalization Waiting Period
-
-Once a [Market](#market) has [Finalized](#finalized-market), users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and [halt](#developer-mode) the Augur system before the attacker could claim the proceeds. When the Augur development team is confident that Augur is secure, this waiting period will be removed.
 
 ## REP
 
