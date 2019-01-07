@@ -59,12 +59,6 @@ The heart of Augur is its Decentralized Oracle, which allows users and smart con
 
 A Designated Report occurs when a [Designated Reporter](#designated-reporter) [Stakes](#designated-reporter-stake) [REP](#rep) on a particular [Outcome](#outcome) in a [Market](#market). This Outcome then becomes the [Tentative Outcome](#tentative-outcome) for the Market, and the Market changes to the [Waiting for the Next Fee Window to Begin Phase](#waiting-for-the-next-fee Window to Begin Phase). 
 
-## No-Show Bond
-
-The No-Show Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during [Market](#market) creation. If the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the [Tentative Outcome](#tentative-outcome) Reported by the [First Public Reporter](#first-public-reporter). If the Tentative Outcome selected by the First Public Reporter becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is [Disputed](#disputed) and then still becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the [First Public Report](#first-public-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)
-
-During the very first [Fee Window](#fee-window) after launch, the No-Show Bond will be set at 0.35 REP. As with the [Validity Bond](#validity-bond), the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.
-
 ## Designated Reporter
 
 A Designated Reporter is a single Ethereum address designated to submit the [Tentative Outcome](#tentative-outcome) for a [Market](#market) during the [Designated Reporting Phase](#designated-reporting-phase). The Designated Reporter is set by the [Market Creator](#market-creator) during Market creation. All Markets must have a Designated Reporter.
@@ -98,6 +92,14 @@ Let <i>A<sub>n</sub></i> denote the total Stake over all of this Market’s Outc
 <i>B</i>(&omega;,<i>n</i>)=2<i>A<sub>n</sub></i>-<i>3S</i>(&omega;,<i>n</i>)
 
 The Dispute Bond sizes are chosen this way to ensure a fix ROI of 50% for [Reporters](#reporter) who successfully Dispute false outcomes.
+
+## Dispute Pacing
+
+[Dispute Rounds](#dispute-round) for a [Market](#market) occur continuously until there are 4 Dispute Rounds remaining before a [Fork](#fork) (in the fastest case). At this point, Dispute Pacing begins. Dispute Pacing causes a Market's [Crowdsourcers](#crowdsourcer) to wait for a new [Fee Window](#fee-window) to begin before starting the next Dispute Round. Augur does this to provide time for the community to crowdsource enough funds to [Dispute](#dispute) the Market's [Tentative Outcome](#tentative-outcome).
+
+## Dispute Pacing Threshold
+
+The Dispute Pacing Threshold is the amount of [attoREP](#atto-prefix) that a [Market's](#market) [Crowdsourcer](#crowdsourcer) must have [Staked](#dispute-stake) in it before [Dispute Pacing](#dispute-pacing) begins.
 
 ## Dispute Round
 
@@ -226,6 +228,12 @@ The Maximum Display Price (often seen as `maxDisplayPrice`) is the maximum price
 ## Minimum Display Price
 
 The Minimum Display Price (often seen as `minDisplayPrice`) is the minimum price allowed for a [Share](#share) on a [Market](#market). For [Yes/No](#yes-no-market) or [Categorical](#categorical-market) Markets this value is always 0, as in 0 ETH. [Scalar](#scalar-market) Markets' Minimum Display Price would be the bottom end of the range set by the [Market Creator](#market-creator).
+
+## No-Show Bond
+
+The No-Show Bond is paid for using [REP](#rep) by the [Market Creator](#market-creator) during [Market](#market) creation. If the [Designated Reporter](#designed-reporter) submits a [Report](#report) during the [Designated Reporting Phase](#designated-reporting-phase), the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the [Tentative Outcome](#tentative-outcome) Reported by the [First Public Reporter](#first-public-reporter). If the Tentative Outcome selected by the First Public Reporter becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is [Disputed](#disputed) and then still becomes the [Final Outcome](#final-outcome) of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the [First Public Report](#first-public-report) because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually [Finalized](#finalized-market) the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)
+
+During the very first [Fee Window](#fee-window) after launch, the No-Show Bond will be set at 0.35 REP. As with the [Validity Bond](#validity-bond), the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.
 
 ## Number of Ticks
 
