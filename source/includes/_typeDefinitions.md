@@ -630,13 +630,16 @@ Serves as an enum for the state of a Market.
 ### UserTradePosition  (Object)
 
 #### **Properties:** 
+* **`averagePrice`** (string) Average price paid to acquire this position, in ETH.
+* **`cost`** (string) Cost per Share to acquire this position, in ETH.
 * **`marketId`** (string) Contract address of the Market, as a hexadecimal string.
-* **`outcome`** (number) Outcome of the shares the user owns.
-* **`numShares`** (string) Quantity of shares currently owned by the user.
-* **`numSharesAdjustedForUserIntention`** (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.
-* **`realizedProfitLoss`** (string) AttoETH profit or loss the user took upon closing this position.
-* **`unrealizedProfitLoss`** (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.
-* **`averagePrice`** (string) Average price in attoETH paid to acquire this position.
+* **`netPosition`** (string) Number of virtual Shares the user owns (when short on `outcome`).
+* **`outcome`** (number) Outcome of the Shares the user owns.
+* **`position`** (string) Number of Shares of `outcome` that the user holds.
+* **`realized`** (string) ETH profit or loss the user took upon closing this position.
+* **`timestamp`** (number) Unix timestamp when user's trade position last changed. (If the user has no position, this is the current block time.)
+* **`total`** (string) The sum of `realized` and `unrealized`.
+* **`unrealized`** (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.
 
 <a name="WebSocket"></a>
 ### WebSocket  (Object)

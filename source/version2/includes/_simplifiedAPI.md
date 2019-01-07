@@ -2205,77 +2205,24 @@ augur.trading.getUserTradingHistory({
 
 augur.trading.getUserTradingPositions({
   account: "0x000000000000000000000000000000000000d00d",
-  universe: "0x000000000000000000000000000000000000000b",
+  marketId: "0x0000000000000000000000000000000000000ff1",
 }, function (error, result) {
   console.log(result);
 });
 // example output:
 [
   {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 0,
-    numShares: "1.8",
-    numSharesAdjustedForUserIntention: "-1.8",
-    realizedProfitLoss: "-0.26",
-    unrealizedProfitLoss: "0",
-    averagePrice: "4.2",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
+    averagePrice: "26.99662542182234436667",
+    cost: "0.00809898762654670331",
+    marketId: "0x0000000000000000000000000000000000000ff1",
+    netPosition: "-0.0003",
     outcome: 1,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 2,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 3,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 4,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 5,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 6,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }, {
-    marketId: "0x0000000000000000000000000000000000000001",
-    outcome: 7,
-    numShares: "0",
-    numSharesAdjustedForUserIntention: "0",
-    realizedProfitLoss: "0",
-    unrealizedProfitLoss: "0",
-    averagePrice: "0",
-  }
+    position: "0",
+    realized: "54999999999.56442531007152770894",
+    timestamp: 1534435013,
+    total: "54999999999.56442531007152770894",
+    unrealized: "0",
+  },
 ]
 
 augur.trading.normalizePrice({
