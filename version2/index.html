@@ -403,13 +403,13 @@ The <code>--ws</code> flag allows WebSocket connections, which are recommended f
 
 <h2 id="designated-reporting-state">Designated Reporting State</h2>
 
-<p>When creating a Market, <a href="#market-creator">Market Creators</a> are required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to three days to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (state b in the figure above).</p>
+<p>When creating a Market, <a href="#market-creator">Market Creators</a> are required to choose a <a href="#designated-reporter">Designated Reporter</a> and post a <a href="#no-show-bond">No-Show Bond</a>. During the Designated Reporting Phase (state a in the figure above), the Market’s Designated Reporter has up to 24 hours to Report on the <a href="#outcome">Outcome</a> of the event. If the Designated Reporter fails to Report within this allotted time, the Market Creator forfeits the No-Show Bond, and the Market automatically enters the <a href="#open-reporting-phase">Open Reporting Phase</a> (state b in the figure above).</p>
 
 <p>If the Designated Reporter submits a <a href="#report">Report</a> on time, then the No-Show Bond is returned to the Market Creator. The Designated Reporter is required to post the <a href="#designated-reporter-stake">Designated Reporter Stake</a> on its Reported Outcome, which it will forfeit if the Market finalizes to any Outcome other than the one they Reported. As soon as the Designated Reporter submits its Report, the Market enters the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a> (state c in the figure above), and the Reported Outcome becomes the Market’s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
 
 <h2 id="open-reporting-state">Open Reporting State</h2>
 
-<p>If the Designated Reporter fails to Report within the allotted 3 days, the Market Creator forfeits the <a href="#no-show-bond">No-Show Bond</a>, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, anyone can report the Outcome of the Market. When the Designated Reporter fails to Report, the first Reporter who Reports on the Outcome of a Market is called the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
+<p>If the Designated Reporter fails to Report within the allotted 24 hours, the Market Creator forfeits the <a href="#no-show-bond">No-Show Bond</a>, and the Market immediately enters the Open Reporting Phase. As soon as the Market enters the Open Reporting Phase, anyone can report the Outcome of the Market. When the Designated Reporter fails to Report, the first Reporter who Reports on the Outcome of a Market is called the Market’s <a href="#first-public-reporter">First Public Reporter</a>.</p>
 
 <p>The Market’s First Public Reporter receives the forfeited <a href="#no-show-bond">No-Show Bond</a> in the form of Stake on their chosen Outcome, so they may claim the No-Show Bond only if their Reported Outcome agrees with the Market’s <a href="#final-outcome">Final Outcome</a>.</p>
 
@@ -2527,7 +2527,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">{</span>
-  <span class="s2">"AWAITING_FINALIZATION"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"DESIGNATED_REPORTING"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
   <span class="s2">"CROWDSOURCING_DISPUTE"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="s2">"FINALIZED"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -2654,7 +2653,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-reporting-finalizemarket-p">augur.reporting.finalizeMarket(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> a <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
+<p><a href="#finalized-market">Finalizes</a> a <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Once the Market has been Finalized, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -3227,77 +3226,24 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">getUserTradingPositions</span><span class="p">({</span>
   <span class="na">account</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000d00d"</span><span class="p">,</span>
-  <span class="na">universe</span><span class="p">:</span> <span class="s2">"0x000000000000000000000000000000000000000b"</span><span class="p">,</span>
+  <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000ff1"</span><span class="p">,</span>
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// example output:</span>
 <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"1.8"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"-1.8"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"-0.26"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"4.2"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
+    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"26.99662542182234436667"</span><span class="p">,</span>
+    <span class="na">cost</span><span class="p">:</span> <span class="s2">"0.00809898762654670331"</span><span class="p">,</span>
+    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000ff1"</span><span class="p">,</span>
+    <span class="na">netPosition</span><span class="p">:</span> <span class="s2">"-0.0003"</span><span class="p">,</span>
     <span class="na">outcome</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">},</span> <span class="p">{</span>
-    <span class="na">marketId</span><span class="p">:</span> <span class="s2">"0x0000000000000000000000000000000000000001"</span><span class="p">,</span>
-    <span class="na">outcome</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="na">numShares</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">numSharesAdjustedForUserIntention</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">realizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">unrealizedProfitLoss</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-    <span class="na">averagePrice</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">position</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="na">realized</span><span class="p">:</span> <span class="s2">"54999999999.56442531007152770894"</span><span class="p">,</span>
+    <span class="na">timestamp</span><span class="p">:</span> <span class="mi">1534435013</span><span class="p">,</span>
+    <span class="na">total</span><span class="p">:</span> <span class="s2">"54999999999.56442531007152770894"</span><span class="p">,</span>
+    <span class="na">unrealized</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+  <span class="p">},</span>
 <span class="p">]</span>
 
 <span class="nx">augur</span><span class="p">.</span><span class="nx">trading</span><span class="p">.</span><span class="nx">normalizePrice</span><span class="p">({</span>
@@ -3649,7 +3595,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><code class="prettyprint">p._market</code> is not Finalized.</li>
-<li>The <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -5524,6 +5469,14 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="c1">// example output:</span>
 <span class="s2">"0xca3edca4ed326bbcb77e914b379913b12d49654d"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getDisputePacingOn</span><span class="p">({</span> 
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputePacingOn</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">disputePacingOn</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="kc">true</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Market</span><span class="p">.</span><span class="nx">getEndTime</span><span class="p">({</span> 
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">market</span> <span class="p">}</span> 
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span> 
@@ -5896,6 +5849,31 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(string) Ethereum address of the Designated Reporter for the Market, as a 20-byte hexadecimal string.</li>
+</ul>
+
+<h3 id="augur-api-market-getdisputepacingon-p-callback">augur.api.Market.getDisputePacingOn(p, callback)</h3>
+
+<p>Returns whether <a href="#dispute-pacing">Dispute Pacing</a> is enabled for a given <a href="#market">Market&rsquo;s</a> Crowdsourcers.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Market contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(boolean) <code class="prettyprint">true</code> if Dispute Pacing is enabled for the Market&rsquo;s Crowdsourcers, or <code class="prettyprint">false</code> otherwise.</li>
 </ul>
 
 <h3 id="augur-api-market-getendtime-p-callback">augur.api.Market.getEndTime(p, callback)</h3>
@@ -7384,6 +7362,14 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <span class="c1">// example output:</span>
 <span class="s2">"604800"</span>
 
+<span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getDisputeThresholdForDisputePacing</span>
+  <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">}</span> 
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">disputeThresholdForDisputePacing</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">disputeThresholdForDisputePacing</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// example output:</span>
+<span class="s2">""</span>
+
 <span class="nx">augur</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">Universe</span><span class="p">.</span><span class="nx">getFeeWindow</span><span class="p">({</span> 
   <span class="na">_feeWindowId</span><span class="p">:</span> <span class="s2">"0x242"</span><span class="p">,</span>
   <span class="na">tx</span><span class="p">:</span> <span class="p">{</span> <span class="na">to</span><span class="p">:</span> <span class="nx">universe</span> <span class="p">},</span> 
@@ -7645,6 +7631,31 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li>(string) Number of seconds in a Universe&rsquo;s Dispute Round, as a stringified unsigned integer.</li>
+</ul>
+
+<h3 id="augur-api-universe-getdisputethresholdfordisputepacing-p-callback">augur.api.Universe.getDisputeThresholdForDisputePacing(p, callback)</h3>
+
+<p>Returns the <a href="#dispute-pacing-threshold">Dispute Pacing Threshold</a> (in <a href="#atto-prefix">attoREP</a>) that a <a href="#market">Market&rsquo;s</a> <a href="#crowdsourcer">Dispute Crowdsourcer</a> must reach before <a href="#dispute-pacing">Dispute Pacing</a> begins.</p>
+
+<h4 id="strong-strong"><strong>Parameters:</strong></h4>
+
+<ul>
+<li><strong><code class="prettyprint">p</code></strong> (Object) Parameters object.<br>
+
+<ul>
+<li><strong><code class="prettyprint">p.tx</code></strong> (Object) Object containing details about how this function call should be made.
+
+<ul>
+<li><strong><code class="prettyprint">p.tx.to</code></strong> (string) Ethereum contract address of the Universe contract on which to call this function, as a 20-byte hexadecimal string.</li>
+</ul></li>
+</ul></li>
+<li><strong><code class="prettyprint">callback</code></strong> (function) &lt;optional&gt; Called after the function&rsquo;s result has been retrieved.</li>
+</ul>
+
+<h4 id="strong-strong"><strong>Returns:</strong></h4>
+
+<ul>
+<li>(string) Amount of attoREP that a Market&rsquo;s Crowdsourcer must reach before Dispute Pacing begins, as a stringified unsigned integer.</li>
 </ul>
 
 <h3 id="augur-api-universe-getfeewindow-p-callback">augur.api.Universe.getFeeWindow(p, callback)</h3>
@@ -8846,7 +8857,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <ul>
 <li><code class="prettyprint">p._market</code> has not been Finalized.</li>
-<li>The <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not passed.</li>
 </ul>
 
 <h4 id="strong-strong"><strong>Parameters:</strong></h4>
@@ -9961,8 +9971,9 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <p>This function will fail if:</p>
 
 <ul>
-<li>The Market is in a <a href="#fee-window">Fee Window</a> that is not active.</li>
-<li>The <a href="#market">Market&rsquo;s</a> <a href="#universe">Universe</a> has a <a href="#forked-market">Forked Market</a>.</li>
+<li>No <a href="#initial-report">Initial Report</a> has been submitted on the Market.</li>
+<li>The Market&rsquo;s <a href="#fee-window">Fee Window</a> has ended.</li>
+<li>The Market&rsquo;s <a href="#universe">Universe</a> has a <a href="#forked-market">Forked Market</a>.</li>
 <li>The <a href="#outcome">Outcome</a> specified by <code class="prettyprint">p._payoutNumerators</code> and <code class="prettyprint">p._invalid</code> is already the Tentative Outcome of the Market.</li>
 <li><code class="prettyprint">p._invalid</code> is true and the Numerators in <code class="prettyprint">p._payoutNumerators</code> are not all the same value. (For information about what the Payout Set should look like for an Invalid Market, refer to the <a href="#invalid-outcome">Invalid Outcome glossary entry</a>.)</li>
 </ul>
@@ -10075,7 +10086,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-market-finalize-p">augur.api.Market.finalize(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#market">Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the Market, redistributes <a href="#rep">REP</a> Staked on non-winning <a href="#outcome">Outcomes</a> to REP holders who Staked on the winning Outcome, and distributes the <a href="#validity-bond">Validity Bond</a> based on whether the Market resolved as <a href="#invalid-outcome">Invalid</a>. Once the Market has been Finalized, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>. This transaction will trigger a <a href="#MarketFinalized"><code class="prettyprint">MarketFinalized</code></a> event if the Market Finalized without any errors.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -10112,7 +10123,7 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 
 <h3 id="augur-api-market-finalizefork-p">augur.api.Market.finalizeFork(p)</h3>
 
-<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the <a href="#market">Market</a>. Then, once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
+<p><a href="#finalized-market">Finalizes</a> the <a href="#forked-market">Forked Market</a>, meaning it sets the winning <a href="#payout-distribution-hash">Payout Distribution Hash</a> for the <a href="#market">Market</a>. Once the Market has been Finalized, users can <a href="#settlement">Settle</a> their <a href="#share">Shares</a>.</p>
 
 <p>This transaction will fail if:</p>
 
@@ -13493,7 +13504,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <li><strong><code class="prettyprint">OPEN_REPORTING</code></strong> (string) The Designated Reporter failed to submit a Designated Report within the allotted time, causing the Market to enter the Open Reporting Phase.</li>
 <li><strong><code class="prettyprint">CROWDSOURCING_DISPUTE</code></strong> (string) An Initial Report for the Market has been submitted, and the Market&rsquo;s Tentative Outcome is open to being Disputed.</li>
 <li><strong><code class="prettyprint">AWAITING_NEXT_WINDOW</code></strong> (string) Either the Market had an Initial Report submitted in the current Fee Window, or one of the Market&rsquo;s Dispute Crowdsourcers received enough REP to Challenge the Market&rsquo;s Tentative Outcome. In either case, the Market is awaiting the next Fee Window in order to enter another Dispute Round.</li>
-<li><strong><code class="prettyprint">AWAITING_FINALIZATION</code></strong> (string) The Market has been Finalized, but the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has not elapsed.</li>
 <li><strong><code class="prettyprint">FINALIZED</code></strong> (string) An Outcome for the Market has been determined.</li>
 <li><strong><code class="prettyprint">FORKING</code></strong> (string) The Dispute Crowdsourcer for one of the Market&rsquo;s Outcomes received enough REP to reach the Fork Threshold, causing a fork. Users can migrate their REP to the Universe of their choice.</li>
 <li><strong><code class="prettyprint">AWAITING_NO_REPORT_MIGRATION</code></strong> (string) Either the Designated Report was Disputed, or the Designated Reporter failed to submit a Report, and the Market is waiting for the next reporting phase to begin.</li>
@@ -13693,13 +13703,16 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <h4 id="strong-strong"><strong>Properties:</strong></h4>
 
 <ul>
+<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price paid to acquire this position, in ETH.</li>
+<li><strong><code class="prettyprint">cost</code></strong> (string) Cost per Share to acquire this position, in ETH.</li>
 <li><strong><code class="prettyprint">marketId</code></strong> (string) Contract address of the Market, as a hexadecimal string.</li>
-<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the shares the user owns.</li>
-<li><strong><code class="prettyprint">numShares</code></strong> (string) Quantity of shares currently owned by the user.</li>
-<li><strong><code class="prettyprint">numSharesAdjustedForUserIntention</code></strong> (string) Similar to numShares, but Short Positions are shown as negative for Yes/No and Scalar Markets.</li>
-<li><strong><code class="prettyprint">realizedProfitLoss</code></strong> (string) AttoETH profit or loss the user took upon closing this position.</li>
-<li><strong><code class="prettyprint">unrealizedProfitLoss</code></strong> (string) AttoETH profit or loss the user would take if they closed their position at the last trade price.</li>
-<li><strong><code class="prettyprint">averagePrice</code></strong> (string) Average price in attoETH paid to acquire this position.</li>
+<li><strong><code class="prettyprint">netPosition</code></strong> (string) Number of virtual Shares the user owns (when short on <code class="prettyprint">outcome</code>).</li>
+<li><strong><code class="prettyprint">outcome</code></strong> (number) Outcome of the Shares the user owns.</li>
+<li><strong><code class="prettyprint">position</code></strong> (string) Number of Shares of <code class="prettyprint">outcome</code> that the user holds.</li>
+<li><strong><code class="prettyprint">realized</code></strong> (string) ETH profit or loss the user took upon closing this position.</li>
+<li><strong><code class="prettyprint">timestamp</code></strong> (number) Unix timestamp when user&rsquo;s trade position last changed. (If the user has no position, this is the current block time.)</li>
+<li><strong><code class="prettyprint">total</code></strong> (string) The sum of <code class="prettyprint">realized</code> and <code class="prettyprint">unrealized</code>.</li>
+<li><strong><code class="prettyprint">unrealized</code></strong> (string) Profit or loss the user would take if they closed their position at the last trade price, in ETH.</li>
 </ul>
 
 <p><a name="WebSocket"></a></p>
@@ -13762,7 +13775,6 @@ should lose all economic value, while any REP Staked on the Market’s true Outc
 <p>Object that acts as an enum containing the following values: </p>
 
 <ul>
-<li>CLAIM_PROCEEDS_WAIT_TIME - Number of seconds that the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> lasts.</li>
 <li>DESIGNATED_REPORTING_DURATION_SECONDS - Maximum number of seconds the <a href="#designated-reporting-phase">Designated Reporting Phase</a> can last.</li>
 <li>DISPUTE_ROUND_DURATION_SECONDS - Maximum number of seconds a <a href="#dispute-round-phase">Dispute Round</a> can last.</li>
 <li>FORK_DURATION_SECONDS - Maximum number of seconds a <a href="#fork-period">Fork Period</a> can last.</li>
@@ -14347,12 +14359,6 @@ Goals:
 
 <p>A Designated Report occurs when a <a href="#designated-reporter">Designated Reporter</a> <a href="#designated-reporter-stake">Stakes</a> <a href="#rep">REP</a> on a particular <a href="#outcome">Outcome</a> in a <a href="#market">Market</a>. This Outcome then becomes the <a href="#tentative-outcome">Tentative Outcome</a> for the Market, and the Market changes to the <a href="#waiting-for-the-next-fee Window to Begin Phase">Waiting for the Next Fee Window to Begin Phase</a>. </p>
 
-<h2 id="no-show-bond">No-Show Bond</h2>
-
-<p>The No-Show Bond is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)</p>
-
-<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
-
 <h2 id="designated-reporter">Designated Reporter</h2>
 
 <p>A Designated Reporter is a single Ethereum address designated to submit the <a href="#tentative-outcome">Tentative Outcome</a> for a <a href="#market">Market</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>. The Designated Reporter is set by the <a href="#market-creator">Market Creator</a> during Market creation. All Markets must have a Designated Reporter.</p>
@@ -14365,11 +14371,11 @@ Goals:
 
 <h2 id="designated-reporting">Designated Reporting</h2>
 
-<p>Designated Reporting is the first and fastest way that a <a href="#market">Market</a> can be <a href="#report">Reported</a> on. One Ethereum address will be responsible for submitting a <a href="#tentative-outcome">Tentative Outcome</a> for the Market and will have 3 days to do so after a Market&rsquo;s <a href="#end-time">End Time</a>, known as the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
+<p>Designated Reporting is the first and fastest way that a <a href="#market">Market</a> can be <a href="#report">Reported</a> on. One Ethereum address will be responsible for submitting a <a href="#tentative-outcome">Tentative Outcome</a> for the Market and will have 24 hours to do so after a Market&rsquo;s <a href="#end-time">End Time</a>, known as the <a href="#designated-reporting-phase">Designated Reporting Phase</a>.</p>
 
 <h2 id="designated-reporting-phase">Designated Reporting Phase</h2>
 
-<p>The Designated Reporting Phase lasts up to three (3) days and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>.</p>
+<p>The Designated Reporting Phase lasts up to 24 hours and begins immediately following the <a href="#end-time">End Time</a> of a <a href="#market">Market</a>. During this time, the <a href="#designated-reporter">Designated Reporter</a> is expected to <a href="#report">Report</a> a <a href="#tentative-outcome">Tentative Outcome</a> for the Market. When the Designated Reporter submits a Report, the Market will enter the <a href="#waiting-for-the-next-fee-window-to-begin-phase">Waiting for the Next Fee Window to Begin Phase</a>. If the Designated Reporter fails to Report on the Market within the Designated Reporting Phase, then the Market goes to the <a href="open-reporting-phase">Open Reporting Phase</a>. When this happens, the <a href="#market-creator">Market Creator</a> does not get refunded the <a href="#no-show-bond">No-Show Bond</a>. Instead, the <a href="designated-report-no-show-REP-bond">No-Show Bond</a> goes toward covering the <a href="#first-public-reporter-stake">Stake</a> of the <a href="#first-public-reporter">First Public Reporter</a> when they submit the <a href="#first-public-report">First Public Report</a>.</p>
 
 <h2 id="dispute">Dispute</h2>
 
@@ -14386,6 +14392,14 @@ Goals:
 <p><i>B</i>(&omega;,<i>n</i>)=2<i>A<sub>n</sub></i>-<i>3S</i>(&omega;,<i>n</i>)</p>
 
 <p>The Dispute Bond sizes are chosen this way to ensure a fix ROI of 50% for <a href="#reporter">Reporters</a> who successfully Dispute false outcomes.</p>
+
+<h2 id="dispute-pacing">Dispute Pacing</h2>
+
+<p><a href="#dispute-round">Dispute Rounds</a> for a <a href="#market">Market</a> occur continuously until there are 4 Dispute Rounds remaining before a <a href="#fork">Fork</a> (in the fastest case). At this point, Dispute Pacing begins. Dispute Pacing causes a Market&rsquo;s <a href="#crowdsourcer">Crowdsourcers</a> to wait for a new <a href="#fee-window">Fee Window</a> to begin before starting the next Dispute Round. Augur does this to provide time for the community to crowdsource enough funds to <a href="#dispute">Dispute</a> the Market&rsquo;s <a href="#tentative-outcome">Tentative Outcome</a>.</p>
+
+<h2 id="dispute-pacing-threshold">Dispute Pacing Threshold</h2>
+
+<p>The Dispute Pacing Threshold is the amount of <a href="#atto-prefix">attoREP</a> that a <a href="#market">Market&rsquo;s</a> <a href="#crowdsourcer">Crowdsourcer</a> must have <a href="#dispute-stake">Staked</a> in it before <a href="#dispute-pacing">Dispute Pacing</a> begins.</p>
 
 <h2 id="dispute-round">Dispute Round</h2>
 
@@ -14429,7 +14443,7 @@ Goals:
 
 <h2 id="finalized-market">Finalized Market</h2>
 
-<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#share">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market once the <a href="#post-finalization-waiting-period">Post-Finalization Waiting Period</a> has elapsed.</p>
+<p>A Finalized Market is a <a href="#market">Market</a> that has not had its <a href="#tentative-outcome">Tentative Outcome</a> <a href="#challenge">Challenged</a> through a <a href="#dispute-round-phase">Dispute Round Phase</a>, or has gone through the <a href="#fork-period">Fork Phase</a>. Its <a href="#tentative-outcome">Tentative Outcome</a> is now considered final, and the Market will allow <a href="#share">Share</a> holders to <a href="#settlement">Settle</a> their Shares with the Market.</p>
 
 <h2 id="finalized-phase">Finalized Phase</h2>
 
@@ -14514,6 +14528,12 @@ Goals:
 <h2 id="minimum-display-price">Minimum Display Price</h2>
 
 <p>The Minimum Display Price (often seen as <code class="prettyprint">minDisplayPrice</code>) is the minimum price allowed for a <a href="#share">Share</a> on a <a href="#market">Market</a>. For <a href="#yes-no-market">Yes/No</a> or <a href="#categorical-market">Categorical</a> Markets this value is always 0, as in 0 ETH. <a href="#scalar-market">Scalar</a> Markets&rsquo; Minimum Display Price would be the bottom end of the range set by the <a href="#market-creator">Market Creator</a>.</p>
+
+<h2 id="no-show-bond">No-Show Bond</h2>
+
+<p>The No-Show Bond is paid for using <a href="#rep">REP</a> by the <a href="#market-creator">Market Creator</a> during <a href="#market">Market</a> creation. If the <a href="#designed-reporter">Designated Reporter</a> submits a <a href="#report">Report</a> during the <a href="#designated-reporting-phase">Designated Reporting Phase</a>, the Bond is refunded to the Market Creator. If the Designated Reporter fails to Report during the Designated Reporting Phase, then the No-Show Bond is applied as Stake on the <a href="#tentative-outcome">Tentative Outcome</a> Reported by the <a href="#first-public-reporter">First Public Reporter</a>. If the Tentative Outcome selected by the First Public Reporter becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond. If the Tentative Outcome selected by the First Public Reporter is <a href="#disputed">Disputed</a> and then still becomes the <a href="#final-outcome">Final Outcome</a> of the Market, the First Public Reporter receives the No-Show Bond plus an additional 50% of the Bond amount. This actually allows for someone to stake 0 REP for the <a href="#first-public-report">First Public Report</a> because the Bond is added to whatever is staked. This means someone without any REP has the potential to Report and if the Market is eventually <a href="#finalized-market">Finalized</a> the way that person Reported, then they can earn REP without having to purchase any. (Note that they will have to pay the gas cost to submit the Report.)</p>
+
+<p>During the very first <a href="#fee-window">Fee Window</a> after launch, the No-Show Bond will be set at 0.35 REP. As with the <a href="#validity-bond">Validity Bond</a>, the No-Show Bond is adjusted up or down, targeting a 1% no-show rate with a floor of 0.35 REP. Specifically, we let ρ be the proportion of Markets in the previous Fee Window whose Designated Reporters failed to Report on time, and we let b<sub>r</sub> be amount of the No-Show Bond from the previous Fee Window. Then the amount of the No-Show Bond for the current Fee Window is max &#123;0.35, b<sub>r</sub>f(ρ)&#125;.</p>
 
 <h2 id="number-of-ticks">Number of Ticks</h2>
 
@@ -14605,10 +14625,6 @@ Note: When calculating the Payout Set for a Scalar Market using integer-only mat
 <h2 id="position">Position</h2>
 
 <p>A Position is the amount of <a href="#share">Shares</a> that are owned (a <a href="#long-position">Long Position</a>) or borrowed and then sold (a <a href="#short-position">Short Position</a>) by an individual. A Position can be profitable or unprofitable, depending on <a href="#market">Market</a> movements. Positions can be open or closed. An open Position means the Position holder currently own the Shares, whereas a closed position means they have redeemed their Shares and have cashed out for currency. Closing a Short Position means a trader is buying Shares of an <a href="#outcome">Outcome</a> they are short on, whereas closing a Long Position means they are selling the Shares they own.</p>
-
-<h2 id="post-finalization-waiting-period">Post-Finalization Waiting Period</h2>
-
-<p>Once a <a href="#market">Market</a> has <a href="#finalized-market">Finalized</a>, users must wait three (3) days before claiming their trading proceeds. This waiting period is intended as a security precaution. In the event that an attacker could somehow cause a Market to Finalize incorrectly, the Augur development team would have 3 days to notice and <a href="#developer-mode">halt</a> the Augur system before the attacker could claim the proceeds. When the Augur development team is confident that Augur is secure, this waiting period will be removed.</p>
 
 <h2 id="rep">REP</h2>
 
