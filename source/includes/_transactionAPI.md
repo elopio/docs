@@ -3273,6 +3273,14 @@ Provides JavaScript bindings for the [Universe Solidity Contract](https://github
 
 Creates a new [Categorical Market](#categorical-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
+
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### Parameters:
@@ -3333,6 +3341,15 @@ This transaction will fail if:
 
 Creates a new [Scalar Market](#scalar-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
 
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._numTicks` is less than 2.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
+
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### Parameters:
@@ -3367,6 +3384,14 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 ### augur.api.Universe.createYesNoMarket(p)
 
 Creates a new [Yes/No Market](#yes-no-market). This transaction will trigger a [`MarketCreated`](#MarketCreated) event if the [Market](#market) is created successfully. After the transaction has completed successfully, the Market address can be obtained by calling `augur.createMarket.getMarketFromCreateMarketReceipt`.
+
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
 
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 

@@ -686,6 +686,14 @@ augur.createMarket.getMarketFromCreateMarketReceipt(
 
 Creates a [Categorical Market](#categorical-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
 
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
+
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
 #### **Parameters:**
@@ -712,6 +720,15 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 ### augur.createMarket.createScalarMarket(p)
 
 Creates a [Scalar Market](#scalar-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._numTicks` is less than 2.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
 
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it. 
 
@@ -741,6 +758,14 @@ NOTE: The account attempting to create the new market must have sufficient REP i
 ### augur.createMarket.createYesNoMarket(p)
 
 Creates a [Yes/No Market](#yes-no-market) in a specified [Universe](#universe). This function will trigger a [`MarketCreated`](#MarketCreated) event and [`TokensTransferred`](#TokensTransferred) event if the [Market](#market) is created successfully.
+
+This transaction will fail if:
+
+* `p._outcomes` contains fewer than 2 outcomes or more than 8 outcomes.
+* `p._designatedReporterAddress` is set to the null address.
+* `p._feePerEthInWei` is greater than the maximum fee (0.5 ETH).
+* `p._endTime` has already passed.
+* The Universe is Forking.
 
 NOTE: The account attempting to create the new market must have sufficient REP in order for the market to be created. This is also true when calling `eth_estimateGas`, which essentially does a trial run of the transaction to determine what the gas cost would be to actually run it.
 
